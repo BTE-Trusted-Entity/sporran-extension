@@ -21,7 +21,7 @@ async function deriveKeyFromPassword(
     new TextEncoder().encode(password),
     'PBKDF2',
     false,
-    ['deriveBits', 'deriveKey'],
+    ['deriveKey'],
   );
 
   return crypto.subtle.deriveKey(
@@ -33,7 +33,7 @@ async function deriveKeyFromPassword(
     },
     keyMaterial,
     { name: 'AES-CTR', length: 256 },
-    true,
+    false,
     ['encrypt', 'decrypt'],
   );
 }
