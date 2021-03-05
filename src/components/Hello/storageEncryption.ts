@@ -1,0 +1,129 @@
+import { browser } from 'webextension-polyfill-ts';
+
+type SaltsAndCipherBytes = {
+  keySaltBytes: ArrayBuffer;
+  cipherSaltBytes: ArrayBuffer;
+  cipherBytes: ArrayBuffer;
+};
+
+type SaltsAndCipherStrings = {
+  keySaltString: string;
+  cipherSaltString: string;
+  cipherString: string;
+};
+
+async function deriveKeyFromPassword(
+  password: string,
+  keySaltBytes: ArrayBuffer,
+): Promise<CryptoKey> {
+  const keyMaterial = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(password),
+    'PBKDF2',
+    false,
+    ['deriveKey'],
+  );
+
+  return crypto.subtle.deriveKey(
+    {
+      name: 'PBKDF2',
+      salt: keySaltBytes,
+      iterations: 100000,
+      hash: 'SHA-256',
+    },
+    keyMaterial,
+    { name: 'AES-CTR', length: 256 },
+    false,
+    ['encrypt', 'decrypt'],
+  );
+}
+
+export async function encrypt(
+  password: string,
+  bytes: Uint8Array,
+): Promise<SaltsAndCipherBytes> {
+  const keySaltBytes = crypto.getRandomValues(new Uint8Array(16));
+  const cipherSaltBytes = crypto.getRandomValues(new Uint8Array(16));
+
+  const key = await deriveKeyFromPassword(password, keySaltBytes);
+
+  const cipherBytes = await crypto.subtle.encrypt(
+    { name: 'AES-CTR', counter: cipherSaltBytes, length: 64 },
+    key,
+    bytes,
+  );
+
+  return {
+    keySaltBytes,
+    cipherSaltBytes,
+    cipherBytes,
+  };
+}
+
+export async function decrypt(
+  password: string,
+  bytes: SaltsAndCipherBytes,
+): Promise<ArrayBuffer> {
+  const { keySaltBytes, cipherSaltBytes, cipherBytes } = bytes;
+  const key = await deriveKeyFromPassword(password, keySaltBytes);
+
+  return crypto.subtle.decrypt(
+    { name: 'AES-CTR', counter: cipherSaltBytes, length: 64 },
+    key,
+    cipherBytes,
+  );
+}
+
+function arrayBufferToBase64(arrayBuffer: ArrayBuffer): string {
+  return btoa(String.fromCodePoint(...Array.from(new Uint8Array(arrayBuffer))));
+}
+
+function base64ToArrayBuffer(base64: string): ArrayBuffer {
+  return Uint8Array.from(atob(base64), (c) => c.charCodeAt(0)).buffer;
+}
+
+function serializeEncrypted({
+  keySaltBytes,
+  cipherSaltBytes,
+  cipherBytes,
+}: SaltsAndCipherBytes): SaltsAndCipherStrings {
+  return {
+    keySaltString: arrayBufferToBase64(keySaltBytes),
+    cipherSaltString: arrayBufferToBase64(cipherSaltBytes),
+    cipherString: arrayBufferToBase64(cipherBytes),
+  };
+}
+
+function deserializeEncrypted({
+  keySaltString,
+  cipherSaltString,
+  cipherString,
+}: SaltsAndCipherStrings): SaltsAndCipherBytes {
+  return {
+    keySaltBytes: base64ToArrayBuffer(keySaltString),
+    cipherSaltBytes: base64ToArrayBuffer(cipherSaltString),
+    cipherBytes: base64ToArrayBuffer(cipherString),
+  };
+}
+
+const storage = browser.storage.local;
+
+export async function saveEncrypted(
+  storageKey: string,
+  password: string,
+  bytes: Uint8Array,
+): Promise<void> {
+  const result = await encrypt(password, bytes);
+  const serialized = serializeEncrypted(result);
+  await storage.set({ [storageKey]: serialized });
+}
+
+export async function loadEncrypted(
+  storageKey: string,
+  password: string,
+): Promise<ArrayBuffer> {
+  const stored = await storage.get(storageKey);
+  const serialized = stored[storageKey] as SaltsAndCipherStrings;
+  const bytes = deserializeEncrypted(serialized);
+  return decrypt(password, bytes);
+}
