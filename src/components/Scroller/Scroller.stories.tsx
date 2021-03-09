@@ -1,5 +1,5 @@
-import { Scroller } from './Scroller';
 import { Meta } from '@storybook/react';
+import { Scroller } from './Scroller';
 
 export default {
   title: 'Components/Scroller',
