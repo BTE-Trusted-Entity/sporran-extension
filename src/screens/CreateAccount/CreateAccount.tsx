@@ -5,7 +5,8 @@ export const CreateAccount: FC = () => {
   const [mnemonic, setMnemonic] = useState<string>();
   const [address, setAddress] = useState<string>();
   useEffect(() => {
-    (async (): Promise<void> => {
+    (async () => {
+      // TODO: move URI to config
       await init({ address: 'wss://full-nodes.kilt.io:9944' });
       const mnemonic = Identity.generateMnemonic();
       setMnemonic(mnemonic);
