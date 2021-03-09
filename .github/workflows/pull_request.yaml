@@ -1,5 +1,5 @@
-name: Build extension
-on: [push]
+name: Checks pull request
+on: [pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
