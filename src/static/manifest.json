@@ -10,9 +10,7 @@
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": [
-      "js/backgroundPage.js"
-    ],
+    "scripts": ["js/backgroundPage.js"],
     "persistent": false
   },
   "icons": {
@@ -27,5 +25,6 @@
     "storage",
     "http://*/",
     "https://*/"
-  ]
+  ],
+  "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self'"
 }

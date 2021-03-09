@@ -30,6 +30,7 @@
     "open-chrome": "node scripts/chrome-launch.js"
   },
   "dependencies": {
+    "@kiltprotocol/core": "^0.20.0-rc.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "webextension-polyfill-ts": "^0.25.0"
