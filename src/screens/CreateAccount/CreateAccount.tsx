@@ -1,7 +1,7 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Identity, init } from '@kiltprotocol/core';
 
-export const CreateAccount: FC = () => {
+export function CreateAccount(): JSX.Element {
   const [mnemonic, setMnemonic] = useState<string>();
   const [address, setAddress] = useState<string>();
   useEffect(() => {
@@ -22,4 +22,4 @@ export const CreateAccount: FC = () => {
       <h1>{address}</h1>
     </>
   );
-};
+}

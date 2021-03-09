@@ -1,6 +1,11 @@
-import { storiesOf } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { Hello } from './Hello';
 
-storiesOf('Hello', module).add('renders', () => {
+export default {
+  title: 'Components/Hello',
+  component: Hello,
+} as Meta;
+
+export function Template(): JSX.Element {
   return <Hello />;
-});
+}

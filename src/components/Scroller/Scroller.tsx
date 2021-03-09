@@ -34,7 +34,7 @@ function executeScript(code: string): void {
     });
 }
 
-export const Scroller: FC = () => {
+export function Scroller() {
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -53,4 +53,4 @@ export const Scroller: FC = () => {
       </div>
     </div>
   );
-};
+}

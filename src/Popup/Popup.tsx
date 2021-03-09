@@ -1,4 +1,4 @@
-import { useEffect, FC } from 'react';
+import { useEffect } from 'react';
 
 import { browser } from 'webextension-polyfill-ts';
 
@@ -7,7 +7,7 @@ import { Scroller } from '../components/Scroller/Scroller';
 
 import styles from './Popup.module.css';
 
-export const Popup: FC = () => {
+export function Popup(): JSX.Element {
   // Sends the `popupMounted` event
   useEffect(() => {
     browser.runtime.sendMessage({ popupMounted: true });
@@ -23,4 +23,4 @@ export const Popup: FC = () => {
       </div>
     </div>
   );
-};
+}
