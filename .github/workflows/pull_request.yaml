@@ -36,3 +36,12 @@ jobs:
 
       - name: Build code
         run: yarn build
+
+      - name: Package extension
+        run: yarn package
+
+      - name: Publish on GitHub
+        uses: actions/upload-artifact@v2
+        with:
+          name: sporran-extension
+          path: dist/web-ext-artifacts/*

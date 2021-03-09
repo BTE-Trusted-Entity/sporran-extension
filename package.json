@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build": "webpack --config webpack.prod.js",
+    "package": "cd dist && web-ext build --overwrite-dest",
     "dev": "webpack -w --config webpack.dev.js",
     "test": "jest",
     "lint": "eslint --fix -c ./.eslintrc.json \"src/**/*.ts*\"",
