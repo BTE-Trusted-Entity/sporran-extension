@@ -1,8 +1,7 @@
-import { FC } from 'react';
 import styles from './Hello.module.css';
 import { browser } from 'webextension-polyfill-ts';
 
-export const Hello: FC = () => {
+export function Hello(): JSX.Element {
   return (
     <div className="row">
       <div className="col-lg-12 text-center">
@@ -12,4 +11,4 @@ export const Hello: FC = () => {
       </div>
     </div>
   );
-};
+}
