@@ -4,7 +4,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { Hello } from '../components/Hello/Hello';
 import { Scroller } from '../components/Scroller/Scroller';
-import { CreateAccount } from '../screens/CreateAccount/CreateAccount';
+import { CreateAccount } from '../components/CreateAccount/CreateAccount';
 
 import styles from './Popup.module.css';
 
