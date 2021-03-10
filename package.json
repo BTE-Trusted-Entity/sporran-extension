@@ -33,6 +33,7 @@
     "@kiltprotocol/core": "^0.20.0-rc.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-spinners": "^0.10.6",
     "webextension-polyfill-ts": "^0.25.0"
   },
   "devDependencies": {
