@@ -9,7 +9,7 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: Get yarn cache directory path
+      - name: Get package manager cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
