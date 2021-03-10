@@ -59,7 +59,6 @@ export function CreateAccount(): JSX.Element {
             Enter password:
             <input
               type="password"
-              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
