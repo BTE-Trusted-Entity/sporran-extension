@@ -43,6 +43,30 @@ exports[`Popup renders 1`] = `
         </button>
       </div>
     </div>
+    <p>
+      
+    </p>
+    <p>
+      
+    </p>
+    <form
+      onSubmit={[Function]}
+    >
+      <label>
+        Enter password:
+        <input
+          onChange={[Function]}
+          required={true}
+          type="password"
+        />
+      </label>
+      <button
+        disabled={true}
+        type="submit"
+      >
+        Create Account
+      </button>
+    </form>
   </div>
 </div>
 `;

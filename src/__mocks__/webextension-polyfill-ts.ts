@@ -23,6 +23,9 @@ export const browser = {
       return messageData ? messageData.message : `[[${messageName}]]`;
     },
   },
+  storage: {
+    local: {},
+  },
 };
 
 export interface Tabs {
