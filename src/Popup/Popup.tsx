@@ -4,6 +4,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { Hello } from '../components/Hello/Hello';
 import { Scroller } from '../components/Scroller/Scroller';
+import { CreateAccount } from '../screens/CreateAccount/CreateAccount';
 
 import styles from './Popup.module.css';
 
@@ -20,6 +21,7 @@ export function Popup(): JSX.Element {
         <Hello />
         <hr />
         <Scroller />
+        <CreateAccount />
       </div>
     </div>
   );
