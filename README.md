@@ -7,7 +7,7 @@
 1. Go to [actions page](https://github.com/KILTprotocol/sporran-extension/actions).
 1. Click on the build you want to test.
 1. Download the extension file from the _Artifacts_ section at the bottom.
-1. Unpack the downloaded _.zip_ file.
+1. Unpack the downloaded _.zip_ file and unpack the _sporran-1.0.0.zip_ from it as well.
 
 
 ### Testing in [Chrome](https://developer.chrome.com/docs/extensions/mv2/getstarted/#manifest)
