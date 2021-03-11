@@ -25,7 +25,6 @@ export function Balance({ address }: BalanceProps): JSX.Element {
   useEffect(() => {
     let unsubscribe: () => void;
     (async () => {
-      // listen for balance changes
       unsubscribe = await listenToBalanceChanges(address, balanceListener);
     })();
     return () => {
