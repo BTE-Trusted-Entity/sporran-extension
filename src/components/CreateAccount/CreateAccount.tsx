@@ -3,6 +3,7 @@ import { Identity, init } from '@kiltprotocol/core';
 import { ClipLoader } from 'react-spinners';
 
 import { loadEncrypted, saveEncrypted } from '../Hello/storageEncryption';
+import { Balance } from '../Balance/Balance';
 
 export function CreateAccount(): JSX.Element {
   const [mnemonic, setMnemonic] = useState('');
@@ -50,7 +51,10 @@ export function CreateAccount(): JSX.Element {
       <p>{mnemonic}</p>
       <p>{address}</p>
       {address ? (
-        <p style={{ color: 'green' }}>Account creation successful!</p>
+        <>
+          <p style={{ color: 'green' }}>Account creation successful!</p>
+          <Balance address={address} />
+        </>
       ) : loading ? (
         <ClipLoader />
       ) : (
