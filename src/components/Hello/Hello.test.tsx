@@ -1,7 +1,10 @@
-import { Hello } from './Hello';
-import { create } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
-it('Hello renders', () => {
-  const tree = create(<Hello />).toJSON();
-  expect(tree).toMatchSnapshot();
+import { Hello } from './Hello';
+
+describe('Hello', () => {
+  it('should render', () => {
+    const { container } = render(<Hello />);
+    expect(container).toMatchSnapshot();
+  });
 });

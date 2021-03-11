@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Scroller renders 1`] = `
-<div
-  className="row"
->
+exports[`Scroller should render 1`] = `
+<div>
   <div
-    className="col-lg-12"
+    class="row"
   >
-    <button
-      className="btn btn-block btn-outline-dark"
-      onClick={[Function]}
+    <div
+      class="col-lg-12"
     >
-      Scroll To Top
-    </button>
-    <button
-      className="btn btn-block btn-outline-dark"
-      onClick={[Function]}
-    >
-      Scroll To Bottom
-    </button>
+      <button
+        class="btn btn-block btn-outline-dark"
+      >
+        Scroll To Top
+      </button>
+      <button
+        class="btn btn-block btn-outline-dark"
+      >
+        Scroll To Bottom
+      </button>
+    </div>
   </div>
 </div>
 `;

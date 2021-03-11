@@ -1,7 +1,10 @@
-import { Scroller } from './Scroller';
-import { create } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
-it('Scroller renders', () => {
-  const tree = create(<Scroller />).toJSON();
-  expect(tree).toMatchSnapshot();
+import { Scroller } from './Scroller';
+
+describe('Scroller', () => {
+  it('should render', () => {
+    const { container } = render(<Scroller />);
+    expect(container).toMatchSnapshot();
+  });
 });

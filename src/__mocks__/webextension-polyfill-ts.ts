@@ -26,6 +26,11 @@ export const browser = {
   storage: {
     local: {},
   },
+  runtime: {
+    sendMessage(): void {
+      // dummy
+    },
+  },
 };
 
 export interface Tabs {

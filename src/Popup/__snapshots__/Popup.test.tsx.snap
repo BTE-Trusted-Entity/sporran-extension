@@ -1,72 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Popup renders 1`] = `
-<div
-  className="container"
->
+exports[`Popup should render 1`] = `
+<div>
   <div
-    className="container mx-4 my-4"
+    class="container"
   >
     <div
-      className="row"
+      class="container mx-4 my-4"
     >
       <div
-        className="col-lg-12 text-center"
+        class="row"
       >
-        <p
-          className="text"
+        <div
+          class="col-lg-12 text-center"
         >
-          Example Extension «
-          Sporran
-          »
-        </p>
+          <p
+            class="text"
+          >
+            Example Extension «
+            Sporran
+            »
+          </p>
+        </div>
       </div>
-    </div>
-    <hr />
-    <div
-      className="row"
-    >
+      <hr />
       <div
-        className="col-lg-12"
+        class="row"
       >
-        <button
-          className="btn btn-block btn-outline-dark"
-          onClick={[Function]}
+        <div
+          class="col-lg-12"
         >
-          Scroll To Top
-        </button>
-        <button
-          className="btn btn-block btn-outline-dark"
-          onClick={[Function]}
-        >
-          Scroll To Bottom
-        </button>
+          <button
+            class="btn btn-block btn-outline-dark"
+          >
+            Scroll To Top
+          </button>
+          <button
+            class="btn btn-block btn-outline-dark"
+          >
+            Scroll To Bottom
+          </button>
+        </div>
       </div>
+      <p>
+        mnemonic
+      </p>
+      <p />
+      <form>
+        <label>
+          Enter password:
+          <input
+            required=""
+            type="password"
+          />
+        </label>
+        <button
+          disabled=""
+          type="submit"
+        >
+          Create Account
+        </button>
+      </form>
     </div>
-    <p>
-      
-    </p>
-    <p>
-      
-    </p>
-    <form
-      onSubmit={[Function]}
-    >
-      <label>
-        Enter password:
-        <input
-          onChange={[Function]}
-          required={true}
-          type="password"
-        />
-      </label>
-      <button
-        disabled={true}
-        type="submit"
-      >
-        Create Account
-      </button>
-    </form>
   </div>
 </div>
 `;
