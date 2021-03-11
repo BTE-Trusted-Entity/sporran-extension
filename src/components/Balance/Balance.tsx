@@ -30,6 +30,7 @@ export function Balance({ address }: BalanceProps): JSX.Element {
     return () => {
       unsubscribe();
     };
-  }, []);
-  return <div>Balance: {balance ? balance : <ClipLoader size={10} />}</div>;
+  }, [address]);
+
+  return <div>Balance: {balance || <ClipLoader size={10} />}</div>;
 }
