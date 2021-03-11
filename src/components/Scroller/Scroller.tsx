@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { browser, Tabs } from 'webextension-polyfill-ts';
 // import styles from './Scroller.module.css';
 
@@ -34,7 +33,7 @@ function executeScript(code: string): void {
     });
 }
 
-export function Scroller() {
+export function Scroller(): JSX.Element {
   return (
     <div className="row">
       <div className="col-lg-12">

@@ -44,7 +44,7 @@ export function CreateAccount(): JSX.Element {
 
       setLoading(false);
     },
-    [password],
+    [password, mnemonic],
   );
   return (
     <>
