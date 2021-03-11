@@ -6,7 +6,7 @@ import {
 import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 
-const KILT_FEMTO_COIN = 1000000000000000;
+const KILT_FEMTO_COIN = 1e15; // or 1_000_000_000_000_000
 
 interface BalanceProps {
   address: string;
