@@ -3,10 +3,10 @@ import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.c
 import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 
-const KILT_FEMTO_COIN = 1e15; // or 1_000_000_000_000_000
+const KILT_FEMTO_COIN = new BN(1e15);
 
 function asKiltCoins(balance: BN): string {
-  return balance.div(new BN(KILT_FEMTO_COIN)).toNumber() + ' K';
+  return balance.div(KILT_FEMTO_COIN).toNumber() + ' K';
 }
 
 interface BalanceProps {
