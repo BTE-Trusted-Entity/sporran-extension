@@ -7,7 +7,7 @@ exports[`Warning should render 1`] = `
   >
     <a
       class="backButton"
-      href="#"
+      href="/"
     >
       Back
     </a>
@@ -28,14 +28,20 @@ exports[`Warning should render 1`] = `
     <h2>
       Keep it carefully to not lose your assets
     </h2>
-    <button>
-      I understand this - go to the Phrase
-    </button>
-    <a
-      href="#"
-    >
-      Cancel
-    </a>
+    <p>
+      <a
+        href="/account/create/verify"
+      >
+        I understand this - go to the Phrase
+      </a>
+    </p>
+    <p>
+      <a
+        href="/"
+      >
+        Cancel
+      </a>
+    </p>
   </div>
 </div>
 `;
