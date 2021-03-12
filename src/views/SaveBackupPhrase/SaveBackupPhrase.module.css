@@ -1,0 +1,25 @@
+.items {
+  columns: 2;
+  width: 25rem;
+}
+
+.item {
+  display: block;
+  margin-bottom: 1rem;
+  width: 10rem;
+  height: 1.5rem;
+  border: 0;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+  background: none;
+  text-align: left;
+}
+
+.word {
+  visibility: hidden;
+}
+
+.item:hover .word,
+.item:focus .word {
+  visibility: visible;
+}
