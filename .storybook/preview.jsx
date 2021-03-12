@@ -27,7 +27,7 @@ export const parameters = {
         name: 'Extension Popup',
         type: 'desktop',
         styles: {
-          height: '640px',
+          height: '600px',
           width: '480px',
         }
       }
