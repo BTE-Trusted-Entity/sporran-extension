@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  height: 6rem;
+}
+
+.logo h3 {
+  padding-top: 2rem;
+}
+
+.info {
+  margin: 0;
+}
+
+.button {
+  font-size: 1rem;
+  width: 90%;
+  padding: 1rem;
+  margin: 3rem 0;
+  cursor: pointer;
+  background: none;
+  box-shadow: 0.25rem 0.25rem #000;
+}
