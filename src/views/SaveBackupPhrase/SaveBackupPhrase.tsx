@@ -12,7 +12,7 @@ export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   return (
-    <section>
+    <section className={styles.container}>
       <h1>{t('view_SaveBackupPhrase_heading')}</h1>
       <p>{t('view_SaveBackupPhrase_explanation')}</p>
 
