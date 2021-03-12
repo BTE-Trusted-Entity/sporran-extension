@@ -11,16 +11,16 @@
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
-  "view_Welcome_account_info": {
+  "view_Welcome_info": {
     "message": "You currently don't have any accounts."
   },
-  "view_Welcome_account_invitation": {
+  "view_Welcome_invitation": {
     "message": "Create your first account to get started."
   },
-  "view_Welcome_account_create": {
+  "view_Welcome_create": {
     "message": "Create Account"
   },
-  "view_Welcome_account_import": {
+  "view_Welcome_import": {
     "message": "Import an Account from pre-existing phrase"
   },
   "views_SaveBackupPhrase_heading": {

@@ -5,11 +5,11 @@
 }
 
 .logo {
-  height: 6em;
+  height: 6rem;
 }
 
 .logo h3 {
-  padding-top: 2em;
+  padding-top: 2rem;
 }
 
 .info {
@@ -17,12 +17,11 @@
 }
 
 .button {
-  font-size: 1em;
+  font-size: 1rem;
   width: 90%;
-  padding: 1em;
-  margin: 3em 0;
+  padding: 1rem;
+  margin: 3rem 0;
   cursor: pointer;
-  background-color: #fff;
-  box-shadow: 0.25em 0.25em #000;
-  outline: none;
+  background: none;
+  box-shadow: 0.25rem 0.25rem #000;
 }
