@@ -30,16 +30,12 @@ exports[`App should render 1`] = `
       </h3>
       <a
         class="buttonContainer"
-        href="/warning"
+        href="/account/create"
       >
-        <button
-          class="button"
-        >
-          Create Account
-        </button>
+        Create Account
       </a>
       <a
-        href="#"
+        href="/account/restore"
       >
         Import an Account from pre-existing phrase
       </a>
