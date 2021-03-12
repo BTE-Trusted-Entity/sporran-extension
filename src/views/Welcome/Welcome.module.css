@@ -16,11 +16,15 @@
   margin: 0;
 }
 
-.button {
-  font-size: 1rem;
+.buttonContainer {
   width: 90%;
-  padding: 1rem;
   margin: 3rem 0;
+}
+
+.button {
+  width: 100%;
+  font-size: 1rem;
+  padding: 1rem;
   cursor: pointer;
   background: none;
   box-shadow: 0.25rem 0.25rem #000;

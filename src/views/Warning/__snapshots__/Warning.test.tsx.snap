@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Warning should render 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <a
+      class="backButton"
+      href="/"
+    >
+      Back
+    </a>
+    <h1>
+      Attention!
+    </h1>
+    <div>
+      <h3>
+        [Insert logo here]
+      </h3>
+    </div>
+    <h2>
+      The next Step is very important!
+    </h2>
+    <p>
+      Please write down your wallet's phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet.
+    </p>
+    <h2>
+      Keep it carefully to not lose your assets
+    </h2>
+    <p>
+      <a
+        href="/account/create/verify"
+      >
+        I understand this - go to the Phrase
+      </a>
+    </p>
+    <p>
+      <a
+        href="/"
+      >
+        Cancel
+      </a>
+    </p>
+  </div>
+</div>
+`;
