@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react';
+import { render } from '../../testing';
+
 import { Welcome } from './Welcome';
 
 describe('Welcome', () => {

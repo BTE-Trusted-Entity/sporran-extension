@@ -2,7 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { Identity, init } from '@kiltprotocol/core';
 import { ClipLoader } from 'react-spinners';
 
-import { loadEncrypted, saveEncrypted } from '../Hello/storageEncryption';
+import {
+  loadEncrypted,
+  saveEncrypted,
+} from '../../utilities/storageEncryption/storageEncryption';
 import { Balance } from '../Balance/Balance';
 
 export function CreateAccount(): JSX.Element {

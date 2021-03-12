@@ -2,7 +2,6 @@ declare namespace SaveBackupPhraseModuleCssNamespace {
   export interface ISaveBackupPhraseModuleCss {
     item: string;
     items: string;
-    radio: string;
     word: string;
   }
 }
