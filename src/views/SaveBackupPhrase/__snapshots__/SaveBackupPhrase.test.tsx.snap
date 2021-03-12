@@ -2,7 +2,9 @@
 
 exports[`SaveBackupPhrase should render 1`] = `
 <div>
-  <section>
+  <section
+    class="container"
+  >
     <h1>
       Your Backup Phrase
     </h1>
