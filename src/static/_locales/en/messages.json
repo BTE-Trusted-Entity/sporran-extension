@@ -8,6 +8,12 @@
   "manifest_description": {
     "message": "TODO"
   },
+  "common_action_back": {
+    "message": "Back"
+  },
+  "common_action_cancel": {
+    "message": "Cancel"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -23,6 +29,21 @@
   "view_Welcome_import": {
     "message": "Import an Account from pre-existing phrase"
   },
+  "view_Warning_headline": {
+    "message": "Attention!"
+  },
+  "view_Warning_emphasis": {
+    "message": "The next Step is very important!"
+  },
+  "view_Warning_explanation": {
+    "message": "Please write down your wallet's phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet."
+  },
+  "view_Warning_emphasis_again": {
+    "message": "Keep it carefully to not lose your assets"
+  },
+  "view_Warning_CTA": {
+    "message": "I understand this - go to the Phrase"
+  },
   "view_SaveBackupPhrase_heading": {
     "message": "Your Backup Phrase"
   },
@@ -31,11 +52,5 @@
   },
   "view_SaveBackupPhrase_CTA": {
     "message": "Next Step"
-  },
-  "common_action_back": {
-    "message": "Back"
-  },
-  "common_action_cancel": {
-    "message": "Cancel"
   }
 }
