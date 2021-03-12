@@ -4,7 +4,7 @@ import CopyPlugin from 'copy-webpack-plugin';
 export default {
   entry: {
     backgroundPage: path.resolve('./src/backgroundPage.ts'),
-    popup: path.resolve('./src/Popup/renderPopup.tsx'),
+    popup: path.resolve('./src/popup.tsx'),
   },
   output: {
     path: path.resolve('./dist/js'),

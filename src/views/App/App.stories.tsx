@@ -1,11 +1,11 @@
 import { Meta } from '@storybook/react';
-import { Hello } from './Hello';
+import { App } from './App';
 
 export default {
-  title: 'Components/Hello',
-  component: Hello,
+  title: 'Views/App',
+  component: App,
 } as Meta;
 
 export function Template(): JSX.Element {
-  return <Hello />;
+  return <App />;
 }

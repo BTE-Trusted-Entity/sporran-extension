@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+import { Link } from 'react-router-dom';
 
 import styles from './SaveBackupPhrase.module.css';
 
@@ -26,13 +27,13 @@ export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
       </div>
 
       <p>
-        <a href="/">{t('view_SaveBackupPhrase_CTA')}</a>
+        <Link to="/">{t('view_SaveBackupPhrase_CTA')}</Link>
       </p>
       <p>
-        <a href="/">{t('common_action_back')}</a>
+        <Link to="/">{t('common_action_back')}</Link>
       </p>
       <p>
-        <a href="/">{t('common_action_cancel')}</a>
+        <Link to="/">{t('common_action_cancel')}</Link>
       </p>
     </section>
   );
