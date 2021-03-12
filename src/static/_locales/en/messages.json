@@ -7,5 +7,20 @@
   },
   "manifest_description": {
     "message": "TODO"
+  },
+  "views_SaveBackupPhrase_heading":  {
+    "message": "Your Backup Phrase"
+  },
+  "views_SaveBackupPhrase_explanation":  {
+    "message": "You have to click or tap an empty field to see one word of the phrase. For the next step, you need your written words in the correct order."
+  },
+  "views_SaveBackupPhrase_CTA":  {
+    "message": "Next Step"
+  },
+  "common_action_back":  {
+    "message": "Back"
+  },
+  "common_action_cancel":  {
+    "message": "Cancel"
   }
 }

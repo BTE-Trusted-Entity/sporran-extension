@@ -1,0 +1,12 @@
+import { render } from '@testing-library/react';
+
+import { SaveBackupPhrase } from './SaveBackupPhrase';
+
+describe('SaveBackupPhrase', () => {
+  it('should render', async () => {
+    const { container } = render(
+      <SaveBackupPhrase backupPhrase="one two three four five six seven eight nine ten eleven twelve" />,
+    );
+    expect(container).toMatchSnapshot();
+  });
+});
