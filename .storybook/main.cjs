@@ -11,6 +11,12 @@ module.exports = {
     const cssLoaderOptions = config.module.rules.flatMap(({ use }) => use).find(l => /\bcss-loader\b/.test(l?.loader)).options;
     cssLoaderOptions.modules = true;
 
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: "javascript/auto",
+    })
+
     config.plugins = [
       ...config.plugins,
       new webpack.NormalModuleReplacementPlugin(
