@@ -18,10 +18,12 @@ export function Warning(): JSX.Element {
       <h2>{t('view_Warning_emphasis')}</h2>
       <p>{t('view_Warning_explanation')}</p>
       <h2>{t('view_Warning_emphasis_again')}</h2>
-      <Link to="/account/create/verify" className={styles.buttonContainer}>
-        <button className={styles.button}>{t('view_Warning_CTA')}</button>
-      </Link>
-      <Link to="/">{t('common_action_cancel')}</Link>
+      <p>
+        <Link to="/account/create/verify">{t('view_Warning_CTA')}</Link>
+      </p>
+      <p>
+        <Link to="/">{t('common_action_cancel')}</Link>
+      </p>
     </div>
   );
 }
