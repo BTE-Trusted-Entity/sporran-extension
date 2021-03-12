@@ -28,11 +28,16 @@ exports[`App should render 1`] = `
       >
         Create your first account to get started.
       </h3>
-      <button
-        class="button"
+      <a
+        class="buttonContainer"
+        href="/warning"
       >
-        Create Account
-      </button>
+        <button
+          class="button"
+        >
+          Create Account
+        </button>
+      </a>
       <a
         href="#"
       >
