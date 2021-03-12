@@ -1,6 +1,7 @@
 import { MemoryRouter, Switch, Route } from 'react-router-dom';
 
 import { SaveBackupPhrase } from '../SaveBackupPhrase/SaveBackupPhrase';
+import { Warning } from '../Warning/Warning';
 import { Welcome } from '../Welcome/Welcome';
 
 import styles from './App.module.css';
@@ -12,6 +13,9 @@ export function App(): JSX.Element {
         <Switch>
           <Route path="/" exact>
             <Welcome />
+          </Route>
+          <Route path="/warning">
+            <Warning />
           </Route>
           <Route path="/account/create/verify">
             <SaveBackupPhrase backupPhrase="one two three four five six seven eight nine ten eleven twelve" />
