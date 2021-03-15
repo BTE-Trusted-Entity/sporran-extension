@@ -14,6 +14,9 @@
   "common_action_cancel": {
     "message": "Cancel"
   },
+  "common_action_next": {
+    "message": "Next Step"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -52,6 +55,12 @@
   },
   "view_SaveBackupPhrase_CTA": {
     "message": "Next Step"
+  },
+  "view_VerifyBackupPhrase_heading": {
+    "message": "Check my Backup Phrase"
+  },
+  "view_VerifyBackupPhrase_explanation": {
+    "message": "To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order"
   },
   "view_CreatePassword_heading": {
     "message": "Your account password"
@@ -93,7 +102,7 @@
     "message": "You need to use at least $minimum$ characters",
     "placeholders": {
       "minimum": {
-        "content" : "$1"
+        "content": "$1"
       }
     }
   },
