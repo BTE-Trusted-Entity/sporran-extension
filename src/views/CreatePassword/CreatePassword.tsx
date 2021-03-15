@@ -48,6 +48,7 @@ export function CreatePassword({ backupPhrase }: Props): JSX.Element {
 
   const [password, setPassword] = useState('');
   const [modified, setModified] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const handleInput = useCallback((event) => {
     setPassword(event.target.value);
@@ -81,6 +82,14 @@ export function CreatePassword({ backupPhrase }: Props): JSX.Element {
     },
     [error, history, backupPhrase, password],
   );
+
+  const handleHideClick = useCallback(() => {
+    setVisible(false);
+  }, []);
+
+  const handleShowClick = useCallback(() => {
+    setVisible(true);
+  }, []);
 
   function makeClasses(validator: (value: string) => boolean) {
     const pass = validator(password);
@@ -125,12 +134,22 @@ export function CreatePassword({ backupPhrase }: Props): JSX.Element {
           {t('view_CreatePassword_label')}
           <input
             onInput={handleInput}
-            type="password"
+            type={visible ? 'text' : 'password'}
             name="password"
             autoComplete="new-password"
             required
             minLength={MIN_LENGTH}
           />
+
+          {visible ? (
+            <button type="button" onClick={handleHideClick}>
+              {t('view_CreatePassword_hide')}
+            </button>
+          ) : (
+            <button type="button" onClick={handleShowClick}>
+              {t('view_CreatePassword_show')}
+            </button>
+          )}
         </label>
 
         <p className={styles.errors}>{error}</p>
