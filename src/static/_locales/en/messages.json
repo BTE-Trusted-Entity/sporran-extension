@@ -81,7 +81,7 @@
     "message": "Do not use our example"
   },
   "view_CreatePassword_error_cases": {
-    "message": "You need to use at both uppercase and lowercase"
+    "message": "You need to use both uppercase and lowercase letters"
   },
   "view_CreatePassword_error_numbers": {
     "message": "You need to use at least one number"
