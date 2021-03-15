@@ -7,18 +7,13 @@ interface VerifyBackupPhraseProps {
   backupPhrase: string;
 }
 
-function shuffle(array: string[]) {
-  let m = array.length,
-    t,
-    i;
-
-  while (m) {
-    i = Math.floor(Math.random() * m--);
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
+// Fisher-Yates algorithm
+// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array?answertab=votes#tab-top
+function shuffle(array: string[]): string[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-
   return array;
 }
 
@@ -27,7 +22,9 @@ export function VerifyBackupPhrase({
 }: VerifyBackupPhraseProps): JSX.Element {
   const words = backupPhrase.split(/\s+/);
   const shuffledWords = shuffle([...words]);
+
   const shuffledPhrase = shuffledWords.join(' ');
+
   const t = browser.i18n.getMessage;
 
   return (
@@ -36,8 +33,7 @@ export function VerifyBackupPhrase({
         {t('common_action_back')}
       </Link>
       <h1>{t('view_VerifyBackupPhrase_heading')}</h1>
-      <p>{t('view_VerifyBackupPhrase_explanation')}</p>
-      <p>{backupPhrase}</p>
+      <h3>{t('view_VerifyBackupPhrase_explanation')}</h3>
       <p>{shuffledPhrase}</p>
       <p>
         <Link to="/">{t('common_action_cancel')}</Link>{' '}
