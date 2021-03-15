@@ -80,7 +80,7 @@ export function CreatePassword({ backupPhrase }: Props): JSX.Element {
 
       history.push('/account/create/success');
     },
-    [error, history, backupPhrase, password],
+    [modified, error, history, backupPhrase, password],
   );
 
   const handleHideClick = useCallback(() => {
