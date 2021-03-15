@@ -20,7 +20,7 @@ export function Welcome(): JSX.Element {
         {t('view_Welcome_create')}
       </Link>
 
-      <Link to="/account/restore">{t('view_Welcome_import')}</Link>
+      <Link to="/account/import">{t('view_Welcome_import')}</Link>
     </div>
   );
 }

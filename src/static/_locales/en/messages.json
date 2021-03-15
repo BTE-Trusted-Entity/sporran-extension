@@ -53,6 +53,12 @@
   "view_SaveBackupPhrase_CTA": {
     "message": "Next Step"
   },
+  "view_ImportBackupPhrase_heading": {
+    "message": "Import an Account"
+  },
+  "view_ImportBackupPhrase_explanation": {
+    "message": "Import a Sporran-Account from a pre-existing phrase use 12-word mnemonic seed"
+  },
   "view_CreatePassword_heading": {
     "message": "Your account password"
   },
