@@ -6,16 +6,36 @@ import styles from './ImportBackupPhrase.module.css';
 
 export function ImportBackupPhrase(): JSX.Element {
   const t = browser.i18n.getMessage;
-  const [mnemonic, setMnemonic] = useState([]);
+  const [mnemonicObject, setMnemonicObject] = useState({
+    one: '',
+    two: '',
+    three: '',
+    four: '',
+    five: '',
+    six: '',
+    seven: '',
+    eight: '',
+    nine: '',
+    ten: '',
+    eleven: '',
+    twelve: '',
+  });
 
-  const handleInput = useCallback((event) => {
-    const checker = DEFAULT_WORDLIST.includes(event.target.value);
-    if (!checker) {
-      console.log('bad');
-    } else {
-      setMnemonic(event.target.value);
-    }
-  }, []);
+  const handleInput = useCallback(
+    (event) => {
+      const name = event.target.name;
+      const value = event.target.value;
+      const checker = DEFAULT_WORDLIST.includes(value);
+      if (!checker) {
+        console.log('bad');
+      } else {
+        setMnemonicObject({ ...mnemonicObject, [name]: value });
+      }
+    },
+    [setMnemonicObject, mnemonicObject],
+  );
+
+  console.log('I am the mnemonic', JSON.stringify(mnemonicObject));
 
   return (
     <section className={styles.container}>
@@ -26,54 +46,17 @@ export function ImportBackupPhrase(): JSX.Element {
       <p>{t('view_ImportBackupPhrase_explanation')}</p>
 
       <form className={styles.items}>
-        <label>
-          1.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          2.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          3.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          4.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          5.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          6.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          7.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          8.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          9.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          10.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          11.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
-        <label>
-          12.
-          <input className={styles.item} type="text" onInput={handleInput} />
-        </label>
+        {Object.keys(mnemonicObject).map((value, index) => (
+          <label key={index}>
+            {index + 1} {'.'}
+            <input
+              className={styles.item}
+              name={value}
+              type="text"
+              onInput={handleInput}
+            />
+          </label>
+        ))}
       </form>
 
       <p>
