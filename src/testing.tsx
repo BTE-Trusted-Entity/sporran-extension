@@ -1,3 +1,4 @@
+export * from '@testing-library/react';
 import { render as externalRender } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
