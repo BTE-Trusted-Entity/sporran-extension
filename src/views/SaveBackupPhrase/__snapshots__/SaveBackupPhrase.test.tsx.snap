@@ -149,14 +149,14 @@ exports[`SaveBackupPhrase should render 1`] = `
     </div>
     <p>
       <a
-        href="/"
+        href="/account/create/password"
       >
         Next Step
       </a>
     </p>
     <p>
       <a
-        href="/"
+        href="/account/create"
       >
         Back
       </a>

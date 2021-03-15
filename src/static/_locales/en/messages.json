@@ -52,5 +52,70 @@
   },
   "view_SaveBackupPhrase_CTA": {
     "message": "Next Step"
+  },
+  "view_CreatePassword_heading": {
+    "message": "Your account password"
+  },
+  "view_CreatePassword_per_account": {
+    "message": "You need a separate password for each account."
+  },
+  "view_CreatePassword_explanation": {
+    "message": "To protect your account this password has to be secure. A good example would be a sentence of several words with numbers and punctuation, like this:"
+  },
+  "view_CreatePassword_example": {
+    "message": "House 12! small DOGS"
+  },
+  "view_CreatePassword_criteria_cases": {
+    "message": "Use both uppercase and lowercase letters"
+  },
+  "view_CreatePassword_criteria_numbers": {
+    "message": "Use numbers"
+  },
+  "view_CreatePassword_criteria_other": {
+    "message": "Use punctuation or special characters"
+  },
+  "view_CreatePassword_criteria_length": {
+    "message": "Use at least 12 characters in total"
+  },
+  "view_CreatePassword_criteria_example": {
+    "message": "Do not use our example"
+  },
+  "view_CreatePassword_error_cases": {
+    "message": "You need to use at both uppercase and lowercase"
+  },
+  "view_CreatePassword_error_numbers": {
+    "message": "You need to use at least one number"
+  },
+  "view_CreatePassword_error_other": {
+    "message": "You need to use at least one special character"
+  },
+  "view_CreatePassword_error_length": {
+    "message": "You need to use at least $minimum$ characters",
+    "placeholders": {
+      "minimum": {
+        "content" : "$1"
+      }
+    }
+  },
+  "view_CreatePassword_error_example": {
+    "message": "DON’T USE OUR EXAMPLE"
+  },
+  "view_CreatePassword_label": {
+    "message": "Please enter your password:"
+  },
+  "view_CreatePassword_show": {
+    "message": "Show"
+  },
+  "view_CreatePassword_hide": {
+    "message": "Hide"
+  },
+  "view_CreatePassword_CTA": {
+    "message": "Next Step"
+  },
+  "view_CreateAccountSuccess_heading": {
+    "message": "Congratulations"
+  },
+  "view_CreateAccountSuccess_message": {
+    "message": "You have successfully created a KILT-Wallet"
   }
 }

@@ -19,7 +19,7 @@ export function Warning(): JSX.Element {
       <p>{t('view_Warning_explanation')}</p>
       <h2>{t('view_Warning_emphasis_again')}</h2>
       <p>
-        <Link to="/account/create/verify">{t('view_Warning_CTA')}</Link>
+        <Link to="/account/create/backup">{t('view_Warning_CTA')}</Link>
       </p>
       <p>
         <Link to="/">{t('common_action_cancel')}</Link>
