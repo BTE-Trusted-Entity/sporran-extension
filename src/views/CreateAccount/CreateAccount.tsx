@@ -5,6 +5,8 @@ import { ClipLoader } from 'react-spinners';
 
 import { SaveBackupPhrase } from '../SaveBackupPhrase/SaveBackupPhrase';
 import { Warning } from '../Warning/Warning';
+import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSuccess';
+import { CreatePassword } from '../CreatePassword/CreatePassword';
 
 export function CreateAccount(): JSX.Element {
   const [mnemonic, setMnemonic] = useState('');
@@ -26,8 +28,14 @@ export function CreateAccount(): JSX.Element {
       <Route path="/account/create" exact>
         <Warning />
       </Route>
-      <Route path="/account/create/verify">
+      <Route path="/account/create/backup">
         <SaveBackupPhrase backupPhrase={mnemonic} />
+      </Route>
+      <Route path="/account/create/password">
+        <CreatePassword backupPhrase={mnemonic} />
+      </Route>
+      <Route path="/account/create/success">
+        <CreateAccountSuccess />
       </Route>
     </Switch>
   );

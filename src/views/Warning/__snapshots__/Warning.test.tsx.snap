@@ -30,7 +30,7 @@ exports[`Warning should render 1`] = `
     </h2>
     <p>
       <a
-        href="/account/create/verify"
+        href="/account/create/backup"
       >
         I understand this - go to the Phrase
       </a>

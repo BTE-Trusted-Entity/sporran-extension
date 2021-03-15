@@ -27,10 +27,12 @@ export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
       </div>
 
       <p>
-        <Link to="/">{t('view_SaveBackupPhrase_CTA')}</Link>
+        <Link to="/account/create/password">
+          {t('view_SaveBackupPhrase_CTA')}
+        </Link>
       </p>
       <p>
-        <Link to="/">{t('common_action_back')}</Link>
+        <Link to="/account/create">{t('common_action_back')}</Link>
       </p>
       <p>
         <Link to="/">{t('common_action_cancel')}</Link>

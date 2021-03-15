@@ -24,7 +24,11 @@ export const browser = {
     },
   },
   storage: {
-    local: {},
+    local: {
+      async set(): Promise<void> {
+        // dummy
+      },
+    },
   },
   runtime: {
     sendMessage(): void {
