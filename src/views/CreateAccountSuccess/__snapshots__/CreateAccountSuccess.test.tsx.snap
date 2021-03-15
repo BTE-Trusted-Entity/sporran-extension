@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateAccountSuccess should render 1`] = `
+<div>
+  <main>
+    <h1>
+      Congratulations
+    </h1>
+    <p>
+      You have successfully created a KILT-Wallet
+    </p>
+  </main>
+</div>
+`;
