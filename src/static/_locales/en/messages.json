@@ -59,6 +59,9 @@
   "view_ImportBackupPhrase_explanation": {
     "message": "Import a Sporran-Account from a pre-existing phrase use 12-word mnemonic seed"
   },
+  "view_ImportBackupPhrase_submit": {
+    "message": "Import Account"
+  },
   "view_CreatePassword_heading": {
     "message": "Your account password"
   },
@@ -99,7 +102,7 @@
     "message": "You need to use at least $minimum$ characters",
     "placeholders": {
       "minimum": {
-        "content" : "$1"
+        "content": "$1"
       }
     }
   },

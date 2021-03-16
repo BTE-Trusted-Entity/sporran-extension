@@ -4,6 +4,10 @@ declare namespace ImportBackupPhraseModuleCssNamespace {
     item: string;
     items: string;
     word: string;
+    buttonContainer: string;
+    errors: string;
+    fail: string;
+    pass: string;
   }
 }
 
