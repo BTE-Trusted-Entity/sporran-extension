@@ -14,23 +14,24 @@ export const RelevantSDKErrors = [
 
 export function ImportBackupPhrase(): JSX.Element {
   const t = browser.i18n.getMessage;
-  const [error, setError] = useState({ isError: false, name: '', value: '' });
   const history = useHistory();
-  const [mnemonicObject, setMnemonicObject] = useState({
-    one: '',
-    two: '',
-    three: '',
-    four: '',
-    five: '',
-    six: '',
-    seven: '',
-    eight: '',
-    nine: '',
-    ten: '',
-    eleven: '',
-    twelve: '',
-  });
+  const [error, setError] = useState({ isError: false, name: '', value: '' });
   const [mnemonic, setMnemonic] = useState<string>();
+  const [mnemonicObject, setMnemonicObject] = useState({
+    '1': '',
+    '2': '',
+    '3': '',
+    '4': '',
+    '5': '',
+    '6': '',
+    '7': '',
+    '8': '',
+    '9': '',
+    '10': '',
+    '11': '',
+    '12': '',
+  });
+
   const handleAdd = useCallback(
     (event) => {
       const { name, value } = event.target;
@@ -90,7 +91,7 @@ export function ImportBackupPhrase(): JSX.Element {
           ))}
         </div>
         {error.isError &&
-          `You have an error here: ${error.name} ${error.value}`}
+          `It looks like there’s a typo in word ${error.name}: [${error.value}]`}
         <div className={styles.buttonContainer}>
           <button type="submit">{t('view_ImportBackupPhrase_submit')}</button>
         </div>
