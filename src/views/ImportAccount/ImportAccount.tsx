@@ -13,7 +13,6 @@ export function ImportAccount(): JSX.Element {
   const onImport = useCallback(
     (phrase) => {
       setBackupPhrase(phrase);
-
       history.push('/account/import/password');
     },
     [history],
@@ -37,7 +36,7 @@ export function ImportAccount(): JSX.Element {
         <CreatePassword onSuccess={onSuccess} />
       </Route>
       <Route path="/account/import/success">
-        <CreateAccountSuccess />
+        <CreateAccountSuccess type="import" />
       </Route>
     </Switch>
   );

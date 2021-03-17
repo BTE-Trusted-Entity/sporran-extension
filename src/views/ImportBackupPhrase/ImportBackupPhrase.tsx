@@ -12,10 +12,16 @@ export const RelevantSDKErrors = [
   SDKErrors.ErrorCode.ERROR_MNEMONIC_PHRASE_MALFORMED,
 ];
 
+const STATUS = {
+  pass: styles.pass,
+  fail: styles.fail,
+  neutral: '',
+};
+
 type BackupPhraseObject = {
   [key: string]: {
     backupPhrase: string;
-    style?: string;
+    style: string;
   };
 };
 
@@ -34,32 +40,32 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
     backupPhraseObject,
     setBackupPhraseObject,
   ] = useState<BackupPhraseObject>({
-    '1': { backupPhrase: '', style: '' },
-    '2': { backupPhrase: '', style: '' },
-    '3': { backupPhrase: '', style: '' },
-    '4': { backupPhrase: '', style: '' },
-    '5': { backupPhrase: '', style: '' },
-    '6': { backupPhrase: '', style: '' },
-    '7': { backupPhrase: '', style: '' },
-    '8': { backupPhrase: '', style: '' },
-    '9': { backupPhrase: '', style: '' },
-    '10': { backupPhrase: '', style: '' },
-    '11': { backupPhrase: '', style: '' },
-    '12': { backupPhrase: '', style: '' },
+    '1': { backupPhrase: '', style: STATUS.neutral },
+    '2': { backupPhrase: '', style: STATUS.neutral },
+    '3': { backupPhrase: '', style: STATUS.neutral },
+    '4': { backupPhrase: '', style: STATUS.neutral },
+    '5': { backupPhrase: '', style: STATUS.neutral },
+    '6': { backupPhrase: '', style: STATUS.neutral },
+    '7': { backupPhrase: '', style: STATUS.neutral },
+    '8': { backupPhrase: '', style: STATUS.neutral },
+    '9': { backupPhrase: '', style: STATUS.neutral },
+    '10': { backupPhrase: '', style: STATUS.neutral },
+    '11': { backupPhrase: '', style: STATUS.neutral },
+    '12': { backupPhrase: '', style: STATUS.neutral },
   });
 
   const errors = [
+    error.isError &&
+      error.name === '30008' &&
+      t('view_ImportBackupPhrase_error_invalid_backup_phrase'),
+    error.isError &&
+      error.name === '20012' &&
+      t('view_ImportBackupPhrase_error_backup_phrase_length'),
     error.isError &&
       t('view_ImportBackupPhrase_error_invalid_word', [
         error.name,
         error.value,
       ]),
-    error.isError &&
-      error.value === '30008' &&
-      t('view_ImportBackupPhrase_error_invalid_backup_phrase'),
-    error.isError &&
-      error.value === '20012' &&
-      t('view_ImportBackupPhrase_error_backup_phrase_length'),
   ].filter(Boolean)[0];
 
   const handleAdd = useCallback(
@@ -67,17 +73,23 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
       const { name, value } = event.target;
       const word = wordlistLibrary(value);
 
-      if (!word && value.length > 0) {
-        setError({ isError: true, name, value });
-        setBackupPhraseObject({
-          ...backupPhraseObject,
-          [name]: { style: styles.fail },
-        });
-      } else {
+      if (word) {
         setError({ ...error, isError: false });
         setBackupPhraseObject({
           ...backupPhraseObject,
-          [name]: { backupPhrase: word, style: styles.pass },
+          [name]: { backupPhrase: value, style: STATUS.pass },
+        });
+      } else if (value.length === 0) {
+        setError({ ...error, isError: false });
+        setBackupPhraseObject({
+          ...backupPhraseObject,
+          [name]: { backupPhrase: value, style: STATUS.neutral },
+        });
+      } else {
+        setError({ isError: true, name, value });
+        setBackupPhraseObject({
+          ...backupPhraseObject,
+          [name]: { backupPhrase: value, style: STATUS.fail },
         });
       }
     },
@@ -87,7 +99,9 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      const mnemonicString = Object.values(backupPhraseObject).join(' ');
+      const mnemonicString = Object.values(backupPhraseObject)
+        .map((val) => val.backupPhrase)
+        .join(' ');
       try {
         Identity.buildFromMnemonic(mnemonicString);
         importBackupPhrase(mnemonicString);

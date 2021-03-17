@@ -10,13 +10,13 @@ import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { saveEncrypted } from '../../utilities/storageEncryption/storageEncryption';
 
 export function CreateAccount(): JSX.Element {
-  const [backupPhrase, setMnemonic] = useState('');
+  const [backupPhrase, setBackupPhrase] = useState('');
   const history = useHistory();
   useEffect(() => {
     (async () => {
       // TODO: move address to config file
       await init({ address: 'wss://full-nodes.kilt.io:9944' });
-      setMnemonic(Identity.generateMnemonic());
+      setBackupPhrase(Identity.generateMnemonic());
     })();
   }, []);
 
