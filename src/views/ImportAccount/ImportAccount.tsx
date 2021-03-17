@@ -27,7 +27,7 @@ export function ImportAccount(): JSX.Element {
     },
     [backupPhrase, history],
   );
-  console.log(backupPhrase);
+
   return (
     <Switch>
       <Route path="/account/import" exact>

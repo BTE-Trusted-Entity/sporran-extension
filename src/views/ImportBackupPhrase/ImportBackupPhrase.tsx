@@ -12,26 +12,36 @@ export const RelevantSDKErrors = [
   SDKErrors.ErrorCode.ERROR_MNEMONIC_PHRASE_MALFORMED,
 ];
 
-type Props = {
-  importBackupPhrase: (val: string) => void;
+type BackupPhraseObject = {
+  [key: string]: {
+    backupPhrase: string;
+    style?: string;
+  };
 };
+
+interface Props {
+  importBackupPhrase: (val: string) => void;
+}
 
 export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const [error, setError] = useState({ isError: false, name: '', value: '' });
-  const [backupPhraseObject, setBackupPhraseObject] = useState({
-    '1': '',
-    '2': '',
-    '3': '',
-    '4': '',
-    '5': '',
-    '6': '',
-    '7': '',
-    '8': '',
-    '9': '',
-    '10': '',
-    '11': '',
-    '12': '',
+  const [
+    backupPhraseObject,
+    setBackupPhraseObject,
+  ] = useState<BackupPhraseObject>({
+    '1': { backupPhrase: '', style: '' },
+    '2': { backupPhrase: '', style: '' },
+    '3': { backupPhrase: '', style: '' },
+    '4': { backupPhrase: '', style: '' },
+    '5': { backupPhrase: '', style: '' },
+    '6': { backupPhrase: '', style: '' },
+    '7': { backupPhrase: '', style: '' },
+    '8': { backupPhrase: '', style: '' },
+    '9': { backupPhrase: '', style: '' },
+    '10': { backupPhrase: '', style: '' },
+    '11': { backupPhrase: '', style: '' },
+    '12': { backupPhrase: '', style: '' },
   });
 
   const handleAdd = useCallback(
@@ -40,9 +50,16 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
       const wordlist = DEFAULT_WORDLIST.includes(value);
       if (!wordlist && value.length > 0) {
         setError({ isError: true, name, value });
+        setBackupPhraseObject({
+          ...backupPhraseObject,
+          [name]: { style: styles.fail },
+        });
       } else {
         setError({ ...error, isError: false });
-        setBackupPhraseObject({ ...backupPhraseObject, [name]: value });
+        setBackupPhraseObject({
+          ...backupPhraseObject,
+          [name]: { backupPhrase: value, style: styles.pass },
+        });
       }
     },
     [backupPhraseObject, error],
@@ -80,7 +97,7 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
       <form onSubmit={handleSubmit}>
         <div className={styles.items}>
           {Object.keys(backupPhraseObject).map((value, index) => (
-            <label key={index}>
+            <li key={index} className={backupPhraseObject[value].style}>
               {index + 1} {'.'}
               <input
                 className={styles.item}
@@ -88,7 +105,7 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
                 type="text"
                 onInput={handleAdd}
               />
-            </label>
+            </li>
           ))}
         </div>
         {error.isError &&

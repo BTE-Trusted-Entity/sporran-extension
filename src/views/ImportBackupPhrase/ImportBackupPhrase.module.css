@@ -32,11 +32,6 @@
   display: block;
 }
 
-.errors {
-  color: red;
-  min-height: 1.2rem;
-}
-
 .pass {
   color: green;
   list-style-type: '✔ ️';
