@@ -3,7 +3,7 @@ import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/bip39-en';
 import { Identity } from '@kiltprotocol/core';
 import { SDKErrors } from '@kiltprotocol/utils';
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import styles from './ImportBackupPhrase.module.css';
 
@@ -12,12 +12,14 @@ export const RelevantSDKErrors = [
   SDKErrors.ErrorCode.ERROR_MNEMONIC_PHRASE_MALFORMED,
 ];
 
-export function ImportBackupPhrase(): JSX.Element {
+type Props = {
+  importBackupPhrase: (val: string) => void;
+};
+
+export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const history = useHistory();
   const [error, setError] = useState({ isError: false, name: '', value: '' });
-  const [mnemonic, setMnemonic] = useState<string>();
-  const [mnemonicObject, setMnemonicObject] = useState({
+  const [backupPhraseObject, setBackupPhraseObject] = useState({
     '1': '',
     '2': '',
     '3': '',
@@ -40,32 +42,31 @@ export function ImportBackupPhrase(): JSX.Element {
         setError({ isError: true, name, value });
       } else {
         setError({ ...error, isError: false });
-        setMnemonicObject({ ...mnemonicObject, [name]: value });
+        setBackupPhraseObject({ ...backupPhraseObject, [name]: value });
       }
     },
-    [mnemonicObject, error],
+    [backupPhraseObject, error],
   );
 
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      const mnemonicString = Object.values(mnemonicObject).join(' ');
+      const mnemonicString = Object.values(backupPhraseObject).join(' ');
       try {
         Identity.buildFromMnemonic(mnemonicString);
-        setMnemonic(mnemonicString);
-        history.push('/account/create/password');
+        importBackupPhrase(mnemonicString);
       } catch (e) {
         if (
           SDKErrors.isSDKError(e) &&
           RelevantSDKErrors.includes(e.errorCode)
         ) {
-          setError({ isError: true, value: e.message, name: '' });
+          setError({ isError: true, value: e.message, name: `${e.errorCode}` });
         } else {
-          console.log('This Error is very wrong', e);
+          setError({ isError: true, value: e, name: '' });
         }
       }
     },
-    [history, mnemonicObject],
+    [importBackupPhrase, backupPhraseObject],
   );
 
   return (
@@ -78,7 +79,7 @@ export function ImportBackupPhrase(): JSX.Element {
 
       <form onSubmit={handleSubmit}>
         <div className={styles.items}>
-          {Object.keys(mnemonicObject).map((value, index) => (
+          {Object.keys(backupPhraseObject).map((value, index) => (
             <label key={index}>
               {index + 1} {'.'}
               <input

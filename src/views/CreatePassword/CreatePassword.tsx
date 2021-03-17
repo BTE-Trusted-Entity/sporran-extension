@@ -1,10 +1,7 @@
 import { useCallback, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
-import { Identity } from '@kiltprotocol/core';
-
-import { saveEncrypted } from '../../utilities/storageEncryption/storageEncryption';
 
 import styles from './CreatePassword.module.css';
 
@@ -39,12 +36,11 @@ function isNotExample(value: string): boolean {
 }
 
 interface Props {
-  backupPhrase: string;
+  onSuccess: (val: string) => void;
 }
 
-export function CreatePassword({ backupPhrase }: Props): JSX.Element {
+export function CreatePassword({ onSuccess }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const history = useHistory();
 
   const [password, setPassword] = useState('');
   const [modified, setModified] = useState(false);
@@ -66,7 +62,6 @@ export function CreatePassword({ backupPhrase }: Props): JSX.Element {
       !isNotExample(password) &&
       t('view_CreatePassword_error_example'),
   ].filter(Boolean)[0];
-
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
@@ -74,13 +69,9 @@ export function CreatePassword({ backupPhrase }: Props): JSX.Element {
       if (error) {
         return;
       }
-
-      const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
-      await saveEncrypted(address, password, seed);
-
-      history.push('/account/create/success');
+      onSuccess(password);
     },
-    [error, history, backupPhrase, password],
+    [error, onSuccess, password],
   );
 
   const handleHideClick = useCallback(() => {

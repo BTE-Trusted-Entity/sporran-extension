@@ -2,7 +2,7 @@ import { MemoryRouter, Switch, Route } from 'react-router-dom';
 
 import { Welcome } from '../Welcome/Welcome';
 import { CreateAccount } from '../CreateAccount/CreateAccount';
-import { ImportBackupPhrase } from '../ImportBackupPhrase/ImportBackupPhrase';
+import { ImportAccount } from '../ImportAccount/ImportAccount';
 
 import styles from './App.module.css';
 
@@ -18,7 +18,7 @@ export function App(): JSX.Element {
             <CreateAccount />
           </Route>
           <Route path="/account/import">
-            <ImportBackupPhrase />
+            <ImportAccount />
           </Route>
         </Switch>
       </MemoryRouter>
