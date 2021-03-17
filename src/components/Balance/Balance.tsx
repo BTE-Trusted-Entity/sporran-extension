@@ -4,21 +4,7 @@ import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
 
-import { KiltCurrency } from '../KiltCurrency/KiltCurrency';
-
-const KILT_FEMTO_COIN = new BN(1e15);
-
-const FORMAT = {
-  minimumFractionDigits: 4,
-  maximumFractionDigits: 4,
-};
-
-function asKiltCoins(balance: BN): string {
-  return balance
-    .div(KILT_FEMTO_COIN)
-    .toNumber()
-    .toLocaleString(browser.i18n.getUILanguage(), FORMAT);
-}
+import { KiltAmount } from '../KiltAmount/KiltAmount';
 
 interface BalanceProps {
   address: string;
@@ -26,10 +12,10 @@ interface BalanceProps {
 
 export function Balance({ address }: BalanceProps): JSX.Element {
   const t = browser.i18n.getMessage;
-  const [balance, setBalance] = useState<string | null>(null);
+  const [balance, setBalance] = useState<BN | null>(null);
 
   function balanceListener(address: string, balance: BN) {
-    setBalance(asKiltCoins(balance));
+    setBalance(balance);
   }
 
   useEffect(() => {
@@ -46,11 +32,7 @@ export function Balance({ address }: BalanceProps): JSX.Element {
     <span>
       {t('component_Balance_label')}
 
-      {balance !== null && (
-        <>
-          {balance} <KiltCurrency />
-        </>
-      )}
+      {balance !== null && <KiltAmount amount={balance} />}
 
       {balance === null && <ClipLoader size={10} />}
     </span>
