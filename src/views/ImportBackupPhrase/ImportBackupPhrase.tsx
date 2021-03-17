@@ -23,6 +23,10 @@ interface Props {
   importBackupPhrase: (val: string) => void;
 }
 
+const wordlistLibrary = (value: string) => {
+  return DEFAULT_WORDLIST.includes(value);
+};
+
 export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const [error, setError] = useState({ isError: false, name: '', value: '' });
@@ -44,11 +48,26 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
     '12': { backupPhrase: '', style: '' },
   });
 
+  const errors = [
+    error.isError &&
+      t('view_ImportBackupPhrase_error_invalid_word', [
+        error.name,
+        error.value,
+      ]),
+    error.isError &&
+      error.value === '30008' &&
+      t('view_ImportBackupPhrase_error_invalid_backup_phrase'),
+    error.isError &&
+      error.value === '20012' &&
+      t('view_ImportBackupPhrase_error_backup_phrase_length'),
+  ].filter(Boolean)[0];
+
   const handleAdd = useCallback(
     (event) => {
       const { name, value } = event.target;
-      const wordlist = DEFAULT_WORDLIST.includes(value);
-      if (!wordlist && value.length > 0) {
+      const word = wordlistLibrary(value);
+
+      if (!word && value.length > 0) {
         setError({ isError: true, name, value });
         setBackupPhraseObject({
           ...backupPhraseObject,
@@ -58,7 +77,7 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
         setError({ ...error, isError: false });
         setBackupPhraseObject({
           ...backupPhraseObject,
-          [name]: { backupPhrase: value, style: styles.pass },
+          [name]: { backupPhrase: word, style: styles.pass },
         });
       }
     },
@@ -77,9 +96,9 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
           SDKErrors.isSDKError(e) &&
           RelevantSDKErrors.includes(e.errorCode)
         ) {
-          setError({ isError: true, value: e.message, name: `${e.errorCode}` });
+          setError({ isError: true, name: `${e.errorCode}`, value: e.message });
         } else {
-          setError({ isError: true, value: e, name: '' });
+          setError({ isError: true, name: '', value: e });
         }
       }
     },
@@ -108,8 +127,7 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
             </li>
           ))}
         </div>
-        {error.isError &&
-          `It looks like there’s a typo in word ${error.name}: [${error.value}]`}
+        {error.isError && <p className={styles.errors}>{errors}</p>}
         <div className={styles.buttonContainer}>
           <button type="submit">{t('view_ImportBackupPhrase_submit')}</button>
         </div>
