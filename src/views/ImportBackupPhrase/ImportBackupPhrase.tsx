@@ -15,7 +15,7 @@ export const RelevantSDKErrors = [
 const STATUS = {
   pass: styles.pass,
   fail: styles.fail,
-  neutral: '',
+  neutral: styles.neutral,
 };
 
 type BackupPhraseObject = {
@@ -68,7 +68,7 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
       ]),
   ].filter(Boolean)[0];
 
-  const handleAdd = useCallback(
+  const handleInput = useCallback(
     (event) => {
       const { name, value } = event.target;
       const word = wordlistLibrary(value);
@@ -128,19 +128,22 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
       <p>{t('view_ImportBackupPhrase_explanation')}</p>
 
       <form onSubmit={handleSubmit}>
-        <div className={styles.items}>
-          {Object.keys(backupPhraseObject).map((value, index) => (
-            <li key={index} className={backupPhraseObject[value].style}>
-              {index + 1} {'.'}
-              <input
-                className={styles.item}
-                name={value}
-                type="text"
-                onInput={handleAdd}
-              />
-            </li>
+        <ul className={styles.items}>
+          {Object.keys(backupPhraseObject).map((wordIndex, index) => (
+            <div key={index} className={styles.item}>
+              <li className={backupPhraseObject[wordIndex].style}>
+                {index + 1}
+                <input
+                  name={wordIndex}
+                  className={styles.input}
+                  type="text"
+                  onInput={handleInput}
+                  value={backupPhraseObject[wordIndex].backupPhrase}
+                />
+              </li>
+            </div>
           ))}
-        </div>
+        </ul>
         {error.isError && <p className={styles.errors}>{errors}</p>}
         <div className={styles.buttonContainer}>
           <button type="submit">{t('view_ImportBackupPhrase_submit')}</button>
