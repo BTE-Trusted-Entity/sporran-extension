@@ -2,11 +2,22 @@ import { useEffect, useState } from 'react';
 import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
+import { browser } from 'webextension-polyfill-ts';
+
+import { KiltCurrency } from '../KiltCurrency/KiltCurrency';
 
 const KILT_FEMTO_COIN = new BN(1e15);
 
+const FORMAT = {
+  minimumFractionDigits: 4,
+  maximumFractionDigits: 4,
+};
+
 function asKiltCoins(balance: BN): string {
-  return balance.div(KILT_FEMTO_COIN).toNumber() + ' K';
+  return balance
+    .div(KILT_FEMTO_COIN)
+    .toNumber()
+    .toLocaleString(browser.i18n.getUILanguage(), FORMAT);
 }
 
 interface BalanceProps {
@@ -14,11 +25,10 @@ interface BalanceProps {
 }
 
 export function Balance({ address }: BalanceProps): JSX.Element {
-  const [balance, setBalance] = useState('');
+  const t = browser.i18n.getMessage;
+  const [balance, setBalance] = useState<string | null>(null);
 
-  function balanceListener(address: string, balance: BN, change: BN) {
-    console.log('Balance: ', BN);
-    console.log('Balance changed by ', asKiltCoins(change));
+  function balanceListener(address: string, balance: BN) {
     setBalance(asKiltCoins(balance));
   }
 
@@ -32,5 +42,17 @@ export function Balance({ address }: BalanceProps): JSX.Element {
     };
   }, [address]);
 
-  return <div>Balance: {balance || <ClipLoader size={10} />}</div>;
+  return (
+    <span>
+      {t('component_Balance_label')}
+
+      {balance !== null && (
+        <>
+          {balance} <KiltCurrency />
+        </>
+      )}
+
+      {balance === null && <ClipLoader size={10} />}
+    </span>
+  );
 }

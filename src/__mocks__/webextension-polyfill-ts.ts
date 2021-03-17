@@ -22,6 +22,9 @@ export const browser = {
       const messageData = messagesEN[messageName];
       return messageData ? messageData.message : `[[${messageName}]]`;
     },
+    getUILanguage(): string {
+      return 'en-US';
+    },
   },
   storage: {
     local: {

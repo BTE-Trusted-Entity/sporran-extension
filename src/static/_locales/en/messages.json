@@ -17,6 +17,9 @@
   "common_action_next": {
     "message": "Next Step"
   },
+  "component_Balance_label": {
+    "message": "Balance: "
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
