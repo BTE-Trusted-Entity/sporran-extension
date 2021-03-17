@@ -1,14 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateAccountSuccess should render 1`] = `
+exports[`CreateAccountSuccess should render for create 1`] = `
 <div>
   <main>
     <h1>
-      Congratulations
+      Congratulations!
     </h1>
     <p>
-      You have successfully created a KILT-Wallet
+      You have successfully created a KILT Wallet
     </p>
+    <a
+      href="/"
+    >
+      See the wallet
+    </a>
+  </main>
+</div>
+`;
+
+exports[`CreateAccountSuccess should render for import 1`] = `
+<div>
+  <main>
+    <h1>
+      Congratulations!
+    </h1>
+    <p>
+      You have successfully imported your KILT Wallet
+    </p>
+    <a
+      href="/"
+    >
+      See the wallet
+    </a>
   </main>
 </div>
 `;

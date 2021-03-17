@@ -113,9 +113,15 @@
     "message": "Next Step"
   },
   "view_CreateAccountSuccess_heading": {
-    "message": "Congratulations"
+    "message": "Congratulations!"
   },
-  "view_CreateAccountSuccess_message": {
-    "message": "You have successfully created a KILT-Wallet"
+  "view_CreateAccountSuccess_message_create": {
+    "message": "You have successfully created a KILT Wallet"
+  },
+  "view_CreateAccountSuccess_message_import": {
+    "message": "You have successfully imported your KILT Wallet"
+  },
+  "view_CreateAccountSuccess_CTA": {
+    "message": "See the wallet"
   }
 }
