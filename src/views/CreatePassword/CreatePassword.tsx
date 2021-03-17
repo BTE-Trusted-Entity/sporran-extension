@@ -66,12 +66,12 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
     async (event) => {
       event.preventDefault();
 
-      if (error) {
+      if (!modified || error) {
         return;
       }
       onSuccess(password);
     },
-    [error, onSuccess, password],
+    [error, modified, onSuccess, password],
   );
 
   const handleHideClick = useCallback(() => {
@@ -131,17 +131,17 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
             required
             minLength={MIN_LENGTH}
           />
-
-          {visible ? (
-            <button type="button" onClick={handleHideClick}>
-              {t('view_CreatePassword_hide')}
-            </button>
-          ) : (
-            <button type="button" onClick={handleShowClick}>
-              {t('view_CreatePassword_show')}
-            </button>
-          )}
         </label>
+
+        {visible ? (
+          <button type="button" onClick={handleHideClick}>
+            {t('view_CreatePassword_hide')}
+          </button>
+        ) : (
+          <button type="button" onClick={handleShowClick}>
+            {t('view_CreatePassword_show')}
+          </button>
+        )}
 
         <p className={styles.errors}>{error}</p>
         <button type="submit">{t('view_CreatePassword_CTA')}</button>

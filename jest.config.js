@@ -22,6 +22,7 @@ export default {
   // coveragePathIgnorePatterns: [
   //   "/node_modules/"
   // ],
+  coverageProvider: 'v8',
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
   //   "json",
