@@ -13,12 +13,9 @@ import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
 export function CreateAccount(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
   const history = useHistory();
+
   useEffect(() => {
-    (async () => {
-      // TODO: move address to config file
-      await init({ address: 'wss://full-nodes.kilt.io:9944' });
-      setBackupPhrase(Identity.generateMnemonic());
-    })();
+    setBackupPhrase(Identity.generateMnemonic());
   }, []);
 
   const onSuccess = useCallback(
