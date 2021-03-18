@@ -12,6 +12,11 @@ export const RelevantSDKErrors = [
   SDKErrors.ErrorCode.ERROR_MNEMONIC_PHRASE_MALFORMED,
 ];
 
+const [ERROR_CODE_INVALID_BACKUP_PHRASE, ERROR_CODE_BACKUP_PHRASE_MALFORMED] = [
+  '30008',
+  '20012',
+];
+
 const STATUS = {
   pass: styles.pass,
   fail: styles.fail,
@@ -56,10 +61,10 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
 
   const errors = [
     error.isError &&
-      error.name === '30008' &&
+      error.name === ERROR_CODE_INVALID_BACKUP_PHRASE &&
       t('view_ImportBackupPhrase_error_invalid_backup_phrase'),
     error.isError &&
-      error.name === '20012' &&
+      error.name === ERROR_CODE_BACKUP_PHRASE_MALFORMED &&
       t('view_ImportBackupPhrase_error_backup_phrase_length'),
     error.isError &&
       t('view_ImportBackupPhrase_error_invalid_word', [
