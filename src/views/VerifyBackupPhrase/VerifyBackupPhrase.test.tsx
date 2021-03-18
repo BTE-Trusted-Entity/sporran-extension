@@ -2,10 +2,6 @@ import { render } from '../../testing';
 
 import { VerifyBackupPhrase } from './VerifyBackupPhrase';
 
-// jest.mock('./VerifyBackupPhrase');
-// (shuffle as jest.Mock).mockImplementation(() => [
-//   'twelve, eleven, ten, nine, eight, seven, six, five, four, three, two, one',
-// ]);
 jest.spyOn(Math, 'random').mockImplementation(() => 0.123456789);
 
 describe('VerifyBackupPhrase', () => {
