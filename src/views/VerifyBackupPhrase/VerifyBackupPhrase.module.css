@@ -9,3 +9,37 @@
   position: absolute;
   left: 0.5rem;
 }
+
+.button {
+  padding: 0.5rem 2rem;
+  margin: 0.1rem;
+  background: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.button > * {
+  pointer-events: none;
+}
+
+.correct {
+  border: 2px solid green;
+}
+
+.correct > * {
+  color: green;
+}
+
+.incorrect {
+  border: 2px solid red;
+}
+
+.error {
+  color: red;
+}
+
+.booleanSymbol {
+  position: absolute;
+  right: 0.1rem;
+  top: 0;
+}

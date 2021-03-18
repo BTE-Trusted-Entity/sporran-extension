@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VerifyBackupPhrase should render 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <a
+      class="backButton"
+      href="/account/create/backup"
+    >
+      Back
+    </a>
+    <h1>
+      Check my Backup Phrase
+    </h1>
+    <h3>
+      To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order
+    </h3>
+    <div />
+    <hr />
+    <div>
+      <button
+        class="button"
+        value="nine"
+      >
+        nine
+      </button>
+      <button
+        class="button"
+        value="seven"
+      >
+        seven
+      </button>
+      <button
+        class="button"
+        value="twelve"
+      >
+        twelve
+      </button>
+      <button
+        class="button"
+        value="eight"
+      >
+        eight
+      </button>
+      <button
+        class="button"
+        value="one"
+      >
+        one
+      </button>
+      <button
+        class="button"
+        value="two"
+      >
+        two
+      </button>
+      <button
+        class="button"
+        value="six"
+      >
+        six
+      </button>
+      <button
+        class="button"
+        value="ten"
+      >
+        ten
+      </button>
+      <button
+        class="button"
+        value="five"
+      >
+        five
+      </button>
+      <button
+        class="button"
+        value="eleven"
+      >
+        eleven
+      </button>
+      <button
+        class="button"
+        value="four"
+      >
+        four
+      </button>
+      <button
+        class="button"
+        value="three"
+      >
+        three
+      </button>
+    </div>
+    <p
+      class="error"
+    />
+    <button>
+      Next Step
+    </button>
+    <p>
+      <a
+        href="/"
+      >
+        Cancel
+      </a>
+       
+    </p>
+  </section>
+</div>
+`;
