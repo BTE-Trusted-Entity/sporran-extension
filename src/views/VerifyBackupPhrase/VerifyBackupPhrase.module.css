@@ -10,6 +10,10 @@
   left: 0.5rem;
 }
 
+.selectedWordsContainer {
+  min-height: 6rem;
+}
+
 .button {
   padding: 0.5rem 2rem;
   margin: 0.1rem;

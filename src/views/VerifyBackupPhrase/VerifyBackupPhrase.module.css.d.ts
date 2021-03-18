@@ -6,6 +6,7 @@ declare namespace VerifyBackupPhraseModuleCssNamespace {
     correct: string;
     error: string;
     incorrect: string;
+    selectedWordsContainer: string;
   }
 }
 
