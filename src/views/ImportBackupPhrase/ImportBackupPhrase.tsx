@@ -29,16 +29,16 @@ type BackupPhraseObject = {
 };
 
 interface Props {
-  onImport: (value: string) => void;
+  onImport: (backupPhrase: string) => void;
 }
 
-const isAllowed = (value: string) => {
-  return DEFAULT_WORDLIST.includes(value);
+const isAllowed = (word: string) => {
+  return DEFAULT_WORDLIST.includes(word);
 };
 
 export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const [error, setError] = useState({ isError: false, name: '', value: '' });
+  const [error, setError] = useState({ isError: false, name: '', message: '' });
   const [
     backupPhraseObject,
     setBackupPhraseObject,
@@ -67,7 +67,7 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
     error.isError &&
       t('view_ImportBackupPhrase_error_invalid_word', [
         error.name,
-        error.value,
+        error.message,
       ]),
   ].filter(Boolean)[0];
 
@@ -89,7 +89,7 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
           [name]: { backupWord: value, style: STATUS.neutral },
         });
       } else {
-        setError({ isError: true, name, value });
+        setError({ isError: true, name, message: value });
         setBackupPhraseObject({
           ...backupPhraseObject,
           [name]: { backupWord: value, style: STATUS.fail },
@@ -116,10 +116,10 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
           setError({
             isError: true,
             name: `${error.errorCode}`,
-            value: error.message,
+            message: error.message,
           });
         } else {
-          setError({ isError: true, name: '', value: error });
+          setError({ isError: true, name: '', message: error });
         }
       }
     },
