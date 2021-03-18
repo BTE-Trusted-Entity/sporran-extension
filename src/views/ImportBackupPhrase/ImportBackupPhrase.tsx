@@ -20,38 +20,38 @@ const STATUS = {
 
 type BackupPhraseObject = {
   [key: string]: {
-    backupPhrase: string;
+    backupWord: string;
     style: string;
   };
 };
 
 interface Props {
-  importBackupPhrase: (val: string) => void;
+  onImport: (value: string) => void;
 }
 
-const wordlistLibrary = (value: string) => {
+const isAllowed = (value: string) => {
   return DEFAULT_WORDLIST.includes(value);
 };
 
-export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
+export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const [error, setError] = useState({ isError: false, name: '', value: '' });
   const [
     backupPhraseObject,
     setBackupPhraseObject,
   ] = useState<BackupPhraseObject>({
-    '1': { backupPhrase: '', style: STATUS.neutral },
-    '2': { backupPhrase: '', style: STATUS.neutral },
-    '3': { backupPhrase: '', style: STATUS.neutral },
-    '4': { backupPhrase: '', style: STATUS.neutral },
-    '5': { backupPhrase: '', style: STATUS.neutral },
-    '6': { backupPhrase: '', style: STATUS.neutral },
-    '7': { backupPhrase: '', style: STATUS.neutral },
-    '8': { backupPhrase: '', style: STATUS.neutral },
-    '9': { backupPhrase: '', style: STATUS.neutral },
-    '10': { backupPhrase: '', style: STATUS.neutral },
-    '11': { backupPhrase: '', style: STATUS.neutral },
-    '12': { backupPhrase: '', style: STATUS.neutral },
+    '1': { backupWord: '', style: STATUS.neutral },
+    '2': { backupWord: '', style: STATUS.neutral },
+    '3': { backupWord: '', style: STATUS.neutral },
+    '4': { backupWord: '', style: STATUS.neutral },
+    '5': { backupWord: '', style: STATUS.neutral },
+    '6': { backupWord: '', style: STATUS.neutral },
+    '7': { backupWord: '', style: STATUS.neutral },
+    '8': { backupWord: '', style: STATUS.neutral },
+    '9': { backupWord: '', style: STATUS.neutral },
+    '10': { backupWord: '', style: STATUS.neutral },
+    '11': { backupWord: '', style: STATUS.neutral },
+    '12': { backupWord: '', style: STATUS.neutral },
   });
 
   const errors = [
@@ -71,25 +71,25 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
   const handleInput = useCallback(
     (event) => {
       const { name, value } = event.target;
-      const word = wordlistLibrary(value);
+      const word = isAllowed(value);
 
       if (word) {
         setError({ ...error, isError: false });
         setBackupPhraseObject({
           ...backupPhraseObject,
-          [name]: { backupPhrase: value, style: STATUS.pass },
+          [name]: { backupWord: value, style: STATUS.pass },
         });
       } else if (value.length === 0) {
         setError({ ...error, isError: false });
         setBackupPhraseObject({
           ...backupPhraseObject,
-          [name]: { backupPhrase: value, style: STATUS.neutral },
+          [name]: { backupWord: value, style: STATUS.neutral },
         });
       } else {
         setError({ isError: true, name, value });
         setBackupPhraseObject({
           ...backupPhraseObject,
-          [name]: { backupPhrase: value, style: STATUS.fail },
+          [name]: { backupWord: value, style: STATUS.fail },
         });
       }
     },
@@ -99,24 +99,28 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      const mnemonicString = Object.values(backupPhraseObject)
-        .map((val) => val.backupPhrase)
+      const backupPhraseString = Object.values(backupPhraseObject)
+        .map(({ backupWord }) => backupWord)
         .join(' ');
       try {
-        Identity.buildFromMnemonic(mnemonicString);
-        importBackupPhrase(mnemonicString);
-      } catch (e) {
+        Identity.buildFromMnemonic(backupPhraseString);
+        onImport(backupPhraseString);
+      } catch (error) {
         if (
-          SDKErrors.isSDKError(e) &&
-          RelevantSDKErrors.includes(e.errorCode)
+          SDKErrors.isSDKError(error) &&
+          RelevantSDKErrors.includes(error.errorCode)
         ) {
-          setError({ isError: true, name: `${e.errorCode}`, value: e.message });
+          setError({
+            isError: true,
+            name: `${error.errorCode}`,
+            value: error.message,
+          });
         } else {
-          setError({ isError: true, name: '', value: e });
+          setError({ isError: true, name: '', value: error });
         }
       }
     },
-    [importBackupPhrase, backupPhraseObject],
+    [onImport, backupPhraseObject],
   );
 
   return (
@@ -130,18 +134,18 @@ export function ImportBackupPhrase({ importBackupPhrase }: Props): JSX.Element {
       <form onSubmit={handleSubmit}>
         <ul className={styles.items}>
           {Object.keys(backupPhraseObject).map((wordIndex, index) => (
-            <div key={index} className={styles.item}>
-              <li className={backupPhraseObject[wordIndex].style}>
+            <li key={index} className={backupPhraseObject[wordIndex].style}>
+              <label className={styles.item}>
                 {index + 1}
                 <input
                   name={wordIndex}
                   className={styles.input}
                   type="text"
                   onInput={handleInput}
-                  value={backupPhraseObject[wordIndex].backupPhrase}
+                  value={backupPhraseObject[wordIndex].backupWord}
                 />
-              </li>
-            </div>
+              </label>
+            </li>
           ))}
         </ul>
         {error.isError && <p className={styles.errors}>{errors}</p>}

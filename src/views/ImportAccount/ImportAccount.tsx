@@ -30,7 +30,7 @@ export function ImportAccount(): JSX.Element {
   return (
     <Switch>
       <Route path="/account/import" exact>
-        <ImportBackupPhrase importBackupPhrase={onImport} />
+        <ImportBackupPhrase onImport={onImport} />
       </Route>
       <Route path="/account/import/password">
         <CreatePassword onSuccess={onSuccess} />

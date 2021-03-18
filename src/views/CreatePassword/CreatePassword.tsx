@@ -36,7 +36,7 @@ function isNotExample(value: string): boolean {
 }
 
 interface Props {
-  onSuccess: (val: string) => void;
+  onSuccess: (password: string) => void;
 }
 
 export function CreatePassword({ onSuccess }: Props): JSX.Element {

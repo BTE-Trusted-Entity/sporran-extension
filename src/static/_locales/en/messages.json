@@ -57,7 +57,7 @@
     "message": "Import an Account"
   },
   "view_ImportBackupPhrase_explanation": {
-    "message": "Import a Sporran-Account from a pre-existing phrase use 12-word mnemonic seed"
+    "message": "To import a Sporran account, you will need a pre-existing backup phrase consisting of 12-words"
   },
   "view_ImportBackupPhrase_submit": {
     "message": "Import Account"
@@ -69,7 +69,7 @@
     "message": "Please insert all the words of the backup phrase"
   },
   "view_ImportBackupPhrase_error_invalid_word": {
-    "message": "It looks like there’s a typo in word $number$: [$word$]",
+    "message": "It looks like there’s a typo in word $number$: “$word$”",
     "placeholders": {
       "number": {
         "content": "$1"
