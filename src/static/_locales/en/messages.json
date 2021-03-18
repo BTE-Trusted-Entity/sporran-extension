@@ -11,6 +11,9 @@
   "common_action_back": {
     "message": "Back"
   },
+  "common_action_save": {
+    "message": "Save"
+  },
   "common_action_cancel": {
     "message": "Cancel"
   },
@@ -161,5 +164,32 @@
   },
   "view_CreateAccountSuccess_CTA": {
     "message": "See the wallet"
+  },
+  "view_Accounts_title": {
+    "message": "Your accounts"
+  },
+  "view_Accounts_subtitle_one": {
+    "message": "You have $number$ account",
+    "placeholders": {
+      "number": "$1"
+    }
+  },
+  "view_Accounts_subtitle_other": {
+    "message": "You have $number$ accounts",
+    "placeholders": {
+      "number": "$1"
+    }
+  },
+  "view_Account_rename": {
+    "message": "Rename"
+  },
+  "view_Account_name": {
+    "message": "Account name:"
+  },
+  "view_Account_send": {
+    "message": "Send"
+  },
+  "view_Account_receive": {
+    "message": "Receive"
   }
 }

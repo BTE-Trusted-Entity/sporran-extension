@@ -28,6 +28,9 @@ export const browser = {
   },
   storage: {
     local: {
+      async get(): Promise<unknown> {
+        return {};
+      },
       async set(): Promise<void> {
         // dummy
       },
