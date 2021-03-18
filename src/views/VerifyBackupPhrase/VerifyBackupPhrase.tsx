@@ -45,7 +45,7 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const selectWord = useCallback(
     (event) => {
       setSubmitted(false);
-      const selectedWord = event.target.innerHTML;
+      const selectedWord = event.target.textContent;
       setSelectedWords([...selectedWords, selectedWord]);
     },
     [selectedWords],
@@ -54,7 +54,7 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const unselectWord = useCallback(
     (event) => {
       setSubmitted(false);
-      const unselectedWord = event.target.innerHTML;
+      const unselectedWord = event.target.textContent;
       setSelectedWords(selectedWords.filter((word) => word !== unselectedWord));
     },
     [selectedWords],
