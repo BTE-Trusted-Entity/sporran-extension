@@ -22,39 +22,9 @@ exports[`VerifyBackupPhrase should render 1`] = `
     <div>
       <button
         class="button"
-        value="eight"
-      >
-        eight
-      </button>
-      <button
-        class="button"
-        value="four"
-      >
-        four
-      </button>
-      <button
-        class="button"
-        value="ten"
-      >
-        ten
-      </button>
-      <button
-        class="button"
-        value="five"
-      >
-        five
-      </button>
-      <button
-        class="button"
         value="nine"
       >
         nine
-      </button>
-      <button
-        class="button"
-        value="eleven"
-      >
-        eleven
       </button>
       <button
         class="button"
@@ -64,15 +34,21 @@ exports[`VerifyBackupPhrase should render 1`] = `
       </button>
       <button
         class="button"
-        value="two"
+        value="four"
       >
-        two
+        four
       </button>
       <button
         class="button"
-        value="twelve"
+        value="five"
       >
-        twelve
+        five
+      </button>
+      <button
+        class="button"
+        value="six"
+      >
+        six
       </button>
       <button
         class="button"
@@ -82,15 +58,39 @@ exports[`VerifyBackupPhrase should render 1`] = `
       </button>
       <button
         class="button"
+        value="eight"
+      >
+        eight
+      </button>
+      <button
+        class="button"
         value="one"
       >
         one
       </button>
       <button
         class="button"
-        value="six"
+        value="ten"
       >
-        six
+        ten
+      </button>
+      <button
+        class="button"
+        value="eleven"
+      >
+        eleven
+      </button>
+      <button
+        class="button"
+        value="twelve"
+      >
+        twelve
+      </button>
+      <button
+        class="button"
+        value="two"
+      >
+        two
       </button>
     </div>
     <p
