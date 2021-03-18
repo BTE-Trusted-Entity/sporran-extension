@@ -53,9 +53,6 @@
   "view_SaveBackupPhrase_explanation": {
     "message": "You have to click or tap an empty field to see one word of the phrase. For the next step, you need your written words in the correct order."
   },
-  "view_SaveBackupPhrase_CTA": {
-    "message": "Next Step"
-  },
   "view_VerifyBackupPhrase_heading": {
     "message": "Check my Backup Phrase"
   },

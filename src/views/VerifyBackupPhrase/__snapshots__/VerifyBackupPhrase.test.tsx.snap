@@ -2,7 +2,7 @@
 
 exports[`VerifyBackupPhrase should render 1`] = `
 <div>
-  <section
+  <main
     class="container"
   >
     <a
@@ -17,96 +17,98 @@ exports[`VerifyBackupPhrase should render 1`] = `
     <h3>
       To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order
     </h3>
-    <div />
-    <hr />
-    <div>
+    <form>
+      <hr />
+      <div>
+        <button
+          class="button"
+          type="button"
+        >
+          nine
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          three
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          four
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          five
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          six
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          seven
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          eight
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          one
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          ten
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          eleven
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          twelve
+        </button>
+        <button
+          class="button"
+          type="button"
+        >
+          two
+        </button>
+      </div>
+      <p
+        class="error"
+      />
       <button
-        class="button"
-        value="nine"
+        type="submit"
       >
-        nine
+        Next Step
       </button>
-      <button
-        class="button"
-        value="three"
-      >
-        three
-      </button>
-      <button
-        class="button"
-        value="four"
-      >
-        four
-      </button>
-      <button
-        class="button"
-        value="five"
-      >
-        five
-      </button>
-      <button
-        class="button"
-        value="six"
-      >
-        six
-      </button>
-      <button
-        class="button"
-        value="seven"
-      >
-        seven
-      </button>
-      <button
-        class="button"
-        value="eight"
-      >
-        eight
-      </button>
-      <button
-        class="button"
-        value="one"
-      >
-        one
-      </button>
-      <button
-        class="button"
-        value="ten"
-      >
-        ten
-      </button>
-      <button
-        class="button"
-        value="eleven"
-      >
-        eleven
-      </button>
-      <button
-        class="button"
-        value="twelve"
-      >
-        twelve
-      </button>
-      <button
-        class="button"
-        value="two"
-      >
-        two
-      </button>
-    </div>
-    <p
-      class="error"
-    />
-    <button>
-      Next Step
-    </button>
+    </form>
     <p>
       <a
         href="/"
       >
         Cancel
       </a>
-       
     </p>
-  </section>
+  </main>
 </div>
 `;

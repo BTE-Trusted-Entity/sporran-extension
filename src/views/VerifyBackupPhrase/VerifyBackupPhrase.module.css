@@ -18,28 +18,29 @@
   cursor: pointer;
 }
 
-.button > * {
-  pointer-events: none;
-}
-
 .correct {
   border: 2px solid green;
 }
 
-.correct > * {
+.correct::after {
+  content: '✔';
   color: green;
+  position: absolute;
+  right: 0.1rem;
+  top: 0;
 }
 
 .incorrect {
   border: 2px solid red;
 }
 
-.error {
-  color: red;
-}
-
-.booleanSymbol {
+.incorrect::after {
+  content: '❌';
   position: absolute;
   right: 0.1rem;
   top: 0;
+}
+
+.error {
+  color: red;
 }
