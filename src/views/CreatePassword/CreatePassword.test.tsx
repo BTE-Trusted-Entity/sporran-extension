@@ -2,19 +2,16 @@ import userEvent from '@testing-library/user-event';
 import { Identity } from '@kiltprotocol/core';
 
 import { render, screen } from '../../testing';
-import { saveEncrypted } from '../../utilities/storageEncryption/storageEncryption';
 
 import { CreatePassword } from './CreatePassword';
 
 jest.mock('@kiltprotocol/core');
 (Identity.buildFromMnemonic as jest.Mock).mockImplementation(() => 'mnemonic');
 
-jest.mock('../../utilities/storageEncryption/storageEncryption');
-(saveEncrypted as jest.Mock).mockImplementation(async () => '');
+const onSuccess = jest.fn();
 
 const props = {
-  backupPhrase:
-    'one two three four five six seven eight nine ten eleven twelve',
+  onSuccess,
 };
 
 describe('CreatePassword', () => {
@@ -27,7 +24,7 @@ describe('CreatePassword', () => {
     render(<CreatePassword {...props} />);
 
     userEvent.click(screen.getByText('Next Step'));
-    expect(saveEncrypted).not.toHaveBeenCalled();
+    expect(onSuccess).not.toHaveBeenCalled();
 
     userEvent.type(
       screen.getByLabelText('Please enter your password:'),
@@ -35,7 +32,7 @@ describe('CreatePassword', () => {
     );
     userEvent.click(screen.getByText('Next Step'));
 
-    expect(saveEncrypted).toHaveBeenCalled();
+    expect(onSuccess).toHaveBeenCalled();
   });
 
   it('should allow visible and hidden passwords', async () => {
