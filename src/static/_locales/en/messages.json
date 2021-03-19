@@ -171,13 +171,17 @@
   "view_Accounts_subtitle_one": {
     "message": "You have $number$ account",
     "placeholders": {
-      "number": "$1"
+      "number": {
+        "content": "$1"
+      }
     }
   },
   "view_Accounts_subtitle_other": {
     "message": "You have $number$ accounts",
     "placeholders": {
-      "number": "$1"
+      "number": {
+        "content": "$1"
+      }
     }
   },
   "view_Account_rename": {
