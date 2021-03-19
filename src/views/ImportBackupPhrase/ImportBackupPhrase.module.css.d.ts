@@ -2,13 +2,13 @@ declare namespace ImportBackupPhraseModuleCssNamespace {
   export interface IImportBackupPhraseModuleCss {
     buttonContainer: string;
     container: string;
-    errors: string;
     fail: string;
+    input: string;
     item: string;
     items: string;
-    input: string;
-    pass: string;
     neutral: string;
+    pass: string;
+    word: string;
   }
 }
 

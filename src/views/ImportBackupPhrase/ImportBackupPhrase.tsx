@@ -11,9 +11,9 @@ function isAllowed(word: string) {
   return DEFAULT_WORDLIST.includes(word);
 }
 
-function ERROR_INVALID_BACKUP_PHRASE(value: string): boolean {
+function ERROR_INVALID_BACKUP_PHRASE(backupPhrase: Array<string>): boolean {
   try {
-    Identity.buildFromMnemonic(value);
+    Identity.buildFromMnemonic(backupPhrase.join(' '));
     return false;
   } catch {
     return true;
@@ -32,7 +32,7 @@ function ERROR_INVALID_BACKUP_WORD(value: string): boolean {
   return !isAllowed(value);
 }
 
-type BackupPhrase = Array<string>;
+type BackupPhrase = Array<string[12]>;
 
 interface Props {
   onImport: (backupPhrase: string) => void;
@@ -65,7 +65,7 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
       ERROR_BACKUP_PHRASE_MALFORMED(backupPhrase) &&
       t('view_ImportBackupPhrase_error_backup_phrase_length'),
     modified &&
-      ERROR_INVALID_BACKUP_PHRASE(backupPhrase.map((word) => word).join(' ')) &&
+      ERROR_INVALID_BACKUP_PHRASE(backupPhrase) &&
       t('view_ImportBackupPhrase_error_invalid_backup_phrase'),
   ].filter(Boolean)[0];
 
@@ -85,7 +85,7 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
       if (error) {
         return;
       }
-      const backupPhraseString = backupPhrase.map((word) => word).join(' ');
+      const backupPhraseString = backupPhrase.join(' ');
       onImport(backupPhraseString);
     },
     [backupPhrase, error, onImport],
@@ -125,7 +125,7 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
             </li>
           ))}
         </ul>
-        {error && <p className={styles.errors}>{error}</p>}
+        {error && <p>{error}</p>}
         <div className={styles.buttonContainer}>
           <button type="submit">{t('view_ImportBackupPhrase_submit')}</button>
         </div>

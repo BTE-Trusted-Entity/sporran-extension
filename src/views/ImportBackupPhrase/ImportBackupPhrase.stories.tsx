@@ -7,5 +7,5 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  return <ImportBackupPhrase />;
+  return <ImportBackupPhrase onImport={(val) => val} />;
 }
