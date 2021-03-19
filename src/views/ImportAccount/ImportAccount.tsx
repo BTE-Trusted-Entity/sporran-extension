@@ -5,6 +5,7 @@ import { saveEncrypted } from '../../utilities/storageEncryption/storageEncrypti
 import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSuccess';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { ImportBackupPhrase } from '../ImportBackupPhrase/ImportBackupPhrase';
+import { paths } from '../paths';
 
 export function ImportAccount(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
@@ -13,7 +14,7 @@ export function ImportAccount(): JSX.Element {
   const onImport = useCallback(
     (phrase) => {
       setBackupPhrase(phrase);
-      history.push('/account/import/password');
+      history.push(paths.account.import.password);
     },
     [history],
   );
@@ -22,20 +23,20 @@ export function ImportAccount(): JSX.Element {
     async (password: string) => {
       const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
       await saveEncrypted(address, password, seed);
-      history.push('/account/import/success');
+      history.push(paths.account.import.success);
     },
     [backupPhrase, history],
   );
 
   return (
     <Switch>
-      <Route path="/account/import" exact>
+      <Route path={paths.account.import.start} exact>
         <ImportBackupPhrase onImport={onImport} />
       </Route>
-      <Route path="/account/import/password">
+      <Route path={paths.account.import.password}>
         <CreatePassword onSuccess={onSuccess} />
       </Route>
-      <Route path="/account/import/success">
+      <Route path={paths.account.import.success}>
         <CreateAccountSuccess type="import" />
       </Route>
     </Switch>

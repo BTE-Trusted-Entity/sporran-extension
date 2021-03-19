@@ -7,6 +7,7 @@ import {
   useCurrentAccount,
 } from '../../utilities/accounts/accounts';
 import { Account } from '../Account/Account';
+import { paths } from '../paths';
 
 interface Props {
   accounts: AccountsMap;
@@ -31,13 +32,13 @@ export function Accounts({ accounts }: Props): JSX.Element {
 
         <Switch>
           <Route
-            path="/account/:address"
+            path={paths.account.overview}
             render={({ match }) => {
-              const account = accounts[match.params.address];
+              const account = accounts[match.params.address as string];
               return account ? (
                 <Account account={account} />
               ) : (
-                <Redirect to="/" />
+                <Redirect to={paths.home} />
               );
             }}
           />

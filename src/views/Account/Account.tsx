@@ -7,6 +7,7 @@ import {
   saveAccount,
   setCurrentAccount,
 } from '../../utilities/accounts/accounts';
+import { generatePath, paths } from '../paths';
 
 interface Props {
   account: {
@@ -76,12 +77,12 @@ export function Account({ account }: Props): JSX.Element {
       </p>
 
       <p>
-        <Link to={`/account/${account.address}/send`}>
+        <Link to={generatePath(paths.account.send, account)}>
           {t('view_Account_send')}
         </Link>
       </p>
       <p>
-        <Link to={`/account/${account.address}/receive`}>
+        <Link to={generatePath(paths.account.receive, account)}>
           {t('view_Account_receive')}
         </Link>
       </p>

@@ -7,6 +7,7 @@ import { CreateAccount } from '../CreateAccount/CreateAccount';
 import { ImportAccount } from '../ImportAccount/ImportAccount';
 import { Accounts } from '../Accounts/Accounts';
 import { useAccounts } from '../../utilities/accounts/accounts';
+import { paths } from '../paths';
 
 import styles from './App.module.css';
 
@@ -25,7 +26,7 @@ export function App(): JSX.Element {
     <main className={styles.container}>
       <MemoryRouter>
         <Switch>
-          <Route path="/" exact>
+          <Route path={paths.home} exact>
             {accounts.data &&
               (hasAccounts ? (
                 <Accounts accounts={accounts.data} />
@@ -33,10 +34,10 @@ export function App(): JSX.Element {
                 <Welcome />
               ))}
           </Route>
-          <Route path="/account/create">
+          <Route path={paths.account.create.start}>
             <CreateAccount />
           </Route>
-          <Route path="/account/import">
+          <Route path={paths.account.import.start}>
             <ImportAccount />
           </Route>
         </Switch>

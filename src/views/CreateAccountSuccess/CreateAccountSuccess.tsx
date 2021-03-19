@@ -1,6 +1,8 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import { paths } from '../paths';
+
 interface Props {
   type?: 'create' | 'import';
 }
@@ -16,7 +18,7 @@ export function CreateAccountSuccess({ type = 'create' }: Props): JSX.Element {
         {type === 'import' && t('view_CreateAccountSuccess_message_import')}
       </p>
 
-      <Link to="/">{t('view_CreateAccountSuccess_CTA')}</Link>
+      <Link to={paths.home}>{t('view_CreateAccountSuccess_CTA')}</Link>
     </main>
   );
 }

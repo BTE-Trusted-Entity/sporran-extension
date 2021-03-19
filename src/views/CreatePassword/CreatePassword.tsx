@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
 
+import { paths } from '../paths';
+
 import styles from './CreatePassword.module.css';
 
 function hasUpperCase(value: string): boolean {
@@ -148,7 +150,7 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
       </form>
 
       <p>
-        <Link to="/account/create/backup">{t('common_action_back')}</Link>
+        <Link to={paths.account.create.backup}>{t('common_action_back')}</Link>
       </p>
     </main>
   );

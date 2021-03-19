@@ -1,6 +1,8 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import { paths } from '../paths';
+
 import styles from './SaveBackupPhrase.module.css';
 
 interface Props {
@@ -27,13 +29,13 @@ export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
       </div>
 
       <p>
-        <Link to="/account/create/verify">{t('common_action_next')}</Link>
+        <Link to={paths.account.create.verify}>{t('common_action_next')}</Link>
       </p>
       <p>
-        <Link to="/account/create">{t('common_action_back')}</Link>
+        <Link to={paths.account.create.start}>{t('common_action_back')}</Link>
       </p>
       <p>
-        <Link to="/">{t('common_action_cancel')}</Link>
+        <Link to={paths.home}>{t('common_action_cancel')}</Link>
       </p>
     </section>
   );
