@@ -7,11 +7,13 @@ import cx from 'classnames';
 
 import styles from './ImportBackupPhrase.module.css';
 
+type BackupPhrase = string[];
+
 function isAllowed(word: string) {
   return DEFAULT_WORDLIST.includes(word);
 }
 
-function INVALID_BACKUP_PHRASE(backupPhrase: Array<string>): boolean {
+function INVALID_BACKUP_PHRASE(backupPhrase: BackupPhrase): boolean {
   try {
     Identity.buildFromMnemonic(backupPhrase.join(' '));
     return false;
@@ -20,7 +22,7 @@ function INVALID_BACKUP_PHRASE(backupPhrase: Array<string>): boolean {
   }
 }
 
-function BACKUP_PHRASE_MALFORMED(backupPhrase: Array<string>): boolean {
+function BACKUP_PHRASE_MALFORMED(backupPhrase: BackupPhrase): boolean {
   const length = backupPhrase.filter(Boolean).length;
   const hasNoWords = length === 0;
   const hasAllWords = length === 12;
@@ -31,8 +33,6 @@ function BACKUP_PHRASE_MALFORMED(backupPhrase: Array<string>): boolean {
 function INVALID_BACKUP_WORD(value: string): boolean {
   return !isAllowed(value);
 }
-
-type BackupPhrase = Array<string[12]>;
 
 interface Props {
   onImport: (backupPhrase: string) => void;
@@ -45,7 +45,7 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
     Array(12).fill(''),
   );
 
-  function HAS_INVALID_WORD(backupPhrase: Array<string>): string | null {
+  function HAS_INVALID_WORD(backupPhrase: BackupPhrase): string | null {
     const invalidWord = backupPhrase.find(INVALID_BACKUP_WORD);
 
     if (!invalidWord) {
