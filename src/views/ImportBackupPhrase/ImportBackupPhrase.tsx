@@ -11,7 +11,7 @@ function isAllowed(word: string) {
   return DEFAULT_WORDLIST.includes(word);
 }
 
-function ERROR_INVALID_BACKUP_PHRASE(backupPhrase: Array<string>): boolean {
+function INVALID_BACKUP_PHRASE(backupPhrase: Array<string>): boolean {
   try {
     Identity.buildFromMnemonic(backupPhrase.join(' '));
     return false;
@@ -20,7 +20,7 @@ function ERROR_INVALID_BACKUP_PHRASE(backupPhrase: Array<string>): boolean {
   }
 }
 
-function ERROR_BACKUP_PHRASE_MALFORMED(backupPhrase: Array<string>): boolean {
+function BACKUP_PHRASE_MALFORMED(backupPhrase: Array<string>): boolean {
   const length = backupPhrase.filter(Boolean).length;
   const hasNoWords = length === 0;
   const hasAllWords = length === 12;
@@ -28,7 +28,7 @@ function ERROR_BACKUP_PHRASE_MALFORMED(backupPhrase: Array<string>): boolean {
   return !allIsFine;
 }
 
-function ERROR_INVALID_BACKUP_WORD(value: string): boolean {
+function INVALID_BACKUP_WORD(value: string): boolean {
   return !isAllowed(value);
 }
 
@@ -45,8 +45,8 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
     Array(12).fill(''),
   );
 
-  function ERROR_HAS_INVALID_WORD(backupPhrase: Array<string>): string | null {
-    const invalidWord = backupPhrase.find(ERROR_INVALID_BACKUP_WORD);
+  function HAS_INVALID_WORD(backupPhrase: Array<string>): string | null {
+    const invalidWord = backupPhrase.find(INVALID_BACKUP_WORD);
 
     if (!invalidWord) {
       return null;
@@ -60,12 +60,12 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
   }
 
   const error = [
-    modified && ERROR_HAS_INVALID_WORD(backupPhrase),
+    modified && HAS_INVALID_WORD(backupPhrase),
     modified &&
-      ERROR_BACKUP_PHRASE_MALFORMED(backupPhrase) &&
+      BACKUP_PHRASE_MALFORMED(backupPhrase) &&
       t('view_ImportBackupPhrase_error_backup_phrase_length'),
     modified &&
-      ERROR_INVALID_BACKUP_PHRASE(backupPhrase) &&
+      INVALID_BACKUP_PHRASE(backupPhrase) &&
       t('view_ImportBackupPhrase_error_invalid_backup_phrase'),
   ].filter(Boolean)[0];
 
