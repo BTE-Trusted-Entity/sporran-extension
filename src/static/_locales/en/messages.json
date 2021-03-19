@@ -11,11 +11,17 @@
   "common_action_back": {
     "message": "Back"
   },
+  "common_action_save": {
+    "message": "Save"
+  },
   "common_action_cancel": {
     "message": "Cancel"
   },
   "common_action_next": {
     "message": "Next Step"
+  },
+  "component_Balance_label": {
+    "message": "Balance: "
   },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
@@ -158,5 +164,36 @@
   },
   "view_CreateAccountSuccess_CTA": {
     "message": "See the wallet"
+  },
+  "view_Accounts_title": {
+    "message": "Your accounts"
+  },
+  "view_Accounts_subtitle_one": {
+    "message": "You have $number$ account",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_Accounts_subtitle_other": {
+    "message": "You have $number$ accounts",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_Account_rename": {
+    "message": "Rename"
+  },
+  "view_Account_name": {
+    "message": "Account name:"
+  },
+  "view_Account_send": {
+    "message": "Send"
+  },
+  "view_Account_receive": {
+    "message": "Receive"
   }
 }

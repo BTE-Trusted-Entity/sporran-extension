@@ -1,0 +1,17 @@
+import { browser } from 'webextension-polyfill-ts';
+
+import { plural } from './plural';
+
+jest.mock('webextension-polyfill-ts');
+jest.spyOn(browser.i18n, 'getMessage').mockImplementation((key) => key);
+
+describe('plural', () => {
+  it('should return proper form for one', async () => {
+    const actual = plural(1, { one: 'PASS', other: 'FAIL' });
+    expect(actual).toEqual('PASS');
+  });
+  it('should return proper form for other', async () => {
+    const actual = plural(2, { one: 'FAIL', other: 'PASS' });
+    expect(actual).toEqual('PASS');
+  });
+});

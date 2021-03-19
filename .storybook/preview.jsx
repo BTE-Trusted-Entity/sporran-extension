@@ -2,6 +2,9 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { withConsole, setConsoleOptions } from '@storybook/addon-console';
 import { withInfo } from '@storybook/addon-info';
 import { MemoryRouter } from 'react-router-dom';
+import { init } from "@kiltprotocol/core";
+
+init({ address: 'wss://full-nodes-lb.devnet.kilt.io' });
 
 // You'll start to receive all console messages, warnings, errors in your action logger panel - Everything except HMR logs.
 setConsoleOptions({

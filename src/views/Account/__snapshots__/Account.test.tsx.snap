@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account should render 1`] = `
+<div>
+  <section>
+    <h2>
+      My Sporran Account
+    </h2>
+    <button
+      type="button"
+    >
+      Rename
+    </button>
+    <p>
+      <span>
+        Balance: 
+        1.2340
+         
+        K
+      </span>
+    </p>
+    <p>
+      <a
+        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
+      >
+        Send
+      </a>
+    </p>
+    <p>
+      <a
+        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
+      >
+        Receive
+      </a>
+    </p>
+  </section>
+</div>
+`;
