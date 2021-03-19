@@ -27,7 +27,6 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
 
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const [shuffledWords] = useState<string[]>(shuffle([...orderedWords]));
-  const [submitted, setSubmitted] = useState(false);
 
   const wordsAreInOrder = selectedWords.every(
     (word, index) => word === orderedWords[index],
@@ -35,16 +34,10 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
 
   const allWordsSelected = selectedWords.length === orderedWords.length;
 
-  const error = [
-    submitted &&
-      (!wordsAreInOrder || !allWordsSelected) &&
-      t('view_VerifyBackupPhrase_error_instruction'),
-    !wordsAreInOrder && t('view_VerifyBackupPhrase_error_info'),
-  ].filter(Boolean)[0];
+  const error = !wordsAreInOrder && t('view_VerifyBackupPhrase_error');
 
   const selectWord = useCallback(
     (event) => {
-      setSubmitted(false);
       const selectedWord = event.target.textContent;
       setSelectedWords([...selectedWords, selectedWord]);
     },
@@ -53,23 +46,22 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
 
   const unselectWord = useCallback(
     (event) => {
-      setSubmitted(false);
       const unselectedWord = event.target.textContent;
       setSelectedWords(selectedWords.filter((word) => word !== unselectedWord));
     },
     [selectedWords],
   );
 
-  const handleSubmit = useCallback((event) => {
-    event.preventDefault();
-    setSubmitted(true);
-  }, []);
-
-  useEffect(() => {
-    if (submitted && !error) {
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      if (!allWordsSelected || error) {
+        return;
+      }
       history.push('/account/create/password');
-    }
-  }, [submitted, error, history]);
+    },
+    [allWordsSelected, error, history],
+  );
 
   return (
     <main className={styles.container}>

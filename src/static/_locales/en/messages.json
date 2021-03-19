@@ -59,11 +59,8 @@
   "view_VerifyBackupPhrase_explanation": {
     "message": "To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order"
   },
-  "view_VerifyBackupPhrase_error_info": {
+  "view_VerifyBackupPhrase_error": {
     "message": "The order of the backup phrase is not correct"
-  },
-  "view_VerifyBackupPhrase_error_instruction": {
-    "message": "Please put every word in the correct order"
   },
   "view_CreatePassword_heading": {
     "message": "Your account password"
