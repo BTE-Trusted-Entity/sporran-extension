@@ -14,6 +14,9 @@
   "common_action_cancel": {
     "message": "Cancel"
   },
+  "common_action_next": {
+    "message": "Next Step"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -50,8 +53,14 @@
   "view_SaveBackupPhrase_explanation": {
     "message": "You have to click or tap an empty field to see one word of the phrase. For the next step, you need your written words in the correct order."
   },
-  "view_SaveBackupPhrase_CTA": {
-    "message": "Next Step"
+  "view_VerifyBackupPhrase_heading": {
+    "message": "Check my Backup Phrase"
+  },
+  "view_VerifyBackupPhrase_explanation": {
+    "message": "To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order"
+  },
+  "view_VerifyBackupPhrase_error": {
+    "message": "The order of the backup phrase is not correct"
   },
   "view_ImportBackupPhrase_heading": {
     "message": "Import an Account"

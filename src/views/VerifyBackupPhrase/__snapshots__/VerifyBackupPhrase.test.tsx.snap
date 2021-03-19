@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VerifyBackupPhrase should render 1`] = `
+<div>
+  <main
+    class="container"
+  >
+    <a
+      class="backButton"
+      href="/account/create/backup"
+    >
+      Back
+    </a>
+    <h1>
+      Check my Backup Phrase
+    </h1>
+    <h3>
+      To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order
+    </h3>
+    <form>
+      <div
+        class="selectedWordsContainer"
+      />
+      <hr />
+      <button
+        class="button"
+        type="button"
+      >
+        nine
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        three
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        four
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        five
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        six
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        seven
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        eight
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        one
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        ten
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        eleven
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        twelve
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        two
+      </button>
+      <p
+        class="error"
+      />
+      <button
+        type="submit"
+      >
+        Next Step
+      </button>
+    </form>
+    <p>
+      <a
+        href="/"
+      >
+        Cancel
+      </a>
+    </p>
+  </main>
+</div>
+`;

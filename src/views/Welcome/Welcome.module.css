@@ -17,15 +17,5 @@
 }
 
 .buttonContainer {
-  width: 90%;
   margin: 3rem 0;
-}
-
-.button {
-  width: 100%;
-  font-size: 1rem;
-  padding: 1rem;
-  cursor: pointer;
-  background: none;
-  box-shadow: 0.25rem 0.25rem #000;
 }

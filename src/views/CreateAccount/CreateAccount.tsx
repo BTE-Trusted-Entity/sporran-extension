@@ -8,6 +8,7 @@ import { Warning } from '../Warning/Warning';
 import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSuccess';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { saveEncrypted } from '../../utilities/storageEncryption/storageEncryption';
+import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
 
 export function CreateAccount(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
@@ -41,6 +42,9 @@ export function CreateAccount(): JSX.Element {
       </Route>
       <Route path="/account/create/backup">
         <SaveBackupPhrase backupPhrase={backupPhrase} />
+      </Route>
+      <Route path="/account/create/verify">
+        <VerifyBackupPhrase backupPhrase={backupPhrase} />
       </Route>
       <Route path="/account/create/password">
         <CreatePassword onSuccess={onSuccess} />
