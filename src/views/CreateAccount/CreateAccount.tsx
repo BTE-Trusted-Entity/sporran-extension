@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { Identity, init } from '@kiltprotocol/core';
+import { Identity } from '@kiltprotocol/core';
 import { ClipLoader } from 'react-spinners';
 
 import { SaveBackupPhrase } from '../SaveBackupPhrase/SaveBackupPhrase';
