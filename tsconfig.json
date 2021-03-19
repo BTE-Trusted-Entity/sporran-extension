@@ -15,5 +15,8 @@
         "name": "typescript-plugin-css-modules"
       }
     ]
-  }
+  },
+  "include": [
+    "./jest.setup.ts"
+  ]
 }
