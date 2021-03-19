@@ -100,12 +100,7 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
           </button>
         ))}
         <p className={styles.error}>{error}</p>
-        <button
-          type="submit"
-          // disabled={selectedWords.length !== orderedWords.length}
-        >
-          {t('common_action_next')}
-        </button>
+        <button type="submit">{t('common_action_next')}</button>
       </form>
 
       <p>
