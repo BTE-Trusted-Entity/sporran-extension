@@ -1,130 +1,100 @@
 import { useCallback, useState } from 'react';
 import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/bip39-en';
 import { Identity } from '@kiltprotocol/core';
-import { SDKErrors } from '@kiltprotocol/utils';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
+import cx from 'classnames';
 
 import styles from './ImportBackupPhrase.module.css';
 
-export const RelevantSDKErrors = [
-  SDKErrors.ErrorCode.ERROR_MNEMONIC_PHRASE_INVALID,
-  SDKErrors.ErrorCode.ERROR_MNEMONIC_PHRASE_MALFORMED,
-];
+function isAllowed(word: string) {
+  return DEFAULT_WORDLIST.includes(word);
+}
 
-const ERROR_CODE_INVALID_BACKUP_PHRASE = '30008';
-const ERROR_CODE_BACKUP_PHRASE_MALFORMED = '20012';
+function filterArray<T>(value: T | null | undefined): value is T {
+  return value !== null && value !== undefined;
+}
 
-const STATUS = {
-  pass: styles.pass,
-  fail: styles.fail,
-  neutral: styles.neutral,
-};
+function ERROR_INVALID_BACKUP_PHRASE(value: string): boolean {
+  try {
+    Identity.buildFromMnemonic(value);
+    return true;
+  } catch {
+    return false;
+  }
+}
+function ERROR_BACKUP_PHRASE_MALFORMED(value: Array<string>): boolean {
+  const filteredArray = value.filter(filterArray);
+  if (filteredArray.length > 0 && filteredArray.length < 12) return false;
+  return true;
+}
+function ERROR_INVALID_BACKUP_WORD(value: string): boolean {
+  return isAllowed(value);
+}
 
-type BackupPhraseObject = {
-  [key: string]: {
-    backupWord: string;
-    style: string;
-  };
-};
+type BackupPhrase = Array<string>;
 
 interface Props {
   onImport: (backupPhrase: string) => void;
 }
 
-const isAllowed = (word: string) => {
-  return DEFAULT_WORDLIST.includes(word);
-};
-
 export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const [error, setError] = useState({ isError: false, name: '', message: '' });
-  const [
-    backupPhraseObject,
-    setBackupPhraseObject,
-  ] = useState<BackupPhraseObject>({
-    '1': { backupWord: '', style: STATUS.neutral },
-    '2': { backupWord: '', style: STATUS.neutral },
-    '3': { backupWord: '', style: STATUS.neutral },
-    '4': { backupWord: '', style: STATUS.neutral },
-    '5': { backupWord: '', style: STATUS.neutral },
-    '6': { backupWord: '', style: STATUS.neutral },
-    '7': { backupWord: '', style: STATUS.neutral },
-    '8': { backupWord: '', style: STATUS.neutral },
-    '9': { backupWord: '', style: STATUS.neutral },
-    '10': { backupWord: '', style: STATUS.neutral },
-    '11': { backupWord: '', style: STATUS.neutral },
-    '12': { backupWord: '', style: STATUS.neutral },
-  });
+  const [modified, setModified] = useState(false);
+  const [backupPhrase, setBackupPhrase] = useState<BackupPhrase>([
+    ...Array(12),
+  ]);
 
-  const errors = [
-    error.isError &&
-      error.name === ERROR_CODE_INVALID_BACKUP_PHRASE &&
-      t('view_ImportBackupPhrase_error_invalid_backup_phrase'),
-    error.isError &&
-      error.name === ERROR_CODE_BACKUP_PHRASE_MALFORMED &&
+  const error = [
+    // modified &&
+    //   !ERROR_INVALID_BACKUP_WORD(backupPhrase[2]) &&
+    //   t('view_ImportBackupPhrase_error_invalid_word', [
+    //     backupPhrase.indexOf(backupPhrase[2]),
+    //     backupPhrase[2],
+    //   ]),
+    modified &&
+      !ERROR_BACKUP_PHRASE_MALFORMED(backupPhrase) &&
       t('view_ImportBackupPhrase_error_backup_phrase_length'),
-    error.isError &&
-      t('view_ImportBackupPhrase_error_invalid_word', [
-        error.name,
-        error.message,
-      ]),
+    modified &&
+      !ERROR_INVALID_BACKUP_PHRASE(
+        backupPhrase.map((word) => word).join(' '),
+      ) &&
+      t('view_ImportBackupPhrase_error_invalid_backup_phrase'),
   ].filter(Boolean)[0];
 
   const handleInput = useCallback(
     (event) => {
       const { name, value } = event.target;
-      const word = isAllowed(value);
-
-      if (word) {
-        setError({ ...error, isError: false });
-        setBackupPhraseObject({
-          ...backupPhraseObject,
-          [name]: { backupWord: value, style: STATUS.pass },
-        });
-      } else if (value.length === 0) {
-        setError({ ...error, isError: false });
-        setBackupPhraseObject({
-          ...backupPhraseObject,
-          [name]: { backupWord: value, style: STATUS.neutral },
-        });
-      } else {
-        setError({ isError: true, name, message: value });
-        setBackupPhraseObject({
-          ...backupPhraseObject,
-          [name]: { backupWord: value, style: STATUS.fail },
-        });
-      }
+      backupPhrase[name] = value;
+      setBackupPhrase([...backupPhrase]);
+      setModified(true);
     },
-    [backupPhraseObject, error],
+    [backupPhrase],
   );
 
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      const backupPhraseString = Object.values(backupPhraseObject)
-        .map(({ backupWord }) => backupWord)
-        .join(' ');
-      try {
-        Identity.buildFromMnemonic(backupPhraseString);
-        onImport(backupPhraseString);
-      } catch (error) {
-        if (
-          SDKErrors.isSDKError(error) &&
-          RelevantSDKErrors.includes(error.errorCode)
-        ) {
-          setError({
-            isError: true,
-            name: `${error.errorCode}`,
-            message: error.message,
-          });
-        } else {
-          setError({ isError: true, name: '', message: error });
-        }
+      if (error) {
+        return;
       }
+      const backupPhraseString = backupPhrase.map((word) => word).join(' ');
+      onImport(backupPhraseString);
     },
-    [onImport, backupPhraseObject],
+    [backupPhrase, error, onImport],
   );
+
+  // function makeClasses(validator: (value: string) => boolean) {
+  //   const filteredArray = backupPhrase.filter(filterArray);
+  //   return filteredArray.map((val) => {
+  //     const homer = validator(val);
+  //     return cx({
+  //       [styles.neutral]: !modified,
+  //       [styles.pass]: homer && modified,
+  //       [styles.fail]: !homer && modified,
+  //     });
+  //   });
+  // }
 
   return (
     <section className={styles.container}>
@@ -136,22 +106,24 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
 
       <form onSubmit={handleSubmit}>
         <ul className={styles.items}>
-          {Object.keys(backupPhraseObject).map((wordIndex, index) => (
-            <li key={index} className={backupPhraseObject[wordIndex].style}>
+          {backupPhrase.map((_, index) => (
+            <li
+              key={index}
+              // className={makeClasses(ERROR_INVALID_BACKUP_WORD)}
+            >
               <label className={styles.item}>
                 {index + 1}
                 <input
-                  name={wordIndex}
+                  name={index.toString()}
                   className={styles.input}
                   type="text"
                   onInput={handleInput}
-                  value={backupPhraseObject[wordIndex].backupWord}
                 />
               </label>
             </li>
           ))}
         </ul>
-        {error.isError && <p className={styles.errors}>{errors}</p>}
+        {error && <p className={styles.errors}>{error}</p>}
         <div className={styles.buttonContainer}>
           <button type="submit">{t('view_ImportBackupPhrase_submit')}</button>
         </div>
