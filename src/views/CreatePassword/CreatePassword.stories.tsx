@@ -7,7 +7,5 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  return (
-    <CreatePassword backupPhrase="one two three four five six seven eight nine ten eleven twelve" />
-  );
+  return <CreatePassword onSuccess={(val) => val} />;
 }

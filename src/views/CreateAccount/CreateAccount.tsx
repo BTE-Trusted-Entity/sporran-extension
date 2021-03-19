@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import { Identity, init } from '@kiltprotocol/core';
 import { ClipLoader } from 'react-spinners';
 
@@ -7,20 +7,31 @@ import { SaveBackupPhrase } from '../SaveBackupPhrase/SaveBackupPhrase';
 import { Warning } from '../Warning/Warning';
 import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSuccess';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
+import { saveEncrypted } from '../../utilities/storageEncryption/storageEncryption';
 import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
 
 export function CreateAccount(): JSX.Element {
-  const [mnemonic, setMnemonic] = useState('');
-
+  const [backupPhrase, setBackupPhrase] = useState('');
+  const history = useHistory();
   useEffect(() => {
     (async () => {
       // TODO: move address to config file
       await init({ address: 'wss://full-nodes.kilt.io:9944' });
-      setMnemonic(Identity.generateMnemonic());
+      setBackupPhrase(Identity.generateMnemonic());
     })();
   }, []);
 
-  if (!mnemonic) {
+  const onSuccess = useCallback(
+    async (password: string) => {
+      const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
+      await saveEncrypted(address, password, seed);
+
+      history.push('/account/create/success');
+    },
+    [backupPhrase, history],
+  );
+
+  if (!backupPhrase) {
     return <ClipLoader />;
   }
 
@@ -30,13 +41,13 @@ export function CreateAccount(): JSX.Element {
         <Warning />
       </Route>
       <Route path="/account/create/backup">
-        <SaveBackupPhrase backupPhrase={mnemonic} />
+        <SaveBackupPhrase backupPhrase={backupPhrase} />
       </Route>
       <Route path="/account/create/verify">
-        <VerifyBackupPhrase backupPhrase={mnemonic} />
+        <VerifyBackupPhrase backupPhrase={backupPhrase} />
       </Route>
       <Route path="/account/create/password">
-        <CreatePassword backupPhrase={mnemonic} />
+        <CreatePassword onSuccess={onSuccess} />
       </Route>
       <Route path="/account/create/success">
         <CreateAccountSuccess />

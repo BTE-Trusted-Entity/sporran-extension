@@ -1,0 +1,54 @@
+.container {
+  padding-top: 1rem;
+}
+
+.items {
+  display: block;
+  columns: 2;
+  width: 25rem;
+}
+
+.item {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.word {
+  visibility: hidden;
+}
+
+.buttonContainer {
+  display: block;
+}
+
+.neutral {
+  float: inline-start;
+  font-size: medium;
+}
+
+.pass {
+  color: green;
+  list-style-type: '✔ ️';
+}
+
+.fail {
+  color: red;
+  list-style-type: '❌ ️';
+}
+
+.input {
+  float: inline-end;
+  border: 0;
+  border-bottom: 1px solid black;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.fail .input { 
+  color: red;
+}
+
+.pass .input {
+  color: green;
+}

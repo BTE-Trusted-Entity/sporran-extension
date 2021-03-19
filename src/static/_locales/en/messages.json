@@ -62,6 +62,32 @@
   "view_VerifyBackupPhrase_error": {
     "message": "The order of the backup phrase is not correct"
   },
+  "view_ImportBackupPhrase_heading": {
+    "message": "Import an Account"
+  },
+  "view_ImportBackupPhrase_explanation": {
+    "message": "To import a Sporran account, you will need a pre-existing backup phrase consisting of 12-words"
+  },
+  "view_ImportBackupPhrase_submit": {
+    "message": "Import Account"
+  },
+  "view_ImportBackupPhrase_error_invalid_backup_phrase": {
+    "message": "The entered backup phrase doesn’t exist"
+  },
+  "view_ImportBackupPhrase_error_backup_phrase_length": {
+    "message": "Please insert all the words of the backup phrase"
+  },
+  "view_ImportBackupPhrase_error_invalid_word": {
+    "message": "It looks like there’s a typo in word $number$: “$word$”",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      },
+      "word": {
+        "content": "$2"
+      }
+    }
+  },
   "view_CreatePassword_heading": {
     "message": "Your account password"
   },

@@ -32,7 +32,7 @@ exports[`Welcome should render 1`] = `
       Create Account
     </a>
     <a
-      href="/account/restore"
+      href="/account/import"
     >
       Import an Account from pre-existing phrase
     </a>
