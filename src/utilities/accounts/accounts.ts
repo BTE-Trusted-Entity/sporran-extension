@@ -44,8 +44,8 @@ async function getCurrentAccount(): Promise<string | null> {
 }
 
 export async function setCurrentAccount(address: string): Promise<void> {
-  const oldAddress = await (await storage.get(ACCOUNTS_KEY))[ACCOUNTS_KEY];
-  if (address === oldAddress) {
+  const oldAddress = await storage.get(CURRENT_ACCOUNT_KEY);
+  if (address === oldAddress[CURRENT_ACCOUNT_KEY]) {
     return;
   }
   await storage.set({ [CURRENT_ACCOUNT_KEY]: address });
