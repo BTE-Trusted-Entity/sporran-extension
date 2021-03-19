@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.backButton {
+  position: absolute;
+  left: 0.5rem;
+}
+
+.selectedWordsContainer {
+  min-height: 6rem;
+}
+
+.button {
+  padding: 0.5rem 2rem;
+  margin: 0.1rem;
+  background: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.correct {
+  border: 2px solid green;
+}
+
+.correct::after {
+  content: '✔';
+  color: green;
+  position: absolute;
+  right: 0.1rem;
+  top: 0;
+}
+
+.incorrect {
+  border: 2px solid red;
+}
+
+.incorrect::after {
+  content: '❌';
+  position: absolute;
+  right: 0.1rem;
+  top: 0;
+}
+
+.error {
+  color: red;
+}

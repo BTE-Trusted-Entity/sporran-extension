@@ -7,6 +7,7 @@ import { SaveBackupPhrase } from '../SaveBackupPhrase/SaveBackupPhrase';
 import { Warning } from '../Warning/Warning';
 import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSuccess';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
+import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
 
 export function CreateAccount(): JSX.Element {
   const [mnemonic, setMnemonic] = useState('');
@@ -30,6 +31,9 @@ export function CreateAccount(): JSX.Element {
       </Route>
       <Route path="/account/create/backup">
         <SaveBackupPhrase backupPhrase={mnemonic} />
+      </Route>
+      <Route path="/account/create/verify">
+        <VerifyBackupPhrase backupPhrase={mnemonic} />
       </Route>
       <Route path="/account/create/password">
         <CreatePassword backupPhrase={mnemonic} />
