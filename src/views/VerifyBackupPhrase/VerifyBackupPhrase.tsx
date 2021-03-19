@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
