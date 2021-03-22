@@ -165,6 +165,14 @@
   "view_CreateAccountSuccess_CTA": {
     "message": "See the wallet"
   },
+  "view_ReceiveToken_heading":{
+    "message": "Receive"
+  },
+  "view_ReceiveToken_explanation":{
+    "message": "copy and send your wallet ID"
+  },"view_ReceiveToken_account_address":{
+    "message": "my account address"
+  },
   "view_Accounts_title": {
     "message": "Your accounts"
   },

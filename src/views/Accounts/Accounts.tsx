@@ -7,6 +7,8 @@ import {
   useCurrentAccount,
 } from '../../utilities/accounts/accounts';
 import { Account } from '../Account/Account';
+import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
+
 import { paths } from '../paths';
 
 interface Props {
@@ -44,6 +46,9 @@ export function Accounts({ accounts }: Props): JSX.Element {
           />
           <Route>
             {current.data && <Account account={accounts[current.data]} />}
+          </Route>
+          <Route>
+            {current.data && <ReceiveToken account={accounts[current.data]} />}
           </Route>
         </Switch>
 
