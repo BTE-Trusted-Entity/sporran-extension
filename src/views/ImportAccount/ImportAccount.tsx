@@ -1,7 +1,6 @@
-import { Identity } from '@kiltprotocol/core';
 import { useCallback, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { saveEncrypted } from '../../utilities/storageEncryption/storageEncryption';
+import { createAccount } from '../../utilities/accounts/accounts';
 import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSuccess';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { ImportBackupPhrase } from '../ImportBackupPhrase/ImportBackupPhrase';
@@ -21,8 +20,7 @@ export function ImportAccount(): JSX.Element {
 
   const onSuccess = useCallback(
     async (password: string) => {
-      const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
-      await saveEncrypted(address, password, seed);
+      await createAccount(backupPhrase, password);
       history.push(paths.account.import.success);
     },
     [backupPhrase, history],
