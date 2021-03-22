@@ -5,6 +5,11 @@ import { ImportBackupPhrase } from './ImportBackupPhrase';
 
 const onImport = jest.fn();
 
+const invalidBackupPhrase = 'The entered backup phrase doesn’t exist';
+const backupPhraseNotLongEnough =
+  'Please insert all the words of the backup phrase';
+const typo = 'It looks like there’s a typo in word $number$: “$word$”';
+
 const props = {
   onImport,
 };
@@ -20,6 +25,7 @@ describe('ImportBackupPhrase', () => {
     userEvent.type(await screen.findByLabelText('1'), 'oooooo');
     userEvent.click(screen.getByText('Import Account'));
     expect(onImport).not.toHaveBeenCalled();
+    expect(screen.queryByText(typo)).toBeInTheDocument();
   });
 
   it('should report backup phrase not long enough', async () => {
@@ -27,6 +33,7 @@ describe('ImportBackupPhrase', () => {
     userEvent.type(await screen.findByLabelText('1'), 'century');
     userEvent.click(screen.getByText('Import Account'));
     expect(onImport).not.toHaveBeenCalled();
+    expect(screen.queryByText(backupPhraseNotLongEnough)).toBeInTheDocument();
   });
 
   it('should report invalid backup phrase', async () => {
@@ -43,10 +50,11 @@ describe('ImportBackupPhrase', () => {
     userEvent.type(await screen.findByLabelText('9'), 'fine');
     userEvent.type(await screen.findByLabelText('10'), 'siege');
     userEvent.type(await screen.findByLabelText('11'), 'brain');
-    userEvent.type(await screen.findByLabelText('12'), 'og');
+    userEvent.type(await screen.findByLabelText('12'), 'brain');
 
     userEvent.click(screen.getByText('Import Account'));
     expect(onImport).not.toHaveBeenCalled();
+    expect(screen.queryByText(invalidBackupPhrase)).toBeInTheDocument();
   });
 
   it('should allow backup phrase', async () => {
