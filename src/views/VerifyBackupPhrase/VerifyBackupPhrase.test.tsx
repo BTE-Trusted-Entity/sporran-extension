@@ -22,6 +22,9 @@ describe('VerifyBackupPhrase', () => {
     expect(
       (await screen.findAllByRole('button', { name: 'one' }))[0],
     ).toHaveClass('correct');
+    expect(
+      screen.queryByText('The order of the backup phrase is not correct'),
+    ).toBe(null);
   });
 
   it('should indicate the incorrect word', async () => {
