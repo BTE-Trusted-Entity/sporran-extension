@@ -38,7 +38,7 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-spinners": "^0.10.6",
-    "swr": "^0.5.3",
+    "swr": "^0.5.4",
     "webextension-polyfill-ts": "^0.25.0"
   },
   "devDependencies": {
