@@ -24,7 +24,7 @@ describe('VerifyBackupPhrase', () => {
     ).toHaveClass('correct');
     expect(
       screen.queryByText('The order of the backup phrase is not correct'),
-    ).toBe(null);
+    ).not.toBeInTheDocument();
   });
 
   it('should indicate the incorrect word', async () => {
