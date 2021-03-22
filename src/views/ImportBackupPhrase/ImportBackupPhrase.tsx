@@ -5,6 +5,8 @@ import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
+import { paths } from '../paths';
+
 import styles from './ImportBackupPhrase.module.css';
 
 type BackupPhrase = string[];
@@ -132,10 +134,10 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
       </form>
 
       <p>
-        <Link to="/">{t('common_action_back')}</Link>
+        <Link to={paths.home}>{t('common_action_back')}</Link>
       </p>
       <p>
-        <Link to="/">{t('common_action_cancel')}</Link>
+        <Link to={paths.home}>{t('common_action_cancel')}</Link>
       </p>
     </section>
   );

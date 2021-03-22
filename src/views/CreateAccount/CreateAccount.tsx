@@ -9,6 +9,7 @@ import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSucce
 import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { saveEncrypted } from '../../utilities/storageEncryption/storageEncryption';
 import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
+import { paths } from '../paths';
 
 export function CreateAccount(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
@@ -23,7 +24,7 @@ export function CreateAccount(): JSX.Element {
       const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
       await saveEncrypted(address, password, seed);
 
-      history.push('/account/create/success');
+      history.push(paths.account.create.success);
     },
     [backupPhrase, history],
   );
@@ -34,19 +35,19 @@ export function CreateAccount(): JSX.Element {
 
   return (
     <Switch>
-      <Route path="/account/create" exact>
+      <Route path={paths.account.create.start} exact>
         <Warning />
       </Route>
-      <Route path="/account/create/backup">
+      <Route path={paths.account.create.backup}>
         <SaveBackupPhrase backupPhrase={backupPhrase} />
       </Route>
-      <Route path="/account/create/verify">
+      <Route path={paths.account.create.verify}>
         <VerifyBackupPhrase backupPhrase={backupPhrase} />
       </Route>
-      <Route path="/account/create/password">
+      <Route path={paths.account.create.password}>
         <CreatePassword onSuccess={onSuccess} />
       </Route>
-      <Route path="/account/create/success">
+      <Route path={paths.account.create.success}>
         <CreateAccountSuccess />
       </Route>
     </Switch>

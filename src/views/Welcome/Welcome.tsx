@@ -1,6 +1,8 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import { paths } from '../paths';
+
 import styles from './Welcome.module.css';
 
 export function Welcome(): JSX.Element {
@@ -16,11 +18,11 @@ export function Welcome(): JSX.Element {
       <h3 className={styles.info}>{t('view_Welcome_info')}</h3>
       <h3 className={styles.info}>{t('view_Welcome_invitation')}</h3>
 
-      <Link to="/account/create" className={styles.buttonContainer}>
+      <Link to={paths.account.create.start} className={styles.buttonContainer}>
         {t('view_Welcome_create')}
       </Link>
 
-      <Link to="/account/import">{t('view_Welcome_import')}</Link>
+      <Link to={paths.account.import.start}>{t('view_Welcome_import')}</Link>
     </div>
   );
 }

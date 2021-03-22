@@ -3,6 +3,8 @@ import { Link, useHistory } from 'react-router-dom';
 import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
 
+import { paths } from '../paths';
+
 import styles from './VerifyBackupPhrase.module.css';
 
 interface Props {
@@ -58,14 +60,14 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
       if (!allWordsSelected || error) {
         return;
       }
-      history.push('/account/create/password');
+      history.push(paths.account.create.password);
     },
     [allWordsSelected, error, history],
   );
 
   return (
     <main className={styles.container}>
-      <Link to="/account/create/backup" className={styles.backButton}>
+      <Link to={paths.account.create.backup} className={styles.backButton}>
         {t('common_action_back')}
       </Link>
       <h1>{t('view_VerifyBackupPhrase_heading')}</h1>
@@ -104,7 +106,7 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
       </form>
 
       <p>
-        <Link to="/">{t('common_action_cancel')}</Link>
+        <Link to={paths.home}>{t('common_action_cancel')}</Link>
       </p>
     </main>
   );
