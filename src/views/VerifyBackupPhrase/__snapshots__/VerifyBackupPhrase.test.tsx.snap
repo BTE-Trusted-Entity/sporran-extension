@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VerifyBackupPhrase should handle correct selection of all words 1`] = `
+exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
 <div>
   <main
     class="container"
