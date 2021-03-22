@@ -1,5 +1,216 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VerifyBackupPhrase should handle correct selection of all words 1`] = `
+<div>
+  <main
+    class="container"
+  >
+    <a
+      class="backButton"
+      href="/account/create/backup"
+    >
+      Back
+    </a>
+    <h1>
+      Check my Backup Phrase
+    </h1>
+    <h3>
+      To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order
+    </h3>
+    <form>
+      <div
+        class="selectedWordsContainer"
+      >
+        <button
+          class="button correct"
+          type="button"
+        >
+          one
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          two
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          three
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          four
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          five
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          six
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          seven
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          eight
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          nine
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          ten
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          eleven
+        </button>
+        <button
+          class="button correct"
+          type="button"
+        >
+          twelve
+        </button>
+      </div>
+      <hr />
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        nine
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        three
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        four
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        five
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        six
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        seven
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        eight
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        one
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        ten
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        eleven
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        twelve
+      </button>
+      <button
+        class="button"
+        data-testid="shuffledWord"
+        disabled=""
+        type="button"
+      >
+        two
+      </button>
+      <p
+        class="error"
+      />
+      <button
+        type="submit"
+      >
+        Next Step
+      </button>
+    </form>
+    <p>
+      <a
+        href="/"
+      >
+        Cancel
+      </a>
+    </p>
+  </main>
+</div>
+`;
+
 exports[`VerifyBackupPhrase should render 1`] = `
 <div>
   <main
@@ -24,72 +235,84 @@ exports[`VerifyBackupPhrase should render 1`] = `
       <hr />
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         nine
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         three
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         four
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         five
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         six
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         seven
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         eight
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         one
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         ten
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         eleven
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         twelve
       </button>
       <button
         class="button"
+        data-testid="shuffledWord"
         type="button"
       >
         two
