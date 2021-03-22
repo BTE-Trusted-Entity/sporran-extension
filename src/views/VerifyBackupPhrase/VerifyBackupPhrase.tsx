@@ -97,7 +97,6 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
             key={word}
             className={styles.button}
             onClick={selectWord}
-            data-testid="shuffledWord"
           >
             {word}
           </button>

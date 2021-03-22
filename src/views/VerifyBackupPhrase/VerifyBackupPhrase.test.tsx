@@ -16,17 +16,6 @@ describe('VerifyBackupPhrase', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('should shuffle the backup phrase', async () => {
-    render(<VerifyBackupPhrase backupPhrase={backupPhrase} />);
-    const wordButtons = await screen.findAllByTestId('shuffledWord');
-    const words = wordButtons.map((button) => button.textContent);
-    const backupPhraseWords = backupPhrase.split(' ');
-
-    expect(words).not.toEqual(backupPhraseWords);
-
-    expect(words.sort()).toEqual(backupPhraseWords.sort());
-  });
-
   it('should indicate the correct word', async () => {
     render(<VerifyBackupPhrase backupPhrase={backupPhrase} />);
     userEvent.click(await screen.findByRole('button', { name: 'one' }));
@@ -41,6 +30,9 @@ describe('VerifyBackupPhrase', () => {
     expect(
       (await screen.findAllByRole('button', { name: 'seven' }))[0],
     ).toHaveClass('incorrect');
+    expect(
+      await screen.findByText('The order of the backup phrase is not correct'),
+    ).toBeInTheDocument();
   });
 
   it('should handle selection of all words', async () => {

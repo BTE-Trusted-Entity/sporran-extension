@@ -97,7 +97,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       <hr />
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -105,7 +104,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -113,7 +111,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -121,7 +118,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -129,7 +125,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -137,7 +132,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -145,7 +139,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -153,7 +146,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -161,7 +153,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -169,7 +160,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -177,7 +167,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -185,7 +174,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         disabled=""
         type="button"
       >
@@ -235,84 +223,72 @@ exports[`VerifyBackupPhrase should render 1`] = `
       <hr />
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         nine
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         three
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         four
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         five
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         six
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         seven
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         eight
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         one
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         ten
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         eleven
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         twelve
       </button>
       <button
         class="button"
-        data-testid="shuffledWord"
         type="button"
       >
         two
