@@ -21,7 +21,8 @@ export function ImportAccount(): JSX.Element {
 
   const onSuccess = useCallback(
     async (password: string) => {
-      await createAccount(backupPhrase, password);
+      const account = await createAccount(backupPhrase, password);
+      setAddress(account.address);
       history.push(paths.account.import.success);
     },
     [backupPhrase, history],

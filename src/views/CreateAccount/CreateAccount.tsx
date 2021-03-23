@@ -22,7 +22,8 @@ export function CreateAccount(): JSX.Element {
 
   const onSuccess = useCallback(
     async (password: string) => {
-      await createAccount(backupPhrase, password);
+      const account = await createAccount(backupPhrase, password);
+      setAddress(account.address);
       history.push(paths.account.create.success);
     },
     [backupPhrase, history],

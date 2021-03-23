@@ -66,10 +66,12 @@ export async function saveAccount(account: Account): Promise<void> {
 export async function createAccount(
   backupPhrase: string,
   password: string,
-): Promise<void> {
+): Promise<Account> {
   const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
   await saveEncrypted(address, password, seed);
 
   const name = 'My Sporran Account';
-  await saveAccount({ name, address });
+  const account = { name, address };
+  await saveAccount(account);
+  return account;
 }
