@@ -57,7 +57,7 @@
     "@testing-library/dom": "^7.30.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^13.0.6",
+    "@testing-library/user-event": "^13.0.7",
     "@types/chrome": "^0.0.133",
     "@types/classnames": "^2.2.11",
     "@types/jest": "^26.0.21",
