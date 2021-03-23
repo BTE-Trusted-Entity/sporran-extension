@@ -174,9 +174,6 @@
   "view_ReceiveToken_account_address": {
     "message": "My account address"
   },
-  "view_ReceiveToken_name": {
-    "message": "Account name:"
-  },
   "view_ReceiveToken_copy_button": {
     "message": "copy to clipboard"
   },
