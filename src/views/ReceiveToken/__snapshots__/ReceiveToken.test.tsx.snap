@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReceiveToken should render 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <h1>
+      Receive
+    </h1>
+    <p>
+      Copy and send your wallet ID
+    </p>
+    <h2>
+      My Sporran Account
+    </h2>
+    <p>
+      [Insert account Image] 
+    </p>
+    <p>
+      [Insert switch buttons]
+    </p>
+    <p>
+      My account address
+    </p>
+    <div
+      class="accountBox"
+    >
+      <input
+        class="addressBox"
+        readonly=""
+        value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      />
+      <p>
+        ⊛
+      </p>
+    </div>
+    <button>
+      copy to clipboard
+    </button>
+    <p>
+      [Insert QR Image] 
+    </p>
+    <p>
+      <a
+        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      >
+        DONE
+      </a>
+    </p>
+    <p>
+      <a
+        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      >
+        Back
+      </a>
+    </p>
+    <p>
+      10 account - Total balance: 1000.0000 K
+    </p>
+  </section>
+</div>
+`;

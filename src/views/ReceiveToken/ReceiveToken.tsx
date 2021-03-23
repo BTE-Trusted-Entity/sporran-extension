@@ -13,13 +13,13 @@ interface Props {
 }
 
 export function ReceiveToken({ account }: Props): JSX.Element {
-  const addressRef = useRef(null);
+  const addressRef = useRef<HTMLInputElement>(null);
   const [isCopied, setIsCopied] = useState(false);
   const { address, name } = account;
   const t = browser.i18n.getMessage;
 
   function copyToClipboard(): void {
-    addressRef.current.select();
+    addressRef?.current?.select();
     document.execCommand('copy');
     setIsCopied(true);
     setTimeout(function () {
@@ -45,11 +45,11 @@ export function ReceiveToken({ account }: Props): JSX.Element {
         />
         <p>{isCopied ? '✔' : '⊛'}</p>
       </div>
-      {document.queryCommandSupported('copy') && (
-        <button onClick={copyToClipboard}>
-          {t('view_ReceiveToken_copy_button')}
-        </button>
-      )}
+
+      <button onClick={copyToClipboard}>
+        {t('view_ReceiveToken_copy_button')}
+      </button>
+
       <p>[Insert QR Image] </p>
       <p>
         <Link to={generatePath(paths.account.overview, { address })}>
