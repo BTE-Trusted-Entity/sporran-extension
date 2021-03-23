@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddAccount should render 1`] = `
+<div>
+  <nav
+    class="container"
+  >
+    <button
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="button"
+      role="button"
+      tabindex="0"
+      type="button"
+    >
+      +
+    </button>
+    <div
+      class="menu invisible"
+      role="menu"
+    >
+      <h4
+        class="menuItem menuTitle"
+      >
+        Add account
+      </h4>
+      <a
+        class="menuItem menuLink"
+        href="/account/create"
+        role="menuitem"
+        tabindex="-1"
+      >
+        Create new account
+      </a>
+      <a
+        class="menuItem menuLink"
+        href="/account/import"
+        role="menuitem"
+        tabindex="-1"
+      >
+        Import account from pre-existing phrase
+      </a>
+    </div>
+  </nav>
+</div>
+`;
