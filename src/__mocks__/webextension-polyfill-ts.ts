@@ -40,6 +40,14 @@ export const browser = {
     sendMessage(): void {
       // dummy
     },
+    onMessage: {
+      addListener(): void {
+        // dummy
+      },
+      removeListener(): void {
+        // dummy
+      },
+    },
   },
 };
 

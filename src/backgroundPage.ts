@@ -1,6 +1,12 @@
 import { browser } from 'webextension-polyfill-ts';
 
-// Listen for messages sent from other parts of the extension
-browser.runtime.onMessage.addListener(() => {
-  // do nothing so far
-});
+import { initBlockChainConnection } from './connection/initBlockChainConnection/initBlockChainConnection';
+import { initBalanceMessages } from './connection/initBalanceMessages/initBalanceMessages';
+
+function init() {
+  initBlockChainConnection();
+  initBalanceMessages();
+}
+
+init();
+browser.runtime.onInstalled.addListener(init);
