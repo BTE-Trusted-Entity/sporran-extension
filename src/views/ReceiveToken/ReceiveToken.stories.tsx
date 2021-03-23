@@ -7,5 +7,12 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  return <ReceiveToken />;
+  return (
+    <ReceiveToken
+      account={{
+        name: 'My Sporran Account',
+        address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+      }}
+    />
+  );
 }
