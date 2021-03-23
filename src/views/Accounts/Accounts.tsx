@@ -47,7 +47,7 @@ export function Accounts({ accounts }: Props): JSX.Element {
           <Route>
             {current.data && <Account account={accounts[current.data]} />}
           </Route>
-          <Route>
+          <Route path={paths.account.receive}>
             {current.data && <ReceiveToken account={accounts[current.data]} />}
           </Route>
         </Switch>
