@@ -13,6 +13,7 @@ import { paths } from '../paths';
 
 export function CreateAccount(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
+  const [address, setAddress] = useState('');
   const history = useHistory();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ export function CreateAccount(): JSX.Element {
     async (password: string) => {
       const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
       await saveEncrypted(address, password, seed);
+      setAddress(address);
 
       history.push(paths.account.create.success);
     },
@@ -48,7 +50,7 @@ export function CreateAccount(): JSX.Element {
         <CreatePassword onSuccess={onSuccess} />
       </Route>
       <Route path={paths.account.create.success}>
-        <CreateAccountSuccess />
+        <CreateAccountSuccess address={address} />
       </Route>
     </Switch>
   );

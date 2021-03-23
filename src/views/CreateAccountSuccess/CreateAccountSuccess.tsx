@@ -1,13 +1,17 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
-import { paths } from '../paths';
+import { paths, generatePath } from '../paths';
 
 interface Props {
   type?: 'create' | 'import';
+  address: string;
 }
 
-export function CreateAccountSuccess({ type = 'create' }: Props): JSX.Element {
+export function CreateAccountSuccess({
+  type = 'create',
+  address,
+}: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   return (
     <main>
@@ -18,7 +22,9 @@ export function CreateAccountSuccess({ type = 'create' }: Props): JSX.Element {
         {type === 'import' && t('view_CreateAccountSuccess_message_import')}
       </p>
 
-      <Link to={paths.home}>{t('view_CreateAccountSuccess_CTA')}</Link>
+      <Link to={generatePath(paths.account.overview, { address })}>
+        {t('view_CreateAccountSuccess_CTA')}
+      </Link>
     </main>
   );
 }
