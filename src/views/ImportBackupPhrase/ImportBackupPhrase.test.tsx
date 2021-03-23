@@ -24,16 +24,18 @@ describe('ImportBackupPhrase', () => {
     render(<ImportBackupPhrase {...props} />);
     userEvent.type(await screen.findByLabelText('1'), 'oooooo');
     userEvent.click(screen.getByText('Import Account'));
+    expect(await screen.findByText(typo)).toBeInTheDocument();
     expect(onImport).not.toHaveBeenCalled();
-    expect(screen.queryByText(typo)).toBeInTheDocument();
   });
 
   it('should report backup phrase not long enough', async () => {
     render(<ImportBackupPhrase {...props} />);
     userEvent.type(await screen.findByLabelText('1'), 'century');
     userEvent.click(screen.getByText('Import Account'));
+    expect(
+      await screen.findByText(backupPhraseNotLongEnough),
+    ).toBeInTheDocument();
     expect(onImport).not.toHaveBeenCalled();
-    expect(screen.queryByText(backupPhraseNotLongEnough)).toBeInTheDocument();
   });
 
   it('should report invalid backup phrase', async () => {
@@ -53,8 +55,8 @@ describe('ImportBackupPhrase', () => {
     userEvent.type(await screen.findByLabelText('12'), 'brain');
 
     userEvent.click(screen.getByText('Import Account'));
+    expect(await screen.findByText(invalidBackupPhrase)).toBeInTheDocument();
     expect(onImport).not.toHaveBeenCalled();
-    expect(screen.queryByText(invalidBackupPhrase)).toBeInTheDocument();
   });
 
   it('should allow backup phrase', async () => {
@@ -72,6 +74,8 @@ describe('ImportBackupPhrase', () => {
     userEvent.type(await screen.findByLabelText('10'), 'siege');
     userEvent.type(await screen.findByLabelText('11'), 'brain');
     userEvent.type(await screen.findByLabelText('12'), 'fog');
+    expect(screen.queryByText(invalidBackupPhrase)).not.toBeInTheDocument();
+    expect(screen.queryByText(typo)).not.toBeInTheDocument();
     userEvent.click(screen.getByText('Import Account'));
     expect(onImport).toHaveBeenCalledWith(
       'century answer price repeat carpet truck swarm boost fine siege brain fog',
