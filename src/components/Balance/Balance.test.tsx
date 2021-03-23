@@ -1,18 +1,24 @@
-import BN from 'bn.js';
-import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.chain';
+import { browser } from 'webextension-polyfill-ts';
 
 import { render, screen } from '../../testing';
+import {
+  BalanceChangeRequest,
+  BalanceChangeResponse,
+  MessageType,
+} from '../../connection/MessageType';
+
 import { Balance } from './Balance';
 
-jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
-(listenToBalanceChanges as jest.Mock).mockImplementation(
-  async (address, callback) => {
-    callback(address, new BN(1.234e15));
-    return () => {
-      // dummy
-    };
-  },
-);
+jest.spyOn(browser.runtime, 'sendMessage');
+jest
+  .spyOn(browser.runtime.onMessage, 'addListener')
+  .mockImplementation(async (callback) => {
+    const response = {
+      type: MessageType.balanceChangeResponse,
+      data: { balance: '04625103a72000' },
+    } as BalanceChangeResponse;
+    callback(response, {});
+  });
 
 describe('Balance', () => {
   it('should render', async () => {
@@ -22,9 +28,9 @@ describe('Balance', () => {
     await screen.findByText(/K/);
 
     expect(container).toMatchSnapshot();
-    expect(listenToBalanceChanges).toHaveBeenCalledWith(
-      address,
-      expect.anything(),
-    );
+    expect(browser.runtime.sendMessage).toHaveBeenCalledWith({
+      type: MessageType.balanceChangeRequest,
+      data: { address },
+    } as BalanceChangeRequest);
   });
 });

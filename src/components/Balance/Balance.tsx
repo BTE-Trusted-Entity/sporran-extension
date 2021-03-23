@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
-import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
 
+import {
+  BalanceChangeResponse,
+  BalanceChangeRequest,
+  MessageType,
+} from '../../connection/MessageType';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
 
 interface BalanceProps {
@@ -14,17 +18,19 @@ export function Balance({ address }: BalanceProps): JSX.Element {
   const t = browser.i18n.getMessage;
   const [balance, setBalance] = useState<BN | null>(null);
 
-  function balanceListener(address: string, balance: BN) {
-    setBalance(balance);
+  function balanceListener(message: BalanceChangeResponse) {
+    setBalance(new BN(message.data.balance, 16));
   }
 
   useEffect(() => {
-    let unsubscribe: () => void;
-    (async () => {
-      unsubscribe = await listenToBalanceChanges(address, balanceListener);
-    })();
+    browser.runtime.onMessage.addListener(balanceListener);
+    browser.runtime.sendMessage({
+      type: MessageType.balanceChangeRequest,
+      data: { address },
+    } as BalanceChangeRequest);
+
     return () => {
-      unsubscribe();
+      browser.runtime.onMessage.removeListener(balanceListener);
     };
   }, [address]);
 

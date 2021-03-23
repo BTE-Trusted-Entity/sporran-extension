@@ -1,25 +1,29 @@
 import userEvent from '@testing-library/user-event';
-import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.chain';
-import BN from 'bn.js';
+import { browser } from 'webextension-polyfill-ts';
 
 import { render, screen } from '../../testing';
 import {
   saveAccount,
   setCurrentAccount,
 } from '../../utilities/accounts/accounts';
+import {
+  BalanceChangeResponse,
+  MessageType,
+} from '../../connection/MessageType';
 
 import { Account } from './Account';
 
 jest.mock('../../utilities/accounts/accounts');
-jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
-(listenToBalanceChanges as jest.Mock).mockImplementation(
-  async (address, callback) => {
-    callback(address, new BN(1.234e15));
-    return () => {
-      // dummy
-    };
-  },
-);
+jest.spyOn(browser.runtime, 'sendMessage');
+jest
+  .spyOn(browser.runtime.onMessage, 'addListener')
+  .mockImplementation(async (callback) => {
+    const response = {
+      type: MessageType.balanceChangeResponse,
+      data: { balance: '04625103a72000' },
+    } as BalanceChangeResponse;
+    callback(response, {});
+  });
 
 const account = {
   name: 'My Sporran Account',

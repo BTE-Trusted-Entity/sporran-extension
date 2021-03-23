@@ -7,7 +7,7 @@ import { SaveBackupPhrase } from '../SaveBackupPhrase/SaveBackupPhrase';
 import { Warning } from '../Warning/Warning';
 import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSuccess';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
-import { saveEncrypted } from '../../utilities/storageEncryption/storageEncryption';
+import { createAccount } from '../../utilities/accounts/accounts';
 import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
 import { paths } from '../paths';
 
@@ -21,9 +21,7 @@ export function CreateAccount(): JSX.Element {
 
   const onSuccess = useCallback(
     async (password: string) => {
-      const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
-      await saveEncrypted(address, password, seed);
-
+      await createAccount(backupPhrase, password);
       history.push(paths.account.create.success);
     },
     [backupPhrase, history],
