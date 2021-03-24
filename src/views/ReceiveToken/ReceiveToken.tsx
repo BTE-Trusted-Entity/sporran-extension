@@ -1,8 +1,11 @@
 import { useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { generatePath, Link } from 'react-router-dom';
+
 import { paths } from '../paths';
+
 import styles from './ReceiveToken.module.css';
+
 interface Props {
   account: {
     address: string;
