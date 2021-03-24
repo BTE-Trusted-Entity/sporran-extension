@@ -6,6 +6,7 @@ import {
   AccountsMap,
   useCurrentAccount,
 } from '../../utilities/accounts/accounts';
+import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { generatePath, paths } from '../paths';
 
@@ -31,6 +32,9 @@ export function Accounts({ accounts }: Props): JSX.Element {
         </p>
 
         <Switch>
+          <Route path={paths.account.receive}>
+            {current.data && <ReceiveToken account={accounts[current.data]} />}
+          </Route>
           <Route
             path={paths.account.overview}
             render={({ match }) => {

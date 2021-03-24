@@ -8,6 +8,7 @@ import { paths } from '../paths';
 
 export function ImportAccount(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
+  const [address, setAddress] = useState('');
   const history = useHistory();
 
   const onImport = useCallback(
@@ -20,7 +21,8 @@ export function ImportAccount(): JSX.Element {
 
   const onSuccess = useCallback(
     async (password: string) => {
-      await createAccount(backupPhrase, password);
+      const account = await createAccount(backupPhrase, password);
+      setAddress(account.address);
       history.push(paths.account.import.success);
     },
     [backupPhrase, history],
@@ -35,7 +37,7 @@ export function ImportAccount(): JSX.Element {
         <CreatePassword onSuccess={onSuccess} />
       </Route>
       <Route path={paths.account.import.success}>
-        <CreateAccountSuccess type="import" />
+        <CreateAccountSuccess type="import" address={address} />
       </Route>
     </Switch>
   );

@@ -13,6 +13,7 @@ import { paths } from '../paths';
 
 export function CreateAccount(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
+  const [address, setAddress] = useState('');
   const history = useHistory();
 
   useEffect(() => {
@@ -21,7 +22,8 @@ export function CreateAccount(): JSX.Element {
 
   const onSuccess = useCallback(
     async (password: string) => {
-      await createAccount(backupPhrase, password);
+      const account = await createAccount(backupPhrase, password);
+      setAddress(account.address);
       history.push(paths.account.create.success);
     },
     [backupPhrase, history],
@@ -46,7 +48,7 @@ export function CreateAccount(): JSX.Element {
         <CreatePassword onSuccess={onSuccess} />
       </Route>
       <Route path={paths.account.create.success}>
-        <CreateAccountSuccess />
+        <CreateAccountSuccess address={address} />
       </Route>
     </Switch>
   );

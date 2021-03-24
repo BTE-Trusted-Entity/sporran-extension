@@ -68,7 +68,7 @@ export async function saveAccount(account: Account): Promise<void> {
 export async function createAccount(
   backupPhrase: string,
   password: string,
-): Promise<void> {
+): Promise<Account> {
   const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
   await saveEncrypted(address, password, seed);
 
@@ -77,5 +77,7 @@ export async function createAccount(
 
   const index = 1 + largestIndex;
   const name = 'My Sporran Account';
-  await saveAccount({ name, address, index });
+  const account = { name, address, index };
+  await saveAccount(account);
+  return account;
 }

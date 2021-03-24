@@ -1,0 +1,14 @@
+.container {
+  padding-top: 1rem;
+}
+
+.accountBox {
+  display: block;
+}
+
+.addressBox {
+  width: 90%;
+  float: left;
+  border: 1px solid black;
+  overflow: hidden;
+}
