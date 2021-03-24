@@ -13,6 +13,7 @@ interface Props {
   account: {
     address: string;
     name: string;
+    index: number;
   };
 }
 
