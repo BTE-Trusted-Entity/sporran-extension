@@ -55,12 +55,12 @@ export function ReceiveToken({ account }: Props): JSX.Element {
 
       <p>[Insert QR Image] </p>
       <p>
-        <Link to={generatePath(paths.account.overview, { address })}>
+        <Link to={generatePath(paths.account.overview, account)}>
           {t('view_ReceiveToken_done_button')}
         </Link>
       </p>
       <p>
-        <Link to={generatePath(paths.account.overview, { address })}>
+        <Link to={generatePath(paths.account.overview, account)}>
           {t('common_action_back')}
         </Link>
       </p>
