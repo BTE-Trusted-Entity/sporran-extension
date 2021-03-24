@@ -1,22 +1,24 @@
 import { useCallback, useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { generatePath, Link } from 'react-router-dom';
+import { generatePath, Link, useRouteMatch } from 'react-router-dom';
 
+import { Account, AccountsMap } from '../../utilities/accounts/accounts';
+import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { paths } from '../paths';
 
 import styles from './ReceiveToken.module.css';
 
 interface Props {
-  account: {
-    address: string;
-    name: string;
-  };
+  account: Account;
+  accounts: AccountsMap;
 }
 
-export function ReceiveToken({ account }: Props): JSX.Element {
+export function ReceiveToken({ account, accounts }: Props): JSX.Element {
   const addressRef = useRef<HTMLInputElement>(null);
   const [isCopied, setIsCopied] = useState(false);
-  const { address, name } = account;
+  const { path } = useRouteMatch();
+
+  const { address } = account;
   const t = browser.i18n.getMessage;
 
   const copyToClipboard = useCallback(() => {
@@ -32,10 +34,9 @@ export function ReceiveToken({ account }: Props): JSX.Element {
     <section className={styles.container}>
       <h1>{t('view_ReceiveToken_heading')}</h1>
       <p>{t('view_ReceiveToken_explanation')}</p>
-      <h2>{name}</h2>
 
-      <p>[Insert account Image] </p>
-      <p>[Insert switch buttons]</p>
+      <AccountsCarousel path={path} account={account} accounts={accounts} />
+
       <p>{t('view_ReceiveToken_account_address')}</p>
       <div className={styles.accountBox}>
         <input
@@ -55,12 +56,12 @@ export function ReceiveToken({ account }: Props): JSX.Element {
 
       <p>[Insert QR Image] </p>
       <p>
-        <Link to={generatePath(paths.account.overview, account)}>
+        <Link to={generatePath(paths.account.overview, { address })}>
           {t('view_ReceiveToken_done_button')}
         </Link>
       </p>
       <p>
-        <Link to={generatePath(paths.account.overview, account)}>
+        <Link to={generatePath(paths.account.overview, { address })}>
           {t('common_action_back')}
         </Link>
       </p>

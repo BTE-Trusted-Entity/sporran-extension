@@ -11,15 +11,30 @@ exports[`ReceiveToken should render 1`] = `
     <p>
       Copy and send your wallet ID
     </p>
-    <h2>
-      My Sporran Account
-    </h2>
-    <p>
-      [Insert account Image] 
-    </p>
-    <p>
-      [Insert switch buttons]
-    </p>
+    <a
+      aria-label="My Third Account"
+      href="/"
+      title="My Third Account"
+    >
+      ←
+    </a>
+    <section>
+      <h2>
+        My Sporran Account
+      </h2>
+      <button
+        type="button"
+      >
+        Rename
+      </button>
+    </section>
+    <a
+      aria-label="My Second Account"
+      href="/"
+      title="My Second Account"
+    >
+      →
+    </a>
     <p>
       My account address
     </p>
