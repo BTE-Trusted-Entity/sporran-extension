@@ -36,9 +36,6 @@ export function Accounts({ accounts }: Props): JSX.Element {
           <Route path={paths.account.receive}>
             {current.data && <ReceiveToken account={accounts[current.data]} />}
           </Route>
-          <Route>
-            {current.data && <Account account={accounts[current.data]} />}
-          </Route>
           <Route
             path={paths.account.overview}
             render={({ match }) => {
@@ -50,6 +47,9 @@ export function Accounts({ accounts }: Props): JSX.Element {
               );
             }}
           />
+          <Route>
+            {current.data && <Account account={accounts[current.data]} />}
+          </Route>
         </Switch>
 
         <p>1 account - Total balance: 0.0000 K</p>
