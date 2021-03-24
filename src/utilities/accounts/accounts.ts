@@ -18,6 +18,16 @@ export interface Account {
 
 export type AccountsMap = Record<string, Account>;
 
+export const NEW: Account = {
+  address: 'NEW',
+  name: '',
+  index: -1,
+};
+
+export function isNew(account: Account): boolean {
+  return account === NEW;
+}
+
 async function getAccounts(): Promise<AccountsMap> {
   return (await storage.get(ACCOUNTS_KEY))[ACCOUNTS_KEY] || {};
 }
