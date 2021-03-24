@@ -1,10 +1,8 @@
+import { useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { generatePath, Link } from 'react-router-dom';
-
-import styles from './ReceiveToken.module.css';
 import { paths } from '../paths';
-import { useRef, useState } from 'react';
-
+import styles from './ReceiveToken.module.css';
 interface Props {
   account: {
     address: string;

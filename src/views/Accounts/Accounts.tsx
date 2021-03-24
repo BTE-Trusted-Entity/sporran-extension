@@ -33,7 +33,7 @@ export function Accounts({ accounts }: Props): JSX.Element {
         </p>
 
         <Switch>
-          <Route>
+          <Route path={paths.account.receive}>
             {current.data && <ReceiveToken account={accounts[current.data]} />}
           </Route>
           <Route>
