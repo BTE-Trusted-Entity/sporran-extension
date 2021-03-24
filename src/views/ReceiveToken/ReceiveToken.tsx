@@ -20,7 +20,7 @@ export function ReceiveToken({ account }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   function copyToClipboard(): void {
-    addressRef?.current?.select();
+    addressRef?.current?.select?.();
     document.execCommand('copy');
     setIsCopied(true);
     setTimeout(function () {
