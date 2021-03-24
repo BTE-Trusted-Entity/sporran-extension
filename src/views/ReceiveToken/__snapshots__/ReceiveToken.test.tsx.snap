@@ -35,7 +35,9 @@ exports[`ReceiveToken should render 1`] = `
         ⊛
       </p>
     </div>
-    <button>
+    <button
+      type="button"
+    >
       copy to clipboard
     </button>
     <p>
