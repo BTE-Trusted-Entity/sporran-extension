@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { generatePath, Link } from 'react-router-dom';
 
@@ -19,14 +19,14 @@ export function ReceiveToken({ account }: Props): JSX.Element {
   const { address, name } = account;
   const t = browser.i18n.getMessage;
 
-  function copyToClipboard(): void {
+  const copyToClipboard = useCallback(() => {
     addressRef?.current?.select?.();
     document.execCommand('copy');
     setIsCopied(true);
     setTimeout(function () {
       setIsCopied(false);
     }, 500);
-  }
+  }, [addressRef]);
 
   return (
     <section className={styles.container}>
@@ -47,7 +47,7 @@ export function ReceiveToken({ account }: Props): JSX.Element {
         <p>{isCopied ? '✔' : '⊛'}</p>
       </div>
 
-      <button onClick={copyToClipboard}>
+      <button onClick={copyToClipboard} type="button">
         {t('view_ReceiveToken_copy_button')}
       </button>
 
