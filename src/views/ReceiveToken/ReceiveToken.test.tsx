@@ -9,6 +9,9 @@ const account = {
 
 describe('ReceiveToken', () => {
   it('should render', async () => {
+    document.queryCommandSupported = () => true;
+    document.execCommand = () => true;
+
     const { container } = render(<ReceiveToken account={account} />);
     expect(container).toMatchSnapshot();
   });

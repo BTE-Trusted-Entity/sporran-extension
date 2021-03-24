@@ -47,9 +47,11 @@ export function ReceiveToken({ account }: Props): JSX.Element {
         <p>{isCopied ? '✔' : '⊛'}</p>
       </div>
 
-      <button onClick={copyToClipboard} type="button">
-        {t('view_ReceiveToken_copy_button')}
-      </button>
+      {document.queryCommandSupported('copy') && (
+        <button onClick={copyToClipboard} type="button">
+          {t('view_ReceiveToken_copy_button')}
+        </button>
+      )}
 
       <p>[Insert QR Image] </p>
       <p>
