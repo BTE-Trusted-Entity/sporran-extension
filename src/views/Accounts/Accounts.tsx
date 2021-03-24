@@ -6,8 +6,8 @@ import {
   AccountsMap,
   useCurrentAccount,
 } from '../../utilities/accounts/accounts';
-import { Account } from '../Account/Account';
-import { paths } from '../paths';
+import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
+import { generatePath, paths } from '../paths';
 
 interface Props {
   accounts: AccountsMap;
@@ -35,15 +35,27 @@ export function Accounts({ accounts }: Props): JSX.Element {
             path={paths.account.overview}
             render={({ match }) => {
               const account = accounts[match.params.address as string];
-              return account ? (
-                <Account account={account} />
-              ) : (
-                <Redirect to={paths.home} />
+              if (!account) {
+                return <Redirect to={paths.home} />;
+              }
+              return (
+                <AccountsCarousel
+                  path={match.path}
+                  account={account}
+                  accounts={accounts}
+                />
               );
             }}
           />
           <Route>
-            {current.data && <Account account={accounts[current.data]} />}
+            {current.data && (
+              <Redirect
+                to={generatePath(
+                  paths.account.overview,
+                  accounts[current.data] as { address: string },
+                )}
+              />
+            )}
           </Route>
         </Switch>
 

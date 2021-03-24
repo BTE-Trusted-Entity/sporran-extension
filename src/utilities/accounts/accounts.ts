@@ -1,6 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
 import useSWR, { mutate, SWRResponse } from 'swr';
 import { Identity } from '@kiltprotocol/core';
+import { map, max } from 'lodash-es';
 
 import { saveEncrypted } from '../storageEncryption/storageEncryption';
 
@@ -12,6 +13,7 @@ const CURRENT_ACCOUNT_KEY = 'currentAccount';
 export interface Account {
   address: string;
   name: string;
+  index: number;
 }
 
 export type AccountsMap = Record<string, Account>;
@@ -70,6 +72,10 @@ export async function createAccount(
   const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
   await saveEncrypted(address, password, seed);
 
+  const accounts = await getAccounts();
+  const largestIndex = max(map(accounts, 'index')) || 0;
+
+  const index = 1 + largestIndex;
   const name = 'My Sporran Account';
-  await saveAccount({ name, address });
+  await saveAccount({ name, address, index });
 }
