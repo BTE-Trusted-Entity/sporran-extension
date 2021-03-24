@@ -28,6 +28,7 @@ jest
 const account = {
   name: 'My Sporran Account',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+  index: 1,
 };
 
 describe('Account', () => {
@@ -55,6 +56,7 @@ describe('Account', () => {
     expect(saveAccount).toHaveBeenCalledWith({
       name: 'Foo',
       address: account.address,
+      index: 1,
     });
   });
 });
