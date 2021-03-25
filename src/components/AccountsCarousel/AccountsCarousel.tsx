@@ -1,16 +1,20 @@
 import { Link } from 'react-router-dom';
+import { browser } from 'webextension-polyfill-ts';
 import { sortBy } from 'lodash-es';
 
 import {
   AccountsMap,
-  Account as AccountType,
+  Account,
+  isNew,
+  NEW,
 } from '../../utilities/accounts/accounts';
 import { AccountSlide } from '../AccountSlide/AccountSlide';
 import { generatePath } from '../../views/paths';
+import { AccountSlideNew } from '../AccountSlide/AccountSlideNew';
 
 interface AccountLinkProps {
   path: string;
-  account: AccountType;
+  account: Account;
   accounts: AccountsMap;
   direction: 'previous' | 'next';
 }
@@ -21,21 +25,36 @@ function AccountLink({
   accounts,
   direction,
 }: AccountLinkProps): JSX.Element {
-  const accountsList = sortBy(Object.values(accounts), 'index');
-  const currentIndex = accountsList.indexOf(account);
+  const t = browser.i18n.getMessage;
 
-  const delta = direction === 'previous' ? -1 : 1;
+  const accountsList = sortBy(Object.values(accounts), 'index');
   const { length } = accountsList;
-  const linkedIndex = (currentIndex + delta + length) % length;
-  const linkedAccount = accountsList[linkedIndex];
+
+  const isPrevious = direction === 'previous';
+  const currentIndex = !isNew(account)
+    ? accountsList.indexOf(account)
+    : isPrevious
+    ? length
+    : -1;
+
+  const delta = isPrevious ? -1 : 1;
+
+  const modifiedIndex = currentIndex + delta;
+  const isInRange = 0 <= modifiedIndex && modifiedIndex < length;
+
+  const linkedIndex = (modifiedIndex + length) % length;
+  const linkedAccount = isInRange ? accountsList[linkedIndex] : NEW;
+  const title = isInRange
+    ? linkedAccount.name
+    : t('component_AccountLink_title');
 
   return (
     <Link
       to={generatePath(path, { address: linkedAccount.address })}
-      title={linkedAccount.name}
-      aria-label={linkedAccount.name}
+      title={title}
+      aria-label={title}
     >
-      {direction === 'previous' ? '←' : '→'}
+      {isPrevious ? '←' : '→'}
     </Link>
   );
 }
@@ -43,7 +62,7 @@ function AccountLink({
 interface Props {
   path: string;
   accounts: AccountsMap;
-  account: AccountType;
+  account: Account;
 }
 
 export function AccountsCarousel({
@@ -60,7 +79,11 @@ export function AccountsCarousel({
         accounts={accounts}
       />
 
-      <AccountSlide account={account} />
+      {isNew(account) ? (
+        <AccountSlideNew />
+      ) : (
+        <AccountSlide account={account} />
+      )}
 
       <AccountLink
         direction="next"

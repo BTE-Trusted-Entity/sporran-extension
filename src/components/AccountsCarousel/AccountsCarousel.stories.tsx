@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { MemoryRouter } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import {
@@ -42,16 +41,10 @@ export function Template(): JSX.Element {
   };
 
   return (
-    <MemoryRouter
-      initialEntries={[
-        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send',
-      ]}
-    >
-      <AccountsCarousel
-        path={paths.account.overview}
-        account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-        accounts={accounts}
-      />
-    </MemoryRouter>
+    <AccountsCarousel
+      path={paths.account.overview}
+      account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+      accounts={accounts}
+    />
   );
 }
