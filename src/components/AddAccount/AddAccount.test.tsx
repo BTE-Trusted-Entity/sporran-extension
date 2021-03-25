@@ -12,14 +12,15 @@ describe('AddAccount', () => {
   it('menu should be visible when menu button clicked', async () => {
     render(<AddAccount />);
     const menu = await screen.findByRole('menu');
-    expect(menu).not.toHaveClass('visible');
+    const openMenuButton = await screen.findByLabelText(
+      'open add account menu',
+    );
+    expect(menu).toHaveClass('hidden');
+    expect(openMenuButton).toHaveAttribute('aria-expanded', 'false');
 
-    // Both tests fail. Why?
-    expect(menu).not.toBeVisible();
-    expect(menu).toHaveStyle('visibility: hidden');
+    userEvent.click(openMenuButton);
 
-    userEvent.click(await screen.findByRole('button', { name: '+' }));
-    expect(menu).toHaveClass('visible');
-    expect(menu).toBeVisible();
+    expect(menu).not.toHaveClass('hidden');
+    expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
   });
 });

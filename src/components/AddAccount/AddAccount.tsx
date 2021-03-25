@@ -3,8 +3,9 @@ import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import styles from './AddAccount.module.css';
 import { paths } from '../../views/paths';
+
+import styles from './AddAccount.module.css';
 
 export function AddAccount(): JSX.Element {
   const t = browser.i18n.getMessage;
@@ -13,33 +14,33 @@ export function AddAccount(): JSX.Element {
 
   return (
     <nav className={styles.container}>
-      <button {...buttonProps} type="button" className={styles.button}>
+      <button
+        {...buttonProps}
+        type="button"
+        className={styles.button}
+        aria-label="open add account menu"
+      >
         +
       </button>
       <div
         className={cx(styles.menu, {
-          [styles.visible]: isOpen,
-          [styles.invisible]: !isOpen,
+          [styles.hidden]: !isOpen,
         })}
         role="menu"
       >
-        <h4 className={cx(styles.menuItem, styles.menuTitle)}>
-          {t('component_AddAccount_title')}
-        </h4>
-        <Link
-          {...itemProps[0]}
-          to={paths.account.create.start}
-          className={cx(styles.menuItem, styles.menuLink)}
-        >
-          {t('component_AddAccount_create')}
-        </Link>
-        <Link
-          {...itemProps[1]}
-          to={paths.account.import.start}
-          className={cx(styles.menuItem, styles.menuLink)}
-        >
-          {t('component_AddAccount_import')}
-        </Link>
+        <h4 className={styles.menuTitle}>{t('component_AddAccount_title')}</h4>
+        <ul className={styles.list}>
+          <li className={styles.listItem}>
+            <Link {...itemProps[0]} to={paths.account.create.start}>
+              {t('component_AddAccount_create')}
+            </Link>
+          </li>
+          <li className={styles.listItem}>
+            <Link {...itemProps[1]} to={paths.account.import.start}>
+              {t('component_AddAccount_import')}
+            </Link>
+          </li>
+        </ul>
       </div>
     </nav>
   );
