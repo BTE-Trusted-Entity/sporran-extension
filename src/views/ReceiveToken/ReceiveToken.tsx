@@ -2,7 +2,8 @@ import { useCallback, useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { generatePath, Link, useRouteMatch } from 'react-router-dom';
 
-import { Account, AccountsMap } from '../../utilities/accounts/accounts';
+import { Account, AccountsMap, isNew } from '../../utilities/accounts/accounts';
+import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { paths } from '../paths';
 
@@ -29,6 +30,10 @@ export function ReceiveToken({ account, accounts }: Props): JSX.Element {
       setIsCopied(false);
     }, 500);
   }, [addressRef]);
+
+  if (isNew(account)) {
+    return <AccountOverviewNew accounts={accounts} />;
+  }
 
   return (
     <section className={styles.container}>

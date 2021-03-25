@@ -1,11 +1,14 @@
 import { Meta } from '@storybook/react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Route } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import {
   BalanceChangeResponse,
   MessageType,
 } from '../../connection/MessageType';
+import { NEW } from '../../utilities/accounts/accounts';
+import { paths } from '../paths';
+
 import { AccountOverview } from './AccountOverview';
 
 export default {
@@ -46,10 +49,30 @@ export function Template(): JSX.Element {
         '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send',
       ]}
     >
-      <AccountOverview
-        account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-        accounts={accounts}
-      />
+      <Route path={paths.account.overview}>
+        <AccountOverview
+          account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+          accounts={accounts}
+        />
+      </Route>
+    </MemoryRouter>
+  );
+}
+
+export function New(): JSX.Element {
+  browser.runtime.onMessage.addListener = (callback) => {
+    const response = {
+      type: MessageType.balanceChangeResponse,
+      data: { balance: '04625103a72000' },
+    } as BalanceChangeResponse;
+    callback(response, {});
+  };
+
+  return (
+    <MemoryRouter initialEntries={['/account/NEW/send']}>
+      <Route path={paths.account.overview}>
+        <AccountOverview account={NEW} accounts={accounts} />
+      </Route>
     </MemoryRouter>
   );
 }

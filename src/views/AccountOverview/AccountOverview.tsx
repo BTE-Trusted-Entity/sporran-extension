@@ -2,10 +2,11 @@ import { browser } from 'webextension-polyfill-ts';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 import { plural } from '../../utilities/plural/plural';
-import { Account, AccountsMap } from '../../utilities/accounts/accounts';
+import { Account, AccountsMap, isNew } from '../../utilities/accounts/accounts';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { generatePath, paths } from '../paths';
 import { Balance } from '../../components/Balance/Balance';
+import { AccountOverviewNew } from './AccountOverviewNew';
 
 interface Props {
   account: Account;
@@ -18,6 +19,10 @@ export function AccountOverview({ account, accounts }: Props): JSX.Element {
 
   const accountsNumber = Object.values(accounts).length;
   const { address } = account;
+
+  if (isNew(account)) {
+    return <AccountOverviewNew accounts={accounts} />;
+  }
 
   return (
     <main>

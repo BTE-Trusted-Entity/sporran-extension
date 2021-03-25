@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ReceiveToken should render a normal account 1`] = `
+exports[`AccountOverview should render a normal account 1`] = `
 <div>
-  <section
-    class="container"
-  >
-    <h1>
-      Receive
-    </h1>
-    <p>
-      Copy and send your wallet ID
-    </p>
+  <main>
+    <header>
+      <h1>
+        Your accounts
+      </h1>
+      <p>
+        You have $number$ accounts
+      </p>
+    </header>
     <a
       aria-label="Create new account"
-      href="/account/NEW/receive"
+      href="/account/NEW"
       title="Create new account"
     >
       ←
@@ -30,57 +30,42 @@ exports[`ReceiveToken should render a normal account 1`] = `
     </section>
     <a
       aria-label="My Second Account"
-      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/receive"
+      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
       title="My Second Account"
     >
       →
     </a>
     <p>
-      My account address
-    </p>
-    <div
-      class="accountBox"
-    >
-      <input
-        class="addressBox"
-        readonly=""
-        value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-      />
-      <p>
-        ⊛
-      </p>
-    </div>
-    <button
-      type="button"
-    >
-      copy to clipboard
-    </button>
-    <p>
-      [Insert QR Image] 
+      <span>
+        Balance: 
+        <span
+          class="css-j3frhc"
+        />
+      </span>
     </p>
     <p>
       <a
-        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
       >
-        DONE
+        Send
       </a>
     </p>
     <p>
       <a
-        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
       >
-        Back
+        Receive
       </a>
     </p>
     <p>
-      10 account - Total balance: 1000.0000 K
+      1 account - Total balance: 0.0000 K
     </p>
-  </section>
+  </main>
   ,
 </div>
 `;
 
-exports[`ReceiveToken should render the new account 1`] = `
+exports[`AccountOverview should render the new account 1`] = `
 <div>
   <main>
     <header>
@@ -93,7 +78,7 @@ exports[`ReceiveToken should render the new account 1`] = `
     </header>
     <a
       aria-label="My Third Account"
-      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL/receive"
+      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
       title="My Third Account"
     >
       ←
@@ -117,7 +102,7 @@ exports[`ReceiveToken should render the new account 1`] = `
     </section>
     <a
       aria-label="My Sporran Account"
-      href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
+      href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       title="My Sporran Account"
     >
       →

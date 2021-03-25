@@ -1,4 +1,9 @@
 import { Meta } from '@storybook/react';
+import { MemoryRouter, Route } from 'react-router-dom';
+
+import { NEW } from '../../utilities/accounts/accounts';
+import { paths } from '../paths';
+
 import { ReceiveToken } from './ReceiveToken';
 
 export default {
@@ -26,9 +31,27 @@ const accounts = {
 
 export function Template(): JSX.Element {
   return (
-    <ReceiveToken
-      account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-      accounts={accounts}
-    />
+    <MemoryRouter
+      initialEntries={[
+        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive',
+      ]}
+    >
+      <Route path={paths.account.receive}>
+        <ReceiveToken
+          account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+          accounts={accounts}
+        />
+      </Route>
+    </MemoryRouter>
+  );
+}
+
+export function New(): JSX.Element {
+  return (
+    <MemoryRouter initialEntries={['/account/NEW/receive']}>
+      <Route path={paths.account.receive}>
+        <ReceiveToken account={NEW} accounts={accounts} />{' '}
+      </Route>
+    </MemoryRouter>
   );
 }
