@@ -31,15 +31,13 @@ function AccountLink({
   const { length } = accountsList;
 
   const isPrevious = direction === 'previous';
-  const currentIndex = !isNew(account)
-    ? accountsList.indexOf(account)
-    : isPrevious
-    ? length
-    : -1;
-
   const delta = isPrevious ? -1 : 1;
+  const modifiedIndex = !isNew(account)
+    ? accountsList.indexOf(account) + delta
+    : isPrevious
+    ? length - 1
+    : 0;
 
-  const modifiedIndex = currentIndex + delta;
   const isInRange = 0 <= modifiedIndex && modifiedIndex < length;
 
   const linkedIndex = (modifiedIndex + length) % length;
