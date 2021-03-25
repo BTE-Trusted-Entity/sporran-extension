@@ -2,10 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { browser } from 'webextension-polyfill-ts';
 
 import { render, screen } from '../../testing';
-import {
-  saveAccount,
-  setCurrentAccount,
-} from '../../utilities/accounts/accounts';
+import { saveAccount } from '../../utilities/accounts/accounts';
 import {
   BalanceChangeResponse,
   MessageType,
