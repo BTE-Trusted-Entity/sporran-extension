@@ -44,7 +44,7 @@ function AccountLink({
   const linkedAccount = isInRange ? accountsList[linkedIndex] : NEW;
   const title = isInRange
     ? linkedAccount.name
-    : t('component_AccountLink_title');
+    : t('component_AccountLink_title_new');
 
   return (
     <Link
