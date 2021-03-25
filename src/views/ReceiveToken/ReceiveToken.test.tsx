@@ -42,9 +42,6 @@ describe('ReceiveToken', () => {
   });
 
   it('should render the new account', async () => {
-    document.queryCommandSupported = () => true;
-    document.execCommand = () => true;
-
     const { container } = render(
       <MemoryRouter initialEntries={['/account/NEW/receive']}>
         <Route path={paths.account.receive}>
