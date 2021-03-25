@@ -1,38 +1,25 @@
-import { MemoryRouter, Switch, Route } from 'react-router-dom';
+import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
 import { Welcome } from '../Welcome/Welcome';
-import { CreateAccount } from '../CreateAccount/CreateAccount';
-import { ImportAccount } from '../ImportAccount/ImportAccount';
-import { Accounts } from '../Accounts/Accounts';
-import { useAccounts } from '../../utilities/accounts/accounts';
+import { AccountsRouter } from '../AccountsRouter/AccountsRouter';
 import { paths } from '../paths';
 
 import styles from './App.module.css';
 
 export function App(): JSX.Element {
-  const accounts = useAccounts();
-  const hasAccounts = accounts.data && Object.values(accounts.data).length > 0;
-
   return (
-    <main className={styles.container}>
+    <div className={styles.container}>
       <MemoryRouter>
         <Switch>
           <Route path={paths.home} exact>
-            {accounts.data &&
-              (hasAccounts ? (
-                <Accounts accounts={accounts.data} />
-              ) : (
-                <Welcome />
-              ))}
+            <Welcome />
           </Route>
-          <Route path={paths.account.create.start}>
-            <CreateAccount />
-          </Route>
-          <Route path={paths.account.import.start}>
-            <ImportAccount />
+
+          <Route path={paths.account.base}>
+            <AccountsRouter />
           </Route>
         </Switch>
       </MemoryRouter>
-    </main>
+    </div>
   );
 }

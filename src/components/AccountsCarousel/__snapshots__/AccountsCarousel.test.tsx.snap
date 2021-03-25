@@ -18,28 +18,6 @@ exports[`AccountsCarousel should render 1`] = `
     >
       Rename
     </button>
-    <p>
-      <span>
-        Balance: 
-        <span
-          class="css-j3frhc"
-        />
-      </span>
-    </p>
-    <p>
-      <a
-        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
-      >
-        Send
-      </a>
-    </p>
-    <p>
-      <a
-        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
-      >
-        Receive
-      </a>
-    </p>
   </section>
   <a
     aria-label="My Second Account"

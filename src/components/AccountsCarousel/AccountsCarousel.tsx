@@ -5,7 +5,7 @@ import {
   AccountsMap,
   Account as AccountType,
 } from '../../utilities/accounts/accounts';
-import { Account } from '../../views/Account/Account';
+import { AccountSlide } from '../AccountSlide/AccountSlide';
 import { generatePath } from '../../views/paths';
 
 interface AccountLinkProps {
@@ -60,7 +60,7 @@ export function AccountsCarousel({
         accounts={accounts}
       />
 
-      <Account account={account} />
+      <AccountSlide account={account} />
 
       <AccountLink
         direction="next"
