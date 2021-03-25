@@ -2,16 +2,14 @@ import userEvent from '@testing-library/user-event';
 import { browser } from 'webextension-polyfill-ts';
 
 import { render, screen } from '../../testing';
-import {
-  saveAccount,
-  setCurrentAccount,
-} from '../../utilities/accounts/accounts';
+import { saveAccount } from '../../utilities/accounts/accounts';
 import {
   BalanceChangeResponse,
   MessageType,
 } from '../../connection/MessageType';
 
-import { Account } from './Account';
+import { AccountSlide } from './AccountSlide';
+import { AccountSlideNew } from './AccountSlideNew';
 
 jest.mock('../../utilities/accounts/accounts');
 jest.spyOn(browser.runtime, 'sendMessage');
@@ -31,19 +29,14 @@ const account = {
   index: 1,
 };
 
-describe('Account', () => {
+describe('AccountSlide', () => {
   it('should render', async () => {
-    const { container } = render(<Account account={account} />);
+    const { container } = render(<AccountSlide account={account} />);
     expect(container).toMatchSnapshot();
   });
 
-  it('should update the current account', async () => {
-    render(<Account account={account} />);
-    expect(setCurrentAccount).toHaveBeenCalledWith(account.address);
-  });
-
   it('should enable editing the account name', async () => {
-    render(<Account account={account} />);
+    render(<AccountSlide account={account} />);
 
     userEvent.click(await screen.findByRole('button', { name: 'Rename' }));
     userEvent.type(await screen.findByLabelText('Account name:'), 'Foo');
@@ -58,5 +51,12 @@ describe('Account', () => {
       address: account.address,
       index: 1,
     });
+  });
+});
+
+describe('AccountSlideNew', () => {
+  it('should render', async () => {
+    const { container } = render(<AccountSlideNew />);
+    expect(container).toMatchSnapshot();
   });
 });

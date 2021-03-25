@@ -180,10 +180,10 @@
   "view_ReceiveToken_done_button": {
     "message": "DONE"
   },
-  "view_Accounts_title": {
+  "view_AccountOverview_title": {
     "message": "Your accounts"
   },
-  "view_Accounts_subtitle_one": {
+  "view_AccountOverview_subtitle_one": {
     "message": "You have $number$ account",
     "placeholders": {
       "number": {
@@ -191,7 +191,7 @@
       }
     }
   },
-  "view_Accounts_subtitle_other": {
+  "view_AccountOverview_subtitle_other": {
     "message": "You have $number$ accounts",
     "placeholders": {
       "number": {
@@ -199,16 +199,28 @@
       }
     }
   },
-  "view_Account_rename": {
+  "component_AccountSlide_rename": {
     "message": "Rename"
   },
-  "view_Account_name": {
+  "component_AccountSlide_name": {
     "message": "Account name:"
   },
-  "view_Account_send": {
+  "component_AccountLink_title_new": {
+    "message": "Create new account"
+  },
+  "component_AccountSlideNew_title": {
+    "message": "Create new account"
+  },
+  "component_AccountSlideNew_or": {
+    "message": "or"
+  },
+  "component_AccountSlideNew_import": {
+    "message": "Import an account from pre-existing phrase"
+  },
+  "view_AccountOverview_send": {
     "message": "Send"
   },
-  "view_Account_receive": {
+  "view_AccountOverview_receive": {
     "message": "Receive"
   }
 }

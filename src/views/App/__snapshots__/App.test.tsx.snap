@@ -2,7 +2,7 @@
 
 exports[`App should render 1`] = `
 <div>
-  <main
+  <div
     class="container"
   >
     <div
@@ -40,6 +40,6 @@ exports[`App should render 1`] = `
         Import an Account from pre-existing phrase
       </a>
     </div>
-  </main>
+  </div>
 </div>
 `;

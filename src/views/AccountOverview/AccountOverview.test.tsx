@@ -4,7 +4,7 @@ import { render } from '../../testing';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
 
-import { ReceiveToken } from './ReceiveToken';
+import { AccountOverview } from './AccountOverview';
 
 const accounts = {
   '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire': {
@@ -26,15 +26,12 @@ const accounts = {
 
 const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
-describe('ReceiveToken', () => {
+describe('AccountOverview', () => {
   it('should render a normal account', async () => {
-    document.queryCommandSupported = () => true;
-    document.execCommand = () => true;
-
     const { container } = render(
-      <MemoryRouter initialEntries={[`/account/${account.address}/receive`]}>
-        <Route path={paths.account.receive}>
-          <ReceiveToken account={account} accounts={accounts} />,
+      <MemoryRouter initialEntries={[`/account/${account.address}/`]}>
+        <Route path={paths.account.overview}>
+          <AccountOverview account={account} accounts={accounts} />,
         </Route>
       </MemoryRouter>,
     );
@@ -43,9 +40,9 @@ describe('ReceiveToken', () => {
 
   it('should render the new account', async () => {
     const { container } = render(
-      <MemoryRouter initialEntries={['/account/NEW/receive']}>
-        <Route path={paths.account.receive}>
-          <ReceiveToken account={NEW} accounts={accounts} />,
+      <MemoryRouter initialEntries={['/account/NEW/']}>
+        <Route path={paths.account.overview}>
+          <AccountOverview account={NEW} accounts={accounts} />,
         </Route>
       </MemoryRouter>,
     );

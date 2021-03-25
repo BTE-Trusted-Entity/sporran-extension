@@ -1,13 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import { Balance } from '../../components/Balance/Balance';
-import {
-  saveAccount,
-  setCurrentAccount,
-} from '../../utilities/accounts/accounts';
-import { generatePath, paths } from '../paths';
+import { saveAccount } from '../../utilities/accounts/accounts';
 
 interface Props {
   account: {
@@ -17,12 +11,8 @@ interface Props {
   };
 }
 
-export function Account({ account }: Props): JSX.Element {
+export function AccountSlide({ account }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-
-  useEffect(() => {
-    setCurrentAccount(account.address);
-  }, [account]);
 
   const [editing, setEditing] = useState(false);
 
@@ -55,14 +45,14 @@ export function Account({ account }: Props): JSX.Element {
 
       {!editing && (
         <button type="button" onClick={handleEditClick}>
-          {t('view_Account_rename')}
+          {t('component_AccountSlide_rename')}
         </button>
       )}
 
       {editing && (
         <form onSubmit={handleSubmit}>
           <label>
-            {t('view_Account_name')}
+            {t('component_AccountSlide_name')}
             <input name="name" required />
           </label>
           <button type="submit">{t('common_action_save')}</button>
@@ -72,21 +62,6 @@ export function Account({ account }: Props): JSX.Element {
           </button>
         </form>
       )}
-
-      <p>
-        <Balance address={account.address} />
-      </p>
-
-      <p>
-        <Link to={generatePath(paths.account.send, account)}>
-          {t('view_Account_send')}
-        </Link>
-      </p>
-      <p>
-        <Link to={generatePath(paths.account.receive, account)}>
-          {t('view_Account_receive')}
-        </Link>
-      </p>
     </section>
   );
 }

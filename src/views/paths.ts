@@ -3,6 +3,7 @@ export { generatePath } from 'react-router-dom';
 export const paths = {
   home: '/',
   account: {
+    base: '/account/',
     create: {
       start: '/account/create',
       backup: '/account/create/backup',

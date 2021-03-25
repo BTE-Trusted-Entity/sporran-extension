@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountSlide should render 1`] = `
+<div>
+  <section>
+    <h2>
+      My Sporran Account
+    </h2>
+    <button
+      type="button"
+    >
+      Rename
+    </button>
+  </section>
+</div>
+`;
+
+exports[`AccountSlideNew should render 1`] = `
+<div>
+  <section>
+    <a
+      href="/account/create"
+    >
+      <h2>
+        Create new account
+      </h2>
+    </a>
+    <p>
+      or
+    </p>
+    <a
+      href="/account/import"
+    >
+      Import an account from pre-existing phrase
+    </a>
+  </section>
+</div>
+`;
