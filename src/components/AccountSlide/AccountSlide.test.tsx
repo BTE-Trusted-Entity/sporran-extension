@@ -12,6 +12,7 @@ import {
 } from '../../connection/MessageType';
 
 import { AccountSlide } from './AccountSlide';
+import { AccountSlideNew } from './AccountSlideNew';
 
 jest.mock('../../utilities/accounts/accounts');
 jest.spyOn(browser.runtime, 'sendMessage');
@@ -53,5 +54,12 @@ describe('AccountSlide', () => {
       address: account.address,
       index: 1,
     });
+  });
+});
+
+describe('AccountSlideNew', () => {
+  it('should render', async () => {
+    const { container } = render(<AccountSlideNew />);
+    expect(container).toMatchSnapshot();
   });
 });

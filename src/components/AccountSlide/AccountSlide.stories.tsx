@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
 
 import { AccountSlide } from './AccountSlide';
+import { AccountSlideNew } from './AccountSlideNew';
 
 export default {
   title: 'Components/AccountSlide',
@@ -17,4 +18,8 @@ export function Template(): JSX.Element {
       }}
     />
   );
+}
+
+export function New(): JSX.Element {
+  return <AccountSlideNew />;
 }

@@ -205,6 +205,18 @@
   "component_AccountSlide_name": {
     "message": "Account name:"
   },
+  "component_AccountLink_title": {
+    "message": "Create new account"
+  },
+  "component_AccountSlideNew_title": {
+    "message": "Create new account"
+  },
+  "component_AccountSlideNew_or": {
+    "message": "or"
+  },
+  "component_AccountSlideNew_import": {
+    "message": "Import an account from pre-existing phrase"
+  },
   "view_AccountOverview_send": {
     "message": "Send"
   },
