@@ -9,8 +9,8 @@ import {
   NEW,
 } from '../../utilities/accounts/accounts';
 import { AccountSlide } from '../AccountSlide/AccountSlide';
-import { generatePath } from '../../views/paths';
 import { AccountSlideNew } from '../AccountSlide/AccountSlideNew';
+import { generatePath } from '../../views/paths';
 
 interface AccountLinkProps {
   path: string;
