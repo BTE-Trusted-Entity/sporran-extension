@@ -2,7 +2,6 @@ import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
 import { Welcome } from '../Welcome/Welcome';
 import { AccountsRouter } from '../AccountsRouter/AccountsRouter';
-import { AddAccount } from '../../components/AddAccount/AddAccount';
 
 import { paths } from '../paths';
 
@@ -12,7 +11,6 @@ export function App(): JSX.Element {
   return (
     <div className={styles.container}>
       <MemoryRouter>
-        <AddAccount />
         <Switch>
           <Route path={paths.home} exact>
             <Welcome />

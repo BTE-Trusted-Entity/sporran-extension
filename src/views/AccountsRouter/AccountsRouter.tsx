@@ -11,6 +11,7 @@ import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
 import { CreateAccount } from '../CreateAccount/CreateAccount';
 import { ImportAccount } from '../ImportAccount/ImportAccount';
 import { AccountOverview } from '../AccountOverview/AccountOverview';
+import { AddAccount } from '../../components/AddAccount/AddAccount';
 import { paths } from '../paths';
 
 interface Props {
@@ -31,15 +32,18 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
   }
 
   return (
-    <Switch>
-      <Route path={paths.account.receive}>
-        <ReceiveToken account={account} accounts={accounts} />
-      </Route>
+    <>
+      <AddAccount />
+      <Switch>
+        <Route path={paths.account.receive}>
+          <ReceiveToken account={account} accounts={accounts} />
+        </Route>
 
-      <Route path={paths.account.overview}>
-        <AccountOverview account={account} accounts={accounts} />
-      </Route>
-    </Switch>
+        <Route path={paths.account.overview}>
+          <AccountOverview account={account} accounts={accounts} />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
