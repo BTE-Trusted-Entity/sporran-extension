@@ -60,6 +60,18 @@
   "component_Stats_balance": {
     "message": " Balance: "
   },
+  "component_AccountOptions_title": {
+    "message": "Account"
+  },
+  "component_AccountOptions_edit": {
+    "message": "Edit account name"
+  },
+  "component_AccountOptions_forget": {
+    "message": "Forget account"
+  },
+  "component_AccountOptions_reset_password": {
+    "message": "Reset password"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },

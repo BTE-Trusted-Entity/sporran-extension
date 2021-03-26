@@ -1,0 +1,39 @@
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  width: 10rem;
+  margin-left: 0.5rem;
+}
+
+.menu {
+  border: 1px solid black;
+}
+
+.menuTitle {
+  background: lightgrey;
+  margin: 0;
+  padding: 0.25rem;
+}
+
+.list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.button {
+  align-self: flex-start;
+}
+
+.listItem {
+  padding: 0.25rem;
+  border-top: 1px solid black;
+}
+
+.listItem:hover {
+  cursor: pointer;
+}
+
+.hidden {
+  visibility: hidden;
+}
