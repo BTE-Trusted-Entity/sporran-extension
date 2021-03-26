@@ -45,6 +45,7 @@ export function AccountOptions({ onEdit }: Props): JSX.Element {
           <ul className={styles.list}>
             <li className={styles.listItem}>
               <button
+                type="button"
                 role={itemProps[0].role}
                 tabIndex={itemProps[0].tabIndex}
                 onClick={handleClick}
