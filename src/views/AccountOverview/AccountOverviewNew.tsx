@@ -4,6 +4,7 @@ import { useRouteMatch } from 'react-router-dom';
 import { plural } from '../../utilities/plural/plural';
 import { AccountsMap, NEW } from '../../utilities/accounts/accounts';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
+import { Stats } from '../../components/Stats/Stats';
 
 interface Props {
   accounts: AccountsMap;
@@ -29,7 +30,7 @@ export function AccountOverviewNew({ accounts }: Props): JSX.Element {
 
       <AccountsCarousel path={path} account={NEW} accounts={accounts} />
 
-      <p>1 account - Total balance: 0.0000 K</p>
+      <Stats accounts={accounts} />
     </main>
   );
 }

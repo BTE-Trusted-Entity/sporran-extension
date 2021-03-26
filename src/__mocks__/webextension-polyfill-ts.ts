@@ -4,6 +4,7 @@
 // outside the Web Extension environment provided by a compatible browser
 
 import messagesEN from '../static/_locales/en/messages.json';
+import { BalanceChangeResponse, MessageType } from '../connection/MessageType';
 
 export const browser = {
   tabs: {
@@ -41,8 +42,12 @@ export const browser = {
       // dummy
     },
     onMessage: {
-      addListener(): void {
-        // dummy
+      addListener(callback: (...args: unknown[]) => void): void {
+        const response = {
+          type: MessageType.balanceChangeResponse,
+          data: { balance: '04625103a72000' },
+        } as BalanceChangeResponse;
+        callback(response, {});
       },
       removeListener(): void {
         // dummy

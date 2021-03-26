@@ -18,5 +18,5 @@ export function plural(value: number, keys: Keys): string {
     );
   }
 
-  return browser.i18n.getMessage(key);
+  return browser.i18n.getMessage(key, [value]);
 }

@@ -6,6 +6,7 @@ import { Account, AccountsMap, isNew } from '../../utilities/accounts/accounts';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { generatePath, paths } from '../paths';
 import { Balance } from '../../components/Balance/Balance';
+import { Stats } from '../../components/Stats/Stats';
 import { AccountOverviewNew } from './AccountOverviewNew';
 
 interface Props {
@@ -53,7 +54,7 @@ export function AccountOverview({ account, accounts }: Props): JSX.Element {
         </Link>
       </p>
 
-      <p>1 account - Total balance: 0.0000 K</p>
+      <Stats accounts={accounts} />
     </main>
   );
 }

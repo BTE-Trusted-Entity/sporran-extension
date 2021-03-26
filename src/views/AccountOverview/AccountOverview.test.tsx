@@ -1,6 +1,6 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 
-import { render } from '../../testing';
+import { mockBackgroundScript, render } from '../../testing';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
 
@@ -28,6 +28,8 @@ const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 describe('AccountOverview', () => {
   it('should render a normal account', async () => {
+    mockBackgroundScript();
+
     const { container } = render(
       <MemoryRouter initialEntries={[`/account/${account.address}/`]}>
         <Route path={paths.account.overview}>
@@ -39,6 +41,8 @@ describe('AccountOverview', () => {
   });
 
   it('should render the new account', async () => {
+    mockBackgroundScript();
+
     const { container } = render(
       <MemoryRouter initialEntries={['/account/NEW/']}>
         <Route path={paths.account.overview}>

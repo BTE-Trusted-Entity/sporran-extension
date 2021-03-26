@@ -5,6 +5,7 @@ import { generatePath, Link, useRouteMatch } from 'react-router-dom';
 import { Account, AccountsMap, isNew } from '../../utilities/accounts/accounts';
 import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
+import { Stats } from '../../components/Stats/Stats';
 import { paths } from '../paths';
 
 import styles from './ReceiveToken.module.css';
@@ -70,7 +71,8 @@ export function ReceiveToken({ account, accounts }: Props): JSX.Element {
           {t('common_action_back')}
         </Link>
       </p>
-      <p>10 account - Total balance: 1000.0000 K</p>
+
+      <Stats accounts={accounts} />
     </section>
   );
 }

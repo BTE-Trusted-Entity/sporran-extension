@@ -1,12 +1,10 @@
 import { Meta } from '@storybook/react';
 
-import { mockBackgroundScript } from '../../testing';
-import { paths } from '../../views/paths';
-import { AccountsCarousel } from './AccountsCarousel';
+import { Stats } from './Stats';
 
 export default {
-  title: 'Components/AccountsCarousel',
-  component: AccountsCarousel,
+  title: 'Components/Stats',
+  component: Stats,
 } as Meta;
 
 const accounts = {
@@ -28,13 +26,5 @@ const accounts = {
 };
 
 export function Template(): JSX.Element {
-  mockBackgroundScript();
-
-  return (
-    <AccountsCarousel
-      path={paths.account.overview}
-      account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-      accounts={accounts}
-    />
-  );
+  return <Stats accounts={accounts} />;
 }

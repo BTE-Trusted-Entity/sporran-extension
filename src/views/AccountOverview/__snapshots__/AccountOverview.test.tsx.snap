@@ -38,9 +38,9 @@ exports[`AccountOverview should render a normal account 1`] = `
     <p>
       <span>
         Balance: 
-        <span
-          class="css-j3frhc"
-        />
+        1.2340
+         
+        K
       </span>
     </p>
     <p>
@@ -58,7 +58,11 @@ exports[`AccountOverview should render a normal account 1`] = `
       </a>
     </p>
     <p>
-      1 account - Total balance: 0.0000 K
+      You have $number$ accounts with a total
+       Balance: 
+      3.7020
+       
+      K
     </p>
   </main>
   ,
@@ -108,7 +112,11 @@ exports[`AccountOverview should render the new account 1`] = `
       →
     </a>
     <p>
-      1 account - Total balance: 0.0000 K
+      You have $number$ accounts with a total
+       Balance: 
+      3.7020
+       
+      K
     </p>
   </main>
   ,

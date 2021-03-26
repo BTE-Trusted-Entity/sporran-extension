@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stats should render for at least two accounts 1`] = `
+<div>
+  <p>
+    You have $number$ accounts with a total
+     Balance: 
+    3.7020
+     
+    K
+  </p>
+</div>
+`;
