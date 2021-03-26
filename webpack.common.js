@@ -32,6 +32,10 @@ export default {
           },
         ],
       },
+      {
+        test: /App.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   resolve: {
