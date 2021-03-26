@@ -1,10 +1,6 @@
 import { Meta } from '@storybook/react';
-import { browser } from 'webextension-polyfill-ts';
 
-import {
-  BalanceChangeResponse,
-  MessageType,
-} from '../../connection/MessageType';
+import { mockBackgroundScript } from '../../testing';
 import { paths } from '../../views/paths';
 import { AccountsCarousel } from './AccountsCarousel';
 
@@ -32,13 +28,7 @@ const accounts = {
 };
 
 export function Template(): JSX.Element {
-  browser.runtime.onMessage.addListener = (callback) => {
-    const response = {
-      type: MessageType.balanceChangeResponse,
-      data: { balance: '04625103a72000' },
-    } as BalanceChangeResponse;
-    callback(response, {});
-  };
+  mockBackgroundScript();
 
   return (
     <AccountsCarousel

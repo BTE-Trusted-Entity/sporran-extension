@@ -1,11 +1,6 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
 
-import {
-  BalanceChangeResponse,
-  MessageType,
-} from '../../connection/MessageType';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
 
@@ -34,19 +29,7 @@ const accounts = {
   },
 };
 
-function mockListener(
-  callback: Parameters<typeof browser.runtime.onMessage.addListener>[0],
-) {
-  const response = {
-    type: MessageType.balanceChangeResponse,
-    data: { balance: '04625103a72000' },
-  } as BalanceChangeResponse;
-  callback(response, {});
-}
-
 export function Template(): JSX.Element {
-  browser.runtime.onMessage.addListener = mockListener;
-
   return (
     <MemoryRouter
       initialEntries={[
@@ -64,8 +47,6 @@ export function Template(): JSX.Element {
 }
 
 export function New(): JSX.Element {
-  browser.runtime.onMessage.addListener = mockListener;
-
   return (
     <MemoryRouter initialEntries={['/account/NEW/send']}>
       <Route path={paths.account.overview}>
