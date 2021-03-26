@@ -2,6 +2,7 @@ import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
 import { Welcome } from '../Welcome/Welcome';
 import { AccountsRouter } from '../AccountsRouter/AccountsRouter';
+
 import { paths } from '../paths';
 
 import styles from './App.module.css';
