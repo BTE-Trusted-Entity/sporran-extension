@@ -5,6 +5,7 @@ import { AccountsRouter } from '../AccountsRouter/AccountsRouter';
 
 import { paths } from '../paths';
 
+import './App.css';
 import styles from './App.module.css';
 
 export function App(): JSX.Element {
