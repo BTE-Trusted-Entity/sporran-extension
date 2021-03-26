@@ -38,7 +38,7 @@ describe('AccountSlide', () => {
   it('should enable editing the account name', async () => {
     render(<AccountSlide account={account} />);
 
-    userEvent.click(await screen.findByLabelText('open account options menu'));
+    userEvent.click(await screen.findByLabelText('Account options'));
     userEvent.click(
       await screen.findByRole('menuitem', { name: 'Edit account name' }),
     );

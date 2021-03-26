@@ -11,16 +11,13 @@ describe('AddAccount', () => {
 
   it('menu should be visible when menu button clicked', async () => {
     render(<AddAccount />);
-    const menu = await screen.findByRole('menu');
-    const openMenuButton = await screen.findByLabelText(
-      'open add account menu',
-    );
-    expect(menu).toHaveClass('hidden');
+    const openMenuButton = await screen.findByLabelText('Add account');
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 
     userEvent.click(openMenuButton);
 
-    expect(menu).not.toHaveClass('hidden');
+    expect(screen.queryByRole('menu')).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
   });
 });

@@ -6,7 +6,7 @@ declare namespace AccountOptionsModuleCssNamespace {
     list: string;
     listItem: string;
     menu: string;
-    menuTitle: string;
+    menuHeading: string;
   }
 }
 

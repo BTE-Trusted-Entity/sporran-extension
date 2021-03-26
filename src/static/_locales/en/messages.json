@@ -60,7 +60,19 @@
   "component_Stats_balance": {
     "message": " Balance: "
   },
-  "component_AccountOptions_title": {
+  "component_AddAccount_label": {
+    "message": "Add account"
+  },
+  "component_AddAccount_create": {
+    "message": "Create new account"
+  },
+  "component_AddAccount_import": {
+    "message": "Import account from pre-existing phrase"
+  },
+  "component_AccountOptions_label": {
+    "message": "Account options"
+  },
+  "component_AccountOptions_heading": {
     "message": "Account"
   },
   "component_AccountOptions_edit": {
@@ -253,14 +265,5 @@
   },
   "view_AccountOverview_receive": {
     "message": "Receive"
-  },
-  "component_AddAccount_title": {
-    "message": "Add account"
-  },
-  "component_AddAccount_create": {
-    "message": "Create new account"
-  },
-  "component_AddAccount_import": {
-    "message": "Import account from pre-existing phrase"
   }
 }

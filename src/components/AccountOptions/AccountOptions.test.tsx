@@ -17,16 +17,13 @@ describe('AddAccount', () => {
 
   it('menu should be visible when menu button clicked', async () => {
     render(<AccountOptions {...props} />);
-    const menu = await screen.findByRole('menu');
-    const openMenuButton = await screen.findByLabelText(
-      'open account options menu',
-    );
-    expect(menu).toHaveClass('hidden');
+    const openMenuButton = await screen.findByLabelText('Account options');
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 
     userEvent.click(openMenuButton);
 
-    expect(menu).not.toHaveClass('hidden');
+    expect(screen.queryByRole('menu')).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
   });
 });
