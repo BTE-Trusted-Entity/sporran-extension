@@ -23,6 +23,43 @@
   "component_Balance_label": {
     "message": "Balance: "
   },
+  "component_AccountSlide_rename": {
+    "message": "Rename"
+  },
+  "component_AccountSlide_name": {
+    "message": "Account name:"
+  },
+  "component_AccountLink_title_new": {
+    "message": "Create new account"
+  },
+  "component_AccountSlideNew_title": {
+    "message": "Create new account"
+  },
+  "component_AccountSlideNew_or": {
+    "message": "or"
+  },
+  "component_AccountSlideNew_import": {
+    "message": "Import an account from pre-existing phrase"
+  },
+  "component_Stats_account_one": {
+    "message": "You have $number$ account with a total",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "component_Stats_account_other": {
+    "message": "You have $number$ accounts with a total",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "component_Stats_balance": {
+    "message": " Balance: "
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -198,24 +235,6 @@
         "content": "$1"
       }
     }
-  },
-  "component_AccountSlide_rename": {
-    "message": "Rename"
-  },
-  "component_AccountSlide_name": {
-    "message": "Account name:"
-  },
-  "component_AccountLink_title_new": {
-    "message": "Create new account"
-  },
-  "component_AccountSlideNew_title": {
-    "message": "Create new account"
-  },
-  "component_AccountSlideNew_or": {
-    "message": "or"
-  },
-  "component_AccountSlideNew_import": {
-    "message": "Import an account from pre-existing phrase"
   },
   "view_AccountOverview_send": {
     "message": "Send"

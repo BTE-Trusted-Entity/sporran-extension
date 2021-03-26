@@ -73,7 +73,11 @@ exports[`ReceiveToken should render a normal account 1`] = `
       </a>
     </p>
     <p>
-      10 account - Total balance: 1000.0000 K
+      You have $number$ accounts with a total
+       Balance: 
+      3.7020
+       
+      K
     </p>
   </section>
   ,
@@ -123,7 +127,11 @@ exports[`ReceiveToken should render the new account 1`] = `
       →
     </a>
     <p>
-      1 account - Total balance: 0.0000 K
+      You have $number$ accounts with a total
+       Balance: 
+      3.7020
+       
+      K
     </p>
   </main>
   ,
