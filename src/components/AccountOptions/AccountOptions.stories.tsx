@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
-import { AccountOptions } from './AccountOptions';
 import { action } from '@storybook/addon-actions';
+
+import { AccountOptions } from './AccountOptions';
 
 export default {
   title: 'Components/AccountOptions',
