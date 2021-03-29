@@ -8,6 +8,5 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   return <AccountOptions onEdit={action('onEdit')} />;
 }
