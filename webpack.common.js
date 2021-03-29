@@ -36,6 +36,10 @@ export default {
         test: /App.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|svg|woff2)$/i,
+        use: ['url-loader'],
+      },
     ],
   },
   resolve: {
