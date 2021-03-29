@@ -38,13 +38,12 @@ describe('AccountSlide', () => {
   it('should enable editing the account name', async () => {
     render(<AccountSlide account={account} />);
 
-    userEvent.click(await screen.findByRole('button', { name: 'Rename' }));
+    userEvent.click(await screen.findByLabelText('Account options'));
+    userEvent.click(
+      await screen.findByRole('menuitem', { name: 'Edit account name' }),
+    );
     userEvent.type(await screen.findByLabelText('Account name:'), 'Foo');
     userEvent.click(await screen.findByRole('button', { name: 'Save' }));
-
-    expect(
-      await screen.findByRole('button', { name: 'Rename' }),
-    ).toBeInTheDocument();
 
     expect(saveAccount).toHaveBeenCalledWith({
       name: 'Foo',

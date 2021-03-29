@@ -10,14 +10,27 @@ exports[`AccountsCarousel should render normal accounts 1`] = `
     ←
   </a>
   <section>
-    <h2>
+    <h2
+      style="display: inline;"
+    >
       My Second Account
     </h2>
-    <button
-      type="button"
+    <nav
+      class="container"
     >
-      Rename
-    </button>
+      <button
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="Account options"
+        class="button"
+        role="button"
+        tabindex="0"
+        title="Account options"
+        type="button"
+      >
+        v
+      </button>
+    </nav>
   </section>
   <a
     aria-label="My Third Account"
@@ -39,14 +52,27 @@ exports[`AccountsCarousel should render the first account 1`] = `
     ←
   </a>
   <section>
-    <h2>
+    <h2
+      style="display: inline;"
+    >
       My Sporran Account
     </h2>
-    <button
-      type="button"
+    <nav
+      class="container"
     >
-      Rename
-    </button>
+      <button
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="Account options"
+        class="button"
+        role="button"
+        tabindex="0"
+        title="Account options"
+        type="button"
+      >
+        v
+      </button>
+    </nav>
   </section>
   <a
     aria-label="My Second Account"
@@ -68,14 +94,27 @@ exports[`AccountsCarousel should render the last account 1`] = `
     ←
   </a>
   <section>
-    <h2>
+    <h2
+      style="display: inline;"
+    >
       My Third Account
     </h2>
-    <button
-      type="button"
+    <nav
+      class="container"
     >
-      Rename
-    </button>
+      <button
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="Account options"
+        class="button"
+        role="button"
+        tabindex="0"
+        title="Account options"
+        type="button"
+      >
+        v
+      </button>
+    </nav>
   </section>
   <a
     aria-label="Create new account"
@@ -133,14 +172,27 @@ exports[`AccountsCarousel should support other paths 1`] = `
     ←
   </a>
   <section>
-    <h2>
+    <h2
+      style="display: inline;"
+    >
       My Third Account
     </h2>
-    <button
-      type="button"
+    <nav
+      class="container"
     >
-      Rename
-    </button>
+      <button
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="Account options"
+        class="button"
+        role="button"
+        tabindex="0"
+        title="Account options"
+        type="button"
+      >
+        v
+      </button>
+    </nav>
   </section>
   <a
     aria-label="Create new account"
