@@ -1,0 +1,63 @@
+.screenHeadline {
+  font-family: "Montserrat SemiBold", sans-serif;
+  font-size: 1.75rem;
+  color: var(--color-grey-light);
+}
+
+.importantHeadline {
+  font-family: "Montserrat Bold", sans-serif;
+  font-size: 1.5rem;
+  color: var(--color-orange);
+}
+
+.subline {
+  font-family: "Montserrat Medium", sans-serif;
+  font-size: 0.875rem;
+  color: var(--color-grey-light);
+}
+
+.accountText {
+  font-family: "Montserrat SemiBold", sans-serif;
+  font-size: 1rem;
+  color: var(--color-grey-light);
+}
+
+.buttonText {
+  font-family: "Montserrat SemiBold", sans-serif;
+  font-size: 0.875rem;
+  color: var(--color-grey-light);
+}
+
+.buttonText:disabled {
+  color: rgba(242,239,238,0.2); /* var(--color-grey-light) + 0.2 opacity */
+}
+
+.balanceText {
+  font-family: "Montserrat Medium", sans-serif;
+  font-size: 0.875rem;
+  color: var(--color-orange);
+}
+
+.smallText {
+  font-family: "Montserrat Medium", sans-serif;
+  font-size: 0.75rem;
+  color: var(--color-grey-medium);
+}
+
+.smallImportant {
+  font-family: "Montserrat Medium", sans-serif;
+  font-size: 0.75rem;
+  color: var(--color-orange);
+}
+
+.inputText {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.875rem;
+  color: var(--color-grey-light);
+}
+
+.errorText {
+  font-family: "Roboto Mono", monospace;
+  font-size: calc(11rem / 16);
+  color: var(--color-grey-light);
+}
