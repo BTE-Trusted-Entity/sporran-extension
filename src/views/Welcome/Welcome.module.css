@@ -2,20 +2,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100%
 }
 
-.logo {
-  height: 6rem;
-}
-
-.logo h3 {
-  padding-top: 2rem;
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
 }
 
 .info {
-  margin: 0;
+  composes: subline from '../../components/Typography/Typography.module.css';
 }
 
-.buttonContainer {
+.create {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+  margin-top: 3rem;
+}
+
+.import {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
   margin: 3rem 0;
 }
