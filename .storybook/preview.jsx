@@ -1,6 +1,5 @@
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { withConsole, setConsoleOptions } from '@storybook/addon-console';
-import { withInfo } from '@storybook/addon-info';
 import { MemoryRouter } from 'react-router-dom';
 import { init } from '@kiltprotocol/core';
 
@@ -15,8 +14,6 @@ setConsoleOptions({
 });
 
 export const decorators = [
-  withInfo,
-
   // You'll receive console outputs as a console,
   // warn and error actions in the panel. You might want to know from
   // what stories they come. In this case, add withConsole decorator:
