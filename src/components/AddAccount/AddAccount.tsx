@@ -18,30 +18,35 @@ export function AddAccount(): JSX.Element {
         {...buttonProps}
         type="button"
         className={styles.button}
-        aria-label="open add account menu"
+        title={t('component_AddAccount_label')}
+        aria-label={t('component_AddAccount_label')}
       >
         +
       </button>
-      <div
-        className={cx(styles.menu, {
-          [styles.hidden]: !isOpen,
-        })}
-        role="menu"
-      >
-        <h4 className={styles.menuTitle}>{t('component_AddAccount_title')}</h4>
-        <ul className={styles.list}>
-          <li className={styles.listItem}>
-            <Link {...itemProps[0]} to={paths.account.create.start}>
-              {t('component_AddAccount_create')}
-            </Link>
-          </li>
-          <li className={styles.listItem}>
-            <Link {...itemProps[1]} to={paths.account.import.start}>
-              {t('component_AddAccount_import')}
-            </Link>
-          </li>
-        </ul>
-      </div>
+      {isOpen && (
+        <div
+          className={cx(styles.menu, {
+            [styles.hidden]: !isOpen,
+          })}
+          role="menu"
+        >
+          <h4 className={styles.menuHeading}>
+            {t('component_AddAccount_label')}
+          </h4>
+          <ul className={styles.list}>
+            <li className={styles.listItem}>
+              <Link {...itemProps[0]} to={paths.account.create.start}>
+                {t('component_AddAccount_create')}
+              </Link>
+            </li>
+            <li className={styles.listItem}>
+              <Link {...itemProps[1]} to={paths.account.import.start}>
+                {t('component_AddAccount_import')}
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }
