@@ -5,7 +5,7 @@ import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 
 import styles from './AccountOptions.module.css';
 
-export interface Props {
+interface Props {
   onEdit: () => void;
 }
 
