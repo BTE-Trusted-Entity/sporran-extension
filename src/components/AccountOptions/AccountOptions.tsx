@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import cx from 'classnames';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
