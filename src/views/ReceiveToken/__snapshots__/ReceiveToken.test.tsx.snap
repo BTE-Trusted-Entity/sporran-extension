@@ -19,14 +19,27 @@ exports[`ReceiveToken should render a normal account 1`] = `
       ←
     </a>
     <section>
-      <h2>
+      <h2
+        style="display: inline;"
+      >
         My Sporran Account
       </h2>
-      <button
-        type="button"
+      <nav
+        class="container"
       >
-        Rename
-      </button>
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Account options"
+          class="button"
+          role="button"
+          tabindex="0"
+          title="Account options"
+          type="button"
+        >
+          v
+        </button>
+      </nav>
     </section>
     <a
       aria-label="My Second Account"

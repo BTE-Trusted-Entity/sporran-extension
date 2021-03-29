@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
+import { AccountOptions } from '../AccountOptions/AccountOptions';
 import { saveAccount } from '../../utilities/accounts/accounts';
 
 interface Props {
@@ -41,13 +42,8 @@ export function AccountSlide({ account }: Props): JSX.Element {
 
   return (
     <section>
-      <h2>{account.name}</h2>
-
-      {!editing && (
-        <button type="button" onClick={handleEditClick}>
-          {t('component_AccountSlide_rename')}
-        </button>
-      )}
+      <h2 style={{ display: 'inline' }}>{account.name}</h2>
+      <AccountOptions onEdit={handleEditClick} />
 
       {editing && (
         <form onSubmit={handleSubmit}>

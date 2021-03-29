@@ -1,14 +1,8 @@
 .container {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   width: 10rem;
-}
-
-.button {
-  align-self: flex-end;
+  margin-left: 0.5rem;
 }
 
 .menu {
@@ -27,9 +21,17 @@
   margin: 0;
 }
 
+.button {
+  align-self: flex-start;
+}
+
 .listItem {
   padding: 0.25rem;
   border-top: 1px solid black;
+}
+
+.listItem:hover {
+  cursor: pointer;
 }
 
 .hidden {
