@@ -17,7 +17,7 @@ describe('AddAccount', () => {
 
     userEvent.click(openMenuButton);
 
-    expect(screen.queryByRole('menu')).toBeInTheDocument();
+    expect(await screen.findByRole('menu')).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
   });
 });
