@@ -10,7 +10,7 @@ describe('AddAccount', () => {
   });
 
   it('menu should be visible when menu button clicked', async () => {
-    render(<AddAccount />);
+    const { container } = render(<AddAccount />);
     const openMenuButton = await screen.findByLabelText('Add account');
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'false');
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
@@ -19,5 +19,7 @@ describe('AddAccount', () => {
 
     expect(await screen.findByRole('menu')).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
+
+    expect(container).toMatchSnapshot();
   });
 });
