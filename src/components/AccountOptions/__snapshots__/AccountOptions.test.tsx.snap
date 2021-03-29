@@ -8,14 +8,14 @@ exports[`AddAccount menu should be visible when menu button clicked 1`] = `
     <button
       aria-expanded="true"
       aria-haspopup="true"
-      aria-label="Add account"
+      aria-label="Account options"
       class="button"
       role="button"
       tabindex="0"
-      title="Add account"
+      title="Account options"
       type="button"
     >
-      +
+      v
     </button>
     <div
       class="menu"
@@ -24,7 +24,7 @@ exports[`AddAccount menu should be visible when menu button clicked 1`] = `
       <h4
         class="menuHeading"
       >
-        Add account
+        Account
       </h4>
       <ul
         class="list"
@@ -32,23 +32,32 @@ exports[`AddAccount menu should be visible when menu button clicked 1`] = `
         <li
           class="listItem"
         >
+          <button
+            role="menuitem"
+            tabindex="-1"
+            type="button"
+          >
+            Edit account name
+          </button>
+        </li>
+        <li
+          class="listItem"
+        >
           <a
-            href="/account/create"
             role="menuitem"
             tabindex="-1"
           >
-            Create new account
+            Forget account
           </a>
         </li>
         <li
           class="listItem"
         >
           <a
-            href="/account/import"
             role="menuitem"
             tabindex="-1"
           >
-            Import account from pre-existing phrase
+            Reset password
           </a>
         </li>
       </ul>
@@ -65,14 +74,14 @@ exports[`AddAccount should render 1`] = `
     <button
       aria-expanded="false"
       aria-haspopup="true"
-      aria-label="Add account"
+      aria-label="Account options"
       class="button"
       role="button"
       tabindex="0"
-      title="Add account"
+      title="Account options"
       type="button"
     >
-      +
+      v
     </button>
   </nav>
 </div>
