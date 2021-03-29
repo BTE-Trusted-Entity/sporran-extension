@@ -4,6 +4,7 @@ import { withInfo } from '@storybook/addon-info';
 import { MemoryRouter } from 'react-router-dom';
 import { init } from '@kiltprotocol/core';
 
+import { ViewDecorator } from "../src/components/View/ViewDecorator";
 import '../src/views/App/App.css';
 
 init({ address: 'wss://full-nodes-lb.devnet.kilt.io' });
@@ -20,6 +21,8 @@ export const decorators = [
   // warn and error actions in the panel. You might want to know from
   // what stories they come. In this case, add withConsole decorator:
   (storyFn, context) => withConsole()(storyFn)(context),
+
+  ViewDecorator,
 
   (Story) => (
     <MemoryRouter>

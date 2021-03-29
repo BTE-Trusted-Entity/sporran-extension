@@ -1,8 +1,8 @@
 body {
   margin: 0;
+  padding: 0;
 }
 
 .container {
-  min-width: 480px;
-  min-height: 600px;
+  composes: view from "../../components/View/View.module.css";
 }
