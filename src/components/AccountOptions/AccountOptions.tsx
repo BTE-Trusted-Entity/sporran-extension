@@ -46,8 +46,7 @@ export function AccountOptions({ onEdit }: Props): JSX.Element {
             <li className={styles.listItem}>
               <button
                 type="button"
-                role={itemProps[0].role}
-                tabIndex={itemProps[0].tabIndex}
+                {...(itemProps[0] as unknown)}
                 onClick={handleClick}
               >
                 {t('component_AccountOptions_edit')}
