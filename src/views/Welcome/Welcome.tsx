@@ -1,31 +1,25 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link, Redirect } from 'react-router-dom';
 
-import {
-  useAccounts,
-  useCurrentAccount,
-} from '../../utilities/accounts/accounts';
+import { AccountsMap } from '../../utilities/accounts/accounts';
 import { generatePath, paths } from '../paths';
 
 import styles from './Welcome.module.css';
 
-export function Welcome(): JSX.Element | null {
+interface Props {
+  accounts?: AccountsMap;
+  current?: string | null;
+}
+
+export function Welcome({ accounts, current }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const accounts = useAccounts();
-  const hasAccounts = accounts.data && Object.values(accounts.data).length > 0;
-  const current = useCurrentAccount();
-
-  if (!accounts.data) {
-    return null;
-  }
-
-  if (current.data && hasAccounts) {
+  if (accounts && current && Object.values(accounts).length > 0) {
     return (
       <Redirect
         to={generatePath(
           paths.account.overview,
-          accounts.data[current.data] as { address: string },
+          accounts[current] as { address: string },
         )}
       />
     );

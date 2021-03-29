@@ -7,5 +7,5 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  return <Welcome />;
+  return <Welcome hasAccounts={false} />;
 }

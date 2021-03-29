@@ -5,6 +5,26 @@ exports[`App should render 1`] = `
   <div
     class="container"
   >
+    <nav
+      class="menus"
+    >
+      <nav
+        class="container"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Settings"
+          class="button"
+          role="button"
+          tabindex="0"
+          title="Settings"
+          type="button"
+        >
+          ⚙
+        </button>
+      </nav>
+    </nav>
     <div
       class="container"
     >
