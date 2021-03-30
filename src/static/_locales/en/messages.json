@@ -88,7 +88,7 @@
     "message": "Welcome to your Sporran"
   },
   "view_Welcome_info": {
-    "message": "You currently don't have any accounts."
+    "message": "You currently don’t have any accounts."
   },
   "view_Welcome_invitation": {
     "message": "Create your first account to get started."
@@ -106,7 +106,7 @@
     "message": "The next Step is very important!"
   },
   "view_Warning_explanation": {
-    "message": "Please write down your wallet's phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet."
+    "message": "Please write down your wallet’s phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet."
   },
   "view_Warning_emphasis_again": {
     "message": "Keep it carefully to not lose your assets"

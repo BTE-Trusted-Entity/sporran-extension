@@ -8,18 +8,21 @@
 
 .heading {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  margin-bottom: 0;
 }
 
 .info {
   composes: subline from '../../components/Typography/Typography.module.css';
+  margin-top: 0.25rem;
+  margin-bottom: 0;
 }
 
 .create {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
-  margin-top: 3rem;
+  margin-top: 2.75rem;
 }
 
 .import {
   composes: buttonSecondary from '../../components/Button/Button.module.css';
-  margin: 3rem 0;
+  margin-top: 1.25rem;
 }
