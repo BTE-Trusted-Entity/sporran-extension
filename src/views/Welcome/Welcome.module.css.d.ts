@@ -1,7 +1,9 @@
 declare namespace WelcomeModuleCssNamespace {
   export interface IWelcomeModuleCss {
-    buttonContainer: string;
     container: string;
+    create: string;
+    heading: string;
+    import: string;
     info: string;
     logo: string;
   }

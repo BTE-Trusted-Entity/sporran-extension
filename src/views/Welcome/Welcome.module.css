@@ -2,20 +2,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100%
 }
 
-.logo {
-  height: 6rem;
-}
-
-.logo h3 {
-  padding-top: 2rem;
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  margin-bottom: 0;
 }
 
 .info {
-  margin: 0;
+  composes: subline from '../../components/Typography/Typography.module.css';
+  margin-top: 0.25rem;
+  margin-bottom: 0;
 }
 
-.buttonContainer {
-  margin: 3rem 0;
+.create {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+  margin-top: 1.25rem;
+}
+
+.import {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
+  margin-top: 1.25rem;
 }
