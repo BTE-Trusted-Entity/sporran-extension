@@ -1,5 +1,4 @@
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
-import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -42,12 +41,7 @@ export function AddAccount({
         +
       </button>
       {isOpen && (
-        <div
-          className={cx(styles.menu, {
-            [styles.hidden]: !isOpen,
-          })}
-          role="menu"
-        >
+        <div className={styles.menu} role="menu">
           <h4 className={styles.menuHeading}>
             {t('component_AddAccount_label')}
           </h4>
