@@ -1,17 +1,23 @@
 import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
-import cx from 'classnames';
+import { SWRResponse } from 'swr';
 
-import { AccountsMap } from '../../utilities/accounts/accounts';
+import {
+  useAccounts as useAccountsDI,
+  AccountsMap,
+} from '../../utilities/accounts/accounts';
 
 import styles from './Settings.module.css';
 
-export interface Props {
-  accounts?: AccountsMap;
+interface Props {
+  useAccounts?: () => SWRResponse<AccountsMap, unknown>;
 }
 
-export function Settings({ accounts }: Props): JSX.Element {
+export function Settings({ useAccounts = useAccountsDI }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
+
+  const accounts = useAccounts();
+  const hasAccounts = accounts.data && Object.values(accounts.data).length > 0;
 
   const { buttonProps, itemProps, isOpen } = useDropdownMenu(accounts ? 4 : 2);
 
@@ -31,42 +37,35 @@ export function Settings({ accounts }: Props): JSX.Element {
       </button>
 
       {isOpen && (
-        <div
-          className={cx(styles.menu, {
-            [styles.hidden]: !isOpen,
-          })}
-          role="menu"
-        >
+        <div className={styles.menu} role="menu">
           <h4 className={styles.menuHeading}>
             {t('component_Settings_label')}
           </h4>
 
           <ul className={styles.list}>
-            {accounts && (
+            {hasAccounts && (
               <li className={styles.listItem}>
                 {/* TODO: forget account - https://kiltprotocol.atlassian.net/browse/SK-59 */}
-                <a {...itemProps[0]}>{t('component_Settings_forget')}</a>
+                <a {...itemProps.shift()}>{t('component_Settings_forget')}</a>
               </li>
             )}
-            {accounts && (
+            {hasAccounts && (
               <li className={styles.listItem}>
                 {/* TODO: reset password - https://kiltprotocol.atlassian.net/browse/SK-55 */}
-                <a {...itemProps[1]}>
+                <a {...itemProps.shift()}>
                   {t('component_Settings_reset_password')}
                 </a>
               </li>
             )}
             <li className={styles.listItem}>
               {/* TODO: link to terms and conditions */}
-              <a {...itemProps[accounts ? 2 : 0]}>
-                {t('component_Settings_t&c')}
+              <a {...itemProps.shift()}>
+                {t('component_Settings_terms_and_conditions')}
               </a>
             </li>
             <li className={styles.listItem}>
               {/* TODO: link to FAQ */}
-              <a {...itemProps[accounts ? 3 : 1]}>
-                {t('component_Settings_faq')}
-              </a>
+              <a {...itemProps.shift()}>{t('component_Settings_faq')}</a>
             </li>
 
             <li className={styles.listItem}>

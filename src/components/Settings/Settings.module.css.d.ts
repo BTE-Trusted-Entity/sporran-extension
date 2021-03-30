@@ -2,7 +2,6 @@ declare namespace SettingsModuleCssNamespace {
   export interface ISettingsModuleCss {
     button: string;
     container: string;
-    hidden: string;
     list: string;
     listItem: string;
     menu: string;

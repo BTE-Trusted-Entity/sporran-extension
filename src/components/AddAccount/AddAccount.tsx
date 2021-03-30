@@ -6,11 +6,29 @@ import { browser } from 'webextension-polyfill-ts';
 import { paths } from '../../views/paths';
 
 import styles from './AddAccount.module.css';
+import {
+  AccountsMap,
+  useAccounts as useAccountsDI,
+} from '../../utilities/accounts/accounts';
+import { SWRResponse } from 'swr';
 
-export function AddAccount(): JSX.Element {
+interface Props {
+  useAccounts?: () => SWRResponse<AccountsMap, unknown>;
+}
+
+export function AddAccount({
+  useAccounts = useAccountsDI,
+}: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
+  const accounts = useAccounts();
+  const hasAccounts = accounts.data && Object.values(accounts.data).length > 0;
+
   const { buttonProps, itemProps, isOpen } = useDropdownMenu(2);
+
+  if (!hasAccounts) {
+    return null;
+  }
 
   return (
     <nav className={styles.container}>

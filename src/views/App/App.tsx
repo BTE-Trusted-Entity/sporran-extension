@@ -6,30 +6,22 @@ import { Settings } from '../../components/Settings/Settings';
 import { Welcome } from '../Welcome/Welcome';
 import { AccountsRouter } from '../AccountsRouter/AccountsRouter';
 
-import {
-  useAccounts,
-  useCurrentAccount,
-} from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
 
 import './App.css';
 import styles from './App.module.css';
 
 export function App(): JSX.Element {
-  const accounts = useAccounts();
-  const current = useCurrentAccount();
-  const hasAccounts = accounts.data && Object.values(accounts.data).length > 0;
-
   return (
     <div className={styles.container}>
       <MemoryRouter>
         <nav className={styles.menus}>
-          {hasAccounts && <AddAccount />}
-          <Settings accounts={accounts.data} />
+          <AddAccount />
+          <Settings />
         </nav>
         <Switch>
           <Route path={paths.home} exact>
-            <Welcome accounts={accounts.data} current={current.data} />
+            <Welcome />
           </Route>
 
           <Route path={paths.account.base}>
