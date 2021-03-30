@@ -8,20 +8,15 @@ exports[`App should render 1`] = `
     <div
       class="container"
     >
-      <div
-        class="logo"
+      <h1
+        class="heading"
       >
-        <h3>
-          [Insert logo here]
-        </h3>
-      </div>
-      <h1>
         Welcome to your Sporran
       </h1>
       <h3
         class="info"
       >
-        You currently don't have any accounts.
+        You currently don’t have any accounts.
       </h3>
       <h3
         class="info"
@@ -29,12 +24,13 @@ exports[`App should render 1`] = `
         Create your first account to get started.
       </h3>
       <a
-        class="buttonContainer"
+        class="create"
         href="/account/create"
       >
         Create Account
       </a>
       <a
+        class="import"
         href="/account/import"
       >
         Import an Account from pre-existing phrase

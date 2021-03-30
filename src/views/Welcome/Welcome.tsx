@@ -33,19 +33,18 @@ export function Welcome(): JSX.Element | null {
 
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>
-        <h3>[Insert logo here]</h3>
-      </div>
-      <h1>{t('view_Welcome_heading')}</h1>
+      <h1 className={styles.heading}>{t('view_Welcome_heading')}</h1>
 
       <h3 className={styles.info}>{t('view_Welcome_info')}</h3>
       <h3 className={styles.info}>{t('view_Welcome_invitation')}</h3>
 
-      <Link to={paths.account.create.start} className={styles.buttonContainer}>
+      <Link to={paths.account.create.start} className={styles.create}>
         {t('view_Welcome_create')}
       </Link>
 
-      <Link to={paths.account.import.start}>{t('view_Welcome_import')}</Link>
+      <Link to={paths.account.import.start} className={styles.import}>
+        {t('view_Welcome_import')}
+      </Link>
     </div>
   );
 }
