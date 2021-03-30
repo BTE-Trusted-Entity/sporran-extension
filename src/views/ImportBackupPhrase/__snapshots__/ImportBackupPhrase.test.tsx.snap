@@ -16,7 +16,9 @@ exports[`ImportBackupPhrase should render 1`] = `
     <p>
       To import a Sporran account, you will need a pre-existing backup phrase consisting of 12-words
     </p>
-    <form>
+    <form
+      autocomplete="off"
+    >
       <ul
         class="items"
       >

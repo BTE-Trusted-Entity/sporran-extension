@@ -111,7 +111,7 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
       <h1>{t('view_ImportBackupPhrase_heading')}</h1>
       <p>{t('view_ImportBackupPhrase_explanation')}</p>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <ul className={styles.items}>
           {backupPhrase.map((word, index) => (
             <li key={index} className={makeClasses(word)}>
