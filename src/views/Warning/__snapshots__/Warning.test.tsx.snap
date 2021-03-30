@@ -23,7 +23,7 @@ exports[`Warning should render 1`] = `
       The next Step is very important!
     </h2>
     <p>
-      Please write down your wallet's phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet.
+      Please write down your wallet’s phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet.
     </p>
     <h2>
       Keep it carefully to not lose your assets

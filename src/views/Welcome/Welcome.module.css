@@ -19,7 +19,7 @@
 
 .create {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
-  margin-top: 2.75rem;
+  margin-top: 1.25rem;
 }
 
 .import {
