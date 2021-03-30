@@ -8,6 +8,9 @@ jest.spyOn(Math, 'random').mockImplementation(() => 0.123456789);
 const backupPhrase =
   'one two three four five six seven eight nine ten eleven twelve';
 
+const backupPhraseWithDupeWord =
+  'one two three four five six seven eight nine ten eleven two';
+
 describe('VerifyBackupPhrase', () => {
   it('should render', async () => {
     const { container } = render(
@@ -56,5 +59,15 @@ describe('VerifyBackupPhrase', () => {
     userEvent.click(await screen.findByRole('button', { name: 'twelve' }));
 
     expect(container).toMatchSnapshot();
+  });
+  it('should handle duplicate words', async () => {
+    render(<VerifyBackupPhrase backupPhrase={backupPhraseWithDupeWord} />);
+    userEvent.click((await screen.findAllByRole('button', { name: 'two' }))[0]);
+    expect(
+      (await screen.findAllByRole('button', { name: 'two' }))[1],
+    ).toBeDisabled();
+    expect(
+      (await screen.findAllByRole('button', { name: 'two' }))[2],
+    ).not.toBeDisabled();
   });
 });

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, MouseEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
@@ -10,6 +10,8 @@ import styles from './VerifyBackupPhrase.module.css';
 interface Props {
   backupPhrase: string;
 }
+
+type Word = { value: string | null; id: number };
 
 // Fisher-Yates algorithm
 // https://stackoverflow.com/a/12646864/14715116
@@ -27,11 +29,16 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
 
   const orderedWords = backupPhrase.split(/\s+/);
 
-  const [selectedWords, setSelectedWords] = useState<string[]>([]);
-  const [shuffledWords] = useState<string[]>(shuffle([...orderedWords]));
+  const initialShuffledWords: Word[] = [];
+  shuffle([...orderedWords]).map((word, index) => {
+    initialShuffledWords.push({ value: word, id: index });
+  });
+
+  const [selectedWords, setSelectedWords] = useState<Word[]>([]);
+  const [shuffledWords] = useState<Word[]>(initialShuffledWords);
 
   const wordsAreInOrder = selectedWords.every(
-    (word, index) => word === orderedWords[index],
+    (word, index) => word.value === orderedWords[index],
   );
 
   const allWordsSelected = selectedWords.length === orderedWords.length;
@@ -39,17 +46,19 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const error = !wordsAreInOrder && t('view_VerifyBackupPhrase_error');
 
   const selectWord = useCallback(
-    (event) => {
-      const selectedWord = event.target.textContent;
+    (wordId: number) => (event: MouseEvent<HTMLButtonElement>) => {
+      const selectedWord: Word = {
+        value: event.currentTarget.textContent,
+        id: wordId,
+      };
       setSelectedWords([...selectedWords, selectedWord]);
     },
     [selectedWords],
   );
 
   const unselectWord = useCallback(
-    (event) => {
-      const unselectedWord = event.target.textContent;
-      setSelectedWords(selectedWords.filter((word) => word !== unselectedWord));
+    (wordId: number) => () => {
+      setSelectedWords(selectedWords.filter((word) => word.id !== wordId));
     },
     [selectedWords],
   );
@@ -78,14 +87,14 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
           {selectedWords.map((word, index) => (
             <button
               type="button"
-              key={word}
+              key={word.id}
               className={cx(styles.button, {
-                [styles.incorrect]: word !== orderedWords[index],
-                [styles.correct]: word === orderedWords[index],
+                [styles.incorrect]: word.value !== orderedWords[index],
+                [styles.correct]: word.value === orderedWords[index],
               })}
-              onClick={unselectWord}
+              onClick={unselectWord(word.id)}
             >
-              {word}
+              {word.value}
             </button>
           ))}
         </div>
@@ -93,12 +102,16 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
         {shuffledWords.map((word) => (
           <button
             type="button"
-            disabled={selectedWords.includes(word)}
-            key={word}
+            disabled={
+              selectedWords.filter(
+                (selectedWord) => selectedWord.id === word.id,
+              ).length > 0
+            }
+            key={word.id}
             className={styles.button}
-            onClick={selectWord}
+            onClick={selectWord(word.id)}
           >
-            {word}
+            {word.value}
           </button>
         ))}
         <p className={styles.error}>{error}</p>
