@@ -33,7 +33,7 @@ export function ReceiveToken({ account, accounts }: Props): JSX.Element {
   }, [addressRef]);
 
   if (isNew(account)) {
-    return <AccountOverviewNew accounts={accounts} />;
+    return <AccountOverviewNew />;
   }
 
   return (

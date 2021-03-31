@@ -40,7 +40,7 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
         </Route>
 
         <Route path={paths.account.overview}>
-          <AccountOverview account={account} accounts={accounts} />
+          <AccountOverview account={account} />
         </Route>
       </Switch>
     </>

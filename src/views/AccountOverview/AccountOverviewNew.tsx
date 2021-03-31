@@ -2,17 +2,18 @@ import { browser } from 'webextension-polyfill-ts';
 import { useRouteMatch } from 'react-router-dom';
 
 import { plural } from '../../utilities/plural/plural';
-import { AccountsMap, NEW } from '../../utilities/accounts/accounts';
+import { NEW, useAccounts } from '../../utilities/accounts/accounts';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { Stats } from '../../components/Stats/Stats';
 
-interface Props {
-  accounts: AccountsMap;
-}
-
-export function AccountOverviewNew({ accounts }: Props): JSX.Element {
+export function AccountOverviewNew(): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
+
+  const accounts = useAccounts().data;
+  if (!accounts) {
+    return null;
+  }
 
   const accountsNumber = Object.values(accounts).length;
 
