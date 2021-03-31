@@ -100,21 +100,14 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
         disabled=""
         type="button"
       >
-        nine
+        eight
       </button>
       <button
         class="button"
         disabled=""
         type="button"
       >
-        three
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-      >
-        four
+        eleven
       </button>
       <button
         class="button"
@@ -128,21 +121,14 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
         disabled=""
         type="button"
       >
-        six
+        four
       </button>
       <button
         class="button"
         disabled=""
         type="button"
       >
-        seven
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-      >
-        eight
+        nine
       </button>
       <button
         class="button"
@@ -156,6 +142,20 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
         disabled=""
         type="button"
       >
+        seven
+      </button>
+      <button
+        class="button"
+        disabled=""
+        type="button"
+      >
+        six
+      </button>
+      <button
+        class="button"
+        disabled=""
+        type="button"
+      >
         ten
       </button>
       <button
@@ -163,7 +163,7 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
         disabled=""
         type="button"
       >
-        eleven
+        three
       </button>
       <button
         class="button"
@@ -225,19 +225,13 @@ exports[`VerifyBackupPhrase should render 1`] = `
         class="button"
         type="button"
       >
-        nine
+        eight
       </button>
       <button
         class="button"
         type="button"
       >
-        three
-      </button>
-      <button
-        class="button"
-        type="button"
-      >
-        four
+        eleven
       </button>
       <button
         class="button"
@@ -249,19 +243,13 @@ exports[`VerifyBackupPhrase should render 1`] = `
         class="button"
         type="button"
       >
-        six
+        four
       </button>
       <button
         class="button"
         type="button"
       >
-        seven
-      </button>
-      <button
-        class="button"
-        type="button"
-      >
-        eight
+        nine
       </button>
       <button
         class="button"
@@ -273,13 +261,25 @@ exports[`VerifyBackupPhrase should render 1`] = `
         class="button"
         type="button"
       >
+        seven
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
+        six
+      </button>
+      <button
+        class="button"
+        type="button"
+      >
         ten
       </button>
       <button
         class="button"
         type="button"
       >
-        eleven
+        three
       </button>
       <button
         class="button"

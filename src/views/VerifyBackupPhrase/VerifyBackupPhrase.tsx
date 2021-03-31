@@ -11,16 +11,6 @@ interface Props {
   backupPhrase: string;
 }
 
-// Fisher-Yates algorithm
-// https://stackoverflow.com/a/12646864/14715116
-function shuffle(array: string[]): string[] {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const history = useHistory();
@@ -28,7 +18,7 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const orderedWords = backupPhrase.split(/\s+/);
 
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
-  const [shuffledWords] = useState<string[]>(shuffle([...orderedWords]));
+  const [sortedWords] = useState<string[]>([...orderedWords].sort());
 
   const wordsAreInOrder = selectedWords.every(
     (word, index) => word === orderedWords[index],
@@ -90,7 +80,7 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
           ))}
         </div>
         <hr />
-        {shuffledWords.map((word) => (
+        {sortedWords.map((word) => (
           <button
             type="button"
             disabled={selectedWords.includes(word)}

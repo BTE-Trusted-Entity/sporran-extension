@@ -3,8 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../testing';
 import { VerifyBackupPhrase } from './VerifyBackupPhrase';
 
-jest.spyOn(Math, 'random').mockImplementation(() => 0.123456789);
-
 const backupPhrase =
   'one two three four five six seven eight nine ten eleven twelve';
 
