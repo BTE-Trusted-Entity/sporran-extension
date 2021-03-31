@@ -197,7 +197,7 @@ exports[`ImportBackupPhrase should render 1`] = `
         <button
           type="submit"
         >
-          Import Account
+          Next Step
         </button>
       </div>
     </form>

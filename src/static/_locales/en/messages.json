@@ -158,9 +158,6 @@
   "view_ImportBackupPhrase_explanation": {
     "message": "To import a Sporran account, you will need a pre-existing backup phrase consisting of 12-words"
   },
-  "view_ImportBackupPhrase_submit": {
-    "message": "Import Account"
-  },
   "view_ImportBackupPhrase_error_invalid_backup_phrase": {
     "message": "The entered backup phrase doesn’t exist"
   },

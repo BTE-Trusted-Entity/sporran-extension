@@ -131,7 +131,7 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
         {error && <p>{error}</p>}
 
         <div className={styles.buttonContainer}>
-          <button type="submit">{t('view_ImportBackupPhrase_submit')}</button>
+          <button type="submit">{t('common_action_next')}</button>
         </div>
       </form>
 
