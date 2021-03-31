@@ -15,12 +15,22 @@ function isAllowed(word: string) {
   return DEFAULT_WORDLIST.includes(word);
 }
 
-function isInvalid(backupPhrase: BackupPhrase): string | null {
+function isInvalid(
+  backupPhrase: BackupPhrase,
+  expectedAddress?: string,
+): string | null {
+  const t = browser.i18n.getMessage;
   try {
-    Identity.buildFromMnemonic(backupPhrase.join(' '));
-    return null;
+    const { address } = Identity.buildFromMnemonic(backupPhrase.join(' '));
+
+    const noNeedToCompare = !expectedAddress;
+    const matchesExpectations = expectedAddress === address;
+    if (noNeedToCompare || matchesExpectations) {
+      return null;
+    }
+
+    return t('view_ImportBackupPhrase_error_mismatched_backup_phrase');
   } catch {
-    const t = browser.i18n.getMessage;
     return t('view_ImportBackupPhrase_error_invalid_backup_phrase');
   }
 }
@@ -63,11 +73,13 @@ function makeClasses(word: string): string {
 
 interface Props {
   type?: 'import' | 'reset';
+  address?: string;
   onImport: (backupPhrase: string) => void;
 }
 
 export function ImportBackupPhrase({
   type = 'import',
+  address,
   onImport,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
@@ -82,7 +94,7 @@ export function ImportBackupPhrase({
     [
       hasInvalidWord(backupPhrase),
       isMalformed(backupPhrase),
-      isInvalid(backupPhrase),
+      isInvalid(backupPhrase, type === 'reset' ? address : undefined),
     ].filter(Boolean)[0];
 
   const handleInput = useCallback(

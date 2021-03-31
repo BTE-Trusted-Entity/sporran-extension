@@ -167,6 +167,9 @@
   "view_ImportBackupPhrase_error_invalid_backup_phrase": {
     "message": "The entered backup phrase doesn’t exist"
   },
+  "view_ImportBackupPhrase_error_mismatched_backup_phrase": {
+    "message": "This is not the backup phrase of this account"
+  },
   "view_ImportBackupPhrase_error_backup_phrase_length": {
     "message": "Please insert all the words of the backup phrase"
   },

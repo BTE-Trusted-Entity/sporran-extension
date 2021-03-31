@@ -30,7 +30,11 @@ export function ResetAccount({ account }: { account: Account }): JSX.Element {
   return (
     <Switch>
       <Route path={generatePath(paths.account.reset.start, { address })} exact>
-        <ImportBackupPhrase type="reset" onImport={onImport} />
+        <ImportBackupPhrase
+          type="reset"
+          address={address}
+          onImport={onImport}
+        />
       </Route>
       <Route path={generatePath(paths.account.reset.password, { address })}>
         <CreatePassword onSuccess={onSuccess} />
