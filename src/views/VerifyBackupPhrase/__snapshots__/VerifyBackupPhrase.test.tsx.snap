@@ -24,72 +24,84 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
         <button
           class="button correct"
           type="button"
+          value="5"
         >
           one
         </button>
         <button
           class="button correct"
           type="button"
+          value="11"
         >
           two
         </button>
         <button
           class="button correct"
           type="button"
+          value="9"
         >
           three
         </button>
         <button
           class="button correct"
           type="button"
+          value="3"
         >
           four
         </button>
         <button
           class="button correct"
           type="button"
+          value="2"
         >
           five
         </button>
         <button
           class="button correct"
           type="button"
+          value="7"
         >
           six
         </button>
         <button
           class="button correct"
           type="button"
+          value="6"
         >
           seven
         </button>
         <button
           class="button correct"
           type="button"
+          value="0"
         >
           eight
         </button>
         <button
           class="button correct"
           type="button"
+          value="4"
         >
           nine
         </button>
         <button
           class="button correct"
           type="button"
+          value="8"
         >
           ten
         </button>
         <button
           class="button correct"
           type="button"
+          value="1"
         >
           eleven
         </button>
         <button
           class="button correct"
           type="button"
+          value="10"
         >
           twelve
         </button>
@@ -99,48 +111,7 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
         class="button"
         disabled=""
         type="button"
-      >
-        nine
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-      >
-        three
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-      >
-        four
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-      >
-        five
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-      >
-        six
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-      >
-        seven
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
+        value="0"
       >
         eight
       </button>
@@ -148,20 +119,7 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
         class="button"
         disabled=""
         type="button"
-      >
-        one
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-      >
-        ten
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
+        value="1"
       >
         eleven
       </button>
@@ -169,6 +127,71 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
         class="button"
         disabled=""
         type="button"
+        value="2"
+      >
+        five
+      </button>
+      <button
+        class="button"
+        disabled=""
+        type="button"
+        value="3"
+      >
+        four
+      </button>
+      <button
+        class="button"
+        disabled=""
+        type="button"
+        value="4"
+      >
+        nine
+      </button>
+      <button
+        class="button"
+        disabled=""
+        type="button"
+        value="5"
+      >
+        one
+      </button>
+      <button
+        class="button"
+        disabled=""
+        type="button"
+        value="6"
+      >
+        seven
+      </button>
+      <button
+        class="button"
+        disabled=""
+        type="button"
+        value="7"
+      >
+        six
+      </button>
+      <button
+        class="button"
+        disabled=""
+        type="button"
+        value="8"
+      >
+        ten
+      </button>
+      <button
+        class="button"
+        disabled=""
+        type="button"
+        value="9"
+      >
+        three
+      </button>
+      <button
+        class="button"
+        disabled=""
+        type="button"
+        value="10"
       >
         twelve
       </button>
@@ -176,6 +199,7 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
         class="button"
         disabled=""
         type="button"
+        value="11"
       >
         two
       </button>
@@ -224,72 +248,84 @@ exports[`VerifyBackupPhrase should render 1`] = `
       <button
         class="button"
         type="button"
-      >
-        nine
-      </button>
-      <button
-        class="button"
-        type="button"
-      >
-        three
-      </button>
-      <button
-        class="button"
-        type="button"
-      >
-        four
-      </button>
-      <button
-        class="button"
-        type="button"
-      >
-        five
-      </button>
-      <button
-        class="button"
-        type="button"
-      >
-        six
-      </button>
-      <button
-        class="button"
-        type="button"
-      >
-        seven
-      </button>
-      <button
-        class="button"
-        type="button"
+        value="0"
       >
         eight
       </button>
       <button
         class="button"
         type="button"
-      >
-        one
-      </button>
-      <button
-        class="button"
-        type="button"
-      >
-        ten
-      </button>
-      <button
-        class="button"
-        type="button"
+        value="1"
       >
         eleven
       </button>
       <button
         class="button"
         type="button"
+        value="2"
+      >
+        five
+      </button>
+      <button
+        class="button"
+        type="button"
+        value="3"
+      >
+        four
+      </button>
+      <button
+        class="button"
+        type="button"
+        value="4"
+      >
+        nine
+      </button>
+      <button
+        class="button"
+        type="button"
+        value="5"
+      >
+        one
+      </button>
+      <button
+        class="button"
+        type="button"
+        value="6"
+      >
+        seven
+      </button>
+      <button
+        class="button"
+        type="button"
+        value="7"
+      >
+        six
+      </button>
+      <button
+        class="button"
+        type="button"
+        value="8"
+      >
+        ten
+      </button>
+      <button
+        class="button"
+        type="button"
+        value="9"
+      >
+        three
+      </button>
+      <button
+        class="button"
+        type="button"
+        value="10"
       >
         twelve
       </button>
       <button
         class="button"
         type="button"
+        value="11"
       >
         two
       </button>

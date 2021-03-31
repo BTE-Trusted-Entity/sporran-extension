@@ -3,10 +3,11 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../testing';
 import { VerifyBackupPhrase } from './VerifyBackupPhrase';
 
-jest.spyOn(Math, 'random').mockImplementation(() => 0.123456789);
-
 const backupPhrase =
   'one two three four five six seven eight nine ten eleven twelve';
+
+const backupPhraseWithDupeWord =
+  'one two three four five six seven eight nine ten eleven two';
 
 describe('VerifyBackupPhrase', () => {
   it('should render', async () => {
@@ -56,5 +57,15 @@ describe('VerifyBackupPhrase', () => {
     userEvent.click(await screen.findByRole('button', { name: 'twelve' }));
 
     expect(container).toMatchSnapshot();
+  });
+
+  it('should handle duplicate words', async () => {
+    render(<VerifyBackupPhrase backupPhrase={backupPhraseWithDupeWord} />);
+    userEvent.click((await screen.findAllByRole('button', { name: 'two' }))[0]);
+
+    const buttons = await screen.findAllByRole('button', { name: 'two' });
+    // button[0] is in the input field
+    expect(buttons[1]).toBeDisabled();
+    expect(buttons[2]).not.toBeDisabled();
   });
 });

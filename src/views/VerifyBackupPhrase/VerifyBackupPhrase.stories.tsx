@@ -8,6 +8,6 @@ export default {
 
 export function Template(): JSX.Element {
   return (
-    <VerifyBackupPhrase backupPhrase="one two three four five six seven eight nine ten eleven twelve" />
+    <VerifyBackupPhrase backupPhrase="one two two three four five six seven eight nine ten eleven" />
   );
 }
