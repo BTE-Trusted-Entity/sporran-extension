@@ -49,7 +49,7 @@ describe('CreatePassword', () => {
   it('should report weak password errors', async () => {
     const { container } = render(<CreatePassword {...props} />);
     const password = screen.getByLabelText('Please enter your password:');
-    
+
     userEvent.type(password, 'H');
     expect(container).toMatchSnapshot();
 
@@ -61,7 +61,7 @@ describe('CreatePassword', () => {
 
     userEvent.type(password, '!!!!!');
     expect(container).toMatchSnapshot();
-    
+
     // here the test should not report any more errors
     userEvent.type(password, 'f');
     expect(container).toMatchSnapshot();
