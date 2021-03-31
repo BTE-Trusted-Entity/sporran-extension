@@ -57,7 +57,7 @@
     "@storybook/addons": "^6.1.21",
     "@storybook/react": "^6.2.1",
     "@teamsupercell/typings-for-css-modules-loader": "^2.4.0",
-    "@testing-library/dom": "^7.30.2",
+    "@testing-library/dom": "^7.30.3",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^13.1.1",
