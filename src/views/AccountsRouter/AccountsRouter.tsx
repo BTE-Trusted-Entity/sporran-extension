@@ -36,11 +36,11 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
       <AddAccount />
       <Switch>
         <Route path={paths.account.receive}>
-          <ReceiveToken account={account} accounts={accounts} />
+          <ReceiveToken account={account} />
         </Route>
 
         <Route path={paths.account.overview}>
-          <AccountOverview account={account} accounts={accounts} />
+          <AccountOverview account={account} />
         </Route>
       </Switch>
     </>

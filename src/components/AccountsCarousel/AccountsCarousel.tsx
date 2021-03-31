@@ -3,10 +3,10 @@ import { browser } from 'webextension-polyfill-ts';
 import { sortBy } from 'lodash-es';
 
 import {
-  AccountsMap,
   Account,
   isNew,
   NEW,
+  useAccounts,
 } from '../../utilities/accounts/accounts';
 import { AccountSlide } from '../AccountSlide/AccountSlide';
 import { AccountSlideNew } from '../AccountSlide/AccountSlideNew';
@@ -15,17 +15,20 @@ import { generatePath } from '../../views/paths';
 interface AccountLinkProps {
   path: string;
   account: Account;
-  accounts: AccountsMap;
   direction: 'previous' | 'next';
 }
 
 function AccountLink({
   path,
   account,
-  accounts,
   direction,
-}: AccountLinkProps): JSX.Element {
+}: AccountLinkProps): JSX.Element | null {
   const t = browser.i18n.getMessage;
+
+  const accounts = useAccounts().data;
+  if (!accounts) {
+    return null;
+  }
 
   const accountsList = sortBy(Object.values(accounts), 'index');
   const { length } = accountsList;
@@ -59,23 +62,13 @@ function AccountLink({
 
 interface Props {
   path: string;
-  accounts: AccountsMap;
   account: Account;
 }
 
-export function AccountsCarousel({
-  account,
-  accounts,
-  path,
-}: Props): JSX.Element {
+export function AccountsCarousel({ account, path }: Props): JSX.Element {
   return (
     <>
-      <AccountLink
-        direction="previous"
-        path={path}
-        account={account}
-        accounts={accounts}
-      />
+      <AccountLink direction="previous" path={path} account={account} />
 
       {isNew(account) ? (
         <AccountSlideNew />
@@ -83,12 +76,7 @@ export function AccountsCarousel({
         <AccountSlide account={account} />
       )}
 
-      <AccountLink
-        direction="next"
-        path={path}
-        account={account}
-        accounts={accounts}
-      />
+      <AccountLink direction="next" path={path} account={account} />
     </>
   );
 }
