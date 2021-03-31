@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ImportBackupPhrase should render 1`] = `
+exports[`ImportBackupPhrase should render for import 1`] = `
 <div>
   <section
     class="container"
@@ -15,6 +15,225 @@ exports[`ImportBackupPhrase should render 1`] = `
     </h1>
     <p>
       To import a Sporran account, you will need a pre-existing backup phrase consisting of 12-words
+    </p>
+    <form
+      autocomplete="off"
+    >
+      <ul
+        class="items"
+      >
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            1
+            <input
+              class="input"
+              name="0"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            2
+            <input
+              class="input"
+              name="1"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            3
+            <input
+              class="input"
+              name="2"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            4
+            <input
+              class="input"
+              name="3"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            5
+            <input
+              class="input"
+              name="4"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            6
+            <input
+              class="input"
+              name="5"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            7
+            <input
+              class="input"
+              name="6"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            8
+            <input
+              class="input"
+              name="7"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            9
+            <input
+              class="input"
+              name="8"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            10
+            <input
+              class="input"
+              name="9"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            11
+            <input
+              class="input"
+              name="10"
+              type="text"
+            />
+          </label>
+        </li>
+        <li
+          class="neutral"
+        >
+          <label
+            class="item"
+          >
+            12
+            <input
+              class="input"
+              name="11"
+              type="text"
+            />
+          </label>
+        </li>
+      </ul>
+      <div
+        class="buttonContainer"
+      >
+        <button
+          type="submit"
+        >
+          Next Step
+        </button>
+      </div>
+    </form>
+    <p>
+      <a
+        href="/"
+      >
+        Back
+      </a>
+    </p>
+    <p>
+      <a
+        href="/"
+      >
+        Cancel
+      </a>
+    </p>
+  </section>
+</div>
+`;
+
+exports[`ImportBackupPhrase should render for reset 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <div>
+      <h3>
+        [Insert logo here]
+      </h3>
+    </div>
+    <h1>
+      Set a new password
+    </h1>
+    <p>
+      In order to set a new password you have to re-enter your backup phrase
     </p>
     <form
       autocomplete="off"

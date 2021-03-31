@@ -62,10 +62,14 @@ function makeClasses(word: string): string {
 }
 
 interface Props {
+  type?: 'import' | 'reset';
   onImport: (backupPhrase: string) => void;
 }
 
-export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
+export function ImportBackupPhrase({
+  type = 'import',
+  onImport,
+}: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const [modified, setModified] = useState(false);
@@ -108,8 +112,19 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
       <div>
         <h3>[Insert logo here]</h3>
       </div>
-      <h1>{t('view_ImportBackupPhrase_heading')}</h1>
-      <p>{t('view_ImportBackupPhrase_explanation')}</p>
+
+      {type === 'import' && (
+        <>
+          <h1>{t('view_ImportBackupPhrase_heading_import')}</h1>
+          <p>{t('view_ImportBackupPhrase_explanation_import')}</p>
+        </>
+      )}
+      {type === 'reset' && (
+        <>
+          <h1>{t('view_ImportBackupPhrase_heading_reset')}</h1>
+          <p>{t('view_ImportBackupPhrase_explanation_reset')}</p>
+        </>
+      )}
 
       <form onSubmit={handleSubmit} autoComplete="off">
         <ul className={styles.items}>

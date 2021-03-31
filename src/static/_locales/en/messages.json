@@ -152,11 +152,17 @@
   "view_VerifyBackupPhrase_error": {
     "message": "The order of the backup phrase is not correct"
   },
-  "view_ImportBackupPhrase_heading": {
+  "view_ImportBackupPhrase_heading_import": {
     "message": "Import an Account"
   },
-  "view_ImportBackupPhrase_explanation": {
+  "view_ImportBackupPhrase_heading_reset": {
+    "message": "Set a new password"
+  },
+  "view_ImportBackupPhrase_explanation_import": {
     "message": "To import a Sporran account, you will need a pre-existing backup phrase consisting of 12-words"
+  },
+  "view_ImportBackupPhrase_explanation_reset": {
+    "message": "In order to set a new password you have to re-enter your backup phrase"
   },
   "view_ImportBackupPhrase_error_invalid_backup_phrase": {
     "message": "The entered backup phrase doesn’t exist"

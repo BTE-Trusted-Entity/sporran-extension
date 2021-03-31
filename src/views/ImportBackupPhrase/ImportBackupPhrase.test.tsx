@@ -15,8 +15,15 @@ const props = {
 };
 
 describe('ImportBackupPhrase', () => {
-  it('should render', async () => {
+  it('should render for import', async () => {
     const { container } = render(<ImportBackupPhrase {...props} />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render for reset', async () => {
+    const { container } = render(
+      <ImportBackupPhrase {...props} type="reset" />,
+    );
     expect(container).toMatchSnapshot();
   });
 
