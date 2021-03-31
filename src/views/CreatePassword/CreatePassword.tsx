@@ -30,7 +30,7 @@ function hasOther(value: string): boolean {
 const MIN_LENGTH = 12;
 
 function isLong(value: string): boolean {
-  return value.length > MIN_LENGTH;
+  return value.length >= MIN_LENGTH;
 }
 
 function isNotExample(value: string): boolean {

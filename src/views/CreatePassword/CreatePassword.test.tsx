@@ -59,7 +59,11 @@ describe('CreatePassword', () => {
     userEvent.type(password, '1');
     expect(container).toMatchSnapshot();
 
-    userEvent.type(password, '!');
+    userEvent.type(password, '!!!!!');
+    expect(container).toMatchSnapshot();
+
+    // here the test should not report any more errors
+    userEvent.type(password, 'f');
     expect(container).toMatchSnapshot();
   });
 });
