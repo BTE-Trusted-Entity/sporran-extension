@@ -8,9 +8,17 @@ describe('CreateAccountSuccess', () => {
     const { container } = render(<CreateAccountSuccess address={address} />);
     expect(container).toMatchSnapshot();
   });
+
   it('should render for import', async () => {
     const { container } = render(
       <CreateAccountSuccess type="import" address={address} />,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render for reset', async () => {
+    const { container } = render(
+      <CreateAccountSuccess type="reset" address={address} />,
     );
     expect(container).toMatchSnapshot();
   });

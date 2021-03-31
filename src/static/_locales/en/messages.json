@@ -246,6 +246,9 @@
   "view_CreateAccountSuccess_message_import": {
     "message": "You have successfully imported your KILT Wallet"
   },
+  "view_CreateAccountSuccess_message_reset": {
+    "message": "You have successfully set a new password"
+  },
   "view_CreateAccountSuccess_CTA": {
     "message": "See the wallet"
   },

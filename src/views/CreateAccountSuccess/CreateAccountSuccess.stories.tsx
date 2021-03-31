@@ -21,3 +21,12 @@ export function Import(): JSX.Element {
     />
   );
 }
+
+export function Reset(): JSX.Element {
+  return (
+    <CreateAccountSuccess
+      type="reset"
+      address="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+    />
+  );
+}
