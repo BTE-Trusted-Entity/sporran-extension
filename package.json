@@ -42,7 +42,7 @@
     "react-popper": "^2.2.5",
     "react-router-dom": "^5.2.0",
     "react-spinners": "^0.10.6",
-    "swr": "^0.5.4",
+    "swr": "^0.5.5",
     "webextension-polyfill-ts": "^0.25.0"
   },
   "devDependencies": {
