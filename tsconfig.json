@@ -16,5 +16,5 @@
       }
     ]
   },
-  "include": ["./src/jest.setup.ts", "./src/custom.d.ts"]
+  "include": ["./src/jest.setup.ts"]
 }

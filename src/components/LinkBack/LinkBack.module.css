@@ -1,0 +1,8 @@
+.linkBack {
+  display: inline-block;
+  height: calc(13rem / 16);
+  width: 2rem;
+  background-image: url('../images/arrow-left.svg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}

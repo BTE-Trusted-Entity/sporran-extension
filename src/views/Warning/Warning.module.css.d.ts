@@ -4,7 +4,6 @@ declare namespace WarningModuleCssNamespace {
     cancel: string;
     confirm: string;
     container: string;
-    hand: string;
     heading: string;
     important: string;
     info: string;
