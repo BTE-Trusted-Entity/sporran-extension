@@ -56,6 +56,18 @@ describe('ImportBackupPhrase', () => {
     expect(onImport).not.toHaveBeenCalled();
   });
 
+  it('should ignore whitespace and be case-insensitive', async () => {
+    render(<ImportBackupPhrase {...props} />);
+
+    userEvent.type(await screen.findByLabelText('1'), ' Century');
+    userEvent.click(await screen.findByText('Next Step'));
+
+    expect(
+      await screen.findByText(backupPhraseNotLongEnough),
+    ).toBeInTheDocument();
+    expect(onImport).not.toHaveBeenCalled();
+  });
+
   it('should report backup phrase not long enough', async () => {
     render(<ImportBackupPhrase {...props} />);
 

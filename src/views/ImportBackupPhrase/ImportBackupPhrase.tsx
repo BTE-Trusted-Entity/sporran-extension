@@ -100,7 +100,7 @@ export function ImportBackupPhrase({
   const handleInput = useCallback(
     (event) => {
       const { name, value } = event.target;
-      backupPhrase[name] = value;
+      backupPhrase[name] = value.trim().toLowerCase();
       setBackupPhrase([...backupPhrase]);
       setModified(true);
     },
