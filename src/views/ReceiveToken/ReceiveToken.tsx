@@ -72,7 +72,7 @@ export function ReceiveToken({ account, accounts }: Props): JSX.Element {
         </Link>
       </p>
 
-      <Stats accounts={accounts} />
+      <Stats />
     </section>
   );
 }

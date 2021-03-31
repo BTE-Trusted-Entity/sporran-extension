@@ -30,7 +30,7 @@ export function AccountOverviewNew({ accounts }: Props): JSX.Element {
 
       <AccountsCarousel path={path} account={NEW} accounts={accounts} />
 
-      <Stats accounts={accounts} />
+      <Stats />
     </main>
   );
 }

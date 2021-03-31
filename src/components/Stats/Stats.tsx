@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { plural } from '../../utilities/plural/plural';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
-import { AccountsMap } from '../../utilities/accounts/accounts';
+import { AccountsMap, useAccounts } from '../../utilities/accounts/accounts';
 import { useStats } from './useStats';
 
 interface Props {
@@ -30,8 +30,9 @@ function UnconditionalStats({ accounts }: Props): JSX.Element | null {
   );
 }
 
-export function Stats({ accounts }: Props): JSX.Element | null {
-  if (Object.values(accounts).length < 2) {
+export function Stats(): JSX.Element | null {
+  const accounts = useAccounts().data;
+  if (!accounts || Object.values(accounts).length < 2) {
     return null;
   }
 
