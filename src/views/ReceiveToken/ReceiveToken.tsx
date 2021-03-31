@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { generatePath, Link, useRouteMatch } from 'react-router-dom';
 
-import { Account, AccountsMap, isNew } from '../../utilities/accounts/accounts';
+import { Account, isNew } from '../../utilities/accounts/accounts';
 import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { Stats } from '../../components/Stats/Stats';
@@ -12,10 +12,9 @@ import styles from './ReceiveToken.module.css';
 
 interface Props {
   account: Account;
-  accounts: AccountsMap;
 }
 
-export function ReceiveToken({ account, accounts }: Props): JSX.Element {
+export function ReceiveToken({ account }: Props): JSX.Element {
   const addressRef = useRef<HTMLInputElement>(null);
   const [isCopied, setIsCopied] = useState(false);
   const { path } = useRouteMatch();
