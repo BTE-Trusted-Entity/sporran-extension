@@ -28,7 +28,7 @@ export function AccountOverviewNew({ accounts }: Props): JSX.Element {
         </p>
       </header>
 
-      <AccountsCarousel path={path} account={NEW} accounts={accounts} />
+      <AccountsCarousel path={path} account={NEW} />
 
       <Stats />
     </main>
