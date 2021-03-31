@@ -1,5 +1,6 @@
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
+import { AccountsProvider } from '../../utilities/accounts/AccountsContext';
 import { Welcome } from '../Welcome/Welcome';
 import { AccountsRouter } from '../AccountsRouter/AccountsRouter';
 
@@ -23,5 +24,13 @@ export function App(): JSX.Element {
         </Switch>
       </MemoryRouter>
     </div>
+  );
+}
+
+export function AppWithProviders(): JSX.Element {
+  return (
+    <AccountsProvider>
+      <App />
+    </AccountsProvider>
   );
 }

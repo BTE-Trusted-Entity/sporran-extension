@@ -1,22 +1,17 @@
-import { browser } from 'webextension-polyfill-ts';
+import { useContext } from 'react';
 import useSWR, { mutate, SWRResponse } from 'swr';
 import { Identity } from '@kiltprotocol/core';
 import { map, max } from 'lodash-es';
 
 import { saveEncrypted } from '../storageEncryption/storageEncryption';
+import { AccountsContext, AccountsContextType } from './AccountsContext';
+import { storage } from './storage';
+import { ACCOUNTS_KEY, getAccounts } from './getAccounts';
 
-const storage = browser.storage.local;
+import { Account, AccountsMap } from './types';
+export { Account, AccountsMap } from './types';
 
-const ACCOUNTS_KEY = 'accounts';
 const CURRENT_ACCOUNT_KEY = 'currentAccount';
-
-export interface Account {
-  address: string;
-  name: string;
-  index: number;
-}
-
-export type AccountsMap = Record<string, Account>;
 
 export const NEW: Account = {
   address: 'NEW',
@@ -28,12 +23,8 @@ export function isNew(account: Account): boolean {
   return account === NEW;
 }
 
-async function getAccounts(): Promise<AccountsMap> {
-  return (await storage.get(ACCOUNTS_KEY))[ACCOUNTS_KEY] || {};
-}
-
-export function useAccounts(): SWRResponse<AccountsMap, unknown> {
-  return useSWR(ACCOUNTS_KEY, getAccounts);
+export function useAccounts(): AccountsContextType {
+  return useContext(AccountsContext);
 }
 
 async function getCurrentAccount(): Promise<string | null> {
