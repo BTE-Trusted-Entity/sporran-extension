@@ -15,25 +15,50 @@ function isAllowed(word: string) {
   return DEFAULT_WORDLIST.includes(word);
 }
 
-function INVALID_BACKUP_PHRASE(backupPhrase: BackupPhrase): boolean {
+function isInvalid(backupPhrase: BackupPhrase): string | null {
   try {
     Identity.buildFromMnemonic(backupPhrase.join(' '));
-    return false;
+    return null;
   } catch {
-    return true;
+    const t = browser.i18n.getMessage;
+    return t('view_ImportBackupPhrase_error_invalid_backup_phrase');
   }
 }
 
-function BACKUP_PHRASE_MALFORMED(backupPhrase: BackupPhrase): boolean {
+function isMalformed(backupPhrase: BackupPhrase): string | null {
   const length = backupPhrase.filter(Boolean).length;
   const hasNoWords = length === 0;
   const hasAllWords = length === 12;
   const allIsFine = hasAllWords || hasNoWords;
-  return !allIsFine;
+  if (allIsFine) {
+    return null;
+  }
+  const t = browser.i18n.getMessage;
+  return t('view_ImportBackupPhrase_error_backup_phrase_length');
 }
 
-function INVALID_BACKUP_WORD(value: string): boolean {
-  return !isAllowed(value);
+function hasInvalidWord(backupPhrase: BackupPhrase): string | null {
+  const invalidWord = backupPhrase.find((value) => !isAllowed(value));
+  if (!invalidWord) {
+    return null;
+  }
+
+  const t = browser.i18n.getMessage;
+  const invalidWordIndex = backupPhrase.indexOf(invalidWord);
+  return t('view_ImportBackupPhrase_error_invalid_word', [
+    invalidWordIndex + 1,
+    invalidWord,
+  ]);
+}
+
+function makeClasses(word: string): string {
+  const empty = word === '';
+  const allowed = isAllowed(word);
+  return cx({
+    [styles.neutral]: empty,
+    [styles.pass]: !empty && allowed,
+    [styles.fail]: !empty && !allowed,
+  });
 }
 
 interface Props {
@@ -42,34 +67,19 @@ interface Props {
 
 export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
+
   const [modified, setModified] = useState(false);
   const [backupPhrase, setBackupPhrase] = useState<BackupPhrase>(
     Array(12).fill(''),
   );
 
-  function HAS_INVALID_WORD(backupPhrase: BackupPhrase): string | null {
-    const invalidWord = backupPhrase.find(INVALID_BACKUP_WORD);
-
-    if (!invalidWord) {
-      return null;
-    }
-
-    const invalidWordIndex = backupPhrase.indexOf(invalidWord);
-    return t('view_ImportBackupPhrase_error_invalid_word', [
-      invalidWordIndex + 1,
-      invalidWord,
-    ]);
-  }
-
-  const error = [
-    modified && HAS_INVALID_WORD(backupPhrase),
+  const error =
     modified &&
-      BACKUP_PHRASE_MALFORMED(backupPhrase) &&
-      t('view_ImportBackupPhrase_error_backup_phrase_length'),
-    modified &&
-      INVALID_BACKUP_PHRASE(backupPhrase) &&
-      t('view_ImportBackupPhrase_error_invalid_backup_phrase'),
-  ].filter(Boolean)[0];
+    [
+      hasInvalidWord(backupPhrase),
+      isMalformed(backupPhrase),
+      isInvalid(backupPhrase),
+    ].filter(Boolean)[0];
 
   const handleInput = useCallback(
     (event) => {
@@ -92,16 +102,6 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
     },
     [backupPhrase, error, onImport],
   );
-
-  function makeClasses(word: string): string {
-    const empty = word === '';
-    const allowed = isAllowed(word);
-    return cx({
-      [styles.neutral]: empty,
-      [styles.pass]: !empty && allowed,
-      [styles.fail]: !empty && !allowed,
-    });
-  }
 
   return (
     <section className={styles.container}>
@@ -127,7 +127,9 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
             </li>
           ))}
         </ul>
+
         {error && <p>{error}</p>}
+
         <div className={styles.buttonContainer}>
           <button type="submit">{t('view_ImportBackupPhrase_submit')}</button>
         </div>
