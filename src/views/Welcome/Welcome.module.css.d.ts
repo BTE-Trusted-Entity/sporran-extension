@@ -5,7 +5,6 @@ declare namespace WelcomeModuleCssNamespace {
     heading: string;
     import: string;
     info: string;
-    logo: string;
   }
 }
 

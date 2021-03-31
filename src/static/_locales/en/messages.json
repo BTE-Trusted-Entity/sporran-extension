@@ -108,8 +108,11 @@
   "view_Warning_explanation": {
     "message": "Please write down your wallet’s phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet."
   },
-  "view_Warning_emphasis_again": {
-    "message": "Keep it carefully to not lose your assets"
+  "view_Warning_emphasis_two": {
+    "message": "Keep it carefully"
+  },
+  "view_Warning_emphasis_three": {
+    "message": "to not lose your assets"
   },
   "view_Warning_CTA": {
     "message": "I understand this - go to the Phrase"
