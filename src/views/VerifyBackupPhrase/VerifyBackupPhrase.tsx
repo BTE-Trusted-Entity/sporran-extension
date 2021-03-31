@@ -11,47 +11,40 @@ interface Props {
   backupPhrase: string;
 }
 
-// Fisher-Yates algorithm
-// https://stackoverflow.com/a/12646864/14715116
-function shuffle(array: string[]): string[] {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const history = useHistory();
 
-  const orderedWords = backupPhrase.split(/\s+/);
+  const expectedWords = backupPhrase.split(/\s+/);
+  const selectableWords = [...expectedWords].sort();
 
-  const [selectedWords, setSelectedWords] = useState<string[]>([]);
-  const [shuffledWords] = useState<string[]>(shuffle([...orderedWords]));
+  const [selectedIndexes, setSelectedIndexes] = useState<number[]>([]);
 
-  const wordsAreInOrder = selectedWords.every(
-    (word, index) => word === orderedWords[index],
+  const wordsAreInOrder = selectedIndexes.every(
+    (selectedIndex, index) =>
+      selectableWords[selectedIndex] === expectedWords[index],
   );
 
-  const allWordsSelected = selectedWords.length === orderedWords.length;
+  const allWordsSelected = selectedIndexes.length === expectedWords.length;
 
   const error = !wordsAreInOrder && t('view_VerifyBackupPhrase_error');
 
   const selectWord = useCallback(
     (event) => {
-      const selectedWord = event.target.textContent;
-      setSelectedWords([...selectedWords, selectedWord]);
+      const selectedIndex = parseInt(event.target.value, 10);
+      setSelectedIndexes([...selectedIndexes, selectedIndex]);
     },
-    [selectedWords],
+    [selectedIndexes],
   );
 
   const unselectWord = useCallback(
     (event) => {
-      const unselectedWord = event.target.textContent;
-      setSelectedWords(selectedWords.filter((word) => word !== unselectedWord));
+      const unselectedIndex = parseInt(event.target.value, 10);
+      setSelectedIndexes(
+        selectedIndexes.filter((index) => index !== unselectedIndex),
+      );
     },
-    [selectedWords],
+    [selectedIndexes],
   );
 
   const handleSubmit = useCallback(
@@ -75,26 +68,30 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
 
       <form onSubmit={handleSubmit}>
         <div className={styles.selectedWordsContainer}>
-          {selectedWords.map((word, index) => (
+          {selectedIndexes.map((selectedIndex, index) => (
             <button
               type="button"
-              key={word}
+              key={selectedIndex}
+              value={selectedIndex}
               className={cx(styles.button, {
-                [styles.incorrect]: word !== orderedWords[index],
-                [styles.correct]: word === orderedWords[index],
+                [styles.incorrect]:
+                  selectableWords[selectedIndex] !== expectedWords[index],
+                [styles.correct]:
+                  selectableWords[selectedIndex] === expectedWords[index],
               })}
               onClick={unselectWord}
             >
-              {word}
+              {selectableWords[selectedIndex]}
             </button>
           ))}
         </div>
         <hr />
-        {shuffledWords.map((word) => (
+        {selectableWords.map((word, index) => (
           <button
             type="button"
-            disabled={selectedWords.includes(word)}
-            key={word}
+            disabled={selectedIndexes.includes(index)}
+            key={index}
+            value={index}
             className={styles.button}
             onClick={selectWord}
           >
