@@ -6,6 +6,9 @@ import { paths } from '../paths';
 
 import styles from './SaveBackupPhrase.module.css';
 
+const formatCounter = (idx: number) =>
+  idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`;
+
 interface Props {
   backupPhrase: string;
 }
@@ -16,26 +19,31 @@ export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
 
   return (
     <section className={styles.container}>
-      <h1>{t('view_SaveBackupPhrase_heading')}</h1>
-      <p>{t('view_SaveBackupPhrase_explanation')}</p>
+      <h1 className={styles.heading}>{t('view_SaveBackupPhrase_heading')}</h1>
+      <p className={styles.subheading}>
+        {t('view_SaveBackupPhrase_explanation')}
+      </p>
 
       <div className={styles.items}>
         {words.map((word, index) => (
-          <button key={word} className={styles.item}>
-            {index + 1}
-            {'. '}
+          <div key={word} className={styles.item}>
+            <span className={styles.counter}>
+              {formatCounter(index)}
+              {'. '}
+            </span>
             <span className={styles.word}>{word}</span>
-          </button>
+            <span className={styles.eye} />
+          </div>
         ))}
       </div>
-
-      <p>
-        <Link to={paths.account.create.verify}>{t('common_action_next')}</Link>
-      </p>
-      <p>
-        <Link to={paths.home}>{t('common_action_cancel')}</Link>
-      </p>
-
+      <div className={styles.buttons}>
+        <Link to={paths.home} className={styles.cancel}>
+          {t('common_action_cancel')}
+        </Link>
+        <Link to={paths.account.create.verify} className={styles.create}>
+          {t('common_action_next')}
+        </Link>
+      </div>
       <LinkBack />
     </section>
   );
