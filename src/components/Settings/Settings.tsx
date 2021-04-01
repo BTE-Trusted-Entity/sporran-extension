@@ -11,8 +11,6 @@ export function Settings(): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const accounts = useAccounts().data;
-  const hasAccounts = accounts && Object.values(accounts).length > 0;
-
   const { buttonProps, itemProps, isOpen } = useDropdownMenu(accounts ? 4 : 2);
 
   // TODO - move version number to config
