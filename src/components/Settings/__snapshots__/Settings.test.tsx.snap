@@ -43,6 +43,7 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a
+            href="/account/foo/reset"
             role="menuitem"
             tabindex="-1"
           >
