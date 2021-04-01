@@ -1,0 +1,11 @@
+.linkBack {
+  display: inline-block;
+  position: absolute;
+  left: 1.5rem;
+  top: 2rem;
+  height: calc(13rem / 16);
+  width: 2rem;
+  background-image: url('../images/arrow-left.svg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}

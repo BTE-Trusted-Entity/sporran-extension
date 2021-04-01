@@ -1,7 +1,12 @@
 declare namespace WarningModuleCssNamespace {
   export interface IWarningModuleCss {
     backButton: string;
+    cancel: string;
+    confirm: string;
     container: string;
+    heading: string;
+    important: string;
+    info: string;
   }
 }
 

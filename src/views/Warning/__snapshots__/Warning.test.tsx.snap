@@ -8,40 +8,41 @@ exports[`Warning should render 1`] = `
     <a
       class="backButton"
       href="/"
+      title="Back"
+    />
+    <h1
+      class="heading"
     >
-      Back
-    </a>
-    <h1>
       Attention!
     </h1>
-    <div>
-      <h3>
-        [Insert logo here]
-      </h3>
-    </div>
-    <h2>
+    <h2
+      class="important"
+    >
       The next Step is very important!
     </h2>
-    <p>
+    <p
+      class="info"
+    >
       Please write down your wallet’s phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet.
     </p>
-    <h2>
-      Keep it carefully to not lose your assets
+    <h2
+      class="important"
+    >
+      Keep it carefully
+to not lose your assets
     </h2>
-    <p>
-      <a
-        href="/account/create/backup"
-      >
-        I understand this - go to the Phrase
-      </a>
-    </p>
-    <p>
-      <a
-        href="/"
-      >
-        Cancel
-      </a>
-    </p>
+    <a
+      class="confirm"
+      href="/account/create/backup"
+    >
+      I understand this - go to the Phrase
+    </a>
+    <a
+      class="cancel"
+      href="/"
+    >
+      Cancel
+    </a>
   </div>
 </div>
 `;

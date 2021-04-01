@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Settings menu should be visible when menu button clicked 1`] = `
+<div>
+  <nav
+    class="container"
+  >
+    <button
+      aria-expanded="true"
+      aria-haspopup="true"
+      aria-label="Settings"
+      class="button"
+      role="button"
+      tabindex="0"
+      title="Settings"
+      type="button"
+    >
+      ⚙
+    </button>
+    <div
+      class="menu"
+      role="menu"
+    >
+      <h4
+        class="menuHeading"
+      >
+        Settings
+      </h4>
+      <ul
+        class="list"
+      >
+        <li
+          class="listItem"
+        >
+          <a
+            role="menuitem"
+            tabindex="-1"
+          >
+            Forget current account
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            role="menuitem"
+            tabindex="-1"
+          >
+            Reset password for current account
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            role="menuitem"
+            tabindex="-1"
+          >
+            Terms & Conditions
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            role="menuitem"
+            tabindex="-1"
+          >
+            FAQ & Help
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <p>
+            Version $version$
+          </p>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+`;
+
+exports[`Settings should render 1`] = `
+<div>
+  <nav
+    class="container"
+  >
+    <button
+      aria-expanded="false"
+      aria-haspopup="true"
+      aria-label="Settings"
+      class="button"
+      role="button"
+      tabindex="0"
+      title="Settings"
+      type="button"
+    >
+      ⚙
+    </button>
+  </nav>
+</div>
+`;

@@ -84,6 +84,29 @@
   "component_AccountOptions_reset_password": {
     "message": "Reset password"
   },
+  "component_Settings_label": {
+    "message": "Settings"
+  },
+  "component_Settings_forget": {
+    "message": "Forget current account"
+  },
+  "component_Settings_reset_password": {
+    "message": "Reset password for current account"
+  },
+  "component_Settings_terms_and_conditions": {
+    "message": "Terms & Conditions"
+  },
+  "component_Settings_faq": {
+    "message": "FAQ & Help"
+  },
+  "component_Settings_version": {
+    "message": "Version $version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -109,7 +132,7 @@
     "message": "Please write down your wallet’s phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet."
   },
   "view_Warning_emphasis_again": {
-    "message": "Keep it carefully to not lose your assets"
+    "message": "Keep it carefully\nto not lose your assets"
   },
   "view_Warning_CTA": {
     "message": "I understand this - go to the Phrase"

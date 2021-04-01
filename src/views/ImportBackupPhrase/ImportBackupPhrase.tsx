@@ -56,7 +56,7 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
 
     const invalidWordIndex = backupPhrase.indexOf(invalidWord);
     return t('view_ImportBackupPhrase_error_invalid_word', [
-      invalidWordIndex,
+      invalidWordIndex + 1,
       invalidWord,
     ]);
   }
