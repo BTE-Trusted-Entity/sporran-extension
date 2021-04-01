@@ -38,10 +38,20 @@ function isNotExample(value: string): boolean {
 }
 
 interface Props {
+  type?: 'create' | 'import' | 'reset';
   onSuccess: (password: string) => void;
 }
 
-export function CreatePassword({ onSuccess }: Props): JSX.Element {
+const previousPages = {
+  create: paths.account.create.backup,
+  import: paths.account.import.start,
+  reset: paths.account.import.start,
+};
+
+export function CreatePassword({
+  type = 'create',
+  onSuccess,
+}: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const [password, setPassword] = useState('');
@@ -150,7 +160,7 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
       </form>
 
       <p>
-        <Link to={paths.account.create.backup}>{t('common_action_back')}</Link>
+        <Link to={previousPages[type]}>{t('common_action_back')}</Link>
       </p>
     </main>
   );

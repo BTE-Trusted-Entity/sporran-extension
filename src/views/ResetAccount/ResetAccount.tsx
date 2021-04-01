@@ -37,7 +37,7 @@ export function ResetAccount({ account }: { account: Account }): JSX.Element {
         />
       </Route>
       <Route path={generatePath(paths.account.reset.password, { address })}>
-        <CreatePassword onSuccess={onSuccess} />
+        <CreatePassword type="reset" onSuccess={onSuccess} />
       </Route>
       <Route path={generatePath(paths.account.reset.success, { address })}>
         <CreateAccountSuccess type="reset" address={address} />
