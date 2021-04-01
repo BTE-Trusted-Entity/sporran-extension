@@ -8,9 +8,6 @@
 
 .backButton {
   composes: linkBack from '../../components/LinkBack/LinkBack.module.css';
-  position: absolute;
-  left: 1.5rem;
-  top: 2rem;
 }
 
 .heading {
