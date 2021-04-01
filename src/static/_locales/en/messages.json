@@ -84,6 +84,29 @@
   "component_AccountOptions_reset_password": {
     "message": "Reset password"
   },
+  "component_Settings_label": {
+    "message": "Settings"
+  },
+  "component_Settings_forget": {
+    "message": "Forget current account"
+  },
+  "component_Settings_reset_password": {
+    "message": "Reset password for current account"
+  },
+  "component_Settings_terms_and_conditions": {
+    "message": "Terms & Conditions"
+  },
+  "component_Settings_faq": {
+    "message": "FAQ & Help"
+  },
+  "component_Settings_version": {
+    "message": "Version $version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },

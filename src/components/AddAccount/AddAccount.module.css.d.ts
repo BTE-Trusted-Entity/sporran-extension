@@ -2,7 +2,6 @@ declare namespace AddAccountModuleCssNamespace {
   export interface IAddAccountModuleCss {
     button: string;
     container: string;
-    hidden: string;
     list: string;
     listItem: string;
     menu: string;

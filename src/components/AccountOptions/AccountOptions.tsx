@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import cx from 'classnames';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 
 import styles from './AccountOptions.module.css';
@@ -32,12 +31,7 @@ export function AccountOptions({ onEdit }: Props): JSX.Element {
       </button>
 
       {isOpen && (
-        <div
-          className={cx(styles.menu, {
-            [styles.hidden]: !isOpen,
-          })}
-          role="menu"
-        >
+        <div className={styles.menu} role="menu">
           <h4 className={styles.menuHeading}>
             {t('component_AccountOptions_heading')}
           </h4>
