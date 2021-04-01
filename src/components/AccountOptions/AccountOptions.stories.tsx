@@ -9,5 +9,5 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  return <AccountOptions onEdit={action('onEdit')} />;
+  return <AccountOptions onEdit={action('onEdit')} address="ADDRESS" />;
 }

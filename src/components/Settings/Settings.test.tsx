@@ -1,4 +1,5 @@
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '../../testing';
 import { AccountsProviderMock } from '../../testing/AccountsProviderMock';
@@ -11,7 +12,11 @@ describe('Settings', () => {
   });
 
   it('menu should be visible when menu button clicked', async () => {
-    const { container } = render(<Settings />);
+    const { container } = render(
+      <MemoryRouter initialEntries={['/account/foo']}>
+        <Settings />
+      </MemoryRouter>,
+    );
     const openMenuButton = await screen.findByLabelText('Settings');
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'false');
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();

@@ -152,17 +152,23 @@
   "view_VerifyBackupPhrase_error": {
     "message": "The order of the backup phrase is not correct"
   },
-  "view_ImportBackupPhrase_heading": {
+  "view_ImportBackupPhrase_heading_import": {
     "message": "Import an Account"
   },
-  "view_ImportBackupPhrase_explanation": {
+  "view_ImportBackupPhrase_heading_reset": {
+    "message": "Set a new password"
+  },
+  "view_ImportBackupPhrase_explanation_import": {
     "message": "To import a Sporran account, you will need a pre-existing backup phrase consisting of 12-words"
   },
-  "view_ImportBackupPhrase_submit": {
-    "message": "Import Account"
+  "view_ImportBackupPhrase_explanation_reset": {
+    "message": "In order to set a new password you have to re-enter your backup phrase"
   },
   "view_ImportBackupPhrase_error_invalid_backup_phrase": {
     "message": "The entered backup phrase doesn’t exist"
+  },
+  "view_ImportBackupPhrase_error_mismatched_backup_phrase": {
+    "message": "This is not the backup phrase of this account"
   },
   "view_ImportBackupPhrase_error_backup_phrase_length": {
     "message": "Please insert all the words of the backup phrase"
@@ -245,6 +251,9 @@
   },
   "view_CreateAccountSuccess_message_import": {
     "message": "You have successfully imported your KILT Wallet"
+  },
+  "view_CreateAccountSuccess_message_reset": {
+    "message": "You have successfully set a new password"
   },
   "view_CreateAccountSuccess_CTA": {
     "message": "See the wallet"

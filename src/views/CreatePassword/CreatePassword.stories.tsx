@@ -1,4 +1,6 @@
 import { Meta } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+
 import { CreatePassword } from './CreatePassword';
 
 export default {
@@ -7,5 +9,5 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  return <CreatePassword onSuccess={(val) => val} />;
+  return <CreatePassword onSuccess={action('onSuccess')} />;
 }

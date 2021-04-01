@@ -9,6 +9,7 @@ import { storage } from './storage';
 import { ACCOUNTS_KEY, getAccounts } from './getAccounts';
 
 import { Account, AccountsMap } from './types';
+
 export { Account, AccountsMap } from './types';
 
 const CURRENT_ACCOUNT_KEY = 'currentAccount';
@@ -66,12 +67,20 @@ export async function saveAccount(account: Account): Promise<void> {
   await mutate(ACCOUNTS_KEY);
 }
 
+export async function encryptAccount(
+  backupPhrase: string,
+  password: string,
+): Promise<string> {
+  const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
+  await saveEncrypted(address, password, seed);
+  return address;
+}
+
 export async function createAccount(
   backupPhrase: string,
   password: string,
 ): Promise<Account> {
-  const { address, seed } = Identity.buildFromMnemonic(backupPhrase);
-  await saveEncrypted(address, password, seed);
+  const address = await encryptAccount(backupPhrase, password);
 
   const accounts = await getAccounts();
   const largestIndex = max(map(accounts, 'index')) || 0;

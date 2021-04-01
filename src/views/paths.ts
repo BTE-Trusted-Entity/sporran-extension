@@ -16,6 +16,11 @@ export const paths = {
       password: '/account/import/password',
       success: '/account/import/success',
     },
+    reset: {
+      start: '/account/:address/reset',
+      password: '/account/:address/reset/password',
+      success: '/account/:address/reset/success',
+    },
     overview: '/account/:address',
     send: '/account/:address/send',
     receive: '/account/:address/receive',

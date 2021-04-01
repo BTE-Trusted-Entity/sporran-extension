@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { paths, generatePath } from '../paths';
 
 interface Props {
-  type?: 'create' | 'import';
+  type?: 'create' | 'import' | 'reset';
   address: string;
 }
 
@@ -20,6 +20,7 @@ export function CreateAccountSuccess({
       <p>
         {type === 'create' && t('view_CreateAccountSuccess_message_create')}
         {type === 'import' && t('view_CreateAccountSuccess_message_import')}
+        {type === 'reset' && t('view_CreateAccountSuccess_message_reset')}
       </p>
 
       <Link to={generatePath(paths.account.overview, { address })}>

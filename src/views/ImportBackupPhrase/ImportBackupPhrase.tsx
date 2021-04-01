@@ -15,66 +15,92 @@ function isAllowed(word: string) {
   return DEFAULT_WORDLIST.includes(word);
 }
 
-function INVALID_BACKUP_PHRASE(backupPhrase: BackupPhrase): boolean {
+function isInvalid(
+  backupPhrase: BackupPhrase,
+  expectedAddress?: string,
+): string | null {
+  const t = browser.i18n.getMessage;
   try {
-    Identity.buildFromMnemonic(backupPhrase.join(' '));
-    return false;
+    const { address } = Identity.buildFromMnemonic(backupPhrase.join(' '));
+
+    const noNeedToCompare = !expectedAddress;
+    const matchesExpectations = expectedAddress === address;
+    if (noNeedToCompare || matchesExpectations) {
+      return null;
+    }
+
+    return t('view_ImportBackupPhrase_error_mismatched_backup_phrase');
   } catch {
-    return true;
+    return t('view_ImportBackupPhrase_error_invalid_backup_phrase');
   }
 }
 
-function BACKUP_PHRASE_MALFORMED(backupPhrase: BackupPhrase): boolean {
+function isMalformed(backupPhrase: BackupPhrase): string | null {
   const length = backupPhrase.filter(Boolean).length;
   const hasNoWords = length === 0;
   const hasAllWords = length === 12;
   const allIsFine = hasAllWords || hasNoWords;
-  return !allIsFine;
+  if (allIsFine) {
+    return null;
+  }
+  const t = browser.i18n.getMessage;
+  return t('view_ImportBackupPhrase_error_backup_phrase_length');
 }
 
-function INVALID_BACKUP_WORD(value: string): boolean {
-  return !isAllowed(value);
+function hasInvalidWord(backupPhrase: BackupPhrase): string | null {
+  const invalidWord = backupPhrase.find((value) => !isAllowed(value));
+  if (!invalidWord) {
+    return null;
+  }
+
+  const t = browser.i18n.getMessage;
+  const invalidWordIndex = backupPhrase.indexOf(invalidWord);
+  return t('view_ImportBackupPhrase_error_invalid_word', [
+    invalidWordIndex + 1,
+    invalidWord,
+  ]);
+}
+
+function makeClasses(word: string): string {
+  const empty = word === '';
+  const allowed = isAllowed(word);
+  return cx({
+    [styles.neutral]: empty,
+    [styles.pass]: !empty && allowed,
+    [styles.fail]: !empty && !allowed,
+  });
 }
 
 interface Props {
+  type?: 'import' | 'reset';
+  address?: string;
   onImport: (backupPhrase: string) => void;
 }
 
-export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
+export function ImportBackupPhrase({
+  type = 'import',
+  address,
+  onImport,
+}: Props): JSX.Element {
   const t = browser.i18n.getMessage;
+
   const [modified, setModified] = useState(false);
   const [backupPhrase, setBackupPhrase] = useState<BackupPhrase>(
     Array(12).fill(''),
   );
 
-  function HAS_INVALID_WORD(backupPhrase: BackupPhrase): string | null {
-    const invalidWord = backupPhrase.find(INVALID_BACKUP_WORD);
-
-    if (!invalidWord) {
-      return null;
-    }
-
-    const invalidWordIndex = backupPhrase.indexOf(invalidWord);
-    return t('view_ImportBackupPhrase_error_invalid_word', [
-      invalidWordIndex + 1,
-      invalidWord,
-    ]);
-  }
-
-  const error = [
-    modified && HAS_INVALID_WORD(backupPhrase),
+  const error =
     modified &&
-      BACKUP_PHRASE_MALFORMED(backupPhrase) &&
-      t('view_ImportBackupPhrase_error_backup_phrase_length'),
-    modified &&
-      INVALID_BACKUP_PHRASE(backupPhrase) &&
-      t('view_ImportBackupPhrase_error_invalid_backup_phrase'),
-  ].filter(Boolean)[0];
+    [
+      hasInvalidWord(backupPhrase),
+      isMalformed(backupPhrase),
+      isInvalid(backupPhrase, type === 'reset' ? address : undefined),
+    ].filter(Boolean)[0];
 
   const handleInput = useCallback(
     (event) => {
       const { name, value } = event.target;
-      backupPhrase[name] = value;
+      backupPhrase[name] = value.trim().toLowerCase();
       setBackupPhrase([...backupPhrase]);
       setModified(true);
     },
@@ -93,23 +119,24 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
     [backupPhrase, error, onImport],
   );
 
-  function makeClasses(word: string): string {
-    const empty = word === '';
-    const allowed = isAllowed(word);
-    return cx({
-      [styles.neutral]: empty,
-      [styles.pass]: !empty && allowed,
-      [styles.fail]: !empty && !allowed,
-    });
-  }
-
   return (
     <section className={styles.container}>
       <div>
         <h3>[Insert logo here]</h3>
       </div>
-      <h1>{t('view_ImportBackupPhrase_heading')}</h1>
-      <p>{t('view_ImportBackupPhrase_explanation')}</p>
+
+      {type === 'import' && (
+        <>
+          <h1>{t('view_ImportBackupPhrase_heading_import')}</h1>
+          <p>{t('view_ImportBackupPhrase_explanation_import')}</p>
+        </>
+      )}
+      {type === 'reset' && (
+        <>
+          <h1>{t('view_ImportBackupPhrase_heading_reset')}</h1>
+          <p>{t('view_ImportBackupPhrase_explanation_reset')}</p>
+        </>
+      )}
 
       <form onSubmit={handleSubmit} autoComplete="off">
         <ul className={styles.items}>
@@ -127,9 +154,11 @@ export function ImportBackupPhrase({ onImport }: Props): JSX.Element {
             </li>
           ))}
         </ul>
+
         {error && <p>{error}</p>}
+
         <div className={styles.buttonContainer}>
-          <button type="submit">{t('view_ImportBackupPhrase_submit')}</button>
+          <button type="submit">{t('common_action_next')}</button>
         </div>
       </form>
 

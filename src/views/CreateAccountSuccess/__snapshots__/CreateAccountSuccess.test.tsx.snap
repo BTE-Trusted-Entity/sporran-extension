@@ -35,3 +35,21 @@ exports[`CreateAccountSuccess should render for import 1`] = `
   </main>
 </div>
 `;
+
+exports[`CreateAccountSuccess should render for reset 1`] = `
+<div>
+  <main>
+    <h1>
+      Congratulations!
+    </h1>
+    <p>
+      You have successfully set a new password
+    </p>
+    <a
+      href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+    >
+      See the wallet
+    </a>
+  </main>
+</div>
+`;

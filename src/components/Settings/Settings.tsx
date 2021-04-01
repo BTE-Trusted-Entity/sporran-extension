@@ -1,7 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
+import { Link, Route } from 'react-router-dom';
 
 import { useAccounts } from '../../utilities/accounts/accounts';
+import { generatePath, paths } from '../../views/paths';
 
 import styles from './Settings.module.css';
 
@@ -9,8 +11,6 @@ export function Settings(): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const accounts = useAccounts().data;
-  const hasAccounts = accounts && Object.values(accounts).length > 0;
-
   const { buttonProps, itemProps, isOpen } = useDropdownMenu(accounts ? 4 : 2);
 
   // TODO - move version number to config
@@ -35,20 +35,34 @@ export function Settings(): JSX.Element {
           </h4>
 
           <ul className={styles.list}>
-            {hasAccounts && (
-              <li className={styles.listItem}>
-                {/* TODO: forget account - https://kiltprotocol.atlassian.net/browse/SK-59 */}
-                <a {...itemProps.shift()}>{t('component_Settings_forget')}</a>
-              </li>
-            )}
-            {hasAccounts && (
-              <li className={styles.listItem}>
-                {/* TODO: reset password - https://kiltprotocol.atlassian.net/browse/SK-55 */}
-                <a {...itemProps.shift()}>
-                  {t('component_Settings_reset_password')}
-                </a>
-              </li>
-            )}
+            <Route
+              path={paths.account.overview}
+              render={({ match }) => {
+                const { address } = match.params;
+                return (
+                  <>
+                    <li className={styles.listItem}>
+                      {/* TODO: forget account - https://kiltprotocol.atlassian.net/browse/SK-59 */}
+                      <a {...itemProps.shift()}>
+                        {t('component_Settings_forget')}
+                      </a>
+                    </li>
+
+                    <li className={styles.listItem}>
+                      <Link
+                        to={generatePath(paths.account.reset.start, {
+                          address,
+                        })}
+                        {...itemProps.shift()}
+                      >
+                        {t('component_Settings_reset_password')}
+                      </Link>
+                    </li>
+                  </>
+                );
+              }}
+            />
+
             <li className={styles.listItem}>
               {/* TODO: link to terms and conditions */}
               <a {...itemProps.shift()}>

@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 
 import { Settings } from './Settings';
 import { AccountsProviderMock } from '../../testing/AccountsProviderMock';
+import { MemoryRouter } from 'react-router-dom';
 
 export default {
   title: 'Components/Settings',
@@ -17,5 +18,9 @@ export function NoAccounts(): JSX.Element {
 }
 
 export function WithAccounts(): JSX.Element {
-  return <Settings />;
+  return (
+    <MemoryRouter initialEntries={['/account/foo']}>
+      <Settings />
+    </MemoryRouter>
+  );
 }

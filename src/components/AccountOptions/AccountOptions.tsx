@@ -1,14 +1,18 @@
 import { useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
+
+import { generatePath, paths } from '../../views/paths';
 
 import styles from './AccountOptions.module.css';
 
 interface Props {
+  address: string;
   onEdit: () => void;
 }
 
-export function AccountOptions({ onEdit }: Props): JSX.Element {
+export function AccountOptions({ address, onEdit }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(3);
@@ -51,10 +55,12 @@ export function AccountOptions({ onEdit }: Props): JSX.Element {
               <a {...itemProps[1]}>{t('component_AccountOptions_forget')}</a>
             </li>
             <li className={styles.listItem}>
-              {/* TODO: reset password - https://kiltprotocol.atlassian.net/browse/SK-55 */}
-              <a {...itemProps[2]}>
+              <Link
+                to={generatePath(paths.account.reset.start, { address })}
+                {...itemProps[2]}
+              >
                 {t('component_AccountOptions_reset_password')}
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
