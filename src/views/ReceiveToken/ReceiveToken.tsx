@@ -6,6 +6,7 @@ import { Account, isNew } from '../../utilities/accounts/accounts';
 import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { Stats } from '../../components/Stats/Stats';
+import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
 
 import styles from './ReceiveToken.module.css';
@@ -65,11 +66,8 @@ export function ReceiveToken({ account }: Props): JSX.Element {
           {t('view_ReceiveToken_done_button')}
         </Link>
       </p>
-      <p>
-        <Link to={generatePath(paths.account.overview, { address })}>
-          {t('common_action_back')}
-        </Link>
-      </p>
+
+      <LinkBack />
 
       <Stats />
     </section>

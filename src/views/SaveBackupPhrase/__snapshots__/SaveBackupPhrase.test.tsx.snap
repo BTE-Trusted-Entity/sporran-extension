@@ -156,18 +156,17 @@ exports[`SaveBackupPhrase should render 1`] = `
     </p>
     <p>
       <a
-        href="/account/create"
-      >
-        Back
-      </a>
-    </p>
-    <p>
-      <a
         href="/"
       >
         Cancel
       </a>
     </p>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
   </section>
 </div>
 `;

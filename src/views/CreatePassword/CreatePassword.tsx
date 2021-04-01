@@ -1,9 +1,8 @@
 import { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
 import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
 
-import { paths } from '../paths';
+import { LinkBack } from '../../components/LinkBack/LinkBack';
 
 import styles from './CreatePassword.module.css';
 
@@ -38,20 +37,10 @@ function isNotExample(value: string): boolean {
 }
 
 interface Props {
-  type?: 'create' | 'import' | 'reset';
   onSuccess: (password: string) => void;
 }
 
-const previousPages = {
-  create: paths.account.create.backup,
-  import: paths.account.import.start,
-  reset: paths.account.import.start,
-};
-
-export function CreatePassword({
-  type = 'create',
-  onSuccess,
-}: Props): JSX.Element {
+export function CreatePassword({ onSuccess }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const [password, setPassword] = useState('');
@@ -159,9 +148,7 @@ export function CreatePassword({
         <button type="submit">{t('view_CreatePassword_CTA')}</button>
       </form>
 
-      <p>
-        <Link to={previousPages[type]}>{t('common_action_back')}</Link>
-      </p>
+      <LinkBack />
     </main>
   );
 }

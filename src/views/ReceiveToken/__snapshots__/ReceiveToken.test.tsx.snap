@@ -78,13 +78,12 @@ exports[`ReceiveToken should render a normal account 1`] = `
         DONE
       </a>
     </p>
-    <p>
-      <a
-        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-      >
-        Back
-      </a>
-    </p>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
     <p>
       You have $number$ accounts with a total
        Balance: 

@@ -5,6 +5,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
+import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
 
 import styles from './ImportBackupPhrase.module.css';
@@ -162,9 +163,8 @@ export function ImportBackupPhrase({
         </div>
       </form>
 
-      <p>
-        <Link to={paths.home}>{t('common_action_back')}</Link>
-      </p>
+      <LinkBack />
+
       <p>
         <Link to={paths.home}>{t('common_action_cancel')}</Link>
       </p>

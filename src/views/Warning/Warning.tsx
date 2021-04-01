@@ -1,6 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
 
 import styles from './Warning.module.css';
@@ -10,11 +11,6 @@ export function Warning(): JSX.Element {
 
   return (
     <div className={styles.container}>
-      <Link
-        to={paths.home}
-        title={t('common_action_back')}
-        className={styles.backButton}
-      ></Link>
       <h1 className={styles.heading}>{t('view_Warning_headline')}</h1>
       <h2 className={styles.important}>{t('view_Warning_emphasis')}</h2>
       <p className={styles.info}>{t('view_Warning_explanation')}</p>
@@ -25,6 +21,8 @@ export function Warning(): JSX.Element {
       <Link to={paths.home} className={styles.cancel}>
         {t('common_action_cancel')}
       </Link>
+
+      <LinkBack />
     </div>
   );
 }

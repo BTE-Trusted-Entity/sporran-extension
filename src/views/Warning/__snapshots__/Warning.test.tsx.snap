@@ -5,11 +5,6 @@ exports[`Warning should render 1`] = `
   <div
     class="container"
   >
-    <a
-      class="backButton"
-      href="/"
-      title="Back"
-    />
     <h1
       class="heading"
     >
@@ -43,6 +38,12 @@ to not lose your assets
     >
       Cancel
     </a>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
   </div>
 </div>
 `;
