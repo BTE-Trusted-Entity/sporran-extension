@@ -1,9 +1,10 @@
 import userEvent from '@testing-library/user-event';
 
 import { render, screen } from '../../testing';
+import { AccountsProviderMock } from '../../testing/AccountsProviderMock';
 import { Settings } from './Settings';
 
-describe('AddAccount', () => {
+describe('Settings', () => {
   it('should render', async () => {
     const { container } = render(<Settings />);
     expect(container).toMatchSnapshot();
@@ -18,8 +19,29 @@ describe('AddAccount', () => {
     userEvent.click(openMenuButton);
 
     expect(await screen.findByRole('menu')).toBeInTheDocument();
+    expect(
+      await screen.findByRole('menuitem', { name: 'Forget current account' }),
+    ).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
 
     expect(container).toMatchSnapshot();
+  });
+
+  it('should not render account options if there are no accounts', async () => {
+    render(
+      <AccountsProviderMock accounts={{}}>
+        <Settings />
+      </AccountsProviderMock>,
+    );
+    userEvent.click(await screen.findByLabelText('Settings'));
+
+    expect(
+      screen.queryByRole('menuitem', { name: 'Forget current account' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('menuitem', {
+        name: 'Reset password for current account',
+      }),
+    ).not.toBeInTheDocument();
   });
 });

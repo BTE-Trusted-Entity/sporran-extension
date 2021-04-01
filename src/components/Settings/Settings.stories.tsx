@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
 
 import { Settings } from './Settings';
+import { AccountsProviderMock } from '../../testing/AccountsProviderMock';
 
 export default {
   title: 'Components/Settings',
@@ -8,24 +9,13 @@ export default {
 } as Meta;
 
 export function NoAccounts(): JSX.Element {
-  return <Settings />;
-}
-
-function mockUseAccounts() {
-  return {
-    data: {
-      '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire': {
-        name: 'My Sporran Account',
-        address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-        index: 1,
-      },
-    },
-    revalidate: async () => true,
-    mutate: () => undefined,
-    isValidating: false,
-  };
+  return (
+    <AccountsProviderMock accounts={{}}>
+      <Settings />
+    </AccountsProviderMock>
+  );
 }
 
 export function WithAccounts(): JSX.Element {
-  return <Settings useAccounts={mockUseAccounts} />;
+  return <Settings />;
 }
