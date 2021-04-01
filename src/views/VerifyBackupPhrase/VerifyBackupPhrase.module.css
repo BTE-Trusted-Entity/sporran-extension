@@ -5,11 +5,6 @@
   text-align: center;
 }
 
-.backButton {
-  position: absolute;
-  left: 0.5rem;
-}
-
 .selectedWordsContainer {
   min-height: 6rem;
 }

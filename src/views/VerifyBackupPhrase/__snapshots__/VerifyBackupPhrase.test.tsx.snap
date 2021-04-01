@@ -5,12 +5,6 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
   <main
     class="container"
   >
-    <a
-      class="backButton"
-      href="/account/create/backup"
-    >
-      Back
-    </a>
     <h1>
       Check my Backup Phrase
     </h1>
@@ -219,6 +213,12 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
         Cancel
       </a>
     </p>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
   </main>
 </div>
 `;
@@ -228,12 +228,6 @@ exports[`VerifyBackupPhrase should render 1`] = `
   <main
     class="container"
   >
-    <a
-      class="backButton"
-      href="/account/create/backup"
-    >
-      Back
-    </a>
     <h1>
       Check my Backup Phrase
     </h1>
@@ -345,6 +339,12 @@ exports[`VerifyBackupPhrase should render 1`] = `
         Cancel
       </a>
     </p>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
   </main>
 </div>
 `;

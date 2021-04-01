@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
 
+import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
 
 import styles from './VerifyBackupPhrase.module.css';
@@ -60,9 +61,6 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
 
   return (
     <main className={styles.container}>
-      <Link to={paths.account.create.backup} className={styles.backButton}>
-        {t('common_action_back')}
-      </Link>
       <h1>{t('view_VerifyBackupPhrase_heading')}</h1>
       <h3>{t('view_VerifyBackupPhrase_explanation')}</h3>
 
@@ -105,6 +103,8 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
       <p>
         <Link to={paths.home}>{t('common_action_cancel')}</Link>
       </p>
+
+      <LinkBack />
     </main>
   );
 }

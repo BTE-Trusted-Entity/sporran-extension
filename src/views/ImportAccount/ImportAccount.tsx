@@ -34,7 +34,7 @@ export function ImportAccount(): JSX.Element {
         <ImportBackupPhrase onImport={onImport} />
       </Route>
       <Route path={paths.account.import.password}>
-        <CreatePassword type="import" onSuccess={onSuccess} />
+        <CreatePassword onSuccess={onSuccess} />
       </Route>
       <Route path={paths.account.import.success}>
         <CreateAccountSuccess type="import" address={address} />

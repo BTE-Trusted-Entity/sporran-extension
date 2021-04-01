@@ -201,13 +201,12 @@ exports[`ImportBackupPhrase should render for import 1`] = `
         </button>
       </div>
     </form>
-    <p>
-      <a
-        href="/"
-      >
-        Back
-      </a>
-    </p>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
     <p>
       <a
         href="/"
@@ -420,13 +419,12 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
         </button>
       </div>
     </form>
-    <p>
-      <a
-        href="/"
-      >
-        Back
-      </a>
-    </p>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
     <p>
       <a
         href="/"

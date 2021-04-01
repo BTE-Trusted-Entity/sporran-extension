@@ -6,10 +6,6 @@
   padding: 5rem 1.5rem 0 1.5rem;
 }
 
-.backButton {
-  composes: linkBack from '../../components/LinkBack/LinkBack.module.css';
-}
-
 .heading {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
   background-image: url('../../components/images/attention-hand.svg');

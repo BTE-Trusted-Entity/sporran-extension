@@ -5,7 +5,10 @@
   top: 2rem;
   height: calc(13rem / 16);
   width: 2rem;
+  border: 0;
+  background-color: transparent;
   background-image: url('../images/arrow-left.svg');
   background-size: 100%;
   background-repeat: no-repeat;
+  cursor: pointer;
 }

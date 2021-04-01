@@ -1,6 +1,5 @@
 declare namespace VerifyBackupPhraseModuleCssNamespace {
   export interface IVerifyBackupPhraseModuleCss {
-    backButton: string;
     button: string;
     container: string;
     correct: string;
