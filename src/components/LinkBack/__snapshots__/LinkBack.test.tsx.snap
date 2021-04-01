@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LinkBack should render 1`] = `
+<div>
+  <button
+    aria-label="Back"
+    class="linkBack"
+    title="Back"
+    type="button"
+  />
+</div>
+`;
