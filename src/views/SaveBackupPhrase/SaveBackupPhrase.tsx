@@ -7,7 +7,7 @@ import { paths } from '../paths';
 import styles from './SaveBackupPhrase.module.css';
 
 const formatCounter = (idx: number) =>
-  idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`;
+  idx + 1 < 10 ? `0${idx + 1}.` : `${idx + 1}.`;
 
 interface Props {
   backupPhrase: string;
@@ -27,10 +27,7 @@ export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
       <div className={styles.items}>
         {words.map((word, index) => (
           <div key={word} className={styles.item}>
-            <span className={styles.counter}>
-              {formatCounter(index)}
-              {'. '}
-            </span>
+            <span className={styles.counter}>{formatCounter(index)}</span>
             <span className={styles.word}>{word}</span>
             <span className={styles.eye} />
           </div>
