@@ -43,7 +43,7 @@ export function AccountSlide({ account }: Props): JSX.Element {
   return (
     <section>
       <h2 style={{ display: 'inline' }}>{account.name}</h2>
-      <AccountOptions onEdit={handleEditClick} />
+      <AccountOptions address={account.address} onEdit={handleEditClick} />
 
       {editing && (
         <form onSubmit={handleSubmit}>

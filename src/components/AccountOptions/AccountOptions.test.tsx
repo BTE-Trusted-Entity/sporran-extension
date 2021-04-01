@@ -6,6 +6,7 @@ import { AccountOptions } from './AccountOptions';
 const onEdit = jest.fn();
 
 const props = {
+  address: 'ADDRESS',
   onEdit,
 };
 
