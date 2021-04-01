@@ -1,16 +1,23 @@
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
-import cx from 'classnames';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { paths } from '../../views/paths';
+import { useAccounts } from '../../utilities/accounts/accounts';
 
 import styles from './AddAccount.module.css';
 
-export function AddAccount(): JSX.Element {
+export function AddAccount(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
+  const accounts = useAccounts().data;
+  const hasAccounts = accounts && Object.values(accounts).length > 0;
+
   const { buttonProps, itemProps, isOpen } = useDropdownMenu(2);
+
+  if (!hasAccounts) {
+    return null;
+  }
 
   return (
     <nav className={styles.container}>
@@ -24,12 +31,7 @@ export function AddAccount(): JSX.Element {
         +
       </button>
       {isOpen && (
-        <div
-          className={cx(styles.menu, {
-            [styles.hidden]: !isOpen,
-          })}
-          role="menu"
-        >
+        <div className={styles.menu} role="menu">
           <h4 className={styles.menuHeading}>
             {t('component_AddAccount_label')}
           </h4>
