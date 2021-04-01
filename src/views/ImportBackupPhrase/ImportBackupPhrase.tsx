@@ -159,7 +159,12 @@ export function ImportBackupPhrase({
         {error && <p>{error}</p>}
 
         <div className={styles.buttonContainer}>
-          <button type="submit">{t('common_action_next')}</button>
+          <button
+            type="submit"
+            disabled={Boolean(error) || backupPhrase.join('') === ''}
+          >
+            {t('common_action_next')}
+          </button>
         </div>
       </form>
 

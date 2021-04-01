@@ -195,6 +195,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
         class="buttonContainer"
       >
         <button
+          disabled=""
           type="submit"
         >
           Next Step
@@ -413,6 +414,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
         class="buttonContainer"
       >
         <button
+          disabled=""
           type="submit"
         >
           Next Step
