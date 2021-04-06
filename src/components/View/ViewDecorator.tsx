@@ -1,9 +1,11 @@
+import { makeDecorator } from '@storybook/addons';
+
 import styles from './View.module.css';
 
-export function ViewDecorator(Story: () => JSX.Element): JSX.Element {
-  return (
-    <section className={styles.view}>
-      <Story />
-    </section>
-  );
-}
+export const ViewDecorator = makeDecorator({
+  name: 'ViewDecorator',
+  parameterName: 'ViewDecorator',
+  wrapper: function ViewDecorator(storyFn, context) {
+    return <section className={styles.view}>{storyFn(context)}</section>;
+  },
+});
