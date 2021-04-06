@@ -26,6 +26,7 @@
 .toggle {
   /* needed for z-index to work */
   position: relative;
+  cursor: pointer;
 }
 
 .toggle[aria-expanded=true] {
