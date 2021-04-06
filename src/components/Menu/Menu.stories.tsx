@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
+import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 
 import menuStyles from './Menu.module.css';
-import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 
 export default {
   title: 'Components/Menu',
