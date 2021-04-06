@@ -26,3 +26,15 @@ export function InputKiltAmount(): JSX.Element {
     />
   );
 }
+
+export function InputWithGradient(): JSX.Element {
+  return (
+    <section style={background}>
+      <input
+        className={styles.inputWithGradient}
+        type="text"
+        defaultValue="word"
+      />
+    </section>
+  );
+}

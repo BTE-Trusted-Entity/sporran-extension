@@ -1,27 +1,59 @@
 .container {
   padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  margin: 0;
+}
+
+.info {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  text-align: center;
+  margin: 0.5rem;
 }
 
 .items {
   display: block;
   columns: 2;
-  width: 25rem;
+  list-style-type: decimal-leading-zero;
+  list-style-position: inside;
+  padding-inline-start: 0;
 }
 
 .item {
+  composes: inputWithGradient from '../../components/Input/Input.module.css';
+  width: 6.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.items ::marker {
+  font-family: 'Montserrat Medium', sans-serif;
+  font-size: 0.875rem;
+  color: var(--color-orange);
+}
+
+.input {
+  composes: inputText from '../../components/Typography/Typography.module.css';
+  width: 4.5rem;
+  margin-top: 0.4rem;
+  background: transparent;
+  border: 0;
+  text-align: left;
+}
+
+.button {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+  width: calc(210rem / 16);
+  cursor: pointer;
   display: block;
-  margin-bottom: 1rem;
+  margin: 0 auto;
 }
 
-.word {
-  visibility: hidden;
-}
-
-.buttonContainer {
-  display: block;
-}
-
-.neutral {
+/* .neutral {
   float: inline-start;
   font-size: medium;
 }
@@ -34,21 +66,12 @@
 .fail {
   color: red;
   list-style-type: '❌ ️';
-}
+} */
 
-.input {
-  float: inline-end;
-  border: 0;
-  border-bottom: 1px solid black;
-  background: none;
-  cursor: pointer;
-  text-align: left;
-}
-
-.fail .input { 
+/* .fail .input {
   color: red;
 }
 
 .pass .input {
   color: green;
-}
+} */
