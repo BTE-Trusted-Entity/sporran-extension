@@ -1,0 +1,72 @@
+.wrapper {
+  /* needed to position the menu relative to the button */
+  position: relative;
+}
+
+.dropdown {
+  --gradient-end: #9B1864;
+  --gradient-start: #630E40;
+  --item-height: 1.25rem;
+
+  /* place it covering the button with an overlap */
+  position: absolute;
+  top: -0.375rem;
+  right: -0.375rem;
+
+  width: 10rem;
+
+  /* following generates the menu footer */
+  --footer-height: 0.375rem;
+  padding-bottom: var(--footer-height);
+  background-size: var(--footer-height);
+  background-image: linear-gradient(0, var(--gradient-start) 0%, var(--gradient-end) var(--footer-height));
+  background-position: bottom;
+}
+
+.toggle {
+  /* needed for z-index to work */
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle[aria-expanded=true] {
+  /* keep the toggle button visible on top of menu */
+  z-index: 1;
+  opacity: 0.35;
+}
+
+.heading {
+  composes: buttonText from '../Typography/Typography.module.css';
+
+  background: linear-gradient(0, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  color: var(--color-grey-light);
+  margin: 0;
+  padding: 0.5rem;
+  height: var(--item-height);
+  line-height: var(--item-height);
+  border-bottom: 1px solid #352b3e;
+}
+
+.list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  background-color: #4F405C;
+}
+
+.listItem {
+  composes: subline from '../Typography/Typography.module.css';
+  font-size: calc(11rem / 16);
+
+  margin: 0;
+  padding: 0.5rem;
+  height: var(--item-height);
+  line-height: var(--item-height);
+  border-top: 1px solid #655276;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.33);
+  cursor: pointer;
+}
+
+.listItem:hover {
+  background-color: rgba(0,0,0,0.2);
+}
