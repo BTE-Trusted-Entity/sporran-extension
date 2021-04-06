@@ -1,12 +1,9 @@
 import { Meta } from '@storybook/react';
 
-import { ViewDecorator } from '../View/ViewDecorator';
-
 import styles from './Typography.module.css';
 
 export default {
   title: 'Components/Typography',
-  decorators: [ViewDecorator],
 } as Meta;
 
 export function Template(): JSX.Element {

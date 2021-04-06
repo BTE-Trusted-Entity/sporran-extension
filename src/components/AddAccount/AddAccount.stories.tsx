@@ -9,11 +9,9 @@ export default {
   component: AddAccount,
   decorators: [
     (Story) => (
-      <section style={{ padding: '2rem' }}>
-        <div className={menuStyles.wrapper} style={{ float: 'right' }}>
-          <Story />
-        </div>
-      </section>
+      <div className={menuStyles.wrapper} style={{ float: 'right' }}>
+        <Story />
+      </div>
     ),
   ],
 } as Meta;

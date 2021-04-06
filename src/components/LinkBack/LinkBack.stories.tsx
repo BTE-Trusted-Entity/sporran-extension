@@ -9,22 +9,10 @@ export default {
   title: 'Components/LinkBack',
 } as Meta;
 
-const background = {
-  padding: '2rem',
-};
-
 export function CSS(): JSX.Element {
-  return (
-    <section style={background}>
-      <Link to="" title="Back" className={styles.linkBack} />
-    </section>
-  );
+  return <Link to="" title="Back" className={styles.linkBack} />;
 }
 
 export function Component(): JSX.Element {
-  return (
-    <section style={background}>
-      <LinkBack />
-    </section>
-  );
+  return <LinkBack />;
 }
