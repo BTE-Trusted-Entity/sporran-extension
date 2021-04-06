@@ -24,22 +24,20 @@ exports[`App should render 1`] = `
           +
         </button>
       </nav>
-      <nav
-        class="container"
+      <div
+        class="wrapper"
       >
         <button
           aria-expanded="false"
           aria-haspopup="true"
           aria-label="Settings"
-          class="button"
+          class="toggle"
           role="button"
           tabindex="0"
           title="Settings"
           type="button"
-        >
-          ⚙
-        </button>
-      </nav>
+        />
+      </div>
     </nav>
     <div
       class="container"
