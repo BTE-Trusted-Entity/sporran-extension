@@ -81,7 +81,7 @@ export function Settings(): JSX.Element {
             </li>
 
             <li className={menuStyles.listItem}>
-              {t('component_Settings_version', [VERSION_NUMBER])}
+              <a>{t('component_Settings_version', [VERSION_NUMBER])}</a>
             </li>
           </ul>
         </div>
