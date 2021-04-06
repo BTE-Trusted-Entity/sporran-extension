@@ -60,6 +60,34 @@ function hasInvalidWord(backupPhrase: BackupPhrase): string | null {
   ]);
 }
 
+interface WordItemProps {
+  word: string;
+  index: number;
+  handleInput: (event: any) => void;
+}
+
+function WordItem({ word, index, handleInput }: WordItemProps): JSX.Element {
+  const t = browser.i18n.getMessage;
+  const errorTooltip = useErrorTooltip(Boolean(word && !isAllowed(word)));
+
+  return (
+    <li className={styles.item} {...errorTooltip.anchor}>
+      <input
+        name={index.toString()}
+        className={styles.input}
+        type="text"
+        onInput={handleInput}
+      />
+      {!isAllowed(word) && (
+        <p {...errorTooltip.tooltip}>
+          {t('view_ImportBackupPhrase_error_typo')}
+          <span {...errorTooltip.pointer} />
+        </p>
+      )}
+    </li>
+  );
+}
+
 interface Props {
   type?: 'import' | 'reset';
   address?: string;
@@ -78,10 +106,6 @@ export function ImportBackupPhrase({
     Array(12).fill(''),
   );
 
-  const invalidWordIndex = backupPhrase.findIndex(
-    (word) => word !== '' && !isAllowed(word),
-  );
-
   const error =
     modified &&
     [
@@ -91,7 +115,6 @@ export function ImportBackupPhrase({
     ].filter(Boolean)[0];
 
   const errorTooltip = useErrorTooltip(Boolean(error));
-  const invalidWordTooltip = useErrorTooltip(true);
 
   const handleInput = useCallback(
     (event) => {
@@ -141,24 +164,12 @@ export function ImportBackupPhrase({
       <form onSubmit={handleSubmit} autoComplete="off">
         <ol className={styles.items}>
           {backupPhrase.map((word, index) => (
-            <li
+            <WordItem
               key={index}
-              className={styles.item}
-              {...(index === invalidWordIndex && invalidWordTooltip.anchor)}
-            >
-              <input
-                name={index.toString()}
-                className={styles.input}
-                type="text"
-                onInput={handleInput}
-              />
-              {index === invalidWordIndex && (
-                <p {...invalidWordTooltip.tooltip}>
-                  Invalid word
-                  <span {...invalidWordTooltip.pointer} />
-                </p>
-              )}
-            </li>
+              word={word}
+              index={index}
+              handleInput={handleInput}
+            />
           ))}
         </ol>
 
