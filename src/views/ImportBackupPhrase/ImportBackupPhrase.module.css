@@ -24,16 +24,16 @@
   padding-inline-start: 0;
 }
 
-.item {
-  composes: inputWithGradient from '../../components/Input/Input.module.css';
-  width: 6.5rem;
-  margin-bottom: 0.75rem;
-}
-
 .items ::marker {
   font-family: 'Montserrat Medium', sans-serif;
   font-size: 0.875rem;
   color: var(--color-orange);
+}
+
+.item {
+  composes: inputWithGradient from '../../components/Input/Input.module.css';
+  width: 6.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .input {
@@ -52,26 +52,3 @@
   display: block;
   margin: 0 auto;
 }
-
-/* .neutral {
-  float: inline-start;
-  font-size: medium;
-}
-
-.pass {
-  color: green;
-  list-style-type: '✔ ️';
-}
-
-.fail {
-  color: red;
-  list-style-type: '❌ ️';
-} */
-
-/* .fail .input {
-  color: red;
-}
-
-.pass .input {
-  color: green;
-} */
