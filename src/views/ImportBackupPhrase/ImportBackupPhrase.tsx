@@ -63,7 +63,7 @@ function hasInvalidWord(backupPhrase: BackupPhrase): string | null {
 interface WordItemProps {
   word: string;
   index: number;
-  handleInput: (event: any) => void;
+  handleInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function WordItem({ word, index, handleInput }: WordItemProps): JSX.Element {
