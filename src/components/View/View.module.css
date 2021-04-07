@@ -3,6 +3,8 @@
   min-height: 600px;
   width: 480px;
   height: 600px;
+  max-width: 480px;
+  max-height: 600px;
   background: url('../images/logo.svg') no-repeat center 1.5rem,
     url('../images/background.png') no-repeat center/contain;
   padding: 5rem 1.5rem 0 1.5rem;
