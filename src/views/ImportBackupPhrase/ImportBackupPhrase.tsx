@@ -59,7 +59,7 @@ function WordInput({ word, index, handleInput }: WordInputProps): JSX.Element {
   const errorTooltip = useErrorTooltip(hasError);
 
   return (
-    <li style={{ display: 'list-item' }} {...errorTooltip.anchor}>
+    <li className={styles.item} {...errorTooltip.anchor}>
       <input
         aria-label={(index + 1).toString()}
         id={index.toString()}
