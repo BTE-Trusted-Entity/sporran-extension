@@ -5,6 +5,7 @@ import { generatePath, Link, useRouteMatch } from 'react-router-dom';
 import { Account, isNew } from '../../utilities/accounts/accounts';
 import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
+import { QRCode } from '../../components/QRCode/QRCode';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
@@ -60,7 +61,9 @@ export function ReceiveToken({ account }: Props): JSX.Element {
         </button>
       )}
 
-      <p>[Insert QR Image] </p>
+      <p>
+        <QRCode address={address} className={styles.qrCode} />
+      </p>
       <p>
         <Link to={generatePath(paths.account.overview, { address })}>
           {t('view_ReceiveToken_done_button')}

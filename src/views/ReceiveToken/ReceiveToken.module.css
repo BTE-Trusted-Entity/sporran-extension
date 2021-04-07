@@ -12,3 +12,8 @@
   border: 1px solid black;
   overflow: hidden;
 }
+
+.qrCode {
+  composes: component from '../../components/QRCode/QRCode.module.css';
+  width: 50%;
+}
