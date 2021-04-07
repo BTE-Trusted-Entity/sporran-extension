@@ -73,6 +73,7 @@ function WordItem({ word, index, handleInput }: WordItemProps): JSX.Element {
   return (
     <li className={styles.item} {...errorTooltip.anchor}>
       <input
+        aria-label={(index + 1).toString()}
         name={index.toString()}
         className={styles.input}
         type="text"

@@ -5,202 +5,292 @@ exports[`ImportBackupPhrase should render for import 1`] = `
   <section
     class="container"
   >
-    <div>
-      <h3>
-        [Insert logo here]
-      </h3>
-    </div>
-    <h1>
+    <h1
+      class="heading"
+    >
       Import an Account
     </h1>
-    <p>
+    <p
+      class="info"
+    >
       To import a Sporran account, you will need a pre-existing backup phrase consisting of 12-words
     </p>
     <form
       autocomplete="off"
     >
-      <ul
+      <ol
         class="items"
       >
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="1"
+            class="input"
+            name="0"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            1
-            <input
-              class="input"
-              name="0"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="2"
+            class="input"
+            name="1"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            2
-            <input
-              class="input"
-              name="1"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="3"
+            class="input"
+            name="2"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            3
-            <input
-              class="input"
-              name="2"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="4"
+            class="input"
+            name="3"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            4
-            <input
-              class="input"
-              name="3"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="5"
+            class="input"
+            name="4"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            5
-            <input
-              class="input"
-              name="4"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="6"
+            class="input"
+            name="5"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            6
-            <input
-              class="input"
-              name="5"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="7"
+            class="input"
+            name="6"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            7
-            <input
-              class="input"
-              name="6"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="8"
+            class="input"
+            name="7"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            8
-            <input
-              class="input"
-              name="7"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="9"
+            class="input"
+            name="8"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            9
-            <input
-              class="input"
-              name="8"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="10"
+            class="input"
+            name="9"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            10
-            <input
-              class="input"
-              name="9"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="11"
+            class="input"
+            name="10"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            11
-            <input
-              class="input"
-              name="10"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="12"
+            class="input"
+            name="11"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            12
-            <input
-              class="input"
-              name="11"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
-      </ul>
-      <div
-        class="buttonContainer"
+      </ol>
+      <button
+        class="button"
+        disabled=""
+        type="submit"
       >
-        <button
-          disabled=""
-          type="submit"
-        >
-          Next Step
-        </button>
-      </div>
+        Next Step
+      </button>
+      <p
+        class="tooltip"
+        style="position: absolute; left: 0px; top: 0px;"
+      >
+        <span
+          class="pointer"
+          data-popper-arrow="true"
+          style="position: absolute;"
+        />
+      </p>
     </form>
     <button
       aria-label="Back"
@@ -208,13 +298,6 @@ exports[`ImportBackupPhrase should render for import 1`] = `
       title="Back"
       type="button"
     />
-    <p>
-      <a
-        href="/"
-      >
-        Cancel
-      </a>
-    </p>
   </section>
 </div>
 `;
@@ -224,202 +307,292 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
   <section
     class="container"
   >
-    <div>
-      <h3>
-        [Insert logo here]
-      </h3>
-    </div>
-    <h1>
+    <h1
+      class="heading"
+    >
       Set a new password
     </h1>
-    <p>
+    <p
+      class="info"
+    >
       In order to set a new password you have to re-enter your backup phrase
     </p>
     <form
       autocomplete="off"
     >
-      <ul
+      <ol
         class="items"
       >
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="1"
+            class="input"
+            name="0"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            1
-            <input
-              class="input"
-              name="0"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="2"
+            class="input"
+            name="1"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            2
-            <input
-              class="input"
-              name="1"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="3"
+            class="input"
+            name="2"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            3
-            <input
-              class="input"
-              name="2"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="4"
+            class="input"
+            name="3"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            4
-            <input
-              class="input"
-              name="3"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="5"
+            class="input"
+            name="4"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            5
-            <input
-              class="input"
-              name="4"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="6"
+            class="input"
+            name="5"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            6
-            <input
-              class="input"
-              name="5"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="7"
+            class="input"
+            name="6"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            7
-            <input
-              class="input"
-              name="6"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="8"
+            class="input"
+            name="7"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            8
-            <input
-              class="input"
-              name="7"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="9"
+            class="input"
+            name="8"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            9
-            <input
-              class="input"
-              name="8"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="10"
+            class="input"
+            name="9"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            10
-            <input
-              class="input"
-              name="9"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="11"
+            class="input"
+            name="10"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            11
-            <input
-              class="input"
-              name="10"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
+          <input
+            aria-label="12"
+            class="input"
+            name="11"
+            type="text"
+          />
+          <p
+            class="tooltip"
+            style="position: absolute; left: 0px; top: 0px;"
           >
-            12
-            <input
-              class="input"
-              name="11"
-              type="text"
+            It looks like there's a typo in this word
+            <span
+              class="pointer"
+              data-popper-arrow="true"
+              style="position: absolute;"
             />
-          </label>
+          </p>
         </li>
-      </ul>
-      <div
-        class="buttonContainer"
+      </ol>
+      <button
+        class="button"
+        disabled=""
+        type="submit"
       >
-        <button
-          disabled=""
-          type="submit"
-        >
-          Next Step
-        </button>
-      </div>
+        Next Step
+      </button>
+      <p
+        class="tooltip"
+        style="position: absolute; left: 0px; top: 0px;"
+      >
+        <span
+          class="pointer"
+          data-popper-arrow="true"
+          style="position: absolute;"
+        />
+      </p>
     </form>
     <button
       aria-label="Back"
@@ -427,13 +600,6 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
       title="Back"
       type="button"
     />
-    <p>
-      <a
-        href="/"
-      >
-        Cancel
-      </a>
-    </p>
   </section>
 </div>
 `;
