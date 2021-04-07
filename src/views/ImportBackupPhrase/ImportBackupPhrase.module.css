@@ -38,7 +38,6 @@
 .button {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
   width: calc(210rem / 16);
-  cursor: pointer;
   display: block;
   margin: 0 auto;
 }

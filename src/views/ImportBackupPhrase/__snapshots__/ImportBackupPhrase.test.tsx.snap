@@ -22,256 +22,136 @@ exports[`ImportBackupPhrase should render for import 1`] = `
         class="items"
       >
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="1"
             class="input"
+            id="0"
             name="0"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="2"
             class="input"
+            id="1"
             name="1"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="3"
             class="input"
+            id="2"
             name="2"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="4"
             class="input"
+            id="3"
             name="3"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="5"
             class="input"
+            id="4"
             name="4"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="6"
             class="input"
+            id="5"
             name="5"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="7"
             class="input"
+            id="6"
             name="6"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="8"
             class="input"
+            id="7"
             name="7"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="9"
             class="input"
+            id="8"
             name="8"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="10"
             class="input"
+            id="9"
             name="9"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="11"
             class="input"
+            id="10"
             name="10"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="12"
             class="input"
+            id="11"
             name="11"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
       </ol>
       <button
@@ -281,7 +161,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
       >
         Next Step
       </button>
-      <p
+      <output
         class="tooltip"
         style="position: absolute; left: 0px; top: 0px;"
       >
@@ -290,7 +170,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
           data-popper-arrow="true"
           style="position: absolute;"
         />
-      </p>
+      </output>
     </form>
     <button
       aria-label="Back"
@@ -324,256 +204,136 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
         class="items"
       >
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="1"
             class="input"
+            id="0"
             name="0"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="2"
             class="input"
+            id="1"
             name="1"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="3"
             class="input"
+            id="2"
             name="2"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="4"
             class="input"
+            id="3"
             name="3"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="5"
             class="input"
+            id="4"
             name="4"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="6"
             class="input"
+            id="5"
             name="5"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="7"
             class="input"
+            id="6"
             name="6"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="8"
             class="input"
+            id="7"
             name="7"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="9"
             class="input"
+            id="8"
             name="8"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="10"
             class="input"
+            id="9"
             name="9"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="11"
             class="input"
+            id="10"
             name="10"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
         <li
-          class="item"
+          style="display: list-item;"
         >
           <input
             aria-label="12"
             class="input"
+            id="11"
             name="11"
             type="text"
           />
-          <p
-            class="tooltip"
-            style="position: absolute; left: 0px; top: 0px;"
-          >
-            It looks like there's a typo in this word
-            <span
-              class="pointer"
-              data-popper-arrow="true"
-              style="position: absolute;"
-            />
-          </p>
         </li>
       </ol>
       <button
@@ -583,7 +343,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
       >
         Next Step
       </button>
-      <p
+      <output
         class="tooltip"
         style="position: absolute; left: 0px; top: 0px;"
       >
@@ -592,7 +352,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
           data-popper-arrow="true"
           style="position: absolute;"
         />
-      </p>
+      </output>
     </form>
     <button
       aria-label="Back"

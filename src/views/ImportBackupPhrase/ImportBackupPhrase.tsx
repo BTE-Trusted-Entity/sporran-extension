@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { ChangeEventHandler, useCallback, useState } from 'react';
 import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/bip39-en';
 import { Identity } from '@kiltprotocol/core';
 import { browser } from 'webextension-polyfill-ts';
@@ -46,30 +46,33 @@ function isMalformed(backupPhrase: BackupPhrase): string | null {
   return t('view_ImportBackupPhrase_error_backup_phrase_length');
 }
 
-interface WordItemProps {
+interface WordInputProps {
   word: string;
   index: number;
-  handleInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInput: ChangeEventHandler<HTMLInputElement>;
 }
 
-function WordItem({ word, index, handleInput }: WordItemProps): JSX.Element {
+function WordInput({ word, index, handleInput }: WordInputProps): JSX.Element {
   const t = browser.i18n.getMessage;
-  const errorTooltip = useErrorTooltip(Boolean(word && !isAllowed(word)));
+
+  const hasError = Boolean(word && !isAllowed(word)); // to be reused in JSX below
+  const errorTooltip = useErrorTooltip(hasError);
 
   return (
     <li style={{ display: 'list-item' }} {...errorTooltip.anchor}>
       <input
         aria-label={(index + 1).toString()}
+        id={index.toString()}
         name={index.toString()}
         className={styles.input}
         type="text"
         onInput={handleInput}
       />
-      {!isAllowed(word) && (
-        <p {...errorTooltip.tooltip}>
+      {hasError && (
+        <output htmlFor={index.toString()} {...errorTooltip.tooltip}>
           {t('view_ImportBackupPhrase_error_typo')}
           <span {...errorTooltip.pointer} />
-        </p>
+        </output>
       )}
     </li>
   );
@@ -150,7 +153,7 @@ export function ImportBackupPhrase({
       <form onSubmit={handleSubmit} autoComplete="off">
         <ol className={styles.items}>
           {backupPhrase.map((word, index) => (
-            <WordItem
+            <WordInput
               key={index}
               word={word}
               index={index}
@@ -167,10 +170,10 @@ export function ImportBackupPhrase({
         >
           {t('common_action_next')}
         </button>
-        <p {...errorTooltip.tooltip}>
+        <output {...errorTooltip.tooltip}>
           {error}
           <span {...errorTooltip.pointer} />
-        </p>
+        </output>
       </form>
 
       <LinkBack />

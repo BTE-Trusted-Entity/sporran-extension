@@ -174,7 +174,7 @@
     "message": "Please insert all the words of the backup phrase"
   },
   "view_ImportBackupPhrase_error_typo": {
-    "message": "It looks like there's a typo in this word"
+    "message": "It looks like there’s a typo in this word"
   },
   "view_CreatePassword_heading": {
     "message": "Your account password"
