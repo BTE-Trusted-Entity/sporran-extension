@@ -5,11 +5,15 @@ import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.c
 import { MessageType, BalanceChangeRequest } from '../MessageType';
 
 export async function onChange(address: string, balance: BN): Promise<void> {
+  // Using toString(16) as in bn@4 toJSON, because in bn@5 it is toString(16,2)
+  // (https://github.com/indutny/bn.js/pull/164/files)
+  // and is incompatible with the mix of versions Kilt SDK and polkadot are using.
+  // Hoping for a proper fix upstream, but this works around the issue.
   await browser.runtime.sendMessage({
     type: MessageType.balanceChangeResponse,
     data: {
       address,
-      balance: balance.toJSON(),
+      balance: balance.toString(16),
     },
   });
 }
