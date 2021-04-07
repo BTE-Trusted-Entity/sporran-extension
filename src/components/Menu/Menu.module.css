@@ -58,21 +58,22 @@
   composes: subline from '../Typography/Typography.module.css';
   font-size: calc(11rem / 16);
 
-  display: flex;
+  display: grid;
   margin: 0;
-  padding: 0.5rem 0.75rem;
-  min-height: var(--item-height);
+  padding: 0;
   border-top: 1px solid #655276;
   border-bottom: 1px solid rgba(0, 0, 0, 0.33);
-  cursor: pointer;
 }
 
 .listItem:hover {
   background-color: rgba(0,0,0,0.2);
 }
 
-.listItem a {
-  margin: auto 0;
+.listItem a, .listItem button {
+  display: flex;
+  min-height: var(--item-height);
+  padding: 0.5rem 0.75rem;
+  align-items: center;
   color: var(--color-grey-light);
   text-decoration: none;
 }

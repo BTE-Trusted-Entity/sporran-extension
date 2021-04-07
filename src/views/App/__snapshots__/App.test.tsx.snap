@@ -8,22 +8,20 @@ exports[`App should render 1`] = `
     <nav
       class="menus"
     >
-      <nav
-        class="container"
+      <div
+        class="wrapper"
       >
         <button
           aria-expanded="false"
           aria-haspopup="true"
           aria-label="Add account"
-          class="button"
+          class="toggle"
           role="button"
           tabindex="0"
           title="Add account"
           type="button"
-        >
-          +
-        </button>
-      </nav>
+        />
+      </div>
       <div
         class="wrapper"
       >

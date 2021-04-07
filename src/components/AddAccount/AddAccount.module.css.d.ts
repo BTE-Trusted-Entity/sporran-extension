@@ -1,11 +1,6 @@
 declare namespace AddAccountModuleCssNamespace {
   export interface IAddAccountModuleCss {
-    button: string;
-    container: string;
-    list: string;
-    listItem: string;
-    menu: string;
-    menuHeading: string;
+    toggle: string;
   }
 }
 
