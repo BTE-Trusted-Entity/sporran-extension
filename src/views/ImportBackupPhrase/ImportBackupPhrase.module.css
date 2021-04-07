@@ -17,6 +17,8 @@
 }
 
 .items {
+  composes: smallImportant from '../../components/Typography/Typography.module.css';
+  font-size: 0.875rem;
   display: block;
   columns: 2;
   list-style-type: decimal-leading-zero;
@@ -24,24 +26,12 @@
   padding-inline-start: 0;
 }
 
-.items ::marker {
-  font-family: 'Montserrat Medium', sans-serif;
-  font-size: 0.875rem;
-  color: var(--color-orange);
-}
-
-.item {
-  composes: inputWithGradient from '../../components/Input/Input.module.css';
-  width: 6.5rem;
-  margin-bottom: 0.75rem;
-}
-
 .input {
-  composes: inputText from '../../components/Typography/Typography.module.css';
-  width: 4.5rem;
-  margin-top: 0.4rem;
-  background: transparent;
-  border: 0;
+  composes: input from '../../components/Input/Input.module.css';
+  width: 5rem;
+  margin-top: 0.75rem;
+  margin-left: -2rem;
+  padding-left: 2.5rem;
   text-align: left;
 }
 

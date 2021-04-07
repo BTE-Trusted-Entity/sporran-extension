@@ -46,20 +46,6 @@ function isMalformed(backupPhrase: BackupPhrase): string | null {
   return t('view_ImportBackupPhrase_error_backup_phrase_length');
 }
 
-function hasInvalidWord(backupPhrase: BackupPhrase): string | null {
-  const invalidWord = backupPhrase.find((value) => !isAllowed(value));
-  if (!invalidWord) {
-    return null;
-  }
-
-  const t = browser.i18n.getMessage;
-  const invalidWordIndex = backupPhrase.indexOf(invalidWord);
-  return t('view_ImportBackupPhrase_error_invalid_word', [
-    invalidWordIndex + 1,
-    invalidWord,
-  ]);
-}
-
 interface WordItemProps {
   word: string;
   index: number;
@@ -71,7 +57,7 @@ function WordItem({ word, index, handleInput }: WordItemProps): JSX.Element {
   const errorTooltip = useErrorTooltip(Boolean(word && !isAllowed(word)));
 
   return (
-    <li className={styles.item} {...errorTooltip.anchor}>
+    <li style={{ display: 'list-item' }} {...errorTooltip.anchor}>
       <input
         aria-label={(index + 1).toString()}
         name={index.toString()}
@@ -110,7 +96,6 @@ export function ImportBackupPhrase({
   const error =
     modified &&
     [
-      hasInvalidWord(backupPhrase),
       isMalformed(backupPhrase),
       isInvalid(backupPhrase, type === 'reset' ? address : undefined),
     ].filter(Boolean)[0];

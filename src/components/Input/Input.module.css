@@ -6,7 +6,11 @@
   border: 0;
   border-radius: 1.125rem;
   box-shadow: inset 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
-  background-color: var(--color-dark);
+  background: linear-gradient(
+    140deg,
+    var(--color-pink) 0%,
+    var(--color-dark) 100%
+  );
 }
 
 .inputKiltAmount {
@@ -18,14 +22,4 @@
   background-repeat: no-repeat;
   background-position: calc(100% - 0.75rem) center;
   padding-right: 2rem;
-}
-
-.inputWithGradient {
-  composes: input;
-
-  background: linear-gradient(
-    140deg,
-    var(--color-pink) 0%,
-    var(--color-dark) 100%
-  );
 }
