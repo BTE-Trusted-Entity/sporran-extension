@@ -7,6 +7,8 @@ declare namespace ImportBackupPhraseModuleCssNamespace {
     input: string;
     item: string;
     items: string;
+    pointer: string;
+    tooltip: string;
   }
 }
 

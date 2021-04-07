@@ -55,11 +55,10 @@ interface WordInputProps {
 function WordInput({ word, index, handleInput }: WordInputProps): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const hasError = Boolean(word && !isAllowed(word)); // to be reused in JSX below
-  const errorTooltip = useErrorTooltip(hasError);
+  const hasError = Boolean(word && !isAllowed(word));
 
   return (
-    <li className={styles.item} {...errorTooltip.anchor}>
+    <li className={styles.item}>
       <input
         aria-label={(index + 1).toString()}
         id={index.toString()}
@@ -69,9 +68,9 @@ function WordInput({ word, index, handleInput }: WordInputProps): JSX.Element {
         onInput={handleInput}
       />
       {hasError && (
-        <output htmlFor={index.toString()} {...errorTooltip.tooltip}>
+        <output htmlFor={index.toString()} className={styles.tooltip}>
           {t('view_ImportBackupPhrase_error_typo')}
-          <span {...errorTooltip.pointer} />
+          <span className={styles.pointer} />
         </output>
       )}
     </li>
@@ -110,7 +109,7 @@ export function ImportBackupPhrase({
       const { name, value } = event.target;
       backupPhrase[name] = value.trim().toLowerCase();
       setBackupPhrase([...backupPhrase]);
-      setModified(true);
+      setModified(backupPhrase.join('') !== '');
     },
     [backupPhrase],
   );
