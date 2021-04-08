@@ -19,6 +19,7 @@ interface Props {
 export function ReceiveToken({ account }: Props): JSX.Element {
   const addressRef = useRef<HTMLInputElement>(null);
   const [isCopied, setIsCopied] = useState(false);
+  const [largeQR, setLargeQR] = useState(false);
   const { path } = useRouteMatch();
 
   const { address } = account;
@@ -32,6 +33,10 @@ export function ReceiveToken({ account }: Props): JSX.Element {
       setIsCopied(false);
     }, 500);
   }, [addressRef]);
+
+  const handleEnlargeClick = useCallback(() => {
+    setLargeQR(true);
+  }, []);
 
   if (isNew(account)) {
     return <AccountOverviewNew />;
@@ -61,9 +66,16 @@ export function ReceiveToken({ account }: Props): JSX.Element {
         </button>
       )}
 
-      <p>
+      <button
+        className={styles.qrCodeToggle}
+        type="button"
+        onClick={handleEnlargeClick}
+        aria-label={t('view_ReceiveToken_enlarge')}
+      >
         <QRCode address={address} className={styles.qrCode} />
-      </p>
+        <span className={styles.qrCodeShadow} />
+      </button>
+
       <p>
         <Link to={generatePath(paths.account.overview, { address })}>
           {t('view_ReceiveToken_done_button')}

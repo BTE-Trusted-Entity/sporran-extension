@@ -265,6 +265,9 @@
   "view_ReceiveToken_done_button": {
     "message": "DONE"
   },
+  "view_ReceiveToken_enlarge": {
+    "message": "Enlarge"
+  },
   "view_AccountOverview_title": {
     "message": "Your accounts"
   },

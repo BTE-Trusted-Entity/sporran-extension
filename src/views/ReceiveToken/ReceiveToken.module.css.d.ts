@@ -4,6 +4,8 @@ declare namespace ReceiveTokenModuleCssNamespace {
     addressBox: string;
     container: string;
     qrCode: string;
+    qrCodeShadow: string;
+    qrCodeToggle: string;
   }
 }
 
