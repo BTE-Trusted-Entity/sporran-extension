@@ -16,7 +16,7 @@
 .qrCodeToggle {
   display: grid;
   grid-template-areas: 'code';
-  width: 50%;
+  width: 30%;
   background: none;
   border: 0;
   padding: 0;
@@ -34,4 +34,30 @@
   border: 0;
   position: relative;
   cursor: pointer;
+}
+
+.qrCodeLarge {
+  width: calc(var(--popup-width) - 4rem);
+  display: inline-block;
+}
+
+.dialog {
+  border: 0;
+  overflow: visible;
+}
+
+.dialog::backdrop,
+.dialog + :global(.backdrop) {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.dialogClose {
+  position: absolute;
+  top: -2rem;
+  right: 0;
+  border: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: transparent url('../../components/images/plus-circle.svg') no-repeat;
+  transform: rotate(45deg);
 }

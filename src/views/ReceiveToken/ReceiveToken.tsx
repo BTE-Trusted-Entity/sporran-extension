@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { generatePath, Link, useRouteMatch } from 'react-router-dom';
+import { Modal } from 'react-dialog-polyfill';
 
 import { Account, isNew } from '../../utilities/accounts/accounts';
 import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
@@ -36,6 +37,9 @@ export function ReceiveToken({ account }: Props): JSX.Element {
 
   const handleEnlargeClick = useCallback(() => {
     setLargeQR(true);
+  }, []);
+  const handleCloseClick = useCallback(() => {
+    setLargeQR(false);
   }, []);
 
   if (isNew(account)) {
@@ -75,6 +79,16 @@ export function ReceiveToken({ account }: Props): JSX.Element {
         <QRCode address={address} className={styles.qrCode} />
         <span className={styles.qrCodeShadow} />
       </button>
+
+      <Modal open={largeQR} className={styles.dialog}>
+        <QRCode address={address} className={styles.qrCodeLarge} />
+        <button
+          type="button"
+          onClick={handleCloseClick}
+          className={styles.dialogClose}
+          aria-label={t('common_action_close')}
+        />
+      </Modal>
 
       <p>
         <Link to={generatePath(paths.account.overview, { address })}>

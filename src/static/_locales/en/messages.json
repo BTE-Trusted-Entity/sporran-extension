@@ -17,6 +17,9 @@
   "common_action_cancel": {
     "message": "Cancel"
   },
+  "common_action_close": {
+    "message": "Close"
+  },
   "common_action_next": {
     "message": "Next Step"
   },
