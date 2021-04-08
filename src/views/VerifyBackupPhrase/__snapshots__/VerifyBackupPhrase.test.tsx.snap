@@ -5,214 +5,279 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
   <main
     class="container"
   >
-    <h1>
+    <h1
+      class="heading"
+    >
       Check my Backup Phrase
     </h1>
-    <h3>
+    <p
+      class="info"
+    >
       To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order
-    </h3>
+    </p>
     <form>
       <div
-        class="selectedWordsContainer"
+        class="selectedWords"
+        id="selected-words"
       >
         <button
-          class="button correct"
+          class="word correct"
           type="button"
           value="5"
         >
+          <span
+            class="index"
+          >
+            01
+          </span>
           one
         </button>
         <button
-          class="button correct"
+          class="word correct"
           type="button"
           value="11"
         >
+          <span
+            class="index"
+          >
+            02
+          </span>
           two
         </button>
         <button
-          class="button correct"
+          class="word correct"
           type="button"
           value="9"
         >
+          <span
+            class="index"
+          >
+            03
+          </span>
           three
         </button>
         <button
-          class="button correct"
+          class="word correct"
           type="button"
           value="3"
         >
+          <span
+            class="index"
+          >
+            04
+          </span>
           four
         </button>
         <button
-          class="button correct"
+          class="word correct"
           type="button"
           value="2"
         >
+          <span
+            class="index"
+          >
+            05
+          </span>
           five
         </button>
         <button
-          class="button correct"
+          class="word correct"
           type="button"
           value="7"
         >
+          <span
+            class="index"
+          >
+            06
+          </span>
           six
         </button>
         <button
-          class="button correct"
+          class="word correct"
           type="button"
           value="6"
         >
+          <span
+            class="index"
+          >
+            07
+          </span>
           seven
         </button>
         <button
-          class="button correct"
+          class="word correct"
+          type="button"
+          value="0"
+        >
+          <span
+            class="index"
+          >
+            08
+          </span>
+          eight
+        </button>
+        <button
+          class="word correct"
+          type="button"
+          value="4"
+        >
+          <span
+            class="index"
+          >
+            09
+          </span>
+          nine
+        </button>
+        <button
+          class="word correct"
+          type="button"
+          value="8"
+        >
+          <span
+            class="index"
+          >
+            10
+          </span>
+          ten
+        </button>
+        <button
+          class="word correct"
+          type="button"
+          value="1"
+        >
+          <span
+            class="index"
+          >
+            11
+          </span>
+          eleven
+        </button>
+        <button
+          class="word correct"
+          type="button"
+          value="10"
+        >
+          <span
+            class="index"
+          >
+            12
+          </span>
+          twelve
+        </button>
+      </div>
+      <div
+        class="selectableWords"
+      >
+        <button
+          class="word"
+          disabled=""
           type="button"
           value="0"
         >
           eight
         </button>
         <button
-          class="button correct"
-          type="button"
-          value="4"
-        >
-          nine
-        </button>
-        <button
-          class="button correct"
-          type="button"
-          value="8"
-        >
-          ten
-        </button>
-        <button
-          class="button correct"
+          class="word"
+          disabled=""
           type="button"
           value="1"
         >
           eleven
         </button>
         <button
-          class="button correct"
+          class="word"
+          disabled=""
+          type="button"
+          value="2"
+        >
+          five
+        </button>
+        <button
+          class="word"
+          disabled=""
+          type="button"
+          value="3"
+        >
+          four
+        </button>
+        <button
+          class="word"
+          disabled=""
+          type="button"
+          value="4"
+        >
+          nine
+        </button>
+        <button
+          class="word"
+          disabled=""
+          type="button"
+          value="5"
+        >
+          one
+        </button>
+        <button
+          class="word"
+          disabled=""
+          type="button"
+          value="6"
+        >
+          seven
+        </button>
+        <button
+          class="word"
+          disabled=""
+          type="button"
+          value="7"
+        >
+          six
+        </button>
+        <button
+          class="word"
+          disabled=""
+          type="button"
+          value="8"
+        >
+          ten
+        </button>
+        <button
+          class="word"
+          disabled=""
+          type="button"
+          value="9"
+        >
+          three
+        </button>
+        <button
+          class="word"
+          disabled=""
           type="button"
           value="10"
         >
           twelve
         </button>
+        <button
+          class="word"
+          disabled=""
+          type="button"
+          value="11"
+        >
+          two
+        </button>
       </div>
-      <hr />
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="0"
+      <a
+        class="cancel"
+        href="/"
       >
-        eight
-      </button>
+        Cancel
+      </a>
       <button
-        class="button"
-        disabled=""
-        type="button"
-        value="1"
-      >
-        eleven
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="2"
-      >
-        five
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="3"
-      >
-        four
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="4"
-      >
-        nine
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="5"
-      >
-        one
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="6"
-      >
-        seven
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="7"
-      >
-        six
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="8"
-      >
-        ten
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="9"
-      >
-        three
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="10"
-      >
-        twelve
-      </button>
-      <button
-        class="button"
-        disabled=""
-        type="button"
-        value="11"
-      >
-        two
-      </button>
-      <p
-        class="error"
-      />
-      <button
+        class="submit"
         type="submit"
       >
         Next Step
       </button>
     </form>
-    <p>
-      <a
-        href="/"
-      >
-        Cancel
-      </a>
-    </p>
     <button
       aria-label="Back"
       class="linkBack"
@@ -228,117 +293,123 @@ exports[`VerifyBackupPhrase should render 1`] = `
   <main
     class="container"
   >
-    <h1>
+    <h1
+      class="heading"
+    >
       Check my Backup Phrase
     </h1>
-    <h3>
+    <p
+      class="info"
+    >
       To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order
-    </h3>
+    </p>
     <form>
       <div
-        class="selectedWordsContainer"
+        class="selectedWords"
+        id="selected-words"
       />
-      <hr />
-      <button
-        class="button"
-        type="button"
-        value="0"
+      <div
+        class="selectableWords"
       >
-        eight
-      </button>
-      <button
-        class="button"
-        type="button"
-        value="1"
+        <button
+          class="word"
+          type="button"
+          value="0"
+        >
+          eight
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="1"
+        >
+          eleven
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="2"
+        >
+          five
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="3"
+        >
+          four
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="4"
+        >
+          nine
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="5"
+        >
+          one
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="6"
+        >
+          seven
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="7"
+        >
+          six
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="8"
+        >
+          ten
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="9"
+        >
+          three
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="10"
+        >
+          twelve
+        </button>
+        <button
+          class="word"
+          type="button"
+          value="11"
+        >
+          two
+        </button>
+      </div>
+      <a
+        class="cancel"
+        href="/"
       >
-        eleven
-      </button>
+        Cancel
+      </a>
       <button
-        class="button"
-        type="button"
-        value="2"
-      >
-        five
-      </button>
-      <button
-        class="button"
-        type="button"
-        value="3"
-      >
-        four
-      </button>
-      <button
-        class="button"
-        type="button"
-        value="4"
-      >
-        nine
-      </button>
-      <button
-        class="button"
-        type="button"
-        value="5"
-      >
-        one
-      </button>
-      <button
-        class="button"
-        type="button"
-        value="6"
-      >
-        seven
-      </button>
-      <button
-        class="button"
-        type="button"
-        value="7"
-      >
-        six
-      </button>
-      <button
-        class="button"
-        type="button"
-        value="8"
-      >
-        ten
-      </button>
-      <button
-        class="button"
-        type="button"
-        value="9"
-      >
-        three
-      </button>
-      <button
-        class="button"
-        type="button"
-        value="10"
-      >
-        twelve
-      </button>
-      <button
-        class="button"
-        type="button"
-        value="11"
-      >
-        two
-      </button>
-      <p
-        class="error"
-      />
-      <button
+        class="submit"
+        disabled=""
         type="submit"
       >
         Next Step
       </button>
     </form>
-    <p>
-      <a
-        href="/"
-      >
-        Cancel
-      </a>
-    </p>
     <button
       aria-label="Back"
       class="linkBack"

@@ -51,27 +51,24 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      if (!allWordsSelected || error) {
-        return;
-      }
       history.push(paths.account.create.password);
     },
-    [allWordsSelected, error, history],
+    [history],
   );
 
   return (
     <main className={styles.container}>
-      <h1>{t('view_VerifyBackupPhrase_heading')}</h1>
-      <h3>{t('view_VerifyBackupPhrase_explanation')}</h3>
+      <h1 className={styles.heading}>{t('view_VerifyBackupPhrase_heading')}</h1>
+      <p className={styles.info}>{t('view_VerifyBackupPhrase_explanation')}</p>
 
       <form onSubmit={handleSubmit}>
-        <div className={styles.selectedWordsContainer}>
+        <div className={styles.selectedWords} id="selected-words">
           {selectedIndexes.map((selectedIndex, index) => (
             <button
               type="button"
               key={selectedIndex}
               value={selectedIndex}
-              className={cx(styles.button, {
+              className={cx(styles.word, {
                 [styles.incorrect]:
                   selectableWords[selectedIndex] !== expectedWords[index],
                 [styles.correct]:
@@ -79,30 +76,48 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
               })}
               onClick={unselectWord}
             >
+              {selectableWords[selectedIndex] === expectedWords[index] && (
+                <span className={styles.index}>
+                  {(index + 1).toString().padStart(2, '0')}
+                </span>
+              )}
               {selectableWords[selectedIndex]}
             </button>
           ))}
+          {error && (
+            <output htmlFor="selected-words" className={styles.tooltip}>
+              {error}
+              <span className={styles.pointer} />
+            </output>
+          )}
         </div>
-        <hr />
-        {selectableWords.map((word, index) => (
-          <button
-            type="button"
-            disabled={selectedIndexes.includes(index)}
-            key={index}
-            value={index}
-            className={styles.button}
-            onClick={selectWord}
-          >
-            {word}
-          </button>
-        ))}
-        <p className={styles.error}>{error}</p>
-        <button type="submit">{t('common_action_next')}</button>
-      </form>
 
-      <p>
-        <Link to={paths.home}>{t('common_action_cancel')}</Link>
-      </p>
+        <div className={styles.selectableWords}>
+          {selectableWords.map((word, index) => (
+            <button
+              type="button"
+              disabled={selectedIndexes.includes(index)}
+              key={index}
+              value={index}
+              className={styles.word}
+              onClick={selectWord}
+            >
+              {word}
+            </button>
+          ))}
+        </div>
+
+        <Link to={paths.home} className={styles.cancel}>
+          {t('common_action_cancel')}
+        </Link>
+        <button
+          type="submit"
+          disabled={!allWordsSelected || Boolean(error)}
+          className={styles.submit}
+        >
+          {t('common_action_next')}
+        </button>
+      </form>
 
       <LinkBack />
     </main>

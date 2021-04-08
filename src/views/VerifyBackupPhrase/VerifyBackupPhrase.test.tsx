@@ -20,11 +20,11 @@ describe('VerifyBackupPhrase', () => {
   it('should indicate the correct word', async () => {
     render(<VerifyBackupPhrase backupPhrase={backupPhrase} />);
     userEvent.click(await screen.findByRole('button', { name: 'one' }));
+    expect(await screen.findByRole('button', { name: '01 one' })).toHaveClass(
+      'correct',
+    );
     expect(
-      (await screen.findAllByRole('button', { name: 'one' }))[0],
-    ).toHaveClass('correct');
-    expect(
-      screen.queryByText('The order of the backup phrase is not correct'),
+      screen.queryByText('Please put every word in the correct order'),
     ).not.toBeInTheDocument();
   });
 
@@ -35,7 +35,7 @@ describe('VerifyBackupPhrase', () => {
       (await screen.findAllByRole('button', { name: 'seven' }))[0],
     ).toHaveClass('incorrect');
     expect(
-      await screen.findByText('The order of the backup phrase is not correct'),
+      await screen.findByText('Please put every word in the correct order'),
     ).toBeInTheDocument();
   });
 
