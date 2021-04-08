@@ -173,16 +173,8 @@
   "view_ImportBackupPhrase_error_backup_phrase_length": {
     "message": "Please insert all the words of the backup phrase"
   },
-  "view_ImportBackupPhrase_error_invalid_word": {
-    "message": "It looks like there’s a typo in word $number$: “$word$”",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      },
-      "word": {
-        "content": "$2"
-      }
-    }
+  "view_ImportBackupPhrase_error_typo": {
+    "message": "It looks like there’s a typo in this word"
   },
   "view_CreatePassword_heading": {
     "message": "Your account password"

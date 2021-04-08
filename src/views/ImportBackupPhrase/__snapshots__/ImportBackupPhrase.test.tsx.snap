@@ -5,202 +5,172 @@ exports[`ImportBackupPhrase should render for import 1`] = `
   <section
     class="container"
   >
-    <div>
-      <h3>
-        [Insert logo here]
-      </h3>
-    </div>
-    <h1>
+    <h1
+      class="heading"
+    >
       Import an Account
     </h1>
-    <p>
+    <p
+      class="info"
+    >
       To import a Sporran account, you will need a pre-existing backup phrase consisting of 12-words
     </p>
     <form
       autocomplete="off"
     >
-      <ul
+      <ol
         class="items"
       >
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            1
-            <input
-              class="input"
-              name="0"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="1"
+            class="input"
+            id="0"
+            name="0"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            2
-            <input
-              class="input"
-              name="1"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="2"
+            class="input"
+            id="1"
+            name="1"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            3
-            <input
-              class="input"
-              name="2"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="3"
+            class="input"
+            id="2"
+            name="2"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            4
-            <input
-              class="input"
-              name="3"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="4"
+            class="input"
+            id="3"
+            name="3"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            5
-            <input
-              class="input"
-              name="4"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="5"
+            class="input"
+            id="4"
+            name="4"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            6
-            <input
-              class="input"
-              name="5"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="6"
+            class="input"
+            id="5"
+            name="5"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            7
-            <input
-              class="input"
-              name="6"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="7"
+            class="input"
+            id="6"
+            name="6"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            8
-            <input
-              class="input"
-              name="7"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="8"
+            class="input"
+            id="7"
+            name="7"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            9
-            <input
-              class="input"
-              name="8"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="9"
+            class="input"
+            id="8"
+            name="8"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            10
-            <input
-              class="input"
-              name="9"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="10"
+            class="input"
+            id="9"
+            name="9"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            11
-            <input
-              class="input"
-              name="10"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="11"
+            class="input"
+            id="10"
+            name="10"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            12
-            <input
-              class="input"
-              name="11"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="12"
+            class="input"
+            id="11"
+            name="11"
+            type="text"
+          />
         </li>
-      </ul>
-      <div
-        class="buttonContainer"
+      </ol>
+      <button
+        class="button"
+        disabled=""
+        type="submit"
       >
-        <button
-          disabled=""
-          type="submit"
-        >
-          Next Step
-        </button>
-      </div>
+        Next Step
+      </button>
+      <output
+        class="tooltip"
+        style="position: absolute; left: 0px; top: 0px;"
+      >
+        <span
+          class="pointer"
+          data-popper-arrow="true"
+          style="position: absolute;"
+        />
+      </output>
     </form>
     <button
       aria-label="Back"
@@ -208,13 +178,6 @@ exports[`ImportBackupPhrase should render for import 1`] = `
       title="Back"
       type="button"
     />
-    <p>
-      <a
-        href="/"
-      >
-        Cancel
-      </a>
-    </p>
   </section>
 </div>
 `;
@@ -224,202 +187,172 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
   <section
     class="container"
   >
-    <div>
-      <h3>
-        [Insert logo here]
-      </h3>
-    </div>
-    <h1>
+    <h1
+      class="heading"
+    >
       Set a new password
     </h1>
-    <p>
+    <p
+      class="info"
+    >
       In order to set a new password you have to re-enter your backup phrase
     </p>
     <form
       autocomplete="off"
     >
-      <ul
+      <ol
         class="items"
       >
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            1
-            <input
-              class="input"
-              name="0"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="1"
+            class="input"
+            id="0"
+            name="0"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            2
-            <input
-              class="input"
-              name="1"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="2"
+            class="input"
+            id="1"
+            name="1"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            3
-            <input
-              class="input"
-              name="2"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="3"
+            class="input"
+            id="2"
+            name="2"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            4
-            <input
-              class="input"
-              name="3"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="4"
+            class="input"
+            id="3"
+            name="3"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            5
-            <input
-              class="input"
-              name="4"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="5"
+            class="input"
+            id="4"
+            name="4"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            6
-            <input
-              class="input"
-              name="5"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="6"
+            class="input"
+            id="5"
+            name="5"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            7
-            <input
-              class="input"
-              name="6"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="7"
+            class="input"
+            id="6"
+            name="6"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            8
-            <input
-              class="input"
-              name="7"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="8"
+            class="input"
+            id="7"
+            name="7"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            9
-            <input
-              class="input"
-              name="8"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="9"
+            class="input"
+            id="8"
+            name="8"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            10
-            <input
-              class="input"
-              name="9"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="10"
+            class="input"
+            id="9"
+            name="9"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            11
-            <input
-              class="input"
-              name="10"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="11"
+            class="input"
+            id="10"
+            name="10"
+            type="text"
+          />
         </li>
         <li
-          class="neutral"
+          class="item"
         >
-          <label
-            class="item"
-          >
-            12
-            <input
-              class="input"
-              name="11"
-              type="text"
-            />
-          </label>
+          <input
+            aria-label="12"
+            class="input"
+            id="11"
+            name="11"
+            type="text"
+          />
         </li>
-      </ul>
-      <div
-        class="buttonContainer"
+      </ol>
+      <button
+        class="button"
+        disabled=""
+        type="submit"
       >
-        <button
-          disabled=""
-          type="submit"
-        >
-          Next Step
-        </button>
-      </div>
+        Next Step
+      </button>
+      <output
+        class="tooltip"
+        style="position: absolute; left: 0px; top: 0px;"
+      >
+        <span
+          class="pointer"
+          data-popper-arrow="true"
+          style="position: absolute;"
+        />
+      </output>
     </form>
     <button
       aria-label="Back"
@@ -427,13 +360,6 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
       title="Back"
       type="button"
     />
-    <p>
-      <a
-        href="/"
-      >
-        Cancel
-      </a>
-    </p>
   </section>
 </div>
 `;

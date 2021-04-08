@@ -2,6 +2,7 @@ declare namespace UseErrorTooltipModuleCssNamespace {
   export interface IUseErrorTooltipModuleCss {
     pointer: string;
     tooltip: string;
+    variables: string;
     visible: string;
   }
 }

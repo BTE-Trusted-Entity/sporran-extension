@@ -9,7 +9,7 @@ const invalidBackupPhrase = 'The entered backup phrase doesn’t exist';
 const mismatchingBackupPhrase = 'This is not the backup phrase of this account';
 const backupPhraseNotLongEnough =
   'Please insert all the words of the backup phrase';
-const typo = 'It looks like there’s a typo in word $number$: “$word$”';
+const typo = 'It looks like there’s a typo in this word';
 
 const props = {
   onImport,
@@ -50,10 +50,8 @@ describe('ImportBackupPhrase', () => {
     render(<ImportBackupPhrase {...props} />);
 
     userEvent.type(await screen.findByLabelText('1'), 'oooooo');
-    userEvent.click(await screen.findByText('Next Step'));
 
     expect(await screen.findByText(typo)).toBeInTheDocument();
-    expect(onImport).not.toHaveBeenCalled();
   });
 
   it('should ignore whitespace and be case-insensitive', async () => {

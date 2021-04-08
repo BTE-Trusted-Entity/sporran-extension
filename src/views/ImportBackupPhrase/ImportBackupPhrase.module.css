@@ -1,54 +1,81 @@
 .container {
   padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  margin: 0;
+}
+
+.info {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  text-align: center;
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 .items {
-  display: block;
-  columns: 2;
-  width: 25rem;
+  height: calc(264rem / 16);
+  width: calc(284rem / 16);
+  list-style-type: decimal-leading-zero;
+  list-style-position: inside;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.item::marker {
+  /* composes: smallImportant from '../../components/Typography/Typography.module.css'; */
+  font-family: 'Montserrat Medium', sans-serif;
+  font-size: 0.875rem;
+  color: var(--color-orange);
 }
 
 .item {
-  display: block;
-  margin-bottom: 1rem;
-}
-
-.word {
-  visibility: hidden;
-}
-
-.buttonContainer {
-  display: block;
-}
-
-.neutral {
-  float: inline-start;
-  font-size: medium;
-}
-
-.pass {
-  color: green;
-  list-style-type: '✔ ️';
-}
-
-.fail {
-  color: red;
-  list-style-type: '❌ ️';
+  composes: input from '../../components/Input/Input.module.css';
+  box-sizing: border-box;
+  width: 8.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.375rem 1rem;
 }
 
 .input {
-  float: inline-end;
-  border: 0;
-  border-bottom: 1px solid black;
+  composes: inputText from '../../components/Typography/Typography.module.css';
+  position: relative;
+  top: -1.625rem;
+  left: -1rem;
+  width: 4.5rem;
+  height: 2rem;
+  padding-top: 0;
+  border: 0 solid transparent;
+  border-left-width: 3rem;
+  border-right-width: 1rem;
   background: none;
-  cursor: pointer;
-  text-align: left;
 }
 
-.fail .input { 
-  color: red;
+.tooltip {
+  composes: tooltip from '../../components/useErrorMessage/useErrorTooltip.module.css';
+  display: inline;
+  position: relative;
+  top: -1.75rem;
+  white-space: nowrap;
+  left: -100%;
 }
 
-.pass .input {
-  color: green;
+.pointer {
+  composes: pointer from '../../components/useErrorMessage/useErrorTooltip.module.css';
+  display: block;
+  position: absolute;
+  top: -.25rem;
+  left: 50%;
+}
+
+.button {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+  width: calc(210rem / 16);
+  display: block;
+  margin: 0 auto;
 }
