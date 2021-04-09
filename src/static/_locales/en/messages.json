@@ -153,7 +153,7 @@
     "message": "To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order"
   },
   "view_VerifyBackupPhrase_error": {
-    "message": "The order of the backup phrase is not correct"
+    "message": "Please put every word in the correct order"
   },
   "view_ImportBackupPhrase_heading_import": {
     "message": "Import an Account"
