@@ -24,7 +24,6 @@
 
 .item {
   composes: smallImportant from '../../components/Typography/Typography.module.css';
-  display: list-item;
   margin-bottom: 1.125rem;
   width: 8.5rem;
   height: 1.5rem;
@@ -35,8 +34,7 @@
   background-repeat: no-repeat;
   background-position: right;
   background-image: url('../../components/images/eye-closed.svg');
-  list-style: inside;
-  list-style-type: decimal-leading-zero;
+  list-style: inside decimal-leading-zero;
 }
 
 .word {
