@@ -1,8 +1,15 @@
 declare namespace CreatePasswordModuleCssNamespace {
   export interface ICreatePasswordModuleCss {
-    errors: string;
-    fail: string;
+    cancel: string;
+    container: string;
+    criteria: string;
+    criteriaHeading: string;
+    heading: string;
+    input: string;
+    inputLine: string;
     pass: string;
+    subline: string;
+    submit: string;
   }
 }
 
