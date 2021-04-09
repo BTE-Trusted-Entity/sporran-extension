@@ -24,4 +24,7 @@
   padding: 0 2rem;
   background: none;
   text-decoration: underline;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }

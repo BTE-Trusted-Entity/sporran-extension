@@ -78,7 +78,4 @@
 .cancel {
   composes: buttonSecondary from '../../components/Button/Button.module.css';
   width: 4.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
