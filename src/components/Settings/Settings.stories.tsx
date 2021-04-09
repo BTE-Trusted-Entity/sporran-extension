@@ -1,12 +1,21 @@
 import { Meta } from '@storybook/react';
+import { MemoryRouter } from 'react-router-dom';
+
+import { AccountsProviderMock } from '../../testing/AccountsProviderMock';
+import menuStyles from '../Menu/Menu.module.css';
 
 import { Settings } from './Settings';
-import { AccountsProviderMock } from '../../testing/AccountsProviderMock';
-import { MemoryRouter } from 'react-router-dom';
 
 export default {
   title: 'Components/Settings',
   component: Settings,
+  decorators: [
+    (Story) => (
+      <div className={menuStyles.wrapper} style={{ float: 'right' }}>
+        <Story />
+      </div>
+    ),
+  ],
 } as Meta;
 
 export function NoAccounts(): JSX.Element {

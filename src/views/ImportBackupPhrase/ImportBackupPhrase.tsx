@@ -1,12 +1,10 @@
-import { useCallback, useState } from 'react';
+import { ChangeEventHandler, useCallback, useState } from 'react';
 import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/bip39-en';
 import { Identity } from '@kiltprotocol/core';
 import { browser } from 'webextension-polyfill-ts';
-import { Link } from 'react-router-dom';
-import cx from 'classnames';
 
+import { useErrorTooltip } from '../../components/useErrorMessage/useErrorTooltip';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
-import { paths } from '../paths';
 
 import styles from './ImportBackupPhrase.module.css';
 
@@ -48,28 +46,35 @@ function isMalformed(backupPhrase: BackupPhrase): string | null {
   return t('view_ImportBackupPhrase_error_backup_phrase_length');
 }
 
-function hasInvalidWord(backupPhrase: BackupPhrase): string | null {
-  const invalidWord = backupPhrase.find((value) => !isAllowed(value));
-  if (!invalidWord) {
-    return null;
-  }
-
-  const t = browser.i18n.getMessage;
-  const invalidWordIndex = backupPhrase.indexOf(invalidWord);
-  return t('view_ImportBackupPhrase_error_invalid_word', [
-    invalidWordIndex + 1,
-    invalidWord,
-  ]);
+interface WordInputProps {
+  word: string;
+  index: number;
+  handleInput: ChangeEventHandler<HTMLInputElement>;
 }
 
-function makeClasses(word: string): string {
-  const empty = word === '';
-  const allowed = isAllowed(word);
-  return cx({
-    [styles.neutral]: empty,
-    [styles.pass]: !empty && allowed,
-    [styles.fail]: !empty && !allowed,
-  });
+function WordInput({ word, index, handleInput }: WordInputProps): JSX.Element {
+  const t = browser.i18n.getMessage;
+
+  const hasError = Boolean(word && !isAllowed(word));
+
+  return (
+    <li className={styles.item}>
+      <input
+        aria-label={(index + 1).toString()}
+        id={index.toString()}
+        name={index.toString()}
+        className={styles.input}
+        type="text"
+        onInput={handleInput}
+      />
+      {hasError && (
+        <output htmlFor={index.toString()} className={styles.tooltip}>
+          {t('view_ImportBackupPhrase_error_typo')}
+          <span className={styles.pointer} />
+        </output>
+      )}
+    </li>
+  );
 }
 
 interface Props {
@@ -93,17 +98,18 @@ export function ImportBackupPhrase({
   const error =
     modified &&
     [
-      hasInvalidWord(backupPhrase),
       isMalformed(backupPhrase),
       isInvalid(backupPhrase, type === 'reset' ? address : undefined),
     ].filter(Boolean)[0];
+
+  const errorTooltip = useErrorTooltip(Boolean(error));
 
   const handleInput = useCallback(
     (event) => {
       const { name, value } = event.target;
       backupPhrase[name] = value.trim().toLowerCase();
       setBackupPhrase([...backupPhrase]);
-      setModified(true);
+      setModified(backupPhrase.join('') !== '');
     },
     [backupPhrase],
   );
@@ -122,57 +128,54 @@ export function ImportBackupPhrase({
 
   return (
     <section className={styles.container}>
-      <div>
-        <h3>[Insert logo here]</h3>
-      </div>
-
       {type === 'import' && (
         <>
-          <h1>{t('view_ImportBackupPhrase_heading_import')}</h1>
-          <p>{t('view_ImportBackupPhrase_explanation_import')}</p>
+          <h1 className={styles.heading}>
+            {t('view_ImportBackupPhrase_heading_import')}
+          </h1>
+          <p className={styles.info}>
+            {t('view_ImportBackupPhrase_explanation_import')}
+          </p>
         </>
       )}
       {type === 'reset' && (
         <>
-          <h1>{t('view_ImportBackupPhrase_heading_reset')}</h1>
-          <p>{t('view_ImportBackupPhrase_explanation_reset')}</p>
+          <h1 className={styles.heading}>
+            {t('view_ImportBackupPhrase_heading_reset')}
+          </h1>
+          <p className={styles.info}>
+            {t('view_ImportBackupPhrase_explanation_reset')}
+          </p>
         </>
       )}
 
       <form onSubmit={handleSubmit} autoComplete="off">
-        <ul className={styles.items}>
+        <ol className={styles.items}>
           {backupPhrase.map((word, index) => (
-            <li key={index} className={makeClasses(word)}>
-              <label className={styles.item}>
-                {index + 1}
-                <input
-                  name={index.toString()}
-                  className={styles.input}
-                  type="text"
-                  onInput={handleInput}
-                />
-              </label>
-            </li>
+            <WordInput
+              key={index}
+              word={word}
+              index={index}
+              handleInput={handleInput}
+            />
           ))}
-        </ul>
+        </ol>
 
-        {error && <p>{error}</p>}
-
-        <div className={styles.buttonContainer}>
-          <button
-            type="submit"
-            disabled={Boolean(error) || backupPhrase.join('') === ''}
-          >
-            {t('common_action_next')}
-          </button>
-        </div>
+        <button
+          type="submit"
+          className={styles.button}
+          disabled={Boolean(error) || backupPhrase.join('') === ''}
+          {...errorTooltip.anchor}
+        >
+          {t('common_action_next')}
+        </button>
+        <output {...errorTooltip.tooltip}>
+          {error}
+          <span {...errorTooltip.pointer} />
+        </output>
       </form>
 
       <LinkBack />
-
-      <p>
-        <Link to={paths.home}>{t('common_action_cancel')}</Link>
-      </p>
     </section>
   );
 }

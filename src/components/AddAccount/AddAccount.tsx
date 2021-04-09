@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
@@ -5,6 +6,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { paths } from '../../views/paths';
 import { useAccounts } from '../../utilities/accounts/accounts';
 
+import menuStyles from '../Menu/Menu.module.css';
 import styles from './AddAccount.module.css';
 
 export function AddAccount(): JSX.Element | null {
@@ -13,35 +15,40 @@ export function AddAccount(): JSX.Element | null {
   const accounts = useAccounts().data;
   const hasAccounts = accounts && Object.values(accounts).length > 0;
 
-  const { buttonProps, itemProps, isOpen } = useDropdownMenu(2);
+  const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(2);
+
+  const handleClick = useCallback(() => {
+    setIsOpen(false);
+  }, [setIsOpen]);
 
   if (!hasAccounts) {
     return null;
   }
 
   return (
-    <nav className={styles.container}>
+    <div className={menuStyles.wrapper}>
       <button
         {...buttonProps}
         type="button"
-        className={styles.button}
+        className={styles.toggle}
         title={t('component_AddAccount_label')}
         aria-label={t('component_AddAccount_label')}
-      >
-        +
-      </button>
+      />
+
       {isOpen && (
-        <div className={styles.menu} role="menu">
-          <h4 className={styles.menuHeading}>
+        <div className={menuStyles.dropdown} role="menu" onClick={handleClick}>
+          <h4 className={menuStyles.heading}>
             {t('component_AddAccount_label')}
           </h4>
-          <ul className={styles.list}>
-            <li className={styles.listItem}>
+
+          <ul className={menuStyles.list}>
+            <li className={menuStyles.listItem}>
               <Link {...itemProps[0]} to={paths.account.create.start}>
                 {t('component_AddAccount_create')}
               </Link>
             </li>
-            <li className={styles.listItem}>
+
+            <li className={menuStyles.listItem}>
               <Link {...itemProps[1]} to={paths.account.import.start}>
                 {t('component_AddAccount_import')}
               </Link>
@@ -49,6 +56,6 @@ export function AddAccount(): JSX.Element | null {
           </ul>
         </div>
       )}
-    </nav>
+    </div>
   );
 }

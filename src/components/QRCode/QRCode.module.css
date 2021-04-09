@@ -1,0 +1,25 @@
+:global .QRCode-cell-empty {
+  fill: var(--color-white);
+}
+
+:global .QRCode-cell-filled {
+  fill: var(--color-pink);
+}
+
+.component {
+  position: relative;
+  display: inline-block;
+  padding: 3%;
+  background: var(--color-white);
+}
+
+.logo {
+  --size: 20%;
+  position: absolute;
+  height: var(--size);
+  width: var(--size);
+  top: calc((100% - var(--size)) / 2);
+  left: calc((100% - var(--size)) / 2);
+  background: var(--color-white) url("../images/kilt-logo.svg") no-repeat 100% center/contain;
+  box-shadow: 0 0 .5rem .5rem var(--color-white);
+}

@@ -1,11 +1,18 @@
 declare namespace VerifyBackupPhraseModuleCssNamespace {
   export interface IVerifyBackupPhraseModuleCss {
-    button: string;
+    cancel: string;
     container: string;
     correct: string;
-    error: string;
+    heading: string;
     incorrect: string;
-    selectedWordsContainer: string;
+    index: string;
+    info: string;
+    pointer: string;
+    selectableWords: string;
+    selectedWords: string;
+    submit: string;
+    tooltip: string;
+    word: string;
   }
 }
 

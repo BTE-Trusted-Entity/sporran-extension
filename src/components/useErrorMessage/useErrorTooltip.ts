@@ -24,12 +24,12 @@ interface useErrorTooltipType {
 export function useErrorTooltip(visible: boolean): useErrorTooltipType {
   const anchorRef = useRef(null);
   const pointerRef = useRef(null);
-  const popperRef = useRef(null);
+  const tooltipRef = useRef(null);
 
   const modifier = { name: 'arrow', options: { element: pointerRef.current } };
   const { styles, attributes } = usePopper(
     anchorRef.current,
-    popperRef.current,
+    tooltipRef.current,
     { modifiers: [modifier] },
   );
 
@@ -42,7 +42,7 @@ export function useErrorTooltip(visible: boolean): useErrorTooltipType {
       'data-popper-arrow': true,
     },
     tooltip: {
-      ref: popperRef,
+      ref: tooltipRef,
       style: styles.popper,
       className: cx(moreStyles.tooltip, visible && moreStyles.visible),
       ...attributes.popper,

@@ -6,10 +6,11 @@ module.exports = {
   addons: [
     '@storybook/addon-actions/register',
     '@storybook/addon-viewport/register',
+    '@storybook/addon-controls/register',
   ],
   webpackFinal: async (config) => {
     const cssLoaderOptions = config.module.rules.flatMap(({ use }) => use).find(l => /\bcss-loader\b/.test(l?.loader)).options;
-    cssLoaderOptions.modules = true;
+    cssLoaderOptions.modules = { auto: true };
 
     config.module.rules.push({
       test: /\.mjs$/,

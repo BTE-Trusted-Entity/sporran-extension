@@ -1,32 +1,10 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  right: 2rem;
-}
+.toggle {
+  composes: toggle from '../../components/Menu/Menu.module.css';
 
-.button {
-  align-self: flex-end;
-}
-
-.menu {
-  width: 10rem;
-  border: 1px solid black;
-}
-
-.menuHeading {
-  background: lightgrey;
-  margin: 0;
-  padding: 0.25rem;
-}
-
-.list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.listItem {
-  padding: 0.25rem;
-  border-top: 1px solid black;
+  display: inline-flex;
+  width: 1.625rem;
+  height: 1.625rem;
+  border: 0;
+  padding: 0;
+  background: url('../../components/images/plus-circle.svg') no-repeat center;
 }

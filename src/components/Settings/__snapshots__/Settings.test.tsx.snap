@@ -2,27 +2,25 @@
 
 exports[`Settings menu should be visible when menu button clicked 1`] = `
 <div>
-  <nav
-    class="container"
+  <div
+    class="wrapper"
   >
     <button
       aria-expanded="true"
       aria-haspopup="true"
       aria-label="Settings"
-      class="button"
+      class="toggle"
       role="button"
       tabindex="0"
       title="Settings"
       type="button"
-    >
-      ⚙
-    </button>
+    />
     <div
-      class="menu"
+      class="dropdown"
       role="menu"
     >
       <h4
-        class="menuHeading"
+        class="heading"
       >
         Settings
       </h4>
@@ -73,33 +71,31 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
         <li
           class="listItem"
         >
-          <p>
+          <a>
             Version $version$
-          </p>
+          </a>
         </li>
       </ul>
     </div>
-  </nav>
+  </div>
 </div>
 `;
 
 exports[`Settings should render 1`] = `
 <div>
-  <nav
-    class="container"
+  <div
+    class="wrapper"
   >
     <button
       aria-expanded="false"
       aria-haspopup="true"
       aria-label="Settings"
-      class="button"
+      class="toggle"
       role="button"
       tabindex="0"
       title="Settings"
       type="button"
-    >
-      ⚙
-    </button>
-  </nav>
+    />
+  </div>
 </div>
 `;

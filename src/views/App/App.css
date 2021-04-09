@@ -1,5 +1,7 @@
 /* Note this is not a CSS Modules file, the styles here will be applied globally */
 
+@import '~dialog-polyfill/dist/dialog-polyfill.css';
+
 :root {
   --color-pink: #8C145A;
   --color-orange: #EF5A28;
@@ -10,28 +12,32 @@
   --color-grey-medium: #A8A8A8;
   --color-black: black;
   --color-white: white;
+
+  --popup-width: 480px;
+  --popup-height: 600px;
+
   font-size: 16px;
 }
 
 @font-face {
-  font-family: "Montserrat Bold";
+  font-family: 'Montserrat Bold';
   font-weight: bold;
-  src: url("./fonts/Montserrat-Bold.woff2") format("woff2");
+  src: url('./fonts/Montserrat-Bold.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: "Montserrat SemiBold";
+  font-family: 'Montserrat SemiBold';
   font-weight: 600;
-  src: url("./fonts/Montserrat-SemiBold.woff2") format("woff2");
+  src: url('./fonts/Montserrat-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: "Montserrat Medium";
+  font-family: 'Montserrat Medium';
   font-weight: 500;
-  src: url("./fonts/Montserrat-Medium.woff2") format("woff2");
+  src: url('./fonts/Montserrat-Medium.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: "Roboto Mono";
-  src: url(fonts/Roboto-Mono.woff2) format("woff2");
+  font-family: 'Roboto Mono';
+  src: url(fonts/Roboto-Mono.woff2) format('woff2');
 }
