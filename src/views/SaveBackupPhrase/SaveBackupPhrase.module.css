@@ -48,7 +48,6 @@
 .item::marker {
   display: inline-block;
   font-size: 1.125rem;
-  font-variant-numeric: normal;
   width: 1.875rem;
 }
 
