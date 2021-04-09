@@ -1,29 +1,77 @@
 .container {
-  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  margin: 0;
+}
+
+.subheading {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  text-align: center;
+  margin: 0 0 1rem;
 }
 
 .items {
   columns: 2;
-  width: 25rem;
+  width: 17.75rem;
+  padding: 0;
 }
 
 .item {
-  display: block;
-  margin-bottom: 1rem;
-  width: 10rem;
+  composes: smallImportant from '../../components/Typography/Typography.module.css';
+  margin-bottom: 1.125rem;
+  width: 8.5rem;
   height: 1.5rem;
   border: 0;
-  border-bottom: 1px solid black;
+  border-bottom: 2px dashed var(--color-grey-light);
   cursor: pointer;
-  background: none;
   text-align: left;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-image: url('../../components/images/eye-closed.svg');
+  list-style: inside decimal-leading-zero;
 }
 
 .word {
-  visibility: hidden;
+  composes: subline from '../../components/Typography/Typography.module.css';
+  font-size: 1rem;
+  filter: blur(3px);
+}
+
+.item::marker {
+  display: inline-block;
+  font-size: 1.125rem;
+  width: 1.875rem;
+}
+
+.item:hover,
+.item:focus {
+  background-image: none;
 }
 
 .item:hover .word,
 .item:focus .word {
-  visibility: visible;
+  filter: none;
+}
+
+.buttons {
+  width: 18rem;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+}
+
+.create {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+  display: inline-block;
+}
+
+.cancel {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
+  width: 4.5rem;
 }

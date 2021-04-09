@@ -1,8 +1,13 @@
 declare namespace SaveBackupPhraseModuleCssNamespace {
   export interface ISaveBackupPhraseModuleCss {
+    buttons: string;
+    cancel: string;
     container: string;
+    create: string;
+    heading: string;
     item: string;
     items: string;
+    subheading: string;
     word: string;
   }
 }
