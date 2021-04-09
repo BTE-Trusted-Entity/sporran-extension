@@ -25,7 +25,7 @@
   flex-wrap: wrap;
   width: 100%;
   height: calc(120rem / 16);
-  padding: calc(calc(18rem / 16) - calc(3rem / 16)) 1rem;
+  padding: 1rem 1rem;
   margin-bottom: 1.5rem;
 }
 
@@ -40,28 +40,20 @@
   height: 1.5rem;
   border: none;
   border-radius: calc(3rem / 16);
-  box-shadow: 0.0625rem 0.0625rem 0.0625rem 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
   margin: calc(3rem / 16);
-  background: linear-gradient(
-    180deg,
-    var(--color-grey-medium) 0%,
-    var(--color-grey-dark) 100%
-  );
+  background: linear-gradient(var(--color-grey-medium) 0%, #6C6B6B 100%);
   color: var(--color-dark);
   cursor: pointer;
 }
 
-.wordContainer:disabled {
+.word:disabled {
   opacity: 35%;
 }
 
 .correct {
   composes: smallText from '../../components/Typography/Typography.module.css';
-  background: linear-gradient(
-    180deg,
-    var(--color-green) 0%,
-    var(--color-green-dark) 100%
-  );
+  background: linear-gradient(var(--color-green) 0%, #387067 100%);
   color: var(--color-grey-light);
 }
 
@@ -75,22 +67,18 @@
 }
 
 .incorrect {
-  background: linear-gradient(
-    180deg,
-    var(--color-orange) 0%,
-    var(--color-orange-dark) 100%
-  );
+  background: linear-gradient(var(--color-orange) 0%, #BA4822 100%);
   color: var(--color-grey-light);
 }
 
 .incorrect::after {
-  content: 'x';
-  font-size: 0.4rem;
-  width: 0.55rem;
-  height: 0.55rem;
-  line-height: 0.55rem;
-  border: 0.0625rem solid rgba(0, 0, 0, 0.5);
-  box-shadow: 0.0625rem 0.0625rem 0.0625rem 0 rgba(0, 0, 0, 0.4);
+  content: '×';
+  font-size: calc(10rem / 16);
+  width: calc(9rem / 16);
+  height: calc(9rem / 16);
+  line-height: calc(9rem / 16);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
   border-radius: 50%;
   background: var(--color-orange);
   position: absolute;

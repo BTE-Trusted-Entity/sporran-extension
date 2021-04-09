@@ -13,7 +13,6 @@ declare namespace VerifyBackupPhraseModuleCssNamespace {
     submit: string;
     tooltip: string;
     word: string;
-    wordContainer: string;
   }
 }
 

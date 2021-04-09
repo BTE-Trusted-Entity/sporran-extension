@@ -63,27 +63,29 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
 
       <form onSubmit={handleSubmit}>
         <div className={styles.selectedWords} id="selected-words">
-          {selectedIndexes.map((selectedIndex, index) => (
-            <button
-              type="button"
-              key={selectedIndex}
-              value={selectedIndex}
-              className={cx(styles.word, {
-                [styles.incorrect]:
-                  selectableWords[selectedIndex] !== expectedWords[index],
-                [styles.correct]:
-                  selectableWords[selectedIndex] === expectedWords[index],
-              })}
-              onClick={unselectWord}
-            >
-              {selectableWords[selectedIndex] === expectedWords[index] && (
-                <span className={styles.index}>
-                  {(index + 1).toString().padStart(2, '0')}
-                </span>
-              )}
-              {selectableWords[selectedIndex]}
-            </button>
-          ))}
+          {selectedIndexes.map((selectedIndex, index) => {
+            const correct =
+              selectableWords[selectedIndex] === expectedWords[index];
+            return (
+              <button
+                type="button"
+                key={selectedIndex}
+                value={selectedIndex}
+                className={cx(styles.word, {
+                  [styles.incorrect]: !correct,
+                  [styles.correct]: correct,
+                })}
+                onClick={unselectWord}
+              >
+                {correct && (
+                  <span className={styles.index}>
+                    {(index + 1).toString().padStart(2, '0')}
+                  </span>
+                )}
+                {selectableWords[selectedIndex]}
+              </button>
+            );
+          })}
           {error && (
             <output htmlFor="selected-words" className={styles.tooltip}>
               {error}

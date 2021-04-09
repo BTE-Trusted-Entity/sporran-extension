@@ -1,16 +1,13 @@
 /* Note this is not a CSS Modules file, the styles here will be applied globally */
 
 :root {
-  --color-pink: #8c145a;
-  --color-orange: #ef5a28;
-  --color-orange-dark: #ba4822;
-  --color-dark: #4f405c;
-  --color-green: #5ab9aa;
-  --color-green-dark: #387067;
-  --color-light: #c8e3ee;
-  --color-grey-light: #f2efee;
-  --color-grey-medium: #a8a8a8;
-  --color-grey-dark: #6c6b6b;
+  --color-pink: #8C145A;
+  --color-orange: #EF5A28;
+  --color-dark: #4F405C;
+  --color-green: #5AB9AA;
+  --color-light: #C8E3EE;
+  --color-grey-light: #F2EFEE;
+  --color-grey-medium: #A8A8A8;
   --color-black: black;
   --color-white: white;
   font-size: 16px;
