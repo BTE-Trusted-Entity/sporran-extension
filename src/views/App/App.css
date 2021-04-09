@@ -14,24 +14,24 @@
 }
 
 @font-face {
-  font-family: "Montserrat Bold";
+  font-family: 'Montserrat Bold';
   font-weight: bold;
-  src: url("./fonts/Montserrat-Bold.woff2") format("woff2");
+  src: url('./fonts/Montserrat-Bold.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: "Montserrat SemiBold";
+  font-family: 'Montserrat SemiBold';
   font-weight: 600;
-  src: url("./fonts/Montserrat-SemiBold.woff2") format("woff2");
+  src: url('./fonts/Montserrat-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: "Montserrat Medium";
+  font-family: 'Montserrat Medium';
   font-weight: 500;
-  src: url("./fonts/Montserrat-Medium.woff2") format("woff2");
+  src: url('./fonts/Montserrat-Medium.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: "Roboto Mono";
-  src: url(fonts/Roboto-Mono.woff2) format("woff2");
+  font-family: 'Roboto Mono';
+  src: url(fonts/Roboto-Mono.woff2) format('woff2');
 }
