@@ -39,6 +39,27 @@ function isNotExample(value: string): boolean {
   return value !== browser.i18n.getMessage('view_CreatePassword_example');
 }
 
+function getComplexityClassName(password: string): string {
+  const complexity = [
+    hasBothCases(password),
+    hasNumber(password),
+    hasOther(password),
+    isLong(password),
+    isNotExample(password),
+  ].filter(Boolean).length;
+
+  const classNames = [
+    styles.complexityNone,
+    styles.complexityNone,
+    styles.complexityPoor,
+    styles.complexityMedium,
+    styles.complexityGood,
+    styles.complexityOk,
+  ];
+
+  return classNames[complexity];
+}
+
 interface Props {
   onSuccess: (password: string) => void;
 }
@@ -133,6 +154,12 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
           {error}
           <span {...errorTooltip.pointer} />
         </output>
+
+        <div
+          className={`${styles.complexity} ${getComplexityClassName(password)}`}
+        >
+          <div className={styles.lock} />
+        </div>
 
         <p>
           <Link to={paths.home} className={styles.cancel}>
