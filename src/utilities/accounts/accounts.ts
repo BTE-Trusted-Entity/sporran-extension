@@ -7,6 +7,7 @@ import { saveEncrypted } from '../storageEncryption/storageEncryption';
 import { AccountsContext, AccountsContextType } from './AccountsContext';
 import { storage } from './storage';
 import { ACCOUNTS_KEY, getAccounts } from './getAccounts';
+import { NEXT_TARTAN, setNextTartan } from './tartans';
 
 import { Account, AccountsMap } from './types';
 
@@ -17,6 +18,7 @@ const CURRENT_ACCOUNT_KEY = 'currentAccount';
 export const NEW: Account = {
   address: 'NEW',
   name: '',
+  tartan: '',
   index: -1,
 };
 
@@ -86,8 +88,18 @@ export async function createAccount(
   const largestIndex = max(map(accounts, 'index')) || 0;
 
   const index = 1 + largestIndex;
-  const name = 'My Sporran Account';
-  const account = { name, address, index };
+
+  if (index === 1) {
+    await setNextTartan();
+  }
+
+  const tartan = (await storage.get(NEXT_TARTAN))[NEXT_TARTAN] as string;
+  const name = tartan;
+
+  const account = { name, tartan, address, index };
   await saveAccount(account);
+
+  setNextTartan();
+
   return account;
 }

@@ -2,14 +2,10 @@ import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import { AccountOptions } from '../AccountOptions/AccountOptions';
-import { saveAccount } from '../../utilities/accounts/accounts';
+import { Account, saveAccount } from '../../utilities/accounts/accounts';
 
 interface Props {
-  account: {
-    address: string;
-    name: string;
-    index: number;
-  };
+  account: Account;
 }
 
 export function AccountSlide({ account }: Props): JSX.Element {

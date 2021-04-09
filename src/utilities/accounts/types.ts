@@ -1,6 +1,7 @@
 export interface Account {
   address: string;
   name: string;
+  tartan: string;
   index: number;
 }
 
