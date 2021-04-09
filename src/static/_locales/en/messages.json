@@ -229,10 +229,10 @@
   "view_CreatePassword_label": {
     "message": "Please enter your password:"
   },
-  "view_CreatePassword_show": {
+  "component_usePasswordType_show": {
     "message": "Show"
   },
-  "view_CreatePassword_hide": {
+  "component_usePasswordType_hide": {
     "message": "Hide"
   },
   "view_CreatePassword_CTA": {

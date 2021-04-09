@@ -3,6 +3,7 @@ import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
 
 import { LinkBack } from '../../components/LinkBack/LinkBack';
+import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 
 import styles from './CreatePassword.module.css';
 
@@ -45,7 +46,7 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
 
   const [password, setPassword] = useState('');
   const [modified, setModified] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const { passwordType, passwordToggle } = usePasswordType();
 
   const handleInput = useCallback((event) => {
     setPassword(event.target.value);
@@ -63,6 +64,7 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
       !isNotExample(password) &&
       t('view_CreatePassword_error_example'),
   ].filter(Boolean)[0];
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
@@ -74,14 +76,6 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
     },
     [error, modified, onSuccess, password],
   );
-
-  const handleHideClick = useCallback(() => {
-    setVisible(false);
-  }, []);
-
-  const handleShowClick = useCallback(() => {
-    setVisible(true);
-  }, []);
 
   function makeClasses(validator: (value: string) => boolean) {
     const pass = validator(password);
@@ -126,7 +120,7 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
           {t('view_CreatePassword_label')}
           <input
             onInput={handleInput}
-            type={visible ? 'text' : 'password'}
+            type={passwordType}
             name="password"
             autoComplete="new-password"
             required
@@ -134,15 +128,7 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
           />
         </label>
 
-        {visible ? (
-          <button type="button" onClick={handleHideClick}>
-            {t('view_CreatePassword_hide')}
-          </button>
-        ) : (
-          <button type="button" onClick={handleShowClick}>
-            {t('view_CreatePassword_show')}
-          </button>
-        )}
+        {passwordToggle}
 
         <p className={styles.errors}>{error}</p>
         <button type="submit">{t('view_CreatePassword_CTA')}</button>

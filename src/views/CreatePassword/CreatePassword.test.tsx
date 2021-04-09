@@ -39,10 +39,10 @@ describe('CreatePassword', () => {
     const { container } = render(<CreatePassword {...props} />);
     expect(container).toMatchSnapshot();
 
-    userEvent.click(screen.getByText('Show'));
+    userEvent.click(screen.getByLabelText('Show'));
     expect(container).toMatchSnapshot();
 
-    userEvent.click(screen.getByText('Hide'));
+    userEvent.click(screen.getByLabelText('Hide'));
     expect(container).toMatchSnapshot();
   });
 
