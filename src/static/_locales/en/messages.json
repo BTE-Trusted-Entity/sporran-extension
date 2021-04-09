@@ -17,6 +17,9 @@
   "common_action_cancel": {
     "message": "Cancel"
   },
+  "common_action_close": {
+    "message": "Close"
+  },
   "common_action_next": {
     "message": "Next Step"
   },
@@ -264,6 +267,9 @@
   },
   "view_ReceiveToken_done_button": {
     "message": "DONE"
+  },
+  "view_ReceiveToken_enlarge": {
+    "message": "Enlarge"
   },
   "view_AccountOverview_title": {
     "message": "Your accounts"
