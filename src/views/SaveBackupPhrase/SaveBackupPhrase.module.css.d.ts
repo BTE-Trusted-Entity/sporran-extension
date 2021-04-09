@@ -3,9 +3,7 @@ declare namespace SaveBackupPhraseModuleCssNamespace {
     buttons: string;
     cancel: string;
     container: string;
-    counter: string;
     create: string;
-    eye: string;
     heading: string;
     item: string;
     items: string;

@@ -5,10 +5,6 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
 
 import styles from './SaveBackupPhrase.module.css';
-
-const formatCounter = (idx: number) =>
-  idx + 1 < 10 ? `0${idx + 1}.` : `${idx + 1}.`;
-
 interface Props {
   backupPhrase: string;
 }
@@ -24,15 +20,14 @@ export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
         {t('view_SaveBackupPhrase_explanation')}
       </p>
 
-      <div className={styles.items}>
+      <ul className={styles.items}>
         {words.map((word, index) => (
-          <div key={word} className={styles.item}>
-            <span className={styles.counter}>{formatCounter(index)}</span>
+          <li key={index} className={styles.item}>
             <span className={styles.word}>{word}</span>
-            <span className={styles.eye} />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
+
       <div className={styles.buttons}>
         <Link to={paths.home} className={styles.cancel}>
           {t('common_action_cancel')}
@@ -41,6 +36,7 @@ export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
           {t('common_action_next')}
         </Link>
       </div>
+
       <LinkBack />
     </section>
   );

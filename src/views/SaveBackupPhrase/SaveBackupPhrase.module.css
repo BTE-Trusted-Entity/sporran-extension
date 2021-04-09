@@ -17,29 +17,27 @@
   margin: 0 0 1rem;
 }
 
-.counter {
-  composes: smallImportant from '../../components/Typography/Typography.module.css';
-  font-size: 1.125rem;
-  width: 1.875rem;
-  display: inline-block;
-}
-
 .items {
   columns: 2;
-  width: 17.85rem;
+  width: 17.75rem;
+  padding: 0;
 }
 
 .item {
-  display: block;
+  display: list-item;
   margin-bottom: 1.125rem;
   width: 8.5rem;
   height: 1.5rem;
   border: 0;
-  border-bottom: 2px dashed #f2efee;
+  border-bottom: 2px dashed var(--color-grey-light);
   cursor: pointer;
   background: none;
   text-align: left;
-  position: relative;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-image: url('../../components/images/eye-closed.svg');
+  list-style: inside;
+  list-style-type: decimal-leading-zero;
 }
 
 .word {
@@ -48,22 +46,17 @@
   filter: blur(3px);
 }
 
-.eye {
-  height: 0.7rem;
-  width: 1.125rem;
-  background-image: url('../../components/images/eye-closed.svg');
-  background-size: 1.1rem 0.7rem;
-  background-repeat: no-repeat;
-  background-position: center;
+.item::marker {
+  color: var(--color-orange);
   display: inline-block;
-  position: absolute;
-  right: 0;
-  top: 0.3rem;
+  font-family: "Montserrat Medium", sans-serif;
+  font-size: 1.125rem;
+  width: 1.875rem;
 }
 
-.item:hover .eye,
-.item:focus .eye {
-  opacity: 0;
+.item:hover,
+.item:focus {
+  background-image: none;
 }
 
 .item:hover .word,
@@ -75,17 +68,16 @@
   width: 18rem;
   display: flex;
   justify-content: space-between;
+  margin-top: 1.25rem;
 }
 
 .create {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
-  margin-top: 1.25rem;
   display: inline-block;
 }
 
 .cancel {
   composes: buttonSecondary from '../../components/Button/Button.module.css';
-  margin-top: 1.25rem;
   width: 4.5rem;
   display: flex;
   justify-content: center;
