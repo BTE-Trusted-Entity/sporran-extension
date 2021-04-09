@@ -31,7 +31,6 @@
   border: 0;
   border-bottom: 2px dashed var(--color-grey-light);
   cursor: pointer;
-  background: none;
   text-align: left;
   background-repeat: no-repeat;
   background-position: right;
