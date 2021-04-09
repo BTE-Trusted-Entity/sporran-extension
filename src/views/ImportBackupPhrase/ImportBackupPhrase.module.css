@@ -30,6 +30,7 @@
 .item::marker {
   /* composes: smallImportant from '../../components/Typography/Typography.module.css'; */
   font-family: 'Montserrat Medium', sans-serif;
+  font-variant-numeric: normal;
   font-size: 0.875rem;
   color: var(--color-orange);
 }
