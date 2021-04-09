@@ -20,13 +20,13 @@ export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
         {t('view_SaveBackupPhrase_explanation')}
       </p>
 
-      <ul className={styles.items}>
+      <ol className={styles.items}>
         {words.map((word, index) => (
           <li key={index} className={styles.item}>
             <span className={styles.word}>{word}</span>
           </li>
         ))}
-      </ul>
+      </ol>
 
       <div className={styles.buttons}>
         <Link to={paths.home} className={styles.cancel}>

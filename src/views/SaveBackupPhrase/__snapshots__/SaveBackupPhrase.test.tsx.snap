@@ -15,214 +15,118 @@ exports[`SaveBackupPhrase should render 1`] = `
     >
       You have to click or tap an empty field to see one word of the phrase. For the next step, you need your written words in the correct order.
     </p>
-    <div
+    <ol
       class="items"
     >
-      <div
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          01.
-        </span>
         <span
           class="word"
         >
           one
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          02.
-        </span>
         <span
           class="word"
         >
           two
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          03.
-        </span>
         <span
           class="word"
         >
           three
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          04.
-        </span>
         <span
           class="word"
         >
           four
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          05.
-        </span>
         <span
           class="word"
         >
           five
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          06.
-        </span>
         <span
           class="word"
         >
           six
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          07.
-        </span>
         <span
           class="word"
         >
           seven
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          08.
-        </span>
         <span
           class="word"
         >
           eight
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          09.
-        </span>
         <span
           class="word"
         >
           nine
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          10.
-        </span>
         <span
           class="word"
         >
           ten
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          11.
-        </span>
         <span
           class="word"
         >
           eleven
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-      <div
+      </li>
+      <li
         class="item"
       >
-        <span
-          class="counter"
-        >
-          12.
-        </span>
         <span
           class="word"
         >
           twelve
         </span>
-        <span
-          class="eye"
-        />
-      </div>
-    </div>
+      </li>
+    </ol>
     <div
       class="buttons"
     >

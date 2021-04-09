@@ -23,6 +23,7 @@
 }
 
 .item {
+  composes: smallImportant from '../../components/Typography/Typography.module.css';
   display: list-item;
   margin-bottom: 1.125rem;
   width: 8.5rem;
@@ -46,10 +47,9 @@
 }
 
 .item::marker {
-  color: var(--color-orange);
   display: inline-block;
-  font-family: "Montserrat Medium", sans-serif;
   font-size: 1.125rem;
+  font-variant-numeric: normal;
   width: 1.875rem;
 }
 
