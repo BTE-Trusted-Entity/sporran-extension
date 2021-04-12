@@ -23660,7 +23660,7 @@ exports[`ReceiveToken should render a normal account 1`] = `
     <p>
       You have $number$ accounts with a total
        Balance: 
-      3.7020
+      6.1700
        
       K
     </p>
@@ -23681,9 +23681,9 @@ exports[`ReceiveToken should render the new account 1`] = `
       </p>
     </header>
     <a
-      aria-label="My Third Account"
-      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL/receive"
-      title="My Third Account"
+      aria-label="My Fifth Account"
+      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtB/receive"
+      title="My Fifth Account"
     >
       ←
     </a>
@@ -23714,7 +23714,7 @@ exports[`ReceiveToken should render the new account 1`] = `
     <p>
       You have $number$ accounts with a total
        Balance: 
-      3.7020
+      6.1700
        
       K
     </p>

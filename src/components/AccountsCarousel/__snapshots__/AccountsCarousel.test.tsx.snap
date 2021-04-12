@@ -117,9 +117,9 @@ exports[`AccountsCarousel should render the last account 1`] = `
     </nav>
   </section>
   <a
-    aria-label="Create new account"
-    href="/account/NEW"
-    title="Create new account"
+    aria-label="My Fourth Account"
+    href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtA"
+    title="My Fourth Account"
   >
     →
   </a>
@@ -129,9 +129,9 @@ exports[`AccountsCarousel should render the last account 1`] = `
 exports[`AccountsCarousel should render the new account 1`] = `
 <div>
   <a
-    aria-label="My Third Account"
-    href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-    title="My Third Account"
+    aria-label="My Fifth Account"
+    href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtB"
+    title="My Fifth Account"
   >
     ←
   </a>
@@ -195,9 +195,9 @@ exports[`AccountsCarousel should support other paths 1`] = `
     </nav>
   </section>
   <a
-    aria-label="Create new account"
-    href="/account/NEW/send"
-    title="Create new account"
+    aria-label="My Fourth Account"
+    href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtA/send"
+    title="My Fourth Account"
   >
     →
   </a>

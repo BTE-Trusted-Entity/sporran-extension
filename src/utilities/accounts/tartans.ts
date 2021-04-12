@@ -11,7 +11,7 @@ const popularTartans = [
   'MacGregor',
 ];
 
-const otherTartans = [
+export const otherTartans = [
   'Armstrong',
   'Barclay',
   'Brodie',
