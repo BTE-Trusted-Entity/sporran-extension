@@ -60,6 +60,8 @@ const otherTartans = [
   'Wallace',
 ];
 
+const allTartans = [...popularTartans, ...otherTartans];
+
 export const NEXT_TARTAN = 'nextTartan';
 
 async function setNextTartan(tartan: string): Promise<void> {
@@ -89,7 +91,6 @@ export async function updateNextTartan(): Promise<void> {
   }
 
   // if all tartans are used, start reusing them
-  const allTartans = [...popularTartans, ...otherTartans];
   await setNextTartan(sample(allTartans));
 }
 
