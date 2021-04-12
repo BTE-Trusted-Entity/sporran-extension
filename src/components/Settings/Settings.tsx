@@ -48,10 +48,12 @@ export function Settings(): JSX.Element {
                 return (
                   <>
                     <li className={menuStyles.listItem}>
-                      {/* TODO: forget account - https://kiltprotocol.atlassian.net/browse/SK-59 */}
-                      <a {...itemProps.shift()}>
+                      <Link
+                        to={generatePath(paths.account.remove, { address })}
+                        {...itemProps.shift()}
+                      >
                         {t('component_Settings_forget')}
-                      </a>
+                      </Link>
                     </li>
 
                     <li className={menuStyles.listItem}>
