@@ -1,8 +1,11 @@
 import { useCallback, useState } from 'react';
-import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
+import { Link } from 'react-router-dom';
 
 import { LinkBack } from '../../components/LinkBack/LinkBack';
+import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
+import { useErrorTooltip } from '../../components/useErrorMessage/useErrorTooltip';
+import { paths } from '../paths';
 
 import styles from './CreatePassword.module.css';
 
@@ -36,6 +39,27 @@ function isNotExample(value: string): boolean {
   return value !== browser.i18n.getMessage('view_CreatePassword_example');
 }
 
+function getComplexityClassName(password: string): string {
+  const complexity = [
+    hasBothCases(password),
+    hasNumber(password),
+    hasOther(password),
+    isLong(password),
+    isNotExample(password),
+  ].filter(Boolean).length;
+
+  const classNames = [
+    styles.complexityNone,
+    styles.complexityNone,
+    styles.complexityPoor,
+    styles.complexityMedium,
+    styles.complexityGood,
+    styles.complexityOk,
+  ];
+
+  return classNames[complexity];
+}
+
 interface Props {
   onSuccess: (password: string) => void;
 }
@@ -44,71 +68,55 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const [password, setPassword] = useState('');
-  const [modified, setModified] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const modified = password !== '';
+  const { passwordType, passwordToggle } = usePasswordType();
 
   const handleInput = useCallback((event) => {
     setPassword(event.target.value);
-    setModified(true);
   }, []);
 
-  const error = [
-    modified && !hasBothCases(password) && t('view_CreatePassword_error_cases'),
-    modified && !hasNumber(password) && t('view_CreatePassword_error_numbers'),
-    modified && !hasOther(password) && t('view_CreatePassword_error_other'),
+  const error =
     modified &&
-      !isLong(password) &&
-      t('view_CreatePassword_error_length', [MIN_LENGTH]),
-    modified &&
-      !isNotExample(password) &&
-      t('view_CreatePassword_error_example'),
-  ].filter(Boolean)[0];
+    [
+      !hasBothCases(password) && t('view_CreatePassword_error_cases'),
+      !hasNumber(password) && t('view_CreatePassword_error_numbers'),
+      !hasOther(password) && t('view_CreatePassword_error_other'),
+      !isLong(password) && t('view_CreatePassword_error_length', [MIN_LENGTH]),
+      !isNotExample(password) && t('view_CreatePassword_error_example'),
+    ].filter(Boolean)[0];
+
+  const errorTooltip = useErrorTooltip(Boolean(error));
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
 
-      if (!modified || error) {
-        return;
+      if (modified && !error) {
+        onSuccess(password);
       }
-      onSuccess(password);
     },
     [error, modified, onSuccess, password],
   );
 
-  const handleHideClick = useCallback(() => {
-    setVisible(false);
-  }, []);
-
-  const handleShowClick = useCallback(() => {
-    setVisible(true);
-  }, []);
-
   function makeClasses(validator: (value: string) => boolean) {
     const pass = validator(password);
-    return cx(
-      modified && {
-        [styles.pass]: pass,
-        [styles.fail]: !pass,
-      },
-    );
+    return modified && pass ? styles.pass : undefined;
   }
 
   return (
-    <main>
-      <h1>{t('view_CreatePassword_heading')}</h1>
-      <p>{t('view_CreatePassword_per_account')}</p>
-
-      <p>
+    <main className={styles.container}>
+      <h1 className={styles.heading}>{t('view_CreatePassword_heading')}</h1>
+      <p className={styles.subline}>
         {t('view_CreatePassword_explanation')}{' '}
-        <code>{t('view_CreatePassword_example')}</code>
+        {t('view_CreatePassword_example')}
       </p>
 
-      <ul>
+      <h2 className={styles.criteriaHeading}>
+        {t('view_CreatePassword_criteria')}
+      </h2>
+      <ul className={styles.criteria}>
         <li className={makeClasses(hasBothCases)}>
           {t('view_CreatePassword_criteria_cases')}
-        </li>
-        <li className={makeClasses(hasNumber)}>
-          {t('view_CreatePassword_criteria_numbers')}
         </li>
         <li className={makeClasses(hasOther)}>
           {t('view_CreatePassword_criteria_other')}
@@ -116,36 +124,56 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
         <li className={makeClasses(isLong)}>
           {t('view_CreatePassword_criteria_length')}
         </li>
+        <li className={makeClasses(hasNumber)}>
+          {t('view_CreatePassword_criteria_numbers')}
+        </li>
         <li className={makeClasses(isNotExample)}>
           {t('view_CreatePassword_criteria_example')}
         </li>
       </ul>
 
       <form onSubmit={handleSubmit}>
-        <label>
-          {t('view_CreatePassword_label')}
+        <p className={styles.inputLine}>
           <input
+            className={styles.input}
             onInput={handleInput}
-            type={visible ? 'text' : 'password'}
+            type={passwordType}
             name="password"
             autoComplete="new-password"
             required
             minLength={MIN_LENGTH}
+            aria-label={t('view_CreatePassword_label')}
+            placeholder={t('view_CreatePassword_label')}
+            {...errorTooltip.anchor}
           />
-        </label>
 
-        {visible ? (
-          <button type="button" onClick={handleHideClick}>
-            {t('view_CreatePassword_hide')}
-          </button>
-        ) : (
-          <button type="button" onClick={handleShowClick}>
-            {t('view_CreatePassword_show')}
-          </button>
-        )}
+          {passwordToggle}
+        </p>
 
-        <p className={styles.errors}>{error}</p>
-        <button type="submit">{t('view_CreatePassword_CTA')}</button>
+        <output {...errorTooltip.tooltip}>
+          {error}
+          <span {...errorTooltip.pointer} />
+        </output>
+
+        <div
+          className={`${styles.complexity} ${getComplexityClassName(password)}`}
+        >
+          <div className={styles.lock} />
+        </div>
+
+        <p>
+          <Link to={paths.home} className={styles.cancel}>
+            {t('common_action_cancel')}
+          </Link>
+
+          <button
+            className={styles.submit}
+            type="submit"
+            disabled={!modified || Boolean(error)}
+          >
+            {t('view_CreatePassword_CTA')}
+          </button>
+        </p>
       </form>
 
       <LinkBack />

@@ -27,7 +27,7 @@ describe('CreatePassword', () => {
     expect(onSuccess).not.toHaveBeenCalled();
 
     userEvent.type(
-      screen.getByLabelText('Please enter your password:'),
+      screen.getByLabelText('Please enter your password'),
       'Hello, World!11',
     );
     userEvent.click(screen.getByText('Next Step'));
@@ -39,16 +39,16 @@ describe('CreatePassword', () => {
     const { container } = render(<CreatePassword {...props} />);
     expect(container).toMatchSnapshot();
 
-    userEvent.click(screen.getByText('Show'));
+    userEvent.click(screen.getByLabelText('Show'));
     expect(container).toMatchSnapshot();
 
-    userEvent.click(screen.getByText('Hide'));
+    userEvent.click(screen.getByLabelText('Hide'));
     expect(container).toMatchSnapshot();
   });
 
   it('should report weak password errors', async () => {
     const { container } = render(<CreatePassword {...props} />);
-    const password = screen.getByLabelText('Please enter your password:');
+    const password = screen.getByLabelText('Please enter your password');
 
     userEvent.type(password, 'H');
     expect(container).toMatchSnapshot();

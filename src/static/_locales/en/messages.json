@@ -180,31 +180,31 @@
     "message": "It looks like there’s a typo in this word"
   },
   "view_CreatePassword_heading": {
-    "message": "Your account password"
-  },
-  "view_CreatePassword_per_account": {
-    "message": "You need a separate password for each account."
+    "message": "Set Account Password"
   },
   "view_CreatePassword_explanation": {
-    "message": "To protect your account this password has to be secure. A good example would be a sentence of several words with numbers and punctuation, like this:"
+    "message": "You need a secure password for every account. A good one could look like this:"
   },
   "view_CreatePassword_example": {
     "message": "House 12! small DOGS"
   },
+  "view_CreatePassword_criteria": {
+    "message": "You need to use:"
+  },
   "view_CreatePassword_criteria_cases": {
-    "message": "Use both uppercase and lowercase letters"
+    "message": "uppercase and lowercase letters"
   },
   "view_CreatePassword_criteria_numbers": {
-    "message": "Use numbers"
+    "message": "numbers"
   },
   "view_CreatePassword_criteria_other": {
-    "message": "Use punctuation or special characters"
+    "message": "punctuation or special characters"
   },
   "view_CreatePassword_criteria_length": {
-    "message": "Use at least 12 characters in total"
+    "message": "12 characters in total"
   },
   "view_CreatePassword_criteria_example": {
-    "message": "Do not use our example"
+    "message": "and don’t use our example"
   },
   "view_CreatePassword_error_cases": {
     "message": "You need to use both uppercase and lowercase letters"
@@ -227,12 +227,12 @@
     "message": "DON’T USE OUR EXAMPLE"
   },
   "view_CreatePassword_label": {
-    "message": "Please enter your password:"
+    "message": "Please enter your password"
   },
-  "view_CreatePassword_show": {
+  "component_usePasswordType_show": {
     "message": "Show"
   },
-  "view_CreatePassword_hide": {
+  "component_usePasswordType_hide": {
     "message": "Hide"
   },
   "view_CreatePassword_CTA": {
