@@ -1,17 +1,37 @@
 import { browser } from 'webextension-polyfill-ts';
+import { pull } from 'lodash-es';
 
-import { BalanceChangeResponse, MessageType } from '../connection/MessageType';
+import {
+  BalanceChangeRequest,
+  BalanceChangeResponse,
+  MessageType,
+} from '../connection/MessageType';
+
+type CallbackType = Parameters<typeof browser.runtime.onMessage.addListener>[0];
+type SendMessageType = Parameters<typeof browser.runtime.sendMessage>[0];
 
 export function mockBackgroundScript(): void {
-  function mockListener(
-    callback: Parameters<typeof browser.runtime.onMessage.addListener>[0],
-  ) {
-    const response = {
-      type: MessageType.balanceChangeResponse,
-      data: { balance: '04625103a72000' },
-    } as BalanceChangeResponse;
-    callback(response, {});
-  }
+  const listeners: CallbackType[] = [];
 
-  browser.runtime.onMessage.addListener = mockListener;
+  browser.runtime.onMessage.addListener = (callback: CallbackType) => {
+    listeners.push(callback);
+  };
+
+  browser.runtime.onMessage.removeListener = (callback: CallbackType) => {
+    pull(listeners, callback);
+  };
+
+  browser.runtime.sendMessage = ((message: BalanceChangeRequest) => {
+    listeners.forEach((callback) => {
+      const response = {
+        type: MessageType.balanceChangeResponse,
+        data: {
+          address: message.data.address,
+          balance: '04625103a72000',
+        },
+      } as BalanceChangeResponse;
+
+      callback(response, {});
+    });
+  }) as SendMessageType;
 }

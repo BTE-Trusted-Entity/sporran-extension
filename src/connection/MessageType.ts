@@ -10,5 +10,8 @@ export interface BalanceChangeRequest {
 
 export interface BalanceChangeResponse {
   type: 'balanceChangeResponse';
-  data: { balance: string };
+  data: {
+    address: string;
+    balance: string;
+  };
 }

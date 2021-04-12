@@ -15,7 +15,10 @@ jest
   .mockImplementation(async (callback) => {
     const response = {
       type: MessageType.balanceChangeResponse,
-      data: { balance: '04625103a72000' },
+      data: {
+        address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+        balance: '04625103a72000',
+      },
     } as BalanceChangeResponse;
     callback(response, {});
   });
