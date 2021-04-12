@@ -82,7 +82,7 @@ export async function updateNextTartan(): Promise<void> {
 
   const availableOtherTartans = without(otherTartans, ...usedTartans);
 
-  if (availableOtherTartans) {
+  if (availableOtherTartans.length > 0) {
     const randomOtherTartan = sample(availableOtherTartans);
     setNextTartan(randomOtherTartan);
     return;
