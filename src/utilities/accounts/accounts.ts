@@ -69,6 +69,18 @@ export async function saveAccount(account: Account): Promise<void> {
   await mutate(ACCOUNTS_KEY);
 }
 
+export async function removeAccount(account: Account): Promise<void> {
+  const accounts = await getAccounts();
+  delete accounts[account.address];
+
+  await storage.set({ [ACCOUNTS_KEY]: accounts });
+  await storage.remove(account.address);
+
+  await mutate(ACCOUNTS_KEY);
+
+  await getCurrentAccount();
+}
+
 export async function encryptAccount(
   backupPhrase: string,
   password: string,
