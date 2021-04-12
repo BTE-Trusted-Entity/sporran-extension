@@ -62,7 +62,7 @@ const otherTartans = [
 
 const allTartans = [...popularTartans, ...otherTartans];
 
-export const NEXT_TARTAN = 'nextTartan';
+const NEXT_TARTAN = 'nextTartan';
 
 async function setNextTartan(tartan: string): Promise<void> {
   await storage.set({
