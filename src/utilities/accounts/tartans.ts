@@ -62,7 +62,6 @@ const otherTartans = [
 export const NEXT_TARTAN = 'nextTartan';
 
 export async function setNextTartan(): Promise<void> {
-  // check which tartans already exist in accounts
   const accounts = await getAccounts();
   const usedTartans: string[] = [];
   Object.values(accounts).forEach((account) =>
@@ -72,12 +71,13 @@ export async function setNextTartan(): Promise<void> {
   const availablePopularTartans = popularTartans.filter(
     (tartan) => !usedTartans.includes(tartan),
   );
+  const randomPopularTartan =
+    availablePopularTartans[
+      Math.floor(Math.random() * availablePopularTartans.length)
+    ];
   if (availablePopularTartans) {
     await storage.set({
-      [NEXT_TARTAN]:
-        availablePopularTartans[
-          Math.floor(Math.random() * availablePopularTartans.length)
-        ],
+      [NEXT_TARTAN]: randomPopularTartan,
     });
     return;
   }
@@ -85,15 +85,17 @@ export async function setNextTartan(): Promise<void> {
   const availableOtherTartans = otherTartans.filter(
     (tartan) => !usedTartans.includes(tartan),
   );
+  const randomOtherTartan =
+    availableOtherTartans[
+      Math.floor(Math.random() * availableOtherTartans.length)
+    ];
   if (availableOtherTartans) {
     await storage.set({
-      [NEXT_TARTAN]:
-        availableOtherTartans[
-          Math.floor(Math.random() * availableOtherTartans.length)
-        ],
+      [NEXT_TARTAN]: randomOtherTartan,
     });
     return;
   }
+
   // if all tartans are used, start reusing them
   const allTartans = [...popularTartans, ...otherTartans];
   await storage.set({

@@ -11,10 +11,6 @@ export default {
 
 export { Avatar };
 (Avatar as Type).args = {
-  account: {
-    address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-    name: 'MacIntyre',
-    tartan: 'MacIntyre',
-    index: 1,
-  },
+  tartan: 'MacFarlane',
+  address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
 };

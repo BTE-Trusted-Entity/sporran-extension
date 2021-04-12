@@ -1,26 +1,26 @@
 import Identicon from '@polkadot/react-identicon';
 
-import { Account } from '../../utilities/accounts/types';
-// import styles from './Avatar.module.css';
+import styles from './Avatar.module.css';
 
 interface Props {
-  account: Account;
+  tartan: string;
+  address?: string;
 }
 
-export function Avatar({ account }: Props): JSX.Element {
-  const backgroundStyle = {
-    backgroundImage: `url(../images/tartans/${account.tartan}.png)`,
-    height: '96px',
-    width: '96px',
-    backgroundSize: '100%',
-    backgroundRepeat: 'no-repeat',
-    margin: 0,
-  };
-
+export function Avatar({ tartan, address }: Props): JSX.Element {
   return (
-    <>
-      <div style={backgroundStyle} />
-      <Identicon value={account.address} size={65} theme="polkadot" />
-    </>
+    <div className={`${styles[tartan]} ${styles.tartan}`}>
+      {address ? (
+        <Identicon
+          className={styles.identicon}
+          value={address}
+          size={65}
+          theme="polkadot"
+        />
+      ) : (
+        // TODO: https://kiltprotocol.atlassian.net/browse/SK-93
+        <div />
+      )}
+    </div>
   );
 }
