@@ -14,7 +14,7 @@
 }
 
 .input::placeholder {
-    color: var(--color-grey-medium);
+  color: var(--color-grey-medium);
 }
 
 .inputKiltAmount {
