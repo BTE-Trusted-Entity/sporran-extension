@@ -74,7 +74,7 @@ export async function updateNextTartan(): Promise<void> {
 
   const availablePopularTartans = without(popularTartans, ...usedTartans);
 
-  if (availablePopularTartans) {
+  if (availablePopularTartans.length > 0) {
     const randomPopularTartan = sample(availablePopularTartans);
     setNextTartan(randomPopularTartan);
     return;
