@@ -78,7 +78,7 @@
     "babel-loader": "^8.2.2",
     "chrome-launch": "^1.1.4",
     "copy-webpack-plugin": "^6.4.1",
-    "css-loader": "^5.2.0",
+    "css-loader": "^5.2.1",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-jest": "^24.3.5",
