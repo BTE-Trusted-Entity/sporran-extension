@@ -95,7 +95,7 @@ export async function createAccount(
   const account = { name, tartan, address, index };
   await saveAccount(account);
 
-  updateNextTartan();
+  await updateNextTartan();
 
   return account;
 }
