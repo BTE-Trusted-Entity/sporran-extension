@@ -1,6 +1,8 @@
 import { Avatar } from './Avatar';
 import { render } from '../../testing';
 
+jest.mock('@polkadot/react-identicon');
+
 describe('Avatar', () => {
   it('should render', async () => {
     const { container } = render(

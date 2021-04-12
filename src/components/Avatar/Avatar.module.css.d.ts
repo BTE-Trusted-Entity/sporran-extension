@@ -32,6 +32,7 @@ declare namespace AvatarModuleCssNamespace {
     MacIntyre: string;
     MacKay: string;
     MacKenzie: string;
+    MacKinnon: string;
     MacKintosh: string;
     MacLachlan: string;
     MacLean: string;
