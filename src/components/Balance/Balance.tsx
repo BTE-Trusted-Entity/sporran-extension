@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
@@ -18,9 +18,17 @@ export function Balance({ address }: BalanceProps): JSX.Element {
   const t = browser.i18n.getMessage;
   const [balance, setBalance] = useState<BN | null>(null);
 
-  function balanceListener(message: BalanceChangeResponse) {
-    setBalance(new BN(message.data.balance, 16));
-  }
+  const balanceListener = useCallback(
+    (message: BalanceChangeResponse) => {
+      if (
+        message.type === MessageType.balanceChangeResponse &&
+        message.data.address === address
+      ) {
+        setBalance(new BN(message.data.balance, 16));
+      }
+    },
+    [address],
+  );
 
   useEffect(() => {
     browser.runtime.onMessage.addListener(balanceListener);
@@ -32,7 +40,7 @@ export function Balance({ address }: BalanceProps): JSX.Element {
     return () => {
       browser.runtime.onMessage.removeListener(balanceListener);
     };
-  }, [address]);
+  }, [address, balanceListener]);
 
   return (
     <span>

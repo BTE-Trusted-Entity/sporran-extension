@@ -1,7 +1,14 @@
-import { AccountsProviderMock, render } from '../../testing';
+import {
+  AccountsProviderMock,
+  mockBackgroundScript,
+  render,
+  screen,
+} from '../../testing';
 import { Stats } from './Stats';
 
 describe('Stats', () => {
+  beforeEach(mockBackgroundScript);
+
   it('should not render for no accounts', async () => {
     const { container } = render(
       <AccountsProviderMock accounts={{}}>
@@ -29,6 +36,7 @@ describe('Stats', () => {
 
   it('should render for at least two accounts', async () => {
     const { container } = render(<Stats />);
+    expect(await screen.findByText(/Balance/)).toBeInTheDocument();
     expect(container).toMatchSnapshot();
   });
 });
