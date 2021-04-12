@@ -24,6 +24,10 @@ function subscribeToBalance(
   subscriptions: Subscriptions,
 ) {
   function balanceListener(message: BalanceChangeResponse) {
+    if (message.data.address !== address) {
+      return;
+    }
+
     const balance = new BN(message.data.balance, 16);
     setBalances((balances: Balances) => ({
       ...balances,
