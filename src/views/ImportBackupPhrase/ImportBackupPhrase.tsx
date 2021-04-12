@@ -1,4 +1,9 @@
-import { ChangeEventHandler, useCallback, useState } from 'react';
+import {
+  ChangeEventHandler,
+  ClipboardEventHandler,
+  useCallback,
+  useState,
+} from 'react';
 import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/bip39-en';
 import { Identity } from '@kiltprotocol/core';
 import { browser } from 'webextension-polyfill-ts';
@@ -50,9 +55,15 @@ interface WordInputProps {
   word: string;
   index: number;
   handleInput: ChangeEventHandler<HTMLInputElement>;
+  handlePaste?: ClipboardEventHandler<HTMLInputElement>;
 }
 
-function WordInput({ word, index, handleInput }: WordInputProps): JSX.Element {
+function WordInput({
+  word,
+  index,
+  handleInput,
+  handlePaste,
+}: WordInputProps): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const hasError = Boolean(word && !isAllowed(word));
@@ -66,6 +77,8 @@ function WordInput({ word, index, handleInput }: WordInputProps): JSX.Element {
         className={styles.input}
         type="text"
         onInput={handleInput}
+        onPaste={handlePaste}
+        value={word}
       />
       {hasError && (
         <output htmlFor={index.toString()} className={styles.tooltip}>
@@ -90,10 +103,10 @@ export function ImportBackupPhrase({
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const [modified, setModified] = useState(false);
   const [backupPhrase, setBackupPhrase] = useState<BackupPhrase>(
     Array(12).fill(''),
   );
+  const modified = backupPhrase.join('') !== '';
 
   const error =
     modified &&
@@ -109,10 +122,22 @@ export function ImportBackupPhrase({
       const { name, value } = event.target;
       backupPhrase[name] = value.trim().toLowerCase();
       setBackupPhrase([...backupPhrase]);
-      setModified(backupPhrase.join('') !== '');
     },
     [backupPhrase],
   );
+
+  const handlePaste = useCallback((event) => {
+    const text = event.clipboardData.getData('text');
+    if (!text) {
+      return;
+    }
+    const values = text.split(/\s+/);
+    if (values.length !== 12) {
+      return;
+    }
+    setBackupPhrase(values);
+    event.preventDefault();
+  }, []);
 
   const handleSubmit = useCallback(
     (event) => {
@@ -157,6 +182,7 @@ export function ImportBackupPhrase({
               word={word}
               index={index}
               handleInput={handleInput}
+              handlePaste={index === 0 ? handlePaste : undefined}
             />
           ))}
         </ol>
