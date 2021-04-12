@@ -11,9 +11,7 @@ export function AccountSlideNew(): JSX.Element {
       <Link to={paths.account.create.start}>
         <h2>{t('component_AccountSlideNew_title')}</h2>
       </Link>
-
       <p>{t('component_AccountSlideNew_or')}</p>
-
       <Link to={paths.account.import.start}>
         {t('component_AccountSlideNew_import')}
       </Link>

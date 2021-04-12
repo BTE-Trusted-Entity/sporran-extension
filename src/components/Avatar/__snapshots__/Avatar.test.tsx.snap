@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar should render 1`] = `
+<div>
+  <div
+    class="MacFarlane tartan"
+  >
+    Identicon
+  </div>
+</div>
+`;
