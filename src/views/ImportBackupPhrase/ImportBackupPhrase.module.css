@@ -59,12 +59,15 @@
 
 .tooltip {
   composes: tooltip from '../../components/useErrorMessage/useErrorTooltip.module.css';
-  display: inline;
   position: absolute;
   top: 2.125rem;
   white-space: nowrap;
   left: -50%;
   z-index: 1;
+}
+
+.input:not(:focus) + .tooltip {
+  display: inline;
 }
 
 .pointer {
