@@ -77,7 +77,7 @@ export async function updateNextTartan(): Promise<void> {
   const availablePopularTartans = without(popularTartans, ...usedTartans);
 
   if (availablePopularTartans.length > 0) {
-    const randomPopularTartan = sample(availablePopularTartans);
+    const randomPopularTartan = sample(availablePopularTartans) as string;
     await setNextTartan(randomPopularTartan);
     return;
   }
@@ -85,13 +85,13 @@ export async function updateNextTartan(): Promise<void> {
   const availableOtherTartans = without(otherTartans, ...usedTartans);
 
   if (availableOtherTartans.length > 0) {
-    const randomOtherTartan = sample(availableOtherTartans);
+    const randomOtherTartan = sample(availableOtherTartans) as string;
     await setNextTartan(randomOtherTartan);
     return;
   }
 
   // if all tartans are used, start reusing them
-  await setNextTartan(sample(allTartans));
+  await setNextTartan(sample(allTartans) as string);
 }
 
 export async function getNextTartan(): Promise<string> {
