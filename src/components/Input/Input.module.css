@@ -13,6 +13,10 @@
   );
 }
 
+.input::placeholder {
+    color: var(--color-grey-medium);
+}
+
 .inputKiltAmount {
   composes: input;
 
