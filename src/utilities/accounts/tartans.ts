@@ -1,7 +1,7 @@
 import { getAccounts } from './getAccounts';
 import { storage } from './storage';
 
-export const popularTartans = [
+const popularTartans = [
   'MacLeod',
   'MacIntyre',
   'MacFarlane',
@@ -10,7 +10,7 @@ export const popularTartans = [
   'MacGregor',
 ];
 
-export const otherTartans = [
+const otherTartans = [
   'Armstrong',
   'Barclay',
   'Brodie',
