@@ -30,6 +30,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="0"
             name="0"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -41,6 +42,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="1"
             name="1"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -52,6 +54,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="2"
             name="2"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -63,6 +66,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="3"
             name="3"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -74,6 +78,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="4"
             name="4"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -85,6 +90,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="5"
             name="5"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -96,6 +102,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="6"
             name="6"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -107,6 +114,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="7"
             name="7"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -118,6 +126,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="8"
             name="8"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -129,6 +138,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="9"
             name="9"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -140,6 +150,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="10"
             name="10"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -151,6 +162,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             id="11"
             name="11"
             type="text"
+            value=""
           />
         </li>
       </ol>
@@ -212,6 +224,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="0"
             name="0"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -223,6 +236,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="1"
             name="1"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -234,6 +248,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="2"
             name="2"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -245,6 +260,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="3"
             name="3"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -256,6 +272,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="4"
             name="4"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -267,6 +284,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="5"
             name="5"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -278,6 +296,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="6"
             name="6"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -289,6 +308,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="7"
             name="7"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -300,6 +320,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="8"
             name="8"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -311,6 +332,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="9"
             name="9"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -322,6 +344,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="10"
             name="10"
             type="text"
+            value=""
           />
         </li>
         <li
@@ -333,6 +356,7 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             id="11"
             name="11"
             type="text"
+            value=""
           />
         </li>
       </ol>
