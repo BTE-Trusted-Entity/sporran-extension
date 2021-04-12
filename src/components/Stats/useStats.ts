@@ -24,7 +24,10 @@ function subscribeToBalance(
   subscriptions: Subscriptions,
 ) {
   function balanceListener(message: BalanceChangeResponse) {
-    if (message.data.address !== address) {
+    if (
+      message.type === MessageType.balanceChangeResponse &&
+      message.data.address !== address
+    ) {
       return;
     }
 

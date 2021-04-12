@@ -20,7 +20,10 @@ export function Balance({ address }: BalanceProps): JSX.Element {
 
   const balanceListener = useCallback(
     (message: BalanceChangeResponse) => {
-      if (message.data.address === address) {
+      if (
+        message.type === MessageType.balanceChangeResponse &&
+        message.data.address === address
+      ) {
         setBalance(new BN(message.data.balance, 16));
       }
     },
