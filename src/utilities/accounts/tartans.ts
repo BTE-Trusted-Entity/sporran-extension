@@ -95,9 +95,9 @@ export async function updateNextTartan(): Promise<void> {
 
 export async function getNextTartan(): Promise<string> {
   const tartan = (await storage.get(NEXT_TARTAN))[NEXT_TARTAN] as string;
-  if (!tartan) {
-    await updateNextTartan();
-    return (await storage.get(NEXT_TARTAN))[NEXT_TARTAN] as string;
+  if (tartan) {
+    return tartan;
   }
-  return tartan;
+  await updateNextTartan();
+  return (await storage.get(NEXT_TARTAN))[NEXT_TARTAN] as string;
 }
