@@ -7,7 +7,7 @@ import { saveEncrypted } from '../storageEncryption/storageEncryption';
 import { AccountsContext, AccountsContextType } from './AccountsContext';
 import { storage } from './storage';
 import { ACCOUNTS_KEY, getAccounts } from './getAccounts';
-import { NEXT_TARTAN, setNextTartan } from './tartans';
+import { getNextTartan, updateNextTartan } from './tartans';
 
 import { Account, AccountsMap } from './types';
 
@@ -89,17 +89,13 @@ export async function createAccount(
 
   const index = 1 + largestIndex;
 
-  if (index === 1) {
-    await setNextTartan();
-  }
-
-  const tartan = (await storage.get(NEXT_TARTAN))[NEXT_TARTAN] as string;
+  const tartan = await getNextTartan();
   const name = tartan;
 
   const account = { name, tartan, address, index };
   await saveAccount(account);
 
-  setNextTartan();
+  updateNextTartan();
 
   return account;
 }

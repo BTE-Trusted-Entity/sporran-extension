@@ -1,3 +1,4 @@
+import { map, sample, without } from 'lodash-es';
 import { getAccounts } from './getAccounts';
 import { storage } from './storage';
 
@@ -61,44 +62,42 @@ const otherTartans = [
 
 export const NEXT_TARTAN = 'nextTartan';
 
-export async function setNextTartan(): Promise<void> {
-  const accounts = await getAccounts();
-  const usedTartans: string[] = [];
-  Object.values(accounts).forEach((account) =>
-    usedTartans.push(account.tartan),
-  );
+async function setNextTartan(tartan: string): Promise<void> {
+  await storage.set({
+    [NEXT_TARTAN]: tartan,
+  });
+}
 
-  const availablePopularTartans = popularTartans.filter(
-    (tartan) => !usedTartans.includes(tartan),
-  );
-  const randomPopularTartan =
-    availablePopularTartans[
-      Math.floor(Math.random() * availablePopularTartans.length)
-    ];
+export async function updateNextTartan(): Promise<void> {
+  const accounts = await getAccounts();
+  const usedTartans = map(accounts, 'tartan');
+
+  const availablePopularTartans = without(popularTartans, ...usedTartans);
+
   if (availablePopularTartans) {
-    await storage.set({
-      [NEXT_TARTAN]: randomPopularTartan,
-    });
+    const randomPopularTartan = sample(availablePopularTartans);
+    setNextTartan(randomPopularTartan);
     return;
   }
 
-  const availableOtherTartans = otherTartans.filter(
-    (tartan) => !usedTartans.includes(tartan),
-  );
-  const randomOtherTartan =
-    availableOtherTartans[
-      Math.floor(Math.random() * availableOtherTartans.length)
-    ];
+  const availableOtherTartans = without(otherTartans, ...usedTartans);
+
   if (availableOtherTartans) {
-    await storage.set({
-      [NEXT_TARTAN]: randomOtherTartan,
-    });
+    const randomOtherTartan = sample(availableOtherTartans);
+    setNextTartan(randomOtherTartan);
     return;
   }
 
   // if all tartans are used, start reusing them
   const allTartans = [...popularTartans, ...otherTartans];
-  await storage.set({
-    [NEXT_TARTAN]: allTartans[Math.floor(Math.random() * allTartans.length)],
-  });
+  await setNextTartan(sample(allTartans));
+}
+
+export async function getNextTartan(): Promise<string> {
+  const tartan = (await storage.get(NEXT_TARTAN))[NEXT_TARTAN] as string;
+  if (!tartan) {
+    await updateNextTartan();
+    return (await storage.get(NEXT_TARTAN))[NEXT_TARTAN] as string;
+  }
+  return tartan;
 }
