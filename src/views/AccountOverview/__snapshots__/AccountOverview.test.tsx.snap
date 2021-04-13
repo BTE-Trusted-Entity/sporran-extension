@@ -73,7 +73,7 @@ exports[`AccountOverview should render a normal account 1`] = `
     <p>
       You have $number$ accounts with a total
        Balance: 
-      6.1700
+      3.7020
        
       K
     </p>
@@ -94,9 +94,9 @@ exports[`AccountOverview should render the new account 1`] = `
       </p>
     </header>
     <a
-      aria-label="My Fifth Account"
-      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtB"
-      title="My Fifth Account"
+      aria-label="My Third Account"
+      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+      title="My Third Account"
     >
       ←
     </a>
@@ -127,7 +127,7 @@ exports[`AccountOverview should render the new account 1`] = `
     <p>
       You have $number$ accounts with a total
        Balance: 
-      6.1700
+      3.7020
        
       K
     </p>

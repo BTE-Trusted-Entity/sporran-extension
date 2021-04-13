@@ -5,7 +5,7 @@ exports[`Stats should render for at least two accounts 1`] = `
   <p>
     You have $number$ accounts with a total
      Balance: 
-    6.1700
+    3.7020
      
     K
   </p>
