@@ -51,8 +51,12 @@ export function AccountOptions({ address, onEdit }: Props): JSX.Element {
               </button>
             </li>
             <li className={styles.listItem}>
-              {/* TODO: forget account - https://kiltprotocol.atlassian.net/browse/SK-59 */}
-              <a {...itemProps[1]}>{t('component_AccountOptions_forget')}</a>
+              <Link
+                to={generatePath(paths.account.remove, { address })}
+                {...itemProps[1]}
+              >
+                {t('component_AccountOptions_forget')}
+              </Link>
             </li>
             <li className={styles.listItem}>
               <Link

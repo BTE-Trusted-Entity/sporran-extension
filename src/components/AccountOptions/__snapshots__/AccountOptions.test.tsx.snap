@@ -44,6 +44,7 @@ exports[`AddAccount menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a
+            href="/account/ADDRESS/remove"
             role="menuitem"
             tabindex="-1"
           >

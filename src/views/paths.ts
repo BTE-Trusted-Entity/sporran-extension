@@ -24,5 +24,6 @@ export const paths = {
     overview: '/account/:address',
     send: '/account/:address/send',
     receive: '/account/:address/receive',
+    remove: '/account/:address/remove',
   },
 };

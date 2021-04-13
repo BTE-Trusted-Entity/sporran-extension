@@ -295,5 +295,20 @@
   },
   "view_AccountOverview_receive": {
     "message": "Receive"
+  },
+  "view_RemoveAccount_heading": {
+    "message": "Attention!"
+  },
+  "view_RemoveAccount_subline": {
+    "message": "You’re about to remove your account"
+  },
+  "view_RemoveAccount_address": {
+    "message": "My account address"
+  },
+  "view_RemoveAccount_explanation": {
+    "message": "The next step will remove your account from the browser extension. This will not delete your account. You can add it again any time by importing your backup phrase."
+  },
+  "view_RemoveAccount_remove": {
+    "message": "Forget this account"
   }
 }

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RemoveAccount should render 1`] = `
+<div>
+  <main
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Attention!
+    </h1>
+    <p
+      class="subline"
+    >
+      You’re about to remove your account
+    </p>
+    <p>
+      My Sporran Account
+    </p>
+    <span>
+      Balance: 
+      1.2340
+       
+      K
+    </span>
+    <p
+      class="addressLabel"
+    >
+      My account address
+    </p>
+    <p
+      class="address"
+    >
+      4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire
+    </p>
+    <p
+      class="explanation"
+    >
+      The next step will remove your account from the browser extension. This will not delete your account. You can add it again any time by importing your backup phrase.
+    </p>
+    <a
+      class="cancel"
+      href="/"
+    >
+      Cancel
+    </a>
+    <button
+      class="remove"
+      type="button"
+    >
+      Forget this account
+    </button>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+  </main>
+</div>
+`;

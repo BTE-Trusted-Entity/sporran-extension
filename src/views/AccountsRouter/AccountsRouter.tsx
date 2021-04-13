@@ -12,6 +12,7 @@ import { CreateAccount } from '../CreateAccount/CreateAccount';
 import { ImportAccount } from '../ImportAccount/ImportAccount';
 import { AccountOverview } from '../AccountOverview/AccountOverview';
 import { ResetAccount } from '../ResetAccount/ResetAccount';
+import { RemoveAccount } from '../RemoveAccount/RemoveAccount';
 import { paths } from '../paths';
 
 interface Props {
@@ -36,6 +37,10 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
       <Switch>
         <Route path={paths.account.receive}>
           <ReceiveToken account={account} />
+        </Route>
+
+        <Route path={paths.account.remove}>
+          <RemoveAccount account={account} />
         </Route>
 
         <Route path={paths.account.reset.start}>
