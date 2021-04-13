@@ -20,18 +20,6 @@ export const accountsMock: AccountsMap = {
     address: '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL',
     index: 3,
   },
-  '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtA': {
-    name: 'My Fourth Account',
-    tartan: 'MacLeod',
-    address: '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtA',
-    index: 4,
-  },
-  '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtB': {
-    name: 'My Fifth Account',
-    tartan: 'MacGregor',
-    address: '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtB',
-    index: 5,
-  },
 };
 
 export function AccountsProviderMock({

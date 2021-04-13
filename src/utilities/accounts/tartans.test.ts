@@ -3,15 +3,6 @@ import { accountsMock } from '../../testing/AccountsProviderMock';
 import { storage } from './storage';
 import { updateNextTartan, otherTartans } from './tartans';
 
-const addedAccount = {
-  '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtC': {
-    name: 'My Sixth Account',
-    tartan: 'MacIntyre',
-    address: '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtC',
-    index: 6,
-  },
-};
-
 jest.mock('./getAccounts');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,19 +16,27 @@ jest.spyOn(storage, 'set').mockImplementation(async (value) => {
 
 jest.spyOn(storage, 'get').mockImplementation(async () => mockStorage);
 
+const firstAccount =
+  accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+
 describe('tartans', () => {
   it('should set last remaining popular tartan as next tartan', async () => {
-    (getAccounts as jest.Mock).mockReturnValue(accountsMock);
+    const accounts = { ...accountsMock };
+    ['MacLeod', 'MacGregor'].forEach((tartan) => {
+      accounts[tartan] = { ...firstAccount, tartan };
+    });
+    (getAccounts as jest.Mock).mockReturnValue(accounts);
 
     await updateNextTartan();
     expect(storage.set).toHaveBeenCalledWith({ nextTartan: 'MacIntyre' });
     expect(mockStorage.nextTartan).toBe('MacIntyre');
   });
   it('should use other tartan after all popular tartans are used', async () => {
-    (getAccounts as jest.Mock).mockReturnValue({
-      ...accountsMock,
-      ...addedAccount,
+    const accounts = { ...accountsMock };
+    ['MacLeod', 'MacGregor', 'MacIntyre'].forEach((tartan) => {
+      accounts[tartan] = { ...firstAccount, tartan };
     });
+    (getAccounts as jest.Mock).mockReturnValue(accounts);
 
     await updateNextTartan();
     expect(otherTartans).toContain(mockStorage.nextTartan);
