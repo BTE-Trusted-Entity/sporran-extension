@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@kiltprotocol/core": "^0.20.0",
-    "@polkadot/react-identicon": "^0.72.1",
+    "@polkadot/react-identicon": "^0.73.1",
     "@popperjs/core": "^2.9.2",
     "bn.js": "^5.2.0",
     "classnames": "^2.3.1",
