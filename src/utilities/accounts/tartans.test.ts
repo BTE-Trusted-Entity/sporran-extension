@@ -1,20 +1,10 @@
 import { getAccounts } from './getAccounts';
 import { accountsMock } from '../../testing/AccountsProviderMock';
 import { storage } from './storage';
-import { updateNextTartan, otherTartans } from './tartans';
+import { updateNextTartan } from './tartans';
 
 jest.mock('./getAccounts');
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const mockStorage: { [key: string]: any } = {
-  nextTartan: undefined,
-};
-
-jest.spyOn(storage, 'set').mockImplementation(async (value) => {
-  mockStorage.nextTartan = value.nextTartan;
-});
-
-jest.spyOn(storage, 'get').mockImplementation(async () => mockStorage);
+jest.mock('./storage');
 
 const firstAccount =
   accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
@@ -29,7 +19,6 @@ describe('tartans', () => {
 
     await updateNextTartan();
     expect(storage.set).toHaveBeenCalledWith({ nextTartan: 'MacIntyre' });
-    expect(mockStorage.nextTartan).toBe('MacIntyre');
   });
   it('should use other tartan after all popular tartans are used', async () => {
     const accounts = { ...accountsMock };
@@ -39,6 +28,11 @@ describe('tartans', () => {
     (getAccounts as jest.Mock).mockReturnValue(accounts);
 
     await updateNextTartan();
-    expect(otherTartans).toContain(mockStorage.nextTartan);
+    expect(storage.set).not.toHaveBeenCalledWith({ nextTartan: 'MacLeod' });
+    expect(storage.set).not.toHaveBeenCalledWith({ nextTartan: 'MacIntyre' });
+    expect(storage.set).not.toHaveBeenCalledWith({ nextTartan: 'MacFarlane' });
+    expect(storage.set).not.toHaveBeenCalledWith({ nextTartan: 'MacLachlan' });
+    expect(storage.set).not.toHaveBeenCalledWith({ nextTartan: 'MacPherson' });
+    expect(storage.set).not.toHaveBeenCalledWith({ nextTartan: 'MacGregor' });
   });
 });
