@@ -13,9 +13,6 @@ const addedAccount = {
 };
 
 jest.mock('./getAccounts');
-(getAccounts as jest.Mock)
-  .mockReturnValueOnce(accountsMock)
-  .mockReturnValueOnce({ ...accountsMock, ...addedAccount });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mockStorage: { [key: string]: any } = {
@@ -30,11 +27,18 @@ jest.spyOn(storage, 'get').mockImplementation(async () => mockStorage);
 
 describe('tartans', () => {
   it('should set last remaining popular tartan as next tartan', async () => {
+    (getAccounts as jest.Mock).mockReturnValue(accountsMock);
+
     await updateNextTartan();
     expect(storage.set).toHaveBeenCalledWith({ nextTartan: 'MacIntyre' });
     expect(mockStorage.nextTartan).toBe('MacIntyre');
   });
   it('should use other tartan after all popular tartans are used', async () => {
+    (getAccounts as jest.Mock).mockReturnValue({
+      ...accountsMock,
+      ...addedAccount,
+    });
+
     await updateNextTartan();
     expect(otherTartans).toContain(mockStorage.nextTartan);
   });
