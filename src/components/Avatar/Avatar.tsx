@@ -1,4 +1,4 @@
-import Identicon from '@polkadot/react-identicon';
+import { Identicon } from './Identicon';
 
 import styles from './Avatar.module.css';
 
@@ -66,12 +66,7 @@ export function Avatar({ tartan, address }: Props): JSX.Element {
   return (
     <div className={`${classNameForTartan[tartan]} ${styles.tartan}`}>
       {address ? (
-        <Identicon
-          className={styles.identicon}
-          value={address}
-          size={65}
-          theme="polkadot"
-        />
+        <Identicon className={styles.identicon} address={address} size={64} />
       ) : (
         // TODO: https://kiltprotocol.atlassian.net/browse/SK-93
         <div />
