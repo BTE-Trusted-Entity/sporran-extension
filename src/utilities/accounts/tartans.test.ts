@@ -10,6 +10,10 @@ const firstAccount =
   accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 describe('tartans', () => {
+  beforeEach(() => {
+    (storage.set as jest.Mock).mockClear();
+  });
+
   it('should set last remaining popular tartan as next tartan', async () => {
     const accounts = { ...accountsMock };
     ['MacLeod', 'MacGregor'].forEach((tartan) => {
