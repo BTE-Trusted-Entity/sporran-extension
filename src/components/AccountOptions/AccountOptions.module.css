@@ -1,6 +1,9 @@
 .toggle {
   composes: toggle from '../../components/Menu/Menu.module.css';
 
+  position: absolute;
+  top: -0.25rem;
+  right: 0;
   display: inline-flex;
   width: 1.625rem;
   height: 1.625rem;

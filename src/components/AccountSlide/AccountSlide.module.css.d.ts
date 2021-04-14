@@ -2,6 +2,7 @@ declare namespace AccountSlideModuleCssNamespace {
   export interface IAccountSlideModuleCss {
     name: string;
     nameContainer: string;
+    slideInfo: string;
   }
 }
 
