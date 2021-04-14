@@ -1,5 +1,6 @@
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
+import cx from 'classnames';
 
 import { KiltCurrency } from '../KiltCurrency/KiltCurrency';
 
@@ -28,12 +29,13 @@ function asKiltCoins(balance: BN): string {
 
 interface Props {
   amount: BN;
+  small?: boolean;
 }
 
-export function KiltAmount({ amount }: Props): JSX.Element {
+export function KiltAmount({ amount, small }: Props): JSX.Element {
   return (
-    <span className={styles.balance}>
-      {asKiltCoins(amount)} <KiltCurrency />
+    <span className={cx(styles.balance, small && styles.small)}>
+      {asKiltCoins(amount)} <KiltCurrency small />
     </span>
   );
 }

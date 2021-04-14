@@ -1,6 +1,7 @@
 declare namespace KiltAmountModuleCssNamespace {
   export interface IKiltAmountModuleCss {
     balance: string;
+    small: string;
   }
 }
 

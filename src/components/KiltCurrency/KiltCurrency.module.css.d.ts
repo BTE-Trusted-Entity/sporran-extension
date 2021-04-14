@@ -1,6 +1,7 @@
 declare namespace KiltCurrencyModuleCssNamespace {
   export interface IKiltCurrencyModuleCss {
     coin: string;
+    small: string;
   }
 }
 

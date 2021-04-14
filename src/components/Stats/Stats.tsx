@@ -5,6 +5,8 @@ import { KiltAmount } from '../KiltAmount/KiltAmount';
 import { AccountsMap, useAccounts } from '../../utilities/accounts/accounts';
 import { useStats } from './useStats';
 
+import styles from './Stats.module.css';
+
 interface Props {
   accounts: AccountsMap;
 }
@@ -18,14 +20,13 @@ function UnconditionalStats({ accounts }: Props): JSX.Element | null {
   }
 
   return (
-    <p>
+    <p className={styles.stats}>
       {plural(stats.count, {
         one: 'component_Stats_account_one',
         other: 'component_Stats_account_other',
       })}
-
-      {t('component_Stats_balance')}
-      <KiltAmount amount={stats.total} />
+      <span className={styles.balance}>{t('component_Stats_balance')}</span>
+      <KiltAmount amount={stats.total} small />
     </p>
   );
 }

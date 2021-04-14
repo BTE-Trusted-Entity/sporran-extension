@@ -4,3 +4,7 @@
   display: inline-flex;
   align-items: center;
 }
+
+.small {
+  font-size: 0.75rem;
+}

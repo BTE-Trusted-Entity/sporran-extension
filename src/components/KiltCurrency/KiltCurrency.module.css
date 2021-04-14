@@ -4,3 +4,9 @@
   height: 1.25rem;
   margin-left: 0.25rem;
 }
+
+.small {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-size: 100%;
+}
