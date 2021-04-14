@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
 
-import { accountsMock, mockBackgroundScript } from '../../testing';
+import { accountsMock } from '../../testing/AccountsProviderMock';
+import { mockBackgroundScript } from '../../testing/mockBackgroundScript';
 import { paths } from '../../views/paths';
 import { AccountsCarousel } from './AccountsCarousel';
 
