@@ -3,7 +3,7 @@
 exports[`KiltAmount should render 1`] = `
 <div>
   <span
-    class="balance"
+    class="amount"
   >
     1.2340
      

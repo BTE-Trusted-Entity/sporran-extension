@@ -23674,12 +23674,12 @@ exports[`ReceiveToken should render a normal account 1`] = `
          Balance: 
       </span>
       <span
-        class="balance small"
+        class="amount"
       >
         3.7020
          
         <span
-          class="coin small"
+          class="coin"
         />
       </span>
     </p>
@@ -23742,12 +23742,12 @@ exports[`ReceiveToken should render the new account 1`] = `
          Balance: 
       </span>
       <span
-        class="balance small"
+        class="amount"
       >
         3.7020
          
         <span
-          class="coin small"
+          class="coin"
         />
       </span>
     </p>

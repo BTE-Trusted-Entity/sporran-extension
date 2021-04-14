@@ -62,15 +62,11 @@ exports[`AccountOverview should render a normal account 1`] = `
       />
     </div>
     <p
-      style="margin: 0px;"
+      class="balance"
     >
+      Balance: 
       <span
-        class="balanceLabel"
-      >
-        Balance: 
-      </span>
-      <span
-        class="balance"
+        class="amount"
       >
         1.2340
          
@@ -103,12 +99,12 @@ exports[`AccountOverview should render a normal account 1`] = `
          Balance: 
       </span>
       <span
-        class="balance small"
+        class="amount"
       >
         3.7020
          
         <span
-          class="coin small"
+          class="coin"
         />
       </span>
     </p>
@@ -171,12 +167,12 @@ exports[`AccountOverview should render the new account 1`] = `
          Balance: 
       </span>
       <span
-        class="balance small"
+        class="amount"
       >
         3.7020
          
         <span
-          class="coin small"
+          class="coin"
         />
       </span>
     </p>

@@ -18,20 +18,20 @@ exports[`RemoveAccount should render 1`] = `
     <p>
       My Sporran Account
     </p>
-    <span
-      class="balanceLabel"
-    >
-      Balance: 
-    </span>
-    <span
+    <p
       class="balance"
     >
-      1.2340
-       
+      Balance: 
       <span
-        class="coin"
-      />
-    </span>
+        class="amount"
+      >
+        1.2340
+         
+        <span
+          class="coin"
+        />
+      </span>
+    </p>
     <p
       class="addressLabel"
     >

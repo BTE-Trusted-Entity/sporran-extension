@@ -12,12 +12,12 @@ exports[`Stats should render for at least two accounts 1`] = `
        Balance: 
     </span>
     <span
-      class="balance small"
+      class="amount"
     >
       3.7020
        
       <span
-        class="coin small"
+        class="coin"
       />
     </span>
   </p>
