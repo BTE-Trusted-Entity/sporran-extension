@@ -1,3 +1,5 @@
+import styles from './KiltCurrency.module.css';
+
 export function KiltCurrency(): JSX.Element {
-  return <>K</>;
+  return <span className={styles.coin} />;
 }

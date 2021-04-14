@@ -10,6 +10,8 @@ import {
 } from '../../connection/MessageType';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
 
+import styles from './Balance.module.css';
+
 interface BalanceProps {
   address: string;
 }
@@ -43,12 +45,13 @@ export function Balance({ address }: BalanceProps): JSX.Element {
   }, [address, balanceListener]);
 
   return (
-    <span>
-      {t('component_Balance_label')}
-
+    <>
+      <span className={styles.balanceLabel}>
+        {t('component_Balance_label')}
+      </span>
       {balance !== null && <KiltAmount amount={balance} />}
 
       {balance === null && <ClipLoader size={10} />}
-    </span>
+    </>
   );
 }

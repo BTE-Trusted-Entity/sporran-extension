@@ -3,6 +3,8 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { KiltCurrency } from '../KiltCurrency/KiltCurrency';
 
+import styles from './KiltAmount.module.css';
+
 const KILT_POWER = 15;
 
 const PRECISION = 4;
@@ -30,8 +32,8 @@ interface Props {
 
 export function KiltAmount({ amount }: Props): JSX.Element {
   return (
-    <>
+    <span className={styles.balance}>
       {asKiltCoins(amount)} <KiltCurrency />
-    </>
+    </span>
   );
 }
