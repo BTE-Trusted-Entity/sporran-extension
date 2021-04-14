@@ -35,7 +35,7 @@ interface Props {
 export function KiltAmount({ amount, small }: Props): JSX.Element {
   return (
     <span className={cx(styles.balance, small && styles.small)}>
-      {asKiltCoins(amount)} <KiltCurrency small />
+      {asKiltCoins(amount)} <KiltCurrency small={small} />
     </span>
   );
 }
