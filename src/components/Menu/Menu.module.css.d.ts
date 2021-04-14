@@ -3,6 +3,7 @@ declare namespace MenuModuleCssNamespace {
     dropdown: string;
     heading: string;
     list: string;
+    listButton: string;
     listItem: string;
     toggle: string;
     wrapper: string;

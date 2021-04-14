@@ -8,22 +8,20 @@ exports[`AccountSlide should render 1`] = `
     >
       My Sporran Account
     </h2>
-    <nav
-      class="container"
+    <div
+      class="wrapper"
     >
       <button
         aria-expanded="false"
         aria-haspopup="true"
         aria-label="Account options"
-        class="button"
+        class="toggle"
         role="button"
         tabindex="0"
         title="Account options"
         type="button"
-      >
-        v
-      </button>
-    </nav>
+      />
+    </div>
   </section>
 </div>
 `;

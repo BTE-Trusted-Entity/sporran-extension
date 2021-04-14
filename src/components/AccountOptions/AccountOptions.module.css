@@ -1,35 +1,14 @@
-.container {
+.toggle {
+  composes: toggle from '../../components/Menu/Menu.module.css';
+
   display: inline-flex;
-  flex-direction: column;
-  width: 10rem;
-  margin-left: 0.5rem;
+  width: 1.625rem;
+  height: 1.625rem;
+  border: 0;
+  padding: 0;
+  background: url('../../components/images/chevron-down.svg') no-repeat center/0.75rem;
 }
 
-.menu {
-  border: 1px solid black;
-}
-
-.menuHeading {
-  background: lightgrey;
-  margin: 0;
-  padding: 0.25rem;
-}
-
-.list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.button {
-  align-self: flex-start;
-}
-
-.listItem {
-  padding: 0.25rem;
-  border-top: 1px solid black;
-}
-
-.listItem:hover {
-  cursor: pointer;
+.toggle[aria-expanded=true] {
+  transform: rotate(180deg);
 }
