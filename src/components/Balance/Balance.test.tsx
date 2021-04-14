@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import { render, screen } from '../../testing';
+import { render } from '../../testing';
 import {
   BalanceChangeRequest,
   BalanceChangeResponse,
@@ -27,8 +27,6 @@ describe('Balance', () => {
   it('should render', async () => {
     const address = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
     const { container } = render(<Balance address={address} />);
-
-    await screen.findByText(/K/);
 
     expect(container).toMatchSnapshot();
     expect(browser.runtime.sendMessage).toHaveBeenCalledWith({

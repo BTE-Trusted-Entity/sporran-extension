@@ -2,11 +2,19 @@
 
 exports[`Balance should render 1`] = `
 <div>
-  <span>
+  <span
+    class="balanceLabel"
+  >
     Balance: 
+  </span>
+  <span
+    class="balance"
+  >
     1.2340
      
-    K
+    <span
+      class="coin"
+    />
   </span>
 </div>
 `;

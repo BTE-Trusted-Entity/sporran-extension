@@ -2,78 +2,115 @@
 
 exports[`AccountOverview should render a normal account 1`] = `
 <div>
-  <main>
+  <main
+    class="container"
+  >
     <header>
-      <h1>
-        Your accounts
+      <h1
+        class="heading"
+      >
+        Your Accounts
       </h1>
-      <p>
+      <p
+        class="info"
+      >
         You have $number$ accounts
       </p>
     </header>
-    <a
-      aria-label="Create new account"
-      href="/account/NEW"
-      title="Create new account"
+    <div
+      class="container"
     >
-      ←
-    </a>
-    <section>
-      <h2
-        style="display: inline;"
-      >
-        My Sporran Account
-      </h2>
-      <div
-        class="wrapper"
-      >
-        <button
-          aria-expanded="false"
-          aria-haspopup="true"
-          aria-label="Account options"
-          class="toggle"
-          role="button"
-          tabindex="0"
-          title="Account options"
-          type="button"
+      <a
+        aria-label="Create new account"
+        class="chevron left"
+        href="/account/NEW"
+        title="Create new account"
+      />
+      <section>
+        <div
+          class="MacFarlane tartan"
         />
-      </div>
-    </section>
-    <a
-      aria-label="My Second Account"
-      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-      title="My Second Account"
+        <div
+          class="slideInfo"
+        >
+          <div
+            class="nameContainer"
+          >
+            <h2
+              class="name"
+            >
+              My Sporran Account
+            </h2>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="Account options"
+              class="toggle"
+              role="button"
+              tabindex="0"
+              title="Account options"
+              type="button"
+            />
+          </div>
+        </div>
+      </section>
+      <a
+        aria-label="My Second Account"
+        class="chevron right"
+        href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+        title="My Second Account"
+      />
+    </div>
+    <p
+      style="margin: 0px;"
     >
-      →
-    </a>
-    <p>
-      <span>
+      <span
+        class="balanceLabel"
+      >
         Balance: 
+      </span>
+      <span
+        class="balance"
+      >
         1.2340
          
-        K
+        <span
+          class="coin"
+        />
       </span>
     </p>
     <p>
       <a
+        class="button"
         href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
       >
         Send
       </a>
-    </p>
-    <p>
       <a
+        class="button"
         href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
       >
         Receive
       </a>
     </p>
-    <p>
+    <p
+      class="stats"
+    >
       You have $number$ accounts with a total
-       Balance: 
-      3.7020
-       
-      K
+      <span
+        class="balance"
+      >
+         Balance: 
+      </span>
+      <span
+        class="balance small"
+      >
+        3.7020
+         
+        <span
+          class="coin small"
+        />
+      </span>
     </p>
   </main>
   ,
@@ -85,49 +122,63 @@ exports[`AccountOverview should render the new account 1`] = `
   <main>
     <header>
       <h1>
-        Your accounts
+        Your Accounts
       </h1>
       <p>
         You have $number$ accounts
       </p>
     </header>
-    <a
-      aria-label="My Third Account"
-      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-      title="My Third Account"
+    <div
+      class="container"
     >
-      ←
-    </a>
-    <section>
       <a
-        href="/account/create"
-      >
-        <h2>
-          Create new account
-        </h2>
-      </a>
-      <p>
-        or
-      </p>
+        aria-label="My Third Account"
+        class="chevron left"
+        href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+        title="My Third Account"
+      />
+      <section>
+        <a
+          href="/account/create"
+        >
+          <h2>
+            Create new account
+          </h2>
+        </a>
+        <p>
+          or
+        </p>
+        <a
+          href="/account/import"
+        >
+          Import an account from pre-existing phrase
+        </a>
+      </section>
       <a
-        href="/account/import"
-      >
-        Import an account from pre-existing phrase
-      </a>
-    </section>
-    <a
-      aria-label="My Sporran Account"
-      href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-      title="My Sporran Account"
+        aria-label="My Sporran Account"
+        class="chevron right"
+        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+        title="My Sporran Account"
+      />
+    </div>
+    <p
+      class="stats"
     >
-      →
-    </a>
-    <p>
       You have $number$ accounts with a total
-       Balance: 
-      3.7020
-       
-      K
+      <span
+        class="balance"
+      >
+         Balance: 
+      </span>
+      <span
+        class="balance small"
+      >
+        3.7020
+         
+        <span
+          class="coin small"
+        />
+      </span>
     </p>
   </main>
   ,

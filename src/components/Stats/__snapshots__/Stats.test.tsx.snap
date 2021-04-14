@@ -2,12 +2,24 @@
 
 exports[`Stats should render for at least two accounts 1`] = `
 <div>
-  <p>
+  <p
+    class="stats"
+  >
     You have $number$ accounts with a total
-     Balance: 
-    3.7020
-     
-    K
+    <span
+      class="balance"
+    >
+       Balance: 
+    </span>
+    <span
+      class="balance small"
+    >
+      3.7020
+       
+      <span
+        class="coin small"
+      />
+    </span>
   </p>
 </div>
 `;

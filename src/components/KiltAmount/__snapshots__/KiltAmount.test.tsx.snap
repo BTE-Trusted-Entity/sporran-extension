@@ -2,8 +2,14 @@
 
 exports[`KiltAmount should render 1`] = `
 <div>
-  1.2340
-   
-  K
+  <span
+    class="balance"
+  >
+    1.2340
+     
+    <span
+      class="coin"
+    />
+  </span>
 </div>
 `;

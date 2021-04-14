@@ -2,196 +2,234 @@
 
 exports[`AccountsCarousel should render normal accounts 1`] = `
 <div>
-  <a
-    aria-label="My Sporran Account"
-    href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-    title="My Sporran Account"
+  <div
+    class="container"
   >
-    ←
-  </a>
-  <section>
-    <h2
-      style="display: inline;"
-    >
-      My Second Account
-    </h2>
-    <div
-      class="wrapper"
-    >
-      <button
-        aria-expanded="false"
-        aria-haspopup="true"
-        aria-label="Account options"
-        class="toggle"
-        role="button"
-        tabindex="0"
-        title="Account options"
-        type="button"
+    <a
+      aria-label="My Sporran Account"
+      class="chevron left"
+      href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      title="My Sporran Account"
+    />
+    <section>
+      <div
+        class="MacLachlan tartan"
       />
-    </div>
-  </section>
-  <a
-    aria-label="My Third Account"
-    href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-    title="My Third Account"
-  >
-    →
-  </a>
+      <div
+        class="slideInfo"
+      >
+        <div
+          class="nameContainer"
+        >
+          <h2
+            class="name"
+          >
+            My Second Account
+          </h2>
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Account options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Account options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <a
+      aria-label="My Third Account"
+      class="chevron right"
+      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+      title="My Third Account"
+    />
+  </div>
 </div>
 `;
 
 exports[`AccountsCarousel should render the first account 1`] = `
 <div>
-  <a
-    aria-label="Create new account"
-    href="/account/NEW"
-    title="Create new account"
+  <div
+    class="container"
   >
-    ←
-  </a>
-  <section>
-    <h2
-      style="display: inline;"
-    >
-      My Sporran Account
-    </h2>
-    <div
-      class="wrapper"
-    >
-      <button
-        aria-expanded="false"
-        aria-haspopup="true"
-        aria-label="Account options"
-        class="toggle"
-        role="button"
-        tabindex="0"
-        title="Account options"
-        type="button"
+    <a
+      aria-label="Create new account"
+      class="chevron left"
+      href="/account/NEW"
+      title="Create new account"
+    />
+    <section>
+      <div
+        class="MacFarlane tartan"
       />
-    </div>
-  </section>
-  <a
-    aria-label="My Second Account"
-    href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-    title="My Second Account"
-  >
-    →
-  </a>
+      <div
+        class="slideInfo"
+      >
+        <div
+          class="nameContainer"
+        >
+          <h2
+            class="name"
+          >
+            My Sporran Account
+          </h2>
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Account options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Account options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <a
+      aria-label="My Second Account"
+      class="chevron right"
+      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+      title="My Second Account"
+    />
+  </div>
 </div>
 `;
 
 exports[`AccountsCarousel should render the last account 1`] = `
 <div>
-  <a
-    aria-label="My Second Account"
-    href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-    title="My Second Account"
+  <div
+    class="container"
   >
-    ←
-  </a>
-  <section>
-    <h2
-      style="display: inline;"
-    >
-      My Third Account
-    </h2>
-    <div
-      class="wrapper"
-    >
-      <button
-        aria-expanded="false"
-        aria-haspopup="true"
-        aria-label="Account options"
-        class="toggle"
-        role="button"
-        tabindex="0"
-        title="Account options"
-        type="button"
+    <a
+      aria-label="My Second Account"
+      class="chevron left"
+      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+      title="My Second Account"
+    />
+    <section>
+      <div
+        class="MacPherson tartan"
       />
-    </div>
-  </section>
-  <a
-    aria-label="Create new account"
-    href="/account/NEW"
-    title="Create new account"
-  >
-    →
-  </a>
+      <div
+        class="slideInfo"
+      >
+        <div
+          class="nameContainer"
+        >
+          <h2
+            class="name"
+          >
+            My Third Account
+          </h2>
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Account options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Account options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <a
+      aria-label="Create new account"
+      class="chevron right"
+      href="/account/NEW"
+      title="Create new account"
+    />
+  </div>
 </div>
 `;
 
 exports[`AccountsCarousel should render the new account 1`] = `
 <div>
-  <a
-    aria-label="My Third Account"
-    href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-    title="My Third Account"
+  <div
+    class="container"
   >
-    ←
-  </a>
-  <section>
     <a
-      href="/account/create"
-    >
-      <h2>
-        Create new account
-      </h2>
-    </a>
-    <p>
-      or
-    </p>
+      aria-label="My Third Account"
+      class="chevron left"
+      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+      title="My Third Account"
+    />
+    <section>
+      <a
+        href="/account/create"
+      >
+        <h2>
+          Create new account
+        </h2>
+      </a>
+      <p>
+        or
+      </p>
+      <a
+        href="/account/import"
+      >
+        Import an account from pre-existing phrase
+      </a>
+    </section>
     <a
-      href="/account/import"
-    >
-      Import an account from pre-existing phrase
-    </a>
-  </section>
-  <a
-    aria-label="My Sporran Account"
-    href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-    title="My Sporran Account"
-  >
-    →
-  </a>
+      aria-label="My Sporran Account"
+      class="chevron right"
+      href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      title="My Sporran Account"
+    />
+  </div>
 </div>
 `;
 
 exports[`AccountsCarousel should support other paths 1`] = `
 <div>
-  <a
-    aria-label="My Second Account"
-    href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
-    title="My Second Account"
+  <div
+    class="container"
   >
-    ←
-  </a>
-  <section>
-    <h2
-      style="display: inline;"
-    >
-      My Third Account
-    </h2>
-    <div
-      class="wrapper"
-    >
-      <button
-        aria-expanded="false"
-        aria-haspopup="true"
-        aria-label="Account options"
-        class="toggle"
-        role="button"
-        tabindex="0"
-        title="Account options"
-        type="button"
+    <a
+      aria-label="My Second Account"
+      class="chevron left"
+      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
+      title="My Second Account"
+    />
+    <section>
+      <div
+        class="MacPherson tartan"
       />
-    </div>
-  </section>
-  <a
-    aria-label="Create new account"
-    href="/account/NEW/send"
-    title="Create new account"
-  >
-    →
-  </a>
+      <div
+        class="slideInfo"
+      >
+        <div
+          class="nameContainer"
+        >
+          <h2
+            class="name"
+          >
+            My Third Account
+          </h2>
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Account options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Account options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <a
+      aria-label="Create new account"
+      class="chevron right"
+      href="/account/NEW/send"
+      title="Create new account"
+    />
+  </div>
 </div>
 `;

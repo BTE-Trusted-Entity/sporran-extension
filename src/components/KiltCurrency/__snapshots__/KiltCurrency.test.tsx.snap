@@ -2,6 +2,8 @@
 
 exports[`KiltCurrency should render 1`] = `
 <div>
-  K
+  <span
+    class="coin"
+  />
 </div>
 `;

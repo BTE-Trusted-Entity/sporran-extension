@@ -2,86 +2,78 @@
 
 exports[`AddAccount menu should be visible when menu button clicked 1`] = `
 <div>
+  <button
+    aria-expanded="true"
+    aria-haspopup="true"
+    aria-label="Account options"
+    class="toggle"
+    role="button"
+    tabindex="0"
+    title="Account options"
+    type="button"
+  />
   <div
-    class="wrapper"
+    class="dropdown"
+    role="menu"
   >
-    <button
-      aria-expanded="true"
-      aria-haspopup="true"
-      aria-label="Account options"
-      class="toggle"
-      role="button"
-      tabindex="0"
-      title="Account options"
-      type="button"
-    />
-    <div
-      class="dropdown"
-      role="menu"
+    <h4
+      class="heading"
     >
-      <h4
-        class="heading"
+      Account
+    </h4>
+    <ul
+      class="list"
+    >
+      <li
+        class="listItem"
       >
-        Account
-      </h4>
-      <ul
-        class="list"
+        <button
+          class="listButton"
+          role="menuitem"
+          tabindex="-1"
+          type="button"
+        >
+          Edit account name
+        </button>
+      </li>
+      <li
+        class="listItem"
       >
-        <li
-          class="listItem"
+        <a
+          href="/account/ADDRESS/remove"
+          role="menuitem"
+          tabindex="-1"
         >
-          <button
-            class="listButton"
-            role="menuitem"
-            tabindex="-1"
-            type="button"
-          >
-            Edit account name
-          </button>
-        </li>
-        <li
-          class="listItem"
+          Forget account
+        </a>
+      </li>
+      <li
+        class="listItem"
+      >
+        <a
+          href="/account/ADDRESS/reset"
+          role="menuitem"
+          tabindex="-1"
         >
-          <a
-            href="/account/ADDRESS/remove"
-            role="menuitem"
-            tabindex="-1"
-          >
-            Forget account
-          </a>
-        </li>
-        <li
-          class="listItem"
-        >
-          <a
-            href="/account/ADDRESS/reset"
-            role="menuitem"
-            tabindex="-1"
-          >
-            Reset password
-          </a>
-        </li>
-      </ul>
-    </div>
+          Reset password
+        </a>
+      </li>
+    </ul>
   </div>
 </div>
 `;
 
 exports[`AddAccount should render 1`] = `
 <div>
-  <div
-    class="wrapper"
-  >
-    <button
-      aria-expanded="false"
-      aria-haspopup="true"
-      aria-label="Account options"
-      class="toggle"
-      role="button"
-      tabindex="0"
-      title="Account options"
-      type="button"
-    />
-  </div>
+  <button
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label="Account options"
+    class="toggle"
+    role="button"
+    tabindex="0"
+    title="Account options"
+    type="button"
+  />
 </div>
 `;
