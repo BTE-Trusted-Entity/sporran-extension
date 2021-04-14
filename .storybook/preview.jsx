@@ -3,7 +3,7 @@ import { withConsole, setConsoleOptions } from '@storybook/addon-console';
 import { MemoryRouter } from 'react-router-dom';
 import { init } from '@kiltprotocol/core';
 
-import { AccountsProviderMock } from '../src/testing';
+import { AccountsProviderMock } from '../src/testing/AccountsProviderMock';
 import { ViewDecorator } from '../src/components/View/ViewDecorator';
 import '../src/views/App/App.css';
 
