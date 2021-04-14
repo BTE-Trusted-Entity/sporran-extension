@@ -23,6 +23,9 @@
   "common_action_next": {
     "message": "Next Step"
   },
+  "common_action_paste": {
+    "message": "Paste from clipboard"
+  },
   "component_Balance_label": {
     "message": "Balance: "
   },
@@ -316,5 +319,60 @@
   },
   "view_RemoveAccount_remove": {
     "message": "Forget this account"
+  },
+  "view_SendToken_heading": {
+    "message": "Send KILT Coins"
+  },
+  "view_SendToken_subline": {
+    "message": "Securely send some of your coins"
+  },
+  "view_SendToken_maximum": {
+    "message": "Maximum sendable amount: "
+  },
+  "view_SendToken_amount": {
+    "message": "Amount to send"
+  },
+  "view_SendToken_amount_invalid": {
+    "message": "The value entered is not a number"
+  },
+  "view_SendToken_amount_small": {
+    "message": "The minimum sendable amount is $minimum$",
+    "placeholders": {
+      "minimum": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_SendToken_amount_large": {
+    "message": "The amount entered exceeds your maximum sendable amount"
+  },
+  "view_SendToken_total_fee": {
+    "message": "Total fee: "
+  },
+  "view_SendToken_all_in": {
+    "message": "All in"
+  },
+  "view_SendToken_tip_increase": {
+    "message": "Increase the tip by 1%"
+  },
+  "view_SendToken_tip_decrease": {
+    "message": "Decrease the tip by 1%"
+  },
+  "view_SendToken_tip": {
+    "message": "Tip of $percent$% included in fee",
+    "placeholders": {
+      "percent": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_SendToken_recipient": {
+    "message": "Paste the recipient address here"
+  },
+  "view_SendToken_recipient_invalid": {
+    "message": "The recipient address is not properly formatted"
+  },
+  "view_SendToken_CTA": {
+    "message": "Review & Sign Transaction"
   }
 }

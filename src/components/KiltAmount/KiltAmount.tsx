@@ -16,7 +16,7 @@ const FORMAT = {
 const CONVERSION_FACTOR = new BN(10 ** (KILT_POWER - PRECISION));
 const DIVIDER = 10 ** PRECISION;
 
-function asKiltCoins(balance: BN): string {
+export function asKiltCoins(balance: BN): string {
   const numberWithFractions =
     balance.div(CONVERSION_FACTOR).toNumber() / DIVIDER;
 
