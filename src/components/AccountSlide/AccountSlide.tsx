@@ -42,13 +42,11 @@ export function AccountSlide({ account }: Props): JSX.Element {
   return (
     <section>
       <Avatar tartan={account.tartan} address={account.address} />
-      <div className={styles.slideInfo}>
-        <div className={styles.nameContainer}>
-          <h2 className={styles.name}>{account.name}</h2>
-          <AccountOptions address={account.address} onEdit={handleEditClick} />
-        </div>
+      <div className={styles.name}>
+        <span>{account.name}</span>
+        <AccountOptions address={account.address} onEdit={handleEditClick} />
+        {/* TODO - https://kiltprotocol.atlassian.net/browse/SK-119 */}
       </div>
-
       {editing && (
         <form onSubmit={handleSubmit}>
           <label>

@@ -24,7 +24,7 @@ export function AccountOptions({ address, onEdit }: Props): JSX.Element {
   }, [onEdit, setIsOpen]);
 
   return (
-    <>
+    <div className={`${menuStyles.wrapper} ${styles.wrapper}`}>
       <button
         {...buttonProps}
         type="button"
@@ -69,6 +69,6 @@ export function AccountOptions({ address, onEdit }: Props): JSX.Element {
           </ul>
         </div>
       )}
-    </>
+    </div>
   );
 }
