@@ -15,22 +15,20 @@ exports[`AccountsCarousel should render normal accounts 1`] = `
     >
       My Second Account
     </h2>
-    <nav
-      class="container"
+    <div
+      class="wrapper"
     >
       <button
         aria-expanded="false"
         aria-haspopup="true"
         aria-label="Account options"
-        class="button"
+        class="toggle"
         role="button"
         tabindex="0"
         title="Account options"
         type="button"
-      >
-        v
-      </button>
-    </nav>
+      />
+    </div>
   </section>
   <a
     aria-label="My Third Account"
@@ -57,22 +55,20 @@ exports[`AccountsCarousel should render the first account 1`] = `
     >
       My Sporran Account
     </h2>
-    <nav
-      class="container"
+    <div
+      class="wrapper"
     >
       <button
         aria-expanded="false"
         aria-haspopup="true"
         aria-label="Account options"
-        class="button"
+        class="toggle"
         role="button"
         tabindex="0"
         title="Account options"
         type="button"
-      >
-        v
-      </button>
-    </nav>
+      />
+    </div>
   </section>
   <a
     aria-label="My Second Account"
@@ -99,22 +95,20 @@ exports[`AccountsCarousel should render the last account 1`] = `
     >
       My Third Account
     </h2>
-    <nav
-      class="container"
+    <div
+      class="wrapper"
     >
       <button
         aria-expanded="false"
         aria-haspopup="true"
         aria-label="Account options"
-        class="button"
+        class="toggle"
         role="button"
         tabindex="0"
         title="Account options"
         type="button"
-      >
-        v
-      </button>
-    </nav>
+      />
+    </div>
   </section>
   <a
     aria-label="Create new account"
@@ -177,22 +171,20 @@ exports[`AccountsCarousel should support other paths 1`] = `
     >
       My Third Account
     </h2>
-    <nav
-      class="container"
+    <div
+      class="wrapper"
     >
       <button
         aria-expanded="false"
         aria-haspopup="true"
         aria-label="Account options"
-        class="button"
+        class="toggle"
         role="button"
         tabindex="0"
         title="Account options"
         type="button"
-      >
-        v
-      </button>
-    </nav>
+      />
+    </div>
   </section>
   <a
     aria-label="Create new account"
