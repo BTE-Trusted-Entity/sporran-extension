@@ -9,16 +9,14 @@ exports[`AccountSlide should render 1`] = `
       Identicon
     </div>
     <div
-      class="slideInfo"
+      class="name"
     >
+      <span>
+        My Sporran Account
+      </span>
       <div
-        class="nameContainer"
+        class="wrapper wrapper"
       >
-        <h2
-          class="name"
-        >
-          My Sporran Account
-        </h2>
         <button
           aria-expanded="false"
           aria-haspopup="true"

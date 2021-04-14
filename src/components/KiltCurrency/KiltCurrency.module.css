@@ -1,7 +1,9 @@
 .coin {
-  background-image: url('../images/kilt-coin-circle.svg');
+  background: url('../images/kilt-coin-circle.svg') no-repeat;
+  background-size: 100%;
+  display: inline-block;
   width: 1em;
   height: 1em;
-  background-size: 100%;
-  margin-left: 0.25em;
+  vertical-align: text-top;
+  margin-top: 0.125em;
 }

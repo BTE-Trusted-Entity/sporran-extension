@@ -11,11 +11,11 @@
 }
 
 .left {
-  background-image: url('../images/chevron-left.svg');
+  background: url('../images/chevron-left.svg') no-repeat;
   left: 6.25rem;
 }
 
 .right {
-  background-image: url('../images/chevron-right.svg');
+  background: url('../images/chevron-right.svg') no-repeat;
   right: 6.25rem;
 }

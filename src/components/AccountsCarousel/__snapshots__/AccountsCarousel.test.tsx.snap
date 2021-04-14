@@ -14,18 +14,18 @@ exports[`AccountsCarousel should render normal accounts 1`] = `
     <section>
       <div
         class="MacLachlan tartan"
-      />
-      <div
-        class="slideInfo"
       >
+        Identicon
+      </div>
+      <div
+        class="name"
+      >
+        <span>
+          My Second Account
+        </span>
         <div
-          class="nameContainer"
+          class="wrapper wrapper"
         >
-          <h2
-            class="name"
-          >
-            My Second Account
-          </h2>
           <button
             aria-expanded="false"
             aria-haspopup="true"
@@ -63,18 +63,18 @@ exports[`AccountsCarousel should render the first account 1`] = `
     <section>
       <div
         class="MacFarlane tartan"
-      />
-      <div
-        class="slideInfo"
       >
+        Identicon
+      </div>
+      <div
+        class="name"
+      >
+        <span>
+          My Sporran Account
+        </span>
         <div
-          class="nameContainer"
+          class="wrapper wrapper"
         >
-          <h2
-            class="name"
-          >
-            My Sporran Account
-          </h2>
           <button
             aria-expanded="false"
             aria-haspopup="true"
@@ -112,18 +112,18 @@ exports[`AccountsCarousel should render the last account 1`] = `
     <section>
       <div
         class="MacPherson tartan"
-      />
-      <div
-        class="slideInfo"
       >
+        Identicon
+      </div>
+      <div
+        class="name"
+      >
+        <span>
+          My Third Account
+        </span>
         <div
-          class="nameContainer"
+          class="wrapper wrapper"
         >
-          <h2
-            class="name"
-          >
-            My Third Account
-          </h2>
           <button
             aria-expanded="false"
             aria-haspopup="true"
@@ -199,18 +199,18 @@ exports[`AccountsCarousel should support other paths 1`] = `
     <section>
       <div
         class="MacPherson tartan"
-      />
-      <div
-        class="slideInfo"
       >
+        Identicon
+      </div>
+      <div
+        class="name"
+      >
+        <span>
+          My Third Account
+        </span>
         <div
-          class="nameContainer"
+          class="wrapper wrapper"
         >
-          <h2
-            class="name"
-          >
-            My Third Account
-          </h2>
           <button
             aria-expanded="false"
             aria-haspopup="true"

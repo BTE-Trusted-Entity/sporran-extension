@@ -3,6 +3,7 @@
 exports[`KiltCurrency should render 1`] = `
 <div>
   <span
+    aria-label="Kilt coin"
     class="coin"
   />
 </div>

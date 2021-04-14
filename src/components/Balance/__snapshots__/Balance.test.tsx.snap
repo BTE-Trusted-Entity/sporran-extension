@@ -12,6 +12,7 @@ exports[`Balance should render 1`] = `
       1.2340
        
       <span
+        aria-label="Kilt coin"
         class="coin"
       />
     </span>

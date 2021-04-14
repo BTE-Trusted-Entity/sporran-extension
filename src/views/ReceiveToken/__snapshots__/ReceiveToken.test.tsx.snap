@@ -23,18 +23,18 @@ exports[`ReceiveToken should render a normal account 1`] = `
       <section>
         <div
           class="MacFarlane tartan"
-        />
-        <div
-          class="slideInfo"
         >
+          Identicon
+        </div>
+        <div
+          class="name"
+        >
+          <span>
+            My Sporran Account
+          </span>
           <div
-            class="nameContainer"
+            class="wrapper wrapper"
           >
-            <h2
-              class="name"
-            >
-              My Sporran Account
-            </h2>
             <button
               aria-expanded="false"
               aria-haspopup="true"
@@ -23672,15 +23672,16 @@ exports[`ReceiveToken should render a normal account 1`] = `
         class="balance"
       >
          Balance: 
-      </span>
-      <span
-        class="amount"
-      >
-        3.7020
-         
         <span
-          class="coin"
-        />
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="Kilt coin"
+            class="coin"
+          />
+        </span>
       </span>
     </p>
   </section>
@@ -23740,15 +23741,16 @@ exports[`ReceiveToken should render the new account 1`] = `
         class="balance"
       >
          Balance: 
-      </span>
-      <span
-        class="amount"
-      >
-        3.7020
-         
         <span
-          class="coin"
-        />
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="Kilt coin"
+            class="coin"
+          />
+        </span>
       </span>
     </p>
   </main>

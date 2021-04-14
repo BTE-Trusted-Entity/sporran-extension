@@ -15,10 +15,6 @@
   margin: 0.25rem 0 0.75rem 0;
 }
 
-.buttons {
-  height: 2.25rem;
-}
-
 .button {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
   display: inline-block;

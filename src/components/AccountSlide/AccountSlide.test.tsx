@@ -10,7 +10,6 @@ import {
 
 import { AccountSlide } from './AccountSlide';
 import { AccountSlideNew } from './AccountSlideNew';
-import { Identicon } from '../Avatar/Identicon';
 
 jest.mock('../../utilities/accounts/accounts');
 jest.spyOn(browser.runtime, 'sendMessage');
@@ -33,9 +32,6 @@ const account = {
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
   index: 1,
 };
-
-jest.mock('../Avatar/Identicon');
-(Identicon as jest.Mock).mockImplementation(() => 'Identicon');
 
 describe('AccountSlide', () => {
   it('should render', async () => {

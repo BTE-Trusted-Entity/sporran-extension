@@ -25,8 +25,10 @@ function UnconditionalStats({ accounts }: Props): JSX.Element | null {
         one: 'component_Stats_account_one',
         other: 'component_Stats_account_other',
       })}
-      <span className={styles.balance}>{t('component_Stats_balance')}</span>
-      <KiltAmount amount={stats.total} small />
+      <span className={styles.balance}>
+        {t('component_Stats_balance')}
+        <KiltAmount amount={stats.total} />
+      </span>
     </p>
   );
 }

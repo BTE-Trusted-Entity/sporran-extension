@@ -1,7 +1,6 @@
 declare namespace AccountOverviewModuleCssNamespace {
   export interface IAccountOverviewModuleCss {
     button: string;
-    buttons: string;
     container: string;
     heading: string;
     info: string;

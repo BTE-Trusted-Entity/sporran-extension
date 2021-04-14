@@ -28,7 +28,6 @@ function asKiltCoins(balance: BN): string {
 
 interface Props {
   amount: BN;
-  small?: boolean;
 }
 
 export function KiltAmount({ amount }: Props): JSX.Element {

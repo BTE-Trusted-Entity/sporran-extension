@@ -87,6 +87,9 @@
   "component_AccountOptions_reset_password": {
     "message": "Reset password"
   },
+  "component_KiltCurrency_label": {
+    "message": "Kilt coin"
+  },
   "component_Settings_label": {
     "message": "Settings"
   },

@@ -10,15 +10,16 @@ exports[`Stats should render for at least two accounts 1`] = `
       class="balance"
     >
        Balance: 
-    </span>
-    <span
-      class="amount"
-    >
-      3.7020
-       
       <span
-        class="coin"
-      />
+        class="amount"
+      >
+        3.7020
+         
+        <span
+          aria-label="Kilt coin"
+          class="coin"
+        />
+      </span>
     </span>
   </p>
 </div>

@@ -5,6 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import dialogPolyfill from 'dialog-polyfill';
 
 import { AccountsProviderMock } from './testing/AccountsProviderMock';
+import { Identicon } from './components/Avatar/Identicon';
 
 export {
   AccountsProviderMock,
@@ -12,6 +13,9 @@ export {
 } from './testing/AccountsProviderMock';
 
 export { mockBackgroundScript } from './testing/mockBackgroundScript';
+
+jest.mock('./components/Avatar/Identicon');
+(Identicon as jest.Mock).mockImplementation(() => 'Identicon');
 
 export function render(
   ui: Parameters<typeof externalRender>[0],
