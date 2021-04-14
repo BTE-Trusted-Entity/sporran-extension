@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { browser } from 'webextension-polyfill-ts';
 
-import { render, screen } from '../../testing';
+import { render, screen, waitForElementToBeRemoved } from '../../testing';
 import { saveAccount } from '../../utilities/accounts/accounts';
 import {
   BalanceChangeResponse,
@@ -47,7 +47,9 @@ describe('AccountSlide', () => {
       await screen.findByRole('menuitem', { name: 'Edit account name' }),
     );
     userEvent.type(await screen.findByLabelText('Account name:'), 'Foo');
-    userEvent.click(await screen.findByRole('button', { name: 'Save' }));
+
+    const saveButton = await screen.findByRole('button', { name: 'Save' });
+    userEvent.click(saveButton);
 
     expect(saveAccount).toHaveBeenCalledWith({
       name: 'Foo',
@@ -55,6 +57,8 @@ describe('AccountSlide', () => {
       address: account.address,
       index: 1,
     });
+
+    await waitForElementToBeRemoved(saveButton);
   });
 });
 
