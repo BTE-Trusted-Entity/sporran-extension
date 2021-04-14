@@ -1,6 +1,8 @@
 export * from '@testing-library/react';
-import { render as externalRender } from '@testing-library/react';
+export { waitForElementToBeRemoved } from '@testing-library/dom';
+import { act, render as externalRender, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import dialogPolyfill from 'dialog-polyfill';
 
 import { AccountsProviderMock } from './testing/AccountsProviderMock';
 
@@ -21,4 +23,17 @@ export function render(
     </AccountsProviderMock>,
     options,
   );
+}
+
+export async function waitForTooltipUpdate(): Promise<void> {
+  expect(await screen.findByRole('status')).toHaveAttribute(
+    'data-popper-escaped',
+  );
+}
+
+const dialogPromise = Promise.resolve();
+(dialogPolyfill.registerDialog as jest.Mock).mockReturnValue(dialogPromise);
+
+export async function waitForDialogUpdate(): Promise<void> {
+  await act(() => dialogPromise);
 }

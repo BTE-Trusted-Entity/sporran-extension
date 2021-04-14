@@ -4,6 +4,7 @@ import {
   accountsMock as accounts,
   mockBackgroundScript,
   render,
+  waitForDialogUpdate,
 } from '../../testing';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
@@ -25,6 +26,7 @@ describe('ReceiveToken', () => {
         </Route>
       </MemoryRouter>,
     );
+    await waitForDialogUpdate();
     expect(container).toMatchSnapshot();
   });
 
@@ -38,6 +40,7 @@ describe('ReceiveToken', () => {
         </Route>
       </MemoryRouter>,
     );
+    await waitForDialogUpdate();
     expect(container).toMatchSnapshot();
   });
 });
