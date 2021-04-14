@@ -45,13 +45,11 @@ export function Balance({ address }: BalanceProps): JSX.Element {
   }, [address, balanceListener]);
 
   return (
-    <>
-      <span className={styles.balanceLabel}>
-        {t('component_Balance_label')}
-      </span>
+    <p className={styles.balance}>
+      {t('component_Balance_label')}
       {balance !== null && <KiltAmount amount={balance} />}
 
       {balance === null && <ClipLoader size={10} />}
-    </>
+    </p>
   );
 }

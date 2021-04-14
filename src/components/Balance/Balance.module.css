@@ -1,5 +1,5 @@
-.balanceLabel {
+.balance {
   composes: smallText from '../Typography/Typography.module.css';
   font-size: 1.25rem;
-  margin-right: 0.25rem;
+  margin: 0;
 }
