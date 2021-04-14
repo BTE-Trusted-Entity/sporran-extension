@@ -5,6 +5,7 @@ import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 
 import { generatePath, paths } from '../../views/paths';
 
+import menuStyles from '../Menu/Menu.module.css';
 import styles from './AccountOptions.module.css';
 
 interface Props {
@@ -23,34 +24,33 @@ export function AccountOptions({ address, onEdit }: Props): JSX.Element {
   }, [onEdit, setIsOpen]);
 
   return (
-    <nav className={styles.container}>
+    <div className={menuStyles.wrapper}>
       <button
         {...buttonProps}
         type="button"
         title={t('component_AccountOptions_label')}
         aria-label={t('component_AccountOptions_label')}
-        className={styles.button}
-      >
-        v
-      </button>
+        className={styles.toggle}
+      />
 
       {isOpen && (
-        <div className={styles.menu} role="menu">
-          <h4 className={styles.menuHeading}>
+        <div className={menuStyles.dropdown} role="menu">
+          <h4 className={menuStyles.heading}>
             {t('component_AccountOptions_heading')}
           </h4>
 
-          <ul className={styles.list}>
-            <li className={styles.listItem}>
+          <ul className={menuStyles.list}>
+            <li className={menuStyles.listItem}>
               <button
                 type="button"
                 {...(itemProps[0] as unknown)}
                 onClick={handleClick}
+                className={menuStyles.listButton}
               >
                 {t('component_AccountOptions_edit')}
               </button>
             </li>
-            <li className={styles.listItem}>
+            <li className={menuStyles.listItem}>
               <Link
                 to={generatePath(paths.account.remove, { address })}
                 {...itemProps[1]}
@@ -58,7 +58,7 @@ export function AccountOptions({ address, onEdit }: Props): JSX.Element {
                 {t('component_AccountOptions_forget')}
               </Link>
             </li>
-            <li className={styles.listItem}>
+            <li className={menuStyles.listItem}>
               <Link
                 to={generatePath(paths.account.reset.start, { address })}
                 {...itemProps[2]}
@@ -69,6 +69,6 @@ export function AccountOptions({ address, onEdit }: Props): JSX.Element {
           </ul>
         </div>
       )}
-    </nav>
+    </div>
   );
 }

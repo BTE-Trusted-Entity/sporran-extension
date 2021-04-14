@@ -1,11 +1,6 @@
 declare namespace AccountOptionsModuleCssNamespace {
   export interface IAccountOptionsModuleCss {
-    button: string;
-    container: string;
-    list: string;
-    listItem: string;
-    menu: string;
-    menuHeading: string;
+    toggle: string;
   }
 }
 

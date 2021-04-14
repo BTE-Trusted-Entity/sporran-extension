@@ -2,27 +2,25 @@
 
 exports[`AddAccount menu should be visible when menu button clicked 1`] = `
 <div>
-  <nav
-    class="container"
+  <div
+    class="wrapper"
   >
     <button
       aria-expanded="true"
       aria-haspopup="true"
       aria-label="Account options"
-      class="button"
+      class="toggle"
       role="button"
       tabindex="0"
       title="Account options"
       type="button"
-    >
-      v
-    </button>
+    />
     <div
-      class="menu"
+      class="dropdown"
       role="menu"
     >
       <h4
-        class="menuHeading"
+        class="heading"
       >
         Account
       </h4>
@@ -33,6 +31,7 @@ exports[`AddAccount menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <button
+            class="listButton"
             role="menuitem"
             tabindex="-1"
             type="button"
@@ -64,27 +63,25 @@ exports[`AddAccount menu should be visible when menu button clicked 1`] = `
         </li>
       </ul>
     </div>
-  </nav>
+  </div>
 </div>
 `;
 
 exports[`AddAccount should render 1`] = `
 <div>
-  <nav
-    class="container"
+  <div
+    class="wrapper"
   >
     <button
       aria-expanded="false"
       aria-haspopup="true"
       aria-label="Account options"
-      class="button"
+      class="toggle"
       role="button"
       tabindex="0"
       title="Account options"
       type="button"
-    >
-      v
-    </button>
-  </nav>
+    />
+  </div>
 </div>
 `;
