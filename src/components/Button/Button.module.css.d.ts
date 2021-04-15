@@ -1,5 +1,6 @@
 declare namespace ButtonModuleCssNamespace {
   export interface IButtonModuleCss {
+    buttonIcon: string;
     buttonPrimary: string;
     buttonSecondary: string;
   }

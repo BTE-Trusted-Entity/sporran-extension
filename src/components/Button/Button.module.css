@@ -29,3 +29,11 @@
   align-items: center;
   cursor: pointer;
 }
+
+.buttonIcon {
+  border: 0;
+  padding: 0;
+  background: none no-repeat center/contain;
+  display: inline-flex;
+  cursor: pointer;
+}

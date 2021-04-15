@@ -6,14 +6,12 @@
 
 .toggle {
   composes: toggle from '../../components/Menu/Menu.module.css';
+  composes: buttonIcon from '../../components/Button/Button.module.css';
 
-  display: inline-flex;
   width: 1.625rem;
   height: 1.625rem;
-  border: 0;
-  padding: 0;
-  background: url('../../components/images/chevron-down.svg') no-repeat
-    center/0.75rem;
+  background-size: 0.75rem;
+  background-image: url('../../components/images/chevron-down.svg');
 }
 
 .toggle[aria-expanded='true'] {
