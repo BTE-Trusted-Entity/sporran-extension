@@ -43,7 +43,7 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
     <>
       <Switch>
         <Route path={paths.account.receive}>
-          <ReceiveToken account={account} />
+          <ReceiveToken account={account} nextTartan={nextTartan} />
         </Route>
 
         <Route path={paths.account.remove}>

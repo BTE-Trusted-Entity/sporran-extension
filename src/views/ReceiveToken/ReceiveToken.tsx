@@ -15,9 +15,10 @@ import styles from './ReceiveToken.module.css';
 
 interface Props {
   account: Account;
+  nextTartan: string;
 }
 
-export function ReceiveToken({ account }: Props): JSX.Element {
+export function ReceiveToken({ account, nextTartan }: Props): JSX.Element {
   const addressRef = useRef<HTMLInputElement>(null);
   const [isCopied, setIsCopied] = useState(false);
   const [largeQR, setLargeQR] = useState(false);
@@ -43,7 +44,7 @@ export function ReceiveToken({ account }: Props): JSX.Element {
   }, []);
 
   if (isNew(account)) {
-    return <AccountOverviewNew />;
+    return <AccountOverviewNew nextTartan={nextTartan} />;
   }
 
   return (
