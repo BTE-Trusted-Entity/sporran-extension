@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
 
+import storiesStyles from './Button.stories.module.css';
 import styles from './Button.module.css';
 
 export default {
@@ -36,4 +37,8 @@ export function ButtonSecondaryDisabled(): JSX.Element {
       Cancel
     </button>
   );
+}
+
+export function ButtonIcon(): JSX.Element {
+  return <button className={storiesStyles.icon} type="button" />;
 }

@@ -1,0 +1,6 @@
+.icon {
+  composes: buttonIcon from './Button.module.css';
+  background-image: url('../images/plus-circle.svg');
+  width: 2rem;
+  height: 2rem;
+}

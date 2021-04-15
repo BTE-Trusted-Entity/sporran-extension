@@ -1,14 +1,9 @@
 .linkBack {
-  display: inline-block;
+  composes: buttonIcon from '../../components/Button/Button.module.css';
   position: absolute;
   left: 1.5rem;
   top: 2rem;
   height: calc(13rem / 16);
   width: 2rem;
-  border: 0;
-  background-color: transparent;
   background-image: url('../images/arrow-left.svg');
-  background-size: 100%;
-  background-repeat: no-repeat;
-  cursor: pointer;
 }

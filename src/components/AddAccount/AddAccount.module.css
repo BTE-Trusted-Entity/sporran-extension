@@ -1,10 +1,8 @@
 .toggle {
   composes: toggle from '../../components/Menu/Menu.module.css';
+  composes: buttonIcon from '../../components/Button/Button.module.css';
 
-  display: inline-flex;
   width: 1.625rem;
   height: 1.625rem;
-  border: 0;
-  padding: 0;
-  background: url('../../components/images/plus-circle.svg') no-repeat center;
+  background-image: url('../../components/images/plus-circle.svg');
 }

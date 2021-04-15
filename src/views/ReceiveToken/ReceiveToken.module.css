@@ -14,13 +14,10 @@
 }
 
 .qrCodeToggle {
+  composes: buttonIcon from '../../components/Button/Button.module.css';
   display: grid;
   grid-template-areas: 'code';
   width: 30%;
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
 }
 
 .qrCode {
@@ -53,12 +50,12 @@
 }
 
 .dialogClose {
+  composes: buttonIcon from '../../components/Button/Button.module.css';
   position: absolute;
   top: -2rem;
   right: 0;
-  border: 0;
   width: 1.5rem;
   height: 1.5rem;
-  background: transparent url('../../components/images/plus-circle.svg') no-repeat;
+  background-image: url('../../components/images/plus-circle.svg');
   transform: rotate(45deg);
 }
