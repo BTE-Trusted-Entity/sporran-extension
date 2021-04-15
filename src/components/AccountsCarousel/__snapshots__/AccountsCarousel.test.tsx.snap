@@ -159,21 +159,30 @@ exports[`AccountsCarousel should render the new account 1`] = `
       title="My Third Account"
     />
     <section>
-      <a
-        href="/account/create"
+      <div
+        class="undefined tartan"
       >
-        <h2>
-          Create new account
-        </h2>
-      </a>
-      <p>
-        or
-      </p>
-      <a
-        href="/account/import"
+        Identicon
+      </div>
+      <div
+        class="name"
       >
-        Import an account from pre-existing phrase
-      </a>
+        <span />
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Account options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Account options"
+            type="button"
+          />
+        </div>
+      </div>
     </section>
     <a
       aria-label="My Sporran Account"

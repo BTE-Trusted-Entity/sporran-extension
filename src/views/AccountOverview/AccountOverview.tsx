@@ -13,9 +13,13 @@ import styles from './AccountOverview.module.css';
 
 interface Props {
   account: Account;
+  nextTartan: string;
 }
 
-export function AccountOverview({ account }: Props): JSX.Element | null {
+export function AccountOverview({
+  account,
+  nextTartan,
+}: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
 
@@ -28,7 +32,7 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
   const { address } = account;
 
   if (isNew(account)) {
-    return <AccountOverviewNew />;
+    return <AccountOverviewNew nextTartan={nextTartan} />;
   }
 
   return (

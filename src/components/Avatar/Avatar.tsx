@@ -1,4 +1,7 @@
 import { Identicon } from './Identicon';
+import { browser } from 'webextension-polyfill-ts';
+import { Link } from 'react-router-dom';
+import { paths } from '../../views/paths';
 
 import styles from './Avatar.module.css';
 
@@ -63,13 +66,20 @@ const classNameForTartan: { [key: string]: string } = {
 };
 
 export function Avatar({ tartan, address }: Props): JSX.Element {
+  const t = browser.i18n.getMessage;
+  const titleNew = t('component_Avatar_title_new');
+
   return (
     <div className={`${classNameForTartan[tartan]} ${styles.tartan}`}>
       {address ? (
         <Identicon className={styles.identicon} address={address} size={64} />
       ) : (
-        // TODO: https://kiltprotocol.atlassian.net/browse/SK-93
-        <div />
+        <Link
+          to={paths.account.create.start}
+          className={styles.new}
+          aria-label={titleNew}
+          title={titleNew}
+        />
       )}
     </div>
   );

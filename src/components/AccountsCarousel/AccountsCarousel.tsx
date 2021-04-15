@@ -64,15 +64,20 @@ function AccountLink({
 interface Props {
   path: string;
   account: Account;
+  nextTartan?: string;
 }
 
-export function AccountsCarousel({ account, path }: Props): JSX.Element {
+export function AccountsCarousel({
+  account,
+  path,
+  nextTartan,
+}: Props): JSX.Element {
   return (
     <div className={styles.container}>
       <AccountLink direction="previous" path={path} account={account} />
 
-      {isNew(account) ? (
-        <AccountSlideNew />
+      {isNew(account) && nextTartan ? (
+        <AccountSlideNew nextTartan={nextTartan} />
       ) : (
         <AccountSlide account={account} />
       )}

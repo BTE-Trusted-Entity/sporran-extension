@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Redirect, Route, Switch, useParams } from 'react-router-dom';
 
 import {
@@ -14,6 +14,7 @@ import { AccountOverview } from '../AccountOverview/AccountOverview';
 import { ResetAccount } from '../ResetAccount/ResetAccount';
 import { RemoveAccount } from '../RemoveAccount/RemoveAccount';
 import { paths } from '../paths';
+import { getNextTartan } from '../../utilities/accounts/tartans';
 
 interface Props {
   accounts: AccountsMap;
@@ -25,6 +26,12 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
   useEffect(() => {
     setCurrentAccount(address);
   }, [address]);
+
+  const [nextTartan, setNextTartan] = useState('');
+
+  useEffect(() => {
+    (async () => setNextTartan(await getNextTartan()))();
+  }, []);
 
   const isNew = address === NEW.address;
   const account = isNew ? NEW : accounts[address];
@@ -48,7 +55,7 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
         </Route>
 
         <Route path={paths.account.overview}>
-          <AccountOverview account={account} />
+          <AccountOverview account={account} nextTartan={nextTartan} />
         </Route>
       </Switch>
     </>
