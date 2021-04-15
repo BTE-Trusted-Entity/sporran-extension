@@ -1,6 +1,5 @@
 .coin {
-  background: url('../images/kilt-coin-circle.svg') no-repeat;
-  background-size: 100%;
+  background: url('../images/kilt-coin-circle.svg') no-repeat center/100%;
   display: inline-block;
   width: 1em;
   height: 1em;
