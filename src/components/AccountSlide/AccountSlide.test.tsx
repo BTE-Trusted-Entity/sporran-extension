@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { browser } from 'webextension-polyfill-ts';
+import { act } from '@testing-library/react';
 
 import { render, screen, waitForElementToBeRemoved } from '../../testing';
 import { saveAccount } from '../../utilities/accounts/accounts';
@@ -64,7 +65,11 @@ describe('AccountSlide', () => {
 
 describe('AccountSlideNew', () => {
   it('should render', async () => {
+    const promise = Promise.resolve();
+    const setTartan = jest.fn(() => promise);
     const { container } = render(<AccountSlideNew />);
+    expect(setTartan).toHaveBeenCalled();
     expect(container).toMatchSnapshot();
+    await act(() => promise);
   });
 });
