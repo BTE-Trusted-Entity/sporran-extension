@@ -1,6 +1,7 @@
 declare namespace AccountOptionsModuleCssNamespace {
   export interface IAccountOptionsModuleCss {
     toggle: string;
+    wrapper: string;
   }
 }
 

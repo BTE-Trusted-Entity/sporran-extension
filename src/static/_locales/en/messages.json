@@ -87,6 +87,9 @@
   "component_AccountOptions_reset_password": {
     "message": "Reset password"
   },
+  "component_KiltCurrency_label": {
+    "message": "Kilt coin"
+  },
   "component_Settings_label": {
     "message": "Settings"
   },
@@ -272,7 +275,7 @@
     "message": "Enlarge"
   },
   "view_AccountOverview_title": {
-    "message": "Your accounts"
+    "message": "Your Accounts"
   },
   "view_AccountOverview_subtitle_one": {
     "message": "You have $number$ account",

@@ -1,0 +1,5 @@
+.amount {
+  composes: balanceText from '../Typography/Typography.module.css';
+  margin-left: 0.25em;
+  font-size: 1em;
+}

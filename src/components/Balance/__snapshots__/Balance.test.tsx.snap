@@ -2,11 +2,20 @@
 
 exports[`Balance should render 1`] = `
 <div>
-  <span>
+  <p
+    class="balance"
+  >
     Balance: 
-    1.2340
-     
-    K
-  </span>
+    <span
+      class="amount"
+    >
+      1.2340
+       
+      <span
+        aria-label="Kilt coin"
+        class="coin"
+      />
+    </span>
+  </p>
 </div>
 `;

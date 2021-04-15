@@ -1,0 +1,23 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.chevron {
+  position: absolute;
+  top: 2rem;
+  width: 1rem;
+  height: 2rem;
+}
+
+.left {
+  composes: chevron;
+  background: url('../images/chevron-left.svg') no-repeat;
+  left: 6.25rem;
+}
+
+.right {
+  composes: chevron;
+  background: url('../images/chevron-right.svg') no-repeat;
+  right: 6.25rem;
+}
