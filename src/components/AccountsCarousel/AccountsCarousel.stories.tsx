@@ -8,6 +8,7 @@ import { AccountsCarousel } from './AccountsCarousel';
 export default {
   title: 'Components/AccountsCarousel',
   component: AccountsCarousel,
+  decorators: [(story) => <div style={{ textAlign: 'center' }}>{story()}</div>],
 } as Meta;
 
 export function Template(): JSX.Element {

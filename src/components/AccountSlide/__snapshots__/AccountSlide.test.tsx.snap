@@ -3,24 +3,31 @@
 exports[`AccountSlide should render 1`] = `
 <div>
   <section>
-    <h2
-      style="display: inline;"
-    >
-      My Sporran Account
-    </h2>
     <div
-      class="wrapper"
+      class="MacFarlane tartan"
     >
-      <button
-        aria-expanded="false"
-        aria-haspopup="true"
-        aria-label="Account options"
-        class="toggle"
-        role="button"
-        tabindex="0"
-        title="Account options"
-        type="button"
-      />
+      Identicon
+    </div>
+    <div
+      class="name"
+    >
+      <span>
+        My Sporran Account
+      </span>
+      <div
+        class="wrapper"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Account options"
+          class="toggle"
+          role="button"
+          tabindex="0"
+          title="Account options"
+          type="button"
+        />
+      </div>
     </div>
   </section>
 </div>

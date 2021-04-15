@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
-
 import { render, screen } from '../../testing';
+
 import {
   BalanceChangeRequest,
   BalanceChangeResponse,
@@ -28,7 +28,7 @@ describe('Balance', () => {
     const address = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
     const { container } = render(<Balance address={address} />);
 
-    await screen.findByText(/K/);
+    await screen.findByLabelText('Kilt coin');
 
     expect(container).toMatchSnapshot();
     expect(browser.runtime.sendMessage).toHaveBeenCalledWith({

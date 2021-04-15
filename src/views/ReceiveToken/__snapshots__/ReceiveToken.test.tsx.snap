@@ -11,41 +11,50 @@ exports[`ReceiveToken should render a normal account 1`] = `
     <p>
       Copy and send your wallet ID
     </p>
-    <a
-      aria-label="Create new account"
-      href="/account/NEW/receive"
-      title="Create new account"
+    <div
+      class="container"
     >
-      ←
-    </a>
-    <section>
-      <h2
-        style="display: inline;"
-      >
-        My Sporran Account
-      </h2>
-      <div
-        class="wrapper"
-      >
-        <button
-          aria-expanded="false"
-          aria-haspopup="true"
-          aria-label="Account options"
-          class="toggle"
-          role="button"
-          tabindex="0"
-          title="Account options"
-          type="button"
-        />
-      </div>
-    </section>
-    <a
-      aria-label="My Second Account"
-      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/receive"
-      title="My Second Account"
-    >
-      →
-    </a>
+      <a
+        aria-label="Create new account"
+        class="left"
+        href="/account/NEW/receive"
+        title="Create new account"
+      />
+      <section>
+        <div
+          class="MacFarlane tartan"
+        >
+          Identicon
+        </div>
+        <div
+          class="name"
+        >
+          <span>
+            My Sporran Account
+          </span>
+          <div
+            class="wrapper"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="Account options"
+              class="toggle"
+              role="button"
+              tabindex="0"
+              title="Account options"
+              type="button"
+            />
+          </div>
+        </div>
+      </section>
+      <a
+        aria-label="My Second Account"
+        class="right"
+        href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/receive"
+        title="My Second Account"
+      />
+    </div>
     <p>
       My account address
     </p>
@@ -23655,12 +23664,25 @@ exports[`ReceiveToken should render a normal account 1`] = `
       title="Back"
       type="button"
     />
-    <p>
+    <p
+      class="stats"
+    >
       You have $number$ accounts with a total
-       Balance: 
-      3.7020
-       
-      K
+      <span
+        class="balance"
+      >
+         Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="Kilt coin"
+            class="coin"
+          />
+        </span>
+      </span>
     </p>
   </section>
   ,
@@ -23672,49 +23694,64 @@ exports[`ReceiveToken should render the new account 1`] = `
   <main>
     <header>
       <h1>
-        Your accounts
+        Your Accounts
       </h1>
       <p>
         You have $number$ accounts
       </p>
     </header>
-    <a
-      aria-label="My Third Account"
-      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL/receive"
-      title="My Third Account"
+    <div
+      class="container"
     >
-      ←
-    </a>
-    <section>
       <a
-        href="/account/create"
-      >
-        <h2>
-          Create new account
-        </h2>
-      </a>
-      <p>
-        or
-      </p>
+        aria-label="My Third Account"
+        class="left"
+        href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL/receive"
+        title="My Third Account"
+      />
+      <section>
+        <a
+          href="/account/create"
+        >
+          <h2>
+            Create new account
+          </h2>
+        </a>
+        <p>
+          or
+        </p>
+        <a
+          href="/account/import"
+        >
+          Import an account from pre-existing phrase
+        </a>
+      </section>
       <a
-        href="/account/import"
-      >
-        Import an account from pre-existing phrase
-      </a>
-    </section>
-    <a
-      aria-label="My Sporran Account"
-      href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
-      title="My Sporran Account"
+        aria-label="My Sporran Account"
+        class="right"
+        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
+        title="My Sporran Account"
+      />
+    </div>
+    <p
+      class="stats"
     >
-      →
-    </a>
-    <p>
       You have $number$ accounts with a total
-       Balance: 
-      3.7020
-       
-      K
+      <span
+        class="balance"
+      >
+         Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="Kilt coin"
+            class="coin"
+          />
+        </span>
+      </span>
     </p>
   </main>
   ,

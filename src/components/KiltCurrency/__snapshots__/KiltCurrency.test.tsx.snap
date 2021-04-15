@@ -2,6 +2,9 @@
 
 exports[`KiltCurrency should render 1`] = `
 <div>
-  K
+  <span
+    aria-label="Kilt coin"
+    class="coin"
+  />
 </div>
 `;
