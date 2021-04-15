@@ -1,12 +1,12 @@
 import { browser } from 'webextension-polyfill-ts';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import { getNextTartan } from '../../utilities/accounts/tartans';
 import { paths } from '../../views/paths';
 import { Avatar } from '../Avatar/Avatar';
 
 import styles from './AccountSlide.module.css';
-import { useState, useEffect } from 'react';
-import { getNextTartan } from '../../utilities/accounts/tartans';
 
 export function AccountSlideNew(): JSX.Element {
   const t = browser.i18n.getMessage;
