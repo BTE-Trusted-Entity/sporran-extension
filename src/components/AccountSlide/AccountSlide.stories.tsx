@@ -23,5 +23,5 @@ export function Template(): JSX.Element {
 }
 
 export function New(): JSX.Element {
-  return <AccountSlideNew nextTartan={'MacLeod'} />;
+  return <AccountSlideNew />;
 }

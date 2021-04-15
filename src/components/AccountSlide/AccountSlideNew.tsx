@@ -5,13 +5,17 @@ import { paths } from '../../views/paths';
 import { Avatar } from '../Avatar/Avatar';
 
 import styles from './AccountSlide.module.css';
+import { useState, useEffect } from 'react';
+import { getNextTartan } from '../../utilities/accounts/tartans';
 
-interface Props {
-  nextTartan: string;
-}
-
-export function AccountSlideNew({ nextTartan }: Props): JSX.Element {
+export function AccountSlideNew(): JSX.Element {
   const t = browser.i18n.getMessage;
+
+  const [nextTartan, setNextTartan] = useState('');
+
+  useEffect(() => {
+    (async () => setNextTartan(await getNextTartan()))();
+  }, []);
 
   return (
     <section>

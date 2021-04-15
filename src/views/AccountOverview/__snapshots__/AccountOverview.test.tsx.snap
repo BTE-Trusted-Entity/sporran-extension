@@ -145,27 +145,24 @@ exports[`AccountOverview should render the new account 1`] = `
         <div
           class="undefined tartan"
         >
-          Identicon
+          <a
+            aria-label="Create new account"
+            class="new"
+            href="/account/create"
+            title="Create new account"
+          />
         </div>
-        <div
-          class="name"
+        <p
+          class="new"
         >
-          <span />
-          <div
-            class="wrapper"
-          >
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="Account options"
-              class="toggle"
-              role="button"
-              tabindex="0"
-              title="Account options"
-              type="button"
-            />
-          </div>
-        </div>
+          Create new account
+        </p>
+        <a
+          class="import"
+          href="/account/import"
+        >
+          Import an account from pre-existing phrase
+        </a>
       </section>
       <a
         aria-label="My Sporran Account"

@@ -22,7 +22,6 @@ export function Template(): JSX.Element {
       <Route path={paths.account.overview}>
         <AccountOverview
           account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-          nextTartan={'MacLeod'}
         />
       </Route>
     </MemoryRouter>
@@ -33,7 +32,7 @@ export function New(): JSX.Element {
   return (
     <MemoryRouter initialEntries={['/account/NEW/send']}>
       <Route path={paths.account.overview}>
-        <AccountOverview account={NEW} nextTartan={'MacLeod'} />
+        <AccountOverview account={NEW} />
       </Route>
     </MemoryRouter>
   );

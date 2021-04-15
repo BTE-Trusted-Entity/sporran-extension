@@ -8,11 +8,7 @@ import { Stats } from '../../components/Stats/Stats';
 
 import styles from './AccountOverview.module.css';
 
-interface Props {
-  nextTartan: string;
-}
-
-export function AccountOverviewNew({ nextTartan }: Props): JSX.Element | null {
+export function AccountOverviewNew(): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
 
@@ -35,7 +31,7 @@ export function AccountOverviewNew({ nextTartan }: Props): JSX.Element | null {
         </p>
       </header>
 
-      <AccountsCarousel path={path} account={NEW} nextTartan={nextTartan} />
+      <AccountsCarousel path={path} account={NEW} />
 
       <Stats />
     </main>
