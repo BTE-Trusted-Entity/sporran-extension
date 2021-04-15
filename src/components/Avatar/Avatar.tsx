@@ -69,7 +69,6 @@ const classNameForTartan: { [key: string]: string } = {
 
 export function Avatar({ tartan, address }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const titleNew = t('component_Avatar_title_new');
 
   return (
     <div className={`${classNameForTartan[tartan]} ${styles.tartan}`}>
@@ -79,8 +78,8 @@ export function Avatar({ tartan, address }: Props): JSX.Element {
         <Link
           to={paths.account.create.start}
           className={styles.new}
-          aria-label={titleNew}
-          title={titleNew}
+          aria-label={t('component_Avatar_title_new')}
+          title={t('component_Avatar_title_new')}
         />
       )}
     </div>
