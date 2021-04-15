@@ -6,6 +6,7 @@ import { AccountSlideNew } from './AccountSlideNew';
 export default {
   title: 'Components/AccountSlide',
   component: AccountSlide,
+  decorators: [(story) => <div style={{ textAlign: 'center' }}>{story()}</div>],
 } as Meta;
 
 export function Template(): JSX.Element {
@@ -13,6 +14,7 @@ export function Template(): JSX.Element {
     <AccountSlide
       account={{
         name: 'My Sporran Account',
+        tartan: 'MacPherson',
         address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
         index: 1,
       }}

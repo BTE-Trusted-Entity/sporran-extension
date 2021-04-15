@@ -1,0 +1,9 @@
+.stats {
+  composes: smallText from '../Typography/Typography.module.css';
+  position: absolute;
+  bottom: 0;
+}
+
+.balance {
+  color: var(--color-orange);
+}

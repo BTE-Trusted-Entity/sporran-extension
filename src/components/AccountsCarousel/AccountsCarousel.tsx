@@ -12,6 +12,8 @@ import { AccountSlide } from '../AccountSlide/AccountSlide';
 import { AccountSlideNew } from '../AccountSlide/AccountSlideNew';
 import { generatePath } from '../../views/paths';
 
+import styles from './AccountsCarousel.module.css';
+
 interface AccountLinkProps {
   path: string;
   account: Account;
@@ -54,9 +56,8 @@ function AccountLink({
       to={generatePath(path, { address: linkedAccount.address })}
       title={title}
       aria-label={title}
-    >
-      {isPrevious ? '←' : '→'}
-    </Link>
+      className={isPrevious ? styles.left : styles.right}
+    />
   );
 }
 
@@ -67,7 +68,7 @@ interface Props {
 
 export function AccountsCarousel({ account, path }: Props): JSX.Element {
   return (
-    <>
+    <div className={styles.container}>
       <AccountLink direction="previous" path={path} account={account} />
 
       {isNew(account) ? (
@@ -77,6 +78,6 @@ export function AccountsCarousel({ account, path }: Props): JSX.Element {
       )}
 
       <AccountLink direction="next" path={path} account={account} />
-    </>
+    </div>
   );
 }

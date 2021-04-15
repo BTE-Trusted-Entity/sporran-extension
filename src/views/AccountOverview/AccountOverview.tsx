@@ -9,6 +9,8 @@ import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { AccountOverviewNew } from './AccountOverviewNew';
 
+import styles from './AccountOverview.module.css';
+
 interface Props {
   account: Account;
 }
@@ -30,10 +32,10 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
   }
 
   return (
-    <main>
+    <main className={styles.container}>
       <header>
-        <h1>{t('view_AccountOverview_title')}</h1>
-        <p>
+        <h1 className={styles.heading}>{t('view_AccountOverview_title')}</h1>
+        <p className={styles.info}>
           {plural(accountsNumber, {
             one: 'view_AccountOverview_subtitle_one',
             other: 'view_AccountOverview_subtitle_other',
@@ -43,17 +45,20 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
 
       <AccountsCarousel path={path} account={account} />
 
-      <p>
-        <Balance address={address} />
-      </p>
+      <Balance address={address} />
 
       <p>
-        <Link to={generatePath(paths.account.send, { address })}>
+        <Link
+          to={generatePath(paths.account.send, { address })}
+          className={styles.button}
+        >
           {t('view_AccountOverview_send')}
         </Link>
-      </p>
-      <p>
-        <Link to={generatePath(paths.account.receive, { address })}>
+
+        <Link
+          to={generatePath(paths.account.receive, { address })}
+          className={styles.button}
+        >
           {t('view_AccountOverview_receive')}
         </Link>
       </p>

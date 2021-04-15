@@ -1,3 +1,9 @@
+.wrapper {
+  composes: wrapper from '../../components/Menu/Menu.module.css';
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
 .toggle {
   composes: toggle from '../../components/Menu/Menu.module.css';
 
@@ -6,9 +12,10 @@
   height: 1.625rem;
   border: 0;
   padding: 0;
-  background: url('../../components/images/chevron-down.svg') no-repeat center/0.75rem;
+  background: url('../../components/images/chevron-down.svg') no-repeat
+    center/0.75rem;
 }
 
-.toggle[aria-expanded=true] {
+.toggle[aria-expanded='true'] {
   transform: rotate(180deg);
 }

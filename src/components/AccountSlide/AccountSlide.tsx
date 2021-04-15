@@ -3,6 +3,9 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { AccountOptions } from '../AccountOptions/AccountOptions';
 import { Account, saveAccount } from '../../utilities/accounts/accounts';
+import { Avatar } from '../Avatar/Avatar';
+
+import styles from './AccountSlide.module.css';
 
 interface Props {
   account: Account;
@@ -38,9 +41,12 @@ export function AccountSlide({ account }: Props): JSX.Element {
 
   return (
     <section>
-      <h2 style={{ display: 'inline' }}>{account.name}</h2>
-      <AccountOptions address={account.address} onEdit={handleEditClick} />
-
+      <Avatar tartan={account.tartan} address={account.address} />
+      <div className={styles.name}>
+        <span>{account.name}</span>
+        <AccountOptions address={account.address} onEdit={handleEditClick} />
+        {/* TODO - https://kiltprotocol.atlassian.net/browse/SK-119 */}
+      </div>
       {editing && (
         <form onSubmit={handleSubmit}>
           <label>

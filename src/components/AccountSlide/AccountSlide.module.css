@@ -1,0 +1,9 @@
+.name {
+  composes: accountText from '../../components/Typography/Typography.module.css';
+  position: relative;
+  padding-left: 2.125rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
