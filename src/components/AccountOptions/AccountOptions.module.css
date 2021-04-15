@@ -4,11 +4,6 @@
   margin-left: 0.5rem;
 }
 
-.heading {
-  composes: heading from '../../components/Menu/Menu.module.css';
-  text-align: left;
-}
-
 .toggle {
   composes: toggle from '../../components/Menu/Menu.module.css';
 
