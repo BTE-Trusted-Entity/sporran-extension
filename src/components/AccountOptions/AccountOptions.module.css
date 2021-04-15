@@ -1,6 +1,6 @@
 .wrapper {
   composes: wrapper from '../../components/Menu/Menu.module.css';
-  display: inline-block;
+  display: inline-flex;
   margin-left: 0.5rem;
 }
 

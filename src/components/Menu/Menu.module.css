@@ -45,6 +45,7 @@
   height: var(--item-height);
   line-height: var(--item-height);
   border-bottom: 1px solid #352b3e;
+  text-align: left;
 }
 
 .list {
