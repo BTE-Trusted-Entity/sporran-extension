@@ -1,4 +1,5 @@
 .wrapper {
+  composes: wrapper from '../../components/Menu/Menu.module.css';
   display: inline-block;
   margin-left: 0.5rem;
 }

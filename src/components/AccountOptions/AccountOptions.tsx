@@ -24,7 +24,7 @@ export function AccountOptions({ address, onEdit }: Props): JSX.Element {
   }, [onEdit, setIsOpen]);
 
   return (
-    <div className={`${menuStyles.wrapper} ${styles.wrapper}`}>
+    <div className={styles.wrapper}>
       <button
         {...buttonProps}
         type="button"

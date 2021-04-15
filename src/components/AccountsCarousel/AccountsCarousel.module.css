@@ -11,11 +11,13 @@
 }
 
 .left {
+  composes: chevron;
   background: url('../images/chevron-left.svg') no-repeat;
   left: 6.25rem;
 }
 
 .right {
+  composes: chevron;
   background: url('../images/chevron-right.svg') no-repeat;
   right: 6.25rem;
 }

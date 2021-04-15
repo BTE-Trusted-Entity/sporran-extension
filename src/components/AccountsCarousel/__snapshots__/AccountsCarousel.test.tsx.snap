@@ -7,7 +7,7 @@ exports[`AccountsCarousel should render normal accounts 1`] = `
   >
     <a
       aria-label="My Sporran Account"
-      class="chevron left"
+      class="left"
       href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       title="My Sporran Account"
     />
@@ -24,7 +24,7 @@ exports[`AccountsCarousel should render normal accounts 1`] = `
           My Second Account
         </span>
         <div
-          class="wrapper wrapper"
+          class="wrapper"
         >
           <button
             aria-expanded="false"
@@ -41,7 +41,7 @@ exports[`AccountsCarousel should render normal accounts 1`] = `
     </section>
     <a
       aria-label="My Third Account"
-      class="chevron right"
+      class="right"
       href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
       title="My Third Account"
     />
@@ -56,7 +56,7 @@ exports[`AccountsCarousel should render the first account 1`] = `
   >
     <a
       aria-label="Create new account"
-      class="chevron left"
+      class="left"
       href="/account/NEW"
       title="Create new account"
     />
@@ -73,7 +73,7 @@ exports[`AccountsCarousel should render the first account 1`] = `
           My Sporran Account
         </span>
         <div
-          class="wrapper wrapper"
+          class="wrapper"
         >
           <button
             aria-expanded="false"
@@ -90,7 +90,7 @@ exports[`AccountsCarousel should render the first account 1`] = `
     </section>
     <a
       aria-label="My Second Account"
-      class="chevron right"
+      class="right"
       href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
       title="My Second Account"
     />
@@ -105,7 +105,7 @@ exports[`AccountsCarousel should render the last account 1`] = `
   >
     <a
       aria-label="My Second Account"
-      class="chevron left"
+      class="left"
       href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
       title="My Second Account"
     />
@@ -122,7 +122,7 @@ exports[`AccountsCarousel should render the last account 1`] = `
           My Third Account
         </span>
         <div
-          class="wrapper wrapper"
+          class="wrapper"
         >
           <button
             aria-expanded="false"
@@ -139,7 +139,7 @@ exports[`AccountsCarousel should render the last account 1`] = `
     </section>
     <a
       aria-label="Create new account"
-      class="chevron right"
+      class="right"
       href="/account/NEW"
       title="Create new account"
     />
@@ -154,7 +154,7 @@ exports[`AccountsCarousel should render the new account 1`] = `
   >
     <a
       aria-label="My Third Account"
-      class="chevron left"
+      class="left"
       href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
       title="My Third Account"
     />
@@ -177,7 +177,7 @@ exports[`AccountsCarousel should render the new account 1`] = `
     </section>
     <a
       aria-label="My Sporran Account"
-      class="chevron right"
+      class="right"
       href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       title="My Sporran Account"
     />
@@ -192,7 +192,7 @@ exports[`AccountsCarousel should support other paths 1`] = `
   >
     <a
       aria-label="My Second Account"
-      class="chevron left"
+      class="left"
       href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
       title="My Second Account"
     />
@@ -209,7 +209,7 @@ exports[`AccountsCarousel should support other paths 1`] = `
           My Third Account
         </span>
         <div
-          class="wrapper wrapper"
+          class="wrapper"
         >
           <button
             aria-expanded="false"
@@ -226,7 +226,7 @@ exports[`AccountsCarousel should support other paths 1`] = `
     </section>
     <a
       aria-label="Create new account"
-      class="chevron right"
+      class="right"
       href="/account/NEW/send"
       title="Create new account"
     />

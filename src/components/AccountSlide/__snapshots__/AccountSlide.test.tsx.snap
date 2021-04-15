@@ -15,7 +15,7 @@ exports[`AccountSlide should render 1`] = `
         My Sporran Account
       </span>
       <div
-        class="wrapper wrapper"
+        class="wrapper"
       >
         <button
           aria-expanded="false"

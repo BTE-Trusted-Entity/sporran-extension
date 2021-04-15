@@ -11,7 +11,6 @@ import {
 import { AccountSlide } from '../AccountSlide/AccountSlide';
 import { AccountSlideNew } from '../AccountSlide/AccountSlideNew';
 import { generatePath } from '../../views/paths';
-import cx from 'classnames';
 
 import styles from './AccountsCarousel.module.css';
 
@@ -57,10 +56,7 @@ function AccountLink({
       to={generatePath(path, { address: linkedAccount.address })}
       title={title}
       aria-label={title}
-      className={cx(styles.chevron, {
-        [styles.left]: isPrevious,
-        [styles.right]: !isPrevious,
-      })}
+      className={isPrevious ? styles.left : styles.right}
     />
   );
 }

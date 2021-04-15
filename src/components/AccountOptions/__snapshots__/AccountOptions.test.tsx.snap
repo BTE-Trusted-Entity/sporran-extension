@@ -3,7 +3,7 @@
 exports[`AddAccount menu should be visible when menu button clicked 1`] = `
 <div>
   <div
-    class="wrapper wrapper"
+    class="wrapper"
   >
     <button
       aria-expanded="true"
@@ -70,7 +70,7 @@ exports[`AddAccount menu should be visible when menu button clicked 1`] = `
 exports[`AddAccount should render 1`] = `
 <div>
   <div
-    class="wrapper wrapper"
+    class="wrapper"
   >
     <button
       aria-expanded="false"

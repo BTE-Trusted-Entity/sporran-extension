@@ -22,7 +22,7 @@ exports[`AccountOverview should render a normal account 1`] = `
     >
       <a
         aria-label="Create new account"
-        class="chevron left"
+        class="left"
         href="/account/NEW"
         title="Create new account"
       />
@@ -39,7 +39,7 @@ exports[`AccountOverview should render a normal account 1`] = `
             My Sporran Account
           </span>
           <div
-            class="wrapper wrapper"
+            class="wrapper"
           >
             <button
               aria-expanded="false"
@@ -56,7 +56,7 @@ exports[`AccountOverview should render a normal account 1`] = `
       </section>
       <a
         aria-label="My Second Account"
-        class="chevron right"
+        class="right"
         href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
         title="My Second Account"
       />
@@ -131,7 +131,7 @@ exports[`AccountOverview should render the new account 1`] = `
     >
       <a
         aria-label="My Third Account"
-        class="chevron left"
+        class="left"
         href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
         title="My Third Account"
       />
@@ -154,7 +154,7 @@ exports[`AccountOverview should render the new account 1`] = `
       </section>
       <a
         aria-label="My Sporran Account"
-        class="chevron right"
+        class="right"
         href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
         title="My Sporran Account"
       />
