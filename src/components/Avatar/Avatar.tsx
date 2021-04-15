@@ -1,7 +1,9 @@
-import { Identicon } from './Identicon';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
+
 import { paths } from '../../views/paths';
+
+import { Identicon } from './Identicon';
 
 import styles from './Avatar.module.css';
 
