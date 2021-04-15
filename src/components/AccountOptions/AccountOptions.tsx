@@ -35,7 +35,7 @@ export function AccountOptions({ address, onEdit }: Props): JSX.Element {
 
       {isOpen && (
         <div className={menuStyles.dropdown} role="menu">
-          <h4 className={menuStyles.heading}>
+          <h4 className={styles.heading}>
             {t('component_AccountOptions_heading')}
           </h4>
 
