@@ -37,7 +37,7 @@ exports[`AccountSlideNew should render 1`] = `
 <div>
   <section>
     <div
-      class="undefined tartan"
+      class="MacLeod tartan"
     >
       <a
         aria-label="Create new account"

@@ -160,7 +160,7 @@ exports[`AccountsCarousel should render the new account 1`] = `
     />
     <section>
       <div
-        class="undefined tartan"
+        class="MacLeod tartan"
       >
         <a
           aria-label="Create new account"
