@@ -38,8 +38,7 @@ describe('AccountOverview', () => {
         </Route>
       </MemoryRouter>,
     );
-    expect(container).toMatchSnapshot();
-
     await waitForNextTartan();
+    expect(container).toMatchSnapshot();
   });
 });
