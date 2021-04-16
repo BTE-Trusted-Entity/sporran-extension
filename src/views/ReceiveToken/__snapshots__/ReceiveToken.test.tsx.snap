@@ -23717,7 +23717,7 @@ exports[`ReceiveToken should render the new account 1`] = `
       />
       <section>
         <div
-          class="MacLeod tartan"
+          class="undefined tartan"
         >
           <a
             aria-label="Create new account"

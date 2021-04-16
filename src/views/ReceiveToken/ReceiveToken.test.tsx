@@ -5,6 +5,7 @@ import {
   mockBackgroundScript,
   render,
   waitForDialogUpdate,
+  waitForNextTartan,
 } from '../../testing';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
@@ -41,6 +42,7 @@ describe('ReceiveToken', () => {
       </MemoryRouter>,
     );
     await waitForDialogUpdate();
+    await waitForNextTartan();
     expect(container).toMatchSnapshot();
   });
 });

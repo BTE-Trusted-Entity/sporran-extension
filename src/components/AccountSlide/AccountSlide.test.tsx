@@ -1,9 +1,13 @@
 import userEvent from '@testing-library/user-event';
 import { browser } from 'webextension-polyfill-ts';
 
-import { act, render, screen, waitForElementToBeRemoved } from '../../testing';
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+  waitForNextTartan,
+} from '../../testing';
 import { saveAccount } from '../../utilities/accounts/accounts';
-import { getNextTartan } from '../../utilities/accounts/tartans';
 import {
   BalanceChangeResponse,
   MessageType,
@@ -12,7 +16,6 @@ import {
 import { AccountSlide } from './AccountSlide';
 import { AccountSlideNew } from './AccountSlideNew';
 
-jest.mock('../../utilities/accounts/tartans');
 jest.mock('../../utilities/accounts/accounts');
 jest.spyOn(browser.runtime, 'sendMessage');
 jest
@@ -66,12 +69,9 @@ describe('AccountSlide', () => {
 
 describe('AccountSlideNew', () => {
   it('should render', async () => {
-    const promise = Promise.resolve();
-    (getNextTartan as jest.Mock).mockReturnValue(promise);
-
     const { container } = render(<AccountSlideNew />);
 
+    await waitForNextTartan();
     expect(container).toMatchSnapshot();
-    await act(() => promise);
   });
 });

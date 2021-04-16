@@ -1,4 +1,8 @@
-import { accountsMock as accounts, render } from '../../testing';
+import {
+  accountsMock as accounts,
+  render,
+  waitForNextTartan,
+} from '../../testing';
 import { paths } from '../../views/paths';
 
 import { NEW } from '../../utilities/accounts/accounts';
@@ -39,6 +43,7 @@ describe('AccountsCarousel', () => {
     const { container } = render(
       <AccountsCarousel path={paths.account.overview} account={NEW} />,
     );
+    await waitForNextTartan();
     expect(container).toMatchSnapshot();
   });
 
