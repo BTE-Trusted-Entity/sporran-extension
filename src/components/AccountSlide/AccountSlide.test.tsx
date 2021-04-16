@@ -1,8 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { browser } from 'webextension-polyfill-ts';
-import { act } from '@testing-library/react';
 
-import { render, screen, waitForElementToBeRemoved } from '../../testing';
+import { act, render, screen, waitForElementToBeRemoved } from '../../testing';
 import { saveAccount } from '../../utilities/accounts/accounts';
 import { getNextTartan } from '../../utilities/accounts/tartans';
 import {
