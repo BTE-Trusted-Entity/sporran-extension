@@ -23691,12 +23691,18 @@ exports[`ReceiveToken should render a normal account 1`] = `
 
 exports[`ReceiveToken should render the new account 1`] = `
 <div>
-  <main>
+  <main
+    class="container"
+  >
     <header>
-      <h1>
+      <h1
+        class="heading"
+      >
         Your Accounts
       </h1>
-      <p>
+      <p
+        class="info"
+      >
         You have $number$ accounts
       </p>
     </header>
@@ -23710,17 +23716,23 @@ exports[`ReceiveToken should render the new account 1`] = `
         title="My Third Account"
       />
       <section>
-        <a
-          href="/account/create"
+        <div
+          class="MacLeod tartan"
         >
-          <h2>
-            Create new account
-          </h2>
-        </a>
-        <p>
-          or
+          <a
+            aria-label="Create new account"
+            class="new"
+            href="/account/create"
+            title="Create new account"
+          />
+        </div>
+        <p
+          class="new"
+        >
+          Create new account
         </p>
         <a
+          class="import"
           href="/account/import"
         >
           Import an account from pre-existing phrase

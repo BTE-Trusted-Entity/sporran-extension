@@ -2,6 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { browser } from 'webextension-polyfill-ts';
 
 import { render, screen, waitForElementToBeRemoved } from '../../testing';
+import { waitForNextTartan } from '../../testing/getNextTartan.mock';
 import { saveAccount } from '../../utilities/accounts/accounts';
 import {
   BalanceChangeResponse,
@@ -65,6 +66,8 @@ describe('AccountSlide', () => {
 describe('AccountSlideNew', () => {
   it('should render', async () => {
     const { container } = render(<AccountSlideNew />);
+
+    await waitForNextTartan();
     expect(container).toMatchSnapshot();
   });
 });

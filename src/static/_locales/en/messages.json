@@ -44,6 +44,9 @@
   "component_AccountSlideNew_import": {
     "message": "Import an account from pre-existing phrase"
   },
+  "component_Avatar_title_new": {
+    "message": "Create new account"
+  },
   "component_Stats_account_one": {
     "message": "You have $number$ account with a total",
     "placeholders": {

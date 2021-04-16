@@ -159,17 +159,23 @@ exports[`AccountsCarousel should render the new account 1`] = `
       title="My Third Account"
     />
     <section>
-      <a
-        href="/account/create"
+      <div
+        class="MacLeod tartan"
       >
-        <h2>
-          Create new account
-        </h2>
-      </a>
-      <p>
-        or
+        <a
+          aria-label="Create new account"
+          class="new"
+          href="/account/create"
+          title="Create new account"
+        />
+      </div>
+      <p
+        class="new"
+      >
+        Create new account
       </p>
       <a
+        class="import"
         href="/account/import"
       >
         Import an account from pre-existing phrase

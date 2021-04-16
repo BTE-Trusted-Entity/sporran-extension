@@ -15,6 +15,13 @@
   border-radius: 50%;
 }
 
+.new {
+  background: var(--color-dark) url('../images/plus-circle.svg') no-repeat center/100%;
+  border-radius: 50%;
+  height: 4rem;
+  width: 4rem;
+}
+
 .Armstrong {
   background-image: url('../images/tartans/Armstrong.png');
 }
