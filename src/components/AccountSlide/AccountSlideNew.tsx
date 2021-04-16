@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getNextTartan } from '../../utilities/accounts/tartans';
@@ -14,10 +14,9 @@ export function AccountSlideNew(): JSX.Element {
   const [nextTartan, setNextTartan] = useState('');
 
   useEffect(() => {
-    async function setTartan() {
+    (async () => {
       setNextTartan(await getNextTartan());
-    }
-    setTartan();
+    })();
   }, []);
 
   return (
