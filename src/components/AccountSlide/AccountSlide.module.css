@@ -8,6 +8,57 @@
   justify-content: center;
 }
 
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputLine {
+  display: inline-block;
+  position: relative;
+}
+
+.input {
+  composes: input from '../Input/Input.module.css';
+  width: calc(230rem / 16);
+  padding-right: 2.5rem;
+}
+
+.pencil {
+  position: absolute;
+  right: 0.25rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: url('../images/pencil.svg') no-repeat center;
+  opacity: 0.34;
+}
+
+.circle {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  box-shadow: inset -1px 1px 1px 0 rgba(255, 255, 255, 0.1),
+    0.375rem 0.375rem 0.75rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.save {
+  composes: buttonIcon from '../Button/Button.module.css';
+  composes: circle;
+
+  background-image: url('../images/checkmark.svg'),
+    linear-gradient(140deg, var(--color-dark) 0%, var(--color-pink) 100%);
+  background-size: auto;
+  margin: 0 0.375rem 0 0.375rem;
+}
+
+.cancel {
+  composes: buttonIcon from '../Button/Button.module.css';
+  composes: circle;
+
+  background-image: url('../images/cancel.svg');
+}
+
 .new {
   composes: name;
   padding: 0;

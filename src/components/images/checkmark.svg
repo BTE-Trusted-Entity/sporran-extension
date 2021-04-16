@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="13px" viewBox="0 0 18 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>sporran_icons/checkmark</title>
+    <g id="edit-account-name" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="KILT-sporran---edit-account-03" transform="translate(-355.000000, -267.000000)" fill="#F2EFEE" fill-rule="nonzero">
+            <g id="Group" transform="translate(346.000000, 255.000000)">
+                <g transform="translate(9.000000, 11.000000)" id="checkmark">
+                    <g transform="translate(0.000000, 1.000000)">
+                        <path d="M5.57854022,13 C5.35556099,13 5.09541855,12.9250629 4.90960252,12.7377201 L0.278724041,8.44510677 C-0.0929080138,8.07042117 -0.0929080138,7.47092419 0.278724041,7.13370714 C0.650356097,6.75902153 1.24496739,6.75902153 1.57943623,7.13370714 L5.57854022,10.7893549 L16.4205638,0.281014207 C16.7921958,-0.0936714023 17.3868071,-0.0936714023 17.721276,0.281014207 C18.092908,0.655699816 18.092908,1.25519679 17.721276,1.59241384 L6.24747792,12.7377201 C6.06166189,12.9250629 5.83868266,13 5.57854022,13 Z" id="Path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

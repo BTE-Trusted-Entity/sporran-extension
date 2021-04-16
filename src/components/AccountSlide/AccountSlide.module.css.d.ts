@@ -1,8 +1,15 @@
 declare namespace AccountSlideModuleCssNamespace {
   export interface IAccountSlideModuleCss {
+    cancel: string;
+    circle: string;
+    form: string;
     import: string;
+    input: string;
+    inputLine: string;
     name: string;
     new: string;
+    pencil: string;
+    save: string;
   }
 }
 

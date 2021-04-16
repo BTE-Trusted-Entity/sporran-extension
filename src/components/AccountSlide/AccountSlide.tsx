@@ -42,22 +42,37 @@ export function AccountSlide({ account }: Props): JSX.Element {
   return (
     <section>
       <Avatar tartan={account.tartan} address={account.address} />
-      <div className={styles.name}>
-        <span>{account.name}</span>
-        <AccountOptions address={account.address} onEdit={handleEditClick} />
-        {/* TODO - https://kiltprotocol.atlassian.net/browse/SK-119 */}
-      </div>
-      {editing && (
-        <form onSubmit={handleSubmit}>
-          <label>
-            {t('component_AccountSlide_name')}
-            <input name="name" required />
-          </label>
-          <button type="submit">{t('common_action_save')}</button>
-
-          <button type="button" onClick={handleCancelClick}>
-            {t('common_action_cancel')}
-          </button>
+      {!editing ? (
+        <div className={styles.name}>
+          <span>{account.name}</span>
+          <AccountOptions address={account.address} onEdit={handleEditClick} />
+          {/* TODO - https://kiltprotocol.atlassian.net/browse/SK-119 */}
+        </div>
+      ) : (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <p className={styles.inputLine}>
+            <input
+              className={styles.input}
+              name="name"
+              required
+              aria-label={t('component_AccountSlide_name')}
+              placeholder={account.name}
+            />
+            <span className={styles.pencil} />
+          </p>
+          <button
+            className={styles.save}
+            type="submit"
+            aria-label={t('common_action_save')}
+            title={t('common_action_save')}
+          />
+          <button
+            className={styles.cancel}
+            type="button"
+            onClick={handleCancelClick}
+            aria-label={t('common_action_cancel')}
+            title={t('common_action_cancel')}
+          />
         </form>
       )}
     </section>
