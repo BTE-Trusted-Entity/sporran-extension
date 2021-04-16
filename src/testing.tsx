@@ -6,7 +6,6 @@ import dialogPolyfill from 'dialog-polyfill';
 
 import { AccountsProviderMock } from './testing/AccountsProviderMock';
 import { Identicon } from './components/Avatar/Identicon';
-import { getNextTartan } from './utilities/accounts/tartans';
 
 export {
   AccountsProviderMock,
@@ -41,14 +40,4 @@ const dialogPromise = Promise.resolve();
 
 export async function waitForDialogUpdate(): Promise<void> {
   await act(() => dialogPromise);
-}
-
-jest.mock('./utilities/accounts/tartans');
-const nextTartanPromise = Promise.resolve('MacLeod');
-(getNextTartan as jest.Mock).mockReturnValue(nextTartanPromise);
-
-export async function waitForNextTartan(): Promise<void> {
-  await act(async () => {
-    await nextTartanPromise;
-  });
 }

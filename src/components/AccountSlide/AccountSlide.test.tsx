@@ -1,12 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { browser } from 'webextension-polyfill-ts';
 
-import {
-  render,
-  screen,
-  waitForElementToBeRemoved,
-  waitForNextTartan,
-} from '../../testing';
+import { render, screen, waitForElementToBeRemoved } from '../../testing';
 import { saveAccount } from '../../utilities/accounts/accounts';
 import {
   BalanceChangeResponse,
@@ -15,6 +10,7 @@ import {
 
 import { AccountSlide } from './AccountSlide';
 import { AccountSlideNew } from './AccountSlideNew';
+import { waitForNextTartan } from '../../testing/getNextTartan.mock';
 
 jest.mock('../../utilities/accounts/accounts');
 jest.spyOn(browser.runtime, 'sendMessage');

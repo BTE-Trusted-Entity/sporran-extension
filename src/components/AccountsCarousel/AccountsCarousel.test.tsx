@@ -1,12 +1,9 @@
-import {
-  accountsMock as accounts,
-  render,
-  waitForNextTartan,
-} from '../../testing';
+import { accountsMock as accounts, render } from '../../testing';
 import { paths } from '../../views/paths';
 
 import { NEW } from '../../utilities/accounts/accounts';
 import { AccountsCarousel } from './AccountsCarousel';
+import { waitForNextTartan } from '../../testing/getNextTartan.mock';
 
 describe('AccountsCarousel', () => {
   it('should render normal accounts', async () => {
