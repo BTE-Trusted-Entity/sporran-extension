@@ -4,6 +4,7 @@ import { act } from '@testing-library/react';
 
 import { render, screen, waitForElementToBeRemoved } from '../../testing';
 import { saveAccount } from '../../utilities/accounts/accounts';
+import { getNextTartan } from '../../utilities/accounts/tartans';
 import {
   BalanceChangeResponse,
   MessageType,
@@ -12,6 +13,7 @@ import {
 import { AccountSlide } from './AccountSlide';
 import { AccountSlideNew } from './AccountSlideNew';
 
+jest.mock('../../utilities/accounts/tartans');
 jest.mock('../../utilities/accounts/accounts');
 jest.spyOn(browser.runtime, 'sendMessage');
 jest
@@ -66,9 +68,10 @@ describe('AccountSlide', () => {
 describe('AccountSlideNew', () => {
   it('should render', async () => {
     const promise = Promise.resolve();
-    const setTartan = jest.fn(() => promise);
+    (getNextTartan as jest.Mock).mockReturnValue(promise);
+
     const { container } = render(<AccountSlideNew />);
-    expect(setTartan).toHaveBeenCalled();
+
     expect(container).toMatchSnapshot();
     await act(() => promise);
   });
