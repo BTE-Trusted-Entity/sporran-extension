@@ -53,6 +53,7 @@ declare namespace AvatarModuleCssNamespace {
     Sutherland: string;
     Wallace: string;
     identicon: string;
+    new: string;
     tartan: string;
   }
 }

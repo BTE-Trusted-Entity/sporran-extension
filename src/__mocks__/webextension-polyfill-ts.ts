@@ -29,8 +29,10 @@ export const browser = {
   },
   storage: {
     local: {
-      async get(): Promise<unknown> {
-        return {};
+      async get(
+        keys: null | string | Record<string, unknown> | string[],
+      ): Promise<unknown> {
+        return keys === 'nextTartan' ? { nextTartan: 'MacLeod' } : {};
       },
       async set(): Promise<void> {
         // dummy

@@ -1,9 +1,20 @@
 .name {
-  composes: accountText from '../../components/Typography/Typography.module.css';
+  composes: accountText from '../Typography/Typography.module.css';
   position: relative;
   padding-left: 2.125rem;
   height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.new {
+  composes: name;
+  padding: 0;
+  margin: 0;
+}
+
+.import {
+  composes: buttonSecondary from '../Button/Button.module.css';
+  margin-top: 1rem;
 }
