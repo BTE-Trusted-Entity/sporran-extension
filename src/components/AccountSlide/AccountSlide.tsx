@@ -50,16 +50,14 @@ export function AccountSlide({ account }: Props): JSX.Element {
         </div>
       ) : (
         <form className={styles.form} onSubmit={handleSubmit}>
-          <p className={styles.inputLine}>
-            <input
-              className={styles.input}
-              name="name"
-              required
-              aria-label={t('component_AccountSlide_name')}
-              placeholder={t('component_AccountSlide_name')}
-              defaultValue={account.name}
-            />
-          </p>
+          <input
+            className={styles.input}
+            name="name"
+            required
+            aria-label={t('component_AccountSlide_name')}
+            placeholder={t('component_AccountSlide_name')}
+            defaultValue={account.name}
+          />
           <button
             className={styles.save}
             type="submit"
