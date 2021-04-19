@@ -14,11 +14,6 @@
   justify-content: center;
 }
 
-.inputLine {
-  display: inline-block;
-  position: relative;
-}
-
 .input {
   composes: input from '../Input/Input.module.css';
   width: calc(236rem / 16);
