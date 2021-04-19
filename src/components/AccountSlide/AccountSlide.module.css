@@ -25,7 +25,8 @@
   padding-right: 2.5rem;
 }
 
-.pencil {
+.inputLine::after {
+  content: '';
   position: absolute;
   right: 0.25rem;
   width: 2.25rem;
@@ -35,6 +36,8 @@
 }
 
 .circle {
+  composes: buttonIcon from '../Button/Button.module.css';
+
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50%;
@@ -43,7 +46,6 @@
 }
 
 .save {
-  composes: buttonIcon from '../Button/Button.module.css';
   composes: circle;
 
   background-image: url('../images/checkmark.svg'),
@@ -53,10 +55,16 @@
 }
 
 .cancel {
-  composes: buttonIcon from '../Button/Button.module.css';
   composes: circle;
 
-  background-image: url('../images/cancel.svg');
+  box-shadow: none;
+  border: double 2.2px transparent;
+  background-image: url('../images/x-close.svg'),
+    linear-gradient(#363657, #363657),
+    linear-gradient(140deg, var(--color-dark) 0%, var(--color-pink) 100%);
+  background-origin: border-box;
+  background-clip: border-box, content-box, border-box;
+  background-size: auto;
 }
 
 .new {

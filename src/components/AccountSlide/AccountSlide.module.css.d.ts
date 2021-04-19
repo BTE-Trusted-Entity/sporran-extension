@@ -8,7 +8,6 @@ declare namespace AccountSlideModuleCssNamespace {
     inputLine: string;
     name: string;
     new: string;
-    pencil: string;
     save: string;
   }
 }

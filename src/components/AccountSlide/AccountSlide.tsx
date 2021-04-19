@@ -56,9 +56,9 @@ export function AccountSlide({ account }: Props): JSX.Element {
               name="name"
               required
               aria-label={t('component_AccountSlide_name')}
-              placeholder={account.name}
+              placeholder={t('component_AccountSlide_name')}
+              defaultValue={account.name}
             />
-            <span className={styles.pencil} />
           </p>
           <button
             className={styles.save}
