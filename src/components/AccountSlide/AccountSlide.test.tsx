@@ -47,13 +47,13 @@ describe('AccountSlide', () => {
     userEvent.click(
       await screen.findByRole('menuitem', { name: 'Edit account name' }),
     );
-    userEvent.type(await screen.findByLabelText('Account name:'), 'Foo');
+    userEvent.type(await screen.findByLabelText('Account name:'), ' Foo');
 
     const saveButton = await screen.findByRole('button', { name: 'Save' });
     userEvent.click(saveButton);
 
     expect(saveAccount).toHaveBeenCalledWith({
-      name: 'Foo',
+      name: 'My Sporran Account Foo',
       tartan: account.tartan,
       address: account.address,
       index: 1,
