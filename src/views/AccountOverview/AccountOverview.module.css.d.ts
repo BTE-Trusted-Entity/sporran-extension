@@ -3,6 +3,7 @@ declare namespace AccountOverviewModuleCssNamespace {
     button: string;
     container: string;
     heading: string;
+    import: string;
     info: string;
   }
 }

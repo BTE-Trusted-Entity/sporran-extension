@@ -1,8 +1,10 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, Link } from 'react-router-dom';
 
 import { plural } from '../../utilities/plural/plural';
 import { NEW, useAccounts } from '../../utilities/accounts/accounts';
+import { paths } from '../paths';
+
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { Stats } from '../../components/Stats/Stats';
 
@@ -32,6 +34,10 @@ export function AccountOverviewNew(): JSX.Element | null {
       </header>
 
       <AccountsCarousel path={path} account={NEW} />
+
+      <Link to={paths.account.import.start} className={styles.import}>
+        {t('component_AccountSlideNew_import')}
+      </Link>
 
       <Stats />
     </main>

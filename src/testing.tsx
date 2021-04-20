@@ -10,6 +10,7 @@ import { Identicon } from './components/Avatar/Identicon';
 export {
   AccountsProviderMock,
   accountsMock,
+  moreAccountsMock,
 } from './testing/AccountsProviderMock';
 
 export { mockBackgroundScript } from './testing/mockBackgroundScript';

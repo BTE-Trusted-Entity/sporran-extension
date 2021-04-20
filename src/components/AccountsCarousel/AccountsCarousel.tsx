@@ -17,22 +17,18 @@ import styles from './AccountsCarousel.module.css';
 interface AccountLinkProps {
   path: string;
   account: Account;
+  accountsList: Account[];
   direction: 'previous' | 'next';
 }
 
 function AccountLink({
   path,
   account,
+  accountsList,
   direction,
-}: AccountLinkProps): JSX.Element | null {
+}: AccountLinkProps): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const accounts = useAccounts().data;
-  if (!accounts) {
-    return null;
-  }
-
-  const accountsList = sortBy(Object.values(accounts), 'index');
   const { length } = accountsList;
 
   const isPrevious = direction === 'previous';
@@ -61,23 +57,93 @@ function AccountLink({
   );
 }
 
+interface AccountBubblesProps {
+  account: Account;
+  accountsList: Account[];
+  path: string;
+}
+
+function AccountBubbles({
+  account,
+  accountsList,
+  path,
+}: AccountBubblesProps): JSX.Element | null {
+  const t = browser.i18n.getMessage;
+
+  const maxAccountBubbles = 5;
+
+  if (accountsList.length > maxAccountBubbles) {
+    return null;
+  }
+
+  return (
+    <>
+      <ul className={styles.bubbles}>
+        {accountsList.map((mappedAccount) => (
+          <li style={{ display: 'inline-block' }} key={mappedAccount.index}>
+            <Link
+              className={
+                account.index === mappedAccount.index
+                  ? styles.bubble
+                  : styles.bubbleTransparent
+              }
+              to={generatePath(path, { address: mappedAccount.address })}
+              aria-label={mappedAccount.name}
+              title={mappedAccount.name}
+            />
+          </li>
+        ))}
+      </ul>
+      <Link
+        className={isNew(account) ? styles.add : styles.addTransparent}
+        to={generatePath(path, { address: NEW.address })}
+        aria-label={t('component_AccountsCarousel_title_new')}
+        title={t('component_AccountsCarousel_title_new')}
+      />
+    </>
+  );
+}
+
 interface Props {
   path: string;
   account: Account;
 }
 
-export function AccountsCarousel({ account, path }: Props): JSX.Element {
+export function AccountsCarousel({ account, path }: Props): JSX.Element | null {
+  const accounts = useAccounts().data;
+  if (!accounts) {
+    return null;
+  }
+
+  const accountsList = sortBy(Object.values(accounts), 'index');
+
   return (
     <div className={styles.container}>
-      <AccountLink direction="previous" path={path} account={account} />
-
       {isNew(account) ? (
         <AccountSlideNew />
       ) : (
         <AccountSlide account={account} />
       )}
 
-      <AccountLink direction="next" path={path} account={account} />
+      <AccountLink
+        direction="previous"
+        path={path}
+        account={account}
+        accountsList={accountsList}
+      />
+
+      <AccountLink
+        direction="next"
+        path={path}
+        account={account}
+        accountsList={accountsList}
+      />
+
+      <AccountBubbles
+        account={account}
+        accountsList={accountsList}
+        path={path}
+      />
     </div>
   );
 }

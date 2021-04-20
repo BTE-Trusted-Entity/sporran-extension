@@ -1,16 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccountsCarousel should render normal accounts 1`] = `
+exports[`AccountsCarousel should not render bubbles if number of accounts is more than the maximum 1`] = `
 <div>
   <div
     class="container"
   >
+    <section>
+      <div
+        class="MacIntyre tartan"
+      >
+        Identicon
+      </div>
+      <div
+        class="name"
+      >
+        <span>
+          My Fourth Account
+        </span>
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Account options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Account options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
     <a
-      aria-label="My Sporran Account"
+      aria-label="My Third Account"
       class="left"
-      href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-      title="My Sporran Account"
+      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+      title="My Third Account"
     />
+    <a
+      aria-label="My Fifth Account"
+      class="right"
+      href="/account/4o9GN2oCv8E9GVrLMoYRgVWBYAtjXfWieKECsZmwKXevdSiV"
+      title="My Fifth Account"
+    />
+  </div>
+</div>
+`;
+
+exports[`AccountsCarousel should render a bubble for each account 1`] = `
+<div>
+  <div
+    class="container"
+  >
     <section>
       <div
         class="MacLachlan tartan"
@@ -40,10 +83,145 @@ exports[`AccountsCarousel should render normal accounts 1`] = `
       </div>
     </section>
     <a
+      aria-label="My Sporran Account"
+      class="left"
+      href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      title="My Sporran Account"
+    />
+    <a
       aria-label="My Third Account"
       class="right"
       href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
       title="My Third Account"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Sporran Account"
+          class="bubbleTransparent"
+          href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+          title="My Sporran Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Second Account"
+          class="bubble"
+          href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+          title="My Second Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Third Account"
+          class="bubbleTransparent"
+          href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+          title="My Third Account"
+        />
+      </li>
+    </ul>
+    <a
+      aria-label="Create new account"
+      class="addTransparent"
+      href="/account/NEW"
+      title="Create new account"
+    />
+  </div>
+</div>
+`;
+
+exports[`AccountsCarousel should render normal accounts 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <section>
+      <div
+        class="MacLachlan tartan"
+      >
+        Identicon
+      </div>
+      <div
+        class="name"
+      >
+        <span>
+          My Second Account
+        </span>
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Account options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Account options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <a
+      aria-label="My Sporran Account"
+      class="left"
+      href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      title="My Sporran Account"
+    />
+    <a
+      aria-label="My Third Account"
+      class="right"
+      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+      title="My Third Account"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Sporran Account"
+          class="bubbleTransparent"
+          href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+          title="My Sporran Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Second Account"
+          class="bubble"
+          href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+          title="My Second Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Third Account"
+          class="bubbleTransparent"
+          href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+          title="My Third Account"
+        />
+      </li>
+    </ul>
+    <a
+      aria-label="Create new account"
+      class="addTransparent"
+      href="/account/NEW"
+      title="Create new account"
     />
   </div>
 </div>
@@ -54,12 +232,6 @@ exports[`AccountsCarousel should render the first account 1`] = `
   <div
     class="container"
   >
-    <a
-      aria-label="Create new account"
-      class="left"
-      href="/account/NEW"
-      title="Create new account"
-    />
     <section>
       <div
         class="MacFarlane tartan"
@@ -89,10 +261,56 @@ exports[`AccountsCarousel should render the first account 1`] = `
       </div>
     </section>
     <a
+      aria-label="Create new account"
+      class="left"
+      href="/account/NEW"
+      title="Create new account"
+    />
+    <a
       aria-label="My Second Account"
       class="right"
       href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
       title="My Second Account"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Sporran Account"
+          class="bubble"
+          href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+          title="My Sporran Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Second Account"
+          class="bubbleTransparent"
+          href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+          title="My Second Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Third Account"
+          class="bubbleTransparent"
+          href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+          title="My Third Account"
+        />
+      </li>
+    </ul>
+    <a
+      aria-label="Create new account"
+      class="addTransparent"
+      href="/account/NEW"
+      title="Create new account"
     />
   </div>
 </div>
@@ -103,12 +321,6 @@ exports[`AccountsCarousel should render the last account 1`] = `
   <div
     class="container"
   >
-    <a
-      aria-label="My Second Account"
-      class="left"
-      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-      title="My Second Account"
-    />
     <section>
       <div
         class="MacPherson tartan"
@@ -138,8 +350,54 @@ exports[`AccountsCarousel should render the last account 1`] = `
       </div>
     </section>
     <a
+      aria-label="My Second Account"
+      class="left"
+      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+      title="My Second Account"
+    />
+    <a
       aria-label="Create new account"
       class="right"
+      href="/account/NEW"
+      title="Create new account"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Sporran Account"
+          class="bubbleTransparent"
+          href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+          title="My Sporran Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Second Account"
+          class="bubbleTransparent"
+          href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+          title="My Second Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Third Account"
+          class="bubble"
+          href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+          title="My Third Account"
+        />
+      </li>
+    </ul>
+    <a
+      aria-label="Create new account"
+      class="addTransparent"
       href="/account/NEW"
       title="Create new account"
     />
@@ -152,12 +410,6 @@ exports[`AccountsCarousel should render the new account 1`] = `
   <div
     class="container"
   >
-    <a
-      aria-label="My Third Account"
-      class="left"
-      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-      title="My Third Account"
-    />
     <section>
       <div
         class="MacLeod tartan"
@@ -174,18 +426,58 @@ exports[`AccountsCarousel should render the new account 1`] = `
       >
         Create new account
       </p>
-      <a
-        class="import"
-        href="/account/import"
-      >
-        Import an account from pre-existing phrase
-      </a>
     </section>
+    <a
+      aria-label="My Third Account"
+      class="left"
+      href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+      title="My Third Account"
+    />
     <a
       aria-label="My Sporran Account"
       class="right"
       href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       title="My Sporran Account"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Sporran Account"
+          class="bubbleTransparent"
+          href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+          title="My Sporran Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Second Account"
+          class="bubbleTransparent"
+          href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+          title="My Second Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Third Account"
+          class="bubbleTransparent"
+          href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+          title="My Third Account"
+        />
+      </li>
+    </ul>
+    <a
+      aria-label="Create new account"
+      class="add"
+      href="/account/NEW"
+      title="Create new account"
     />
   </div>
 </div>
@@ -196,12 +488,6 @@ exports[`AccountsCarousel should support other paths 1`] = `
   <div
     class="container"
   >
-    <a
-      aria-label="My Second Account"
-      class="left"
-      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
-      title="My Second Account"
-    />
     <section>
       <div
         class="MacPherson tartan"
@@ -231,8 +517,54 @@ exports[`AccountsCarousel should support other paths 1`] = `
       </div>
     </section>
     <a
+      aria-label="My Second Account"
+      class="left"
+      href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
+      title="My Second Account"
+    />
+    <a
       aria-label="Create new account"
       class="right"
+      href="/account/NEW/send"
+      title="Create new account"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Sporran Account"
+          class="bubbleTransparent"
+          href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
+          title="My Sporran Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Second Account"
+          class="bubbleTransparent"
+          href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
+          title="My Second Account"
+        />
+      </li>
+      <li
+        style="display: inline-block;"
+      >
+        <a
+          aria-label="My Third Account"
+          class="bubble"
+          href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL/send"
+          title="My Third Account"
+        />
+      </li>
+    </ul>
+    <a
+      aria-label="Create new account"
+      class="addTransparent"
       href="/account/NEW/send"
       title="Create new account"
     />

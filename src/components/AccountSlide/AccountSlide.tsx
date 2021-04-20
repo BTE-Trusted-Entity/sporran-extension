@@ -46,7 +46,6 @@ export function AccountSlide({ account }: Props): JSX.Element {
         <div className={styles.name}>
           <span>{account.name}</span>
           <AccountOptions address={account.address} onEdit={handleEditClick} />
-          {/* TODO - https://kiltprotocol.atlassian.net/browse/SK-119 */}
         </div>
       ) : (
         <form className={styles.form} onSubmit={handleSubmit}>

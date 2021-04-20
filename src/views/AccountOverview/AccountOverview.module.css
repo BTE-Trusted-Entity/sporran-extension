@@ -22,3 +22,8 @@
   width: calc(137rem / 16);
   margin: calc(6rem / 16);
 }
+
+.import {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
+  margin-top: 1rem;
+}

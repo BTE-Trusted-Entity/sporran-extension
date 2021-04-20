@@ -35,6 +35,9 @@
   "component_AccountSlide_name": {
     "message": "Account name:"
   },
+  "component_AccountsCarousel_title_new": {
+    "message": "Create new account"
+  },
   "component_AccountLink_title_new": {
     "message": "Create new account"
   },

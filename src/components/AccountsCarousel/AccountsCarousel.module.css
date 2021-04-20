@@ -21,3 +21,35 @@
   background: url('../images/chevron-right.svg') no-repeat;
   right: 6.25rem;
 }
+
+.bubbles {
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bubble {
+  display: inline-block;
+  height: 0.5rem;
+  width: 0.5rem;
+  background: var(--color-grey-light);
+  border-radius: 50%;
+  margin: 0 0.1875rem 0 0.1875rem;
+}
+
+.bubbleTransparent {
+  composes: bubble;
+  background: rgba(200, 227, 238, 0.5);
+}
+
+.add {
+  composes: bubble;
+  composes: buttonIcon from '../Button/Button.module.css';
+  background: url('../images/plus-circle.svg') no-repeat center/contain;
+}
+
+.addTransparent {
+  composes: add;
+  opacity: 0.35;
+}

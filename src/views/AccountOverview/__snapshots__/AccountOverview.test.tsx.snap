@@ -20,12 +20,6 @@ exports[`AccountOverview should render a normal account 1`] = `
     <div
       class="container"
     >
-      <a
-        aria-label="Create new account"
-        class="left"
-        href="/account/NEW"
-        title="Create new account"
-      />
       <section>
         <div
           class="MacFarlane tartan"
@@ -55,10 +49,56 @@ exports[`AccountOverview should render a normal account 1`] = `
         </div>
       </section>
       <a
+        aria-label="Create new account"
+        class="left"
+        href="/account/NEW"
+        title="Create new account"
+      />
+      <a
         aria-label="My Second Account"
         class="right"
         href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
         title="My Second Account"
+      />
+      <ul
+        class="bubbles"
+      >
+        <li
+          style="display: inline-block;"
+        >
+          <a
+            aria-label="My Sporran Account"
+            class="bubble"
+            href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+            title="My Sporran Account"
+          />
+        </li>
+        <li
+          style="display: inline-block;"
+        >
+          <a
+            aria-label="My Second Account"
+            class="bubbleTransparent"
+            href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+            title="My Second Account"
+          />
+        </li>
+        <li
+          style="display: inline-block;"
+        >
+          <a
+            aria-label="My Third Account"
+            class="bubbleTransparent"
+            href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+            title="My Third Account"
+          />
+        </li>
+      </ul>
+      <a
+        aria-label="Create new account"
+        class="addTransparent"
+        href="/account/NEW"
+        title="Create new account"
       />
     </div>
     <p
@@ -135,12 +175,6 @@ exports[`AccountOverview should render the new account 1`] = `
     <div
       class="container"
     >
-      <a
-        aria-label="My Third Account"
-        class="left"
-        href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-        title="My Third Account"
-      />
       <section>
         <div
           class="MacLeod tartan"
@@ -157,20 +191,66 @@ exports[`AccountOverview should render the new account 1`] = `
         >
           Create new account
         </p>
-        <a
-          class="import"
-          href="/account/import"
-        >
-          Import an account from pre-existing phrase
-        </a>
       </section>
+      <a
+        aria-label="My Third Account"
+        class="left"
+        href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+        title="My Third Account"
+      />
       <a
         aria-label="My Sporran Account"
         class="right"
         href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
         title="My Sporran Account"
       />
+      <ul
+        class="bubbles"
+      >
+        <li
+          style="display: inline-block;"
+        >
+          <a
+            aria-label="My Sporran Account"
+            class="bubbleTransparent"
+            href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+            title="My Sporran Account"
+          />
+        </li>
+        <li
+          style="display: inline-block;"
+        >
+          <a
+            aria-label="My Second Account"
+            class="bubbleTransparent"
+            href="/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+            title="My Second Account"
+          />
+        </li>
+        <li
+          style="display: inline-block;"
+        >
+          <a
+            aria-label="My Third Account"
+            class="bubbleTransparent"
+            href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+            title="My Third Account"
+          />
+        </li>
+      </ul>
+      <a
+        aria-label="Create new account"
+        class="add"
+        href="/account/NEW"
+        title="Create new account"
+      />
     </div>
+    <a
+      class="import"
+      href="/account/import"
+    >
+      Import an account from pre-existing phrase
+    </a>
     <p
       class="stats"
     >

@@ -51,12 +51,6 @@ exports[`AccountSlideNew should render 1`] = `
     >
       Create new account
     </p>
-    <a
-      class="import"
-      href="/account/import"
-    >
-      Import an account from pre-existing phrase
-    </a>
   </section>
 </div>
 `;
