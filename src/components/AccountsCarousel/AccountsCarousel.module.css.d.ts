@@ -1,7 +1,13 @@
 declare namespace AccountsCarouselModuleCssNamespace {
   export interface IAccountsCarouselModuleCss {
+    add: string;
+    addActive: string;
+    bubble: string;
+    bubbleActive: string;
+    bubbles: string;
     chevron: string;
     container: string;
+    item: string;
     left: string;
     right: string;
   }

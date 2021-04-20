@@ -1,10 +1,14 @@
-import { accountsMock as accounts, render } from '../../testing';
+import {
+  accountsMock as accounts,
+  moreAccountsMock as moreAccounts,
+  render,
+} from '../../testing';
 import { paths } from '../../views/paths';
 
 import { NEW } from '../../utilities/accounts/accounts';
 import { waitForNextTartan } from '../../testing/getNextTartan.mock';
 
-import { AccountsCarousel } from './AccountsCarousel';
+import { AccountsCarousel, AccountsBubbles } from './AccountsCarousel';
 
 describe('AccountsCarousel', () => {
   it('should render normal accounts', async () => {
@@ -52,6 +56,27 @@ describe('AccountsCarousel', () => {
         account={accounts['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']}
       />,
     );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render a bubble for each account', async () => {
+    const { container } = render(
+      <AccountsBubbles
+        accounts={Object.values(accounts)}
+        path={paths.account.overview}
+      />,
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+  it('should not render bubbles if number of accounts is more than the maximum', async () => {
+    const { container } = render(
+      <AccountsBubbles
+        accounts={Object.values(moreAccounts)}
+        path={paths.account.overview}
+      />,
+    );
+
     expect(container).toMatchSnapshot();
   });
 });

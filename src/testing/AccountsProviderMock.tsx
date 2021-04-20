@@ -22,6 +22,28 @@ export const accountsMock: AccountsMap = {
   },
 };
 
+export const moreAccountsMock: AccountsMap = {
+  ...accountsMock,
+  '4ruKeJZXBuqvgTvsTpbsG1RChkTsdz1TDMGgFP7SYykK78R8': {
+    name: 'My Fourth Account',
+    tartan: 'MacIntyre',
+    address: '4ruKeJZXBuqvgTvsTpbsG1RChkTsdz1TDMGgFP7SYykK78R8',
+    index: 4,
+  },
+  '4o9GN2oCv8E9GVrLMoYRgVWBYAtjXfWieKECsZmwKXevdSiV': {
+    name: 'My Fifth Account',
+    tartan: 'MacGregor',
+    address: '4o9GN2oCv8E9GVrLMoYRgVWBYAtjXfWieKECsZmwKXevdSiV',
+    index: 5,
+  },
+  '4srs2Ag4NQJyr9uDszokjT4EdiHfDHiv2hzvuZtJL7KFCVWo': {
+    name: 'My Sixth Account',
+    tartan: 'MacLeod',
+    address: '4srs2Ag4NQJyr9uDszokjT4EdiHfDHiv2hzvuZtJL7KFCVWo',
+    index: 6,
+  },
+};
+
 export function AccountsProviderMock({
   accounts = accountsMock,
   children,

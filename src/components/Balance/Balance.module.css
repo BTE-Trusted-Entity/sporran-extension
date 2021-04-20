@@ -1,5 +1,5 @@
 .balance {
   composes: smallText from '../Typography/Typography.module.css';
   font-size: 1.25rem;
-  margin: 0;
+  margin: 1rem 0 0 0;
 }
