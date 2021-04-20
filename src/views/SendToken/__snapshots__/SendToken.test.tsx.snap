@@ -88,7 +88,7 @@ exports[`SendToken should render 1`] = `
         class="amount"
         inputmode="numeric"
         name="amount"
-        placeholder="1.2339 - 0.0100"
+        placeholder="0.0100 – 1.2339"
         required=""
       />
       <button

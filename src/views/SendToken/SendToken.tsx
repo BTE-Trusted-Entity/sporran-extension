@@ -224,7 +224,7 @@ export function SendToken({ account }: Props): JSX.Element {
           aria-label={t('view_SendToken_amount')}
           placeholder={
             maximum
-              ? `${asKiltCoins(maximum)} - ${asKiltCoins(minimum)}`
+              ? `${asKiltCoins(minimum)} – ${asKiltCoins(maximum)}`
               : undefined
           }
         />
