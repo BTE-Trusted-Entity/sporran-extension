@@ -17,24 +17,24 @@ import styles from './AccountsCarousel.module.css';
 interface AccountLinkProps {
   path: string;
   account: Account;
-  accountsList: Account[];
+  accounts: Account[];
   direction: 'previous' | 'next';
 }
 
 function AccountLink({
   path,
   account,
-  accountsList,
+  accounts,
   direction,
 }: AccountLinkProps): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { length } = accountsList;
+  const { length } = accounts;
 
   const isPrevious = direction === 'previous';
   const delta = isPrevious ? -1 : 1;
   const modifiedIndex = !isNew(account)
-    ? accountsList.indexOf(account) + delta
+    ? accounts.indexOf(account) + delta
     : isPrevious
     ? length - 1
     : 0;
@@ -42,7 +42,7 @@ function AccountLink({
   const isInRange = 0 <= modifiedIndex && modifiedIndex < length;
 
   const linkedIndex = (modifiedIndex + length) % length;
-  const linkedAccount = isInRange ? accountsList[linkedIndex] : NEW;
+  const linkedAccount = isInRange ? accounts[linkedIndex] : NEW;
   const title = isInRange
     ? linkedAccount.name
     : t('component_AccountLink_title_new');
@@ -76,8 +76,8 @@ export function AccountsBubbles({
 
   return (
     <ul className={styles.bubbles}>
-      {accounts.map(({ name, address, index }) => (
-        <li className={styles.item} key={index}>
+      {accounts.map(({ name, address }) => (
+        <li className={styles.item} key={address}>
           <NavLink
             className={styles.bubble}
             activeClassName={styles.bubbleActive}
@@ -125,14 +125,14 @@ export function AccountsCarousel({ account, path }: Props): JSX.Element | null {
         direction="previous"
         path={path}
         account={account}
-        accountsList={accountsList}
+        accounts={accountsList}
       />
 
       <AccountLink
         direction="next"
         path={path}
         account={account}
-        accountsList={accountsList}
+        accounts={accountsList}
       />
 
       <AccountsBubbles accounts={accountsList} path={path} />

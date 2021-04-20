@@ -26,7 +26,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function noBubbles(): JSX.Element {
+export function NoBubbles(): JSX.Element {
   return (
     <AccountsProviderMock accounts={moreAccountsMock}>
       <AccountsCarousel
