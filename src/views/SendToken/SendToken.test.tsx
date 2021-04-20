@@ -56,6 +56,18 @@ describe('SendToken', () => {
     ).toBeInTheDocument();
   });
 
+  it('should not throw for values larger than 1e22 femtokoins', async () => {
+    render(<SendToken account={account} />);
+
+    userEvent.type(await screen.findByLabelText('Amount to send'), '1111111');
+
+    expect(
+      await screen.findByText(
+        'The amount entered exceeds your maximum sendable amount',
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('should report an invalid amount', async () => {
     render(<SendToken account={account} />);
 

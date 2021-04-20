@@ -17,11 +17,17 @@ import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import styles from './SendToken.module.css';
 
 const nonNumberCharacters = /[^0-9,.]/g;
-const FEMTO_FACTOR = 1e15;
+const KILT_POWER = 15;
 const minimum = new BN(0.01e15);
 
 function numberToCoins(parsedValue: number): BN {
-  return new BN((parsedValue * FEMTO_FACTOR).toString());
+  const value = parsedValue.toString();
+
+  // ludicrously rich man’s multiplication that supports values beyond 1e22
+  const [whole, fraction = ''] = value.split('.');
+  const paddedFraction = fraction.padEnd(KILT_POWER, '0');
+
+  return new BN(whole + paddedFraction);
 }
 
 function getLocaleSeparators(
