@@ -18,12 +18,6 @@ exports[`SendToken should render 1`] = `
     <div
       class="container"
     >
-      <a
-        aria-label="Create new account"
-        class="left"
-        href="/"
-        title="Create new account"
-      />
       <section>
         <div
           class="MacFarlane tartan"
@@ -53,11 +47,65 @@ exports[`SendToken should render 1`] = `
         </div>
       </section>
       <a
+        aria-label="Create new account"
+        class="left"
+        href="/"
+        title="Create new account"
+      />
+      <a
         aria-label="My Second Account"
         class="right"
         href="/"
         title="My Second Account"
       />
+      <ul
+        class="bubbles"
+      >
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="My Sporran Account"
+            class="bubble bubbleActive"
+            href="/"
+            title="My Sporran Account"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="My Second Account"
+            class="bubble bubbleActive"
+            href="/"
+            title="My Second Account"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="My Third Account"
+            class="bubble bubbleActive"
+            href="/"
+            title="My Third Account"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Create new account"
+            class="add addActive"
+            href="/"
+            title="Create new account"
+          />
+        </li>
+      </ul>
     </div>
     <p
       class="balance"
