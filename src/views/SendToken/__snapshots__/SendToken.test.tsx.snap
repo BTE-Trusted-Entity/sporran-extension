@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SendToken should render 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Send KILT Coins
+    </h1>
+    <p
+      class="subline"
+    >
+      Securely send some of your coins
+    </p>
+    <div
+      class="container"
+    >
+      <a
+        aria-label="Create new account"
+        class="left"
+        href="/"
+        title="Create new account"
+      />
+      <section>
+        <div
+          class="MacFarlane tartan"
+        >
+          Identicon
+        </div>
+        <div
+          class="name"
+        >
+          <span>
+            My Sporran Account
+          </span>
+          <div
+            class="wrapper"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="Account options"
+              class="toggle"
+              role="button"
+              tabindex="0"
+              title="Account options"
+              type="button"
+            />
+          </div>
+        </div>
+      </section>
+      <a
+        aria-label="My Second Account"
+        class="right"
+        href="/"
+        title="My Second Account"
+      />
+    </div>
+    <p
+      class="balance"
+    >
+      Balance: 
+      <span
+        class="amount"
+      >
+        1.2340
+         
+        <span
+          aria-label="Kilt coin"
+          class="coin"
+        />
+      </span>
+    </p>
+    <small
+      class="maximum"
+    >
+      Maximum sendable amount: 
+      1.2339 K
+    </small>
+    <p
+      class="amountLine"
+    >
+      <input
+        aria-label="Amount to send"
+        class="amount"
+        inputmode="numeric"
+        maxlength="15"
+        name="amount"
+        placeholder="0.0100 – 1.2339"
+        required=""
+      />
+      <button
+        class="all"
+        type="button"
+      >
+        All in
+      </button>
+    </p>
+    <p
+      class="totalLine"
+    >
+      <button
+        aria-label="Decrease the tip by 1%"
+        class="decrease"
+        disabled=""
+        title="Decrease the tip by 1%"
+        type="button"
+      />
+      <small
+        class="total"
+      >
+        Total fee: 
+        0.0000
+         K
+      </small>
+      <button
+        aria-label="Increase the tip by 1%"
+        class="increase"
+        title="Increase the tip by 1%"
+        type="button"
+      />
+    </p>
+    <small
+      class="tip"
+    >
+      Tip of $percent$% included in fee
+    </small>
+    <p
+      class="recipientLine"
+    >
+      <input
+        aria-label="Paste the recipient address here"
+        class="recipient"
+        id="recipient"
+        name="recipient"
+        placeholder="Paste the recipient address here"
+        required=""
+      />
+      <output
+        class="tooltip"
+        for="recipient"
+        style="position: absolute; left: 0px; top: 0px;"
+      >
+        
+        <span
+          class="pointer"
+          data-popper-arrow="true"
+          style="position: absolute;"
+        />
+      </output>
+    </p>
+    <button
+      class="submit"
+      disabled=""
+      type="submit"
+    >
+      Review & Sign Transaction
+    </button>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+  </form>
+</div>
+`;

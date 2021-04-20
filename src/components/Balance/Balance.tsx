@@ -16,8 +16,7 @@ interface BalanceProps {
   address: string;
 }
 
-export function Balance({ address }: BalanceProps): JSX.Element {
-  const t = browser.i18n.getMessage;
+export function useAddressBalance(address: string): BN | null {
   const [balance, setBalance] = useState<BN | null>(null);
 
   const balanceListener = useCallback(
@@ -43,6 +42,13 @@ export function Balance({ address }: BalanceProps): JSX.Element {
       browser.runtime.onMessage.removeListener(balanceListener);
     };
   }, [address, balanceListener]);
+
+  return balance;
+}
+
+export function Balance({ address }: BalanceProps): JSX.Element {
+  const t = browser.i18n.getMessage;
+  const balance = useAddressBalance(address);
 
   return (
     <p className={styles.balance}>

@@ -21,6 +21,8 @@
   "permissions": [
     "tabs",
     "activeTab",
+    "clipboardRead",
+    "clipboardWrite",
     "notifications",
     "storage",
     "http://*/",

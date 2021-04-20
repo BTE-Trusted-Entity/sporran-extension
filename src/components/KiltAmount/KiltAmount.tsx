@@ -13,12 +13,11 @@ const FORMAT = {
   maximumFractionDigits: PRECISION,
 };
 
-const CONVERSION_FACTOR = new BN(10 ** (KILT_POWER - PRECISION));
-const DIVIDER = 10 ** PRECISION;
-
-function asKiltCoins(balance: BN): string {
-  const numberWithFractions =
-    balance.div(CONVERSION_FACTOR).toNumber() / DIVIDER;
+export function asKiltCoins(balance: BN): string {
+  const balanceString = balance.toString(10).padStart(16, '0');
+  const whole = balanceString.slice(0, -KILT_POWER);
+  const fraction = balanceString.slice(-KILT_POWER);
+  const numberWithFractions = parseFloat(`${whole}.${fraction}`);
 
   return numberWithFractions.toLocaleString(
     browser.i18n.getUILanguage(),

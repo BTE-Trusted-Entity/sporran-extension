@@ -6,6 +6,7 @@
   border: 0;
   border-radius: 1.125rem;
   box-shadow: inset 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
+  background-color: var(--color-pink);
   background-image: linear-gradient(
     140deg,
     var(--color-pink) 0%,
@@ -13,8 +14,13 @@
   );
 }
 
+.input::selection {
+  background-color: var(--color-orange);
+}
+
 .input::placeholder {
   color: var(--color-grey-medium);
+  opacity: 1;
 }
 
 .inputKiltAmount {
@@ -32,4 +38,13 @@
   background-repeat: no-repeat;
   background-position: calc(100% - 0.75rem) center, 0;
   padding-right: 2rem;
+}
+
+.inputKiltAmount[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.inputKiltAmount[type='number']::-webkit-inner-spin-button,
+.inputKiltAmount[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
 }
