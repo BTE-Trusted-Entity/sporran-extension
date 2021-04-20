@@ -7,7 +7,7 @@ import {
 import { Stats } from './Stats';
 
 describe('Stats', () => {
-  beforeEach(mockBackgroundScript);
+  beforeEach(() => mockBackgroundScript());
 
   it('should not render for no accounts', async () => {
     const { container } = render(
