@@ -4,8 +4,8 @@
 }
 
 .dropdown {
-  --gradient-end: #9B1864;
-  --gradient-start: #630E40;
+  --gradient-end: #9b1864;
+  --gradient-start: #630e40;
   --item-height: 1.25rem;
 
   /* place it covering the button with an overlap */
@@ -19,8 +19,13 @@
   --footer-height: 0.375rem;
   padding-bottom: var(--footer-height);
   background-size: var(--footer-height);
-  background-image: linear-gradient(0, var(--gradient-start) 0%, var(--gradient-end) var(--footer-height));
+  background-image: linear-gradient(
+    0,
+    var(--gradient-start) 0%,
+    var(--gradient-end) var(--footer-height)
+  );
   background-position: bottom;
+  z-index: 1;
 }
 
 .toggle {
@@ -29,16 +34,20 @@
   cursor: pointer;
 }
 
-.toggle[aria-expanded=true] {
+.toggle[aria-expanded='true'] {
   /* keep the toggle button visible on top of menu */
-  z-index: 1;
+  z-index: 2;
   opacity: 0.35;
 }
 
 .heading {
   composes: buttonText from '../Typography/Typography.module.css';
 
-  background: linear-gradient(0, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  background: linear-gradient(
+    0,
+    var(--gradient-start) 0%,
+    var(--gradient-end) 100%
+  );
   color: var(--color-grey-light);
   margin: 0;
   padding: 0.5rem 0.75rem;
@@ -52,7 +61,7 @@
   list-style: none;
   padding-left: 0;
   margin: 0;
-  background-color: #4F405C;
+  background-color: #4f405c;
 }
 
 .listItem {
