@@ -2,7 +2,7 @@
   composes: accountText from '../Typography/Typography.module.css';
   position: relative;
   padding-left: 2.125rem;
-  height: calc(22rem / 16);
+  height: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;

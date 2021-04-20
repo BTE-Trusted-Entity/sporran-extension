@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { sortBy } from 'lodash-es';
 
@@ -57,50 +57,46 @@ function AccountLink({
   );
 }
 
-interface AccountBubblesProps {
-  account: Account;
-  accountsList: Account[];
+const maxAccountBubbles = 5;
+
+interface AccountsBubblesProps {
+  accounts: Account[];
   path: string;
 }
 
-function AccountBubbles({
-  account,
-  accountsList,
+export function AccountsBubbles({
+  accounts,
   path,
-}: AccountBubblesProps): JSX.Element | null {
+}: AccountsBubblesProps): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const maxAccountBubbles = 5;
-
-  if (accountsList.length > maxAccountBubbles) {
+  if (accounts.length > maxAccountBubbles) {
     return null;
   }
 
   return (
-    <>
-      <ul className={styles.bubbles}>
-        {accountsList.map((mappedAccount) => (
-          <li style={{ display: 'inline-block' }} key={mappedAccount.index}>
-            <Link
-              className={
-                account.index === mappedAccount.index
-                  ? styles.bubble
-                  : styles.bubbleTransparent
-              }
-              to={generatePath(path, { address: mappedAccount.address })}
-              aria-label={mappedAccount.name}
-              title={mappedAccount.name}
-            />
-          </li>
-        ))}
-      </ul>
-      <Link
-        className={isNew(account) ? styles.add : styles.addTransparent}
-        to={generatePath(path, { address: NEW.address })}
-        aria-label={t('component_AccountsCarousel_title_new')}
-        title={t('component_AccountsCarousel_title_new')}
-      />
-    </>
+    <ul className={styles.bubbles}>
+      {accounts.map(({ name, address, index }) => (
+        <li className={styles.item} key={index}>
+          <NavLink
+            className={styles.bubble}
+            activeClassName={styles.bubbleActive}
+            to={generatePath(path, { address: address })}
+            aria-label={name}
+            title={name}
+          />
+        </li>
+      ))}
+      <li className={styles.item}>
+        <NavLink
+          className={styles.add}
+          activeClassName={styles.addActive}
+          to={generatePath(path, { address: NEW.address })}
+          aria-label={t('component_AccountsCarousel_title_new')}
+          title={t('component_AccountsCarousel_title_new')}
+        />
+      </li>
+    </ul>
   );
 }
 
@@ -139,11 +135,7 @@ export function AccountsCarousel({ account, path }: Props): JSX.Element | null {
         accountsList={accountsList}
       />
 
-      <AccountBubbles
-        account={account}
-        accountsList={accountsList}
-        path={path}
-      />
+      <AccountsBubbles accounts={accountsList} path={path} />
     </div>
   );
 }
