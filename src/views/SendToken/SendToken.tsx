@@ -25,7 +25,9 @@ function numberToCoins(parsedValue: number): BN {
 
   // ludicrously rich man’s multiplication that supports values beyond 1e22
   const [whole, fraction = ''] = value.split('.');
-  const paddedFraction = fraction.padEnd(KILT_POWER, '0');
+  const paddedFraction = fraction
+    .substring(0, KILT_POWER)
+    .padEnd(KILT_POWER, '0');
 
   return new BN(whole + paddedFraction);
 }
@@ -227,6 +229,7 @@ export function SendToken({ account }: Props): JSX.Element {
           name="amount"
           inputMode="numeric"
           required
+          maxLength={15}
           aria-label={t('view_SendToken_amount')}
           placeholder={
             maximum

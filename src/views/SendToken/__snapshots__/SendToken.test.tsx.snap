@@ -87,6 +87,7 @@ exports[`SendToken should render 1`] = `
         aria-label="Amount to send"
         class="amount"
         inputmode="numeric"
+        maxlength="15"
         name="amount"
         placeholder="0.0100 – 1.2339"
         required=""
