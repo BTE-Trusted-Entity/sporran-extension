@@ -1,21 +1,21 @@
-import { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { Identity } from '@kiltprotocol/core';
 import { ClipLoader } from 'react-spinners';
 
 import { SaveBackupPhrase } from '../SaveBackupPhrase/SaveBackupPhrase';
 import { Warning } from '../Warning/Warning';
-import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSuccess';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
-import { createAccount } from '../../utilities/accounts/accounts';
+import { createAccount, NEW } from '../../utilities/accounts/accounts';
 import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
 import { paths } from '../paths';
+import { AccountOverview } from '../AccountOverview/AccountOverview';
+import { SuccessTypes } from '../../utilities/accounts/types';
 
 export function CreateAccount(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
-  const [address, setAddress] = useState('');
+  const [account, setAccount] = useState(NEW);
   const history = useHistory();
-
   useEffect(() => {
     setBackupPhrase(Identity.generateMnemonic());
   }, []);
@@ -23,8 +23,8 @@ export function CreateAccount(): JSX.Element {
   const onSuccess = useCallback(
     async (password: string) => {
       const account = await createAccount(backupPhrase, password);
-      setAddress(account.address);
-      history.push(paths.account.create.success);
+      setAccount(account);
+      history.push(paths.account.create.overview);
     },
     [backupPhrase, history],
   );
@@ -47,8 +47,11 @@ export function CreateAccount(): JSX.Element {
       <Route path={paths.account.create.password}>
         <CreatePassword onSuccess={onSuccess} />
       </Route>
-      <Route path={paths.account.create.success}>
-        <CreateAccountSuccess address={address} />
+      <Route path={paths.account.create.overview}>
+        <AccountOverview
+          account={account}
+          hasSuccessOverlay={SuccessTypes.created}
+        />
       </Route>
     </Switch>
   );

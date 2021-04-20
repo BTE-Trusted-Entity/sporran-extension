@@ -1,14 +1,15 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { createAccount } from '../../utilities/accounts/accounts';
-import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSuccess';
+import { SuccessTypes } from '../../utilities/accounts/types';
+import { createAccount, NEW } from '../../utilities/accounts/accounts';
+import { AccountOverview } from '../AccountOverview/AccountOverview';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { ImportBackupPhrase } from '../ImportBackupPhrase/ImportBackupPhrase';
 import { paths } from '../paths';
 
 export function ImportAccount(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
-  const [address, setAddress] = useState('');
+  const [account, setAccount] = useState(NEW);
   const history = useHistory();
 
   const onImport = useCallback(
@@ -22,8 +23,8 @@ export function ImportAccount(): JSX.Element {
   const onSuccess = useCallback(
     async (password: string) => {
       const account = await createAccount(backupPhrase, password);
-      setAddress(account.address);
-      history.push(paths.account.import.success);
+      setAccount(account);
+      history.push(paths.account.import.overview);
     },
     [backupPhrase, history],
   );
@@ -36,8 +37,11 @@ export function ImportAccount(): JSX.Element {
       <Route path={paths.account.import.password}>
         <CreatePassword onSuccess={onSuccess} />
       </Route>
-      <Route path={paths.account.import.success}>
-        <CreateAccountSuccess type="import" address={address} />
+      <Route path={paths.account.import.overview}>
+        <AccountOverview
+          account={account}
+          hasSuccessOverlay={SuccessTypes.imported}
+        />
       </Route>
     </Switch>
   );

@@ -8,14 +8,20 @@ import { generatePath, paths } from '../paths';
 import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { AccountOverviewNew } from './AccountOverviewNew';
+import { SuccessTypes } from '../../utilities/accounts/types';
+import { SuccessAccountOverlay } from '../../components/SuccessAccountOverlay/SuccessAcountOverlay';
 
 import styles from './AccountOverview.module.css';
 
 interface Props {
   account: Account;
+  hasSuccessOverlay?: SuccessTypes;
 }
 
-export function AccountOverview({ account }: Props): JSX.Element | null {
+export function AccountOverview({
+  account,
+  hasSuccessOverlay,
+}: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
 
@@ -64,6 +70,12 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
       </p>
 
       <Stats />
+      {hasSuccessOverlay && (
+        <SuccessAccountOverlay
+          successType={hasSuccessOverlay}
+          account={account}
+        />
+      )}
     </main>
   );
 }

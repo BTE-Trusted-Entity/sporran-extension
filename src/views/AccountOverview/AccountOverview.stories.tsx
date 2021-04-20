@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { accountsMock as accounts } from '../../testing/AccountsProviderMock';
+import { SuccessTypes } from '../../utilities/accounts/types';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
 
@@ -10,9 +11,29 @@ import { AccountOverview } from './AccountOverview';
 export default {
   title: 'Views/AccountOverview',
   component: AccountOverview,
+  argTypes: {
+    hasSuccessOverlay: {
+      control: {
+        type: 'radio',
+        options: [
+          SuccessTypes.created,
+          SuccessTypes.imported,
+          SuccessTypes.reset,
+          undefined,
+        ],
+      },
+    },
+  },
+  args: {
+    primary: undefined,
+  },
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template({
+  ...args
+}: {
+  hasSuccessOverlay: SuccessTypes;
+}): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
@@ -22,6 +43,7 @@ export function Template(): JSX.Element {
       <Route path={paths.account.overview}>
         <AccountOverview
           account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+          {...args}
         />
       </Route>
     </MemoryRouter>
