@@ -122,6 +122,24 @@
       }
     }
   },
+  "component_CreateAccountSuccess_heading": {
+    "message": "Congratulations!"
+  },
+  "component_CreateAccountSuccess_button": {
+    "message": "OK"
+  },
+  "component_CreateAccountSuccess_message_create": {
+    "message": "You have successfully created a KILT Account"
+  },
+  "component_CreateAccountSuccess_message_import": {
+    "message": "You have successfully imported your KILT Account"
+  },
+  "component_CreateAccountSuccess_message_reset": {
+    "message": "You have successfully set a new password"
+  },
+  "component_CreateAccountSuccess_CTA": {
+    "message": "See the wallet"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -249,21 +267,6 @@
   },
   "view_CreatePassword_CTA": {
     "message": "Next Step"
-  },
-  "view_CreateAccountSuccess_heading": {
-    "message": "Congratulations!"
-  },
-  "view_CreateAccountSuccess_message_create": {
-    "message": "You have successfully created a KILT Wallet"
-  },
-  "view_CreateAccountSuccess_message_import": {
-    "message": "You have successfully imported your KILT Wallet"
-  },
-  "view_CreateAccountSuccess_message_reset": {
-    "message": "You have successfully set a new password"
-  },
-  "view_CreateAccountSuccess_CTA": {
-    "message": "See the wallet"
   },
   "view_ReceiveToken_heading": {
     "message": "Receive"
