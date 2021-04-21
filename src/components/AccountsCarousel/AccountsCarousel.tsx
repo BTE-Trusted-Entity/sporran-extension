@@ -53,6 +53,7 @@ function AccountLink({
       title={title}
       aria-label={title}
       className={isPrevious ? styles.left : styles.right}
+      replace
     />
   );
 }
