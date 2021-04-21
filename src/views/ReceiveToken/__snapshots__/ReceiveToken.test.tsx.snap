@@ -109,11 +109,11 @@ exports[`ReceiveToken should render a normal account 1`] = `
     >
       Account Address
     </small>
-    <div
-      class="addressWrapper"
+    <p
+      class="addressLine"
     >
       <input
-        class="addressBox"
+        class="address"
         readonly=""
         value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       />
@@ -123,7 +123,7 @@ exports[`ReceiveToken should render a normal account 1`] = `
         title="copy to clipboard"
         type="button"
       />
-    </div>
+    </p>
     <button
       aria-label="Enlarge"
       class="qrCodeToggle"

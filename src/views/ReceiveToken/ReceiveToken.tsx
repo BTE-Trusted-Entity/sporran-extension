@@ -62,18 +62,14 @@ export function ReceiveToken({ account }: Props): JSX.Element {
           readOnly
           value={address}
         />
-        {isCopied ? (
-          <span className={styles.copied} />
-        ) : (
-          document.queryCommandSupported('copy') && (
-            <button
-              className={styles.copy}
-              onClick={copyToClipboard}
-              type="button"
-              aria-label={t('view_ReceiveToken_copy_button')}
-              title={t('view_ReceiveToken_copy_button')}
-            />
-          )
+        {document.queryCommandSupported('copy') && (
+          <button
+            className={isCopied ? styles.copied : styles.copy}
+            onClick={copyToClipboard}
+            type="button"
+            aria-label={t('view_ReceiveToken_copy_button')}
+            title={t('view_ReceiveToken_copy_button')}
+          />
         )}
       </p>
 
