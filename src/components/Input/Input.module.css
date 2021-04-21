@@ -12,6 +12,7 @@
     var(--color-pink) 0%,
     var(--color-dark) 100%
   );
+  caret-color: var(--color-grey-light);
 }
 
 .input::selection {
@@ -23,17 +24,21 @@
   opacity: 1;
 }
 
+/* https://selleo.com/til/posts/xhgzlfgcql-a-way-to-make-autofilled-inputs-background-transparent */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: var(--color-grey-light) !important;
+}
+
 .inputKiltAmount {
   composes: input;
 
   text-align: right;
-  background-image:
-    url('../images/kilt-coin.svg'),
-    linear-gradient(
-      140deg,
-      var(--color-pink) 0%,
-      var(--color-dark) 100%
-    );
+  background-image: url('../images/kilt-coin.svg'),
+    linear-gradient(140deg, var(--color-pink) 0%, var(--color-dark) 100%);
   background-size: calc(13rem / 16) 1rem, auto;
   background-repeat: no-repeat;
   background-position: calc(100% - 0.75rem) center, 0;
