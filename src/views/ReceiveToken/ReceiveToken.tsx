@@ -52,7 +52,7 @@ export function ReceiveToken({ account }: Props): JSX.Element {
 
       <AccountsCarousel path={path} account={account} />
 
-      <small className={styles.small}>
+      <small id="addressLabel" className={styles.small}>
         {t('view_ReceiveToken_account_address')}
       </small>
       <p className={styles.addressLine}>
@@ -61,6 +61,7 @@ export function ReceiveToken({ account }: Props): JSX.Element {
           ref={addressRef}
           readOnly
           value={address}
+          aria-labelledby="addressLabel"
         />
         {document.queryCommandSupported('copy') && (
           <button
