@@ -269,7 +269,7 @@
     "message": "Receive"
   },
   "view_ReceiveToken_explanation": {
-    "message": "Copy and send your wallet ID"
+    "message": "Copy and send your address"
   },
   "view_ReceiveToken_account_address": {
     "message": "Account Address"
