@@ -12,7 +12,7 @@ interface Props {
 
 const t = browser.i18n.getMessage;
 
-const SuccessSwitch = (type: SuccessTypes) => {
+function SuccessSwitch(type: SuccessTypes) {
   switch (type) {
     case SuccessTypes.created:
       return t('component_CreateAccountSuccess_message_create');
@@ -20,13 +20,15 @@ const SuccessSwitch = (type: SuccessTypes) => {
       return t('component_CreateAccountSuccess_message_import');
     case SuccessTypes.reset:
       return t('component_CreateAccountSuccess_message_reset');
+    default:
+      null;
   }
-};
+}
 
-export const SuccessAccountOverlay = ({
+export function SuccessAccountOverlay({
   account,
   successType,
-}: Props): JSX.Element | null => {
+}: Props): JSX.Element | null {
   const [isOpen, setIsOpen] = useState(true);
 
   const okHandler = () => setIsOpen(false);
@@ -43,4 +45,4 @@ export const SuccessAccountOverlay = ({
       </button>
     </div>
   ) : null;
-};
+}
