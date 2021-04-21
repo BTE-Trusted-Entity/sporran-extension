@@ -25,11 +25,7 @@
 }
 
 /* https://selleo.com/til/posts/xhgzlfgcql-a-way-to-make-autofilled-inputs-background-transparent */
-.input:-webkit-autofill {
-  transition: all 5000s;
-}
-
-.input:autofill {
+.input:autofill, .input:-webkit-autofill {
   transition: all 5000s;
 }
 
