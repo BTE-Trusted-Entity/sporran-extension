@@ -106,6 +106,7 @@ exports[`ReceiveToken should render a normal account 1`] = `
     </div>
     <small
       class="small"
+      id="addressLabel"
     >
       Account Address
     </small>
@@ -113,6 +114,7 @@ exports[`ReceiveToken should render a normal account 1`] = `
       class="addressLine"
     >
       <input
+        aria-labelledby="addressLabel"
         class="address"
         readonly=""
         value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
