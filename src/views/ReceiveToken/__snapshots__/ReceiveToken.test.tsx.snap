@@ -13,7 +13,7 @@ exports[`ReceiveToken should render a normal account 1`] = `
     <p
       class="subline"
     >
-      Copy and send your wallet ID
+      Copy and send your address
     </p>
     <div
       class="container"
