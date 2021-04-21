@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { generatePath, Link, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import { Modal } from 'react-dialog-polyfill';
 
 import { Account, isNew } from '../../utilities/accounts/accounts';
@@ -9,7 +9,6 @@ import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCaro
 import { QRCode } from '../../components/QRCode/QRCode';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
-import { paths } from '../paths';
 
 import styles from './ReceiveToken.module.css';
 
@@ -48,27 +47,35 @@ export function ReceiveToken({ account }: Props): JSX.Element {
 
   return (
     <section className={styles.container}>
-      <h1>{t('view_ReceiveToken_heading')}</h1>
-      <p>{t('view_ReceiveToken_explanation')}</p>
+      <h1 className={styles.heading}>{t('view_ReceiveToken_heading')}</h1>
+      <p className={styles.subline}>{t('view_ReceiveToken_explanation')}</p>
 
       <AccountsCarousel path={path} account={account} />
 
-      <p>{t('view_ReceiveToken_account_address')}</p>
-      <div className={styles.accountBox}>
+      <small className={styles.small}>
+        {t('view_ReceiveToken_account_address')}
+      </small>
+      <div className={styles.addressWrapper}>
         <input
           className={styles.addressBox}
           ref={addressRef}
           readOnly
           value={address}
         />
-        <p>{isCopied ? '✔' : '⊛'}</p>
+        {isCopied ? (
+          <span className={styles.copied} />
+        ) : (
+          document.queryCommandSupported('copy') && (
+            <button
+              className={styles.copy}
+              onClick={copyToClipboard}
+              type="button"
+              aria-label={t('view_ReceiveToken_copy_button')}
+              title={t('view_ReceiveToken_copy_button')}
+            />
+          )
+        )}
       </div>
-
-      {document.queryCommandSupported('copy') && (
-        <button onClick={copyToClipboard} type="button">
-          {t('view_ReceiveToken_copy_button')}
-        </button>
-      )}
 
       <button
         className={styles.qrCodeToggle}
@@ -89,12 +96,6 @@ export function ReceiveToken({ account }: Props): JSX.Element {
           aria-label={t('common_action_close')}
         />
       </Modal>
-
-      <p>
-        <Link to={generatePath(paths.account.overview, { address })}>
-          {t('view_ReceiveToken_done_button')}
-        </Link>
-      </p>
 
       <LinkBack />
 
