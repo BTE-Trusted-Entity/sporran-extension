@@ -55,9 +55,9 @@ export function ReceiveToken({ account }: Props): JSX.Element {
       <small className={styles.small}>
         {t('view_ReceiveToken_account_address')}
       </small>
-      <div className={styles.addressWrapper}>
+      <p className={styles.addressLine}>
         <input
-          className={styles.addressBox}
+          className={styles.address}
           ref={addressRef}
           readOnly
           value={address}
@@ -75,7 +75,7 @@ export function ReceiveToken({ account }: Props): JSX.Element {
             />
           )
         )}
-      </div>
+      </p>
 
       <button
         className={styles.qrCodeToggle}
