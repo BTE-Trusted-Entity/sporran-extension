@@ -24,13 +24,14 @@
   opacity: 1;
 }
 
-/* https://selleo.com/til/posts/xhgzlfgcql-a-way-to-make-autofilled-inputs-background-transparent */
-.input:autofill {
-  transition: all 5000s;
+.input:-autofill {
+  transition-delay: 5000s;
+  transition-property: background-color, color;
 }
 
 .input:-webkit-autofill {
-  transition: all 5000s;
+  transition-delay: 5000s;
+  transition-property: background-color, color;
 }
 
 .inputKiltAmount {
