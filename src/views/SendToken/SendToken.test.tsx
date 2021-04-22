@@ -5,7 +5,6 @@ import {
   mockBackgroundScript,
   render,
   screen,
-  waitForTooltipUpdate,
 } from '../../testing';
 
 import { SendToken } from './SendToken';
@@ -17,9 +16,8 @@ describe('SendToken', () => {
 
   it('should render', async () => {
     const { container } = render(<SendToken account={account} />);
+    await screen.findByText(/Maximum sendable amount: 1.2340/);
     expect(container).toMatchSnapshot();
-
-    await waitForTooltipUpdate();
   });
 
   it('should enable submit for correct amount and recipient', async () => {

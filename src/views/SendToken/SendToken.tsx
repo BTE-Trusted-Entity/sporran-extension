@@ -167,8 +167,9 @@ export function SendToken({ account }: Props): JSX.Element {
   const numericAmount = amount && !amountError && parseFloatLocale(amount);
 
   const [tipPercents, setTipPercents] = useState(0);
-  const tipBN =
-    numericAmount && numberToBN((tipPercents / 100) * numericAmount);
+  const tipBN = numericAmount
+    ? numberToBN((tipPercents / 100) * numericAmount)
+    : new BN(0);
   const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
   const [recipient, setRecipient] = useState('');
@@ -177,11 +178,12 @@ export function SendToken({ account }: Props): JSX.Element {
 
   useEffect(() => {
     (async () => {
-      if (typeof numericAmount !== 'number' || Number.isNaN(numericAmount)) {
-        return;
-      }
+      const value =
+        typeof numericAmount === 'number' && !Number.isNaN(numericAmount)
+          ? numberToBN(numericAmount)
+          : new BN(0);
 
-      const realFee = await getFee(numberToBN(numericAmount), recipient);
+      const realFee = await getFee(value, recipient);
       setFee(realFee);
     })();
   }, [numericAmount, recipient]);
@@ -268,8 +270,8 @@ export function SendToken({ account }: Props): JSX.Element {
           maxLength={15}
           aria-label={t('view_SendToken_amount')}
           placeholder={
-            balance
-              ? `${asKiltCoins(minimum)} – ${asKiltCoins(maximum || balance)}`
+            maximum
+              ? `${asKiltCoins(minimum)} – ${asKiltCoins(maximum)}`
               : undefined
           }
         />
