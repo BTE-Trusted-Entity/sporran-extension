@@ -1,10 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import { accountsMock, render } from '../../testing';
 import { SuccessAccountOverlay } from './SuccessAcountOverlay';
+const account =
+  accountsMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 describe('SuccessAccountOverlay', () => {
-  const account =
-    accountsMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
   it('should render success overlay for created account', async () => {
     const { container } = render(
       <SuccessAccountOverlay
