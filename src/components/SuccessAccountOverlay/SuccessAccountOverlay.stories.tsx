@@ -9,10 +9,13 @@ export default {
   decorators: [(story) => <div style={{ textAlign: 'center' }}>{story()}</div>],
 } as Meta;
 
+const account =
+  accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+
 export function Template(): JSX.Element {
   return (
     <SuccessAccountOverlay
-      account={accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+      account={account}
       successType="created"
       openOverlayHandler={action('closeOverlay')}
     />
@@ -22,7 +25,7 @@ export function Template(): JSX.Element {
 export function Imported(): JSX.Element {
   return (
     <SuccessAccountOverlay
-      account={accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+      account={account}
       successType="imported"
       openOverlayHandler={action('closeOverlay')}
     />
@@ -32,7 +35,7 @@ export function Imported(): JSX.Element {
 export function Reset(): JSX.Element {
   return (
     <SuccessAccountOverlay
-      account={accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+      account={account}
       successType="reset"
       openOverlayHandler={action('closeOverlay')}
     />
