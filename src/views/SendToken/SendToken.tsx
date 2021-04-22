@@ -245,7 +245,7 @@ export function SendToken({ account }: Props): JSX.Element {
   }, []);
 
   return (
-    <form className={styles.container}>
+    <form className={styles.container} autoComplete="off">
       <h1 className={styles.heading}>{t('view_SendToken_heading')}</h1>
       <p className={styles.subline}>{t('view_SendToken_subline')}</p>
 

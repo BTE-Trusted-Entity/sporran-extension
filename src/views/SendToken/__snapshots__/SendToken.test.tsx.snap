@@ -3,6 +3,7 @@
 exports[`SendToken should render 1`] = `
 <div>
   <form
+    autocomplete="off"
     class="container"
   >
     <h1
