@@ -284,6 +284,7 @@ export function SendToken({ account }: Props): JSX.Element {
           )}
           onInput={handleRecipientInput}
           required
+          autoComplete="off"
           aria-label={t('view_SendToken_recipient')}
           placeholder={t('view_SendToken_recipient')}
           {...recipientTooltip.anchor}

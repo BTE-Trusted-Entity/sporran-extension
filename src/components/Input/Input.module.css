@@ -24,16 +24,6 @@
   opacity: 1;
 }
 
-.input:-autofill {
-  transition-delay: 5000s;
-  transition-property: background-color, color;
-}
-
-.input:-webkit-autofill {
-  transition-delay: 5000s;
-  transition-property: background-color, color;
-}
-
 .inputKiltAmount {
   composes: input;
 
