@@ -25,7 +25,7 @@ export function SuccessAccountOverlay({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.overlay}>
       <Avatar tartan={account.tartan} address={account.address} />
       <h1 className={styles.heading}>
         {t('component_CreateAccountSuccess_heading')}

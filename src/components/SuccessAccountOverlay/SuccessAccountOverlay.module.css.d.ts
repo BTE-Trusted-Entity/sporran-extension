@@ -1,7 +1,7 @@
 declare namespace SuccessAccountOverlayModuleCssNamespace {
   export interface ISuccessAccountOverlayModuleCss {
     button: string;
-    container: string;
+    overlay: string;
     heading: string;
     text: string;
   }
