@@ -17,7 +17,6 @@ export const paths = {
     reset: {
       start: '/account/:address/reset',
       password: '/account/:address/reset/password',
-      overview: '/account/:address/reset/overview',
     },
     overview: '/account/:address',
     send: '/account/:address/send',
