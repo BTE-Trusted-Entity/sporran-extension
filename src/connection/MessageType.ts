@@ -2,6 +2,7 @@ export const MessageType = {
   balanceChangeRequest: 'balanceChangeRequest',
   balanceChangeResponse: 'balanceChangeResponse',
   feeRequest: 'feeRequest',
+  savePasswordRequest: 'savePasswordRequest',
 };
 
 export interface BalanceChangeRequest {
@@ -22,5 +23,13 @@ export interface FeeRequest {
   data: {
     recipient: string;
     amount: string;
+  };
+}
+
+export interface SavePasswordRequest {
+  type: 'savePasswordRequest';
+  data: {
+    password: string;
+    address: string;
   };
 }
