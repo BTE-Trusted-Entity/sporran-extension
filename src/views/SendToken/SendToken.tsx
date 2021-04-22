@@ -310,7 +310,7 @@ export function SendToken({ account }: Props): JSX.Element {
           disabled={
             !!numericAmount &&
             !!maximum &&
-            new BN(((tipPercents + 1) / 100) * numericAmount).gt(maximum)
+            new BN(((100 + tipPercents + 1) / 100) * numericAmount).gt(maximum)
           }
         />
       </p>
