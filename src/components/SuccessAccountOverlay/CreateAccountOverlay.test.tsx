@@ -1,15 +1,16 @@
+import { action } from '@storybook/addon-actions';
 import { accountsMock, render } from '../../testing';
-import { SuccessTypes } from '../../utilities/accounts/types';
 import { SuccessAccountOverlay } from './SuccessAcountOverlay';
 
 describe('SuccessAccountOverlay', () => {
+  const account =
+    accountsMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
   it('should render success overlay for created account', async () => {
     const { container } = render(
       <SuccessAccountOverlay
-        account={
-          accountsMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
-        }
-        successType={SuccessTypes.created}
+        account={account}
+        successType="created"
+        openOverlayHandler={action('closeOverlay')}
       />,
     );
     expect(container).toMatchSnapshot();
@@ -18,10 +19,9 @@ describe('SuccessAccountOverlay', () => {
   it('should render success overlay for imported account', async () => {
     const { container } = render(
       <SuccessAccountOverlay
-        account={
-          accountsMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
-        }
-        successType={SuccessTypes.imported}
+        account={account}
+        successType="imported"
+        openOverlayHandler={action('closeOverlay')}
       />,
     );
     expect(container).toMatchSnapshot();
@@ -30,10 +30,9 @@ describe('SuccessAccountOverlay', () => {
   it('should render success overlay for reset password', async () => {
     const { container } = render(
       <SuccessAccountOverlay
-        account={
-          accountsMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
-        }
-        successType={SuccessTypes.reset}
+        account={account}
+        successType="reset"
+        openOverlayHandler={action('closeOverlay')}
       />,
     );
     expect(container).toMatchSnapshot();
