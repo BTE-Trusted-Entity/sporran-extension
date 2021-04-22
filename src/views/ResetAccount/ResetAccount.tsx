@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
+
 import { Account, encryptAccount } from '../../utilities/accounts/accounts';
-import { SuccessTypes } from '../../utilities/accounts/types';
-import { AccountOverview } from '../AccountOverview/AccountOverview';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { ImportBackupPhrase } from '../ImportBackupPhrase/ImportBackupPhrase';
 import { paths, generatePath } from '../paths';
@@ -23,7 +22,7 @@ export function ResetAccount({ account }: { account: Account }): JSX.Element {
   const onSuccess = useCallback(
     async (password: string) => {
       await encryptAccount(backupPhrase, password);
-      history.push(generatePath(paths.account.reset.overview, { address }));
+      history.push(generatePath(paths.account.reseted, { address }));
     },
     [backupPhrase, history, address],
   );
@@ -39,12 +38,6 @@ export function ResetAccount({ account }: { account: Account }): JSX.Element {
       </Route>
       <Route path={generatePath(paths.account.reset.password, { address })}>
         <CreatePassword onSuccess={onSuccess} />
-      </Route>
-      <Route path={generatePath(paths.account.reset.overview, { address })}>
-        <AccountOverview
-          account={account}
-          hasSuccessOverlay={SuccessTypes.reset}
-        />
       </Route>
     </Switch>
   );

@@ -12,7 +12,7 @@ export default {
   title: 'Views/AccountOverview',
   component: AccountOverview,
   argTypes: {
-    hasSuccessOverlay: {
+    successType: {
       control: {
         type: 'radio',
         options: [
@@ -24,16 +24,9 @@ export default {
       },
     },
   },
-  args: {
-    primary: undefined,
-  },
 } as Meta;
 
-export function Template({
-  ...args
-}: {
-  hasSuccessOverlay: SuccessTypes;
-}): JSX.Element {
+export function Template(props: { successType: SuccessTypes }): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
@@ -43,7 +36,7 @@ export function Template({
       <Route path={paths.account.overview}>
         <AccountOverview
           account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-          {...args}
+          {...props}
         />
       </Route>
     </MemoryRouter>

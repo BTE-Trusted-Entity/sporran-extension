@@ -1,34 +1,39 @@
+import { useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useRouteMatch } from 'react-router-dom';
 
-import { plural } from '../../utilities/plural/plural';
-import { Account, isNew, useAccounts } from '../../utilities/accounts/accounts';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
-import { generatePath, paths } from '../paths';
 import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
-import { AccountOverviewNew } from './AccountOverviewNew';
-import { SuccessTypes } from '../../utilities/accounts/types';
 import { SuccessAccountOverlay } from '../../components/SuccessAccountOverlay/SuccessAcountOverlay';
+import { SuccessTypes } from '../../utilities/accounts/types';
+import { Account, isNew, useAccounts } from '../../utilities/accounts/accounts';
+import { plural } from '../../utilities/plural/plural';
+import { generatePath, paths } from '../paths';
+import { AccountOverviewNew } from './AccountOverviewNew';
 
 import styles from './AccountOverview.module.css';
 
 interface Props {
   account: Account;
-  hasSuccessOverlay?: SuccessTypes;
+  successType?: SuccessTypes;
 }
 
 export function AccountOverview({
   account,
-  hasSuccessOverlay,
+  successType,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
+
+  const [hasOpenOverlay, setOpenOverlay] = useState(true);
 
   const accounts = useAccounts().data;
   if (!accounts) {
     return null;
   }
+
+  const openOverlayHandler = () => setOpenOverlay(false);
 
   const accountsNumber = Object.values(accounts).length;
   const { address } = account;
@@ -70,10 +75,11 @@ export function AccountOverview({
       </p>
 
       <Stats />
-      {hasSuccessOverlay && (
+      {hasOpenOverlay && successType && (
         <SuccessAccountOverlay
-          successType={hasSuccessOverlay}
+          successType={successType}
           account={account}
+          openOverlayHandler={openOverlayHandler}
         />
       )}
     </main>

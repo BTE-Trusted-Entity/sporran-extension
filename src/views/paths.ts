@@ -9,12 +9,10 @@ export const paths = {
       backup: '/account/create/backup',
       verify: '/account/create/verify',
       password: '/account/create/password',
-      overview: '/account/create/overview',
     },
     import: {
       start: '/account/import',
       password: '/account/import/password',
-      overview: '/account/import/overview',
     },
     reset: {
       start: '/account/:address/reset',
@@ -25,5 +23,8 @@ export const paths = {
     send: '/account/:address/send',
     receive: '/account/:address/receive',
     remove: '/account/:address/remove',
+    created: '/account/:address/created',
+    imported: '/account/:address/imported',
+    reseted: '/account/:address/reseted',
   },
 };

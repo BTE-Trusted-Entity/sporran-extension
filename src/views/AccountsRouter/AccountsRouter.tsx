@@ -15,6 +15,7 @@ import { ResetAccount } from '../ResetAccount/ResetAccount';
 import { RemoveAccount } from '../RemoveAccount/RemoveAccount';
 import { SendToken } from '../SendToken/SendToken';
 import { paths } from '../paths';
+import { SuccessTypes } from '../../utilities/accounts/types';
 
 interface Props {
   accounts: AccountsMap;
@@ -50,6 +51,24 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
 
         <Route path={paths.account.reset.start}>
           <ResetAccount account={account} />
+        </Route>
+
+        <Route path={paths.account.created}>
+          <AccountOverview
+            account={account}
+            successType={SuccessTypes.created}
+          />
+        </Route>
+
+        <Route path={paths.account.imported}>
+          <AccountOverview
+            account={account}
+            successType={SuccessTypes.imported}
+          />
+        </Route>
+
+        <Route path={paths.account.reseted}>
+          <AccountOverview account={account} successType={SuccessTypes.reset} />
         </Route>
 
         <Route path={paths.account.overview}>
