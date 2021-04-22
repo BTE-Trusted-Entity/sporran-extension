@@ -35,6 +35,7 @@
   background-position: right;
   background-image: url('../../components/images/eye-closed.svg');
   list-style: inside decimal-leading-zero;
+  user-select: none;
 }
 
 .word {
@@ -52,6 +53,7 @@
 .item:hover,
 .item:focus {
   background-image: none;
+  user-select: all;
 }
 
 .item:hover .word,

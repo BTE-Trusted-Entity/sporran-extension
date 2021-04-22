@@ -56,6 +56,7 @@ export function AccountSlide({ account }: Props): JSX.Element {
             aria-label={t('component_AccountSlide_name')}
             placeholder={t('component_AccountSlide_name')}
             defaultValue={account.name}
+            autoComplete="off"
           />
           <button
             className={styles.save}

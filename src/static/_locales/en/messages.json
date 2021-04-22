@@ -272,16 +272,13 @@
     "message": "Receive"
   },
   "view_ReceiveToken_explanation": {
-    "message": "Copy and send your wallet ID"
+    "message": "Copy and send your address"
   },
   "view_ReceiveToken_account_address": {
-    "message": "My account address"
+    "message": "Account Address"
   },
   "view_ReceiveToken_copy_button": {
     "message": "copy to clipboard"
-  },
-  "view_ReceiveToken_done_button": {
-    "message": "DONE"
   },
   "view_ReceiveToken_enlarge": {
     "message": "Enlarge"

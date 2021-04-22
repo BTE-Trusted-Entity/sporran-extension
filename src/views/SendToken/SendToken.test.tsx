@@ -1,20 +1,23 @@
+import userEvent from '@testing-library/user-event';
+
 import {
   accountsMock as accounts,
+  mockBackgroundScript,
   render,
   screen,
-  waitForTooltipUpdate,
 } from '../../testing';
+
 import { SendToken } from './SendToken';
-import userEvent from '@testing-library/user-event';
 
 const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 describe('SendToken', () => {
+  beforeEach(() => mockBackgroundScript());
+
   it('should render', async () => {
     const { container } = render(<SendToken account={account} />);
+    await screen.findByText(/Maximum sendable amount: 1.2340/);
     expect(container).toMatchSnapshot();
-
-    await waitForTooltipUpdate();
   });
 
   it('should enable submit for correct amount and recipient', async () => {
@@ -30,6 +33,7 @@ describe('SendToken', () => {
       await screen.findByLabelText('Paste the recipient address here'),
       '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
     );
+    await screen.findByText(/Maximum sendable amount: 1.2340/);
 
     expect(submit).not.toBeDisabled();
   });

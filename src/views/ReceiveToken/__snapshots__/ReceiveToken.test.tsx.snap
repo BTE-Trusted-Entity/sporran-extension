@@ -5,11 +5,15 @@ exports[`ReceiveToken should render a normal account 1`] = `
   <section
     class="container"
   >
-    <h1>
+    <h1
+      class="heading"
+    >
       Receive
     </h1>
-    <p>
-      Copy and send your wallet ID
+    <p
+      class="subline"
+    >
+      Copy and send your address
     </p>
     <div
       class="container"
@@ -100,26 +104,28 @@ exports[`ReceiveToken should render a normal account 1`] = `
         </li>
       </ul>
     </div>
-    <p>
-      My account address
-    </p>
-    <div
-      class="accountBox"
+    <small
+      class="small"
+      id="addressLabel"
+    >
+      Account Address
+    </small>
+    <p
+      class="addressLine"
     >
       <input
-        class="addressBox"
+        aria-labelledby="addressLabel"
+        class="address"
         readonly=""
         value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       />
-      <p>
-        ⊛
-      </p>
-    </div>
-    <button
-      type="button"
-    >
-      copy to clipboard
-    </button>
+      <button
+        aria-label="copy to clipboard"
+        class="copy"
+        title="copy to clipboard"
+        type="button"
+      />
+    </p>
     <button
       aria-label="Enlarge"
       class="qrCodeToggle"
@@ -23696,13 +23702,6 @@ exports[`ReceiveToken should render a normal account 1`] = `
         type="button"
       />
     </dialog>
-    <p>
-      <a
-        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-      >
-        DONE
-      </a>
-    </p>
     <button
       aria-label="Back"
       class="linkBack"

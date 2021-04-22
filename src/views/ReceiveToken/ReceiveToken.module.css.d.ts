@@ -1,14 +1,19 @@
 declare namespace ReceiveTokenModuleCssNamespace {
   export interface IReceiveTokenModuleCss {
-    accountBox: string;
-    addressBox: string;
+    address: string;
+    addressLine: string;
     container: string;
+    copied: string;
+    copy: string;
     dialog: string;
     dialogClose: string;
+    heading: string;
     qrCode: string;
     qrCodeLarge: string;
     qrCodeShadow: string;
     qrCodeToggle: string;
+    small: string;
+    subline: string;
   }
 }
 
