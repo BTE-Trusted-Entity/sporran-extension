@@ -57,6 +57,9 @@ export function Settings(): JSX.Element {
               path={paths.account.overview}
               render={({ match }) => {
                 const { address } = match.params;
+
+                if (address && !accounts?.[address]) return null;
+
                 return (
                   <>
                     <li className={menuStyles.listItem}>
