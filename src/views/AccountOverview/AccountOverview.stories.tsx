@@ -2,7 +2,6 @@ import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { accountsMock as accounts } from '../../testing/AccountsProviderMock';
-import { SuccessTypes } from '../../utilities/accounts/types';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
 
@@ -15,18 +14,15 @@ export default {
     successType: {
       control: {
         type: 'radio',
-        options: [
-          SuccessTypes.created,
-          SuccessTypes.imported,
-          SuccessTypes.reset,
-          undefined,
-        ],
+        options: ['created', 'imported', 'reset', undefined],
       },
     },
   },
 } as Meta;
 
-export function Template(props: { successType: SuccessTypes }): JSX.Element {
+export function Template(props: {
+  successType?: 'created' | 'imported' | 'reset';
+}): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[

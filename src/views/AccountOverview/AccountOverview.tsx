@@ -6,7 +6,6 @@ import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCaro
 import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { SuccessAccountOverlay } from '../../components/SuccessAccountOverlay/SuccessAcountOverlay';
-import { SuccessTypes } from '../../utilities/accounts/types';
 import { Account, isNew, useAccounts } from '../../utilities/accounts/accounts';
 import { plural } from '../../utilities/plural/plural';
 import { generatePath, paths } from '../paths';
@@ -16,7 +15,7 @@ import styles from './AccountOverview.module.css';
 
 interface Props {
   account: Account;
-  successType?: SuccessTypes;
+  successType?: 'created' | 'imported' | 'reset';
 }
 
 export function AccountOverview({

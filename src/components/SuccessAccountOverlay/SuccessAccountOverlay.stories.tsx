@@ -1,6 +1,6 @@
+import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import { accountsMock } from '../../testing/AccountsProviderMock';
-import { SuccessTypes } from '../../utilities/accounts/types';
 import { SuccessAccountOverlay } from './SuccessAcountOverlay';
 
 export default {
@@ -13,7 +13,8 @@ export function Template(): JSX.Element {
   return (
     <SuccessAccountOverlay
       account={accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-      successType={SuccessTypes.created}
+      successType="created"
+      openOverlayHandler={action('closeOverlay')}
     />
   );
 }
@@ -22,7 +23,8 @@ export function Imported(): JSX.Element {
   return (
     <SuccessAccountOverlay
       account={accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-      successType={SuccessTypes.imported}
+      successType="imported"
+      openOverlayHandler={action('closeOverlay')}
     />
   );
 }
@@ -31,7 +33,8 @@ export function Reset(): JSX.Element {
   return (
     <SuccessAccountOverlay
       account={accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-      successType={SuccessTypes.reset}
+      successType="reset"
+      openOverlayHandler={action('closeOverlay')}
     />
   );
 }
