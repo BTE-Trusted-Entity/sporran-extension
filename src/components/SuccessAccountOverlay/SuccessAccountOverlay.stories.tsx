@@ -6,7 +6,6 @@ import { SuccessAccountOverlay } from './SuccessAcountOverlay';
 export default {
   title: 'Components/SuccessAccountOverlay',
   component: SuccessAccountOverlay,
-  decorators: [(story) => <div style={{ textAlign: 'center' }}>{story()}</div>],
 } as Meta;
 
 const account =
