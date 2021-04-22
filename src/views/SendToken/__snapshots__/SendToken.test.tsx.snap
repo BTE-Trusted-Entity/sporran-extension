@@ -181,6 +181,7 @@ exports[`SendToken should render 1`] = `
     >
       <input
         aria-label="Paste the recipient address here"
+        autocomplete="off"
         class="recipient"
         id="recipient"
         name="recipient"
