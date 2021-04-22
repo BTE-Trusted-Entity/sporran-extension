@@ -3,7 +3,7 @@
 exports[`SuccessAccountOverlay should render success overlay for created account 1`] = `
 <div>
   <div
-    class="container"
+    class="overlay"
   >
     <div
       class="MacLachlan tartan"
@@ -33,7 +33,7 @@ exports[`SuccessAccountOverlay should render success overlay for created account
 exports[`SuccessAccountOverlay should render success overlay for imported account 1`] = `
 <div>
   <div
-    class="container"
+    class="overlay"
   >
     <div
       class="MacLachlan tartan"
@@ -63,7 +63,7 @@ exports[`SuccessAccountOverlay should render success overlay for imported accoun
 exports[`SuccessAccountOverlay should render success overlay for reset password 1`] = `
 <div>
   <div
-    class="container"
+    class="overlay"
   >
     <div
       class="MacLachlan tartan"
