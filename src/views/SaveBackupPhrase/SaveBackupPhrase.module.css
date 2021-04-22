@@ -35,13 +35,13 @@
   background-position: right;
   background-image: url('../../components/images/eye-closed.svg');
   list-style: inside decimal-leading-zero;
+  user-select: none;
 }
 
 .word {
   composes: subline from '../../components/Typography/Typography.module.css';
   font-size: 1rem;
   filter: blur(3px);
-  user-select: none;
 }
 
 .item::marker {
@@ -53,6 +53,7 @@
 .item:hover,
 .item:focus {
   background-image: none;
+  user-select: all;
 }
 
 .item:hover .word,
