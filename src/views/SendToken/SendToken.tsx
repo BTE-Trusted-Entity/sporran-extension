@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { useRouteMatch } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { find } from 'lodash-es';
 import { DataUtils } from '@kiltprotocol/utils';
 import cx from 'classnames';
 
+import { FeeRequest, MessageType } from '../../connection/MessageType';
 import { Account } from '../../utilities/accounts/types';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { Balance, useAddressBalance } from '../../components/Balance/Balance';
@@ -20,7 +21,7 @@ const nonNumberCharacters = /[^0-9,.]/g;
 const KILT_POWER = 15;
 const minimum = new BN(0.01e15);
 
-function numberToCoins(parsedValue: number): BN {
+function numberToBN(parsedValue: number): BN {
   const value = parsedValue.toString();
 
   // ludicrously rich man’s multiplication that supports values beyond 1e22
@@ -87,7 +88,7 @@ function getIsAmountInvalidError(amount: string): string | null {
 }
 
 function getIsAmountTooSmallError(amount: number, minimum: BN): string | null {
-  if (numberToCoins(amount).gte(minimum)) {
+  if (numberToBN(amount).gte(minimum)) {
     return null;
   }
   const t = browser.i18n.getMessage;
@@ -95,14 +96,17 @@ function getIsAmountTooSmallError(amount: number, minimum: BN): string | null {
 }
 
 function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
-  if (numberToCoins(amount).lte(maximum)) {
+  if (numberToBN(amount).lte(maximum)) {
     return null;
   }
   const t = browser.i18n.getMessage;
   return t('view_SendToken_amount_large');
 }
 
-function getAmountError(amount: string | null, maximum: BN): string | null {
+function getAmountError(
+  amount: string | null,
+  maximum: BN | null,
+): string | null {
   if (amount === null) {
     return null;
   }
@@ -133,6 +137,18 @@ function formatKiltInput(amount: BN): string {
   return asKiltCoins(amount).replace(/[,.]?0+$/, '');
 }
 
+async function getFee(amount: BN, recipient: string): Promise<BN> {
+  const feeString = await browser.runtime.sendMessage({
+    type: MessageType.feeRequest,
+    data: {
+      amount: amount.toString(16),
+      recipient,
+    },
+  } as FeeRequest);
+
+  return new BN(feeString, 16);
+}
+
 interface Props {
   account: Account;
 }
@@ -141,22 +157,36 @@ export function SendToken({ account }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
 
-  const [fee] = useState<BN | null>(new BN(0.0001e15)); // TODO: fetch real value
+  const [fee, setFee] = useState<BN | null>(null);
 
   const balance = useAddressBalance(account.address);
   const maximum = balance && fee ? balance.sub(fee) : null;
 
   const [amount, setAmount] = useState<string | null>(null);
-  const amountError = amount && maximum && getAmountError(amount, maximum);
+  const amountError = amount && getAmountError(amount, maximum);
   const numericAmount = amount && !amountError && parseFloatLocale(amount);
 
-  const [tipPercents] = useState(0);
-  const tipBN = numericAmount && new BN((tipPercents / 100) * numericAmount);
+  const [tipPercents, setTipPercents] = useState(0);
+  const tipBN = numericAmount
+    ? numberToBN((tipPercents / 100) * numericAmount)
+    : new BN(0);
   const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
   const [recipient, setRecipient] = useState('');
   const recipientError = recipient && getAddressError(recipient);
   const recipientTooltip = useErrorTooltip(Boolean(recipientError));
+
+  useEffect(() => {
+    (async () => {
+      const value =
+        typeof numericAmount === 'number' && !Number.isNaN(numericAmount)
+          ? numberToBN(numericAmount)
+          : new BN(0);
+
+      const realFee = await getFee(value, recipient);
+      setFee(realFee);
+    })();
+  }, [numericAmount, recipient]);
 
   const handleAmountInput = useCallback((event) => {
     const { value } = event.target;
@@ -176,7 +206,7 @@ export function SendToken({ account }: Props): JSX.Element {
     if (Number.isNaN(parsedValue)) {
       return;
     }
-    const femtoKilts = numberToCoins(parsedValue);
+    const femtoKilts = numberToBN(parsedValue);
     const formatted = formatKiltInput(femtoKilts);
     event.target.value = formatted;
     setAmount(formatted);
@@ -194,6 +224,14 @@ export function SendToken({ account }: Props): JSX.Element {
     [maximum],
   );
 
+  const handleDecreaseTipClick = useCallback(() => {
+    setTipPercents(tipPercents - 1);
+  }, [tipPercents]);
+
+  const handleIncreaseTipClick = useCallback(() => {
+    setTipPercents(tipPercents + 1);
+  }, [tipPercents]);
+
   const handleRecipientInput = useCallback((event) => {
     const { value } = event.target;
     setRecipient(value.trim());
@@ -209,7 +247,7 @@ export function SendToken({ account }: Props): JSX.Element {
   }, []);
 
   return (
-    <form className={styles.container}>
+    <form className={styles.container} autoComplete="off">
       <h1 className={styles.heading}>{t('view_SendToken_heading')}</h1>
       <p className={styles.subline}>{t('view_SendToken_subline')}</p>
 
@@ -254,6 +292,7 @@ export function SendToken({ account }: Props): JSX.Element {
         <button
           className={styles.decrease}
           type="button"
+          onClick={handleDecreaseTipClick}
           title={t('view_SendToken_tip_decrease')}
           aria-label={t('view_SendToken_tip_decrease')}
           disabled={tipPercents <= 0}
@@ -265,8 +304,16 @@ export function SendToken({ account }: Props): JSX.Element {
         <button
           className={styles.increase}
           type="button"
+          onClick={handleIncreaseTipClick}
           title={t('view_SendToken_tip_increase')}
           aria-label={t('view_SendToken_tip_increase')}
+          disabled={
+            !!numericAmount &&
+            !!maximum &&
+            numberToBN(((100 + tipPercents + 1) / 100) * numericAmount).gt(
+              maximum,
+            )
+          }
         />
       </p>
 

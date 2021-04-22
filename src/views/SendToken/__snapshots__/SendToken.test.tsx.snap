@@ -3,6 +3,7 @@
 exports[`SendToken should render 1`] = `
 <div>
   <form
+    autocomplete="off"
     class="container"
   >
     <h1
@@ -126,7 +127,7 @@ exports[`SendToken should render 1`] = `
       class="maximum"
     >
       Maximum sendable amount: 
-      1.2339 K
+      1.2340 K
     </small>
     <p
       class="amountLine"
@@ -137,7 +138,7 @@ exports[`SendToken should render 1`] = `
         inputmode="numeric"
         maxlength="15"
         name="amount"
-        placeholder="0.0100 – 1.2339"
+        placeholder="0.0100 – 1.2340"
         required=""
       />
       <button
@@ -189,14 +190,17 @@ exports[`SendToken should render 1`] = `
       />
       <output
         class="tooltip"
+        data-popper-escaped="true"
+        data-popper-placement="bottom"
+        data-popper-reference-hidden="true"
         for="recipient"
-        style="position: absolute; left: 0px; top: 0px;"
+        style="position: absolute; left: 0px; top: 0px; transform: translate(0px, 0px);"
       >
         
         <span
           class="pointer"
           data-popper-arrow="true"
-          style="position: absolute;"
+          style="position: absolute; left: 0px; transform: translate(0px, 0px);"
         />
       </output>
     </p>
@@ -213,6 +217,26 @@ exports[`SendToken should render 1`] = `
       title="Back"
       type="button"
     />
+    <p
+      class="stats"
+    >
+      You have $number$ accounts with a total
+      <span
+        class="balance"
+      >
+         Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="Kilt coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
   </form>
 </div>
 `;
