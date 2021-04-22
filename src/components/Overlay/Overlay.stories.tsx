@@ -17,7 +17,7 @@ export function Template(): JSX.Element {
         className={overlayStyles.button}
         onClick={action('closeOverlay')}
       >
-        {'OK'}
+        OK
       </button>
     </div>
   );
