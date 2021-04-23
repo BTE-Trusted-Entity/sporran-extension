@@ -19,16 +19,16 @@ export function AccountSuccessOverlay({
   const t = browser.i18n.getMessage;
 
   const messages = {
-    created: t('component_SuccessAccountOverlay_message_create'),
-    imported: t('component_SuccessAccountOverlay_message_import'),
-    reset: t('component_SuccessAccountOverlay_message_reset'),
+    created: t('component_AccountSuccessOverlay_message_create'),
+    imported: t('component_AccountSuccessOverlay_message_import'),
+    reset: t('component_AccountSuccessOverlay_message_reset'),
   };
 
   return (
     <div className={styles.overlay}>
       <Avatar tartan={account.tartan} address={account.address} />
       <h1 className={styles.heading}>
-        {t('component_SuccessAccountOverlay_heading')}
+        {t('component_AccountSuccessOverlay_heading')}
       </h1>
       <p className={styles.text}>{messages[successType]}</p>
       <button
@@ -36,7 +36,7 @@ export function AccountSuccessOverlay({
         className={styles.button}
         onClick={handleSuccessOverlayButtonClick}
       >
-        {t('component_SuccessAccountOverlay_button')}
+        {t('component_AccountSuccessOverlay_button')}
       </button>
     </div>
   );

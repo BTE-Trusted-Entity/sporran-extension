@@ -122,22 +122,22 @@
       }
     }
   },
-  "component_SuccessAccountOverlay_heading": {
+  "component_AccountSuccessOverlay_heading": {
     "message": "Congratulations!"
   },
-  "component_SuccessAccountOverlay_button": {
+  "component_AccountSuccessOverlay_button": {
     "message": "OK"
   },
-  "component_SuccessAccountOverlay_message_create": {
+  "component_AccountSuccessOverlay_message_create": {
     "message": "You have successfully created a KILT Account"
   },
-  "component_SuccessAccountOverlay_message_import": {
+  "component_AccountSuccessOverlay_message_import": {
     "message": "You have successfully imported your KILT Account"
   },
-  "component_SuccessAccountOverlay_message_reset": {
+  "component_AccountSuccessOverlay_message_reset": {
     "message": "You have successfully set a new password"
   },
-  "component_SuccessAccountOverlay_CTA": {
+  "component_AccountSuccessOverlay_CTA": {
     "message": "See the wallet"
   },
   "view_Welcome_heading": {
