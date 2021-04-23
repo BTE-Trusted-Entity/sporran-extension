@@ -8,80 +8,69 @@ import {
 } from '../MessageType';
 
 interface SavedPassword {
-  password?: string;
-  timestamp?: number;
+  password: string;
+  timestamp: number;
 }
 
 const savedPasswords: Record<string, SavedPassword> = {};
 
-let intervalId: NodeJS.Timeout;
-
-const saveDuration = 15; // in minutes
-const intervalDuration = 1; // in minutes
-
-function cleanUp(): void {
-  if (Object.values(savedPasswords).length === 0) {
-    clearInterval(intervalId);
-  }
-}
+const saveDuration = 15 * 60 * 1000; // milliseconds
+const intervalDuration = 1 * 60 * 1000; // milliseconds
 
 function checkExpiredPasswords() {
-  for (const password in savedPasswords) {
-    if (
-      Date.now() - savedPasswords[password].timestamp >
-      saveDuration * 60000
-    ) {
-      delete savedPasswords[password];
+  setInterval(function () {
+    for (const password in savedPasswords) {
+      if (Date.now() - savedPasswords[password].timestamp > saveDuration) {
+        delete savedPasswords[password];
+      }
     }
-  }
-  cleanUp();
+  }, intervalDuration);
 }
 
 export function savePasswordListener(message: SavePasswordRequest): void {
-  if (message.type === MessageType.savePasswordRequest) {
-    const { password, address } = message.data;
-    if (Object.values(savedPasswords).length === 0) {
-      intervalId = setInterval(function () {
-        checkExpiredPasswords();
-      }, intervalDuration * 60000);
-    }
-    if (!savedPasswords[address]) {
-      savedPasswords[address] = {};
-    }
-    savedPasswords[address].password = password;
-    savedPasswords[address].timestamp = Date.now();
+  if (message.type !== MessageType.savePasswordRequest) {
+    return;
   }
+  const { password, address } = message.data;
+
+  if (!savedPasswords[address]) {
+    savedPasswords[address] = { password: '', timestamp: 0 };
+  }
+  savedPasswords[address].password = password;
+  savedPasswords[address].timestamp = Date.now();
 }
 
 export function getPasswordListener(
   message: GetPasswordRequest,
-): Promise<string> {
-  if (message.type === MessageType.getPasswordRequest) {
-    const { address } = message.data;
-    return Promise.resolve(savedPasswords[address].password);
+): Promise<string | undefined> | void {
+  if (message.type !== MessageType.getPasswordRequest) {
+    return;
   }
+  const { address } = message.data;
+  return Promise.resolve(savedPasswords[address].password);
 }
 
 export function forgetPasswordListener(message: ForgetPasswordRequest): void {
-  if (message.type === MessageType.forgetPasswordRequest) {
-    const { address } = message.data;
-    delete savedPasswords[address];
-    cleanUp();
+  if (message.type !== MessageType.forgetPasswordRequest) {
+    return;
   }
+  const { address } = message.data;
+  delete savedPasswords[address];
 }
 
 export function forgetAllPasswordsListener(
   message: ForgetAllPasswordsRequest,
 ): void {
-  if (message.type === MessageType.forgetAllPasswordsRequest) {
-    for (const password in savedPasswords) {
-      delete savedPasswords[password];
-    }
-    cleanUp();
+  if (message.type !== MessageType.forgetAllPasswordsRequest) {
+    return;
+  }
+  for (const password in savedPasswords) {
+    delete savedPasswords[password];
   }
 }
 
 export function initSavedPasswords(): void {
+  checkExpiredPasswords();
   browser.runtime.onMessage.addListener(savePasswordListener);
   browser.runtime.onMessage.addListener(getPasswordListener);
   browser.runtime.onMessage.addListener(forgetPasswordListener);
