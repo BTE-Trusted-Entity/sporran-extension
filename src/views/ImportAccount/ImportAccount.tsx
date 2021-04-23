@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
 
 import { createAccount } from '../../utilities/accounts/accounts';

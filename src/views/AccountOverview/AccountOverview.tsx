@@ -70,9 +70,7 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
         </Link>
 
         <Link
-          to={generatePath(paths.account.receive, {
-            address,
-          })}
+          to={generatePath(paths.account.receive, { address })}
           className={styles.button}
         >
           {t('view_AccountOverview_receive')}
