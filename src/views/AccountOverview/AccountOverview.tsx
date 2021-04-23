@@ -22,7 +22,7 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
   const { path } = useRouteMatch();
   const params = useParams() as { type?: 'created' | 'imported' | 'reset' };
 
-  const [hasOpenOverlay, setOpenOverlay] = useState(Boolean(params.type));
+  const [hasOpenOverlay, setHasOpenOverlay] = useState(Boolean(params.type));
   const [type] = useState(params.type);
 
   const handleSuccessOverlayButtonClick = useCallback(() => {
