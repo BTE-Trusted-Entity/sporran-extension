@@ -10,7 +10,7 @@ describe('SuccessAccountOverlay', () => {
       <SuccessAccountOverlay
         account={account}
         successType="created"
-        openOverlayHandler={action('closeOverlay')}
+        closeOverlayHandler={action('closeOverlay')}
       />,
     );
     expect(container).toMatchSnapshot();
@@ -21,7 +21,7 @@ describe('SuccessAccountOverlay', () => {
       <SuccessAccountOverlay
         account={account}
         successType="imported"
-        openOverlayHandler={action('closeOverlay')}
+        closeOverlayHandler={action('closeOverlay')}
       />,
     );
     expect(container).toMatchSnapshot();
@@ -32,7 +32,7 @@ describe('SuccessAccountOverlay', () => {
       <SuccessAccountOverlay
         account={account}
         successType="reset"
-        openOverlayHandler={action('closeOverlay')}
+        closeOverlayHandler={action('closeOverlay')}
       />,
     );
     expect(container).toMatchSnapshot();

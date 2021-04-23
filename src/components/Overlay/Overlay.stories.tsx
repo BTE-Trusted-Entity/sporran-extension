@@ -9,9 +9,9 @@ export default {
 
 export function Template(): JSX.Element {
   return (
-    <div className={overlayStyles.overlay} style={{ float: 'right' }}>
-      <h1 className={overlayStyles.heading}>{'Heading'}</h1>
-      <p className={overlayStyles.text}>{'Overlay Text'}</p>
+    <div className={overlayStyles.overlay}>
+      <h1 className={overlayStyles.heading}>Heading</h1>
+      <p className={overlayStyles.text}>Overlay Text</p>
       <button
         type="button"
         className={overlayStyles.button}

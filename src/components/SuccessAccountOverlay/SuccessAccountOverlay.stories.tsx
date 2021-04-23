@@ -16,7 +16,7 @@ export function Template(): JSX.Element {
     <SuccessAccountOverlay
       account={account}
       successType="created"
-      openOverlayHandler={action('closeOverlay')}
+      closeOverlayHandler={action('closeOverlay')}
     />
   );
 }
@@ -26,7 +26,7 @@ export function Imported(): JSX.Element {
     <SuccessAccountOverlay
       account={account}
       successType="imported"
-      openOverlayHandler={action('closeOverlay')}
+      closeOverlayHandler={action('closeOverlay')}
     />
   );
 }
@@ -36,7 +36,7 @@ export function Reset(): JSX.Element {
     <SuccessAccountOverlay
       account={account}
       successType="reset"
-      openOverlayHandler={action('closeOverlay')}
+      closeOverlayHandler={action('closeOverlay')}
     />
   );
 }
