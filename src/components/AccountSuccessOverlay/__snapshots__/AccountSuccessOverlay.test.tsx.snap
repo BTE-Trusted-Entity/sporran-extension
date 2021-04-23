@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SuccessAccountOverlay should render success overlay for created account 1`] = `
+exports[`AccountSuccessOverlay should render success overlay for created account 1`] = `
 <div>
   <div
     class="overlay"
@@ -30,7 +30,7 @@ exports[`SuccessAccountOverlay should render success overlay for created account
 </div>
 `;
 
-exports[`SuccessAccountOverlay should render success overlay for imported account 1`] = `
+exports[`AccountSuccessOverlay should render success overlay for imported account 1`] = `
 <div>
   <div
     class="overlay"
@@ -60,7 +60,7 @@ exports[`SuccessAccountOverlay should render success overlay for imported accoun
 </div>
 `;
 
-exports[`SuccessAccountOverlay should render success overlay for reset password 1`] = `
+exports[`AccountSuccessOverlay should render success overlay for reset password 1`] = `
 <div>
   <div
     class="overlay"

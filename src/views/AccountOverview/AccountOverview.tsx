@@ -5,7 +5,7 @@ import { Link, useParams, useRouteMatch, Redirect } from 'react-router-dom';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
-import { SuccessAccountOverlay } from '../../components/SuccessAccountOverlay/SuccessAcountOverlay';
+import { AccountSuccessOverlay } from '../../components/AccountSuccessOverlay/AccountSuccessOverlay';
 import { Account, isNew, useAccounts } from '../../utilities/accounts/accounts';
 import { plural } from '../../utilities/plural/plural';
 import { generatePath, paths } from '../paths';
@@ -25,7 +25,7 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
   const [hasOpenOverlay, setOpenOverlay] = useState(Boolean(params.type));
   const [type] = useState(params.type);
 
-  const closeOverlayHandler = useCallback(() => {
+  const handleSuccessOverlay = useCallback(() => {
     setOpenOverlay(false);
   }, []);
 
@@ -81,10 +81,10 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
 
       <Stats />
       {hasOpenOverlay && type && (
-        <SuccessAccountOverlay
+        <AccountSuccessOverlay
           successType={type}
           account={account}
-          closeOverlayHandler={closeOverlayHandler}
+          handleSuccessOverlay={handleSuccessOverlay}
         />
       )}
     </main>

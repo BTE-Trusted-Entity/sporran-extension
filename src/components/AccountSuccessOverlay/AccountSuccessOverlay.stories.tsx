@@ -1,11 +1,11 @@
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
 import { accountsMock } from '../../testing/AccountsProviderMock';
-import { SuccessAccountOverlay } from './SuccessAcountOverlay';
+import { AccountSuccessOverlay } from './AccountSuccessOverlay';
 
 export default {
-  title: 'Components/SuccessAccountOverlay',
-  component: SuccessAccountOverlay,
+  title: 'Components/AccountSuccessOverlay',
+  component: AccountSuccessOverlay,
 } as Meta;
 
 const account =
@@ -13,30 +13,30 @@ const account =
 
 export function Template(): JSX.Element {
   return (
-    <SuccessAccountOverlay
+    <AccountSuccessOverlay
       account={account}
       successType="created"
-      closeOverlayHandler={action('closeOverlay')}
+      handleSuccessOverlay={action('closeOverlay')}
     />
   );
 }
 
 export function Imported(): JSX.Element {
   return (
-    <SuccessAccountOverlay
+    <AccountSuccessOverlay
       account={account}
       successType="imported"
-      closeOverlayHandler={action('closeOverlay')}
+      handleSuccessOverlay={action('closeOverlay')}
     />
   );
 }
 
 export function Reset(): JSX.Element {
   return (
-    <SuccessAccountOverlay
+    <AccountSuccessOverlay
       account={account}
       successType="reset"
-      closeOverlayHandler={action('closeOverlay')}
+      handleSuccessOverlay={action('closeOverlay')}
     />
   );
 }

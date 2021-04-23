@@ -3,18 +3,18 @@ import { browser } from 'webextension-polyfill-ts';
 import { Avatar } from '../Avatar/Avatar';
 import { Account } from '../../utilities/accounts/accounts';
 
-import styles from './SuccessAccountOverlay.module.css';
+import styles from './AccountSuccessOverlay.module.css';
 
 interface Props {
   account: Account;
   successType: 'created' | 'imported' | 'reset';
-  closeOverlayHandler: () => void;
+  handleSuccessOverlay: () => void;
 }
 
-export function SuccessAccountOverlay({
+export function AccountSuccessOverlay({
   account,
   successType,
-  closeOverlayHandler,
+  handleSuccessOverlay,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -34,7 +34,7 @@ export function SuccessAccountOverlay({
       <button
         type="button"
         className={styles.button}
-        onClick={closeOverlayHandler}
+        onClick={handleSuccessOverlay}
       >
         {t('component_CreateAccountSuccess_button')}
       </button>
