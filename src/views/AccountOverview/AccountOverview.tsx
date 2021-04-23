@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useParams, useRouteMatch, Redirect } from 'react-router-dom';
 
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { Balance } from '../../components/Balance/Balance';
@@ -15,27 +15,31 @@ import styles from './AccountOverview.module.css';
 
 interface Props {
   account: Account;
-  successType?: 'created' | 'imported' | 'reset';
 }
 
-export function AccountOverview({
-  account,
-  successType,
-}: Props): JSX.Element | null {
+export function AccountOverview({ account }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
+  const params = useParams() as { type?: 'created' | 'imported' | 'reset' };
 
-  const [hasOpenOverlay, setOpenOverlay] = useState(true);
+  const [hasOpenOverlay, setOpenOverlay] = useState(Boolean(params.type));
+  const [type] = useState(params.type);
+
+  const openOverlayHandler = useCallback(() => {
+    setOpenOverlay(false);
+  }, []);
 
   const accounts = useAccounts().data;
   if (!accounts) {
     return null;
   }
 
-  const openOverlayHandler = () => setOpenOverlay(false);
-
   const accountsNumber = Object.values(accounts).length;
   const { address } = account;
+
+  if (params.type) {
+    return <Redirect to={generatePath(paths.account.overview, { address })} />;
+  }
 
   if (isNew(account)) {
     return <AccountOverviewNew />;
@@ -66,7 +70,9 @@ export function AccountOverview({
         </Link>
 
         <Link
-          to={generatePath(paths.account.receive, { address })}
+          to={generatePath(paths.account.receive, {
+            address,
+          })}
           className={styles.button}
         >
           {t('view_AccountOverview_receive')}
@@ -74,9 +80,9 @@ export function AccountOverview({
       </p>
 
       <Stats />
-      {hasOpenOverlay && successType && (
+      {hasOpenOverlay && type && (
         <SuccessAccountOverlay
-          successType={successType}
+          successType={type}
           account={account}
           openOverlayHandler={openOverlayHandler}
         />

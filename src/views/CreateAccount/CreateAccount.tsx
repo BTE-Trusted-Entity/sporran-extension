@@ -21,7 +21,10 @@ export function CreateAccount(): JSX.Element {
   const onSuccess = useCallback(
     async (password: string) => {
       const { address } = await createAccount(backupPhrase, password);
-      history.push(generatePath(paths.account.created, { address }));
+
+      history.push(
+        generatePath(paths.account.overview, { address, type: 'created' }),
+      );
     },
     [backupPhrase, history],
   );

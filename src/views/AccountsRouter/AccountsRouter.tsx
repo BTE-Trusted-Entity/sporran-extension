@@ -52,18 +52,6 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
           <ResetAccount account={account} />
         </Route>
 
-        <Route path={paths.account.created}>
-          <AccountOverview account={account} successType="created" />
-        </Route>
-
-        <Route path={paths.account.imported}>
-          <AccountOverview account={account} successType="imported" />
-        </Route>
-
-        <Route path={paths.account.reseted}>
-          <AccountOverview account={account} successType="reset" />
-        </Route>
-
         <Route path={paths.account.overview}>
           <AccountOverview account={account} />
         </Route>

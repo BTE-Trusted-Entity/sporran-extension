@@ -22,7 +22,9 @@ export function ResetAccount({ account }: { account: Account }): JSX.Element {
   const onSuccess = useCallback(
     async (password: string) => {
       await encryptAccount(backupPhrase, password);
-      history.push(generatePath(paths.account.reseted, { address }));
+      history.push(
+        generatePath(paths.account.overview, { address, type: 'reset' }),
+      );
     },
     [backupPhrase, history, address],
   );

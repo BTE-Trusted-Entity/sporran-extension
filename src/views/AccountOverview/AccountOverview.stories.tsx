@@ -10,29 +10,18 @@ import { AccountOverview } from './AccountOverview';
 export default {
   title: 'Views/AccountOverview',
   component: AccountOverview,
-  argTypes: {
-    successType: {
-      control: {
-        type: 'radio',
-        options: ['created', 'imported', 'reset', undefined],
-      },
-    },
-  },
 } as Meta;
 
-export function Template(props: {
-  successType?: 'created' | 'imported' | 'reset';
-}): JSX.Element {
+export function Template(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send',
+        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
       ]}
     >
       <Route path={paths.account.overview}>
         <AccountOverview
           account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-          {...props}
         />
       </Route>
     </MemoryRouter>
@@ -44,6 +33,57 @@ export function New(): JSX.Element {
     <MemoryRouter initialEntries={['/account/NEW/send']}>
       <Route path={paths.account.overview}>
         <AccountOverview account={NEW} />
+      </Route>
+    </MemoryRouter>
+  );
+}
+
+export function CreateSuccess(): JSX.Element {
+  return (
+    <MemoryRouter
+      initialEntries={[
+        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/created',
+        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+      ]}
+    >
+      <Route path={paths.account.overview}>
+        <AccountOverview
+          account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+        />
+      </Route>
+    </MemoryRouter>
+  );
+}
+
+export function ImportSuccess(): JSX.Element {
+  return (
+    <MemoryRouter
+      initialEntries={[
+        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/imported',
+        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+      ]}
+    >
+      <Route path={paths.account.overview}>
+        <AccountOverview
+          account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+        />
+      </Route>
+    </MemoryRouter>
+  );
+}
+
+export function ResetSuccess(): JSX.Element {
+  return (
+    <MemoryRouter
+      initialEntries={[
+        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset',
+        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+      ]}
+    >
+      <Route path={paths.account.overview}>
+        <AccountOverview
+          account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+        />
       </Route>
     </MemoryRouter>
   );

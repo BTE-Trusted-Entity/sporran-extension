@@ -18,12 +18,9 @@ export const paths = {
       start: '/account/:address/reset',
       password: '/account/:address/reset/password',
     },
-    overview: '/account/:address',
+    overview: '/account/:address/:type(created|imported|reset)?',
     send: '/account/:address/send',
     receive: '/account/:address/receive',
     remove: '/account/:address/remove',
-    created: '/account/:address/created',
-    imported: '/account/:address/imported',
-    reseted: '/account/:address/reseted',
   },
 };
