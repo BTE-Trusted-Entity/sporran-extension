@@ -63,7 +63,7 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
 
       <p>
         <Link
-          to={generatePath(paths.account.send, { address })}
+          to={generatePath(paths.account.send.start, { address })}
           className={styles.button}
         >
           {t('view_AccountOverview_send')}

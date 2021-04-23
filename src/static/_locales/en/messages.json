@@ -377,5 +377,47 @@
   },
   "view_SendToken_CTA": {
     "message": "Review & Sign Transaction"
+  },
+  "view_ReviewTransaction_heading": {
+    "message": "Send KILT Coins"
+  },
+  "view_ReviewTransaction_subline": {
+    "message": "Transaction Details"
+  },
+  "view_ReviewTransaction_recipient": {
+    "message": "send to:"
+  },
+  "view_ReviewTransaction_reset": {
+    "message": "Reset Password"
+  },
+  "view_ReviewTransaction_total": {
+    "message": "Total costs: "
+  },
+  "view_ReviewTransaction_showDetails": {
+    "message": "Show details"
+  },
+  "view_ReviewTransaction_hideDetails": {
+    "message": "Hide details"
+  },
+  "view_ReviewTransaction_fee": {
+    "message": "Minimum Fee:"
+  },
+  "view_ReviewTransaction_tip": {
+    "message": "Tip:"
+  },
+  "view_ReviewTransaction_totalFee": {
+    "message": "Total Fee:"
+  },
+  "view_ReviewTransaction_amount": {
+    "message": "Amount:"
+  },
+  "view_ReviewTransaction_password": {
+    "message": "Sign with Password:"
+  },
+  "view_ReviewTransaction_remember": {
+    "message": "Remember my password for the next 15 minutes"
+  },
+  "view_ReviewTransaction_CTA": {
+    "message": "Send"
   }
 }

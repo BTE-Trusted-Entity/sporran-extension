@@ -52,7 +52,7 @@ describe('AccountsCarousel', () => {
   it('should support other paths', async () => {
     const { container } = render(
       <AccountsCarousel
-        path={paths.account.send}
+        path={paths.account.send.start}
         account={accounts['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']}
       />,
     );

@@ -14,12 +14,16 @@ export const paths = {
       start: '/account/import',
       password: '/account/import/password',
     },
+
+    overview: '/account/:address/:type(created|imported|reset)?',
     reset: {
       start: '/account/:address/reset',
       password: '/account/:address/reset/password',
     },
-    overview: '/account/:address/:type(created|imported|reset)?',
-    send: '/account/:address/send',
+    send: {
+      start: '/account/:address/send',
+      review: '/account/:address/send/review',
+    },
     receive: '/account/:address/receive',
     remove: '/account/:address/remove',
   },

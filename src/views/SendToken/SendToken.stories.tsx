@@ -9,7 +9,7 @@ import { paths } from '../paths';
 import { SendToken } from './SendToken';
 
 export default {
-  title: 'views/SendToken',
+  title: 'Views/SendToken',
   component: SendToken,
 } as Meta;
 
@@ -19,10 +19,10 @@ export function Template(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive',
+        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send',
       ]}
     >
-      <Route path={paths.account.receive}>
+      <Route path={paths.account.send.start}>
         <SendToken
           account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
         />

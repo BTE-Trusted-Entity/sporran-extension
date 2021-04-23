@@ -40,7 +40,7 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
           <ReceiveToken account={account} />
         </Route>
 
-        <Route path={paths.account.send}>
+        <Route path={paths.account.send.start}>
           <SendToken account={account} />
         </Route>
 
