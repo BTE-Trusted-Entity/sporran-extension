@@ -82,7 +82,7 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
         <AccountSuccessOverlay
           successType={type}
           account={account}
-          handleSuccessOverlayButtonClick={handleSuccessOverlayButtonClick}
+          onSuccessOverlayButtonClick={handleSuccessOverlayButtonClick}
         />
       )}
     </main>

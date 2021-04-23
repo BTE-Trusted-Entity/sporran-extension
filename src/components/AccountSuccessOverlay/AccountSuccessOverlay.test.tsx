@@ -9,7 +9,7 @@ describe('AccountSuccessOverlay', () => {
       <AccountSuccessOverlay
         account={account}
         successType="created"
-        handleSuccessOverlayButtonClick={jest.fn()}
+        onSuccessOverlayButtonClick={jest.fn()}
       />,
     );
     expect(container).toMatchSnapshot();
@@ -20,7 +20,7 @@ describe('AccountSuccessOverlay', () => {
       <AccountSuccessOverlay
         account={account}
         successType="imported"
-        handleSuccessOverlayButtonClick={jest.fn()}
+        onSuccessOverlayButtonClick={jest.fn()}
       />,
     );
     expect(container).toMatchSnapshot();
@@ -31,7 +31,7 @@ describe('AccountSuccessOverlay', () => {
       <AccountSuccessOverlay
         account={account}
         successType="reset"
-        handleSuccessOverlayButtonClick={jest.fn()}
+        onSuccessOverlayButtonClick={jest.fn()}
       />,
     );
     expect(container).toMatchSnapshot();
