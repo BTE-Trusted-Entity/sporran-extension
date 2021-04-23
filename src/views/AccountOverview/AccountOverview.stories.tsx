@@ -12,12 +12,12 @@ export default {
   component: AccountOverview,
 } as Meta;
 
-const address = '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
+const uri = '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 export function Template(): JSX.Element {
   return (
-    <MemoryRouter initialEntries={[address]}>
+    <MemoryRouter initialEntries={[uri]}>
       <Route path={paths.account.overview}>
         <AccountOverview account={account} />
       </Route>
@@ -40,7 +40,7 @@ export function CreateSuccess(): JSX.Element {
     <MemoryRouter
       initialEntries={[
         '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/created',
-        address,
+        uri,
       ]}
     >
       <Route path={paths.account.overview}>
@@ -55,7 +55,7 @@ export function ImportSuccess(): JSX.Element {
     <MemoryRouter
       initialEntries={[
         '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/imported',
-        address,
+        uri,
       ]}
     >
       <Route path={paths.account.overview}>
@@ -70,7 +70,7 @@ export function ResetSuccess(): JSX.Element {
     <MemoryRouter
       initialEntries={[
         '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset',
-        address,
+        uri,
       ]}
     >
       <Route path={paths.account.overview}>

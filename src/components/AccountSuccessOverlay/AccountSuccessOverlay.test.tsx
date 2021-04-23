@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import { accountsMock, render } from '../../testing';
 import { AccountSuccessOverlay } from './AccountSuccessOverlay';
 const account =
@@ -10,7 +9,7 @@ describe('AccountSuccessOverlay', () => {
       <AccountSuccessOverlay
         account={account}
         successType="created"
-        handleSuccessOverlayButtonClick={action('closeOverlay')}
+        handleSuccessOverlayButtonClick={jest.fn()}
       />,
     );
     expect(container).toMatchSnapshot();
@@ -21,7 +20,7 @@ describe('AccountSuccessOverlay', () => {
       <AccountSuccessOverlay
         account={account}
         successType="imported"
-        handleSuccessOverlayButtonClick={action('closeOverlay')}
+        handleSuccessOverlayButtonClick={jest.fn()}
       />,
     );
     expect(container).toMatchSnapshot();
@@ -32,7 +31,7 @@ describe('AccountSuccessOverlay', () => {
       <AccountSuccessOverlay
         account={account}
         successType="reset"
-        handleSuccessOverlayButtonClick={action('closeOverlay')}
+        handleSuccessOverlayButtonClick={jest.fn()}
       />,
     );
     expect(container).toMatchSnapshot();
