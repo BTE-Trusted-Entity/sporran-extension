@@ -12,17 +12,14 @@ export default {
   component: AccountOverview,
 } as Meta;
 
+const address = '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
+const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+
 export function Template(): JSX.Element {
   return (
-    <MemoryRouter
-      initialEntries={[
-        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-      ]}
-    >
+    <MemoryRouter initialEntries={[address]}>
       <Route path={paths.account.overview}>
-        <AccountOverview
-          account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-        />
+        <AccountOverview account={account} />
       </Route>
     </MemoryRouter>
   );
@@ -43,13 +40,11 @@ export function CreateSuccess(): JSX.Element {
     <MemoryRouter
       initialEntries={[
         '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/created',
-        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+        address,
       ]}
     >
       <Route path={paths.account.overview}>
-        <AccountOverview
-          account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-        />
+        <AccountOverview account={account} />
       </Route>
     </MemoryRouter>
   );
@@ -60,13 +55,11 @@ export function ImportSuccess(): JSX.Element {
     <MemoryRouter
       initialEntries={[
         '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/imported',
-        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+        address,
       ]}
     >
       <Route path={paths.account.overview}>
-        <AccountOverview
-          account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-        />
+        <AccountOverview account={account} />
       </Route>
     </MemoryRouter>
   );
@@ -77,13 +70,11 @@ export function ResetSuccess(): JSX.Element {
     <MemoryRouter
       initialEntries={[
         '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset',
-        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+        address,
       ]}
     >
       <Route path={paths.account.overview}>
-        <AccountOverview
-          account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
-        />
+        <AccountOverview account={account} />
       </Route>
     </MemoryRouter>
   );
