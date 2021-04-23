@@ -3,13 +3,13 @@ import { browser } from 'webextension-polyfill-ts';
 import { initBlockChainConnection } from './connection/initBlockChainConnection/initBlockChainConnection';
 import { initBalanceMessages } from './connection/initBalanceMessages/initBalanceMessages';
 import { initFeeMessages } from './connection/initFeeMessages/initFeeMessages';
-import { initSavePassword } from './connection/initSavePassword/initSavePassword';
+import { initSavedPasswords } from './connection/initSavedPasswords/initSavedPasswords';
 
 function init() {
   initBlockChainConnection();
   initBalanceMessages();
   initFeeMessages();
-  initSavePassword();
+  initSavedPasswords();
 }
 
 init();
