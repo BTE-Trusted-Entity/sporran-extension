@@ -8,13 +8,13 @@ import styles from './AccountSuccessOverlay.module.css';
 interface Props {
   account: Account;
   successType: 'created' | 'imported' | 'reset';
-  handleSuccessOverlay: () => void;
+  handleSuccessOverlayButtonClick: () => void;
 }
 
 export function AccountSuccessOverlay({
   account,
   successType,
-  handleSuccessOverlay,
+  handleSuccessOverlayButtonClick,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -34,7 +34,7 @@ export function AccountSuccessOverlay({
       <button
         type="button"
         className={styles.button}
-        onClick={handleSuccessOverlay}
+        onClick={handleSuccessOverlayButtonClick}
       >
         {t('component_CreateAccountSuccess_button')}
       </button>

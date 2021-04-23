@@ -25,7 +25,7 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
   const [hasOpenOverlay, setOpenOverlay] = useState(Boolean(params.type));
   const [type] = useState(params.type);
 
-  const handleSuccessOverlay = useCallback(() => {
+  const handleSuccessOverlayButtonClick = useCallback(() => {
     setOpenOverlay(false);
   }, []);
 
@@ -84,7 +84,7 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
         <AccountSuccessOverlay
           successType={type}
           account={account}
-          handleSuccessOverlay={handleSuccessOverlay}
+          handleSuccessOverlayButtonClick={handleSuccessOverlayButtonClick}
         />
       )}
     </main>
