@@ -3,7 +3,10 @@ import useSWR, { mutate, SWRResponse } from 'swr';
 import { Identity } from '@kiltprotocol/core';
 import { map, max } from 'lodash-es';
 
-import { saveEncrypted } from '../storageEncryption/storageEncryption';
+import {
+  loadEncrypted,
+  saveEncrypted,
+} from '../storageEncryption/storageEncryption';
 import { AccountsContext, AccountsContextType } from './AccountsContext';
 import { storage } from './storage';
 import { ACCOUNTS_KEY, getAccounts } from './getAccounts';
@@ -110,4 +113,13 @@ export async function createAccount(
   await updateNextTartan();
 
   return account;
+}
+
+export async function decryptAccount(
+  address: string,
+  password: string,
+): Promise<Identity> {
+  // TODO: throw on wrong results
+  const seed = await loadEncrypted(address, password);
+  return Identity.buildFromSeed(new Uint8Array(seed));
 }

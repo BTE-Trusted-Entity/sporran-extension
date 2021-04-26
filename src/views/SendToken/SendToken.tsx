@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { useRouteMatch } from 'react-router-dom';
@@ -151,9 +151,15 @@ async function getFee(amount: BN, recipient: string): Promise<BN> {
 
 interface Props {
   account: Account;
+  onSuccess: (values: {
+    recipient: string;
+    amount: BN;
+    fee: BN;
+    tip: BN;
+  }) => void;
 }
 
-export function SendToken({ account }: Props): JSX.Element {
+export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
 
@@ -167,9 +173,13 @@ export function SendToken({ account }: Props): JSX.Element {
   const numericAmount = amount && !amountError && parseFloatLocale(amount);
 
   const [tipPercents, setTipPercents] = useState(0);
-  const tipBN = numericAmount
-    ? numberToBN((tipPercents / 100) * numericAmount)
-    : new BN(0);
+  const tipBN = useMemo(
+    () =>
+      numericAmount
+        ? numberToBN((tipPercents / 100) * numericAmount)
+        : new BN(0),
+    [numericAmount, tipPercents],
+  );
   const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
   const [recipient, setRecipient] = useState('');
@@ -246,8 +256,29 @@ export function SendToken({ account }: Props): JSX.Element {
     setRecipient(address.trim());
   }, []);
 
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      if (!(recipient && fee && tipBN && numericAmount)) {
+        return;
+      }
+      onSuccess({
+        recipient,
+        amount: numberToBN(numericAmount),
+        fee,
+        tip: tipBN,
+      });
+    },
+    [onSuccess, recipient, numericAmount, fee, tipBN],
+  );
+
   return (
-    <form className={styles.container} autoComplete="off">
+    <form
+      onSubmit={handleSubmit}
+      className={styles.container}
+      autoComplete="off"
+    >
       <h1 className={styles.heading}>{t('view_SendToken_heading')}</h1>
       <p className={styles.subline}>{t('view_SendToken_subline')}</p>
 
