@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountSuccessOverlay should render success overlay for created account 1`] = `
+<div>
+  <div
+    class="overlay"
+  >
+    <div
+      class="MacLachlan tartan"
+    >
+      Identicon
+    </div>
+    <h1
+      class="heading"
+    >
+      Congratulations!
+    </h1>
+    <p
+      class="text"
+    >
+      You have successfully created a KILT Account
+    </p>
+    <button
+      class="button"
+      type="button"
+    >
+      OK
+    </button>
+  </div>
+</div>
+`;
+
+exports[`AccountSuccessOverlay should render success overlay for imported account 1`] = `
+<div>
+  <div
+    class="overlay"
+  >
+    <div
+      class="MacLachlan tartan"
+    >
+      Identicon
+    </div>
+    <h1
+      class="heading"
+    >
+      Congratulations!
+    </h1>
+    <p
+      class="text"
+    >
+      You have successfully imported your KILT Account
+    </p>
+    <button
+      class="button"
+      type="button"
+    >
+      OK
+    </button>
+  </div>
+</div>
+`;
+
+exports[`AccountSuccessOverlay should render success overlay for reset password 1`] = `
+<div>
+  <div
+    class="overlay"
+  >
+    <div
+      class="MacLachlan tartan"
+    >
+      Identicon
+    </div>
+    <h1
+      class="heading"
+    >
+      Congratulations!
+    </h1>
+    <p
+      class="text"
+    >
+      You have successfully set a new password
+    </p>
+    <button
+      class="button"
+      type="button"
+    >
+      OK
+    </button>
+  </div>
+</div>
+`;

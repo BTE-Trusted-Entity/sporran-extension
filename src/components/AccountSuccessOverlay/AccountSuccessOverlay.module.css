@@ -1,0 +1,17 @@
+.overlay {
+  composes: overlay from '../../components/Overlay/Overlay.module.css';
+  height: 17.75rem;
+  width: 17.75rem;
+}
+
+.heading {
+  composes: heading from '../../components/Overlay/Overlay.module.css';
+}
+
+.text {
+  composes: text from '../../components/Overlay/Overlay.module.css';
+}
+
+.button {
+  composes: button from '../../components/Overlay/Overlay.module.css';
+}

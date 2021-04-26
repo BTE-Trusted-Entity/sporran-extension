@@ -1,11 +1,11 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
-import { Identity } from '@kiltprotocol/core';
+import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
+
+import { Identity } from '@kiltprotocol/core';
 
 import { SaveBackupPhrase } from '../SaveBackupPhrase/SaveBackupPhrase';
 import { Warning } from '../Warning/Warning';
-import { CreateAccountSuccess } from '../CreateAccountSuccess/CreateAccountSuccess';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { createAccount } from '../../utilities/accounts/accounts';
 import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
@@ -13,18 +13,18 @@ import { paths } from '../paths';
 
 export function CreateAccount(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
-  const [address, setAddress] = useState('');
   const history = useHistory();
-
   useEffect(() => {
     setBackupPhrase(Identity.generateMnemonic());
   }, []);
 
   const onSuccess = useCallback(
     async (password: string) => {
-      const account = await createAccount(backupPhrase, password);
-      setAddress(account.address);
-      history.push(paths.account.create.success);
+      const { address } = await createAccount(backupPhrase, password);
+
+      history.push(
+        generatePath(paths.account.overview, { address, type: 'created' }),
+      );
     },
     [backupPhrase, history],
   );
@@ -46,9 +46,6 @@ export function CreateAccount(): JSX.Element {
       </Route>
       <Route path={paths.account.create.password}>
         <CreatePassword onSuccess={onSuccess} />
-      </Route>
-      <Route path={paths.account.create.success}>
-        <CreateAccountSuccess address={address} />
       </Route>
     </Switch>
   );
