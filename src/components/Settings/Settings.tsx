@@ -4,11 +4,11 @@ import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { Link, Route } from 'react-router-dom';
 
 import { useAccounts } from '../../utilities/accounts/accounts';
+import { forgetAllPasswords } from '../../utilities/passwords/passwords';
 import { generatePath, paths } from '../../views/paths';
 
 import menuStyles from '../Menu/Menu.module.css';
 import styles from './Settings.module.css';
-import { forgetAllPasswords } from '../../utilities/passwords/passwords';
 
 export function Settings(): JSX.Element {
   const t = browser.i18n.getMessage;
@@ -24,10 +24,6 @@ export function Settings(): JSX.Element {
 
   // TODO - move version number to config
   const VERSION_NUMBER = '1.0.0';
-
-  const handleForgetPasswords = useCallback(() => {
-    forgetAllPasswords();
-  }, []);
 
   return (
     <div className={menuStyles.wrapper}>
@@ -76,7 +72,7 @@ export function Settings(): JSX.Element {
                         type="button"
                         className={menuStyles.listButton}
                         {...(itemProps.shift() as unknown)}
-                        onClick={handleForgetPasswords}
+                        onClick={forgetAllPasswords}
                       >
                         {t('component_Settings_forget_saved_passwords')}
                       </button>

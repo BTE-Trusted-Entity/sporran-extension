@@ -51,12 +51,20 @@ export function ReviewTransaction({
     setShowDetails(false);
   }, []);
 
+  const [savedPassword, setSavedPassword] = useState<string | undefined>();
+
+  useEffect(() => {
+    (async () => {
+      setSavedPassword(await getPassword(account.address));
+    })();
+  }, [account]);
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
 
       const { elements } = event.target;
-      const password = elements.password.value;
+      const password = savedPassword || elements.password.value;
 
       try {
         await decryptAccount(account.address, password);
@@ -71,19 +79,11 @@ export function ReviewTransaction({
         setError(t('view_ReviewTransaction_password_incorrect'));
       }
     },
-    [t, account],
+    [t, account, savedPassword],
   );
 
   const totalFee = fee.add(tip);
   const total = amount.add(totalFee);
-
-  const [savedPassword, setSavedPassword] = useState<string | undefined>();
-
-  useEffect(() => {
-    (async () => {
-      setSavedPassword(await getPassword(account.address));
-    })();
-  }, [account]);
 
   return (
     <form
@@ -180,7 +180,7 @@ export function ReviewTransaction({
           id="password"
           name="password"
           className={styles.password}
-          defaultValue={savedPassword}
+          defaultValue={savedPassword ? '*********' : undefined}
         />
         {passwordToggle}
 
