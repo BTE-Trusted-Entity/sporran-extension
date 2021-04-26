@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,12 @@ import { decryptAccount } from '../../utilities/accounts/accounts';
 import { useErrorTooltip } from '../../components/useErrorMessage/useErrorTooltip';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { generatePath, paths } from '../paths';
+import {
+  MessageType,
+  GetPasswordRequest,
+  SavePasswordRequest,
+  ForgetPasswordRequest,
+} from '../../connection/MessageType';
 
 import styles from './ReviewTransaction.module.css';
 
@@ -52,6 +58,24 @@ export function ReviewTransaction({
 
       const { elements } = event.target;
       const password = elements.password.value;
+      const remember = elements.remember;
+
+      if (remember.checked) {
+        browser.runtime.sendMessage({
+          type: MessageType.savePasswordRequest,
+          data: {
+            password: password,
+            address: account.address,
+          },
+        } as SavePasswordRequest);
+      } else {
+        browser.runtime.sendMessage({
+          type: MessageType.forgetPasswordRequest,
+          data: {
+            address: account.address,
+          },
+        } as ForgetPasswordRequest);
+      }
 
       try {
         await decryptAccount(account.address, password);
@@ -64,6 +88,21 @@ export function ReviewTransaction({
 
   const totalFee = fee.add(tip);
   const total = amount.add(totalFee);
+
+  const [savedPassword, setSavedPassword] = useState<string | undefined>();
+
+  useEffect(() => {
+    (async () => {
+      setSavedPassword(
+        await browser.runtime.sendMessage({
+          type: MessageType.getPasswordRequest,
+          data: {
+            address: account.address,
+          },
+        } as GetPasswordRequest),
+      );
+    })();
+  }, [account]);
 
   return (
     <form
@@ -160,6 +199,7 @@ export function ReviewTransaction({
           id="password"
           name="password"
           className={styles.password}
+          defaultValue={savedPassword}
         />
         {passwordToggle}
 

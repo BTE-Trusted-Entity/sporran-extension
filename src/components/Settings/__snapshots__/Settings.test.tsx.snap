@@ -52,6 +52,16 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
         <li
           class="listItem"
         >
+          <button
+            class="listButton"
+            type="button"
+          >
+            Require password for future transactions
+          </button>
+        </li>
+        <li
+          class="listItem"
+        >
           <a
             role="menuitem"
             tabindex="-1"

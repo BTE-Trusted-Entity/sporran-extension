@@ -5,6 +5,7 @@ import { Link, Route } from 'react-router-dom';
 
 import { useAccounts } from '../../utilities/accounts/accounts';
 import { generatePath, paths } from '../../views/paths';
+import { MessageType } from '../../connection/MessageType';
 
 import menuStyles from '../Menu/Menu.module.css';
 import styles from './Settings.module.css';
@@ -23,6 +24,12 @@ export function Settings(): JSX.Element {
 
   // TODO - move version number to config
   const VERSION_NUMBER = '1.0.0';
+
+  const handleForgetPasswords = useCallback(() => {
+    browser.runtime.sendMessage({
+      type: MessageType.forgetAllPasswordsRequest,
+    });
+  }, []);
 
   return (
     <div className={menuStyles.wrapper}>
@@ -65,6 +72,16 @@ export function Settings(): JSX.Element {
                       >
                         {t('component_Settings_reset_password')}
                       </Link>
+                    </li>
+                    <li className={menuStyles.listItem}>
+                      <button
+                        type="button"
+                        className={menuStyles.listButton}
+                        {...(itemProps.shift() as unknown)}
+                        onClick={handleForgetPasswords}
+                      >
+                        {t('component_Settings_forget_saved_passwords')}
+                      </button>
                     </li>
                   </>
                 );
