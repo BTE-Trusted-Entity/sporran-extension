@@ -104,6 +104,7 @@
 
 .remember {
   composes: toggle from '../../components/Toggle/Toggle.module.css';
+  cursor: pointer;
 }
 
 .buttonsLine {
