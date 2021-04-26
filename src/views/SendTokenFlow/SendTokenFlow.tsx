@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import BN from 'bn.js';
 
 import { Account } from '../../utilities/accounts/types';
@@ -36,7 +36,7 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
   return (
     <Switch>
       <Route path={paths.account.send.review}>
-        {recipient && amount && fee && tip && (
+        {recipient && amount && fee && tip ? (
           <ReviewTransaction
             account={account}
             recipient={recipient}
@@ -44,6 +44,8 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
             fee={fee}
             tip={tip}
           />
+        ) : (
+          <Redirect to={generatePath(paths.account.send.start, { address })} />
         )}
       </Route>
 
