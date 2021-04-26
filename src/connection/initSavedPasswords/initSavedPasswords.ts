@@ -14,8 +14,8 @@ interface SavedPassword {
 
 const savedPasswords: Record<string, SavedPassword> = {};
 
-const saveDuration = 15 * 60 * 1000; // milliseconds
-const intervalDuration = 1 * 60 * 1000; // milliseconds
+const saveDuration = 15 * 60 * 1000;
+const intervalDuration = 1 * 60 * 1000;
 
 export function savePasswordListener(message: SavePasswordRequest): void {
   if (message.type !== MessageType.savePasswordRequest) {
@@ -23,11 +23,7 @@ export function savePasswordListener(message: SavePasswordRequest): void {
   }
   const { password, address } = message.data;
 
-  if (!savedPasswords[address]) {
-    savedPasswords[address] = { password: '', timestamp: 0 };
-  }
-  savedPasswords[address].password = password;
-  savedPasswords[address].timestamp = Date.now();
+  savedPasswords[address] = { password, timestamp: Date.now() };
 }
 
 export function getPasswordListener(
@@ -60,8 +56,10 @@ export function forgetAllPasswordsListener(
 }
 
 function checkExpiredPasswords(): void {
+  const oldestPossible = Date.now() - saveDuration;
   for (const password in savedPasswords) {
-    if (Date.now() - savedPasswords[password].timestamp > saveDuration) {
+    const { timestamp } = savedPasswords[password];
+    if (timestamp < oldestPossible) {
       delete savedPasswords[password];
     }
   }

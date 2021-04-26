@@ -14,12 +14,11 @@ import {
   forgetAllPasswordsListener,
 } from './initSavedPasswords';
 
+const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
+jest.useFakeTimers('modern');
+initSavedPasswords();
+
 describe('initSavedPasswords', () => {
-  const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
-
-  jest.useFakeTimers('modern');
-  initSavedPasswords();
-
   it('should save the password', async () => {
     savePasswordListener({
       type: MessageType.savePasswordRequest,
@@ -84,7 +83,6 @@ describe('initSavedPasswords', () => {
 
   it('should forget all passwords when requested', async () => {
     const mockAddress2 = '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr';
-    const mockAddress3 = '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL';
 
     savePasswordListener({
       type: MessageType.savePasswordRequest,
@@ -98,13 +96,6 @@ describe('initSavedPasswords', () => {
       data: {
         address: mockAddress2,
         password: 'somePassword2',
-      },
-    } as SavePasswordRequest);
-    savePasswordListener({
-      type: MessageType.savePasswordRequest,
-      data: {
-        address: mockAddress3,
-        password: 'somePassword3',
       },
     } as SavePasswordRequest);
 
@@ -122,13 +113,8 @@ describe('initSavedPasswords', () => {
       type: MessageType.getPasswordRequest,
       data: { address: mockAddress2 },
     } as GetPasswordRequest);
-    const retrievedPassword3 = await getPasswordListener({
-      type: MessageType.getPasswordRequest,
-      data: { address: mockAddress3 },
-    } as GetPasswordRequest);
 
     expect(retrievedPassword).toBeUndefined();
     expect(retrievedPassword2).toBeUndefined();
-    expect(retrievedPassword3).toBeUndefined();
   });
 });
