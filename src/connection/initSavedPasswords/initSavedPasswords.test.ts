@@ -4,6 +4,7 @@ import {
   GetPasswordRequest,
   ForgetPasswordRequest,
   ForgetAllPasswordsRequest,
+  HasSavedPasswordsRequest,
 } from '../MessageType';
 
 import {
@@ -12,6 +13,7 @@ import {
   getPasswordListener,
   forgetPasswordListener,
   forgetAllPasswordsListener,
+  hasSavedPasswordsListener,
 } from './initSavedPasswords';
 
 const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
@@ -116,5 +118,21 @@ describe('initSavedPasswords', () => {
 
     expect(retrievedPassword).toBeUndefined();
     expect(retrievedPassword2).toBeUndefined();
+  });
+
+  it('should return true if user has any saved passwords', async () => {
+    savePasswordListener({
+      type: MessageType.savePasswordRequest,
+      data: {
+        address: mockAddress,
+        password: 'somePassword',
+      },
+    } as SavePasswordRequest);
+
+    const hasPasswords = await hasSavedPasswordsListener({
+      type: MessageType.hasSavedPasswordsRequest,
+    } as HasSavedPasswordsRequest);
+
+    expect(hasPasswords).toBe(true);
   });
 });

@@ -4,6 +4,7 @@ export const MessageType = {
   feeRequest: 'feeRequest',
   savePasswordRequest: 'savePasswordRequest',
   getPasswordRequest: 'getPasswordRequest',
+  hasSavedPasswordsRequest: 'hasSavedPasswordsRequest',
   forgetPasswordRequest: 'forgetPasswordRequest',
   forgetAllPasswordsRequest: 'forgetAllPasswordsRequest',
 };
@@ -42,6 +43,10 @@ export interface GetPasswordRequest {
   data: {
     address: string;
   };
+}
+
+export interface HasSavedPasswordsRequest {
+  type: 'hasSavedPasswordsRequest';
 }
 
 export interface ForgetPasswordRequest {

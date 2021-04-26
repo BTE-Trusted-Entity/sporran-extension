@@ -5,6 +5,7 @@ import {
   GetPasswordRequest,
   ForgetPasswordRequest,
   ForgetAllPasswordsRequest,
+  HasSavedPasswordsRequest,
 } from '../MessageType';
 
 interface SavedPassword {
@@ -55,6 +56,16 @@ export function forgetAllPasswordsListener(
   }
 }
 
+export function hasSavedPasswordsListener(
+  message: HasSavedPasswordsRequest,
+): Promise<boolean> | void {
+  if (message.type !== MessageType.hasSavedPasswordsRequest) {
+    return;
+  }
+  const hasPasswords = Boolean(Object.values(savedPasswords).length);
+  return Promise.resolve(hasPasswords);
+}
+
 function checkExpiredPasswords(): void {
   const oldestPossible = Date.now() - saveDuration;
   for (const password in savedPasswords) {
@@ -71,4 +82,5 @@ export function initSavedPasswords(): void {
   browser.runtime.onMessage.addListener(getPasswordListener);
   browser.runtime.onMessage.addListener(forgetPasswordListener);
   browser.runtime.onMessage.addListener(forgetAllPasswordsListener);
+  browser.runtime.onMessage.addListener(hasSavedPasswordsListener);
 }
