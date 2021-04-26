@@ -62,7 +62,7 @@ export function hasSavedPasswordsListener(
   if (message.type !== MessageType.hasSavedPasswordsRequest) {
     return;
   }
-  const hasPasswords = Boolean(Object.values(savedPasswords).length);
+  const hasPasswords = Object.values(savedPasswords).length > 0;
   return Promise.resolve(hasPasswords);
 }
 
