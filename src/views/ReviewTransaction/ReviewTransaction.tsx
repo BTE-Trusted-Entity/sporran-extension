@@ -64,7 +64,11 @@ export function ReviewTransaction({
       event.preventDefault();
 
       const { elements } = event.target;
-      const password = savedPassword || elements.password.value;
+      const providedPasword = elements.password.value;
+      const password =
+        providedPasword === '************' && savedPassword
+          ? savedPassword
+          : providedPasword;
 
       try {
         await decryptAccount(account.address, password);
@@ -180,7 +184,7 @@ export function ReviewTransaction({
           id="password"
           name="password"
           className={styles.password}
-          defaultValue={savedPassword ? '*********' : undefined}
+          defaultValue={savedPassword ? '************' : undefined}
         />
         {passwordToggle}
 
