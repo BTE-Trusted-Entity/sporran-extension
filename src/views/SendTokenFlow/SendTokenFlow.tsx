@@ -41,7 +41,7 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
         return;
       }
 
-      const error = await browser.runtime.sendMessage({
+      await browser.runtime.sendMessage({
         type: MessageType.transferRequest,
         data: {
           address,
