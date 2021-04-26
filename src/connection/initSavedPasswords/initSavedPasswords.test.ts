@@ -16,7 +16,7 @@ import {
 describe('initSavedPasswords', () => {
   const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 
-  jest.useFakeTimers();
+  jest.useFakeTimers('modern');
   initSavedPasswords();
 
   it('should save the password', async () => {
@@ -47,9 +47,7 @@ describe('initSavedPasswords', () => {
       },
     } as SavePasswordRequest);
 
-    jest.spyOn(global.Date, 'now').mockReturnValue(Date.now() + 15 * 60 * 1000);
-
-    jest.advanceTimersByTime(15 * 60 * 1000);
+    jest.advanceTimersByTime(16 * 60 * 1000);
 
     const retrievedPassword = await getPasswordListener({
       type: MessageType.getPasswordRequest,
