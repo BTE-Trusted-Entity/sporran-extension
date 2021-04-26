@@ -100,11 +100,11 @@
   align-items: center;
   justify-content: space-between;
   margin: 0.75rem 0.5rem 0.75rem 0;
+  cursor: pointer;
 }
 
 .remember {
   composes: toggle from '../../components/Toggle/Toggle.module.css';
-  cursor: pointer;
 }
 
 .buttonsLine {
