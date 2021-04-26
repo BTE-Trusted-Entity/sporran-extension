@@ -64,11 +64,11 @@ export function ReviewTransaction({
       event.preventDefault();
 
       const { elements } = event.target;
-      const providedPasword = elements.password.value;
+      const providedPassword = elements.password.value;
       const password =
-        providedPasword === '************' && savedPassword
+        providedPassword === '************' && savedPassword
           ? savedPassword
-          : providedPasword;
+          : providedPassword;
 
       try {
         await decryptAccount(account.address, password);
