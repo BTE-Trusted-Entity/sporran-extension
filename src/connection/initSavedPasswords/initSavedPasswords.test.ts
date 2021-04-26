@@ -1,17 +1,18 @@
 import {
-  initSavedPasswords,
-  savePasswordListener,
-  getPasswordListener,
-  forgetPasswordListener,
-  forgetAllPasswordsListener,
-} from './initSavedPasswords';
-import {
   MessageType,
   SavePasswordRequest,
   GetPasswordRequest,
   ForgetPasswordRequest,
   ForgetAllPasswordsRequest,
 } from '../MessageType';
+
+import {
+  initSavedPasswords,
+  savePasswordListener,
+  getPasswordListener,
+  forgetPasswordListener,
+  forgetAllPasswordsListener,
+} from './initSavedPasswords';
 
 describe('initSavedPasswords', () => {
   const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
