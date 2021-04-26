@@ -5,10 +5,10 @@ import { Link, Route } from 'react-router-dom';
 
 import { useAccounts } from '../../utilities/accounts/accounts';
 import { generatePath, paths } from '../../views/paths';
-import { MessageType } from '../../connection/MessageType';
 
 import menuStyles from '../Menu/Menu.module.css';
 import styles from './Settings.module.css';
+import { forgetAllPasswords } from '../../utilities/passwords/passwords';
 
 export function Settings(): JSX.Element {
   const t = browser.i18n.getMessage;
@@ -26,9 +26,7 @@ export function Settings(): JSX.Element {
   const VERSION_NUMBER = '1.0.0';
 
   const handleForgetPasswords = useCallback(() => {
-    browser.runtime.sendMessage({
-      type: MessageType.forgetAllPasswordsRequest,
-    });
+    forgetAllPasswords();
   }, []);
 
   return (

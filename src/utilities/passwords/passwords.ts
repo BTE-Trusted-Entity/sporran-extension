@@ -17,15 +17,6 @@ export function savePassword(password: string, address: string): void {
   } as SavePasswordRequest);
 }
 
-export function forgetPassword(address: string): void {
-  browser.runtime.sendMessage({
-    type: MessageType.forgetPasswordRequest,
-    data: {
-      address,
-    },
-  } as ForgetPasswordRequest);
-}
-
 export async function getPassword(
   address: string,
 ): Promise<string | undefined> {
@@ -35,4 +26,19 @@ export async function getPassword(
       address,
     },
   } as GetPasswordRequest);
+}
+
+export function forgetPassword(address: string): void {
+  browser.runtime.sendMessage({
+    type: MessageType.forgetPasswordRequest,
+    data: {
+      address,
+    },
+  } as ForgetPasswordRequest);
+}
+
+export function forgetAllPasswords(): void {
+  browser.runtime.sendMessage({
+    type: MessageType.forgetAllPasswordsRequest,
+  });
 }
