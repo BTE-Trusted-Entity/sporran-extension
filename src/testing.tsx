@@ -42,3 +42,20 @@ const dialogPromise = Promise.resolve();
 export async function waitForDialogUpdate(): Promise<void> {
   await act(() => dialogPromise);
 }
+
+/** Helps against the warning `Not implemented: HTMLFormElement.prototype.submit`
+ * in JSDom: https://github.com/jsdom/jsdom/issues/1937 */
+export async function runWithJSDOMErrorsDisabled(
+  callback: () => void,
+): Promise<void> {
+  const console = ((window as unknown) as {
+    _virtualConsole: { emit: () => void };
+  })._virtualConsole;
+
+  const { emit } = console;
+  console.emit = jest.fn();
+
+  await callback();
+
+  console.emit = emit;
+}

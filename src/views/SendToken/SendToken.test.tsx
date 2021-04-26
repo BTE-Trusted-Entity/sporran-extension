@@ -4,6 +4,7 @@ import {
   accountsMock as accounts,
   mockBackgroundScript,
   render,
+  runWithJSDOMErrorsDisabled,
   screen,
 } from '../../testing';
 
@@ -15,13 +16,17 @@ describe('SendToken', () => {
   beforeEach(() => mockBackgroundScript());
 
   it('should render', async () => {
-    const { container } = render(<SendToken account={account} />);
+    const { container } = render(
+      <SendToken account={account} onSuccess={jest.fn()} />,
+    );
     await screen.findByText(/Maximum sendable amount: 1.2340/);
     expect(container).toMatchSnapshot();
   });
 
-  it('should enable submit for correct amount and recipient', async () => {
-    render(<SendToken account={account} />);
+  it('should submit correct values', async () => {
+    const address = '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr';
+    const onSuccess = jest.fn();
+    render(<SendToken account={account} onSuccess={onSuccess} />);
 
     const submit = await screen.findByRole('button', {
       name: 'Review & Sign Transaction',
@@ -31,15 +36,25 @@ describe('SendToken', () => {
     userEvent.type(await screen.findByLabelText('Amount to send'), '1');
     userEvent.type(
       await screen.findByLabelText('Paste the recipient address here'),
-      '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
+      address,
     );
+    userEvent.click(await screen.findByLabelText('Increase the tip by 1%'));
     await screen.findByText(/Maximum sendable amount: 1.2340/);
 
-    expect(submit).not.toBeDisabled();
+    await runWithJSDOMErrorsDisabled(() => {
+      userEvent.click(submit);
+    });
+
+    expect(onSuccess).toHaveBeenCalled();
+    const values = onSuccess.mock.calls[0][0];
+    expect(values.recipient).toEqual(address);
+    expect(values.amount.toString()).toEqual('1000000000000000');
+    expect(values.fee.toString()).toEqual('125000000');
+    expect(values.tip.toString()).toEqual('10000000000000');
   });
 
   it('should report too small an amount', async () => {
-    render(<SendToken account={account} />);
+    render(<SendToken account={account} onSuccess={jest.fn()} />);
 
     userEvent.type(await screen.findByLabelText('Amount to send'), '0');
 
@@ -49,7 +64,7 @@ describe('SendToken', () => {
   });
 
   it('should report too large an amount', async () => {
-    render(<SendToken account={account} />);
+    render(<SendToken account={account} onSuccess={jest.fn()} />);
 
     userEvent.type(await screen.findByLabelText('Amount to send'), '111');
 
@@ -61,7 +76,7 @@ describe('SendToken', () => {
   });
 
   it('should not throw for values larger than 1e22 femtokoins', async () => {
-    render(<SendToken account={account} />);
+    render(<SendToken account={account} onSuccess={jest.fn()} />);
 
     userEvent.type(await screen.findByLabelText('Amount to send'), '1111111');
 
@@ -73,7 +88,7 @@ describe('SendToken', () => {
   });
 
   it('should report an invalid amount', async () => {
-    render(<SendToken account={account} />);
+    render(<SendToken account={account} onSuccess={jest.fn()} />);
 
     userEvent.type(await screen.findByLabelText('Amount to send'), ',.,.,.');
 
@@ -83,7 +98,7 @@ describe('SendToken', () => {
   });
 
   it('should report an invalid recipient', async () => {
-    render(<SendToken account={account} />);
+    render(<SendToken account={account} onSuccess={jest.fn()} />);
 
     userEvent.type(
       await screen.findByLabelText('Paste the recipient address here'),

@@ -151,9 +151,15 @@ async function getFee(amount: BN, recipient: string): Promise<BN> {
 
 interface Props {
   account: Account;
+  onSuccess: (values: {
+    recipient: string;
+    amount: BN;
+    fee: BN;
+    tip: BN;
+  }) => void;
 }
 
-export function SendToken({ account }: Props): JSX.Element {
+export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
 
@@ -246,8 +252,24 @@ export function SendToken({ account }: Props): JSX.Element {
     setRecipient(address.trim());
   }, []);
 
+  const handleSubmit = useCallback(() => {
+    if (!(recipient && fee && tipBN && numericAmount)) {
+      return;
+    }
+    onSuccess({
+      recipient,
+      amount: numberToBN(numericAmount),
+      fee,
+      tip: tipBN,
+    });
+  }, [onSuccess, recipient, numericAmount, fee, tipBN]);
+
   return (
-    <form className={styles.container} autoComplete="off">
+    <form
+      onSubmit={handleSubmit}
+      className={styles.container}
+      autoComplete="off"
+    >
       <h1 className={styles.heading}>{t('view_SendToken_heading')}</h1>
       <p className={styles.subline}>{t('view_SendToken_subline')}</p>
 

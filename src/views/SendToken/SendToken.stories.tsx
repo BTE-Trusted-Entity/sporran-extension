@@ -1,5 +1,6 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 import { Meta } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import { browser } from 'webextension-polyfill-ts';
 
 import { mockBackgroundScript } from '../../testing/mockBackgroundScript';
@@ -25,6 +26,7 @@ export function Template(): JSX.Element {
       <Route path={paths.account.send.start}>
         <SendToken
           account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+          onSuccess={action('onSuccess')}
         />
       </Route>
     </MemoryRouter>
