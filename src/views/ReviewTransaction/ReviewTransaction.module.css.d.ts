@@ -1,26 +1,26 @@
 declare namespace ReviewTransactionModuleCssNamespace {
   export interface IReviewTransactionModuleCss {
-    container: string;
-    buttonsLine: string;
-    heading: string;
-    subline: string;
-    recipient: string;
     address: string;
-    resetLine: string;
-    reset: string;
-    passwordLabel: string;
-    passwordLine: string;
-    password: string;
-    rememberLabel: string;
-    remember: string;
+    buttonsLine: string;
     cancel: string;
-    submit: string;
-    totalLine: string;
-    showDetails: string;
-    hideDetails: string;
+    container: string;
+    detailName: string;
     details: string;
     detailsHidden: string;
-    detailName: string;
+    heading: string;
+    hideDetails: string;
+    password: string;
+    passwordLabel: string;
+    passwordLine: string;
+    recipient: string;
+    remember: string;
+    rememberLabel: string;
+    reset: string;
+    resetLine: string;
+    showDetails: string;
+    subline: string;
+    submit: string;
+    totalLine: string;
   }
 }
 
