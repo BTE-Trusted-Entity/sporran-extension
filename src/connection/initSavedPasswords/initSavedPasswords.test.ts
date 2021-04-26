@@ -15,6 +15,7 @@ import {
 
 describe('initSavedPasswords', () => {
   const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
+
   jest.useFakeTimers();
   initSavedPasswords();
 
@@ -45,6 +46,8 @@ describe('initSavedPasswords', () => {
         password: 'somePassword',
       },
     } as SavePasswordRequest);
+
+    jest.spyOn(global.Date, 'now').mockReturnValue(Date.now() + 15 * 60 * 1000);
 
     jest.advanceTimersByTime(15 * 60 * 1000);
 

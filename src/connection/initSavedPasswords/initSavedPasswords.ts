@@ -61,7 +61,6 @@ export function forgetAllPasswordsListener(
 
 function checkExpiredPasswords(): void {
   for (const password in savedPasswords) {
-    console.log('Checking password: ', savedPasswords[password].password);
     if (Date.now() - savedPasswords[password].timestamp > saveDuration) {
       delete savedPasswords[password];
     }
