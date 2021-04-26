@@ -75,6 +75,19 @@ describe('SendToken', () => {
     ).toBeInTheDocument();
   });
 
+  it('should report the too large fee', async () => {
+    render(<SendToken account={account} onSuccess={jest.fn()} />);
+
+    userEvent.click(await screen.findByLabelText('Increase the tip by 1%'));
+    userEvent.type(await screen.findByLabelText('Amount to send'), '1.23');
+
+    expect(
+      await screen.findByText(
+        'The amount+fee exceed your maximum sendable amount',
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('should not throw for values larger than 1e22 femtokoins', async () => {
     render(<SendToken account={account} onSuccess={jest.fn()} />);
 
@@ -108,6 +121,21 @@ describe('SendToken', () => {
     expect(
       await screen.findByText(
         'The recipient address is not properly formatted',
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it('should report the same recipient', async () => {
+    render(<SendToken account={account} onSuccess={jest.fn()} />);
+
+    userEvent.type(
+      await screen.findByLabelText('Paste the recipient address here'),
+      account.address,
+    );
+
+    expect(
+      await screen.findByText(
+        'The recipient address is the same as account address',
       ),
     ).toBeInTheDocument();
   });

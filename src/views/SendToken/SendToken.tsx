@@ -123,12 +123,15 @@ function getAmountError(
   ].filter(Boolean)[0];
 }
 
-function getAddressError(address: string): string | null {
+function getAddressError(address: string, account: Account): string | null {
+  const t = browser.i18n.getMessage;
   try {
+    if (address === account.address) {
+      return t('view_SendToken_recipient_same');
+    }
     DataUtils.validateAddress(address, 'recipient');
     return null;
   } catch (error) {
-    const t = browser.i18n.getMessage;
     return t('view_SendToken_recipient_invalid');
   }
 }
@@ -171,6 +174,13 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const [amount, setAmount] = useState<string | null>(null);
   const amountError = amount && getAmountError(amount, maximum);
   const numericAmount = amount && !amountError && parseFloatLocale(amount);
+  const amountBN = useMemo(
+    () =>
+      typeof numericAmount === 'number' && !Number.isNaN(numericAmount)
+        ? numberToBN(numericAmount)
+        : new BN(0),
+    [numericAmount],
+  );
 
   const [tipPercents, setTipPercents] = useState(0);
   const tipBN = useMemo(
@@ -182,21 +192,21 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   );
   const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
+  const totalError =
+    maximum &&
+    amountBN.add(totalFee).gt(maximum) &&
+    t('view_SendToken_fee_large');
+
   const [recipient, setRecipient] = useState('');
-  const recipientError = recipient && getAddressError(recipient);
+  const recipientError = recipient && getAddressError(recipient, account);
   const recipientTooltip = useErrorTooltip(Boolean(recipientError));
 
   useEffect(() => {
     (async () => {
-      const value =
-        typeof numericAmount === 'number' && !Number.isNaN(numericAmount)
-          ? numberToBN(numericAmount)
-          : new BN(0);
-
-      const realFee = await getFee(value, recipient);
+      const realFee = await getFee(amountBN, recipient);
       setFee(realFee);
     })();
-  }, [numericAmount, recipient]);
+  }, [amountBN, recipient]);
 
   const handleAmountInput = useCallback((event) => {
     const { value } = event.target;
@@ -311,9 +321,9 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
           {t('view_SendToken_all_in')}
         </button>
 
-        {amountError && (
+        {(amountError || totalError) && (
           <output htmlFor="amount" className={styles.amountError}>
-            {amountError}
+            {amountError || totalError}
             <span className={styles.amountPointer} />
           </output>
         )}
@@ -387,6 +397,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
         disabled={
           !amount ||
           Boolean(amountError) ||
+          Boolean(totalError) ||
           !recipient ||
           Boolean(recipientError)
         }
