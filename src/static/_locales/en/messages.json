@@ -349,6 +349,9 @@
   "view_SendToken_amount_large": {
     "message": "The amount entered exceeds your maximum sendable amount"
   },
+  "view_SendToken_fee_large": {
+    "message": "The amount+fee exceed your maximum sendable amount"
+  },
   "view_SendToken_total_fee": {
     "message": "Total fee: "
   },
@@ -374,6 +377,9 @@
   },
   "view_SendToken_recipient_invalid": {
     "message": "The recipient address is not properly formatted"
+  },
+  "view_SendToken_recipient_same": {
+    "message": "The recipient address is the same as account address"
   },
   "view_SendToken_CTA": {
     "message": "Review & Sign Transaction"
