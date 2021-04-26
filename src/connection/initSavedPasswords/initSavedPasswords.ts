@@ -12,7 +12,7 @@ interface SavedPassword {
   timestamp: number;
 }
 
-export const savedPasswords: Record<string, SavedPassword> = {};
+const savedPasswords: Record<string, SavedPassword> = {};
 
 const saveDuration = 15 * 60 * 1000; // milliseconds
 const intervalDuration = 1 * 60 * 1000; // milliseconds
@@ -37,7 +37,7 @@ export function getPasswordListener(
     return;
   }
   const { address } = message.data;
-  return Promise.resolve(savedPasswords[address].password);
+  return Promise.resolve(savedPasswords[address]?.password);
 }
 
 export function forgetPasswordListener(message: ForgetPasswordRequest): void {
@@ -59,8 +59,9 @@ export function forgetAllPasswordsListener(
   }
 }
 
-export function checkExpiredPasswords(): void {
+function checkExpiredPasswords(): void {
   for (const password in savedPasswords) {
+    console.log('Checking password: ', savedPasswords[password].password);
     if (Date.now() - savedPasswords[password].timestamp > saveDuration) {
       delete savedPasswords[password];
     }
