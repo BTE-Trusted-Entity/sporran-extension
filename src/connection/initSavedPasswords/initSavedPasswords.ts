@@ -12,20 +12,10 @@ interface SavedPassword {
   timestamp: number;
 }
 
-const savedPasswords: Record<string, SavedPassword> = {};
+export const savedPasswords: Record<string, SavedPassword> = {};
 
 const saveDuration = 15 * 60 * 1000; // milliseconds
 const intervalDuration = 1 * 60 * 1000; // milliseconds
-
-function checkExpiredPasswords() {
-  setInterval(function () {
-    for (const password in savedPasswords) {
-      if (Date.now() - savedPasswords[password].timestamp > saveDuration) {
-        delete savedPasswords[password];
-      }
-    }
-  }, intervalDuration);
-}
 
 export function savePasswordListener(message: SavePasswordRequest): void {
   if (message.type !== MessageType.savePasswordRequest) {
@@ -69,8 +59,16 @@ export function forgetAllPasswordsListener(
   }
 }
 
+export function checkExpiredPasswords(): void {
+  for (const password in savedPasswords) {
+    if (Date.now() - savedPasswords[password].timestamp > saveDuration) {
+      delete savedPasswords[password];
+    }
+  }
+}
+
 export function initSavedPasswords(): void {
-  checkExpiredPasswords();
+  setInterval(checkExpiredPasswords, intervalDuration);
   browser.runtime.onMessage.addListener(savePasswordListener);
   browser.runtime.onMessage.addListener(getPasswordListener);
   browser.runtime.onMessage.addListener(forgetPasswordListener);
