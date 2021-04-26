@@ -13,11 +13,10 @@ import { useErrorTooltip } from '../../components/useErrorMessage/useErrorToolti
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { generatePath, paths } from '../paths';
 import {
-  MessageType,
-  GetPasswordRequest,
-  SavePasswordRequest,
-  ForgetPasswordRequest,
-} from '../../connection/MessageType';
+  forgetPassword,
+  getPassword,
+  savePassword,
+} from '../../utilities/passwords/passwords';
 
 import styles from './ReviewTransaction.module.css';
 
@@ -64,20 +63,9 @@ export function ReviewTransaction({
 
         const remember = elements.remember;
         if (remember.checked) {
-          browser.runtime.sendMessage({
-            type: MessageType.savePasswordRequest,
-            data: {
-              password: password,
-              address: account.address,
-            },
-          } as SavePasswordRequest);
+          savePassword(password, account.address);
         } else {
-          browser.runtime.sendMessage({
-            type: MessageType.forgetPasswordRequest,
-            data: {
-              address: account.address,
-            },
-          } as ForgetPasswordRequest);
+          forgetPassword(account.address);
         }
       } catch (error) {
         setError(t('view_ReviewTransaction_password_incorrect'));
@@ -93,14 +81,7 @@ export function ReviewTransaction({
 
   useEffect(() => {
     (async () => {
-      setSavedPassword(
-        await browser.runtime.sendMessage({
-          type: MessageType.getPasswordRequest,
-          data: {
-            address: account.address,
-          },
-        } as GetPasswordRequest),
-      );
+      setSavedPassword(await getPassword(account.address));
     })();
   }, [account]);
 
