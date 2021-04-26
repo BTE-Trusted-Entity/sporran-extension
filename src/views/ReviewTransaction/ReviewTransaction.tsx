@@ -58,27 +58,27 @@ export function ReviewTransaction({
 
       const { elements } = event.target;
       const password = elements.password.value;
-      const remember = elements.remember;
-
-      if (remember.checked) {
-        browser.runtime.sendMessage({
-          type: MessageType.savePasswordRequest,
-          data: {
-            password: password,
-            address: account.address,
-          },
-        } as SavePasswordRequest);
-      } else {
-        browser.runtime.sendMessage({
-          type: MessageType.forgetPasswordRequest,
-          data: {
-            address: account.address,
-          },
-        } as ForgetPasswordRequest);
-      }
 
       try {
         await decryptAccount(account.address, password);
+
+        const remember = elements.remember;
+        if (remember.checked) {
+          browser.runtime.sendMessage({
+            type: MessageType.savePasswordRequest,
+            data: {
+              password: password,
+              address: account.address,
+            },
+          } as SavePasswordRequest);
+        } else {
+          browser.runtime.sendMessage({
+            type: MessageType.forgetPasswordRequest,
+            data: {
+              address: account.address,
+            },
+          } as ForgetPasswordRequest);
+        }
       } catch (error) {
         setError(t('view_ReviewTransaction_password_incorrect'));
       }
