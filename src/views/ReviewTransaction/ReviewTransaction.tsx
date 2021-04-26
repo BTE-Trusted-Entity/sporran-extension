@@ -8,6 +8,8 @@ import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { AccountSlide } from '../../components/AccountSlide/AccountSlide';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
+import { decryptAccount } from '../../utilities/accounts/accounts';
+import { useErrorTooltip } from '../../components/useErrorMessage/useErrorTooltip';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { generatePath, paths } from '../paths';
 
@@ -33,6 +35,9 @@ export function ReviewTransaction({
   const { passwordType, passwordToggle } = usePasswordType();
   const [showDetails, setShowDetails] = useState(false);
 
+  const [error, setError] = useState<string | null>(null);
+  const errorTooltip = useErrorTooltip(Boolean(error));
+
   const handleShowDetailsClick = useCallback(() => {
     setShowDetails(true);
   }, []);
@@ -41,11 +46,31 @@ export function ReviewTransaction({
     setShowDetails(false);
   }, []);
 
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+
+      const { elements } = event.target;
+      const password = elements.password.value;
+
+      try {
+        await decryptAccount(account.address, password);
+      } catch (error) {
+        setError(t('view_ReviewTransaction_password_incorrect'));
+      }
+    },
+    [t, account],
+  );
+
   const totalFee = fee.add(tip);
   const total = amount.add(totalFee);
 
   return (
-    <form className={styles.container} autoComplete="off">
+    <form
+      onSubmit={handleSubmit}
+      className={styles.container}
+      autoComplete="off"
+    >
       <h1 className={styles.heading}>{t('view_ReviewTransaction_heading')}</h1>
       <p className={styles.subline}>{t('view_ReviewTransaction_subline')}</p>
 
@@ -129,7 +154,7 @@ export function ReviewTransaction({
         </Link>
       </p>
 
-      <p className={styles.passwordLine}>
+      <p className={styles.passwordLine} {...errorTooltip.anchor}>
         <input
           type={passwordType}
           id="password"
@@ -137,6 +162,11 @@ export function ReviewTransaction({
           className={styles.password}
         />
         {passwordToggle}
+
+        <output {...errorTooltip.tooltip}>
+          {error}
+          <span {...errorTooltip.pointer} />
+        </output>
       </p>
 
       <label className={styles.rememberLabel}>

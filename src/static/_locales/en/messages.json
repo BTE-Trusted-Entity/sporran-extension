@@ -414,6 +414,9 @@
   "view_ReviewTransaction_password": {
     "message": "Sign with Password:"
   },
+  "view_ReviewTransaction_password_incorrect": {
+    "message": "The password is incorrect"
+  },
   "view_ReviewTransaction_remember": {
     "message": "Remember my password for the next 15 minutes"
   },

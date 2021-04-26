@@ -131,7 +131,7 @@ export function ImportBackupPhrase({
     if (!text) {
       return;
     }
-    const values = text.split(/\s+/);
+    const values = text.trim().split(/\s+/);
     if (values.length !== 12) {
       return;
     }

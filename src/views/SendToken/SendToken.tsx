@@ -256,17 +256,22 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     setRecipient(address.trim());
   }, []);
 
-  const handleSubmit = useCallback(() => {
-    if (!(recipient && fee && tipBN && numericAmount)) {
-      return;
-    }
-    onSuccess({
-      recipient,
-      amount: numberToBN(numericAmount),
-      fee,
-      tip: tipBN,
-    });
-  }, [onSuccess, recipient, numericAmount, fee, tipBN]);
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      if (!(recipient && fee && tipBN && numericAmount)) {
+        return;
+      }
+      onSuccess({
+        recipient,
+        amount: numberToBN(numericAmount),
+        fee,
+        tip: tipBN,
+      });
+    },
+    [onSuccess, recipient, numericAmount, fee, tipBN],
+  );
 
   return (
     <form
