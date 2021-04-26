@@ -195,14 +195,12 @@ exports[`ReviewTransaction should render 1`] = `
       <span>
         Remember my password for the next 15 minutes
       </span>
-      <span
+      <input
         class="remember"
-      >
-        <input
-          name="remember"
-          type="checkbox"
-        />
-      </span>
+        name="remember"
+        type="checkbox"
+      />
+      <span />
     </label>
     <p
       class="buttonsLine"
