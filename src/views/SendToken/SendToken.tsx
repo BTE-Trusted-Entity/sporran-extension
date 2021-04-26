@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { useRouteMatch } from 'react-router-dom';
@@ -173,9 +173,13 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const numericAmount = amount && !amountError && parseFloatLocale(amount);
 
   const [tipPercents, setTipPercents] = useState(0);
-  const tipBN = numericAmount
-    ? numberToBN((tipPercents / 100) * numericAmount)
-    : new BN(0);
+  const tipBN = useMemo(
+    () =>
+      numericAmount
+        ? numberToBN((tipPercents / 100) * numericAmount)
+        : new BN(0),
+    [numericAmount, tipPercents],
+  );
   const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
   const [recipient, setRecipient] = useState('');
