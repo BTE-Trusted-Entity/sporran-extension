@@ -94,6 +94,8 @@
   right: 0;
   width: 1.5rem;
   height: 1.5rem;
-  background-image: url('../../components/images/plus-circle.svg');
-  transform: rotate(45deg);
+  background-image: url('../../components/images/x-close.svg');
+  background-size: 0.625rem;
+  border: 2px solid var(--color-grey-light);
+  border-radius: 50%;
 }
