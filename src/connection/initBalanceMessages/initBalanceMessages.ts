@@ -9,7 +9,7 @@ export async function onChange(address: string, balance: BN): Promise<void> {
     type: MessageType.balanceChangeResponse,
     data: {
       address,
-      balance: balance.toString(10),
+      balance: balance.toString(),
     },
   });
 }

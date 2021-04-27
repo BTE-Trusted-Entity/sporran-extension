@@ -46,8 +46,8 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
         data: {
           address,
           recipient,
-          amount: amount.toString(10),
-          tip: tip.toString(10),
+          amount: amount.toString(),
+          tip: tip.toString(),
           password,
         },
       } as TransferRequest);

@@ -18,7 +18,7 @@ export function feeListener(message: FeeRequest): Promise<string> | void {
       new BN(message.data.amount),
     );
     const { partialFee } = await api.rpc.payment.queryInfo(tx.toHex());
-    return partialFee.toString(10);
+    return partialFee.toString();
   })();
 }
 

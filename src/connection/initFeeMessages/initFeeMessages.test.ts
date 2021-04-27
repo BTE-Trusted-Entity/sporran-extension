@@ -19,8 +19,8 @@ describe('initFeeMessages', () => {
       };
       const infoMock = {
         partialFee: {
-          toString(radix: number) {
-            return radix === 10 ? 'partial fee' : undefined;
+          toString() {
+            return 'partial fee';
           },
         },
       };
