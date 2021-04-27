@@ -50,10 +50,11 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
           </a>
         </li>
         <li
-          class="listItem"
+          class="disabled"
         >
           <button
             class="listButton"
+            disabled=""
             role="menuitem"
             tabindex="-1"
             type="button"
