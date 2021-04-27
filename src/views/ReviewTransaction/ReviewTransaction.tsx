@@ -55,9 +55,17 @@ export function ReviewTransaction({
 
   const [savedPassword, setSavedPassword] = useState<string | undefined>();
 
+  const [remember, setRemember] = useState(false);
+
+  const toggleRemember = useCallback(() => {
+    setRemember(!remember);
+  }, [remember]);
+
   useEffect(() => {
     (async () => {
-      setSavedPassword(await getPassword(account.address));
+      const password = await getPassword(account.address);
+      setSavedPassword(password);
+      setRemember(Boolean(password));
     })();
   }, [account]);
 
@@ -75,8 +83,7 @@ export function ReviewTransaction({
       try {
         await decryptAccount(account.address, password);
 
-        const remember = elements.remember;
-        if (remember.checked) {
+        if (remember) {
           savePassword(password, account.address);
         } else {
           forgetPassword(account.address);
@@ -87,7 +94,7 @@ export function ReviewTransaction({
         setError(t('view_ReviewTransaction_password_incorrect'));
       }
     },
-    [t, account, savedPassword, onSuccess],
+    [t, account, savedPassword, onSuccess, remember],
   );
 
   const totalFee = fee.add(tip);
@@ -200,7 +207,13 @@ export function ReviewTransaction({
 
       <label className={styles.rememberLabel}>
         <span>{t('view_ReviewTransaction_remember')}</span>
-        <input type="checkbox" name="remember" className={styles.remember} />
+        <input
+          type="checkbox"
+          name="remember"
+          className={styles.remember}
+          checked={remember}
+          onChange={toggleRemember}
+        />
         <span />
       </label>
 
