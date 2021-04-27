@@ -60,7 +60,7 @@
     "@storybook/react": "^6.2.9",
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
     "@testing-library/dom": "^7.30.3",
-    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.5",
     "@types/chrome": "^0.0.135",
