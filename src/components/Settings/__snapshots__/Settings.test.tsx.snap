@@ -86,7 +86,7 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a>
-            Version $version$
+            Version 1.0.0
           </a>
         </li>
       </ul>

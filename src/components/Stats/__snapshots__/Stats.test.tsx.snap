@@ -5,7 +5,7 @@ exports[`Stats should render for at least two accounts 1`] = `
   <p
     class="stats"
   >
-    You have $number$ accounts with a total
+    You have 3 accounts with a total
     <span
       class="balance"
     >
