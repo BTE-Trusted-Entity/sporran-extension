@@ -8,6 +8,8 @@ import cx from 'classnames';
 
 import { FeeRequest, MessageType } from '../../connection/MessageType';
 import { Account } from '../../utilities/accounts/types';
+import { isNew } from '../../utilities/accounts/accounts';
+import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { Balance, useAddressBalance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
@@ -282,6 +284,10 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     },
     [onSuccess, recipient, numericAmount, fee, tipBN],
   );
+
+  if (isNew(account)) {
+    return <AccountOverviewNew />;
+  }
 
   return (
     <form
