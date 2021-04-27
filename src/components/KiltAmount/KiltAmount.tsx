@@ -14,7 +14,7 @@ const FORMAT = {
 };
 
 export function asKiltCoins(balance: BN): string {
-  const balanceString = balance.toString(10).padStart(16, '0');
+  const balanceString = balance.toString().padStart(16, '0');
   const whole = balanceString.slice(0, -KILT_POWER);
   const fraction = balanceString.slice(-KILT_POWER);
   const numberWithFractions = parseFloat(`${whole}.${fraction}`);

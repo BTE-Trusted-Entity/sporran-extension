@@ -30,7 +30,7 @@ describe('initTransferMessages', () => {
         data: {
           address: 'account-address',
           recipient: 'recipient-address',
-          amount: '7735940',
+          amount: '125000000',
           password: 'password',
           tip: '0',
         },

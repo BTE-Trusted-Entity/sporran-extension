@@ -44,7 +44,7 @@ export const browser = {
           type: MessageType.balanceChangeResponse,
           data: {
             address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-            balance: '04625103a72000',
+            balance: '1234000000000000',
           },
         } as BalanceChangeResponse;
         callback(response, {});

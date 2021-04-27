@@ -21,7 +21,7 @@ describe('initBalanceMessages', () => {
         type: MessageType.balanceChangeResponse,
         data: {
           address: 'address',
-          balance: '4625103a72000',
+          balance: '1234000000000000',
         },
       } as BalanceChangeResponse);
     });
