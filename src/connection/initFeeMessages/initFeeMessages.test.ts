@@ -20,7 +20,7 @@ describe('initFeeMessages', () => {
       const infoMock = {
         partialFee: {
           toString(radix: number) {
-            return radix === 16 ? 'partial fee' : undefined;
+            return radix === 10 ? 'partial fee' : undefined;
           },
         },
       };
@@ -34,7 +34,7 @@ describe('initFeeMessages', () => {
 
       const fee = await feeListener({
         type: MessageType.feeRequest,
-        data: { recipient: 'address', amount: '7735940' },
+        data: { recipient: 'address', amount: '125000000' },
       } as FeeRequest);
 
       expect(fee).toEqual('partial fee');

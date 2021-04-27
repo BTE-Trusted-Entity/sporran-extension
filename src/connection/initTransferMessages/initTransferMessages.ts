@@ -19,7 +19,7 @@ export function transferListener(
 
       // TODO: include the tip in the transaction when the SDK enables it
       // https://github.com/KILTprotocol/sdk-js/pull/378
-      const tx = await makeTransfer(identity, recipient, new BN(amount, 16));
+      const tx = await makeTransfer(identity, recipient, new BN(amount, 10));
       await BlockchainUtils.submitTxWithReSign(tx, identity, {
         resolveOn: BlockchainUtils.IS_IN_BLOCK,
       });

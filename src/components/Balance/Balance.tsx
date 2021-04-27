@@ -25,7 +25,7 @@ export function useAddressBalance(address: string): BN | null {
         message.type === MessageType.balanceChangeResponse &&
         message.data.address === address
       ) {
-        setBalance(new BN(message.data.balance, 16));
+        setBalance(new BN(message.data.balance, 10));
       }
     },
     [address],

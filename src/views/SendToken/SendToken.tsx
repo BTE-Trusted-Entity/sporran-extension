@@ -146,12 +146,12 @@ async function getFee(amount: BN, recipient: string): Promise<BN> {
   const feeString = await browser.runtime.sendMessage({
     type: MessageType.feeRequest,
     data: {
-      amount: amount.toString(16),
+      amount: amount.toString(10),
       recipient,
     },
   } as FeeRequest);
 
-  return new BN(feeString, 16);
+  return new BN(feeString, 10);
 }
 
 interface Props {
