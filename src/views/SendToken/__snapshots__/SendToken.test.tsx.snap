@@ -1,5 +1,133 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SendToken should not render for new account 1`] = `
+<div>
+  <main
+    class="container"
+  >
+    <header>
+      <h1
+        class="heading"
+      >
+        Your Accounts
+      </h1>
+      <p
+        class="info"
+      >
+        You have $number$ accounts
+      </p>
+    </header>
+    <div
+      class="container"
+    >
+      <section>
+        <div
+          class="MacLeod tartan"
+        >
+          <a
+            aria-label="Create new account"
+            class="new"
+            href="/account/create"
+            title="Create new account"
+          />
+        </div>
+        <p
+          class="new"
+        >
+          Create new account
+        </p>
+      </section>
+      <a
+        aria-label="My Third Account"
+        class="left"
+        href="/"
+        title="My Third Account"
+      />
+      <a
+        aria-label="My Sporran Account"
+        class="right"
+        href="/"
+        title="My Sporran Account"
+      />
+      <ul
+        class="bubbles"
+      >
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="My Sporran Account"
+            class="bubble bubbleActive"
+            href="/"
+            title="My Sporran Account"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="My Second Account"
+            class="bubble bubbleActive"
+            href="/"
+            title="My Second Account"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="My Third Account"
+            class="bubble bubbleActive"
+            href="/"
+            title="My Third Account"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Create new account"
+            class="add addActive"
+            href="/"
+            title="Create new account"
+          />
+        </li>
+      </ul>
+    </div>
+    <a
+      class="import"
+      href="/account/import"
+    >
+      Import an account from pre-existing phrase
+    </a>
+    <p
+      class="stats"
+    >
+      You have $number$ accounts with a total
+      <span
+        class="balance"
+      >
+         Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="Kilt coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </main>
+</div>
+`;
+
 exports[`SendToken should render 1`] = `
 <div>
   <form

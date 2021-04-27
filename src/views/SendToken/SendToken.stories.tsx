@@ -3,6 +3,7 @@ import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { browser } from 'webextension-polyfill-ts';
 
+import { NEW } from '../../utilities/accounts/accounts';
 import { mockBackgroundScript } from '../../testing/mockBackgroundScript';
 import { accountsMock as accounts } from '../../testing/AccountsProviderMock';
 import { paths } from '../paths';
@@ -28,6 +29,18 @@ export function Template(): JSX.Element {
           account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
           onSuccess={action('onSuccess')}
         />
+      </Route>
+    </MemoryRouter>
+  );
+}
+
+export function New(): JSX.Element {
+  mockBackgroundScript(browser);
+
+  return (
+    <MemoryRouter initialEntries={['/account/NEW/send']}>
+      <Route path={paths.account.send.start}>
+        <SendToken account={NEW} onSuccess={action('onSuccess')} />
       </Route>
     </MemoryRouter>
   );

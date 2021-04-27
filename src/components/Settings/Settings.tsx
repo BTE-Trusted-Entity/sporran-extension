@@ -1,9 +1,13 @@
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { Link, Route } from 'react-router-dom';
 
 import { useAccounts } from '../../utilities/accounts/accounts';
+import {
+  forgetAllPasswords,
+  hasSavedPasswords,
+} from '../../utilities/passwords/passwords';
 import { generatePath, paths } from '../../views/paths';
 
 import menuStyles from '../Menu/Menu.module.css';
@@ -14,7 +18,7 @@ export function Settings(): JSX.Element {
 
   const accounts = useAccounts().data;
   const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(
-    accounts ? 4 : 2,
+    accounts ? 5 : 2,
   );
 
   const handleClick = useCallback(() => {
@@ -23,6 +27,14 @@ export function Settings(): JSX.Element {
 
   // TODO - move version number to config
   const VERSION_NUMBER = '1.0.0';
+
+  const [hasPasswords, setHasPasswords] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      setHasPasswords(await hasSavedPasswords());
+    })();
+  }, []);
 
   return (
     <div className={menuStyles.wrapper}>
@@ -65,6 +77,21 @@ export function Settings(): JSX.Element {
                       >
                         {t('component_Settings_reset_password')}
                       </Link>
+                    </li>
+                    <li
+                      className={
+                        hasPasswords ? menuStyles.listItem : menuStyles.disabled
+                      }
+                    >
+                      <button
+                        type="button"
+                        className={menuStyles.listButton}
+                        {...(itemProps.shift() as unknown)}
+                        onClick={forgetAllPasswords}
+                        disabled={!hasPasswords}
+                      >
+                        {t('component_Settings_forget_saved_passwords')}
+                      </button>
                     </li>
                   </>
                 );

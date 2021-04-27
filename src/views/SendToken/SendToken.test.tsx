@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 
+import { NEW } from '../../utilities/accounts/accounts';
 import {
   accountsMock as accounts,
   mockBackgroundScript,
@@ -7,6 +8,7 @@ import {
   runWithJSDOMErrorsDisabled,
   screen,
 } from '../../testing';
+import { waitForNextTartan } from '../../testing/getNextTartan.mock';
 
 import { SendToken } from './SendToken';
 
@@ -20,6 +22,14 @@ describe('SendToken', () => {
       <SendToken account={account} onSuccess={jest.fn()} />,
     );
     await screen.findByText(/Maximum sendable amount: 1.2340/);
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should not render for new account', async () => {
+    const { container } = render(
+      <SendToken account={NEW} onSuccess={jest.fn()} />,
+    );
+    await waitForNextTartan();
     expect(container).toMatchSnapshot();
   });
 
