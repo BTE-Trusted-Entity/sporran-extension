@@ -15,7 +15,7 @@ export function feeListener(message: FeeRequest): Promise<string> | void {
     const { api } = await BlockchainApiConnection.getConnectionOrConnect();
     const tx = api.tx.balances.transfer(
       message.data.recipient || fallbackAddressForFee,
-      new BN(message.data.amount, 10),
+      new BN(message.data.amount),
     );
     const { partialFee } = await api.rpc.payment.queryInfo(tx.toHex());
     return partialFee.toString(10);

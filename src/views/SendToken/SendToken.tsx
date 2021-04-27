@@ -151,7 +151,7 @@ async function getFee(amount: BN, recipient: string): Promise<BN> {
     },
   } as FeeRequest);
 
-  return new BN(feeString, 10);
+  return new BN(feeString);
 }
 
 interface Props {
