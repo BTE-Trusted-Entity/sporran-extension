@@ -26,6 +26,7 @@ interface Props {
   amount: BN;
   fee: BN;
   tip: BN;
+  onSuccess: (values: { password: string }) => void;
 }
 
 export function ReviewTransaction({
@@ -34,6 +35,7 @@ export function ReviewTransaction({
   amount,
   fee,
   tip,
+  onSuccess,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -79,11 +81,13 @@ export function ReviewTransaction({
         } else {
           forgetPassword(account.address);
         }
+
+        onSuccess({ password });
       } catch (error) {
         setError(t('view_ReviewTransaction_password_incorrect'));
       }
     },
-    [t, account, savedPassword],
+    [t, account, savedPassword, onSuccess],
   );
 
   const totalFee = fee.add(tip);
