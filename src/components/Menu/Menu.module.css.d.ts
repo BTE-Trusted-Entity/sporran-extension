@@ -1,5 +1,6 @@
 declare namespace MenuModuleCssNamespace {
   export interface IMenuModuleCss {
+    disabled: string;
     dropdown: string;
     heading: string;
     list: string;

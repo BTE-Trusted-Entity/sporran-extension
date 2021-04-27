@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+import { HasSavedPasswordsRequest } from '../../connection/MessageType';
 
 import {
   MessageType,
@@ -41,4 +42,10 @@ export function forgetAllPasswords(): void {
   browser.runtime.sendMessage({
     type: MessageType.forgetAllPasswordsRequest,
   });
+}
+
+export async function hasSavedPasswords(): Promise<boolean> {
+  return await browser.runtime.sendMessage({
+    type: MessageType.hasSavedPasswordsRequest,
+  } as HasSavedPasswordsRequest);
 }
