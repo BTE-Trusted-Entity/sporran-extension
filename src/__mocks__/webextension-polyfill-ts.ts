@@ -3,6 +3,7 @@
 // This is used to mock these values for Storybook so you can develop your components
 // outside the Web Extension environment provided by a compatible browser
 
+import { setupGetMessageShim } from 'chrome-extension-i18n-shim';
 import messagesEN from '../static/_locales/en/messages.json';
 import { BalanceChangeResponse, MessageType } from '../connection/MessageType';
 
@@ -16,13 +17,7 @@ export const browser = {
     },
   },
   i18n: {
-    getMessage(
-      messageName: keyof typeof messagesEN,
-      // substitutions?: any,
-    ): string {
-      const messageData = messagesEN[messageName];
-      return messageData ? messageData.message : `[[${messageName}]]`;
-    },
+    getMessage: setupGetMessageShim(messagesEN),
     getUILanguage(): string {
       return 'en-US';
     },

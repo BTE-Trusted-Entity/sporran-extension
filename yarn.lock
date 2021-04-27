@@ -4521,6 +4521,11 @@ chownr@^2.0.0:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-2.0.0.tgz#15bfbe53d2eab4cf70f18a8cd68ebe5b3cb1dece"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
 
+chrome-extension-i18n-shim@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/chrome-extension-i18n-shim/-/chrome-extension-i18n-shim-1.0.0.tgz#ea23b0a47364c8102e953eefc4bc8d0215ee19fb"
+  integrity sha512-iEX2EFMw7GOZfryWqzaNaQbyYEAt7OHmzG8Ti4vE2MXK6bABRwrFfViS1rv2ba8fpMGtDNwBe4b2kPGrVD9q8w==
+
 chrome-launch@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/chrome-launch/-/chrome-launch-1.1.4.tgz#c8985bd022635a5cc897099bafd19831838a7252"

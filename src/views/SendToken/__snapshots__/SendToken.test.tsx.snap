@@ -14,7 +14,7 @@ exports[`SendToken should not render for new account 1`] = `
       <p
         class="info"
       >
-        You have $number$ accounts
+        You have 3 accounts
       </p>
     </header>
     <div
@@ -107,7 +107,7 @@ exports[`SendToken should not render for new account 1`] = `
     <p
       class="stats"
     >
-      You have $number$ accounts with a total
+      You have 3 accounts with a total
       <span
         class="balance"
       >
@@ -303,7 +303,7 @@ exports[`SendToken should render 1`] = `
     <small
       class="tip"
     >
-      Tip of $percent$% included in fee
+      Tip of 0% included in fee
     </small>
     <p
       class="recipientLine"
@@ -348,7 +348,7 @@ exports[`SendToken should render 1`] = `
     <p
       class="stats"
     >
-      You have $number$ accounts with a total
+      You have 3 accounts with a total
       <span
         class="balance"
       >

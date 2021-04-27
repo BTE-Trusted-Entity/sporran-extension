@@ -23711,7 +23711,7 @@ exports[`ReceiveToken should render a normal account 1`] = `
     <p
       class="stats"
     >
-      You have $number$ accounts with a total
+      You have 3 accounts with a total
       <span
         class="balance"
       >
@@ -23747,7 +23747,7 @@ exports[`ReceiveToken should render the new account 1`] = `
       <p
         class="info"
       >
-        You have $number$ accounts
+        You have 3 accounts
       </p>
     </header>
     <div
@@ -23837,7 +23837,7 @@ exports[`ReceiveToken should render the new account 1`] = `
     <p
       class="stats"
     >
-      You have $number$ accounts with a total
+      You have 3 accounts with a total
       <span
         class="balance"
       >

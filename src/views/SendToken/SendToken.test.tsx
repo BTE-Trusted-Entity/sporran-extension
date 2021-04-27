@@ -69,7 +69,7 @@ describe('SendToken', () => {
     userEvent.type(await screen.findByLabelText('Amount to send'), '0');
 
     expect(
-      await screen.findByText('The minimum sendable amount is $minimum$'),
+      await screen.findByText('The minimum sendable amount is 0.0100'),
     ).toBeInTheDocument();
   });
 
