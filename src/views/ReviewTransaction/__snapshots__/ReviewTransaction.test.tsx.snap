@@ -181,6 +181,7 @@ exports[`ReviewTransaction should render 1`] = `
         id="password"
         name="password"
         type="password"
+        value=""
       />
       <button
         aria-label="Show"
