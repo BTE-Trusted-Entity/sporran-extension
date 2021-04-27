@@ -7,6 +7,7 @@ export const MessageType = {
   hasSavedPasswordsRequest: 'hasSavedPasswordsRequest',
   forgetPasswordRequest: 'forgetPasswordRequest',
   forgetAllPasswordsRequest: 'forgetAllPasswordsRequest',
+  transferRequest: 'transferRequest',
 };
 
 export interface BalanceChangeRequest {
@@ -58,4 +59,15 @@ export interface ForgetPasswordRequest {
 
 export interface ForgetAllPasswordsRequest {
   type: 'forgetAllPasswordsRequest';
+}
+
+export interface TransferRequest {
+  type: 'transferRequest';
+  data: {
+    address: string;
+    recipient: string;
+    amount: string;
+    tip: string;
+    password: string;
+  };
 }
