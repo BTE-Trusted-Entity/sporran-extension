@@ -71,6 +71,11 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.disabled {
+  composes: listItem;
+  pointer-events: none;
+}
+
 .listButton {
   composes: subline from '../Typography/Typography.module.css';
   font-size: calc(11rem / 16);
@@ -80,6 +85,10 @@
   text-align: left;
   background: none;
   cursor: pointer;
+}
+
+.listButton:disabled {
+  opacity: 0.25;
 }
 
 .listItem a {
