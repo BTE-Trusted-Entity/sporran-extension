@@ -3,11 +3,13 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '../../testing';
 import { AccountsProviderMock } from '../../testing/AccountsProviderMock';
+import { waitForHasSavedPasswords } from '../../testing/hasSavedPasswords.mock';
 import { Settings } from './Settings';
 
 describe('Settings', () => {
   it('should render', async () => {
     const { container } = render(<Settings />);
+    await waitForHasSavedPasswords();
     expect(container).toMatchSnapshot();
   });
 
@@ -29,6 +31,8 @@ describe('Settings', () => {
     ).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
 
+    await waitForHasSavedPasswords();
+
     expect(container).toMatchSnapshot();
   });
 
@@ -48,5 +52,7 @@ describe('Settings', () => {
         name: 'Reset password for current account',
       }),
     ).not.toBeInTheDocument();
+
+    await waitForHasSavedPasswords();
   });
 });
