@@ -12,7 +12,9 @@ declare namespace SendTokenModuleCssNamespace {
     maximum: string;
     paste: string;
     recipient: string;
+    recipientError: string;
     recipientLine: string;
+    recipientPointer: string;
     recipientWithButton: string;
     setTip: string;
     subline: string;
