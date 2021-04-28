@@ -34,7 +34,7 @@ export function Settings(): JSX.Element {
     (async () => {
       setHasPasswords(await hasSavedPasswords());
     })();
-  }, []);
+  }, [isOpen]);
 
   return (
     <div className={menuStyles.wrapper}>
