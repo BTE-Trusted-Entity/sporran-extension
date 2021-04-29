@@ -14,7 +14,6 @@ import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCaro
 import { Balance, useAddressBalance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
-import { useErrorTooltip } from '../../components/useErrorMessage/useErrorTooltip';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 
 import styles from './SendToken.module.css';
@@ -201,7 +200,6 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   const [recipient, setRecipient] = useState('');
   const recipientError = recipient && getAddressError(recipient, account);
-  const recipientTooltip = useErrorTooltip(Boolean(recipientError));
 
   useEffect(() => {
     (async () => {
@@ -380,7 +378,6 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
           required
           aria-label={t('view_SendToken_recipient')}
           placeholder={t('view_SendToken_recipient')}
-          {...recipientTooltip.anchor}
         />
         {showPasteButton && (
           <button
@@ -391,10 +388,12 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
             aria-label={t('common_action_paste')}
           />
         )}
-        <output htmlFor="recipient" {...recipientTooltip.tooltip}>
-          {recipientError}
-          <span {...recipientTooltip.pointer} />
-        </output>
+        {recipientError && (
+          <output htmlFor="recipient" className={styles.recipientError}>
+            {recipientError}
+            <span className={styles.recipientPointer} />
+          </output>
+        )}
       </p>
 
       <button

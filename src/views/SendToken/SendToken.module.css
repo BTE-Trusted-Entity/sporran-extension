@@ -44,7 +44,7 @@
 .amountPointer {
   composes: pointer from '../../components/useErrorMessage/useErrorTooltip.module.css';
   display: block;
-  top: -.25rem;
+  top: -0.25rem;
   left: 50%;
 }
 
@@ -98,6 +98,7 @@
   width: 100%;
   display: grid;
   grid-template-areas: 'full';
+  position: relative;
 }
 
 .recipient {
@@ -108,6 +109,21 @@
 
 .recipientWithButton {
   padding-right: 2.5rem;
+}
+
+.recipientError {
+  composes: tooltip from '../../components/useErrorMessage/useErrorTooltip.module.css';
+  display: block;
+  position: absolute;
+  bottom: -0.875rem;
+  right: 1rem;
+}
+
+.recipientPointer {
+  composes: pointer from '../../components/useErrorMessage/useErrorTooltip.module.css';
+  display: block;
+  top: -0.25rem;
+  right: 10%;
 }
 
 .paste {
