@@ -13,6 +13,10 @@
     "scripts": ["js/backgroundPage.js"],
     "persistent": true
   },
+  "content_scripts": [{
+    "matches": ["*://*/*"],
+    "js": ["js/contentScript.js"]
+  }],
   "icons": {
     "16": "icon-16.png",
     "48": "icon-48.png",
@@ -28,5 +32,8 @@
     "http://*/",
     "https://*/"
   ],
-  "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self';"
+  "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self';",
+  "web_accessible_resources": [
+    "js/injectedScript.js"
+  ]
 }

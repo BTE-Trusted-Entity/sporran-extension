@@ -5,6 +5,7 @@ import { initBalanceMessages } from './connection/initBalanceMessages/initBalanc
 import { initFeeMessages } from './connection/initFeeMessages/initFeeMessages';
 import { initSavedPasswords } from './connection/initSavedPasswords/initSavedPasswords';
 import { initTransferMessages } from './connection/initTransferMessages/initTransferMessages';
+import { initPopupMessages } from './connection/initPopupMessages/initPopupMessages';
 
 function init() {
   initBlockChainConnection();
@@ -12,6 +13,7 @@ function init() {
   initFeeMessages();
   initSavedPasswords();
   initTransferMessages();
+  initPopupMessages();
 }
 
 init();

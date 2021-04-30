@@ -27,4 +27,9 @@ export const paths = {
     receive: '/account/:address/receive',
     remove: '/account/:address/remove',
   },
+  popup: {
+    base: '/popup',
+    claim: '/popup/claim',
+    save: '/popup/save',
+  },
 };

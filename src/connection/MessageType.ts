@@ -1,3 +1,5 @@
+import { PopupAction } from '../utilities/popups/types';
+
 export const MessageType = {
   balanceChangeRequest: 'balanceChangeRequest',
   balanceChangeResponse: 'balanceChangeResponse',
@@ -8,6 +10,7 @@ export const MessageType = {
   forgetPasswordRequest: 'forgetPasswordRequest',
   forgetAllPasswordsRequest: 'forgetAllPasswordsRequest',
   transferRequest: 'transferRequest',
+  popupRequest: 'popupRequest',
 };
 
 export interface BalanceChangeRequest {
@@ -69,5 +72,13 @@ export interface TransferRequest {
     amount: string;
     tip: string;
     password: string;
+  };
+}
+
+export interface PopupRequest {
+  type: 'popupRequest';
+  data: {
+    action: PopupAction;
+    [key: string]: string;
   };
 }
