@@ -16,12 +16,9 @@ function injectScript() {
 
 function messageListener(event: MessageEvent) {
   const { data, source } = event;
-  const { action, ...values } = data;
+  const { type, action, ...values } = data;
 
-  if (
-    source !== window ||
-    data.type !== 'sporranExtension.injectedScript.request'
-  ) {
+  if (source !== window || type !== 'sporranExtension.injectedScript.request') {
     return;
   }
 
