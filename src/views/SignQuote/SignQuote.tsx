@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { minBy } from 'lodash-es';
 import BN from 'bn.js';
@@ -19,6 +19,17 @@ export function SignQuote(): JSX.Element | null {
   const values = [...Object.entries(useQuery())];
 
   const { passwordType, passwordToggle } = usePasswordType();
+
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleNameInput = useCallback((event) => {
+    setName(event.target.value);
+  }, []);
+
+  const handlePasswordInput = useCallback((event) => {
+    setPassword(event.target.value);
+  }, []);
 
   const handleCancel = useCallback(() => {
     window.close();
@@ -65,7 +76,12 @@ export function SignQuote(): JSX.Element | null {
 
       <label className={styles.label}>
         {t('view_SignQuote_name')}
-        <input name="name" className={styles.name} />
+        <input
+          name="name"
+          className={styles.name}
+          required
+          onInput={handleNameInput}
+        />
       </label>
 
       <div className={styles.account}>
@@ -84,6 +100,8 @@ export function SignQuote(): JSX.Element | null {
             name="password"
             type={passwordType}
             className={styles.password}
+            required
+            onInput={handlePasswordInput}
           />
           {passwordToggle}
         </span>
@@ -93,7 +111,11 @@ export function SignQuote(): JSX.Element | null {
         <button type="button" className={styles.cancel} onClick={handleCancel}>
           {t('common_action_cancel')}
         </button>
-        <button type="submit" className={styles.submit}>
+        <button
+          type="submit"
+          className={styles.submit}
+          disabled={!name || !password}
+        >
           {t('view_SignQuote_CTA')}
         </button>
       </p>

@@ -88,6 +88,7 @@ exports[`SignQuote should render 1`] = `
       <input
         class="name"
         name="name"
+        required=""
       />
     </label>
     <div
@@ -112,6 +113,7 @@ exports[`SignQuote should render 1`] = `
         <input
           class="password"
           name="password"
+          required=""
           type="password"
         />
         <button
@@ -133,6 +135,7 @@ exports[`SignQuote should render 1`] = `
       </button>
       <button
         class="submit"
+        disabled=""
         type="submit"
       >
         Accept
