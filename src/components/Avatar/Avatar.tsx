@@ -10,6 +10,7 @@ import styles from './Avatar.module.css';
 interface Props {
   tartan: string;
   address?: string;
+  className?: string;
 }
 
 const classNameForTartan: { [key: string]: string } = {
@@ -67,11 +68,15 @@ const classNameForTartan: { [key: string]: string } = {
   Wallace: styles.Wallace,
 };
 
-export function Avatar({ tartan, address }: Props): JSX.Element {
+export function Avatar({
+  tartan,
+  address,
+  className = styles.tartan,
+}: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   return (
-    <div className={`${classNameForTartan[tartan]} ${styles.tartan}`}>
+    <div className={`${classNameForTartan[tartan]} ${className}`}>
       {address ? (
         <Identicon className={styles.identicon} address={address} size={64} />
       ) : (
