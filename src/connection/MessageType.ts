@@ -11,6 +11,7 @@ export const MessageType = {
   forgetAllPasswordsRequest: 'forgetAllPasswordsRequest',
   transferRequest: 'transferRequest',
   popupRequest: 'popupRequest',
+  popupResponse: 'popupResponse',
 };
 
 export interface BalanceChangeRequest {
@@ -79,6 +80,13 @@ export interface PopupRequest {
   type: 'popupRequest';
   data: {
     action: PopupAction;
+    [key: string]: string;
+  };
+}
+
+export interface PopupResponse {
+  type: typeof MessageType.popupResponse;
+  data: {
     [key: string]: string;
   };
 }

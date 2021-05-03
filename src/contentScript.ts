@@ -1,5 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
-import { MessageType, PopupRequest } from './connection/MessageType';
+import {
+  MessageType,
+  PopupRequest,
+  PopupResponse,
+} from './connection/MessageType';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -12,9 +16,12 @@ function injectScript() {
 
 function messageListener(event: MessageEvent) {
   const { data, source } = event;
-  const { type, action, ...values } = data;
+  const { action, ...values } = data;
 
-  if (source !== window || type !== 'sporranExtension.injectedScript') {
+  if (
+    source !== window ||
+    data.type !== 'sporranExtension.injectedScript.request'
+  ) {
     return;
   }
 
@@ -27,8 +34,23 @@ function messageListener(event: MessageEvent) {
   })();
 }
 
+function responseListener(message: PopupResponse) {
+  if (message.type !== MessageType.popupResponse) {
+    return;
+  }
+
+  window.postMessage(
+    {
+      type: 'sporranExtension.injectedScript.response',
+      ...message.data,
+    },
+    window.location.href,
+  );
+}
+
 function initMessages() {
   window.addEventListener('message', messageListener);
+  browser.runtime.onMessage.addListener(responseListener);
 }
 
 function main() {
