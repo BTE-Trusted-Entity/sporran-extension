@@ -11,6 +11,9 @@
 }
 
 .identicon {
+  --size: calc(64% / 96 * 100);
+  width: var(--size);
+  height: var(--size);
   border: 1px solid var(--color-black);
   border-radius: 50%;
 }

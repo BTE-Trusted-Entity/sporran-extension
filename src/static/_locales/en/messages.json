@@ -431,5 +431,23 @@
   },
   "view_ReviewTransaction_CTA": {
     "message": "Send"
+  },
+  "view_SignQuote_heading": {
+    "message": "Sporran"
+  },
+  "view_SignQuote_subline": {
+    "message": "Terms for Generating Credential"
+  },
+  "view_SignQuote_costs": {
+    "message": "Credential Costs: "
+  },
+  "view_SignQuote_name": {
+    "message": "Give your credential a name:"
+  },
+  "view_SignQuote_password": {
+    "message": "Sign with Password:"
+  },
+  "view_SignQuote_CTA": {
+    "message": "Accept"
   }
 }

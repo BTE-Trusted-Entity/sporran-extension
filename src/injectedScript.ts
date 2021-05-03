@@ -6,6 +6,13 @@ function showClaimPopup(values: { [key: string]: string }) {
     {
       type,
       action: 'claim',
+
+      // TODO: remove
+      'Full Name': 'Ingo Rübe',
+      Email: 'ingo@kilt.io',
+      'Credential type': 'BL-Mail-Simple',
+      Attester: 'BOTLabs',
+
       ...values,
     },
     window.location.href,

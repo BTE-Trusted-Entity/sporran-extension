@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignQuote should render 1`] = `
+<div>
+  <form
+    autocomplete="off"
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Sporran
+    </h1>
+    <p
+      class="subline"
+    >
+      Terms for Generating Credential
+    </p>
+    <dl
+      class="details"
+    >
+      <dt
+        class="detailName"
+      >
+        Full Name
+        :
+      </dt>
+      <dd
+        class="detailOwnValue"
+      >
+        Ingo Rübe
+      </dd>
+      <dt
+        class="detailName"
+      >
+        Email
+        :
+      </dt>
+      <dd
+        class="detailOwnValue"
+      >
+        ingo@kilt.io
+      </dd>
+      <dt
+        class="detailName"
+      >
+        Credential type
+        :
+      </dt>
+      <dd
+        class="detailValue"
+      >
+        BL-Mail-Simple
+      </dd>
+      <dt
+        class="detailName"
+      >
+        Attester
+        :
+      </dt>
+      <dd
+        class="detailValue"
+      >
+        BOTLabs
+      </dd>
+    </dl>
+    <p
+      class="costs"
+    >
+      <span>
+        Credential Costs: 
+      </span>
+      <span
+        class="amount"
+      >
+        0.0000
+         
+        <span
+          aria-label="Kilt coin"
+          class="coin"
+        />
+      </span>
+    </p>
+    <label
+      class="label"
+    >
+      Give your credential a name:
+      <input
+        class="name"
+        name="name"
+        required=""
+      />
+    </label>
+    <div
+      class="account"
+    >
+      <div
+        class="MacFarlane tartan"
+      >
+        Identicon
+      </div>
+      <span>
+        My Sporran Account
+      </span>
+    </div>
+    <label
+      class="label"
+    >
+      Sign with Password:
+      <span
+        class="passwordLine"
+      >
+        <input
+          class="password"
+          name="password"
+          required=""
+          type="password"
+        />
+        <button
+          aria-label="Show"
+          class="show"
+          title="Show"
+          type="button"
+        />
+      </span>
+    </label>
+    <p
+      class="buttonsLine"
+    >
+      <button
+        class="cancel"
+        type="button"
+      >
+        Cancel
+      </button>
+      <button
+        class="submit"
+        disabled=""
+        type="submit"
+      >
+        Accept
+      </button>
+    </p>
+  </form>
+</div>
+`;
