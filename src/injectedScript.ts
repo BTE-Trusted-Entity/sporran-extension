@@ -1,10 +1,15 @@
-const type = 'sporranExtension.injectedScript';
+let lastCallback: (values: { [key: string]: string }) => void | undefined;
 
-function showClaimPopup(values: { [key: string]: string }) {
+function showClaimPopup(
+  values: { [key: string]: string },
+  callback: typeof lastCallback,
+) {
+  lastCallback = callback;
+
   // Non-extension scripts cannot open windows with extension pages
   window.postMessage(
     {
-      type,
+      type: 'sporranExtension.injectedScript.request',
       action: 'claim',
 
       // TODO: remove
@@ -19,6 +24,16 @@ function showClaimPopup(values: { [key: string]: string }) {
   );
 }
 
+function onMessage(message: MessageEvent) {
+  if (
+    !lastCallback ||
+    message.data.type !== 'sporranExtension.injectedScript.response'
+  ) {
+    return;
+  }
+  lastCallback(message.data);
+}
+
 interface API {
   showClaimPopup: typeof showClaimPopup;
 }
@@ -31,6 +46,7 @@ function main() {
   ((window as unknown) as { sporranExtension: API }).sporranExtension = {
     showClaimPopup,
   };
+  window.addEventListener('message', onMessage);
 }
 
 main();
