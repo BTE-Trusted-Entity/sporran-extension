@@ -24,6 +24,25 @@ function showClaimPopup(
   );
 }
 
+function showSaveCredentialPopup(values: { [key: string]: string }) {
+  // Non-extension scripts cannot open windows with extension pages
+  window.postMessage(
+    {
+      type: 'sporranExtension.injectedScript.request',
+      action: 'save',
+
+      // TODO: remove
+      'Full Name': 'Ingo Rübe',
+      Email: 'ingo@kilt.io',
+      'Credential type': 'BL-Mail-Simple',
+      Attester: 'BOTLabs',
+
+      ...values,
+    },
+    window.location.href,
+  );
+}
+
 function onMessage(message: MessageEvent) {
   if (
     !lastCallback ||
@@ -36,6 +55,7 @@ function onMessage(message: MessageEvent) {
 
 interface API {
   showClaimPopup: typeof showClaimPopup;
+  showSaveCredentialPopup: typeof showSaveCredentialPopup;
 }
 
 function main() {
@@ -45,6 +65,7 @@ function main() {
   // Only injected scripts can create variables like this, content script cannot do this
   ((window as unknown) as { sporranExtension: API }).sporranExtension = {
     showClaimPopup,
+    showSaveCredentialPopup,
   };
   window.addEventListener('message', onMessage);
 }

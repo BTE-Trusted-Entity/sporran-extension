@@ -449,5 +449,17 @@
   },
   "view_SignQuote_CTA": {
     "message": "Accept"
+  },
+  "view_SaveCredential_heading": {
+    "message": "Sporran"
+  },
+  "view_SaveCredential_subline": {
+    "message": "Your attested credential was saved:"
+  },
+  "view_SaveCredential_warning": {
+    "message": "Please backup your\ncredential now!"
+  },
+  "view_SaveCredential_CTA": {
+    "message": "Backup Credential"
   }
 }
