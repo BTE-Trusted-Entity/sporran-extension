@@ -9,8 +9,8 @@ export default {
     injectedScript: path.resolve('./src/injectedScript.ts'),
   },
   output: {
-    path: path.resolve('./dist/js'),
-    filename: '[name].js',
+    path: path.resolve('./dist'),
+    filename: 'js/[name].js',
   },
   module: {
     rules: [
@@ -40,7 +40,14 @@ export default {
       },
       {
         test: /\.(png|svg|woff2)$/i,
-        use: ['url-loader'],
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 4 * 1024,
+            },
+          },
+        ],
       },
     ],
   },
