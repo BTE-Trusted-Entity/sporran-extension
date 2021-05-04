@@ -27,3 +27,7 @@
   composes: buttonSecondary from '../../components/Button/Button.module.css';
   margin-top: 1rem;
 }
+
+.credentials {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
+}
