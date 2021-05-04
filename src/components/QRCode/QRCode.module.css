@@ -15,6 +15,7 @@
 
 .logo {
   --size: 20%;
+
   position: absolute;
   height: var(--size);
   width: var(--size);
