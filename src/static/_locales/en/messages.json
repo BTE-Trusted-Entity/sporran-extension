@@ -311,6 +311,9 @@
   "view_AccountOverview_receive": {
     "message": "Receive"
   },
+  "view_AccountOverview_credentials": {
+    "message": "Show Credentials"
+  },
   "view_RemoveAccount_heading": {
     "message": "Attention!"
   },
@@ -461,5 +464,23 @@
   },
   "view_SaveCredential_CTA": {
     "message": "Backup Credential"
+  },
+  "view_AccountCredentials_title": {
+    "message": "Your Credentials"
+  },
+  "view_AccountCredentials_subline": {
+    "message": "Overview"
+  },
+  "view_AccountCredentials_name": {
+    "message": "Name"
+  },
+  "view_AccountCredentials_ctype": {
+    "message": "C-Type"
+  },
+  "view_AccountCredentials_attester": {
+    "message": "Attester"
+  },
+  "view_AccountCredentials_valid": {
+    "message": "Valid"
   }
 }

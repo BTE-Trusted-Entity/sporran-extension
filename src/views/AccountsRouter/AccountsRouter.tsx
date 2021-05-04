@@ -14,6 +14,7 @@ import { AccountOverview } from '../AccountOverview/AccountOverview';
 import { ResetAccount } from '../ResetAccount/ResetAccount';
 import { RemoveAccount } from '../RemoveAccount/RemoveAccount';
 import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
+import { AccountCredentials } from '../AccountCredentials/AccountCredentials';
 import { paths } from '../paths';
 
 interface Props {
@@ -42,6 +43,10 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
 
         <Route path={paths.account.send.start}>
           <SendTokenFlow account={account} />
+        </Route>
+
+        <Route path={paths.account.credentials}>
+          <AccountCredentials account={account} />
         </Route>
 
         <Route path={paths.account.remove}>

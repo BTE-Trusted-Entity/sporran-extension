@@ -2,6 +2,8 @@
   composes: buttonText from '../Typography/Typography.module.css';
 
   text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
   height: 2.25rem;
   line-height: 2.25rem;
   border: 0;
