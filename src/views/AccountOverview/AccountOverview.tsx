@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useParams, useRouteMatch, Redirect } from 'react-router-dom';
+import { minBy } from 'lodash-es';
 
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { Balance } from '../../components/Balance/Balance';
@@ -34,6 +35,7 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
     return null;
   }
 
+  const credentialsAccount = minBy(Object.values(accounts), 'index') as Account;
   const accountsNumber = Object.values(accounts).length;
   const { address } = account;
 
@@ -76,6 +78,15 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
           {t('view_AccountOverview_receive')}
         </Link>
       </p>
+
+      {account === credentialsAccount && (
+        <Link
+          to={generatePath(paths.account.credentials, { address })}
+          className={styles.credentials}
+        >
+          {t('view_AccountOverview_credentials')}
+        </Link>
+      )}
 
       <Stats />
       {hasOpenOverlay && type && (

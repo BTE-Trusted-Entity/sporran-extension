@@ -25,6 +25,7 @@ export const paths = {
       review: '/account/:address/send/review',
     },
     receive: '/account/:address/receive',
+    credentials: '/account/:address/credentials',
     remove: '/account/:address/remove',
   },
   popup: {
