@@ -14,8 +14,8 @@ function injectScript() {
   document.head.appendChild(script);
 }
 
-function messageListener(event: MessageEvent) {
-  const { data, source } = event;
+function messageListener(message: MessageEvent) {
+  const { data, source } = message;
   const { type, action, ...values } = data;
 
   if (source !== window || type !== 'sporranExtension.injectedScript.request') {
