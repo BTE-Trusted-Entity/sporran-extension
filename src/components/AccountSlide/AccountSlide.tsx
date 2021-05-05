@@ -57,6 +57,7 @@ export function AccountSlide({ account }: Props): JSX.Element {
             placeholder={t('component_AccountSlide_name')}
             defaultValue={account.name}
             autoComplete="off"
+            autoFocus
           />
           <button
             className={styles.save}

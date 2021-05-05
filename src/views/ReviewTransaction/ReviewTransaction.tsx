@@ -196,6 +196,7 @@ export function ReviewTransaction({
           name="password"
           className={styles.password}
           defaultValue={savedPassword ? '************' : undefined}
+          autoFocus
         />
         {passwordToggle}
 

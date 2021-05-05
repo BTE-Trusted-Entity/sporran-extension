@@ -79,6 +79,7 @@ function WordInput({
         onInput={handleInput}
         onPaste={handlePaste}
         value={word}
+        autoFocus={index === 0}
       />
       {hasError && (
         <output htmlFor={index.toString()} className={styles.tooltip}>

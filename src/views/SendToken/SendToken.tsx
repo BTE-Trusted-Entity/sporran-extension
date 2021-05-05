@@ -312,6 +312,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
           name="amount"
           inputMode="numeric"
           required
+          autoFocus
           maxLength={15}
           aria-label={t('view_SendToken_amount')}
           placeholder={
