@@ -40,7 +40,7 @@ yarn dev
 -   `yarn storybook` - runs the Storybook server
 -   `yarn build` - builds the production-ready unpacked extension
 -   `yarn test -u` - runs Jest + updates test snapshots
--   `yarn lint` - runs EsLint
+-   `yarn lint` - runs Stylelint and ESLint
 -   `yarn prettify` - runs Prettier
 -   `yarn open-firefox` - opens Sporran in Firefox
 -   `yarn open-chrome` - opens Sporran in Chrome

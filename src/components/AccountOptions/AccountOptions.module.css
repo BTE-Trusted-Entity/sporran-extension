@@ -7,7 +7,6 @@
 .toggle {
   composes: toggle from '../../components/Menu/Menu.module.css';
   composes: buttonIcon from '../../components/Button/Button.module.css';
-
   width: 1.625rem;
   height: 1.625rem;
   background-size: 0.75rem;

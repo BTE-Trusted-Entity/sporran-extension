@@ -42,7 +42,7 @@
   border-radius: calc(3rem / 16);
   box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
   margin: calc(3rem / 16);
-  background: linear-gradient(var(--color-grey-medium) 0%, #6C6B6B 100%);
+  background: linear-gradient(var(--color-grey-medium) 0%, #6c6b6b 100%);
   color: var(--color-dark);
   cursor: pointer;
 }
@@ -67,7 +67,7 @@
 }
 
 .incorrect {
-  background: linear-gradient(var(--color-orange) 0%, #BA4822 100%);
+  background: linear-gradient(var(--color-orange) 0%, #ba4822 100%);
   color: var(--color-grey-light);
 }
 

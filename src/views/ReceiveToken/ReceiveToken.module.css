@@ -65,7 +65,8 @@
 .qrCodeToggle:focus .qrCodeShadow {
   grid-area: code;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7) url('../../components/images/search.svg')
+  background:
+    rgba(0, 0, 0, 0.7) url('../../components/images/search.svg')
     center center/1.5rem no-repeat;
   border: 0;
   position: relative;
