@@ -86,6 +86,7 @@ exports[`SignQuote should render 1`] = `
     >
       Give your credential a name:
       <input
+        autocomplete="off"
         class="name"
         name="name"
         required=""
