@@ -482,5 +482,35 @@
   },
   "view_AccountCredentials_valid": {
     "message": "Valid"
+  },
+  "view_ShareCredential_share": {
+    "message": "Share credential"
+  },
+  "view_ShareCredential_heading": {
+    "message": "Your Credentials"
+  },
+  "view_ShareCredential_subline": {
+    "message": "Pick credentials to sign and share"
+  },
+  "view_ShareCredential_all": {
+    "message": "all"
+  },
+  "view_ShareCredential_name": {
+    "message": "Name"
+  },
+  "view_ShareCredential_ctype": {
+    "message": "C-Type"
+  },
+  "view_ShareCredential_attester": {
+    "message": "Attester"
+  },
+  "view_ShareCredential_valid": {
+    "message": "Valid"
+  },
+  "view_ShareCredential_password": {
+    "message": "Sign with Password:"
+  },
+  "view_ShareCredential_CTA": {
+    "message": "Share"
   }
 }

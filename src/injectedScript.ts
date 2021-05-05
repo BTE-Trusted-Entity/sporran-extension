@@ -43,6 +43,18 @@ function showSaveCredentialPopup(values: { [key: string]: string }) {
   );
 }
 
+function showShareCredentialPopup(values: { [key: string]: string }) {
+  // Non-extension scripts cannot open windows with extension pages
+  window.postMessage(
+    {
+      type: 'sporranExtension.injectedScript.request',
+      action: 'share',
+      ...values,
+    },
+    window.location.href,
+  );
+}
+
 function onMessage(message: MessageEvent) {
   if (
     !lastCallback ||
@@ -56,6 +68,7 @@ function onMessage(message: MessageEvent) {
 interface API {
   showClaimPopup: typeof showClaimPopup;
   showSaveCredentialPopup: typeof showSaveCredentialPopup;
+  showShareCredentialPopup: typeof showShareCredentialPopup;
 }
 
 function main() {
@@ -66,6 +79,7 @@ function main() {
   ((window as unknown) as { sporranExtension: API }).sporranExtension = {
     showClaimPopup,
     showSaveCredentialPopup,
+    showShareCredentialPopup,
   };
   window.addEventListener('message', onMessage);
 }
