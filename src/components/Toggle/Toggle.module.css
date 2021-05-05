@@ -5,6 +5,7 @@
 .toggle + * {
   --size: 1.75em;
   --knob: calc(1em - 2px);
+
   width: var(--size);
   height: var(--size);
   vertical-align: middle;
@@ -19,10 +20,9 @@
   display: block;
   width: var(--size);
   height: 1em;
-  background: var(--color-grey-light);
   border-radius: 0.5em;
   background: var(--color-pink) linear-gradient(140deg, var(--color-pink) 0%, var(--color-dark) 100%);
-  box-shadow: inset 1px 1px 1px 0 rgba(0,0,0,0.4);
+  box-shadow: inset 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
 }
 
 .toggle + *::after {

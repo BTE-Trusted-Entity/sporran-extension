@@ -26,7 +26,8 @@
   border-bottom: var(--arrow) solid var(--background);
 }
 
-.tooltip.visible, .tooltip.visible > .pointer {
+.tooltip.visible,
+.tooltip.visible > .pointer {
   display: block;
 }
 

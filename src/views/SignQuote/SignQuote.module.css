@@ -60,7 +60,9 @@
 
 .tartan {
   composes: tartan from '../../components/Avatar/Avatar.module.css';
+
   --size: calc(29rem / 16);
+
   width: var(--size);
   height: var(--size);
 }

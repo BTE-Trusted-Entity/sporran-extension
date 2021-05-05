@@ -31,14 +31,14 @@
   width: 10rem;
 }
 
-.amount:focus ~ .amountError {
-  display: none;
-}
-
 .amountError {
   composes: tooltip from '../../components/useErrorMessage/useErrorTooltip.module.css';
   display: block;
   position: absolute;
+}
+
+.amount:focus ~ .amountError {
+  display: none;
 }
 
 .amountPointer {
