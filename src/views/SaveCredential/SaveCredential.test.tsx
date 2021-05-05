@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 
-import { render } from '../../testing';
+import { render } from '../../testing/testing';
 import { paths } from '../paths';
 
 import { SaveCredential } from './SaveCredential';

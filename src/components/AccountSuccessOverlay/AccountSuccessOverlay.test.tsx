@@ -1,4 +1,8 @@
-import { accountsMock, render, waitForDialogUpdate } from '../../testing';
+import {
+  accountsMock,
+  render,
+  waitForDialogUpdate,
+} from '../../testing/testing';
 import { AccountSuccessOverlay } from './AccountSuccessOverlay';
 
 const account =

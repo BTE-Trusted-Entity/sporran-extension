@@ -1,5 +1,5 @@
 import { getAccounts } from './getAccounts';
-import { accountsMock } from '../../testing/AccountsProviderMock';
+import { accountsMock } from './AccountsProvider.mock';
 import { storage } from './storage';
 import { updateNextTartan } from './tartans';
 

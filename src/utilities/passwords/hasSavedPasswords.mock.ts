@@ -1,8 +1,8 @@
 import { act } from '@testing-library/react';
 
-import { hasSavedPasswords } from '../utilities/passwords/passwords';
+import { hasSavedPasswords } from './passwords';
 
-jest.mock('../utilities/passwords/passwords');
+jest.mock('./passwords');
 const hasSavedPasswordsPromise = Promise.resolve(false);
 (hasSavedPasswords as jest.Mock).mockReturnValue(hasSavedPasswordsPromise);
 

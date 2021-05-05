@@ -3,7 +3,7 @@ import {
   mockBackgroundScript,
   render,
   screen,
-} from '../../testing';
+} from '../../testing/testing';
 import { Stats } from './Stats';
 
 describe('Stats', () => {

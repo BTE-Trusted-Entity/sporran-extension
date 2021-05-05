@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { AccountsProviderMock } from '../../testing/AccountsProviderMock';
+import { AccountsProviderMock } from '../../utilities/accounts/AccountsProvider.mock';
 import menuStyles from '../Menu/Menu.module.css';
 
 import { Settings } from './Settings';

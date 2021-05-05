@@ -1,5 +1,5 @@
-import { AccountsMap } from '../utilities/accounts/accounts';
-import { AccountsContext } from '../utilities/accounts/AccountsContext';
+import { AccountsMap } from './accounts';
+import { AccountsContext } from './AccountsContext';
 
 export const accountsMock: AccountsMap = {
   '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire': {

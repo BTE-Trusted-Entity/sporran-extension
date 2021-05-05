@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 import BN from 'bn.js';
 
-import { accountsMock as accounts } from '../../testing/AccountsProviderMock';
+import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
 import { paths } from '../paths';
 
 import { ReviewTransaction } from './ReviewTransaction';

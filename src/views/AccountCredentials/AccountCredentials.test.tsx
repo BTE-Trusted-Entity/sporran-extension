@@ -1,4 +1,4 @@
-import { accountsMock, render } from '../../testing';
+import { accountsMock, render } from '../../testing/testing';
 
 import { AccountCredentials } from './AccountCredentials';
 

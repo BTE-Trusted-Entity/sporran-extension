@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 
-import { render, screen } from '../../testing';
+import { render, screen } from '../../testing/testing';
 import { AccountOptions } from './AccountOptions';
 
 const onEdit = jest.fn();

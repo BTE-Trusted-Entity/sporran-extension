@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { Identity } from '@kiltprotocol/core';
 
-import { render, screen, waitForTooltipUpdate } from '../../testing';
+import { render, screen, waitForTooltipUpdate } from '../../testing/testing';
 
 import { CreatePassword } from './CreatePassword';
 

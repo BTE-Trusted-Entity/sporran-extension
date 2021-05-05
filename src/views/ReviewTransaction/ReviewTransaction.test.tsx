@@ -1,6 +1,6 @@
 import BN from 'bn.js';
 
-import { accountsMock as accounts, render } from '../../testing';
+import { accountsMock as accounts, render } from '../../testing/testing';
 
 import { ReviewTransaction } from './ReviewTransaction';
 

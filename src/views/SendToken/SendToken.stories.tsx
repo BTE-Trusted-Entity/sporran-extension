@@ -5,7 +5,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { NEW } from '../../utilities/accounts/accounts';
 import { mockBackgroundScript } from '../../testing/mockBackgroundScript';
-import { accountsMock as accounts } from '../../testing/AccountsProviderMock';
+import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
 import { paths } from '../paths';
 
 import { SendToken } from './SendToken';

@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react';
 
-import { accountsMock } from '../../testing/AccountsProviderMock';
+import { accountsMock } from '../../utilities/accounts/AccountsProvider.mock';
 
 import { AccountCredentials } from './AccountCredentials';
 

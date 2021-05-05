@@ -1,8 +1,8 @@
 import { act } from '@testing-library/react';
 
-import { getNextTartan } from '../utilities/accounts/tartans';
+import { getNextTartan } from './tartans';
 
-jest.mock('../utilities/accounts/tartans');
+jest.mock('./tartans');
 const nextTartanPromise = Promise.resolve('MacLeod');
 (getNextTartan as jest.Mock).mockReturnValue(nextTartanPromise);
 

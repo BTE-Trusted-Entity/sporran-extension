@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '../../testing';
+import { render, screen } from '../../testing/testing';
 
 import { ImportBackupPhrase } from './ImportBackupPhrase';
 
