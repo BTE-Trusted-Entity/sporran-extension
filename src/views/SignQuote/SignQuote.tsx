@@ -89,6 +89,8 @@ export function SignQuote(): JSX.Element | null {
           className={styles.name}
           required
           onInput={handleNameInput}
+          autoComplete="off"
+          autoFocus
         />
       </label>
 

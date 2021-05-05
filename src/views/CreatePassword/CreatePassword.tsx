@@ -140,6 +140,7 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
             type={passwordType}
             name="password"
             autoComplete="new-password"
+            autoFocus
             required
             minLength={MIN_LENGTH}
             aria-label={t('view_CreatePassword_label')}
