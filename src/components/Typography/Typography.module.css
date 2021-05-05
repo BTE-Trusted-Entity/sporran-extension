@@ -29,7 +29,7 @@
 }
 
 .buttonText:disabled {
-  color: rgba(242,239,238,0.2); /* var(--color-grey-light) + 0.2 opacity */
+  color: rgba(242, 239, 238, 0.2); /* var(--color-grey-light) + 0.2 opacity */
 }
 
 .balanceText {

@@ -1,17 +1,17 @@
 .input {
   composes: inputText from '../Typography/Typography.module.css';
-
   height: 2rem;
   padding: 0 1rem 0.125rem 1rem;
   border: 0;
   border-radius: 1.125rem;
   box-shadow: inset 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
   background-color: var(--color-pink);
-  background-image: linear-gradient(
-    140deg,
-    var(--color-pink) 0%,
-    var(--color-dark) 100%
-  );
+  background-image:
+    linear-gradient(
+      140deg,
+      var(--color-pink) 0%,
+      var(--color-dark) 100%
+    );
   caret-color: var(--color-grey-light);
 }
 
@@ -26,9 +26,9 @@
 
 .inputKiltAmount {
   composes: input;
-
   text-align: right;
-  background-image: url('../images/kilt-coin.svg'),
+  background-image:
+    url('../images/kilt-coin.svg'),
     linear-gradient(140deg, var(--color-pink) 0%, var(--color-dark) 100%);
   background-size: calc(13rem / 16) 1rem, auto;
   background-repeat: no-repeat;
