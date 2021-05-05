@@ -32,5 +32,6 @@ export const paths = {
     base: '/popup',
     claim: '/popup/claim',
     save: '/popup/save',
+    share: '/popup/share',
   },
 };

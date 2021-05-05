@@ -1,1 +1,1 @@
-export type PopupAction = 'claim' | 'save';
+export type PopupAction = 'claim' | 'save' | 'share';

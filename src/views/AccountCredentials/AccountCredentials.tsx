@@ -63,6 +63,11 @@ export function AccountCredentials({ account }: Props): JSX.Element {
               <td className={tableStyles.td}>{credential.Attester}</td>
               <td
                 className={credential.valid ? styles.valid : tableStyles.td}
+                aria-label={
+                  credential.valid
+                    ? t('view_AccountCredentials_valid')
+                    : undefined
+                }
               />
             </tr>
           ))}
