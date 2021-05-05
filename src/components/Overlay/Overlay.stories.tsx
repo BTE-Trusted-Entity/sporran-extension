@@ -1,5 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
+import { Modal } from 'react-dialog-polyfill';
 
 import overlayStyles from './Overlay.module.css';
 
@@ -9,7 +10,7 @@ export default {
 
 export function Template(): JSX.Element {
   return (
-    <div className={overlayStyles.overlay}>
+    <Modal open className={overlayStyles.overlay}>
       <h1 className={overlayStyles.heading}>Heading</h1>
       <p className={overlayStyles.text}>Overlay Text</p>
       <button
@@ -19,6 +20,6 @@ export function Template(): JSX.Element {
       >
         OK
       </button>
-    </div>
+    </Modal>
   );
 }

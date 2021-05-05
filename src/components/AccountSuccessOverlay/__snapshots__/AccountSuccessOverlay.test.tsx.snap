@@ -2,7 +2,7 @@
 
 exports[`AccountSuccessOverlay should render success overlay for created account 1`] = `
 <div>
-  <div
+  <dialog
     class="overlay"
   >
     <div
@@ -26,13 +26,13 @@ exports[`AccountSuccessOverlay should render success overlay for created account
     >
       OK
     </button>
-  </div>
+  </dialog>
 </div>
 `;
 
 exports[`AccountSuccessOverlay should render success overlay for imported account 1`] = `
 <div>
-  <div
+  <dialog
     class="overlay"
   >
     <div
@@ -56,13 +56,13 @@ exports[`AccountSuccessOverlay should render success overlay for imported accoun
     >
       OK
     </button>
-  </div>
+  </dialog>
 </div>
 `;
 
 exports[`AccountSuccessOverlay should render success overlay for reset password 1`] = `
 <div>
-  <div
+  <dialog
     class="overlay"
   >
     <div
@@ -86,6 +86,6 @@ exports[`AccountSuccessOverlay should render success overlay for reset password 
     >
       OK
     </button>
-  </div>
+  </dialog>
 </div>
 `;

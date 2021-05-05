@@ -1,9 +1,16 @@
-import { accountsMock, render } from '../../testing';
+import { accountsMock, render, waitForDialogUpdate } from '../../testing';
 import { AccountSuccessOverlay } from './AccountSuccessOverlay';
+
 const account =
   accountsMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 describe('AccountSuccessOverlay', () => {
+  beforeEach(() => {
+    ((HTMLDialogElement.prototype as unknown) as {
+      showModal: () => void;
+    }).showModal = jest.fn();
+  });
+
   it('should render success overlay for created account', async () => {
     const { container } = render(
       <AccountSuccessOverlay
@@ -12,6 +19,7 @@ describe('AccountSuccessOverlay', () => {
         onSuccessOverlayButtonClick={jest.fn()}
       />,
     );
+    await waitForDialogUpdate();
     expect(container).toMatchSnapshot();
   });
 
@@ -23,6 +31,7 @@ describe('AccountSuccessOverlay', () => {
         onSuccessOverlayButtonClick={jest.fn()}
       />,
     );
+    await waitForDialogUpdate();
     expect(container).toMatchSnapshot();
   });
 
@@ -34,6 +43,7 @@ describe('AccountSuccessOverlay', () => {
         onSuccessOverlayButtonClick={jest.fn()}
       />,
     );
+    await waitForDialogUpdate();
     expect(container).toMatchSnapshot();
   });
 });

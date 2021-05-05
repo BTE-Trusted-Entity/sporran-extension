@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+import { Modal } from 'react-dialog-polyfill';
 
 import { Avatar } from '../Avatar/Avatar';
 import { Account } from '../../utilities/accounts/accounts';
@@ -25,7 +26,7 @@ export function AccountSuccessOverlay({
   };
 
   return (
-    <div className={styles.overlay}>
+    <Modal open className={styles.overlay}>
       <Avatar tartan={account.tartan} address={account.address} />
       <h1 className={styles.heading}>
         {t('component_AccountSuccessOverlay_heading')}
@@ -38,6 +39,6 @@ export function AccountSuccessOverlay({
       >
         {t('component_AccountSuccessOverlay_button')}
       </button>
-    </div>
+    </Modal>
   );
 }
