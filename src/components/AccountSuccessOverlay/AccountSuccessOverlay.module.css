@@ -3,6 +3,11 @@
   width: 17.75rem;
 }
 
+.overlay::backdrop,
+.overlay + :global(.backdrop) {
+  opacity: 0;
+}
+
 .heading {
   composes: heading from '../../components/Overlay/Overlay.module.css';
 }

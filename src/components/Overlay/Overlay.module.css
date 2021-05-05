@@ -1,4 +1,5 @@
 .overlay {
+  border: 0;
   border-radius: 0.75rem;
   background:
     linear-gradient(
@@ -10,7 +11,7 @@
     );
   box-shadow: 0.375rem 0.375rem 0.75rem 0 rgba(0, 0, 0, 0.5);
   position: absolute;
-  top: calc(123rem / 16);
+  top: calc(124rem / 16);
   left: 6.125rem;
   right: 6.125rem;
   padding: 1.5rem;
