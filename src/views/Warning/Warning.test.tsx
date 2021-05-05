@@ -1,4 +1,4 @@
-import { render } from '../../testing';
+import { render } from '../../testing/testing';
 import { Warning } from './Warning';
 
 describe('Warning', () => {

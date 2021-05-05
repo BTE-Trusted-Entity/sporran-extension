@@ -1,4 +1,4 @@
-import { render, screen } from '../../testing';
+import { render, screen } from '../../testing/testing';
 import { App } from './App';
 
 describe('App', () => {

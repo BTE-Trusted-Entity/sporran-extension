@@ -17,5 +17,7 @@
       }
     ]
   },
-  "include": ["./src/jest.setup.ts"]
+  "include": [
+    "./src/testing/jest.setup.ts"
+  ]
 }

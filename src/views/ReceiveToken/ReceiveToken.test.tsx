@@ -5,8 +5,8 @@ import {
   mockBackgroundScript,
   render,
   waitForDialogUpdate,
-} from '../../testing';
-import { waitForNextTartan } from '../../testing/getNextTartan.mock';
+} from '../../testing/testing';
+import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
 

@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
-import { accountsMock } from '../../testing/AccountsProviderMock';
+import { accountsMock } from '../../utilities/accounts/AccountsProvider.mock';
 import { AccountSuccessOverlay } from './AccountSuccessOverlay';
 
 export default {

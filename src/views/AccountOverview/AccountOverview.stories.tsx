@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
-import { accountsMock as accounts } from '../../testing/AccountsProviderMock';
+import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
 

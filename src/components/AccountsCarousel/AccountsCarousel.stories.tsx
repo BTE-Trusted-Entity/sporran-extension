@@ -4,7 +4,7 @@ import {
   accountsMock,
   moreAccountsMock,
   AccountsProviderMock,
-} from '../../testing/AccountsProviderMock';
+} from '../../utilities/accounts/AccountsProvider.mock';
 import { mockBackgroundScript } from '../../testing/mockBackgroundScript';
 import { paths } from '../../views/paths';
 import { AccountsCarousel } from './AccountsCarousel';

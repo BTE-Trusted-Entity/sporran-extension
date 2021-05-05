@@ -4,18 +4,18 @@ import { act, render as externalRender, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import dialogPolyfill from 'dialog-polyfill';
 
-import { AccountsProviderMock } from './testing/AccountsProviderMock';
-import { Identicon } from './components/Avatar/Identicon';
+import { AccountsProviderMock } from '../utilities/accounts/AccountsProvider.mock';
+import { Identicon } from '../components/Avatar/Identicon';
 
 export {
   AccountsProviderMock,
   accountsMock,
   moreAccountsMock,
-} from './testing/AccountsProviderMock';
+} from '../utilities/accounts/AccountsProvider.mock';
 
-export { mockBackgroundScript } from './testing/mockBackgroundScript';
+export { mockBackgroundScript } from './mockBackgroundScript';
 
-jest.mock('./components/Avatar/Identicon');
+jest.mock('../components/Avatar/Identicon');
 (Identicon as jest.Mock).mockImplementation(() => 'Identicon');
 
 export function render(

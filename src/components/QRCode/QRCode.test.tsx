@@ -1,5 +1,5 @@
 import { QRCode } from './QRCode';
-import { render } from '../../testing';
+import { render } from '../../testing/testing';
 
 describe('QRCode', () => {
   it('should render', async () => {

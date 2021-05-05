@@ -1,6 +1,6 @@
 import BN from 'bn.js';
 
-import { render } from '../../testing';
+import { render } from '../../testing/testing';
 import { KiltAmount } from './KiltAmount';
 
 describe('KiltAmount', () => {

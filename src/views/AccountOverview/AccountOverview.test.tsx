@@ -1,7 +1,11 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 
-import { accountsMock, mockBackgroundScript, render } from '../../testing';
-import { waitForNextTartan } from '../../testing/getNextTartan.mock';
+import {
+  accountsMock,
+  mockBackgroundScript,
+  render,
+} from '../../testing/testing';
+import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
 

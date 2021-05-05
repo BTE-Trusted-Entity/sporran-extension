@@ -1,4 +1,4 @@
-import { render } from '../../testing';
+import { render } from '../../testing/testing';
 import { RemoveAccount } from './RemoveAccount';
 
 const account = {

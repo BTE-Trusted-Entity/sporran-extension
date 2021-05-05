@@ -3,8 +3,8 @@ import CopyPlugin from 'copy-webpack-plugin';
 
 export default {
   entry: {
-    backgroundPage: path.resolve('./src/backgroundPage.ts'),
-    popup: path.resolve('./src/popup.tsx'),
+    backgroundScript: path.resolve('./src/backgroundScript.ts'),
+    popupScript: path.resolve('./src/popupScript.tsx'),
     contentScript: path.resolve('./src/contentScript.ts'),
     injectedScript: path.resolve('./src/injectedScript.ts'),
   },

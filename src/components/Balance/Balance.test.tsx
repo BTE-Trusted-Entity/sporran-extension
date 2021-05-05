@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { render, screen } from '../../testing';
+import { render, screen } from '../../testing/testing';
 
 import {
   BalanceChangeRequest,

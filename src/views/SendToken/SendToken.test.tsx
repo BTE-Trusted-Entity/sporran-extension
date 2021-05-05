@@ -7,8 +7,8 @@ import {
   render,
   runWithJSDOMErrorsDisabled,
   screen,
-} from '../../testing';
-import { waitForNextTartan } from '../../testing/getNextTartan.mock';
+} from '../../testing/testing';
+import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 
 import { SendToken } from './SendToken';
 

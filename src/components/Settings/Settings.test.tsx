@@ -1,9 +1,9 @@
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
-import { render, screen } from '../../testing';
-import { AccountsProviderMock } from '../../testing/AccountsProviderMock';
-import { waitForHasSavedPasswords } from '../../testing/hasSavedPasswords.mock';
+import { render, screen } from '../../testing/testing';
+import { AccountsProviderMock } from '../../utilities/accounts/AccountsProvider.mock';
+import { waitForHasSavedPasswords } from '../../utilities/passwords/hasSavedPasswords.mock';
 import { Settings } from './Settings';
 
 describe('Settings', () => {
