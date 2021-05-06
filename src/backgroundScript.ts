@@ -71,4 +71,3 @@ function init() {
 }
 
 init();
-browser.runtime.onInstalled.addListener(init);
