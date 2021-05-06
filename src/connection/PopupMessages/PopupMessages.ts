@@ -1,6 +1,26 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import { MessageType, PopupRequest, PopupResponse } from '../MessageType';
+import { PopupAction } from '../../utilities/popups/types';
+
+export const PopupMessageType = {
+  popupRequest: 'popupRequest',
+  popupResponse: 'popupResponse',
+};
+
+export interface PopupRequest {
+  type: typeof PopupMessageType.popupRequest;
+  data: {
+    action: PopupAction;
+    [key: string]: string;
+  };
+}
+
+export interface PopupResponse {
+  type: typeof PopupMessageType.popupResponse;
+  data: {
+    [key: string]: string;
+  };
+}
 
 function getPopupUrl(values: { [key: string]: string }): string {
   const url = new URL(browser.runtime.getURL('popup.html'));
@@ -31,11 +51,11 @@ async function closeExistingPopup() {
   popupId = undefined;
 }
 
-function popupListener(
+export function popupRequestListener(
   message: PopupRequest,
   sender: { tab?: { id?: number } },
-) {
-  if (message.type !== MessageType.popupRequest) {
+): Promise<void> | void {
+  if (message.type !== PopupMessageType.popupRequest) {
     return;
   }
 
@@ -51,8 +71,10 @@ function popupListener(
   })();
 }
 
-function responseListener(message: PopupResponse) {
-  if (message.type !== MessageType.popupResponse) {
+export function popupResponseListener(
+  message: PopupResponse,
+): Promise<void> | void {
+  if (message.type !== PopupMessageType.popupResponse) {
     return;
   }
 
@@ -61,14 +83,16 @@ function responseListener(message: PopupResponse) {
       return;
     }
     await browser.tabs.sendMessage(tabId, {
-      type: MessageType.popupResponse,
+      type: PopupMessageType.popupResponse,
       data: message.data,
     });
     tabId = undefined;
   })();
 }
 
-function tabRemovedListener(removedTabId: number) {
+export function popupTabRemovedListener(
+  removedTabId: number,
+): Promise<void> | void {
   if (tabId !== removedTabId) {
     return;
   }
@@ -77,8 +101,11 @@ function tabRemovedListener(removedTabId: number) {
   })();
 }
 
-export function initPopupMessages(): void {
-  browser.runtime.onMessage.addListener(popupListener);
-  browser.runtime.onMessage.addListener(responseListener);
-  browser.tabs.onRemoved.addListener(tabRemovedListener);
+export async function sendPopupResponse(data: {
+  [key: string]: string;
+}): Promise<void> {
+  await browser.runtime.sendMessage({
+    type: PopupMessageType.popupResponse,
+    data,
+  });
 }

@@ -1,9 +1,8 @@
 import { useCallback, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import BN from 'bn.js';
-import { browser } from 'webextension-polyfill-ts';
 
-import { MessageType, TransferRequest } from '../../connection/MessageType';
+import { sendTransferMessage } from '../../connection/TransferMessages/TransferMessages';
 import { Account } from '../../utilities/accounts/types';
 import { ReviewTransaction } from '../ReviewTransaction/ReviewTransaction';
 import { SendToken } from '../SendToken/SendToken';
@@ -37,20 +36,17 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
 
   const handleReviewTransactionSuccess = useCallback(
     async ({ password }) => {
-      if (!amount || !tip) {
+      if (!amount || !tip || !recipient) {
         return;
       }
 
-      await browser.runtime.sendMessage({
-        type: MessageType.transferRequest,
-        data: {
-          address,
-          recipient,
-          amount: amount.toString(),
-          tip: tip.toString(),
-          password,
-        },
-      } as TransferRequest);
+      await sendTransferMessage({
+        address,
+        recipient,
+        amount,
+        tip,
+        password,
+      });
 
       history.push(generatePath(paths.account.overview, { address }));
     },

@@ -16,7 +16,7 @@ import {
   forgetPassword,
   getPassword,
   savePassword,
-} from '../../utilities/passwords/passwords';
+} from '../../connection/SavedPasswordsMessages/SavedPasswordsMessages';
 
 import styles from './ReviewTransaction.module.css';
 

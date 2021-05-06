@@ -1,84 +1,76 @@
 import {
-  MessageType,
-  SavePasswordRequest,
-  GetPasswordRequest,
-  ForgetPasswordRequest,
-  ForgetAllPasswordsRequest,
-  HasSavedPasswordsRequest,
-} from '../MessageType';
-
-import {
-  initSavedPasswords,
   savePasswordListener,
   getPasswordListener,
   forgetPasswordListener,
   forgetAllPasswordsListener,
   hasSavedPasswordsListener,
-} from './initSavedPasswords';
+  schedulePasswordsCheck,
+  SavedPasswordsMessagesType,
+} from './SavedPasswordsMessages';
 
 const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 jest.useFakeTimers('modern');
-initSavedPasswords();
+schedulePasswordsCheck();
 
-describe('initSavedPasswords', () => {
+describe('SavedPasswordsMessages', () => {
   it('should save the password', async () => {
     savePasswordListener({
-      type: MessageType.savePasswordRequest,
+      type: SavedPasswordsMessagesType.savePasswordRequest,
       data: {
         address: mockAddress,
         password: 'somePassword',
       },
-    } as SavePasswordRequest);
+    });
 
     jest.advanceTimersByTime(1 * 60 * 1000);
 
     const retrievedPassword = await getPasswordListener({
-      type: MessageType.getPasswordRequest,
+      type: SavedPasswordsMessagesType.getPasswordRequest,
       data: { address: mockAddress },
-    } as GetPasswordRequest);
+    });
 
     expect(retrievedPassword).toBe('somePassword');
   });
 
   it('should forget the password after 15 minutes', async () => {
     savePasswordListener({
-      type: MessageType.savePasswordRequest,
+      type: SavedPasswordsMessagesType.savePasswordRequest,
       data: {
         address: mockAddress,
         password: 'somePassword',
       },
-    } as SavePasswordRequest);
+    });
 
     jest.advanceTimersByTime(16 * 60 * 1000);
 
     const retrievedPassword = await getPasswordListener({
-      type: MessageType.getPasswordRequest,
+      type: SavedPasswordsMessagesType.getPasswordRequest,
       data: { address: mockAddress },
-    } as GetPasswordRequest);
+    });
 
     expect(retrievedPassword).toBeUndefined();
   });
 
   it('should forget the password when requested', async () => {
     savePasswordListener({
-      type: MessageType.savePasswordRequest,
+      type: SavedPasswordsMessagesType.savePasswordRequest,
       data: {
         address: mockAddress,
         password: 'somePassword',
       },
-    } as SavePasswordRequest);
+    });
 
     jest.advanceTimersByTime(1 * 60 * 1000);
 
     forgetPasswordListener({
-      type: MessageType.forgetPasswordRequest,
+      type: SavedPasswordsMessagesType.forgetPasswordRequest,
       data: { address: mockAddress },
-    } as ForgetPasswordRequest);
+    });
 
     const retrievedPassword = await getPasswordListener({
-      type: MessageType.getPasswordRequest,
+      type: SavedPasswordsMessagesType.getPasswordRequest,
       data: { address: mockAddress },
-    } as GetPasswordRequest);
+    });
 
     expect(retrievedPassword).toBeUndefined();
   });
@@ -87,34 +79,34 @@ describe('initSavedPasswords', () => {
     const mockAddress2 = '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr';
 
     savePasswordListener({
-      type: MessageType.savePasswordRequest,
+      type: SavedPasswordsMessagesType.savePasswordRequest,
       data: {
         address: mockAddress,
         password: 'somePassword',
       },
-    } as SavePasswordRequest);
+    });
     savePasswordListener({
-      type: MessageType.savePasswordRequest,
+      type: SavedPasswordsMessagesType.savePasswordRequest,
       data: {
         address: mockAddress2,
         password: 'somePassword2',
       },
-    } as SavePasswordRequest);
+    });
 
     jest.advanceTimersByTime(1 * 60 * 1000);
 
     forgetAllPasswordsListener({
-      type: MessageType.forgetAllPasswordsRequest,
-    } as ForgetAllPasswordsRequest);
+      type: SavedPasswordsMessagesType.forgetAllPasswordsRequest,
+    });
 
     const retrievedPassword = await getPasswordListener({
-      type: MessageType.getPasswordRequest,
+      type: SavedPasswordsMessagesType.getPasswordRequest,
       data: { address: mockAddress },
-    } as GetPasswordRequest);
+    });
     const retrievedPassword2 = await getPasswordListener({
-      type: MessageType.getPasswordRequest,
+      type: SavedPasswordsMessagesType.getPasswordRequest,
       data: { address: mockAddress2 },
-    } as GetPasswordRequest);
+    });
 
     expect(retrievedPassword).toBeUndefined();
     expect(retrievedPassword2).toBeUndefined();
@@ -122,16 +114,16 @@ describe('initSavedPasswords', () => {
 
   it('should return true if user has any saved passwords', async () => {
     savePasswordListener({
-      type: MessageType.savePasswordRequest,
+      type: SavedPasswordsMessagesType.savePasswordRequest,
       data: {
         address: mockAddress,
         password: 'somePassword',
       },
-    } as SavePasswordRequest);
+    });
 
     const hasPasswords = await hasSavedPasswordsListener({
-      type: MessageType.hasSavedPasswordsRequest,
-    } as HasSavedPasswordsRequest);
+      type: SavedPasswordsMessagesType.hasSavedPasswordsRequest,
+    });
 
     expect(hasPasswords).toBe(true);
   });

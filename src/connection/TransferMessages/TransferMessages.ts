@@ -1,15 +1,55 @@
 import { browser } from 'webextension-polyfill-ts';
 import BN from 'bn.js';
-import { BlockchainUtils } from '@kiltprotocol/chain-helpers';
+
 import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
+import { BlockchainUtils } from '@kiltprotocol/chain-helpers';
 
 import { decryptAccount } from '../../utilities/accounts/accounts';
-import { MessageType, TransferRequest } from '../MessageType';
 
-export function transferListener(
+export const TransferMessageType = {
+  transferRequest: 'transferRequest',
+};
+
+export interface TransferRequest {
+  type: typeof TransferMessageType.transferRequest;
+  data: {
+    address: string;
+    recipient: string;
+    amount: string;
+    tip: string;
+    password: string;
+  };
+}
+
+export async function sendTransferMessage({
+  address,
+  recipient,
+  amount,
+  tip,
+  password,
+}: {
+  address: string;
+  recipient: string;
+  amount: BN;
+  tip: BN;
+  password: string;
+}): Promise<void> {
+  await browser.runtime.sendMessage({
+    type: TransferMessageType.transferRequest,
+    data: {
+      address,
+      recipient,
+      amount: amount.toString(),
+      tip: tip.toString(),
+      password,
+    },
+  } as TransferRequest);
+}
+
+export function transferMessageListener(
   message: TransferRequest,
 ): Promise<string> | void {
-  if (message.type !== MessageType.transferRequest) {
+  if (message.type !== TransferMessageType.transferRequest) {
     return;
   }
   return (async () => {
@@ -30,8 +70,4 @@ export function transferListener(
       return error.message;
     }
   })();
-}
-
-export function initTransferMessages(): void {
-  browser.runtime.onMessage.addListener(transferListener);
 }

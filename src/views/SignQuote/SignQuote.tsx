@@ -6,18 +6,11 @@ import BN from 'bn.js';
 import { Account, useAccounts } from '../../utilities/accounts/accounts';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { useQuery } from '../../utilities/useQuery/useQuery';
-import { MessageType } from '../../connection/MessageType';
+import { sendPopupResponse } from '../../connection/PopupMessages/PopupMessages';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { Avatar } from '../../components/Avatar/Avatar';
 
 import styles from './SignQuote.module.css';
-
-async function sendPopupResponse(data: { [key: string]: string }) {
-  await browser.runtime.sendMessage({
-    type: MessageType.popupResponse,
-    data,
-  });
-}
 
 export function SignQuote(): JSX.Element | null {
   const t = browser.i18n.getMessage;

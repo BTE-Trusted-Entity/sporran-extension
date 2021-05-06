@@ -5,10 +5,9 @@ import { find, mapValues, omit } from 'lodash-es';
 
 import { AccountsMap } from '../../utilities/accounts/accounts';
 import {
-  BalanceChangeRequest,
   BalanceChangeResponse,
-  MessageType,
-} from '../../connection/MessageType';
+  BalanceMessageType,
+} from '../../connection/BalanceMessages/BalanceMessages';
 
 interface Balances {
   [address: string]: BN | null;
@@ -25,7 +24,7 @@ function subscribeToBalance(
 ) {
   function balanceListener(message: BalanceChangeResponse) {
     if (
-      message.type === MessageType.balanceChangeResponse &&
+      message.type === BalanceMessageType.balanceChangeResponse &&
       message.data.address !== address
     ) {
       return;
@@ -40,9 +39,9 @@ function subscribeToBalance(
 
   browser.runtime.onMessage.addListener(balanceListener);
   browser.runtime.sendMessage({
-    type: MessageType.balanceChangeRequest,
+    type: BalanceMessageType.balanceChangeRequest,
     data: { address },
-  } as BalanceChangeRequest);
+  });
 
   subscriptions[address] = () => {
     browser.runtime.onMessage.removeListener(balanceListener);

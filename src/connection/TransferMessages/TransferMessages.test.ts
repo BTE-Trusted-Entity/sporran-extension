@@ -2,8 +2,11 @@ import { BlockchainUtils } from '@kiltprotocol/chain-helpers';
 import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
 import { decryptAccount } from '../../utilities/accounts/accounts';
-import { MessageType, TransferRequest } from '../MessageType';
-import { transferListener } from './initTransferMessages';
+import {
+  transferMessageListener,
+  TransferMessageType,
+  TransferRequest,
+} from './TransferMessages';
 
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
 jest.mock('@kiltprotocol/chain-helpers', () => ({
@@ -15,8 +18,8 @@ jest.mock('../../utilities/accounts/accounts', () => ({
   decryptAccount: jest.fn(),
 }));
 
-describe('initTransferMessages', () => {
-  describe('transferListener', () => {
+describe('TransferMessages', () => {
+  describe('transferMessageListener', () => {
     it('should respond with fee to the proper messages', async () => {
       (decryptAccount as jest.Mock).mockImplementation(() => ({
         identity: true,
@@ -25,8 +28,8 @@ describe('initTransferMessages', () => {
         transaction: true,
       }));
 
-      const error = await transferListener({
-        type: MessageType.transferRequest,
+      const error = await transferMessageListener({
+        type: TransferMessageType.transferRequest,
         data: {
           address: 'account-address',
           recipient: 'recipient-address',
@@ -34,7 +37,7 @@ describe('initTransferMessages', () => {
           password: 'password',
           tip: '0',
         },
-      } as TransferRequest);
+      });
 
       expect(error).toEqual('');
       expect(decryptAccount).toHaveBeenCalledWith(
@@ -56,7 +59,7 @@ describe('initTransferMessages', () => {
     it('should ignore other messages', async () => {
       (decryptAccount as jest.Mock).mockClear();
 
-      transferListener(({
+      transferMessageListener(({
         type: 'other',
         data: { address: 'address' },
       } as unknown) as TransferRequest);

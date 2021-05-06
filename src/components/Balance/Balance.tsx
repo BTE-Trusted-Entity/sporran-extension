@@ -5,9 +5,8 @@ import { browser } from 'webextension-polyfill-ts';
 
 import {
   BalanceChangeResponse,
-  BalanceChangeRequest,
-  MessageType,
-} from '../../connection/MessageType';
+  BalanceMessageType,
+} from '../../connection/BalanceMessages/BalanceMessages';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
 
 import styles from './Balance.module.css';
@@ -22,7 +21,7 @@ export function useAddressBalance(address: string): BN | null {
   const balanceListener = useCallback(
     (message: BalanceChangeResponse) => {
       if (
-        message.type === MessageType.balanceChangeResponse &&
+        message.type === BalanceMessageType.balanceChangeResponse &&
         message.data.address === address
       ) {
         setBalance(new BN(message.data.balance));
@@ -34,9 +33,9 @@ export function useAddressBalance(address: string): BN | null {
   useEffect(() => {
     browser.runtime.onMessage.addListener(balanceListener);
     browser.runtime.sendMessage({
-      type: MessageType.balanceChangeRequest,
+      type: BalanceMessageType.balanceChangeRequest,
       data: { address },
-    } as BalanceChangeRequest);
+    });
 
     return () => {
       browser.runtime.onMessage.removeListener(balanceListener);

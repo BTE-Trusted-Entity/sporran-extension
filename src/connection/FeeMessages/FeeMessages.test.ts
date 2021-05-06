@@ -1,7 +1,6 @@
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
-import { FeeRequest, MessageType } from '../MessageType';
-import { feeListener } from './initFeeMessages';
+import { feeMessageListener, FeeMessageType, FeeRequest } from './FeeMessages';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: {
@@ -9,8 +8,8 @@ jest.mock('@kiltprotocol/chain-helpers', () => ({
   },
 }));
 
-describe('initFeeMessages', () => {
-  describe('feeListener', () => {
+describe('FeeMessages', () => {
+  describe('feeMessageListener', () => {
     it('should respond with fee to the proper messages', async () => {
       const txMock = {
         toHex() {
@@ -32,10 +31,10 @@ describe('initFeeMessages', () => {
         { api: apiMock },
       );
 
-      const fee = await feeListener({
-        type: MessageType.feeRequest,
+      const fee = await feeMessageListener({
+        type: FeeMessageType.feeRequest,
         data: { recipient: 'address', amount: '125000000' },
-      } as FeeRequest);
+      });
 
       expect(fee).toEqual('partial fee');
       expect(BlockchainApiConnection.getConnectionOrConnect).toHaveBeenCalled();
@@ -58,7 +57,7 @@ describe('initFeeMessages', () => {
     it('should ignore other messages', async () => {
       (BlockchainApiConnection.getConnectionOrConnect as jest.Mock).mockClear();
 
-      feeListener(({
+      feeMessageListener(({
         type: 'other',
         data: { address: 'address' },
       } as unknown) as FeeRequest);

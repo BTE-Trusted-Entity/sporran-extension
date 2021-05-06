@@ -6,7 +6,7 @@ import { find } from 'lodash-es';
 import { DataUtils } from '@kiltprotocol/utils';
 import cx from 'classnames';
 
-import { FeeRequest, MessageType } from '../../connection/MessageType';
+import { getFee } from '../../connection/FeeMessages/FeeMessages';
 import { Account } from '../../utilities/accounts/types';
 import { isNew } from '../../utilities/accounts/accounts';
 import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
@@ -139,18 +139,6 @@ function getAddressError(address: string, account: Account): string | null {
 
 function formatKiltInput(amount: BN): string {
   return asKiltCoins(amount).replace(/[,.]?0+$/, '');
-}
-
-async function getFee(amount: BN, recipient: string): Promise<BN> {
-  const feeString = await browser.runtime.sendMessage({
-    type: MessageType.feeRequest,
-    data: {
-      amount: amount.toString(),
-      recipient,
-    },
-  } as FeeRequest);
-
-  return new BN(feeString);
 }
 
 interface Props {

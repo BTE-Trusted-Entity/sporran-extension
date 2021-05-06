@@ -5,20 +5,21 @@ import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.c
 import {
   BalanceChangeRequest,
   BalanceChangeResponse,
-  MessageType,
-} from '../MessageType';
-import { balanceListener, onChange } from './initBalanceMessages';
+  balanceMessageListener,
+  BalanceMessageType,
+  onBalanceChange,
+} from './BalanceMessages';
 
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
 jest.spyOn(browser.runtime, 'sendMessage');
 
-describe('initBalanceMessages', () => {
+describe('BalanceMessages', () => {
   describe('onChange', () => {
     it('should send runtime message', async () => {
-      await onChange('address', new BN(1.234e15));
+      await onBalanceChange('address', new BN(1.234e15));
 
       expect(browser.runtime.sendMessage).toHaveBeenCalledWith({
-        type: MessageType.balanceChangeResponse,
+        type: BalanceMessageType.balanceChangeResponse,
         data: {
           address: 'address',
           balance: '1234000000000000',
@@ -27,12 +28,12 @@ describe('initBalanceMessages', () => {
     });
   });
 
-  describe('balanceListener', () => {
+  describe('balanceMessageListener', () => {
     it('should start listening when called', async () => {
-      balanceListener({
-        type: MessageType.balanceChangeRequest,
+      balanceMessageListener({
+        type: BalanceMessageType.balanceChangeRequest,
         data: { address: 'address' },
-      } as BalanceChangeRequest);
+      });
 
       expect(listenToBalanceChanges).toHaveBeenCalledWith(
         'address',
@@ -42,7 +43,7 @@ describe('initBalanceMessages', () => {
     it('should ignore other messages', async () => {
       (listenToBalanceChanges as jest.Mock).mockClear();
 
-      balanceListener(({
+      balanceMessageListener(({
         type: 'other',
         data: { address: 'address' },
       } as unknown) as BalanceChangeRequest);

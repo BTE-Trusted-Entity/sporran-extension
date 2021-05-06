@@ -1,9 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
 import {
-  MessageType,
+  PopupMessageType,
   PopupRequest,
   PopupResponse,
-} from './connection/MessageType';
+} from './connection/PopupMessages/PopupMessages';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -25,14 +25,14 @@ function messageListener(message: MessageEvent) {
   (async () => {
     // content scripts cannot open windows, only background and popup scripts can
     await browser.runtime.sendMessage({
-      type: MessageType.popupRequest,
+      type: PopupMessageType.popupRequest,
       data: { action, ...values },
     } as PopupRequest);
   })();
 }
 
-function responseListener(message: PopupResponse) {
-  if (message.type !== MessageType.popupResponse) {
+function popupResponseListener(message: PopupResponse) {
+  if (message.type !== PopupMessageType.popupResponse) {
     return;
   }
 
@@ -47,7 +47,7 @@ function responseListener(message: PopupResponse) {
 
 function initMessages() {
   window.addEventListener('message', messageListener);
-  browser.runtime.onMessage.addListener(responseListener);
+  browser.runtime.onMessage.addListener(popupResponseListener);
 }
 
 function main() {
