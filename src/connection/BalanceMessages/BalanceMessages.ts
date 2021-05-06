@@ -30,13 +30,6 @@ async function sendBalanceChangeResponse(address: string, balance: string) {
   });
 }
 
-export async function onBalanceChange(
-  address: string,
-  balance: BN,
-): Promise<void> {
-  await sendBalanceChangeResponse(address, balance.toString());
-}
-
 export const onBalanceChangeRequest = createOnMessage<BalanceChangeRequest>(
   balanceChangeRequest,
 );
@@ -44,6 +37,13 @@ export const onBalanceChangeRequest = createOnMessage<BalanceChangeRequest>(
 export const onBalanceChangeResponse = createOnMessage<BalanceChangeResponse>(
   balanceChangeResponse,
 );
+
+export async function onBalanceChange(
+  address: string,
+  balance: BN,
+): Promise<void> {
+  await sendBalanceChangeResponse(address, balance.toString());
+}
 
 export async function balanceMessageListener(
   data: BalanceChangeRequest,
