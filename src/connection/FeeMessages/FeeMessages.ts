@@ -2,7 +2,7 @@ import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
-import { createOnMessage } from '../createOnMessage';
+import { createOnMessage } from '../createOnMessage/createOnMessage';
 
 export const feeRequest = 'feeRequest';
 

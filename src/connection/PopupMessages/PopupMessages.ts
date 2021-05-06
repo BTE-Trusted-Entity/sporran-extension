@@ -1,7 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
 
 import { PopupAction } from '../../utilities/popups/types';
-import { createOnMessage } from '../createOnMessage';
+import { createOnMessage } from '../createOnMessage/createOnMessage';
 
 const popupRequest = 'popupRequest';
 const popupResponse = 'popupResponse';

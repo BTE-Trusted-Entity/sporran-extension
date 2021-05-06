@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts';
 import BN from 'bn.js';
 import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
-import { createOnMessage } from '../createOnMessage';
+import { createOnMessage } from '../createOnMessage/createOnMessage';
 
 export const balanceChangeRequest = 'balanceChangeRequest';
 export const balanceChangeResponse = 'balanceChangeResponse';

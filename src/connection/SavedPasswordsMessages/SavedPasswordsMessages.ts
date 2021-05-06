@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import { createOnMessage } from '../createOnMessage';
+import { createOnMessage } from '../createOnMessage/createOnMessage';
 
 const savePasswordRequest = 'savePasswordRequest';
 const getPasswordRequest = 'getPasswordRequest';

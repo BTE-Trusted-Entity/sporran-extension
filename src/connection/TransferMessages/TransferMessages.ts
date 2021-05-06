@@ -5,7 +5,7 @@ import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import { BlockchainUtils } from '@kiltprotocol/chain-helpers';
 
 import { decryptAccount } from '../../utilities/accounts/accounts';
-import { createOnMessage } from '../createOnMessage';
+import { createOnMessage } from '../createOnMessage/createOnMessage';
 
 const transferRequest = 'transferRequest';
 
