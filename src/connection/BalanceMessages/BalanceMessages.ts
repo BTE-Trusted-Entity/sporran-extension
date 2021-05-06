@@ -20,17 +20,25 @@ export interface BalanceChangeResponse {
   };
 }
 
+export async function sendBalanceChangeRequest(address: string): Promise<void> {
+  await browser.runtime.sendMessage({
+    type: BalanceMessageType.balanceChangeRequest,
+    data: { address },
+  } as BalanceChangeRequest);
+}
+
+async function sendBalanceChangeResponse(address: string, balance: string) {
+  await browser.runtime.sendMessage({
+    type: BalanceMessageType.balanceChangeResponse,
+    data: { address, balance },
+  });
+}
+
 export async function onBalanceChange(
   address: string,
   balance: BN,
 ): Promise<void> {
-  await browser.runtime.sendMessage({
-    type: BalanceMessageType.balanceChangeResponse,
-    data: {
-      address,
-      balance: balance.toString(),
-    },
-  });
+  await sendBalanceChangeResponse(address, balance.toString());
 }
 
 export function balanceMessageListener(message: BalanceChangeRequest): void {
@@ -39,11 +47,4 @@ export function balanceMessageListener(message: BalanceChangeRequest): void {
       await listenToBalanceChanges(message.data.address, onBalanceChange);
     })();
   }
-}
-
-export async function sendBalanceChangeRequest(address: string): Promise<void> {
-  await browser.runtime.sendMessage({
-    type: BalanceMessageType.balanceChangeRequest,
-    data: { address },
-  } as BalanceChangeRequest);
 }
