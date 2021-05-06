@@ -1,8 +1,8 @@
 import { browser } from 'webextension-polyfill-ts';
 import {
   PopupMessageType,
-  PopupRequest,
   PopupResponse,
+  sendPopupRequest,
 } from './connection/PopupMessages/PopupMessages';
 
 function injectScript() {
@@ -24,10 +24,7 @@ function messageListener(message: MessageEvent) {
 
   (async () => {
     // content scripts cannot open windows, only background and popup scripts can
-    await browser.runtime.sendMessage({
-      type: PopupMessageType.popupRequest,
-      data: { action, ...values },
-    } as PopupRequest);
+    await sendPopupRequest(action, values);
   })();
 }
 

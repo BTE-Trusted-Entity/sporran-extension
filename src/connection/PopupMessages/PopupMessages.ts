@@ -109,3 +109,13 @@ export async function sendPopupResponse(data: {
     data,
   });
 }
+
+export async function sendPopupRequest(
+  action: PopupAction,
+  values: PopupResponse['data'],
+): Promise<void> {
+  await browser.runtime.sendMessage({
+    type: PopupMessageType.popupRequest,
+    data: { action, ...values },
+  } as PopupRequest);
+}
