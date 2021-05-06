@@ -43,7 +43,12 @@ function showSaveCredentialPopup(values: { [key: string]: string }) {
   );
 }
 
-function showShareCredentialPopup(values: { [key: string]: string }) {
+function showShareCredentialPopup(
+  values: { [key: string]: string },
+  callback: typeof lastCallback,
+) {
+  lastCallback = callback;
+
   // Non-extension scripts cannot open windows with extension pages
   window.postMessage(
     {
