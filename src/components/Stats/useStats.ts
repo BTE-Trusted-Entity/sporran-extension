@@ -7,6 +7,7 @@ import { AccountsMap } from '../../utilities/accounts/accounts';
 import {
   BalanceChangeResponse,
   BalanceMessageType,
+  sendBalanceChangeRequest,
 } from '../../connection/BalanceMessages/BalanceMessages';
 
 interface Balances {
@@ -24,7 +25,7 @@ function subscribeToBalance(
 ) {
   function balanceListener(message: BalanceChangeResponse) {
     if (
-      message.type === BalanceMessageType.balanceChangeResponse &&
+      message.type !== BalanceMessageType.balanceChangeResponse ||
       message.data.address !== address
     ) {
       return;
@@ -38,10 +39,7 @@ function subscribeToBalance(
   }
 
   browser.runtime.onMessage.addListener(balanceListener);
-  browser.runtime.sendMessage({
-    type: BalanceMessageType.balanceChangeRequest,
-    data: { address },
-  });
+  sendBalanceChangeRequest(address);
 
   subscriptions[address] = () => {
     browser.runtime.onMessage.removeListener(balanceListener);

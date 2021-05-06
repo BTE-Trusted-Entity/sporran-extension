@@ -40,3 +40,10 @@ export function balanceMessageListener(message: BalanceChangeRequest): void {
     })();
   }
 }
+
+export async function sendBalanceChangeRequest(address: string): Promise<void> {
+  await browser.runtime.sendMessage({
+    type: BalanceMessageType.balanceChangeRequest,
+    data: { address },
+  } as BalanceChangeRequest);
+}
