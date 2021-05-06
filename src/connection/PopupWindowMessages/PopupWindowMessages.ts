@@ -1,63 +1,49 @@
 import { PopupAction } from '../../utilities/popups/types';
 
-const PopupWindowMessagesType = {
-  request: 'sporranExtension.injectedScript.request',
-  response: 'sporranExtension.injectedScript.response',
-};
+const request = 'sporranExtension.injectedScript.request';
+const response = 'sporranExtension.injectedScript.response';
 
 interface PopupWindowRequest {
-  type: typeof PopupWindowMessagesType.request;
-  action: PopupAction;
-  data: {
-    [key: string]: string;
-  };
+  [key: string]: string;
 }
 
 interface PopupWindowResponse {
-  type: typeof PopupWindowMessagesType.response;
-  data: {
-    [key: string]: string;
-  };
+  [key: string]: string;
 }
 
 export function sendPopupWindowRequest(
   action: PopupAction,
-  data: PopupWindowRequest['data'],
+  data: PopupWindowRequest,
 ): void {
   window.postMessage(
     {
-      type: PopupWindowMessagesType.request,
+      type: request,
       action,
-      ...data,
-    } as PopupWindowRequest,
+      data,
+    },
     window.location.href,
   );
 }
 
-export function sendPopupWindowResponse(
-  data: PopupWindowResponse['data'],
-): void {
+export function sendPopupWindowResponse(data: PopupWindowResponse): void {
   window.postMessage(
     {
-      type: PopupWindowMessagesType.response,
-      ...data,
-    } as PopupWindowResponse,
+      type: response,
+      data,
+    },
     window.location.href,
   );
 }
 
 export function onPopupWindowRequest(
-  callback: (action: PopupAction, data: PopupWindowRequest['data']) => void,
+  callback: (action: PopupAction, data: PopupWindowRequest) => void,
 ): () => void {
   function messageListener(message: MessageEvent) {
     const { data, source } = message;
-    const { type, action, ...values } = data;
 
-    if (source !== window || type !== PopupWindowMessagesType.request) {
-      return;
+    if (source === window && data.type === request) {
+      callback(data.action, data.data);
     }
-
-    callback(action, values);
   }
 
   window.addEventListener('message', messageListener);
@@ -66,17 +52,14 @@ export function onPopupWindowRequest(
 }
 
 export function onPopupWindowResponse(
-  callback: (data: PopupWindowResponse['data']) => void,
+  callback: (data: PopupWindowResponse) => void,
 ): () => void {
   function messageListener(message: MessageEvent) {
     const { data, source } = message;
-    const { type, ...values } = data;
 
-    if (source !== window || type !== PopupWindowMessagesType.response) {
-      return;
+    if (source === window && data.type === response) {
+      callback(data.data);
     }
-
-    callback(values);
   }
 
   window.addEventListener('message', messageListener);
