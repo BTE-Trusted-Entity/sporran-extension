@@ -13,7 +13,7 @@ interface SavedPassword {
   timestamp: number;
 }
 
-export interface SavePasswordRequest {
+interface SavePasswordRequest {
   type: typeof SavedPasswordsMessagesType.savePasswordRequest;
   data: {
     password: string;
@@ -21,26 +21,68 @@ export interface SavePasswordRequest {
   };
 }
 
-export interface GetPasswordRequest {
+interface GetPasswordRequest {
   type: typeof SavedPasswordsMessagesType.getPasswordRequest;
   data: {
     address: string;
   };
 }
 
-export interface HasSavedPasswordsRequest {
+interface HasSavedPasswordsRequest {
   type: typeof SavedPasswordsMessagesType.hasSavedPasswordsRequest;
 }
 
-export interface ForgetPasswordRequest {
+interface ForgetPasswordRequest {
   type: typeof SavedPasswordsMessagesType.forgetPasswordRequest;
   data: {
     address: string;
   };
 }
 
-export interface ForgetAllPasswordsRequest {
+interface ForgetAllPasswordsRequest {
   type: typeof SavedPasswordsMessagesType.forgetAllPasswordsRequest;
+}
+
+export function savePassword(password: string, address: string): void {
+  browser.runtime.sendMessage({
+    type: SavedPasswordsMessagesType.savePasswordRequest,
+    data: {
+      password,
+      address,
+    },
+  } as SavePasswordRequest);
+}
+
+export async function getPassword(
+  address: string,
+): Promise<string | undefined> {
+  return browser.runtime.sendMessage({
+    type: SavedPasswordsMessagesType.getPasswordRequest,
+    data: {
+      address,
+    },
+  } as GetPasswordRequest);
+}
+
+export function forgetPassword(address: string): void {
+  browser.runtime.sendMessage({
+    type: SavedPasswordsMessagesType.forgetPasswordRequest,
+    data: {
+      address,
+    },
+  } as ForgetPasswordRequest);
+}
+
+export function forgetAllPasswords(): void {
+  browser.runtime.sendMessage({
+    type: SavedPasswordsMessagesType.forgetAllPasswordsRequest,
+  } as ForgetAllPasswordsRequest);
+}
+
+export async function hasSavedPasswords(): Promise<boolean> {
+  return browser.runtime.sendMessage({
+    type: SavedPasswordsMessagesType.hasSavedPasswordsRequest,
+  } as HasSavedPasswordsRequest);
 }
 
 const savedPasswords: Record<string, SavedPassword> = {};
@@ -108,46 +150,4 @@ function checkExpiredPasswords(): void {
 
 export function schedulePasswordsCheck(): void {
   setInterval(checkExpiredPasswords, intervalDuration);
-}
-
-export function savePassword(password: string, address: string): void {
-  browser.runtime.sendMessage({
-    type: SavedPasswordsMessagesType.savePasswordRequest,
-    data: {
-      password,
-      address,
-    },
-  });
-}
-
-export async function getPassword(
-  address: string,
-): Promise<string | undefined> {
-  return browser.runtime.sendMessage({
-    type: SavedPasswordsMessagesType.getPasswordRequest,
-    data: {
-      address,
-    },
-  });
-}
-
-export function forgetPassword(address: string): void {
-  browser.runtime.sendMessage({
-    type: SavedPasswordsMessagesType.forgetPasswordRequest,
-    data: {
-      address,
-    },
-  });
-}
-
-export function forgetAllPasswords(): void {
-  browser.runtime.sendMessage({
-    type: SavedPasswordsMessagesType.forgetAllPasswordsRequest,
-  });
-}
-
-export async function hasSavedPasswords(): Promise<boolean> {
-  return browser.runtime.sendMessage({
-    type: SavedPasswordsMessagesType.hasSavedPasswordsRequest,
-  });
 }
