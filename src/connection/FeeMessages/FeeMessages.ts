@@ -14,15 +14,15 @@ export interface FeeRequest {
   };
 }
 
-export async function getFee(amount: BN, recipient: string): Promise<BN> {
-  const feeString = await browser.runtime.sendMessage({
+async function sendFeeRequest(amount: string, recipient: string) {
+  return browser.runtime.sendMessage({
     type: FeeMessageType.feeRequest,
-    data: {
-      amount: amount.toString(),
-      recipient,
-    },
+    data: { amount, recipient },
   } as FeeRequest);
+}
 
+export async function getFee(amount: BN, recipient: string): Promise<BN> {
+  const feeString = await sendFeeRequest(amount.toString(), recipient);
   return new BN(feeString);
 }
 
