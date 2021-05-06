@@ -56,7 +56,9 @@ export function ShareCredential(): JSX.Element | null {
     window.close();
   }, []);
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = useCallback(async (event) => {
+    event.preventDefault();
+
     await sendPopupResponse({});
     window.close();
   }, []);
