@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { browser } from 'webextension-polyfill-ts';
 import BN from 'bn.js';
 import { find, mapValues, omit } from 'lodash-es';
 
 import { AccountsMap } from '../../utilities/accounts/accounts';
 import {
   BalanceChangeResponse,
-  BalanceMessageType,
+  onBalanceChangeResponse,
   sendBalanceChangeRequest,
 } from '../../connection/BalanceMessages/BalanceMessages';
 
@@ -23,26 +22,23 @@ function subscribeToBalance(
   setBalances: (callback: (balances: Balances) => Balances) => void,
   subscriptions: Subscriptions,
 ) {
-  function balanceListener(message: BalanceChangeResponse) {
-    if (
-      message.type !== BalanceMessageType.balanceChangeResponse ||
-      message.data.address !== address
-    ) {
+  async function balanceListener(data: BalanceChangeResponse['data']) {
+    if (data.address !== address) {
       return;
     }
 
-    const balance = new BN(message.data.balance);
+    const balance = new BN(data.balance);
     setBalances((balances: Balances) => ({
       ...balances,
       ...(address in balances && { [address]: balance }),
     }));
   }
 
-  browser.runtime.onMessage.addListener(balanceListener);
+  const removeListener = onBalanceChangeResponse(balanceListener);
   sendBalanceChangeRequest(address);
 
   subscriptions[address] = () => {
-    browser.runtime.onMessage.removeListener(balanceListener);
+    removeListener();
     delete subscriptions[address];
     setBalances((balances: Balances) => omit(balances, address));
   };

@@ -1,7 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 import {
-  PopupMessageType,
-  PopupResponse,
+  onPopupResponse,
   sendPopupRequest,
 } from './connection/PopupMessages/PopupMessages';
 import {
@@ -18,17 +17,15 @@ function injectScript() {
   document.head.appendChild(script);
 }
 
-function popupResponseListener(message: PopupResponse) {
-  if (message.type !== PopupMessageType.popupResponse) {
-    return;
-  }
-
-  sendPopupWindowResponse(message.data);
+async function popupResponseListener(
+  data: Parameters<typeof sendPopupWindowResponse>[0],
+) {
+  sendPopupWindowResponse(data);
 }
 
 function initMessages() {
   onPopupWindowRequest(sendPopupRequest);
-  browser.runtime.onMessage.addListener(popupResponseListener);
+  onPopupResponse(popupResponseListener);
 }
 
 function main() {

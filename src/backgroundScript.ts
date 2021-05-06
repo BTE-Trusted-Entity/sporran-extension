@@ -1,47 +1,63 @@
 import { browser } from 'webextension-polyfill-ts';
 
 import { initBlockChainConnection } from './connection/initBlockChainConnection/initBlockChainConnection';
-import { transferMessageListener } from './connection/TransferMessages/TransferMessages';
-import { feeMessageListener } from './connection/FeeMessages/FeeMessages';
+import {
+  onTransfer,
+  transferMessageListener,
+} from './connection/TransferMessages/TransferMessages';
+import {
+  feeMessageListener,
+  onFeeRequest,
+} from './connection/FeeMessages/FeeMessages';
 import {
   forgetAllPasswordsListener,
   forgetPasswordListener,
   getPasswordListener,
   hasSavedPasswordsListener,
+  onForgetAllPasswordsRequest,
+  onForgetPasswordRequest,
+  onGetPasswordRequest,
+  onHasSavedPasswordsRequest,
+  onSavePasswordRequest,
   savePasswordListener,
   schedulePasswordsCheck,
 } from './connection/SavedPasswordsMessages/SavedPasswordsMessages';
 import {
+  onPopupRequest,
+  onPopupResponse,
   popupRequestListener,
   popupResponseListener,
   popupTabRemovedListener,
 } from './connection/PopupMessages/PopupMessages';
-import { balanceMessageListener } from './connection/BalanceMessages/BalanceMessages';
+import {
+  balanceMessageListener,
+  onBalanceChangeRequest,
+} from './connection/BalanceMessages/BalanceMessages';
 
 export function initBalanceMessages(): void {
-  browser.runtime.onMessage.addListener(balanceMessageListener);
+  onBalanceChangeRequest(balanceMessageListener);
 }
 
 function initFeeMessages(): void {
-  browser.runtime.onMessage.addListener(feeMessageListener);
+  onFeeRequest(feeMessageListener);
 }
 
 function initSavedPasswords(): void {
   schedulePasswordsCheck();
-  browser.runtime.onMessage.addListener(savePasswordListener);
-  browser.runtime.onMessage.addListener(getPasswordListener);
-  browser.runtime.onMessage.addListener(forgetPasswordListener);
-  browser.runtime.onMessage.addListener(forgetAllPasswordsListener);
-  browser.runtime.onMessage.addListener(hasSavedPasswordsListener);
+  onSavePasswordRequest(savePasswordListener);
+  onGetPasswordRequest(getPasswordListener);
+  onForgetPasswordRequest(forgetPasswordListener);
+  onForgetAllPasswordsRequest(forgetAllPasswordsListener);
+  onHasSavedPasswordsRequest(hasSavedPasswordsListener);
 }
 
 function initTransferMessages(): void {
-  browser.runtime.onMessage.addListener(transferMessageListener);
+  onTransfer(transferMessageListener);
 }
 
 export function initPopupMessages(): void {
-  browser.runtime.onMessage.addListener(popupRequestListener);
-  browser.runtime.onMessage.addListener(popupResponseListener);
+  onPopupRequest(popupRequestListener);
+  onPopupResponse(popupResponseListener);
   browser.tabs.onRemoved.addListener(popupTabRemovedListener);
 }
 

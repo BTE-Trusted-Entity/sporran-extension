@@ -5,12 +5,13 @@ import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import { BlockchainUtils } from '@kiltprotocol/chain-helpers';
 
 import { decryptAccount } from '../../utilities/accounts/accounts';
+import { createOnMessage } from '../createOnMessage';
 
-export const TransferMessageType = {
+const TransferMessageType = {
   transferRequest: 'transferRequest',
 };
 
-export interface TransferRequest {
+interface TransferRequest {
   type: typeof TransferMessageType.transferRequest;
   data: {
     address: string;
@@ -46,28 +47,27 @@ export async function sendTransferMessage({
   } as TransferRequest);
 }
 
-export function transferMessageListener(
-  message: TransferRequest,
-): Promise<string> | void {
-  if (message.type !== TransferMessageType.transferRequest) {
-    return;
+export const onTransfer = createOnMessage<TransferRequest, string>(
+  TransferMessageType.transferRequest,
+);
+
+export async function transferMessageListener(
+  data: TransferRequest['data'],
+): Promise<string> {
+  const { address, recipient, amount, password } = data;
+  try {
+    const identity = await decryptAccount(address, password);
+
+    // TODO: include the tip in the transaction when the SDK enables it
+    // https://github.com/KILTprotocol/sdk-js/pull/378
+    const tx = await makeTransfer(identity, recipient, new BN(amount));
+    await BlockchainUtils.submitTxWithReSign(tx, identity, {
+      resolveOn: BlockchainUtils.IS_IN_BLOCK,
+    });
+
+    return ''; // empty string = no error
+  } catch (error) {
+    console.error(error);
+    return error.message;
   }
-  return (async () => {
-    const { address, recipient, amount, password } = message.data;
-    try {
-      const identity = await decryptAccount(address, password);
-
-      // TODO: include the tip in the transaction when the SDK enables it
-      // https://github.com/KILTprotocol/sdk-js/pull/378
-      const tx = await makeTransfer(identity, recipient, new BN(amount));
-      await BlockchainUtils.submitTxWithReSign(tx, identity, {
-        resolveOn: BlockchainUtils.IS_IN_BLOCK,
-      });
-
-      return ''; // empty string = no error
-    } catch (error) {
-      console.error(error);
-      return error.message;
-    }
-  })();
 }

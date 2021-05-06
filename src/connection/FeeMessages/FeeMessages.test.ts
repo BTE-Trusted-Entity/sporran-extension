@@ -1,6 +1,6 @@
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
-import { feeMessageListener, FeeMessageType, FeeRequest } from './FeeMessages';
+import { feeMessageListener } from './FeeMessages';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: {
@@ -32,8 +32,8 @@ describe('FeeMessages', () => {
       );
 
       const fee = await feeMessageListener({
-        type: FeeMessageType.feeRequest,
-        data: { recipient: 'address', amount: '125000000' },
+        recipient: 'address',
+        amount: '125000000',
       });
 
       expect(fee).toEqual('partial fee');
@@ -52,19 +52,6 @@ describe('FeeMessages', () => {
       expect(apiMock.rpc.payment.queryInfo).toHaveBeenCalledWith(
         'hex transaction',
       );
-    });
-
-    it('should ignore other messages', async () => {
-      (BlockchainApiConnection.getConnectionOrConnect as jest.Mock).mockClear();
-
-      feeMessageListener(({
-        type: 'other',
-        data: { address: 'address' },
-      } as unknown) as FeeRequest);
-
-      expect(
-        BlockchainApiConnection.getConnectionOrConnect,
-      ).not.toHaveBeenCalled();
     });
   });
 });

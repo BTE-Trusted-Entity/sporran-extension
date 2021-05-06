@@ -2,6 +2,8 @@ import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
+import { createOnMessage } from '../createOnMessage';
+
 export const FeeMessageType = {
   feeRequest: 'feeRequest',
 };
@@ -21,6 +23,10 @@ async function sendFeeRequest(amount: string, recipient: string) {
   } as FeeRequest);
 }
 
+export const onFeeRequest = createOnMessage<FeeRequest, string>(
+  FeeMessageType.feeRequest,
+);
+
 export async function getFee(amount: BN, recipient: string): Promise<BN> {
   const feeString = await sendFeeRequest(amount.toString(), recipient);
   return new BN(feeString);
@@ -29,19 +35,16 @@ export async function getFee(amount: BN, recipient: string): Promise<BN> {
 const fallbackAddressForFee =
   '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 
-export function feeMessageListener(
-  message: FeeRequest,
-): Promise<string> | void {
-  if (message.type !== FeeMessageType.feeRequest) {
-    return;
-  }
-  return (async () => {
-    const { api } = await BlockchainApiConnection.getConnectionOrConnect();
-    const tx = api.tx.balances.transfer(
-      message.data.recipient || fallbackAddressForFee,
-      new BN(message.data.amount),
-    );
-    const { partialFee } = await api.rpc.payment.queryInfo(tx.toHex());
-    return partialFee.toString();
-  })();
+export async function feeMessageListener(
+  data: FeeRequest['data'],
+): Promise<string> {
+  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+
+  const tx = api.tx.balances.transfer(
+    data.recipient || fallbackAddressForFee,
+    new BN(data.amount),
+  );
+
+  const { partialFee } = await api.rpc.payment.queryInfo(tx.toHex());
+  return partialFee.toString();
 }

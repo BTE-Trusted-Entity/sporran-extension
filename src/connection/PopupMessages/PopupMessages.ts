@@ -1,13 +1,14 @@
 import { browser } from 'webextension-polyfill-ts';
 
 import { PopupAction } from '../../utilities/popups/types';
+import { createOnMessage } from '../createOnMessage';
 
-export const PopupMessageType = {
+const PopupMessageType = {
   popupRequest: 'popupRequest',
   popupResponse: 'popupResponse',
 };
 
-export interface PopupRequest {
+interface PopupRequest {
   type: typeof PopupMessageType.popupRequest;
   data: {
     action: PopupAction;
@@ -15,7 +16,7 @@ export interface PopupRequest {
   };
 }
 
-export interface PopupResponse {
+interface PopupResponse {
   type: typeof PopupMessageType.popupResponse;
   data: {
     [key: string]: string;
@@ -36,6 +37,18 @@ export async function sendPopupResponse(data: {
   [key: string]: string;
 }): Promise<void> {
   await browser.runtime.sendMessage({
+    type: PopupMessageType.popupResponse,
+    data,
+  } as PopupResponse);
+}
+
+async function sendPopupTabResponse(
+  tabId: number,
+  data: {
+    [key: string]: string;
+  },
+): Promise<void> {
+  await browser.tabs.sendMessage(tabId, {
     type: PopupMessageType.popupResponse,
     data,
   } as PopupResponse);
@@ -70,43 +83,36 @@ async function closeExistingPopup() {
   popupId = undefined;
 }
 
-export function popupRequestListener(
-  message: PopupRequest,
-  sender: { tab?: { id?: number } },
-): Promise<void> | void {
-  if (message.type !== PopupMessageType.popupRequest) {
-    return;
-  }
+export const onPopupRequest = createOnMessage<PopupRequest>(
+  PopupMessageType.popupRequest,
+);
 
+export const onPopupResponse = createOnMessage<PopupResponse>(
+  PopupMessageType.popupResponse,
+);
+
+export async function popupRequestListener(
+  data: PopupRequest['data'],
+  sender: { tab?: { id?: number } },
+): Promise<void> {
   tabId = sender?.tab?.id;
 
-  return (async () => {
-    await closeExistingPopup();
+  await closeExistingPopup();
 
-    // scripts cannot show the extension popup itself, only create window popups
-    const url = getPopupUrl(message.data);
-    const window = await browser.windows.create({ url, type, width, height });
-    popupId = window.id;
-  })();
+  // scripts cannot show the extension popup itself, only create window popups
+  const url = getPopupUrl(data);
+  const window = await browser.windows.create({ url, type, width, height });
+  popupId = window.id;
 }
 
-export function popupResponseListener(
-  message: PopupResponse,
-): Promise<void> | void {
-  if (message.type !== PopupMessageType.popupResponse) {
+export async function popupResponseListener(
+  data: PopupResponse['data'],
+): Promise<void> {
+  if (!tabId) {
     return;
   }
-
-  (async () => {
-    if (!tabId) {
-      return;
-    }
-    await browser.tabs.sendMessage(tabId, {
-      type: PopupMessageType.popupResponse,
-      data: message.data,
-    });
-    tabId = undefined;
-  })();
+  await sendPopupTabResponse(tabId, data);
+  tabId = undefined;
 }
 
 export function popupTabRemovedListener(

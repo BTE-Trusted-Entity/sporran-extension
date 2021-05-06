@@ -1,6 +1,8 @@
 import { browser } from 'webextension-polyfill-ts';
 
-export const SavedPasswordsMessagesType = {
+import { createOnMessage } from '../createOnMessage';
+
+const SavedPasswordsMessagesType = {
   savePasswordRequest: 'savePasswordRequest',
   getPasswordRequest: 'getPasswordRequest',
   hasSavedPasswordsRequest: 'hasSavedPasswordsRequest',
@@ -30,6 +32,7 @@ interface GetPasswordRequest {
 
 interface HasSavedPasswordsRequest {
   type: typeof SavedPasswordsMessagesType.hasSavedPasswordsRequest;
+  data: Record<string, never>;
 }
 
 interface ForgetPasswordRequest {
@@ -41,6 +44,7 @@ interface ForgetPasswordRequest {
 
 interface ForgetAllPasswordsRequest {
   type: typeof SavedPasswordsMessagesType.forgetAllPasswordsRequest;
+  data: Record<string, never>;
 }
 
 export function savePassword(password: string, address: string): void {
@@ -90,52 +94,55 @@ const savedPasswords: Record<string, SavedPassword> = {};
 const saveDuration = 15 * 60 * 1000;
 const intervalDuration = 1 * 60 * 1000;
 
-export function savePasswordListener(message: SavePasswordRequest): void {
-  if (message.type !== SavedPasswordsMessagesType.savePasswordRequest) {
-    return;
-  }
-  const { password, address } = message.data;
+export const onSavePasswordRequest = createOnMessage<SavePasswordRequest>(
+  SavedPasswordsMessagesType.savePasswordRequest,
+);
 
+export async function savePasswordListener({
+  address,
+  password,
+}: SavePasswordRequest['data']): Promise<void> {
   savedPasswords[address] = { password, timestamp: Date.now() };
 }
 
-export function getPasswordListener(
-  message: GetPasswordRequest,
-): Promise<string | undefined> | void {
-  if (message.type !== SavedPasswordsMessagesType.getPasswordRequest) {
-    return;
-  }
-  const { address } = message.data;
-  return Promise.resolve(savedPasswords[address]?.password);
+export const onGetPasswordRequest = createOnMessage<
+  GetPasswordRequest,
+  string | undefined
+>(SavedPasswordsMessagesType.getPasswordRequest);
+
+export async function getPasswordListener({
+  address,
+}: GetPasswordRequest['data']): Promise<string | undefined> {
+  return savedPasswords[address]?.password;
 }
 
-export function forgetPasswordListener(message: ForgetPasswordRequest): void {
-  if (message.type !== SavedPasswordsMessagesType.forgetPasswordRequest) {
-    return;
-  }
-  const { address } = message.data;
+export const onForgetPasswordRequest = createOnMessage<ForgetPasswordRequest>(
+  SavedPasswordsMessagesType.forgetPasswordRequest,
+);
+
+export async function forgetPasswordListener({
+  address,
+}: ForgetPasswordRequest['data']): Promise<void> {
   delete savedPasswords[address];
 }
 
-export function forgetAllPasswordsListener(
-  message: ForgetAllPasswordsRequest,
-): void {
-  if (message.type !== SavedPasswordsMessagesType.forgetAllPasswordsRequest) {
-    return;
-  }
+export const onForgetAllPasswordsRequest = createOnMessage<ForgetAllPasswordsRequest>(
+  SavedPasswordsMessagesType.forgetAllPasswordsRequest,
+);
+
+export async function forgetAllPasswordsListener(): Promise<void> {
   for (const password in savedPasswords) {
     delete savedPasswords[password];
   }
 }
 
-export function hasSavedPasswordsListener(
-  message: HasSavedPasswordsRequest,
-): Promise<boolean> | void {
-  if (message.type !== SavedPasswordsMessagesType.hasSavedPasswordsRequest) {
-    return;
-  }
-  const hasPasswords = Object.values(savedPasswords).length > 0;
-  return Promise.resolve(hasPasswords);
+export const onHasSavedPasswordsRequest = createOnMessage<
+  HasSavedPasswordsRequest,
+  boolean
+>(SavedPasswordsMessagesType.hasSavedPasswordsRequest);
+
+export async function hasSavedPasswordsListener(): Promise<boolean> {
+  return Object.values(savedPasswords).length > 0;
 }
 
 function checkExpiredPasswords(): void {

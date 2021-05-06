@@ -2,6 +2,8 @@ import { browser } from 'webextension-polyfill-ts';
 import BN from 'bn.js';
 import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
+import { createOnMessage } from '../createOnMessage';
+
 export const BalanceMessageType = {
   balanceChangeRequest: 'balanceChangeRequest',
   balanceChangeResponse: 'balanceChangeResponse',
@@ -41,10 +43,16 @@ export async function onBalanceChange(
   await sendBalanceChangeResponse(address, balance.toString());
 }
 
-export function balanceMessageListener(message: BalanceChangeRequest): void {
-  if (message.type === BalanceMessageType.balanceChangeRequest) {
-    (async () => {
-      await listenToBalanceChanges(message.data.address, onBalanceChange);
-    })();
-  }
+export const onBalanceChangeRequest = createOnMessage<BalanceChangeRequest>(
+  BalanceMessageType.balanceChangeRequest,
+);
+
+export const onBalanceChangeResponse = createOnMessage<BalanceChangeResponse>(
+  BalanceMessageType.balanceChangeResponse,
+);
+
+export async function balanceMessageListener(
+  data: BalanceChangeRequest['data'],
+): Promise<void> {
+  await listenToBalanceChanges(data.address, onBalanceChange);
 }
