@@ -20,7 +20,7 @@ export function useAddressBalance(address: string): BN | null {
   const [balance, setBalance] = useState<BN | null>(null);
 
   const balanceListener = useCallback(
-    async (data: BalanceChangeResponse['data']) => {
+    async (data: BalanceChangeResponse) => {
       if (data.address === address) {
         setBalance(new BN(data.balance));
       }

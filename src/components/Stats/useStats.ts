@@ -22,7 +22,7 @@ function subscribeToBalance(
   setBalances: (callback: (balances: Balances) => Balances) => void,
   subscriptions: Subscriptions,
 ) {
-  async function balanceListener(data: BalanceChangeResponse['data']) {
+  async function balanceListener(data: BalanceChangeResponse) {
     if (data.address !== address) {
       return;
     }

@@ -2,8 +2,9 @@ import { browser } from 'webextension-polyfill-ts';
 import { render, screen } from '../../testing/testing';
 
 import {
+  balanceChangeRequest,
+  balanceChangeResponse,
   BalanceChangeResponse,
-  BalanceMessageType,
 } from '../../connection/BalanceMessages/BalanceMessages';
 import { Balance } from './Balance';
 
@@ -12,12 +13,12 @@ jest
   .spyOn(browser.runtime.onMessage, 'addListener')
   .mockImplementation(async (callback) => {
     const response = {
-      type: BalanceMessageType.balanceChangeResponse,
+      type: balanceChangeResponse,
       data: {
         address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
         balance: '1234000000000000',
-      },
-    } as BalanceChangeResponse;
+      } as BalanceChangeResponse,
+    };
     callback(response, {});
   });
 
@@ -30,7 +31,7 @@ describe('Balance', () => {
 
     expect(container).toMatchSnapshot();
     expect(browser.runtime.sendMessage).toHaveBeenCalledWith({
-      type: BalanceMessageType.balanceChangeRequest,
+      type: balanceChangeRequest,
       data: { address },
     });
   });

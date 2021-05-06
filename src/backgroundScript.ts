@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { initBlockChainConnection } from './connection/initBlockChainConnection/initBlockChainConnection';
 import {
-  onTransfer,
+  onTransferRequest,
   transferMessageListener,
 } from './connection/TransferMessages/TransferMessages';
 import {
@@ -52,7 +52,7 @@ function initSavedPasswords(): void {
 }
 
 function initTransferMessages(): void {
-  onTransfer(transferMessageListener);
+  onTransferRequest(transferMessageListener);
 }
 
 export function initPopupMessages(): void {

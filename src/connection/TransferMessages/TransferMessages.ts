@@ -7,19 +7,14 @@ import { BlockchainUtils } from '@kiltprotocol/chain-helpers';
 import { decryptAccount } from '../../utilities/accounts/accounts';
 import { createOnMessage } from '../createOnMessage';
 
-const TransferMessageType = {
-  transferRequest: 'transferRequest',
-};
+const transferRequest = 'transferRequest';
 
 interface TransferRequest {
-  type: typeof TransferMessageType.transferRequest;
-  data: {
-    address: string;
-    recipient: string;
-    amount: string;
-    tip: string;
-    password: string;
-  };
+  address: string;
+  recipient: string;
+  amount: string;
+  tip: string;
+  password: string;
 }
 
 export async function sendTransferMessage({
@@ -36,23 +31,23 @@ export async function sendTransferMessage({
   password: string;
 }): Promise<void> {
   await browser.runtime.sendMessage({
-    type: TransferMessageType.transferRequest,
+    type: transferRequest,
     data: {
       address,
       recipient,
       amount: amount.toString(),
       tip: tip.toString(),
       password,
-    },
-  } as TransferRequest);
+    } as TransferRequest,
+  });
 }
 
-export const onTransfer = createOnMessage<TransferRequest, string>(
-  TransferMessageType.transferRequest,
+export const onTransferRequest = createOnMessage<TransferRequest, string>(
+  transferRequest,
 );
 
 export async function transferMessageListener(
-  data: TransferRequest['data'],
+  data: TransferRequest,
 ): Promise<string> {
   const { address, recipient, amount, password } = data;
   try {

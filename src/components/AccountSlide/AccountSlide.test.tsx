@@ -9,8 +9,8 @@ import {
 import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { saveAccount } from '../../utilities/accounts/accounts';
 import {
+  balanceChangeResponse,
   BalanceChangeResponse,
-  BalanceMessageType,
 } from '../../connection/BalanceMessages/BalanceMessages';
 
 import { AccountSlide } from './AccountSlide';
@@ -22,12 +22,12 @@ jest
   .spyOn(browser.runtime.onMessage, 'addListener')
   .mockImplementation(async (callback) => {
     const response = {
-      type: BalanceMessageType.balanceChangeResponse,
+      type: balanceChangeResponse,
       data: {
         address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
         balance: '1234000000000000',
-      },
-    } as BalanceChangeResponse;
+      } as BalanceChangeResponse,
+    };
     callback(response, {});
   });
 

@@ -3,8 +3,8 @@ import BN from 'bn.js';
 import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
 import {
+  balanceChangeResponse,
   balanceMessageListener,
-  BalanceMessageType,
   onBalanceChange,
 } from './BalanceMessages';
 
@@ -17,7 +17,7 @@ describe('BalanceMessages', () => {
       await onBalanceChange('address', new BN(1.234e15));
 
       expect(browser.runtime.sendMessage).toHaveBeenCalledWith({
-        type: BalanceMessageType.balanceChangeResponse,
+        type: balanceChangeResponse,
         data: {
           address: 'address',
           balance: '1234000000000000',

@@ -3,43 +3,35 @@ import { browser } from 'webextension-polyfill-ts';
 import { PopupAction } from '../../utilities/popups/types';
 import { createOnMessage } from '../createOnMessage';
 
-const PopupMessageType = {
-  popupRequest: 'popupRequest',
-  popupResponse: 'popupResponse',
-};
+const popupRequest = 'popupRequest';
+const popupResponse = 'popupResponse';
 
 interface PopupRequest {
-  type: typeof PopupMessageType.popupRequest;
-  data: {
-    action: PopupAction;
-    [key: string]: string;
-  };
+  action: PopupAction;
+  [key: string]: string;
 }
 
 interface PopupResponse {
-  type: typeof PopupMessageType.popupResponse;
-  data: {
-    [key: string]: string;
-  };
+  [key: string]: string;
 }
 
 export async function sendPopupRequest(
   action: PopupAction,
-  values: PopupResponse['data'],
+  values: PopupResponse,
 ): Promise<void> {
   await browser.runtime.sendMessage({
-    type: PopupMessageType.popupRequest,
-    data: { action, ...values },
-  } as PopupRequest);
+    type: popupRequest,
+    data: { action, ...values } as PopupRequest,
+  });
 }
 
 export async function sendPopupResponse(data: {
   [key: string]: string;
 }): Promise<void> {
   await browser.runtime.sendMessage({
-    type: PopupMessageType.popupResponse,
-    data,
-  } as PopupResponse);
+    type: popupResponse,
+    data: data as PopupResponse,
+  });
 }
 
 async function sendPopupTabResponse(
@@ -49,9 +41,9 @@ async function sendPopupTabResponse(
   },
 ): Promise<void> {
   await browser.tabs.sendMessage(tabId, {
-    type: PopupMessageType.popupResponse,
-    data,
-  } as PopupResponse);
+    type: popupResponse,
+    data: data as PopupResponse,
+  });
 }
 
 function getPopupUrl(values: { [key: string]: string }): string {
@@ -83,16 +75,12 @@ async function closeExistingPopup() {
   popupId = undefined;
 }
 
-export const onPopupRequest = createOnMessage<PopupRequest>(
-  PopupMessageType.popupRequest,
-);
+export const onPopupRequest = createOnMessage<PopupRequest>(popupRequest);
 
-export const onPopupResponse = createOnMessage<PopupResponse>(
-  PopupMessageType.popupResponse,
-);
+export const onPopupResponse = createOnMessage<PopupResponse>(popupResponse);
 
 export async function popupRequestListener(
-  data: PopupRequest['data'],
+  data: PopupRequest,
   sender: { tab?: { id?: number } },
 ): Promise<void> {
   tabId = sender?.tab?.id;
@@ -106,7 +94,7 @@ export async function popupRequestListener(
 }
 
 export async function popupResponseListener(
-  data: PopupResponse['data'],
+  data: PopupResponse,
 ): Promise<void> {
   if (!tabId) {
     return;
