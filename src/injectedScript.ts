@@ -1,3 +1,8 @@
+import {
+  onPopupWindowResponse,
+  sendPopupWindowRequest,
+} from './connection/PopupWindowMessages/PopupWindowMessages';
+
 let lastCallback: (values: { [key: string]: string }) => void | undefined;
 
 function showClaimPopup(
@@ -7,40 +12,28 @@ function showClaimPopup(
   lastCallback = callback;
 
   // Non-extension scripts cannot open windows with extension pages
-  window.postMessage(
-    {
-      type: 'sporranExtension.injectedScript.request',
-      action: 'claim',
+  sendPopupWindowRequest('claim', {
+    // TODO: remove
+    'Full Name': 'Ingo Rübe',
+    Email: 'ingo@kilt.io',
+    'Credential type': 'BL-Mail-Simple',
+    Attester: 'BOTLabs',
 
-      // TODO: remove
-      'Full Name': 'Ingo Rübe',
-      Email: 'ingo@kilt.io',
-      'Credential type': 'BL-Mail-Simple',
-      Attester: 'BOTLabs',
-
-      ...values,
-    },
-    window.location.href,
-  );
+    ...values,
+  });
 }
 
 function showSaveCredentialPopup(values: { [key: string]: string }) {
   // Non-extension scripts cannot open windows with extension pages
-  window.postMessage(
-    {
-      type: 'sporranExtension.injectedScript.request',
-      action: 'save',
+  sendPopupWindowRequest('save', {
+    // TODO: remove
+    'Full Name': 'Ingo Rübe',
+    Email: 'ingo@kilt.io',
+    'Credential type': 'BL-Mail-Simple',
+    Attester: 'BOTLabs',
 
-      // TODO: remove
-      'Full Name': 'Ingo Rübe',
-      Email: 'ingo@kilt.io',
-      'Credential type': 'BL-Mail-Simple',
-      Attester: 'BOTLabs',
-
-      ...values,
-    },
-    window.location.href,
-  );
+    ...values,
+  });
 }
 
 function showShareCredentialPopup(
@@ -50,24 +43,11 @@ function showShareCredentialPopup(
   lastCallback = callback;
 
   // Non-extension scripts cannot open windows with extension pages
-  window.postMessage(
-    {
-      type: 'sporranExtension.injectedScript.request',
-      action: 'share',
-      ...values,
-    },
-    window.location.href,
-  );
+  sendPopupWindowRequest('share', values);
 }
 
-function onMessage(message: MessageEvent) {
-  if (
-    !lastCallback ||
-    message.data.type !== 'sporranExtension.injectedScript.response'
-  ) {
-    return;
-  }
-  lastCallback(message.data);
+function handleResponse(data: Parameters<typeof lastCallback>[0]) {
+  lastCallback?.(data);
 }
 
 interface API {
@@ -86,7 +66,8 @@ function main() {
     showSaveCredentialPopup,
     showShareCredentialPopup,
   };
-  window.addEventListener('message', onMessage);
+
+  onPopupWindowResponse(handleResponse);
 }
 
 main();

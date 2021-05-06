@@ -4,6 +4,10 @@ import {
   PopupResponse,
   sendPopupRequest,
 } from './connection/PopupMessages/PopupMessages';
+import {
+  onPopupWindowRequest,
+  sendPopupWindowResponse,
+} from './connection/PopupWindowMessages/PopupWindowMessages';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -14,36 +18,16 @@ function injectScript() {
   document.head.appendChild(script);
 }
 
-function messageListener(message: MessageEvent) {
-  const { data, source } = message;
-  const { type, action, ...values } = data;
-
-  if (source !== window || type !== 'sporranExtension.injectedScript.request') {
-    return;
-  }
-
-  (async () => {
-    // content scripts cannot open windows, only background and popup scripts can
-    await sendPopupRequest(action, values);
-  })();
-}
-
 function popupResponseListener(message: PopupResponse) {
   if (message.type !== PopupMessageType.popupResponse) {
     return;
   }
 
-  window.postMessage(
-    {
-      type: 'sporranExtension.injectedScript.response',
-      ...message.data,
-    },
-    window.location.href,
-  );
+  sendPopupWindowResponse(message.data);
 }
 
 function initMessages() {
-  window.addEventListener('message', messageListener);
+  onPopupWindowRequest(sendPopupRequest);
   browser.runtime.onMessage.addListener(popupResponseListener);
 }
 
