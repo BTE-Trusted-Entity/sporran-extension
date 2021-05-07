@@ -14,7 +14,7 @@ jest.spyOn(browser.runtime, 'sendMessage');
 describe('BalanceMessages', () => {
   describe('onBalanceChange', () => {
     it('should send runtime message', async () => {
-      await onBalanceChange('address', new BN(1.234e15));
+      await onBalanceChange('address', { free: new BN(1.234e15) });
 
       expect(browser.runtime.sendMessage).toHaveBeenCalledWith({
         type: balanceChangeResponse,
