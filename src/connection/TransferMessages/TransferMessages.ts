@@ -49,7 +49,7 @@ export const onTransferRequest = createOnMessage<TransferRequest, string>(
 export async function transferMessageListener(
   data: TransferRequest,
 ): Promise<string> {
-  const { address, recipient, amount, password } = data;
+  const { address, recipient, amount, password, tip } = data;
   try {
     const identity = await decryptAccount(address, password);
 
@@ -58,6 +58,7 @@ export async function transferMessageListener(
     const tx = await makeTransfer(recipient, new BN(amount));
     await BlockchainUtils.signAndSubmitTx(tx, identity, {
       resolveOn: BlockchainUtils.IS_IN_BLOCK,
+      tip,
     });
 
     return ''; // empty string = no error
