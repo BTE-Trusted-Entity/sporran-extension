@@ -61,6 +61,10 @@ export function ReviewTransaction({
     setRemember(!remember);
   }, [remember]);
 
+  const handlePasswordInput = useCallback(() => {
+    setError(null);
+  }, []);
+
   useEffect(() => {
     (async () => {
       const password = await getPassword(account.address);
@@ -192,6 +196,7 @@ export function ReviewTransaction({
       <p className={styles.passwordLine} {...errorTooltip.anchor}>
         <input
           type={passwordType}
+          onInput={handlePasswordInput}
           id="password"
           name="password"
           className={styles.password}

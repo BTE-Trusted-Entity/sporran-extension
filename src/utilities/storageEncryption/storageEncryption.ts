@@ -32,7 +32,7 @@ async function deriveKeyFromPassword(
       hash: 'SHA-256',
     },
     keyMaterial,
-    { name: 'AES-CTR', length: 256 },
+    { name: 'AES-GCM', length: 256 },
     false,
     ['encrypt', 'decrypt'],
   );
@@ -48,7 +48,7 @@ export async function encrypt(
   const key = await deriveKeyFromPassword(password, keySaltBytes);
 
   const cipherBytes = await crypto.subtle.encrypt(
-    { name: 'AES-CTR', counter: cipherSaltBytes, length: 64 },
+    { name: 'AES-GCM', iv: cipherSaltBytes },
     key,
     bytes,
   );
@@ -68,7 +68,7 @@ export async function decrypt(
   const key = await deriveKeyFromPassword(password, keySaltBytes);
 
   return crypto.subtle.decrypt(
-    { name: 'AES-CTR', counter: cipherSaltBytes, length: 64 },
+    { name: 'AES-GCM', iv: cipherSaltBytes },
     key,
     cipherBytes,
   );
