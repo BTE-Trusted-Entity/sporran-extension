@@ -21,7 +21,7 @@ interface Props {
 export function AccountOverview({ account }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
-  const params = useParams() as { type?: 'created' | 'imported' | 'reset' };
+  const params = useParams() as { type?: 'created' | 'imported' | 'pwreset' };
 
   const [hasOpenOverlay, setHasOpenOverlay] = useState(Boolean(params.type));
   const [type] = useState(params.type);

@@ -8,7 +8,7 @@ import styles from './AccountSuccessOverlay.module.css';
 
 interface Props {
   account: Account;
-  successType: 'created' | 'imported' | 'reset';
+  successType: 'created' | 'imported' | 'pwreset';
   onSuccessOverlayButtonClick: () => void;
 }
 
@@ -22,7 +22,7 @@ export function AccountSuccessOverlay({
   const messages = {
     created: t('component_AccountSuccessOverlay_message_create'),
     imported: t('component_AccountSuccessOverlay_message_import'),
-    reset: t('component_AccountSuccessOverlay_message_reset'),
+    pwreset: t('component_AccountSuccessOverlay_message_reset'),
   };
 
   return (
