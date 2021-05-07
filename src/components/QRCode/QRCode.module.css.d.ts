@@ -1,5 +1,6 @@
 declare namespace QrCodeModuleCssNamespace {
   export interface IQrCodeModuleCss {
+    code: string;
     component: string;
     logo: string;
   }
