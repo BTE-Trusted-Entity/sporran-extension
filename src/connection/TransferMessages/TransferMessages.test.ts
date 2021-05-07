@@ -7,7 +7,7 @@ import { transferMessageListener } from './TransferMessages';
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainUtils: {
-    submitTxWithReSign: jest.fn(),
+    signAndSubmitTx: jest.fn(),
   },
 }));
 jest.mock('../../utilities/accounts/accounts', () => ({
@@ -38,11 +38,10 @@ describe('TransferMessages', () => {
         'password',
       );
       expect(makeTransfer).toHaveBeenCalledWith(
-        { identity: true },
         'recipient-address',
         expect.anything(),
       );
-      expect(BlockchainUtils.submitTxWithReSign).toHaveBeenCalledWith(
+      expect(BlockchainUtils.signAndSubmitTx).toHaveBeenCalledWith(
         { transaction: true },
         { identity: true },
         expect.anything(),

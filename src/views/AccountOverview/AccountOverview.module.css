@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+header {
+  height: 4.25rem;
+}
+
 .heading {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
   margin: 0;

@@ -33,7 +33,7 @@
     "open-chrome": "node scripts/chrome-launch.js"
   },
   "dependencies": {
-    "@kiltprotocol/core": "^0.20.0",
+    "@kiltprotocol/core": "^0.21.0",
     "@popperjs/core": "^2.9.2",
     "bn.js": "^5.2.0",
     "classnames": "^2.3.1",
