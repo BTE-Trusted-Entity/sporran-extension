@@ -23,7 +23,7 @@ export function ResetAccount({ account }: { account: Account }): JSX.Element {
     async (password: string) => {
       await encryptAccount(backupPhrase, password);
       history.push(
-        generatePath(paths.account.overview, { address, type: 'reset' }),
+        generatePath(paths.account.overview, { address, type: 'pwreset' }),
       );
     },
     [backupPhrase, history, address],
