@@ -2,20 +2,13 @@ import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
 
-import { MessageType } from '../../connection/MessageType';
+import { sendPopupResponse } from '../../connection/PopupMessages/PopupMessages';
 import { AccountSlide } from '../../components/AccountSlide/AccountSlide';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { Account, useAccounts } from '../../utilities/accounts/accounts';
 
 import tableStyles from '../../components/Table/Table.module.css';
 import styles from './ShareCredential.module.css';
-
-async function sendPopupResponse(data: { [key: string]: string }) {
-  await browser.runtime.sendMessage({
-    type: MessageType.popupResponse,
-    data,
-  });
-}
 
 export function ShareCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;

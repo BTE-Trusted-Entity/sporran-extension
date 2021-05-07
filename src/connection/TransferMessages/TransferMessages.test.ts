@@ -2,8 +2,7 @@ import { BlockchainUtils } from '@kiltprotocol/chain-helpers';
 import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
 import { decryptAccount } from '../../utilities/accounts/accounts';
-import { MessageType, TransferRequest } from '../MessageType';
-import { transferListener } from './initTransferMessages';
+import { transferMessageListener } from './TransferMessages';
 
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
 jest.mock('@kiltprotocol/chain-helpers', () => ({
@@ -15,8 +14,8 @@ jest.mock('../../utilities/accounts/accounts', () => ({
   decryptAccount: jest.fn(),
 }));
 
-describe('initTransferMessages', () => {
-  describe('transferListener', () => {
+describe('TransferMessages', () => {
+  describe('transferMessageListener', () => {
     it('should respond with fee to the proper messages', async () => {
       (decryptAccount as jest.Mock).mockImplementation(() => ({
         identity: true,
@@ -25,16 +24,13 @@ describe('initTransferMessages', () => {
         transaction: true,
       }));
 
-      const error = await transferListener({
-        type: MessageType.transferRequest,
-        data: {
-          address: 'account-address',
-          recipient: 'recipient-address',
-          amount: '125000000',
-          password: 'password',
-          tip: '0',
-        },
-      } as TransferRequest);
+      const error = await transferMessageListener({
+        address: 'account-address',
+        recipient: 'recipient-address',
+        amount: '125000000',
+        password: 'password',
+        tip: '0',
+      });
 
       expect(error).toEqual('');
       expect(decryptAccount).toHaveBeenCalledWith(
@@ -51,17 +47,6 @@ describe('initTransferMessages', () => {
         { identity: true },
         expect.anything(),
       );
-    });
-
-    it('should ignore other messages', async () => {
-      (decryptAccount as jest.Mock).mockClear();
-
-      transferListener(({
-        type: 'other',
-        data: { address: 'address' },
-      } as unknown) as TransferRequest);
-
-      expect(decryptAccount).not.toHaveBeenCalled();
     });
   });
 });

@@ -1,12 +1,12 @@
 import { browser } from 'webextension-polyfill-ts';
 import { pull } from 'lodash-es';
 
+import { feeRequest, FeeRequest } from '../connection/FeeMessages/FeeMessages';
 import {
   BalanceChangeRequest,
+  balanceChangeResponse,
   BalanceChangeResponse,
-  FeeRequest,
-  MessageType,
-} from '../connection/MessageType';
+} from '../connection/BalanceMessages/BalanceMessages';
 
 type CallbackType = Parameters<typeof browser.runtime.onMessage.addListener>[0];
 type SendMessageType = Parameters<typeof browser.runtime.sendMessage>[0];
@@ -22,21 +22,22 @@ export function mockBackgroundScript(namespace = browser): void {
     pull(listeners, callback);
   };
 
-  namespace.runtime.sendMessage = ((
-    message: BalanceChangeRequest | FeeRequest,
-  ) => {
-    if (message.type === MessageType.feeRequest) {
+  namespace.runtime.sendMessage = ((message: {
+    type: string;
+    data: BalanceChangeRequest | FeeRequest;
+  }) => {
+    if (message.type === feeRequest) {
       return Promise.resolve('125000000');
     }
 
     listeners.forEach((callback) => {
       const response = {
-        type: MessageType.balanceChangeResponse,
+        type: balanceChangeResponse,
         data: {
-          address: (message as BalanceChangeRequest).data.address,
+          address: (message.data as BalanceChangeRequest).address,
           balance: '1234000000000000',
-        },
-      } as BalanceChangeResponse;
+        } as BalanceChangeResponse,
+      };
 
       callback(response, {});
     });
