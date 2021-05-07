@@ -40,9 +40,9 @@ export const onBalanceChangeResponse = createOnMessage<BalanceChangeResponse>(
 
 export async function onBalanceChange(
   address: string,
-  balance: BN,
+  { free }: { free: BN },
 ): Promise<void> {
-  await sendBalanceChangeResponse(address, balance.toString());
+  await sendBalanceChangeResponse(address, free.toString());
 }
 
 export async function balanceMessageListener(
