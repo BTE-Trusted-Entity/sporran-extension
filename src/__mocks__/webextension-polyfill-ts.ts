@@ -5,7 +5,6 @@
 
 import { setupGetMessageShim } from 'chrome-extension-i18n-shim';
 import messagesEN from '../static/_locales/en/messages.json';
-import { BalanceChangeResponse, MessageType } from '../connection/MessageType';
 
 export const browser = {
   tabs: {
@@ -41,12 +40,12 @@ export const browser = {
     onMessage: {
       addListener(callback: (...args: unknown[]) => void): void {
         const response = {
-          type: MessageType.balanceChangeResponse,
+          type: 'balanceChangeResponse',
           data: {
             address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
             balance: '1234000000000000',
           },
-        } as BalanceChangeResponse;
+        };
         callback(response, {});
       },
       removeListener(): void {

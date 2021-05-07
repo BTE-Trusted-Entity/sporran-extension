@@ -7,7 +7,7 @@ import { useAccounts } from '../../utilities/accounts/accounts';
 import {
   forgetAllPasswords,
   hasSavedPasswords,
-} from '../../utilities/passwords/passwords';
+} from '../../connection/SavedPasswordsMessages/SavedPasswordsMessages';
 import { generatePath, paths } from '../../views/paths';
 
 import menuStyles from '../Menu/Menu.module.css';
