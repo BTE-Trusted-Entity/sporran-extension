@@ -43,7 +43,7 @@ describe('AccountSuccessOverlay', () => {
     const { container } = render(
       <AccountSuccessOverlay
         account={account}
-        successType="reset"
+        successType="pwreset"
         onSuccessOverlayButtonClick={jest.fn()}
       />,
     );

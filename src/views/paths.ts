@@ -15,7 +15,7 @@ export const paths = {
       password: '/account/import/password',
     },
 
-    overview: '/account/:address/:type(created|imported|reset)?',
+    overview: '/account/:address/:type(created|imported|pwreset)?',
     reset: {
       start: '/account/:address/reset',
       password: '/account/:address/reset/password',
