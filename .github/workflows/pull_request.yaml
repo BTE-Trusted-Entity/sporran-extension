@@ -32,7 +32,16 @@ jobs:
         run: yarn lint
 
       - name: Run tests
+        run: yarn test --maxWorkers=1
+
+      - name: Run tests
         run: yarn test
+
+      - name: Run tests
+        run: yarn test --maxWorkers=2
+
+      - name: Run tests
+        run: yarn test --maxWorkers=1
 
       - name: Build code
         run: yarn build
