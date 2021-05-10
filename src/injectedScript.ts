@@ -61,7 +61,7 @@ function main() {
     return;
   }
   // Only injected scripts can create variables like this, content script cannot do this
-  ((window as unknown) as { sporranExtension: API }).sporranExtension = {
+  (window as unknown as { sporranExtension: API }).sporranExtension = {
     showClaimPopup,
     showSaveCredentialPopup,
     showShareCredentialPopup,
