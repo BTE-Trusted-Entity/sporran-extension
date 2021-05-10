@@ -52,8 +52,6 @@ export async function transferMessageListener(
   try {
     const identity = await decryptAccount(address, password);
 
-    // TODO: include the tip in the transaction when the SDK enables it
-    // https://github.com/KILTprotocol/sdk-js/pull/378
     const tx = await makeTransfer(recipient, new BN(amount));
     await BlockchainUtils.signAndSubmitTx(tx, identity, {
       resolveOn: BlockchainUtils.IS_IN_BLOCK,
