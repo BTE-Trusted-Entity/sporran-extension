@@ -14,23 +14,13 @@ describe('Settings', () => {
   });
 
   it('menu should be visible when menu button clicked', async () => {
-    const accounts = {
-      '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire': {
-        name: 'My Sporran Account',
-        tartan: 'MacFarlane',
-        address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-        index: 1,
-      },
-    };
     const { container } = render(
       <MemoryRouter
         initialEntries={[
           '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
         ]}
       >
-        <AccountsProviderMock accounts={accounts}>
-          <Settings />
-        </AccountsProviderMock>
+        <Settings />
       </MemoryRouter>,
     );
     const openMenuButton = await screen.findByLabelText('Settings');
