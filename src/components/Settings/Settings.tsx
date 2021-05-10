@@ -18,7 +18,7 @@ export function Settings(): JSX.Element {
 
   const accounts = useAccounts().data;
   const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(
-    accounts ? 5 : 2,
+    accounts ? 6 : 3,
   );
 
   const handleClick = useCallback(() => {
