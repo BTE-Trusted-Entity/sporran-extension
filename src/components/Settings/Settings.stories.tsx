@@ -28,7 +28,11 @@ export function NoAccounts(): JSX.Element {
 
 export function WithAccounts(): JSX.Element {
   return (
-    <MemoryRouter initialEntries={['/account/foo']}>
+    <MemoryRouter
+      initialEntries={[
+        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+      ]}
+    >
       <Settings />
     </MemoryRouter>
   );
