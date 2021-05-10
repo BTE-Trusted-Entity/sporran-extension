@@ -119,7 +119,6 @@ export async function decryptAccount(
   address: string,
   password: string,
 ): Promise<Identity> {
-  // TODO: throw on wrong results
   const seed = await loadEncrypted(address, password);
   return Identity.buildFromSeed(new Uint8Array(seed));
 }
