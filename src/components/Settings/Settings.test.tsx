@@ -40,6 +40,26 @@ describe('Settings', () => {
     expect(container).toMatchSnapshot();
   });
 
+  it('should not render account options when creating account', async () => {
+    render(
+      <MemoryRouter initialEntries={['/account/NEW']}>
+        <Settings />
+      </MemoryRouter>,
+    );
+    userEvent.click(await screen.findByLabelText('Settings'));
+
+    expect(
+      screen.queryByRole('menuitem', { name: 'Forget current account' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('menuitem', {
+        name: 'Reset password for current account',
+      }),
+    ).not.toBeInTheDocument();
+
+    await waitForHasSavedPasswords();
+  });
+
   it('should not render account options if there are no accounts', async () => {
     render(
       <AccountsProviderMock accounts={{}}>

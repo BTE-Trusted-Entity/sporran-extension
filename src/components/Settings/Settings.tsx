@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
-import { Link, Route } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import { useAccounts } from '../../utilities/accounts/accounts';
 import {
@@ -16,10 +16,16 @@ import styles from './Settings.module.css';
 export function Settings(): JSX.Element {
   const t = browser.i18n.getMessage;
 
+  const [hasPasswords, setHasPasswords] = useState(false);
+
+  const match = useRouteMatch(paths.account.overview);
+  const address = (match?.params as { address: string })?.address;
   const accounts = useAccounts().data;
-  const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(
-    accounts ? 6 : 3,
-  );
+  const onExistingAccount = Boolean(accounts?.[address]);
+
+  const countForAccount = hasPasswords ? 6 : 5;
+  const count = onExistingAccount ? countForAccount : 3;
+  const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(count);
 
   const handleClick = useCallback(() => {
     setIsOpen(false);
@@ -27,8 +33,6 @@ export function Settings(): JSX.Element {
 
   // TODO - move version number to config
   const VERSION_NUMBER = '1.0.0';
-
-  const [hasPasswords, setHasPasswords] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -53,54 +57,44 @@ export function Settings(): JSX.Element {
           </h4>
 
           <ul className={menuStyles.list}>
-            <Route
-              path={paths.account.overview}
-              render={({ match }) => {
-                const { address } = match.params;
+            {onExistingAccount && (
+              <>
+                <li className={menuStyles.listItem}>
+                  <Link
+                    to={generatePath(paths.account.remove, { address })}
+                    {...itemProps.shift()}
+                  >
+                    {t('component_Settings_forget')}
+                  </Link>
+                </li>
 
-                if (address && !accounts?.[address]) return null;
-
-                return (
-                  <>
-                    <li className={menuStyles.listItem}>
-                      <Link
-                        to={generatePath(paths.account.remove, { address })}
-                        {...itemProps.shift()}
-                      >
-                        {t('component_Settings_forget')}
-                      </Link>
-                    </li>
-
-                    <li className={menuStyles.listItem}>
-                      <Link
-                        to={generatePath(paths.account.reset.start, {
-                          address,
-                        })}
-                        {...itemProps.shift()}
-                      >
-                        {t('component_Settings_reset_password')}
-                      </Link>
-                    </li>
-                    <li
-                      className={
-                        hasPasswords ? menuStyles.listItem : menuStyles.disabled
-                      }
-                    >
-                      <button
-                        type="button"
-                        className={menuStyles.listButton}
-                        {...(itemProps.shift() as unknown)}
-                        onClick={forgetAllPasswords}
-                        disabled={!hasPasswords}
-                      >
-                        {t('component_Settings_forget_saved_passwords')}
-                      </button>
-                    </li>
-                  </>
-                );
-              }}
-            />
-
+                <li className={menuStyles.listItem}>
+                  <Link
+                    to={generatePath(paths.account.reset.start, {
+                      address,
+                    })}
+                    {...itemProps.shift()}
+                  >
+                    {t('component_Settings_reset_password')}
+                  </Link>
+                </li>
+                <li
+                  className={
+                    hasPasswords ? menuStyles.listItem : menuStyles.disabled
+                  }
+                >
+                  <button
+                    type="button"
+                    className={menuStyles.listButton}
+                    {...(hasPasswords && (itemProps.shift() as unknown))}
+                    onClick={forgetAllPasswords}
+                    disabled={!hasPasswords}
+                  >
+                    {t('component_Settings_forget_saved_passwords')}
+                  </button>
+                </li>
+              </>
+            )}
             <li className={menuStyles.listItem}>
               {/* TODO: link to terms and conditions */}
               <a {...itemProps.shift()}>
@@ -113,7 +107,9 @@ export function Settings(): JSX.Element {
             </li>
 
             <li className={menuStyles.listItem}>
-              <a>{t('component_Settings_version', [VERSION_NUMBER])}</a>
+              <a {...itemProps.shift()}>
+                {t('component_Settings_version', [VERSION_NUMBER])}
+              </a>
             </li>
           </ul>
         </div>
