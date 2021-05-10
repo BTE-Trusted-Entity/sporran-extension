@@ -2,6 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+  core: {
+    builder: 'webpack5',
+  },
   stories: ['../src/**/*.stories.tsx'],
   addons: [
     '@storybook/addon-actions/register',
@@ -13,35 +16,23 @@ module.exports = {
     reactDocgen: 'none', // current version doesn’t work with recent TS
   },
   webpackFinal: async (config) => {
-    const cssLoaderOptions = config.module.rules.flatMap(({ use }) => use).find(l => /\bcss-loader\b/.test(l?.loader)).options;
-    cssLoaderOptions.modules = { auto: true };
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'webextension-polyfill-ts': require.resolve('../src/__mocks__/webextension-polyfill-ts.ts'),
+    };
 
-    config.module.rules.push({
-      test: /\.mjs$/,
-      include: /node_modules/,
-      type: "javascript/auto",
-    })
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      'crypto': require.resolve('crypto-browserify'),
+      'stream': require.resolve('stream-browserify'),
+    };
 
     config.plugins = [
       ...config.plugins,
-      new webpack.NormalModuleReplacementPlugin(
-        /webextension-polyfill-ts/,
-        (resource) => {
-          // Gets absolute path to mock `webextension-polyfill-ts` package
-          // NOTE: this is required because the `webextension-polyfill-ts`
-          // package can't be used outside the environment provided by web extensions
-          const absRootMockPath = path.resolve(
-            __dirname,
-            '../src/__mocks__/webextension-polyfill-ts.ts',
-          );
-
-          // Gets relative path from requesting module to our mocked module
-          const relativePath = path.relative(resource.context, absRootMockPath);
-
-          // Updates the `resource.request` to reference our mocked module instead of the real one
-          resource.request = relativePath;
-        },
-      ),
+      new webpack.ProvidePlugin({
+        Buffer: ['buffer', 'Buffer'],
+        process: ['process'],
+      }),
     ];
 
     return config;
