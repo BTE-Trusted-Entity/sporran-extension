@@ -10,9 +10,11 @@ const account =
 
 describe('AccountSuccessOverlay', () => {
   beforeEach(() => {
-    ((HTMLDialogElement.prototype as unknown) as {
-      showModal: () => void;
-    }).showModal = jest.fn();
+    (
+      HTMLDialogElement.prototype as unknown as {
+        showModal: () => void;
+      }
+    ).showModal = jest.fn();
   });
 
   it('should render success overlay for created account', async () => {

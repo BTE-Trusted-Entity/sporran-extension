@@ -48,9 +48,11 @@ export async function waitForDialogUpdate(): Promise<void> {
 export async function runWithJSDOMErrorsDisabled(
   callback: () => void,
 ): Promise<void> {
-  const console = ((window as unknown) as {
-    _virtualConsole: { emit: () => void };
-  })._virtualConsole;
+  const console = (
+    window as unknown as {
+      _virtualConsole: { emit: () => void };
+    }
+  )._virtualConsole;
 
   const { emit } = console;
   console.emit = jest.fn();

@@ -34,9 +34,10 @@ function numberToBN(parsedValue: number): BN {
   return new BN(whole + paddedFraction);
 }
 
-function getLocaleSeparators(
-  locale: string = browser.i18n.getUILanguage(),
-): { group?: string; decimal?: string } {
+function getLocaleSeparators(locale: string = browser.i18n.getUILanguage()): {
+  group?: string;
+  decimal?: string;
+} {
   const parts = new Intl.NumberFormat(locale).formatToParts(1234.5);
   const group = find(parts, { type: 'group' })?.value;
   const decimal = find(parts, { type: 'decimal' })?.value;
