@@ -25,6 +25,7 @@
 .heading {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
   margin: 1.125rem 0 0;
+  color: var(--color-grey-light);
 }
 
 .text {

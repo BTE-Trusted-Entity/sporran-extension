@@ -27,6 +27,7 @@
   height: calc(120rem / 16);
   padding: 1rem 1rem;
   margin-bottom: 1.5rem;
+  background: linear-gradient(153deg, #1c3451 0%, #335a87 100%);
 }
 
 .selectableWords {

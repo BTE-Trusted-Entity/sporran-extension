@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+import { toggleIcon } from './connection/IconMessages/IconMessages';
 import {
   onPopupResponse,
   sendPopupRequest,
@@ -31,6 +32,7 @@ function initMessages() {
 function main() {
   injectScript();
   initMessages();
+  toggleIcon();
 }
 
 main();
