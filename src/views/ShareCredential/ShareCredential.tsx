@@ -13,7 +13,9 @@ import styles from './ShareCredential.module.css';
 export function ShareCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const [checked, setChecked] = useState<{ [key: string]: boolean }>({});
+  const [checked, setChecked] = useState<{ [key: string]: boolean }>({
+    '0': true,
+  });
 
   const { passwordType, passwordToggle } = usePasswordType();
   const [password, setPassword] = useState('');
