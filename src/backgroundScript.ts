@@ -2,6 +2,10 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { initBlockChainConnection } from './connection/initBlockChainConnection/initBlockChainConnection';
 import {
+  onToggleIconRequest,
+  toggleIconListener,
+} from './connection/IconMessages/IconMessages';
+import {
   onTransferRequest,
   transferMessageListener,
 } from './connection/TransferMessages/TransferMessages';
@@ -61,6 +65,10 @@ export function initPopupMessages(): void {
   browser.tabs.onRemoved.addListener(popupTabRemovedListener);
 }
 
+function initToggleIcon(): void {
+  onToggleIconRequest(toggleIconListener);
+}
+
 function init() {
   initBlockChainConnection();
   initBalanceMessages();
@@ -68,6 +76,7 @@ function init() {
   initSavedPasswords();
   initTransferMessages();
   initPopupMessages();
+  initToggleIcon();
 }
 
 init();
