@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "default_locale": "en",
   "browser_action": {
-    "default_icon": "icon-16.png",
+    "default_icon": "icon/light/16.png",
     "default_popup": "popup.html"
   },
   "background": {
@@ -18,9 +18,9 @@
     "js": ["js/contentScript.js"]
   }],
   "icons": {
-    "16": "icon-16.png",
-    "48": "icon-48.png",
-    "128": "icon-128.png"
+    "16": "icon/light/16.png",
+    "48": "icon/light/48.png",
+    "128": "icon/light/128.png"
   },
   "permissions": [
     "tabs",

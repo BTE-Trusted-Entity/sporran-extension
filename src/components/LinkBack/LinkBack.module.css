@@ -2,7 +2,7 @@
   composes: buttonIcon from '../../components/Button/Button.module.css';
   position: absolute;
   left: 1.5rem;
-  top: 2rem;
+  top: 2.5rem;
   height: calc(13rem / 16);
   width: 2rem;
   background-image: url('../images/arrow-left.svg');
