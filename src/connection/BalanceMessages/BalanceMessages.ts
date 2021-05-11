@@ -30,9 +30,8 @@ async function sendBalanceChangeResponse(address: string, balance: string) {
   });
 }
 
-export const onBalanceChangeRequest = createOnMessage<BalanceChangeRequest>(
-  balanceChangeRequest,
-);
+export const onBalanceChangeRequest =
+  createOnMessage<BalanceChangeRequest>(balanceChangeRequest);
 
 export const onBalanceChangeResponse = createOnMessage<BalanceChangeResponse>(
   balanceChangeResponse,

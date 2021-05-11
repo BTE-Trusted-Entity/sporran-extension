@@ -14,9 +14,8 @@ export function toggleIcon(): void {
   });
 }
 
-export const onToggleIconRequest = createOnMessage<ToggleIconRequest>(
-  toggleIconRequest,
-);
+export const onToggleIconRequest =
+  createOnMessage<ToggleIconRequest>(toggleIconRequest);
 
 export async function toggleIconListener(): Promise<void> {
   console.log('setting dark mode icon');

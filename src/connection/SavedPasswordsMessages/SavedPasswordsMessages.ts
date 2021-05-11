@@ -77,9 +77,8 @@ const savedPasswords: Record<string, SavedPassword> = {};
 const saveDuration = 15 * 60 * 1000;
 const intervalDuration = 1 * 60 * 1000;
 
-export const onSavePasswordRequest = createOnMessage<SavePasswordRequest>(
-  savePasswordRequest,
-);
+export const onSavePasswordRequest =
+  createOnMessage<SavePasswordRequest>(savePasswordRequest);
 
 export async function savePasswordListener({
   address,
@@ -88,10 +87,8 @@ export async function savePasswordListener({
   savedPasswords[address] = { password, timestamp: Date.now() };
 }
 
-export const onGetPasswordRequest = createOnMessage<
-  GetPasswordRequest,
-  string | undefined
->(getPasswordRequest);
+export const onGetPasswordRequest =
+  createOnMessage<GetPasswordRequest, string | undefined>(getPasswordRequest);
 
 export async function getPasswordListener({
   address,
@@ -109,9 +106,8 @@ export async function forgetPasswordListener({
   delete savedPasswords[address];
 }
 
-export const onForgetAllPasswordsRequest = createOnMessage<ForgetAllPasswordsRequest>(
-  forgetAllPasswordsRequest,
-);
+export const onForgetAllPasswordsRequest =
+  createOnMessage<ForgetAllPasswordsRequest>(forgetAllPasswordsRequest);
 
 export async function forgetAllPasswordsListener(): Promise<void> {
   for (const password in savedPasswords) {
