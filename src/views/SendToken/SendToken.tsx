@@ -34,7 +34,9 @@ function numberToBN(parsedValue: number): BN {
   return new BN(whole + paddedFraction);
 }
 
-function getLocaleSeparators(locale: string = browser.i18n.getUILanguage()): {
+function getLocaleSeparators(
+  locale: string = browser.i18n.getUILanguage(),
+): {
   group?: string;
   decimal?: string;
 } {

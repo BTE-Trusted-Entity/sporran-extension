@@ -27,9 +27,9 @@ describe('FeeMessages', () => {
         tx: { balances: { transfer: jest.fn(() => txMock) } },
         rpc: { payment: { queryInfo: jest.fn().mockResolvedValue(infoMock) } },
       };
-      (
-        BlockchainApiConnection.getConnectionOrConnect as jest.Mock
-      ).mockResolvedValue({ api: apiMock });
+      (BlockchainApiConnection.getConnectionOrConnect as jest.Mock).mockResolvedValue(
+        { api: apiMock },
+      );
 
       const fee = await feeMessageListener({
         recipient: 'address',

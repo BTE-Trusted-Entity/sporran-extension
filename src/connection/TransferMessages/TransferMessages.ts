@@ -42,8 +42,9 @@ export async function sendTransferMessage({
   });
 }
 
-export const onTransferRequest =
-  createOnMessage<TransferRequest, string>(transferRequest);
+export const onTransferRequest = createOnMessage<TransferRequest, string>(
+  transferRequest,
+);
 
 export async function transferMessageListener(
   data: TransferRequest,
