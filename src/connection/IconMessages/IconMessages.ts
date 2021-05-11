@@ -18,8 +18,11 @@ export const onToggleIconRequest =
   createOnMessage<ToggleIconRequest>(toggleIconRequest);
 
 export async function toggleIconListener(): Promise<void> {
-  console.log('setting dark mode icon');
   browser.browserAction.setIcon({
-    path: 'icon-dark-mode-16.png',
+    path: {
+      16: 'icon/dark/16.png',
+      48: 'icon/dark/48.png',
+      128: 'icon/dark/128.png',
+    },
   });
 }

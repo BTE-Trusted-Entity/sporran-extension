@@ -5,7 +5,7 @@
   justify-content: center;
   height: 2.25rem;
   line-height: 2.25rem;
-  border: 1px solid #fff;
+  border: 1px solid var(--color-white);
   border-radius: 1.125rem;
   padding: 0 2rem;
   background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
