@@ -51,7 +51,9 @@ describe('ImportBackupPhrase', () => {
 
     userEvent.type(await screen.findByLabelText('1'), 'oooooo');
 
-    expect(await screen.findByText(typo)).toBeInTheDocument();
+    expect(
+      await screen.findByText(typo, { selector: ':not([hidden])' }),
+    ).toBeInTheDocument();
   });
 
   it('should ignore whitespace and be case-insensitive', async () => {
@@ -111,7 +113,9 @@ describe('ImportBackupPhrase', () => {
     userEvent.type(await screen.findByLabelText('12'), 'fog');
 
     expect(screen.queryByText(invalidBackupPhrase)).not.toBeInTheDocument();
-    expect(screen.queryByText(typo)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(typo, { selector: ':not([hidden])' }),
+    ).not.toBeInTheDocument();
 
     userEvent.click(await screen.findByText('Next Step'));
     expect(onImport).toHaveBeenCalledWith(
@@ -133,7 +137,9 @@ describe('ImportBackupPhrase', () => {
 
     expect(screen.queryByText(invalidBackupPhrase)).not.toBeInTheDocument();
     expect(screen.queryByText(mismatchingBackupPhrase)).not.toBeInTheDocument();
-    expect(screen.queryByText(typo)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(typo, { selector: ':not([hidden])' }),
+    ).not.toBeInTheDocument();
 
     userEvent.click(await screen.findByText('Next Step'));
     expect(onImport).toHaveBeenCalledWith(

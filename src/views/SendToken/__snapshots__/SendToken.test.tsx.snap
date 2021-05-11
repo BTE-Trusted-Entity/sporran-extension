@@ -275,6 +275,11 @@ exports[`SendToken should render 1`] = `
       >
         All in
       </button>
+      <output
+        class="amountError"
+        for="amount"
+        hidden=""
+      />
     </p>
     <p
       class="totalLine"
@@ -316,7 +321,11 @@ exports[`SendToken should render 1`] = `
         placeholder="Paste the recipient address here"
         required=""
       />
-      
+      <output
+        class="recipientError"
+        for="recipient"
+        hidden=""
+      />
     </p>
     <button
       class="submit"

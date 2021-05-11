@@ -4,7 +4,6 @@ declare namespace SendTokenModuleCssNamespace {
     amount: string;
     amountError: string;
     amountLine: string;
-    amountPointer: string;
     container: string;
     decrease: string;
     heading: string;
@@ -14,7 +13,6 @@ declare namespace SendTokenModuleCssNamespace {
     recipient: string;
     recipientError: string;
     recipientLine: string;
-    recipientPointer: string;
     recipientWithButton: string;
     setTip: string;
     subline: string;

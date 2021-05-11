@@ -32,6 +32,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="0"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -44,6 +51,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="1"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -56,6 +70,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="2"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -68,6 +89,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="3"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -80,6 +108,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="4"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -92,6 +127,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="5"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -104,6 +146,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="6"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -116,6 +165,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="7"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -128,6 +184,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="8"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -140,6 +203,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="9"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -152,6 +222,13 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="10"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -164,25 +241,30 @@ exports[`ImportBackupPhrase should render for import 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="11"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
       </ol>
-      <button
-        class="button"
-        disabled=""
-        type="submit"
+      <p
+        class="buttonLine"
       >
-        Next Step
-      </button>
-      <output
-        class="tooltip"
-        style="position: absolute; left: 0px; top: 0px;"
-      >
-        <span
-          class="pointer"
-          data-popper-arrow="true"
-          style="position: absolute;"
+        <button
+          class="button"
+          disabled=""
+          type="submit"
+        >
+          Next Step
+        </button>
+        <output
+          class="errorTooltip"
+          hidden=""
         />
-      </output>
+      </p>
     </form>
     <button
       aria-label="Back"
@@ -226,6 +308,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="0"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -238,6 +327,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="1"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -250,6 +346,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="2"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -262,6 +365,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="3"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -274,6 +384,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="4"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -286,6 +403,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="5"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -298,6 +422,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="6"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -310,6 +441,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="7"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -322,6 +460,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="8"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -334,6 +479,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="9"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -346,6 +498,13 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="10"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
         <li
           class="item"
@@ -358,25 +517,30 @@ exports[`ImportBackupPhrase should render for reset 1`] = `
             type="text"
             value=""
           />
+          <output
+            class="wordErrorTooltip"
+            for="11"
+            hidden=""
+          >
+            It looks like there’s a typo in this word
+          </output>
         </li>
       </ol>
-      <button
-        class="button"
-        disabled=""
-        type="submit"
+      <p
+        class="buttonLine"
       >
-        Next Step
-      </button>
-      <output
-        class="tooltip"
-        style="position: absolute; left: 0px; top: 0px;"
-      >
-        <span
-          class="pointer"
-          data-popper-arrow="true"
-          style="position: absolute;"
+        <button
+          class="button"
+          disabled=""
+          type="submit"
+        >
+          Next Step
+        </button>
+        <output
+          class="errorTooltip"
+          hidden=""
         />
-      </output>
+      </p>
     </form>
     <button
       aria-label="Back"

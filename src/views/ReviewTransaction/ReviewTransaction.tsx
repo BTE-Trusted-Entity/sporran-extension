@@ -9,7 +9,6 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { AccountSlide } from '../../components/AccountSlide/AccountSlide';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { decryptAccount } from '../../utilities/accounts/accounts';
-import { useErrorTooltip } from '../../components/useErrorMessage/useErrorTooltip';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { generatePath, paths } from '../paths';
 import {
@@ -43,7 +42,6 @@ export function ReviewTransaction({
   const [showDetails, setShowDetails] = useState(false);
 
   const [error, setError] = useState<string | null>(null);
-  const errorTooltip = useErrorTooltip(Boolean(error));
 
   const handleShowDetailsClick = useCallback(() => {
     setShowDetails(true);
@@ -193,7 +191,7 @@ export function ReviewTransaction({
         </Link>
       </p>
 
-      <p className={styles.passwordLine} {...errorTooltip.anchor}>
+      <p className={styles.passwordLine}>
         <input
           type={passwordType}
           onInput={handlePasswordInput}
@@ -205,9 +203,8 @@ export function ReviewTransaction({
         />
         {passwordToggle}
 
-        <output {...errorTooltip.tooltip}>
+        <output className={styles.errorTooltip} hidden={!error}>
           {error}
-          <span {...errorTooltip.pointer} />
         </output>
       </p>
 

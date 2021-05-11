@@ -103,6 +103,10 @@
   cursor: pointer;
 }
 
+.errorTooltip {
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
+}
+
 .remember {
   composes: toggle from '../../components/Toggle/Toggle.module.css';
 }

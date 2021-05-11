@@ -315,12 +315,13 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
           {t('view_SendToken_all_in')}
         </button>
 
-        {(amountError || totalError) && (
-          <output htmlFor="amount" className={styles.amountError}>
-            {amountError || totalError}
-            <span className={styles.amountPointer} />
-          </output>
-        )}
+        <output
+          htmlFor="amount"
+          className={styles.amountError}
+          hidden={!(amountError || totalError)}
+        >
+          {amountError || totalError}
+        </output>
       </p>
 
       <p className={styles.totalLine}>
@@ -378,12 +379,13 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
             aria-label={t('common_action_paste')}
           />
         )}
-        {recipientError && (
-          <output htmlFor="recipient" className={styles.recipientError}>
-            {recipientError}
-            <span className={styles.recipientPointer} />
-          </output>
-        )}
+        <output
+          htmlFor="recipient"
+          className={styles.recipientError}
+          hidden={!recipientError}
+        >
+          {recipientError}
+        </output>
       </p>
 
       <button
