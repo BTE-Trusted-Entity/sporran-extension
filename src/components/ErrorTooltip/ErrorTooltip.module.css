@@ -1,0 +1,28 @@
+.tooltip {
+  --background: rgba(255, 0, 0, 0.5);
+  --arrow: 0.25rem;
+
+  composes: errorText from '../Typography/Typography.module.css';
+  position: absolute;
+  top: 2.125rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  border-radius: 0.5rem;
+  padding: 0 0.625rem;
+  background-color: var(--background);
+  white-space: nowrap;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--arrow) * -1);
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 0 solid transparent;
+  border-left-width: var(--arrow);
+  border-right-width: var(--arrow);
+  border-bottom: var(--arrow) solid var(--background);
+}

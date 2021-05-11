@@ -57,12 +57,8 @@
   background: none;
 }
 
-.tooltip {
-  composes: tooltip from '../../components/useErrorMessage/useErrorTooltip.module.css';
-  position: absolute;
-  top: 2.125rem;
-  white-space: nowrap;
-  left: -50%;
+.wordErrorTooltip {
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
   z-index: 1;
 }
 
@@ -70,12 +66,8 @@
   display: inline;
 }
 
-.pointer {
-  composes: pointer from '../../components/useErrorMessage/useErrorTooltip.module.css';
-  display: block;
-  position: absolute;
-  top: -0.25rem;
-  left: 50%;
+.buttonLine {
+  position: relative;
 }
 
 .button {
@@ -83,4 +75,8 @@
   width: calc(210rem / 16);
   display: block;
   margin: 0 auto;
+}
+
+.errorTooltip {
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
 }

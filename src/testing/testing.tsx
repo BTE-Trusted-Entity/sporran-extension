@@ -1,6 +1,6 @@
 export * from '@testing-library/react';
 export { waitForElementToBeRemoved } from '@testing-library/dom';
-import { act, render as externalRender, screen } from '@testing-library/react';
+import { act, render as externalRender } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import dialogPolyfill from 'dialog-polyfill';
 
@@ -27,12 +27,6 @@ export function render(
       <MemoryRouter>{ui}</MemoryRouter>
     </AccountsProviderMock>,
     options,
-  );
-}
-
-export async function waitForTooltipUpdate(): Promise<void> {
-  expect(await screen.findByRole('status')).toHaveAttribute(
-    'data-popper-escaped',
   );
 }
 

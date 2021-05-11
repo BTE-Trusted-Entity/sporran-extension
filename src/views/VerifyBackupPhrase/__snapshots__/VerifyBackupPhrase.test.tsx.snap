@@ -164,6 +164,11 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
           </span>
           twelve
         </button>
+        <output
+          class="tooltip"
+          for="selected-words"
+          hidden=""
+        />
       </div>
       <div
         class="selectableWords"
@@ -307,7 +312,13 @@ exports[`VerifyBackupPhrase should render 1`] = `
       <div
         class="selectedWords"
         id="selected-words"
-      />
+      >
+        <output
+          class="tooltip"
+          for="selected-words"
+          hidden=""
+        />
+      </div>
       <div
         class="selectableWords"
       >

@@ -7,7 +7,6 @@ declare namespace VerifyBackupPhraseModuleCssNamespace {
     incorrect: string;
     index: string;
     info: string;
-    pointer: string;
     selectableWords: string;
     selectedWords: string;
     submit: string;

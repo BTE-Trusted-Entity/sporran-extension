@@ -88,19 +88,9 @@
 }
 
 .tooltip {
-  composes: tooltip from '../../components/useErrorMessage/useErrorTooltip.module.css';
-  display: inline;
-  position: absolute;
-  right: 0;
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
+  top: auto;
   bottom: -0.75rem;
-}
-
-.pointer {
-  composes: pointer from '../../components/useErrorMessage/useErrorTooltip.module.css';
-  display: block;
-  position: absolute;
-  top: -0.25rem;
-  right: 1rem;
 }
 
 .cancel {

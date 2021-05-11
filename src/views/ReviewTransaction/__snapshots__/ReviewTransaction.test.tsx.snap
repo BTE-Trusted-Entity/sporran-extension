@@ -190,15 +190,9 @@ exports[`ReviewTransaction should render 1`] = `
         type="button"
       />
       <output
-        class="tooltip"
-        style="position: absolute; left: 0px; top: 0px;"
-      >
-        <span
-          class="pointer"
-          data-popper-arrow="true"
-          style="position: absolute;"
-        />
-      </output>
+        class="errorTooltip"
+        hidden=""
+      />
     </p>
     <label
       class="rememberLabel"

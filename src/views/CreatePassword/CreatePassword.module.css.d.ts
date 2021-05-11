@@ -10,6 +10,7 @@ declare namespace CreatePasswordModuleCssNamespace {
     container: string;
     criteria: string;
     criteriaHeading: string;
+    errorTooltip: string;
     heading: string;
     input: string;
     inputLine: string;

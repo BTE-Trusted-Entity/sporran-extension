@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { Identity } from '@kiltprotocol/core';
 
-import { render, screen, waitForTooltipUpdate } from '../../testing/testing';
+import { render, screen } from '../../testing/testing';
 
 import { CreatePassword } from './CreatePassword';
 
@@ -33,8 +33,6 @@ describe('CreatePassword', () => {
     userEvent.click(screen.getByText('Next Step'));
 
     expect(onSuccess).toHaveBeenCalled();
-
-    await waitForTooltipUpdate();
   });
 
   it('should allow visible and hidden passwords', async () => {
@@ -46,8 +44,6 @@ describe('CreatePassword', () => {
 
     userEvent.click(screen.getByLabelText('Hide'));
     expect(container).toMatchSnapshot();
-
-    await waitForTooltipUpdate();
   });
 
   it('should report weak password errors', async () => {
@@ -69,7 +65,5 @@ describe('CreatePassword', () => {
     // here the test should not report any more errors
     userEvent.type(password, 'f');
     expect(container).toMatchSnapshot();
-
-    await waitForTooltipUpdate();
   });
 });

@@ -1,28 +1,26 @@
 import { useState } from 'react';
 import { Meta } from '@storybook/react';
 
-import { useErrorTooltip } from './useErrorTooltip';
+import styles from './ErrorTooltip.module.css';
 
 export default {
-  title: 'Components/useErrorTooltip',
+  title: 'Components/ErrorTooltip',
 } as Meta;
 
 export function Template(): JSX.Element {
   const [error, setError] = useState('');
-  const errorTooltip = useErrorTooltip(Boolean(error));
 
   return (
     <form>
-      <p>
-        <label {...errorTooltip.anchor}>
+      <p style={{ position: 'relative' }}>
+        <label>
           Value:
           <input name="foo" onInput={() => setError('Totally incorrect!!11')} />
         </label>
-      </p>
 
-      <p {...errorTooltip.tooltip}>
-        {error}
-        <span {...errorTooltip.pointer} />
+        <output className={styles.tooltip} hidden={!error}>
+          {error}
+        </output>
       </p>
     </form>
   );

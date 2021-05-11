@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
-import { useErrorTooltip } from '../../components/useErrorMessage/useErrorTooltip';
 import { paths } from '../paths';
 
 import styles from './CreatePassword.module.css';
@@ -85,8 +84,6 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
       !isNotExample(password) && t('view_CreatePassword_error_example'),
     ].filter(Boolean)[0];
 
-  const errorTooltip = useErrorTooltip(Boolean(error));
-
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
@@ -145,16 +142,14 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
             minLength={MIN_LENGTH}
             aria-label={t('view_CreatePassword_label')}
             placeholder={t('view_CreatePassword_label')}
-            {...errorTooltip.anchor}
           />
 
           {passwordToggle}
-        </p>
 
-        <output {...errorTooltip.tooltip}>
-          {error}
-          <span {...errorTooltip.pointer} />
-        </output>
+          <output className={styles.errorTooltip} hidden={!error}>
+            {error}
+          </output>
+        </p>
 
         <div
           className={`${styles.complexity} ${getComplexityClassName(password)}`}

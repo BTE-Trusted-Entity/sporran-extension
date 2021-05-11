@@ -86,12 +86,13 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
               </button>
             );
           })}
-          {error && (
-            <output htmlFor="selected-words" className={styles.tooltip}>
-              {error}
-              <span className={styles.pointer} />
-            </output>
-          )}
+          <output
+            htmlFor="selected-words"
+            className={styles.tooltip}
+            hidden={!error}
+          >
+            {error}
+          </output>
         </div>
 
         <div className={styles.selectableWords}>

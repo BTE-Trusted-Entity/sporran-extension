@@ -23,6 +23,7 @@
 .amountLine {
   margin-top: 0.25rem;
   margin-bottom: 0.5rem;
+  position: relative;
 }
 
 .amount {
@@ -32,20 +33,11 @@
 }
 
 .amountError {
-  composes: tooltip from '../../components/useErrorMessage/useErrorTooltip.module.css';
-  display: block;
-  position: absolute;
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
 }
 
 .amount:focus ~ .amountError {
   display: none;
-}
-
-.amountPointer {
-  composes: pointer from '../../components/useErrorMessage/useErrorTooltip.module.css';
-  display: block;
-  top: -0.25rem;
-  left: 50%;
 }
 
 .all {
@@ -112,18 +104,7 @@
 }
 
 .recipientError {
-  composes: tooltip from '../../components/useErrorMessage/useErrorTooltip.module.css';
-  display: block;
-  position: absolute;
-  bottom: -0.875rem;
-  right: 1rem;
-}
-
-.recipientPointer {
-  composes: pointer from '../../components/useErrorMessage/useErrorTooltip.module.css';
-  display: block;
-  top: -0.25rem;
-  right: 10%;
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
 }
 
 .paste {

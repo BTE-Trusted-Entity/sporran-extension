@@ -8,7 +8,6 @@ import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/bip39-en';
 import { Identity } from '@kiltprotocol/core';
 import { browser } from 'webextension-polyfill-ts';
 
-import { useErrorTooltip } from '../../components/useErrorMessage/useErrorTooltip';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 
 import styles from './ImportBackupPhrase.module.css';
@@ -81,12 +80,13 @@ function WordInput({
         value={word}
         autoFocus={index === 0}
       />
-      {hasError && (
-        <output htmlFor={index.toString()} className={styles.tooltip}>
-          {t('view_ImportBackupPhrase_error_typo')}
-          <span className={styles.pointer} />
-        </output>
-      )}
+      <output
+        htmlFor={index.toString()}
+        className={styles.wordErrorTooltip}
+        hidden={!hasError}
+      >
+        {t('view_ImportBackupPhrase_error_typo')}
+      </output>
     </li>
   );
 }
@@ -115,8 +115,6 @@ export function ImportBackupPhrase({
       isMalformed(backupPhrase),
       isInvalid(backupPhrase, type === 'reset' ? address : undefined),
     ].filter(Boolean)[0];
-
-  const errorTooltip = useErrorTooltip(Boolean(error));
 
   const handleInput = useCallback(
     (event) => {
@@ -188,18 +186,18 @@ export function ImportBackupPhrase({
           ))}
         </ol>
 
-        <button
-          type="submit"
-          className={styles.button}
-          disabled={Boolean(error) || backupPhrase.join('') === ''}
-          {...errorTooltip.anchor}
-        >
-          {t('common_action_next')}
-        </button>
-        <output {...errorTooltip.tooltip}>
-          {error}
-          <span {...errorTooltip.pointer} />
-        </output>
+        <p className={styles.buttonLine}>
+          <button
+            type="submit"
+            className={styles.button}
+            disabled={Boolean(error) || backupPhrase.join('') === ''}
+          >
+            {t('common_action_next')}
+          </button>
+          <output className={styles.errorTooltip} hidden={!error}>
+            {error}
+          </output>
+        </p>
       </form>
 
       <LinkBack />
