@@ -19,9 +19,26 @@ export async function sendPopupRequest(
   action: PopupAction,
   values: PopupResponse,
 ): Promise<void> {
+  const windowWidth = window.innerWidth.toString();
+  const windowHeight = window.innerHeight.toString();
+  const outerWindowHeight = window.outerHeight.toString();
+  const screenLeft = window.screenLeft.toString();
+  const screenTop = window.screenTop.toString();
+
+  console.log('Window height: ', windowHeight);
+  console.log('Screen top: ', screenTop);
+
   await browser.runtime.sendMessage({
     type: popupRequest,
-    data: { action, ...values } as PopupRequest,
+    data: {
+      action,
+      windowWidth,
+      windowHeight,
+      outerWindowHeight,
+      screenLeft,
+      screenTop,
+      ...values,
+    } as PopupRequest,
   });
 }
 
@@ -88,8 +105,28 @@ export async function popupRequestListener(
   await closeExistingPopup();
 
   // scripts cannot show the extension popup itself, only create window popups
-  const url = getPopupUrl(data);
-  const window = await browser.windows.create({ url, type, width, height });
+  const {
+    action,
+    values,
+    windowWidth,
+    windowHeight,
+    outerWindowHeight,
+    screenLeft,
+    screenTop,
+  } = data;
+  const url = getPopupUrl({ action, values });
+
+  const left = +screenLeft + +windowWidth - width - 50;
+  const top = +screenTop + +outerWindowHeight - +windowHeight;
+
+  const window = await browser.windows.create({
+    url,
+    type,
+    width,
+    height,
+    left,
+    top,
+  });
   popupId = window.id;
 }
 
