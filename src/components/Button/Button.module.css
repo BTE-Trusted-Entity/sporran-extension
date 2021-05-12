@@ -39,3 +39,35 @@
   display: inline-flex;
   cursor: pointer;
 }
+
+.circle {
+  composes: buttonIcon;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  box-shadow:
+    inset -1px 1px 1px 0 rgba(255, 255, 255, 0.1),
+    0.375rem 0.375rem 0.75rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.buttonCheckmark {
+  composes: circle;
+  background-image:
+    url('../images/checkmark.svg'),
+    linear-gradient(140deg, var(--color-dark) 0%, var(--color-pink) 100%);
+  background-size: auto;
+  margin: 0 0.375rem 0 0.375rem;
+}
+
+.buttonCross {
+  composes: circle;
+  box-shadow: none;
+  border: double 2.2px transparent;
+  background-image:
+    url('../images/x-close.svg'),
+    linear-gradient(#363657, #363657),
+    linear-gradient(140deg, var(--color-dark) 0%, var(--color-pink) 100%);
+  background-origin: border-box;
+  background-clip: border-box, content-box, border-box;
+  background-size: auto;
+}

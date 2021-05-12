@@ -1,6 +1,6 @@
 import { map, sample, without } from 'lodash-es';
 import { getAccounts } from './getAccounts';
-import { storage } from './storage';
+import { storage } from '../storage/storage';
 
 const popularTartans = [
   'MacLeod',

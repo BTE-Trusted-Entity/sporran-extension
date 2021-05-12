@@ -117,6 +117,9 @@
   "component_Settings_faq": {
     "message": "FAQ & Help"
   },
+  "component_Settings_endpoint": {
+    "message": "Custom endpoint"
+  },
   "component_Settings_version": {
     "message": "Version $version$",
     "placeholders": {
@@ -512,5 +515,23 @@
   },
   "view_ShareCredential_CTA": {
     "message": "Share"
+  },
+  "view_AppSettings_heading": {
+    "message": "Custom Endpoint"
+  },
+  "view_AppSettings_subline": {
+    "message": "Set custom endpoint"
+  },
+  "view_AppSettings_warning": {
+    "message": "When changing the endpoint the extension needs to close.\nJust start it again to continue."
+  },
+  "view_AppSettings_endpoint": {
+    "message": "Custom endpoint"
+  },
+  "view_AppSettings_endpoint_placeholder": {
+    "message": "wss://example.org:433"
+  },
+  "view_AppSettings_reset": {
+    "message": "Restore default"
   }
 }

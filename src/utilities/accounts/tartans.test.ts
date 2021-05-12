@@ -1,10 +1,10 @@
 import { getAccounts } from './getAccounts';
 import { accountsMock } from './AccountsProvider.mock';
-import { storage } from './storage';
+import { storage } from '../storage/storage';
 import { updateNextTartan } from './tartans';
 
 jest.mock('./getAccounts');
-jest.mock('./storage');
+jest.mock('../storage/storage');
 
 const firstAccount =
   accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];

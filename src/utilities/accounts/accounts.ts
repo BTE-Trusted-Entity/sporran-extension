@@ -8,7 +8,7 @@ import {
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 import { AccountsContext, AccountsContextType } from './AccountsContext';
-import { storage } from './storage';
+import { storage } from '../storage/storage';
 import { ACCOUNTS_KEY, getAccounts } from './getAccounts';
 import { getNextTartan, updateNextTartan } from './tartans';
 

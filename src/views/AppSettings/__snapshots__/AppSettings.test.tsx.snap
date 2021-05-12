@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppSettings should render 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Custom Endpoint
+    </h1>
+    <p
+      class="subline"
+    >
+      Set custom endpoint
+    </p>
+    <p
+      class="subline"
+    >
+      When changing the endpoint the extension needs to close.
+Just start it again to continue.
+    </p>
+    <p
+      class="endpointLine"
+    >
+      <datalist
+        id="endpoints"
+      >
+        <option
+          value="wss://full-nodes.kilt.io:443"
+        />
+        <option
+          value="wss://full-nodes.staging.kilt.io:443"
+        />
+        <option
+          value="wss://full-nodes-lb.devnet.kilt.io:443"
+        />
+      </datalist>
+      <input
+        aria-label="Custom endpoint"
+        class="endpoint"
+        list="endpoints"
+        name="endpoint"
+        pattern="wss://.*"
+        placeholder="wss://example.org:433"
+        required=""
+        type="url"
+        value="wss://full-nodes.kilt.io:443"
+      />
+      <button
+        aria-label="Save"
+        class="save"
+        title="Save"
+        type="submit"
+      />
+      <a
+        aria-label="Cancel"
+        class="cancel"
+        href="/"
+        title="Cancel"
+        type="button"
+      />
+    </p>
+    <button
+      class="reset"
+      type="button"
+    >
+      Restore default
+    </button>
+  </form>
+</div>
+`;
