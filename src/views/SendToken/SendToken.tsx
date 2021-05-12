@@ -250,9 +250,15 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     navigator.clipboard && 'readText' in navigator.clipboard;
 
   const handleRecipientPaste = useCallback(async (event) => {
-    const address = await navigator.clipboard.readText();
-    event.target.form.recipient.value = address;
-    setRecipient(address.trim());
+    const input = event.target.form.recipient;
+    if ('chrome' in window) {
+      input.focus();
+      document.execCommand('paste'); // Chrome doesn’t support the new API in extensions
+    } else {
+      const address = await navigator.clipboard.readText();
+      input.value = address;
+      setRecipient(address.trim());
+    }
   }, []);
 
   const handleSubmit = useCallback(
