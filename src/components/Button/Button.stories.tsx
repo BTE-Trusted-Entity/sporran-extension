@@ -42,3 +42,11 @@ export function ButtonSecondaryDisabled(): JSX.Element {
 export function ButtonIcon(): JSX.Element {
   return <button className={storiesStyles.icon} type="button" />;
 }
+
+export function ButtonCheckmark(): JSX.Element {
+  return <button className={styles.buttonCheckmark} type="button" />;
+}
+
+export function ButtonCross(): JSX.Element {
+  return <button className={styles.buttonCross} type="button" />;
+}

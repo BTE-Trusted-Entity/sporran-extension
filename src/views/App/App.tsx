@@ -12,6 +12,7 @@ import { paths } from '../paths';
 
 import './App.css';
 import styles from './App.module.css';
+import { AppSettings } from '../AppSettings/AppSettings';
 
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();
@@ -26,6 +27,10 @@ export function App(): JSX.Element {
         <Switch>
           <Route path={paths.home} exact>
             <Welcome />
+          </Route>
+
+          <Route path={paths.settings}>
+            <AppSettings />
           </Route>
 
           <Route path={paths.account.base}>

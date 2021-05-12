@@ -2,6 +2,7 @@ export { generatePath } from 'react-router-dom';
 
 export const paths = {
   home: '/',
+  settings: '/setting',
   account: {
     base: '/account/',
     create: {

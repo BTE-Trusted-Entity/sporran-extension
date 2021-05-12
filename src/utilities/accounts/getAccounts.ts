@@ -1,4 +1,4 @@
-import { storage } from './storage';
+import { storage } from '../storage/storage';
 import { AccountsMap } from './types';
 
 export const ACCOUNTS_KEY = 'accounts';
