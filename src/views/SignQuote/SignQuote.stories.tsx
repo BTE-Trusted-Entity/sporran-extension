@@ -11,7 +11,7 @@ export default {
 } as Meta;
 
 const query =
-  'Full+Name=Ingo+R%C3%BCbe&Email=ingo%40kilt.io&Credential+type=BL-Mail-Simple&Attester=BOTLabs';
+  'Full+Name=Ingo+R%C3%BCbe&Email=ingo%40kilt.io&Credential+type=BL-Mail-Simple&Attester=socialKYC';
 
 export function Template(): JSX.Element {
   return (

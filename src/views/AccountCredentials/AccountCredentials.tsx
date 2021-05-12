@@ -24,7 +24,7 @@ export function AccountCredentials({ account }: Props): JSX.Element {
       'Full Name': 'Ingo Rübe',
       Email: 'ingo@kilt.io',
       'Credential type': 'BL-Mail-Simple',
-      Attester: 'BOTLabs',
+      Attester: 'socialKYC',
       valid: true,
     },
   ];
