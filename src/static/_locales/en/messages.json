@@ -522,6 +522,9 @@
   "view_AppSettings_subline": {
     "message": "Set custom endpoint"
   },
+  "view_AppSettings_warning": {
+    "message": "When changing the endpoint the extension needs to close.\nJust start it again to continue."
+  },
   "view_AppSettings_endpoint": {
     "message": "Custom endpoint"
   },

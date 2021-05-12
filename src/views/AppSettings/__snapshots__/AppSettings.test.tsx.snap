@@ -16,6 +16,12 @@ exports[`AppSettings should render 1`] = `
       Set custom endpoint
     </p>
     <p
+      class="warning"
+    >
+      When changing the endpoint the extension needs to close.
+Just start it again to continue.
+    </p>
+    <p
       class="endpointLine"
     >
       <datalist
