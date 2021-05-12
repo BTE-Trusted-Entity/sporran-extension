@@ -16,7 +16,7 @@ exports[`AppSettings should render 1`] = `
       Set custom endpoint
     </p>
     <p
-      class="warning"
+      class="subline"
     >
       When changing the endpoint the extension needs to close.
 Just start it again to continue.
@@ -46,7 +46,7 @@ Just start it again to continue.
         placeholder="wss://example.org:433"
         required=""
         type="url"
-        value=""
+        value="wss://full-nodes.kilt.io:443"
       />
       <button
         aria-label="Save"
