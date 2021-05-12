@@ -99,7 +99,9 @@ export async function popupRequestListener(
   const fakeWindow = { left: 0, top: 0, width: 1400, height: 800 };
 
   const sizes =
-    realWindow && realWindow.left !== undefined ? realWindow : fakeWindow;
+    realWindow && realWindow.left !== undefined
+      ? (realWindow as typeof fakeWindow)
+      : fakeWindow;
 
   const left = sizes.left + sizes.width - width - 50;
   const top = sizes.top + 80;
