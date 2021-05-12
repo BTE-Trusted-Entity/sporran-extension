@@ -6,37 +6,41 @@ import { createOnMessage } from '../createOnMessage/createOnMessage';
 const popupRequest = 'popupRequest';
 const popupResponse = 'popupResponse';
 
-interface PopupRequest {
-  action: PopupAction;
-  [key: string]: string;
+interface Window {
+  innerWidth: number;
+  innerHeight: number;
+  outerHeight: number;
+  screenLeft: number;
+  screenTop: number;
 }
 
 interface PopupResponse {
   [key: string]: string;
 }
 
+interface PopupRequest {
+  action: PopupAction;
+  windowProps: Window;
+  values: PopupResponse;
+}
+
 export async function sendPopupRequest(
   action: PopupAction,
   values: PopupResponse,
 ): Promise<void> {
-  const windowWidth = window.innerWidth.toString();
-  const windowHeight = window.innerHeight.toString();
-  const outerWindowHeight = window.outerHeight.toString();
-  const screenLeft = window.screenLeft.toString();
-  const screenTop = window.screenTop.toString();
-
-  console.log('Window height: ', windowHeight);
-  console.log('Screen top: ', screenTop);
+  const windowProps = {
+    innerWidth: window.innerWidth,
+    innerHeight: window.innerHeight,
+    outerHeight: window.outerHeight,
+    screenLeft: window.screenLeft,
+    screenTop: window.screenTop,
+  };
 
   await browser.runtime.sendMessage({
     type: popupRequest,
     data: {
       action,
-      windowWidth,
-      windowHeight,
-      outerWindowHeight,
-      screenLeft,
-      screenTop,
+      windowProps,
       ...values,
     } as PopupRequest,
   });
@@ -105,19 +109,14 @@ export async function popupRequestListener(
   await closeExistingPopup();
 
   // scripts cannot show the extension popup itself, only create window popups
-  const {
-    action,
-    values,
-    windowWidth,
-    windowHeight,
-    outerWindowHeight,
-    screenLeft,
-    screenTop,
-  } = data;
-  const url = getPopupUrl({ action, values });
+  const { action, values, windowProps } = data;
+  const url = getPopupUrl({ action, ...values });
 
-  const left = +screenLeft + +windowWidth - width - 50;
-  const top = +screenTop + +outerWindowHeight - +windowHeight;
+  const { innerWidth, innerHeight, outerHeight, screenLeft, screenTop } =
+    windowProps;
+
+  const left = screenLeft + innerWidth - width - 50;
+  const top = screenTop + outerHeight - innerHeight;
 
   const window = await browser.windows.create({
     url,
