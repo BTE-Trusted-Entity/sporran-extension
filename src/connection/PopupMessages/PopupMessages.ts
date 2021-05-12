@@ -86,19 +86,25 @@ export async function popupRequestListener(
   data: PopupRequest,
   sender: SenderType,
 ): Promise<void> {
-  tabId = sender?.tab?.id;
+  tabId = sender.tab?.id;
 
   await closeExistingPopup();
 
   // scripts cannot show the extension popup itself, only create window popups
   const url = getPopupUrl(data);
 
-  const window = await browser.windows.get(sender?.tab?.windowId as number);
+  const windowId = sender.tab?.windowId;
 
-  const left = (window.left || 0) + (window.width || 1400) - width - 50;
-  const top = (window.top || 0) + 80;
+  const realWindow = windowId && (await browser.windows.get(windowId));
+  const fakeWindow = { left: 0, top: 0, width: 1400, height: 800 };
 
-  const popup = await browser.windows.create({
+  const sizes =
+    realWindow && realWindow.left !== undefined ? realWindow : fakeWindow;
+
+  const left = sizes.left + sizes.width - width - 50;
+  const top = sizes.top + 80;
+
+  const window = await browser.windows.create({
     url,
     type,
     width,
@@ -106,7 +112,7 @@ export async function popupRequestListener(
     left,
     top,
   });
-  popupId = popup.id;
+  popupId = window.id;
 }
 
 export async function popupResponseListener(
