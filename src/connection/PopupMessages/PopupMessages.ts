@@ -1,7 +1,10 @@
 import { browser } from 'webextension-polyfill-ts';
 
 import { PopupAction } from '../../utilities/popups/types';
-import { createOnMessage } from '../createOnMessage/createOnMessage';
+import {
+  createOnMessage,
+  SenderType,
+} from '../createOnMessage/createOnMessage';
 
 const popupRequest = 'popupRequest';
 const popupResponse = 'popupResponse';
@@ -81,7 +84,7 @@ export const onPopupResponse = createOnMessage<PopupResponse>(popupResponse);
 
 export async function popupRequestListener(
   data: PopupRequest,
-  sender: { tab?: { id?: number; windowId?: number } },
+  sender: SenderType,
 ): Promise<void> {
   tabId = sender?.tab?.id;
 

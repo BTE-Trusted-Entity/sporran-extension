@@ -1,7 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
 
 type EventEmitter = typeof browser.runtime.onMessage;
-type SenderType = Parameters<
+export type SenderType = Parameters<
   Parameters<typeof browser.runtime.onMessage.addListener>[0]
 >[1];
 
