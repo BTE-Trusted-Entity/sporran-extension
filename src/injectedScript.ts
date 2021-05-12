@@ -17,7 +17,7 @@ function showClaimPopup(
     'Full Name': 'Ingo Rübe',
     Email: 'ingo@kilt.io',
     'Credential type': 'BL-Mail-Simple',
-    Attester: 'BOTLabs',
+    Attester: 'socialKYC',
 
     ...values,
   });
@@ -30,7 +30,7 @@ function showSaveCredentialPopup(values: { [key: string]: string }) {
     'Full Name': 'Ingo Rübe',
     Email: 'ingo@kilt.io',
     'Credential type': 'BL-Mail-Simple',
-    Attester: 'BOTLabs',
+    Attester: 'socialKYC',
 
     ...values,
   });

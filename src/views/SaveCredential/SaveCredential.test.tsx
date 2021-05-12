@@ -6,7 +6,7 @@ import { paths } from '../paths';
 import { SaveCredential } from './SaveCredential';
 
 const query =
-  'Full+Name=Ingo+R%C3%BCbe&Email=ingo%40kilt.io&Credential+type=BL-Mail-Simple&Attester=BOTLabs&credential=eyJlbWFpbCI6ImluZ29Aa2lsdC5pbyJ9';
+  'Full+Name=Ingo+R%C3%BCbe&Email=ingo%40kilt.io&Credential+type=BL-Mail-Simple&Attester=socialKYC&credential=eyJlbWFpbCI6ImluZ29Aa2lsdC5pbyJ9';
 
 describe('SaveCredential', () => {
   it('should render', async () => {
