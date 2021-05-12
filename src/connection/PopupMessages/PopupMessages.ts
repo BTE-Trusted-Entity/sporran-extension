@@ -84,7 +84,7 @@ export const onPopupResponse = createOnMessage<PopupResponse>(popupResponse);
 
 export async function popupRequestListener(
   data: PopupRequest,
-  sender: SenderType,
+  sender: { tab?: { id?: number; windowId?: number } },
 ): Promise<void> {
   tabId = sender.tab?.id;
 
