@@ -68,11 +68,17 @@ export function ShareCredential(): JSX.Element | null {
   // TODO: use real data
   const credentials = [
     {
-      Name: 'Email',
+      Name: 'email private',
       'Full Name': 'Ingo Rübe',
       Email: 'ingo@kilt.io',
       'Credential type': 'BL-Mail-Simple',
-      Attester: 'BOTLabs',
+      Attester: 'socialKYC',
+      valid: true,
+    },
+    {
+      Name: 'twitter',
+      'Credential type': 'BL-Mail-Advanced',
+      Attester: 'socialKYC',
       valid: true,
     },
   ];
