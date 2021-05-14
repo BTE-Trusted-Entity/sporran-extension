@@ -1,7 +1,10 @@
+import { injectExtension } from '@polkadot/extension-inject';
+
 import {
   onPopupWindowResponse,
   sendPopupWindowRequest,
 } from './connection/PopupWindowMessages/PopupWindowMessages';
+import { InjectedSporranAccounts } from './utilities/accounts/InjectedSporranAccounts';
 
 let lastCallback: (values: { [key: string]: string }) => void | undefined;
 
@@ -50,6 +53,19 @@ function handleResponse(data: Parameters<typeof lastCallback>[0]) {
   lastCallback?.(data);
 }
 
+function injectIntoDApp() {
+  const name = 'Sporran'; // manifest_name
+  const version = '1.0.0'; // TODO: version
+
+  injectExtension(
+    async (name: string) => ({
+      accounts: new InjectedSporranAccounts(name),
+      signer: {},
+    }),
+    { name, version },
+  );
+}
+
 interface API {
   showClaimPopup: typeof showClaimPopup;
   showSaveCredentialPopup: typeof showSaveCredentialPopup;
@@ -68,6 +84,7 @@ function main() {
   };
 
   onPopupWindowResponse(handleResponse);
+  injectIntoDApp();
 }
 
 main();

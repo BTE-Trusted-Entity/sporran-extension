@@ -1,7 +1,7 @@
 import { PopupAction } from '../../utilities/popups/types';
 
-const request = 'sporranExtension.injectedScript.request';
-const response = 'sporranExtension.injectedScript.response';
+const request = 'sporranExtension.injectedScript.popupRequest';
+const response = 'sporranExtension.injectedScript.popupResponse';
 
 interface PopupWindowRequest {
   [key: string]: string;

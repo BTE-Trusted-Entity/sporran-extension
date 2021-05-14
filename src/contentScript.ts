@@ -8,6 +8,7 @@ import {
   onPopupWindowRequest,
   sendPopupWindowResponse,
 } from './connection/PopupWindowMessages/PopupWindowMessages';
+import { handleAllInjectedAccountsRequests } from './utilities/accounts/injectedAccounts';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -27,6 +28,8 @@ async function popupResponseListener(
 function initMessages() {
   onPopupWindowRequest(sendPopupRequest);
   onPopupResponse(popupResponseListener);
+
+  handleAllInjectedAccountsRequests();
 }
 
 function main() {
