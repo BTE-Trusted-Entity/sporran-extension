@@ -9,6 +9,7 @@ import {
   sendPopupWindowResponse,
 } from './connection/PopupWindowMessages/PopupWindowMessages';
 import { handleAllInjectedAccountsRequests } from './utilities/accounts/injectedAccounts';
+import { handleAllInjectedEnableRequests } from './utilities/dApps/authorize';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -29,7 +30,9 @@ function initMessages() {
   onPopupWindowRequest(sendPopupRequest);
   onPopupResponse(popupResponseListener);
 
-  handleAllInjectedAccountsRequests();
+  const origin = window.location.href;
+  handleAllInjectedEnableRequests(origin);
+  handleAllInjectedAccountsRequests(origin);
 }
 
 function main() {

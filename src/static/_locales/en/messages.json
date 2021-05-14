@@ -533,5 +533,25 @@
   },
   "view_AppSettings_reset": {
     "message": "Restore default"
+  },
+  "view_AuthorizeDApp_title": {
+    "message": "Authorize"
+  },
+  "view_AuthorizeDApp_subline": {
+    "message": "An application, self-identifying as $name$ is requesting access from:",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_AuthorizeDApp_warning": {
+    "message": "Only approve this request if you trust the application. Approving gives the application access to the addresses of your accounts."
+  },
+  "view_AuthorizeDApp_CTA": {
+    "message": "Yes, allow this application access"
+  },
+  "view_AuthorizeDApp_reject": {
+    "message": "Reject"
   }
 }

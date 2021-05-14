@@ -6,6 +6,7 @@ import {
   sendInjectedAccountsResponse,
 } from '../../connection/InjectedAccountsMessages/InjectedAccountsMessages';
 import { storageAreaName } from '../storage/storage';
+import { authorize } from '../dApps/authorize';
 import { ACCOUNTS_KEY, getAccounts } from './getAccounts';
 
 async function getInjectableAccounts(): Promise<InjectedAccount[]> {
@@ -39,8 +40,10 @@ function subscribe(
   return () => browser.storage.onChanged.removeListener(onChanged);
 }
 
-export function handleAllInjectedAccountsRequests(): () => void {
-  return onInjectedAccountsRequest(async () => {
+export function handleAllInjectedAccountsRequests(origin: string): () => void {
+  return onInjectedAccountsRequest(async ({ name }) => {
+    await authorize(name, origin);
+
     subscribe(sendInjectedAccountsResponse);
     await sendInjectedAccountsResponse(await getInjectableAccounts());
   });

@@ -5,6 +5,7 @@ import {
   sendPopupWindowRequest,
 } from './connection/PopupWindowMessages/PopupWindowMessages';
 import { InjectedSporranAccounts } from './utilities/accounts/InjectedSporranAccounts';
+import { getInjectedEnableResult } from './connection/InjectedEnableMessages/InjectedEnableMessages';
 
 let lastCallback: (values: { [key: string]: string }) => void | undefined;
 
@@ -59,13 +60,17 @@ function injectIntoDApp() {
     version: '1.0.0', // TODO: version
   };
 
-  injectExtension(
-    async (name: string) => ({
+  injectExtension(async (name: string) => {
+    const { authorized } = await getInjectedEnableResult({ name });
+    if (!authorized) {
+      throw new Error('Not authorized');
+    }
+
+    return {
       accounts: new InjectedSporranAccounts(name),
       signer: {},
-    }),
-    sporranMeta,
-  );
+    };
+  }, sporranMeta);
 }
 
 interface API {
