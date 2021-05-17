@@ -7,12 +7,15 @@ export function connectToBackground(): void {
   browser.runtime.connect(undefined, { name });
 }
 
-export async function extensionPopupListener(
-  port: Runtime.Port,
-): Promise<void> {
-  if (port.name !== name) {
-    return;
-  }
+export function onPopupConnect(callback: typeof connectToBlockchain): void {
+  browser.runtime.onConnect.addListener((port) => {
+    if (port.name === name) {
+      callback(port);
+    }
+  });
+}
+
+export async function connectToBlockchain(port: Runtime.Port): Promise<void> {
   port.onDisconnect.addListener(async function () {
     await disconnect();
   });

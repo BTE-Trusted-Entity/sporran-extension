@@ -37,7 +37,10 @@ import {
   balanceMessageListener,
   onBalanceChangeRequest,
 } from './connection/BalanceMessages/BalanceMessages';
-import { extensionPopupListener } from './connection/ExtensionPopupMessages/ExtensionPopupMessages';
+import {
+  connectToBlockchain,
+  onPopupConnect,
+} from './connection/ExtensionPopupMessages/ExtensionPopupMessages';
 
 export function initBalanceMessages(): void {
   onBalanceChangeRequest(balanceMessageListener);
@@ -71,7 +74,7 @@ function initToggleIcon(): void {
 }
 
 function initExtensionPopupMessages(): void {
-  browser.runtime.onConnect.addListener(extensionPopupListener);
+  onPopupConnect(connectToBlockchain);
 }
 
 function init() {
