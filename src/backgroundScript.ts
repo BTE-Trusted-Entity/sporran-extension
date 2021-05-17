@@ -1,9 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import {
-  extensionPopupListener,
-  initBlockchainConnection,
-} from './connection/blockchainMessages/blockchainMessages';
+import { initKiltSDK } from './connection/initKiltSDK/initKiltSDK';
 import {
   onToggleIconRequest,
   toggleIconListener,
@@ -40,6 +37,7 @@ import {
   balanceMessageListener,
   onBalanceChangeRequest,
 } from './connection/BalanceMessages/BalanceMessages';
+import { extensionPopupListener } from './connection/ExtensionPopupMessages/ExtensionPopupMessages';
 
 export function initBalanceMessages(): void {
   onBalanceChangeRequest(balanceMessageListener);
@@ -72,13 +70,13 @@ function initToggleIcon(): void {
   onToggleIconRequest(toggleIconListener);
 }
 
-function initBlockchainMessages(): void {
-  initBlockchainConnection();
+function initExtensionPopupMessages(): void {
   browser.runtime.onConnect.addListener(extensionPopupListener);
 }
 
 function init() {
-  initBlockchainMessages();
+  initKiltSDK();
+  initExtensionPopupMessages();
   initBalanceMessages();
   initFeeMessages();
   initSavedPasswords();
