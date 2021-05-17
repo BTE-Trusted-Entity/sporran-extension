@@ -1,20 +1,20 @@
 import { disconnect, connect } from '@kiltprotocol/core';
 import { browser, Runtime } from 'webextension-polyfill-ts';
 
-const popup = 'popup';
+const name = 'popup';
 
 export function connectToBackground(): void {
-  browser.runtime.connect(undefined, { name: popup });
+  browser.runtime.connect(undefined, { name });
 }
 
 export async function extensionPopupListener(
   port: Runtime.Port,
 ): Promise<void> {
-  if (port.name !== popup) {
+  if (port.name !== name) {
     return;
   }
   port.onDisconnect.addListener(async function () {
-    console.log(await disconnect());
+    await disconnect();
   });
-  console.log(await connect());
+  await connect();
 }
