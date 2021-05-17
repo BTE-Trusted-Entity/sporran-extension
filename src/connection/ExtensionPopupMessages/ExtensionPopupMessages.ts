@@ -16,7 +16,7 @@ export function onPopupConnect(callback: typeof connectToBlockchain): void {
 }
 
 export async function connectToBlockchain(port: Runtime.Port): Promise<void> {
-  port.onDisconnect.addListener(async function () {
+  port.onDisconnect.addListener(async () => {
     await disconnect();
   });
   await connect();
