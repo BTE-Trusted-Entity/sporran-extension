@@ -7,7 +7,7 @@ export function connectToBackground(): void {
   browser.runtime.connect(undefined, { name });
 }
 
-export function onPopupConnect(callback: typeof connectToBlockchain): void {
+export function onPopupConnect(callback: (port: Runtime.Port) => void): void {
   browser.runtime.onConnect.addListener((port) => {
     if (port.name === name) {
       callback(port);
