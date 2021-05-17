@@ -2,8 +2,8 @@ import { browser } from 'webextension-polyfill-ts';
 
 import {
   extensionPopupListener,
-  initBlockChainConnection,
-} from './connection/blockchainConnection/blockchainConnection';
+  initBlockchainConnection,
+} from './connection/blockchainMessages/blockchainMessages';
 import {
   onToggleIconRequest,
   toggleIconListener,
@@ -72,13 +72,13 @@ function initToggleIcon(): void {
   onToggleIconRequest(toggleIconListener);
 }
 
-function initBlockchainConnection(): void {
-  initBlockChainConnection();
+function initBlockchainMessages(): void {
+  initBlockchainConnection();
   browser.runtime.onConnect.addListener(extensionPopupListener);
 }
 
 function init() {
-  initBlockchainConnection();
+  initBlockchainMessages();
   initBalanceMessages();
   initFeeMessages();
   initSavedPasswords();

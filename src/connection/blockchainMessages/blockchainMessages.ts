@@ -3,7 +3,7 @@ import { Runtime } from 'webextension-polyfill-ts';
 
 import { getEndpoint } from '../../utilities/endpoints/endpoints';
 
-export function initBlockChainConnection(): void {
+export function initBlockchainConnection(): void {
   (async () => {
     const address = await getEndpoint();
     await init({ address });
