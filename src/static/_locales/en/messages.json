@@ -159,28 +159,28 @@
     "message": "Create Account"
   },
   "view_Welcome_import": {
-    "message": "Import an Account from pre-existing phrase"
+    "message": "Import an account from pre-existing phrase"
   },
   "view_Warning_headline": {
     "message": "Attention!"
   },
   "view_Warning_emphasis": {
-    "message": "The next Step is very important!"
+    "message": "The next step is very important!"
   },
   "view_Warning_explanation": {
-    "message": "Please write down your wallet’s phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet."
+    "message": "Please write down your wallet’s phrase and keep it in a safe place. We recommend that you write down your backup phrase with pen and paper. The phrase must be used to restore your wallet."
   },
   "view_Warning_emphasis_again": {
-    "message": "Keep it carefully\nto not lose your assets"
+    "message": "Keep it safe, so you don't lose\nyour assets"
   },
   "view_Warning_CTA": {
-    "message": "I understand this - go to the Phrase"
+    "message": "I understand this --- go to the Phrase"
   },
   "view_SaveBackupPhrase_heading": {
     "message": "My Backup Phrase"
   },
   "view_SaveBackupPhrase_explanation": {
-    "message": "You have to click or tap an empty field to see one word of the phrase. For the next step, you need your written words in the correct order."
+    "message": "Click or hover over each word and write it down. You need to write the words in the correct order from 1 to 12."
   },
   "view_VerifyBackupPhrase_heading": {
     "message": "Check my Backup Phrase"
@@ -198,7 +198,7 @@
     "message": "Set a new password"
   },
   "view_ImportBackupPhrase_explanation_import": {
-    "message": "To import a Sporran account, you will need a pre-existing backup phrase consisting of 12-words"
+    "message": "To import a Sporran account, you will need your backup phrase consisting of 12 words."
   },
   "view_ImportBackupPhrase_explanation_reset": {
     "message": "In order to set a new password you have to re-enter your backup phrase"
@@ -210,7 +210,7 @@
     "message": "This is not the backup phrase of this account"
   },
   "view_ImportBackupPhrase_error_backup_phrase_length": {
-    "message": "Please insert all the words of the backup phrase"
+    "message": "Please insert all 12 words of the backup phrase in the correct order"
   },
   "view_ImportBackupPhrase_error_typo": {
     "message": "It looks like there’s a typo in this word"
@@ -219,7 +219,7 @@
     "message": "Set Account Password"
   },
   "view_CreatePassword_explanation": {
-    "message": "You need a secure password for every account. A good one could look like this:"
+    "message": "You need a secure password for every account. A strong password would look like this: "
   },
   "view_CreatePassword_example": {
     "message": "House 12! small DOGS"
