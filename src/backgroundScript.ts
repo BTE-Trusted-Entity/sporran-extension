@@ -41,6 +41,7 @@ import {
   connectToBlockchain,
   onPopupConnect,
 } from './connection/ExtensionPopupMessages/ExtensionPopupMessages';
+import { initSignTxMessages } from './dApps/SignTxMessages/SignTxMessages';
 
 export function initBalanceMessages(): void {
   onBalanceChangeRequest(balanceMessageListener);
@@ -86,6 +87,7 @@ function init() {
   initTransferMessages();
   initPopupMessages();
   initToggleIcon();
+  initSignTxMessages();
 }
 
 init();

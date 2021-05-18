@@ -10,6 +10,7 @@ import {
 } from './connection/PopupWindowMessages/PopupWindowMessages';
 import { handleAllAccountsRequests } from './dApps/accountsDataProvider/accountsDataProvider';
 import { handleAllAccessRequests } from './dApps/checkAccess/checkAccess';
+import { handleAllSignRequests } from './dApps/signaturesProvider/signaturesProvider';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -33,6 +34,7 @@ function initMessages() {
   const origin = window.location.href;
   handleAllAccessRequests(origin);
   handleAllAccountsRequests(origin);
+  handleAllSignRequests(origin);
 }
 
 function main() {
