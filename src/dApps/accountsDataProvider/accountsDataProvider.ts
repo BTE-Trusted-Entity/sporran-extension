@@ -2,13 +2,17 @@ import { InjectedAccount } from '@polkadot/extension-inject/types';
 import { browser, Storage } from 'webextension-polyfill-ts';
 
 import {
-  onInjectedAccountsRequest,
-  sendInjectedAccountsResponse,
-} from '../../connection/InjectedAccountsMessages/InjectedAccountsMessages';
-import { storageAreaName } from '../storage/storage';
-import { ACCOUNTS_KEY, getAccounts } from './getAccounts';
+  onAccountsRequest,
+  sendAccountsResponse,
+} from '../AccountsMessages/AccountsMessages';
+import { storageAreaName } from '../../utilities/storage/storage';
+import {
+  ACCOUNTS_KEY,
+  getAccounts,
+} from '../../utilities/accounts/getAccounts';
+import { checkAccess } from '../checkAccess/checkAccess';
 
-async function getInjectableAccounts(): Promise<InjectedAccount[]> {
+async function getAccountsForInjectedAPI(): Promise<InjectedAccount[]> {
   const accounts = await getAccounts();
   return Object.values(accounts).map(({ name, address }) => ({
     name,
@@ -31,7 +35,7 @@ function subscribe(
 
     const needToNotify = ACCOUNTS_KEY in changes;
     if (needToNotify) {
-      callback(await getInjectableAccounts());
+      callback(await getAccountsForInjectedAPI());
     }
   }
 
@@ -39,9 +43,11 @@ function subscribe(
   return () => browser.storage.onChanged.removeListener(onChanged);
 }
 
-export function handleAllInjectedAccountsRequests(): () => void {
-  return onInjectedAccountsRequest(async () => {
-    subscribe(sendInjectedAccountsResponse);
-    await sendInjectedAccountsResponse(await getInjectableAccounts());
+export function handleAllAccountsRequests(origin: string): () => void {
+  return onAccountsRequest(async ({ dAppName }) => {
+    await checkAccess(dAppName, origin);
+
+    subscribe(sendAccountsResponse);
+    await sendAccountsResponse(await getAccountsForInjectedAPI());
   });
 }
