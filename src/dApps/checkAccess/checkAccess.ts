@@ -49,7 +49,7 @@ export async function checkAccess(
 export function handleAllAccessRequests(origin: string): void {
   produceAccessResult(async (request) => {
     try {
-      await checkAccess(request.name, origin);
+      await checkAccess(request.dAppName, origin);
       return { authorized: true };
     } catch (error) {
       console.error(error);
