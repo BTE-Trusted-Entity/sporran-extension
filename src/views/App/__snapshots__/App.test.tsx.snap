@@ -65,7 +65,7 @@ exports[`App should render 1`] = `
         class="import"
         href="/account/import"
       >
-        Import an Account from pre-existing phrase
+        Import an account from pre-existing phrase
       </a>
     </div>
   </div>

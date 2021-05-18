@@ -8,7 +8,7 @@ const onImport = jest.fn();
 const invalidBackupPhrase = 'The entered backup phrase doesn’t exist';
 const mismatchingBackupPhrase = 'This is not the backup phrase of this account';
 const backupPhraseNotLongEnough =
-  'Please insert all the words of the backup phrase';
+  'Please insert all 12 words of the backup phrase in the correct order';
 const typo = 'It looks like there’s a typo in this word';
 
 const props = {

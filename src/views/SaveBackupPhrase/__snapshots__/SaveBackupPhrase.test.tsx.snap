@@ -13,7 +13,7 @@ exports[`SaveBackupPhrase should render 1`] = `
     <p
       class="subheading"
     >
-      You have to click or tap an empty field to see one word of the phrase. For the next step, you need your written words in the correct order.
+      Click or hover over each word and write it down. You need to write the words in the correct order from 1 to 12.
     </p>
     <ol
       class="items"
