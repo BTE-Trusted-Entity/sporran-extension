@@ -79,6 +79,15 @@ export const onPopupRequest = createOnMessage<PopupRequest>(popupRequest);
 
 export const onPopupResponse = createOnMessage<PopupResponse>(popupResponse);
 
+export async function getPopupResult(
+  ...args: Parameters<typeof sendPopupRequest>
+): Promise<PopupResponse> {
+  await sendPopupRequest(...args);
+  return new Promise((resolve) => {
+    onPopupResponse(async (result) => resolve(result));
+  });
+}
+
 export async function popupRequestListener(
   data: PopupRequest,
   sender: { tab?: { id?: number; windowId?: number } },
