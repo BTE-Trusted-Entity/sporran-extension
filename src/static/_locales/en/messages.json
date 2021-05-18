@@ -362,7 +362,7 @@
     "message": "The amount+fee exceed your maximum sendable amount"
   },
   "view_SendToken_total_fee": {
-    "message": "Total fee: "
+    "message": "Costs: "
   },
   "view_SendToken_all_in": {
     "message": "All in"
@@ -374,7 +374,7 @@
     "message": "Decrease the tip by 1%"
   },
   "view_SendToken_tip": {
-    "message": "Tip of $percent$% included in fee",
+    "message": "Tip of $percent$% included in costs",
     "placeholders": {
       "percent": {
         "content": "$1"
@@ -406,7 +406,7 @@
     "message": "Reset Password"
   },
   "view_ReviewTransaction_total": {
-    "message": "Total costs: "
+    "message": "Total: "
   },
   "view_ReviewTransaction_showDetails": {
     "message": "Show details"
@@ -415,13 +415,13 @@
     "message": "Hide details"
   },
   "view_ReviewTransaction_fee": {
-    "message": "Minimum Fee:"
+    "message": "Fee:"
   },
   "view_ReviewTransaction_tip": {
     "message": "Tip:"
   },
   "view_ReviewTransaction_totalFee": {
-    "message": "Total Fee:"
+    "message": "Costs:"
   },
   "view_ReviewTransaction_amount": {
     "message": "Amount:"
@@ -533,5 +533,25 @@
   },
   "view_AppSettings_reset": {
     "message": "Restore default"
+  },
+  "view_AuthorizeDApp_title": {
+    "message": "Authorize"
+  },
+  "view_AuthorizeDApp_subline": {
+    "message": "An application, self-identifying as $name$ is requesting access from:",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_AuthorizeDApp_warning": {
+    "message": "Only approve this request if you trust the application. Approving gives the application access to the addresses of your accounts."
+  },
+  "view_AuthorizeDApp_CTA": {
+    "message": "Yes, allow this application access"
+  },
+  "view_AuthorizeDApp_reject": {
+    "message": "Reject"
   }
 }

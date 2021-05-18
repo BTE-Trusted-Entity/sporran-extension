@@ -294,7 +294,7 @@ exports[`SendToken should render 1`] = `
       <small
         class="total"
       >
-        Total fee: 
+        Costs: 
         0.0000
          K
       </small>
@@ -308,7 +308,7 @@ exports[`SendToken should render 1`] = `
     <small
       class="tip"
     >
-      Tip of 0% included in fee
+      Tip of 0% included in costs
     </small>
     <p
       class="recipientLine"

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthorizeDApp should render 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Authorize
+    </h1>
+    <p
+      class="subline"
+    >
+      An application, self-identifying as KILT-Sporran is requesting access from:
+    </p>
+    <p
+      class="origin"
+    >
+      https://polkadot.js.org/apps/
+    </p>
+    <p
+      class="warning"
+    >
+      Only approve this request if you trust the application. Approving gives the application access to the addresses of your accounts.
+    </p>
+    <button
+      class="authorize"
+    >
+      Yes, allow this application access
+    </button>
+    <button
+      class="reject"
+    >
+      Reject
+    </button>
+  </section>
+</div>
+`;
