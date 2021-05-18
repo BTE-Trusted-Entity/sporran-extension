@@ -9,9 +9,9 @@ interface InjectedEnableRequest {
   name: string;
 }
 
-type InjectedEnableResponse = {
+interface InjectedEnableResponse {
   authorized?: boolean;
-};
+}
 
 const sendInjectedEnableRequest =
   createSendWindowMessage<InjectedEnableRequest>(request);
