@@ -58,7 +58,7 @@ exports[`ReviewTransaction should render 1`] = `
       class="totalLine"
     >
       <span>
-        Total costs: 
+        Total: 
       </span>
       <span
         class="amount"
@@ -85,7 +85,7 @@ exports[`ReviewTransaction should render 1`] = `
           <th
             class="detailName"
           >
-            Minimum Fee:
+            Fee:
           </th>
           <th
             class="detailName"
@@ -95,7 +95,7 @@ exports[`ReviewTransaction should render 1`] = `
           <th
             class="detailName"
           >
-            Total Fee:
+            Costs:
           </th>
           <th
             class="detailName"
