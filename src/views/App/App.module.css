@@ -5,7 +5,6 @@ body {
 
 #popup {
   background:
-  url('../images/logo.svg') no-repeat center 1.5rem,
   url('../images/background.png') center/contain;
 }
 
