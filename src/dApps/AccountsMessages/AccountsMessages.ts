@@ -8,7 +8,7 @@ const request = 'sporranExtension.injectedScript.accountsRequest';
 const response = 'sporranExtension.injectedScript.accountsResponse';
 
 interface AccountsRequest {
-  name: string;
+  dAppName: string;
 }
 
 type AccountsResponse = InjectedAccount[];

@@ -44,8 +44,8 @@ function subscribe(
 }
 
 export function handleAllAccountsRequests(origin: string): () => void {
-  return onAccountsRequest(async ({ name }) => {
-    await checkAccess(name, origin);
+  return onAccountsRequest(async ({ dAppName }) => {
+    await checkAccess(dAppName, origin);
 
     subscribe(sendAccountsResponse);
     await sendAccountsResponse(await getAccountsForInjectedAPI());

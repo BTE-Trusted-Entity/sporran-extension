@@ -6,7 +6,7 @@ const request = 'sporranExtension.injectedScript.accessRequest';
 const response = 'sporranExtension.injectedScript.accessResponse';
 
 interface AccessRequest {
-  name: string;
+  dAppName: string;
 }
 
 interface AccessResponse {

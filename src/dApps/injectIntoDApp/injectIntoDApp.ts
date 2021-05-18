@@ -9,14 +9,14 @@ export function injectIntoDApp(): void {
     version: '1.0.0', // TODO: version
   };
 
-  injectExtension(async (name: string) => {
-    const { authorized } = await getAccessResult({ name });
+  injectExtension(async (dAppName: string) => {
+    const { authorized } = await getAccessResult({ dAppName });
     if (!authorized) {
       throw new Error('Not authorized');
     }
 
     return {
-      accounts: new AccountsInjectedAPI(name),
+      accounts: new AccountsInjectedAPI(dAppName),
       signer: {},
     };
   }, sporranMeta);

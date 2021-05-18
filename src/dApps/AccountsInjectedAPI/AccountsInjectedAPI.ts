@@ -8,11 +8,11 @@ import { getAccountsResult } from '../AccountsMessages/AccountsMessages';
 type CallbackType = Parameters<InjectedAccounts['subscribe']>[0];
 
 export class AccountsInjectedAPI implements InjectedAccounts {
-  name: string;
+  dAppName: string;
   accounts: InjectedAccount[] = [];
 
-  constructor(name: string) {
-    this.name = name;
+  constructor(dAppName: string) {
+    this.dAppName = dAppName;
   }
 
   async request(): Promise<void> {
@@ -23,7 +23,7 @@ export class AccountsInjectedAPI implements InjectedAccounts {
 
     this.request = () => whenReady; // make sure the following only runs once
 
-    getAccountsResult({ name: this.name }).then((accounts) => {
+    getAccountsResult({ dAppName: this.dAppName }).then((accounts) => {
       markReady();
       this.accounts = accounts;
       this.listeners.forEach((listener) => listener(accounts));
