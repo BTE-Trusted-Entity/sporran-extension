@@ -13,16 +13,16 @@ type InjectedEnableResponse = {
   authorized?: boolean;
 };
 
-export const sendInjectedEnableRequest =
+const sendInjectedEnableRequest =
   createSendWindowMessage<InjectedEnableRequest>(request);
 
-export const onInjectedEnableRequest =
+const onInjectedEnableRequest =
   createOnWindowMessage<InjectedEnableRequest>(request);
 
-export const sendInjectedEnableResponse =
+const sendInjectedEnableResponse =
   createSendWindowMessage<InjectedEnableResponse>(response);
 
-export const onInjectedEnableResponse =
+const onInjectedEnableResponse =
   createOnWindowMessage<InjectedEnableResponse>(response);
 
 export const getInjectedEnableResult = createGetResult<
