@@ -54,15 +54,17 @@ function handleResponse(data: Parameters<typeof lastCallback>[0]) {
 }
 
 function injectIntoDApp() {
-  const name = 'Sporran'; // manifest_name
-  const version = '1.0.0'; // TODO: version
+  const sporranMeta = {
+    name: 'Sporran', // manifest_name
+    version: '1.0.0', // TODO: version
+  };
 
   injectExtension(
     async (name: string) => ({
       accounts: new InjectedSporranAccounts(name),
       signer: {},
     }),
-    { name, version },
+    sporranMeta,
   );
 }
 
