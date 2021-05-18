@@ -3,6 +3,12 @@ body {
   padding: 0;
 }
 
+#popup {
+  background:
+  url('../images/logo.svg') no-repeat center 1.5rem,
+  url('../images/background.png') center/contain;
+}
+
 .container {
   composes: view from "../../components/View/View.module.css";
 }
