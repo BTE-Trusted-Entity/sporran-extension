@@ -4,7 +4,7 @@ body {
 }
 
 #popup {
-  background: url('../images/background.png') center/contain;
+  background: url('../../components/images/background.png') center/contain;
 }
 
 .container {
