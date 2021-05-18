@@ -8,8 +8,8 @@ import {
   onPopupWindowRequest,
   sendPopupWindowResponse,
 } from './connection/PopupWindowMessages/PopupWindowMessages';
-import { handleAllInjectedAccountsRequests } from './utilities/accounts/injectedAccounts';
-import { handleAllInjectedEnableRequests } from './utilities/dApps/authorize';
+import { handleAllAccountsRequests } from './dApps/accountsDataProvider/accountsDataProvider';
+import { handleAllAccessRequests } from './dApps/checkAccess/checkAccess';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -31,8 +31,8 @@ function initMessages() {
   onPopupResponse(popupResponseListener);
 
   const origin = window.location.href;
-  handleAllInjectedEnableRequests(origin);
-  handleAllInjectedAccountsRequests(origin);
+  handleAllAccessRequests(origin);
+  handleAllAccountsRequests(origin);
 }
 
 function main() {

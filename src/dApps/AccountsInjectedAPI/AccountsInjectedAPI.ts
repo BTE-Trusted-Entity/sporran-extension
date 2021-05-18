@@ -2,13 +2,12 @@ import { pull } from 'lodash-es';
 import {
   InjectedAccount,
   InjectedAccounts,
-  Unsubcall,
 } from '@polkadot/extension-inject/types';
-import { getInjectedAccountsResult } from '../../connection/InjectedAccountsMessages/InjectedAccountsMessages';
+import { getAccountsResult } from '../AccountsMessages/AccountsMessages';
 
 type CallbackType = Parameters<InjectedAccounts['subscribe']>[0];
 
-export class InjectedSporranAccounts implements InjectedAccounts {
+export class AccountsInjectedAPI implements InjectedAccounts {
   name: string;
   accounts: InjectedAccount[] = [];
 
@@ -24,7 +23,7 @@ export class InjectedSporranAccounts implements InjectedAccounts {
 
     this.request = () => whenReady; // make sure the following only runs once
 
-    getInjectedAccountsResult({ name: this.name }).then((accounts) => {
+    getAccountsResult({ name: this.name }).then((accounts) => {
       markReady();
       this.accounts = accounts;
       this.listeners.forEach((listener) => listener(accounts));
@@ -35,12 +34,12 @@ export class InjectedSporranAccounts implements InjectedAccounts {
 
   listeners: CallbackType[] = [];
 
-  subscribe(callback: CallbackType): Unsubcall {
+  subscribe(listener: CallbackType): () => void {
     this.request();
 
-    this.listeners.push(callback);
+    this.listeners.push(listener);
     return () => {
-      pull(this.listeners, callback);
+      pull(this.listeners, listener);
     };
   }
 

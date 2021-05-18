@@ -1,6 +1,6 @@
-import { storage } from '../storage/storage';
+import { storage } from '../../utilities/storage/storage';
 import { getPopupResult } from '../../connection/PopupMessages/PopupMessages';
-import { respondToInjectedEnableRequest } from '../../connection/InjectedEnableMessages/InjectedEnableMessages';
+import { produceAccessResult } from '../AccessMessages/AccessMessages';
 
 const authorizedKey = 'authorizedDApps';
 
@@ -16,7 +16,7 @@ async function setAuthorized(authorized: AuthorizedType) {
   return await storage.set({ [authorizedKey]: authorized });
 }
 
-export async function authorize(
+export async function checkAccess(
   name: string,
   fullOrigin: string,
 ): Promise<void> {
@@ -46,10 +46,10 @@ export async function authorize(
   }
 }
 
-export function handleAllInjectedEnableRequests(origin: string): void {
-  respondToInjectedEnableRequest(async (request) => {
+export function handleAllAccessRequests(origin: string): void {
+  produceAccessResult(async (request) => {
     try {
-      await authorize(request.name, origin);
+      await checkAccess(request.name, origin);
       return { authorized: true };
     } catch (error) {
       console.error(error);
