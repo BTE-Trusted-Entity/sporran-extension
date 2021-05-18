@@ -13,7 +13,7 @@ interface InjectedAccountsRequest {
 
 type InjectedAccountsResponse = InjectedAccount[];
 
-export const sendInjectedAccountsRequest =
+const sendInjectedAccountsRequest =
   createSendWindowMessage<InjectedAccountsRequest>(request);
 
 export const onInjectedAccountsRequest =
@@ -22,7 +22,7 @@ export const onInjectedAccountsRequest =
 export const sendInjectedAccountsResponse =
   createSendWindowMessage<InjectedAccountsResponse>(response);
 
-export const onInjectedAccountsResponse =
+const onInjectedAccountsResponse =
   createOnWindowMessage<InjectedAccountsResponse>(response);
 
 export const getInjectedAccountsResult = createGetResult<
