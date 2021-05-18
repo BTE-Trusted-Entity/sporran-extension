@@ -35,7 +35,7 @@ export function Reset(): JSX.Element {
   return (
     <AccountSuccessOverlay
       account={account}
-      successType="reset"
+      successType="pwreset"
       onSuccessOverlayButtonClick={action('closeOverlay')}
     />
   );
