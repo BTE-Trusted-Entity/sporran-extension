@@ -1,5 +1,5 @@
 import { SignerPayloadJSON } from '@polkadot/types/types/extrinsic';
-import { getSignPopupResult } from '../SignPopupMessages/SignPopupMessages';
+import { getSignPopupWindowResult } from '../SignPopupWindowMessages/SignPopupWindowMessages';
 
 export class SignerInjectedAPI {
   dAppName: string;
@@ -11,7 +11,7 @@ export class SignerInjectedAPI {
   async signPayload(
     payload: SignerPayloadJSON,
   ): Promise<{ id: number; signature: string }> {
-    return getSignPopupResult({
+    return getSignPopupWindowResult({
       dAppName: this.dAppName,
       payload,
     });

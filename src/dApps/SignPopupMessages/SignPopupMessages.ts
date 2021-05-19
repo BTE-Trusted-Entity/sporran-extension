@@ -1,40 +1,49 @@
-import { SignerPayloadJSON } from '@polkadot/types/types/extrinsic';
-import { createSendWindowMessage } from '../../connection/createSendWindowMessage/createSendWindowMessage';
-import { createOnWindowMessage } from '../../connection/createOnWindowMessage/createOnWindowMessage';
-import { createGetResult } from '../../connection/createGetResult/createGetResult';
+import { useMemo } from 'react';
+import {
+  SignerPayloadJSON,
+  SignerResult,
+} from '@polkadot/types/types/extrinsic';
 
-const request = 'sporranExtension.injectedScript.signRequest';
-const response = 'sporranExtension.injectedScript.signResponse';
+import {
+  getPopupResult,
+  sendPopupResponse,
+} from '../../connection/PopupMessages/PopupMessages';
+import { useQuery } from '../../utilities/useQuery/useQuery';
 
-interface SignPopupRequest {
-  dAppName: string;
-  payload: SignerPayloadJSON;
+export async function getSignPopupResult(
+  payload: SignerPayloadJSON,
+): Promise<SignerResult> {
+  const { id, signature } = await getPopupResult('sign', {
+    ...payload,
+    version: String(payload.version),
+    signedExtensions: JSON.stringify(payload.signedExtensions),
+  });
+
+  return {
+    id: parseInt(id),
+    signature,
+  };
 }
 
-interface SignPopupResponse {
-  id: number;
-  signature: string;
+export function useSignPopupQuery(): SignerPayloadJSON {
+  const query = useQuery();
+  return useMemo(
+    () =>
+      ({
+        ...query,
+        version: parseInt(query.version),
+        signedExtensions: JSON.parse(query.signedExtensions),
+      } as SignerPayloadJSON),
+    [query],
+  );
 }
 
-const sendSignPopupRequest = createSendWindowMessage<SignPopupRequest>(request);
-
-const onSignPopupRequest = createOnWindowMessage<SignPopupRequest>(request);
-
-const sendSignPopupResponse =
-  createSendWindowMessage<SignPopupResponse>(response);
-
-const onSignPopupResponse = createOnWindowMessage<SignPopupResponse>(response);
-
-export const getSignPopupResult = createGetResult<
-  SignPopupRequest,
-  SignPopupResponse
->(sendSignPopupRequest, onSignPopupResponse);
-
-export function produceSignPopupResult(
-  callback: (request: SignPopupRequest) => Promise<SignPopupResponse>,
-): () => void {
-  return onSignPopupRequest(async (request) => {
-    const result = await callback(request);
-    sendSignPopupResponse(result);
+export async function signPopupMessages({
+  id,
+  signature,
+}: SignerResult): Promise<void> {
+  await sendPopupResponse({
+    id: String(id),
+    signature,
   });
 }

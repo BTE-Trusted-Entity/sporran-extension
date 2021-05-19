@@ -1,21 +1,22 @@
 import { useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { SignerPayloadJSON } from '@polkadot/types/types/extrinsic';
 
-import { useQuery } from '../../utilities/useQuery/useQuery';
 import { useAccounts } from '../../utilities/accounts/accounts';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { getPassword } from '../../connection/SavedPasswordsMessages/SavedPasswordsMessages';
 import { getSignTxResult } from '../../dApps/SignTxMessages/SignTxMessages';
-import { sendPopupResponse } from '../../connection/PopupMessages/PopupMessages';
+import {
+  signPopupMessages,
+  useSignPopupQuery,
+} from '../../dApps/SignPopupMessages/SignPopupMessages';
 
 import styles from './SignDApp.module.css';
 
 export function SignDApp(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const query = useQuery();
+  const query = useSignPopupQuery();
 
   /*
     const values = [
@@ -71,14 +72,8 @@ export function SignDApp(): JSX.Element | null {
           ? savedPassword
           : providedPassword;
 
-      const payload = {
-        ...query,
-        version: parseInt(query.version),
-        signedExtensions: JSON.parse(query.signedExtensions),
-      } as SignerPayloadJSON;
-
-      const { id, signature } = await getSignTxResult({ password, payload });
-      await sendPopupResponse({ id: String(id), signature });
+      const signed = await getSignTxResult({ password, payload: query });
+      await signPopupMessages(signed);
 
       window.close();
     },
