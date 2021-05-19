@@ -61,7 +61,7 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
 
       <AccountsCarousel path={path} account={account} />
 
-      <Balance address={address} />
+      <Balance address={address} breakdown />
 
       <p>
         <Link

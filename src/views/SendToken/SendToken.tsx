@@ -159,7 +159,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const [fee, setFee] = useState<BN | null>(null);
 
   const balance = useAddressBalance(account.address);
-  const maximum = balance && fee ? balance.sub(fee) : null;
+  const maximum = balance && fee ? balance.free.sub(fee) : null;
 
   const [amount, setAmount] = useState<string | null>(null);
   const amountError = amount && getAmountError(amount, maximum);

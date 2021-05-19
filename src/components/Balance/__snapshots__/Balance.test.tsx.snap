@@ -3,9 +3,9 @@
 exports[`Balance should render 1`] = `
 <div>
   <p
-    class="balance"
+    class="balanceLine"
   >
-    Balance: 
+    Total Balance: 
     <span
       class="amount"
     >
