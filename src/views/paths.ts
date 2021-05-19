@@ -31,6 +31,7 @@ export const paths = {
   },
   popup: {
     base: '/popup',
+    authorize: '/popup/authorize',
     claim: '/popup/claim',
     save: '/popup/save',
     share: '/popup/share',
