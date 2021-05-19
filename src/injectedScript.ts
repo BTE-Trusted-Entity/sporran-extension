@@ -1,10 +1,8 @@
-import { injectExtension } from '@polkadot/extension-inject';
-
 import {
   onPopupWindowResponse,
   sendPopupWindowRequest,
 } from './connection/PopupWindowMessages/PopupWindowMessages';
-import { InjectedSporranAccounts } from './utilities/accounts/InjectedSporranAccounts';
+import { injectIntoDApp } from './dApps/injectIntoDApp/injectIntoDApp';
 
 let lastCallback: (values: { [key: string]: string }) => void | undefined;
 
@@ -51,21 +49,6 @@ function showShareCredentialPopup(
 
 function handleResponse(data: Parameters<typeof lastCallback>[0]) {
   lastCallback?.(data);
-}
-
-function injectIntoDApp() {
-  const sporranMeta = {
-    name: 'Sporran', // manifest_name
-    version: '1.0.0', // TODO: version
-  };
-
-  injectExtension(
-    async (name: string) => ({
-      accounts: new InjectedSporranAccounts(name),
-      signer: {},
-    }),
-    sporranMeta,
-  );
 }
 
 interface API {
