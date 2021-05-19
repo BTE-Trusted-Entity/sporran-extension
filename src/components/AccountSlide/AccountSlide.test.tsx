@@ -25,7 +25,12 @@ jest
       type: balanceChangeResponse,
       data: {
         address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-        balance: '1234000000000000',
+        balance: {
+          free: '1231000000000000',
+          bonded: '1000000000000',
+          locked: '2000000000000',
+          total: '1234000000000000',
+        },
       } as BalanceChangeResponse,
     };
     callback(response, {});
