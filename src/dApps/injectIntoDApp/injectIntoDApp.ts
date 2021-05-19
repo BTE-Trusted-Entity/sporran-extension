@@ -2,6 +2,7 @@ import { injectExtension } from '@polkadot/extension-inject';
 
 import { getAccessResult } from '../AccessMessages/AccessMessages';
 import { AccountsInjectedAPI } from '../AccountsInjectedAPI/AccountsInjectedAPI';
+import { SignerInjectedAPI } from '../SignerInjectedAPI/SignerInjectedAPI';
 
 export function injectIntoDApp(): void {
   const sporranMeta = {
@@ -17,7 +18,7 @@ export function injectIntoDApp(): void {
 
     return {
       accounts: new AccountsInjectedAPI(dAppName),
-      signer: {},
+      signer: new SignerInjectedAPI(dAppName),
     };
   }, sporranMeta);
 }

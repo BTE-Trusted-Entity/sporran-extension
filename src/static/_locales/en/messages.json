@@ -568,5 +568,41 @@
   },
   "view_AuthorizeDApp_reject": {
     "message": "Reject"
+  },
+  "view_SignDApp_from": {
+    "message": "from"
+  },
+  "view_SignDApp_genesis": {
+    "message": "genesis"
+  },
+  "view_SignDApp_version": {
+    "message": "version"
+  },
+  "view_SignDApp_nonce": {
+    "message": "nonce"
+  },
+  "view_SignDApp_method": {
+    "message": "method data"
+  },
+  "view_SignDApp_lifetime": {
+    "message": "lifetime"
+  },
+  "view_SignDApp_title": {
+    "message": "Transaction"
+  },
+  "view_SignDApp_password": {
+    "message": "Sign with password:"
+  },
+  "view_SignDApp_remember": {
+    "message": "Remember my password for the next 15 minutes"
+  },
+  "view_SignDApp_reject": {
+    "message": "Reject"
+  },
+  "view_SignDApp_CTA": {
+    "message": "Sign the transaction"
+  },
+  "view_SignDApp_password_incorrect": {
+    "message": "The password is incorrect"
   }
 }
