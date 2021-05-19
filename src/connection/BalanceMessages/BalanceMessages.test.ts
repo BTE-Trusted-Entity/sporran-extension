@@ -7,6 +7,7 @@ import {
   balanceMessageListener,
   onBalanceChange,
 } from './BalanceMessages';
+import { balanceMock } from './BalanceMessages.mock';
 
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
 jest.spyOn(browser.runtime, 'sendMessage');
@@ -25,12 +26,7 @@ describe('BalanceMessages', () => {
         type: balanceChangeResponse,
         data: {
           address: 'address',
-          balance: {
-            free: '1226000000000000',
-            bonded: '5000000000000',
-            locked: '3000000000000',
-            total: '1234000000000000',
-          },
+          balance: balanceMock,
         },
       });
     });

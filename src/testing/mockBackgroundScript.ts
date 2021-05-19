@@ -7,6 +7,7 @@ import {
   balanceChangeResponse,
   BalanceChangeResponse,
 } from '../connection/BalanceMessages/BalanceMessages';
+import { balanceMock } from '../connection/BalanceMessages/BalanceMessages.mock';
 
 type CallbackType = Parameters<typeof browser.runtime.onMessage.addListener>[0];
 type SendMessageType = Parameters<typeof browser.runtime.sendMessage>[0];
@@ -35,12 +36,7 @@ export function mockBackgroundScript(namespace = browser): void {
         type: balanceChangeResponse,
         data: {
           address: (message.data as BalanceChangeRequest).address,
-          balance: {
-            free: '1231000000000000',
-            bonded: '1000000000000',
-            locked: '2000000000000',
-            total: '1234000000000000',
-          },
+          balance: balanceMock,
         } as BalanceChangeResponse,
       };
 

@@ -12,6 +12,7 @@ import {
   balanceChangeResponse,
   BalanceChangeResponse,
 } from '../../connection/BalanceMessages/BalanceMessages';
+import { balanceMock } from '../../connection/BalanceMessages/BalanceMessages.mock';
 
 import { AccountSlide } from './AccountSlide';
 import { AccountSlideNew } from './AccountSlideNew';
@@ -25,12 +26,7 @@ jest
       type: balanceChangeResponse,
       data: {
         address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-        balance: {
-          free: '1231000000000000',
-          bonded: '1000000000000',
-          locked: '2000000000000',
-          total: '1234000000000000',
-        },
+        balance: balanceMock,
       } as BalanceChangeResponse,
     };
     callback(response, {});
