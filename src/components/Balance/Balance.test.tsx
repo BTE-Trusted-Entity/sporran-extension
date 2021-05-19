@@ -6,6 +6,8 @@ import {
   balanceChangeResponse,
   BalanceChangeResponse,
 } from '../../connection/BalanceMessages/BalanceMessages';
+import { balanceMock } from '../../connection/BalanceMessages/BalanceMessages.mock';
+
 import { Balance } from './Balance';
 
 jest.spyOn(browser.runtime, 'sendMessage');
@@ -16,7 +18,7 @@ jest
       type: balanceChangeResponse,
       data: {
         address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-        balance: '1234000000000000',
+        balance: balanceMock,
       } as BalanceChangeResponse,
     };
     callback(response, {});
