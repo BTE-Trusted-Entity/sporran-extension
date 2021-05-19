@@ -10,7 +10,8 @@ export default {
   component: SignDApp,
 } as Meta;
 
-const query = 'address=4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
+const query =
+  'address=4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire&signedExtensions=[]';
 
 export function Template(): JSX.Element {
   return (
