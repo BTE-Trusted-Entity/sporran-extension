@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import { useAccounts } from '../../utilities/accounts/accounts';
+import { decryptAccount, useAccounts } from '../../utilities/accounts/accounts';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
-import { getPassword } from '../../connection/SavedPasswordsMessages/SavedPasswordsMessages';
+import {
+  forgetPassword,
+  getPassword,
+  savePassword,
+} from '../../connection/SavedPasswordsMessages/SavedPasswordsMessages';
 import { getSignTxResult } from '../../dApps/SignTxMessages/SignTxMessages';
 import {
   signPopupMessages,
@@ -72,12 +76,29 @@ export function SignDApp(): JSX.Element | null {
           ? savedPassword
           : providedPassword;
 
-      const signed = await getSignTxResult({ password, payload: query });
-      await signPopupMessages(signed);
+      if (!account) {
+        return;
+      }
 
-      window.close();
+      try {
+        const { address } = account;
+        await decryptAccount(address, password);
+
+        if (remember) {
+          savePassword(password, address);
+        } else {
+          forgetPassword(address);
+        }
+
+        const signed = await getSignTxResult({ password, payload: query });
+        await signPopupMessages(signed);
+
+        window.close();
+      } catch (error) {
+        setError(t('view_SignDApp_password_incorrect'));
+      }
     },
-    [query, savedPassword],
+    [account, query, remember, savedPassword, t],
   );
 
   const handleCancelClick = useCallback(async () => {

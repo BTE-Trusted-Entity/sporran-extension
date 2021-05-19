@@ -601,5 +601,8 @@
   },
   "view_SignDApp_CTA": {
     "message": "Sign the transaction"
+  },
+  "view_SignDApp_password_incorrect": {
+    "message": "The password is incorrect"
   }
 }
