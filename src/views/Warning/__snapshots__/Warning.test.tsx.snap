@@ -23,8 +23,8 @@ exports[`Warning should render 1`] = `
     <h2
       class="important"
     >
-      Keep it safe, so
-you don't lose your assets
+      Keep it safe, so you don't lose
+your assets
     </h2>
     <a
       class="confirm"
