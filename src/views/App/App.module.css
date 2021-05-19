@@ -1,10 +1,12 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
-}
-
-#popup {
-  background: url('../../components/images/background.png') center/contain;
+  background: #223249;
 }
 
 .container {
