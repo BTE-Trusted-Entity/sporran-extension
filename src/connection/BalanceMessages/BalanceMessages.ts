@@ -14,7 +14,7 @@ interface Balance {
   feeFrozen: BN;
 }
 
-export interface ComputedBalance {
+interface ComputedBalance {
   free: string;
   bonded: string;
   locked: string;

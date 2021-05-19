@@ -58,7 +58,7 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
 
   const [showBreakdown, setShowBreakdown] = useState(false);
 
-  const handleshowBreakdownClick = useCallback(() => {
+  const handleShowBreakdownClick = useCallback(() => {
     setShowBreakdown(true);
   }, []);
 
@@ -87,7 +87,7 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
           ) : (
             <button
               type="button"
-              onClick={handleshowBreakdownClick}
+              onClick={handleShowBreakdownClick}
               className={styles.showBreakdown}
               title={t('component_Balance_showBreakdown')}
               aria-label={t('component_Balance_showBreakdown')}
