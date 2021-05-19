@@ -1,22 +1,18 @@
-import { Meta, Story } from '@storybook/react';
+import { Meta } from '@storybook/react';
+import { browser } from 'webextension-polyfill-ts';
 
 import { RemoveAccount } from './RemoveAccount';
-
-type Type = Story<Parameters<typeof RemoveAccount>[0]>;
+import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
+import { mockBackgroundScript } from '../../testing/mockBackgroundScript';
 
 export default {
   title: 'Views/RemoveAccount',
   component: RemoveAccount,
 } as Meta;
 
-const account = {
-  name: 'My Sporran Account',
-  tartan: 'MacFarlane',
-  address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-  index: 1,
-};
+const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
-export { RemoveAccount };
-(RemoveAccount as Type).args = {
-  account,
-};
+export function Template(): JSX.Element {
+  mockBackgroundScript(browser);
+  return <RemoveAccount account={account} />;
+}

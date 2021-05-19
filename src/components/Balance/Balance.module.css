@@ -2,4 +2,32 @@
   composes: smallText from '../Typography/Typography.module.css';
   font-size: 1.25rem;
   margin: 1rem 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showBalanceBreakdown {
+  composes: buttonIcon from '../../components/Button/Button.module.css';
+  background-image: url('../../components/images/chevron-down-orange.svg');
+  width: 1.625rem;
+  height: 1.625rem;
+  background-size: 0.75rem;
+  margin: 0 0 0 0.5rem;
+}
+
+.hideBalanceBreakdown {
+  composes: showBalanceBreakdown;
+  transform: rotate(180deg);
+}
+
+.balanceBreakdown {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0 0;
+}
+
+.balanceBreakdown li {
+  margin: 0.25rem 0;
 }

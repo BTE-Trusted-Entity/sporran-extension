@@ -21,7 +21,7 @@ describe('SendToken', () => {
     const { container } = render(
       <SendToken account={account} onSuccess={jest.fn()} />,
     );
-    await screen.findByText(/Maximum sendable amount: 1.2340/);
+    await screen.findByText(/Maximum sendable amount: 1.2310/);
     expect(container).toMatchSnapshot();
   });
 
@@ -49,7 +49,7 @@ describe('SendToken', () => {
       address,
     );
     userEvent.click(await screen.findByLabelText('Increase the tip by 1%'));
-    await screen.findByText(/Maximum sendable amount: 1.2340/);
+    await screen.findByText(/Maximum sendable amount: 1.2310/);
 
     await runWithJSDOMErrorsDisabled(() => {
       userEvent.click(submit);

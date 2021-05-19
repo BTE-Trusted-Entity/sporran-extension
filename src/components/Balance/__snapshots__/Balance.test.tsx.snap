@@ -5,7 +5,7 @@ exports[`Balance should render 1`] = `
   <p
     class="balance"
   >
-    Balance: 
+    Total Balance: 
     <span
       class="amount"
     >

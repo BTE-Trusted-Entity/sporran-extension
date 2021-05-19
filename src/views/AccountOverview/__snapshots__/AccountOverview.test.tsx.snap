@@ -109,7 +109,7 @@ exports[`AccountOverview should render a normal account 1`] = `
     <p
       class="balance"
     >
-      Balance: 
+      Total Balance: 
       <span
         class="amount"
       >
@@ -120,6 +120,12 @@ exports[`AccountOverview should render a normal account 1`] = `
           class="coin"
         />
       </span>
+      <button
+        aria-label="Show balance breakdown"
+        class="showBalanceBreakdown"
+        title="Show balance breakdown"
+        type="button"
+      />
     </p>
     <p>
       <a

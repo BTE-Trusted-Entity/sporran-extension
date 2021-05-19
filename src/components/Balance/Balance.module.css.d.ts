@@ -1,6 +1,9 @@
 declare namespace BalanceModuleCssNamespace {
   export interface IBalanceModuleCss {
     balance: string;
+    balanceBreakdown: string;
+    hideBalanceBreakdown: string;
+    showBalanceBreakdown: string;
   }
 }
 

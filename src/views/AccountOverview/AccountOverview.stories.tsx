@@ -1,9 +1,11 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
+import { browser } from 'webextension-polyfill-ts';
 
 import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
+import { mockBackgroundScript } from '../../testing/mockBackgroundScript';
 
 import { AccountOverview } from './AccountOverview';
 
@@ -16,6 +18,7 @@ const uri = '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 export function Template(): JSX.Element {
+  mockBackgroundScript(browser);
   return (
     <MemoryRouter initialEntries={[uri]}>
       <Route path={paths.account.overview}>
@@ -36,6 +39,7 @@ export function New(): JSX.Element {
 }
 
 export function CreateSuccess(): JSX.Element {
+  mockBackgroundScript(browser);
   return (
     <MemoryRouter
       initialEntries={[
@@ -51,6 +55,7 @@ export function CreateSuccess(): JSX.Element {
 }
 
 export function ImportSuccess(): JSX.Element {
+  mockBackgroundScript(browser);
   return (
     <MemoryRouter
       initialEntries={[
@@ -66,6 +71,7 @@ export function ImportSuccess(): JSX.Element {
 }
 
 export function ResetSuccess(): JSX.Element {
+  mockBackgroundScript(browser);
   return (
     <MemoryRouter
       initialEntries={[

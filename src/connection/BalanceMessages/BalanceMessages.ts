@@ -7,13 +7,27 @@ import { createOnMessage } from '../createOnMessage/createOnMessage';
 export const balanceChangeRequest = 'balanceChangeRequest';
 export const balanceChangeResponse = 'balanceChangeResponse';
 
+interface Balance {
+  free: BN;
+  reserved: BN;
+  miscFrozen: BN;
+  feeFrozen: BN;
+}
+
+export interface ComputedBalance {
+  free: string;
+  bonded: string;
+  locked: string;
+  total: string;
+}
+
 export interface BalanceChangeRequest {
   address: string;
 }
 
 export interface BalanceChangeResponse {
   address: string;
-  balance: string;
+  balance: ComputedBalance;
 }
 
 export async function sendBalanceChangeRequest(address: string): Promise<void> {
@@ -23,7 +37,10 @@ export async function sendBalanceChangeRequest(address: string): Promise<void> {
   });
 }
 
-async function sendBalanceChangeResponse(address: string, balance: string) {
+async function sendBalanceChangeResponse(
+  address: string,
+  balance: ComputedBalance,
+) {
   await browser.runtime.sendMessage({
     type: balanceChangeResponse,
     data: { address, balance },
@@ -39,9 +56,18 @@ export const onBalanceChangeResponse = createOnMessage<BalanceChangeResponse>(
 
 export async function onBalanceChange(
   address: string,
-  { free }: { free: BN },
+  balance: Balance,
 ): Promise<void> {
-  await sendBalanceChangeResponse(address, free.toString());
+  const { free, reserved, miscFrozen, feeFrozen } = balance;
+  const locked = miscFrozen.add(feeFrozen);
+  const total = free.add(reserved).add(locked);
+
+  await sendBalanceChangeResponse(address, {
+    free: free.toString(),
+    bonded: reserved.toString(),
+    locked: locked.toString(),
+    total: total.toString(),
+  });
 }
 
 export async function balanceMessageListener(
