@@ -29,19 +29,19 @@
   "component_Balance_label": {
     "message": "Total Balance: "
   },
-  "component_Balance_showBalanceBreakdown": {
+  "component_Balance_showBreakdown": {
     "message": "Show balance breakdown"
   },
-  "component_Balance_hideBalanceBreakdown": {
+  "component_Balance_hideBreakdown": {
     "message": "Hide balance breakdown"
   },
-  "component_Balance_balance_free": {
+  "component_Balance_free": {
     "message": "Free Balance: "
   },
-  "component_Balance_balance_locked": {
+  "component_Balance_locked": {
     "message": "Locked Balance: "
   },
-  "component_Balance_balance_bonded": {
+  "component_Balance_bonded": {
     "message": "Bonded Balance: "
   },
   "component_AccountSlide_rename": {

@@ -1,4 +1,4 @@
-.balance {
+.balanceLine {
   composes: smallText from '../Typography/Typography.module.css';
   font-size: 1.25rem;
   margin: 1rem 0 0 0;
@@ -7,7 +7,7 @@
   justify-content: center;
 }
 
-.showBalanceBreakdown {
+.showBreakdown {
   composes: buttonIcon from '../../components/Button/Button.module.css';
   background-image: url('../../components/images/chevron-down-orange.svg');
   width: 1.625rem;
@@ -16,18 +16,18 @@
   margin: 0 0 0 0.5rem;
 }
 
-.hideBalanceBreakdown {
-  composes: showBalanceBreakdown;
+.hideBreakdown {
+  composes: showBreakdown;
   transform: rotate(180deg);
 }
 
-.balanceBreakdown {
+.breakdown {
   composes: smallText from '../../components/Typography/Typography.module.css';
   list-style: none;
   padding: 0;
   margin: 0.25rem 0 0 0;
 }
 
-.balanceBreakdown li {
+.balance {
   margin: 0.25rem 0;
 }

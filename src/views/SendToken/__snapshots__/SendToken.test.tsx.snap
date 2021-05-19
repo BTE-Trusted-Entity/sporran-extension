@@ -237,7 +237,7 @@ exports[`SendToken should render 1`] = `
       </ul>
     </div>
     <p
-      class="balance"
+      class="balanceLine"
     >
       Total Balance: 
       <span

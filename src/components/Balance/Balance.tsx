@@ -4,7 +4,6 @@ import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
 
 import {
-  ComputedBalance,
   BalanceChangeResponse,
   onBalanceChangeResponse,
   sendBalanceChangeRequest,
@@ -13,18 +12,27 @@ import { KiltAmount } from '../KiltAmount/KiltAmount';
 
 import styles from './Balance.module.css';
 
-interface BalanceProps {
-  address: string;
-  breakdown?: boolean;
+interface BalanceBN {
+  free: BN;
+  bonded: BN;
+  locked: BN;
+  total: BN;
 }
 
-export function useAddressBalance(address: string): ComputedBalance | null {
-  const [balance, setBalance] = useState<ComputedBalance | null>(null);
+export function useAddressBalance(address: string): BalanceBN | null {
+  const [balance, setBalance] = useState<BalanceBN | null>(null);
 
   const balanceListener = useCallback(
     async (data: BalanceChangeResponse) => {
       if (data.address === address) {
-        setBalance(data.balance);
+        const { free, bonded, locked, total } = data.balance;
+        const balanceBN = {
+          free: new BN(free),
+          bonded: new BN(bonded),
+          locked: new BN(locked),
+          total: new BN(total),
+        };
+        setBalance(balanceBN);
       }
     },
     [address],
@@ -39,61 +47,66 @@ export function useAddressBalance(address: string): ComputedBalance | null {
   return balance;
 }
 
+interface BalanceProps {
+  address: string;
+  breakdown?: boolean;
+}
+
 export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
   const t = browser.i18n.getMessage;
   const balance = useAddressBalance(address);
 
-  const [showBalanceBreakdown, setShowBalanceBreakdown] = useState(false);
+  const [showBreakdown, setShowBreakdown] = useState(false);
 
-  const handleshowBalanceBreakdownClick = useCallback(() => {
-    setShowBalanceBreakdown(true);
+  const handleshowBreakdownClick = useCallback(() => {
+    setShowBreakdown(true);
   }, []);
 
-  const handleHideBalanceBreakdownClick = useCallback(() => {
-    setShowBalanceBreakdown(false);
+  const handleHideBreakdownClick = useCallback(() => {
+    setShowBreakdown(false);
   }, []);
 
   return (
     <>
-      <p className={styles.balance}>
+      <p className={styles.balanceLine}>
         {t('component_Balance_label')}
-        {balance !== null && <KiltAmount amount={new BN(balance.total)} />}
+        {balance !== null && <KiltAmount amount={balance.total} />}
 
         {balance === null && <ClipLoader size={10} />}
 
         {breakdown &&
           balance !== null &&
-          (showBalanceBreakdown ? (
+          (showBreakdown ? (
             <button
               type="button"
-              onClick={handleHideBalanceBreakdownClick}
-              className={styles.hideBalanceBreakdown}
-              title={t('component_Balance_hideBalanceBreakdown')}
-              aria-label={t('component_Balance_hideBalanceBreakdown')}
+              onClick={handleHideBreakdownClick}
+              className={styles.hideBreakdown}
+              title={t('component_Balance_hideBreakdown')}
+              aria-label={t('component_Balance_hideBreakdown')}
             />
           ) : (
             <button
               type="button"
-              onClick={handleshowBalanceBreakdownClick}
-              className={styles.showBalanceBreakdown}
-              title={t('component_Balance_showBalanceBreakdown')}
-              aria-label={t('component_Balance_showBalanceBreakdown')}
+              onClick={handleshowBreakdownClick}
+              className={styles.showBreakdown}
+              title={t('component_Balance_showBreakdown')}
+              aria-label={t('component_Balance_showBreakdown')}
             />
           ))}
       </p>
-      {showBalanceBreakdown && balance !== null && (
-        <ul className={styles.balanceBreakdown}>
-          <li>
-            {t('component_Balance_balance_free')}
-            <KiltAmount amount={new BN(balance.free)} />
+      {showBreakdown && balance !== null && (
+        <ul className={styles.breakdown}>
+          <li className={styles.balance}>
+            {t('component_Balance_free')}
+            <KiltAmount amount={balance.free} />
           </li>
-          <li>
-            {t('component_Balance_balance_locked')}
-            <KiltAmount amount={new BN(balance.locked)} />
+          <li className={styles.balance}>
+            {t('component_Balance_locked')}
+            <KiltAmount amount={balance.locked} />
           </li>
-          <li>
-            {t('component_Balance_balance_bonded')}
-            <KiltAmount amount={new BN(balance.bonded)} />
+          <li className={styles.balance}>
+            {t('component_Balance_bonded')}
+            <KiltAmount amount={balance.bonded} />
           </li>
         </ul>
       )}

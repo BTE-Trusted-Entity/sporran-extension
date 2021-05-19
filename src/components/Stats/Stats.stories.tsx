@@ -1,8 +1,9 @@
 import { Meta } from '@storybook/react';
 import { browser } from 'webextension-polyfill-ts';
 
-import { Stats } from './Stats';
 import { mockBackgroundScript } from '../../testing/mockBackgroundScript';
+
+import { Stats } from './Stats';
 
 export default {
   title: 'Components/Stats',
