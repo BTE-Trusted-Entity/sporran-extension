@@ -27,7 +27,7 @@ function subscribeToBalance(
       return;
     }
 
-    const balance = new BN(data.balance);
+    const balance = new BN(data.balance.total);
     setBalances((balances: Balances) => ({
       ...balances,
       ...(address in balances && { [address]: balance }),

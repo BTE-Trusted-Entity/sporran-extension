@@ -12,17 +12,27 @@ import { KiltAmount } from '../KiltAmount/KiltAmount';
 
 import styles from './Balance.module.css';
 
-interface BalanceProps {
-  address: string;
+interface BalanceBN {
+  free: BN;
+  bonded: BN;
+  locked: BN;
+  total: BN;
 }
 
-export function useAddressBalance(address: string): BN | null {
-  const [balance, setBalance] = useState<BN | null>(null);
+export function useAddressBalance(address: string): BalanceBN | null {
+  const [balance, setBalance] = useState<BalanceBN | null>(null);
 
   const balanceListener = useCallback(
     async (data: BalanceChangeResponse) => {
       if (data.address === address) {
-        setBalance(new BN(data.balance));
+        const { free, bonded, locked, total } = data.balance;
+        const balanceBN = {
+          free: new BN(free),
+          bonded: new BN(bonded),
+          locked: new BN(locked),
+          total: new BN(total),
+        };
+        setBalance(balanceBN);
       }
     },
     [address],
@@ -37,16 +47,69 @@ export function useAddressBalance(address: string): BN | null {
   return balance;
 }
 
-export function Balance({ address }: BalanceProps): JSX.Element {
+interface BalanceProps {
+  address: string;
+  breakdown?: boolean;
+}
+
+export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
   const t = browser.i18n.getMessage;
   const balance = useAddressBalance(address);
 
-  return (
-    <p className={styles.balance}>
-      {t('component_Balance_label')}
-      {balance !== null && <KiltAmount amount={balance} />}
+  const [showBreakdown, setShowBreakdown] = useState(false);
 
-      {balance === null && <ClipLoader size={10} />}
-    </p>
+  const handleShowBreakdownClick = useCallback(() => {
+    setShowBreakdown(true);
+  }, []);
+
+  const handleHideBreakdownClick = useCallback(() => {
+    setShowBreakdown(false);
+  }, []);
+
+  return (
+    <>
+      <p className={styles.balanceLine}>
+        {t('component_Balance_label')}
+        {balance !== null && <KiltAmount amount={balance.total} />}
+
+        {balance === null && <ClipLoader size={10} />}
+
+        {breakdown &&
+          balance !== null &&
+          (showBreakdown ? (
+            <button
+              type="button"
+              onClick={handleHideBreakdownClick}
+              className={styles.hideBreakdown}
+              title={t('component_Balance_hideBreakdown')}
+              aria-label={t('component_Balance_hideBreakdown')}
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={handleShowBreakdownClick}
+              className={styles.showBreakdown}
+              title={t('component_Balance_showBreakdown')}
+              aria-label={t('component_Balance_showBreakdown')}
+            />
+          ))}
+      </p>
+      {showBreakdown && balance !== null && (
+        <ul className={styles.breakdown}>
+          <li className={styles.balance}>
+            {t('component_Balance_free')}
+            <KiltAmount amount={balance.free} />
+          </li>
+          <li className={styles.balance}>
+            {t('component_Balance_locked')}
+            <KiltAmount amount={balance.locked} />
+          </li>
+          <li className={styles.balance}>
+            {t('component_Balance_bonded')}
+            <KiltAmount amount={balance.bonded} />
+          </li>
+        </ul>
+      )}
+    </>
   );
 }
