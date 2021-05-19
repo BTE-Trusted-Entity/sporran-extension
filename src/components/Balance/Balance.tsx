@@ -62,6 +62,7 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
         {balance === null && <ClipLoader size={10} />}
 
         {breakdown &&
+          balance !== null &&
           (showBalanceBreakdown ? (
             <button
               type="button"
