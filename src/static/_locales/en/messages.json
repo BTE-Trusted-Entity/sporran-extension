@@ -161,6 +161,9 @@
   "component_AccountSuccessOverlay_CTA": {
     "message": "See the wallet"
   },
+  "component_useCopyButton_copy": {
+    "message": "copy to clipboard"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -297,9 +300,6 @@
   },
   "view_ReceiveToken_account_address": {
     "message": "Account Address"
-  },
-  "view_ReceiveToken_copy_button": {
-    "message": "copy to clipboard"
   },
   "view_ReceiveToken_enlarge": {
     "message": "Enlarge"
@@ -589,9 +589,6 @@
   },
   "view_SignDApp_title": {
     "message": "Transaction"
-  },
-  "view_SignDApp_copy_button": {
-    "message": "copy to clipboard"
   },
   "view_SignDApp_password": {
     "message": "Sign with password:"
