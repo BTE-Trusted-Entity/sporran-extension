@@ -10,6 +10,9 @@ const query =
 
 describe('SignDApp', () => {
   it('should render', async () => {
+    document.queryCommandSupported = () => true;
+    document.execCommand = () => true;
+
     const { container } = render(
       <MemoryRouter initialEntries={[`${paths.popup.sign}?${query}`]}>
         <SignDApp />

@@ -20,6 +20,22 @@ exports[`SignDApp should render 1`] = `
     >
       My Sporran Account
     </h2>
+    <p
+      class="addressLine"
+    >
+      <input
+        aria-label="My Sporran Account"
+        class="address"
+        readonly=""
+        value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      />
+      <button
+        aria-label="copy to clipboard"
+        class="copy"
+        title="copy to clipboard"
+        type="button"
+      />
+    </p>
     <label
       class="passwordLabel"
       for="password"
