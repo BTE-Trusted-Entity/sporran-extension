@@ -112,6 +112,27 @@ export async function popupRequestListener(
   const left = sizes.left + sizes.width - width - 50;
   const top = sizes.top + 80;
 
+  // Top and left properties are ignored by firefox when creating a popup window.
+  // Only workaround is to update these properties after the window is created.
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=1271047
+  if (realWindow && 'title' in realWindow) {
+    const window = await browser.windows.create({
+      url,
+      type,
+      width: 0,
+      height: 0,
+    });
+    window.id &&
+      (await browser.windows.update(window.id, {
+        width,
+        height,
+        left,
+        top,
+      }));
+    popupId = window.id;
+    return;
+  }
+
   const window = await browser.windows.create({
     url,
     type,
