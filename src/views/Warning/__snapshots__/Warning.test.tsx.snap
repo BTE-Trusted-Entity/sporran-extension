@@ -13,24 +13,24 @@ exports[`Warning should render 1`] = `
     <h2
       class="important"
     >
-      The next Step is very important!
+      The next step is very important!
     </h2>
     <p
       class="info"
     >
-      Please write down your wallet’s phrase and keep it in a safe place. We recommend you write down your backup phrase with a pencil and paper. The phrase must be used to restore your wallet.
+      Please write down your wallet’s phrase and keep it in a safe place. We recommend that you write down your backup phrase with pen and paper. The phrase must be used to restore your wallet.
     </p>
     <h2
       class="important"
     >
-      Keep it carefully
-to not lose your assets
+      Keep it safe, so you don't lose
+your assets
     </h2>
     <a
       class="confirm"
       href="/account/create/backup"
     >
-      I understand this - go to the Phrase
+      I understand this – go to the Phrase
     </a>
     <a
       class="cancel"
