@@ -7,9 +7,10 @@ import {
   getEndpoint,
   setEndpoint,
 } from '../../utilities/endpoints/endpoints';
+import { LinkBack } from '../../components/LinkBack/LinkBack';
+import { paths } from '../paths';
 
 import styles from './AppSettings.module.css';
-import { paths } from '../paths';
 
 export function AppSettings(): JSX.Element {
   const t = browser.i18n.getMessage;
@@ -83,6 +84,8 @@ export function AppSettings(): JSX.Element {
       <button className={styles.reset} type="button" onClick={handleReset}>
         {t('view_AppSettings_reset')}
       </button>
+
+      <LinkBack />
     </form>
   );
 }

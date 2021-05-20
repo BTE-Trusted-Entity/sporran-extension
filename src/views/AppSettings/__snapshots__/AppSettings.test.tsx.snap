@@ -68,6 +68,12 @@ Just start it again to continue.
     >
       Restore default
     </button>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
   </form>
 </div>
 `;
