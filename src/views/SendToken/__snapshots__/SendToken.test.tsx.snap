@@ -255,7 +255,7 @@ exports[`SendToken should render 1`] = `
       class="maximum"
     >
       Maximum sendable amount: 
-      1.2260 K
+      1.1260 K
     </small>
     <p
       class="amountLine"
@@ -266,7 +266,7 @@ exports[`SendToken should render 1`] = `
         inputmode="numeric"
         maxlength="15"
         name="amount"
-        placeholder="0.0100 – 1.2260"
+        placeholder="0.0100 – 1.1260"
         required=""
       />
       <button
@@ -295,7 +295,7 @@ exports[`SendToken should render 1`] = `
         class="total"
       >
         Costs: 
-        0.0000
+        0.1000
          K
       </small>
       <button
