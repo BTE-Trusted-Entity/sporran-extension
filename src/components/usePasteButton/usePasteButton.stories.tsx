@@ -1,6 +1,8 @@
-import { Meta } from '@storybook/react';
-import { usePasteButton } from './usePasteButton';
 import { useRef } from 'react';
+import { Meta } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+
+import { usePasteButton } from './usePasteButton';
 
 export default {
   title: 'Components/usePasteButton',
@@ -8,7 +10,7 @@ export default {
 
 export function Template(): JSX.Element {
   const ref = useRef(null);
-  const copy = usePasteButton(ref);
+  const copy = usePasteButton(ref, action('onPaste'));
 
   return (
     <form>
@@ -20,7 +22,7 @@ export function Template(): JSX.Element {
         <button
           className={copy.className}
           type="button"
-          onClick={copy.handleCopyClick}
+          onClick={copy.handlePasteClick}
           title={copy.title}
           aria-label={copy.title}
         />
