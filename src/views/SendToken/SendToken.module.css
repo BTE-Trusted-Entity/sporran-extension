@@ -100,23 +100,12 @@
 }
 
 .recipientWithButton {
+  composes: recipient;
   padding-right: 2.5rem;
 }
 
 .recipientError {
   composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
-}
-
-.paste {
-  composes: buttonIcon from '../../components/Button/Button.module.css';
-  grid-area: full;
-  align-self: center;
-  justify-self: end;
-  margin-right: 0.5rem;
-  width: 2rem;
-  height: 2rem;
-  background-size: 1.125rem;
-  background-image: url('../../components/images/clipboard.svg');
 }
 
 .submit {

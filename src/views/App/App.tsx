@@ -7,12 +7,12 @@ import { Settings } from '../../components/Settings/Settings';
 import { Welcome } from '../Welcome/Welcome';
 import { AccountsRouter } from '../AccountsRouter/AccountsRouter';
 import { PopupsRouter } from '../PopupsRouter/PopupsRouter';
+import { AppSettings } from '../AppSettings/AppSettings';
 
 import { paths } from '../paths';
 
 import './App.css';
 import styles from './App.module.css';
-import { AppSettings } from '../AppSettings/AppSettings';
 
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();

@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { useRouteMatch } from 'react-router-dom';
 import { find } from 'lodash-es';
 import { DataUtils } from '@kiltprotocol/utils';
-import cx from 'classnames';
 
 import { getFee } from '../../connection/FeeMessages/FeeMessages';
 import { Account } from '../../utilities/accounts/types';
@@ -15,6 +14,7 @@ import { Balance, useAddressBalance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
+import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
 
 import styles from './SendToken.module.css';
 
@@ -246,20 +246,8 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     setRecipient(value.trim());
   }, []);
 
-  const showPasteButton =
-    navigator.clipboard && 'readText' in navigator.clipboard;
-
-  const handleRecipientPaste = useCallback(async (event) => {
-    const input = event.target.form.recipient;
-    if ('chrome' in window) {
-      input.focus();
-      document.execCommand('paste'); // Chrome doesn’t support the new API in extensions
-    } else {
-      const address = await navigator.clipboard.readText();
-      input.value = address;
-      setRecipient(address.trim());
-    }
-  }, []);
+  const recipientRef = useRef(null);
+  const paste = usePasteButton(recipientRef, setRecipient);
 
   const handleSubmit = useCallback(
     (event) => {
@@ -367,22 +355,22 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
         <input
           id="recipient"
           name="recipient"
-          className={cx(
-            styles.recipient,
-            showPasteButton && styles.recipientWithButton,
-          )}
+          className={
+            paste.supported ? styles.recipientWithButton : styles.recipient
+          }
           onInput={handleRecipientInput}
+          ref={recipientRef}
           required
           aria-label={t('view_SendToken_recipient')}
           placeholder={t('view_SendToken_recipient')}
         />
-        {showPasteButton && (
+        {paste.supported && (
           <button
-            onClick={handleRecipientPaste}
-            className={styles.paste}
+            onClick={paste.handlePasteClick}
+            className={paste.className}
             type="button"
-            title={t('common_action_paste')}
-            aria-label={t('common_action_paste')}
+            title={paste.title}
+            aria-label={paste.title}
           />
         )}
         <output

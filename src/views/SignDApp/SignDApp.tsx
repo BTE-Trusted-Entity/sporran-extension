@@ -4,6 +4,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { decryptAccount, useAccounts } from '../../utilities/accounts/accounts';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
+import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import {
   forgetPassword,
   getPassword,
@@ -37,16 +38,7 @@ export function SignDApp(): JSX.Element | null {
   */
 
   const addressRef = useRef<HTMLInputElement>(null);
-  const [isCopied, setIsCopied] = useState(false);
-
-  const copyToClipboard = useCallback(() => {
-    addressRef?.current?.select?.();
-    document.execCommand('copy');
-    setIsCopied(true);
-    setTimeout(function () {
-      setIsCopied(false);
-    }, 500);
-  }, [addressRef]);
+  const copy = useCopyButton(addressRef);
 
   const { passwordType, passwordToggle } = usePasswordType();
   const [error, setError] = useState<string | null>(null);
@@ -140,13 +132,13 @@ export function SignDApp(): JSX.Element | null {
           value={account.address}
           aria-label={account.name}
         />
-        {document.queryCommandSupported('copy') && (
+        {copy.supported && (
           <button
-            className={isCopied ? styles.copied : styles.copy}
-            onClick={copyToClipboard}
+            className={copy.className}
+            onClick={copy.handleCopyClick}
             type="button"
-            aria-label={t('view_SignDApp_copy_button')}
-            title={t('view_SignDApp_copy_button')}
+            aria-label={copy.title}
+            title={copy.title}
           />
         )}
       </p>
