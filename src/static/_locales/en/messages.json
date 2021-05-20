@@ -590,6 +590,9 @@
   "view_SignDApp_title": {
     "message": "Transaction"
   },
+  "view_SignDApp_copy_button": {
+    "message": "copy to clipboard"
+  },
   "view_SignDApp_password": {
     "message": "Sign with password:"
   },

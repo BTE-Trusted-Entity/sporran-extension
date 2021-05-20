@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import { decryptAccount, useAccounts } from '../../utilities/accounts/accounts';
@@ -35,6 +35,18 @@ export function SignDApp(): JSX.Element | null {
       { value: query.era, label: t('view_SignDApp_lifetime') },
     ];
   */
+
+  const addressRef = useRef<HTMLInputElement>(null);
+  const [isCopied, setIsCopied] = useState(false);
+
+  const copyToClipboard = useCallback(() => {
+    addressRef?.current?.select?.();
+    document.execCommand('copy');
+    setIsCopied(true);
+    setTimeout(function () {
+      setIsCopied(false);
+    }, 500);
+  }, [addressRef]);
 
   const { passwordType, passwordToggle } = usePasswordType();
   const [error, setError] = useState<string | null>(null);
@@ -119,6 +131,25 @@ export function SignDApp(): JSX.Element | null {
         className={styles.tartan}
       />
       <h2 className={styles.account}>{account.name}</h2>
+
+      <p className={styles.addressLine}>
+        <input
+          className={styles.address}
+          ref={addressRef}
+          readOnly
+          value={account.address}
+          aria-label={account.name}
+        />
+        {document.queryCommandSupported('copy') && (
+          <button
+            className={isCopied ? styles.copied : styles.copy}
+            onClick={copyToClipboard}
+            type="button"
+            aria-label={t('view_SignDApp_copy_button')}
+            title={t('view_SignDApp_copy_button')}
+          />
+        )}
+      </p>
 
       {/*<dl className={styles.details}>
         {values.map(({ label, value }) => (

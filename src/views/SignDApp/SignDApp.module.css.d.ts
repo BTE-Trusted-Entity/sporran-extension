@@ -1,8 +1,12 @@
 declare namespace SignDAppModuleCssNamespace {
   export interface ISignDAppModuleCss {
     account: string;
+    addressLine: string;
+    address: string;
     buttonsLine: string;
     container: string;
+    copied: string;
+    copy: string;
     detailName: string;
     detailValue: string;
     details: string;
