@@ -1,0 +1,11 @@
+.paste {
+  composes: buttonIcon from '../Button/Button.module.css';
+  background-image: url('../images/clipboard.svg');
+  background-size: 1.125rem;
+  width: 2rem;
+  height: 2rem;
+  grid-area: full;
+  align-self: center;
+  justify-self: end;
+  margin-right: 0.5rem;
+}

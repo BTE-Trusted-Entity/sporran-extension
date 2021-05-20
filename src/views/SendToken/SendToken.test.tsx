@@ -9,6 +9,7 @@ import {
   screen,
 } from '../../testing/testing';
 import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
+import '../../components/usePasteButton/usePasteButton.mock';
 
 import { SendToken } from './SendToken';
 

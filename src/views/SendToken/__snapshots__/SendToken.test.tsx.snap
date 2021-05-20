@@ -315,11 +315,17 @@ exports[`SendToken should render 1`] = `
     >
       <input
         aria-label="Paste the recipient address here"
-        class="recipient"
+        class="recipientWithButton"
         id="recipient"
         name="recipient"
         placeholder="Paste the recipient address here"
         required=""
+      />
+      <button
+        aria-label="Paste to clipboard"
+        class="paste"
+        title="Paste to clipboard"
+        type="button"
       />
       <output
         class="recipientError"

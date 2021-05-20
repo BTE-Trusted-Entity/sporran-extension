@@ -23,9 +23,6 @@
   "common_action_next": {
     "message": "Next Step"
   },
-  "common_action_paste": {
-    "message": "Paste from clipboard"
-  },
   "component_Balance_label": {
     "message": "Total Balance: "
   },
@@ -162,7 +159,10 @@
     "message": "See the wallet"
   },
   "component_useCopyButton_copy": {
-    "message": "copy to clipboard"
+    "message": "Copy to clipboard"
+  },
+  "component_usePasteButton_paste": {
+    "message": "Paste from clipboard"
   },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
