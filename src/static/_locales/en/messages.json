@@ -204,7 +204,7 @@
     "message": "Check my Backup Phrase"
   },
   "view_VerifyBackupPhrase_explanation": {
-    "message": "To make sure that no mistake has crept into your phrase, sort your backup phrase into the correct order"
+    "message": "To make sure you have written down your backup phrase correctly, sort your phrase in the right order from 1 to 12"
   },
   "view_VerifyBackupPhrase_error": {
     "message": "Please put every word in the correct order"
