@@ -8,6 +8,7 @@ import { removeAccount } from '../../utilities/accounts/accounts';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { paths } from '../paths';
+import { Avatar } from '../../components/Avatar/Avatar';
 
 import styles from './RemoveAccount.module.css';
 
@@ -27,21 +28,27 @@ export function RemoveAccount({ account }: Props): JSX.Element {
       <h1 className={styles.heading}>{t('view_RemoveAccount_heading')}</h1>
       <p className={styles.subline}>{t('view_RemoveAccount_subline')}</p>
 
-      <p>{account.name}</p>
+      <Avatar tartan={account.tartan} address={account.address} />
+      <p className={styles.name}>{account.name}</p>
+
       <Balance address={account.address} />
 
-      <p className={styles.addressLabel}>{t('view_RemoveAccount_address')}</p>
+      <small className={styles.addressLabel}>
+        {t('view_RemoveAccount_address')}
+      </small>
       <p className={styles.address}>{account.address}</p>
       <p className={styles.explanation}>
         {t('view_RemoveAccount_explanation')}
       </p>
 
-      <Link to={paths.home} className={styles.cancel}>
-        {t('common_action_cancel')}
-      </Link>
-      <button type="button" onClick={handleClick} className={styles.remove}>
-        {t('view_RemoveAccount_remove')}
-      </button>
+      <p className={styles.buttonsLine}>
+        <Link to={paths.home} className={styles.cancel}>
+          {t('common_action_cancel')}
+        </Link>
+        <button type="button" onClick={handleClick} className={styles.remove}>
+          {t('view_RemoveAccount_remove')}
+        </button>
+      </p>
 
       <LinkBack />
 
