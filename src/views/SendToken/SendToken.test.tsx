@@ -22,7 +22,7 @@ describe('SendToken', () => {
     const { container } = render(
       <SendToken account={account} onSuccess={jest.fn()} />,
     );
-    await screen.findByText(/Maximum sendable amount: 1.2260/);
+    await screen.findByText(/Maximum sendable amount: 1.1260/);
     expect(container).toMatchSnapshot();
   });
 
@@ -50,7 +50,7 @@ describe('SendToken', () => {
       address,
     );
     userEvent.click(await screen.findByLabelText('Increase the tip by 1%'));
-    await screen.findByText(/Maximum sendable amount: 1.2260/);
+    await screen.findByText(/Maximum sendable amount: 1.1260/);
 
     await runWithJSDOMErrorsDisabled(() => {
       userEvent.click(submit);
@@ -60,7 +60,7 @@ describe('SendToken', () => {
     const values = onSuccess.mock.calls[0][0];
     expect(values.recipient).toEqual(address);
     expect(values.amount.toString()).toEqual('1000000000000000');
-    expect(values.fee.toString()).toEqual('125000000');
+    expect(values.fee.toString()).toEqual('100000000000000');
     expect(values.tip.toString()).toEqual('10000000000000');
   });
 
@@ -90,11 +90,11 @@ describe('SendToken', () => {
     render(<SendToken account={account} onSuccess={jest.fn()} />);
 
     userEvent.click(await screen.findByLabelText('Increase the tip by 1%'));
-    userEvent.type(await screen.findByLabelText('Amount to send'), '1.22');
+    userEvent.type(await screen.findByLabelText('Amount to send'), '1.12');
 
     expect(
       await screen.findByText(
-        'The amount+fee exceed your maximum sendable amount',
+        'The amount+costs exceed your maximum sendable amount',
       ),
     ).toBeInTheDocument();
   });
