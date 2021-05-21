@@ -285,7 +285,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
       <h1 className={styles.heading}>{t('view_SendToken_heading')}</h1>
       <p className={styles.subline}>{t('view_SendToken_subline')}</p>
 
-      <AccountsCarousel path={path} account={account} />
+      <AccountsCarousel path={path} account={account} hasNoDropdown={true} />
       <Balance address={account.address} />
 
       <small className={styles.maximum}>

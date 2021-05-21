@@ -45,7 +45,7 @@ export function ReceiveToken({ account }: Props): JSX.Element {
       <h1 className={styles.heading}>{t('view_ReceiveToken_heading')}</h1>
       <p className={styles.subline}>{t('view_ReceiveToken_explanation')}</p>
 
-      <AccountsCarousel path={path} account={account} />
+      <AccountsCarousel path={path} account={account} hasNoDropdown={true} />
 
       <small id="addressLabel" className={styles.small}>
         {t('view_ReceiveToken_account_address')}
