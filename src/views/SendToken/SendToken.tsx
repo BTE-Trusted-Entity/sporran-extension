@@ -163,7 +163,8 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   const [amount, setAmount] = useState<string | null>(null);
   const amountError = amount && getAmountError(amount, maximum);
-  const numericAmount = amount && !amountError && parseFloatLocale(amount);
+  const numericAmount =
+    amount && !getIsAmountInvalidError(amount) && parseFloatLocale(amount);
   const amountBN = useMemo(
     () =>
       typeof numericAmount === 'number' && !Number.isNaN(numericAmount)
@@ -183,9 +184,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
   const totalError =
-    maximum &&
-    amountBN.add(totalFee).gt(maximum) &&
-    t('view_SendToken_fee_large');
+    maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
 
   const [recipient, setRecipient] = useState('');
   const recipientError = recipient && getAddressError(recipient, account);

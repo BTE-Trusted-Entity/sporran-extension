@@ -28,7 +28,7 @@ export function mockBackgroundScript(namespace = browser): void {
     data: BalanceChangeRequest | FeeRequest;
   }) => {
     if (message.type === feeRequest) {
-      return Promise.resolve('125000000');
+      return Promise.resolve('100000000000000');
     }
 
     listeners.forEach((callback) => {

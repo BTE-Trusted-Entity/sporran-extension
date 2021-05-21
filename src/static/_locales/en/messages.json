@@ -374,7 +374,7 @@
     "message": "The amount entered exceeds your maximum sendable amount"
   },
   "view_SendToken_fee_large": {
-    "message": "The amount+fee exceed your maximum sendable amount"
+    "message": "The amount+costs exceed your maximum sendable amount"
   },
   "view_SendToken_total_fee": {
     "message": "Costs: "
