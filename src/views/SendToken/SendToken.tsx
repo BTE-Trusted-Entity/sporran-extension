@@ -163,7 +163,8 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   const [amount, setAmount] = useState<string | null>(null);
   const amountError = amount && getAmountError(amount, maximum);
-  const numericAmount = amount && parseFloatLocale(amount);
+  const numericAmount =
+    amount && !getIsAmountInvalidError(amount) && parseFloatLocale(amount);
   const amountBN = useMemo(
     () =>
       typeof numericAmount === 'number' && !Number.isNaN(numericAmount)
