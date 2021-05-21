@@ -174,13 +174,20 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   );
 
   const [tipPercents, setTipPercents] = useState(0);
-  const tipBN = useMemo(
-    () =>
-      numericAmount
-        ? numberToBN((tipPercents / 100) * numericAmount)
-        : new BN(0),
-    [numericAmount, tipPercents],
-  );
+  const tipBN = useMemo(() => {
+    if (!numericAmount) {
+      return new BN(0);
+    }
+    const preciseTip = (tipPercents / 100) * numericAmount;
+    const preciseTipBN = numberToBN(preciseTip);
+
+    // Technically tip is costs, but if we round it up here the user might not be able to set tip below 0.0002,
+    // while if we round it down the user will always able to increase it.
+    const roundedTipString = asKiltCoins(preciseTipBN, 'funds');
+    const roundedTip = parseFloatLocale(roundedTipString);
+
+    return numberToBN(roundedTip);
+  }, [numericAmount, tipPercents]);
   const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
   const totalError =
