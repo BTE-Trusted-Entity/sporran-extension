@@ -33,22 +33,6 @@
   padding-right: 2.5rem;
 }
 
-.copy {
-  composes: buttonIcon from '../../components/Button/Button.module.css';
-  background-image: url('../../components/images/copy.svg');
-  background-position: center 40%;
-  background-size: auto 50%;
-  width: 2.25rem;
-  height: 2.25rem;
-  position: absolute;
-  right: 0.25rem;
-}
-
-.copied {
-  composes: copy;
-  background-image: url('../../components/images/checkmark-circle.svg');
-}
-
 .qrCodeToggle {
   composes: buttonIcon from '../../components/Button/Button.module.css';
   display: grid;

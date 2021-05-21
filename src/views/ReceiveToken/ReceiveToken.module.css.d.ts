@@ -3,8 +3,6 @@ declare namespace ReceiveTokenModuleCssNamespace {
     address: string;
     addressLine: string;
     container: string;
-    copied: string;
-    copy: string;
     dialog: string;
     dialogClose: string;
     heading: string;

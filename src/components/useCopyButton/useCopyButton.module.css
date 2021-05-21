@@ -1,0 +1,15 @@
+.copy {
+  composes: buttonIcon from '../Button/Button.module.css';
+  background-image: url('../images/copy.svg');
+  background-position: center 40%;
+  background-size: auto 50%;
+  width: 2.25rem;
+  height: 2.25rem;
+  position: absolute;
+  right: 0.25rem;
+}
+
+.copied {
+  composes: copy;
+  background-image: url('../images/checkmark-circle.svg');
+}

@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { useRouteMatch } from 'react-router-dom';
 import { find } from 'lodash-es';
 import { DataUtils } from '@kiltprotocol/utils';
-import cx from 'classnames';
 
 import { getFee } from '../../connection/FeeMessages/FeeMessages';
 import { Account } from '../../utilities/accounts/types';
@@ -15,6 +14,7 @@ import { Balance, useAddressBalance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
+import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
 
 import styles from './SendToken.module.css';
 
@@ -94,7 +94,7 @@ function getIsAmountTooSmallError(amount: number, minimum: BN): string | null {
     return null;
   }
   const t = browser.i18n.getMessage;
-  return t('view_SendToken_amount_small', [asKiltCoins(minimum)]);
+  return t('view_SendToken_amount_small', [asKiltCoins(minimum, 'funds')]);
 }
 
 function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
@@ -139,7 +139,7 @@ function getAddressError(address: string, account: Account): string | null {
 }
 
 function formatKiltInput(amount: BN): string {
-  return asKiltCoins(amount).replace(/[,.]?0+$/, '');
+  return asKiltCoins(amount, 'funds').replace(/[,.]?0+$/, '');
 }
 
 interface Props {
@@ -163,7 +163,8 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   const [amount, setAmount] = useState<string | null>(null);
   const amountError = amount && getAmountError(amount, maximum);
-  const numericAmount = amount && !amountError && parseFloatLocale(amount);
+  const numericAmount =
+    amount && !getIsAmountInvalidError(amount) && parseFloatLocale(amount);
   const amountBN = useMemo(
     () =>
       typeof numericAmount === 'number' && !Number.isNaN(numericAmount)
@@ -173,19 +174,24 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   );
 
   const [tipPercents, setTipPercents] = useState(0);
-  const tipBN = useMemo(
-    () =>
-      numericAmount
-        ? numberToBN((tipPercents / 100) * numericAmount)
-        : new BN(0),
-    [numericAmount, tipPercents],
-  );
+  const tipBN = useMemo(() => {
+    if (!numericAmount) {
+      return new BN(0);
+    }
+    const preciseTip = (tipPercents / 100) * numericAmount;
+    const preciseTipBN = numberToBN(preciseTip);
+
+    // Technically tip is costs, but if we round it up here the user might not be able to set tip below 0.0002,
+    // while if we round it down the user will always able to increase it.
+    const roundedTipString = asKiltCoins(preciseTipBN, 'funds');
+    const roundedTip = parseFloatLocale(roundedTipString);
+
+    return numberToBN(roundedTip);
+  }, [numericAmount, tipPercents]);
   const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
   const totalError =
-    maximum &&
-    amountBN.add(totalFee).gt(maximum) &&
-    t('view_SendToken_fee_large');
+    maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
 
   const [recipient, setRecipient] = useState('');
   const recipientError = recipient && getAddressError(recipient, account);
@@ -246,20 +252,8 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     setRecipient(value.trim());
   }, []);
 
-  const showPasteButton =
-    navigator.clipboard && 'readText' in navigator.clipboard;
-
-  const handleRecipientPaste = useCallback(async (event) => {
-    const input = event.target.form.recipient;
-    if ('chrome' in window) {
-      input.focus();
-      document.execCommand('paste'); // Chrome doesn’t support the new API in extensions
-    } else {
-      const address = await navigator.clipboard.readText();
-      input.value = address;
-      setRecipient(address.trim());
-    }
-  }, []);
+  const recipientRef = useRef(null);
+  const paste = usePasteButton(recipientRef, setRecipient);
 
   const handleSubmit = useCallback(
     (event) => {
@@ -296,7 +290,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
       <small className={styles.maximum}>
         {t('view_SendToken_maximum')}
-        {maximum && `${asKiltCoins(maximum)} K`}
+        {maximum && `${asKiltCoins(maximum, 'funds')} K`}
       </small>
 
       <p className={styles.amountLine}>
@@ -312,7 +306,10 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
           aria-label={t('view_SendToken_amount')}
           placeholder={
             maximum
-              ? `${asKiltCoins(minimum)} – ${asKiltCoins(maximum)}`
+              ? `${asKiltCoins(minimum, 'funds')} – ${asKiltCoins(
+                  maximum,
+                  'funds',
+                )}`
               : undefined
           }
         />
@@ -341,7 +338,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
         />
         <small className={styles.total}>
           {t('view_SendToken_total_fee')}
-          {asKiltCoins(totalFee)} K
+          {asKiltCoins(totalFee, 'costs')} K
         </small>
         <button
           className={styles.increase}
@@ -367,22 +364,22 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
         <input
           id="recipient"
           name="recipient"
-          className={cx(
-            styles.recipient,
-            showPasteButton && styles.recipientWithButton,
-          )}
+          className={
+            paste.supported ? styles.recipientWithButton : styles.recipient
+          }
           onInput={handleRecipientInput}
+          ref={recipientRef}
           required
           aria-label={t('view_SendToken_recipient')}
           placeholder={t('view_SendToken_recipient')}
         />
-        {showPasteButton && (
+        {paste.supported && (
           <button
-            onClick={handleRecipientPaste}
-            className={styles.paste}
+            onClick={paste.handlePasteClick}
+            className={paste.className}
             type="button"
-            title={t('common_action_paste')}
-            aria-label={t('common_action_paste')}
+            title={paste.title}
+            aria-label={paste.title}
           />
         )}
         <output

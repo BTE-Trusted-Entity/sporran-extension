@@ -9,6 +9,7 @@ import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCaro
 import { QRCode } from '../../components/QRCode/QRCode';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
+import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 
 import styles from './ReceiveToken.module.css';
 
@@ -17,26 +18,18 @@ interface Props {
 }
 
 export function ReceiveToken({ account }: Props): JSX.Element {
-  const addressRef = useRef<HTMLInputElement>(null);
-  const [isCopied, setIsCopied] = useState(false);
-  const [largeQR, setLargeQR] = useState(false);
-  const { path } = useRouteMatch();
-
-  const { address } = account;
   const t = browser.i18n.getMessage;
 
-  const copyToClipboard = useCallback(() => {
-    addressRef?.current?.select?.();
-    document.execCommand('copy');
-    setIsCopied(true);
-    setTimeout(function () {
-      setIsCopied(false);
-    }, 500);
-  }, [addressRef]);
+  const { path } = useRouteMatch();
+  const addressRef = useRef<HTMLInputElement>(null);
+  const copy = useCopyButton(addressRef);
+
+  const [largeQR, setLargeQR] = useState(false);
 
   const handleEnlargeClick = useCallback(() => {
     setLargeQR(true);
   }, []);
+
   const handleCloseClick = useCallback(() => {
     setLargeQR(false);
   }, []);
@@ -44,6 +37,8 @@ export function ReceiveToken({ account }: Props): JSX.Element {
   if (isNew(account)) {
     return <AccountOverviewNew />;
   }
+
+  const { address } = account;
 
   return (
     <section className={styles.container}>
@@ -63,13 +58,13 @@ export function ReceiveToken({ account }: Props): JSX.Element {
           value={address}
           aria-labelledby="addressLabel"
         />
-        {document.queryCommandSupported('copy') && (
+        {copy.supported && (
           <button
-            className={isCopied ? styles.copied : styles.copy}
-            onClick={copyToClipboard}
+            className={copy.className}
+            onClick={copy.handleCopyClick}
             type="button"
-            aria-label={t('view_ReceiveToken_copy_button')}
-            title={t('view_ReceiveToken_copy_button')}
+            aria-label={copy.title}
+            title={copy.title}
           />
         )}
       </p>

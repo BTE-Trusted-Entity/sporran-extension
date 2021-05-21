@@ -1,11 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`KiltAmount should render 1`] = `
+exports[`KiltAmount KiltAmount should render costs 1`] = `
 <div>
   <span
     class="amount"
   >
-    1.2340
+    1.2346
+     
+    <span
+      aria-label="Kilt coin"
+      class="coin"
+    />
+  </span>
+</div>
+`;
+
+exports[`KiltAmount KiltAmount should render funds 1`] = `
+<div>
+  <span
+    class="amount"
+  >
+    1.2345
      
     <span
       aria-label="Kilt coin"

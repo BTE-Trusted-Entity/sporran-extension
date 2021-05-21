@@ -2,10 +2,12 @@ declare namespace RemoveAccountModuleCssNamespace {
   export interface IRemoveAccountModuleCss {
     address: string;
     addressLabel: string;
+    buttonsLine: string;
     cancel: string;
     container: string;
     explanation: string;
     heading: string;
+    name: string;
     remove: string;
     subline: string;
   }

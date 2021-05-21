@@ -15,7 +15,14 @@ exports[`RemoveAccount should render 1`] = `
     >
       You’re about to remove your account
     </p>
-    <p>
+    <div
+      class="MacFarlane tartan"
+    >
+      Identicon
+    </div>
+    <p
+      class="name"
+    >
       My Sporran Account
     </p>
     <p
@@ -33,11 +40,11 @@ exports[`RemoveAccount should render 1`] = `
         />
       </span>
     </p>
-    <p
+    <small
       class="addressLabel"
     >
       My account address
-    </p>
+    </small>
     <p
       class="address"
     >
@@ -48,18 +55,22 @@ exports[`RemoveAccount should render 1`] = `
     >
       The next step will remove your account from the browser extension. This will not delete your account. You can add it again any time by importing your backup phrase.
     </p>
-    <a
-      class="cancel"
-      href="/"
+    <p
+      class="buttonsLine"
     >
-      Cancel
-    </a>
-    <button
-      class="remove"
-      type="button"
-    >
-      Forget this account
-    </button>
+      <a
+        class="cancel"
+        href="/"
+      >
+        Cancel
+      </a>
+      <button
+        class="remove"
+        type="button"
+      >
+        Forget this account
+      </button>
+    </p>
     <button
       aria-label="Back"
       class="linkBack"
