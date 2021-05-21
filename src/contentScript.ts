@@ -1,16 +1,11 @@
 import { browser } from 'webextension-polyfill-ts';
-import { toggleIcon } from './connection/IconMessages/IconMessages';
-import {
-  onPopupResponse,
-  sendPopupRequest,
-} from './connection/PopupMessages/PopupMessages';
-import {
-  onPopupWindowRequest,
-  sendPopupWindowResponse,
-} from './connection/PopupWindowMessages/PopupWindowMessages';
-import { handleAllAccountsRequests } from './dApps/accountsDataProvider/accountsDataProvider';
-import { handleAllAccessRequests } from './dApps/checkAccess/checkAccess';
-import { handleAllSignRequests } from './dApps/signaturesProvider/signaturesProvider';
+import { toggleIcon } from './channels/toggleIconChannel/toggleIconChannel';
+import { initContentClaimChannel } from './channels/ClaimChannels/browserClaimChannels';
+import { initContentSaveChannel } from './channels/SaveChannels/browserSaveChannels';
+import { initContentShareChannel } from './channels/ShareChannels/browserShareChannels';
+import { initContentAccountsChannel } from './dApps/accountsDataProvider/accountsDataProvider';
+import { initContentAccessChannel } from './dApps/checkAccess/checkAccess';
+import { initContentSignChannel } from './dApps/SignChannels/browserSignChannels';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -21,20 +16,15 @@ function injectScript() {
   document.head.appendChild(script);
 }
 
-async function popupResponseListener(
-  data: Parameters<typeof sendPopupWindowResponse>[0],
-) {
-  sendPopupWindowResponse(data);
-}
-
 function initMessages() {
-  onPopupWindowRequest(sendPopupRequest);
-  onPopupResponse(popupResponseListener);
+  initContentClaimChannel();
+  initContentSaveChannel();
+  initContentShareChannel();
 
   const origin = window.location.href;
-  handleAllAccessRequests(origin);
-  handleAllAccountsRequests(origin);
-  handleAllSignRequests(origin);
+  initContentAccessChannel(origin);
+  initContentAccountsChannel(origin);
+  initContentSignChannel(origin);
 }
 
 function main() {

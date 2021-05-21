@@ -12,10 +12,10 @@ import { decryptAccount } from '../../utilities/accounts/accounts';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { generatePath, paths } from '../paths';
 import {
-  forgetPassword,
-  getPassword,
-  savePassword,
-} from '../../connection/SavedPasswordsMessages/SavedPasswordsMessages';
+  forgetPasswordChannel,
+  getPasswordChannel,
+  savePasswordChannel,
+} from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
 
 import styles from './ReviewTransaction.module.css';
 
@@ -65,7 +65,7 @@ export function ReviewTransaction({
 
   useEffect(() => {
     (async () => {
-      const password = await getPassword(account.address);
+      const password = await getPasswordChannel.get(account.address);
       setSavedPassword(password);
       setRemember(Boolean(password));
     })();
@@ -86,9 +86,9 @@ export function ReviewTransaction({
         await decryptAccount(account.address, password);
 
         if (remember) {
-          savePassword(password, account.address);
+          await savePasswordChannel.get({ password, address: account.address });
         } else {
-          forgetPassword(account.address);
+          await forgetPasswordChannel.get(account.address);
         }
 
         onSuccess({ password });

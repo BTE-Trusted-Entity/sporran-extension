@@ -1,19 +1,11 @@
-import {
-  onPopupWindowResponse,
-  sendPopupWindowRequest,
-} from './connection/PopupWindowMessages/PopupWindowMessages';
+import { injectedClaimChannel } from './channels/ClaimChannels/injectedClaimChannel';
+import { injectedSaveChannel } from './channels/SaveChannels/injectedSaveChannel';
+import { injectedShareChannel } from './channels/ShareChannels/injectedShareChannel';
 import { injectIntoDApp } from './dApps/injectIntoDApp/injectIntoDApp';
 
-let lastCallback: (values: { [key: string]: string }) => void | undefined;
-
-function showClaimPopup(
-  values: { [key: string]: string },
-  callback: typeof lastCallback,
-) {
-  lastCallback = callback;
-
+async function showClaimPopup(values: { [key: string]: string }) {
   // Non-extension scripts cannot open windows with extension pages
-  sendPopupWindowRequest('claim', {
+  return injectedClaimChannel.get({
     // TODO: remove
     'Full Name': 'Ingo Rübe',
     Email: 'ingo@kilt.io',
@@ -24,9 +16,9 @@ function showClaimPopup(
   });
 }
 
-function showSaveCredentialPopup(values: { [key: string]: string }) {
+async function showSaveCredentialPopup(values: { [key: string]: string }) {
   // Non-extension scripts cannot open windows with extension pages
-  sendPopupWindowRequest('save', {
+  return injectedSaveChannel.get({
     // TODO: remove
     'Full Name': 'Ingo Rübe',
     Email: 'ingo@kilt.io',
@@ -37,18 +29,9 @@ function showSaveCredentialPopup(values: { [key: string]: string }) {
   });
 }
 
-function showShareCredentialPopup(
-  values: { [key: string]: string },
-  callback: typeof lastCallback,
-) {
-  lastCallback = callback;
-
+async function showShareCredentialPopup(values: { [key: string]: string }) {
   // Non-extension scripts cannot open windows with extension pages
-  sendPopupWindowRequest('share', values);
-}
-
-function handleResponse(data: Parameters<typeof lastCallback>[0]) {
-  lastCallback?.(data);
+  return injectedShareChannel.get(values);
 }
 
 interface API {
@@ -68,7 +51,6 @@ function main() {
     showShareCredentialPopup,
   };
 
-  onPopupWindowResponse(handleResponse);
   injectIntoDApp();
 }
 

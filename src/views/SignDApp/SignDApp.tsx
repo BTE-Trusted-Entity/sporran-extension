@@ -6,15 +6,15 @@ import { Avatar } from '../../components/Avatar/Avatar';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import {
-  forgetPassword,
-  getPassword,
-  savePassword,
-} from '../../connection/SavedPasswordsMessages/SavedPasswordsMessages';
-import { getSignTxResult } from '../../dApps/SignTxMessages/SignTxMessages';
+  forgetPasswordChannel,
+  getPasswordChannel,
+  savePasswordChannel,
+} from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
+import { signTxChannel } from '../../dApps/signTxChannel/signTxChannel';
 import {
-  signPopupMessages,
+  backgroundSignChannel,
   useSignPopupQuery,
-} from '../../dApps/SignPopupMessages/SignPopupMessages';
+} from '../../dApps/SignChannels/browserSignChannels';
 
 import styles from './SignDApp.module.css';
 
@@ -63,7 +63,7 @@ export function SignDApp(): JSX.Element | null {
       if (!account) {
         return;
       }
-      const password = await getPassword(account.address);
+      const password = await getPasswordChannel.get(account.address);
       setSavedPassword(password);
       setRemember(Boolean(password));
     })();
@@ -89,13 +89,13 @@ export function SignDApp(): JSX.Element | null {
         await decryptAccount(address, password);
 
         if (remember) {
-          savePassword(password, address);
+          await savePasswordChannel.get({ password, address });
         } else {
-          forgetPassword(address);
+          await forgetPasswordChannel.get(account.address);
         }
 
-        const signed = await getSignTxResult({ password, payload: query });
-        await signPopupMessages(signed);
+        const signed = await signTxChannel.get({ password, payload: query });
+        await backgroundSignChannel.return(signed);
 
         window.close();
       } catch (error) {

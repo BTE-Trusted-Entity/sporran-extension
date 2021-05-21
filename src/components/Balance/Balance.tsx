@@ -3,11 +3,7 @@ import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
 
-import {
-  BalanceChangeResponse,
-  onBalanceChangeResponse,
-  sendBalanceChangeRequest,
-} from '../../connection/BalanceMessages/BalanceMessages';
+import { balanceChangeChannel } from '../../channels/balanceChangeChannel/balanceChangeChannel';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
 
 import styles from './Balance.module.css';
@@ -22,27 +18,9 @@ interface BalanceBN {
 export function useAddressBalance(address: string): BalanceBN | null {
   const [balance, setBalance] = useState<BalanceBN | null>(null);
 
-  const balanceListener = useCallback(
-    async (data: BalanceChangeResponse) => {
-      if (data.address === address) {
-        const { free, bonded, locked, total } = data.balance;
-        const balanceBN = {
-          free: new BN(free),
-          bonded: new BN(bonded),
-          locked: new BN(locked),
-          total: new BN(total),
-        };
-        setBalance(balanceBN);
-      }
-    },
-    [address],
-  );
-
   useEffect(() => {
-    const removeListener = onBalanceChangeResponse(balanceListener);
-    sendBalanceChangeRequest(address);
-    return removeListener;
-  }, [address, balanceListener]);
+    return balanceChangeChannel.subscribe(address, setBalance);
+  }, [address]);
 
   return balance;
 }

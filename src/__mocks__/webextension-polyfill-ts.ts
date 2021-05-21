@@ -5,7 +5,7 @@
 
 import { setupGetMessageShim } from 'chrome-extension-i18n-shim';
 import messagesEN from '../static/_locales/en/messages.json';
-import { balanceMock } from '../connection/BalanceMessages/BalanceMessages.mock';
+import { balanceMock } from '../channels/balanceChangeChannel/balanceChangeChannel.mock';
 
 export const browser = {
   tabs: {
@@ -41,11 +41,8 @@ export const browser = {
     onMessage: {
       addListener(callback: (...args: unknown[]) => void): void {
         const response = {
-          type: 'balanceChangeResponse',
-          data: {
-            address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-            balance: balanceMock,
-          },
+          type: 'balanceChangeOutput',
+          output: balanceMock,
         };
         callback(response, {});
       },

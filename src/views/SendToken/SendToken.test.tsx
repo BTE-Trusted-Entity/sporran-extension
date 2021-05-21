@@ -3,21 +3,21 @@ import userEvent from '@testing-library/user-event';
 import { NEW } from '../../utilities/accounts/accounts';
 import {
   accountsMock as accounts,
-  mockBackgroundScript,
   render,
   runWithJSDOMErrorsDisabled,
   screen,
 } from '../../testing/testing';
 import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
+import { mockFeeChannel } from '../../channels/feeChannel/feeChannel.mock';
 import '../../components/usePasteButton/usePasteButton.mock';
 
 import { SendToken } from './SendToken';
 
+mockFeeChannel();
+
 const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 describe('SendToken', () => {
-  beforeEach(() => mockBackgroundScript());
-
   it('should render', async () => {
     const { container } = render(
       <SendToken account={account} onSuccess={jest.fn()} />,

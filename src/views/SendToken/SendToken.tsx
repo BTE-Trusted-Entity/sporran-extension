@@ -5,7 +5,7 @@ import { useRouteMatch } from 'react-router-dom';
 import { find } from 'lodash-es';
 import { DataUtils } from '@kiltprotocol/utils';
 
-import { getFee } from '../../connection/FeeMessages/FeeMessages';
+import { feeChannel } from '../../channels/feeChannel/feeChannel';
 import { Account } from '../../utilities/accounts/types';
 import { isNew } from '../../utilities/accounts/accounts';
 import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
@@ -198,7 +198,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   useEffect(() => {
     (async () => {
-      const realFee = await getFee(amountBN, recipient);
+      const realFee = await feeChannel.get({ amount: amountBN, recipient });
       setFee(realFee);
     })();
   }, [amountBN, recipient]);

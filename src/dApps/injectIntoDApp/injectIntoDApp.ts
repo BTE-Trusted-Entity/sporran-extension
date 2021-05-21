@@ -1,6 +1,6 @@
 import { injectExtension } from '@polkadot/extension-inject';
 
-import { getAccessResult } from '../AccessMessages/AccessMessages';
+import { injectedAccessChannel } from '../AccessChannels/injectedAccessChannel';
 import { AccountsInjectedAPI } from '../AccountsInjectedAPI/AccountsInjectedAPI';
 import { SignerInjectedAPI } from '../SignerInjectedAPI/SignerInjectedAPI';
 
@@ -11,7 +11,7 @@ export function injectIntoDApp(): void {
   };
 
   injectExtension(async (dAppName: string) => {
-    const { authorized } = await getAccessResult({ dAppName });
+    const { authorized } = await injectedAccessChannel.get({ dAppName });
     if (!authorized) {
       throw new Error('Not authorized');
     }

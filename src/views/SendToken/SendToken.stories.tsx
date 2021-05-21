@@ -1,10 +1,8 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { browser } from 'webextension-polyfill-ts';
 
 import { NEW } from '../../utilities/accounts/accounts';
-import { mockBackgroundScript } from '../../testing/mockBackgroundScript';
 import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
 import { paths } from '../paths';
 
@@ -16,8 +14,6 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  mockBackgroundScript(browser);
-
   return (
     <MemoryRouter
       initialEntries={[
@@ -35,8 +31,6 @@ export function Template(): JSX.Element {
 }
 
 export function New(): JSX.Element {
-  mockBackgroundScript(browser);
-
   return (
     <MemoryRouter initialEntries={['/account/NEW/send']}>
       <Route path={paths.account.send.start}>

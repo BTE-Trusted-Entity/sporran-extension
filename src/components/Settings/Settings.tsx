@@ -5,9 +5,9 @@ import { Link, useRouteMatch } from 'react-router-dom';
 
 import { useAccounts } from '../../utilities/accounts/accounts';
 import {
-  forgetAllPasswords,
-  hasSavedPasswords,
-} from '../../connection/SavedPasswordsMessages/SavedPasswordsMessages';
+  forgetAllPasswordsChannel,
+  hasSavedPasswordsChannel,
+} from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
 import { generatePath, paths } from '../../views/paths';
 
 import menuStyles from '../Menu/Menu.module.css';
@@ -36,9 +36,13 @@ export function Settings(): JSX.Element {
 
   useEffect(() => {
     (async () => {
-      setHasPasswords(await hasSavedPasswords());
+      setHasPasswords(await hasSavedPasswordsChannel.get());
     })();
   }, [isOpen]);
+
+  const handleForgetAllClick = useCallback(async () => {
+    await forgetAllPasswordsChannel.get();
+  }, []);
 
   return (
     <div className={menuStyles.wrapper}>
@@ -87,7 +91,7 @@ export function Settings(): JSX.Element {
                     type="button"
                     className={menuStyles.listButton}
                     {...(hasPasswords && (itemProps.shift() as unknown))}
-                    onClick={forgetAllPasswords}
+                    onClick={handleForgetAllClick}
                     disabled={!hasPasswords}
                   >
                     {t('component_Settings_forget_saved_passwords')}

@@ -1,8 +1,4 @@
-import {
-  accountsMock,
-  mockBackgroundScript,
-  render,
-} from '../../testing/testing';
+import { accountsMock, render } from '../../testing/testing';
 import { RemoveAccount } from './RemoveAccount';
 
 const account =
@@ -10,7 +6,6 @@ const account =
 
 describe('RemoveAccount', () => {
   it('should render', () => {
-    mockBackgroundScript();
     const { container } = render(<RemoveAccount account={account} />);
     expect(container).toMatchSnapshot();
   });
