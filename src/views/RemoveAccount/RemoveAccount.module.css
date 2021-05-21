@@ -41,12 +41,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding-left: 1rem;
 }
 
 .cancel {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
+  margin: 0 1rem;
 }
 
 .remove {
