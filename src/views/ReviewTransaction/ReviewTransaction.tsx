@@ -120,7 +120,7 @@ export function ReviewTransaction({
 
       <p className={styles.totalLine}>
         <span>{t('view_ReviewTransaction_total')}</span>
-        <KiltAmount amount={total} />
+        <KiltAmount amount={total} type="funds" />
 
         {showDetails ? (
           <button
@@ -161,16 +161,16 @@ export function ReviewTransaction({
         <tbody>
           <tr>
             <td>
-              <KiltAmount amount={fee} />
+              <KiltAmount amount={fee} type="costs" />
             </td>
             <td>
-              <KiltAmount amount={tip} />
+              <KiltAmount amount={tip} type="costs" />
             </td>
             <td>
-              <KiltAmount amount={totalFee} />
+              <KiltAmount amount={totalFee} type="costs" />
             </td>
             <td>
-              <KiltAmount amount={amount} />
+              <KiltAmount amount={amount} type="funds" />
             </td>
           </tr>
         </tbody>

@@ -70,7 +70,7 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
     <>
       <p className={styles.balanceLine}>
         {t('component_Balance_label')}
-        {balance !== null && <KiltAmount amount={balance.total} />}
+        {balance !== null && <KiltAmount amount={balance.total} type="funds" />}
 
         {balance === null && <ClipLoader size={10} />}
 
@@ -98,15 +98,15 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
         <ul className={styles.breakdown}>
           <li className={styles.balance}>
             {t('component_Balance_free')}
-            <KiltAmount amount={balance.free} />
+            <KiltAmount amount={balance.free} type="funds" />
           </li>
           <li className={styles.balance}>
             {t('component_Balance_locked')}
-            <KiltAmount amount={balance.locked} />
+            <KiltAmount amount={balance.locked} type="funds" />
           </li>
           <li className={styles.balance}>
             {t('component_Balance_bonded')}
-            <KiltAmount amount={balance.bonded} />
+            <KiltAmount amount={balance.bonded} type="funds" />
           </li>
         </ul>
       )}

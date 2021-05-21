@@ -94,7 +94,7 @@ function getIsAmountTooSmallError(amount: number, minimum: BN): string | null {
     return null;
   }
   const t = browser.i18n.getMessage;
-  return t('view_SendToken_amount_small', [asKiltCoins(minimum)]);
+  return t('view_SendToken_amount_small', [asKiltCoins(minimum, 'funds')]);
 }
 
 function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
@@ -139,7 +139,7 @@ function getAddressError(address: string, account: Account): string | null {
 }
 
 function formatKiltInput(amount: BN): string {
-  return asKiltCoins(amount).replace(/[,.]?0+$/, '');
+  return asKiltCoins(amount, 'funds').replace(/[,.]?0+$/, '');
 }
 
 interface Props {
@@ -174,13 +174,20 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   );
 
   const [tipPercents, setTipPercents] = useState(0);
-  const tipBN = useMemo(
-    () =>
-      numericAmount
-        ? numberToBN((tipPercents / 100) * numericAmount)
-        : new BN(0),
-    [numericAmount, tipPercents],
-  );
+  const tipBN = useMemo(() => {
+    if (!numericAmount) {
+      return new BN(0);
+    }
+    const preciseTip = (tipPercents / 100) * numericAmount;
+    const preciseTipBN = numberToBN(preciseTip);
+
+    // Technically tip is costs, but if we round it up here the user might not be able to set tip below 0.0002,
+    // while if we round it down the user will always able to increase it.
+    const roundedTipString = asKiltCoins(preciseTipBN, 'funds');
+    const roundedTip = parseFloatLocale(roundedTipString);
+
+    return numberToBN(roundedTip);
+  }, [numericAmount, tipPercents]);
   const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
   const totalError =
@@ -283,7 +290,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
       <small className={styles.maximum}>
         {t('view_SendToken_maximum')}
-        {maximum && `${asKiltCoins(maximum)} K`}
+        {maximum && `${asKiltCoins(maximum, 'funds')} K`}
       </small>
 
       <p className={styles.amountLine}>
@@ -299,7 +306,10 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
           aria-label={t('view_SendToken_amount')}
           placeholder={
             maximum
-              ? `${asKiltCoins(minimum)} – ${asKiltCoins(maximum)}`
+              ? `${asKiltCoins(minimum, 'funds')} – ${asKiltCoins(
+                  maximum,
+                  'funds',
+                )}`
               : undefined
           }
         />
@@ -328,7 +338,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
         />
         <small className={styles.total}>
           {t('view_SendToken_total_fee')}
-          {asKiltCoins(totalFee)} K
+          {asKiltCoins(totalFee, 'costs')} K
         </small>
         <button
           className={styles.increase}

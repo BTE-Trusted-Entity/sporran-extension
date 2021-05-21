@@ -8,6 +8,10 @@ export default {
   component: KiltAmount,
 } as Meta;
 
-export function Template(): JSX.Element {
-  return <KiltAmount amount={new BN(1.234e15)} />;
+export function Funds(): JSX.Element {
+  return <KiltAmount amount={new BN(1.23459999e15)} type="funds" />;
+}
+
+export function Costs(): JSX.Element {
+  return <KiltAmount amount={new BN(1.23459999e15)} type="costs" />;
 }
