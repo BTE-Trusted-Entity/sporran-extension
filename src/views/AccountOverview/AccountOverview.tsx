@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useParams, useRouteMatch, Redirect } from 'react-router-dom';
-import { minBy } from 'lodash-es';
 
 import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
 import { Balance } from '../../components/Balance/Balance';
@@ -35,8 +34,12 @@ export function AccountOverview({ account }: Props): JSX.Element | null {
     return null;
   }
 
-  const credentialsAccount = minBy(Object.values(accounts), 'index') as Account;
+  const credentialsAccount = null;
+  // TODO: Use again when developing real credential API
+  // const credentialsAccount = minBy(Object.values(accounts), 'index') as Account;
+
   const accountsNumber = Object.values(accounts).length;
+
   const { address } = account;
 
   if (params.type) {
