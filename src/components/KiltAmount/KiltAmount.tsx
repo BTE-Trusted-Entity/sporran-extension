@@ -13,11 +13,20 @@ const FORMAT = {
   maximumFractionDigits: PRECISION,
 };
 
-export function asKiltCoins(balance: BN): string {
-  const balanceString = balance.toString().padStart(16, '0');
-  const whole = balanceString.slice(0, -KILT_POWER);
-  const fraction = balanceString.slice(-KILT_POWER);
-  const numberWithFractions = parseFloat(`${whole}.${fraction}`);
+type Type = 'funds' | 'costs';
+
+export function asKiltCoins(amount: BN, type: Type): string {
+  const amountString = amount.toString().padStart(16, '0');
+  const whole = amountString.slice(0, -KILT_POWER);
+  const fraction = amountString.slice(-KILT_POWER);
+
+  const visible = fraction.slice(0, PRECISION);
+  const discarded = fraction.slice(PRECISION);
+  const noRoundingNeeded = discarded.match(/^0*$/);
+  const roundDown = noRoundingNeeded || type === 'funds';
+  const replacement = roundDown ? '0' : '9';
+
+  const numberWithFractions = parseFloat(`${whole}.${visible}${replacement}`);
 
   return numberWithFractions.toLocaleString(
     browser.i18n.getUILanguage(),
@@ -27,12 +36,13 @@ export function asKiltCoins(balance: BN): string {
 
 interface Props {
   amount: BN;
+  type: Type;
 }
 
-export function KiltAmount({ amount }: Props): JSX.Element {
+export function KiltAmount({ amount, type }: Props): JSX.Element {
   return (
     <span className={styles.amount}>
-      {asKiltCoins(amount)} <KiltCurrency />
+      {asKiltCoins(amount, type)} <KiltCurrency />
     </span>
   );
 }

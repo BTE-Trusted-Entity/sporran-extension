@@ -94,7 +94,7 @@ function getIsAmountTooSmallError(amount: number, minimum: BN): string | null {
     return null;
   }
   const t = browser.i18n.getMessage;
-  return t('view_SendToken_amount_small', [asKiltCoins(minimum)]);
+  return t('view_SendToken_amount_small', [asKiltCoins(minimum, 'funds')]);
 }
 
 function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
@@ -139,7 +139,7 @@ function getAddressError(address: string, account: Account): string | null {
 }
 
 function formatKiltInput(amount: BN): string {
-  return asKiltCoins(amount).replace(/[,.]?0+$/, '');
+  return asKiltCoins(amount, 'funds').replace(/[,.]?0+$/, '');
 }
 
 interface Props {
@@ -283,7 +283,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
       <small className={styles.maximum}>
         {t('view_SendToken_maximum')}
-        {maximum && `${asKiltCoins(maximum)} K`}
+        {maximum && `${asKiltCoins(maximum, 'funds')} K`}
       </small>
 
       <p className={styles.amountLine}>
@@ -299,7 +299,10 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
           aria-label={t('view_SendToken_amount')}
           placeholder={
             maximum
-              ? `${asKiltCoins(minimum)} – ${asKiltCoins(maximum)}`
+              ? `${asKiltCoins(minimum, 'funds')} – ${asKiltCoins(
+                  maximum,
+                  'funds',
+                )}`
               : undefined
           }
         />
@@ -328,7 +331,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
         />
         <small className={styles.total}>
           {t('view_SendToken_total_fee')}
-          {asKiltCoins(totalFee)} K
+          {asKiltCoins(totalFee, 'costs')} K
         </small>
         <button
           className={styles.increase}
