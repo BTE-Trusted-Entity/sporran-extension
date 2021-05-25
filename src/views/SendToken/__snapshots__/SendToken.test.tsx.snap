@@ -159,20 +159,6 @@ exports[`SendToken should render 1`] = `
           <span>
             My Sporran Account
           </span>
-          <div
-            class="wrapper"
-          >
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="Account options"
-              class="toggle"
-              role="button"
-              tabindex="0"
-              title="Account options"
-              type="button"
-            />
-          </div>
         </div>
       </section>
       <a
