@@ -9,9 +9,10 @@ import styles from './AccountSlide.module.css';
 
 interface Props {
   account: Account;
+  options?: boolean;
 }
 
-export function AccountSlide({ account }: Props): JSX.Element {
+export function AccountSlide({ account, options = true }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const [editing, setEditing] = useState(false);
@@ -43,9 +44,14 @@ export function AccountSlide({ account }: Props): JSX.Element {
     <section>
       <Avatar tartan={account.tartan} address={account.address} />
       {!editing ? (
-        <div className={styles.name}>
+        <div className={options ? styles.name : styles.centeredName}>
           <span>{account.name}</span>
-          <AccountOptions address={account.address} onEdit={handleEditClick} />
+          {options && (
+            <AccountOptions
+              address={account.address}
+              onEdit={handleEditClick}
+            />
+          )}
         </div>
       ) : (
         <form className={styles.form} onSubmit={handleSubmit}>

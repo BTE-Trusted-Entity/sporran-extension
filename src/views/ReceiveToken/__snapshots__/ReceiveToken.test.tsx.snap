@@ -25,25 +25,11 @@ exports[`ReceiveToken should render a normal account 1`] = `
           Identicon
         </div>
         <div
-          class="name"
+          class="centeredName"
         >
           <span>
             My Sporran Account
           </span>
-          <div
-            class="wrapper"
-          >
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="Account options"
-              class="toggle"
-              role="button"
-              tabindex="0"
-              title="Account options"
-              type="button"
-            />
-          </div>
         </div>
       </section>
       <a
