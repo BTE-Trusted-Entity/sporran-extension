@@ -25,7 +25,7 @@ exports[`ReceiveToken should render a normal account 1`] = `
           Identicon
         </div>
         <div
-          class="name"
+          class="centeredName"
         >
           <span>
             My Sporran Account

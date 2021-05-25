@@ -154,7 +154,7 @@ exports[`SendToken should render 1`] = `
           Identicon
         </div>
         <div
-          class="name"
+          class="centeredName"
         >
           <span>
             My Sporran Account
