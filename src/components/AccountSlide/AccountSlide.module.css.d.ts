@@ -7,6 +7,7 @@ declare namespace AccountSlideModuleCssNamespace {
     name: string;
     new: string;
     save: string;
+    centeredName: string;
   }
 }
 
