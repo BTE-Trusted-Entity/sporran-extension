@@ -9,10 +9,10 @@ import styles from './AccountSlide.module.css';
 
 interface Props {
   account: Account;
-  hasNoDropdown?: boolean;
+  options?: boolean;
 }
 
-export function AccountSlide({ account, hasNoDropdown }: Props): JSX.Element {
+export function AccountSlide({ account, options = true }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const [editing, setEditing] = useState(false);
@@ -46,7 +46,7 @@ export function AccountSlide({ account, hasNoDropdown }: Props): JSX.Element {
       {!editing ? (
         <div className={styles.name}>
           <span>{account.name}</span>
-          {!hasNoDropdown && (
+          {options && (
             <AccountOptions
               address={account.address}
               onEdit={handleEditClick}

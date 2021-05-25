@@ -104,13 +104,13 @@ export function AccountsBubbles({
 interface Props {
   path: string;
   account: Account;
-  hasNoDropdown?: boolean;
+  options?: boolean;
 }
 
 export function AccountsCarousel({
   account,
   path,
-  hasNoDropdown,
+  options,
 }: Props): JSX.Element | null {
   const accounts = useAccounts().data;
   if (!accounts) {
@@ -124,7 +124,7 @@ export function AccountsCarousel({
       {isNew(account) ? (
         <AccountSlideNew />
       ) : (
-        <AccountSlide account={account} hasNoDropdown={hasNoDropdown} />
+        <AccountSlide account={account} options={options} />
       )}
 
       <AccountLink
