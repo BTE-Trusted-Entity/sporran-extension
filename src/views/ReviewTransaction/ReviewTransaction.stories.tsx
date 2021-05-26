@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 import BN from 'bn.js';
+import { action } from '@storybook/addon-actions';
 
 import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
 import { paths } from '../paths';
@@ -26,6 +27,7 @@ export function Template(): JSX.Element {
           amount={new BN((120e15).toString())}
           fee={new BN(1.25e7)}
           tip={new BN(0.01e15)}
+          onSuccess={action('success')}
         />
       </Route>
     </MemoryRouter>
