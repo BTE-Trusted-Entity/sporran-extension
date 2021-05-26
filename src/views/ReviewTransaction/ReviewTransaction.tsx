@@ -120,7 +120,7 @@ export function ReviewTransaction({
 
       <p className={styles.totalLine}>
         <span>{t('view_ReviewTransaction_total')}</span>
-        <KiltAmount amount={total} type="funds" />
+        <KiltAmount amount={total} type="costs" />
 
         {showDetails ? (
           <button

@@ -63,7 +63,7 @@ exports[`ReviewTransaction should render 1`] = `
       <span
         class="amount"
       >
-        120.0100
+        120.0101
          
         <span
           aria-label="Kilt coin"
