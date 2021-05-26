@@ -1,12 +1,12 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 import BN from 'bn.js';
+import { action } from '@storybook/addon-actions';
 
 import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
 import { paths } from '../paths';
 
 import { ReviewTransaction } from './ReviewTransaction';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Views/ReviewTransaction',
