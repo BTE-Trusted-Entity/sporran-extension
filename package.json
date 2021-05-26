@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@kiltprotocol/core": "^0.21.0",
-    "@polkadot/extension-inject": "^0.37.2",
+    "@polkadot/extension-inject": "^0.38.1",
     "bn.js": "^5.2.0",
     "classnames": "^2.3.1",
     "lodash-es": "^4.17.21",
