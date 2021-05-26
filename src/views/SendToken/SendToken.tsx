@@ -23,7 +23,7 @@ const KILT_POWER = 15;
 const minimum = new BN(0.01e15);
 
 function numberToBN(parsedValue: number): BN {
-  const value = parsedValue.toString();
+  const value = parsedValue.toFixed(14);
 
   // ludicrously rich man’s multiplication that supports values beyond 1e22
   const [whole, fraction = ''] = value.split('.');
