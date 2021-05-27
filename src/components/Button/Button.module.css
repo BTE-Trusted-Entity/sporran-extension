@@ -32,6 +32,18 @@
   cursor: pointer;
 }
 
+.buttonTertiary {
+  composes: buttonPrimary;
+  line-height: 2rem;
+  border: 2px solid rgba(140, 20, 90, 0.75);
+  background: linear-gradient(140deg, #4f405c12 0%, #8c145a62 100%);
+  box-shadow: none;
+}
+
+.buttonTertiary:disabled {
+  border: 2px solid rgba(79, 64, 92, 0.5);
+}
+
 .buttonIcon {
   border: 0;
   padding: 0;

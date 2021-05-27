@@ -35,6 +35,9 @@
   "component_Balance_hideBreakdown": {
     "message": "Hide balance breakdown"
   },
+  "component_Balance_update": {
+    "message": "Update Balance"
+  },
   "component_Balance_free": {
     "message": "Free Balance: "
   },
