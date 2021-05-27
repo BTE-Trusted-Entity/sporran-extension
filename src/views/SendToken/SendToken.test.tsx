@@ -74,6 +74,17 @@ describe('SendToken', () => {
     ).toBeInTheDocument();
   });
 
+  it('should report exponentially small amount', async () => {
+    render(<SendToken account={account} onSuccess={jest.fn()} />);
+    userEvent.type(
+      await screen.findByLabelText('Amount to send'),
+      '0.0000000000001',
+    );
+    expect(
+      await screen.findByText('The minimum sendable amount is 0.0100'),
+    ).toBeInTheDocument();
+  });
+
   it('should report too large an amount', async () => {
     render(<SendToken account={account} onSuccess={jest.fn()} />);
 
