@@ -11,8 +11,9 @@ const reviewPath = generatePath(paths.identity.send.review, {
 });
 
 describe('ExistentialWarning', () => {
-  it('should render with link to review screen', () => {
-    const { container } = render(<ExistentialWarning path={reviewPath} />);
+  it('should render with link to sign transfer screen', async () => {
+    const { container } = render(<ExistentialWarning nextPath={reviewPath} />);
+
     expect(container).toMatchSnapshot();
   });
 });

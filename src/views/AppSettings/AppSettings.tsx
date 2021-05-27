@@ -55,7 +55,7 @@ export function AppSettings(): JSX.Element {
         <input
           className={styles.endpoint}
           type="url"
-          pattern="wss://.*"
+          pattern="wss?://.*"
           name="endpoint"
           list="endpoints"
           onInput={handleEndpointInput}

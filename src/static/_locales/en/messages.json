@@ -44,6 +44,12 @@
   "component_Balance_bonded": {
     "message": "Bonded Balance: "
   },
+  "component_BalanceUpdateLink_CTA": {
+    "message": "Update Balance"
+  },
+  "component_BalanceUpdateLink_error": {
+    "message": "Account has no unlocked funds for update"
+  },
   "component_IdentitySlide_rename": {
     "message": "Rename"
   },
@@ -685,5 +691,32 @@
   },
   "view_GenericError_message": {
     "message": "An error occurred. Please try again. For help please contact <a href='mailto:support@sporran.org'>support@sporran.org</a>."
+  },
+  "view_UnlockVestedFunds_heading": {
+    "message": "Update Balance"
+  },
+  "view_UnlockVestedFunds_subline": {
+    "message": "Update transaction for releasing unlocked coins"
+  },
+  "view_UnlockVestedFunds_explanation": {
+    "message": "Your unlocked vesting funds need to be manually released. Sign this transaction which involves a fee to have them available as free balance."
+  },
+  "view_UnlockVestedFunds_reset": {
+    "message": "Reset Password"
+  },
+  "view_UnlockVestedFunds_password": {
+    "message": "Sign with Password:"
+  },
+  "view_UnlockVestedFunds_remember": {
+    "message": "Remember my password for the next 15 minutes"
+  },
+  "view_UnlockVestedFunds_password_incorrect": {
+    "message": "The password is incorrect"
+  },
+  "view_UnlockVestedFunds_insufficient_funds": {
+    "message": "You don't have enough free balance to make this transaction"
+  },
+  "view_UnlockVestedFunds_CTA": {
+    "message": "Update Balance"
   }
 }
