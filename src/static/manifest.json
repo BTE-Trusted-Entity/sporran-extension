@@ -29,14 +29,9 @@
     "128": "icon/light/128.png"
   },
   "permissions": [
-    "tabs",
-    "activeTab",
     "clipboardRead",
     "clipboardWrite",
-    "notifications",
-    "storage",
-    "http://*/",
-    "https://*/"
+    "storage"
   ],
   "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self';",
   "web_accessible_resources": [
