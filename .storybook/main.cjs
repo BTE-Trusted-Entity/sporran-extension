@@ -8,6 +8,9 @@ module.exports = {
     '@storybook/addon-viewport/register',
     '@storybook/addon-controls/register',
   ],
+  typescript: {
+    reactDocgen: 'none', // current version doesn’t work with recent TS
+  },
   webpackFinal: async (config) => {
     const cssLoaderOptions = config.module.rules.flatMap(({ use }) => use).find(l => /\bcss-loader\b/.test(l?.loader)).options;
     cssLoaderOptions.modules = { auto: true };
