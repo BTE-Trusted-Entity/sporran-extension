@@ -7,6 +7,7 @@ export const endpoints = [
   'wss://full-nodes.kilt.io:443',
   'wss://full-nodes.staging.kilt.io:443',
   'wss://full-nodes-lb.devnet.kilt.io:443',
+  'wss://peregrine.kilt.io:443',
 ];
 
 export async function getEndpoint(): Promise<string> {

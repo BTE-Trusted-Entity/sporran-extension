@@ -27,6 +27,13 @@ import { initBackgroundAccessChannel } from './dApps/AccessChannels/browserAcces
 import { initBackgroundExistentialDepositChannel } from './channels/existentialDepositChannel/existentialDepositChannel';
 import { initBackgroundGenesisHashChannel } from './dApps/genesisHashChannel/initBackgroundGenesisHashChannel';
 
+import {
+  onVestRequest,
+  vestMessageListener,
+  onHasVestedFundsRequest,
+  hasVestedFundsMessageListener,
+} from './connection/VestingMessages/VestingMessages';
+
 function initSavedPasswords() {
   schedulePasswordsCheck();
   initBackgroundSavePasswordChannel();
@@ -49,6 +56,11 @@ function initExtensionPopupMessages() {
   onPopupConnect(connectToBlockchain);
 }
 
+function initVestingMessages(): void {
+  onHasVestedFundsRequest(hasVestedFundsMessageListener);
+  onVestRequest(vestMessageListener);
+}
+
 function init() {
   initKiltSDK();
   initExtensionPopupMessages();
@@ -61,6 +73,7 @@ function init() {
   initDAppChannels();
   initBackgroundExistentialDepositChannel();
   initBackgroundGenesisHashChannel();
+  initVestingMessages();
 }
 
 init();

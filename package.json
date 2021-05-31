@@ -39,7 +39,7 @@
     "open-chrome": "node scripts/chrome-launch.js"
   },
   "dependencies": {
-    "@kiltprotocol/core": "^0.21.0",
+    "@kiltprotocol/core": "^0.22.0-alpha.1",
     "@polkadot/extension-inject": "^0.38.4",
     "bn.js": "^5.2.0",
     "classnames": "^2.3.1",

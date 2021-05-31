@@ -30,6 +30,7 @@ export const paths = {
     receive: '/account/:address/receive',
     credentials: '/account/:address/credentials',
     remove: '/account/:address/remove',
+    vest: '/account/:address/vest',
   },
   popup: {
     base: '/popup',

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
@@ -8,6 +9,8 @@ import {
   BalanceChangeOutput,
 } from '../../channels/balanceChangeChannel/balanceChangeChannel';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
+import { hasVestedFunds } from '../../connection/VestingMessages/VestingMessages';
+import { paths, generatePath } from '../../views/paths';
 
 import styles from './Balance.module.css';
 
@@ -50,13 +53,24 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
 
   const [showBreakdown, setShowBreakdown] = useState(false);
 
-  const handleShowBreakdownClick = useCallback(() => {
+  const [updateDisabled, setUpdateDisabled] = useState(true);
+
+  const handleShowBreakdownClick = useCallback(async () => {
     setShowBreakdown(true);
-  }, []);
+
+    (await hasVestedFunds(address)) && setUpdateDisabled(false);
+  }, [address]);
 
   const handleHideBreakdownClick = useCallback(() => {
     setShowBreakdown(false);
   }, []);
+
+  const history = useHistory();
+
+  const handleUpdateBalanceClick = useCallback(() => {
+    console.log('should be navigating now...');
+    history.push(generatePath(paths.account.vest, { address }));
+  }, [history, address]);
 
   return (
     <>
@@ -102,7 +116,12 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
               <KiltAmount amount={balance.bonded} type="funds" />
             </li>
           </ul>
-          <button className={styles.update}>
+          <button
+            type="button"
+            onClick={handleUpdateBalanceClick}
+            className={styles.update}
+            disabled={updateDisabled}
+          >
             {t('component_Balance_update')}
           </button>
         </>

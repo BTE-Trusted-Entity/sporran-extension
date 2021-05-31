@@ -15,6 +15,7 @@ import { ResetAccount } from '../ResetAccount/ResetAccount';
 import { RemoveAccount } from '../RemoveAccount/RemoveAccount';
 import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
 import { AccountCredentials } from '../AccountCredentials/AccountCredentials';
+import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 import { paths } from '../paths';
 
 interface Props {
@@ -55,6 +56,10 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
 
         <Route path={paths.account.reset.start}>
           <ResetAccount account={account} />
+        </Route>
+
+        <Route path={paths.account.vest}>
+          <UnlockVestedFunds account={account} />
         </Route>
 
         <Route path={paths.account.overview}>
