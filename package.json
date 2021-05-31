@@ -84,7 +84,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "jest": "^27.0.1",
+    "jest": "^27.0.3",
     "jest-css-modules": "^2.1.0",
     "prettier": "^2.3.0",
     "react-docgen-typescript-loader": "^3.7.2",
