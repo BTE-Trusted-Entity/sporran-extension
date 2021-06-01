@@ -33,8 +33,7 @@ export async function checkAccess(
     throw new Error('Not authorized');
   }
 
-  const result = await contentAccessChannel.get({ name, origin });
-  const authorized = result.authorized === 'authorized';
+  const authorized = await contentAccessChannel.get({ name, origin });
 
   await setAuthorized({
     ...authorizedDApps,
@@ -48,12 +47,6 @@ export async function checkAccess(
 
 export function initContentAccessChannel(origin: string): void {
   injectedAccessChannel.produce(async (input) => {
-    try {
-      await checkAccess(input.dAppName, origin);
-      return { authorized: true };
-    } catch (error) {
-      console.error(error);
-      return { authorized: false };
-    }
+    await checkAccess(input.dAppName, origin);
   });
 }

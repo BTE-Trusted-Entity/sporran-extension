@@ -65,7 +65,7 @@ describe('balanceChangeChannel', () => {
         originalBalancesMock,
       );
 
-      const result = publisher.mock.calls[0][0];
+      const result = publisher.mock.calls[0][1];
       expect(balanceMock).toEqual({
         bonded: result.bonded.toString(),
         free: result.free.toString(),

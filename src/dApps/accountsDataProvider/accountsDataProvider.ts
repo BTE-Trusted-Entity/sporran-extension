@@ -43,7 +43,7 @@ function subscribe(
 export function initContentAccountsChannel(origin: string): () => void {
   return injectedAccountsChannel.publish(async (dAppName, publisher) => {
     await checkAccess(dAppName, origin);
-    publisher(await getAccountsForInjectedAPI());
-    return subscribe(publisher);
+    publisher(null, await getAccountsForInjectedAPI());
+    return subscribe((accounts) => publisher(null, accounts));
   });
 }

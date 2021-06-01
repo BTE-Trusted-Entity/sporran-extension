@@ -19,7 +19,13 @@ export function useAddressBalance(address: string): BalanceBN | null {
   const [balance, setBalance] = useState<BalanceBN | null>(null);
 
   useEffect(() => {
-    return balanceChangeChannel.subscribe(address, setBalance);
+    return balanceChangeChannel.subscribe(address, (error, value?) => {
+      if (error) {
+        console.error(error);
+      } else {
+        setBalance(value as BalanceBN);
+      }
+    });
   }, [address]);
 
   return balance;

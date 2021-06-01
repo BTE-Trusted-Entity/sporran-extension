@@ -3,6 +3,21 @@ import {
   makeTransforms,
   Transforms,
 } from '../ChannelTransforms/ChannelTransforms';
+import { ErrorFirstCallback } from '../types';
+
+interface ErrorMessage {
+  error: string;
+}
+
+type MaybeSuccessMessage<JsonOutput> =
+  | {
+      type: string;
+      output: JsonOutput;
+    }
+  | {
+      type: string;
+      error: string;
+    };
 
 type SenderType = Parameters<
   Parameters<typeof browser.runtime.onMessage.addListener>[0]
@@ -30,23 +45,37 @@ export class BrowserChannel<
     this.transform = makeTransforms(transform);
   }
 
-  async emitInput(
-    input: Input,
-  ): ReturnType<typeof browser.runtime.sendMessage> {
-    return this.emit({
+  async emitInput(input: Input): Promise<JsonOutput | void> {
+    const message = {
       type: this.input,
       input: this.transform.inputToJson(input),
-    });
+    };
+    const result = (await this.emit(message)) as
+      | JsonOutput
+      | ErrorMessage
+      | void;
+
+    if (result && typeof result === 'object' && 'error' in result) {
+      throw new Error(result.error);
+    }
+
+    return result;
   }
 
-  listenForOutput(handleOutput: (output: Output) => void): () => void {
-    const responseListener = (message: {
-      type: string;
-      output: JsonOutput;
-    }) => {
-      if (message.type === this.output) {
+  listenForOutput(handleOutput: ErrorFirstCallback<Output>): () => void {
+    const responseListener = (message: MaybeSuccessMessage<JsonOutput>) => {
+      if (message.type !== this.output) {
+        return;
+      }
+      if ('error' in message) {
+        handleOutput(new Error(message.error));
+        return;
+      }
+      try {
         const output = this.transform.jsonToOutput(message.output);
-        handleOutput(output);
+        handleOutput(null, output);
+      } catch (error) {
+        handleOutput(error);
       }
     };
 
@@ -55,25 +84,40 @@ export class BrowserChannel<
     return () => this.emitter.removeListener(responseListener);
   }
 
-  subscribe(input: Input, handleOutput: (output: Output) => void): () => void {
-    this.emitInput(input);
+  subscribe(
+    input: Input,
+    handleOutput: ErrorFirstCallback<Output>,
+  ): () => void {
+    (async () => {
+      try {
+        await this.emitInput(input);
+      } catch (error) {
+        handleOutput(error);
+      }
+    })();
 
     return this.listenForOutput(handleOutput);
   }
 
   async get(input: Input): Promise<Output> {
     if (!this.output) {
-      const jsonOutput = await this.emitInput(input);
+      const jsonOutput = (await this.emitInput(input)) as JsonOutput;
       return this.transform.jsonToOutput(jsonOutput);
     } else {
-      let respond: (output: Output) => void;
-      const result = new Promise<Output>((resolve) => {
-        respond = resolve;
+      let resolve: (output: Output) => void;
+      let reject: (error: Error) => void;
+      const result = new Promise<Output>((resolveArg, rejectArg) => {
+        resolve = resolveArg;
+        reject = rejectArg;
       });
 
-      const unsubscribe = this.subscribe(input, (output) => {
+      const unsubscribe = this.subscribe(input, (error, output?) => {
         unsubscribe();
-        respond(output);
+        if (error) {
+          reject(error);
+        } else {
+          resolve(output as Output);
+        }
       });
 
       return result;
@@ -86,13 +130,18 @@ export class BrowserChannel<
     const wrappedProducer = (
       message: { type: string; input: JsonInput },
       sender: SenderType,
-    ) => {
-      if (message.type === this.input) {
-        return (async () => {
-          const input = this.transform.jsonToInput(message.input);
-          return producer(input, sender);
-        })();
+    ): Promise<Output | ErrorMessage> | void => {
+      if (message.type !== this.input) {
+        return;
       }
+      return (async () => {
+        try {
+          const input = this.transform.jsonToInput(message.input);
+          return await producer(input, sender);
+        } catch (error) {
+          return { error: error.message };
+        }
+      })();
     };
 
     this.emitter.addListener(wrappedProducer);
@@ -101,27 +150,52 @@ export class BrowserChannel<
   }
 
   async return(output: Output): Promise<void> {
+    try {
+      const jsonOutput = this.transform.outputToJson(output);
+      return this.emit({
+        type: this.output,
+        output: jsonOutput,
+      });
+    } catch (error) {
+      await this.throw(error.message);
+    }
+  }
+
+  async throw(error: string): Promise<void> {
     return this.emit({
       type: this.output,
-      output: this.transform.outputToJson(output),
+      error,
     });
   }
 
   publish(
     subscriber: (
       input: Input,
-      publisher: (output: Output) => void,
+      publisher: ErrorFirstCallback<Output>,
       sender: SenderType,
     ) => void,
   ): () => void {
+    const publisher = async (error: Error | null, output?: Output) => {
+      if (error) {
+        await this.throw(error.toString());
+        return;
+      }
+      try {
+        await this.return(output as Output);
+      } catch (anotherError) {
+        await this.throw(anotherError.toString());
+      }
+    };
+
     const wrappedSubscriber = (
       message: { type: string; input: JsonInput },
       sender: SenderType,
     ) => {
-      if (message.type === this.input) {
-        const input = this.transform.jsonToInput(message.input);
-        subscriber(input, this.return.bind(this), sender);
+      if (message.type !== this.input) {
+        return;
       }
+      const input = this.transform.jsonToInput(message.input);
+      subscriber(input, publisher, sender);
     };
 
     this.emitter.addListener(wrappedSubscriber);

@@ -12,12 +12,12 @@ export function AuthorizeDApp(): JSX.Element {
   const { name, origin } = useQuery();
 
   const handleAuthorizeClick = useCallback(async () => {
-    await backgroundAccessChannel.return({ authorized: 'authorized' });
+    await backgroundAccessChannel.return(true);
     window.close();
   }, []);
 
   const handleRejectClick = useCallback(async () => {
-    await backgroundAccessChannel.return({});
+    await backgroundAccessChannel.return(false);
     window.close();
   }, []);
 

@@ -16,17 +16,23 @@ export class AccountsInjectedAPI implements InjectedAccounts {
   }
 
   async request(): Promise<void> {
-    let markReady: () => void;
-    const whenReady = new Promise<void>((resolve) => {
-      markReady = resolve;
+    let resolve: () => void;
+    let reject: (error: Error) => void;
+    const whenReady = new Promise<void>((resolveArg, rejectArg) => {
+      resolve = resolveArg;
+      reject = rejectArg;
     });
 
     this.request = () => whenReady; // make sure the following only runs once
 
-    injectedAccountsChannel.subscribe(this.dAppName, (accounts) => {
-      markReady();
-      this.accounts = accounts;
-      this.listeners.forEach((listener) => listener(accounts));
+    injectedAccountsChannel.subscribe(this.dAppName, (error, accounts?) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve();
+      this.accounts = accounts as InjectedAccount[];
+      this.listeners.forEach((listener) => listener(this.accounts));
     });
 
     return whenReady;

@@ -41,12 +41,22 @@ export class PopupChannel<
     const jsonInput = this.transform.inputToJson(input);
     await showPopup(this.action, jsonInput, sender);
 
-    return new Promise<Output>((resolve) =>
-      this.channel.listenForOutput(resolve),
+    return new Promise<Output>((resolve, reject) =>
+      this.channel.listenForOutput((error, output?) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(output as Output);
+        }
+      }),
     );
   }
 
   async return(output: Output): Promise<void> {
     return this.channel.return(output);
+  }
+
+  async throw(error: string): Promise<void> {
+    return this.channel.throw(error);
   }
 }
