@@ -3,7 +3,7 @@ import {
   InjectedAccount,
   InjectedAccounts,
 } from '@polkadot/extension-inject/types';
-import { getAccountsResult } from '../AccountsMessages/AccountsMessages';
+import { injectedAccountsChannel } from '../AccountsChannels/injectedAccountsChannel';
 
 type CallbackType = Parameters<InjectedAccounts['subscribe']>[0];
 
@@ -23,7 +23,7 @@ export class AccountsInjectedAPI implements InjectedAccounts {
 
     this.request = () => whenReady; // make sure the following only runs once
 
-    getAccountsResult({ dAppName: this.dAppName }).then((accounts) => {
+    injectedAccountsChannel.subscribe(this.dAppName, (accounts) => {
       markReady();
       this.accounts = accounts;
       this.listeners.forEach((listener) => listener(accounts));

@@ -6,7 +6,7 @@ import BN from 'bn.js';
 import { Account, useAccounts } from '../../utilities/accounts/accounts';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { useQuery } from '../../utilities/useQuery/useQuery';
-import { sendPopupResponse } from '../../connection/PopupMessages/PopupMessages';
+import { backgroundClaimChannel } from '../../channels/ClaimChannels/browserClaimChannels';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { Avatar } from '../../components/Avatar/Avatar';
 
@@ -39,7 +39,7 @@ export function SignQuote(): JSX.Element | null {
   const handleSubmit = useCallback(async (event) => {
     event.preventDefault();
 
-    await sendPopupResponse({});
+    await backgroundClaimChannel.return({});
     window.close();
   }, []);
 

@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
 
-import { sendPopupResponse } from '../../connection/PopupMessages/PopupMessages';
+import { contentShareChannel } from '../../channels/ShareChannels/browserShareChannels';
 import { AccountSlide } from '../../components/AccountSlide/AccountSlide';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { Account, useAccounts } from '../../utilities/accounts/accounts';
@@ -54,7 +54,7 @@ export function ShareCredential(): JSX.Element | null {
   const handleSubmit = useCallback(async (event) => {
     event.preventDefault();
 
-    await sendPopupResponse({});
+    await contentShareChannel.return({});
     window.close();
   }, []);
 

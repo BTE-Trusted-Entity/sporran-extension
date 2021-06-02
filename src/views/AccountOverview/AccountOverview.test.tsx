@@ -1,10 +1,6 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 
-import {
-  accountsMock,
-  mockBackgroundScript,
-  render,
-} from '../../testing/testing';
+import { accountsMock, render } from '../../testing/testing';
 import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
@@ -16,8 +12,6 @@ const account =
 
 describe('AccountOverview', () => {
   it('should render a normal account', async () => {
-    mockBackgroundScript();
-
     const { container } = render(
       <MemoryRouter initialEntries={[`/account/${account.address}/`]}>
         <Route path={paths.account.overview}>
@@ -29,8 +23,6 @@ describe('AccountOverview', () => {
   });
 
   it('should render the new account', async () => {
-    mockBackgroundScript();
-
     const { container } = render(
       <MemoryRouter initialEntries={['/account/NEW/']}>
         <Route path={paths.account.overview}>

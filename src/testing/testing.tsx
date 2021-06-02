@@ -6,6 +6,7 @@ import dialogPolyfill from 'dialog-polyfill';
 
 import { AccountsProviderMock } from '../utilities/accounts/AccountsProvider.mock';
 import { Identicon } from '../components/Avatar/Identicon';
+import { mockBalanceChangeChannel } from '../channels/balanceChangeChannel/mockBalanceChangeChannel';
 
 export {
   AccountsProviderMock,
@@ -13,10 +14,10 @@ export {
   moreAccountsMock,
 } from '../utilities/accounts/AccountsProvider.mock';
 
-export { mockBackgroundScript } from './mockBackgroundScript';
-
 jest.mock('../components/Avatar/Identicon');
 (Identicon as jest.Mock).mockImplementation(() => 'Identicon');
+
+mockBalanceChangeChannel();
 
 export function render(
   ui: Parameters<typeof externalRender>[0],

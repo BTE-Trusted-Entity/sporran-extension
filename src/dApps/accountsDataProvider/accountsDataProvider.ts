@@ -1,10 +1,7 @@
 import { InjectedAccount } from '@polkadot/extension-inject/types';
 import { browser, Storage } from 'webextension-polyfill-ts';
 
-import {
-  onAccountsRequest,
-  sendAccountsResponse,
-} from '../AccountsMessages/AccountsMessages';
+import { injectedAccountsChannel } from '../AccountsChannels/injectedAccountsChannel';
 import { storageAreaName } from '../../utilities/storage/storage';
 import {
   ACCOUNTS_KEY,
@@ -26,28 +23,27 @@ interface Changes {
 }
 
 function subscribe(
-  callback: (accounts: InjectedAccount[]) => void,
+  handleAccounts: (accounts: InjectedAccount[]) => void,
 ): () => void {
-  async function onChanged(changes: Changes, areaName: string) {
+  async function handleChanges(changes: Changes, areaName: string) {
     if (areaName !== storageAreaName) {
       return;
     }
 
     const needToNotify = ACCOUNTS_KEY in changes;
     if (needToNotify) {
-      callback(await getAccountsForInjectedAPI());
+      handleAccounts(await getAccountsForInjectedAPI());
     }
   }
 
-  browser.storage.onChanged.addListener(onChanged);
-  return () => browser.storage.onChanged.removeListener(onChanged);
+  browser.storage.onChanged.addListener(handleChanges);
+  return () => browser.storage.onChanged.removeListener(handleChanges);
 }
 
-export function handleAllAccountsRequests(origin: string): () => void {
-  return onAccountsRequest(async ({ dAppName }) => {
+export function initContentAccountsChannel(origin: string): () => void {
+  return injectedAccountsChannel.publish(async (dAppName, publisher) => {
     await checkAccess(dAppName, origin);
-
-    subscribe(sendAccountsResponse);
-    await sendAccountsResponse(await getAccountsForInjectedAPI());
+    publisher(await getAccountsForInjectedAPI());
+    return subscribe(publisher);
   });
 }

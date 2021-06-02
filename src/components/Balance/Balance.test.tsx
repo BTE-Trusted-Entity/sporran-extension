@@ -1,28 +1,6 @@
-import { browser } from 'webextension-polyfill-ts';
 import { render, screen } from '../../testing/testing';
 
-import {
-  balanceChangeRequest,
-  balanceChangeResponse,
-  BalanceChangeResponse,
-} from '../../connection/BalanceMessages/BalanceMessages';
-import { balanceMock } from '../../connection/BalanceMessages/BalanceMessages.mock';
-
 import { Balance } from './Balance';
-
-jest.spyOn(browser.runtime, 'sendMessage');
-jest
-  .spyOn(browser.runtime.onMessage, 'addListener')
-  .mockImplementation(async (callback) => {
-    const response = {
-      type: balanceChangeResponse,
-      data: {
-        address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-        balance: balanceMock,
-      } as BalanceChangeResponse,
-    };
-    callback(response, {});
-  });
 
 describe('Balance', () => {
   it('should render', async () => {
@@ -32,9 +10,5 @@ describe('Balance', () => {
     await screen.findByLabelText('Kilt coin');
 
     expect(container).toMatchSnapshot();
-    expect(browser.runtime.sendMessage).toHaveBeenCalledWith({
-      type: balanceChangeRequest,
-      data: { address },
-    });
   });
 });

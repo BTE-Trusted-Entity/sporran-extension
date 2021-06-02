@@ -1,6 +1,6 @@
 import { storage } from '../../utilities/storage/storage';
-import { getPopupResult } from '../../connection/PopupMessages/PopupMessages';
-import { produceAccessResult } from '../AccessMessages/AccessMessages';
+import { injectedAccessChannel } from '../AccessChannels/injectedAccessChannel';
+import { contentAccessChannel } from '../AccessChannels/browserAccessChannels';
 
 const authorizedKey = 'authorizedDApps';
 
@@ -33,8 +33,8 @@ export async function checkAccess(
     throw new Error('Not authorized');
   }
 
-  const response = await getPopupResult('authorize', { name, origin });
-  const authorized = response.authorized === 'authorized';
+  const result = await contentAccessChannel.get({ name, origin });
+  const authorized = result.authorized === 'authorized';
 
   await setAuthorized({
     ...authorizedDApps,
@@ -46,10 +46,10 @@ export async function checkAccess(
   }
 }
 
-export function handleAllAccessRequests(origin: string): void {
-  produceAccessResult(async (request) => {
+export function initContentAccessChannel(origin: string): void {
+  injectedAccessChannel.produce(async (input) => {
     try {
-      await checkAccess(request.dAppName, origin);
+      await checkAccess(input.dAppName, origin);
       return { authorized: true };
     } catch (error) {
       console.error(error);

@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { useCallback } from 'react';
 
 import { useQuery } from '../../utilities/useQuery/useQuery';
-import { sendPopupResponse } from '../../connection/PopupMessages/PopupMessages';
+import { backgroundAccessChannel } from '../../dApps/AccessChannels/browserAccessChannels';
 
 import styles from './AuthorizeDApp.module.css';
 
@@ -12,12 +12,12 @@ export function AuthorizeDApp(): JSX.Element {
   const { name, origin } = useQuery();
 
   const handleAuthorizeClick = useCallback(async () => {
-    await sendPopupResponse({ authorized: 'authorized' });
+    await backgroundAccessChannel.return({ authorized: 'authorized' });
     window.close();
   }, []);
 
   const handleRejectClick = useCallback(async () => {
-    await sendPopupResponse({});
+    await backgroundAccessChannel.return({});
     window.close();
   }, []);
 

@@ -1,14 +1,7 @@
-import {
-  AccountsProviderMock,
-  mockBackgroundScript,
-  render,
-  screen,
-} from '../../testing/testing';
+import { AccountsProviderMock, render, screen } from '../../testing/testing';
 import { Stats } from './Stats';
 
 describe('Stats', () => {
-  beforeEach(() => mockBackgroundScript());
-
   it('should not render for no accounts', async () => {
     const { container } = render(
       <AccountsProviderMock accounts={{}}>

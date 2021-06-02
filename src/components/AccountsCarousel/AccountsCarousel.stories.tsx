@@ -5,7 +5,6 @@ import {
   moreAccountsMock,
   AccountsProviderMock,
 } from '../../utilities/accounts/AccountsProvider.mock';
-import { mockBackgroundScript } from '../../testing/mockBackgroundScript';
 import { paths } from '../../views/paths';
 import { AccountsCarousel } from './AccountsCarousel';
 
@@ -16,8 +15,6 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  mockBackgroundScript();
-
   return (
     <AccountsCarousel
       path={paths.account.overview}

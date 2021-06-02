@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import BN from 'bn.js';
 
-import { sendTransferMessage } from '../../connection/TransferMessages/TransferMessages';
+import { transferChannel } from '../../channels/transferChannel/transferChannel';
 import { Account } from '../../utilities/accounts/types';
 import { ReviewTransaction } from '../ReviewTransaction/ReviewTransaction';
 import { SendToken } from '../SendToken/SendToken';
@@ -40,7 +40,8 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
         return;
       }
 
-      await sendTransferMessage({
+      // TODO: error handling
+      await transferChannel.get({
         address,
         recipient,
         amount,

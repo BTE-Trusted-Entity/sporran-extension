@@ -3,11 +3,7 @@ import BN from 'bn.js';
 import { find, mapValues, omit } from 'lodash-es';
 
 import { AccountsMap } from '../../utilities/accounts/accounts';
-import {
-  BalanceChangeResponse,
-  onBalanceChangeResponse,
-  sendBalanceChangeRequest,
-} from '../../connection/BalanceMessages/BalanceMessages';
+import { balanceChangeChannel } from '../../channels/balanceChangeChannel/balanceChangeChannel';
 
 interface Balances {
   [address: string]: BN | null;
@@ -22,23 +18,17 @@ function subscribeToBalance(
   setBalances: (callback: (balances: Balances) => Balances) => void,
   subscriptions: Subscriptions,
 ) {
-  async function balanceListener(data: BalanceChangeResponse) {
-    if (data.address !== address) {
-      return;
-    }
-
-    const balance = new BN(data.balance.total);
+  async function handleBalance({ total }: { total: BN }) {
     setBalances((balances: Balances) => ({
       ...balances,
-      ...(address in balances && { [address]: balance }),
+      ...(address in balances && { [address]: total }),
     }));
   }
 
-  const removeListener = onBalanceChangeResponse(balanceListener);
-  sendBalanceChangeRequest(address);
+  const unsubscribe = balanceChangeChannel.subscribe(address, handleBalance);
 
   subscriptions[address] = () => {
-    removeListener();
+    unsubscribe();
     delete subscriptions[address];
     setBalances((balances: Balances) => omit(balances, address));
   };

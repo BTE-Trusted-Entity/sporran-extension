@@ -8,29 +8,12 @@ import {
 } from '../../testing/testing';
 import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { saveAccount } from '../../utilities/accounts/accounts';
-import {
-  balanceChangeResponse,
-  BalanceChangeResponse,
-} from '../../connection/BalanceMessages/BalanceMessages';
-import { balanceMock } from '../../connection/BalanceMessages/BalanceMessages.mock';
 
 import { AccountSlide } from './AccountSlide';
 import { AccountSlideNew } from './AccountSlideNew';
 
 jest.mock('../../utilities/accounts/accounts');
 jest.spyOn(browser.runtime, 'sendMessage');
-jest
-  .spyOn(browser.runtime.onMessage, 'addListener')
-  .mockImplementation(async (callback) => {
-    const response = {
-      type: balanceChangeResponse,
-      data: {
-        address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-        balance: balanceMock,
-      } as BalanceChangeResponse,
-    };
-    callback(response, {});
-  });
 
 const account = {
   name: 'My Sporran Account',
