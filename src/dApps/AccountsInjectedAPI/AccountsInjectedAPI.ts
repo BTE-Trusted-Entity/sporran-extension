@@ -4,6 +4,7 @@ import {
   InjectedAccounts,
 } from '@polkadot/extension-inject/types';
 import { injectedAccountsChannel } from '../AccountsChannels/injectedAccountsChannel';
+import { makeControlledPromise } from '../../utilities/makeControlledPromise/makeControlledPromise';
 
 type CallbackType = Parameters<InjectedAccounts['subscribe']>[0];
 
@@ -16,26 +17,21 @@ export class AccountsInjectedAPI implements InjectedAccounts {
   }
 
   async request(): Promise<void> {
-    let resolve: () => void;
-    let reject: (error: Error) => void;
-    const whenReady = new Promise<void>((resolveArg, rejectArg) => {
-      resolve = resolveArg;
-      reject = rejectArg;
-    });
+    const result = makeControlledPromise<void>();
 
-    this.request = () => whenReady; // make sure the following only runs once
+    this.request = () => result.promise; // make sure the following only runs once
 
     injectedAccountsChannel.subscribe(this.dAppName, (error, accounts?) => {
       if (error) {
-        reject(error);
+        result.reject(error);
         return;
       }
-      resolve();
+      result.resolve();
       this.accounts = accounts as InjectedAccount[];
       this.listeners.forEach((listener) => listener(this.accounts));
     });
 
-    return whenReady;
+    return result.promise;
   }
 
   listeners: CallbackType[] = [];

@@ -1,3 +1,4 @@
+import { makeControlledPromise } from '../../../utilities/makeControlledPromise/makeControlledPromise';
 import { ErrorFirstCallback } from '../types';
 
 function addListener(listener: (message: MessageEvent) => void) {
@@ -46,23 +47,9 @@ export class WindowChannel<Input, Output> {
   }
 
   async get(input: Input): Promise<Output> {
-    let resolve: (output: Output) => void;
-    let reject: (error: Error) => void;
-    const result = new Promise<Output>((resolveArg, rejectArg) => {
-      resolve = resolveArg;
-      reject = rejectArg;
-    });
-
-    const unsubscribe = this.subscribe(input, (error, output?) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      unsubscribe();
-      resolve(output as Output);
-    });
-
-    return result;
+    const result = makeControlledPromise<Output>();
+    const unsubscribe = this.subscribe(input, result.callback);
+    return result.promise.finally(unsubscribe);
   }
 
   return(output: Output): void {

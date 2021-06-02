@@ -1,4 +1,5 @@
 import { PopupAction } from '../../../utilities/popups/types';
+import { makeControlledPromise } from '../../../utilities/makeControlledPromise/makeControlledPromise';
 import {
   makeTransforms,
   Transforms,
@@ -41,15 +42,9 @@ export class PopupChannel<
     const jsonInput = this.transform.inputToJson(input);
     await showPopup(this.action, jsonInput, sender);
 
-    return new Promise<Output>((resolve, reject) =>
-      this.channel.listenForOutput((error, output?) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(output as Output);
-        }
-      }),
-    );
+    const result = makeControlledPromise<Output>();
+    const unsubscribe = this.channel.listenForOutput(result.callback);
+    return result.promise.finally(unsubscribe);
   }
 
   async return(output: Output): Promise<void> {

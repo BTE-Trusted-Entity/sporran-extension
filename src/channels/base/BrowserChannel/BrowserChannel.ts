@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+import { makeControlledPromise } from '../../../utilities/makeControlledPromise/makeControlledPromise';
 import {
   makeTransforms,
   Transforms,
@@ -104,23 +105,9 @@ export class BrowserChannel<
       const jsonOutput = (await this.emitInput(input)) as JsonOutput;
       return this.transform.jsonToOutput(jsonOutput);
     } else {
-      let resolve: (output: Output) => void;
-      let reject: (error: Error) => void;
-      const result = new Promise<Output>((resolveArg, rejectArg) => {
-        resolve = resolveArg;
-        reject = rejectArg;
-      });
-
-      const unsubscribe = this.subscribe(input, (error, output?) => {
-        unsubscribe();
-        if (error) {
-          reject(error);
-        } else {
-          resolve(output as Output);
-        }
-      });
-
-      return result;
+      const result = makeControlledPromise<Output>();
+      const unsubscribe = this.subscribe(input, result.callback);
+      return result.promise.finally(unsubscribe);
     }
   }
 
