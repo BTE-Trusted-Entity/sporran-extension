@@ -34,11 +34,26 @@ yarn install
 yarn dev
 ```
 
+
+## Build and package for uploading
+
+Run the following commands
+
+```
+yarn install
+yarn build
+yarn package
+```
+
+This will generate a file `dist/web-ext-artifacts/sporran-1.0.0.zip` ready to be uploaded to stores
+
+
 ## Scripts
 
 -   `yarn dev` - run `webpack` in `watch` mode
 -   `yarn storybook` - runs the Storybook server
 -   `yarn build` - builds the production-ready unpacked extension
+-   `yarn package` - packages the built code for upload
 -   `yarn test -u` - runs Jest + updates test snapshots
 -   `yarn lint` - runs Stylelint and ESLint
 -   `yarn prettify` - runs Prettier
