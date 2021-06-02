@@ -11,10 +11,7 @@ export function injectIntoDApp(): void {
   };
 
   injectExtension(async (dAppName: string) => {
-    const { authorized } = await injectedAccessChannel.get({ dAppName });
-    if (!authorized) {
-      throw new Error('Not authorized');
-    }
+    await injectedAccessChannel.get({ dAppName });
 
     return {
       accounts: new AccountsInjectedAPI(dAppName),

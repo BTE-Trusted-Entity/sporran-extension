@@ -6,9 +6,7 @@ export interface AccessInput {
   origin: string;
 }
 
-interface AccessOutput {
-  authorized?: string;
-}
+type AccessOutput = boolean;
 
 export const contentAccessChannel = new BrowserChannel<
   AccessInput,

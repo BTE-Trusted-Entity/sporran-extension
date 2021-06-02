@@ -12,10 +12,10 @@ const bnBalanceMock = {
 };
 
 export function mockBalanceChangeChannel(): void {
-  (balanceChangeChannel.subscribe as jest.Mock).mockImplementation(
-    (address, publisher) => {
-      publisher(bnBalanceMock);
+  jest
+    .spyOn(balanceChangeChannel, 'subscribe')
+    .mockImplementation((address, publisher) => {
+      publisher(null, bnBalanceMock);
       return () => null;
-    },
-  );
+    });
 }

@@ -40,7 +40,6 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
         return;
       }
 
-      // TODO: error handling
       await transferChannel.get({
         address,
         recipient,

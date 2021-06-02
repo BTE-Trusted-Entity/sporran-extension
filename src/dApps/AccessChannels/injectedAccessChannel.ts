@@ -4,9 +4,7 @@ interface AccessInput {
   dAppName: string;
 }
 
-interface AccessOutput {
-  authorized?: boolean;
-}
+type AccessOutput = void;
 
 export const injectedAccessChannel = new WindowChannel<
   AccessInput,

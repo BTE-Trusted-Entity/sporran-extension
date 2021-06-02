@@ -18,7 +18,12 @@ function subscribeToBalance(
   setBalances: (callback: (balances: Balances) => Balances) => void,
   subscriptions: Subscriptions,
 ) {
-  async function handleBalance({ total }: { total: BN }) {
+  async function handleBalance(error: Error | null, balance?: { total: BN }) {
+    if (error) {
+      console.error(error);
+      return;
+    }
+    const { total } = balance as { total: BN };
     setBalances((balances: Balances) => ({
       ...balances,
       ...(address in balances && { [address]: total }),

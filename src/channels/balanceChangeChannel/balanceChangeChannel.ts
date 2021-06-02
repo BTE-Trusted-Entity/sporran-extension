@@ -2,6 +2,7 @@ import BN from 'bn.js';
 import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+import { ErrorFirstCallback } from '../base/types';
 
 interface Balances {
   free: BN;
@@ -63,7 +64,7 @@ export function computeBalance(balances: Balances): BalanceChangeOutput {
 
 export async function publishBalanceChanges(
   address: BalanceChangeInput,
-  publisher: (output: BalanceChangeOutput) => void,
+  publisher: ErrorFirstCallback<BalanceChangeOutput>,
 ): Promise<() => void> {
   function onBalanceChange(
     responseAddress: string,
@@ -73,8 +74,12 @@ export async function publishBalanceChanges(
       return;
     }
 
-    const balance = computeBalance(rawBalances);
-    publisher(balance);
+    try {
+      const balance = computeBalance(rawBalances);
+      publisher(null, balance);
+    } catch (error) {
+      publisher(error);
+    }
   }
 
   return listenToBalanceChanges(address, onBalanceChange);
