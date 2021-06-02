@@ -2,11 +2,17 @@
   "name": "sporran-extension",
   "private": true,
   "version": "1.0.0",
-  "description": "TODO",
+  "description": "KILT browser extension, to manage accounts and send / receive tokens.",
   "license": "BSD-4-Clause",
   "homepage": "https://github.com/KILTprotocol/sporran-extension",
   "keywords": [
-    "todo"
+    "kilt",
+    "cryptocurrency",
+    "blockchain",
+    "polkadot",
+    "substrate",
+    "webextension",
+    "browser-extension"
   ],
   "repository": {
     "type": "git",
