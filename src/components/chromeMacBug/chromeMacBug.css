@@ -1,0 +1,13 @@
+@keyframes mac-bug-redraw {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.7; /* TODO: 0.99 */
+  }
+}
+
+html.redraw-forever {
+  animation: mac-bug-redraw 1s linear infinite;
+}
