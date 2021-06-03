@@ -6,10 +6,11 @@ import { Account } from '../../utilities/accounts/types';
 import { decryptAccount } from '../../utilities/accounts/accounts';
 import { paths, generatePath } from '../paths';
 import {
-  getPassword,
-  savePassword,
-  forgetPassword,
-} from '../../connection/SavedPasswordsMessages/SavedPasswordsMessages';
+  getPasswordChannel,
+  savePasswordChannel,
+  forgetPasswordChannel,
+} from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
+import { vestChannel } from '../../channels/vestingChannels/vestingChannels';
 
 import { Avatar } from '../../components/Avatar/Avatar';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
@@ -17,7 +18,6 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 
 import styles from './UnlockVestedFunds.module.css';
-import { vest } from '../../connection/VestingMessages/VestingMessages';
 
 interface Props {
   account: Account;
@@ -44,7 +44,7 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
 
   useEffect(() => {
     (async () => {
-      const password = await getPassword(account.address);
+      const password = await getPasswordChannel.get(account.address);
       setSavedPassword(password);
       setRemember(Boolean(password));
     })();
@@ -54,6 +54,8 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
     async (event) => {
       event.preventDefault();
 
+      const { address } = account;
+
       const { elements } = event.target;
       const providedPassword = elements.password.value;
       const password =
@@ -62,15 +64,15 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
           : providedPassword;
 
       try {
-        await decryptAccount(account.address, password);
+        await decryptAccount(address, password);
 
         if (remember) {
-          savePassword(password, account.address);
+          await savePasswordChannel.get({ password, address });
         } else {
-          forgetPassword(account.address);
+          await forgetPasswordChannel.get(address);
         }
 
-        await vest(account.address, password);
+        await vestChannel.get({ address, password });
       } catch (error) {
         setError(t('view_UpdateVestedFunds_password_incorrect'));
       }

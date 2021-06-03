@@ -9,8 +9,8 @@ import {
   BalanceChangeOutput,
 } from '../../channels/balanceChangeChannel/balanceChangeChannel';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
-import { hasVestedFunds } from '../../connection/VestingMessages/VestingMessages';
 import { paths, generatePath } from '../../views/paths';
+import { hasVestedFundsChannel } from '../../channels/vestingChannels/vestingChannels';
 
 import styles from './Balance.module.css';
 
@@ -58,7 +58,7 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
   const handleShowBreakdownClick = useCallback(async () => {
     setShowBreakdown(true);
 
-    (await hasVestedFunds(address)) && setUpdateDisabled(false);
+    (await hasVestedFundsChannel.get(address)) && setUpdateDisabled(false);
   }, [address]);
 
   const handleHideBreakdownClick = useCallback(() => {

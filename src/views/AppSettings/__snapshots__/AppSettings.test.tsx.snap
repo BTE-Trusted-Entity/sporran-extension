@@ -36,13 +36,16 @@ Just start it again to continue.
         <option
           value="wss://full-nodes-lb.devnet.kilt.io:443"
         />
+        <option
+          value="wss://peregrine.kilt.io:443"
+        />
       </datalist>
       <input
         aria-label="Custom endpoint"
         class="endpoint"
         list="endpoints"
         name="endpoint"
-        pattern="wss://.*"
+        pattern="wss?://.*"
         placeholder="wss://example.org:433"
         required=""
         type="url"
