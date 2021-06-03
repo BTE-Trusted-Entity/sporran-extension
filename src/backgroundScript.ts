@@ -24,6 +24,7 @@ import { initBackgroundSaveChannel } from './channels/SaveChannels/browserSaveCh
 import { initBackgroundClaimChannel } from './channels/ClaimChannels/browserClaimChannels';
 import { initBackgroundShareChannel } from './channels/ShareChannels/browserShareChannels';
 import { initBackgroundAccessChannel } from './dApps/AccessChannels/browserAccessChannels';
+import { initBackgroundExistentialDepositChannel } from './channels/existentialDepositChannel/existentialDepositChannel';
 
 function initSavedPasswords() {
   schedulePasswordsCheck();
@@ -57,6 +58,7 @@ function init() {
   initBackgroundSignTxChannel();
   initSavedPasswords();
   initDAppChannels();
+  initBackgroundExistentialDepositChannel();
 }
 
 init();

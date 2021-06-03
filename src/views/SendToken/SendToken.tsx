@@ -17,10 +17,16 @@ import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
 
 import styles from './SendToken.module.css';
+import { existentialDepositChannel } from '../../channels/existentialDepositChannel/existentialDepositChannel';
 
 const nonNumberCharacters = /[^0-9,.]/g;
 const KILT_POWER = 15;
 const minimum = new BN(0.01e15);
+let existential: BN;
+
+(async () => {
+  existential = await existentialDepositChannel.get();
+})();
 
 function numberToBN(parsedValue: number): BN {
   const value = parsedValue.toFixed(KILT_POWER);
@@ -105,9 +111,26 @@ function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
   return t('view_SendToken_amount_large');
 }
 
+function getIsAmountSmallerThenRecipientExistential(
+  amount: number,
+  existential: BN,
+  recipientBalance: BN,
+): string | null {
+  if (
+    recipientBalance &&
+    !recipientBalance.isZero() &&
+    existential.cmp(numberToBN(amount)) === -1
+  ) {
+    return null;
+  }
+  const t = browser.i18n.getMessage;
+  return t('view_SendToken_error_existential_recepient');
+}
+
 function getAmountError(
   amount: string | null,
   maximum: BN | null,
+  recipientBalance?: BN | null,
 ): string | null {
   if (amount === null) {
     return null;
@@ -122,6 +145,13 @@ function getAmountError(
   return [
     minimum && getIsAmountTooSmallError(numericAmount, minimum),
     maximum && getIsAmountTooLargeError(numericAmount, maximum),
+    existential && recipientBalance
+      ? getIsAmountSmallerThenRecipientExistential(
+          numericAmount,
+          existential,
+          recipientBalance,
+        )
+      : null,
   ].filter(Boolean)[0];
 }
 
@@ -162,7 +192,6 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const maximum = balance && fee ? balance.free.sub(fee) : null;
 
   const [amount, setAmount] = useState<string | null>(null);
-  const amountError = amount && getAmountError(amount, maximum);
   const numericAmount =
     amount && !getIsAmountInvalidError(amount) && parseFloatLocale(amount);
   const amountBN = useMemo(
@@ -195,6 +224,11 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   const [recipient, setRecipient] = useState('');
   const recipientError = recipient && getAddressError(recipient, account);
+
+  const recipientBalance = useAddressBalance(recipient);
+  const recipientBalanceTotal = recipientBalance && recipientBalance.total;
+  const amountError =
+    amount && getAmountError(amount, maximum, recipientBalanceTotal);
 
   useEffect(() => {
     (async () => {
