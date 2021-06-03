@@ -68,7 +68,6 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
   const history = useHistory();
 
   const handleUpdateBalanceClick = useCallback(() => {
-    console.log('should be navigating now...');
     history.push(generatePath(paths.account.vest, { address }));
   }, [history, address]);
 
