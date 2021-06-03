@@ -24,12 +24,16 @@ async function deriveKeyFromPassword(
     ['deriveKey'],
   );
 
+  // https://kiltprotocol.atlassian.net/wiki/spaces/SKA/pages/1985478657/Research+How+to+secure+browser+extension
+  // https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#pbkdf2
+  const iterations = 200_000;
+
   return crypto.subtle.deriveKey(
     {
       name: 'PBKDF2',
       salt: keySaltBytes,
-      iterations: 100000,
-      hash: 'SHA-256',
+      iterations,
+      hash: 'SHA-512',
     },
     keyMaterial,
     { name: 'AES-GCM', length: 256 },

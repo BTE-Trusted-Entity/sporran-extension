@@ -18,6 +18,10 @@
 .origin {
   composes: smallImportant from '../../components/Typography/Typography.module.css';
   text-decoration: underline;
+  max-height: 3rem;
+  max-width: 100%;
+  word-break: break-all;
+  overflow: auto;
 }
 
 .warning {
