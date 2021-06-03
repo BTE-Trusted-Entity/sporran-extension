@@ -18,7 +18,7 @@ export const hasVestedFundsChannel = new BrowserChannel<string, boolean>(
   'hasVestedFunds',
 );
 
-async function hasVestedFunds(address: string): Promise<boolean> {
+export async function hasVestedFunds(address: string): Promise<boolean> {
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();
   const { isSome } = await api.query.vesting.vesting(address);
   return isSome;
@@ -30,7 +30,7 @@ export function initBackgroundHasVestedFundsChannel(): void {
 
 export const vestChannel = new BrowserChannel<VestInput, VestOutput>('vest');
 
-async function vest({ address, password }: VestInput): Promise<string> {
+export async function vest({ address, password }: VestInput): Promise<string> {
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();
 
   try {

@@ -19,3 +19,85 @@ exports[`Balance should render 1`] = `
   </p>
 </div>
 `;
+
+exports[`Balance should show balance breakdown with update balance button 1`] = `
+<div>
+  <p
+    class="balanceLine"
+  >
+    Total Balance: 
+    <span
+      class="amount"
+    >
+      1.2340
+       
+      <span
+        aria-label="Kilt coin"
+        class="coin"
+      />
+    </span>
+    <button
+      aria-label="Hide balance breakdown"
+      class="hideBreakdown"
+      title="Hide balance breakdown"
+      type="button"
+    />
+  </p>
+  <ul
+    class="breakdown"
+  >
+    <li
+      class="balance"
+    >
+      Free Balance: 
+      <span
+        class="amount"
+      >
+        1.2260
+         
+        <span
+          aria-label="Kilt coin"
+          class="coin"
+        />
+      </span>
+    </li>
+    <li
+      class="balance"
+    >
+      Locked Balance: 
+      <span
+        class="amount"
+      >
+        0.0030
+         
+        <span
+          aria-label="Kilt coin"
+          class="coin"
+        />
+      </span>
+    </li>
+    <li
+      class="balance"
+    >
+      Bonded Balance: 
+      <span
+        class="amount"
+      >
+        0.0050
+         
+        <span
+          aria-label="Kilt coin"
+          class="coin"
+        />
+      </span>
+    </li>
+  </ul>
+  <button
+    class="update"
+    disabled=""
+    type="button"
+  >
+    Update Balance
+  </button>
+</div>
+`;

@@ -10,7 +10,7 @@ import {
 } from '../../channels/balanceChangeChannel/balanceChangeChannel';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
 import { paths, generatePath } from '../../views/paths';
-import { hasVestedFundsChannel } from '../../channels/vestingChannels/vestingChannels';
+import { hasVestedFundsChannel } from '../../channels/VestingChannels/VestingChannels';
 
 import styles from './Balance.module.css';
 

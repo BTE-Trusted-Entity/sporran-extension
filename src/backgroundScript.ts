@@ -30,7 +30,7 @@ import { initBackgroundGenesisHashChannel } from './dApps/genesisHashChannel/ini
 import {
   initBackgroundHasVestedFundsChannel,
   initBackgroundVestChannel,
-} from './channels/vestingChannels/vestingChannels';
+} from './channels/VestingChannels/VestingChannels';
 
 function initSavedPasswords() {
   schedulePasswordsCheck();

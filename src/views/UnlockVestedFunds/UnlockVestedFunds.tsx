@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Account } from '../../utilities/accounts/types';
 import { decryptAccount } from '../../utilities/accounts/accounts';
@@ -10,7 +10,7 @@ import {
   savePasswordChannel,
   forgetPasswordChannel,
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
-import { vestChannel } from '../../channels/vestingChannels/vestingChannels';
+import { vestChannel } from '../../channels/VestingChannels/VestingChannels';
 
 import { Avatar } from '../../components/Avatar/Avatar';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
@@ -25,6 +25,8 @@ interface Props {
 
 export function UnlockVestedFunds({ account }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
+
+  const history = useHistory();
 
   const { passwordType, passwordToggle } = usePasswordType();
 
@@ -73,11 +75,13 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
         }
 
         await vestChannel.get({ address, password });
+
+        history.push(generatePath(paths.account.overview, { address }));
       } catch (error) {
         setError(t('view_UpdateVestedFunds_password_incorrect'));
       }
     },
-    [t, account, savedPassword, remember],
+    [t, account, savedPassword, remember, history],
   );
 
   return (

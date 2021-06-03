@@ -1,13 +1,28 @@
+import userEvent from '@testing-library/user-event';
+
 import { render, screen } from '../../testing/testing';
 
 import { Balance } from './Balance';
 
+const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
+
 describe('Balance', () => {
   it('should render', async () => {
-    const address = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
-    const { container } = render(<Balance address={address} />);
+    const { container } = render(<Balance address={mockAddress} />);
 
     await screen.findByLabelText('Kilt coin');
+
+    expect(container).toMatchSnapshot();
+  });
+  it('should show balance breakdown with update balance button', async () => {
+    const { container } = render(<Balance address={mockAddress} breakdown />);
+
+    const showBreakdown = await screen.findByRole('button', {
+      name: 'Show balance breakdown',
+    });
+    userEvent.click(showBreakdown);
+
+    await screen.findByRole('button', { name: 'Update Balance' });
 
     expect(container).toMatchSnapshot();
   });
