@@ -22,9 +22,7 @@ describe('Balance', () => {
     });
     userEvent.click(showBreakdown);
 
-    await screen.findByRole('button', {
-      name: 'Account has no unlocked funds for update',
-    });
+    await screen.findByLabelText('Account has no unlocked funds for update');
 
     expect(container).toMatchSnapshot();
   });

@@ -83,7 +83,7 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
 
         history.push(generatePath(paths.account.overview, { address }));
       } catch (error) {
-        console.error(error.message);
+        console.error(error);
         if (error.name === 'OperationError') {
           setError(t('view_UnlockVestedFunds_password_incorrect'));
         }

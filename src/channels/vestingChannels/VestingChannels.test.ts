@@ -6,8 +6,9 @@ import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 
 import { decryptAccount } from '../../utilities/accounts/accounts';
-import { hasVestedFunds, vest } from './VestingChannels';
+
 import { originalBalancesMock } from '../balanceChangeChannel/balanceChangeChannel.mock';
+import { hasVestedFunds, vest } from './VestingChannels';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: {
@@ -47,7 +48,7 @@ const apiMock = {
     vesting: { vesting: jest.fn().mockResolvedValue(vestingInfoMock) },
   },
   tx: {
-    vesting: { vest: jest.fn(() => txMock) },
+    vesting: { vest: jest.fn().mockReturnValue(txMock) },
   },
   rpc: {
     payment: { queryInfo: jest.fn().mockResolvedValue(queryInfoMock) },
@@ -76,7 +77,7 @@ describe('VestingChannels', () => {
         identity: true,
       };
 
-      (decryptAccount as jest.Mock).mockImplementation(() => identityMock);
+      (decryptAccount as jest.Mock).mockReturnValue(identityMock);
 
       (getBalances as jest.Mock).mockResolvedValue(originalBalancesMock);
 

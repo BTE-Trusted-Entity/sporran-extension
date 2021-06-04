@@ -59,7 +59,10 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
   const handleShowBreakdownClick = useCallback(async () => {
     setShowBreakdown(true);
 
-    (await hasVestedFundsChannel.get(address)) && setUpdateDisabled(false);
+    const accountHasVestedFunds = await hasVestedFundsChannel.get(address);
+    if (accountHasVestedFunds) {
+      setUpdateDisabled(false);
+    }
   }, [address]);
 
   const handleHideBreakdownClick = useCallback(() => {
@@ -122,9 +125,10 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
             className={styles.update}
             disabled={updateDisabled}
             title={
-              updateDisabled
-                ? t('component_Balance_update_error')
-                : t('component_Balance_update')
+              updateDisabled ? t('component_Balance_update_error') : undefined
+            }
+            aria-label={
+              updateDisabled ? t('component_Balance_update_error') : undefined
             }
           >
             {t('component_Balance_update')}

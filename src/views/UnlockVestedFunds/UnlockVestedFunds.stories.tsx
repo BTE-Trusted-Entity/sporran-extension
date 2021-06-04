@@ -1,7 +1,8 @@
 import { Meta } from '@storybook/react';
 
-import { UnlockVestedFunds } from './UnlockVestedFunds';
 import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
+
+import { UnlockVestedFunds } from './UnlockVestedFunds';
 
 export default {
   title: 'Views/UnlockVestedFunds',

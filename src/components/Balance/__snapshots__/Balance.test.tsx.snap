@@ -93,6 +93,7 @@ exports[`Balance should show balance breakdown with update balance button 1`] = 
     </li>
   </ul>
   <button
+    aria-label="Account has no unlocked funds for update"
     class="update"
     disabled=""
     title="Account has no unlocked funds for update"

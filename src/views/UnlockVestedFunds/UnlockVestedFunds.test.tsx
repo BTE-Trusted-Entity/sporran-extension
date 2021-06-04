@@ -1,7 +1,7 @@
 import { render } from '../../testing/testing';
+import { accountsMock } from '../../utilities/accounts/AccountsProvider.mock';
 
 import { UnlockVestedFunds } from './UnlockVestedFunds';
-import { accountsMock } from '../../utilities/accounts/AccountsProvider.mock';
 
 describe('UnlockVestedFunds', () => {
   it('should render', async () => {
