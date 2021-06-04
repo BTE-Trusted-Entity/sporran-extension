@@ -6,7 +6,6 @@ import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 
 import { decryptAccount } from '../../utilities/accounts/accounts';
-
 import { originalBalancesMock } from '../balanceChangeChannel/balanceChangeChannel.mock';
 import { hasVestedFunds, vest } from './VestingChannels';
 
