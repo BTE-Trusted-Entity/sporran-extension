@@ -26,9 +26,7 @@ export const existentialDepositChannel = new BrowserChannel<
 export async function getExistential(): Promise<BN> {
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const existential = api.consts.balances.existentialDeposit;
-
-  return existential;
+  return api.consts.balances.existentialDeposit;
 }
 
 export function initBackgroundExistentialDepositChannel(): void {
