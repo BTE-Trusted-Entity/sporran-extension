@@ -10,7 +10,11 @@ import {
   savePasswordChannel,
   forgetPasswordChannel,
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
-import { vestChannel } from '../../channels/VestingChannels/VestingChannels';
+import {
+  vestChannel,
+  insufficientFunds,
+  existentialError,
+} from '../../channels/VestingChannels/VestingChannels';
 
 import { Avatar } from '../../components/Avatar/Avatar';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
@@ -74,11 +78,20 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
           await forgetPasswordChannel.get(address);
         }
 
-        await vestChannel.get({ address, password });
+        const vestError = await vestChannel.get({ address, password });
 
-        history.push(generatePath(paths.account.overview, { address }));
+        if (!vestError) {
+          history.push(generatePath(paths.account.overview, { address }));
+        }
+        if (vestError === insufficientFunds) {
+          setError(t('view_UnlockVestedFunds_insufficient_funds'));
+        } else if (vestError === existentialError) {
+          // TODO: https://kiltprotocol.atlassian.net/browse/SK-211
+        } else {
+          console.error(vestError);
+        }
       } catch (error) {
-        setError(t('view_UpdateVestedFunds_password_incorrect'));
+        setError(t('view_UnlockVestedFunds_password_incorrect'));
       }
     },
     [t, account, savedPassword, remember, history],

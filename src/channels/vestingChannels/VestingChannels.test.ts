@@ -2,9 +2,12 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
+import BN from 'bn.js';
 
 import { decryptAccount } from '../../utilities/accounts/accounts';
 import { hasVestedFunds, vest } from './VestingChannels';
+import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
+import { originalBalancesMock } from '../balanceChangeChannel/balanceChangeChannel.mock';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: {
@@ -15,28 +18,42 @@ jest.mock('@kiltprotocol/chain-helpers', () => ({
   },
 }));
 
+jest.mock('@kiltprotocol/core/lib/balance/Balance.chain', () => ({
+  getBalances: jest.fn(),
+}));
+
 jest.mock('../../utilities/accounts/accounts', () => ({
   decryptAccount: jest.fn(),
 }));
 
 const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 
-const queryResultMock = {
+const vestingInfoMock = {
   isSome: true,
 };
 
-const transactionMock = {
-  transaction: true,
+const txMock = {
+  toHex() {
+    return 'hex transaction';
+  },
+};
+
+const queryInfoMock = {
+  partialFee: new BN(125000000),
 };
 
 const apiMock = {
   query: {
-    vesting: { vesting: jest.fn().mockResolvedValue(queryResultMock) },
+    vesting: { vesting: jest.fn().mockResolvedValue(vestingInfoMock) },
   },
   tx: {
-    vesting: {
-      vest: jest.fn(() => transactionMock),
-    },
+    vesting: { vest: jest.fn(() => txMock) },
+  },
+  rpc: {
+    payment: { queryInfo: jest.fn().mockResolvedValue(queryInfoMock) },
+  },
+  consts: {
+    balances: { existentialDeposit: new BN(500) },
   },
 };
 
@@ -61,13 +78,21 @@ describe('VestingChannels', () => {
 
       (decryptAccount as jest.Mock).mockImplementation(() => identityMock);
 
+      (getBalances as jest.Mock).mockResolvedValue(originalBalancesMock);
+
       const error = await vest({ address: mockAddress, password: 'password' });
       expect(error).toEqual('');
 
       expect(decryptAccount).toHaveBeenCalledWith(mockAddress, 'password');
 
+      expect(apiMock.tx.vesting.vest).toHaveBeenCalled();
+
+      expect(apiMock.rpc.payment.queryInfo).toHaveBeenCalledWith(
+        'hex transaction',
+      );
+
       expect(BlockchainUtils.signAndSubmitTx).toHaveBeenCalledWith(
-        transactionMock,
+        txMock,
         identityMock,
         expect.anything(),
       );

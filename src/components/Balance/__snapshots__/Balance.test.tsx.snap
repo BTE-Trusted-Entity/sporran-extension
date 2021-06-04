@@ -95,6 +95,7 @@ exports[`Balance should show balance breakdown with update balance button 1`] = 
   <button
     class="update"
     disabled=""
+    title="Account has no unlocked funds for update"
     type="button"
   >
     Update Balance

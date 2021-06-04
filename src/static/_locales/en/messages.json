@@ -35,9 +35,6 @@
   "component_Balance_hideBreakdown": {
     "message": "Hide balance breakdown"
   },
-  "component_Balance_update": {
-    "message": "Update Balance"
-  },
   "component_Balance_free": {
     "message": "Free Balance: "
   },
@@ -46,6 +43,12 @@
   },
   "component_Balance_bonded": {
     "message": "Bonded Balance: "
+  },
+  "component_Balance_update": {
+    "message": "Update Balance"
+  },
+  "component_Balance_update_error": {
+    "message": "Account has no unlocked funds for update"
   },
   "component_AccountSlide_rename": {
     "message": "Rename"
@@ -668,8 +671,11 @@
   "view_UnlockVestedFunds_remember": {
     "message": "Remember my password for the next 15 minutes"
   },
-  "view_UpdateVestedFunds_password_incorrect": {
+  "view_UnlockVestedFunds_password_incorrect": {
     "message": "The password is incorrect"
+  },
+  "view_UnlockVestedFunds_insufficient_funds": {
+    "message": "You don't have enough free balance to make this transaction"
   },
   "view_UnlockVestedFunds_CTA": {
     "message": "Update Balance"

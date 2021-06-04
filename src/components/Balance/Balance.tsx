@@ -120,6 +120,11 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
             onClick={handleUpdateBalanceClick}
             className={styles.update}
             disabled={updateDisabled}
+            title={
+              updateDisabled
+                ? t('component_Balance_update_error')
+                : t('component_Balance_update')
+            }
           >
             {t('component_Balance_update')}
           </button>

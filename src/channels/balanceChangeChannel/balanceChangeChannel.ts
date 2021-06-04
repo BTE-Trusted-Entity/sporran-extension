@@ -4,7 +4,7 @@ import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.c
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 import { ErrorFirstCallback } from '../base/types';
 
-interface Balances {
+export interface Balances {
   free: BN;
   miscFrozen: BN;
   feeFrozen: BN;
