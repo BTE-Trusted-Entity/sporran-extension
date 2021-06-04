@@ -80,8 +80,7 @@ describe('VestingChannels', () => {
 
       (getBalances as jest.Mock).mockResolvedValue(originalBalancesMock);
 
-      const error = await vest({ address: mockAddress, password: 'password' });
-      expect(error).toEqual('');
+      await vest({ address: mockAddress, password: 'password' });
 
       expect(decryptAccount).toHaveBeenCalledWith(mockAddress, 'password');
 

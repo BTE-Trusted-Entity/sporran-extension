@@ -13,8 +13,6 @@ interface VestInput {
   password: string;
 }
 
-type VestOutput = string;
-
 export const hasVestedFundsChannel = new BrowserChannel<string, boolean>(
   'hasVestedFunds',
 );
@@ -29,41 +27,35 @@ export function initBackgroundHasVestedFundsChannel(): void {
   hasVestedFundsChannel.produce(hasVestedFunds);
 }
 
-export const vestChannel = new BrowserChannel<VestInput, VestOutput>('vest');
+export const vestChannel = new BrowserChannel<VestInput>('vest');
 
-export const insufficientFunds = 'insufficientFunds';
-export const existentialError = 'existentialError';
+export const insufficientFunds = 'Insufficient funds';
+export const existentialError = 'Existential error';
 
-export async function vest({ address, password }: VestInput): Promise<string> {
+export async function vest({ address, password }: VestInput): Promise<void> {
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();
 
-  try {
-    const identity = await decryptAccount(address, password);
+  const identity = await decryptAccount(address, password);
 
-    const tx = api.tx.vesting.vest();
+  const tx = api.tx.vesting.vest();
 
-    const { partialFee } = await api.rpc.payment.queryInfo(tx.toHex());
+  const { partialFee } = await api.rpc.payment.queryInfo(tx.toHex());
 
-    const balance = await getBalances(address);
+  const balance = await getBalances(address);
 
-    if (balance.free.sub(partialFee).isNeg()) {
-      return insufficientFunds;
-    }
-
-    const existentialDeposit = api.consts.balances.existentialDeposit;
-
-    if (balance.free.sub(partialFee).lt(existentialDeposit)) {
-      return existentialError;
-    }
-
-    await BlockchainUtils.signAndSubmitTx(tx, identity, {
-      resolveOn: BlockchainUtils.IS_IN_BLOCK,
-    });
-    return '';
-  } catch (error) {
-    console.error(error);
-    return error.message;
+  if (balance.free.sub(partialFee).isNeg()) {
+    throw new Error(insufficientFunds);
   }
+
+  const existentialDeposit = api.consts.balances.existentialDeposit;
+
+  if (balance.free.sub(partialFee).lt(existentialDeposit)) {
+    throw new Error(existentialError);
+  }
+
+  await BlockchainUtils.signAndSubmitTx(tx, identity, {
+    resolveOn: BlockchainUtils.IS_IN_BLOCK,
+  });
 }
 
 export function initBackgroundVestChannel(): void {

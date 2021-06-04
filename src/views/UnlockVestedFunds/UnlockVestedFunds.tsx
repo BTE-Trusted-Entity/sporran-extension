@@ -79,20 +79,20 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
           await forgetPasswordChannel.get(address);
         }
 
-        const vestError = await vestChannel.get({ address, password });
+        await vestChannel.get({ address, password });
 
-        if (!vestError) {
-          history.push(generatePath(paths.account.overview, { address }));
-        }
-        if (vestError === insufficientFunds) {
-          setError(t('view_UnlockVestedFunds_insufficient_funds'));
-        } else if (vestError === existentialError) {
-          // TODO: https://kiltprotocol.atlassian.net/browse/SK-211
-        } else {
-          console.error(vestError);
-        }
+        history.push(generatePath(paths.account.overview, { address }));
       } catch (error) {
-        setError(t('view_UnlockVestedFunds_password_incorrect'));
+        console.error(error.message);
+        if (error.name === 'OperationError') {
+          setError(t('view_UnlockVestedFunds_password_incorrect'));
+        }
+        if (error.message === insufficientFunds) {
+          setError(t('view_UnlockVestedFunds_insufficient_funds'));
+        }
+        if (error.message === existentialError) {
+          // TODO: https://kiltprotocol.atlassian.net/browse/SK-211
+        }
       }
     },
     [t, account, savedPassword, remember, history],
