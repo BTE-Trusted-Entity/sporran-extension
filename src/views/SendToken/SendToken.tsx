@@ -220,7 +220,6 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const recipientBalanceTotal = recipientBalance && recipientBalance.total;
   const amountError =
     amount && getAmountError(amount, maximum, recipientBalanceTotal);
-  console.log('recipientBalanceTotal', recipientBalanceTotal);
 
   useEffect(() => {
     (async () => {
