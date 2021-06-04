@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import './chromeMacBug.module.css';
+import styles from './chromeMacBug.module.css';
 
 const { screen, screenTop, screenLeft } = window;
 
@@ -20,6 +20,6 @@ export async function chromeMacBug(): Promise<void> {
   const isMac = os === 'mac';
 
   if (isMac && displayIsSecondary) {
-    document.documentElement.classList.add('redraw-forever');
+    document.documentElement.classList.add(styles.redrawForever);
   }
 }

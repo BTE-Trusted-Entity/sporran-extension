@@ -1,7 +1,7 @@
 declare namespace ChromeMacBugModuleCssNamespace {
   export interface IChromeMacBugModuleCss {
-    'mac-bug-redraw': string;
-    'redraw-forever': string;
+    chromeMacBugRedraw: string;
+    redrawForever: string;
   }
 }
 
