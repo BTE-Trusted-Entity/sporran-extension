@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
@@ -69,12 +69,6 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
     setShowBreakdown(false);
   }, []);
 
-  const history = useHistory();
-
-  const handleUpdateBalanceClick = useCallback(() => {
-    history.push(generatePath(paths.account.vest, { address }));
-  }, [history, address]);
-
   return (
     <>
       <p className={styles.balanceLine}>
@@ -119,11 +113,11 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
               <KiltAmount amount={balance.bonded} type="funds" />
             </li>
           </ul>
-          <button
-            type="button"
-            onClick={handleUpdateBalanceClick}
+          <Link
+            onClick={(event) => updateDisabled && event.preventDefault()}
+            to={generatePath(paths.account.vest, { address })}
             className={styles.update}
-            disabled={updateDisabled}
+            aria-disabled={updateDisabled}
             title={
               updateDisabled ? t('component_Balance_update_error') : undefined
             }
@@ -132,7 +126,7 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
             }
           >
             {t('component_Balance_update')}
-          </button>
+          </Link>
         </>
       )}
     </>
