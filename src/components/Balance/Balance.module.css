@@ -36,7 +36,3 @@
   composes: buttonTertiary from '../../components/Button/Button.module.css';
   margin-top: 0.5rem;
 }
-
-.errorTooltip {
-  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
-}

@@ -3,7 +3,6 @@ declare namespace BalanceModuleCssNamespace {
     balance: string;
     balanceLine: string;
     breakdown: string;
-    errorTooltip: string;
     hideBreakdown: string;
     showBreakdown: string;
     update: string;

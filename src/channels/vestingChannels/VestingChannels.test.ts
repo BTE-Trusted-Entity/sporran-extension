@@ -2,11 +2,11 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
+import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 
 import { decryptAccount } from '../../utilities/accounts/accounts';
 import { hasVestedFunds, vest } from './VestingChannels';
-import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import { originalBalancesMock } from '../balanceChangeChannel/balanceChangeChannel.mock';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({

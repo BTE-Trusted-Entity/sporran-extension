@@ -4,12 +4,13 @@ import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
 
+import { KiltAmount } from '../KiltAmount/KiltAmount';
+import { paths, generatePath } from '../../views/paths';
+
 import {
   balanceChangeChannel,
   BalanceChangeOutput,
 } from '../../channels/balanceChangeChannel/balanceChangeChannel';
-import { KiltAmount } from '../KiltAmount/KiltAmount';
-import { paths, generatePath } from '../../views/paths';
 import { hasVestedFundsChannel } from '../../channels/VestingChannels/VestingChannels';
 
 import styles from './Balance.module.css';

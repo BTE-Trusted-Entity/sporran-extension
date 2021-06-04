@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Account } from '../../utilities/accounts/types';
 import { decryptAccount } from '../../utilities/accounts/accounts';
 import { paths, generatePath } from '../paths';
+
 import {
   getPasswordChannel,
   savePasswordChannel,
