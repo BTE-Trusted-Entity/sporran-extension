@@ -14,31 +14,49 @@ interface Balances {
 type BalanceChangeInput = string;
 
 export interface BalanceChangeOutput {
-  free: BN;
-  bonded: BN;
-  locked: BN;
-  total: BN;
+  address: string;
+  balances: {
+    free: BN;
+    bonded: BN;
+    locked: BN;
+    total: BN;
+  };
 }
 
 export interface JsonChangeOutput {
-  free: string;
-  bonded: string;
-  locked: string;
-  total: string;
+  address: string;
+  balances: {
+    free: string;
+    bonded: string;
+    locked: string;
+    total: string;
+  };
 }
 
 const transform = {
-  outputToJson: ({ free, bonded, locked, total }: BalanceChangeOutput) => ({
-    free: free.toString(),
-    bonded: bonded.toString(),
-    locked: locked.toString(),
-    total: total.toString(),
+  outputToJson: ({
+    address,
+    balances: { free, bonded, locked, total },
+  }: BalanceChangeOutput) => ({
+    address,
+    balances: {
+      free: free.toString(),
+      bonded: bonded.toString(),
+      locked: locked.toString(),
+      total: total.toString(),
+    },
   }),
-  jsonToOutput: ({ bonded, free, locked, total }: JsonChangeOutput) => ({
-    free: new BN(free),
-    bonded: new BN(bonded),
-    locked: new BN(locked),
-    total: new BN(total),
+  jsonToOutput: ({
+    address,
+    balances: { free, bonded, locked, total },
+  }: JsonChangeOutput) => ({
+    address,
+    balances: {
+      free: new BN(free),
+      bonded: new BN(bonded),
+      locked: new BN(locked),
+      total: new BN(total),
+    },
   }),
 };
 
@@ -49,16 +67,22 @@ export const balanceChangeChannel = new BrowserChannel<
   JsonChangeOutput
 >('balanceChange', true, transform);
 
-export function computeBalance(balances: Balances): BalanceChangeOutput {
+export function computeBalance(
+  address: string,
+  balances: Balances,
+): BalanceChangeOutput {
   const { free, reserved, miscFrozen, feeFrozen } = balances;
   const locked = miscFrozen.add(feeFrozen);
   const total = free.add(reserved).add(locked);
 
   return {
-    bonded: reserved,
-    free,
-    locked,
-    total,
+    address,
+    balances: {
+      bonded: reserved,
+      free,
+      locked,
+      total,
+    },
   };
 }
 
@@ -70,12 +94,8 @@ export async function publishBalanceChanges(
     responseAddress: string,
     rawBalances: Balances,
   ): void {
-    if (responseAddress !== address) {
-      return;
-    }
-
     try {
-      const balance = computeBalance(rawBalances);
+      const balance = computeBalance(responseAddress, rawBalances);
       publisher(null, balance);
     } catch (error) {
       publisher(error);

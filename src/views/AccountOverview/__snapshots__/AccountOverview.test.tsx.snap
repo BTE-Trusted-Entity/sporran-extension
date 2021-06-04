@@ -111,20 +111,7 @@ exports[`AccountOverview should render a normal account 1`] = `
     >
       Total Balance: 
       <span
-        class="amount"
-      >
-        1.2340
-         
-        <span
-          aria-label="Kilt coin"
-          class="coin"
-        />
-      </span>
-      <button
-        aria-label="Show balance breakdown"
-        class="showBreakdown"
-        title="Show balance breakdown"
-        type="button"
+        class="css-j3frhc"
       />
     </p>
     <p>
