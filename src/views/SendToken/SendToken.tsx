@@ -114,13 +114,8 @@ function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
 function getIsAmountSmallerThenRecipientExistential(
   amount: number,
   existential: BN,
-  recipientBalance: BN,
 ): string | null {
-  if (
-    recipientBalance &&
-    !recipientBalance.isZero() &&
-    existential.cmp(numberToBN(amount)) === -1
-  ) {
+  if (existential.cmp(numberToBN(amount)) === -1) {
     return null;
   }
   const t = browser.i18n.getMessage;
@@ -145,12 +140,8 @@ function getAmountError(
   return [
     minimum && getIsAmountTooSmallError(numericAmount, minimum),
     maximum && getIsAmountTooLargeError(numericAmount, maximum),
-    existential && recipientBalance
-      ? getIsAmountSmallerThenRecipientExistential(
-          numericAmount,
-          existential,
-          recipientBalance,
-        )
+    existential && recipientBalance && recipientBalance.isZero()
+      ? getIsAmountSmallerThenRecipientExistential(numericAmount, existential)
       : null,
   ].filter(Boolean)[0];
 }
@@ -229,6 +220,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const recipientBalanceTotal = recipientBalance && recipientBalance.total;
   const amountError =
     amount && getAmountError(amount, maximum, recipientBalanceTotal);
+  console.log('recipientBalanceTotal', recipientBalanceTotal);
 
   useEffect(() => {
     (async () => {
