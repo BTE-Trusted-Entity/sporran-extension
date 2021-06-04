@@ -1,10 +1,8 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import './chromeMacBug.css';
+import './chromeMacBug.module.css';
 
-const { devicePixelRatio, screen, screenTop, screenLeft } = window;
-
-const displayHasLowDpi = devicePixelRatio < 2;
+const { screen, screenTop, screenLeft } = window;
 
 const displayIsSecondary =
   screenLeft < 0 ||
@@ -21,7 +19,7 @@ export async function chromeMacBug(): Promise<void> {
   const { os } = await browser.runtime.getPlatformInfo();
   const isMac = os === 'mac';
 
-  if (isMac && displayIsSecondary && displayHasLowDpi) {
+  if (isMac && displayIsSecondary) {
     document.documentElement.classList.add('redraw-forever');
   }
 }
