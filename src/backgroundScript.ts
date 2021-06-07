@@ -25,6 +25,7 @@ import { initBackgroundClaimChannel } from './channels/ClaimChannels/browserClai
 import { initBackgroundShareChannel } from './channels/ShareChannels/browserShareChannels';
 import { initBackgroundAccessChannel } from './dApps/AccessChannels/browserAccessChannels';
 import { initBackgroundExistentialDepositChannel } from './channels/existentialDepositChannel/existentialDepositChannel';
+import { initBackgroundGenesisHashChannel } from './dApps/genesisHashChannel/initBackgroundGenesisHashChannel';
 
 function initSavedPasswords() {
   schedulePasswordsCheck();
@@ -59,6 +60,7 @@ function init() {
   initSavedPasswords();
   initDAppChannels();
   initBackgroundExistentialDepositChannel();
+  initBackgroundGenesisHashChannel();
 }
 
 init();
