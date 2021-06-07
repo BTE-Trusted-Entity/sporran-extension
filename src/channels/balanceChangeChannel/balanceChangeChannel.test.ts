@@ -19,13 +19,13 @@ const originalBalancesMock = {
 describe('balanceChangeChannel', () => {
   describe('computeBalance', () => {
     it('should send runtime message', async () => {
-      const result = await computeBalance(originalBalancesMock);
+      const result = await computeBalance('address', originalBalancesMock);
 
       expect(balanceMock).toEqual({
-        bonded: result.bonded.toString(),
-        free: result.free.toString(),
-        locked: result.locked.toString(),
-        total: result.total.toString(),
+        bonded: result.balances.bonded.toString(),
+        free: result.balances.free.toString(),
+        locked: result.balances.locked.toString(),
+        total: result.balances.total.toString(),
       });
     });
   });
@@ -38,20 +38,6 @@ describe('balanceChangeChannel', () => {
         'address',
         expect.anything(),
       );
-    });
-
-    it('should ignore changes to other accounts', async () => {
-      (listenToBalanceChanges as jest.Mock).mockClear();
-
-      const publisher = jest.fn();
-      await publishBalanceChanges('address1', publisher);
-
-      (listenToBalanceChanges as jest.Mock).mock.calls[0][1](
-        'address2',
-        originalBalancesMock,
-      );
-
-      expect(publisher).not.toHaveBeenCalled();
     });
 
     it('should run publisher on balance change', async () => {
@@ -67,10 +53,10 @@ describe('balanceChangeChannel', () => {
 
       const result = publisher.mock.calls[0][1];
       expect(balanceMock).toEqual({
-        bonded: result.bonded.toString(),
-        free: result.free.toString(),
-        locked: result.locked.toString(),
-        total: result.total.toString(),
+        bonded: result.balances.bonded.toString(),
+        free: result.balances.free.toString(),
+        locked: result.balances.locked.toString(),
+        total: result.balances.total.toString(),
       });
     });
   });

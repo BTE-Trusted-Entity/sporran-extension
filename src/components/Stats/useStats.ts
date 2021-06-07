@@ -3,7 +3,10 @@ import BN from 'bn.js';
 import { find, mapValues, omit } from 'lodash-es';
 
 import { AccountsMap } from '../../utilities/accounts/accounts';
-import { balanceChangeChannel } from '../../channels/balanceChangeChannel/balanceChangeChannel';
+import {
+  balanceChangeChannel,
+  BalanceChangeOutput,
+} from '../../channels/balanceChangeChannel/balanceChangeChannel';
 
 interface Balances {
   [address: string]: BN | null;
@@ -18,15 +21,17 @@ function subscribeToBalance(
   setBalances: (callback: (balances: Balances) => Balances) => void,
   subscriptions: Subscriptions,
 ) {
-  async function handleBalance(error: Error | null, balance?: { total: BN }) {
-    if (error) {
+  async function handleBalance(
+    error: Error | null,
+    balance?: BalanceChangeOutput,
+  ) {
+    if (error || !balance) {
       console.error(error);
       return;
     }
-    const { total } = balance as { total: BN };
     setBalances((balances: Balances) => ({
       ...balances,
-      ...(address in balances && { [address]: total }),
+      ...(address in balances && { [address]: balance.balances.total }),
     }));
   }
 
