@@ -23,8 +23,8 @@ export function Settings(): JSX.Element {
   const accounts = useAccounts().data;
   const onExistingAccount = Boolean(accounts?.[address]);
 
-  const countForAccount = hasPasswords ? 7 : 6;
-  const count = onExistingAccount ? countForAccount : 4;
+  const countForAccount = hasPasswords ? 8 : 7;
+  const count = onExistingAccount ? countForAccount : 5;
   const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(count);
 
   const handleClick = useCallback(() => {
@@ -110,6 +110,12 @@ export function Settings(): JSX.Element {
             <li className={menuStyles.listItem}>
               {/* TODO: link to FAQ */}
               <a {...itemProps.shift()}>{t('component_Settings_faq')}</a>
+            </li>
+
+            <li className={menuStyles.listItem}>
+              <Link to={paths.access} {...itemProps.shift()}>
+                {t('component_Settings_access')}
+              </Link>
             </li>
 
             <li className={menuStyles.listItem}>
