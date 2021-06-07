@@ -30,8 +30,15 @@ exports[`RemoveAccount should render 1`] = `
     >
       Total Balance: 
       <span
-        class="css-j3frhc"
-      />
+        class="amount"
+      >
+        1.2340
+         
+        <span
+          aria-label="Kilt coin"
+          class="coin"
+        />
+      </span>
     </p>
     <small
       class="addressLabel"
