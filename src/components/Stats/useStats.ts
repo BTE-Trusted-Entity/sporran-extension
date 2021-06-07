@@ -29,6 +29,9 @@ function subscribeToBalance(
       console.error(error);
       return;
     }
+    if (balance.address !== address) {
+      return;
+    }
     setBalances((balances: Balances) => ({
       ...balances,
       ...(address in balances && { [address]: balance.balances.total }),

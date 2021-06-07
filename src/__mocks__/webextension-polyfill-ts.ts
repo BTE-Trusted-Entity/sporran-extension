@@ -4,8 +4,12 @@
 // outside the Web Extension environment provided by a compatible browser
 
 import { setupGetMessageShim } from 'chrome-extension-i18n-shim';
+import { pull } from 'lodash-es';
 import messagesEN from '../static/_locales/en/messages.json';
 import { balanceMock } from '../channels/balanceChangeChannel/balanceChangeChannel.mock';
+
+type CallbackType = (data: unknown, caller: unknown) => void;
+const listeners: CallbackType[] = [];
 
 export const browser = {
   tabs: {
@@ -35,22 +39,26 @@ export const browser = {
     },
   },
   runtime: {
-    sendMessage(): void {
-      // dummy
-    },
-    onMessage: {
-      addListener(callback: (...args: unknown[]) => void): void {
+    async sendMessage({ input }: { input: string }): Promise<void> {
+      await new Promise((resolve) => setTimeout(resolve, 10));
+
+      listeners.forEach((callback) => {
         const response = {
           type: 'balanceChangeOutput',
           output: {
-            address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+            address: input,
             balances: balanceMock,
           },
         };
         callback(response, {});
+      });
+    },
+    onMessage: {
+      addListener(callback: () => void): void {
+        listeners.push(callback);
       },
-      removeListener(): void {
-        // dummy
+      removeListener(callback: CallbackType): void {
+        pull(listeners, callback);
       },
     },
   },
