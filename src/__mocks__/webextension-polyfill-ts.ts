@@ -42,7 +42,10 @@ export const browser = {
       addListener(callback: (...args: unknown[]) => void): void {
         const response = {
           type: 'balanceChangeOutput',
-          output: balanceMock,
+          output: {
+            address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+            balances: balanceMock,
+          },
         };
         callback(response, {});
       },

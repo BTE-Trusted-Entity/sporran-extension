@@ -3,7 +3,10 @@ import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
 
-import { balanceChangeChannel } from '../../channels/balanceChangeChannel/balanceChangeChannel';
+import {
+  balanceChangeChannel,
+  BalanceChangeOutput,
+} from '../../channels/balanceChangeChannel/balanceChangeChannel';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
 
 import styles from './Balance.module.css';
@@ -19,13 +22,18 @@ export function useAddressBalance(address: string): BalanceBN | null {
   const [balance, setBalance] = useState<BalanceBN | null>(null);
 
   useEffect(() => {
-    return balanceChangeChannel.subscribe(address, (error, value?) => {
-      if (error) {
-        console.error(error);
-      } else {
-        setBalance(value as BalanceBN);
-      }
-    });
+    return balanceChangeChannel.subscribe(
+      address,
+      (error, output?: BalanceChangeOutput) => {
+        if (error || !output) {
+          console.error(error);
+        } else {
+          if (output.address === address) {
+            setBalance(output.balances as BalanceBN);
+          }
+        }
+      },
+    );
   }, [address]);
 
   return balance;
