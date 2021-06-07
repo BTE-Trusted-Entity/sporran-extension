@@ -3,7 +3,7 @@ import {
   InjectedAccount,
   InjectedAccounts,
 } from '@polkadot/extension-inject/types';
-import { injectedAccountsChannel } from '../AccountsChannels/injectedAccountsChannel';
+import { injectedAccountsChannel } from '../injectedAccountsChannel/injectedAccountsChannel';
 import { makeControlledPromise } from '../../utilities/makeControlledPromise/makeControlledPromise';
 
 type CallbackType = Parameters<InjectedAccounts['subscribe']>[0];

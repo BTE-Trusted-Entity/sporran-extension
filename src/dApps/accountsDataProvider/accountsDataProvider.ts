@@ -1,7 +1,8 @@
 import { InjectedAccount } from '@polkadot/extension-inject/types';
 import { browser, Storage } from 'webextension-polyfill-ts';
 
-import { injectedAccountsChannel } from '../AccountsChannels/injectedAccountsChannel';
+import { injectedAccountsChannel } from '../injectedAccountsChannel/injectedAccountsChannel';
+import { genesisHashChannel } from '../genesisHashChannel/genesisHashChannel';
 import { storageAreaName } from '../../utilities/storage/storage';
 import {
   ACCOUNTS_KEY,
@@ -11,10 +12,13 @@ import { checkAccess } from '../checkAccess/checkAccess';
 
 async function getAccountsForInjectedAPI(): Promise<InjectedAccount[]> {
   const accounts = await getAccounts();
+  const genesisHash = await genesisHashChannel.get();
+
   return Object.values(accounts).map(({ name, address }) => ({
     name,
     address,
     type: 'sr25519',
+    genesisHash,
   }));
 }
 
