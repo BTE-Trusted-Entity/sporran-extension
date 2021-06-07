@@ -15,9 +15,9 @@ import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
+import { existentialDepositChannel } from '../../channels/existentialDepositChannel/existentialDepositChannel';
 
 import styles from './SendToken.module.css';
-import { existentialDepositChannel } from '../../channels/existentialDepositChannel/existentialDepositChannel';
 
 const nonNumberCharacters = /[^0-9,.]/g;
 const KILT_POWER = 15;
@@ -111,11 +111,15 @@ function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
   return t('view_SendToken_amount_large');
 }
 
-function getIsAmountSmallerThenRecipientExistential(
+function getIsAmountSmallerThanRecipientExistential(
   amount: number,
   existential: BN,
+  recipientBalance: BN | null | undefined,
 ): string | null {
-  if (existential.cmp(numberToBN(amount)) === -1) {
+  if (
+    !recipientBalance ||
+    (!recipientBalance.isZero() && numberToBN(amount).gt(existential))
+  ) {
     return null;
   }
   const t = browser.i18n.getMessage;
@@ -140,9 +144,11 @@ function getAmountError(
   return [
     minimum && getIsAmountTooSmallError(numericAmount, minimum),
     maximum && getIsAmountTooLargeError(numericAmount, maximum),
-    existential && recipientBalance && recipientBalance.isZero()
-      ? getIsAmountSmallerThenRecipientExistential(numericAmount, existential)
-      : null,
+    getIsAmountSmallerThanRecipientExistential(
+      numericAmount,
+      existential,
+      recipientBalance,
+    ),
   ].filter(Boolean)[0];
 }
 
@@ -182,9 +188,19 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const balance = useAddressBalance(account.address);
   const maximum = balance && fee ? balance.free.sub(fee) : null;
 
+  const [recipient, setRecipient] = useState('');
+  const recipientError = recipient && getAddressError(recipient, account);
+
+  const recipientBalance = useAddressBalance(recipient);
+  const recipientBalanceTotal = recipientBalance && recipientBalance.total;
+
   const [amount, setAmount] = useState<string | null>(null);
+  const amountError =
+    amount && getAmountError(amount, maximum, recipientBalanceTotal);
+
   const numericAmount =
     amount && !getIsAmountInvalidError(amount) && parseFloatLocale(amount);
+
   const amountBN = useMemo(
     () =>
       typeof numericAmount === 'number' && !Number.isNaN(numericAmount)
@@ -212,14 +228,6 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   const totalError =
     maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
-
-  const [recipient, setRecipient] = useState('');
-  const recipientError = recipient && getAddressError(recipient, account);
-
-  const recipientBalance = useAddressBalance(recipient);
-  const recipientBalanceTotal = recipientBalance && recipientBalance.total;
-  const amountError =
-    amount && getAmountError(amount, maximum, recipientBalanceTotal);
 
   useEffect(() => {
     (async () => {
