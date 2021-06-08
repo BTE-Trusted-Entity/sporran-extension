@@ -35,12 +35,8 @@ function useHostNames(setHostNames: (hostNames: HostNames) => void): void {
       );
 
       setHostNames(groupedHostNames);
-      // setHostNames({ // TODO: provide for Storybook
-      //   'main.kilt.io': [{ key: 'https://main.kilt.io', checked: false }],
-      //   'mmain.kilt.io': [{ key: 'https://mmain.kilt.io', checked: false }],
-      // });
     })();
-  });
+  }, [setHostNames]);
 }
 
 export function ExternalAccess(): JSX.Element | null {

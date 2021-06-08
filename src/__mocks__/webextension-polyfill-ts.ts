@@ -28,10 +28,14 @@ export const browser = {
   },
   storage: {
     local: {
-      async get(
-        keys: null | string | Record<string, unknown> | string[],
-      ): Promise<unknown> {
-        return keys === 'nextTartan' ? { nextTartan: 'MacLeod' } : {};
+      async get(): Promise<unknown> {
+        return {
+          nextTartan: 'MacLeod',
+          authorizedDApps: {
+            'evil\nhttps://example.com/evil': false,
+            'good\nhttps://example.org/good': true,
+          },
+        };
       },
       async set(): Promise<void> {
         // dummy
