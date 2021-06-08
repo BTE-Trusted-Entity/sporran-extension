@@ -114,12 +114,9 @@ function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
 function getIsAmountSmallerThanRecipientExistential(
   amount: number,
   existential: BN,
-  recipientBalance: BN | null | undefined,
+  recipientBalanceZero: boolean | undefined,
 ): string | null {
-  if (
-    !recipientBalance ||
-    (!recipientBalance.isZero() && numberToBN(amount).gt(existential))
-  ) {
+  if (!recipientBalanceZero || numberToBN(amount).gte(existential)) {
     return null;
   }
   const t = browser.i18n.getMessage;
@@ -129,7 +126,7 @@ function getIsAmountSmallerThanRecipientExistential(
 function getAmountError(
   amount: string | null,
   maximum: BN | null,
-  recipientBalance?: BN | null,
+  recipientBalanceZero: boolean | undefined,
 ): string | null {
   if (amount === null) {
     return null;
@@ -147,7 +144,7 @@ function getAmountError(
     getIsAmountSmallerThanRecipientExistential(
       numericAmount,
       existential,
-      recipientBalance,
+      recipientBalanceZero,
     ),
   ].filter(Boolean)[0];
 }
@@ -192,11 +189,11 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const recipientError = recipient && getAddressError(recipient, account);
 
   const recipientBalance = useAddressBalance(recipient);
-  const recipientBalanceTotal = recipientBalance && recipientBalance.total;
+  const recipientBalanceZero = recipientBalance?.total?.isZero?.();
 
   const [amount, setAmount] = useState<string | null>(null);
   const amountError =
-    amount && getAmountError(amount, maximum, recipientBalanceTotal);
+    amount && getAmountError(amount, maximum, recipientBalanceZero);
 
   const numericAmount =
     amount && !getIsAmountInvalidError(amount) && parseFloatLocale(amount);
