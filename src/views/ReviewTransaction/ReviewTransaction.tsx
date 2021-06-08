@@ -27,8 +27,6 @@ interface Props {
   fee: BN;
   tip: BN;
   onSuccess: (values: { password: string }) => void;
-  txPending: boolean;
-  txModalOpen: boolean;
 }
 
 export function ReviewTransaction({
@@ -38,8 +36,6 @@ export function ReviewTransaction({
   fee,
   tip,
   onSuccess,
-  txPending,
-  txModalOpen,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -78,6 +74,9 @@ export function ReviewTransaction({
 
   const [submitting, setSubmitting] = useState(false);
 
+  const [txPending, setTxPending] = useState(false);
+  const [txModalOpen, setTxModalOpen] = useState(false);
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
@@ -100,8 +99,16 @@ export function ReviewTransaction({
           await forgetPasswordChannel.get(account.address);
         }
 
-        onSuccess({ password });
+        setTxPending(true);
+        setTxModalOpen(true);
+
+        await onSuccess({ password });
+
+        setTxPending(false);
       } catch (error) {
+        // TODO: Handle transaction errors
+        // https://kiltprotocol.atlassian.net/browse/SK-134
+
         setError(t('view_ReviewTransaction_password_incorrect'));
         setSubmitting(false);
       }

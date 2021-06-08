@@ -34,17 +34,11 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
     [address, history],
   );
 
-  const [txPending, setTxPending] = useState(false);
-
-  const [txModalOpen, setTxModalOpen] = useState(false);
-
   const handleReviewTransactionSuccess = useCallback(
     async ({ password }) => {
       if (!amount || !tip || !recipient) {
-        return;
+        throw new Error('Missing transaction details');
       }
-      setTxPending(true);
-      setTxModalOpen(true);
 
       await transferChannel.get({
         address,
@@ -53,8 +47,6 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
         tip,
         password,
       });
-
-      setTxPending(false);
     },
     [address, amount, recipient, tip],
   );
@@ -70,8 +62,6 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
             fee={fee}
             tip={tip}
             onSuccess={handleReviewTransactionSuccess}
-            txPending={txPending}
-            txModalOpen={txModalOpen}
           />
         ) : (
           <Redirect to={generatePath(paths.account.send.start, { address })} />
