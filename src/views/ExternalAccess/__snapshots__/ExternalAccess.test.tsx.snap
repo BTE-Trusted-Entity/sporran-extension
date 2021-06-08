@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExternalAccess should render 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Website Access
+    </h1>
+    <p
+      class="subline"
+    >
+      Control which websites have access to names and addresses of your accounts
+    </p>
+    <small
+      class="small"
+    >
+      Website access
+    </small>
+    <ul
+      class="list"
+    >
+      <li>
+        <label
+          class="label"
+        >
+          example.org
+          <input
+            class="toggle"
+            name="example.org"
+            type="checkbox"
+          />
+          <span />
+        </label>
+      </li>
+    </ul>
+    <a
+      class="back"
+      href="/"
+    >
+      Back to my accounts
+    </a>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+    <p
+      class="stats"
+    >
+      You have 3 accounts with a total
+      <span
+        class="balance"
+      >
+         Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="Kilt coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </section>
+</div>
+`;

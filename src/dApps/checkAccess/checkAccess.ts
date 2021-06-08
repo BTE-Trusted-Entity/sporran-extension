@@ -1,20 +1,10 @@
-import { storage } from '../../utilities/storage/storage';
+import {
+  getAuthorized,
+  makeDAppKey,
+  setAuthorized,
+} from '../../utilities/authorizedStorage/authorizedStorage';
 import { injectedAccessChannel } from '../AccessChannels/injectedAccessChannel';
 import { contentAccessChannel } from '../AccessChannels/browserAccessChannels';
-
-const authorizedKey = 'authorizedDApps';
-
-interface AuthorizedType {
-  [key: string]: boolean;
-}
-
-async function getAuthorized(): Promise<AuthorizedType> {
-  return (await storage.get(authorizedKey))[authorizedKey] || [];
-}
-
-async function setAuthorized(authorized: AuthorizedType) {
-  return await storage.set({ [authorizedKey]: authorized });
-}
 
 export async function checkAccess(
   name: string,
@@ -23,7 +13,7 @@ export async function checkAccess(
   const origin = fullOrigin.replace(/#.*$/, '');
 
   const authorizedDApps = await getAuthorized();
-  const key = `${name}\n${origin}`;
+  const key = makeDAppKey(name, origin);
 
   if (authorizedDApps[key]) {
     return;

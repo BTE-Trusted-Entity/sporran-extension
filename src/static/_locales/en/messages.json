@@ -129,6 +129,9 @@
   "component_Settings_faq": {
     "message": "FAQ & Help"
   },
+  "component_Settings_access": {
+    "message": "Toggle website access"
+  },
   "component_Settings_endpoint": {
     "message": "Custom endpoint"
   },
@@ -607,5 +610,17 @@
   },
   "view_SignDApp_password_incorrect": {
     "message": "The password is incorrect"
+  },
+  "view_ExternalAccess_heading": {
+    "message": "Website Access"
+  },
+  "view_ExternalAccess_subline": {
+    "message": "Control which websites have access to names and addresses of your accounts"
+  },
+  "view_ExternalAccess_small": {
+    "message": "Website access"
+  },
+  "view_ExternalAccess_back": {
+    "message": "Back to my accounts"
   }
 }
