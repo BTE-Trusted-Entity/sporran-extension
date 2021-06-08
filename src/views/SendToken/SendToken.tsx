@@ -22,7 +22,7 @@ import styles from './SendToken.module.css';
 const nonNumberCharacters = /[^0-9,.]/g;
 const KILT_POWER = 15;
 const minimum = new BN(0.01e15);
-let existential: BN;
+let existential: BN | undefined;
 
 (async () => {
   existential = await existentialDepositChannel.get();
@@ -113,10 +113,13 @@ function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
 
 function getIsAmountSmallerThanRecipientExistential(
   amount: number,
-  existential: BN,
   recipientBalanceZero: boolean | undefined,
 ): string | null {
-  if (!recipientBalanceZero || numberToBN(amount).gte(existential)) {
+  if (
+    !recipientBalanceZero ||
+    !existential ||
+    numberToBN(amount).gte(existential)
+  ) {
     return null;
   }
   const t = browser.i18n.getMessage;
@@ -143,7 +146,6 @@ function getAmountError(
     maximum && getIsAmountTooLargeError(numericAmount, maximum),
     getIsAmountSmallerThanRecipientExistential(
       numericAmount,
-      existential,
       recipientBalanceZero,
     ),
   ].filter(Boolean)[0];
