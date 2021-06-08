@@ -10,6 +10,7 @@ import { AccountSlide } from '../../components/AccountSlide/AccountSlide';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { decryptAccount } from '../../utilities/accounts/accounts';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
+import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { generatePath, paths } from '../paths';
 import {
   forgetPasswordChannel,
@@ -71,9 +72,16 @@ export function ReviewTransaction({
     })();
   }, [account]);
 
+  const [submitting, setSubmitting] = useState(false);
+
+  const [txPending, setTxPending] = useState(false);
+  const [txModalOpen, setTxModalOpen] = useState(false);
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+
+      setSubmitting(true);
 
       const { elements } = event.target;
       const providedPassword = elements.password.value;
@@ -91,9 +99,18 @@ export function ReviewTransaction({
           await forgetPasswordChannel.get(account.address);
         }
 
-        onSuccess({ password });
+        setTxPending(true);
+        setTxModalOpen(true);
+
+        await onSuccess({ password });
+
+        setTxPending(false);
       } catch (error) {
+        // TODO: Handle transaction errors
+        // https://kiltprotocol.atlassian.net/browse/SK-134
+
         setError(t('view_ReviewTransaction_password_incorrect'));
+        setSubmitting(false);
       }
     },
     [t, account, savedPassword, onSuccess, remember],
@@ -224,10 +241,12 @@ export function ReviewTransaction({
         <Link to={paths.home} className={styles.cancel}>
           {t('common_action_cancel')}
         </Link>
-        <button type="submit" className={styles.submit}>
+        <button type="submit" className={styles.submit} disabled={submitting}>
           {t('view_ReviewTransaction_CTA')}
         </button>
       </p>
+
+      {txModalOpen && <TxStatusModal account={account} pending={txPending} />}
 
       <LinkBack />
       <Stats />
