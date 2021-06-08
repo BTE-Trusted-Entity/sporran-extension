@@ -377,7 +377,7 @@
     "message": "The amount entered exceeds your maximum sendable amount"
   },
   "view_SendToken_error_existential_recepient": {
-    "message": "The recipient’s account cannot hold an amount smaller than the existential deposit"
+    "message": "Cannot send less than the existential deposit"
   },
   "view_SendToken_fee_large": {
     "message": "The amount+costs exceed your maximum sendable amount"
