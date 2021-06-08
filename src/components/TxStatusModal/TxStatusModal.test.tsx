@@ -18,7 +18,7 @@ describe('TxStatusModal', () => {
     ).showModal = jest.fn();
   });
 
-  it('should render', async () => {
+  it('should show completed status', async () => {
     const { container } = render(
       <TxStatusModal
         account={account}
