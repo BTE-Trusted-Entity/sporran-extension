@@ -4,6 +4,7 @@ import { useInitialEntries } from '../../utilities/popups/useInitialEntries';
 import { AccountsProvider } from '../../utilities/accounts/AccountsContext';
 import { AddAccount } from '../../components/AddAccount/AddAccount';
 import { Settings } from '../../components/Settings/Settings';
+import { ExternalAccess } from '../ExternalAccess/ExternalAccess';
 import { Welcome } from '../Welcome/Welcome';
 import { AccountsRouter } from '../AccountsRouter/AccountsRouter';
 import { PopupsRouter } from '../PopupsRouter/PopupsRouter';
@@ -31,6 +32,10 @@ export function App(): JSX.Element {
 
           <Route path={paths.settings}>
             <AppSettings />
+          </Route>
+
+          <Route path={paths.access}>
+            <ExternalAccess />
           </Route>
 
           <Route path={paths.account.base}>
