@@ -10,6 +10,7 @@ import { AccountSlide } from '../../components/AccountSlide/AccountSlide';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { decryptAccount } from '../../utilities/accounts/accounts';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
+import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { generatePath, paths } from '../paths';
 import {
   forgetPasswordChannel,
@@ -18,7 +19,6 @@ import {
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
 
 import styles from './ReviewTransaction.module.css';
-import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 
 interface Props {
   account: Account;
@@ -29,7 +29,6 @@ interface Props {
   onSuccess: (values: { password: string }) => void;
   txPending: boolean;
   txModalOpen: boolean;
-  handleCloseTxModal: () => void;
 }
 
 export function ReviewTransaction({
@@ -41,7 +40,6 @@ export function ReviewTransaction({
   onSuccess,
   txPending,
   txModalOpen,
-  handleCloseTxModal,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -241,15 +239,10 @@ export function ReviewTransaction({
         </button>
       </p>
 
+      {txModalOpen && <TxStatusModal account={account} pending={txPending} />}
+
       <LinkBack />
       <Stats />
-      {txModalOpen && (
-        <TxStatusModal
-          account={account}
-          pending={txPending}
-          handleClose={handleCloseTxModal}
-        />
-      )}
     </form>
   );
 }

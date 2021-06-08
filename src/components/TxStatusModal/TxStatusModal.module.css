@@ -5,7 +5,7 @@
 
 .transparent {
   composes: tartan from '../../components/Avatar/Avatar.module.css';
-  filter: opacity(20%);
+  opacity: 0.2;
 }
 
 .wrapper {

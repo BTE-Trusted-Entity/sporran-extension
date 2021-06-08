@@ -16,7 +16,6 @@ describe('ReviewTransaction', () => {
         onSuccess={jest.fn()}
         txPending={false}
         txModalOpen={false}
-        handleCloseTxModal={jest.fn()}
       />,
     );
     expect(container).toMatchSnapshot();

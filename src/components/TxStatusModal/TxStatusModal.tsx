@@ -1,7 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Modal } from 'react-dialog-polyfill';
+import { Link } from 'react-router-dom';
 
 import { Account } from '../../utilities/accounts/types';
+import { paths, generatePath } from '../../views/paths';
 
 import { Avatar } from '../Avatar/Avatar';
 
@@ -10,14 +12,9 @@ import styles from './TxStatusModal.module.css';
 interface Props {
   account: Account;
   pending: boolean;
-  handleClose: () => void;
 }
 
-export function TxStatusModal({
-  account,
-  pending,
-  handleClose,
-}: Props): JSX.Element {
+export function TxStatusModal({ account, pending }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   return (
     <Modal open className={styles.overlay}>
@@ -45,9 +42,12 @@ export function TxStatusModal({
           {t('component_TxStatusModal_success')}
         </h1>
       )}
-      <button type="button" onClick={handleClose} className={styles.confirm}>
+      <Link
+        className={styles.confirm}
+        to={generatePath(paths.account.overview, { address: account.address })}
+      >
         {t('common_action_confirm')}
-      </button>
+      </Link>
     </Modal>
   );
 }
