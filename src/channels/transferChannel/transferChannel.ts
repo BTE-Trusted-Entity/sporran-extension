@@ -50,7 +50,8 @@ export async function transfer(input: TransferInput): Promise<string> {
 
     const tx = await makeTransfer(recipient, amount);
     await BlockchainUtils.signAndSubmitTx(tx, identity, {
-      resolveOn: BlockchainUtils.IS_IN_BLOCK,
+      resolveOn: BlockchainUtils.IS_FINALIZED,
+      rejectOn: BlockchainUtils.IS_ERROR,
       tip,
     });
 

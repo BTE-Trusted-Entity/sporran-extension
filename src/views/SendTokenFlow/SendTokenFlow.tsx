@@ -34,11 +34,25 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
     [address, history],
   );
 
+  const [txPending, setTxPending] = useState(false);
+
+  const [txModalOpen, setTxModalOpen] = useState(false);
+
+  const handleCloseTxModal = useCallback(() => {
+    setTxModalOpen(false);
+
+    if (!txPending) {
+      history.push(generatePath(paths.account.overview, { address }));
+    }
+  }, [history, txPending, address]);
+
   const handleReviewTransactionSuccess = useCallback(
     async ({ password }) => {
       if (!amount || !tip || !recipient) {
         return;
       }
+      setTxPending(true);
+      setTxModalOpen(true);
 
       await transferChannel.get({
         address,
@@ -48,9 +62,9 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
         password,
       });
 
-      history.push(generatePath(paths.account.overview, { address }));
+      setTxPending(false);
     },
-    [address, amount, history, recipient, tip],
+    [address, amount, recipient, tip],
   );
 
   return (
@@ -64,6 +78,9 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
             fee={fee}
             tip={tip}
             onSuccess={handleReviewTransactionSuccess}
+            txPending={txPending}
+            txModalOpen={txModalOpen}
+            handleCloseTxModal={handleCloseTxModal}
           />
         ) : (
           <Redirect to={generatePath(paths.account.send.start, { address })} />

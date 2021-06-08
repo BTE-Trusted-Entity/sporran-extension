@@ -18,6 +18,7 @@ import {
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
 
 import styles from './ReviewTransaction.module.css';
+import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 
 interface Props {
   account: Account;
@@ -26,6 +27,9 @@ interface Props {
   fee: BN;
   tip: BN;
   onSuccess: (values: { password: string }) => void;
+  txPending: boolean;
+  txModalOpen: boolean;
+  handleCloseTxModal: () => void;
 }
 
 export function ReviewTransaction({
@@ -35,6 +39,9 @@ export function ReviewTransaction({
   fee,
   tip,
   onSuccess,
+  txPending,
+  txModalOpen,
+  handleCloseTxModal,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -71,9 +78,13 @@ export function ReviewTransaction({
     })();
   }, [account]);
 
+  const [submitting, setSubmitting] = useState(false);
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+
+      setSubmitting(true);
 
       const { elements } = event.target;
       const providedPassword = elements.password.value;
@@ -94,6 +105,7 @@ export function ReviewTransaction({
         onSuccess({ password });
       } catch (error) {
         setError(t('view_ReviewTransaction_password_incorrect'));
+        setSubmitting(false);
       }
     },
     [t, account, savedPassword, onSuccess, remember],
@@ -224,13 +236,20 @@ export function ReviewTransaction({
         <Link to={paths.home} className={styles.cancel}>
           {t('common_action_cancel')}
         </Link>
-        <button type="submit" className={styles.submit}>
+        <button type="submit" className={styles.submit} disabled={submitting}>
           {t('view_ReviewTransaction_CTA')}
         </button>
       </p>
 
       <LinkBack />
       <Stats />
+      {txModalOpen && (
+        <TxStatusModal
+          account={account}
+          pending={txPending}
+          handleClose={handleCloseTxModal}
+        />
+      )}
     </form>
   );
 }

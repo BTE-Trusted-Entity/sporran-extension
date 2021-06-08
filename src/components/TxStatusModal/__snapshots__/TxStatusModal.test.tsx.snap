@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TxStatusModal should render 1`] = `
+<div>
+  <dialog
+    class="overlay"
+  >
+    <div
+      class="wrapper"
+    >
+      <div
+        class="MacLachlan transparent"
+      >
+        Identicon
+      </div>
+    </div>
+    <h1
+      class="heading"
+    >
+      Your transaction was successfully sent
+    </h1>
+    <button
+      class="confirm"
+      type="button"
+    >
+      OK
+    </button>
+  </dialog>
+</div>
+`;
+
+exports[`TxStatusModal should show pending status 1`] = `
+<div>
+  <dialog
+    class="overlay"
+  >
+    <div
+      class="MacLachlan transparent"
+    >
+      Identicon
+    </div>
+    <h1
+      class="heading"
+    >
+      Your transaction is being processed
+    </h1>
+    <button
+      class="confirm"
+      type="button"
+    >
+      OK
+    </button>
+  </dialog>
+</div>
+`;

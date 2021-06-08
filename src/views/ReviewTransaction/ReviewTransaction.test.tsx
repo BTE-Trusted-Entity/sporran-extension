@@ -14,6 +14,9 @@ describe('ReviewTransaction', () => {
         fee={new BN(1.25e7)}
         tip={new BN(0.01e15)}
         onSuccess={jest.fn()}
+        txPending={false}
+        txModalOpen={false}
+        handleCloseTxModal={jest.fn()}
       />,
     );
     expect(container).toMatchSnapshot();

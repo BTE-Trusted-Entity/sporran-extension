@@ -23,6 +23,9 @@
   "common_action_next": {
     "message": "Next Step"
   },
+  "common_action_confirm": {
+    "message": "OK"
+  },
   "component_Balance_label": {
     "message": "Total Balance: "
   },
@@ -166,6 +169,12 @@
   },
   "component_usePasteButton_paste": {
     "message": "Paste from clipboard"
+  },
+  "component_TxStatusModal_pending": {
+    "message": "Your transaction is being processed"
+  },
+  "component_TxStatusModal_success": {
+    "message": "Your transaction was successfully sent"
   },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
