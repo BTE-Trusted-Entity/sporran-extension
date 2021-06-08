@@ -13,7 +13,7 @@ export default {
 const account =
   accountsMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
-export function Template(): JSX.Element {
+export function TxPending(): JSX.Element {
   return (
     <TxStatusModal
       account={account}
