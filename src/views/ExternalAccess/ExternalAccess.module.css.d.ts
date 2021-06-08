@@ -1,7 +1,9 @@
 declare namespace ExternalAccessModuleCssNamespace {
   export interface IExternalAccessModuleCss {
+    allowed: string;
     back: string;
     container: string;
+    denied: string;
     heading: string;
     label: string;
     list: string;

@@ -87,6 +87,9 @@ export function ExternalAccess(): JSX.Element | null {
           <li key={hostName}>
             <label className={styles.label}>
               {hostName}
+              <span className={styles.denied} aria-hidden>
+                {t('view_ExternalAccess_denied')}
+              </span>
               <input
                 name={hostName}
                 className={styles.toggle}
@@ -95,6 +98,9 @@ export function ExternalAccess(): JSX.Element | null {
                 onClick={handleChange}
               />
               <span />
+              <span className={styles.allowed} aria-hidden>
+                {t('view_ExternalAccess_allowed')}
+              </span>
             </label>
           </li>
         ))}
