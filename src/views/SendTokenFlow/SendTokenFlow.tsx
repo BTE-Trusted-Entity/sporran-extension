@@ -37,7 +37,7 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
   const handleReviewTransactionSuccess = useCallback(
     async ({ password }) => {
       if (!amount || !tip || !recipient) {
-        return;
+        throw new Error('Missing transaction details');
       }
 
       await transferChannel.get({
@@ -47,10 +47,8 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
         tip,
         password,
       });
-
-      history.push(generatePath(paths.account.overview, { address }));
     },
-    [address, amount, history, recipient, tip],
+    [address, amount, recipient, tip],
   );
 
   return (
