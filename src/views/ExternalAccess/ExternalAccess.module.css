@@ -31,13 +31,23 @@
   composes: inputText from '../../components/Typography/Typography.module.css';
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin: 0.25rem 0;
   cursor: pointer;
 }
 
 .toggle {
   composes: toggle from '../../components/Toggle/Toggle.module.css';
+}
+
+.denied {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+
+.allowed {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  margin-left: 0.5rem;
 }
 
 .back {

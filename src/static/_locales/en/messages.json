@@ -629,6 +629,12 @@
   "view_ExternalAccess_small": {
     "message": "Website access"
   },
+  "view_ExternalAccess_denied": {
+    "message": "denied"
+  },
+  "view_ExternalAccess_allowed": {
+    "message": "allowed"
+  },
   "view_ExternalAccess_back": {
     "message": "Back to my accounts"
   }
