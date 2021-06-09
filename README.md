@@ -8,15 +8,15 @@
 1. Go to [actions page for "Packages the internal version"](https://github.com/KILTprotocol/sporran-extension/actions/workflows/publish.yaml).
 1. Click on the build you want to test.
 1. Download the extension file from the _Artifacts_ section at the bottom.
-1. Unpack the downloaded _.zip_ file and unpack the _sporran-internal.zip_ from it as well.
+1. Unpack the downloaded _.zip_ file and unpack the _sporran-1.0.0.zip_ from it as well.
 
 
 ### Getting the _public_ version of extension
 
 1. Go to [actions page for "Packages the public version"](https://github.com/KILTprotocol/sporran-extension/actions/workflows/stores.yaml).
-1. Click the button "???" to prepare the public version and wait for the workflow to finish.
-1. Download the extension file from the _Artifacts_ section at the bottom.
-1. Unpack the downloaded _.zip_ file and unpack the _sporran-public.zip_ from it as well.
+1. Click the buttons "Run workflow" -> "Run workflow" to prepare the public version and wait for the workflow to finish.
+1. Click the link for the just finished workflow and download the extension file from the _Artifacts_ section at the bottom.
+1. Unpack the downloaded _.zip_ file and unpack the _sporran-1.0.0.zip_ from it as well.
 
 
 ### Testing in [Chrome](https://developer.chrome.com/docs/extensions/mv2/getstarted/#manifest)
