@@ -175,6 +175,7 @@ interface Props {
     amount: BN;
     fee: BN;
     tip: BN;
+    existentialWarning?: boolean;
   }) => void;
 }
 
@@ -291,9 +292,31 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     (event) => {
       event.preventDefault();
 
-      if (!(recipient && fee && tipBN && numericAmount)) {
+      if (!(recipient && fee && tipBN && numericAmount && balance)) {
         return;
       }
+
+      const relevantBalance = balance.free.add(balance.locked);
+
+      const costs = fee.add(tipBN).add(amountBN);
+
+      const remainingBalance = relevantBalance.sub(costs);
+
+      if (
+        existential &&
+        remainingBalance.lt(existential) &&
+        !remainingBalance.isZero()
+      ) {
+        onSuccess({
+          recipient,
+          amount: numberToBN(numericAmount),
+          fee,
+          tip: tipBN.add(remainingBalance),
+          existentialWarning: true,
+        });
+        return;
+      }
+
       onSuccess({
         recipient,
         amount: numberToBN(numericAmount),
@@ -301,7 +324,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
         tip: tipBN,
       });
     },
-    [onSuccess, recipient, numericAmount, fee, tipBN],
+    [onSuccess, recipient, numericAmount, fee, tipBN, amountBN, balance],
   );
 
   if (isNew(account)) {

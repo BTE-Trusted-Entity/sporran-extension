@@ -9,11 +9,14 @@ import {
 } from '../../testing/testing';
 import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { mockFeeChannel } from '../../channels/feeChannel/feeChannel.mock';
+import { mockExistentialDepositChannel } from '../../channels/existentialDepositChannel/existentialDepositChannel.mock';
 import '../../components/usePasteButton/usePasteButton.mock';
 
 import { SendToken } from './SendToken';
 
 mockFeeChannel();
+
+mockExistentialDepositChannel();
 
 const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
@@ -62,6 +65,34 @@ describe('SendToken', () => {
     expect(values.amount.toString()).toEqual('1000000000000000');
     expect(values.fee.toString()).toEqual('100000000000000');
     expect(values.tip.toString()).toEqual('10000000000000');
+  });
+
+  it('should warn if balance will go below existential deposit', async () => {
+    const recipientAddress =
+      accounts['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL'].address;
+    const onSuccess = jest.fn();
+
+    render(<SendToken account={account} onSuccess={onSuccess} />);
+
+    userEvent.type(await screen.findByLabelText('Amount to send'), '1');
+    userEvent.type(
+      await screen.findByLabelText('Paste the recipient address here'),
+      recipientAddress,
+    );
+
+    const submit = await screen.findByRole('button', {
+      name: 'Review & Sign Transaction',
+    });
+    await runWithJSDOMErrorsDisabled(() => {
+      userEvent.click(submit);
+    });
+
+    expect(onSuccess).toHaveBeenCalled();
+
+    const values = onSuccess.mock.calls[0][0];
+
+    expect(values.existentialWarning).toBe(true);
+    expect(values.tip.toString()).toEqual('1000000000000000');
   });
 
   it('should report too small an amount', async () => {

@@ -634,5 +634,17 @@
   },
   "view_ExternalAccess_back": {
     "message": "Back to my accounts"
+  },
+  "view_ExistentialWarning_headline": {
+    "message": "Attention"
+  },
+  "view_ExistentialWarning_subline": {
+    "message": "Your account's remaining balance will be set to zero"
+  },
+  "view_ExistentialWarning_warning": {
+    "message": "This transaction would leave your balance below the existential deposit. Therefore the non-bonded balance of your account will be set to zero. The rest of your free balance will be added as a tip. Confirm to proceed with this transaction anyway."
+  },
+  "view_ExistentialWarning_confirm": {
+    "message": "Confirm"
   }
 }
