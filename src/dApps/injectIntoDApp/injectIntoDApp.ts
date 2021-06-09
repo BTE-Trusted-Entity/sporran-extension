@@ -9,10 +9,10 @@ const authenticate = debounceAsync<typeof injectedAccessChannel.get>((input) =>
   injectedAccessChannel.get(input),
 );
 
-export function injectIntoDApp(): void {
+export function injectIntoDApp(version: string): void {
   const sporranMeta = {
     name: 'Sporran', // manifest_name
-    version: '1.0.0', // TODO: version
+    version,
   };
 
   injectExtension(async (unsafeDAppName: string) => {

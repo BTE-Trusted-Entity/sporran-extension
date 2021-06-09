@@ -1,6 +1,8 @@
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
 import { useInitialEntries } from '../../utilities/popups/useInitialEntries';
+import { ConfigurationProvider } from '../../configuration/ConfigurationContext';
+import { useConfiguration } from '../../configuration/useConfiguration';
 import { AccountsProvider } from '../../utilities/accounts/AccountsContext';
 import { AddAccount } from '../../components/AddAccount/AddAccount';
 import { Settings } from '../../components/Settings/Settings';
@@ -17,6 +19,7 @@ import styles from './App.module.css';
 
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();
+  const { features } = useConfiguration();
 
   return (
     <div className={styles.container}>
@@ -30,9 +33,11 @@ export function App(): JSX.Element {
             <Welcome />
           </Route>
 
-          <Route path={paths.settings}>
-            <AppSettings />
-          </Route>
+          {features.endpoint && (
+            <Route path={paths.settings}>
+              <AppSettings />
+            </Route>
+          )}
 
           <Route path={paths.access}>
             <ExternalAccess />
@@ -53,8 +58,10 @@ export function App(): JSX.Element {
 
 export function AppWithProviders(): JSX.Element {
   return (
-    <AccountsProvider>
-      <App />
-    </AccountsProvider>
+    <ConfigurationProvider>
+      <AccountsProvider>
+        <App />
+      </AccountsProvider>
+    </ConfigurationProvider>
   );
 }

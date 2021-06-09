@@ -95,17 +95,6 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a
-            href="/settings"
-            role="menuitem"
-            tabindex="-1"
-          >
-            Custom endpoint
-          </a>
-        </li>
-        <li
-          class="listItem"
-        >
-          <a
             role="menuitem"
             tabindex="-1"
           >
@@ -133,6 +122,91 @@ exports[`Settings should render 1`] = `
       title="Settings"
       type="button"
     />
+  </div>
+</div>
+`;
+
+exports[`Settings should render the endpoint item in the internal build 1`] = `
+<div>
+  <div
+    class="wrapper"
+  >
+    <button
+      aria-expanded="true"
+      aria-haspopup="true"
+      aria-label="Settings"
+      class="toggle"
+      role="button"
+      tabindex="0"
+      title="Settings"
+      type="button"
+    />
+    <div
+      class="dropdown"
+      role="menu"
+    >
+      <h4
+        class="heading"
+      >
+        Settings
+      </h4>
+      <ul
+        class="list"
+      >
+        <li
+          class="listItem"
+        >
+          <a
+            role="menuitem"
+            tabindex="-1"
+          >
+            Terms & Conditions
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            role="menuitem"
+            tabindex="-1"
+          >
+            FAQ & Help
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            href="/access"
+            role="menuitem"
+            tabindex="-1"
+          >
+            Toggle website access
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            href="/settings"
+            role="menuitem"
+            tabindex="-1"
+          >
+            Custom endpoint
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            role="menuitem"
+            tabindex="-1"
+          >
+            Version 1.0.0
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 `;

@@ -23,7 +23,7 @@ export const browser = {
   i18n: {
     getMessage: setupGetMessageShim(messagesEN),
     getUILanguage(): string {
-      return 'en-US';
+      return document.documentElement.lang || 'en';
     },
   },
   storage: {

@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '../../testing/testing';
 import { AccountsProviderMock } from '../../utilities/accounts/AccountsProvider.mock';
 import { waitForHasSavedPasswords } from '../../channels/SavedPasswordsChannels/hasSavedPasswords.mock';
+import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
 import { Settings } from './Settings';
 
 describe('Settings', () => {
@@ -78,5 +79,20 @@ describe('Settings', () => {
     ).not.toBeInTheDocument();
 
     await waitForHasSavedPasswords();
+  });
+
+  it('should render the endpoint item in the internal build', async () => {
+    const { container } = render(
+      <InternalConfigurationContext>
+        <Settings />
+      </InternalConfigurationContext>,
+    );
+    userEvent.click(await screen.findByLabelText('Settings'));
+
+    expect(
+      await screen.findByRole('menuitem', { name: 'Custom endpoint' }),
+    ).toBeInTheDocument();
+
+    expect(container).toMatchSnapshot();
   });
 });

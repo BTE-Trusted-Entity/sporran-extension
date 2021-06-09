@@ -4,6 +4,7 @@ import { act, render as externalRender } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import dialogPolyfill from 'dialog-polyfill';
 
+import { ConfigurationProvider } from '../configuration/ConfigurationContext';
 import { AccountsProviderMock } from '../utilities/accounts/AccountsProvider.mock';
 import { Identicon } from '../components/Avatar/Identicon';
 import { mockBalanceChangeChannel } from '../channels/balanceChangeChannel/mockBalanceChangeChannel';
@@ -24,9 +25,11 @@ export function render(
   options?: Parameters<typeof externalRender>[1],
 ): ReturnType<typeof externalRender> {
   return externalRender(
-    <AccountsProviderMock>
-      <MemoryRouter>{ui}</MemoryRouter>
-    </AccountsProviderMock>,
+    <ConfigurationProvider>
+      <AccountsProviderMock>
+        <MemoryRouter>{ui}</MemoryRouter>
+      </AccountsProviderMock>
+    </ConfigurationProvider>,
     options,
   );
 }

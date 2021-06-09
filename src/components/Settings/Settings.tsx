@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { Link, useRouteMatch } from 'react-router-dom';
@@ -8,10 +8,29 @@ import {
   forgetAllPasswordsChannel,
   hasSavedPasswordsChannel,
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
+import { useConfiguration } from '../../configuration/useConfiguration';
 import { generatePath, paths } from '../../views/paths';
 
 import menuStyles from '../Menu/Menu.module.css';
 import styles from './Settings.module.css';
+
+function useItemsCount(onExistingAccount: boolean, hasPasswords: boolean) {
+  const { features } = useConfiguration();
+
+  const itemCounts = {
+    generic: 4,
+    endpoint: features.endpoint ? 1 : 0,
+    account: onExistingAccount ? 2 : 0,
+    forgetPasswords: onExistingAccount && hasPasswords ? 1 : 0,
+  };
+
+  return (
+    itemCounts.generic +
+    itemCounts.endpoint +
+    itemCounts.account +
+    itemCounts.forgetPasswords
+  );
+}
 
 export function Settings(): JSX.Element {
   const t = browser.i18n.getMessage;
@@ -23,16 +42,14 @@ export function Settings(): JSX.Element {
   const accounts = useAccounts().data;
   const onExistingAccount = Boolean(accounts?.[address]);
 
-  const countForAccount = hasPasswords ? 8 : 7;
-  const count = onExistingAccount ? countForAccount : 5;
+  const { version, features } = useConfiguration();
+
+  const count = useItemsCount(onExistingAccount, hasPasswords);
   const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(count);
 
   const handleClick = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);
-
-  // TODO - move version number to config
-  const VERSION_NUMBER = '1.0.0';
 
   useEffect(() => {
     (async () => {
@@ -118,15 +135,17 @@ export function Settings(): JSX.Element {
               </Link>
             </li>
 
-            <li className={menuStyles.listItem}>
-              <Link to={paths.settings} {...itemProps.shift()}>
-                {t('component_Settings_endpoint')}
-              </Link>
-            </li>
+            {features.endpoint && (
+              <li className={menuStyles.listItem}>
+                <Link to={paths.settings} {...itemProps.shift()}>
+                  {t('component_Settings_endpoint')}
+                </Link>
+              </li>
+            )}
 
             <li className={menuStyles.listItem}>
               <a {...itemProps.shift()}>
-                {t('component_Settings_version', [VERSION_NUMBER])}
+                {t('component_Settings_version', [version])}
               </a>
             </li>
           </ul>
