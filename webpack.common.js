@@ -1,3 +1,4 @@
+import webpack from 'webpack';
 import path from 'path';
 import CopyPlugin from 'copy-webpack-plugin';
 
@@ -55,6 +56,9 @@ export default {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.module.css', '.json'],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      VARIANT: JSON.stringify(process.env.VARIANT),
+    }),
     new CopyPlugin({
       patterns: [
         {

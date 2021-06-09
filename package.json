@@ -62,6 +62,7 @@
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-controls": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
+    "@storybook/addon-toolbars": "^6.2.9",
     "@storybook/addon-viewport": "^6.2.9",
     "@storybook/addons": "^6.2.9",
     "@storybook/react": "^6.2.9",

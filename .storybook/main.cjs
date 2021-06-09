@@ -7,6 +7,7 @@ module.exports = {
     '@storybook/addon-actions/register',
     '@storybook/addon-viewport/register',
     '@storybook/addon-controls/register',
+    '@storybook/addon-toolbars/register',
   ],
   typescript: {
     reactDocgen: 'none', // current version doesn’t work with recent TS
