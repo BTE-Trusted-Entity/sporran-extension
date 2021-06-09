@@ -1,3 +1,4 @@
+import BN from 'bn.js';
 import userEvent from '@testing-library/user-event';
 
 import { NEW } from '../../utilities/accounts/accounts';
@@ -9,14 +10,22 @@ import {
 } from '../../testing/testing';
 import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { mockFeeChannel } from '../../channels/feeChannel/feeChannel.mock';
-import { mockExistentialDepositChannel } from '../../channels/existentialDepositChannel/existentialDepositChannel.mock';
 import '../../components/usePasteButton/usePasteButton.mock';
 
 import { SendToken } from './SendToken';
 
 mockFeeChannel();
 
-mockExistentialDepositChannel();
+jest.mock(
+  '../../channels/existentialDepositChannel/existentialDepositChannel',
+  () => ({
+    existentialDepositChannel: {
+      async get() {
+        return new BN('100000000000000');
+      },
+    },
+  }),
+);
 
 const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
@@ -74,7 +83,7 @@ describe('SendToken', () => {
 
     render(<SendToken account={account} onSuccess={onSuccess} />);
 
-    userEvent.type(await screen.findByLabelText('Amount to send'), '1');
+    userEvent.type(await screen.findByLabelText('Amount to send'), '1.1');
     userEvent.type(
       await screen.findByLabelText('Paste the recipient address here'),
       recipientAddress,
@@ -92,7 +101,7 @@ describe('SendToken', () => {
     const values = onSuccess.mock.calls[0][0];
 
     expect(values.existentialWarning).toBe(true);
-    expect(values.tip.toString()).toEqual('1000000000000000');
+    expect(values.tip.toString()).toEqual('29000000000000');
   });
 
   it('should report too small an amount', async () => {
