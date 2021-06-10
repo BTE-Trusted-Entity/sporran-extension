@@ -11,9 +11,9 @@ jest.unmock('./balanceChangeChannel');
 
 const originalBalancesMock = {
   free: new BN(1.226e15),
-  reserved: new BN(0.005e15),
-  miscFrozen: new BN(0.002e15),
-  feeFrozen: new BN(0.001e15),
+  miscFrozen: new BN(0.004e15),
+  feeFrozen: new BN(0.006e15),
+  reserved: new BN(0.008e15),
 };
 
 describe('balanceChangeChannel', () => {
