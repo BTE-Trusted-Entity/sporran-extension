@@ -229,24 +229,18 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   const amountWithCosts = totalFee.add(amountBN);
 
-  const remainingBalance = useMemo(
-    () => (relevantBalance ? relevantBalance.sub(amountWithCosts) : new BN(0)),
-    [amountWithCosts, relevantBalance],
-  );
+  const remainingBalance = relevantBalance
+    ? relevantBalance.sub(amountWithCosts)
+    : new BN(0);
 
   const remainingAsTip = tipBN.add(remainingBalance);
 
-  const [existentialWarning, setExistentialWarning] = useState(false);
-
-  useEffect(() => {
-    if (
-      existential &&
-      remainingBalance.lt(existential) &&
-      !remainingBalance.isZero()
-    ) {
-      setExistentialWarning(true);
-    }
-  }, [remainingBalance]);
+  const existentialWarning =
+    existential &&
+    remainingBalance.lt(existential) &&
+    !remainingBalance.isZero()
+      ? true
+      : false;
 
   const totalError =
     maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
