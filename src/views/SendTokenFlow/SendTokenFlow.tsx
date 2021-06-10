@@ -30,14 +30,10 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
       setFee(values.fee);
       setTip(values.tip);
 
-      if (values.existentialWarning) {
-        history.push(
-          generatePath(paths.account.send.warnings.existential, { address }),
-        );
-        return;
-      }
-
-      history.push(generatePath(paths.account.send.review, { address }));
+      const nextPath = values.existentialWarning
+        ? paths.account.send.warning
+        : paths.account.send.review;
+      history.push(generatePath(nextPath, { address }));
     },
     [address, history],
   );
@@ -61,7 +57,7 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
 
   return (
     <Switch>
-      <Route path={paths.account.send.warnings.existential}>
+      <Route path={paths.account.send.warning}>
         <ExistentialWarning
           path={generatePath(paths.account.send.review, { address })}
         />

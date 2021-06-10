@@ -186,6 +186,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const [fee, setFee] = useState<BN | null>(null);
 
   const balance = useAddressBalance(account.address);
+  const relevantBalance = balance && balance.free.add(balance.locked);
   const maximum = balance && fee ? balance.free.sub(fee) : null;
 
   const [recipient, setRecipient] = useState('');
@@ -225,6 +226,27 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     return numberToBN(roundedTip);
   }, [numericAmount, tipPercents]);
   const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
+
+  const amountWithCosts = totalFee.add(amountBN);
+
+  const remainingBalance = useMemo(
+    () => (relevantBalance ? relevantBalance.sub(amountWithCosts) : new BN(0)),
+    [amountWithCosts, relevantBalance],
+  );
+
+  const remainingAsTip = tipBN.add(remainingBalance);
+
+  const [existentialWarning, setExistentialWarning] = useState(false);
+
+  useEffect(() => {
+    if (
+      existential &&
+      remainingBalance.lt(existential) &&
+      !remainingBalance.isZero()
+    ) {
+      setExistentialWarning(true);
+    }
+  }, [remainingBalance]);
 
   const totalError =
     maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
@@ -292,39 +314,37 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     (event) => {
       event.preventDefault();
 
-      if (!(recipient && fee && tipBN && numericAmount && balance)) {
+      if (!(recipient && fee && tipBN && numericAmount)) {
         return;
       }
 
-      const relevantBalance = balance.free.add(balance.locked);
-
-      const costs = fee.add(tipBN).add(amountBN);
-
-      const remainingBalance = relevantBalance.sub(costs);
-
-      if (
-        existential &&
-        remainingBalance.lt(existential) &&
-        !remainingBalance.isZero()
-      ) {
-        onSuccess({
-          recipient,
-          amount: numberToBN(numericAmount),
-          fee,
-          tip: tipBN.add(remainingBalance),
-          existentialWarning: true,
-        });
-        return;
-      }
+      //   onSuccess({
+      //     recipient,
+      //     amount: numberToBN(numericAmount),
+      //     fee,
+      //     tip: tipBN.add(remainingBalance),
+      //     existentialWarning: true,
+      //   });
+      //   return;
+      // }
 
       onSuccess({
         recipient,
         amount: numberToBN(numericAmount),
         fee,
-        tip: tipBN,
+        tip: existentialWarning ? remainingAsTip : tipBN,
+        existentialWarning,
       });
     },
-    [onSuccess, recipient, numericAmount, fee, tipBN, amountBN, balance],
+    [
+      onSuccess,
+      recipient,
+      numericAmount,
+      fee,
+      remainingAsTip,
+      tipBN,
+      existentialWarning,
+    ],
   );
 
   if (isNew(account)) {

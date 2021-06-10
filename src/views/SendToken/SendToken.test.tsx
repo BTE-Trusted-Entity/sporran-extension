@@ -77,8 +77,7 @@ describe('SendToken', () => {
   });
 
   it('should warn if balance will go below existential deposit', async () => {
-    const recipientAddress =
-      accounts['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL'].address;
+    const recipientAddress = '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL';
     const onSuccess = jest.fn();
 
     render(<SendToken account={account} onSuccess={onSuccess} />);
