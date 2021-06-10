@@ -18,7 +18,7 @@ exports[`ExistentialWarning should render with link to review screen 1`] = `
     <p
       class="warning"
     >
-      This transaction would leave your balance below the existential deposit. Therefore the non-bonded balance of your account will be set to zero. The rest of your free balance will be added as a tip. Confirm to proceed with this transaction anyway.
+      This transaction would leave your balance below the existential deposit. Therefore the balance of your account will be set to zero. The rest of your balance will be added as a tip. Confirm to proceed with this transaction anyway.
     </p>
     <p
       class="buttonsLine"
