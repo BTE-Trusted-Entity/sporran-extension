@@ -186,7 +186,6 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const [fee, setFee] = useState<BN | null>(null);
 
   const balance = useAddressBalance(account.address);
-  const relevantBalance = balance && balance.free.add(balance.locked);
   const maximum = balance && fee ? balance.free.sub(fee) : null;
 
   const [recipient, setRecipient] = useState('');
@@ -229,11 +228,12 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   const amountWithCosts = totalFee.add(amountBN);
 
-  const remainingBalance = relevantBalance
-    ? relevantBalance.sub(amountWithCosts)
+  const remainingBalance = balance
+    ? balance.total.sub(amountWithCosts)
     : new BN(0);
 
-  const remainingAsTip = tipBN.add(remainingBalance);
+  const useableRemainingBalance =
+    balance && remainingBalance.sub(balance.bonded);
 
   const existentialWarning =
     existential &&
@@ -310,11 +310,16 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
         return;
       }
 
+      const useableRemainingAsTip =
+        useableRemainingBalance && useableRemainingBalance.gtn(0)
+          ? tipBN.add(useableRemainingBalance)
+          : new BN(0);
+
       onSuccess({
         recipient,
         amount: numberToBN(numericAmount),
         fee,
-        tip: existentialWarning ? remainingAsTip : tipBN,
+        tip: existentialWarning ? useableRemainingAsTip : tipBN,
         existentialWarning,
       });
     },
@@ -323,8 +328,8 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
       recipient,
       numericAmount,
       fee,
-      remainingAsTip,
       tipBN,
+      useableRemainingBalance,
       existentialWarning,
     ],
   );
