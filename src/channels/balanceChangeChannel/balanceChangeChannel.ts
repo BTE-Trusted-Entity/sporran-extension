@@ -6,9 +6,9 @@ import { ErrorFirstCallback } from '../base/types';
 
 interface Balances {
   free: BN;
-  reserved: BN;
   miscFrozen: BN;
   feeFrozen: BN;
+  reserved: BN;
 }
 
 type BalanceChangeInput = string;
@@ -17,8 +17,8 @@ export interface BalanceChangeOutput {
   address: string;
   balances: {
     free: BN;
-    bonded: BN;
     locked: BN;
+    bonded: BN;
     total: BN;
   };
 }
@@ -27,8 +27,8 @@ export interface JsonChangeOutput {
   address: string;
   balances: {
     free: string;
-    bonded: string;
     locked: string;
+    bonded: string;
     total: string;
   };
 }
@@ -41,8 +41,8 @@ const transform = {
     address,
     balances: {
       free: free.toString(),
-      bonded: bonded.toString(),
       locked: locked.toString(),
+      bonded: bonded.toString(),
       total: total.toString(),
     },
   }),
@@ -53,8 +53,8 @@ const transform = {
     address,
     balances: {
       free: new BN(free),
-      bonded: new BN(bonded),
       locked: new BN(locked),
+      bonded: new BN(bonded),
       total: new BN(total),
     },
   }),
@@ -73,14 +73,14 @@ export function computeBalance(
 ): BalanceChangeOutput {
   const { free, reserved, miscFrozen, feeFrozen } = balances;
   const locked = miscFrozen.add(feeFrozen);
-  const total = free.add(reserved).add(locked);
+  const total = free.add(reserved);
 
   return {
     address,
     balances: {
-      bonded: reserved,
       free,
       locked,
+      bonded: reserved,
       total,
     },
   };
