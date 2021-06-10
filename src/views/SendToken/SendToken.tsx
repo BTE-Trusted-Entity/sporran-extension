@@ -238,9 +238,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const existentialWarning =
     existential &&
     remainingBalance.lt(existential) &&
-    !remainingBalance.isZero()
-      ? true
-      : false;
+    !remainingBalance.isZero();
 
   const totalError =
     maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
