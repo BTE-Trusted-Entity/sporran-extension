@@ -318,16 +318,6 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
         return;
       }
 
-      //   onSuccess({
-      //     recipient,
-      //     amount: numberToBN(numericAmount),
-      //     fee,
-      //     tip: tipBN.add(remainingBalance),
-      //     existentialWarning: true,
-      //   });
-      //   return;
-      // }
-
       onSuccess({
         recipient,
         amount: numberToBN(numericAmount),
