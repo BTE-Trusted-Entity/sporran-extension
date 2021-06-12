@@ -7,7 +7,7 @@ import BN from 'bn.js';
 
 import { decryptAccount } from '../../utilities/accounts/accounts';
 import { originalBalancesMock } from '../balanceChangeChannel/balanceChangeChannel.mock';
-import { hasVestedFunds, vest } from './VestingChannels';
+import { getVestingFee, hasVestedFunds, vest } from './VestingChannels';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: {
@@ -39,7 +39,7 @@ const txMock = {
 };
 
 const queryInfoMock = {
-  partialFee: new BN(125000000),
+  partialFee: new BN(0.5e15),
 };
 
 const apiMock = {
@@ -53,7 +53,7 @@ const apiMock = {
     payment: { queryInfo: jest.fn().mockResolvedValue(queryInfoMock) },
   },
   consts: {
-    balances: { existentialDeposit: new BN(500) },
+    balances: { existentialDeposit: new BN(1e15) },
   },
 };
 
@@ -70,6 +70,19 @@ describe('VestingChannels', () => {
       expect(BlockchainApiConnection.getConnectionOrConnect).toHaveBeenCalled();
     });
   });
+
+  describe('vestingFee', () => {
+    it('should respond to proper message', async () => {
+      const vestingFee = await getVestingFee();
+
+      expect(apiMock.rpc.payment.queryInfo).toHaveBeenCalledWith(
+        'hex transaction',
+      );
+
+      expect(vestingFee).toEqual(new BN(0.5e15));
+    });
+  });
+
   describe('vest', () => {
     it('should respond to proper message', async () => {
       const identityMock = {
@@ -95,6 +108,10 @@ describe('VestingChannels', () => {
         identityMock,
         expect.anything(),
       );
+
+      expect(
+        (BlockchainUtils.signAndSubmitTx as jest.Mock).mock.calls[0][2],
+      ).toMatchObject({ tip: new BN(0.726e15) });
     });
   });
 });

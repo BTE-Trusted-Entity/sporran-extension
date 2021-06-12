@@ -14,7 +14,6 @@ import {
 import {
   vestChannel,
   insufficientFunds,
-  existentialError,
 } from '../../channels/VestingChannels/VestingChannels';
 
 import { Avatar } from '../../components/Avatar/Avatar';
@@ -85,9 +84,6 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
         }
         if (error.message === insufficientFunds) {
           setError(t('view_UnlockVestedFunds_insufficient_funds'));
-        }
-        if (error.message === existentialError) {
-          // TODO: https://kiltprotocol.atlassian.net/browse/SK-211
         }
       }
     },

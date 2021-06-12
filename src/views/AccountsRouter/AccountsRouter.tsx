@@ -10,12 +10,11 @@ import {
 import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
 import { CreateAccount } from '../CreateAccount/CreateAccount';
 import { ImportAccount } from '../ImportAccount/ImportAccount';
-import { AccountOverview } from '../AccountOverview/AccountOverview';
+import { AccountOverviewFlow } from '../AccountOverviewFlow/AccountOverviewFlow';
 import { ResetAccount } from '../ResetAccount/ResetAccount';
 import { RemoveAccount } from '../RemoveAccount/RemoveAccount';
 import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
 import { AccountCredentials } from '../AccountCredentials/AccountCredentials';
-import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 import { paths } from '../paths';
 
 interface Props {
@@ -58,12 +57,8 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
           <ResetAccount account={account} />
         </Route>
 
-        <Route path={paths.account.vest}>
-          <UnlockVestedFunds account={account} />
-        </Route>
-
         <Route path={paths.account.overview}>
-          <AccountOverview account={account} />
+          <AccountOverviewFlow account={account} />
         </Route>
       </Switch>
     </>

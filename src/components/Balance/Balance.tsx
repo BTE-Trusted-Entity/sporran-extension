@@ -11,7 +11,11 @@ import {
   balanceChangeChannel,
   BalanceChangeOutput,
 } from '../../channels/balanceChangeChannel/balanceChangeChannel';
-import { hasVestedFundsChannel } from '../../channels/VestingChannels/VestingChannels';
+import {
+  hasVestedFundsChannel,
+  vestingFeeChannel,
+} from '../../channels/VestingChannels/VestingChannels';
+import { existentialDepositChannel } from '../../channels/existentialDepositChannel/existentialDepositChannel';
 
 import styles from './Balance.module.css';
 
@@ -69,6 +73,32 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
     setShowBreakdown(false);
   }, []);
 
+  const [existentialDeposit, setExistentialDeposit] = useState<BN>();
+  const [vestingFee, setVestingFee] = useState<BN>();
+
+  useEffect(() => {
+    (async () => {
+      const fee = await vestingFeeChannel.get();
+      const existential = await existentialDepositChannel.get();
+      setVestingFee(fee);
+      setExistentialDeposit(existential);
+    })();
+  }, []);
+
+  const remainingBalance =
+    balance && vestingFee ? balance.total.sub(vestingFee) : new BN(0);
+
+  const existentialWarning =
+    balance &&
+    existentialDeposit &&
+    vestingFee &&
+    balance.total.sub(vestingFee).lt(existentialDeposit) &&
+    !remainingBalance.isZero();
+
+  const vestingPath = existentialWarning
+    ? paths.account.vest.warning
+    : paths.account.vest.sign;
+
   return (
     <>
       <p className={styles.balanceLine}>
@@ -115,7 +145,7 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
           </ul>
           <Link
             onClick={(event) => updateDisabled && event.preventDefault()}
-            to={generatePath(paths.account.vest, { address })}
+            to={generatePath(vestingPath, { address })}
             className={styles.update}
             aria-disabled={updateDisabled}
             title={

@@ -29,6 +29,7 @@ import { initBackgroundGenesisHashChannel } from './dApps/genesisHashChannel/ini
 
 import {
   initBackgroundHasVestedFundsChannel,
+  initBackgroundVestingFeeChannel,
   initBackgroundVestChannel,
 } from './channels/VestingChannels/VestingChannels';
 
@@ -56,6 +57,7 @@ function initExtensionPopupMessages() {
 
 function initVestingChannels() {
   initBackgroundHasVestedFundsChannel();
+  initBackgroundVestingFeeChannel();
   initBackgroundVestChannel();
 }
 
