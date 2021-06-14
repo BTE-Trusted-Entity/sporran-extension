@@ -224,14 +224,25 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
     return numberToBN(roundedTip);
   }, [numericAmount, tipPercents]);
-  const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
+  const totalFee = useMemo(
+    () => (fee && tipBN ? fee.add(tipBN) : new BN(0)),
+    [fee, tipBN],
+  );
 
-  const amountWithCosts = totalFee.add(amountBN);
+  const amountWithCosts = useMemo(
+    () => totalFee.add(amountBN),
+    [amountBN, totalFee],
+  );
 
-  const remainingBalance = balance && balance.total.sub(amountWithCosts);
+  const remainingBalance = useMemo(
+    () => balance && balance.total.sub(amountWithCosts),
+    [balance, amountWithCosts],
+  );
 
-  const usableRemainingBalance =
-    balance && remainingBalance && remainingBalance.sub(balance.bonded);
+  const usableRemainingBalance = useMemo(
+    () => balance && remainingBalance && remainingBalance.sub(balance.bonded),
+    [remainingBalance, balance],
+  );
 
   const existentialWarning =
     existential &&
