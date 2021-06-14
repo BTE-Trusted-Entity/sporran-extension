@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
@@ -85,15 +85,18 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
     })();
   }, []);
 
-  const remainingBalance =
-    balance && vestingFee ? balance.total.sub(vestingFee) : new BN(0);
+  const existentialWarning = useMemo(() => {
+    if (!(balance && vestingFee && existentialDeposit)) {
+      return false;
+    }
 
-  const existentialWarning =
-    balance &&
-    existentialDeposit &&
-    vestingFee &&
-    balance.total.sub(vestingFee).lt(existentialDeposit) &&
-    !remainingBalance.isZero();
+    const remainingBalance = balance.total.sub(vestingFee);
+
+    return (
+      balance.total.sub(vestingFee).lt(existentialDeposit) &&
+      !remainingBalance.isZero()
+    );
+  }, [balance, existentialDeposit, vestingFee]);
 
   const vestingPath = existentialWarning
     ? paths.account.vest.warning
