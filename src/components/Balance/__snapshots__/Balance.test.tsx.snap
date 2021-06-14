@@ -68,7 +68,7 @@ exports[`Balance should show balance breakdown with update balance button 1`] = 
       <span
         class="amount"
       >
-        0.0030
+        0.0100
          
         <span
           aria-label="Kilt coin"
@@ -83,7 +83,7 @@ exports[`Balance should show balance breakdown with update balance button 1`] = 
       <span
         class="amount"
       >
-        0.0050
+        0.0080
          
         <span
           aria-label="Kilt coin"
