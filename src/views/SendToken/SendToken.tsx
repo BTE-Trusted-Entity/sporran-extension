@@ -239,10 +239,13 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     remainingBalance.lt(existential) &&
     !remainingBalance.isZero();
 
-  const finalTip =
-    existentialWarning && usableRemainingBalance?.gtn?.(0)
-      ? tipBN.add(usableRemainingBalance)
-      : tipBN;
+  const finalTip = useMemo(
+    () =>
+      existentialWarning && usableRemainingBalance?.gtn?.(0)
+        ? tipBN.add(usableRemainingBalance)
+        : tipBN,
+    [existentialWarning, usableRemainingBalance, tipBN],
+  );
 
   const totalError =
     maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
