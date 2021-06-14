@@ -239,6 +239,11 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     remainingBalance.lt(existential) &&
     !remainingBalance.isZero();
 
+  const finalTip =
+    existentialWarning && usableRemainingBalance?.gtn?.(0)
+      ? tipBN.add(usableRemainingBalance)
+      : tipBN;
+
   const totalError =
     maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
 
@@ -305,31 +310,19 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     (event) => {
       event.preventDefault();
 
-      if (!(recipient && fee && tipBN && numericAmount)) {
+      if (!(recipient && fee && finalTip && numericAmount)) {
         return;
       }
-
-      const usableRemainingAsTip = usableRemainingBalance?.gtn?.(0)
-        ? tipBN.add(usableRemainingBalance)
-        : new BN(0);
 
       onSuccess({
         recipient,
         amount: numberToBN(numericAmount),
         fee,
-        tip: existentialWarning ? usableRemainingAsTip : tipBN,
+        tip: finalTip,
         existentialWarning: Boolean(existentialWarning),
       });
     },
-    [
-      onSuccess,
-      recipient,
-      numericAmount,
-      fee,
-      tipBN,
-      usableRemainingBalance,
-      existentialWarning,
-    ],
+    [onSuccess, recipient, numericAmount, fee, existentialWarning, finalTip],
   );
 
   if (isNew(account)) {
