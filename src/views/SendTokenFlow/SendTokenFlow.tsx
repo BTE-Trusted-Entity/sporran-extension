@@ -6,6 +6,7 @@ import { transferChannel } from '../../channels/transferChannel/transferChannel'
 import { Account } from '../../utilities/accounts/types';
 import { ReviewTransaction } from '../ReviewTransaction/ReviewTransaction';
 import { SendToken } from '../SendToken/SendToken';
+import { ExistentialWarning } from '../ExistentialWarning/ExistentialWarning';
 import { generatePath, paths } from '../paths';
 
 interface Props {
@@ -29,7 +30,10 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
       setFee(values.fee);
       setTip(values.tip);
 
-      history.push(generatePath(paths.account.send.review, { address }));
+      const nextPath = values.existentialWarning
+        ? paths.account.send.warning
+        : paths.account.send.review;
+      history.push(generatePath(nextPath, { address }));
     },
     [address, history],
   );
@@ -53,6 +57,12 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
 
   return (
     <Switch>
+      <Route path={paths.account.send.warning}>
+        <ExistentialWarning
+          path={generatePath(paths.account.send.review, { address })}
+        />
+      </Route>
+
       <Route path={paths.account.send.review}>
         {recipient && amount && fee && tip ? (
           <ReviewTransaction

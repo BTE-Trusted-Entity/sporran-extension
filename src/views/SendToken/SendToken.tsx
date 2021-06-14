@@ -175,6 +175,7 @@ interface Props {
     amount: BN;
     fee: BN;
     tip: BN;
+    existentialWarning: boolean;
   }) => void;
 }
 
@@ -223,7 +224,33 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
     return numberToBN(roundedTip);
   }, [numericAmount, tipPercents]);
-  const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
+
+  const { totalFee, existentialWarning, finalTip } = useMemo(() => {
+    const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
+
+    const amountWithCosts = totalFee.add(amountBN);
+
+    if (!balance) {
+      return { totalFee };
+    }
+
+    const remainingBalance = balance.total.sub(amountWithCosts);
+
+    const usableRemainingBalance = remainingBalance.sub(balance.bonded);
+
+    const existentialWarning =
+      existential &&
+      remainingBalance &&
+      remainingBalance.lt(existential) &&
+      !remainingBalance.isZero();
+
+    const finalTip =
+      existentialWarning && usableRemainingBalance?.gtn?.(0)
+        ? tipBN.add(usableRemainingBalance)
+        : tipBN;
+
+    return { totalFee, existentialWarning, finalTip };
+  }, [amountBN, balance, fee, tipBN]);
 
   const totalError =
     maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
@@ -291,17 +318,19 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     (event) => {
       event.preventDefault();
 
-      if (!(recipient && fee && tipBN && numericAmount)) {
+      if (!(recipient && fee && finalTip && numericAmount)) {
         return;
       }
+
       onSuccess({
         recipient,
         amount: numberToBN(numericAmount),
         fee,
-        tip: tipBN,
+        tip: finalTip,
+        existentialWarning: Boolean(existentialWarning),
       });
     },
-    [onSuccess, recipient, numericAmount, fee, tipBN],
+    [onSuccess, recipient, numericAmount, fee, existentialWarning, finalTip],
   );
 
   if (isNew(account)) {

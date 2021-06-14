@@ -25,6 +25,7 @@ export const paths = {
     send: {
       start: '/account/:address/send',
       review: '/account/:address/send/review',
+      warning: '/account/:address/send/warning',
     },
     receive: '/account/:address/receive',
     credentials: '/account/:address/credentials',
