@@ -18,7 +18,7 @@ function useItemsCount(onExistingAccount: boolean, hasPasswords: boolean) {
   const { features } = useConfiguration();
 
   const itemCounts = {
-    generic: 4,
+    generic: 3,
     endpoint: features.endpoint ? 1 : 0,
     account: onExistingAccount ? 2 : 0,
     forgetPasswords: onExistingAccount && hasPasswords ? 1 : 0,
@@ -122,11 +122,6 @@ export function Settings(): JSX.Element {
               <a {...itemProps.shift()}>
                 {t('component_Settings_terms_and_conditions')}
               </a>
-            </li>
-
-            <li className={menuStyles.listItem}>
-              {/* TODO: link to FAQ */}
-              <a {...itemProps.shift()}>{t('component_Settings_faq')}</a>
             </li>
 
             <li className={menuStyles.listItem}>

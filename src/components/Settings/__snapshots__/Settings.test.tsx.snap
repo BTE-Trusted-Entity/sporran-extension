@@ -74,16 +74,6 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a
-            role="menuitem"
-            tabindex="-1"
-          >
-            FAQ & Help
-          </a>
-        </li>
-        <li
-          class="listItem"
-        >
-          <a
             href="/access"
             role="menuitem"
             tabindex="-1"
@@ -161,16 +151,6 @@ exports[`Settings should render the endpoint item in the internal build 1`] = `
             tabindex="-1"
           >
             Terms & Conditions
-          </a>
-        </li>
-        <li
-          class="listItem"
-        >
-          <a
-            role="menuitem"
-            tabindex="-1"
-          >
-            FAQ & Help
           </a>
         </li>
         <li
