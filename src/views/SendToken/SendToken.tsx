@@ -224,39 +224,30 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
     return numberToBN(roundedTip);
   }, [numericAmount, tipPercents]);
-  const totalFee = useMemo(
-    () => (fee && tipBN ? fee.add(tipBN) : new BN(0)),
-    [fee, tipBN],
-  );
 
-  const amountWithCosts = useMemo(
-    () => totalFee.add(amountBN),
-    [amountBN, totalFee],
-  );
+  const { totalFee, existentialWarning, finalTip } = useMemo(() => {
+    const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
-  const remainingBalance = useMemo(
-    () => balance && balance.total.sub(amountWithCosts),
-    [balance, amountWithCosts],
-  );
+    const amountWithCosts = totalFee.add(amountBN);
 
-  const usableRemainingBalance = useMemo(
-    () => balance && remainingBalance && remainingBalance.sub(balance.bonded),
-    [remainingBalance, balance],
-  );
+    const remainingBalance = balance && balance.total.sub(amountWithCosts);
 
-  const existentialWarning =
-    existential &&
-    remainingBalance &&
-    remainingBalance.lt(existential) &&
-    !remainingBalance.isZero();
+    const usableRemainingBalance =
+      balance && remainingBalance && remainingBalance.sub(balance.bonded);
 
-  const finalTip = useMemo(
-    () =>
+    const existentialWarning =
+      existential &&
+      remainingBalance &&
+      remainingBalance.lt(existential) &&
+      !remainingBalance.isZero();
+
+    const finalTip =
       existentialWarning && usableRemainingBalance?.gtn?.(0)
         ? tipBN.add(usableRemainingBalance)
-        : tipBN,
-    [existentialWarning, usableRemainingBalance, tipBN],
-  );
+        : tipBN;
+
+    return { totalFee, existentialWarning, finalTip };
+  }, [amountBN, balance, fee, tipBN]);
 
   const totalError =
     maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
