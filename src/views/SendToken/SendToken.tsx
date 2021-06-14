@@ -230,10 +230,13 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
     const amountWithCosts = totalFee.add(amountBN);
 
-    const remainingBalance = balance && balance.total.sub(amountWithCosts);
+    if (!balance) {
+      return { totalFee };
+    }
 
-    const usableRemainingBalance =
-      balance && remainingBalance && remainingBalance.sub(balance.bonded);
+    const remainingBalance = balance.total.sub(amountWithCosts);
+
+    const usableRemainingBalance = remainingBalance.sub(balance.bonded);
 
     const existentialWarning =
       existential &&
