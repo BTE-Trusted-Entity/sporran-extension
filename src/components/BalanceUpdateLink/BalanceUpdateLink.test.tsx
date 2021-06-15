@@ -2,13 +2,13 @@ import BN from 'bn.js';
 
 import { render, screen } from '../../testing/testing';
 
-import { BalanceUpdateLink } from './BalanceUpdateLink';
-
 import { existentialDepositChannel } from '../../channels/existentialDepositChannel/existentialDepositChannel';
 import {
   hasVestedFundsChannel,
   vestingFeeChannel,
 } from '../../channels/VestingChannels/VestingChannels';
+
+import { BalanceUpdateLink } from './BalanceUpdateLink';
 
 const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 
@@ -25,9 +25,7 @@ describe('BalanceUpdateLink', () => {
     (existentialDepositChannel.get as jest.Mock).mockResolvedValue(
       new BN('300000000000000'),
     );
-    const { container } = render(
-      <BalanceUpdateLink address={mockAddress} disabled={false} />,
-    );
+    const { container } = render(<BalanceUpdateLink address={mockAddress} />);
 
     const updateBalance = await screen.findByRole('link', {
       name: 'Update Balance',
@@ -46,9 +44,7 @@ describe('BalanceUpdateLink', () => {
     (existentialDepositChannel.get as jest.Mock).mockResolvedValue(
       new BN('300000000000000'),
     );
-    const { container } = render(
-      <BalanceUpdateLink address={mockAddress} disabled={false} />,
-    );
+    const { container } = render(<BalanceUpdateLink address={mockAddress} />);
 
     const updateBalance = await screen.findByRole('link', {
       name: 'Update Balance',

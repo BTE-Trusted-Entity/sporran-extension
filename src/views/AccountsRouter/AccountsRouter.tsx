@@ -15,8 +15,8 @@ import { ResetAccount } from '../ResetAccount/ResetAccount';
 import { RemoveAccount } from '../RemoveAccount/RemoveAccount';
 import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
 import { AccountCredentials } from '../AccountCredentials/AccountCredentials';
-import { paths } from '../paths';
 import { VestingRouter } from '../VestingRouter/VestingRouter';
+import { paths } from '../paths';
 
 interface Props {
   accounts: AccountsMap;

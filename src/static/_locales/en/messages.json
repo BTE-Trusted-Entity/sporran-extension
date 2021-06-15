@@ -44,10 +44,10 @@
   "component_Balance_bonded": {
     "message": "Bonded Balance: "
   },
-  "component_Balance_update": {
+  "component_BalanceUpdateLink_CTA": {
     "message": "Update Balance"
   },
-  "component_Balance_update_error": {
+  "component_BalanceUpdateLink_error": {
     "message": "Account has no unlocked funds for update"
   },
   "component_AccountSlide_rename": {

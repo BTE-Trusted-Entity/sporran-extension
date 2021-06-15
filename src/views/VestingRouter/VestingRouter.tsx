@@ -11,12 +11,10 @@ interface Props {
 }
 
 export function VestingRouter({ account }: Props): JSX.Element {
-  const signPath = generatePath(paths.account.vest.sign, {
-    address: account.address,
-  });
-  const warningPath = generatePath(paths.account.vest.warning, {
-    address: account.address,
-  });
+  const { address } = account;
+
+  const signPath = generatePath(paths.account.vest.sign, { address });
+  const warningPath = generatePath(paths.account.vest.warning, { address });
 
   return (
     <Switch>

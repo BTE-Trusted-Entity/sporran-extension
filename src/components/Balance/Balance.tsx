@@ -10,7 +10,6 @@ import {
   balanceChangeChannel,
   BalanceChangeOutput,
 } from '../../channels/balanceChangeChannel/balanceChangeChannel';
-import { hasVestedFundsChannel } from '../../channels/VestingChannels/VestingChannels';
 
 import styles from './Balance.module.css';
 
@@ -53,16 +52,9 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
 
   const [showBreakdown, setShowBreakdown] = useState(false);
 
-  const [updateDisabled, setUpdateDisabled] = useState(true);
-
   const handleShowBreakdownClick = useCallback(async () => {
     setShowBreakdown(true);
-
-    const accountHasVestedFunds = await hasVestedFundsChannel.get(address);
-    if (accountHasVestedFunds) {
-      setUpdateDisabled(false);
-    }
-  }, [address]);
+  }, []);
 
   const handleHideBreakdownClick = useCallback(() => {
     setShowBreakdown(false);
@@ -112,7 +104,7 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
               <KiltAmount amount={balance.bonded} type="funds" />
             </li>
           </ul>
-          <BalanceUpdateLink address={address} disabled={updateDisabled} />
+          <BalanceUpdateLink address={address} />
         </>
       )}
     </>
