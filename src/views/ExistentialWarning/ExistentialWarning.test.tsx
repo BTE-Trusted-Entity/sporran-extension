@@ -1,4 +1,4 @@
-import { render } from '../../testing/testing';
+import { render, screen } from '../../testing/testing';
 import { paths, generatePath } from '../paths';
 import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
 
@@ -15,16 +15,28 @@ const signVestingTxPath = generatePath(paths.account.vest.sign, {
 });
 
 describe('ExistentialWarning', () => {
-  it('should render with link to sign transfer screen', () => {
-    const { container } = render(
-      <ExistentialWarning path={signTransferTxPath} />,
+  it('should render with link to sign transfer screen', async () => {
+    render(<ExistentialWarning nextPath={signTransferTxPath} />);
+
+    const confirmationLink = await screen.findByRole('link', {
+      name: 'Confirm',
+    });
+
+    expect(confirmationLink).toHaveAttribute(
+      'href',
+      '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send/review',
     );
-    expect(container).toMatchSnapshot();
   });
-  it('should render with link to sign vesting screen', () => {
-    const { container } = render(
-      <ExistentialWarning path={signVestingTxPath} />,
+  it('should render with link to sign vesting screen', async () => {
+    render(<ExistentialWarning nextPath={signVestingTxPath} />);
+
+    const confirmationLink = await screen.findByRole('link', {
+      name: 'Confirm',
+    });
+
+    expect(confirmationLink).toHaveAttribute(
+      'href',
+      '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/vest/sign',
     );
-    expect(container).toMatchSnapshot();
   });
 });

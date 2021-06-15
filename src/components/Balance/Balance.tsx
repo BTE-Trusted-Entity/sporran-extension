@@ -1,21 +1,16 @@
-import { useCallback, useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
 import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
 
 import { KiltAmount } from '../KiltAmount/KiltAmount';
-import { paths, generatePath } from '../../views/paths';
+import { BalanceUpdateLink } from '../BalanceUpdateLink/BalanceUpdateLink';
 
 import {
   balanceChangeChannel,
   BalanceChangeOutput,
 } from '../../channels/balanceChangeChannel/balanceChangeChannel';
-import {
-  hasVestedFundsChannel,
-  vestingFeeChannel,
-} from '../../channels/VestingChannels/VestingChannels';
-import { existentialDepositChannel } from '../../channels/existentialDepositChannel/existentialDepositChannel';
+import { hasVestedFundsChannel } from '../../channels/VestingChannels/VestingChannels';
 
 import styles from './Balance.module.css';
 
@@ -73,35 +68,6 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
     setShowBreakdown(false);
   }, []);
 
-  const [existentialDeposit, setExistentialDeposit] = useState<BN>();
-  const [vestingFee, setVestingFee] = useState<BN>();
-
-  useEffect(() => {
-    (async () => {
-      const fee = await vestingFeeChannel.get();
-      const existential = await existentialDepositChannel.get();
-      setVestingFee(fee);
-      setExistentialDeposit(existential);
-    })();
-  }, []);
-
-  const existentialWarning = useMemo(() => {
-    if (!(balance && vestingFee && existentialDeposit)) {
-      return false;
-    }
-
-    const remainingBalance = balance.total.sub(vestingFee);
-
-    return (
-      balance.total.sub(vestingFee).lt(existentialDeposit) &&
-      !remainingBalance.isZero()
-    );
-  }, [balance, existentialDeposit, vestingFee]);
-
-  const vestingPath = existentialWarning
-    ? paths.account.vest.warning
-    : paths.account.vest.sign;
-
   return (
     <>
       <p className={styles.balanceLine}>
@@ -146,20 +112,7 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
               <KiltAmount amount={balance.bonded} type="funds" />
             </li>
           </ul>
-          <Link
-            onClick={(event) => updateDisabled && event.preventDefault()}
-            to={generatePath(vestingPath, { address })}
-            className={styles.update}
-            aria-disabled={updateDisabled}
-            title={
-              updateDisabled ? t('component_Balance_update_error') : undefined
-            }
-            aria-label={
-              updateDisabled ? t('component_Balance_update_error') : undefined
-            }
-          >
-            {t('component_Balance_update')}
-          </Link>
+          <BalanceUpdateLink address={address} disabled={updateDisabled} />
         </>
       )}
     </>

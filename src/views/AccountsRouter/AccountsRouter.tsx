@@ -10,12 +10,13 @@ import {
 import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
 import { CreateAccount } from '../CreateAccount/CreateAccount';
 import { ImportAccount } from '../ImportAccount/ImportAccount';
-import { AccountOverviewFlow } from '../AccountOverviewFlow/AccountOverviewFlow';
+import { AccountOverview } from '../AccountOverview/AccountOverview';
 import { ResetAccount } from '../ResetAccount/ResetAccount';
 import { RemoveAccount } from '../RemoveAccount/RemoveAccount';
 import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
 import { AccountCredentials } from '../AccountCredentials/AccountCredentials';
 import { paths } from '../paths';
+import { VestingRouter } from '../VestingRouter/VestingRouter';
 
 interface Props {
   accounts: AccountsMap;
@@ -57,8 +58,12 @@ export function SpecificAccountRouter({ accounts }: Props): JSX.Element {
           <ResetAccount account={account} />
         </Route>
 
+        <Route path={paths.account.vest.base}>
+          <VestingRouter account={account} />
+        </Route>
+
         <Route path={paths.account.overview}>
-          <AccountOverviewFlow account={account} />
+          <AccountOverview account={account} />
         </Route>
       </Switch>
     </>

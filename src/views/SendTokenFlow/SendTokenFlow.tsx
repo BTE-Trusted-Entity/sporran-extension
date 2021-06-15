@@ -59,7 +59,7 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
     <Switch>
       <Route path={paths.account.send.warning}>
         <ExistentialWarning
-          path={generatePath(paths.account.send.review, { address })}
+          nextPath={generatePath(paths.account.send.review, { address })}
         />
       </Route>
 

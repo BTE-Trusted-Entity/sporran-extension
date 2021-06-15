@@ -18,10 +18,6 @@ export const paths = {
     },
 
     overview: '/account/:address/:type(created|imported|pwreset)?',
-    vest: {
-      sign: '/account/:address/vest/sign',
-      warning: '/account/:address/vest/warning',
-    },
     reset: {
       start: '/account/:address/reset',
       password: '/account/:address/reset/password',
@@ -34,6 +30,11 @@ export const paths = {
     receive: '/account/:address/receive',
     credentials: '/account/:address/credentials',
     remove: '/account/:address/remove',
+    vest: {
+      base: '/account/:address/vest',
+      sign: '/account/:address/vest/sign',
+      warning: '/account/:address/vest/warning',
+    },
   },
   popup: {
     base: '/popup',

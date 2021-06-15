@@ -14,7 +14,7 @@ interface VestInput {
   password: string;
 }
 
-type vestingFeeOutput = BN;
+type VestingFeeOutput = BN;
 
 type JsonVestingFeeOutput = string;
 
@@ -39,12 +39,12 @@ const transform = {
 
 export const vestingFeeChannel = new BrowserChannel<
   void,
-  vestingFeeOutput,
+  VestingFeeOutput,
   void,
   JsonVestingFeeOutput
 >('vestingFee', false, transform);
 
-export async function getVestingFee(): Promise<vestingFeeOutput> {
+export async function getVestingFee(): Promise<VestingFeeOutput> {
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();
 
   const tx = api.tx.vesting.vest();
@@ -76,15 +76,15 @@ export async function vest({ address, password }: VestInput): Promise<void> {
     throw new Error(insufficientFunds);
   }
 
-  const existentialDeposit = api.consts.balances.existentialDeposit; // 1e15
+  const existentialDeposit = api.consts.balances.existentialDeposit;
 
-  const totalBalance = balance.free.add(balance.reserved); // 1.234e15
+  const totalBalance = balance.free.add(balance.reserved);
 
-  const remainingBalance = totalBalance.sub(partialFee); // 0.734e15
+  const remainingBalance = totalBalance.sub(partialFee);
 
-  const belowExistential = remainingBalance.lt(existentialDeposit); // true
+  const belowExistential = remainingBalance.lt(existentialDeposit);
 
-  const useableRemainingBalance = remainingBalance.sub(balance.reserved); // 0.726e15
+  const useableRemainingBalance = remainingBalance.sub(balance.reserved);
 
   const tip =
     belowExistential && useableRemainingBalance.gtn(0)

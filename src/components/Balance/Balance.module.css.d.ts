@@ -5,7 +5,6 @@ declare namespace BalanceModuleCssNamespace {
     breakdown: string;
     hideBreakdown: string;
     showBreakdown: string;
-    update: string;
   }
 }
 

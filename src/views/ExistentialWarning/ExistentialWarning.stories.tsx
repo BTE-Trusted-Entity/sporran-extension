@@ -15,7 +15,7 @@ const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 export function Template(): JSX.Element {
   return (
     <ExistentialWarning
-      path={generatePath(paths.account.send.review, {
+      nextPath={generatePath(paths.account.send.review, {
         address: account.address,
       })}
     />

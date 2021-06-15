@@ -31,14 +31,3 @@
 .balance {
   margin: 0.25rem 0;
 }
-
-.update {
-  composes: buttonTertiary from '../../components/Button/Button.module.css';
-  margin-top: 0.5rem;
-}
-
-.update[aria-disabled='true'] {
-  opacity: 0.5;
-  color: var(--color-grey-medium);
-  border: 2px solid rgba(79, 64, 92, 0.5);
-}
