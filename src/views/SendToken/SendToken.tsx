@@ -240,12 +240,11 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
     const existentialWarning =
       existential &&
-      remainingBalance &&
       remainingBalance.lt(existential) &&
       !remainingBalance.isZero();
 
     const finalTip =
-      existentialWarning && usableRemainingBalance?.gtn?.(0)
+      existentialWarning && usableRemainingBalance.gtn(0)
         ? tipBN.add(usableRemainingBalance)
         : tipBN;
 
