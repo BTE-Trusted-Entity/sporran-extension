@@ -25,9 +25,11 @@ exports[`ReceiveToken should render a normal account 1`] = `
           Identicon
         </div>
         <div
-          class="centeredName"
+          class="centeredNameLine"
         >
-          <span>
+          <span
+            class="name"
+          >
             My Sporran Account
           </span>
         </div>
@@ -72,10 +74,10 @@ exports[`ReceiveToken should render a normal account 1`] = `
           class="item"
         >
           <a
-            aria-label="My Third Account"
+            aria-label="My Third Account which has a very long name and might not even fit on the screen"
             class="bubble"
             href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL/receive"
-            title="My Third Account"
+            title="My Third Account which has a very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -245,10 +247,10 @@ exports[`ReceiveToken should render the new account 1`] = `
         </p>
       </section>
       <a
-        aria-label="My Third Account"
+        aria-label="My Third Account which has a very long name and might not even fit on the screen"
         class="left"
         href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL/receive"
-        title="My Third Account"
+        title="My Third Account which has a very long name and might not even fit on the screen"
       />
       <a
         aria-label="My Sporran Account"
@@ -283,10 +285,10 @@ exports[`ReceiveToken should render the new account 1`] = `
           class="item"
         >
           <a
-            aria-label="My Third Account"
+            aria-label="My Third Account which has a very long name and might not even fit on the screen"
             class="bubble"
             href="/account/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL/receive"
-            title="My Third Account"
+            title="My Third Account which has a very long name and might not even fit on the screen"
           />
         </li>
         <li

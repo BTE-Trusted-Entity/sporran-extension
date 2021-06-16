@@ -95,7 +95,7 @@ export function SignQuote(): JSX.Element | null {
           address={firstAccount.address}
           className={styles.tartan}
         />
-        <span>{firstAccount.name}</span>
+        <span className={styles.accountName}>{firstAccount.name}</span>
       </div>
 
       <label className={styles.label}>

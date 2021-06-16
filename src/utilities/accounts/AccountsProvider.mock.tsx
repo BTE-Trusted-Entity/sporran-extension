@@ -15,7 +15,7 @@ export const accountsMock: AccountsMap = {
     index: 2,
   },
   '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL': {
-    name: 'My Third Account',
+    name: 'My Third Account which has a very long name and might not even fit on the screen',
     tartan: 'MacPherson',
     address: '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL',
     index: 3,

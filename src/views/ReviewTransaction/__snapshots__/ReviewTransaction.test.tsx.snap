@@ -23,9 +23,11 @@ exports[`ReviewTransaction should render 1`] = `
         Identicon
       </div>
       <div
-        class="name"
+        class="nameLine"
       >
-        <span>
+        <span
+          class="name"
+        >
           My Sporran Account
         </span>
         <div
