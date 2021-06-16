@@ -40,7 +40,7 @@ type SenderType = Parameters<
   Parameters<typeof browser.runtime.onMessage.addListener>[0]
 >[1];
 
-const transformBackground = {
+const transform = {
   inputToJson: ({ lifetimeStart, lifetimeEnd, ...input }: SignBgInput) => ({
     ...input,
     specVersion: input.specVersion.toString(),
@@ -67,7 +67,7 @@ export const backgroundSignChannel = new PopupChannel<
   SignBgInput,
   SignBgOutput,
   SignBgJsonInput
->('sign', transformBackground);
+>('sign', transform);
 
 async function getExtrinsic(input: SignerPayloadJSON) {
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();

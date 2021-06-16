@@ -20,7 +20,7 @@ interface SignJsonOutput {
   signature: string;
 }
 
-const transformContent = {
+const transform = {
   inputToJson: (input: SignInput) => ({
     ...input,
     version: String(input.version),
@@ -46,7 +46,7 @@ export const contentSignChannel = new BrowserChannel<
   SignOutput,
   SignJsonInput,
   SignJsonOutput
->('dAppSign', false, transformContent);
+>('dAppSign', false, transform);
 
 export function initContentSignChannel(origin: string): () => void {
   return injectedSignChannel.produce(async ({ dAppName, payload }) => {
