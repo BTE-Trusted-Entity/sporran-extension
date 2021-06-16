@@ -584,9 +584,6 @@
   "view_SignDApp_from": {
     "message": "from"
   },
-  "view_SignDApp_genesis": {
-    "message": "genesis"
-  },
   "view_SignDApp_version": {
     "message": "version"
   },
@@ -598,6 +595,20 @@
   },
   "view_SignDApp_lifetime": {
     "message": "lifetime"
+  },
+  "view_SignDApp_immortal": {
+    "message": "immortal"
+  },
+  "view_SignDApp_mortal": {
+    "message": "mortal, valid from $start$ to $end$",
+    "placeholders": {
+      "start": {
+        "content": "$1"
+      },
+      "end": {
+        "content": "$2"
+      }
+    }
   },
   "view_SignDApp_title": {
     "message": "Transaction"

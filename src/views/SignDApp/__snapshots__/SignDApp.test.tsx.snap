@@ -36,6 +36,70 @@ exports[`SignDApp should render 1`] = `
         type="button"
       />
     </p>
+    <dl
+      class="details"
+    >
+      <dt
+        class="detailName"
+      >
+        from
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="https://example.com/extremely-long-url-tries-to-overflow-all-available-space"
+      >
+        https://example.com/extremely-long-url-tries-to-overflow-all-available-space
+      </dd>
+      <dt
+        class="detailName"
+      >
+        version
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="1"
+      >
+        1
+      </dd>
+      <dt
+        class="detailName"
+      >
+        nonce
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="1"
+      >
+        1
+      </dd>
+      <dt
+        class="detailName"
+      >
+        method data
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="namespace.method(input = \\"some meaningful values you would definitely like to see\\")"
+      >
+        namespace.method(input = "some meaningful values you would definitely like to see")
+      </dd>
+      <dt
+        class="detailName"
+      >
+        lifetime
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="mortal, valid from 1 to 1,000,000"
+      >
+        mortal, valid from 1 to 1,000,000
+      </dd>
+    </dl>
     <label
       class="passwordLabel"
       for="password"
