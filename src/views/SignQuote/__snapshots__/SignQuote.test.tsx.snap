@@ -100,7 +100,9 @@ exports[`SignQuote should render 1`] = `
       >
         Identicon
       </div>
-      <span>
+      <span
+        class="accountName"
+      >
         My Sporran Account
       </span>
     </div>
