@@ -58,6 +58,13 @@
   gap: 0.5rem;
 }
 
+.accountName {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+
 .tartan {
   composes: tartan from '../../components/Avatar/Avatar.module.css';
 

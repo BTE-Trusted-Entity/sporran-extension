@@ -1,4 +1,4 @@
-.name {
+.nameLine {
   composes: accountText from '../Typography/Typography.module.css';
   position: relative;
   padding-left: 2.125rem;
@@ -9,9 +9,15 @@
   margin-top: 0.375rem;
 }
 
-.centeredName {
-  composes: name;
+.centeredNameLine {
+  composes: nameLine;
   padding-left: 0;
+}
+
+.name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .form {
@@ -42,7 +48,7 @@
 }
 
 .new {
-  composes: name;
+  composes: nameLine;
   padding: 0;
   margin-bottom: 0;
 }

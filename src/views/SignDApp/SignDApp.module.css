@@ -21,6 +21,10 @@
 .account {
   composes: accountText from '../../components/Typography/Typography.module.css';
   margin: 0.5rem 0 0.5rem;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .addressLine {
