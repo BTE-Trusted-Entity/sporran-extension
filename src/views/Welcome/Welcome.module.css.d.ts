@@ -1,6 +1,7 @@
 declare namespace WelcomeModuleCssNamespace {
   export interface IWelcomeModuleCss {
     agree: string;
+    agreeLabel: string;
     container: string;
     create: string;
     heading: string;

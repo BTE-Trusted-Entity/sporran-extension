@@ -18,7 +18,9 @@ exports[`Welcome should match the snapshot with an account 1`] = `
     <p
       class="termsLine"
     >
-      <label>
+      <label
+        class="agreeLabel"
+      >
         <input
           class="agree"
           type="checkbox"
@@ -78,7 +80,9 @@ Create your first account to get started.
     <p
       class="termsLine"
     >
-      <label>
+      <label
+        class="agreeLabel"
+      >
         <input
           class="agree"
           type="checkbox"

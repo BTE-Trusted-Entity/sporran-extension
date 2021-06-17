@@ -70,7 +70,7 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
       </h3>
 
       <p className={styles.termsLine}>
-        <label>
+        <label className={styles.agreeLabel}>
           <input
             className={styles.agree}
             type="checkbox"

@@ -26,6 +26,10 @@
   margin-top: 1.25rem;
 }
 
+.agreeLabel {
+  cursor: pointer;
+}
+
 .agree {
   composes: checkbox from '../../components/Checkbox/Checkbox.module.css';
 }
