@@ -118,8 +118,12 @@ export function Settings(): JSX.Element {
             )}
 
             <li className={menuStyles.listItem}>
-              {/* TODO: link to terms and conditions */}
-              <a {...itemProps.shift()}>
+              <a
+                href="https://www.sporran.org/terms"
+                target="_blank"
+                rel="noreferrer"
+                {...itemProps.shift()}
+              >
                 {t('component_Settings_terms_and_conditions')}
               </a>
             </li>

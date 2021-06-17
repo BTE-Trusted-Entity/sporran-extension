@@ -64,8 +64,11 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a
+            href="https://www.sporran.org/terms"
+            rel="noreferrer"
             role="menuitem"
             tabindex="-1"
+            target="_blank"
           >
             Terms & Conditions
           </a>
@@ -147,8 +150,11 @@ exports[`Settings should render the endpoint item in the internal build 1`] = `
           class="listItem"
         >
           <a
+            href="https://www.sporran.org/terms"
+            rel="noreferrer"
             role="menuitem"
             tabindex="-1"
+            target="_blank"
           >
             Terms & Conditions
           </a>

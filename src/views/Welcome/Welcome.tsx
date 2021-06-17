@@ -82,7 +82,7 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
         </label>
         <a
           className={styles.terms}
-          href="https://example.com/TODO:"
+          href="https://www.sporran.org/terms"
           target="_blank"
           rel="noreferrer"
         >
