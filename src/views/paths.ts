@@ -6,6 +6,7 @@ export const paths = {
   access: '/access',
   account: {
     base: '/account/',
+    add: '/account/add',
     create: {
       start: '/account/create',
       backup: '/account/create/backup',

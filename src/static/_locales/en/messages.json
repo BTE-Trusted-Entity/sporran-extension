@@ -176,11 +176,33 @@
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
-  "view_Welcome_info": {
-    "message": "You currently don’t have any accounts."
+  "view_Welcome_again": {
+    "message": "Add Account"
   },
-  "view_Welcome_invitation": {
-    "message": "Create your first account to get started."
+  "view_Welcome_noAccounts": {
+    "message": "You currently don’t have any accounts.\nCreate your first account to get started."
+  },
+  "view_Welcome_hasOne": {
+    "message": "You have $number$ account. Add another one.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_Welcome_hasOther": {
+    "message": "You have $number$ accounts. Add another one.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_Welcome_agree": {
+    "message": " I have read and agree to the "
+  },
+  "view_Welcome_terms": {
+    "message": "terms of use"
   },
   "view_Welcome_create": {
     "message": "Create Account"
