@@ -5,7 +5,7 @@ import { initContentSaveChannel } from './channels/SaveChannels/browserSaveChann
 import { initContentShareChannel } from './channels/ShareChannels/browserShareChannels';
 import { initContentAccountsChannel } from './dApps/accountsDataProvider/accountsDataProvider';
 import { initContentAccessChannel } from './dApps/checkAccess/checkAccess';
-import { initContentSignChannel } from './dApps/SignChannels/browserSignChannels';
+import { initContentSignChannel } from './dApps/SignChannels/contentSignChannel';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can

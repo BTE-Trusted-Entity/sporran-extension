@@ -18,8 +18,7 @@ import {
   connectToBlockchain,
   onPopupConnect,
 } from './channels/ExtensionPopupMessages/ExtensionPopupMessages';
-import { initBackgroundSignTxChannel } from './dApps/signTxChannel/signTxChannel';
-import { initBackgroundSignChannel } from './dApps/SignChannels/browserSignChannels';
+import { initBackgroundSignChannel } from './dApps/SignChannels/backgroundSignChannel';
 import { initBackgroundSaveChannel } from './channels/SaveChannels/browserSaveChannels';
 import { initBackgroundClaimChannel } from './channels/ClaimChannels/browserClaimChannels';
 import { initBackgroundShareChannel } from './channels/ShareChannels/browserShareChannels';
@@ -56,7 +55,6 @@ function init() {
   initBackgroundFeeChannel();
   initBackgroundTransferChannel();
   initBackgroundToggleIconChannel();
-  initBackgroundSignTxChannel();
   initSavedPasswords();
   initDAppChannels();
   initBackgroundExistentialDepositChannel();

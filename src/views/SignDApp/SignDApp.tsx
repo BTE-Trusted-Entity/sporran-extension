@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import { decryptAccount, useAccounts } from '../../utilities/accounts/accounts';
@@ -10,32 +10,51 @@ import {
   getPasswordChannel,
   savePasswordChannel,
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
-import { signTxChannel } from '../../dApps/signTxChannel/signTxChannel';
 import {
   backgroundSignChannel,
   useSignPopupQuery,
-} from '../../dApps/SignChannels/browserSignChannels';
+} from '../../dApps/SignChannels/backgroundSignChannel';
 
 import styles from './SignDApp.module.css';
+
+function formatBlock(block: number) {
+  const locale = browser.i18n.getUILanguage();
+  const formatter = new Intl.NumberFormat(locale, { useGrouping: true });
+  return formatter.format(block);
+}
+
+function getExtrinsicValues({
+  origin,
+  specVersion,
+  nonce,
+  method,
+  lifetimeStart,
+  lifetimeEnd,
+}: ReturnType<typeof useSignPopupQuery>) {
+  const t = browser.i18n.getMessage;
+
+  const lifetime =
+    lifetimeStart && lifetimeEnd
+      ? t('view_SignDApp_mortal', [
+          formatBlock(lifetimeStart),
+          formatBlock(lifetimeEnd),
+        ])
+      : t('view_SignDApp_immortal');
+
+  return [
+    { value: origin, label: t('view_SignDApp_from') },
+    { value: specVersion, label: t('view_SignDApp_version') },
+    { value: nonce, label: t('view_SignDApp_nonce') },
+    { value: method, label: t('view_SignDApp_method') },
+    { value: lifetime, label: t('view_SignDApp_lifetime') },
+  ];
+}
 
 export function SignDApp(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const query = useSignPopupQuery();
-
-  /*
-    const values = [
-      { value: query.blockHash, label: t('view_SignDApp_from') }, // TODO
-      { value: query.genesisHash, label: t('view_SignDApp_genesis') },
-      {
-        value: parseInt(query.specVersion, 16),
-        label: t('view_SignDApp_version'),
-      },
-      { value: query.nonce, label: t('view_SignDApp_nonce') },
-      { value: query.method, label: t('view_SignDApp_method') },
-      { value: query.era, label: t('view_SignDApp_lifetime') },
-    ];
-  */
+  const values = getExtrinsicValues(query);
 
   const addressRef = useRef<HTMLInputElement>(null);
   const copy = useCopyButton(addressRef);
@@ -94,18 +113,18 @@ export function SignDApp(): JSX.Element | null {
           await forgetPasswordChannel.get(account.address);
         }
 
-        const signed = await signTxChannel.get({ password, payload: query });
-        await backgroundSignChannel.return(signed);
+        await backgroundSignChannel.return(password);
 
         window.close();
       } catch (error) {
         setError(t('view_SignDApp_password_incorrect'));
       }
     },
-    [account, query, remember, savedPassword, t],
+    [account, remember, savedPassword, t],
   );
 
   const handleCancelClick = useCallback(async () => {
+    await backgroundSignChannel.throw('Rejected');
     window.close();
   }, []);
 
@@ -143,14 +162,16 @@ export function SignDApp(): JSX.Element | null {
         )}
       </p>
 
-      {/*<dl className={styles.details}>
+      <dl className={styles.details}>
         {values.map(({ label, value }) => (
           <Fragment key={label}>
             <dt className={styles.detailName}>{label}:</dt>
-            <dd className={styles.detailValue}>{value}</dd>
+            <dd className={styles.detailValue} title={String(value)}>
+              {value}
+            </dd>
           </Fragment>
         ))}
-      </dl>*/}
+      </dl>
 
       <label className={styles.passwordLabel} htmlFor="password">
         {t('view_SignDApp_password')}
