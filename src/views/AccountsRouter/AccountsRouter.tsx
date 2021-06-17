@@ -8,6 +8,7 @@ import {
   useAccounts,
 } from '../../utilities/accounts/accounts';
 import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
+import { Welcome } from '../Welcome/Welcome';
 import { CreateAccount } from '../CreateAccount/CreateAccount';
 import { ImportAccount } from '../ImportAccount/ImportAccount';
 import { AccountOverview } from '../AccountOverview/AccountOverview';
@@ -70,6 +71,10 @@ export function AccountsRouter(): JSX.Element {
 
   return (
     <Switch>
+      <Route path={paths.account.add}>
+        <Welcome again />
+      </Route>
+
       <Route path={paths.account.create.start}>
         <CreateAccount />
       </Route>

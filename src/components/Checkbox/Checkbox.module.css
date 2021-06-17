@@ -1,8 +1,8 @@
-.сheckbox {
+.checkbox {
   display: none;
 }
 
-.сheckbox + * {
+.checkbox + * {
   --size: 1.25em;
 
   width: var(--size);
@@ -16,7 +16,7 @@
   position: relative;
 }
 
-.сheckbox:checked + *::after {
+.checkbox:checked + *::after {
   --tick-size: calc(var(--size) * 1.25);
 
   width: var(--tick-size);

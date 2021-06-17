@@ -1,6 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Welcome should render 1`] = `
+exports[`Welcome should match the snapshot with an account 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Add Account
+    </h1>
+    <h3
+      class="info"
+    >
+      You have 3 accounts. Add another one.
+    </h3>
+    <p
+      class="termsLine"
+    >
+      <label>
+        <input
+          class="agree"
+          type="checkbox"
+        />
+        <span />
+         I have read and agree to the 
+      </label>
+      <a
+        class="terms"
+        href="https://example.com/TODO:"
+        rel="noreferrer"
+        target="_blank"
+      >
+        terms of use
+      </a>
+    </p>
+    <a
+      aria-disabled="true"
+      class="create"
+      href="/account/create"
+    >
+      Create Account
+    </a>
+    <a
+      aria-disabled="true"
+      class="import"
+      href="/account/import"
+    >
+      Import an account from pre-existing phrase
+    </a>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+  </div>
+</div>
+`;
+
+exports[`Welcome should match the snapshot without accounts 1`] = `
 <div>
   <div
     class="container"
@@ -14,19 +73,37 @@ exports[`Welcome should render 1`] = `
       class="info"
     >
       You currently don’t have any accounts.
+Create your first account to get started.
     </h3>
-    <h3
-      class="info"
+    <p
+      class="termsLine"
     >
-      Create your first account to get started.
-    </h3>
+      <label>
+        <input
+          class="agree"
+          type="checkbox"
+        />
+        <span />
+         I have read and agree to the 
+      </label>
+      <a
+        class="terms"
+        href="https://example.com/TODO:"
+        rel="noreferrer"
+        target="_blank"
+      >
+        terms of use
+      </a>
+    </p>
     <a
+      aria-disabled="true"
       class="create"
       href="/account/create"
     >
       Create Account
     </a>
     <a
+      aria-disabled="true"
       class="import"
       href="/account/import"
     >
