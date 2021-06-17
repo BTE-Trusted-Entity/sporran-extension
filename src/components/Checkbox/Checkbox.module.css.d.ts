@@ -1,6 +1,6 @@
 declare namespace CheckboxModuleCssNamespace {
   export interface ICheckboxModuleCss {
-    сheckbox: string;
+    checkbox: string;
   }
 }
 

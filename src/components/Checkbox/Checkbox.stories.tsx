@@ -9,7 +9,7 @@ export default {
 export function Template(): JSX.Element {
   return (
     <label>
-      Click me <input className={styles.сheckbox} type="checkbox" />
+      Click me <input className={styles.checkbox} type="checkbox" />
       <span />
     </label>
   );

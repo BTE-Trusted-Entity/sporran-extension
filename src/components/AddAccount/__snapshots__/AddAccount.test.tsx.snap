@@ -1,75 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AddAccount menu should be visible when menu button clicked 1`] = `
-<div>
-  <div
-    class="wrapper"
-  >
-    <button
-      aria-expanded="true"
-      aria-haspopup="true"
-      aria-label="Add account"
-      class="toggle"
-      role="button"
-      tabindex="0"
-      title="Add account"
-      type="button"
-    />
-    <div
-      class="dropdown"
-      role="menu"
-    >
-      <h4
-        class="heading"
-      >
-        Add account
-      </h4>
-      <ul
-        class="list"
-      >
-        <li
-          class="listItem"
-        >
-          <a
-            href="/account/create"
-            role="menuitem"
-            tabindex="-1"
-          >
-            Create new account
-          </a>
-        </li>
-        <li
-          class="listItem"
-        >
-          <a
-            href="/account/import"
-            role="menuitem"
-            tabindex="-1"
-          >
-            Import account from pre-existing phrase
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-`;
-
 exports[`AddAccount should render 1`] = `
 <div>
-  <div
-    class="wrapper"
-  >
-    <button
-      aria-expanded="false"
-      aria-haspopup="true"
-      aria-label="Add account"
-      class="toggle"
-      role="button"
-      tabindex="0"
-      title="Add account"
-      type="button"
-    />
-  </div>
+  <a
+    aria-label="Add account"
+    class="toggle"
+    href="/account/add"
+    title="Add account"
+  />
 </div>
 `;
