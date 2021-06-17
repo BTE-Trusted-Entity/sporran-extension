@@ -20,7 +20,11 @@ export const internalFeatures: Features = {
   credentials: true,
 };
 
+// Duplicates the value in src/static/manifest.json
+// We can’t use browser.runtime.getManifest().version, as it’s unavailable in injected scripts
+const version = '2021.6.17';
+
 export const configuration: ConfigurationType = {
-  version: '1.0.0',
+  version,
   features: isInternal ? internalFeatures : publicFeatures,
 };
