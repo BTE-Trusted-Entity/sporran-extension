@@ -7,10 +7,10 @@ import {
   useCurrentAccount,
 } from '../../utilities/accounts/accounts';
 import { plural } from '../../utilities/plural/plural';
+import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { generatePath, paths } from '../paths';
 
 import styles from './Welcome.module.css';
-import { LinkBack } from '../../components/LinkBack/LinkBack';
 
 interface Props {
   again?: boolean;

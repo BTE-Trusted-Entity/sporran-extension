@@ -14,20 +14,6 @@ exports[`App should render 1`] = `
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="Add account"
-          class="toggle"
-          role="button"
-          tabindex="0"
-          title="Add account"
-          type="button"
-        />
-      </div>
-      <div
-        class="wrapper"
-      >
-        <button
-          aria-expanded="false"
-          aria-haspopup="true"
           aria-label="Settings"
           class="toggle"
           role="button"
@@ -49,19 +35,37 @@ exports[`App should render 1`] = `
         class="info"
       >
         You currently don’t have any accounts.
+Create your first account to get started.
       </h3>
-      <h3
-        class="info"
+      <p
+        class="termsLine"
       >
-        Create your first account to get started.
-      </h3>
+        <label>
+          <input
+            class="agree"
+            type="checkbox"
+          />
+          <span />
+           I have read and agree to the 
+        </label>
+        <a
+          class="terms"
+          href="https://example.com/TODO:"
+          rel="noreferrer"
+          target="_blank"
+        >
+          terms of use
+        </a>
+      </p>
       <a
+        aria-disabled="true"
         class="create"
         href="/account/create"
       >
         Create Account
       </a>
       <a
+        aria-disabled="true"
         class="import"
         href="/account/import"
       >
