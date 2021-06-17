@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: sporran-extension-${{ github.sha }}
-          path: dist/web-ext-artifacts/sporran-1.0.0.zip
+          path: dist/web-ext-artifacts/*
