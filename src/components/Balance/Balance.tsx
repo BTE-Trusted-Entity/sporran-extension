@@ -22,6 +22,8 @@ export function useAddressBalance(address: string): BalanceBN | null {
   const [balance, setBalance] = useState<BalanceBN | null>(null);
 
   useEffect(() => {
+    setBalance(null);
+
     return balanceChangeChannel.subscribe(
       address,
       (error, output?: BalanceChangeOutput) => {
