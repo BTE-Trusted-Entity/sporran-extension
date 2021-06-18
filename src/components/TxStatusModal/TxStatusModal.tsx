@@ -11,43 +11,81 @@ import styles from './TxStatusModal.module.css';
 
 interface Props {
   account: Account;
-  pending: boolean;
+  status: 'pending' | 'success' | 'error';
+  onClose: () => void;
 }
 
-export function TxStatusModal({ account, pending }: Props): JSX.Element {
+export function TxStatusModal({
+  account,
+  status,
+  onClose,
+}: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
-  return (
-    <Modal open className={styles.overlay}>
-      {pending ? (
-        <Avatar
-          tartan={account.tartan}
-          address={account.address}
-          className={styles.transparent}
-        />
-      ) : (
-        <div className={styles.wrapper}>
+
+  switch (status) {
+    case 'pending':
+      return (
+        <Modal open className={styles.overlay}>
           <Avatar
             tartan={account.tartan}
             address={account.address}
             className={styles.transparent}
           />
-        </div>
-      )}
-      {pending ? (
-        <h1 className={styles.heading}>
-          {t('component_TxStatusModal_pending')}
-        </h1>
-      ) : (
-        <h1 className={styles.heading}>
-          {t('component_TxStatusModal_success')}
-        </h1>
-      )}
-      <Link
-        className={styles.confirm}
-        to={generatePath(paths.account.overview, { address: account.address })}
-      >
-        {t('common_action_confirm')}
-      </Link>
-    </Modal>
-  );
+          <h1 className={styles.heading}>
+            {t('component_TxStatusModal_pending')}
+          </h1>
+          <Link
+            className={styles.confirm}
+            to={generatePath(paths.account.overview, {
+              address: account.address,
+            })}
+          >
+            {t('common_action_confirm')}
+          </Link>
+        </Modal>
+      );
+    case 'success':
+      return (
+        <Modal open className={styles.overlay}>
+          <div className={styles.success}>
+            <Avatar
+              tartan={account.tartan}
+              address={account.address}
+              className={styles.transparent}
+            />
+          </div>
+          <h1 className={styles.heading}>
+            {t('component_TxStatusModal_success')}
+          </h1>
+          <Link
+            className={styles.confirm}
+            to={generatePath(paths.account.overview, {
+              address: account.address,
+            })}
+          >
+            {t('common_action_confirm')}
+          </Link>
+        </Modal>
+      );
+    case 'error':
+      return (
+        <Modal open className={styles.overlay}>
+          <div className={styles.error}>
+            <Avatar
+              tartan={account.tartan}
+              address={account.address}
+              className={styles.transparent}
+            />
+          </div>
+          <h1 className={styles.heading}>
+            {t('component_TxStatusModal_error')}
+          </h1>
+          <button className={styles.confirm} onClick={onClose}>
+            {t('common_action_confirm')}
+          </button>
+        </Modal>
+      );
+    default:
+      return null;
+  }
 }

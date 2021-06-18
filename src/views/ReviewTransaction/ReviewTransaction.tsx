@@ -42,7 +42,7 @@ export function ReviewTransaction({
   const { passwordType, passwordToggle } = usePasswordType();
   const [showDetails, setShowDetails] = useState(false);
 
-  const [error, setError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<boolean>(false);
 
   const handleShowDetailsClick = useCallback(() => {
     setShowDetails(true);
@@ -61,7 +61,7 @@ export function ReviewTransaction({
   }, [remember]);
 
   const handlePasswordInput = useCallback(() => {
-    setError(null);
+    setPasswordError(false);
   }, []);
 
   useEffect(() => {
@@ -74,8 +74,9 @@ export function ReviewTransaction({
 
   const [submitting, setSubmitting] = useState(false);
 
-  const [txPending, setTxPending] = useState(false);
-  const [txModalOpen, setTxModalOpen] = useState(false);
+  const [txStatus, setTxStatus] = useState<
+    'pending' | 'success' | 'error' | null
+  >(null);
 
   const handleSubmit = useCallback(
     async (event) => {
@@ -99,25 +100,30 @@ export function ReviewTransaction({
           await forgetPasswordChannel.get(account.address);
         }
 
-        setTxPending(true);
-        setTxModalOpen(true);
+        setTxStatus('pending');
 
         await onSuccess({ password });
 
-        setTxPending(false);
+        setTxStatus('success');
       } catch (error) {
-        // TODO: Handle transaction errors
-        // https://kiltprotocol.atlassian.net/browse/SK-134
+        if (error.name === 'OperationError') {
+          setPasswordError(true);
+        } else {
+          setTxStatus('error');
+        }
 
-        setError(t('view_ReviewTransaction_password_incorrect'));
         setSubmitting(false);
       }
     },
-    [t, account, savedPassword, onSuccess, remember],
+    [account, savedPassword, onSuccess, remember],
   );
 
   const totalFee = fee.add(tip);
   const total = amount.add(totalFee);
+
+  const closeModal = useCallback(() => {
+    setTxStatus(null);
+  }, []);
 
   return (
     <form
@@ -220,8 +226,8 @@ export function ReviewTransaction({
         />
         {passwordToggle}
 
-        <output className={styles.errorTooltip} hidden={!error}>
-          {error}
+        <output className={styles.errorTooltip} hidden={!passwordError}>
+          {t('view_ReviewTransaction_password_incorrect')}
         </output>
       </p>
 
@@ -246,7 +252,13 @@ export function ReviewTransaction({
         </button>
       </p>
 
-      {txModalOpen && <TxStatusModal account={account} pending={txPending} />}
+      {txStatus && (
+        <TxStatusModal
+          account={account}
+          status={txStatus}
+          onClose={closeModal}
+        />
+      )}
 
       <LinkBack />
       <Stats />

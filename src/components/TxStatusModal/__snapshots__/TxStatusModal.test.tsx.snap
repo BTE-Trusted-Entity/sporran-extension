@@ -6,7 +6,7 @@ exports[`TxStatusModal should show completed status 1`] = `
     class="overlay"
   >
     <div
-      class="wrapper"
+      class="success"
     >
       <div
         class="MacLachlan transparent"
@@ -25,6 +25,34 @@ exports[`TxStatusModal should show completed status 1`] = `
     >
       OK
     </a>
+  </dialog>
+</div>
+`;
+
+exports[`TxStatusModal should show error status 1`] = `
+<div>
+  <dialog
+    class="overlay"
+  >
+    <div
+      class="error"
+    >
+      <div
+        class="MacLachlan transparent"
+      >
+        Identicon
+      </div>
+    </div>
+    <h1
+      class="heading"
+    >
+      Your transaction has failed
+    </h1>
+    <button
+      class="confirm"
+    >
+      OK
+    </button>
   </dialog>
 </div>
 `;

@@ -194,7 +194,9 @@ exports[`ReviewTransaction should render 1`] = `
       <output
         class="errorTooltip"
         hidden=""
-      />
+      >
+        The password is incorrect
+      </output>
     </p>
     <label
       class="rememberLabel"

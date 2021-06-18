@@ -17,8 +17,8 @@ export function TxPending(): JSX.Element {
   return (
     <TxStatusModal
       account={account}
-      pending={true}
-      handleClose={action('closeModal')}
+      status="pending"
+      onClose={action('closeModal')}
     />
   );
 }
@@ -27,8 +27,18 @@ export function TxSuccess(): JSX.Element {
   return (
     <TxStatusModal
       account={account}
-      pending={false}
-      handleClose={action('closeModal')}
+      status="success"
+      onClose={action('closeModal')}
+    />
+  );
+}
+
+export function TxError(): JSX.Element {
+  return (
+    <TxStatusModal
+      account={account}
+      status="error"
+      onClose={action('closeModal')}
     />
   );
 }

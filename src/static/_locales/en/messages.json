@@ -173,6 +173,9 @@
   "component_TxStatusModal_success": {
     "message": "Your transaction was successfully sent"
   },
+  "component_TxStatusModal_error": {
+    "message": "Your transaction has failed"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },

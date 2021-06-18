@@ -1,8 +1,10 @@
 declare namespace TxStatusModalModuleCssNamespace {
   export interface ITxStatusModalModuleCss {
     confirm: string;
+    error: string;
     heading: string;
     overlay: string;
+    success: string;
     transparent: string;
     wrapper: string;
   }
