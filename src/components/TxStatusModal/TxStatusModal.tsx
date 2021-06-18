@@ -11,43 +11,76 @@ import styles from './TxStatusModal.module.css';
 
 interface Props {
   account: Account;
-  pending: boolean;
+  status: 'pending' | 'success' | 'error';
+  onDismissError: () => void;
 }
 
-export function TxStatusModal({ account, pending }: Props): JSX.Element {
+export function TxStatusModal({
+  account,
+  status,
+  onDismissError,
+}: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
-  return (
-    <Modal open className={styles.overlay}>
-      {pending ? (
+
+  const modals = {
+    pending: (
+      <Modal open className={styles.overlay}>
         <Avatar
           tartan={account.tartan}
           address={account.address}
           className={styles.transparent}
         />
-      ) : (
-        <div className={styles.wrapper}>
+        <h1 className={styles.heading}>
+          {t('component_TxStatusModal_pending')}
+        </h1>
+        <Link
+          className={styles.confirm}
+          to={generatePath(paths.account.overview, {
+            address: account.address,
+          })}
+        >
+          {t('common_action_confirm')}
+        </Link>
+      </Modal>
+    ),
+    success: (
+      <Modal open className={styles.overlay}>
+        <div className={styles.success}>
           <Avatar
             tartan={account.tartan}
             address={account.address}
             className={styles.transparent}
           />
         </div>
-      )}
-      {pending ? (
-        <h1 className={styles.heading}>
-          {t('component_TxStatusModal_pending')}
-        </h1>
-      ) : (
         <h1 className={styles.heading}>
           {t('component_TxStatusModal_success')}
         </h1>
-      )}
-      <Link
-        className={styles.confirm}
-        to={generatePath(paths.account.overview, { address: account.address })}
-      >
-        {t('common_action_confirm')}
-      </Link>
-    </Modal>
-  );
+        <Link
+          className={styles.confirm}
+          to={generatePath(paths.account.overview, {
+            address: account.address,
+          })}
+        >
+          {t('common_action_confirm')}
+        </Link>
+      </Modal>
+    ),
+    error: (
+      <Modal open className={styles.overlay}>
+        <div className={styles.error}>
+          <Avatar
+            tartan={account.tartan}
+            address={account.address}
+            className={styles.transparent}
+          />
+        </div>
+        <h1 className={styles.heading}>{t('component_TxStatusModal_error')}</h1>
+        <button className={styles.confirm} onClick={onDismissError}>
+          {t('common_action_confirm')}
+        </button>
+      </Modal>
+    ),
+  };
+
+  return modals[status] || null;
 }

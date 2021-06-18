@@ -20,7 +20,11 @@ describe('TxStatusModal', () => {
 
   it('should show completed status', async () => {
     const { container } = render(
-      <TxStatusModal account={account} pending={false} />,
+      <TxStatusModal
+        account={account}
+        status="success"
+        onDismissError={jest.fn()}
+      />,
     );
     await waitForDialogUpdate();
     expect(container).toMatchSnapshot();
@@ -28,7 +32,23 @@ describe('TxStatusModal', () => {
 
   it('should show pending status', async () => {
     const { container } = render(
-      <TxStatusModal account={account} pending={true} />,
+      <TxStatusModal
+        account={account}
+        status="pending"
+        onDismissError={jest.fn()}
+      />,
+    );
+    await waitForDialogUpdate();
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should show error status', async () => {
+    const { container } = render(
+      <TxStatusModal
+        account={account}
+        status="error"
+        onDismissError={jest.fn()}
+      />,
     );
     await waitForDialogUpdate();
     expect(container).toMatchSnapshot();

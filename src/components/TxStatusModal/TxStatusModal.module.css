@@ -19,7 +19,22 @@
   bottom: 0;
   right: 0;
   left: 0;
+}
+
+.success {
+  composes: wrapper;
+}
+
+.success::after {
   background: url('../images/checkmark-circle-green.svg') no-repeat center/auto;
+}
+
+.error {
+  composes: wrapper;
+}
+
+.error::after {
+  background: url('../images/transaction-error.svg') no-repeat center/auto;
 }
 
 .heading {
