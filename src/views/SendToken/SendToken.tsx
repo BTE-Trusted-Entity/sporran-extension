@@ -151,17 +151,27 @@ function getAmountError(
   ].filter(Boolean)[0];
 }
 
+function isValidAddress(address: string): boolean {
+  try {
+    DataUtils.validateAddress(address, 'recipient');
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 function getAddressError(address: string, account: Account): string | null {
   const t = browser.i18n.getMessage;
-  try {
-    if (address === account.address) {
-      return t('view_SendToken_recipient_same');
-    }
-    DataUtils.validateAddress(address, 'recipient');
-    return null;
-  } catch (error) {
+
+  if (address === account.address) {
+    return t('view_SendToken_recipient_same');
+  }
+
+  if (!isValidAddress(address)) {
     return t('view_SendToken_recipient_invalid');
   }
+
+  return null;
 }
 
 function formatKiltInput(amount: BN): string {
@@ -191,7 +201,9 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
   const [recipient, setRecipient] = useState('');
   const recipientError = recipient && getAddressError(recipient, account);
 
-  const recipientBalance = useAddressBalance(recipient);
+  const recipientBalance = useAddressBalance(
+    isValidAddress(recipient) ? recipient : '',
+  );
   const recipientBalanceZero = recipientBalance?.total?.isZero?.();
 
   const [amount, setAmount] = useState<string | null>(null);
@@ -256,6 +268,9 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   useEffect(() => {
     (async () => {
+      if (!isValidAddress(recipient)) {
+        return;
+      }
       const realFee = await feeChannel.get({ amount: amountBN, recipient });
       setFee(realFee);
     })();
