@@ -22,8 +22,6 @@ interface JsonTransferInput {
   password: string;
 }
 
-type TransferOutput = string;
-
 const transform = {
   inputToJson: (input: TransferInput) => ({
     ...input,
@@ -39,27 +37,21 @@ const transform = {
 
 export const transferChannel = new BrowserChannel<
   TransferInput,
-  TransferOutput,
+  void,
   JsonTransferInput
 >('transfer', false, transform);
 
-export async function transfer(input: TransferInput): Promise<string> {
+export async function transfer(input: TransferInput): Promise<void> {
   const { address, recipient, amount, password, tip } = input;
-  try {
-    const identity = await decryptAccount(address, password);
 
-    const tx = await makeTransfer(recipient, amount);
-    await BlockchainUtils.signAndSubmitTx(tx, identity, {
-      resolveOn: BlockchainUtils.IS_FINALIZED,
-      rejectOn: BlockchainUtils.IS_ERROR,
-      tip,
-    });
+  const identity = await decryptAccount(address, password);
 
-    return ''; // empty string = no error
-  } catch (error) {
-    console.error(error);
-    return error.message;
-  }
+  const tx = await makeTransfer(recipient, amount);
+  await BlockchainUtils.signAndSubmitTx(tx, identity, {
+    resolveOn: BlockchainUtils.IS_FINALIZED,
+    rejectOn: BlockchainUtils.IS_ERROR,
+    tip,
+  });
 }
 
 export function initBackgroundTransferChannel(): void {
