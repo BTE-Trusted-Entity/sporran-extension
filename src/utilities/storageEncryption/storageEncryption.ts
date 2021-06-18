@@ -71,11 +71,15 @@ export async function decrypt(
   const { keySaltBytes, cipherSaltBytes, cipherBytes } = bytes;
   const key = await deriveKeyFromPassword(password, keySaltBytes);
 
-  return crypto.subtle.decrypt(
-    { name: 'AES-GCM', iv: cipherSaltBytes },
-    key,
-    cipherBytes,
-  );
+  try {
+    return await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: cipherSaltBytes },
+      key,
+      cipherBytes,
+    );
+  } catch {
+    throw new Error('Invalid password');
+  }
 }
 
 function arrayBufferToBase64(arrayBuffer: ArrayBuffer): string {

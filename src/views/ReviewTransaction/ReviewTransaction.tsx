@@ -106,7 +106,7 @@ export function ReviewTransaction({
 
         setTxStatus('success');
       } catch (error) {
-        if (error.name === 'OperationError') {
+        if (error.message === 'Invalid password') {
           setPasswordError(true);
         } else {
           setTxStatus('error');
