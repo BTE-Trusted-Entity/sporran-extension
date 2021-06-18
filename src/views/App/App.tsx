@@ -1,5 +1,6 @@
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
+import { RouteExcept } from '../../components/RouteExcept/RouteExcept';
 import { useInitialEntries } from '../../utilities/popups/useInitialEntries';
 import { ConfigurationProvider } from '../../configuration/ConfigurationContext';
 import { useConfiguration } from '../../configuration/useConfiguration';
@@ -24,10 +25,13 @@ export function App(): JSX.Element {
   return (
     <div className={styles.container}>
       <MemoryRouter initialEntries={initialEntries}>
-        <nav className={styles.menus}>
-          <AddAccount />
-          <Settings />
-        </nav>
+        <RouteExcept path={paths.popup.base}>
+          <nav className={styles.menus}>
+            <AddAccount />
+            <Settings />
+          </nav>
+        </RouteExcept>
+
         <Switch>
           <Route path={paths.home} exact>
             <Welcome />
