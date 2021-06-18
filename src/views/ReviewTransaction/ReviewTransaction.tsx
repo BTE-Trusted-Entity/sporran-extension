@@ -256,7 +256,7 @@ export function ReviewTransaction({
         <TxStatusModal
           account={account}
           status={txStatus}
-          onClose={closeModal}
+          onDismissError={closeModal}
         />
       )}
 
