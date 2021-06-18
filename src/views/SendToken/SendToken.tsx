@@ -268,7 +268,7 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
 
   useEffect(() => {
     (async () => {
-      if (!isValidAddress(recipient)) {
+      if (recipient && !isValidAddress(recipient)) {
         return;
       }
       const realFee = await feeChannel.get({ amount: amountBN, recipient });
