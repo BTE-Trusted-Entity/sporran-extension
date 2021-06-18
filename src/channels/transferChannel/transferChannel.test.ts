@@ -25,7 +25,7 @@ describe('transferChannel', () => {
         transaction: true,
       }));
 
-      const error = await transfer({
+      await transfer({
         address: 'account-address',
         recipient: 'recipient-address',
         amount: new BN(125000000),
@@ -33,7 +33,6 @@ describe('transferChannel', () => {
         tip: new BN(0),
       });
 
-      expect(error).toEqual('');
       expect(decryptAccount).toHaveBeenCalledWith(
         'account-address',
         'password',
