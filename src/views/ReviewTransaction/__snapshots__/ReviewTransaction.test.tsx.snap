@@ -166,13 +166,13 @@ exports[`ReviewTransaction should render 1`] = `
         class="passwordLabel"
         for="password"
       >
-        Sign with Password:
+        Sign with password:
       </label>
       <a
         class="reset"
         href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
       >
-        Reset Password
+        Reset password
       </a>
     </p>
     <p
@@ -194,9 +194,7 @@ exports[`ReviewTransaction should render 1`] = `
       <output
         class="errorTooltip"
         hidden=""
-      >
-        The password is incorrect
-      </output>
+      />
     </p>
     <label
       class="rememberLabel"

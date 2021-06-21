@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
@@ -8,15 +8,12 @@ import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { AccountSlide } from '../../components/AccountSlide/AccountSlide';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
-import { decryptAccount } from '../../utilities/accounts/accounts';
-import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
-import { generatePath, paths } from '../paths';
 import {
-  forgetPasswordChannel,
-  getPasswordChannel,
-  savePasswordChannel,
-} from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
+  PasswordField,
+  usePasswordField,
+} from '../../components/PasswordField/PasswordField';
+import { paths } from '../paths';
 
 import styles from './ReviewTransaction.module.css';
 
@@ -39,10 +36,7 @@ export function ReviewTransaction({
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { passwordType, passwordToggle } = usePasswordType();
   const [showDetails, setShowDetails] = useState(false);
-
-  const [passwordError, setPasswordError] = useState<boolean>(false);
 
   const handleShowDetailsClick = useCallback(() => {
     setShowDetails(true);
@@ -52,25 +46,7 @@ export function ReviewTransaction({
     setShowDetails(false);
   }, []);
 
-  const [savedPassword, setSavedPassword] = useState<string | undefined>();
-
-  const [remember, setRemember] = useState(false);
-
-  const toggleRemember = useCallback(() => {
-    setRemember(!remember);
-  }, [remember]);
-
-  const handlePasswordInput = useCallback(() => {
-    setPasswordError(false);
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const password = await getPasswordChannel.get(account.address);
-      setSavedPassword(password);
-      setRemember(Boolean(password));
-    })();
-  }, [account]);
+  const passwordField = usePasswordField();
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -84,21 +60,8 @@ export function ReviewTransaction({
 
       setSubmitting(true);
 
-      const { elements } = event.target;
-      const providedPassword = elements.password.value;
-      const password =
-        providedPassword === '************' && savedPassword
-          ? savedPassword
-          : providedPassword;
-
       try {
-        await decryptAccount(account.address, password);
-
-        if (remember) {
-          await savePasswordChannel.get({ password, address: account.address });
-        } else {
-          await forgetPasswordChannel.get(account.address);
-        }
+        const password = await passwordField.get(event);
 
         setTxStatus('pending');
 
@@ -106,16 +69,11 @@ export function ReviewTransaction({
 
         setTxStatus('success');
       } catch (error) {
-        if (error.message === 'Invalid password') {
-          setPasswordError(true);
-        } else {
-          setTxStatus('error');
-        }
-
+        setTxStatus('error');
         setSubmitting(false);
       }
     },
-    [account, savedPassword, onSuccess, remember],
+    [onSuccess, passwordField],
   );
 
   const totalFee = fee.add(tip);
@@ -199,49 +157,7 @@ export function ReviewTransaction({
         </tbody>
       </table>
 
-      <p className={styles.resetLine}>
-        <label className={styles.passwordLabel} htmlFor="password">
-          {t('view_ReviewTransaction_password')}
-        </label>
-
-        <Link
-          to={generatePath(paths.account.reset.start, {
-            address: account.address,
-          })}
-          className={styles.reset}
-        >
-          {t('view_ReviewTransaction_reset')}
-        </Link>
-      </p>
-
-      <p className={styles.passwordLine}>
-        <input
-          type={passwordType}
-          onInput={handlePasswordInput}
-          id="password"
-          name="password"
-          className={styles.password}
-          defaultValue={savedPassword ? '************' : undefined}
-          autoFocus
-        />
-        {passwordToggle}
-
-        <output className={styles.errorTooltip} hidden={!passwordError}>
-          {t('view_ReviewTransaction_password_incorrect')}
-        </output>
-      </p>
-
-      <label className={styles.rememberLabel}>
-        <span>{t('view_ReviewTransaction_remember')}</span>
-        <input
-          type="checkbox"
-          name="remember"
-          className={styles.remember}
-          checked={remember}
-          onChange={toggleRemember}
-        />
-        <span />
-      </label>
+      <PasswordField account={account} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
         <Link to={paths.home} className={styles.cancel}>

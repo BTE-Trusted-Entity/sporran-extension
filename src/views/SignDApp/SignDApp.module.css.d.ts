@@ -9,14 +9,8 @@ declare namespace SignDAppModuleCssNamespace {
     detailName: string;
     detailValue: string;
     details: string;
-    errorTooltip: string;
     heading: string;
-    password: string;
-    passwordLabel: string;
-    passwordLine: string;
     reject: string;
-    remember: string;
-    rememberLabel: string;
     submit: string;
   }
 }
