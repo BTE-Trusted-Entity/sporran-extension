@@ -42,7 +42,7 @@ export function AccountSlide({ account, options = true }: Props): JSX.Element {
 
   return (
     <section>
-      <Avatar tartan={account.tartan} address={account.address} />
+      <Avatar address={account.address} />
       {!editing ? (
         <div className={options ? styles.nameLine : styles.centeredNameLine}>
           <span className={styles.name}>{account.name}</span>

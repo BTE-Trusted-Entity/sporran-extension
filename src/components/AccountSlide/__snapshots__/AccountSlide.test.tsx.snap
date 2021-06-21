@@ -4,7 +4,7 @@ exports[`AccountSlide should render 1`] = `
 <div>
   <section>
     <div
-      class="MacFarlane tartan"
+      class="avatar"
     >
       Identicon
     </div>
@@ -38,16 +38,12 @@ exports[`AccountSlide should render 1`] = `
 exports[`AccountSlideNew should render 1`] = `
 <div>
   <section>
-    <div
-      class="MacLeod tartan"
-    >
-      <a
-        aria-label="Create new account"
-        class="new"
-        href="/account/create"
-        title="Create new account"
-      />
-    </div>
+    <a
+      aria-label="Create new account"
+      class="create"
+      href="/account/create"
+      title="Create new account"
+    />
     <p
       class="new"
     >

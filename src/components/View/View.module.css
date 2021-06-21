@@ -5,10 +5,8 @@
   min-height: var(--popup-height);
   height: var(--popup-height);
   max-height: var(--popup-height);
-  background:
-    url('../images/logo.svg') no-repeat center 1.5rem,
-    url('../images/background.png') no-repeat center/contain;
-  padding: 5rem 1.5rem 0 1.5rem;
+  background: url('../images/background.png') no-repeat center/contain;
+  padding: 4rem 1.5rem 0 1.5rem;
   box-sizing: border-box;
   margin: auto;
 }

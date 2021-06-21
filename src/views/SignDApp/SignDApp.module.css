@@ -10,12 +10,10 @@
   margin: 0;
 }
 
-.tartan {
-  composes: tartan from '../../components/Avatar/Avatar.module.css';
-  width: 4.5rem;
-  height: 4.5rem;
+.avatar {
+  composes: avatar from '../../components/Avatar/Avatar.module.css';
   align-self: center;
-  margin-top: 0.5rem;
+  margin-top: calc(31rem / 16);
 }
 
 .account {

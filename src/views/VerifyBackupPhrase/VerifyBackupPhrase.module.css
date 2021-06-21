@@ -27,7 +27,6 @@
   height: calc(120rem / 16);
   padding: 1rem 1rem;
   margin-bottom: 1.5rem;
-  background: linear-gradient(153deg, #1c3451 0%, #335a87 100%);
 }
 
 .selectableWords {
@@ -35,7 +34,7 @@
 }
 
 .word {
-  composes: balanceText from '../../components/Typography/Typography.module.css';
+  composes: subline from '../../components/Typography/Typography.module.css';
   position: relative;
   width: calc(94rem / 16);
   height: 1.5rem;
@@ -43,7 +42,7 @@
   border-radius: calc(3rem / 16);
   box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
   margin: calc(3rem / 16);
-  background: linear-gradient(var(--color-grey-medium) 0%, #6c6b6b 100%);
+  background: linear-gradient(rgba(168, 168, 168, 0.7) 0%, rgba(108, 107, 107, 0.7) 100%);
   color: var(--color-dark);
   cursor: pointer;
 }
@@ -54,7 +53,7 @@
 
 .correct {
   composes: smallText from '../../components/Typography/Typography.module.css';
-  background: linear-gradient(var(--color-green) 0%, #387067 100%);
+  background: linear-gradient(rgba(90, 185, 170, 0.6) 0%, rgba(56, 112, 103, 0.6) 100%);
   color: var(--color-grey-light);
 }
 
@@ -68,7 +67,7 @@
 }
 
 .incorrect {
-  background: linear-gradient(var(--color-orange) 0%, #ba4822 100%);
+  background: linear-gradient(rgba(255, 101, 0, 0.6) 0%, rgba(186, 72, 34, 0.6) 100%);
   color: var(--color-grey-light);
 }
 
@@ -81,7 +80,7 @@
   border: 1px solid rgba(0, 0, 0, 0.5);
   box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
   border-radius: 50%;
-  background: var(--color-orange);
+  background: linear-gradient(rgba(255, 101, 0, 0.6) 0%, rgba(186, 72, 34, 0.6) 100%);
   position: absolute;
   right: -0.25rem;
   top: -0.25rem;

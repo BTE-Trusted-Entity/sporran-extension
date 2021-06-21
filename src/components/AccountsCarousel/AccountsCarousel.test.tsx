@@ -6,7 +6,6 @@ import {
 import { paths } from '../../views/paths';
 
 import { NEW } from '../../utilities/accounts/accounts';
-import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 
 import { AccountsCarousel, AccountsBubbles } from './AccountsCarousel';
 
@@ -45,7 +44,6 @@ describe('AccountsCarousel', () => {
     const { container } = render(
       <AccountsCarousel path={paths.account.overview} account={NEW} />,
     );
-    await waitForNextTartan();
     expect(container).toMatchSnapshot();
   });
 

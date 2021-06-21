@@ -8,7 +8,6 @@ import {
   runWithJSDOMErrorsDisabled,
   screen,
 } from '../../testing/testing';
-import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { mockFeeChannel } from '../../channels/feeChannel/feeChannel.mock';
 import '../../components/usePasteButton/usePasteButton.mock';
 
@@ -42,7 +41,6 @@ describe('SendToken', () => {
     const { container } = render(
       <SendToken account={NEW} onSuccess={jest.fn()} />,
     );
-    await waitForNextTartan();
     expect(container).toMatchSnapshot();
   });
 

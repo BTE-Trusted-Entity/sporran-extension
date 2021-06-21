@@ -3,6 +3,7 @@ declare namespace SignDAppModuleCssNamespace {
     account: string;
     address: string;
     addressLine: string;
+    avatar: string;
     buttonsLine: string;
     container: string;
     detailName: string;
@@ -17,7 +18,6 @@ declare namespace SignDAppModuleCssNamespace {
     remember: string;
     rememberLabel: string;
     submit: string;
-    tartan: string;
   }
 }
 

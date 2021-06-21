@@ -60,14 +60,10 @@ export function SignQuote(): JSX.Element | null {
       <p className={styles.subline}>{t('view_SignQuote_subline')}</p>
 
       <dl className={styles.details}>
-        {values.map(([name, value], index) => (
+        {values.map(([name, value]) => (
           <Fragment key={name}>
             <dt className={styles.detailName}>{name}:</dt>
-            <dd
-              className={index < 2 ? styles.detailOwnValue : styles.detailValue}
-            >
-              {value}
-            </dd>
+            <dd className={styles.detailValue}>{value}</dd>
           </Fragment>
         ))}
       </dl>
@@ -90,11 +86,7 @@ export function SignQuote(): JSX.Element | null {
       </label>
 
       <div className={styles.account}>
-        <Avatar
-          tartan={firstAccount.tartan}
-          address={firstAccount.address}
-          className={styles.tartan}
-        />
+        <Avatar address={firstAccount.address} className={styles.avatar} />
         <span className={styles.accountName}>{firstAccount.name}</span>
       </div>
 

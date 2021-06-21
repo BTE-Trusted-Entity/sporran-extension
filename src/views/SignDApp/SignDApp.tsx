@@ -136,11 +136,7 @@ export function SignDApp(): JSX.Element | null {
     <form className={styles.container} onSubmit={handleSubmit}>
       <h1 className={styles.heading}>{t('view_SignDApp_title')}</h1>
 
-      <Avatar
-        tartan={account.tartan}
-        address={account.address}
-        className={styles.tartan}
-      />
+      <Avatar address={account.address} className={styles.avatar} />
       <h2 className={styles.account}>{account.name}</h2>
 
       <p className={styles.addressLine}>

@@ -16,8 +16,7 @@
 }
 
 .origin {
-  composes: smallImportant from '../../components/Typography/Typography.module.css';
-  text-decoration: underline;
+  composes: subline from '../../components/Typography/Typography.module.css';
   max-height: 3rem;
   max-width: 100%;
   word-break: break-all;
@@ -26,7 +25,6 @@
 
 .warning {
   composes: subline from '../../components/Typography/Typography.module.css';
-  color: var(--color-orange);
   margin-top: 1rem;
   padding-top: 7.5rem;
   background: url('../../components/images/attention-hand.svg') no-repeat top center;

@@ -3,7 +3,7 @@
 exports[`Avatar should render 1`] = `
 <div>
   <div
-    class="MacFarlane tartan"
+    class="avatar"
   >
     Identicon
   </div>

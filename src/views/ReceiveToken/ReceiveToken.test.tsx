@@ -5,7 +5,6 @@ import {
   render,
   waitForDialogUpdate,
 } from '../../testing/testing';
-import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { NEW } from '../../utilities/accounts/accounts';
 import '../../components/useCopyButton/useCopyButton.mock';
 import { paths } from '../paths';
@@ -36,7 +35,6 @@ describe('ReceiveToken', () => {
       </MemoryRouter>,
     );
     await waitForDialogUpdate();
-    await waitForNextTartan();
     expect(container).toMatchSnapshot();
   });
 });

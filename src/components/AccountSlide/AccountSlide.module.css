@@ -29,9 +29,7 @@
 .input {
   composes: input from '../Input/Input.module.css';
   width: calc(232rem / 16);
-  background-image:
-    url('../images/pencil.svg'),
-    linear-gradient(140deg, var(--color-pink) 0%, var(--color-dark) 100%);
+  background-image: url('../images/pencil.svg'), var(--input-gradient);
   background-size: auto;
   background-repeat: no-repeat;
   background-position: calc(100% - 0.75rem) center, 0;
@@ -56,4 +54,11 @@
 .import {
   composes: buttonSecondary from '../Button/Button.module.css';
   margin-top: 1rem;
+}
+
+.create {
+  composes: avatar from '../../components/Avatar/Avatar.module.css';
+  background: rgba(0, 0, 0, 0.3) url('../images/plus-circle.svg') no-repeat
+    center/100%;
+  border-radius: 50%;
 }

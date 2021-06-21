@@ -7,6 +7,7 @@
 
 .heading {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  color: var(--color-orange);
   background-image: url('../../components/images/attention-hand.svg');
   background-size: calc(86rem / 16) calc(118rem / 16);
   background-repeat: no-repeat;

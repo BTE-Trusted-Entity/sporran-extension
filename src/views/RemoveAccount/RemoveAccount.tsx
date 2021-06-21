@@ -28,7 +28,7 @@ export function RemoveAccount({ account }: Props): JSX.Element {
       <h1 className={styles.heading}>{t('view_RemoveAccount_heading')}</h1>
       <p className={styles.subline}>{t('view_RemoveAccount_subline')}</p>
 
-      <Avatar tartan={account.tartan} address={account.address} />
+      <Avatar address={account.address} />
       <p className={styles.name}>{account.name}</p>
 
       <Balance address={account.address} />

@@ -21,14 +21,10 @@ export function SaveCredential(): JSX.Element {
       <p className={styles.subline}>{t('view_SaveCredential_subline')}</p>
 
       <dl className={styles.details}>
-        {values.map(([name, value], index) => (
+        {values.map(([name, value]) => (
           <Fragment key={name}>
             <dt className={styles.detailName}>{name}:</dt>
-            <dd
-              className={index < 2 ? styles.detailOwnValue : styles.detailValue}
-            >
-              {value}
-            </dd>
+            <dd className={styles.detailValue}>{value}</dd>
           </Fragment>
         ))}
       </dl>

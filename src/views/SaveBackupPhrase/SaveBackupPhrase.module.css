@@ -23,7 +23,7 @@
 }
 
 .item {
-  composes: smallImportant from '../../components/Typography/Typography.module.css';
+  composes: balanceText from '../../components/Typography/Typography.module.css';
   margin-bottom: 1.125rem;
   width: 8.5rem;
   height: 1.5rem;
