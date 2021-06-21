@@ -58,7 +58,6 @@
 
 .create {
   composes: avatar from '../../components/Avatar/Avatar.module.css';
-  background: rgba(0, 0, 0, 0.3) url('../images/plus-circle.svg') no-repeat
-    center/100%;
+  background: rgba(0, 0, 0, 0.3) url('../images/plus-circle.svg') no-repeat center/100%;
   border-radius: 50%;
 }
