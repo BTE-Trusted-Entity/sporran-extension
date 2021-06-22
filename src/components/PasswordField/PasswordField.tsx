@@ -42,17 +42,19 @@ export function usePasswordField(): {
   isEmpty: boolean;
   setIsEmpty: (isEmpty: boolean) => void;
 } {
-  const [getPassword, setPasswordGetter] = useState(() => defaultGetPassword);
+  const [passwordGetter, setPasswordGetter] = useState(
+    () => defaultGetPassword,
+  );
   const [isEmpty, setIsEmpty] = useState(true);
 
   return useMemo(
     () => ({
-      get: getPassword,
+      get: passwordGetter,
       set: setPasswordGetter,
       isEmpty,
       setIsEmpty,
     }),
-    [getPassword, isEmpty],
+    [passwordGetter, isEmpty],
   );
 }
 
@@ -83,7 +85,7 @@ export function PasswordField({
 
   const [error, setError] = useState<string | null>(null);
 
-  const getPassword = useCallback(
+  const passwordGetter = useCallback(
     async (event) => {
       if (!address) {
         throw new Error('No account address');
@@ -118,9 +120,9 @@ export function PasswordField({
     (event) => {
       setError(null);
       setIsEmpty(event.target.value === '');
-      setPasswordGetter(() => getPassword);
+      setPasswordGetter(() => passwordGetter);
     },
-    [getPassword, setPasswordGetter, setIsEmpty],
+    [passwordGetter, setPasswordGetter, setIsEmpty],
   );
 
   useEffect(() => {
@@ -134,9 +136,9 @@ export function PasswordField({
       rememberRef.current.checked = Boolean(passwordString);
       setIsEmpty(!rememberRef.current.checked);
 
-      setPasswordGetter(() => getPassword);
+      setPasswordGetter(() => passwordGetter);
     })();
-  }, [address, getPassword, setPasswordGetter, setIsEmpty]);
+  }, [address, passwordGetter, setPasswordGetter, setIsEmpty]);
 
   const { passwordType, passwordToggle } = usePasswordType();
 
