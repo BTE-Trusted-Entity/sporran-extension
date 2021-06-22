@@ -4,7 +4,6 @@ declare namespace SaveCredentialModuleCssNamespace {
     cancel: string;
     container: string;
     detailName: string;
-    detailOwnValue: string;
     detailValue: string;
     details: string;
     heading: string;

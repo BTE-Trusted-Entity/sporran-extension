@@ -3,15 +3,15 @@
 @import '~dialog-polyfill/dist/dialog-polyfill.css';
 
 :root {
-  --color-pink: #8c145a;
   --color-orange: #ff6500;
-  --color-dark: #4f405c;
+  --color-dark: #172a40;
+  --color-light: #8aafe5;
   --color-green: #5ab9aa;
-  --color-light: #c8e3ee;
   --color-grey-light: #f2efee;
   --color-grey-medium: #a8a8a8;
   --color-black: black;
   --color-white: white;
+  --input-gradient: linear-gradient(90deg, #335a87 0%, #2f537e 33%, #264262 100%);
   --popup-width: 480px;
   --popup-height: 600px;
 

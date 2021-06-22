@@ -1,7 +1,7 @@
 .screenHeadline {
   font-family: "Montserrat SemiBold", sans-serif;
-  font-size: 1.75rem;
-  color: var(--color-orange);
+  font-size: 1.625rem;
+  color: var(--color-light);
 }
 
 .importantHeadline {
@@ -34,8 +34,8 @@
 
 .balanceText {
   font-family: "Montserrat Medium", sans-serif;
-  font-size: 0.875rem;
-  color: var(--color-orange);
+  font-size: 1.25rem;
+  color: var(--color-light);
 }
 
 .smallText {

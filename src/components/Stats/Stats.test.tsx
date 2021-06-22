@@ -15,7 +15,6 @@ describe('Stats', () => {
     const accounts = {
       '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire': {
         name: 'My Sporran Account',
-        tartan: 'MacFarlane',
         address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
         index: 1,
       },

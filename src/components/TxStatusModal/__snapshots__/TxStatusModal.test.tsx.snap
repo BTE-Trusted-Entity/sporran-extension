@@ -9,7 +9,7 @@ exports[`TxStatusModal should show completed status 1`] = `
       class="success"
     >
       <div
-        class="MacLachlan transparent"
+        class="transparent"
       >
         Identicon
       </div>
@@ -38,7 +38,7 @@ exports[`TxStatusModal should show error status 1`] = `
       class="error"
     >
       <div
-        class="MacLachlan transparent"
+        class="transparent"
       >
         Identicon
       </div>
@@ -63,7 +63,7 @@ exports[`TxStatusModal should show pending status 1`] = `
     class="overlay"
   >
     <div
-      class="MacLachlan transparent"
+      class="transparent"
     >
       Identicon
     </div>

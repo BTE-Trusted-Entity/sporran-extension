@@ -16,7 +16,7 @@ exports[`RemoveAccount should render 1`] = `
       You’re about to remove your account
     </p>
     <div
-      class="MacFarlane tartan"
+      class="avatar"
     >
       Identicon
     </div>

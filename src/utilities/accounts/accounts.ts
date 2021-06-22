@@ -10,7 +10,6 @@ import {
 import { AccountsContext, AccountsContextType } from './AccountsContext';
 import { storage } from '../storage/storage';
 import { ACCOUNTS_KEY, getAccounts } from './getAccounts';
-import { getNextTartan, updateNextTartan } from './tartans';
 
 import { Account, AccountsMap } from './types';
 
@@ -21,7 +20,6 @@ const CURRENT_ACCOUNT_KEY = 'currentAccount';
 export const NEW: Account = {
   address: 'NEW',
   name: '',
-  tartan: '',
   index: -1,
 };
 
@@ -104,13 +102,11 @@ export async function createAccount(
 
   const index = 1 + largestIndex;
 
-  const tartan = await getNextTartan();
-  const name = tartan;
+  const name =
+    index === 1 ? 'My Sporran Account' : `My Sporran Account ${index}`;
 
-  const account = { name, tartan, address, index };
+  const account = { name, address, index };
   await saveAccount(account);
-
-  await updateNextTartan();
 
   return account;
 }

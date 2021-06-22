@@ -18,7 +18,7 @@ exports[`ReviewTransaction should render 1`] = `
     </p>
     <section>
       <div
-        class="MacFarlane tartan"
+        class="avatar"
       >
         Identicon
       </div>

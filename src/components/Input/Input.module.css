@@ -5,13 +5,8 @@
   border: 0;
   border-radius: 1.125rem;
   box-shadow: inset 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
-  background-color: var(--color-pink);
-  background-image:
-    linear-gradient(
-      140deg,
-      var(--color-pink) 0%,
-      var(--color-dark) 100%
-    );
+  background-color: var(--color-dark);
+  background-image: var(--input-gradient);
   caret-color: var(--color-grey-light);
 }
 
@@ -27,9 +22,7 @@
 .inputKiltAmount {
   composes: input;
   text-align: right;
-  background-image:
-    url('../images/kilt-coin.svg'),
-    linear-gradient(140deg, var(--color-pink) 0%, var(--color-dark) 100%);
+  background-image: url('../images/kilt-coin.svg'), var(--input-gradient);
   background-size: calc(13rem / 16) 1rem, auto;
   background-repeat: no-repeat;
   background-position: calc(100% - 0.75rem) center, 0;

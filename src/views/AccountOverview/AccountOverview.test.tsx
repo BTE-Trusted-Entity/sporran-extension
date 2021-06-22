@@ -1,7 +1,6 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { accountsMock, render } from '../../testing/testing';
-import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { NEW } from '../../utilities/accounts/accounts';
 import { paths } from '../paths';
 
@@ -30,7 +29,6 @@ describe('AccountOverview', () => {
         </Route>
       </MemoryRouter>,
     );
-    await waitForNextTartan();
     expect(container).toMatchSnapshot();
   });
 });

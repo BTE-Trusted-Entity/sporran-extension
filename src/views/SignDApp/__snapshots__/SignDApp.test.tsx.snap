@@ -11,7 +11,7 @@ exports[`SignDApp should render 1`] = `
       Transaction
     </h1>
     <div
-      class="MacFarlane tartan"
+      class="avatar"
     >
       Identicon
     </div>

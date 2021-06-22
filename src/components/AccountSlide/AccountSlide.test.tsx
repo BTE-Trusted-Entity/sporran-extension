@@ -6,7 +6,6 @@ import {
   screen,
   waitForElementToBeRemoved,
 } from '../../testing/testing';
-import { waitForNextTartan } from '../../utilities/accounts/getNextTartan.mock';
 import { saveAccount } from '../../utilities/accounts/accounts';
 
 import { AccountSlide } from './AccountSlide';
@@ -17,7 +16,6 @@ jest.spyOn(browser.runtime, 'sendMessage');
 
 const account = {
   name: 'My Sporran Account',
-  tartan: 'MacFarlane',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
   index: 1,
 };
@@ -42,7 +40,6 @@ describe('AccountSlide', () => {
 
     expect(saveAccount).toHaveBeenCalledWith({
       name: 'My Sporran Account Foo',
-      tartan: account.tartan,
       address: account.address,
       index: 1,
     });
@@ -55,7 +52,6 @@ describe('AccountSlideNew', () => {
   it('should render', async () => {
     const { container } = render(<AccountSlideNew />);
 
-    await waitForNextTartan();
     expect(container).toMatchSnapshot();
   });
 });

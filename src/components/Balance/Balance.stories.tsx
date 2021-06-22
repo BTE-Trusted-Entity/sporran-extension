@@ -10,3 +10,12 @@ export default {
 export function Template(): JSX.Element {
   return <Balance address="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire" />;
 }
+
+export function WithBreakdown(): JSX.Element {
+  return (
+    <Balance
+      address="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      breakdown
+    />
+  );
+}

@@ -4,8 +4,8 @@
 }
 
 .dropdown {
-  --gradient-start: #9b1864;
-  --gradient-end: #630e40;
+  --gradient-start: #294466;
+  --gradient-end: #0a1b2f;
   --item-height: 1.25rem;
 
   /* place it covering the button with an overlap */
@@ -21,6 +21,7 @@
   background-size: var(--footer-height);
   background-image: linear-gradient(var(--gradient-start) 0%, var(--gradient-end) var(--footer-height));
   background-position: bottom;
+  box-shadow: 0.375rem 0.375rem 0.75rem 0 rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
@@ -52,7 +53,7 @@
   list-style: none;
   padding-left: 0;
   margin: 0;
-  background-color: #4f405c;
+  background-color: #234264;
 }
 
 .listItem {

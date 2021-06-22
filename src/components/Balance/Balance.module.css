@@ -9,7 +9,7 @@
 
 .showBreakdown {
   composes: buttonIcon from '../../components/Button/Button.module.css';
-  background-image: url('../../components/images/chevron-down-orange.svg');
+  background-image: url('../../components/images/chevron-down-blue.svg');
   width: 1.625rem;
   height: 1.625rem;
   background-size: 0.75rem;

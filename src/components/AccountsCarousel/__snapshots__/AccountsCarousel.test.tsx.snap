@@ -58,7 +58,7 @@ exports[`AccountsCarousel should render normal accounts 1`] = `
   >
     <section>
       <div
-        class="MacLachlan tartan"
+        class="avatar"
       >
         Identicon
       </div>
@@ -153,7 +153,7 @@ exports[`AccountsCarousel should render the first account 1`] = `
   >
     <section>
       <div
-        class="MacFarlane tartan"
+        class="avatar"
       >
         Identicon
       </div>
@@ -248,7 +248,7 @@ exports[`AccountsCarousel should render the last account 1`] = `
   >
     <section>
       <div
-        class="MacPherson tartan"
+        class="avatar"
       >
         Identicon
       </div>
@@ -342,16 +342,12 @@ exports[`AccountsCarousel should render the new account 1`] = `
     class="container"
   >
     <section>
-      <div
-        class="MacLeod tartan"
-      >
-        <a
-          aria-label="Create new account"
-          class="new"
-          href="/account/create"
-          title="Create new account"
-        />
-      </div>
+      <a
+        aria-label="Create new account"
+        class="create"
+        href="/account/create"
+        title="Create new account"
+      />
       <p
         class="new"
       >
@@ -425,7 +421,7 @@ exports[`AccountsCarousel should support other paths 1`] = `
   >
     <section>
       <div
-        class="MacPherson tartan"
+        class="avatar"
       >
         Identicon
       </div>

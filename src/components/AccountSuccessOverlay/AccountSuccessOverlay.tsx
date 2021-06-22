@@ -27,7 +27,7 @@ export function AccountSuccessOverlay({
 
   return (
     <Modal open className={styles.overlay}>
-      <Avatar tartan={account.tartan} address={account.address} />
+      <Avatar address={account.address} />
       <h1 className={styles.heading}>
         {t('component_AccountSuccessOverlay_heading')}
       </h1>

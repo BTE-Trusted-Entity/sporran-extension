@@ -11,10 +11,5 @@ export default {
 
 export { Avatar };
 (Avatar as Type).args = {
-  tartan: 'MacFarlane',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
 };
-
-export function New(): JSX.Element {
-  return <Avatar tartan="MacLeod" />;
-}

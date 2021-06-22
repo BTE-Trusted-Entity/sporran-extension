@@ -1,25 +1,21 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { getNextTartan } from '../../utilities/accounts/tartans';
-import { Avatar } from '../Avatar/Avatar';
+import { paths } from '../../views/paths';
 
 import styles from './AccountSlide.module.css';
 
 export function AccountSlideNew(): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const [nextTartan, setNextTartan] = useState('');
-
-  useEffect(() => {
-    (async () => {
-      setNextTartan(await getNextTartan());
-    })();
-  }, []);
-
   return (
     <section>
-      <Avatar tartan={nextTartan} />
+      <Link
+        to={paths.account.create.start}
+        className={styles.create}
+        aria-label={t('component_AccountSlideNew_title')}
+        title={t('component_AccountSlideNew_title')}
+      />
       <p className={styles.new}>{t('component_AccountSlideNew_title')}</p>
     </section>
   );
