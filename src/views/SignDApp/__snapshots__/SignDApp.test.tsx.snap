@@ -100,12 +100,16 @@ exports[`SignDApp should render 1`] = `
         mortal, valid from 1 to 1,000,000
       </dd>
     </dl>
-    <label
-      class="passwordLabel"
-      for="password"
+    <p
+      class="resetLine"
     >
-      Sign with password:
-    </label>
+      <label
+        class="passwordLabel"
+        for="password"
+      >
+        Sign with password:
+      </label>
+    </p>
     <p
       class="passwordLine"
     >

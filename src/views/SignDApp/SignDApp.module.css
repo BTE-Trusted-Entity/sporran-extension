@@ -63,40 +63,6 @@
   white-space: nowrap;
 }
 
-.passwordLabel {
-  composes: smallText from '../../components/Typography/Typography.module.css';
-  margin: 0.75rem 0;
-  text-align: left;
-}
-
-.passwordLine {
-  position: relative;
-  margin: 0;
-}
-
-.password {
-  composes: input from '../../components/Input/Input.module.css';
-  width: calc(100% - 3.5rem);
-  padding-right: 2.5rem;
-}
-
-.rememberLabel {
-  composes: smallText from '../../components/Typography/Typography.module.css';
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0.75rem 0.5rem 0.75rem 0;
-  cursor: pointer;
-}
-
-.errorTooltip {
-  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
-}
-
-.remember {
-  composes: toggle from '../../components/Toggle/Toggle.module.css';
-}
-
 .buttonsLine {
   margin: 1rem 0 0;
   display: flex;

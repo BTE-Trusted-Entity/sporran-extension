@@ -7,17 +7,9 @@ declare namespace ReviewTransactionModuleCssNamespace {
     detailName: string;
     details: string;
     detailsHidden: string;
-    errorTooltip: string;
     heading: string;
     hideDetails: string;
-    password: string;
-    passwordLabel: string;
-    passwordLine: string;
     recipient: string;
-    remember: string;
-    rememberLabel: string;
-    reset: string;
-    resetLine: string;
     showDetails: string;
     subline: string;
     submit: string;

@@ -1,15 +1,13 @@
-import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
+import { Fragment, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import { decryptAccount, useAccounts } from '../../utilities/accounts/accounts';
+import { useAccounts } from '../../utilities/accounts/accounts';
 import { Avatar } from '../../components/Avatar/Avatar';
-import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import {
-  forgetPasswordChannel,
-  getPasswordChannel,
-  savePasswordChannel,
-} from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
+  PasswordField,
+  usePasswordField,
+} from '../../components/PasswordField/PasswordField';
 import {
   backgroundSignChannel,
   useSignPopupQuery,
@@ -59,68 +57,25 @@ export function SignDApp(): JSX.Element | null {
   const addressRef = useRef<HTMLInputElement>(null);
   const copy = useCopyButton(addressRef);
 
-  const { passwordType, passwordToggle } = usePasswordType();
-  const [error, setError] = useState<string | null>(null);
-
-  const handlePasswordInput = useCallback(() => {
-    setError(null);
-  }, []);
-
-  const [remember, setRemember] = useState(false);
-
-  const toggleRemember = useCallback(() => {
-    setRemember(!remember);
-  }, [remember]);
-
-  const [savedPassword, setSavedPassword] = useState<string | undefined>();
+  const passwordField = usePasswordField();
 
   const accounts = useAccounts().data;
   const account = accounts && accounts[query.address as string];
-
-  useEffect(() => {
-    (async () => {
-      if (!account) {
-        return;
-      }
-      const password = await getPasswordChannel.get(account.address);
-      setSavedPassword(password);
-      setRemember(Boolean(password));
-    })();
-  }, [account]);
 
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
 
-      const { elements } = event.target;
-      const providedPassword = elements.password.value;
-      const password =
-        providedPassword === '************' && savedPassword
-          ? savedPassword
-          : providedPassword;
-
       if (!account) {
         return;
       }
 
-      try {
-        const { address } = account;
-        await decryptAccount(address, password);
+      const password = await passwordField.get(event);
+      await backgroundSignChannel.return(password);
 
-        if (remember) {
-          await savePasswordChannel.get({ password, address });
-        } else {
-          await forgetPasswordChannel.get(account.address);
-        }
-
-        await backgroundSignChannel.return(password);
-
-        window.close();
-      } catch (error) {
-        setError(t('view_SignDApp_password_incorrect'));
-      }
+      window.close();
     },
-    [account, remember, savedPassword, t],
+    [account, passwordField],
   );
 
   const handleCancelClick = useCallback(async () => {
@@ -169,38 +124,7 @@ export function SignDApp(): JSX.Element | null {
         ))}
       </dl>
 
-      <label className={styles.passwordLabel} htmlFor="password">
-        {t('view_SignDApp_password')}
-      </label>
-
-      <p className={styles.passwordLine}>
-        <input
-          type={passwordType}
-          onInput={handlePasswordInput}
-          id="password"
-          name="password"
-          className={styles.password}
-          defaultValue={savedPassword ? '************' : undefined}
-          autoFocus
-        />
-        {passwordToggle}
-
-        <output className={styles.errorTooltip} hidden={!error}>
-          {error}
-        </output>
-      </p>
-
-      <label className={styles.rememberLabel}>
-        <span>{t('view_SignDApp_remember')}</span>
-        <input
-          type="checkbox"
-          name="remember"
-          className={styles.remember}
-          checked={remember}
-          onChange={toggleRemember}
-        />
-        <span />
-      </label>
+      <PasswordField account={account} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
         <button

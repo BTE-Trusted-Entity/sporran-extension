@@ -173,6 +173,18 @@
   "component_TxStatusModal_error": {
     "message": "Your transaction has failed"
   },
+  "component_PasswordField_reset": {
+    "message": "Reset password"
+  },
+  "component_PasswordField_password": {
+    "message": "Sign with password:"
+  },
+  "component_PasswordField_password_incorrect": {
+    "message": "The password is incorrect"
+  },
+  "component_PasswordField_remember": {
+    "message": "Remember my password for the next 15 minutes"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -451,9 +463,6 @@
   "view_ReviewTransaction_recipient": {
     "message": "send to:"
   },
-  "view_ReviewTransaction_reset": {
-    "message": "Reset Password"
-  },
   "view_ReviewTransaction_total": {
     "message": "Total: "
   },
@@ -474,15 +483,6 @@
   },
   "view_ReviewTransaction_amount": {
     "message": "Amount:"
-  },
-  "view_ReviewTransaction_password": {
-    "message": "Sign with Password:"
-  },
-  "view_ReviewTransaction_password_incorrect": {
-    "message": "The password is incorrect"
-  },
-  "view_ReviewTransaction_remember": {
-    "message": "Remember my password for the next 15 minutes"
   },
   "view_ReviewTransaction_CTA": {
     "message": "Send"
@@ -635,20 +635,11 @@
   "view_SignDApp_title": {
     "message": "Transaction"
   },
-  "view_SignDApp_password": {
-    "message": "Sign with password:"
-  },
-  "view_SignDApp_remember": {
-    "message": "Remember my password for the next 15 minutes"
-  },
   "view_SignDApp_reject": {
     "message": "Reject"
   },
   "view_SignDApp_CTA": {
     "message": "Sign the transaction"
-  },
-  "view_SignDApp_password_incorrect": {
-    "message": "The password is incorrect"
   },
   "view_ExternalAccess_heading": {
     "message": "Website Access"
