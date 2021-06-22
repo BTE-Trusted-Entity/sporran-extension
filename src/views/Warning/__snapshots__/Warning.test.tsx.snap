@@ -28,7 +28,7 @@ your assets
     </h2>
     <a
       class="confirm"
-      href="/account/create/backup"
+      href="/identity/create/backup"
     >
       I understand this – go to the Phrase
     </a>

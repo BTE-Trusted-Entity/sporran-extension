@@ -41,8 +41,8 @@
   margin: 0.5rem 0 1rem;
 }
 
-.account {
-  composes: accountText from '../../components/Typography/Typography.module.css';
+.identity {
+  composes: identityText from '../../components/Typography/Typography.module.css';
   margin: 1.5rem 0 0.5rem;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@
   gap: 0.5rem;
 }
 
-.accountName {
+.identityName {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

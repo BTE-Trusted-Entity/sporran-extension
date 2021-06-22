@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Welcome should match the snapshot with an account 1`] = `
+exports[`Welcome should match the snapshot with an identity 1`] = `
 <div>
   <div
     class="container"
@@ -8,12 +8,12 @@ exports[`Welcome should match the snapshot with an account 1`] = `
     <h1
       class="heading"
     >
-      Add Account
+      Add Identity
     </h1>
     <h3
       class="info"
     >
-      You have 3 accounts. Add another one.
+      You have 3 identities. Add another one.
     </h3>
     <p
       class="termsLine"
@@ -40,16 +40,16 @@ exports[`Welcome should match the snapshot with an account 1`] = `
     <a
       aria-disabled="true"
       class="create"
-      href="/account/create"
+      href="/identity/create"
     >
-      Create Account
+      Create Identity
     </a>
     <a
       aria-disabled="true"
       class="import"
-      href="/account/import"
+      href="/identity/import"
     >
-      Import an account from pre-existing phrase
+      Import an identity from pre-existing phrase
     </a>
     <button
       aria-label="Back"
@@ -61,7 +61,7 @@ exports[`Welcome should match the snapshot with an account 1`] = `
 </div>
 `;
 
-exports[`Welcome should match the snapshot without accounts 1`] = `
+exports[`Welcome should match the snapshot without identities 1`] = `
 <div>
   <div
     class="container"
@@ -74,8 +74,8 @@ exports[`Welcome should match the snapshot without accounts 1`] = `
     <h3
       class="info"
     >
-      You currently don’t have any accounts.
-Create your first account to get started.
+      You currently don’t have any identities.
+Create your first identity to get started.
     </h3>
     <p
       class="termsLine"
@@ -102,16 +102,16 @@ Create your first account to get started.
     <a
       aria-disabled="true"
       class="create"
-      href="/account/create"
+      href="/identity/create"
     >
-      Create Account
+      Create Identity
     </a>
     <a
       aria-disabled="true"
       class="import"
-      href="/account/import"
+      href="/identity/import"
     >
-      Import an account from pre-existing phrase
+      Import an identity from pre-existing phrase
     </a>
   </div>
 </div>

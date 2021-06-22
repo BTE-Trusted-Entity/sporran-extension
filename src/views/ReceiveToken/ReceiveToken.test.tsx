@@ -1,24 +1,24 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import {
-  accountsMock as accounts,
+  identitiesMock as identities,
   render,
   waitForDialogUpdate,
 } from '../../testing/testing';
-import { NEW } from '../../utilities/accounts/accounts';
+import { NEW } from '../../utilities/identities/identities';
 import '../../components/useCopyButton/useCopyButton.mock';
 import { paths } from '../paths';
 
 import { ReceiveToken } from './ReceiveToken';
 
-const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 describe('ReceiveToken', () => {
-  it('should render a normal account', async () => {
+  it('should render a normal identity', async () => {
     const { container } = render(
-      <MemoryRouter initialEntries={[`/account/${account.address}/receive`]}>
-        <Route path={paths.account.receive}>
-          <ReceiveToken account={account} />,
+      <MemoryRouter initialEntries={[`/identity/${identity.address}/receive`]}>
+        <Route path={paths.identity.receive}>
+          <ReceiveToken identity={identity} />,
         </Route>
       </MemoryRouter>,
     );
@@ -26,11 +26,11 @@ describe('ReceiveToken', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('should render the new account', async () => {
+  it('should render the new identity', async () => {
     const { container } = render(
-      <MemoryRouter initialEntries={['/account/NEW/receive']}>
-        <Route path={paths.account.receive}>
-          <ReceiveToken account={NEW} />,
+      <MemoryRouter initialEntries={['/identity/NEW/receive']}>
+        <Route path={paths.identity.receive}>
+          <ReceiveToken identity={NEW} />,
         </Route>
       </MemoryRouter>,
     );

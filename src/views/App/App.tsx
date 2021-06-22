@@ -4,12 +4,12 @@ import { RouteExcept } from '../../components/RouteExcept/RouteExcept';
 import { useInitialEntries } from '../../utilities/popups/useInitialEntries';
 import { ConfigurationProvider } from '../../configuration/ConfigurationContext';
 import { useConfiguration } from '../../configuration/useConfiguration';
-import { AccountsProvider } from '../../utilities/accounts/AccountsContext';
-import { AddAccount } from '../../components/AddAccount/AddAccount';
+import { IdentitiesProvider } from '../../utilities/identities/IdentitiesContext';
+import { AddIdentity } from '../../components/AddIdentity/AddIdentity';
 import { Settings } from '../../components/Settings/Settings';
 import { ExternalAccess } from '../ExternalAccess/ExternalAccess';
 import { Welcome } from '../Welcome/Welcome';
-import { AccountsRouter } from '../AccountsRouter/AccountsRouter';
+import { IdentitiesRouter } from '../IdentitiesRouter/IdentitiesRouter';
 import { PopupsRouter } from '../PopupsRouter/PopupsRouter';
 import { AppSettings } from '../AppSettings/AppSettings';
 
@@ -27,7 +27,7 @@ export function App(): JSX.Element {
       <MemoryRouter initialEntries={initialEntries}>
         <RouteExcept path={paths.popup.base}>
           <nav className={styles.menus}>
-            <AddAccount />
+            <AddIdentity />
             <Settings />
           </nav>
         </RouteExcept>
@@ -47,8 +47,8 @@ export function App(): JSX.Element {
             <ExternalAccess />
           </Route>
 
-          <Route path={paths.account.base}>
-            <AccountsRouter />
+          <Route path={paths.identity.base}>
+            <IdentitiesRouter />
           </Route>
 
           <Route path={paths.popup.base}>
@@ -63,9 +63,9 @@ export function App(): JSX.Element {
 export function AppWithProviders(): JSX.Element {
   return (
     <ConfigurationProvider>
-      <AccountsProvider>
+      <IdentitiesProvider>
         <App />
-      </AccountsProvider>
+      </IdentitiesProvider>
     </ConfigurationProvider>
   );
 }

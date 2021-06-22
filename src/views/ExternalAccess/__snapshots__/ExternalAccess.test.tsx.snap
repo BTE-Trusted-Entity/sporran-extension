@@ -13,7 +13,7 @@ exports[`ExternalAccess should render 1`] = `
     <p
       class="subline"
     >
-      Control which websites have access to names and addresses of your accounts
+      Control which websites have access to names and addresses of your identities
     </p>
     <small
       class="small"
@@ -53,7 +53,7 @@ exports[`ExternalAccess should render 1`] = `
       class="back"
       href="/"
     >
-      Back to my accounts
+      Back to my identities
     </a>
     <button
       aria-label="Back"
@@ -64,7 +64,7 @@ exports[`ExternalAccess should render 1`] = `
     <p
       class="stats"
     >
-      You have 3 accounts with a total
+      You have 3 identities with a total
       <span
         class="balance"
       >

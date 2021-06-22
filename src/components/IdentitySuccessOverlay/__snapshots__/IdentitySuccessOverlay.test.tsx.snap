@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IdentitySuccessOverlay should render success overlay for created identity 1`] = `
+<div>
+  <dialog
+    class="overlay"
+  >
+    <div
+      class="avatar"
+    >
+      Identicon
+    </div>
+    <h1
+      class="heading"
+    >
+      Congratulations!
+    </h1>
+    <p
+      class="text"
+    >
+      You have successfully created a KILT Identity
+    </p>
+    <button
+      class="button"
+      type="button"
+    >
+      OK
+    </button>
+  </dialog>
+</div>
+`;
+
+exports[`IdentitySuccessOverlay should render success overlay for imported identity 1`] = `
+<div>
+  <dialog
+    class="overlay"
+  >
+    <div
+      class="avatar"
+    >
+      Identicon
+    </div>
+    <h1
+      class="heading"
+    >
+      Congratulations!
+    </h1>
+    <p
+      class="text"
+    >
+      You have successfully imported your KILT Identity
+    </p>
+    <button
+      class="button"
+      type="button"
+    >
+      OK
+    </button>
+  </dialog>
+</div>
+`;
+
+exports[`IdentitySuccessOverlay should render success overlay for reset password 1`] = `
+<div>
+  <dialog
+    class="overlay"
+  >
+    <div
+      class="avatar"
+    >
+      Identicon
+    </div>
+    <h1
+      class="heading"
+    >
+      Congratulations!
+    </h1>
+    <p
+      class="text"
+    >
+      You have successfully set a new password
+    </p>
+    <button
+      class="button"
+      type="button"
+    >
+      OK
+    </button>
+  </dialog>
+</div>
+`;

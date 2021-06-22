@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Stats should render for at least two accounts 1`] = `
+exports[`Stats should render for at least two identities 1`] = `
 <div>
   <p
     class="stats"
   >
-    You have 3 accounts with a total
+    You have 3 identities with a total
     <span
       class="balance"
     >

@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { AccountsProviderMock } from '../../utilities/accounts/AccountsProvider.mock';
+import { IdentitiesProviderMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import menuStyles from '../Menu/Menu.module.css';
 
 import { Settings } from './Settings';
@@ -18,19 +18,19 @@ export default {
   ],
 } as Meta;
 
-export function NoAccounts(): JSX.Element {
+export function NoIdentities(): JSX.Element {
   return (
-    <AccountsProviderMock accounts={{}}>
+    <IdentitiesProviderMock identities={{}}>
       <Settings />
-    </AccountsProviderMock>
+    </IdentitiesProviderMock>
   );
 }
 
-export function WithAccounts(): JSX.Element {
+export function WithIdentities(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+        '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
       ]}
     >
       <Settings />

@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddIdentity menu should be visible when menu button clicked 1`] = `
+<div>
+  <div
+    class="wrapper"
+  >
+    <button
+      aria-expanded="true"
+      aria-haspopup="true"
+      aria-label="Identity options"
+      class="toggle"
+      role="button"
+      tabindex="0"
+      title="Identity options"
+      type="button"
+    />
+    <div
+      class="dropdown"
+      role="menu"
+    >
+      <h4
+        class="heading"
+      >
+        Identity
+      </h4>
+      <ul
+        class="list"
+      >
+        <li
+          class="listItem"
+        >
+          <button
+            class="listButton"
+            role="menuitem"
+            tabindex="-1"
+            type="button"
+          >
+            Edit identity name
+          </button>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            href="/identity/ADDRESS/remove"
+            role="menuitem"
+            tabindex="-1"
+          >
+            Forget identity
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            href="/identity/ADDRESS/reset"
+            role="menuitem"
+            tabindex="-1"
+          >
+            Reset password
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AddIdentity should render 1`] = `
+<div>
+  <div
+    class="wrapper"
+  >
+    <button
+      aria-expanded="false"
+      aria-haspopup="true"
+      aria-label="Identity options"
+      class="toggle"
+      role="button"
+      tabindex="0"
+      title="Identity options"
+      type="button"
+    />
+  </div>
+</div>
+`;

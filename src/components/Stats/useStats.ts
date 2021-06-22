@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import BN from 'bn.js';
 import { find, mapValues, omit } from 'lodash-es';
 
-import { AccountsMap } from '../../utilities/accounts/accounts';
+import { IdentitiesMap } from '../../utilities/identities/identities';
 import {
   balanceChangeChannel,
   BalanceChangeOutput,
@@ -48,16 +48,16 @@ function subscribeToBalance(
 }
 
 export function useStats(
-  accounts: AccountsMap,
+  identities: IdentitiesMap,
 ): { count: number; total: BN } | null {
-  const accountsList = Object.values(accounts);
+  const identitiesList = Object.values(identities);
 
   const [balances, setBalances] = useState<Balances>(
-    mapValues(accounts, () => null),
+    mapValues(identities, () => null),
   );
 
   // A more straightforward way would be to use state, but that would cause unsubscribing everything
-  // on every account list change.
+  // on every identity list change.
   const subscriptions = useRef<Subscriptions>({}).current;
   useEffect(() => {
     return () => {
@@ -65,10 +65,10 @@ export function useStats(
     };
   }, [subscriptions]);
 
-  // On every account list change identify which addresses have been added or removed,
+  // On every identity list change identify which addresses have been added or removed,
   // and subscribe or unsubscribe accordingly.
   useEffect(() => {
-    accountsList.forEach(({ address }) => {
+    identitiesList.forEach(({ address }) => {
       const addressWasAdded = !(address in subscriptions);
       if (addressWasAdded) {
         subscribeToBalance(address, setBalances, subscriptions);
@@ -76,12 +76,12 @@ export function useStats(
     });
 
     Object.keys(subscriptions).forEach((address) => {
-      const addressWasRemoved = !find(accountsList, { address });
+      const addressWasRemoved = !find(identitiesList, { address });
       if (addressWasRemoved) {
         subscriptions[address]();
       }
     });
-  }, [accountsList, subscriptions]);
+  }, [identitiesList, subscriptions]);
 
   const balancesList = Object.values(balances);
   if (balancesList.includes(null)) {
@@ -89,7 +89,7 @@ export function useStats(
     return null;
   }
 
-  const count = accountsList.length;
+  const count = identitiesList.length;
   const total = new BN(0);
   balancesList.forEach((balance) => balance && total.iadd(balance));
 

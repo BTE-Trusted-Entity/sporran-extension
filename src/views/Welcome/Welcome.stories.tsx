@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import { AccountsProviderMock } from '../../utilities/accounts/AccountsProvider.mock';
+import { IdentitiesProviderMock } from '../../utilities/identities/IdentitiesProvider.mock';
 
 import { Welcome } from './Welcome';
 
@@ -9,14 +9,14 @@ export default {
   component: Welcome,
 } as Meta;
 
-export function NoAccounts(): JSX.Element {
+export function NoIdentities(): JSX.Element {
   return (
-    <AccountsProviderMock accounts={{}}>
+    <IdentitiesProviderMock identities={{}}>
       <Welcome />
-    </AccountsProviderMock>
+    </IdentitiesProviderMock>
   );
 }
 
-export function HasAccounts(): JSX.Element {
+export function HasIdentities(): JSX.Element {
   return <Welcome again />;
 }

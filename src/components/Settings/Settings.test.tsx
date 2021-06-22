@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '../../testing/testing';
-import { AccountsProviderMock } from '../../utilities/accounts/AccountsProvider.mock';
+import { IdentitiesProviderMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import { waitForHasSavedPasswords } from '../../channels/SavedPasswordsChannels/hasSavedPasswords.mock';
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
 import { Settings } from './Settings';
@@ -18,7 +18,7 @@ describe('Settings', () => {
     const { container } = render(
       <MemoryRouter
         initialEntries={[
-          '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+          '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
         ]}
       >
         <Settings />
@@ -32,7 +32,7 @@ describe('Settings', () => {
 
     expect(await screen.findByRole('menu')).toBeInTheDocument();
     expect(
-      await screen.findByRole('menuitem', { name: 'Forget current account' }),
+      await screen.findByRole('menuitem', { name: 'Forget current identity' }),
     ).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
 
@@ -41,40 +41,40 @@ describe('Settings', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('should not render account options when creating account', async () => {
+  it('should not render identity options when creating identity', async () => {
     render(
-      <MemoryRouter initialEntries={['/account/NEW']}>
+      <MemoryRouter initialEntries={['/identity/NEW']}>
         <Settings />
       </MemoryRouter>,
     );
     userEvent.click(await screen.findByLabelText('Settings'));
 
     expect(
-      screen.queryByRole('menuitem', { name: 'Forget current account' }),
+      screen.queryByRole('menuitem', { name: 'Forget current identity' }),
     ).not.toBeInTheDocument();
     expect(
       screen.queryByRole('menuitem', {
-        name: 'Reset password for current account',
+        name: 'Reset password for current identity',
       }),
     ).not.toBeInTheDocument();
 
     await waitForHasSavedPasswords();
   });
 
-  it('should not render account options if there are no accounts', async () => {
+  it('should not render identity options if there are no identities', async () => {
     render(
-      <AccountsProviderMock accounts={{}}>
+      <IdentitiesProviderMock identities={{}}>
         <Settings />
-      </AccountsProviderMock>,
+      </IdentitiesProviderMock>,
     );
     userEvent.click(await screen.findByLabelText('Settings'));
 
     expect(
-      screen.queryByRole('menuitem', { name: 'Forget current account' }),
+      screen.queryByRole('menuitem', { name: 'Forget current identity' }),
     ).not.toBeInTheDocument();
     expect(
       screen.queryByRole('menuitem', {
-        name: 'Reset password for current account',
+        name: 'Reset password for current identity',
       }),
     ).not.toBeInTheDocument();
 

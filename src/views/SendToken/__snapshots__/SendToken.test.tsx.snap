@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SendToken should not render for new account 1`] = `
+exports[`SendToken should not render for new identity 1`] = `
 <div>
   <main
     class="container"
@@ -9,12 +9,12 @@ exports[`SendToken should not render for new account 1`] = `
       <h1
         class="heading"
       >
-        Your Accounts
+        Your Identities
       </h1>
       <p
         class="info"
       >
-        You have 3 accounts
+        You have 3 identities
       </p>
     </header>
     <div
@@ -22,28 +22,28 @@ exports[`SendToken should not render for new account 1`] = `
     >
       <section>
         <a
-          aria-label="Create new account"
+          aria-label="Create new identity"
           class="create"
-          href="/account/create"
-          title="Create new account"
+          href="/identity/create"
+          title="Create new identity"
         />
         <p
           class="new"
         >
-          Create new account
+          Create new identity
         </p>
       </section>
       <a
-        aria-label="My Third Account which has a very long name and might not even fit on the screen"
+        aria-label="My Third Identity which has a very long name and might not even fit on the screen"
         class="left"
         href="/"
-        title="My Third Account which has a very long name and might not even fit on the screen"
+        title="My Third Identity which has a very long name and might not even fit on the screen"
       />
       <a
-        aria-label="My Sporran Account"
+        aria-label="My Sporran Identity"
         class="right"
         href="/"
-        title="My Sporran Account"
+        title="My Sporran Identity"
       />
       <ul
         class="bubbles"
@@ -53,10 +53,10 @@ exports[`SendToken should not render for new account 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="My Sporran Account"
+            aria-label="My Sporran Identity"
             class="bubble bubbleActive"
             href="/"
-            title="My Sporran Account"
+            title="My Sporran Identity"
           />
         </li>
         <li
@@ -64,10 +64,10 @@ exports[`SendToken should not render for new account 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="My Second Account"
+            aria-label="My Second Identity"
             class="bubble bubbleActive"
             href="/"
-            title="My Second Account"
+            title="My Second Identity"
           />
         </li>
         <li
@@ -75,10 +75,10 @@ exports[`SendToken should not render for new account 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="My Third Account which has a very long name and might not even fit on the screen"
+            aria-label="My Third Identity which has a very long name and might not even fit on the screen"
             class="bubble bubbleActive"
             href="/"
-            title="My Third Account which has a very long name and might not even fit on the screen"
+            title="My Third Identity which has a very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -86,24 +86,24 @@ exports[`SendToken should not render for new account 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="Create new account"
+            aria-label="Create new identity"
             class="add addActive"
             href="/"
-            title="Create new account"
+            title="Create new identity"
           />
         </li>
       </ul>
     </div>
     <a
       class="import"
-      href="/account/import"
+      href="/identity/import"
     >
-      Import an account from pre-existing phrase
+      Import an identity from pre-existing phrase
     </a>
     <p
       class="stats"
     >
-      You have 3 accounts with a total
+      You have 3 identities with a total
       <span
         class="balance"
       >
@@ -155,21 +155,21 @@ exports[`SendToken should render 1`] = `
           <span
             class="name"
           >
-            My Sporran Account
+            My Sporran Identity
           </span>
         </div>
       </section>
       <a
-        aria-label="Create new account"
+        aria-label="Create new identity"
         class="left"
         href="/"
-        title="Create new account"
+        title="Create new identity"
       />
       <a
-        aria-label="My Second Account"
+        aria-label="My Second Identity"
         class="right"
         href="/"
-        title="My Second Account"
+        title="My Second Identity"
       />
       <ul
         class="bubbles"
@@ -179,10 +179,10 @@ exports[`SendToken should render 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="My Sporran Account"
+            aria-label="My Sporran Identity"
             class="bubble bubbleActive"
             href="/"
-            title="My Sporran Account"
+            title="My Sporran Identity"
           />
         </li>
         <li
@@ -190,10 +190,10 @@ exports[`SendToken should render 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="My Second Account"
+            aria-label="My Second Identity"
             class="bubble bubbleActive"
             href="/"
-            title="My Second Account"
+            title="My Second Identity"
           />
         </li>
         <li
@@ -201,10 +201,10 @@ exports[`SendToken should render 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="My Third Account which has a very long name and might not even fit on the screen"
+            aria-label="My Third Identity which has a very long name and might not even fit on the screen"
             class="bubble bubbleActive"
             href="/"
-            title="My Third Account which has a very long name and might not even fit on the screen"
+            title="My Third Identity which has a very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -212,10 +212,10 @@ exports[`SendToken should render 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="Create new account"
+            aria-label="Create new identity"
             class="add addActive"
             href="/"
-            title="Create new account"
+            title="Create new identity"
           />
         </li>
       </ul>
@@ -333,7 +333,7 @@ exports[`SendToken should render 1`] = `
     <p
       class="stats"
     >
-      You have 3 accounts with a total
+      You have 3 identities with a total
       <span
         class="balance"
       >

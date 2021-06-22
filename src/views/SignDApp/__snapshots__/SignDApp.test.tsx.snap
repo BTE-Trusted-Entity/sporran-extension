@@ -16,15 +16,15 @@ exports[`SignDApp should render 1`] = `
       Identicon
     </div>
     <h2
-      class="account"
+      class="identity"
     >
-      My Sporran Account
+      My Sporran Identity
     </h2>
     <p
       class="addressLine"
     >
       <input
-        aria-label="My Sporran Account"
+        aria-label="My Sporran Identity"
         class="address"
         readonly=""
         value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"

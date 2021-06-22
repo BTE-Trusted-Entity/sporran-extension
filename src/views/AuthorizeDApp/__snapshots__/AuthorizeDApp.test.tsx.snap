@@ -23,7 +23,7 @@ exports[`AuthorizeDApp should render 1`] = `
     <p
       class="warning"
     >
-      Only approve this request if you trust the application. Approving gives the application access to the addresses of your accounts.
+      Only approve this request if you trust the application. Approving gives the application access to the addresses of your identities.
     </p>
     <button
       class="authorize"

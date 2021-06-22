@@ -5,15 +5,15 @@ import { MemoryRouter } from 'react-router-dom';
 import dialogPolyfill from 'dialog-polyfill';
 
 import { ConfigurationProvider } from '../configuration/ConfigurationContext';
-import { AccountsProviderMock } from '../utilities/accounts/AccountsProvider.mock';
+import { IdentitiesProviderMock } from '../utilities/identities/IdentitiesProvider.mock';
 import { Identicon } from '../components/Avatar/Identicon';
 import { mockBalanceChangeChannel } from '../channels/balanceChangeChannel/mockBalanceChangeChannel';
 
 export {
-  AccountsProviderMock,
-  accountsMock,
-  moreAccountsMock,
-} from '../utilities/accounts/AccountsProvider.mock';
+  IdentitiesProviderMock,
+  identitiesMock,
+  moreIdentitiesMock,
+} from '../utilities/identities/IdentitiesProvider.mock';
 
 jest.mock('../components/Avatar/Identicon');
 (Identicon as jest.Mock).mockImplementation(() => 'Identicon');
@@ -26,9 +26,9 @@ export function render(
 ): ReturnType<typeof externalRender> {
   return externalRender(
     <ConfigurationProvider>
-      <AccountsProviderMock>
+      <IdentitiesProviderMock>
         <MemoryRouter>{ui}</MemoryRouter>
-      </AccountsProviderMock>
+      </IdentitiesProviderMock>
     </ConfigurationProvider>,
     options,
   );

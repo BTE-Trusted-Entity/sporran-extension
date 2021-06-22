@@ -3,7 +3,7 @@ import BN from 'bn.js';
 import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import { BlockchainUtils } from '@kiltprotocol/chain-helpers';
 
-import { decryptAccount } from '../../utilities/accounts/accounts';
+import { decryptIdentity } from '../../utilities/identities/identities';
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 
 interface TransferInput {
@@ -44,10 +44,10 @@ export const transferChannel = new BrowserChannel<
 export async function transfer(input: TransferInput): Promise<void> {
   const { address, recipient, amount, password, tip } = input;
 
-  const identity = await decryptAccount(address, password);
+  const blockchainIdentity = await decryptIdentity(address, password);
 
   const tx = await makeTransfer(recipient, amount);
-  await BlockchainUtils.signAndSubmitTx(tx, identity, {
+  await BlockchainUtils.signAndSubmitTx(tx, blockchainIdentity, {
     resolveOn: BlockchainUtils.IS_FINALIZED,
     rejectOn: BlockchainUtils.IS_ERROR,
     tip,

@@ -12,7 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import { decryptAccount } from '../../utilities/accounts/accounts';
+import { decryptIdentity } from '../../utilities/identities/identities';
 import { usePasswordType } from '../usePasswordType/usePasswordType';
 import {
   forgetPasswordChannel,
@@ -61,7 +61,7 @@ export function usePasswordField(): {
 const asterisks = '************';
 
 interface Props {
-  account: { address: string };
+  identity: { address: string };
   autoFocus?: boolean;
   password: {
     set: (getter: (event: FormEvent) => Promise<string>) => void;
@@ -70,7 +70,7 @@ interface Props {
 }
 
 export function PasswordField({
-  account: { address },
+  identity: { address },
   autoFocus,
   password,
 }: Props): JSX.Element | null {
@@ -88,7 +88,7 @@ export function PasswordField({
   const passwordGetter = useCallback(
     async (event) => {
       if (!address) {
-        throw new Error('No account address');
+        throw new Error('No identity address');
       }
 
       const { elements } = event.target;
@@ -97,7 +97,7 @@ export function PasswordField({
       const password = useSaved ? savedPassword : providedPassword;
 
       try {
-        await decryptAccount(address, password);
+        await decryptIdentity(address, password);
       } catch (error) {
         if (error.message === 'Invalid password') {
           setError(t('component_PasswordField_password_incorrect'));
@@ -151,7 +151,7 @@ export function PasswordField({
 
         <RouteExcept path={paths.popup.base}>
           <Link
-            to={generatePath(paths.account.reset.start, { address })}
+            to={generatePath(paths.identity.reset.start, { address })}
             className={styles.reset}
           >
             {t('component_PasswordField_reset')}

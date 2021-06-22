@@ -17,7 +17,7 @@ export function Template(): JSX.Element {
 
       <p className={styles.subline}>Sub-line</p>
 
-      <h3 className={styles.accountText}>Account text</h3>
+      <h3 className={styles.identityText}>Identity text</h3>
 
       <p>
         <small className={styles.smallText}>Small text</small>

@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
-import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
-import { NEW } from '../../utilities/accounts/accounts';
+import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
+import { NEW } from '../../utilities/identities/identities';
 import { paths } from '../paths';
 
 import { ReceiveToken } from './ReceiveToken';
@@ -16,12 +16,14 @@ export function Template(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive',
+        '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive',
       ]}
     >
-      <Route path={paths.account.receive}>
+      <Route path={paths.identity.receive}>
         <ReceiveToken
-          account={accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+          identity={
+            identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+          }
         />
       </Route>
     </MemoryRouter>
@@ -30,9 +32,9 @@ export function Template(): JSX.Element {
 
 export function New(): JSX.Element {
   return (
-    <MemoryRouter initialEntries={['/account/NEW/receive']}>
-      <Route path={paths.account.receive}>
-        <ReceiveToken account={NEW} />{' '}
+    <MemoryRouter initialEntries={['/identity/NEW/receive']}>
+      <Route path={paths.identity.receive}>
+        <ReceiveToken identity={NEW} />{' '}
       </Route>
     </MemoryRouter>
   );

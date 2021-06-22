@@ -3,17 +3,17 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import BN from 'bn.js';
 
 import { transferChannel } from '../../channels/transferChannel/transferChannel';
-import { Account } from '../../utilities/accounts/types';
+import { Identity } from '../../utilities/identities/types';
 import { ReviewTransaction } from '../ReviewTransaction/ReviewTransaction';
 import { SendToken } from '../SendToken/SendToken';
 import { ExistentialWarning } from '../ExistentialWarning/ExistentialWarning';
 import { generatePath, paths } from '../paths';
 
 interface Props {
-  account: Account;
+  identity: Identity;
 }
 
-export function SendTokenFlow({ account }: Props): JSX.Element {
+export function SendTokenFlow({ identity }: Props): JSX.Element {
   const history = useHistory();
 
   const [recipient, setRecipient] = useState<string | null>(null);
@@ -21,7 +21,7 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
   const [fee, setFee] = useState<BN | null>(null);
   const [tip, setTip] = useState<BN | null>(null);
 
-  const { address } = account;
+  const { address } = identity;
 
   const handleSendTokenSuccess = useCallback(
     (values) => {
@@ -31,8 +31,8 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
       setTip(values.tip);
 
       const nextPath = values.existentialWarning
-        ? paths.account.send.warning
-        : paths.account.send.review;
+        ? paths.identity.send.warning
+        : paths.identity.send.review;
       history.push(generatePath(nextPath, { address }));
     },
     [address, history],
@@ -57,16 +57,16 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
 
   return (
     <Switch>
-      <Route path={paths.account.send.warning}>
+      <Route path={paths.identity.send.warning}>
         <ExistentialWarning
-          path={generatePath(paths.account.send.review, { address })}
+          path={generatePath(paths.identity.send.review, { address })}
         />
       </Route>
 
-      <Route path={paths.account.send.review}>
+      <Route path={paths.identity.send.review}>
         {recipient && amount && fee && tip ? (
           <ReviewTransaction
-            account={account}
+            identity={identity}
             recipient={recipient}
             amount={amount}
             fee={fee}
@@ -74,12 +74,12 @@ export function SendTokenFlow({ account }: Props): JSX.Element {
             onSuccess={handleReviewTransactionSuccess}
           />
         ) : (
-          <Redirect to={generatePath(paths.account.send.start, { address })} />
+          <Redirect to={generatePath(paths.identity.send.start, { address })} />
         )}
       </Route>
 
-      <Route path={paths.account.send.start}>
-        <SendToken account={account} onSuccess={handleSendTokenSuccess} />
+      <Route path={paths.identity.send.start}>
+        <SendToken identity={identity} onSuccess={handleSendTokenSuccess} />
       </Route>
     </Switch>
   );

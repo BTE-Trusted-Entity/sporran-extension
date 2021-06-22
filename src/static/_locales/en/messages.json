@@ -44,37 +44,37 @@
   "component_Balance_bonded": {
     "message": "Bonded Balance: "
   },
-  "component_AccountSlide_rename": {
+  "component_IdentitySlide_rename": {
     "message": "Rename"
   },
-  "component_AccountSlide_name": {
-    "message": "Account name:"
+  "component_IdentitySlide_name": {
+    "message": "Identity name:"
   },
-  "component_AccountsCarousel_title_new": {
-    "message": "Create new account"
+  "component_IdentitiesCarousel_title_new": {
+    "message": "Create new identity"
   },
-  "component_AccountLink_title_new": {
-    "message": "Create new account"
+  "component_IdentityLink_title_new": {
+    "message": "Create new identity"
   },
-  "component_AccountSlideNew_title": {
-    "message": "Create new account"
+  "component_IdentitySlideNew_title": {
+    "message": "Create new identity"
   },
-  "component_AccountSlideNew_or": {
+  "component_IdentitySlideNew_or": {
     "message": "or"
   },
-  "component_AccountSlideNew_import": {
-    "message": "Import an account from pre-existing phrase"
+  "component_IdentitySlideNew_import": {
+    "message": "Import an identity from pre-existing phrase"
   },
-  "component_Stats_account_one": {
-    "message": "You have $number$ account with a total",
+  "component_Stats_identity_one": {
+    "message": "You have $number$ identity with a total",
     "placeholders": {
       "number": {
         "content": "$1"
       }
     }
   },
-  "component_Stats_account_other": {
-    "message": "You have $number$ accounts with a total",
+  "component_Stats_identity_other": {
+    "message": "You have $number$ identities with a total",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -84,28 +84,28 @@
   "component_Stats_balance": {
     "message": " Balance: "
   },
-  "component_AddAccount_label": {
-    "message": "Add account"
+  "component_AddIdentity_label": {
+    "message": "Add identity"
   },
-  "component_AddAccount_create": {
-    "message": "Create new account"
+  "component_AddIdentity_create": {
+    "message": "Create new identity"
   },
-  "component_AddAccount_import": {
-    "message": "Import account from pre-existing phrase"
+  "component_AddIdentity_import": {
+    "message": "Import identity from pre-existing phrase"
   },
-  "component_AccountOptions_label": {
-    "message": "Account options"
+  "component_IdentityOptions_label": {
+    "message": "Identity options"
   },
-  "component_AccountOptions_heading": {
-    "message": "Account"
+  "component_IdentityOptions_heading": {
+    "message": "Identity"
   },
-  "component_AccountOptions_edit": {
-    "message": "Edit account name"
+  "component_IdentityOptions_edit": {
+    "message": "Edit identity name"
   },
-  "component_AccountOptions_forget": {
-    "message": "Forget account"
+  "component_IdentityOptions_forget": {
+    "message": "Forget identity"
   },
-  "component_AccountOptions_reset_password": {
+  "component_IdentityOptions_reset_password": {
     "message": "Reset password"
   },
   "component_KiltCurrency_label": {
@@ -115,10 +115,10 @@
     "message": "Settings"
   },
   "component_Settings_forget": {
-    "message": "Forget current account"
+    "message": "Forget current identity"
   },
   "component_Settings_reset_password": {
-    "message": "Reset password for current account"
+    "message": "Reset password for current identity"
   },
   "component_Settings_forget_saved_passwords": {
     "message": "Require password for future transactions"
@@ -140,22 +140,22 @@
       }
     }
   },
-  "component_AccountSuccessOverlay_heading": {
+  "component_IdentitySuccessOverlay_heading": {
     "message": "Congratulations!"
   },
-  "component_AccountSuccessOverlay_button": {
+  "component_IdentitySuccessOverlay_button": {
     "message": "OK"
   },
-  "component_AccountSuccessOverlay_message_create": {
-    "message": "You have successfully created a KILT Account"
+  "component_IdentitySuccessOverlay_message_create": {
+    "message": "You have successfully created a KILT Identity"
   },
-  "component_AccountSuccessOverlay_message_import": {
-    "message": "You have successfully imported your KILT Account"
+  "component_IdentitySuccessOverlay_message_import": {
+    "message": "You have successfully imported your KILT Identity"
   },
-  "component_AccountSuccessOverlay_message_reset": {
+  "component_IdentitySuccessOverlay_message_reset": {
     "message": "You have successfully set a new password"
   },
-  "component_AccountSuccessOverlay_CTA": {
+  "component_IdentitySuccessOverlay_CTA": {
     "message": "See the wallet"
   },
   "component_useCopyButton_copy": {
@@ -189,13 +189,13 @@
     "message": "Welcome to your Sporran"
   },
   "view_Welcome_again": {
-    "message": "Add Account"
+    "message": "Add Identity"
   },
-  "view_Welcome_noAccounts": {
-    "message": "You currently don’t have any accounts.\nCreate your first account to get started."
+  "view_Welcome_noIdentities": {
+    "message": "You currently don’t have any identities.\nCreate your first identity to get started."
   },
   "view_Welcome_hasOne": {
-    "message": "You have $number$ account. Add another one.",
+    "message": "You have $number$ identity. Add another one.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -203,7 +203,7 @@
     }
   },
   "view_Welcome_hasOther": {
-    "message": "You have $number$ accounts. Add another one.",
+    "message": "You have $number$ identities. Add another one.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -217,10 +217,10 @@
     "message": "terms of use"
   },
   "view_Welcome_create": {
-    "message": "Create Account"
+    "message": "Create Identity"
   },
   "view_Welcome_import": {
-    "message": "Import an account from pre-existing phrase"
+    "message": "Import an identity from pre-existing phrase"
   },
   "view_Warning_headline": {
     "message": "Attention!"
@@ -253,13 +253,13 @@
     "message": "Please put every word in the correct order"
   },
   "view_ImportBackupPhrase_heading_import": {
-    "message": "Import an Account"
+    "message": "Import an Identity"
   },
   "view_ImportBackupPhrase_heading_reset": {
     "message": "Set a new password"
   },
   "view_ImportBackupPhrase_explanation_import": {
-    "message": "To import a Sporran account, you will need your backup phrase consisting of 12 words."
+    "message": "To import a Sporran identity, you will need your backup phrase consisting of 12 words."
   },
   "view_ImportBackupPhrase_explanation_reset": {
     "message": "In order to set a new password you have to re-enter your backup phrase"
@@ -268,7 +268,7 @@
     "message": "The entered backup phrase doesn’t exist"
   },
   "view_ImportBackupPhrase_error_mismatched_backup_phrase": {
-    "message": "This is not the backup phrase of this account"
+    "message": "This is not the backup phrase of this identity"
   },
   "view_ImportBackupPhrase_error_backup_phrase_length": {
     "message": "Please insert all 12 words of the backup phrase in the correct order"
@@ -277,10 +277,10 @@
     "message": "It looks like there’s a typo in this word"
   },
   "view_CreatePassword_heading": {
-    "message": "Set Account Password"
+    "message": "Set Identity Password"
   },
   "view_CreatePassword_explanation": {
-    "message": "You need a secure password for every account. A strong password would look like this: "
+    "message": "You need a secure password for every identity. A strong password would look like this: "
   },
   "view_CreatePassword_example": {
     "message": "House 12! small DOGS"
@@ -341,54 +341,54 @@
   "view_ReceiveToken_explanation": {
     "message": "Copy and send your address"
   },
-  "view_ReceiveToken_account_address": {
-    "message": "Account Address"
+  "view_ReceiveToken_identity_address": {
+    "message": "Identity Address"
   },
   "view_ReceiveToken_enlarge": {
     "message": "Enlarge"
   },
-  "view_AccountOverview_title": {
-    "message": "Your Accounts"
+  "view_IdentityOverview_title": {
+    "message": "Your Identities"
   },
-  "view_AccountOverview_subtitle_one": {
-    "message": "You have $number$ account",
+  "view_IdentityOverview_subtitle_one": {
+    "message": "You have $number$ identity",
     "placeholders": {
       "number": {
         "content": "$1"
       }
     }
   },
-  "view_AccountOverview_subtitle_other": {
-    "message": "You have $number$ accounts",
+  "view_IdentityOverview_subtitle_other": {
+    "message": "You have $number$ identities",
     "placeholders": {
       "number": {
         "content": "$1"
       }
     }
   },
-  "view_AccountOverview_send": {
+  "view_IdentityOverview_send": {
     "message": "Send"
   },
-  "view_AccountOverview_receive": {
+  "view_IdentityOverview_receive": {
     "message": "Receive"
   },
-  "view_AccountOverview_credentials": {
+  "view_IdentityOverview_credentials": {
     "message": "Show Credentials"
   },
-  "view_RemoveAccount_heading": {
+  "view_RemoveIdentity_heading": {
     "message": "Attention!"
   },
-  "view_RemoveAccount_subline": {
-    "message": "You’re about to remove your account"
+  "view_RemoveIdentity_subline": {
+    "message": "You’re about to remove your identity"
   },
-  "view_RemoveAccount_address": {
-    "message": "My account address"
+  "view_RemoveIdentity_address": {
+    "message": "My identity address"
   },
-  "view_RemoveAccount_explanation": {
-    "message": "The next step will remove your account from the browser extension. This will not delete your account. You can add it again any time by importing your backup phrase."
+  "view_RemoveIdentity_explanation": {
+    "message": "The next step will remove your identity from the browser extension. This will not delete your identity. You can add it again any time by importing your backup phrase."
   },
-  "view_RemoveAccount_remove": {
-    "message": "Forget this account"
+  "view_RemoveIdentity_remove": {
+    "message": "Forget this identity"
   },
   "view_SendToken_heading": {
     "message": "Send KILT Coins"
@@ -449,7 +449,7 @@
     "message": "The recipient address is not properly formatted"
   },
   "view_SendToken_recipient_same": {
-    "message": "The recipient address is the same as account address"
+    "message": "The recipient address is the same as identity address"
   },
   "view_SendToken_CTA": {
     "message": "Review & Sign Transaction"
@@ -517,22 +517,22 @@
   "view_SaveCredential_CTA": {
     "message": "Backup Credential"
   },
-  "view_AccountCredentials_title": {
+  "view_IdentityCredentials_title": {
     "message": "Your Credentials"
   },
-  "view_AccountCredentials_subline": {
+  "view_IdentityCredentials_subline": {
     "message": "Overview"
   },
-  "view_AccountCredentials_name": {
+  "view_IdentityCredentials_name": {
     "message": "Name"
   },
-  "view_AccountCredentials_ctype": {
+  "view_IdentityCredentials_ctype": {
     "message": "C-Type"
   },
-  "view_AccountCredentials_attester": {
+  "view_IdentityCredentials_attester": {
     "message": "Attester"
   },
-  "view_AccountCredentials_valid": {
+  "view_IdentityCredentials_valid": {
     "message": "Valid"
   },
   "view_ShareCredential_share": {
@@ -595,7 +595,7 @@
     }
   },
   "view_AuthorizeDApp_warning": {
-    "message": "Only approve this request if you trust the application. Approving gives the application access to the addresses of your accounts."
+    "message": "Only approve this request if you trust the application. Approving gives the application access to the addresses of your identities."
   },
   "view_AuthorizeDApp_CTA": {
     "message": "Yes, allow this application access"
@@ -645,7 +645,7 @@
     "message": "Website Access"
   },
   "view_ExternalAccess_subline": {
-    "message": "Control which websites have access to names and addresses of your accounts"
+    "message": "Control which websites have access to names and addresses of your identities"
   },
   "view_ExternalAccess_small": {
     "message": "Website access"
@@ -657,16 +657,16 @@
     "message": "allowed"
   },
   "view_ExternalAccess_back": {
-    "message": "Back to my accounts"
+    "message": "Back to my identities"
   },
   "view_ExistentialWarning_headline": {
     "message": "Attention"
   },
   "view_ExistentialWarning_subline": {
-    "message": "Your account's remaining balance will be set to zero"
+    "message": "Your identity's remaining balance will be set to zero"
   },
   "view_ExistentialWarning_warning": {
-    "message": "This transaction would leave your balance below the existential deposit. Therefore the balance of your account will be set to zero. The rest of your balance will be added as a tip. Confirm to proceed with this transaction anyway."
+    "message": "This transaction would leave your balance below the existential deposit. Therefore the balance of your identity will be set to zero. The rest of your balance will be added as a tip. Confirm to proceed with this transaction anyway."
   },
   "view_ExistentialWarning_confirm": {
     "message": "Confirm"

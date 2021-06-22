@@ -34,8 +34,8 @@ exports[`App should render 1`] = `
       <h3
         class="info"
       >
-        You currently don’t have any accounts.
-Create your first account to get started.
+        You currently don’t have any identities.
+Create your first identity to get started.
       </h3>
       <p
         class="termsLine"
@@ -62,16 +62,16 @@ Create your first account to get started.
       <a
         aria-disabled="true"
         class="create"
-        href="/account/create"
+        href="/identity/create"
       >
-        Create Account
+        Create Identity
       </a>
       <a
         aria-disabled="true"
         class="import"
-        href="/account/import"
+        href="/identity/import"
       >
-        Import an account from pre-existing phrase
+        Import an identity from pre-existing phrase
       </a>
     </div>
   </div>

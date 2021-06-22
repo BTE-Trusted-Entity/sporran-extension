@@ -3,7 +3,7 @@ import { toggleIcon } from './channels/toggleIconChannel/toggleIconChannel';
 import { initContentClaimChannel } from './channels/ClaimChannels/browserClaimChannels';
 import { initContentSaveChannel } from './channels/SaveChannels/browserSaveChannels';
 import { initContentShareChannel } from './channels/ShareChannels/browserShareChannels';
-import { initContentAccountsChannel } from './dApps/accountsDataProvider/accountsDataProvider';
+import { initContentIdentitiesChannel } from './dApps/identitiesDataProvider/identitiesDataProvider';
 import { initContentAccessChannel } from './dApps/checkAccess/checkAccess';
 import { initContentSignChannel } from './dApps/SignChannels/contentSignChannel';
 
@@ -23,7 +23,7 @@ function initMessages() {
 
   const origin = window.location.href;
   initContentAccessChannel(origin);
-  initContentAccountsChannel(origin);
+  initContentIdentitiesChannel(origin);
   initContentSignChannel(origin);
 }
 

@@ -13,19 +13,19 @@ exports[`ExistentialWarning should render with link to review screen 1`] = `
     <p
       class="subline"
     >
-      Your account's remaining balance will be set to zero
+      Your identity's remaining balance will be set to zero
     </p>
     <p
       class="warning"
     >
-      This transaction would leave your balance below the existential deposit. Therefore the balance of your account will be set to zero. The rest of your balance will be added as a tip. Confirm to proceed with this transaction anyway.
+      This transaction would leave your balance below the existential deposit. Therefore the balance of your identity will be set to zero. The rest of your balance will be added as a tip. Confirm to proceed with this transaction anyway.
     </p>
     <p
       class="buttonsLine"
     >
       <a
         class="confirm"
-        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send/review"
+        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send/review"
       >
         Confirm
       </a>

@@ -3,7 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { minBy } from 'lodash-es';
 import BN from 'bn.js';
 
-import { Account, useAccounts } from '../../utilities/accounts/accounts';
+import { Identity, useIdentities } from '../../utilities/identities/identities';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { useQuery } from '../../utilities/useQuery/useQuery';
 import { backgroundClaimChannel } from '../../channels/ClaimChannels/browserClaimChannels';
@@ -43,12 +43,12 @@ export function SignQuote(): JSX.Element | null {
     window.close();
   }, []);
 
-  const accounts = useAccounts().data;
-  if (!accounts) {
+  const identities = useIdentities().data;
+  if (!identities) {
     return null;
   }
 
-  const firstAccount = minBy(Object.values(accounts), 'index') as Account;
+  const firstIdentity = minBy(Object.values(identities), 'index') as Identity;
 
   return (
     <form
@@ -85,9 +85,9 @@ export function SignQuote(): JSX.Element | null {
         />
       </label>
 
-      <div className={styles.account}>
-        <Avatar address={firstAccount.address} className={styles.avatar} />
-        <span className={styles.accountName}>{firstAccount.name}</span>
+      <div className={styles.identity}>
+        <Avatar address={firstIdentity.address} className={styles.avatar} />
+        <span className={styles.identityName}>{firstIdentity.name}</span>
       </div>
 
       <label className={styles.label}>

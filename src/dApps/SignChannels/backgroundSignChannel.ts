@@ -11,7 +11,7 @@ import type {
 
 import { makeUsePopupQuery } from '../../utilities/popups/usePopupQuery';
 import { PopupChannel } from '../../channels/base/PopupChannel/PopupChannel';
-import { decryptAccount } from '../../utilities/accounts/accounts';
+import { decryptIdentity } from '../../utilities/identities/identities';
 import { contentSignChannel } from './contentSignChannel';
 
 interface SignBgInput {
@@ -141,7 +141,7 @@ async function getSignature(
   };
 
   const password = await backgroundSignChannel.get(values, sender);
-  return signExtrinsic(extrinsic, await decryptAccount(address, password));
+  return signExtrinsic(extrinsic, await decryptIdentity(address, password));
 }
 
 export function initBackgroundSignChannel(): void {
