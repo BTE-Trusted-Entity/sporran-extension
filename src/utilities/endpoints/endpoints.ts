@@ -4,6 +4,7 @@ import { storage } from '../storage/storage';
 const endpointKey = 'endpoints';
 
 export const endpoints = [
+  'wss://kilt-peregrine-k8s.kilt.io',
   'wss://full-nodes.kilt.io:443',
   'wss://full-nodes.staging.kilt.io:443',
   'wss://full-nodes-lb.devnet.kilt.io:443',
