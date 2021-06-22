@@ -32,7 +32,7 @@ async function defaultGetPassword(event: FormEvent): Promise<string> {
 
 // To store a function in state I have to use this workaround since proper typing was not provided
 // https://github.com/DefinitelyTyped/DefinitelyTyped/pull/38160
-type SetGetPasswordType = Dispatch<
+type SetPasswordGetterType = Dispatch<
   SetStateAction<(event: FormEvent) => Promise<string>>
 >;
 
@@ -42,13 +42,13 @@ export function usePasswordField(): {
   isEmpty: boolean;
   setIsEmpty: (isEmpty: boolean) => void;
 } {
-  const [getPassword, setGetPassword] = useState(() => defaultGetPassword);
+  const [getPassword, setPasswordGetter] = useState(() => defaultGetPassword);
   const [isEmpty, setIsEmpty] = useState(true);
 
   return useMemo(
     () => ({
       get: getPassword,
-      set: setGetPassword,
+      set: setPasswordGetter,
       isEmpty,
       setIsEmpty,
     }),
@@ -75,7 +75,7 @@ export function PasswordField({
   const t = browser.i18n.getMessage;
 
   const { setIsEmpty } = password;
-  const setGetPassword = password.set as SetGetPasswordType;
+  const setPasswordGetter = password.set as SetPasswordGetterType;
 
   const rememberRef = useRef<HTMLInputElement>(null);
 
@@ -118,9 +118,9 @@ export function PasswordField({
     (event) => {
       setError(null);
       setIsEmpty(event.target.value === '');
-      setGetPassword(() => getPassword);
+      setPasswordGetter(() => getPassword);
     },
-    [getPassword, setGetPassword, setIsEmpty],
+    [getPassword, setPasswordGetter, setIsEmpty],
   );
 
   useEffect(() => {
@@ -134,9 +134,9 @@ export function PasswordField({
       rememberRef.current.checked = Boolean(passwordString);
       setIsEmpty(!rememberRef.current.checked);
 
-      setGetPassword(() => getPassword);
+      setPasswordGetter(() => getPassword);
     })();
-  }, [address, getPassword, setGetPassword, setIsEmpty]);
+  }, [address, getPassword, setPasswordGetter, setIsEmpty]);
 
   const { passwordType, passwordToggle } = usePasswordType();
 
