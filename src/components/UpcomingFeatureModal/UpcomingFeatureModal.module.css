@@ -13,5 +13,5 @@
 }
 
 .close {
-  composes: buttonPrimary from '../../components/Button/Button.module.css';
+  composes: button from '../../components/Overlay/Overlay.module.css';
 }
