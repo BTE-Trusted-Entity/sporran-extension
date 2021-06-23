@@ -6,6 +6,8 @@ import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/Identiti
 import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
+import { UpcomingFeatureModal } from '../../components/UpcomingFeatureModal/UpcomingFeatureModal';
+
 import {
   Identity,
   isNew,
@@ -13,6 +15,7 @@ import {
 } from '../../utilities/identities/identities';
 import { plural } from '../../utilities/plural/plural';
 import { generatePath, paths } from '../paths';
+import { useConfiguration } from '../../configuration/useConfiguration';
 import { IdentityOverviewNew } from './IdentityOverviewNew';
 
 import styles from './IdentityOverview.module.css';
@@ -26,11 +29,25 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const { path } = useRouteMatch();
   const params = useParams() as { type?: 'created' | 'imported' | 'pwreset' };
 
-  const [hasOpenOverlay, setHasOpenOverlay] = useState(Boolean(params.type));
+  const { features } = useConfiguration();
+
+  const [hasSuccessOverlay, setHasSuccessOverlay] = useState(
+    Boolean(params.type),
+  );
   const [type] = useState(params.type);
 
   const handleSuccessOverlayButtonClick = useCallback(() => {
-    setHasOpenOverlay(false);
+    setHasSuccessOverlay(false);
+  }, []);
+
+  const [hasUpcomingFeatureModal, setHasUpcomingFeatureModal] = useState(false);
+
+  const handleUpcomingFeatureModalButtonClick = useCallback(() => {
+    setHasUpcomingFeatureModal(false);
+  }, []);
+
+  const handleSendClick = useCallback(() => {
+    setHasUpcomingFeatureModal(true);
   }, []);
 
   const identities = useIdentities().data;
@@ -71,12 +88,22 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
       <Balance address={address} breakdown />
 
       <p>
-        <Link
-          to={generatePath(paths.identity.send.start, { address })}
-          className={styles.button}
-        >
-          {t('view_IdentityOverview_send')}
-        </Link>
+        {features.sendToken ? (
+          <Link
+            to={generatePath(paths.identity.send.start, { address })}
+            className={styles.button}
+          >
+            {t('view_IdentityOverview_send')}
+          </Link>
+        ) : (
+          <button
+            type="button"
+            className={styles.button}
+            onClick={handleSendClick}
+          >
+            {t('view_IdentityOverview_send')}
+          </button>
+        )}
 
         <Link
           to={generatePath(paths.identity.receive, { address })}
@@ -96,12 +123,16 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
       )}
 
       <Stats />
-      {hasOpenOverlay && type && (
+
+      {hasSuccessOverlay && type && (
         <IdentitySuccessOverlay
           successType={type}
           identity={identity}
           onSuccessOverlayButtonClick={handleSuccessOverlayButtonClick}
         />
+      )}
+      {hasUpcomingFeatureModal && (
+        <UpcomingFeatureModal onClose={handleUpcomingFeatureModalButtonClick} />
       )}
     </main>
   );

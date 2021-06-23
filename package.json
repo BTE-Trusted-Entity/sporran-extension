@@ -29,6 +29,7 @@
     "build": "webpack --config webpack.prod.js",
     "package": "cd dist && web-ext build --overwrite-dest",
     "dev": "env VARIANT=internal webpack --watch --config webpack.dev.js",
+    "dev-public": "env VARIANT=public webpack --watch --config webpack.dev.js",
     "test": "jest",
     "lint": "yarn run lint-css && yarn run lint-js",
     "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.json \"src/**/*.ts*\"",

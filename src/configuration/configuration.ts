@@ -3,6 +3,7 @@ import { isInternal } from './variant';
 interface Features {
   endpoint: boolean;
   credentials: boolean;
+  sendToken: boolean;
 }
 
 export interface ConfigurationType {
@@ -13,11 +14,13 @@ export interface ConfigurationType {
 const publicFeatures: Features = {
   endpoint: false,
   credentials: false,
+  sendToken: false,
 };
 
 export const internalFeatures: Features = {
   endpoint: true,
   credentials: true,
+  sendToken: true,
 };
 
 // Duplicates the value in src/static/manifest.json
