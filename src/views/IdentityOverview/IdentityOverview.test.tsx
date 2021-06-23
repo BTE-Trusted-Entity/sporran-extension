@@ -6,6 +6,7 @@ import {
   render,
   screen,
   waitForDialogUpdate,
+  mockDialogShowModal,
 } from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';
@@ -41,11 +42,7 @@ describe('IdentityOverview', () => {
   });
 
   it('should render upcoming feature modal', async () => {
-    (
-      HTMLDialogElement.prototype as unknown as {
-        showModal: () => void;
-      }
-    ).showModal = jest.fn();
+    mockDialogShowModal();
 
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>

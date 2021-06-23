@@ -12,6 +12,7 @@ exports[`UpcomingFeatureModal should render 1`] = `
     </p>
     <button
       class="close"
+      type="button"
     >
       Close
     </button>

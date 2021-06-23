@@ -1,6 +1,5 @@
 .container {
   composes: overlay from '../../components/Overlay/Overlay.module.css';
-  width: calc(284rem / 16);
 }
 
 .info {
