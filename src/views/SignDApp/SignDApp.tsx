@@ -1,7 +1,7 @@
 import { Fragment, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import { useAccounts } from '../../utilities/accounts/accounts';
+import { useIdentities } from '../../utilities/identities/identities';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import {
@@ -59,14 +59,14 @@ export function SignDApp(): JSX.Element | null {
 
   const passwordField = usePasswordField();
 
-  const accounts = useAccounts().data;
-  const account = accounts && accounts[query.address as string];
+  const identities = useIdentities().data;
+  const identity = identities && identities[query.address as string];
 
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
 
-      if (!account) {
+      if (!identity) {
         return;
       }
 
@@ -75,7 +75,7 @@ export function SignDApp(): JSX.Element | null {
 
       window.close();
     },
-    [account, passwordField],
+    [identity, passwordField],
   );
 
   const handleCancelClick = useCallback(async () => {
@@ -83,7 +83,7 @@ export function SignDApp(): JSX.Element | null {
     window.close();
   }, []);
 
-  if (!account) {
+  if (!identity) {
     return null;
   }
 
@@ -91,16 +91,16 @@ export function SignDApp(): JSX.Element | null {
     <form className={styles.container} onSubmit={handleSubmit}>
       <h1 className={styles.heading}>{t('view_SignDApp_title')}</h1>
 
-      <Avatar address={account.address} className={styles.avatar} />
-      <h2 className={styles.account}>{account.name}</h2>
+      <Avatar address={identity.address} className={styles.avatar} />
+      <h2 className={styles.identity}>{identity.name}</h2>
 
       <p className={styles.addressLine}>
         <input
           className={styles.address}
           ref={addressRef}
           readOnly
-          value={account.address}
-          aria-label={account.name}
+          value={identity.address}
+          aria-label={identity.name}
         />
         {copy.supported && (
           <button
@@ -124,7 +124,7 @@ export function SignDApp(): JSX.Element | null {
         ))}
       </dl>
 
-      <PasswordField account={account} autoFocus password={passwordField} />
+      <PasswordField identity={identity} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
         <button

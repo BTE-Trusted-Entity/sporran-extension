@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddIdentity should render 1`] = `
+<div>
+  <a
+    aria-label="Add identity"
+    class="toggle"
+    href="/identity/add"
+    title="Add identity"
+  />
+</div>
+`;

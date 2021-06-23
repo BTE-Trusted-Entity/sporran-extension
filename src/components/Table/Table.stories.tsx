@@ -24,7 +24,7 @@ export function Template(): JSX.Element {
         </tr>
         <tr className={tableStyles.tr}>
           <td className={tableStyles.td}>Twitter</td>
-          <td className={tableStyles.td}>TW-Account</td>
+          <td className={tableStyles.td}>TW-Identity</td>
           <td className={tableStyles.td}>Twitter</td>
         </tr>
         <tr className={tableStyles.tr}>

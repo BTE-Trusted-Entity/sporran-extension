@@ -28,7 +28,7 @@ exports[`ReviewTransaction should render 1`] = `
         <span
           class="name"
         >
-          My Sporran Account
+          My Sporran Identity
         </span>
         <div
           class="wrapper"
@@ -36,11 +36,11 @@ exports[`ReviewTransaction should render 1`] = `
           <button
             aria-expanded="false"
             aria-haspopup="true"
-            aria-label="Account options"
+            aria-label="Identity options"
             class="toggle"
             role="button"
             tabindex="0"
-            title="Account options"
+            title="Identity options"
             type="button"
           />
         </div>
@@ -170,7 +170,7 @@ exports[`ReviewTransaction should render 1`] = `
       </label>
       <a
         class="reset"
-        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
+        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
       >
         Reset password
       </a>
@@ -234,7 +234,7 @@ exports[`ReviewTransaction should render 1`] = `
     <p
       class="stats"
     >
-      You have 3 accounts with a total
+      You have 3 identities with a total
       <span
         class="balance"
       >

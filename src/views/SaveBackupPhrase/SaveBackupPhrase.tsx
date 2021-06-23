@@ -32,7 +32,7 @@ export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
         <Link to={paths.home} className={styles.cancel}>
           {t('common_action_cancel')}
         </Link>
-        <Link to={paths.account.create.verify} className={styles.create}>
+        <Link to={paths.identity.create.verify} className={styles.create}>
           {t('common_action_next')}
         </Link>
       </div>

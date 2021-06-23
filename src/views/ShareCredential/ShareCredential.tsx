@@ -3,9 +3,9 @@ import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
 
 import { contentShareChannel } from '../../channels/ShareChannels/browserShareChannels';
-import { AccountSlide } from '../../components/AccountSlide/AccountSlide';
+import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
-import { Account, useAccounts } from '../../utilities/accounts/accounts';
+import { Identity, useIdentities } from '../../utilities/identities/identities';
 
 import tableStyles from '../../components/Table/Table.module.css';
 import styles from './ShareCredential.module.css';
@@ -58,12 +58,12 @@ export function ShareCredential(): JSX.Element | null {
     window.close();
   }, []);
 
-  const accounts = useAccounts().data;
-  if (!accounts) {
+  const identities = useIdentities().data;
+  if (!identities) {
     return null;
   }
 
-  const account = minBy(Object.values(accounts), 'index') as Account;
+  const identity = minBy(Object.values(identities), 'index') as Identity;
 
   // TODO: use real data
   const credentials = [
@@ -90,7 +90,7 @@ export function ShareCredential(): JSX.Element | null {
       <h1 className={styles.heading}>{t('view_ShareCredential_heading')}</h1>
       <p className={styles.subline}>{t('view_ShareCredential_subline')}</p>
 
-      <AccountSlide account={account} />
+      <IdentitySlide identity={identity} />
 
       <table className={styles.credentials}>
         <thead>

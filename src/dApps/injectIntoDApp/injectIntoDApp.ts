@@ -1,7 +1,7 @@
 import { injectExtension } from '@polkadot/extension-inject';
 
 import { injectedAccessChannel } from '../AccessChannels/injectedAccessChannel';
-import { AccountsInjectedAPI } from '../AccountsInjectedAPI/AccountsInjectedAPI';
+import { IdentitiesInjectedAPI } from '../IdentitiesInjectedAPI/IdentitiesInjectedAPI';
 import { SignerInjectedAPI } from '../SignerInjectedAPI/SignerInjectedAPI';
 import { debounceAsync } from '../../utilities/debounceAsync/debounceAsync';
 
@@ -20,7 +20,7 @@ export function injectIntoDApp(version: string): void {
     await authenticate({ dAppName });
 
     return {
-      accounts: new AccountsInjectedAPI(dAppName),
+      accounts: new IdentitiesInjectedAPI(dAppName),
       signer: new SignerInjectedAPI(dAppName),
     };
   }, sporranMeta);

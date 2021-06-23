@@ -2,7 +2,7 @@
   "name": "sporran-extension",
   "private": true,
   "version": "1.0.0",
-  "description": "KILT browser extension, to manage accounts and send / receive tokens.",
+  "description": "KILT browser extension, to manage identities and send / receive tokens.",
   "license": "BSD-4-Clause",
   "homepage": "https://github.com/KILTprotocol/sporran-extension",
   "keywords": [

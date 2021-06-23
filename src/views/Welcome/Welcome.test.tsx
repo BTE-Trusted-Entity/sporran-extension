@@ -1,20 +1,20 @@
 import userEvent from '@testing-library/user-event';
 
-import { AccountsProviderMock, render, screen } from '../../testing/testing';
+import { IdentitiesProviderMock, render, screen } from '../../testing/testing';
 
 import { Welcome } from './Welcome';
 
 describe('Welcome', () => {
-  it('should match the snapshot without accounts', () => {
+  it('should match the snapshot without identities', () => {
     const { container } = render(
-      <AccountsProviderMock accounts={{}}>
+      <IdentitiesProviderMock identities={{}}>
         <Welcome />
-      </AccountsProviderMock>,
+      </IdentitiesProviderMock>,
     );
     expect(container).toMatchSnapshot();
   });
 
-  it('should match the snapshot with an account', () => {
+  it('should match the snapshot with an identity', () => {
     const { container } = render(<Welcome again />);
     expect(container).toMatchSnapshot();
   });

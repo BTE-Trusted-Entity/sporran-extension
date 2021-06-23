@@ -8,7 +8,7 @@ import {
   configurationTypesForStorybook,
   withConfigurationProvider
 } from '../src/configuration/configurationForStorybook';
-import { AccountsProviderMock } from '../src/utilities/accounts/AccountsProvider.mock';
+import { IdentitiesProviderMock } from '../src/utilities/identities/IdentitiesProvider.mock';
 import { ViewDecorator } from '../src/components/View/ViewDecorator';
 import '../src/views/App/App.css';
 
@@ -36,9 +36,9 @@ export const decorators = [
 
   (Story) => (
     <MemoryRouter>
-      <AccountsProviderMock>
+      <IdentitiesProviderMock>
         <Story />
-      </AccountsProviderMock>
+      </IdentitiesProviderMock>
     </MemoryRouter>
   ),
 ];

@@ -3,7 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { Link, useRouteMatch } from 'react-router-dom';
 
-import { useAccounts } from '../../utilities/accounts/accounts';
+import { useIdentities } from '../../utilities/identities/identities';
 import {
   forgetAllPasswordsChannel,
   hasSavedPasswordsChannel,
@@ -14,20 +14,20 @@ import { generatePath, paths } from '../../views/paths';
 import menuStyles from '../Menu/Menu.module.css';
 import styles from './Settings.module.css';
 
-function useItemsCount(onExistingAccount: boolean, hasPasswords: boolean) {
+function useItemsCount(onExistingIdentity: boolean, hasPasswords: boolean) {
   const { features } = useConfiguration();
 
   const itemCounts = {
     generic: 3,
     endpoint: features.endpoint ? 1 : 0,
-    account: onExistingAccount ? 2 : 0,
-    forgetPasswords: onExistingAccount && hasPasswords ? 1 : 0,
+    identity: onExistingIdentity ? 2 : 0,
+    forgetPasswords: onExistingIdentity && hasPasswords ? 1 : 0,
   };
 
   return (
     itemCounts.generic +
     itemCounts.endpoint +
-    itemCounts.account +
+    itemCounts.identity +
     itemCounts.forgetPasswords
   );
 }
@@ -37,14 +37,14 @@ export function Settings(): JSX.Element {
 
   const [hasPasswords, setHasPasswords] = useState(false);
 
-  const match = useRouteMatch(paths.account.overview);
+  const match = useRouteMatch(paths.identity.overview);
   const address = (match?.params as { address: string })?.address;
-  const accounts = useAccounts().data;
-  const onExistingAccount = Boolean(accounts?.[address]);
+  const identities = useIdentities().data;
+  const onExistingIdentity = Boolean(identities?.[address]);
 
   const { version, features } = useConfiguration();
 
-  const count = useItemsCount(onExistingAccount, hasPasswords);
+  const count = useItemsCount(onExistingIdentity, hasPasswords);
   const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(count);
 
   const handleClick = useCallback(() => {
@@ -78,11 +78,11 @@ export function Settings(): JSX.Element {
           </h4>
 
           <ul className={menuStyles.list}>
-            {onExistingAccount && (
+            {onExistingIdentity && (
               <>
                 <li className={menuStyles.listItem}>
                   <Link
-                    to={generatePath(paths.account.remove, { address })}
+                    to={generatePath(paths.identity.remove, { address })}
                     {...itemProps.shift()}
                   >
                     {t('component_Settings_forget')}
@@ -91,7 +91,7 @@ export function Settings(): JSX.Element {
 
                 <li className={menuStyles.listItem}>
                   <Link
-                    to={generatePath(paths.account.reset.start, {
+                    to={generatePath(paths.identity.reset.start, {
                       address,
                     })}
                     {...itemProps.shift()}

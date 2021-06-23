@@ -1,6 +1,6 @@
 declare namespace TypographyModuleCssNamespace {
   export interface ITypographyModuleCss {
-    accountText: string;
+    identityText: string;
     balanceText: string;
     buttonText: string;
     importantHeadline: string;

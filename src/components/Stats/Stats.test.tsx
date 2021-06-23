@@ -1,33 +1,33 @@
-import { AccountsProviderMock, render, screen } from '../../testing/testing';
+import { IdentitiesProviderMock, render, screen } from '../../testing/testing';
 import { Stats } from './Stats';
 
 describe('Stats', () => {
-  it('should not render for no accounts', async () => {
+  it('should not render for no identities', async () => {
     const { container } = render(
-      <AccountsProviderMock accounts={{}}>
+      <IdentitiesProviderMock identities={{}}>
         <Stats />
-      </AccountsProviderMock>,
+      </IdentitiesProviderMock>,
     );
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('should not render for single account', async () => {
-    const accounts = {
+  it('should not render for single identity', async () => {
+    const identities = {
       '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire': {
-        name: 'My Sporran Account',
+        name: 'My Sporran Identity',
         address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
         index: 1,
       },
     };
     const { container } = render(
-      <AccountsProviderMock accounts={accounts}>
+      <IdentitiesProviderMock identities={identities}>
         <Stats />
-      </AccountsProviderMock>,
+      </IdentitiesProviderMock>,
     );
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('should render for at least two accounts', async () => {
+  it('should render for at least two identities', async () => {
     const { container } = render(<Stats />);
     expect(await screen.findByText(/Balance/)).toBeInTheDocument();
     expect(container).toMatchSnapshot();

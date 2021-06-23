@@ -2,19 +2,22 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { plural } from '../../utilities/plural/plural';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
-import { AccountsMap, useAccounts } from '../../utilities/accounts/accounts';
+import {
+  IdentitiesMap,
+  useIdentities,
+} from '../../utilities/identities/identities';
 import { useStats } from './useStats';
 
 import styles from './Stats.module.css';
 
 interface Props {
-  accounts: AccountsMap;
+  identities: IdentitiesMap;
 }
 
-function UnconditionalStats({ accounts }: Props): JSX.Element | null {
+function UnconditionalStats({ identities }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const stats = useStats(accounts);
+  const stats = useStats(identities);
   if (!stats) {
     return null;
   }
@@ -22,8 +25,8 @@ function UnconditionalStats({ accounts }: Props): JSX.Element | null {
   return (
     <p className={styles.stats}>
       {plural(stats.count, {
-        one: 'component_Stats_account_one',
-        other: 'component_Stats_account_other',
+        one: 'component_Stats_identity_one',
+        other: 'component_Stats_identity_other',
       })}
       <span className={styles.balance}>
         {t('component_Stats_balance')}
@@ -34,10 +37,10 @@ function UnconditionalStats({ accounts }: Props): JSX.Element | null {
 }
 
 export function Stats(): JSX.Element | null {
-  const accounts = useAccounts().data;
-  if (!accounts || Object.values(accounts).length < 2) {
+  const identities = useIdentities().data;
+  if (!identities || Object.values(identities).length < 2) {
     return null;
   }
 
-  return <UnconditionalStats accounts={accounts} />;
+  return <UnconditionalStats identities={identities} />;
 }

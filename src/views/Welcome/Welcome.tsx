@@ -3,9 +3,9 @@ import { browser } from 'webextension-polyfill-ts';
 import { Link, Redirect } from 'react-router-dom';
 
 import {
-  useAccounts,
-  useCurrentAccount,
-} from '../../utilities/accounts/accounts';
+  useIdentities,
+  useCurrentIdentity,
+} from '../../utilities/identities/identities';
 import { plural } from '../../utilities/plural/plural';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { generatePath, paths } from '../paths';
@@ -33,22 +33,22 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
     [enabled],
   );
 
-  const accounts = useAccounts();
-  const current = useCurrentAccount();
+  const identities = useIdentities();
+  const current = useCurrentIdentity();
 
-  if (!accounts.data) {
+  if (!identities.data) {
     return null;
   }
 
-  const accountsNumber = Object.values(accounts.data).length;
-  const hasAccounts = accountsNumber > 0;
+  const identitiesNumber = Object.values(identities.data).length;
+  const hasIdentities = identitiesNumber > 0;
 
-  if (current.data && hasAccounts && !again) {
+  if (current.data && hasIdentities && !again) {
     return (
       <Redirect
         to={generatePath(
-          paths.account.overview,
-          accounts.data[current.data] as { address: string },
+          paths.identity.overview,
+          identities.data[current.data] as { address: string },
         )}
       />
     );
@@ -57,16 +57,16 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>
-        {hasAccounts ? t('view_Welcome_again') : t('view_Welcome_heading')}
+        {hasIdentities ? t('view_Welcome_again') : t('view_Welcome_heading')}
       </h1>
 
       <h3 className={styles.info}>
-        {hasAccounts
-          ? plural(accountsNumber, {
+        {hasIdentities
+          ? plural(identitiesNumber, {
               one: 'view_Welcome_hasOne',
               other: 'view_Welcome_hasOther',
             })
-          : t('view_Welcome_noAccounts')}
+          : t('view_Welcome_noIdentities')}
       </h3>
 
       <p className={styles.termsLine}>
@@ -91,7 +91,7 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
       </p>
 
       <Link
-        to={paths.account.create.start}
+        to={paths.identity.create.start}
         className={styles.create}
         onClick={handleLinkClick}
         aria-disabled={!enabled}
@@ -100,7 +100,7 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
       </Link>
 
       <Link
-        to={paths.account.import.start}
+        to={paths.identity.import.start}
         className={styles.import}
         onClick={handleLinkClick}
         aria-disabled={!enabled}

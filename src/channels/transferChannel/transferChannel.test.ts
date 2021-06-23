@@ -2,7 +2,7 @@ import BN from 'bn.js';
 import { BlockchainUtils } from '@kiltprotocol/chain-helpers';
 import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
-import { decryptAccount } from '../../utilities/accounts/accounts';
+import { decryptIdentity } from '../../utilities/identities/identities';
 import { transfer } from './transferChannel';
 
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
@@ -11,30 +11,30 @@ jest.mock('@kiltprotocol/chain-helpers', () => ({
     signAndSubmitTx: jest.fn(),
   },
 }));
-jest.mock('../../utilities/accounts/accounts', () => ({
-  decryptAccount: jest.fn(),
+jest.mock('../../utilities/identities/identities', () => ({
+  decryptIdentity: jest.fn(),
 }));
 
 describe('transferChannel', () => {
   describe('transferMessageListener', () => {
     it('should respond with fee to the proper messages', async () => {
-      (decryptAccount as jest.Mock).mockImplementation(() => ({
-        identity: true,
+      (decryptIdentity as jest.Mock).mockImplementation(() => ({
+        sdkIdentity: true,
       }));
       (makeTransfer as jest.Mock).mockImplementation(() => ({
         transaction: true,
       }));
 
       await transfer({
-        address: 'account-address',
+        address: 'identity-address',
         recipient: 'recipient-address',
         amount: new BN(125000000),
         password: 'password',
         tip: new BN(0),
       });
 
-      expect(decryptAccount).toHaveBeenCalledWith(
-        'account-address',
+      expect(decryptIdentity).toHaveBeenCalledWith(
+        'identity-address',
         'password',
       );
       expect(makeTransfer).toHaveBeenCalledWith(
@@ -43,7 +43,7 @@ describe('transferChannel', () => {
       );
       expect(BlockchainUtils.signAndSubmitTx).toHaveBeenCalledWith(
         { transaction: true },
-        { identity: true },
+        { sdkIdentity: true },
         expect.anything(),
       );
     });

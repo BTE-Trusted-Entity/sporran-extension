@@ -15,7 +15,7 @@ export function Warning(): JSX.Element {
       <h2 className={styles.important}>{t('view_Warning_emphasis')}</h2>
       <p className={styles.info}>{t('view_Warning_explanation')}</p>
       <h2 className={styles.important}>{t('view_Warning_emphasis_again')}</h2>
-      <Link to={paths.account.create.backup} className={styles.confirm}>
+      <Link to={paths.identity.create.backup} className={styles.confirm}>
         {t('view_Warning_CTA')}
       </Link>
       <Link to={paths.home} className={styles.cancel}>

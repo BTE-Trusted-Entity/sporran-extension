@@ -138,7 +138,7 @@ exports[`SaveBackupPhrase should render 1`] = `
       </a>
       <a
         class="create"
-        href="/account/create/verify"
+        href="/identity/create/verify"
       >
         Next Step
       </a>

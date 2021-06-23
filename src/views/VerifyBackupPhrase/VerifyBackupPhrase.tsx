@@ -51,7 +51,7 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      history.push(paths.account.create.password);
+      history.push(paths.identity.create.password);
     },
     [history],
   );

@@ -3,9 +3,9 @@ import { browser } from 'webextension-polyfill-ts';
 import { useRouteMatch } from 'react-router-dom';
 import { Modal } from 'react-dialog-polyfill';
 
-import { Account, isNew } from '../../utilities/accounts/accounts';
-import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
-import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
+import { Identity, isNew } from '../../utilities/identities/identities';
+import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
+import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { QRCode } from '../../components/QRCode/QRCode';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
@@ -14,10 +14,10 @@ import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import styles from './ReceiveToken.module.css';
 
 interface Props {
-  account: Account;
+  identity: Identity;
 }
 
-export function ReceiveToken({ account }: Props): JSX.Element {
+export function ReceiveToken({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const { path } = useRouteMatch();
@@ -34,21 +34,21 @@ export function ReceiveToken({ account }: Props): JSX.Element {
     setLargeQR(false);
   }, []);
 
-  if (isNew(account)) {
-    return <AccountOverviewNew />;
+  if (isNew(identity)) {
+    return <IdentityOverviewNew />;
   }
 
-  const { address } = account;
+  const { address } = identity;
 
   return (
     <section className={styles.container}>
       <h1 className={styles.heading}>{t('view_ReceiveToken_heading')}</h1>
       <p className={styles.subline}>{t('view_ReceiveToken_explanation')}</p>
 
-      <AccountsCarousel path={path} account={account} options={false} />
+      <IdentitiesCarousel path={path} identity={identity} options={false} />
 
       <small id="addressLabel" className={styles.small}>
-        {t('view_ReceiveToken_account_address')}
+        {t('view_ReceiveToken_identity_address')}
       </small>
       <p className={styles.addressLine}>
         <input

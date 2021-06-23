@@ -3,10 +3,10 @@ import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
-import { Account } from '../../utilities/accounts/types';
+import { Identity } from '../../utilities/identities/types';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
-import { AccountSlide } from '../../components/AccountSlide/AccountSlide';
+import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import {
@@ -18,7 +18,7 @@ import { paths } from '../paths';
 import styles from './ReviewTransaction.module.css';
 
 interface Props {
-  account: Account;
+  identity: Identity;
   recipient: string;
   amount: BN;
   fee: BN;
@@ -27,7 +27,7 @@ interface Props {
 }
 
 export function ReviewTransaction({
-  account,
+  identity,
   recipient,
   amount,
   fee,
@@ -92,7 +92,7 @@ export function ReviewTransaction({
       <h1 className={styles.heading}>{t('view_ReviewTransaction_heading')}</h1>
       <p className={styles.subline}>{t('view_ReviewTransaction_subline')}</p>
 
-      <AccountSlide account={account} />
+      <IdentitySlide identity={identity} />
 
       <p className={styles.recipient}>
         {t('view_ReviewTransaction_recipient')}
@@ -157,7 +157,7 @@ export function ReviewTransaction({
         </tbody>
       </table>
 
-      <PasswordField account={account} autoFocus password={passwordField} />
+      <PasswordField identity={identity} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
         <Link to={paths.home} className={styles.cancel}>
@@ -170,7 +170,7 @@ export function ReviewTransaction({
 
       {txStatus && (
         <TxStatusModal
-          account={account}
+          identity={identity}
           status={txStatus}
           onDismissError={closeModal}
         />

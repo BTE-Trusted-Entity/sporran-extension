@@ -93,7 +93,7 @@ exports[`SignQuote should render 1`] = `
       />
     </label>
     <div
-      class="account"
+      class="identity"
     >
       <div
         class="avatar"
@@ -101,9 +101,9 @@ exports[`SignQuote should render 1`] = `
         Identicon
       </div>
       <span
-        class="accountName"
+        class="identityName"
       >
-        My Sporran Account
+        My Sporran Identity
       </span>
     </div>
     <label

@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 import {
-  accountsMock as accounts,
+  identitiesMock as identities,
   act,
   render,
   screen,
@@ -15,14 +15,14 @@ import {
   getPasswordChannel,
   savePasswordChannel,
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
-import { decryptAccount } from '../../utilities/accounts/accounts';
+import { decryptIdentity } from '../../utilities/identities/identities';
 
 import { PasswordField } from './PasswordField';
 
 jest.mock('../../channels/SavedPasswordsChannels/SavedPasswordsChannels');
-jest.mock('../../utilities/accounts/accounts');
+jest.mock('../../utilities/identities/identities');
 
-const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 const passwordField = {
   set: jest.fn(),
@@ -33,7 +33,7 @@ describe('PasswordField', () => {
   beforeEach(() => {
     passwordField.set.mockReset();
     passwordField.setIsEmpty.mockReset();
-    (decryptAccount as jest.Mock).mockReset();
+    (decryptIdentity as jest.Mock).mockReset();
     (getPasswordChannel.get as jest.Mock).mockReset();
     (savePasswordChannel.get as jest.Mock).mockReset();
     (forgetPasswordChannel.get as jest.Mock).mockReset();
@@ -42,7 +42,7 @@ describe('PasswordField', () => {
   it('should match the snapshot', async () => {
     const { container } = render(
       <form>
-        <PasswordField account={account} password={passwordField} />
+        <PasswordField identity={identity} password={passwordField} />
       </form>,
     );
 
@@ -53,7 +53,7 @@ describe('PasswordField', () => {
     render(
       <MemoryRouter initialEntries={[paths.popup.base]}>
         <form>
-          <PasswordField account={account} password={passwordField} />
+          <PasswordField identity={identity} password={passwordField} />
         </form>
       </MemoryRouter>,
     );
@@ -67,7 +67,7 @@ describe('PasswordField', () => {
 
     render(
       <form>
-        <PasswordField account={account} password={passwordField} />
+        <PasswordField identity={identity} password={passwordField} />
       </form>,
     );
 
@@ -85,7 +85,7 @@ describe('PasswordField', () => {
 
   describe('password getter', () => {
     it('should report an invalid password', async () => {
-      (decryptAccount as jest.Mock).mockRejectedValue(
+      (decryptIdentity as jest.Mock).mockRejectedValue(
         new Error('Invalid password'),
       );
       let error = '';
@@ -102,7 +102,7 @@ describe('PasswordField', () => {
 
       render(
         <form onSubmit={handleSubmit}>
-          <PasswordField account={account} password={passwordField} />
+          <PasswordField identity={identity} password={passwordField} />
           <button type="submit">Submit</button>
         </form>,
       );
@@ -124,7 +124,7 @@ describe('PasswordField', () => {
 
       render(
         <form onSubmit={handleSubmit}>
-          <PasswordField account={account} password={passwordField} />
+          <PasswordField identity={identity} password={passwordField} />
           <button type="submit">Submit</button>
         </form>,
       );
@@ -153,7 +153,7 @@ describe('PasswordField', () => {
 
       render(
         <form onSubmit={handleSubmit}>
-          <PasswordField account={account} password={passwordField} />
+          <PasswordField identity={identity} password={passwordField} />
           <button type="submit">Submit</button>
         </form>,
       );
@@ -166,7 +166,7 @@ describe('PasswordField', () => {
 
       await waitFor(() => password !== '');
       expect(password).toEqual('PASS');
-      expect(forgetPasswordChannel.get).toHaveBeenCalledWith(account.address);
+      expect(forgetPasswordChannel.get).toHaveBeenCalledWith(identity.address);
     });
 
     it('should remember the valid password', async () => {
@@ -180,7 +180,7 @@ describe('PasswordField', () => {
 
       render(
         <form onSubmit={handleSubmit}>
-          <PasswordField account={account} password={passwordField} />
+          <PasswordField identity={identity} password={passwordField} />
           <button type="submit">Submit</button>
         </form>,
       );
@@ -195,7 +195,7 @@ describe('PasswordField', () => {
       await waitFor(() => password !== '');
 
       expect(savePasswordChannel.get).toHaveBeenCalledWith({
-        address: account.address,
+        address: identity.address,
         password: 'PASS',
       });
     });

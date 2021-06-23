@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IdentitySlide should render 1`] = `
+<div>
+  <section>
+    <div
+      class="avatar"
+    >
+      Identicon
+    </div>
+    <div
+      class="nameLine"
+    >
+      <span
+        class="name"
+      >
+        My Sporran Identity
+      </span>
+      <div
+        class="wrapper"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Identity options"
+          class="toggle"
+          role="button"
+          tabindex="0"
+          title="Identity options"
+          type="button"
+        />
+      </div>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`IdentitySlideNew should render 1`] = `
+<div>
+  <section>
+    <a
+      aria-label="Create new identity"
+      class="create"
+      href="/identity/create"
+      title="Create new identity"
+    />
+    <p
+      class="new"
+    >
+      Create new identity
+    </p>
+  </section>
+</div>
+`;

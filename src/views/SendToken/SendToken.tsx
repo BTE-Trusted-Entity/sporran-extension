@@ -6,10 +6,10 @@ import { find } from 'lodash-es';
 import { DataUtils } from '@kiltprotocol/utils';
 
 import { feeChannel } from '../../channels/feeChannel/feeChannel';
-import { Account } from '../../utilities/accounts/types';
-import { isNew } from '../../utilities/accounts/accounts';
-import { AccountOverviewNew } from '../AccountOverview/AccountOverviewNew';
-import { AccountsCarousel } from '../../components/AccountsCarousel/AccountsCarousel';
+import { Identity } from '../../utilities/identities/types';
+import { isNew } from '../../utilities/identities/identities';
+import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
+import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Balance, useAddressBalance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
@@ -160,10 +160,10 @@ function isValidAddress(address: string): boolean {
   }
 }
 
-function getAddressError(address: string, account: Account): string | null {
+function getAddressError(address: string, identity: Identity): string | null {
   const t = browser.i18n.getMessage;
 
-  if (address === account.address) {
+  if (address === identity.address) {
     return t('view_SendToken_recipient_same');
   }
 
@@ -179,7 +179,7 @@ function formatKiltInput(amount: BN): string {
 }
 
 interface Props {
-  account: Account;
+  identity: Identity;
   onSuccess: (values: {
     recipient: string;
     amount: BN;
@@ -189,17 +189,17 @@ interface Props {
   }) => void;
 }
 
-export function SendToken({ account, onSuccess }: Props): JSX.Element {
+export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
 
   const [fee, setFee] = useState<BN | null>(null);
 
-  const balance = useAddressBalance(account.address);
+  const balance = useAddressBalance(identity.address);
   const maximum = balance && fee ? balance.free.sub(fee) : null;
 
   const [recipient, setRecipient] = useState('');
-  const recipientError = recipient && getAddressError(recipient, account);
+  const recipientError = recipient && getAddressError(recipient, identity);
 
   const recipientBalance = useAddressBalance(
     isValidAddress(recipient) ? recipient : '',
@@ -347,8 +347,8 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
     [onSuccess, recipient, numericAmount, fee, existentialWarning, finalTip],
   );
 
-  if (isNew(account)) {
-    return <AccountOverviewNew />;
+  if (isNew(identity)) {
+    return <IdentityOverviewNew />;
   }
 
   return (
@@ -360,8 +360,8 @@ export function SendToken({ account, onSuccess }: Props): JSX.Element {
       <h1 className={styles.heading}>{t('view_SendToken_heading')}</h1>
       <p className={styles.subline}>{t('view_SendToken_subline')}</p>
 
-      <AccountsCarousel path={path} account={account} options={false} />
-      <Balance address={account.address} />
+      <IdentitiesCarousel path={path} identity={identity} options={false} />
+      <Balance address={identity.address} />
 
       <small className={styles.maximum}>
         {t('view_SendToken_maximum')}

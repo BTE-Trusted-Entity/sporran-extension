@@ -1,0 +1,510 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IdentitiesCarousel should not render bubbles if number of identities is more than the maximum 1`] = `<div />`;
+
+exports[`IdentitiesCarousel should render a bubble for each identity 1`] = `
+<div>
+  <ul
+    class="bubbles"
+  >
+    <li
+      class="item"
+    >
+      <a
+        aria-label="My Sporran Identity"
+        class="bubble"
+        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+        title="My Sporran Identity"
+      />
+    </li>
+    <li
+      class="item"
+    >
+      <a
+        aria-label="My Second Identity"
+        class="bubble"
+        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+        title="My Second Identity"
+      />
+    </li>
+    <li
+      class="item"
+    >
+      <a
+        aria-label="My Third Identity which has a very long name and might not even fit on the screen"
+        class="bubble"
+        href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+        title="My Third Identity which has a very long name and might not even fit on the screen"
+      />
+    </li>
+    <li
+      class="item"
+    >
+      <a
+        aria-label="Create new identity"
+        class="add"
+        href="/identity/NEW"
+        title="Create new identity"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`IdentitiesCarousel should render normal identities 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <section>
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="nameLine"
+      >
+        <span
+          class="name"
+        >
+          My Second Identity
+        </span>
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Identity options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Identity options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <a
+      aria-label="My Sporran Identity"
+      class="left"
+      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      title="My Sporran Identity"
+    />
+    <a
+      aria-label="My Third Identity which has a very long name and might not even fit on the screen"
+      class="right"
+      href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+      title="My Third Identity which has a very long name and might not even fit on the screen"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Sporran Identity"
+          class="bubble"
+          href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+          title="My Sporran Identity"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Second Identity"
+          class="bubble"
+          href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+          title="My Second Identity"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Third Identity which has a very long name and might not even fit on the screen"
+          class="bubble"
+          href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+          title="My Third Identity which has a very long name and might not even fit on the screen"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="Create new identity"
+          class="add"
+          href="/identity/NEW"
+          title="Create new identity"
+        />
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`IdentitiesCarousel should render the first identity 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <section>
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="nameLine"
+      >
+        <span
+          class="name"
+        >
+          My Sporran Identity
+        </span>
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Identity options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Identity options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <a
+      aria-label="Create new identity"
+      class="left"
+      href="/identity/NEW"
+      title="Create new identity"
+    />
+    <a
+      aria-label="My Second Identity"
+      class="right"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+      title="My Second Identity"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Sporran Identity"
+          class="bubble"
+          href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+          title="My Sporran Identity"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Second Identity"
+          class="bubble"
+          href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+          title="My Second Identity"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Third Identity which has a very long name and might not even fit on the screen"
+          class="bubble"
+          href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+          title="My Third Identity which has a very long name and might not even fit on the screen"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="Create new identity"
+          class="add"
+          href="/identity/NEW"
+          title="Create new identity"
+        />
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`IdentitiesCarousel should render the last identity 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <section>
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="nameLine"
+      >
+        <span
+          class="name"
+        >
+          My Third Identity which has a very long name and might not even fit on the screen
+        </span>
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Identity options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Identity options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <a
+      aria-label="My Second Identity"
+      class="left"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+      title="My Second Identity"
+    />
+    <a
+      aria-label="Create new identity"
+      class="right"
+      href="/identity/NEW"
+      title="Create new identity"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Sporran Identity"
+          class="bubble"
+          href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+          title="My Sporran Identity"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Second Identity"
+          class="bubble"
+          href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+          title="My Second Identity"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Third Identity which has a very long name and might not even fit on the screen"
+          class="bubble"
+          href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+          title="My Third Identity which has a very long name and might not even fit on the screen"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="Create new identity"
+          class="add"
+          href="/identity/NEW"
+          title="Create new identity"
+        />
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`IdentitiesCarousel should render the new identity 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <section>
+      <a
+        aria-label="Create new identity"
+        class="create"
+        href="/identity/create"
+        title="Create new identity"
+      />
+      <p
+        class="new"
+      >
+        Create new identity
+      </p>
+    </section>
+    <a
+      aria-label="My Third Identity which has a very long name and might not even fit on the screen"
+      class="left"
+      href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+      title="My Third Identity which has a very long name and might not even fit on the screen"
+    />
+    <a
+      aria-label="My Sporran Identity"
+      class="right"
+      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      title="My Sporran Identity"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Sporran Identity"
+          class="bubble"
+          href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+          title="My Sporran Identity"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Second Identity"
+          class="bubble"
+          href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+          title="My Second Identity"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Third Identity which has a very long name and might not even fit on the screen"
+          class="bubble"
+          href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+          title="My Third Identity which has a very long name and might not even fit on the screen"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="Create new identity"
+          class="add"
+          href="/identity/NEW"
+          title="Create new identity"
+        />
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`IdentitiesCarousel should support other paths 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <section>
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="nameLine"
+      >
+        <span
+          class="name"
+        >
+          My Third Identity which has a very long name and might not even fit on the screen
+        </span>
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Identity options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Identity options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <a
+      aria-label="My Second Identity"
+      class="left"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
+      title="My Second Identity"
+    />
+    <a
+      aria-label="Create new identity"
+      class="right"
+      href="/identity/NEW/send"
+      title="Create new identity"
+    />
+    <ul
+      class="bubbles"
+    >
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Sporran Identity"
+          class="bubble"
+          href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
+          title="My Sporran Identity"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Second Identity"
+          class="bubble"
+          href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
+          title="My Second Identity"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="My Third Identity which has a very long name and might not even fit on the screen"
+          class="bubble"
+          href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL/send"
+          title="My Third Identity which has a very long name and might not even fit on the screen"
+        />
+      </li>
+      <li
+        class="item"
+      >
+        <a
+          aria-label="Create new identity"
+          class="add"
+          href="/identity/NEW/send"
+          title="Create new identity"
+        />
+      </li>
+    </ul>
+  </div>
+</div>
+`;
