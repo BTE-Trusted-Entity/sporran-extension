@@ -1,4 +1,4 @@
-import { IdentitiesMap } from './identities';
+import { IdentitiesMap } from './types';
 import { IdentitiesContext } from './IdentitiesContext';
 
 export const identitiesMock: IdentitiesMap = {
