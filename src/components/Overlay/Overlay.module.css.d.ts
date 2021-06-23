@@ -1,8 +1,8 @@
 declare namespace OverlayModuleCssNamespace {
   export interface IOverlayModuleCss {
-    overlay: string;
     button: string;
     heading: string;
+    overlay: string;
     text: string;
   }
 }
