@@ -44,6 +44,14 @@ export async function waitForDialogUpdate(): Promise<void> {
   await act(() => dialogPromise);
 }
 
+export function mockDialogShowModal(): void {
+  (
+    HTMLDialogElement.prototype as unknown as {
+      showModal: () => void;
+    }
+  ).showModal = jest.fn();
+}
+
 /** Helps against the warning `Not implemented: HTMLFormElement.prototype.submit`
  * in JSDom: https://github.com/jsdom/jsdom/issues/1937 */
 export async function runWithJSDOMErrorsDisabled(

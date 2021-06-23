@@ -670,5 +670,8 @@
   },
   "view_ExistentialWarning_confirm": {
     "message": "Confirm"
+  },
+  "view_GenericError_message": {
+    "message": "An error occurred. Please try again. For help please contact <a href='mailto:support@sporran.org'>support@sporran.org</a>."
   }
 }

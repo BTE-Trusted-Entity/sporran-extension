@@ -1,5 +1,6 @@
 import {
   identitiesMock,
+  mockDialogShowModal,
   render,
   waitForDialogUpdate,
 } from '../../testing/testing';
@@ -9,13 +10,7 @@ const identity =
   identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 describe('IdentitySuccessOverlay', () => {
-  beforeEach(() => {
-    (
-      HTMLDialogElement.prototype as unknown as {
-        showModal: () => void;
-      }
-    ).showModal = jest.fn();
-  });
+  beforeEach(mockDialogShowModal);
 
   it('should render success overlay for created identity', async () => {
     const { container } = render(
