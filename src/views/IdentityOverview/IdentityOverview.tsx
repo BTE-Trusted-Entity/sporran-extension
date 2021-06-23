@@ -7,7 +7,6 @@ import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
 import { UpcomingFeatureModal } from '../../components/UpcomingFeatureModal/UpcomingFeatureModal';
-import { IdentityOverviewNew } from './IdentityOverviewNew';
 
 import {
   Identity,
@@ -17,6 +16,7 @@ import {
 import { plural } from '../../utilities/plural/plural';
 import { generatePath, paths } from '../paths';
 import { useConfiguration } from '../../configuration/useConfiguration';
+import { IdentityOverviewNew } from './IdentityOverviewNew';
 
 import styles from './IdentityOverview.module.css';
 
@@ -40,10 +40,14 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
     setHasSuccessOverlay(false);
   }, []);
 
-  const [hasFeatureModal, setHasFeatureModal] = useState(false);
+  const [hasUpcomingFeatureModal, setHasUpcomingFeatureModal] = useState(false);
 
-  const handleFeatureModalClose = useCallback(() => {
-    setHasFeatureModal(false);
+  const handleUpcomingFeatureModalButtonClick = useCallback(() => {
+    setHasUpcomingFeatureModal(false);
+  }, []);
+
+  const handleSendClick = useCallback(() => {
+    setHasUpcomingFeatureModal(true);
   }, []);
 
   const identities = useIdentities().data;
@@ -93,8 +97,9 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           </Link>
         ) : (
           <button
+            type="button"
             className={styles.button}
-            onClick={() => setHasFeatureModal(true)}
+            onClick={handleSendClick}
           >
             {t('view_IdentityOverview_send')}
           </button>
@@ -126,8 +131,8 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           onSuccessOverlayButtonClick={handleSuccessOverlayButtonClick}
         />
       )}
-      {hasFeatureModal && (
-        <UpcomingFeatureModal onClose={handleFeatureModalClose} />
+      {hasUpcomingFeatureModal && (
+        <UpcomingFeatureModal onClose={handleUpcomingFeatureModalButtonClick} />
       )}
     </main>
   );

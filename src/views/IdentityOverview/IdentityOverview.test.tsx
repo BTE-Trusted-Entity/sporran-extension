@@ -12,6 +12,7 @@ import { NEW } from '../../utilities/identities/identities';
 import { paths } from '../paths';
 
 import { IdentityOverview } from './IdentityOverview';
+import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
@@ -57,6 +58,22 @@ describe('IdentityOverview', () => {
     userEvent.click(send);
 
     await waitForDialogUpdate();
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render with link to send screen', async () => {
+    const { container } = render(
+      <InternalConfigurationContext>
+        <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
+          <Route path={paths.identity.overview}>
+            <IdentityOverview identity={identity} />,
+          </Route>
+        </MemoryRouter>
+      </InternalConfigurationContext>,
+    );
+
+    await screen.findByRole('link', { name: 'Send' });
+
     expect(container).toMatchSnapshot();
   });
 });

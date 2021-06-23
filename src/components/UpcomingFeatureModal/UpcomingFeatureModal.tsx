@@ -13,7 +13,7 @@ export function UpcomingFeatureModal({ onClose }: Props): JSX.Element {
   return (
     <Modal open className={styles.container}>
       <p className={styles.info}>{t('component_UpcomingFeatureModal_info')}</p>
-      <button className={styles.close} onClick={onClose}>
+      <button type="button" className={styles.close} onClick={onClose}>
         {t('common_action_close')}
       </button>
     </Modal>
