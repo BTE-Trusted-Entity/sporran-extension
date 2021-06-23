@@ -19,7 +19,7 @@ describe('transferChannel', () => {
   describe('transferMessageListener', () => {
     it('should respond with fee to the proper messages', async () => {
       (decryptIdentity as jest.Mock).mockImplementation(() => ({
-        blockchainIdentity: true,
+        sdkIdentity: true,
       }));
       (makeTransfer as jest.Mock).mockImplementation(() => ({
         transaction: true,
@@ -43,7 +43,7 @@ describe('transferChannel', () => {
       );
       expect(BlockchainUtils.signAndSubmitTx).toHaveBeenCalledWith(
         { transaction: true },
-        { blockchainIdentity: true },
+        { sdkIdentity: true },
         expect.anything(),
       );
     });

@@ -44,10 +44,10 @@ export const transferChannel = new BrowserChannel<
 export async function transfer(input: TransferInput): Promise<void> {
   const { address, recipient, amount, password, tip } = input;
 
-  const blockchainIdentity = await decryptIdentity(address, password);
+  const sdkIdentity = await decryptIdentity(address, password);
 
   const tx = await makeTransfer(recipient, amount);
-  await BlockchainUtils.signAndSubmitTx(tx, blockchainIdentity, {
+  await BlockchainUtils.signAndSubmitTx(tx, sdkIdentity, {
     resolveOn: BlockchainUtils.IS_FINALIZED,
     rejectOn: BlockchainUtils.IS_ERROR,
     tip,

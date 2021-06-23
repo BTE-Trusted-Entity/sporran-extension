@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import useSWR, { mutate, SWRResponse } from 'swr';
-import { Identity as BlockchainIdentity } from '@kiltprotocol/core';
+import { Identity as SdkIdentity } from '@kiltprotocol/core';
 import { map, max } from 'lodash-es';
 
 import {
@@ -86,7 +86,7 @@ export async function encryptIdentity(
   backupPhrase: string,
   password: string,
 ): Promise<string> {
-  const { address, seed } = BlockchainIdentity.buildFromMnemonic(backupPhrase);
+  const { address, seed } = SdkIdentity.buildFromMnemonic(backupPhrase);
   await saveEncrypted(address, password, seed);
   return address;
 }
@@ -114,7 +114,7 @@ export async function createIdentity(
 export async function decryptIdentity(
   address: string,
   password: string,
-): Promise<BlockchainIdentity> {
+): Promise<SdkIdentity> {
   const seed = await loadEncrypted(address, password);
-  return BlockchainIdentity.buildFromSeed(new Uint8Array(seed));
+  return SdkIdentity.buildFromSeed(new Uint8Array(seed));
 }
