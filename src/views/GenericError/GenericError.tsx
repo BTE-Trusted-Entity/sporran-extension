@@ -30,7 +30,10 @@ export class GenericError extends Component<Props, State> {
     return (
       <main>
         <Modal open className={overlayStyles.overlay}>
-          <p className={styles.text}>{t('view_GenericError_message')}</p>
+          <p
+            className={styles.text}
+            dangerouslySetInnerHTML={{ __html: t('view_GenericError_message') }}
+          />
 
           <button
             type="button"

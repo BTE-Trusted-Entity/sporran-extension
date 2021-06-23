@@ -17,7 +17,13 @@ exports[`GenericError should render generic error when an error happens 1`] = `
       <p
         class="text"
       >
-        An error occurred. Please try again. For help please reach out for our support.
+        An error occurred. Please try again. For help please contact 
+        <a
+          href="mailto:support@sporran.org"
+        >
+          support@sporran.org
+        </a>
+        .
       </p>
       <button
         class="button"
