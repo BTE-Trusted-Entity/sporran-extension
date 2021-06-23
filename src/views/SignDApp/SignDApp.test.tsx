@@ -6,6 +6,8 @@ import { paths } from '../paths';
 
 import { SignDApp } from './SignDApp';
 
+jest.mock('@kiltprotocol/chain-helpers', () => ({}));
+
 const query =
   'address=4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire&specVersion=1&nonce=1&method=namespace.method(input = "some meaningful values you would definitely like to see")&lifetimeStart=1&lifetimeEnd=1000000&origin=https://example.com/extremely-long-url-tries-to-overflow-all-available-space';
 

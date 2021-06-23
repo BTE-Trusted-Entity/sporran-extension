@@ -1,5 +1,6 @@
 import BN from 'bn.js';
 import userEvent from '@testing-library/user-event';
+import { DataUtils } from '@kiltprotocol/utils';
 
 import { NEW } from '../../utilities/identities/identities';
 import {
@@ -15,6 +16,14 @@ import { SendToken } from './SendToken';
 
 mockFeeChannel();
 
+jest.mock('@kiltprotocol/chain-helpers', () => ({}));
+jest.mock('@kiltprotocol/core', () => ({}));
+jest.mock('@kiltprotocol/utils', () => ({
+  DataUtils: {
+    validateAddress: jest.fn(),
+  },
+}));
+
 jest.mock(
   '../../channels/existentialDepositChannel/existentialDepositChannel',
   () => ({
@@ -29,6 +38,10 @@ jest.mock(
 const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 describe('SendToken', () => {
+  beforeEach(() => {
+    (DataUtils.validateAddress as jest.Mock).mockReset();
+  });
+
   it('should render', async () => {
     const { container } = render(
       <SendToken identity={identity} onSuccess={jest.fn()} />,
@@ -170,6 +183,10 @@ describe('SendToken', () => {
   });
 
   it('should report an invalid recipient', async () => {
+    (DataUtils.validateAddress as jest.Mock).mockImplementation(() => {
+      throw new Error();
+    });
+
     render(<SendToken identity={identity} onSuccess={jest.fn()} />);
 
     userEvent.type(

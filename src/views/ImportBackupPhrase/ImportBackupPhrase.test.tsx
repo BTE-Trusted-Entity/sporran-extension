@@ -1,7 +1,14 @@
 import userEvent from '@testing-library/user-event';
+import { Identity } from '@kiltprotocol/core';
 import { render, screen } from '../../testing/testing';
 
 import { ImportBackupPhrase } from './ImportBackupPhrase';
+
+jest.mock('@kiltprotocol/core', () => ({
+  Identity: {
+    buildFromMnemonic: jest.fn(),
+  },
+}));
 
 const onImport = jest.fn();
 
@@ -31,6 +38,10 @@ async function typeElevenWords() {
 }
 
 describe('ImportBackupPhrase', () => {
+  beforeEach(() => {
+    (Identity.buildFromMnemonic as jest.Mock).mockReset();
+  });
+
   it('should render for import', async () => {
     const { container } = render(<ImportBackupPhrase {...props} />);
     expect(container).toMatchSnapshot();
@@ -94,6 +105,10 @@ describe('ImportBackupPhrase', () => {
   });
 
   it('should report mismatching backup phrase', async () => {
+    (Identity.buildFromMnemonic as jest.Mock).mockReturnValue({
+      address: 'FAIL',
+    });
+
     render(<ImportBackupPhrase {...props} type="reset" address="foo" />);
 
     await typeElevenWords();
@@ -108,7 +123,11 @@ describe('ImportBackupPhrase', () => {
   });
 
   it('should allow backup phrase import', async () => {
-    render(<ImportBackupPhrase {...props} />);
+    (Identity.buildFromMnemonic as jest.Mock).mockReturnValue({
+      address: 'PASS',
+    });
+
+    render(<ImportBackupPhrase {...props} address="PASS" />);
 
     await typeElevenWords();
     userEvent.type(await screen.findByLabelText('12'), 'fog');
@@ -125,6 +144,10 @@ describe('ImportBackupPhrase', () => {
   });
 
   it('should allow backup phrase reset', async () => {
+    (Identity.buildFromMnemonic as jest.Mock).mockReturnValue({
+      address: '4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos',
+    });
+
     render(
       <ImportBackupPhrase
         {...props}

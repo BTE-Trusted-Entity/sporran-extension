@@ -6,7 +6,6 @@ import dialogPolyfill from 'dialog-polyfill';
 
 import { ConfigurationProvider } from '../configuration/ConfigurationContext';
 import { IdentitiesProviderMock } from '../utilities/identities/IdentitiesProvider.mock';
-import { Identicon } from '../components/Avatar/Identicon';
 import { mockBalanceChangeChannel } from '../channels/balanceChangeChannel/mockBalanceChangeChannel';
 
 export {
@@ -15,8 +14,12 @@ export {
   moreIdentitiesMock,
 } from '../utilities/identities/IdentitiesProvider.mock';
 
-jest.mock('../components/Avatar/Identicon');
-(Identicon as jest.Mock).mockImplementation(() => 'Identicon');
+jest.mock('@kiltprotocol/core', () => ({}));
+jest.mock('@kiltprotocol/core/lib/balance/Balance.chain', () => ({}));
+
+jest.mock('../components/Avatar/Identicon', () => ({
+  Identicon: () => 'Identicon',
+}));
 
 mockBalanceChangeChannel();
 
