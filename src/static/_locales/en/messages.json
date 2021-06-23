@@ -185,6 +185,9 @@
   "component_PasswordField_remember": {
     "message": "Remember my password for the next 15 minutes"
   },
+  "component_UpcomingFeatureModal_info": {
+    "message": "It is not yet possible to send funds. Please check sporran.org for feature releases and then ensure your extension is up to date."
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },

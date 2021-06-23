@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UpcomingFeatureModal should render 1`] = `
+<div>
+  <dialog
+    class="container"
+  >
+    <p
+      class="info"
+    >
+      It is not yet possible to send funds. Please check sporran.org for feature releases and then ensure your extension is up to date.
+    </p>
+    <button
+      class="close"
+    >
+      Close
+    </button>
+  </dialog>
+</div>
+`;
