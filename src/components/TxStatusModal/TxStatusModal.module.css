@@ -1,6 +1,5 @@
 .overlay {
   composes: overlay from '../../components/Overlay/Overlay.module.css';
-  width: 17.75rem;
 }
 
 .transparent {

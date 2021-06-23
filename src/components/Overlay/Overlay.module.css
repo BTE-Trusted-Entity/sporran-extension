@@ -15,6 +15,7 @@
   left: 6.125rem;
   right: 6.125rem;
   padding: 1.75rem;
+  max-width: calc(100% - 13rem);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
