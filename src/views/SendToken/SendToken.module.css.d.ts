@@ -9,6 +9,7 @@ declare namespace SendTokenModuleCssNamespace {
     heading: string;
     increase: string;
     maximum: string;
+    offlineError: string;
     recipient: string;
     recipientError: string;
     recipientLine: string;
@@ -16,6 +17,7 @@ declare namespace SendTokenModuleCssNamespace {
     setTip: string;
     subline: string;
     submit: string;
+    submitLine: string;
     tip: string;
     total: string;
     totalLine: string;

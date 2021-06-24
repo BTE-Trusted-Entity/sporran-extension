@@ -457,6 +457,9 @@
   "view_SendToken_CTA": {
     "message": "Review & Sign Transaction"
   },
+  "view_SendToken_offline": {
+    "message": "Cannot connect to the network. Please check your internet connection."
+  },
   "view_ReviewTransaction_heading": {
     "message": "Send KILT Coins"
   },

@@ -15,6 +15,7 @@ import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
+import { useOnline } from '../../utilities/useOnline/useOnline';
 import { existentialDepositChannel } from '../../channels/existentialDepositChannel/existentialDepositChannel';
 
 import styles from './SendToken.module.css';
@@ -268,13 +269,16 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
 
   useEffect(() => {
     (async () => {
+      if (isNew(identity)) {
+        return;
+      }
       if (recipient && !isValidAddress(recipient)) {
         return;
       }
       const realFee = await feeChannel.get({ amount: amountBN, recipient });
       setFee(realFee);
     })();
-  }, [amountBN, recipient]);
+  }, [amountBN, identity, recipient]);
 
   const handleAmountInput = useCallback((event) => {
     const { value } = event.target;
@@ -346,6 +350,8 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     },
     [onSuccess, recipient, numericAmount, fee, existentialWarning, finalTip],
   );
+
+  const online = useOnline();
 
   if (isNew(identity)) {
     return <IdentityOverviewNew />;
@@ -466,19 +472,24 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
         </output>
       </p>
 
-      <button
-        type="submit"
-        className={styles.submit}
-        disabled={
-          !amount ||
-          Boolean(amountError) ||
-          Boolean(totalError) ||
-          !recipient ||
-          Boolean(recipientError)
-        }
-      >
-        {t('view_SendToken_CTA')}
-      </button>
+      <p className={styles.submitLine}>
+        <button
+          type="submit"
+          className={styles.submit}
+          disabled={
+            !amount ||
+            Boolean(amountError) ||
+            Boolean(totalError) ||
+            !recipient ||
+            Boolean(recipientError)
+          }
+        >
+          {t('view_SendToken_CTA')}
+        </button>
+        <output className={styles.offlineError} hidden={online}>
+          {!online && t('view_SendToken_offline')}
+        </output>
+      </p>
 
       <LinkBack />
       <Stats />

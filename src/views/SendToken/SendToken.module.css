@@ -108,6 +108,14 @@
   composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
 }
 
+.submitLine {
+  position: relative;
+}
+
 .submit {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
+}
+
+.offlineError {
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
 }
