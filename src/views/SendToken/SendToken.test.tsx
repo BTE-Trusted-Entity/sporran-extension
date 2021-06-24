@@ -40,6 +40,10 @@ const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 describe('SendToken', () => {
   beforeEach(() => {
     (DataUtils.validateAddress as jest.Mock).mockReset();
+    Object.defineProperty(window.navigator, 'onLine', {
+      value: true,
+      writable: true,
+    });
   });
 
   it('should render', async () => {
@@ -213,6 +217,18 @@ describe('SendToken', () => {
       await screen.findByText(
         'The recipient address is the same as identity address',
       ),
+    ).toBeInTheDocument();
+  });
+
+  it('should warn about being offline', async () => {
+    Object.defineProperty(window.navigator, 'onLine', {
+      value: false,
+    });
+
+    render(<SendToken identity={identity} onSuccess={jest.fn()} />);
+
+    expect(
+      await screen.findByText(/Cannot connect to the network/),
     ).toBeInTheDocument();
   });
 });

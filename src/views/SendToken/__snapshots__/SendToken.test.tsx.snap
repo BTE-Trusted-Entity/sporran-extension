@@ -317,13 +317,21 @@ exports[`SendToken should render 1`] = `
         hidden=""
       />
     </p>
-    <button
-      class="submit"
-      disabled=""
-      type="submit"
+    <p
+      class="submitLine"
     >
-      Review & Sign Transaction
-    </button>
+      <button
+        class="submit"
+        disabled=""
+        type="submit"
+      >
+        Review & Sign Transaction
+      </button>
+      <output
+        class="offlineError"
+        hidden=""
+      />
+    </p>
     <button
       aria-label="Back"
       class="linkBack"
