@@ -77,9 +77,10 @@ export async function removeIdentity(identity: Identity): Promise<void> {
   await storage.set({ [IDENTITIES_KEY]: identities });
   await storage.remove(identity.address);
 
-  await mutate(IDENTITIES_KEY);
+  const firstIdentity = Object.values(identities)[0];
+  await setCurrentIdentity(firstIdentity?.address);
 
-  await getCurrentIdentity();
+  await mutate(IDENTITIES_KEY);
 }
 
 export async function encryptIdentity(
