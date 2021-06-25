@@ -143,6 +143,14 @@ exports[`IdentityOverview should render a normal identity 1`] = `
         Receive
       </a>
     </p>
+    <a
+      class="subscan"
+      href="https://kilt-testnet.subscan.io/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire?tab=transfer"
+      rel="noreferrer"
+      target="_blank"
+    >
+      View Transactions
+    </a>
     <p
       class="stats"
     >
@@ -428,6 +436,14 @@ exports[`IdentityOverview should render upcoming feature modal 1`] = `
         Receive
       </a>
     </p>
+    <a
+      class="subscan"
+      href="https://kilt-testnet.subscan.io/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire?tab=transfer"
+      rel="noreferrer"
+      target="_blank"
+    >
+      View Transactions
+    </a>
     <p
       class="stats"
     >
@@ -611,6 +627,14 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
         Receive
       </a>
     </p>
+    <a
+      class="subscan"
+      href="https://kilt-testnet.subscan.io/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire?tab=transfer"
+      rel="noreferrer"
+      target="_blank"
+    >
+      View Transactions
+    </a>
     <p
       class="stats"
     >

@@ -4,6 +4,7 @@ declare namespace TxStatusModalModuleCssNamespace {
     error: string;
     heading: string;
     overlay: string;
+    subscan: string;
     success: string;
     transparent: string;
     wrapper: string;

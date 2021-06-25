@@ -170,6 +170,9 @@
   "component_TxStatusModal_error": {
     "message": "Your transaction has failed"
   },
+  "component_TxStatusModal_subscan": {
+    "message": "Check status on Subscan"
+  },
   "component_PasswordField_reset": {
     "message": "Reset password"
   },
@@ -377,6 +380,9 @@
   },
   "view_IdentityOverview_add": {
     "message": "Add identity"
+  },
+  "view_IdentityOverview_subscan": {
+    "message": "View Transactions"
   },
   "view_RemoveIdentity_heading": {
     "message": "Attention!"

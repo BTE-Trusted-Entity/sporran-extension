@@ -28,6 +28,7 @@ export function TxSuccess(): JSX.Element {
     <TxStatusModal
       identity={identity}
       status="success"
+      txHash="0x80284ac035b933c529e1742ec689e833eb0af50e960e837a2cc8048c33e7d82c"
       onDismissError={action('closeModal')}
     />
   );

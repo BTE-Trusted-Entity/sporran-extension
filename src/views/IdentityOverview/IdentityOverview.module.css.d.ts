@@ -6,6 +6,7 @@ declare namespace IdentityOverviewModuleCssNamespace {
     credentials: string;
     heading: string;
     info: string;
+    subscan: string;
   }
 }
 

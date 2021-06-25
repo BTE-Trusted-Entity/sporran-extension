@@ -2,7 +2,10 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { initKiltSDK } from './channels/initKiltSDK/initKiltSDK';
 import { initBackgroundToggleIconChannel } from './channels/toggleIconChannel/toggleIconChannel';
-import { initBackgroundTransferChannel } from './channels/transferChannel/transferChannel';
+import {
+  initBackgroundSignTransferChannel,
+  initBackgroundSubmitTransferChannel,
+} from './channels/transferChannels/transferChannels';
 import { initBackgroundFeeChannel } from './channels/feeChannel/feeChannel';
 import {
   initBackgroundForgetAllPasswordsChannel,
@@ -48,12 +51,17 @@ function initExtensionPopupMessages() {
   onPopupConnect(connectToBlockchain);
 }
 
+function initTransferChannels() {
+  initBackgroundSignTransferChannel();
+  initBackgroundSubmitTransferChannel();
+}
+
 function init() {
   initKiltSDK();
   initExtensionPopupMessages();
   initBackgroundBalanceChangeChannel();
   initBackgroundFeeChannel();
-  initBackgroundTransferChannel();
+  initTransferChannels();
   initBackgroundToggleIconChannel();
   initSavedPasswords();
   initDAppChannels();
