@@ -1,13 +1,17 @@
 import { useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { map, without } from 'lodash-es';
 
 import { Identity } from '../../utilities/identities/types';
 import { Balance } from '../../components/Balance/Balance';
-import { removeIdentity } from '../../utilities/identities/identities';
+import {
+  removeIdentity,
+  useIdentities,
+} from '../../utilities/identities/identities';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-import { paths } from '../paths';
+import { generatePath, paths } from '../paths';
 import { Avatar } from '../../components/Avatar/Avatar';
 
 import styles from './RemoveIdentity.module.css';
@@ -19,9 +23,24 @@ interface Props {
 export function RemoveIdentity({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
+  const history = useHistory();
+  const { data: identities } = useIdentities();
+
   const handleClick = useCallback(async () => {
+    if (!identities) {
+      return;
+    }
+
+    const addresses = map(identities, 'address');
+    const remaining = without(addresses, identity.address);
+    const firstAddress = remaining[0];
+    const path = firstAddress
+      ? generatePath(paths.identity.overview, { address: firstAddress })
+      : paths.home;
+    history.push(path);
+
     await removeIdentity(identity);
-  }, [identity]);
+  }, [history, identity, identities]);
 
   return (
     <main className={styles.container}>

@@ -26,8 +26,10 @@ export function SpecificIdentityRouter({ identities }: Props): JSX.Element {
   const { address } = useParams() as { address: string };
 
   useEffect(() => {
-    setCurrentIdentity(address);
-  }, [address]);
+    if (address in identities) {
+      setCurrentIdentity(address);
+    }
+  }, [address, identities]);
 
   const isNew = address === NEW.address;
   const identity = isNew ? NEW : identities[address];
