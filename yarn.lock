@@ -1646,10 +1646,10 @@
     bn.js "^4.11.9"
     eventemitter3 "^4.0.7"
 
-"@polkadot/extension-inject@^0.38.6":
-  version "0.38.6"
-  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.38.6.tgz#fa6a5a4939e7b25acb90406a8d87fc047df8cc06"
-  integrity sha512-kYkfx928oHXqvBvuJdCLvsdHlqg4nfF2AwpszZPoJ62TDttf5dFctxn0GhAg9hwDnWKAakfDETdj8y1uPXgOFw==
+"@polkadot/extension-inject@^0.38.7":
+  version "0.38.7"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.38.7.tgz#d1a7ac0bd9e99d45fb5a40729d8315f6e319ba38"
+  integrity sha512-0+FSKWKeHzfPcD1EBA7smHGdPJ8FzAGSXm2ZRF3UaYPwoVvPadpEwUshWr/TmhBE/klxJcAmJhkz0h/EO9CI4A==
   dependencies:
     "@babel/runtime" "^7.14.6"
 
