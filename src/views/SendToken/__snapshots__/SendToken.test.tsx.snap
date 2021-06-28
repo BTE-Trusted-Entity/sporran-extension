@@ -14,7 +14,7 @@ exports[`SendToken should not render for new identity 1`] = `
       <p
         class="info"
       >
-        You have 3 identities
+        You have 3 Identities
       </p>
     </header>
     <div
@@ -22,10 +22,10 @@ exports[`SendToken should not render for new identity 1`] = `
     >
       <section>
         <a
-          aria-label="Add identity"
+          aria-label="Add Identity"
           class="add"
           href="/identity/add"
-          title="Add identity"
+          title="Add Identity"
         />
       </section>
       <a
@@ -81,10 +81,10 @@ exports[`SendToken should not render for new identity 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="Add identity"
+            aria-label="Add Identity"
             class="add addActive"
             href="/"
-            title="Add identity"
+            title="Add Identity"
           />
         </li>
       </ul>
@@ -93,23 +93,23 @@ exports[`SendToken should not render for new identity 1`] = `
       class="add"
       href="/identity/add"
     >
-      Add identity
+      Add Identity
     </a>
     <p
       class="stats"
     >
-      You have 3 identities with a total
+      You have 3 Identities with a
       <span
         class="balance"
       >
-         Balance: 
+         Total Balance: 
         <span
           class="amount"
         >
           3.7020
            
           <span
-            aria-label="Kilt coin"
+            aria-label="KILT Coin"
             class="coin"
           />
         </span>
@@ -133,7 +133,7 @@ exports[`SendToken should render 1`] = `
     <p
       class="subline"
     >
-      Securely send some of your coins
+      Securely send your coins
     </p>
     <div
       class="container"
@@ -155,10 +155,10 @@ exports[`SendToken should render 1`] = `
         </div>
       </section>
       <a
-        aria-label="Add identity"
+        aria-label="Add Identity"
         class="left"
         href="/"
-        title="Add identity"
+        title="Add Identity"
       />
       <a
         aria-label="My Second Identity"
@@ -207,10 +207,10 @@ exports[`SendToken should render 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="Add identity"
+            aria-label="Add Identity"
             class="add addActive"
             href="/"
-            title="Add identity"
+            title="Add Identity"
           />
         </li>
       </ul>
@@ -225,7 +225,7 @@ exports[`SendToken should render 1`] = `
         1.2340
          
         <span
-          aria-label="Kilt coin"
+          aria-label="KILT Coin"
           class="coin"
         />
       </span>
@@ -252,7 +252,7 @@ exports[`SendToken should render 1`] = `
         class="all"
         type="button"
       >
-        All in
+        Send All
       </button>
       <output
         class="amountError"
@@ -293,11 +293,11 @@ exports[`SendToken should render 1`] = `
       class="recipientLine"
     >
       <input
-        aria-label="Paste the recipient address here"
+        aria-label="Paste the recipient’s public address here"
         class="recipientWithButton"
         id="recipient"
         name="recipient"
-        placeholder="Paste the recipient address here"
+        placeholder="Paste the recipient’s public address here"
         required=""
       />
       <button
@@ -336,18 +336,18 @@ exports[`SendToken should render 1`] = `
     <p
       class="stats"
     >
-      You have 3 identities with a total
+      You have 3 Identities with a
       <span
         class="balance"
       >
-         Balance: 
+         Total Balance: 
         <span
           class="amount"
         >
           3.7020
            
           <span
-            aria-label="Kilt coin"
+            aria-label="KILT Coin"
             class="coin"
           />
         </span>

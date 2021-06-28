@@ -13,7 +13,7 @@ exports[`RemoveIdentity should render 1`] = `
     <p
       class="subline"
     >
-      You’re about to remove your identity
+      You’re about to remove your Identity
     </p>
     <div
       class="avatar"
@@ -35,7 +35,7 @@ exports[`RemoveIdentity should render 1`] = `
         1.2340
          
         <span
-          aria-label="Kilt coin"
+          aria-label="KILT Coin"
           class="coin"
         />
       </span>
@@ -43,7 +43,7 @@ exports[`RemoveIdentity should render 1`] = `
     <small
       class="addressLabel"
     >
-      My identity address
+      My Identity address
     </small>
     <p
       class="address"
@@ -53,7 +53,7 @@ exports[`RemoveIdentity should render 1`] = `
     <p
       class="explanation"
     >
-      The next step will remove your identity from the browser extension. This will not delete your identity. You can add it again any time by importing your backup phrase.
+      The next step will remove your Identity from the browser extension. This will not delete your Identity. You can add it again any time by importing your backup phrase.
     </p>
     <p
       class="buttonsLine"
@@ -68,7 +68,7 @@ exports[`RemoveIdentity should render 1`] = `
         class="remove"
         type="button"
       >
-        Forget this identity
+        Remove this Identity
       </button>
     </p>
     <button
@@ -80,18 +80,18 @@ exports[`RemoveIdentity should render 1`] = `
     <p
       class="stats"
     >
-      You have 3 identities with a total
+      You have 3 Identities with a
       <span
         class="balance"
       >
-         Balance: 
+         Total Balance: 
         <span
           class="amount"
         >
           3.7020
            
           <span
-            aria-label="Kilt coin"
+            aria-label="KILT Coin"
             class="coin"
           />
         </span>

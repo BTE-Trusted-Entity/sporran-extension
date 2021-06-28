@@ -35,7 +35,7 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
             role="menuitem"
             tabindex="-1"
           >
-            Forget current identity
+            Forget Current Identity
           </a>
         </li>
         <li
@@ -46,7 +46,7 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
             role="menuitem"
             tabindex="-1"
           >
-            Reset password for current identity
+            Reset Password for Current Identity
           </a>
         </li>
         <li
@@ -57,7 +57,7 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
             disabled=""
             type="button"
           >
-            Require password for future transactions
+            Require Password for Future Transactions
           </button>
         </li>
         <li
@@ -81,7 +81,7 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
             role="menuitem"
             tabindex="-1"
           >
-            Toggle website access
+            Toggle Website Access
           </a>
         </li>
         <li
@@ -167,7 +167,7 @@ exports[`Settings should render the endpoint item in the internal build 1`] = `
             role="menuitem"
             tabindex="-1"
           >
-            Toggle website access
+            Toggle Website Access
           </a>
         </li>
         <li
@@ -178,7 +178,7 @@ exports[`Settings should render the endpoint item in the internal build 1`] = `
             role="menuitem"
             tabindex="-1"
           >
-            Custom endpoint
+            Custom Endpoint
           </a>
         </li>
         <li

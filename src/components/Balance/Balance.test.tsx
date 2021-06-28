@@ -10,7 +10,7 @@ describe('Balance', () => {
   it('should render', async () => {
     const { container } = render(<Balance address={mockAddress} />);
 
-    await screen.findByLabelText('Kilt coin');
+    await screen.findByLabelText('KILT Coin');
 
     expect(container).toMatchSnapshot();
   });

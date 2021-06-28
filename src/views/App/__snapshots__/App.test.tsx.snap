@@ -34,8 +34,8 @@ exports[`App should render 1`] = `
       <h3
         class="info"
       >
-        You currently don’t have any identities.
-Create your first identity to get started.
+        You currently don’t have any Identities.
+Add your first Identity to get started.
       </h3>
       <p
         class="termsLine"
@@ -56,7 +56,7 @@ Create your first identity to get started.
           rel="noreferrer"
           target="_blank"
         >
-          terms of use
+          Terms & Conditions
         </a>
       </p>
       <a
@@ -71,7 +71,7 @@ Create your first identity to get started.
         class="import"
         href="/identity/import"
       >
-        Import an identity from pre-existing phrase
+        Import an Identity from pre-existing phrase
       </a>
     </div>
   </div>

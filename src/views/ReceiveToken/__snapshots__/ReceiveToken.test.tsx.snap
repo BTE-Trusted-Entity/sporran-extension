@@ -13,7 +13,7 @@ exports[`ReceiveToken should render a normal identity 1`] = `
     <p
       class="subline"
     >
-      Copy and send your address
+      Copy and send your public address
     </p>
     <div
       class="container"
@@ -35,10 +35,10 @@ exports[`ReceiveToken should render a normal identity 1`] = `
         </div>
       </section>
       <a
-        aria-label="Add identity"
+        aria-label="Add Identity"
         class="left"
         href="/identity/NEW/receive"
-        title="Add identity"
+        title="Add Identity"
       />
       <a
         aria-label="My Second Identity"
@@ -84,10 +84,10 @@ exports[`ReceiveToken should render a normal identity 1`] = `
           class="item"
         >
           <a
-            aria-label="Add identity"
+            aria-label="Add Identity"
             class="add"
             href="/identity/NEW/receive"
-            title="Add identity"
+            title="Add Identity"
           />
         </li>
       </ul>
@@ -95,9 +95,7 @@ exports[`ReceiveToken should render a normal identity 1`] = `
     <small
       class="small"
       id="addressLabel"
-    >
-      Identity Address
-    </small>
+    />
     <p
       class="addressLine"
     >
@@ -187,18 +185,18 @@ exports[`ReceiveToken should render a normal identity 1`] = `
     <p
       class="stats"
     >
-      You have 3 identities with a total
+      You have 3 Identities with a
       <span
         class="balance"
       >
-         Balance: 
+         Total Balance: 
         <span
           class="amount"
         >
           3.7020
            
           <span
-            aria-label="Kilt coin"
+            aria-label="KILT Coin"
             class="coin"
           />
         </span>
@@ -223,7 +221,7 @@ exports[`ReceiveToken should render the new identity 1`] = `
       <p
         class="info"
       >
-        You have 3 identities
+        You have 3 Identities
       </p>
     </header>
     <div
@@ -231,10 +229,10 @@ exports[`ReceiveToken should render the new identity 1`] = `
     >
       <section>
         <a
-          aria-label="Add identity"
+          aria-label="Add Identity"
           class="add"
           href="/identity/add"
-          title="Add identity"
+          title="Add Identity"
         />
       </section>
       <a
@@ -287,10 +285,10 @@ exports[`ReceiveToken should render the new identity 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="Add identity"
+            aria-label="Add Identity"
             class="add addActive"
             href="/identity/NEW/receive"
-            title="Add identity"
+            title="Add Identity"
           />
         </li>
       </ul>
@@ -299,23 +297,23 @@ exports[`ReceiveToken should render the new identity 1`] = `
       class="add"
       href="/identity/add"
     >
-      Add identity
+      Add Identity
     </a>
     <p
       class="stats"
     >
-      You have 3 identities with a total
+      You have 3 Identities with a
       <span
         class="balance"
       >
-         Balance: 
+         Total Balance: 
         <span
           class="amount"
         >
           3.7020
            
           <span
-            aria-label="Kilt coin"
+            aria-label="KILT Coin"
             class="coin"
           />
         </span>

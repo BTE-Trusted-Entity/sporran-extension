@@ -13,7 +13,7 @@ exports[`ExternalAccess should render 1`] = `
     <p
       class="subline"
     >
-      Control which websites have access to names and addresses of your identities
+      Control which websites can access your Identity names and addresses
     </p>
     <small
       class="small"
@@ -53,7 +53,7 @@ exports[`ExternalAccess should render 1`] = `
       class="back"
       href="/"
     >
-      Back to my identities
+      Back to my Identities
     </a>
     <button
       aria-label="Back"
@@ -64,18 +64,18 @@ exports[`ExternalAccess should render 1`] = `
     <p
       class="stats"
     >
-      You have 3 identities with a total
+      You have 3 Identities with a
       <span
         class="balance"
       >
-         Balance: 
+         Total Balance: 
         <span
           class="amount"
         >
           3.7020
            
           <span
-            aria-label="Kilt coin"
+            aria-label="KILT Coin"
             class="coin"
           />
         </span>

@@ -73,7 +73,7 @@ describe('SendToken', () => {
 
     userEvent.type(await screen.findByLabelText('Amount to send'), '1');
     userEvent.type(
-      await screen.findByLabelText('Paste the recipient address here'),
+      await screen.findByLabelText('Paste the recipient’s public address here'),
       address,
     );
     userEvent.click(await screen.findByLabelText('Increase the tip by 1%'));
@@ -99,7 +99,7 @@ describe('SendToken', () => {
 
     userEvent.type(await screen.findByLabelText('Amount to send'), '1.1');
     userEvent.type(
-      await screen.findByLabelText('Paste the recipient address here'),
+      await screen.findByLabelText('Paste the recipient’s public address here'),
       recipientAddress,
     );
 
@@ -194,13 +194,13 @@ describe('SendToken', () => {
     render(<SendToken identity={identity} onSuccess={jest.fn()} />);
 
     userEvent.type(
-      await screen.findByLabelText('Paste the recipient address here'),
+      await screen.findByLabelText('Paste the recipient’s public address here'),
       'My grampa’s cottage',
     );
 
     expect(
       await screen.findByText(
-        'The recipient address is not properly formatted',
+        'The public address is invalid. Please check it again.',
       ),
     ).toBeInTheDocument();
   });
@@ -209,13 +209,13 @@ describe('SendToken', () => {
     render(<SendToken identity={identity} onSuccess={jest.fn()} />);
 
     userEvent.type(
-      await screen.findByLabelText('Paste the recipient address here'),
+      await screen.findByLabelText('Paste the recipient’s public address here'),
       identity.address,
     );
 
     expect(
       await screen.findByText(
-        'The recipient address is the same as identity address',
+        'The recipient address is the same as Identity address',
       ),
     ).toBeInTheDocument();
   });
