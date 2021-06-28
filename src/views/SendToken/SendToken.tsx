@@ -74,7 +74,7 @@ function parseWithSeparators(
 }
 
 function parseFloatLocale(value: string): number {
-  if (nonNumberCharacters.test(value)) {
+  if (value.match(nonNumberCharacters)) {
     return NaN;
   }
 
