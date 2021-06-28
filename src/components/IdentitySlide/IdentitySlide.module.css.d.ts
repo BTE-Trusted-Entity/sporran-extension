@@ -1,14 +1,12 @@
 declare namespace IdentitySlideModuleCssNamespace {
   export interface IIdentitySlideModuleCss {
+    add: string;
     cancel: string;
     centeredNameLine: string;
-    create: string;
     form: string;
-    import: string;
     input: string;
     name: string;
     nameLine: string;
-    new: string;
     save: string;
   }
 }

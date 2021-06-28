@@ -35,8 +35,8 @@ export function IdentityOverviewNew(): JSX.Element | null {
 
       <IdentitiesCarousel path={path} identity={NEW} />
 
-      <Link to={paths.identity.import.start} className={styles.import}>
-        {t('component_IdentitySlideNew_import')}
+      <Link to={paths.identity.add} className={styles.add}>
+        {t('view_IdentityOverview_add')}
       </Link>
 
       <Stats />

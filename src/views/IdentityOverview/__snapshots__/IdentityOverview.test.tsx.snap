@@ -51,10 +51,10 @@ exports[`IdentityOverview should render a normal identity 1`] = `
         </div>
       </section>
       <a
-        aria-label="Create new identity"
+        aria-label="Add identity"
         class="left"
         href="/identity/NEW"
-        title="Create new identity"
+        title="Add identity"
       />
       <a
         aria-label="My Second Identity"
@@ -100,10 +100,10 @@ exports[`IdentityOverview should render a normal identity 1`] = `
           class="item"
         >
           <a
-            aria-label="Create new identity"
+            aria-label="Add identity"
             class="add"
             href="/identity/NEW"
-            title="Create new identity"
+            title="Add identity"
           />
         </li>
       </ul>
@@ -190,16 +190,11 @@ exports[`IdentityOverview should render the new identity 1`] = `
     >
       <section>
         <a
-          aria-label="Create new identity"
-          class="create"
-          href="/identity/create"
-          title="Create new identity"
+          aria-label="Add identity"
+          class="add"
+          href="/identity/add"
+          title="Add identity"
         />
-        <p
-          class="new"
-        >
-          Create new identity
-        </p>
       </section>
       <a
         aria-label="My Third Identity which has a very long name and might not even fit on the screen"
@@ -251,19 +246,19 @@ exports[`IdentityOverview should render the new identity 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="Create new identity"
+            aria-label="Add identity"
             class="add addActive"
             href="/identity/NEW"
-            title="Create new identity"
+            title="Add identity"
           />
         </li>
       </ul>
     </div>
     <a
-      class="import"
-      href="/identity/import"
+      class="add"
+      href="/identity/add"
     >
-      Import an identity from pre-existing phrase
+      Add identity
     </a>
     <p
       class="stats"
@@ -341,10 +336,10 @@ exports[`IdentityOverview should render upcoming feature modal 1`] = `
         </div>
       </section>
       <a
-        aria-label="Create new identity"
+        aria-label="Add identity"
         class="left"
         href="/identity/NEW"
-        title="Create new identity"
+        title="Add identity"
       />
       <a
         aria-label="My Second Identity"
@@ -390,10 +385,10 @@ exports[`IdentityOverview should render upcoming feature modal 1`] = `
           class="item"
         >
           <a
-            aria-label="Create new identity"
+            aria-label="Add identity"
             class="add"
             href="/identity/NEW"
-            title="Create new identity"
+            title="Add identity"
           />
         </li>
       </ul>
@@ -524,10 +519,10 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
         </div>
       </section>
       <a
-        aria-label="Create new identity"
+        aria-label="Add identity"
         class="left"
         href="/identity/NEW"
-        title="Create new identity"
+        title="Add identity"
       />
       <a
         aria-label="My Second Identity"
@@ -573,10 +568,10 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
           class="item"
         >
           <a
-            aria-label="Create new identity"
+            aria-label="Add identity"
             class="add"
             href="/identity/NEW"
-            title="Create new identity"
+            title="Add identity"
           />
         </li>
       </ul>
