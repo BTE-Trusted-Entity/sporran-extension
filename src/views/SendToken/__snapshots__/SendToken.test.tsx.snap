@@ -22,16 +22,11 @@ exports[`SendToken should not render for new identity 1`] = `
     >
       <section>
         <a
-          aria-label="Create new identity"
-          class="create"
-          href="/identity/create"
-          title="Create new identity"
+          aria-label="Add identity"
+          class="add"
+          href="/identity/add"
+          title="Add identity"
         />
-        <p
-          class="new"
-        >
-          Create new identity
-        </p>
       </section>
       <a
         aria-label="My Third Identity which has a very long name and might not even fit on the screen"
@@ -86,19 +81,19 @@ exports[`SendToken should not render for new identity 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="Create new identity"
+            aria-label="Add identity"
             class="add addActive"
             href="/"
-            title="Create new identity"
+            title="Add identity"
           />
         </li>
       </ul>
     </div>
     <a
-      class="import"
-      href="/identity/import"
+      class="add"
+      href="/identity/add"
     >
-      Import an identity from pre-existing phrase
+      Add identity
     </a>
     <p
       class="stats"
@@ -160,10 +155,10 @@ exports[`SendToken should render 1`] = `
         </div>
       </section>
       <a
-        aria-label="Create new identity"
+        aria-label="Add identity"
         class="left"
         href="/"
-        title="Create new identity"
+        title="Add identity"
       />
       <a
         aria-label="My Second Identity"
@@ -212,10 +207,10 @@ exports[`SendToken should render 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="Create new identity"
+            aria-label="Add identity"
             class="add addActive"
             href="/"
-            title="Create new identity"
+            title="Add identity"
           />
         </li>
       </ul>

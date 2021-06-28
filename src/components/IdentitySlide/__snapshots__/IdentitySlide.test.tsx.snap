@@ -39,16 +39,11 @@ exports[`IdentitySlideNew should render 1`] = `
 <div>
   <section>
     <a
-      aria-label="Create new identity"
-      class="create"
-      href="/identity/create"
-      title="Create new identity"
+      aria-label="Add identity"
+      class="add"
+      href="/identity/add"
+      title="Add identity"
     />
-    <p
-      class="new"
-    >
-      Create new identity
-    </p>
   </section>
 </div>
 `;

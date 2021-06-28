@@ -51,19 +51,16 @@
     "message": "Identity name:"
   },
   "component_IdentitiesCarousel_title_new": {
-    "message": "Create new identity"
+    "message": "Add identity"
   },
   "component_IdentityLink_title_new": {
-    "message": "Create new identity"
+    "message": "Add identity"
   },
   "component_IdentitySlideNew_title": {
-    "message": "Create new identity"
+    "message": "Add identity"
   },
   "component_IdentitySlideNew_or": {
     "message": "or"
-  },
-  "component_IdentitySlideNew_import": {
-    "message": "Import an identity from pre-existing phrase"
   },
   "component_Stats_identity_one": {
     "message": "You have $number$ identity with a total",
@@ -377,6 +374,9 @@
   },
   "view_IdentityOverview_credentials": {
     "message": "Show Credentials"
+  },
+  "view_IdentityOverview_add": {
+    "message": "Add identity"
   },
   "view_RemoveIdentity_heading": {
     "message": "Attention!"
