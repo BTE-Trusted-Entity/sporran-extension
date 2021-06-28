@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@kiltprotocol/core": "^0.21.0",
-    "@polkadot/extension-inject": "^0.38.6",
+    "@polkadot/extension-inject": "^0.38.7",
     "@polkadot/ui-shared": "^0.81.1",
     "bn.js": "^5.2.0",
     "classnames": "^2.3.1",
