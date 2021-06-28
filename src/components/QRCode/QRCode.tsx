@@ -15,7 +15,7 @@ export function QRCode({
     <span className={className}>
       <Code
         className={styles.code}
-        value={`did:kilt:${address}`}
+        value={address}
         level="H"
         renderAs="svg"
         fgColor="#8c145a"
