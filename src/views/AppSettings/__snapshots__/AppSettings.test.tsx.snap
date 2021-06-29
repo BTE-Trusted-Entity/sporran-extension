@@ -39,9 +39,6 @@ Just start it again to continue.
         <option
           value="wss://full-nodes-lb.devnet.kilt.io:443"
         />
-        <option
-          value="wss://kilt-peregrine-k8s.kilt.io"
-        />
       </datalist>
       <input
         aria-label="Custom endpoint"
