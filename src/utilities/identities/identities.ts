@@ -103,8 +103,7 @@ export async function createIdentity(
 
   const index = 1 + largestIndex;
 
-  const name =
-    index === 1 ? 'My Sporran Identity' : `My Sporran Identity ${index}`;
+  const name = `KILT Identity ${index}`;
 
   const identity = { name, address, index };
   await saveIdentity(identity);
