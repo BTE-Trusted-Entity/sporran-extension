@@ -43,14 +43,17 @@
 
 .buttonTertiary {
   composes: buttonPrimary;
+  box-sizing: border-box;
+  border: 2px solid var(--color-dark);
+  background: var(--input-gradient);
   line-height: 2rem;
-  border: 2px solid rgba(140, 20, 90, 0.75);
-  background: linear-gradient(140deg, #4f405c12 0%, #8c145a62 100%);
-  box-shadow: none;
 }
 
-.buttonTertiary:disabled {
-  border: 2px solid rgba(79, 64, 92, 0.5);
+.buttonTertiary:disabled,
+.buttonTertiary[aria-disabled=true] {
+  opacity: 0.3;
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark);
 }
 
 .buttonIcon {
