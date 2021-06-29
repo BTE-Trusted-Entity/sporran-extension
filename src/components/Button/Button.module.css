@@ -41,6 +41,21 @@
   color: var(--color-grey-medium);
 }
 
+.buttonTertiary {
+  composes: buttonPrimary;
+  box-sizing: border-box;
+  border: 2px solid var(--color-dark);
+  background: var(--input-gradient);
+  line-height: 2rem;
+}
+
+.buttonTertiary:disabled,
+.buttonTertiary[aria-disabled=true] {
+  opacity: 0.3;
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark);
+}
+
 .buttonIcon {
   border: 0;
   padding: 0;

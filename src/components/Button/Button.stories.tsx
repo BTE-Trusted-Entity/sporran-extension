@@ -39,6 +39,22 @@ export function ButtonSecondaryDisabled(): JSX.Element {
   );
 }
 
+export function ButtonTertiary(): JSX.Element {
+  return (
+    <button className={styles.buttonTertiary} type="button">
+      Update Balance
+    </button>
+  );
+}
+
+export function ButtonTertiaryDisabled(): JSX.Element {
+  return (
+    <button className={styles.buttonTertiary} type="button" disabled>
+      Update Balance
+    </button>
+  );
+}
+
 export function ButtonIcon(): JSX.Element {
   return <button className={storiesStyles.icon} type="button" />;
 }

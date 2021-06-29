@@ -6,10 +6,10 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import styles from './ExistentialWarning.module.css';
 
 interface Props {
-  path: string;
+  nextPath: string;
 }
 
-export function ExistentialWarning({ path }: Props): JSX.Element {
+export function ExistentialWarning({ nextPath }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { goBack } = useHistory();
 
@@ -24,7 +24,7 @@ export function ExistentialWarning({ path }: Props): JSX.Element {
       <p className={styles.warning}>{t('view_ExistentialWarning_warning')}</p>
 
       <p className={styles.buttonsLine}>
-        <Link className={styles.confirm} to={path}>
+        <Link className={styles.confirm} to={nextPath}>
           {t('view_ExistentialWarning_confirm')}
         </Link>
         <button className={styles.cancel} onClick={goBack}>

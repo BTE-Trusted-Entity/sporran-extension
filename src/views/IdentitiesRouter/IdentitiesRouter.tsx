@@ -16,6 +16,7 @@ import { ResetIdentity } from '../ResetIdentity/ResetIdentity';
 import { RemoveIdentity } from '../RemoveIdentity/RemoveIdentity';
 import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
 import { IdentityCredentials } from '../IdentityCredentials/IdentityCredentials';
+import { VestingRouter } from '../VestingRouter/VestingRouter';
 import { paths } from '../paths';
 
 interface Props {
@@ -58,6 +59,10 @@ export function SpecificIdentityRouter({ identities }: Props): JSX.Element {
 
         <Route path={paths.identity.reset.start}>
           <ResetIdentity identity={identity} />
+        </Route>
+
+        <Route path={paths.identity.vest.base}>
+          <VestingRouter identity={identity} />
         </Route>
 
         <Route path={paths.identity.overview}>
