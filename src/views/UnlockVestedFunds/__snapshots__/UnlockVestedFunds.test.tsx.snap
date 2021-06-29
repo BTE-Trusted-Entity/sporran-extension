@@ -29,7 +29,7 @@ exports[`UnlockVestedFunds should render 1`] = `
     <p
       class="explanation"
     >
-      Your unlocked vesting funds need to be manually released. Sign this transaction which involves a fee to have them available as free balance.
+      Your unlocked vested coins need to be released manually. Sign this transaction to release the coins to your usable balance. A fee is required.
     </p>
     <p
       class="resetLine"
@@ -38,13 +38,13 @@ exports[`UnlockVestedFunds should render 1`] = `
         class="passwordLabel"
         for="password"
       >
-        Sign with Password:
+        Sign with password:
       </label>
       <a
         class="reset"
         href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
       >
-        Reset Password
+        Reset password
       </a>
     </p>
     <p
@@ -96,6 +96,10 @@ exports[`UnlockVestedFunds should render 1`] = `
       >
         Update Balance
       </button>
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
     </p>
     <button
       aria-label="Back"

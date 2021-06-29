@@ -8,13 +8,6 @@ declare namespace UnlockVestedFundsModuleCssNamespace {
     explanation: string;
     heading: string;
     name: string;
-    password: string;
-    passwordLabel: string;
-    passwordLine: string;
-    remember: string;
-    rememberLabel: string;
-    reset: string;
-    resetLine: string;
     subline: string;
     submit: string;
   }

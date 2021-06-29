@@ -13,7 +13,7 @@ exports[`ExistentialWarning should render with link to sign transfer screen 1`] 
     <p
       class="subline"
     >
-      Your identity's remaining balance will be set to zero
+      Your identity’s remaining balance will be set to zero
     </p>
     <p
       class="warning"

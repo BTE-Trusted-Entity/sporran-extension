@@ -1,25 +1,22 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useHistory } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
-import { decryptIdentity } from '../../utilities/identities/identities';
 import { paths, generatePath } from '../paths';
 
-import {
-  getPasswordChannel,
-  savePasswordChannel,
-  forgetPasswordChannel,
-} from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
 import {
   vestChannel,
   insufficientFunds,
 } from '../../channels/VestingChannels/VestingChannels';
 
 import { Avatar } from '../../components/Avatar/Avatar';
-import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
+import {
+  PasswordField,
+  usePasswordField,
+} from '../../components/PasswordField/PasswordField';
 
 import styles from './UnlockVestedFunds.module.css';
 
@@ -32,29 +29,9 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
 
   const history = useHistory();
 
-  const { passwordType, passwordToggle } = usePasswordType();
-
-  const [savedPassword, setSavedPassword] = useState<string | undefined>();
-
   const [error, setError] = useState<string | null>(null);
 
-  const [remember, setRemember] = useState(false);
-
-  const toggleRemember = useCallback(() => {
-    setRemember(!remember);
-  }, [remember]);
-
-  const handlePasswordInput = useCallback(() => {
-    setError(null);
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const password = await getPasswordChannel.get(identity.address);
-      setSavedPassword(password);
-      setRemember(Boolean(password));
-    })();
-  }, [identity]);
+  const passwordField = usePasswordField();
 
   const handleSubmit = useCallback(
     async (event) => {
@@ -62,36 +39,20 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
 
       const { address } = identity;
 
-      const { elements } = event.target;
-      const providedPassword = elements.password.value;
-      const password =
-        providedPassword === '************' && savedPassword
-          ? savedPassword
-          : providedPassword;
-
       try {
-        await decryptIdentity(address, password);
-
-        if (remember) {
-          await savePasswordChannel.get({ password, address });
-        } else {
-          await forgetPasswordChannel.get(address);
-        }
+        const password = await passwordField.get(event);
 
         await vestChannel.get({ address, password });
 
         history.push(generatePath(paths.identity.overview, { address }));
       } catch (error) {
         console.error(error);
-        if (error.name === 'OperationError') {
-          setError(t('view_UnlockVestedFunds_password_incorrect'));
-        }
         if (error.message === insufficientFunds) {
           setError(t('view_UnlockVestedFunds_insufficient_funds'));
         }
       }
     },
-    [t, identity, savedPassword, remember, history],
+    [t, identity, history, passwordField],
   );
 
   return (
@@ -110,49 +71,7 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
         {t('view_UnlockVestedFunds_explanation')}
       </p>
 
-      <p className={styles.resetLine}>
-        <label className={styles.passwordLabel} htmlFor="password">
-          {t('view_UnlockVestedFunds_password')}
-        </label>
-
-        <Link
-          to={generatePath(paths.identity.reset.start, {
-            address: identity.address,
-          })}
-          className={styles.reset}
-        >
-          {t('view_UnlockVestedFunds_reset')}
-        </Link>
-      </p>
-
-      <p className={styles.passwordLine}>
-        <input
-          type={passwordType}
-          onInput={handlePasswordInput}
-          id="password"
-          name="password"
-          className={styles.password}
-          defaultValue={savedPassword ? '************' : undefined}
-          autoFocus
-        />
-        {passwordToggle}
-
-        <output className={styles.errorTooltip} hidden={!error}>
-          {error}
-        </output>
-      </p>
-
-      <label className={styles.rememberLabel}>
-        <span>{t('view_UnlockVestedFunds_remember')}</span>
-        <input
-          type="checkbox"
-          name="remember"
-          className={styles.remember}
-          checked={remember}
-          onChange={toggleRemember}
-        />
-        <span />
-      </label>
+      <PasswordField identity={identity} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
         <Link to={paths.home} className={styles.cancel}>
@@ -161,6 +80,9 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
         <button type="submit" className={styles.submit}>
           {t('view_UnlockVestedFunds_CTA')}
         </button>
+        <output className={styles.errorTooltip} hidden={!error}>
+          {error}
+        </output>
       </p>
 
       <LinkBack />

@@ -241,7 +241,7 @@
     "message": "Please write down your wallet’s phrase and keep it in a safe place. We recommend that you write down your backup phrase with pen and paper. The phrase must be used to restore your wallet."
   },
   "view_Warning_emphasis_again": {
-    "message": "Keep it safe, so you don't lose\nyour assets"
+    "message": "Keep it safe, so you don’t lose\nyour assets"
   },
   "view_Warning_CTA": {
     "message": "I understand this – go to the Phrase"
@@ -681,7 +681,7 @@
     "message": "Attention"
   },
   "view_ExistentialWarning_subline": {
-    "message": "Your identity's remaining balance will be set to zero"
+    "message": "Your identity’s remaining balance will be set to zero"
   },
   "view_ExistentialWarning_warning": {
     "message": "This transaction would leave your balance below the existential deposit. Therefore the balance of your identity will be set to zero. The rest of your balance will be added as a tip. Confirm to proceed with this transaction anyway."
@@ -699,22 +699,10 @@
     "message": "Update transaction for releasing unlocked coins"
   },
   "view_UnlockVestedFunds_explanation": {
-    "message": "Your unlocked vesting funds need to be manually released. Sign this transaction which involves a fee to have them available as free balance."
-  },
-  "view_UnlockVestedFunds_reset": {
-    "message": "Reset Password"
-  },
-  "view_UnlockVestedFunds_password": {
-    "message": "Sign with Password:"
-  },
-  "view_UnlockVestedFunds_remember": {
-    "message": "Remember my password for the next 15 minutes"
-  },
-  "view_UnlockVestedFunds_password_incorrect": {
-    "message": "The password is incorrect"
+    "message": "Your unlocked vested coins need to be released manually. Sign this transaction to release the coins to your usable balance. A fee is required."
   },
   "view_UnlockVestedFunds_insufficient_funds": {
-    "message": "You don't have enough free balance to make this transaction"
+    "message": "You don’t have enough free balance to make this transaction"
   },
   "view_UnlockVestedFunds_CTA": {
     "message": "Update Balance"
