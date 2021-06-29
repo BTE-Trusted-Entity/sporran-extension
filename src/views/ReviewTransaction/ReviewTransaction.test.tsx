@@ -15,7 +15,6 @@ describe('ReviewTransaction', () => {
         amount={new BN((120e15).toString())}
         fee={new BN(1.25e7)}
         tip={new BN(0.01e15)}
-        onSuccess={jest.fn()}
       />,
     );
     expect(container).toMatchSnapshot();

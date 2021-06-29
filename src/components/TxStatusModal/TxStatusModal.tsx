@@ -12,15 +12,28 @@ import styles from './TxStatusModal.module.css';
 interface Props {
   identity: Identity;
   status: 'pending' | 'success' | 'error';
+  txHash?: string;
   onDismissError: () => void;
 }
 
 export function TxStatusModal({
   identity,
   status,
+  txHash,
   onDismissError,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
+
+  const subscanLink = txHash && (
+    <a
+      className={styles.subscan}
+      href={`https://kilt-testnet.subscan.io/extrinsic/${txHash}`}
+      target="_blank"
+      rel="noreferrer"
+    >
+      {t('component_TxStatusModal_subscan')}
+    </a>
+  );
 
   const modals = {
     pending: (
@@ -37,6 +50,7 @@ export function TxStatusModal({
         >
           {t('common_action_confirm')}
         </Link>
+        {subscanLink}
       </Modal>
     ),
     success: (
@@ -55,6 +69,7 @@ export function TxStatusModal({
         >
           {t('common_action_confirm')}
         </Link>
+        {subscanLink}
       </Modal>
     ),
     error: (
@@ -66,6 +81,7 @@ export function TxStatusModal({
         <button className={styles.confirm} onClick={onDismissError}>
           {t('common_action_confirm')}
         </button>
+        {subscanLink}
       </Modal>
     ),
   };

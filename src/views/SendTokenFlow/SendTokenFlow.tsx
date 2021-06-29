@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import BN from 'bn.js';
 
-import { transferChannel } from '../../channels/transferChannel/transferChannel';
 import { Identity } from '../../utilities/identities/types';
 import { ReviewTransaction } from '../ReviewTransaction/ReviewTransaction';
 import { SendToken } from '../SendToken/SendToken';
@@ -38,23 +37,6 @@ export function SendTokenFlow({ identity }: Props): JSX.Element {
     [address, history],
   );
 
-  const handleReviewTransactionSuccess = useCallback(
-    async ({ password }) => {
-      if (!amount || !tip || !recipient) {
-        throw new Error('Missing transaction details');
-      }
-
-      await transferChannel.get({
-        address,
-        recipient,
-        amount,
-        tip,
-        password,
-      });
-    },
-    [address, amount, recipient, tip],
-  );
-
   return (
     <Switch>
       <Route path={paths.identity.send.warning}>
@@ -71,7 +53,6 @@ export function SendTokenFlow({ identity }: Props): JSX.Element {
             amount={amount}
             fee={fee}
             tip={tip}
-            onSuccess={handleReviewTransactionSuccess}
           />
         ) : (
           <Redirect to={generatePath(paths.identity.send.start, { address })} />

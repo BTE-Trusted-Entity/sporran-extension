@@ -3,6 +3,11 @@ import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import {
+  signTransferChannel,
+  submitTransferChannel,
+} from '../../channels/transferChannels/transferChannels';
+
 import { Identity } from '../../utilities/identities/types';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
@@ -23,7 +28,6 @@ interface Props {
   amount: BN;
   fee: BN;
   tip: BN;
-  onSuccess: (values: { password: string }) => void;
 }
 
 export function ReviewTransaction({
@@ -32,7 +36,6 @@ export function ReviewTransaction({
   amount,
   fee,
   tip,
-  onSuccess,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -54,6 +57,8 @@ export function ReviewTransaction({
     'pending' | 'success' | 'error' | null
   >(null);
 
+  const [txHash, setTxHash] = useState<string>();
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
@@ -62,10 +67,20 @@ export function ReviewTransaction({
 
       try {
         const password = await passwordField.get(event);
+        const { address } = identity;
 
         setTxStatus('pending');
 
-        await onSuccess({ password });
+        const { hash } = await signTransferChannel.get({
+          address,
+          recipient,
+          amount,
+          tip,
+          password,
+        });
+        setTxHash(hash);
+
+        await submitTransferChannel.get(hash);
 
         setTxStatus('success');
       } catch (error) {
@@ -73,7 +88,7 @@ export function ReviewTransaction({
         setSubmitting(false);
       }
     },
-    [onSuccess, passwordField],
+    [passwordField, amount, identity, recipient, tip],
   );
 
   const totalFee = fee.add(tip);
@@ -172,6 +187,7 @@ export function ReviewTransaction({
         <TxStatusModal
           identity={identity}
           status={txStatus}
+          txHash={txHash}
           onDismissError={closeModal}
         />
       )}

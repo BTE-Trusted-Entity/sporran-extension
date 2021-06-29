@@ -122,6 +122,15 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       )}
 
+      <a
+        className={styles.subscan}
+        href={`https://kilt-testnet.subscan.io/account/${identity.address}?tab=transfer`}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {t('view_IdentityOverview_subscan')}
+      </a>
+
       <Stats />
 
       {hasSuccessOverlay && type && (
