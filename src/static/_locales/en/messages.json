@@ -292,7 +292,7 @@
     "message": "You need a secure password for every Identity. A strong password looks like this: "
   },
   "view_CreatePassword_example": {
-    "message": "House12!smallDOGS"
+    "message": "House 12! small DOGS"
   },
   "view_CreatePassword_criteria": {
     "message": "You need to use:"
