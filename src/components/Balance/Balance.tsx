@@ -3,11 +3,13 @@ import BN from 'bn.js';
 import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
 
+import { KiltAmount } from '../KiltAmount/KiltAmount';
+import { BalanceUpdateLink } from '../BalanceUpdateLink/BalanceUpdateLink';
+
 import {
   balanceChangeChannel,
   BalanceChangeOutput,
 } from '../../channels/balanceChangeChannel/balanceChangeChannel';
-import { KiltAmount } from '../KiltAmount/KiltAmount';
 
 import styles from './Balance.module.css';
 
@@ -52,7 +54,7 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
 
   const [showBreakdown, setShowBreakdown] = useState(false);
 
-  const handleShowBreakdownClick = useCallback(() => {
+  const handleShowBreakdownClick = useCallback(async () => {
     setShowBreakdown(true);
   }, []);
 
@@ -89,20 +91,23 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
           ))}
       </p>
       {showBreakdown && balance !== null && (
-        <ul className={styles.breakdown}>
-          <li className={styles.balance}>
-            {t('component_Balance_free')}
-            <KiltAmount amount={balance.free} type="funds" />
-          </li>
-          <li className={styles.balance}>
-            {t('component_Balance_locked')}
-            <KiltAmount amount={balance.locked} type="funds" />
-          </li>
-          <li className={styles.balance}>
-            {t('component_Balance_bonded')}
-            <KiltAmount amount={balance.bonded} type="funds" />
-          </li>
-        </ul>
+        <>
+          <ul className={styles.breakdown}>
+            <li className={styles.balance}>
+              {t('component_Balance_free')}
+              <KiltAmount amount={balance.free} type="funds" />
+            </li>
+            <li className={styles.balance}>
+              {t('component_Balance_locked')}
+              <KiltAmount amount={balance.locked} type="funds" />
+            </li>
+            <li className={styles.balance}>
+              {t('component_Balance_bonded')}
+              <KiltAmount amount={balance.bonded} type="funds" />
+            </li>
+          </ul>
+          <BalanceUpdateLink address={address} />
+        </>
       )}
     </>
   );

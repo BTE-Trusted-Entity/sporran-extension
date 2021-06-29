@@ -29,6 +29,12 @@ import { initBackgroundAccessChannel } from './dApps/AccessChannels/browserAcces
 import { initBackgroundExistentialDepositChannel } from './channels/existentialDepositChannel/existentialDepositChannel';
 import { initBackgroundGenesisHashChannel } from './dApps/genesisHashChannel/initBackgroundGenesisHashChannel';
 
+import {
+  initBackgroundHasVestedFundsChannel,
+  initBackgroundVestingFeeChannel,
+  initBackgroundVestChannel,
+} from './channels/VestingChannels/VestingChannels';
+
 function initSavedPasswords() {
   schedulePasswordsCheck();
   initBackgroundSavePasswordChannel();
@@ -56,6 +62,12 @@ function initTransferChannels() {
   initBackgroundSubmitTransferChannel();
 }
 
+function initVestingChannels() {
+  initBackgroundHasVestedFundsChannel();
+  initBackgroundVestingFeeChannel();
+  initBackgroundVestChannel();
+}
+
 function init() {
   initKiltSDK();
   initExtensionPopupMessages();
@@ -67,6 +79,7 @@ function init() {
   initDAppChannels();
   initBackgroundExistentialDepositChannel();
   initBackgroundGenesisHashChannel();
+  initVestingChannels();
 }
 
 init();

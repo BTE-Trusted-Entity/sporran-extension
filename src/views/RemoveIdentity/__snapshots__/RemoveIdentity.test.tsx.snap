@@ -23,7 +23,7 @@ exports[`RemoveIdentity should render 1`] = `
     <p
       class="name"
     >
-      My Sporran Identity
+      KILT Identity 1
     </p>
     <p
       class="balanceLine"

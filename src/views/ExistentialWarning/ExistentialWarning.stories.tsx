@@ -15,7 +15,7 @@ const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 export function Template(): JSX.Element {
   return (
     <ExistentialWarning
-      path={generatePath(paths.identity.send.review, {
+      nextPath={generatePath(paths.identity.send.review, {
         address: identity.address,
       })}
     />

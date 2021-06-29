@@ -45,7 +45,7 @@ Just start it again to continue.
         class="endpoint"
         list="endpoints"
         name="endpoint"
-        pattern="wss://.*"
+        pattern="wss?://.*"
         placeholder="wss://example.org:433"
         required=""
         type="url"
