@@ -72,7 +72,7 @@ export async function vest({ address, password }: VestInput): Promise<void> {
 
   const balance = await getBalances(address);
 
-  if (balance.free.sub(partialFee).isNeg()) {
+  if (balance.free.lt(partialFee)) {
     throw new Error(insufficientFunds);
   }
 
