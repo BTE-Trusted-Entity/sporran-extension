@@ -117,14 +117,15 @@ export class BrowserChannel<
     const wrappedProducer = (
       message: { type: string; input: JsonInput },
       sender: SenderType,
-    ): Promise<Output | ErrorMessage> | void => {
+    ): Promise<JsonOutput | ErrorMessage> | void => {
       if (message.type !== this.input) {
         return;
       }
       return (async () => {
         try {
           const input = this.transform.jsonToInput(message.input);
-          return await producer(input, sender);
+          const output = await producer(input, sender);
+          return this.transform.outputToJson(output);
         } catch (error) {
           return { error: error.message };
         }
