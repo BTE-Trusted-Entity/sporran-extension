@@ -23,7 +23,7 @@ describe('Balance', () => {
     });
     userEvent.click(showBreakdown);
 
-    await screen.findByLabelText('Account has no unlocked funds for update');
+    await screen.findByLabelText('Identity has no unlocked funds for update');
 
     expect(container).toMatchSnapshot();
   });

@@ -14,7 +14,7 @@ export function Active(): JSX.Element {
     <BalanceUpdateLinkTemplate
       address="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       disabled={false}
-      path={paths.account.vest.sign}
+      path={paths.identity.vest.sign}
     />
   );
 }
@@ -24,7 +24,7 @@ export function Disabled(): JSX.Element {
     <BalanceUpdateLinkTemplate
       address="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       disabled={true}
-      path={paths.account.vest.sign}
+      path={paths.identity.vest.sign}
     />
   );
 }

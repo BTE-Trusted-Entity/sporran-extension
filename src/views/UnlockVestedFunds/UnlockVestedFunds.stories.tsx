@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import { accountsMock as accounts } from '../../utilities/accounts/AccountsProvider.mock';
+import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 
 import { UnlockVestedFunds } from './UnlockVestedFunds';
 
@@ -9,8 +9,8 @@ export default {
   component: UnlockVestedFunds,
 } as Meta;
 
-const account = accounts['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 export function Template(): JSX.Element {
-  return <UnlockVestedFunds account={account} />;
+  return <UnlockVestedFunds identity={identity} />;
 }

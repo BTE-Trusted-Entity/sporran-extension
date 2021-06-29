@@ -5,7 +5,7 @@ import {
 import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 
-import { decryptAccount } from '../../utilities/accounts/accounts';
+import { decryptIdentity } from '../../utilities/identities/identities';
 import { originalBalancesMock } from '../balanceChangeChannel/balanceChangeChannel.mock';
 import { getVestingFee, hasVestedFunds, vest } from './VestingChannels';
 
@@ -22,8 +22,8 @@ jest.mock('@kiltprotocol/core/lib/balance/Balance.chain', () => ({
   getBalances: jest.fn(),
 }));
 
-jest.mock('../../utilities/accounts/accounts', () => ({
-  decryptAccount: jest.fn(),
+jest.mock('../../utilities/identities/identities', () => ({
+  decryptIdentity: jest.fn(),
 }));
 
 const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
@@ -89,13 +89,13 @@ describe('VestingChannels', () => {
         identity: true,
       };
 
-      (decryptAccount as jest.Mock).mockReturnValue(identityMock);
+      (decryptIdentity as jest.Mock).mockReturnValue(identityMock);
 
       (getBalances as jest.Mock).mockResolvedValue(originalBalancesMock);
 
       await vest({ address: mockAddress, password: 'password' });
 
-      expect(decryptAccount).toHaveBeenCalledWith(mockAddress, 'password');
+      expect(decryptIdentity).toHaveBeenCalledWith(mockAddress, 'password');
 
       expect(apiMock.tx.vesting.vest).toHaveBeenCalled();
 

@@ -17,14 +17,14 @@ exports[`UnlockVestedFunds should render 1`] = `
       Update transaction for releasing unlocked coins
     </p>
     <div
-      class="MacFarlane avatar"
+      class="avatar"
     >
       Identicon
     </div>
     <p
       class="name"
     >
-      My Sporran Account
+      My Sporran Identity
     </p>
     <p
       class="explanation"
@@ -42,7 +42,7 @@ exports[`UnlockVestedFunds should render 1`] = `
       </label>
       <a
         class="reset"
-        href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
+        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
       >
         Reset Password
       </a>
@@ -106,7 +106,7 @@ exports[`UnlockVestedFunds should render 1`] = `
     <p
       class="stats"
     >
-      You have 3 accounts with a total
+      You have 3 identities with a total
       <span
         class="balance"
       >

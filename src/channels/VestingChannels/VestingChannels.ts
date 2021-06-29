@@ -5,7 +5,7 @@ import {
 import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 
-import { decryptAccount } from '../../utilities/accounts/accounts';
+import { decryptIdentity } from '../../utilities/identities/identities';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 
@@ -64,7 +64,7 @@ export const insufficientFunds = 'Insufficient funds';
 export async function vest({ address, password }: VestInput): Promise<void> {
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const identity = await decryptAccount(address, password);
+  const identity = await decryptIdentity(address, password);
 
   const tx = api.tx.vesting.vest();
 

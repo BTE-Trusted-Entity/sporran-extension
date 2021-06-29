@@ -32,7 +32,7 @@ describe('BalanceUpdateLink', () => {
     });
     expect(updateBalance).toHaveAttribute(
       'href',
-      '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/vest/warning',
+      '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/vest/warning',
     );
     expect(container).toMatchSnapshot();
   });
@@ -51,7 +51,7 @@ describe('BalanceUpdateLink', () => {
     });
     expect(updateBalance).toHaveAttribute(
       'href',
-      '/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/vest/sign',
+      '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/vest/sign',
     );
     expect(container).toMatchSnapshot();
   });

@@ -48,7 +48,7 @@
     "message": "Update Balance"
   },
   "component_BalanceUpdateLink_error": {
-    "message": "Account has no unlocked funds for update"
+    "message": "Identity has no unlocked funds for update"
   },
   "component_IdentitySlide_rename": {
     "message": "Rename"

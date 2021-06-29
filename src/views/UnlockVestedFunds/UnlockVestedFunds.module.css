@@ -16,12 +16,12 @@
 }
 
 .avatar {
-  composes: tartan from '../../components/Avatar/Avatar.module.css';
+  composes: avatar from '../../components/Avatar/Avatar.module.css';
   align-self: center;
 }
 
 .name {
-  composes: accountText from '../../components/Typography/Typography.module.css';
+  composes: identityText from '../../components/Typography/Typography.module.css';
   margin: 0.5rem 0 0.25rem 0;
 }
 

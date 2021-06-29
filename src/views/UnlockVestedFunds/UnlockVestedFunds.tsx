@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Account } from '../../utilities/accounts/types';
-import { decryptAccount } from '../../utilities/accounts/accounts';
+import { Identity } from '../../utilities/identities/types';
+import { decryptIdentity } from '../../utilities/identities/identities';
 import { paths, generatePath } from '../paths';
 
 import {
@@ -24,10 +24,10 @@ import { Stats } from '../../components/Stats/Stats';
 import styles from './UnlockVestedFunds.module.css';
 
 interface Props {
-  account: Account;
+  identity: Identity;
 }
 
-export function UnlockVestedFunds({ account }: Props): JSX.Element {
+export function UnlockVestedFunds({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const history = useHistory();
@@ -50,17 +50,17 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
 
   useEffect(() => {
     (async () => {
-      const password = await getPasswordChannel.get(account.address);
+      const password = await getPasswordChannel.get(identity.address);
       setSavedPassword(password);
       setRemember(Boolean(password));
     })();
-  }, [account]);
+  }, [identity]);
 
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
 
-      const { address } = account;
+      const { address } = identity;
 
       const { elements } = event.target;
       const providedPassword = elements.password.value;
@@ -70,7 +70,7 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
           : providedPassword;
 
       try {
-        await decryptAccount(address, password);
+        await decryptIdentity(address, password);
 
         if (remember) {
           await savePasswordChannel.get({ password, address });
@@ -80,7 +80,7 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
 
         await vestChannel.get({ address, password });
 
-        history.push(generatePath(paths.account.overview, { address }));
+        history.push(generatePath(paths.identity.overview, { address }));
       } catch (error) {
         console.error(error);
         if (error.name === 'OperationError') {
@@ -91,7 +91,7 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
         }
       }
     },
-    [t, account, savedPassword, remember, history],
+    [t, identity, savedPassword, remember, history],
   );
 
   return (
@@ -103,12 +103,8 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
       <h1 className={styles.heading}>{t('view_UnlockVestedFunds_heading')}</h1>
       <p className={styles.subline}>{t('view_UnlockVestedFunds_subline')}</p>
 
-      <Avatar
-        tartan={account.tartan}
-        address={account.address}
-        className={styles.avatar}
-      />
-      <p className={styles.name}>{account.name}</p>
+      <Avatar address={identity.address} className={styles.avatar} />
+      <p className={styles.name}>{identity.name}</p>
 
       <p className={styles.explanation}>
         {t('view_UnlockVestedFunds_explanation')}
@@ -120,8 +116,8 @@ export function UnlockVestedFunds({ account }: Props): JSX.Element {
         </label>
 
         <Link
-          to={generatePath(paths.account.reset.start, {
-            address: account.address,
+          to={generatePath(paths.identity.reset.start, {
+            address: identity.address,
           })}
           className={styles.reset}
         >

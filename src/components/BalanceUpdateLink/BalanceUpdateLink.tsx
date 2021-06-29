@@ -56,8 +56,8 @@ export function BalanceUpdateLink({ address }: Props): JSX.Element {
 
   useEffect(() => {
     (async () => {
-      const accountHasVestedFunds = await hasVestedFundsChannel.get(address);
-      if (accountHasVestedFunds) {
+      const identityHasVestedFunds = await hasVestedFundsChannel.get(address);
+      if (identityHasVestedFunds) {
         setDisabled(false);
       }
 
@@ -81,8 +81,8 @@ export function BalanceUpdateLink({ address }: Props): JSX.Element {
   }, [balance, existentialDeposit, vestingFee]);
 
   const vestingPath = existentialWarning
-    ? paths.account.vest.warning
-    : paths.account.vest.sign;
+    ? paths.identity.vest.warning
+    : paths.identity.vest.sign;
 
   return (
     <BalanceUpdateLinkTemplate

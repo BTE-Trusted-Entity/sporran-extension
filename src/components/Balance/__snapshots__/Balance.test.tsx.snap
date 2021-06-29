@@ -94,10 +94,10 @@ exports[`Balance should show balance breakdown with update balance button 1`] = 
   </ul>
   <a
     aria-disabled="true"
-    aria-label="Account has no unlocked funds for update"
+    aria-label="Identity has no unlocked funds for update"
     class="update"
-    href="/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/vest/sign"
-    title="Account has no unlocked funds for update"
+    href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/vest/sign"
+    title="Identity has no unlocked funds for update"
   >
     Update Balance
   </a>

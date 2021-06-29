@@ -1,25 +1,25 @@
 import { Switch, Route } from 'react-router-dom';
 
-import { Account } from '../../utilities/accounts/types';
+import { Identity } from '../../utilities/identities/types';
 import { paths, generatePath } from '../paths';
 
 import { ExistentialWarning } from '../ExistentialWarning/ExistentialWarning';
 import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 
 interface Props {
-  account: Account;
+  identity: Identity;
 }
 
-export function VestingRouter({ account }: Props): JSX.Element {
-  const { address } = account;
+export function VestingRouter({ identity }: Props): JSX.Element {
+  const { address } = identity;
 
-  const signPath = generatePath(paths.account.vest.sign, { address });
-  const warningPath = generatePath(paths.account.vest.warning, { address });
+  const signPath = generatePath(paths.identity.vest.sign, { address });
+  const warningPath = generatePath(paths.identity.vest.warning, { address });
 
   return (
     <Switch>
       <Route path={signPath}>
-        <UnlockVestedFunds account={account} />
+        <UnlockVestedFunds identity={identity} />
       </Route>
 
       <Route path={warningPath}>
