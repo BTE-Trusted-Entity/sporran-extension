@@ -15,7 +15,7 @@ jest.mock('../../utilities/identities/identities');
 jest.spyOn(browser.runtime, 'sendMessage');
 
 const identity = {
-  name: 'My Sporran Identity',
+  name: 'KILT Identity 1',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
   index: 1,
 };
@@ -39,7 +39,7 @@ describe('IdentitySlide', () => {
     userEvent.click(saveButton);
 
     expect(saveIdentity).toHaveBeenCalledWith({
-      name: 'My Sporran Identity Foo',
+      name: 'KILT Identity 1 Foo',
       address: identity.address,
       index: 1,
     });

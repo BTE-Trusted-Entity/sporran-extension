@@ -14,7 +14,7 @@ describe('Stats', () => {
   it('should not render for single identity', async () => {
     const identities = {
       '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire': {
-        name: 'My Sporran Identity',
+        name: 'KILT Identity 1',
         address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
         index: 1,
       },
