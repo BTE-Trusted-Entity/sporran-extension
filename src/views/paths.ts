@@ -31,6 +31,11 @@ export const paths = {
     receive: '/identity/:address/receive',
     credentials: '/identity/:address/credentials',
     remove: '/identity/:address/remove',
+    vest: {
+      base: '/identity/:address/vest',
+      sign: '/identity/:address/vest/sign',
+      warning: '/identity/:address/vest/warning',
+    },
   },
   popup: {
     base: '/popup',

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BalanceUpdateLink should link to vesting sign screen if not below existential deposit 1`] = `
+<div>
+  <a
+    aria-disabled="false"
+    class="update"
+    href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/vest/sign"
+  >
+    Update Balance
+  </a>
+</div>
+`;
+
+exports[`BalanceUpdateLink should link to warning page if below existential deposit 1`] = `
+<div>
+  <a
+    aria-disabled="false"
+    class="update"
+    href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/vest/warning"
+  >
+    Update Balance
+  </a>
+</div>
+`;

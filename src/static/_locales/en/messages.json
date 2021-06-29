@@ -44,6 +44,12 @@
   "component_Balance_bonded": {
     "message": "Bonded Balance: "
   },
+  "component_BalanceUpdateLink_CTA": {
+    "message": "Update Balance"
+  },
+  "component_BalanceUpdateLink_error": {
+    "message": "Identity has no unlocked funds for update"
+  },
   "component_IdentitySlide_rename": {
     "message": "Rename"
   },
@@ -235,7 +241,7 @@
     "message": "Please write down your wallet’s phrase and keep it in a safe place. We recommend that you write down your backup phrase with pen and paper. The phrase must be used to restore your wallet."
   },
   "view_Warning_emphasis_again": {
-    "message": "Keep it safe, so you don't lose\nyour assets"
+    "message": "Keep it safe, so you don’t lose\nyour assets"
   },
   "view_Warning_CTA": {
     "message": "I understand this – go to the Phrase"
@@ -675,7 +681,7 @@
     "message": "Attention"
   },
   "view_ExistentialWarning_subline": {
-    "message": "Your identity's remaining balance will be set to zero"
+    "message": "Your identity’s remaining balance will be set to zero"
   },
   "view_ExistentialWarning_warning": {
     "message": "This transaction would leave your balance below the existential deposit. Therefore the balance of your identity will be set to zero. The rest of your balance will be added as a tip. Confirm to proceed with this transaction anyway."
@@ -685,5 +691,20 @@
   },
   "view_GenericError_message": {
     "message": "An error occurred. Please try again. For help please contact <a href='mailto:support@sporran.org'>support@sporran.org</a>."
+  },
+  "view_UnlockVestedFunds_heading": {
+    "message": "Update Balance"
+  },
+  "view_UnlockVestedFunds_subline": {
+    "message": "Update transaction for releasing unlocked coins"
+  },
+  "view_UnlockVestedFunds_explanation": {
+    "message": "Your unlocked vested coins need to be released manually. Sign this transaction to release the coins to your usable balance. A fee is required."
+  },
+  "view_UnlockVestedFunds_insufficient_funds": {
+    "message": "You don’t have enough free balance to make this transaction"
+  },
+  "view_UnlockVestedFunds_CTA": {
+    "message": "Update Balance"
   }
 }
