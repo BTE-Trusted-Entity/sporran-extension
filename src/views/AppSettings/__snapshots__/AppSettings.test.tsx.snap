@@ -72,7 +72,7 @@ Just start it again to continue.
       class="reset"
       type="button"
     >
-      Restore default
+      Restore Default
     </button>
     <button
       aria-label="Back"

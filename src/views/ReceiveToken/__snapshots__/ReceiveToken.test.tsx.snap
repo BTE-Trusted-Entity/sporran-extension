@@ -13,7 +13,7 @@ exports[`ReceiveToken should render a normal identity 1`] = `
     <p
       class="subline"
     >
-      Copy and send your public address
+      Copy and send your address
     </p>
     <div
       class="container"
@@ -95,7 +95,9 @@ exports[`ReceiveToken should render a normal identity 1`] = `
     <small
       class="small"
       id="addressLabel"
-    />
+    >
+      Address
+    </small>
     <p
       class="addressLine"
     >

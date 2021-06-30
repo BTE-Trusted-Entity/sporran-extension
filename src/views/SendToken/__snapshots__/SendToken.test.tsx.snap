@@ -293,11 +293,11 @@ exports[`SendToken should render 1`] = `
       class="recipientLine"
     >
       <input
-        aria-label="Paste the recipient’s public address here"
+        aria-label="Paste the recipient’s address here"
         class="recipientWithButton"
         id="recipient"
         name="recipient"
-        placeholder="Paste the recipient’s public address here"
+        placeholder="Paste the recipient’s address here"
         required=""
       />
       <button

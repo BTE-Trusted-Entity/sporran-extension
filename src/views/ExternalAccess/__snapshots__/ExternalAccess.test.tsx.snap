@@ -53,7 +53,7 @@ exports[`ExternalAccess should render 1`] = `
       class="back"
       href="/"
     >
-      Back to my Identities
+      Back to My Identities
     </a>
     <button
       aria-label="Back"

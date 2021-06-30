@@ -348,10 +348,10 @@
     "message": "Receive"
   },
   "view_ReceiveToken_explanation": {
-    "message": "Copy and send your public address"
+    "message": "Copy and send your address"
   },
-  "view_ReceiveToken_Identity_address": {
-    "message": "Public Address"
+  "view_ReceiveToken_identity_address": {
+    "message": "Address"
   },
   "view_ReceiveToken_enlarge": {
     "message": "Enlarge"
@@ -458,10 +458,10 @@
     }
   },
   "view_SendToken_recipient": {
-    "message": "Paste the recipient’s public address here"
+    "message": "Paste the recipient’s address here"
   },
   "view_SendToken_recipient_invalid": {
-    "message": "The public address is invalid. Please check it again."
+    "message": "The address is invalid. Please check it again."
   },
   "view_SendToken_recipient_same": {
     "message": "The recipient address is the same as Identity address"
@@ -515,7 +515,7 @@
     "message": "Give your credential a name:"
   },
   "view_SignQuote_password": {
-    "message": "Sign with Password:"
+    "message": "Sign with password:"
   },
   "view_SignQuote_CTA": {
     "message": "Accept"
@@ -575,7 +575,7 @@
     "message": "Valid"
   },
   "view_ShareCredential_password": {
-    "message": "Sign with Password:"
+    "message": "Sign with password:"
   },
   "view_ShareCredential_CTA": {
     "message": "Share"
@@ -596,7 +596,7 @@
     "message": "wss://example.org:433"
   },
   "view_AppSettings_reset": {
-    "message": "Restore default"
+    "message": "Restore Default"
   },
   "view_AuthorizeDApp_title": {
     "message": "Authorize"
@@ -672,7 +672,7 @@
     "message": "allowed"
   },
   "view_ExternalAccess_back": {
-    "message": "Back to my Identities"
+    "message": "Back to My Identities"
   },
   "view_ExistentialWarning_headline": {
     "message": "Attention"
