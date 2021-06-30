@@ -13,7 +13,7 @@ exports[`AuthorizeDApp should render 1`] = `
     <p
       class="subline"
     >
-      An application, self-identifying as KILT-Sporran is requesting access from:
+      An application called KILT-Sporran is requesting access from:
     </p>
     <p
       class="origin"
@@ -23,7 +23,7 @@ exports[`AuthorizeDApp should render 1`] = `
     <p
       class="warning"
     >
-      Only approve this request if you trust the application. Approving gives the application access to the addresses of your identities.
+      Only approve this request if you trust the application. Approving gives the application access to the addresses of your Identities.
     </p>
     <button
       class="authorize"

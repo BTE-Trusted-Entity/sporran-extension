@@ -45,6 +45,7 @@ export function AppSettings(): JSX.Element {
       <p className={styles.subline}>{t('view_AppSettings_subline')}</p>
 
       <p className={styles.subline}>{t('view_AppSettings_warning')}</p>
+      <p className={styles.subline}>{t('view_AppSettings_attention')}</p>
 
       <p className={styles.endpointLine}>
         <datalist id="endpoints">

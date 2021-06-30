@@ -36,7 +36,7 @@ exports[`AddIdentity menu should be visible when menu button clicked 1`] = `
             tabindex="-1"
             type="button"
           >
-            Edit identity name
+            Edit Identity Name
           </button>
         </li>
         <li
@@ -47,7 +47,7 @@ exports[`AddIdentity menu should be visible when menu button clicked 1`] = `
             role="menuitem"
             tabindex="-1"
           >
-            Forget identity
+            Remove Identity
           </a>
         </li>
         <li
@@ -58,7 +58,7 @@ exports[`AddIdentity menu should be visible when menu button clicked 1`] = `
             role="menuitem"
             tabindex="-1"
           >
-            Reset password
+            Reset Password
           </a>
         </li>
       </ul>

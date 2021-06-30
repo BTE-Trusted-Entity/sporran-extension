@@ -13,7 +13,7 @@ exports[`VerifyBackupPhrase should handle selection of all words 1`] = `
     <p
       class="info"
     >
-      To make sure you have written down your backup phrase correctly, sort your phrase in the right order from 1 to 12
+      To make sure you wrote down your backup phrase accurately, sort your phrase in the correct order from 1 to 12.
     </p>
     <form>
       <div
@@ -306,7 +306,7 @@ exports[`VerifyBackupPhrase should render 1`] = `
     <p
       class="info"
     >
-      To make sure you have written down your backup phrase correctly, sort your phrase in the right order from 1 to 12
+      To make sure you wrote down your backup phrase accurately, sort your phrase in the correct order from 1 to 12.
     </p>
     <form>
       <div

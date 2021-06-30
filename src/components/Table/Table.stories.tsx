@@ -20,7 +20,7 @@ export function Template(): JSX.Element {
         <tr className={tableStyles.tr}>
           <td className={tableStyles.td}>Email</td>
           <td className={tableStyles.td}>BL-Mail-Simple</td>
-          <td className={tableStyles.td}>socialKYC</td>
+          <td className={tableStyles.td}>SocialKYC</td>
         </tr>
         <tr className={tableStyles.tr}>
           <td className={tableStyles.td}>Twitter</td>

@@ -49,7 +49,7 @@ exports[`ReviewTransaction should render 1`] = `
     <p
       class="recipient"
     >
-      send to:
+      Send to:
     </p>
     <p
       class="address"
@@ -68,7 +68,7 @@ exports[`ReviewTransaction should render 1`] = `
         120.0101
          
         <span
-          aria-label="Kilt coin"
+          aria-label="KILT Coin"
           class="coin"
         />
       </span>
@@ -115,7 +115,7 @@ exports[`ReviewTransaction should render 1`] = `
               0.0001
                
               <span
-                aria-label="Kilt coin"
+                aria-label="KILT Coin"
                 class="coin"
               />
             </span>
@@ -127,7 +127,7 @@ exports[`ReviewTransaction should render 1`] = `
               0.0100
                
               <span
-                aria-label="Kilt coin"
+                aria-label="KILT Coin"
                 class="coin"
               />
             </span>
@@ -139,7 +139,7 @@ exports[`ReviewTransaction should render 1`] = `
               0.0101
                
               <span
-                aria-label="Kilt coin"
+                aria-label="KILT Coin"
                 class="coin"
               />
             </span>
@@ -151,7 +151,7 @@ exports[`ReviewTransaction should render 1`] = `
               120.0000
                
               <span
-                aria-label="Kilt coin"
+                aria-label="KILT Coin"
                 class="coin"
               />
             </span>
@@ -200,7 +200,7 @@ exports[`ReviewTransaction should render 1`] = `
       class="rememberLabel"
     >
       <span>
-        Remember my password for the next 15 minutes
+        Remember password for the next 15 minutes
       </span>
       <input
         class="remember"
@@ -234,18 +234,18 @@ exports[`ReviewTransaction should render 1`] = `
     <p
       class="stats"
     >
-      You have 3 identities with a total
+      You have 3 Identities with a
       <span
         class="balance"
       >
-         Balance: 
+         Total Balance: 
         <span
           class="amount"
         >
           3.7020
            
           <span
-            aria-label="Kilt coin"
+            aria-label="KILT Coin"
             class="coin"
           />
         </span>

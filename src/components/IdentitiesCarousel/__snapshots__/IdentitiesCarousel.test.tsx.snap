@@ -41,10 +41,10 @@ exports[`IdentitiesCarousel should render a bubble for each identity 1`] = `
       class="item"
     >
       <a
-        aria-label="Add identity"
+        aria-label="Add Identity"
         class="add"
         href="/identity/NEW"
-        title="Add identity"
+        title="Add Identity"
       />
     </li>
   </ul>
@@ -135,10 +135,10 @@ exports[`IdentitiesCarousel should render normal identities 1`] = `
         class="item"
       >
         <a
-          aria-label="Add identity"
+          aria-label="Add Identity"
           class="add"
           href="/identity/NEW"
-          title="Add identity"
+          title="Add Identity"
         />
       </li>
     </ul>
@@ -182,10 +182,10 @@ exports[`IdentitiesCarousel should render the first identity 1`] = `
       </div>
     </section>
     <a
-      aria-label="Add identity"
+      aria-label="Add Identity"
       class="left"
       href="/identity/NEW"
-      title="Add identity"
+      title="Add Identity"
     />
     <a
       aria-label="KILT Identity 2"
@@ -230,10 +230,10 @@ exports[`IdentitiesCarousel should render the first identity 1`] = `
         class="item"
       >
         <a
-          aria-label="Add identity"
+          aria-label="Add Identity"
           class="add"
           href="/identity/NEW"
-          title="Add identity"
+          title="Add Identity"
         />
       </li>
     </ul>
@@ -283,10 +283,10 @@ exports[`IdentitiesCarousel should render the last identity 1`] = `
       title="KILT Identity 2"
     />
     <a
-      aria-label="Add identity"
+      aria-label="Add Identity"
       class="right"
       href="/identity/NEW"
-      title="Add identity"
+      title="Add Identity"
     />
     <ul
       class="bubbles"
@@ -325,10 +325,10 @@ exports[`IdentitiesCarousel should render the last identity 1`] = `
         class="item"
       >
         <a
-          aria-label="Add identity"
+          aria-label="Add Identity"
           class="add"
           href="/identity/NEW"
-          title="Add identity"
+          title="Add Identity"
         />
       </li>
     </ul>
@@ -343,10 +343,10 @@ exports[`IdentitiesCarousel should render the new identity 1`] = `
   >
     <section>
       <a
-        aria-label="Add identity"
+        aria-label="Add Identity"
         class="add"
         href="/identity/add"
-        title="Add identity"
+        title="Add Identity"
       />
     </section>
     <a
@@ -398,10 +398,10 @@ exports[`IdentitiesCarousel should render the new identity 1`] = `
         class="item"
       >
         <a
-          aria-label="Add identity"
+          aria-label="Add Identity"
           class="add"
           href="/identity/NEW"
-          title="Add identity"
+          title="Add Identity"
         />
       </li>
     </ul>
@@ -451,10 +451,10 @@ exports[`IdentitiesCarousel should support other paths 1`] = `
       title="KILT Identity 2"
     />
     <a
-      aria-label="Add identity"
+      aria-label="Add Identity"
       class="right"
       href="/identity/NEW/send"
-      title="Add identity"
+      title="Add Identity"
     />
     <ul
       class="bubbles"
@@ -493,10 +493,10 @@ exports[`IdentitiesCarousel should support other paths 1`] = `
         class="item"
       >
         <a
-          aria-label="Add identity"
+          aria-label="Add Identity"
           class="add"
           href="/identity/NEW/send"
-          title="Add identity"
+          title="Add Identity"
         />
       </li>
     </ul>

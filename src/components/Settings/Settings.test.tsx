@@ -32,7 +32,7 @@ describe('Settings', () => {
 
     expect(await screen.findByRole('menu')).toBeInTheDocument();
     expect(
-      await screen.findByRole('menuitem', { name: 'Forget current identity' }),
+      await screen.findByRole('menuitem', { name: 'Forget Current Identity' }),
     ).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
 
@@ -90,7 +90,7 @@ describe('Settings', () => {
     userEvent.click(await screen.findByLabelText('Settings'));
 
     expect(
-      await screen.findByRole('menuitem', { name: 'Custom endpoint' }),
+      await screen.findByRole('menuitem', { name: 'Custom Endpoint' }),
     ).toBeInTheDocument();
 
     expect(container).toMatchSnapshot();

@@ -18,7 +18,7 @@ exports[`Warning should render 1`] = `
     <p
       class="info"
     >
-      Please write down your wallet’s phrase and keep it in a safe place. We recommend that you write down your backup phrase with pen and paper. The phrase must be used to restore your wallet.
+      Please write down your wallet’s phrase and keep it in a safe place. We recommend that you write down your backup phrase with pen and paper. The phrase is required to restore your Identity.
     </p>
     <h2
       class="important"
@@ -30,7 +30,7 @@ your assets
       class="confirm"
       href="/identity/create/backup"
     >
-      I understand this – go to the Phrase
+      I understand this – go to the phrase
     </a>
     <a
       class="cancel"

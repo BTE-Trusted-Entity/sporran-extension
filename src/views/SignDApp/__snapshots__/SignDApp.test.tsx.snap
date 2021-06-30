@@ -135,7 +135,7 @@ exports[`SignDApp should render 1`] = `
       class="rememberLabel"
     >
       <span>
-        Remember my password for the next 15 minutes
+        Remember password for the next 15 minutes
       </span>
       <input
         class="remember"
@@ -157,7 +157,7 @@ exports[`SignDApp should render 1`] = `
         class="submit"
         type="submit"
       >
-        Sign the transaction
+        Sign the Transaction
       </button>
     </p>
   </form>
