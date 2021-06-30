@@ -13,7 +13,7 @@ exports[`ImportBackupPhrase should render for import 1`] = `
     <p
       class="info"
     >
-      To import a Sporran Identity, you will need your backup phrase consisting of 12 words.
+      To import a KILT Identity, you will need your backup phrase consisting of 12 words.
     </p>
     <form
       autocomplete="off"

@@ -268,7 +268,7 @@
     "message": "Set a new password"
   },
   "view_ImportBackupPhrase_explanation_import": {
-    "message": "To import a Sporran Identity, you will need your backup phrase consisting of 12 words."
+    "message": "To import a KILT Identity, you will need your backup phrase consisting of 12 words."
   },
   "view_ImportBackupPhrase_explanation_reset": {
     "message": "In order to set a new password you have to re-enter your backup phrase"
