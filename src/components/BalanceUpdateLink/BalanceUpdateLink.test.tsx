@@ -12,6 +12,11 @@ import { BalanceUpdateLink } from './BalanceUpdateLink';
 
 const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 
+jest.mock('@kiltprotocol/chain-helpers', () => ({
+  BlockchainApiConnection: {
+    getConnectionOrConnect: jest.fn(),
+  },
+}));
 jest.mock('../../channels/existentialDepositChannel/existentialDepositChannel');
 jest.mock('../../channels/VestingChannels/VestingChannels');
 
