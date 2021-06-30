@@ -72,7 +72,7 @@ export function IdentitiesBubbles({
   const t = browser.i18n.getMessage;
 
   if (identities.length > maxIdentityBubbles) {
-    return null;
+    return null; // hide the component when too many identities
   }
 
   return (
@@ -114,7 +114,7 @@ export function IdentitiesCarousel({
 }: Props): JSX.Element | null {
   const identities = useIdentities().data;
   if (!identities) {
-    return null;
+    return null; // storage data pending
   }
 
   const identitiesList = sortBy(Object.values(identities), 'index');

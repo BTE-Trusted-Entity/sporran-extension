@@ -45,7 +45,7 @@ export function SignQuote(): JSX.Element | null {
 
   const identities = useIdentities().data;
   if (!identities) {
-    return null;
+    return null; // storage data pending
   }
 
   const firstIdentity = minBy(Object.values(identities), 'index') as Identity;

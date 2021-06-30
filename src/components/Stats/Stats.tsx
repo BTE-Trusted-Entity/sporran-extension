@@ -19,7 +19,7 @@ function UnconditionalStats({ identities }: Props): JSX.Element | null {
 
   const stats = useStats(identities);
   if (!stats) {
-    return null;
+    return null; // hide the component while data is pending
   }
 
   return (
@@ -38,8 +38,12 @@ function UnconditionalStats({ identities }: Props): JSX.Element | null {
 
 export function Stats(): JSX.Element | null {
   const identities = useIdentities().data;
-  if (!identities || Object.values(identities).length < 2) {
-    return null;
+  if (!identities) {
+    return null; // storage data pending
+  }
+
+  if (Object.values(identities).length < 2) {
+    return null; // hide the component when too few identities
   }
 
   return <UnconditionalStats identities={identities} />;

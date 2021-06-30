@@ -14,6 +14,8 @@ import styles from './ImportBackupPhrase.module.css';
 
 type BackupPhrase = string[];
 
+const noError = null;
+
 function isAllowed(word: string) {
   return DEFAULT_WORDLIST.includes(word);
 }
@@ -29,7 +31,7 @@ function isInvalid(
     const noNeedToCompare = !expectedAddress;
     const matchesExpectations = expectedAddress === address;
     if (noNeedToCompare || matchesExpectations) {
-      return null;
+      return noError;
     }
 
     return t('view_ImportBackupPhrase_error_mismatched_backup_phrase');
@@ -44,7 +46,7 @@ function isMalformed(backupPhrase: BackupPhrase): string | null {
   const hasAllWords = length === 12;
   const allIsFine = hasAllWords || hasNoWords;
   if (allIsFine) {
-    return null;
+    return noError;
   }
   const t = browser.i18n.getMessage;
   return t('view_ImportBackupPhrase_error_backup_phrase_length');

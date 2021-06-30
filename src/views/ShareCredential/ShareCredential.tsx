@@ -60,7 +60,7 @@ export function ShareCredential(): JSX.Element | null {
 
   const identities = useIdentities().data;
   if (!identities) {
-    return null;
+    return null; // storage data pending
   }
 
   const identity = minBy(Object.values(identities), 'index') as Identity;

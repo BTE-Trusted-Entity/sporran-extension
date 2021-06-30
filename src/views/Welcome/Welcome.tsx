@@ -37,7 +37,7 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
   const current = useCurrentIdentity();
 
   if (!identities.data) {
-    return null;
+    return null; // storage data pending
   }
 
   const identitiesNumber = Object.values(identities.data).length;

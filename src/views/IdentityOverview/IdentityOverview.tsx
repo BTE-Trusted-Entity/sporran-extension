@@ -52,7 +52,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
   const identities = useIdentities().data;
   if (!identities) {
-    return null;
+    return null; // storage data pending
   }
 
   const credentialsIdentity = null;

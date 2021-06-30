@@ -20,6 +20,7 @@ import { existentialDepositChannel } from '../../channels/existentialDepositChan
 
 import styles from './SendToken.module.css';
 
+const noError = null;
 const nonNumberCharacters = /[^0-9,.]/g;
 const KILT_POWER = 15;
 const minimum = new BN(0.01e15);
@@ -89,7 +90,7 @@ function parseFloatLocale(value: string): number {
 function getIsAmountInvalidError(amount: string): string | null {
   const parsed = parseFloatLocale(amount);
   if (!Number.isNaN(parsed)) {
-    return null;
+    return noError;
   }
 
   const t = browser.i18n.getMessage;
@@ -98,7 +99,7 @@ function getIsAmountInvalidError(amount: string): string | null {
 
 function getIsAmountTooSmallError(amount: number, minimum: BN): string | null {
   if (numberToBN(amount).gte(minimum)) {
-    return null;
+    return noError;
   }
   const t = browser.i18n.getMessage;
   return t('view_SendToken_amount_small', [asKiltCoins(minimum, 'funds')]);
@@ -106,7 +107,7 @@ function getIsAmountTooSmallError(amount: number, minimum: BN): string | null {
 
 function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
   if (numberToBN(amount).lte(maximum)) {
-    return null;
+    return noError;
   }
   const t = browser.i18n.getMessage;
   return t('view_SendToken_amount_large');
@@ -121,7 +122,7 @@ function getIsAmountSmallerThanRecipientExistential(
     !existential ||
     numberToBN(amount).gte(existential)
   ) {
-    return null;
+    return noError;
   }
   const t = browser.i18n.getMessage;
   return t('view_SendToken_error_existential_recepient');
@@ -133,7 +134,7 @@ function getAmountError(
   recipientBalanceZero: boolean | undefined,
 ): string | null {
   if (amount === null) {
-    return null;
+    return noError;
   }
 
   const amountValidError = getIsAmountInvalidError(amount);
@@ -172,7 +173,7 @@ function getAddressError(address: string, identity: Identity): string | null {
     return t('view_SendToken_recipient_invalid');
   }
 
-  return null;
+  return noError;
 }
 
 function formatKiltInput(amount: BN): string {

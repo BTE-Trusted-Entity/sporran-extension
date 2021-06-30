@@ -1,6 +1,5 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
-import { ClipLoader } from 'react-spinners';
 
 import { Identity } from '@kiltprotocol/core';
 
@@ -12,11 +11,8 @@ import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
 import { paths } from '../paths';
 
 export function CreateIdentity(): JSX.Element {
-  const [backupPhrase, setBackupPhrase] = useState('');
+  const backupPhrase = useMemo(() => Identity.generateMnemonic(), []);
   const history = useHistory();
-  useEffect(() => {
-    setBackupPhrase(Identity.generateMnemonic());
-  }, []);
 
   const onSuccess = useCallback(
     async (password: string) => {
@@ -28,10 +24,6 @@ export function CreateIdentity(): JSX.Element {
     },
     [backupPhrase, history],
   );
-
-  if (!backupPhrase) {
-    return <ClipLoader />;
-  }
 
   return (
     <Switch>
