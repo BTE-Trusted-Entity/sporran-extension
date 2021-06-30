@@ -24,13 +24,13 @@ export function IdentityCredentials({ identity }: Props): JSX.Element {
       'Full Name': 'Ingo Rübe',
       Email: 'ingo@kilt.io',
       'Credential type': 'BL-Mail-Simple',
-      Attester: 'socialKYC',
+      Attester: 'SocialKYC',
       valid: true,
     },
     {
       Name: 'twitter',
       'Credential type': 'BL-Mail-Advanced',
-      Attester: 'socialKYC',
+      Attester: 'SocialKYC',
       valid: true,
     },
   ];

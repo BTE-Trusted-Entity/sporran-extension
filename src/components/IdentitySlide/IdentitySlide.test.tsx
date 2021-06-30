@@ -31,7 +31,7 @@ describe('IdentitySlide', () => {
 
     userEvent.click(await screen.findByLabelText('Identity options'));
     userEvent.click(
-      await screen.findByRole('menuitem', { name: 'Edit identity name' }),
+      await screen.findByRole('menuitem', { name: 'Edit Identity Name' }),
     );
     userEvent.type(await screen.findByLabelText('Identity name:'), ' Foo');
 

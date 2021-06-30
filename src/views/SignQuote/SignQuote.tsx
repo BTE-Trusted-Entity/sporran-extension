@@ -57,7 +57,6 @@ export function SignQuote(): JSX.Element | null {
       autoComplete="off"
     >
       <h1 className={styles.heading}>{t('view_SignQuote_heading')}</h1>
-      <p className={styles.subline}>{t('view_SignQuote_subline')}</p>
 
       <dl className={styles.details}>
         {values.map(([name, value]) => (

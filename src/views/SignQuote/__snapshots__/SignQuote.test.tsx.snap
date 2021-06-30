@@ -9,13 +9,8 @@ exports[`SignQuote should render 1`] = `
     <h1
       class="heading"
     >
-      Sporran
+      Terms of Attestation
     </h1>
-    <p
-      class="subline"
-    >
-      Terms for Generating Credential
-    </p>
     <dl
       class="details"
     >
@@ -61,7 +56,7 @@ exports[`SignQuote should render 1`] = `
       <dd
         class="detailValue"
       >
-        socialKYC
+        SocialKYC
       </dd>
     </dl>
     <p
@@ -76,7 +71,7 @@ exports[`SignQuote should render 1`] = `
         0.0000
          
         <span
-          aria-label="Kilt coin"
+          aria-label="KILT Coin"
           class="coin"
         />
       </span>
@@ -109,7 +104,7 @@ exports[`SignQuote should render 1`] = `
     <label
       class="label"
     >
-      Sign with Password:
+      Sign with password:
       <span
         class="passwordLine"
       >

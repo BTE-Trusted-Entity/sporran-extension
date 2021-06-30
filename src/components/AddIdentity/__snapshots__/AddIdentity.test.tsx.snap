@@ -3,10 +3,10 @@
 exports[`AddIdentity should render 1`] = `
 <div>
   <a
-    aria-label="Add identity"
+    aria-label="Add Identity"
     class="toggle"
     href="/identity/add"
-    title="Add identity"
+    title="Add Identity"
   />
 </div>
 `;

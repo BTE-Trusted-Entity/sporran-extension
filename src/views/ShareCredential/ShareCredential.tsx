@@ -72,13 +72,13 @@ export function ShareCredential(): JSX.Element | null {
       'Full Name': 'Ingo Rübe',
       Email: 'ingo@kilt.io',
       'Credential type': 'BL-Mail-Simple',
-      Attester: 'socialKYC',
+      Attester: 'SocialKYC',
       valid: true,
     },
     {
       Name: 'twitter',
       'Credential type': 'BL-Mail-Advanced',
-      Attester: 'socialKYC',
+      Attester: 'SocialKYC',
       valid: true,
     },
   ];

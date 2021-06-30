@@ -74,7 +74,7 @@ describe('PasswordField', () => {
     await act(async () => {
       await promise;
     });
-    expect(await screen.findByLabelText(/Remember my password/)).toBeChecked();
+    expect(await screen.findByLabelText(/Remember password/)).toBeChecked();
     expect(await screen.findByLabelText(/Sign with password/)).toHaveValue(
       '************',
     );
@@ -161,7 +161,7 @@ describe('PasswordField', () => {
       await act(async () => {
         await promise;
       });
-      userEvent.click(await screen.findByLabelText(/Remember my password/));
+      userEvent.click(await screen.findByLabelText(/Remember password/));
       userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => password !== '');
@@ -189,7 +189,7 @@ describe('PasswordField', () => {
         await screen.findByLabelText(/Sign with password/),
         'PASS',
       );
-      userEvent.click(await screen.findByLabelText(/Remember my password/));
+      userEvent.click(await screen.findByLabelText(/Remember password/));
       userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => password !== '');

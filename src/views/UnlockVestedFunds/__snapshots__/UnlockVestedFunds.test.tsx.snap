@@ -72,7 +72,7 @@ exports[`UnlockVestedFunds should render 1`] = `
       class="rememberLabel"
     >
       <span>
-        Remember my password for the next 15 minutes
+        Remember password for the next 15 minutes
       </span>
       <input
         class="remember"
@@ -110,18 +110,18 @@ exports[`UnlockVestedFunds should render 1`] = `
     <p
       class="stats"
     >
-      You have 3 identities with a total
+      You have 3 Identities with a
       <span
         class="balance"
       >
-         Balance: 
+         Total Balance: 
         <span
           class="amount"
         >
           3.7020
            
           <span
-            aria-label="Kilt coin"
+            aria-label="KILT Coin"
             class="coin"
           />
         </span>

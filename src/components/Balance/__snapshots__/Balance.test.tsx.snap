@@ -12,7 +12,7 @@ exports[`Balance should render 1`] = `
       1.2340
        
       <span
-        aria-label="Kilt coin"
+        aria-label="KILT Coin"
         class="coin"
       />
     </span>
@@ -32,7 +32,7 @@ exports[`Balance should show balance breakdown with update balance button 1`] = 
       1.2340
        
       <span
-        aria-label="Kilt coin"
+        aria-label="KILT Coin"
         class="coin"
       />
     </span>
@@ -56,7 +56,7 @@ exports[`Balance should show balance breakdown with update balance button 1`] = 
         1.2260
          
         <span
-          aria-label="Kilt coin"
+          aria-label="KILT Coin"
           class="coin"
         />
       </span>
@@ -71,7 +71,7 @@ exports[`Balance should show balance breakdown with update balance button 1`] = 
         0.0100
          
         <span
-          aria-label="Kilt coin"
+          aria-label="KILT Coin"
           class="coin"
         />
       </span>
@@ -86,7 +86,7 @@ exports[`Balance should show balance breakdown with update balance button 1`] = 
         0.0080
          
         <span
-          aria-label="Kilt coin"
+          aria-label="KILT Coin"
           class="coin"
         />
       </span>
