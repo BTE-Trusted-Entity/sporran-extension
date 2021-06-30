@@ -85,8 +85,7 @@ export function useStats(
 
   const balancesList = Object.values(balances);
   if (balancesList.includes(null)) {
-    // do not show the total until all requests are fulfilled
-    return null;
+    return null; // do not show the total until all requests are fulfilled
   }
 
   const count = identitiesList.length;

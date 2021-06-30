@@ -13,7 +13,7 @@ export function AddIdentity(): JSX.Element | null {
   const hasIdentities = identities && Object.values(identities).length > 0;
 
   if (!hasIdentities) {
-    return null;
+    return null; // storage data pending
   }
 
   return (

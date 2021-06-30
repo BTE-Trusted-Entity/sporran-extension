@@ -48,7 +48,7 @@ export function ExternalAccess(): JSX.Element | null {
   const handleChange = useCallback(
     (event) => {
       if (!hostNames) {
-        return null;
+        return;
       }
 
       const { name, checked } = event.target;
@@ -72,7 +72,7 @@ export function ExternalAccess(): JSX.Element | null {
   );
 
   if (!hostNames) {
-    return null;
+    return null; // storage data pending
   }
 
   return (

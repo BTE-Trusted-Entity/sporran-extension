@@ -16,7 +16,7 @@ export function IdentityOverviewNew(): JSX.Element | null {
 
   const identities = useIdentities().data;
   if (!identities) {
-    return null;
+    return null; // storage data pending
   }
 
   const identitiesNumber = Object.values(identities).length;

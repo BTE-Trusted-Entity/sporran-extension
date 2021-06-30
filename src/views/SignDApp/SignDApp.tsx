@@ -84,7 +84,7 @@ export function SignDApp(): JSX.Element | null {
   }, []);
 
   if (!identity) {
-    return null;
+    return null; // TODO: what to show when the user has no identities?
   }
 
   return (
