@@ -199,9 +199,7 @@ describe('SendToken', () => {
     );
 
     expect(
-      await screen.findByText(
-        'The address is invalid. Please check it again.',
-      ),
+      await screen.findByText('The address is invalid. Please check it again.'),
     ).toBeInTheDocument();
   });
 
