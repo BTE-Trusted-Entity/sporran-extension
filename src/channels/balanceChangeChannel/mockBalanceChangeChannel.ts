@@ -7,7 +7,8 @@ jest.mock('./balanceChangeChannel');
 const bnBalanceMock = {
   balances: {
     bonded: new BN(balanceMock.bonded),
-    free: new BN(balanceMock.free),
+    transferable: new BN(balanceMock.transferable),
+    usableForFees: new BN(balanceMock.usableForFees),
     locked: new BN(balanceMock.locked),
     total: new BN(balanceMock.total),
   },

@@ -35,8 +35,8 @@
   "component_Balance_hideBreakdown": {
     "message": "Hide balance breakdown"
   },
-  "component_Balance_free": {
-    "message": "Free Balance: "
+  "component_Balance_transferable": {
+    "message": "Transferable Balance: "
   },
   "component_Balance_locked": {
     "message": "Locked Balance: "
@@ -412,7 +412,7 @@
     "message": "Securely send your coins"
   },
   "view_SendToken_maximum": {
-    "message": "Maximum sendable amount: "
+    "message": "Maximum transferable amount: "
   },
   "view_SendToken_amount": {
     "message": "Amount to send"
@@ -421,7 +421,7 @@
     "message": "The value entered is not a number"
   },
   "view_SendToken_amount_small": {
-    "message": "The minimum sendable amount is $minimum$",
+    "message": "The minimum transferable amount is $minimum$",
     "placeholders": {
       "minimum": {
         "content": "$1"
@@ -429,13 +429,13 @@
     }
   },
   "view_SendToken_amount_large": {
-    "message": "The amount entered exceeds your maximum sendable amount"
+    "message": "The amount entered exceeds your maximum transferable amount"
   },
   "view_SendToken_error_existential_recepient": {
     "message": "Cannot send less than the existential deposit"
   },
   "view_SendToken_fee_large": {
-    "message": "The amount+costs exceed your maximum sendable amount"
+    "message": "The amount+costs exceed your maximum transferable amount"
   },
   "view_SendToken_total_fee": {
     "message": "Costs: "
@@ -681,7 +681,7 @@
     "message": "Your Identity’s remaining balance will be set to zero"
   },
   "view_ExistentialWarning_warning": {
-    "message": "This transaction would leave your balance below the existential deposit. Therefore the balance of your Identity will be set to zero. The rest of your balance will be added as a tip. Confirm to proceed with this transaction anyway."
+    "message": "This transaction would leave your balance below the existential deposit. Therefore the balance of your Identity will be set to zero. The rest of your transferable balance will be added as a tip. Confirm to proceed with this transaction anyway."
   },
   "view_ExistentialWarning_confirm": {
     "message": "Confirm"
@@ -696,10 +696,10 @@
     "message": "Update transaction for releasing unlocked coins"
   },
   "view_UnlockVestedFunds_explanation": {
-    "message": "Your unlocked vested coins need to be released manually. Sign this transaction to release the coins to your usable balance. A fee is required."
+    "message": "Your unlocked vested coins need to be released manually. Sign this transaction to release the coins to your transferable balance. A fee is required."
   },
   "view_UnlockVestedFunds_insufficient_funds": {
-    "message": "You don’t have enough free balance to make this transaction"
+    "message": "You don’t have enough usable balance to make this transaction"
   },
   "view_UnlockVestedFunds_CTA": {
     "message": "Update Balance"

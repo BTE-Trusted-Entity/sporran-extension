@@ -52,9 +52,6 @@ const apiMock = {
   rpc: {
     payment: { queryInfo: jest.fn().mockResolvedValue(queryInfoMock) },
   },
-  consts: {
-    balances: { existentialDeposit: new BN(1e15) },
-  },
 };
 
 (BlockchainApiConnection.getConnectionOrConnect as jest.Mock).mockResolvedValue(
@@ -108,10 +105,6 @@ describe('VestingChannels', () => {
         identityMock,
         expect.anything(),
       );
-
-      expect(
-        (BlockchainUtils.signAndSubmitTx as jest.Mock).mock.calls[0][2],
-      ).toMatchObject({ tip: new BN(0.726e15) });
     });
   });
 });

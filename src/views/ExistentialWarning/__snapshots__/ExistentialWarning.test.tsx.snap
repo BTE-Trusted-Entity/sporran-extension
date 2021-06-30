@@ -18,7 +18,7 @@ exports[`ExistentialWarning should render with link to sign transfer screen 1`] 
     <p
       class="warning"
     >
-      This transaction would leave your balance below the existential deposit. Therefore the balance of your Identity will be set to zero. The rest of your balance will be added as a tip. Confirm to proceed with this transaction anyway.
+      This transaction would leave your balance below the existential deposit. Therefore the balance of your Identity will be set to zero. The rest of your transferable balance will be added as a tip. Confirm to proceed with this transaction anyway.
     </p>
     <p
       class="buttonsLine"

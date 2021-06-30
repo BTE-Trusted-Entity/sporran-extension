@@ -4,6 +4,8 @@ import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.c
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 import { ErrorFirstCallback } from '../base/types';
 
+import { transformBalances } from '../../utilities/transformBalances/transformBalances';
+
 export interface Balances {
   free: BN;
   miscFrozen: BN;
@@ -16,7 +18,8 @@ type BalanceChangeInput = string;
 export interface BalanceChangeOutput {
   address: string;
   balances: {
-    free: BN;
+    transferable: BN;
+    usableForFees: BN;
     locked: BN;
     bonded: BN;
     total: BN;
@@ -26,7 +29,8 @@ export interface BalanceChangeOutput {
 export interface JsonChangeOutput {
   address: string;
   balances: {
-    free: string;
+    transferable: string;
+    usableForFees: string;
     locked: string;
     bonded: string;
     total: string;
@@ -36,11 +40,12 @@ export interface JsonChangeOutput {
 const transform = {
   outputToJson: ({
     address,
-    balances: { free, bonded, locked, total },
+    balances: { transferable, usableForFees, bonded, locked, total },
   }: BalanceChangeOutput) => ({
     address,
     balances: {
-      free: free.toString(),
+      transferable: transferable.toString(),
+      usableForFees: usableForFees.toString(),
       locked: locked.toString(),
       bonded: bonded.toString(),
       total: total.toString(),
@@ -48,11 +53,12 @@ const transform = {
   }),
   jsonToOutput: ({
     address,
-    balances: { free, bonded, locked, total },
+    balances: { transferable, usableForFees, bonded, locked, total },
   }: JsonChangeOutput) => ({
     address,
     balances: {
-      free: new BN(free),
+      transferable: new BN(transferable),
+      usableForFees: new BN(usableForFees),
       locked: new BN(locked),
       bonded: new BN(bonded),
       total: new BN(total),
@@ -71,18 +77,11 @@ export function computeBalance(
   address: string,
   balances: Balances,
 ): BalanceChangeOutput {
-  const { free, reserved, miscFrozen, feeFrozen } = balances;
-  const locked = miscFrozen.add(feeFrozen);
-  const total = free.add(reserved);
+  const transformedBalances = transformBalances(balances);
 
   return {
     address,
-    balances: {
-      free,
-      locked,
-      bonded: reserved,
-      total,
-    },
+    balances: transformedBalances,
   };
 }
 
