@@ -98,7 +98,7 @@ exports[`SignQuote should render 1`] = `
       <span
         class="identityName"
       >
-        My Sporran Identity
+        KILT Identity 1
       </span>
     </div>
     <label

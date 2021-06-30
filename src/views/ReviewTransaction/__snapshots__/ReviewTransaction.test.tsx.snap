@@ -28,7 +28,7 @@ exports[`ReviewTransaction should render 1`] = `
         <span
           class="name"
         >
-          My Sporran Identity
+          KILT Identity 1
         </span>
         <div
           class="wrapper"
