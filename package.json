@@ -95,8 +95,6 @@
     "jest": "^27.0.6",
     "jest-css-modules": "^2.1.0",
     "prettier": "^2.3.2",
-    "react-docgen-typescript-loader": "^3.7.2",
-    "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "style-loader": "^2.0.0",
     "stylelint": "^13.13.1",
     "stylelint-config-css-modules": "^2.2.0",
