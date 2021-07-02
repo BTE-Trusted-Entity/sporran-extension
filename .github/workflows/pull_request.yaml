@@ -4,26 +4,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Configure Node and package manager
-        uses: actions/setup-node@v2.2.0
-        with:
-          node-version: 14.x
-
       - name: Checkout the code
         uses: actions/checkout@v2.3.4
 
-      - name: Get package manager cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Package manager cache
-        id: yarn-cache
-        uses: actions/cache@v2.1.6
+      - name: Configure Node and package manager
+        uses: actions/setup-node@v2.2.0
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          node-version: '14'
+          cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
