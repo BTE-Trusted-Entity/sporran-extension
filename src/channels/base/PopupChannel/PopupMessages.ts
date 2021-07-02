@@ -19,7 +19,7 @@ function getPopupUrl(values: Record<string, Serializable>): string {
 
 const type = 'popup';
 const width = 480 + 1; // +1 to compensate for the window chrome
-const height = 600 + 1;
+const height = 600 + 23; // +23 to compensate for the window
 
 let popupId: number | undefined;
 let tabId: number | undefined;
