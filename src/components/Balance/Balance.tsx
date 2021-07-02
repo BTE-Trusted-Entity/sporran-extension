@@ -14,7 +14,8 @@ import {
 import styles from './Balance.module.css';
 
 interface BalanceBN {
-  free: BN;
+  transferable: BN;
+  usableForFees: BN;
   bonded: BN;
   locked: BN;
   total: BN;
@@ -94,8 +95,8 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
         <>
           <ul className={styles.breakdown}>
             <li className={styles.balance}>
-              {t('component_Balance_free')}
-              <KiltAmount amount={balance.free} type="funds" />
+              {t('component_Balance_transferable')}
+              <KiltAmount amount={balance.transferable} type="funds" />
             </li>
             <li className={styles.balance}>
               {t('component_Balance_locked')}

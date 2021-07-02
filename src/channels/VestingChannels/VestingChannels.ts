@@ -6,6 +6,7 @@ import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 
 import { decryptIdentity } from '../../utilities/identities/identities';
+import { transformBalances } from '../../utilities/transformBalances/transformBalances';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 
@@ -70,31 +71,17 @@ export async function vest({ address, password }: VestInput): Promise<void> {
 
   const { partialFee } = await api.rpc.payment.queryInfo(tx.toHex());
 
-  const balance = await getBalances(address);
+  const rawBalances = await getBalances(address);
 
-  if (balance.free.lt(partialFee)) {
+  const balance = transformBalances(rawBalances);
+
+  if (balance.usableForFees.lt(partialFee)) {
     throw new Error(insufficientFunds);
   }
-
-  const existentialDeposit = api.consts.balances.existentialDeposit;
-
-  const totalBalance = balance.free.add(balance.reserved);
-
-  const remainingBalance = totalBalance.sub(partialFee);
-
-  const belowExistential = remainingBalance.lt(existentialDeposit);
-
-  const useableRemainingBalance = remainingBalance.sub(balance.reserved);
-
-  const tip =
-    belowExistential && useableRemainingBalance.gtn(0)
-      ? useableRemainingBalance
-      : new BN(0);
 
   await BlockchainUtils.signAndSubmitTx(tx, identity, {
     resolveOn: BlockchainUtils.IS_IN_BLOCK,
     rejectOn: BlockchainUtils.IS_ERROR,
-    tip,
   });
 }
 

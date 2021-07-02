@@ -29,7 +29,7 @@ exports[`UnlockVestedFunds should render 1`] = `
     <p
       class="explanation"
     >
-      Your unlocked vested coins need to be released manually. Sign this transaction to release the coins to your usable balance. A fee is required.
+      Your unlocked vested coins need to be released manually. Sign this transaction to release the coins to your transferable balance. A fee is required.
     </p>
     <p
       class="resetLine"
