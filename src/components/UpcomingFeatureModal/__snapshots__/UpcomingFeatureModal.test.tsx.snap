@@ -8,7 +8,15 @@ exports[`UpcomingFeatureModal should render 1`] = `
     <p
       class="info"
     >
-      It is not yet possible to send funds. Please check sporran.org for feature releases and then ensure your extension is up to date.
+      It is not yet possible to transfer KILT Coins via the KILT blockchain. Please visit 
+      <a
+        href="https://sporran.org/"
+        rel="noreferrer"
+        target="_blank"
+      >
+        sporran.org
+      </a>
+       to check whether this functionality is live, then ensure your extension is up-to-date.
     </p>
     <button
       class="close"
