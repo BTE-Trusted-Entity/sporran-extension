@@ -11,6 +11,10 @@
   line-height: 1.25rem;
 }
 
+.info a {
+  color: var(--color-light);
+}
+
 .close {
   composes: button from '../../components/Overlay/Overlay.module.css';
 }
