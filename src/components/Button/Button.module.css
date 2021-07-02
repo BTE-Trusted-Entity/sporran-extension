@@ -51,9 +51,7 @@
 
 .buttonTertiary:disabled,
 .buttonTertiary[aria-disabled=true] {
-  opacity: 0.3;
-  border: 2px solid var(--color-dark);
-  color: var(--color-dark);
+  opacity: 0.4;
 }
 
 .buttonIcon {
