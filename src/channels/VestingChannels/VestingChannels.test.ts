@@ -7,7 +7,7 @@ import BN from 'bn.js';
 
 import { decryptIdentity } from '../../utilities/identities/identities';
 import { originalBalancesMock } from '../balanceChangeChannel/balanceChangeChannel.mock';
-import { getVestingFee, hasVestedFunds, vest } from './VestingChannels';
+import { hasVestedFunds, vest } from './VestingChannels';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: {
@@ -65,18 +65,6 @@ describe('VestingChannels', () => {
 
       expect(hasVestedFundsResult).toBe(true);
       expect(BlockchainApiConnection.getConnectionOrConnect).toHaveBeenCalled();
-    });
-  });
-
-  describe('vestingFee', () => {
-    it('should respond to proper message', async () => {
-      const vestingFee = await getVestingFee();
-
-      expect(apiMock.rpc.payment.queryInfo).toHaveBeenCalledWith(
-        'hex transaction',
-      );
-
-      expect(vestingFee).toEqual(new BN(0.5e15));
     });
   });
 
