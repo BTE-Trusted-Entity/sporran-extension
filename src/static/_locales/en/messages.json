@@ -177,7 +177,7 @@
     "message": "Your transaction has failed"
   },
   "component_TxStatusModal_subscan": {
-    "message": "Check status on Subscan"
+    "message": "Check Status on Subscan"
   },
   "component_PasswordField_reset": {
     "message": "Reset password"
