@@ -80,7 +80,6 @@ export const submitTransferChannel = new BrowserChannel<string>(
 export async function submitTransfer(hash: string): Promise<void> {
   await BlockchainUtils.submitSignedTx(currentTx[hash], {
     resolveOn: BlockchainUtils.IS_FINALIZED,
-    rejectOn: BlockchainUtils.IS_ERROR,
   });
   delete currentTx[hash];
 }

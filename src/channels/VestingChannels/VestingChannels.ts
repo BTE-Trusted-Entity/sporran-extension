@@ -81,7 +81,6 @@ export async function vest({ address, password }: VestInput): Promise<void> {
 
   await BlockchainUtils.signAndSubmitTx(tx, identity, {
     resolveOn: BlockchainUtils.IS_IN_BLOCK,
-    rejectOn: BlockchainUtils.IS_ERROR,
   });
 }
 
