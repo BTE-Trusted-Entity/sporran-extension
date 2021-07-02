@@ -198,7 +198,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const [fee, setFee] = useState<BN | null>(null);
 
   const balance = useAddressBalance(identity.address);
-  const maximum = balance && fee ? balance.free.sub(fee) : null;
+  const maximum = balance && balance.transferable;
 
   const [recipient, setRecipient] = useState('');
   const recipientError = recipient && getAddressError(recipient, identity);
@@ -239,34 +239,51 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     return numberToBN(roundedTip);
   }, [numericAmount, tipPercents]);
 
-  const { totalFee, existentialWarning, finalTip } = useMemo(() => {
-    const totalFee = fee && tipBN ? fee.add(tipBN) : new BN(0);
+  const {
+    totalCosts,
+    amountWithTip,
+    amountWithCosts,
+    existentialWarning,
+    finalTip,
+  } = useMemo(() => {
+    const totalCosts = fee && tipBN ? fee.add(tipBN) : new BN(0);
 
-    const amountWithCosts = totalFee.add(amountBN);
+    const amountWithTip = amountBN.add(tipBN);
+
+    const amountWithCosts = amountBN.add(totalCosts);
 
     if (!balance) {
-      return { totalFee };
+      return { totalCosts, amountWithTip, amountWithCosts };
     }
 
-    const remainingBalance = balance.total.sub(amountWithCosts);
-
-    const usableRemainingBalance = remainingBalance.sub(balance.bonded);
-
+    const remainingTotal = balance.total.sub(amountWithCosts);
     const existentialWarning =
-      existential &&
-      remainingBalance.lt(existential) &&
-      !remainingBalance.isZero();
+      existential && remainingTotal.lt(existential) && !remainingTotal.isZero();
 
-    const finalTip =
-      existentialWarning && usableRemainingBalance.gtn(0)
-        ? tipBN.add(usableRemainingBalance)
-        : tipBN;
+    const maxTransferable = BN.min(
+      balance.transferable,
+      balance.usableForFees.sub(fee || new BN(0)),
+    );
+    const remainingTransferable = maxTransferable.sub(amountBN);
 
-    return { totalFee, existentialWarning, finalTip };
+    const finalTip = existentialWarning
+      ? BN.max(remainingTransferable, tipBN)
+      : tipBN;
+
+    return {
+      totalCosts,
+      amountWithTip,
+      amountWithCosts,
+      existentialWarning,
+      finalTip,
+    };
   }, [amountBN, balance, fee, tipBN]);
 
   const totalError =
-    maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
+    balance &&
+    maximum &&
+    (amountWithTip.gt(maximum) || amountWithCosts.gt(balance.usableForFees)) &&
+    t('view_SendToken_fee_large');
 
   useEffect(() => {
     (async () => {
@@ -307,14 +324,20 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
 
   const handleAllInClick = useCallback(
     (event) => {
-      if (!maximum) {
+      if (!balance || !fee) {
         return;
       }
+      const { transferable, usableForFees } = balance;
+
+      const remainingUsableForFees = usableForFees.sub(fee);
+
+      const allInAmount = BN.min(transferable, remainingUsableForFees);
+
       const input = event.target.form.amount;
-      input.value = formatKiltInput(maximum);
+      input.value = formatKiltInput(allInAmount);
       setAmount(input.value);
     },
-    [maximum],
+    [balance, fee],
   );
 
   const handleDecreaseTipClick = useCallback(() => {
@@ -420,7 +443,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
         />
         <small className={styles.total}>
           {t('view_SendToken_total_fee')}
-          {asKiltCoins(totalFee, 'costs')} K
+          {asKiltCoins(totalCosts, 'costs')} K
         </small>
         <button
           className={styles.increase}

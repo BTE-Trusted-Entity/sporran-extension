@@ -15,7 +15,8 @@ describe('balanceChangeChannel', () => {
 
       expect(balanceMock).toEqual({
         bonded: result.balances.bonded.toString(),
-        free: result.balances.free.toString(),
+        transferable: result.balances.transferable.toString(),
+        usableForFees: result.balances.usableForFees.toString(),
         locked: result.balances.locked.toString(),
         total: result.balances.total.toString(),
       });
@@ -46,7 +47,8 @@ describe('balanceChangeChannel', () => {
       const result = publisher.mock.calls[0][1];
       expect(balanceMock).toEqual({
         bonded: result.balances.bonded.toString(),
-        free: result.balances.free.toString(),
+        transferable: result.balances.transferable.toString(),
+        usableForFees: result.balances.usableForFees.toString(),
         locked: result.balances.locked.toString(),
         total: result.balances.total.toString(),
       });
