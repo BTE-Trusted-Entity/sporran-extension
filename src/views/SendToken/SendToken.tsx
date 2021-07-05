@@ -198,7 +198,8 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const [fee, setFee] = useState<BN | null>(null);
 
   const balance = useAddressBalance(identity.address);
-  const maximum = balance && balance.transferable;
+  const maximum =
+    balance && fee ? BN.max(balance.transferable.sub(fee), new BN(0)) : null;
 
   const [recipient, setRecipient] = useState('');
   const recipientError = recipient && getAddressError(recipient, identity);
@@ -239,51 +240,34 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     return numberToBN(roundedTip);
   }, [numericAmount, tipPercents]);
 
-  const {
-    totalCosts,
-    amountWithTip,
-    amountWithCosts,
-    existentialWarning,
-    finalTip,
-  } = useMemo(() => {
-    const totalCosts = fee && tipBN ? fee.add(tipBN) : new BN(0);
+  const { totalCosts, existentialWarning, finalTip } = useMemo(() => {
+    const totalCosts = tipBN.add(fee || new BN(0));
 
-    const amountWithTip = amountBN.add(tipBN);
-
-    const amountWithCosts = amountBN.add(totalCosts);
-
-    if (!balance) {
-      return { totalCosts, amountWithTip, amountWithCosts };
+    if (!balance || !maximum || !fee) {
+      return { totalCosts };
     }
 
-    const remainingTotal = balance.total.sub(amountWithCosts);
+    const remainingTotal = balance.total.sub(amountBN).sub(totalCosts);
     const existentialWarning =
       existential && remainingTotal.lt(existential) && !remainingTotal.isZero();
 
-    const maxTransferable = BN.min(
-      balance.transferable,
-      balance.usableForFees.sub(fee || new BN(0)),
-    );
-    const remainingTransferable = maxTransferable.sub(amountBN);
+    const remainingTransferable = maximum.sub(amountBN);
+    // Including some tip slightly increases the transaction size and the fee, allow some room for it
+    const remainingAdjustedForTip = remainingTransferable.sub(fee.muln(0.01));
 
     const finalTip = existentialWarning
-      ? BN.max(remainingTransferable, tipBN)
+      ? BN.max(remainingAdjustedForTip, tipBN)
       : tipBN;
 
     return {
       totalCosts,
-      amountWithTip,
-      amountWithCosts,
       existentialWarning,
       finalTip,
     };
-  }, [amountBN, balance, fee, tipBN]);
+  }, [amountBN, balance, maximum, fee, tipBN]);
 
   const totalError =
-    balance &&
-    maximum &&
-    (amountWithTip.gt(maximum) || amountWithCosts.gt(balance.usableForFees)) &&
-    t('view_SendToken_fee_large');
+    maximum && amountBN.add(tipBN).gt(maximum) && t('view_SendToken_fee_large');
 
   useEffect(() => {
     (async () => {
@@ -293,10 +277,14 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       if (recipient && !isValidAddress(recipient)) {
         return;
       }
-      const realFee = await feeChannel.get({ amount: amountBN, recipient });
+      const realFee = await feeChannel.get({
+        amount: amountBN,
+        tip: tipBN,
+        recipient,
+      });
       setFee(realFee);
     })();
-  }, [amountBN, identity, recipient]);
+  }, [amountBN, identity, recipient, tipBN]);
 
   const handleAmountInput = useCallback((event) => {
     const { value } = event.target;
@@ -324,20 +312,15 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
 
   const handleAllInClick = useCallback(
     (event) => {
-      if (!balance || !fee) {
+      if (!maximum) {
         return;
       }
-      const { transferable, usableForFees } = balance;
-
-      const remainingUsableForFees = usableForFees.sub(fee);
-
-      const allInAmount = BN.min(transferable, remainingUsableForFees);
 
       const input = event.target.form.amount;
-      input.value = formatKiltInput(allInAmount);
+      input.value = formatKiltInput(maximum);
       setAmount(input.value);
     },
-    [balance, fee],
+    [maximum],
   );
 
   const handleDecreaseTipClick = useCallback(() => {

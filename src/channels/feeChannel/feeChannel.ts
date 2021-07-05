@@ -1,4 +1,5 @@
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { Identity } from '@kiltprotocol/core';
 import BN from 'bn.js';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
@@ -6,6 +7,7 @@ import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 interface FeeInput {
   recipient: string;
   amount: BN;
+  tip: BN;
 }
 
 type FeeOutput = BN;
@@ -13,17 +15,20 @@ type FeeOutput = BN;
 interface JsonFeeInput {
   recipient: string;
   amount: string;
+  tip: string;
 }
 
 type JsonFeeOutput = string;
 
 const transform = {
-  inputToJson: ({ amount, recipient }: FeeInput) => ({
+  inputToJson: ({ amount, tip, recipient }: FeeInput) => ({
     amount: amount.toString(),
+    tip: tip.toString(),
     recipient,
   }),
-  jsonToInput: ({ amount, recipient }: JsonFeeInput) => ({
+  jsonToInput: ({ amount, tip, recipient }: JsonFeeInput) => ({
     amount: new BN(amount),
+    tip: new BN(tip),
     recipient,
   }),
   outputToJson: (output: BN) => output.toString(),
@@ -41,14 +46,19 @@ const fallbackAddressForFee =
   '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 
 export async function getFee(input: FeeInput): Promise<BN> {
-  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
+  const { api } = blockchain;
 
   const tx = api.tx.balances.transfer(
     input.recipient || fallbackAddressForFee,
     input.amount,
   );
 
-  const { partialFee } = await api.rpc.payment.queryInfo(tx.toHex());
+  // Including any signature increases the transaction size and the fee
+  const fakeIdentity = Identity.buildFromURI('//Alice');
+  const signedTx = await blockchain.signTx(fakeIdentity, tx, input.tip);
+
+  const { partialFee } = await api.rpc.payment.queryInfo(signedTx.toHex());
   return partialFee;
 }
 
