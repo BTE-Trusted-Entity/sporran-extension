@@ -50,7 +50,7 @@ describe('SendToken', () => {
     const { container } = render(
       <SendToken identity={identity} onSuccess={jest.fn()} />,
     );
-    await screen.findByText(/Maximum transferable amount: 1.2160/);
+    await screen.findByText(/Maximum transferable amount: 1.2150/);
     expect(container).toMatchSnapshot();
   });
 
@@ -77,7 +77,7 @@ describe('SendToken', () => {
       address,
     );
     userEvent.click(await screen.findByLabelText('Increase the tip by 1%'));
-    await screen.findByText(/Maximum transferable amount: 1.2160/);
+    await screen.findByText(/Maximum transferable amount: 1.2150/);
 
     await runWithJSDOMErrorsDisabled(() => {
       userEvent.click(submit);
@@ -115,7 +115,7 @@ describe('SendToken', () => {
     const values = onSuccess.mock.calls[0][0];
 
     expect(values.existentialWarning).toBe(true);
-    expect(values.tip.toString()).toEqual('16000000000000');
+    expect(values.tip.toString()).toEqual('14990000671089');
   });
 
   it('should report too small an amount', async () => {
@@ -155,7 +155,7 @@ describe('SendToken', () => {
     render(<SendToken identity={identity} onSuccess={jest.fn()} />);
 
     userEvent.click(await screen.findByLabelText('Increase the tip by 1%'));
-    userEvent.type(await screen.findByLabelText('Amount to send'), '1.216');
+    userEvent.type(await screen.findByLabelText('Amount to send'), '1.215');
 
     expect(
       await screen.findByText(
@@ -233,7 +233,8 @@ describe('SendToken', () => {
   it('should allow all transferable balance to be sent if there is enough usableForFee balance', async () => {
     render(<SendToken identity={identity} onSuccess={jest.fn()} />);
 
-    userEvent.type(await screen.findByLabelText('Amount to send'), '1.216');
+    userEvent.type(await screen.findByLabelText('Amount to send'), '1.215');
+    await screen.findByText(/Maximum transferable amount: 1.2150/);
 
     expect(
       screen.queryByText(
