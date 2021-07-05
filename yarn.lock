@@ -1664,10 +1664,10 @@
     "@polkadot/x-rxjs" "^6.10.1"
     eventemitter3 "^4.0.7"
 
-"@polkadot/extension-inject@^0.38.7":
-  version "0.38.7"
-  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.38.7.tgz#d1a7ac0bd9e99d45fb5a40729d8315f6e319ba38"
-  integrity sha512-0+FSKWKeHzfPcD1EBA7smHGdPJ8FzAGSXm2ZRF3UaYPwoVvPadpEwUshWr/TmhBE/klxJcAmJhkz0h/EO9CI4A==
+"@polkadot/extension-inject@^0.38.8":
+  version "0.38.8"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.38.8.tgz#0d3b3819eadc48f18d58d409d1c71c146e0f504b"
+  integrity sha512-TMkifhCvnDYFxpGgZSwn5XIxCPVjozb7506rHWUP+lCeXq2hjTMKoEYKAUFXo2xnQPJTyqO3/8XPPkKAfPJe/w==
   dependencies:
     "@babel/runtime" "^7.14.6"
 
