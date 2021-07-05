@@ -4,7 +4,7 @@ import { browser, Runtime } from 'webextension-polyfill-ts';
 const name = 'popup';
 
 export function connectToBackground(): void {
-  browser.runtime.connect(undefined, { name });
+  browser.runtime.connect({ name });
 }
 
 export function onPopupConnect(callback: (port: Runtime.Port) => void): void {
