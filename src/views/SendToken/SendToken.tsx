@@ -374,7 +374,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       <p className={styles.subline}>{t('view_SendToken_subline')}</p>
 
       <IdentitiesCarousel path={path} identity={identity} options={false} />
-      <Balance address={identity.address} />
+      <Balance address={identity.address} smallDecimals />
 
       <small className={styles.maximum}>
         {t('view_SendToken_maximum')}

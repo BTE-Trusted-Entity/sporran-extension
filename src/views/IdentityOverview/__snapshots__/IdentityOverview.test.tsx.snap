@@ -115,7 +115,12 @@ exports[`IdentityOverview should render a normal identity 1`] = `
       <span
         class="amount"
       >
-        1.2340
+        1
+        <span
+          class="fractional"
+        >
+          .2340
+        </span>
          
         <span
           aria-label="KILT Coin"
@@ -408,7 +413,12 @@ exports[`IdentityOverview should render upcoming feature modal 1`] = `
       <span
         class="amount"
       >
-        1.2340
+        1
+        <span
+          class="fractional"
+        >
+          .2340
+        </span>
          
         <span
           aria-label="KILT Coin"
@@ -607,7 +617,12 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
       <span
         class="amount"
       >
-        1.2340
+        1
+        <span
+          class="fractional"
+        >
+          .2340
+        </span>
          
         <span
           aria-label="KILT Coin"

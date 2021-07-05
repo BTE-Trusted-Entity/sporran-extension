@@ -85,7 +85,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
       <IdentitiesCarousel path={path} identity={identity} />
 
-      <Balance address={address} breakdown />
+      <Balance address={address} breakdown smallDecimals />
 
       <p>
         {features.sendToken ? (

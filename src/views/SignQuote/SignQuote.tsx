@@ -69,7 +69,7 @@ export function SignQuote(): JSX.Element | null {
 
       <p className={styles.costs}>
         <span>{t('view_SignQuote_costs')}</span>
-        <KiltAmount amount={costs} type="costs" />
+        <KiltAmount amount={costs} type="costs" smallDecimals />
       </p>
 
       <label className={styles.label}>

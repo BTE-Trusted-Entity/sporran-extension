@@ -2,4 +2,10 @@
   composes: balanceText from '../Typography/Typography.module.css';
   margin-left: 0.25em;
   font-size: 1em;
+  line-height: 1em;
+}
+
+.fractional {
+  font-size: 0.7em;
+  vertical-align: text-top;
 }

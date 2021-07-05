@@ -37,12 +37,32 @@ export function asKiltCoins(amount: BN, type: Type): string {
 interface Props {
   amount: BN;
   type: Type;
+  smallDecimals?: boolean;
 }
 
-export function KiltAmount({ amount, type }: Props): JSX.Element {
+export function KiltAmount({
+  amount,
+  type,
+  smallDecimals = false,
+}: Props): JSX.Element {
+  const value = asKiltCoins(amount, type);
+
+  const offset = -1 - PRECISION;
+  const integer = value.slice(0, offset);
+  const fractional = value.slice(offset);
+
+  const formatted = smallDecimals ? (
+    <>
+      {integer}
+      <span className={styles.fractional}>{fractional}</span>
+    </>
+  ) : (
+    value
+  );
+
   return (
     <span className={styles.amount}>
-      {asKiltCoins(amount, type)} <KiltCurrency />
+      {formatted} <KiltCurrency />
     </span>
   );
 }

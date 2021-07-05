@@ -29,3 +29,23 @@ exports[`KiltAmount KiltAmount should render funds 1`] = `
   </span>
 </div>
 `;
+
+exports[`KiltAmount KiltAmount should render with small fractional part 1`] = `
+<div>
+  <span
+    class="amount"
+  >
+    1
+    <span
+      class="fractional"
+    >
+      .2346
+    </span>
+     
+    <span
+      aria-label="KILT Coin"
+      class="coin"
+    />
+  </span>
+</div>
+`;

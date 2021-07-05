@@ -1,6 +1,7 @@
 declare namespace KiltAmountModuleCssNamespace {
   export interface IKiltAmountModuleCss {
     amount: string;
+    fractional: string;
   }
 }
 

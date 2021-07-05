@@ -65,7 +65,12 @@ exports[`ReviewTransaction should render 1`] = `
       <span
         class="amount"
       >
-        120.0101
+        120
+        <span
+          class="fractional"
+        >
+          .0101
+        </span>
          
         <span
           aria-label="KILT Coin"
