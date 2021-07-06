@@ -1,16 +1,18 @@
 import { useState, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
-import { paths, generatePath } from '../paths';
+import { paths } from '../paths';
 
 import {
-  vestChannel,
   insufficientFunds,
+  signVestChannel,
+  submitVestChannel,
 } from '../../channels/VestingChannels/VestingChannels';
 
 import { Avatar } from '../../components/Avatar/Avatar';
+import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import {
@@ -27,7 +29,11 @@ interface Props {
 export function UnlockVestedFunds({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const history = useHistory();
+  const [txStatus, setTxStatus] = useState<
+    'pending' | 'success' | 'error' | null
+  >(null);
+
+  const [txHash, setTxHash] = useState<string>();
 
   const [error, setError] = useState<string | null>(null);
 
@@ -42,18 +48,28 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
       try {
         const password = await passwordField.get(event);
 
-        await vestChannel.get({ address, password });
+        setTxStatus('pending');
 
-        history.push(generatePath(paths.identity.overview, { address }));
+        const hash = await signVestChannel.get({ address, password });
+        setTxHash(hash);
+
+        await submitVestChannel.get(hash);
+
+        setTxStatus('success');
       } catch (error) {
+        setTxStatus('error');
         console.error(error);
         if (error.message === insufficientFunds) {
           setError(t('view_UnlockVestedFunds_insufficient_funds'));
         }
       }
     },
-    [t, identity, history, passwordField],
+    [t, identity, passwordField],
   );
+
+  const closeModal = useCallback(() => {
+    setTxStatus(null);
+  }, []);
 
   return (
     <form
@@ -84,6 +100,15 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
           {error}
         </output>
       </p>
+
+      {txStatus && (
+        <TxStatusModal
+          identity={identity}
+          status={txStatus}
+          txHash={txHash}
+          onDismissError={closeModal}
+        />
+      )}
 
       <LinkBack />
       <Stats />

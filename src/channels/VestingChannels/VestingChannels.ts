@@ -3,6 +3,7 @@ import {
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
 import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
+import { SubmittableExtrinsic } from '@polkadot/api/types';
 
 import { decryptIdentity } from '../../utilities/identities/identities';
 import { transformBalances } from '../../utilities/transformBalances/transformBalances';
@@ -13,6 +14,8 @@ interface VestInput {
   address: string;
   password: string;
 }
+
+const currentTx: Record<string, SubmittableExtrinsic<'promise'>> = {};
 
 export const hasVestedFundsChannel = new BrowserChannel<string, boolean>(
   'hasVestedFunds',
@@ -28,32 +31,46 @@ export function initBackgroundHasVestedFundsChannel(): void {
   hasVestedFundsChannel.produce(hasVestedFunds);
 }
 
-export const vestChannel = new BrowserChannel<VestInput>('vest');
+export const signVestChannel = new BrowserChannel<VestInput, string>(
+  'signVest',
+);
 
 export const insufficientFunds = 'Insufficient funds';
 
-export async function vest({ address, password }: VestInput): Promise<void> {
-  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+export async function signVest({
+  address,
+  password,
+}: VestInput): Promise<string> {
+  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
+  const { api } = blockchain;
 
   const identity = await decryptIdentity(address, password);
 
   const tx = api.tx.vesting.vest();
+  const signedTx = await blockchain.signTx(identity, tx);
 
-  const { partialFee } = await api.rpc.payment.queryInfo(tx.toHex());
+  const { partialFee } = await api.rpc.payment.queryInfo(signedTx.toHex());
+  const { usableForFees } = transformBalances(await getBalances(address));
 
-  const rawBalances = await getBalances(address);
-
-  const balance = transformBalances(rawBalances);
-
-  if (balance.usableForFees.lt(partialFee)) {
+  if (usableForFees.lt(partialFee)) {
     throw new Error(insufficientFunds);
   }
 
-  await BlockchainUtils.signAndSubmitTx(tx, identity, {
-    resolveOn: BlockchainUtils.IS_IN_BLOCK,
-  });
+  const hash = signedTx.hash.toHex();
+  currentTx[hash] = signedTx;
+  return hash;
 }
 
-export function initBackgroundVestChannel(): void {
-  vestChannel.produce(vest);
+export const submitVestChannel = new BrowserChannel<string>('submitVest');
+
+export async function submitVest(hash: string): Promise<void> {
+  await BlockchainUtils.submitSignedTx(currentTx[hash], {
+    resolveOn: BlockchainUtils.IS_FINALIZED,
+  });
+  delete currentTx[hash];
+}
+
+export function initBackgroundVestChannels(): void {
+  signVestChannel.produce(signVest);
+  submitVestChannel.produce(submitVest);
 }
