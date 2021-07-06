@@ -118,7 +118,7 @@
     "message": "Settings"
   },
   "component_Settings_forget": {
-    "message": "Forget Current Identity"
+    "message": "Remove Current Identity"
   },
   "component_Settings_reset_password": {
     "message": "Reset Password for Current Identity"

@@ -32,7 +32,7 @@ describe('Settings', () => {
 
     expect(await screen.findByRole('menu')).toBeInTheDocument();
     expect(
-      await screen.findByRole('menuitem', { name: 'Forget Current Identity' }),
+      await screen.findByRole('menuitem', { name: 'Remove Current Identity' }),
     ).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
 
