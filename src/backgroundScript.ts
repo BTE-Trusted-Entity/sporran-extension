@@ -31,7 +31,7 @@ import { initBackgroundGenesisHashChannel } from './dApps/genesisHashChannel/ini
 
 import {
   initBackgroundHasVestedFundsChannel,
-  initBackgroundVestChannel,
+  initBackgroundVestChannels,
 } from './channels/VestingChannels/VestingChannels';
 
 function initSavedPasswords() {
@@ -63,7 +63,7 @@ function initTransferChannels() {
 
 function initVestingChannels() {
   initBackgroundHasVestedFundsChannel();
-  initBackgroundVestChannel();
+  initBackgroundVestChannels();
 }
 
 function init() {

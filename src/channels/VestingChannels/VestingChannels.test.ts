@@ -7,14 +7,14 @@ import BN from 'bn.js';
 
 import { decryptIdentity } from '../../utilities/identities/identities';
 import { originalBalancesMock } from '../balanceChangeChannel/balanceChangeChannel.mock';
-import { hasVestedFunds, vest } from './VestingChannels';
+import { hasVestedFunds, signVest, submitVest } from './VestingChannels';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: {
     getConnectionOrConnect: jest.fn(),
   },
   BlockchainUtils: {
-    signAndSubmitTx: jest.fn(),
+    submitSignedTx: jest.fn(),
   },
 }));
 
@@ -54,13 +54,29 @@ const apiMock = {
   },
 };
 
+const signedTxMock = {
+  hash: {
+    toHex() {
+      return 'Signed tx hash';
+    },
+  },
+  toHex() {
+    return 'Signed tx hex';
+  },
+};
+
+const chainMock = {
+  api: apiMock,
+  signTx: jest.fn().mockResolvedValue(signedTxMock),
+};
+
 (BlockchainApiConnection.getConnectionOrConnect as jest.Mock).mockResolvedValue(
-  { api: apiMock },
+  chainMock,
 );
 
 describe('VestingChannels', () => {
   describe('hasVestedFunds', () => {
-    it('should respond to proper message', async () => {
+    it('should return true when has vested funds', async () => {
       const hasVestedFundsResult = await hasVestedFunds(mockAddress);
 
       expect(hasVestedFundsResult).toBe(true);
@@ -68,8 +84,8 @@ describe('VestingChannels', () => {
     });
   });
 
-  describe('vest', () => {
-    it('should respond to proper message', async () => {
+  describe('signVest', () => {
+    it('should return the hash of the signed transaction', async () => {
       const identityMock = {
         identity: true,
       };
@@ -78,19 +94,31 @@ describe('VestingChannels', () => {
 
       (getBalances as jest.Mock).mockResolvedValue(originalBalancesMock);
 
-      await vest({ address: mockAddress, password: 'password' });
+      const hash = await signVest({
+        address: mockAddress,
+        password: 'password',
+      });
 
       expect(decryptIdentity).toHaveBeenCalledWith(mockAddress, 'password');
 
       expect(apiMock.tx.vesting.vest).toHaveBeenCalled();
 
       expect(apiMock.rpc.payment.queryInfo).toHaveBeenCalledWith(
-        'hex transaction',
+        'Signed tx hex',
       );
 
-      expect(BlockchainUtils.signAndSubmitTx).toHaveBeenCalledWith(
-        txMock,
-        identityMock,
+      expect(chainMock.signTx).toHaveBeenCalledWith(identityMock, txMock);
+
+      expect(hash).toEqual('Signed tx hash');
+    });
+  });
+
+  describe('submitVest', () => {
+    it('should submit the transaction', async () => {
+      await submitVest('Signed tx hash');
+
+      expect(BlockchainUtils.submitSignedTx).toHaveBeenCalledWith(
+        signedTxMock,
         expect.anything(),
       );
     });

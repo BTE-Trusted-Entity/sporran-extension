@@ -40,7 +40,7 @@ const chainMock = {
 
 describe('transferChannels', () => {
   describe('signTransferChannel', () => {
-    it('should respond to the the proper messages', async () => {
+    it('should return the hash of the signed transaction', async () => {
       (decryptIdentity as jest.Mock).mockImplementation(() => ({
         sdkIdentity: true,
       }));
@@ -73,7 +73,7 @@ describe('transferChannels', () => {
     });
   });
   describe('submitTransferChannel', () => {
-    it('should respond to the proper messages', async () => {
+    it('should submit the transaction', async () => {
       await submitTransfer('Signed tx hash');
       expect(BlockchainUtils.submitSignedTx).toHaveBeenCalledWith(
         signedTxMock,
