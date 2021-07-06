@@ -16,7 +16,9 @@ describe('Balance', () => {
   });
 
   it('should show balance breakdown with update balance button', async () => {
-    const { container } = render(<Balance address={mockAddress} breakdown />);
+    const { container } = render(
+      <Balance address={mockAddress} breakdown smallDecimals />,
+    );
 
     const showBreakdown = await screen.findByRole('button', {
       name: 'Show balance breakdown',

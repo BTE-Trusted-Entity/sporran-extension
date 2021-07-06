@@ -53,5 +53,15 @@ describe('KiltAmount', () => {
       );
       expect(container).toMatchSnapshot();
     });
+    it('should render with small fractional part', async () => {
+      const { container } = render(
+        <KiltAmount
+          amount={new BN(1.23450001e15)}
+          type="costs"
+          smallDecimals
+        />,
+      );
+      expect(container).toMatchSnapshot();
+    });
   });
 });

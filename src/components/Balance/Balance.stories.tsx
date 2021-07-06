@@ -16,6 +16,7 @@ export function WithBreakdown(): JSX.Element {
     <Balance
       address="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       breakdown
+      smallDecimals
     />
   );
 }

@@ -222,7 +222,12 @@ exports[`SendToken should render 1`] = `
       <span
         class="amount"
       >
-        1.2340
+        1
+        <span
+          class="fractional"
+        >
+          .2340
+        </span>
          
         <span
           aria-label="KILT Coin"

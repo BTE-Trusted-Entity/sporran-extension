@@ -47,9 +47,14 @@ export function useAddressBalance(address: string): BalanceBN | null {
 interface BalanceProps {
   address: string;
   breakdown?: boolean;
+  smallDecimals?: boolean;
 }
 
-export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
+export function Balance({
+  address,
+  breakdown = false,
+  smallDecimals = false,
+}: BalanceProps): JSX.Element {
   const t = browser.i18n.getMessage;
   const balance = useAddressBalance(address);
 
@@ -67,7 +72,13 @@ export function Balance({ address, breakdown }: BalanceProps): JSX.Element {
     <>
       <p className={styles.balanceLine}>
         {t('component_Balance_label')}
-        {balance !== null && <KiltAmount amount={balance.total} type="funds" />}
+        {balance !== null && (
+          <KiltAmount
+            amount={balance.total}
+            type="funds"
+            smallDecimals={smallDecimals}
+          />
+        )}
 
         {balance === null && <ClipLoader size={10} />}
 

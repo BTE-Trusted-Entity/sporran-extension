@@ -68,7 +68,12 @@ exports[`SignQuote should render 1`] = `
       <span
         class="amount"
       >
-        0.0000
+        0
+        <span
+          class="fractional"
+        >
+          .0000
+        </span>
          
         <span
           aria-label="KILT Coin"
