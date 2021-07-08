@@ -6,28 +6,12 @@ import { configuration } from './configuration/configuration';
 
 async function showClaimPopup(values: { [key: string]: string }) {
   // Non-extension scripts cannot open windows with extension pages
-  return injectedClaimChannel.get({
-    // TODO: remove
-    'Full Name': 'Ingo Rübe',
-    Email: 'ingo@kilt.io',
-    'Credential type': 'BL-Mail-Simple',
-    Attester: 'SocialKYC',
-
-    ...values,
-  });
+  return injectedClaimChannel.get(values);
 }
 
 async function showSaveCredentialPopup(values: { [key: string]: string }) {
   // Non-extension scripts cannot open windows with extension pages
-  return injectedSaveChannel.get({
-    // TODO: remove
-    'Full Name': 'Ingo Rübe',
-    Email: 'ingo@kilt.io',
-    'Credential type': 'BL-Mail-Simple',
-    Attester: 'SocialKYC',
-
-    ...values,
-  });
+  return injectedSaveChannel.get(values);
 }
 
 async function showShareCredentialPopup(values: { [key: string]: string }) {
