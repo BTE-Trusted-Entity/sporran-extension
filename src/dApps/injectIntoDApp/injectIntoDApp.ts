@@ -5,8 +5,8 @@ import { IdentitiesInjectedAPI } from '../IdentitiesInjectedAPI/IdentitiesInject
 import { SignerInjectedAPI } from '../SignerInjectedAPI/SignerInjectedAPI';
 import { debounceAsync } from '../../utilities/debounceAsync/debounceAsync';
 
-const authenticate = debounceAsync<typeof injectedAccessChannel.get>((input) =>
-  injectedAccessChannel.get(input),
+export const authenticate = debounceAsync<typeof injectedAccessChannel.get>(
+  (input) => injectedAccessChannel.get(input),
 );
 
 export function injectIntoDApp(version: string): void {
