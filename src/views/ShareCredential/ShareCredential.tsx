@@ -65,23 +65,12 @@ export function ShareCredential(): JSX.Element | null {
 
   const identity = minBy(Object.values(identities), 'index') as Identity;
 
-  // TODO: use real data
-  const credentials = [
-    {
-      Name: 'email private',
-      'Full Name': 'Ingo Rübe',
-      Email: 'ingo@kilt.io',
-      'Credential type': 'BL-Mail-Simple',
-      Attester: 'SocialKYC',
-      valid: true,
-    },
-    {
-      Name: 'twitter',
-      'Credential type': 'BL-Mail-Advanced',
-      Attester: 'SocialKYC',
-      valid: true,
-    },
-  ];
+  const credentials: {
+    Name: string;
+    'Credential type': string;
+    Attester: string;
+    valid: boolean;
+  }[] = [];
 
   const allChecked = credentials.every((dummy, index) => checked[index]);
 

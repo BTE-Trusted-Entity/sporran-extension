@@ -17,23 +17,12 @@ interface Props {
 export function IdentityCredentials({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  // TODO: use real data
-  const credentials = [
-    {
-      Name: 'email private',
-      'Full Name': 'Ingo Rübe',
-      Email: 'ingo@kilt.io',
-      'Credential type': 'BL-Mail-Simple',
-      Attester: 'SocialKYC',
-      valid: true,
-    },
-    {
-      Name: 'twitter',
-      'Credential type': 'BL-Mail-Advanced',
-      Attester: 'SocialKYC',
-      valid: true,
-    },
-  ];
+  const credentials: {
+    Name: string;
+    'Credential type': string;
+    Attester: string;
+    valid: boolean;
+  }[] = [];
 
   return (
     <section className={styles.container}>
