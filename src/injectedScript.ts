@@ -77,6 +77,7 @@ async function startSession(unsafeDAppName: string, identity: IPublicIdentity) {
     /** Sporran public identity */
     account: {
       // TODO: real values
+      ...dAppIdentity,
       address: '4tDFy3ubRSio33vtu2N9zWoACqC6U12i4zmCnEuawXjn5SEP',
       boxPublicKeyAsHex:
         '0xe5a91394ab38253ae192d22914618ce868601d15190ca8ed35b5b81a1c9cd10e',
