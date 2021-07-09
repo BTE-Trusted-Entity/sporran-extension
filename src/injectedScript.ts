@@ -1,8 +1,12 @@
+import { find, mapValues } from 'lodash-es';
 import {
   IMessage,
   IPublicIdentity,
+  IRejectTerms,
+  ISubmitTerms,
   MessageBodyType,
 } from '@kiltprotocol/types';
+import Message from '@kiltprotocol/messaging';
 import { injectedClaimChannel } from './channels/ClaimChannels/injectedClaimChannel';
 import { injectedSaveChannel } from './channels/SaveChannels/injectedSaveChannel';
 import { injectedShareChannel } from './channels/ShareChannels/injectedShareChannel';
@@ -49,6 +53,12 @@ interface InjectedWindowProvider {
 }
 
 let dAppIdentity: IPublicIdentity;
+const sporranIdentity: IPublicIdentity = {
+  // TODO: real values
+  address: '4tDFy3ubRSio33vtu2N9zWoACqC6U12i4zmCnEuawXjn5SEP',
+  boxPublicKeyAsHex:
+    '0xe5a91394ab38253ae192d22914618ce868601d15190ca8ed35b5b81a1c9cd10e',
+};
 
 let onMessageFromSporran: (message: IMessage) => Promise<void>;
 
@@ -58,10 +68,36 @@ async function storeMessageFromSporran(message: IMessage): Promise<void> {
   unprocessedMessagesFromSporran.push(message);
 }
 
-async function processMessageFromDApp(message: IMessage): Promise<void> {
+async function processSubmitTerms(
+  messageBody: ISubmitTerms,
+  dAppName: string,
+): Promise<void> {
+  const { claim, cTypes, quote, legitimations, delegationId } =
+    messageBody.content;
+  try {
+    const cType = find(cTypes, { hash: claim.cTypeHash });
+    await injectedClaimChannel.get({
+      ...mapValues(claim.contents, (value) => String(value)),
+      ...(cType && { 'Credential type': cType.schema.title }),
+      ...(quote && { total: String(quote.cost.gross) }),
+      Attester: dAppName,
+    });
+  } catch (error) {
+    const rejectionBody: IRejectTerms = {
+      content: { claim, legitimations, delegationId },
+      type: MessageBodyType.REJECT_TERMS,
+    };
+    const rejection = new Message(rejectionBody, sporranIdentity, dAppIdentity);
+    await onMessageFromSporran(rejection);
+  }
+}
+
+async function processMessageFromDApp(
+  message: IMessage,
+  dAppName: string,
+): Promise<void> {
   if (message.body.type === MessageBodyType.SUBMIT_TERMS) {
-    // TODO: really handle terms instead of just sending the message back
-    await onMessageFromSporran(message);
+    await processSubmitTerms(message.body as ISubmitTerms, dAppName);
   }
 }
 
@@ -75,13 +111,7 @@ async function startSession(unsafeDAppName: string, identity: IPublicIdentity) {
 
   return {
     /** Sporran public identity */
-    account: {
-      // TODO: real values
-      ...dAppIdentity,
-      address: '4tDFy3ubRSio33vtu2N9zWoACqC6U12i4zmCnEuawXjn5SEP',
-      boxPublicKeyAsHex:
-        '0xe5a91394ab38253ae192d22914618ce868601d15190ca8ed35b5b81a1c9cd10e',
-    },
+    account: sporranIdentity,
 
     /** dApp will use given callback to process messages from Sporran */
     async listen(
@@ -102,7 +132,7 @@ async function startSession(unsafeDAppName: string, identity: IPublicIdentity) {
 
     /** dApp sends a message */
     async send(message: IMessage): Promise<void> {
-      return await processMessageFromDApp(message);
+      return await processMessageFromDApp(message, dAppName);
     },
   };
 }
