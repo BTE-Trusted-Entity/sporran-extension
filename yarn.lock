@@ -1495,7 +1495,7 @@
     "@kiltprotocol/utils" "0.23.0-beta.2"
     typescript-logging "^0.6.4"
 
-"@kiltprotocol/core@^0.23.0-beta.2":
+"@kiltprotocol/core@0.23.0-beta.2", "@kiltprotocol/core@^0.23.0-beta.2":
   version "0.23.0-beta.2"
   resolved "https://registry.yarnpkg.com/@kiltprotocol/core/-/core-0.23.0-beta.2.tgz#646fff874ac8a73c15dc2eca774a2f7e67780e23"
   integrity sha512-9czb5tFuMAdTamRDtRw3u/TdStNy9Xxk+urYjz4h/w8C+uZCBUY0+cgTFalgSqQihhsrjxuiNUJb9lI0kY8S/Q==
@@ -1514,6 +1514,16 @@
     bn.js "^4.11.9"
     tweetnacl "^1.0.3"
     typescript-logging "^0.6.4"
+
+"@kiltprotocol/messaging@^0.23.0-beta.2":
+  version "0.23.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@kiltprotocol/messaging/-/messaging-0.23.0-beta.2.tgz#fbd0ea8ccaae9d3e816b0e1f233a7468a80c8bf8"
+  integrity sha512-+qj5iO9Sj9fx0FM/HSC0PQtTLsCD6cUza3rsi83w88RdxTi+bvIKVDv6DBQb1YGRsFwP+1nUWQSd0SemS5wfGQ==
+  dependencies:
+    "@kiltprotocol/core" "0.23.0-beta.2"
+    "@kiltprotocol/types" "0.23.0-beta.2"
+    "@kiltprotocol/utils" "0.23.0-beta.2"
+    "@polkadot/util" "^6.7.1"
 
 "@kiltprotocol/type-definitions@^0.1.6":
   version "0.1.8"

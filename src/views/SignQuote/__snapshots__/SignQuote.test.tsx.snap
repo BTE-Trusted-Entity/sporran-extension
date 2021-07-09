@@ -68,7 +68,7 @@ exports[`SignQuote should render 1`] = `
       <span
         class="amount"
       >
-        0
+        2
         <span
           class="fractional"
         >
