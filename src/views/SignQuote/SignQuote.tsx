@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { minBy } from 'lodash-es';
+import { minBy, omit } from 'lodash-es';
 import BN from 'bn.js';
 
 import { Identity, useIdentities } from '../../utilities/identities/identities';
@@ -15,9 +15,9 @@ import styles from './SignQuote.module.css';
 export function SignQuote(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const costs = new BN(0);
-
-  const values = [...Object.entries(useQuery())];
+  const allValues = useQuery();
+  const costs = new BN(`${allValues.total}000000000000000`);
+  const values = [...Object.entries(omit(allValues, ['total']))];
 
   const { passwordType, passwordToggle } = usePasswordType();
 
@@ -32,7 +32,8 @@ export function SignQuote(): JSX.Element | null {
     setPassword(event.target.value);
   }, []);
 
-  const handleCancel = useCallback(() => {
+  const handleCancel = useCallback(async () => {
+    await backgroundClaimChannel.throw('Rejected');
     window.close();
   }, []);
 
