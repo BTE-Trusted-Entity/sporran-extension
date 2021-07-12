@@ -3,6 +3,7 @@ import {
   IMessage,
   IPublicIdentity,
   IRejectTerms,
+  IRequestAttestationForClaim,
   ISubmitTerms,
   MessageBodyType,
 } from '@kiltprotocol/types';
@@ -76,12 +77,26 @@ async function processSubmitTerms(
     messageBody.content;
   try {
     const cType = find(cTypes, { hash: claim.cTypeHash });
-    await injectedClaimChannel.get({
+    const requestForAttestation = await injectedClaimChannel.get({
       ...mapValues(claim.contents, (value) => String(value)),
       ...(cType && { 'Credential type': cType.schema.title }),
+      claim: JSON.stringify(claim),
+      legitimations: JSON.stringify(legitimations),
+      ...(delegationId && { delegationId: JSON.stringify(delegationId) }),
       ...(quote && { total: String(quote.cost.gross) }),
       Attester: dAppName,
     });
+
+    const requestForAttestationBody: IRequestAttestationForClaim = {
+      content: { requestForAttestation },
+      type: MessageBodyType.REQUEST_ATTESTATION_FOR_CLAIM,
+    };
+    const request = new Message(
+      requestForAttestationBody,
+      sporranIdentity,
+      dAppIdentity,
+    );
+    await onMessageFromSporran(request);
   } catch (error) {
     const rejectionBody: IRejectTerms = {
       content: { claim, legitimations, delegationId },

@@ -2,9 +2,17 @@ import { Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { minBy, omit } from 'lodash-es';
 import BN from 'bn.js';
+import { Claim, RequestForAttestation } from '@kiltprotocol/core';
 
-import { Identity, useIdentities } from '../../utilities/identities/identities';
-import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
+import {
+  decryptIdentity,
+  Identity,
+  useIdentities,
+} from '../../utilities/identities/identities';
+import {
+  PasswordField,
+  usePasswordField,
+} from '../../components/PasswordField/PasswordField';
 import { useQuery } from '../../utilities/useQuery/useQuery';
 import { backgroundClaimChannel } from '../../channels/ClaimChannels/browserClaimChannels';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
@@ -17,19 +25,15 @@ export function SignQuote(): JSX.Element | null {
 
   const allValues = useQuery();
   const costs = new BN(`${allValues.total}000000000000000`);
-  const values = [...Object.entries(omit(allValues, ['total']))];
-
-  const { passwordType, passwordToggle } = usePasswordType();
+  const values = Object.entries(
+    omit(allValues, ['total', 'claim', 'delegationId', 'legitimations']),
+  );
 
   const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+  const passwordField = usePasswordField();
 
   const handleNameInput = useCallback((event) => {
     setName(event.target.value);
-  }, []);
-
-  const handlePasswordInput = useCallback((event) => {
-    setPassword(event.target.value);
   }, []);
 
   const handleCancel = useCallback(async () => {
@@ -37,19 +41,45 @@ export function SignQuote(): JSX.Element | null {
     window.close();
   }, []);
 
-  const handleSubmit = useCallback(async (event) => {
-    event.preventDefault();
-
-    await backgroundClaimChannel.return({});
-    window.close();
-  }, []);
-
   const identities = useIdentities().data;
-  if (!identities) {
+  const firstIdentity =
+    identities && (minBy(Object.values(identities), 'index') as Identity);
+
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+
+      if (!firstIdentity) {
+        return;
+      }
+
+      const claim = new Claim(JSON.parse(allValues.claim));
+
+      const password = await passwordField.get(event);
+      const sdkIdentity = await decryptIdentity(
+        firstIdentity.address,
+        password,
+      );
+      const requestForAttestation = RequestForAttestation.fromClaimAndIdentity(
+        claim,
+        sdkIdentity,
+        {
+          legitimations: JSON.parse(allValues.legitimations),
+          ...(allValues.delegationId && {
+            delegationId: JSON.parse(allValues.delegationId),
+          }),
+        },
+      );
+
+      await backgroundClaimChannel.return(requestForAttestation);
+      window.close();
+    },
+    [allValues, firstIdentity, passwordField],
+  );
+
+  if (!identities || !firstIdentity) {
     return null; // storage data pending
   }
-
-  const firstIdentity = minBy(Object.values(identities), 'index') as Identity;
 
   return (
     <form
@@ -90,19 +120,7 @@ export function SignQuote(): JSX.Element | null {
         <span className={styles.identityName}>{firstIdentity.name}</span>
       </div>
 
-      <label className={styles.label}>
-        {t('view_SignQuote_password')}
-        <span className={styles.passwordLine}>
-          <input
-            name="password"
-            type={passwordType}
-            className={styles.password}
-            required
-            onInput={handlePasswordInput}
-          />
-          {passwordToggle}
-        </span>
-      </label>
+      <PasswordField identity={firstIdentity} password={passwordField} />
 
       <p className={styles.buttonsLine}>
         <button type="button" className={styles.cancel} onClick={handleCancel}>
@@ -111,7 +129,7 @@ export function SignQuote(): JSX.Element | null {
         <button
           type="submit"
           className={styles.submit}
-          disabled={!name || !password}
+          disabled={!name || passwordField.isEmpty}
         >
           {t('view_SignQuote_CTA')}
         </button>
