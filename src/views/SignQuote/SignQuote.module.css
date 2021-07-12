@@ -78,18 +78,6 @@
   margin-top: 0.5rem;
 }
 
-.passwordLine {
-  display: block;
-  position: relative;
-  margin: 0.5rem 0 1.5rem;
-}
-
-.password {
-  composes: input from '../../components/Input/Input.module.css';
-  width: calc(100% - 3.5rem);
-  padding-right: 2.5rem;
-}
-
 .buttonsLine {
   margin: 0;
   display: flex;
