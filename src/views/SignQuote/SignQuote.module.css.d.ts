@@ -13,8 +13,6 @@ declare namespace SignQuoteModuleCssNamespace {
     identityName: string;
     label: string;
     name: string;
-    password: string;
-    passwordLine: string;
     subline: string;
     submit: string;
   }
