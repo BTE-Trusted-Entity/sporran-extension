@@ -9,6 +9,8 @@ import {
   Identity,
   useIdentities,
 } from '../../utilities/identities/identities';
+import { saveCTypeTitle } from '../../utilities/cTypes/cTypes';
+import { saveCredential } from '../../utilities/credentials/credentials';
 import {
   PasswordField,
   usePasswordField,
@@ -55,6 +57,9 @@ export function SignQuote(): JSX.Element | null {
 
       const claim = new Claim(JSON.parse(allValues.claim));
 
+      const cTypeTitle = allValues['Credential type'];
+      await saveCTypeTitle(claim.cTypeHash, cTypeTitle);
+
       const password = await passwordField.get(event);
       const sdkIdentity = await decryptIdentity(
         firstIdentity.address,
@@ -70,6 +75,13 @@ export function SignQuote(): JSX.Element | null {
           }),
         },
       );
+
+      await saveCredential({
+        request: requestForAttestation,
+        cTypeTitle,
+        attester: allValues['Attester'],
+        isAttested: false,
+      });
 
       await backgroundClaimChannel.return(requestForAttestation);
       window.close();

@@ -11,7 +11,7 @@ export async function getAuthorized(): Promise<AuthorizedType> {
 }
 
 export async function setAuthorized(authorized: AuthorizedType): Promise<void> {
-  return await storage.set({ [authorizedKey]: authorized });
+  await storage.set({ [authorizedKey]: authorized });
 }
 
 export function makeDAppKey(name: string, origin: string): string {

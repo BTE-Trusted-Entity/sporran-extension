@@ -4,10 +4,11 @@ import {
   IPublicIdentity,
   IRejectTerms,
   IRequestAttestationForClaim,
+  ISubmitAttestationForClaim,
   ISubmitTerms,
   MessageBodyType,
 } from '@kiltprotocol/types';
-import Message from '@kiltprotocol/messaging';
+import Message, { errorCheckMessageBody } from '@kiltprotocol/messaging';
 import { injectedClaimChannel } from './channels/ClaimChannels/injectedClaimChannel';
 import { injectedSaveChannel } from './channels/SaveChannels/injectedSaveChannel';
 import { injectedShareChannel } from './channels/ShareChannels/injectedShareChannel';
@@ -16,16 +17,6 @@ import {
   injectIntoDApp,
 } from './dApps/injectIntoDApp/injectIntoDApp';
 import { configuration } from './configuration/configuration';
-
-async function showClaimPopup(values: { [key: string]: string }) {
-  // Non-extension scripts cannot open windows with extension pages
-  return injectedClaimChannel.get(values);
-}
-
-async function showSaveCredentialPopup(values: { [key: string]: string }) {
-  // Non-extension scripts cannot open windows with extension pages
-  return injectedSaveChannel.get(values);
-}
 
 async function showShareCredentialPopup(values: { [key: string]: string }) {
   // Non-extension scripts cannot open windows with extension pages
@@ -41,8 +32,6 @@ interface PubSubSession {
 }
 
 interface InjectedWindowProvider {
-  showClaimPopup: typeof showClaimPopup;
-  showSaveCredentialPopup: typeof showSaveCredentialPopup;
   showShareCredentialPopup: typeof showShareCredentialPopup;
 
   startSession: (
@@ -107,12 +96,26 @@ async function processSubmitTerms(
   }
 }
 
+async function processSubmitCredential(
+  messageBody: ISubmitAttestationForClaim,
+): Promise<void> {
+  const { claimHash } = messageBody.content.attestation;
+
+  await injectedSaveChannel.get({ claimHash });
+}
+
 async function processMessageFromDApp(
   message: IMessage,
   dAppName: string,
 ): Promise<void> {
+  errorCheckMessageBody(message.body);
+
   if (message.body.type === MessageBodyType.SUBMIT_TERMS) {
     await processSubmitTerms(message.body as ISubmitTerms, dAppName);
+  }
+
+  if (message.body.type === MessageBodyType.SUBMIT_ATTESTATION_FOR_CLAIM) {
+    await processSubmitCredential(message.body as ISubmitAttestationForClaim);
   }
 }
 
@@ -147,7 +150,7 @@ async function startSession(unsafeDAppName: string, identity: IPublicIdentity) {
 
     /** dApp sends a message */
     async send(message: IMessage): Promise<void> {
-      return await processMessageFromDApp(message, dAppName);
+      await processMessageFromDApp(message, dAppName);
     },
   };
 }
@@ -168,8 +171,6 @@ function main() {
   // Only injected scripts can create variables like this, content script cannot do this
   apiWindow.kilt ||= {};
   apiWindow.kilt.sporran = {
-    showClaimPopup,
-    showSaveCredentialPopup,
     showShareCredentialPopup,
     startSession,
     version,
