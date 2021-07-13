@@ -9,7 +9,7 @@ export const credentialsMock = [
           b: 'b',
           c: 'c',
         },
-        owner: '4rBogi2Xk6vQsTZHdaihYvz4DTJCYTFFYqc1DJCcAH9fJnh7',
+        owner: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -67,6 +67,7 @@ export const credentialsMock = [
       claimerSignature:
         '0x013cd4f4ef68539fa341a0054d55fa3813946d2963bca9e953ebbbd1e575aab26ee13bc0cde0a69588ce4e29b1f747b515c5bf1f4aa0c9bb49113a0fad7b68c38a',
     },
+    name: 'My credential',
     cTypeTitle: 'CType-something',
     attester: 'Trusted Entity attester',
     isAttested: true,
