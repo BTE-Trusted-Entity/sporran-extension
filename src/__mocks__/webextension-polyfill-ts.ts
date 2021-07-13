@@ -5,8 +5,11 @@
 
 import { setupGetMessageShim } from 'chrome-extension-i18n-shim';
 import { pull } from 'lodash-es';
+
 import messagesEN from '../static/_locales/en/messages.json';
+
 import { balanceMock } from '../channels/balanceChangeChannel/balanceChangeChannel.mock';
+import { credentialsMock } from '../utilities/credentials/credentials.mock';
 
 type CallbackType = (data: unknown, caller: unknown) => void;
 const listeners: CallbackType[] = [];
@@ -34,6 +37,7 @@ export const browser = {
             'evil\nhttps://example.com/evil': false,
             'good\nhttps://example.org/good': true,
           },
+          'credential:0xclaimHash': credentialsMock[0],
         };
       },
       async set(): Promise<void> {

@@ -2,18 +2,34 @@ import { Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import { useQuery } from '../../utilities/useQuery/useQuery';
+import { useCredential } from '../../utilities/credentials/credentials';
 
 import styles from './SaveCredential.module.css';
 
-export function SaveCredential(): JSX.Element {
+export function SaveCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { credential, ...query } = useQuery();
-  const values = [...Object.entries(query)];
+  const { claimHash } = useQuery();
+
+  // TODO: Is this whole flow necessary?
+  const credential = useCredential(claimHash);
 
   const handleCancel = useCallback(() => {
     window.close();
   }, []);
+
+  if (!credential) {
+    return null; // storage data pending
+  }
+
+  const values = [
+    ...Object.entries(credential.request.claim.contents),
+    ['Credential type', credential.cTypeTitle],
+    ['Attester', credential.attester],
+  ];
+
+  const downloadName = `${credential.cTypeTitle}-${values[0][1]}.json`;
+  const downloadBlob = window.btoa(JSON.stringify(credential));
 
   return (
     <main className={styles.container}>
@@ -36,8 +52,8 @@ export function SaveCredential(): JSX.Element {
           {t('common_action_cancel')}
         </button>
         <a
-          download="BL-Mail-Simple-ingo@kilt.io.json"
-          href={`data:text/json;base64,${credential}`}
+          download={downloadName}
+          href={`data:text/json;base64,${downloadBlob}`}
           className={styles.submit}
         >
           {t('view_SaveCredential_CTA')}
