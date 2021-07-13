@@ -31,7 +31,7 @@ export class IdentitiesInjectedAPI implements InjectedAccounts {
       this.listeners.forEach((listener) => listener(this.identities));
     });
 
-    return result.promise;
+    await result.promise;
   }
 
   listeners: CallbackType[] = [];

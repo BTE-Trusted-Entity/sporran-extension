@@ -140,7 +140,7 @@ export class BrowserChannel<
   async return(output: Output): Promise<void> {
     try {
       const jsonOutput = this.transform.outputToJson(output);
-      return this.emit({
+      await this.emit({
         type: this.output,
         output: jsonOutput,
       });
@@ -150,7 +150,7 @@ export class BrowserChannel<
   }
 
   async throw(error: string): Promise<void> {
-    return this.emit({
+    await this.emit({
       type: this.output,
       error,
     });

@@ -78,7 +78,7 @@ export function popupTabRemovedListener(
   if (tabId !== removedTabId) {
     return;
   }
-  (async () => {
+  return (async () => {
     await closeExistingPopup();
   })();
 }

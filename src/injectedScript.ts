@@ -147,7 +147,7 @@ async function startSession(unsafeDAppName: string, identity: IPublicIdentity) {
 
     /** dApp sends a message */
     async send(message: IMessage): Promise<void> {
-      return await processMessageFromDApp(message, dAppName);
+      await processMessageFromDApp(message, dAppName);
     },
   };
 }

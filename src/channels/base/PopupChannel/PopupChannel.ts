@@ -48,10 +48,10 @@ export class PopupChannel<
   }
 
   async return(output: Output): Promise<void> {
-    return this.channel.return(output);
+    await this.channel.return(output);
   }
 
   async throw(error: string): Promise<void> {
-    return this.channel.throw(error);
+    await this.channel.throw(error);
   }
 }
