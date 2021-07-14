@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { filter, remove } from 'lodash-es';
+import { filter, pick, remove } from 'lodash-es';
 import { IRequestForAttestation } from '@kiltprotocol/types';
 
 import { storage } from '../storage/storage';
@@ -45,7 +45,9 @@ export async function getCredential(hash: string): Promise<Credential> {
 }
 
 export async function getAllCredentials(): Promise<Credential[]> {
-  const credentials = await storage.get(await getList());
+  const keys = await getList();
+  const result = await storage.get(keys);
+  const credentials = pick(result, keys);
   return Object.values(credentials);
 }
 
@@ -74,14 +76,18 @@ export function useCredential(hash: string): Credential | null {
   return credential;
 }
 
-export function useIdentityCredentials(address: string): Credential[] | null {
+export function useIdentityCredentials(address?: string): Credential[] | null {
   const [credentials, setCredentials] = useState<Credential[] | null>(null);
 
   useEffect(() => {
     (async () => {
       const all = await getAllCredentials();
-      const own = filter(all, { request: { claim: { owner: address } } });
-      setCredentials(own);
+      if (address) {
+        const own = filter(all, { request: { claim: { owner: address } } });
+        setCredentials(own);
+      } else {
+        setCredentials(all);
+      }
     })();
   }, [address]);
 
