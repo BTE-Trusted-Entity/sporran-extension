@@ -1,6 +1,9 @@
 import webpack from 'webpack';
 import path from 'path';
 import CopyPlugin from 'copy-webpack-plugin';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 
 export default {
   entry: {
@@ -41,21 +44,27 @@ export default {
       },
       {
         test: /\.(png|svg|woff2)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 4 * 1024,
-            },
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 4 * 1024,
           },
-        ],
+        },
       },
     ],
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.module.css', '.json'],
+    fallback: {
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+    },
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+      process: ['process'],
+    }),
     new webpack.DefinePlugin({
       VARIANT: JSON.stringify(process.env.VARIANT),
     }),
