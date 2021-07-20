@@ -1,10 +1,8 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
-import { IAttestedClaim } from '@kiltprotocol/types';
-import { Attestation, AttestedClaim } from '@kiltprotocol/core';
 
-import { contentShareChannel } from '../../channels/ShareChannels/browserShareChannels';
+import { backgroundShareChannel } from '../../channels/ShareChannels/backgroundShareChannel';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { Identity, useIdentities } from '../../utilities/identities/identities';
@@ -60,7 +58,7 @@ export function ShareCredential(): JSX.Element | null {
   }, []);
 
   const handleCancel = useCallback(async () => {
-    await contentShareChannel.throw('Rejected');
+    await backgroundShareChannel.throw('Rejected');
     window.close();
   }, []);
 
@@ -76,18 +74,7 @@ export function ShareCredential(): JSX.Element | null {
         .filter(([, value]) => value)
         .map(([index]) => matchingCredentials[Number(index)].request);
 
-      const attestedClaims: IAttestedClaim[] = [];
-      for (const request of requests) {
-        const attestation = await Attestation.query(request.rootHash);
-        if (!attestation) {
-          continue;
-        }
-        attestedClaims.push(
-          AttestedClaim.fromRequestAndAttestation(request, attestation),
-        );
-      }
-
-      await contentShareChannel.return(attestedClaims);
+      await backgroundShareChannel.return(requests);
       window.close();
     },
     [matchingCredentials, checked],
