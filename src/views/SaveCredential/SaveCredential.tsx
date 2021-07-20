@@ -1,8 +1,11 @@
-import { Fragment, useCallback } from 'react';
+import { Fragment, useCallback, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import { useQuery } from '../../utilities/useQuery/useQuery';
-import { useCredential } from '../../utilities/credentials/credentials';
+import {
+  saveCredential,
+  useCredential,
+} from '../../utilities/credentials/credentials';
 
 import styles from './SaveCredential.module.css';
 
@@ -13,6 +16,15 @@ export function SaveCredential(): JSX.Element | null {
 
   // TODO: Is this whole flow necessary?
   const credential = useCredential(claimHash);
+
+  useEffect(() => {
+    (async () => {
+      if (credential) {
+        credential.isAttested = true;
+        await saveCredential(credential);
+      }
+    })();
+  }, [credential]);
 
   const handleCancel = useCallback(() => {
     window.close();

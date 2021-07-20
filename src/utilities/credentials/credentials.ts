@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { remove } from 'lodash-es';
+import { filter, remove } from 'lodash-es';
 import { IRequestForAttestation } from '@kiltprotocol/types';
 
 import { storage } from '../storage/storage';
 
 interface Credential {
   request: IRequestForAttestation;
+  name: string;
   cTypeTitle: string;
   attester: string;
   isAttested: boolean;
@@ -71,4 +72,18 @@ export function useCredential(hash: string): Credential | null {
   }, [hash]);
 
   return credential;
+}
+
+export function useIdentityCredentials(address: string): Credential[] | null {
+  const [credentials, setCredentials] = useState<Credential[] | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const all = await getAllCredentials();
+      const own = filter(all, { request: { claim: { owner: address } } });
+      setCredentials(own);
+    })();
+  }, [address]);
+
+  return credentials;
 }

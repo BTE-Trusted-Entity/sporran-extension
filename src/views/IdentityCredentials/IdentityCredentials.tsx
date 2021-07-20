@@ -5,6 +5,7 @@ import { Identity } from '../../utilities/identities/types';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
+import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { paths } from '../paths';
 
 import tableStyles from '../../components/Table/Table.module.css';
@@ -14,15 +15,13 @@ interface Props {
   identity: Identity;
 }
 
-export function IdentityCredentials({ identity }: Props): JSX.Element {
+export function IdentityCredentials({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const credentials: {
-    Name: string;
-    'Credential type': string;
-    Attester: string;
-    valid: boolean;
-  }[] = [];
+  const credentials = useIdentityCredentials(identity.address);
+  if (!credentials) {
+    return null; // storage data pending
+  }
 
   return (
     <section className={styles.container}>
@@ -50,16 +49,16 @@ export function IdentityCredentials({ identity }: Props): JSX.Element {
         </thead>
         <tbody>
           {credentials.map((credential) => (
-            <tr key={credential.Name} className={tableStyles.tr}>
-              <td className={tableStyles.td}>{credential.Name}</td>
-              <td className={tableStyles.td}>
-                {credential['Credential type']}
-              </td>
-              <td className={tableStyles.td}>{credential.Attester}</td>
+            <tr key={credential.name} className={tableStyles.tr}>
+              <td className={tableStyles.td}>{credential.name}</td>
+              <td className={tableStyles.td}>{credential.cTypeTitle}</td>
+              <td className={tableStyles.td}>{credential.attester}</td>
               <td
-                className={credential.valid ? styles.valid : tableStyles.td}
+                className={
+                  credential.isAttested ? styles.valid : tableStyles.td
+                }
                 aria-label={
-                  credential.valid
+                  credential.isAttested
                     ? t('view_IdentityCredentials_valid')
                     : undefined
                 }
