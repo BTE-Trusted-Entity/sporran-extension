@@ -78,6 +78,7 @@ export function SignQuote(): JSX.Element | null {
 
       await saveCredential({
         request: requestForAttestation,
+        name,
         cTypeTitle,
         attester: allValues['Attester'],
         isAttested: false,
@@ -86,7 +87,7 @@ export function SignQuote(): JSX.Element | null {
       await backgroundClaimChannel.return(requestForAttestation);
       window.close();
     },
-    [allValues, firstIdentity, passwordField],
+    [allValues, firstIdentity, name, passwordField],
   );
 
   if (!identities || !firstIdentity) {

@@ -177,7 +177,6 @@ exports[`IdentityOverview should render a normal identity 1`] = `
       </span>
     </p>
   </main>
-  ,
 </div>
 `;
 
@@ -294,7 +293,6 @@ exports[`IdentityOverview should render the new identity 1`] = `
       </span>
     </p>
   </main>
-  ,
 </div>
 `;
 
@@ -498,7 +496,6 @@ exports[`IdentityOverview should render upcoming feature modal 1`] = `
       </button>
     </dialog>
   </main>
-  ,
 </div>
 `;
 
@@ -679,6 +676,5 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
       </span>
     </p>
   </main>
-  ,
 </div>
 `;

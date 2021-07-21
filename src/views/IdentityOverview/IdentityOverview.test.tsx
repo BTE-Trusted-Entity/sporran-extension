@@ -14,6 +14,10 @@ import { paths } from '../paths';
 
 import { IdentityOverview } from './IdentityOverview';
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
+import { useIdentityCredentials } from '../../utilities/credentials/credentials';
+import { credentialsMock } from '../../utilities/credentials/credentials.mock';
+
+jest.mock('../../utilities/credentials/credentials');
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
@@ -23,7 +27,7 @@ describe('IdentityOverview', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
         <Route path={paths.identity.overview}>
-          <IdentityOverview identity={identity} />,
+          <IdentityOverview identity={identity} />
         </Route>
       </MemoryRouter>,
     );
@@ -34,7 +38,7 @@ describe('IdentityOverview', () => {
     const { container } = render(
       <MemoryRouter initialEntries={['/identity/NEW/']}>
         <Route path={paths.identity.overview}>
-          <IdentityOverview identity={NEW} />,
+          <IdentityOverview identity={NEW} />
         </Route>
       </MemoryRouter>,
     );
@@ -47,7 +51,7 @@ describe('IdentityOverview', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
         <Route path={paths.identity.overview}>
-          <IdentityOverview identity={identity} />,
+          <IdentityOverview identity={identity} />
         </Route>
       </MemoryRouter>,
     );
@@ -63,7 +67,7 @@ describe('IdentityOverview', () => {
       <InternalConfigurationContext>
         <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
           <Route path={paths.identity.overview}>
-            <IdentityOverview identity={identity} />,
+            <IdentityOverview identity={identity} />
           </Route>
         </MemoryRouter>
       </InternalConfigurationContext>,
@@ -72,5 +76,21 @@ describe('IdentityOverview', () => {
     await screen.findByRole('link', { name: 'Send' });
 
     expect(container).toMatchSnapshot();
+  });
+
+  it('should render with link to credentials screen', async () => {
+    (useIdentityCredentials as jest.Mock).mockReturnValue(credentialsMock);
+
+    render(
+      <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
+        <Route path={paths.identity.overview}>
+          <IdentityOverview identity={identity} />
+        </Route>
+      </MemoryRouter>,
+    );
+
+    expect(
+      await screen.findByRole('link', { name: 'Show Credentials' }),
+    ).toBeInTheDocument();
   });
 });
