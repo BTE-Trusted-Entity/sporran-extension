@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 import { IAttestedClaim, IRequestForAttestation } from '@kiltprotocol/types';
-import { Attestation, AttestedClaim } from '@kiltprotocol/core';
+import { Attestation, AttestedClaim, disconnect } from '@kiltprotocol/core';
 
 import { PopupChannel } from '../base/PopupChannel/PopupChannel';
 import { contentShareChannel } from './contentShareChannel';
@@ -23,7 +23,15 @@ async function getAttestedClaims(
 
   const attestedClaims: IAttestedClaim[] = [];
   for (const request of requests) {
-    const attestation = await Attestation.query(request.rootHash);
+    let attestation: Attestation | null;
+
+    try {
+      attestation = await Attestation.query(request.rootHash);
+    } catch {
+      // retry once, since the blockchain connection could have been closed on popup close
+      attestation = await Attestation.query(request.rootHash);
+    }
+
     if (!attestation) {
       continue;
     }
@@ -31,6 +39,8 @@ async function getAttestedClaims(
       AttestedClaim.fromRequestAndAttestation(request, attestation),
     );
   }
+
+  await disconnect();
 
   return attestedClaims;
 }
