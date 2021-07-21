@@ -8,6 +8,7 @@ import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
 import { UpcomingFeatureModal } from '../../components/UpcomingFeatureModal/UpcomingFeatureModal';
 
+import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import {
   Identity,
   isNew,
@@ -50,14 +51,13 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
     setHasUpcomingFeatureModal(true);
   }, []);
 
+  const credentials = useIdentityCredentials(identity.address);
+  const hasCredentials = credentials && credentials.length > 0;
+
   const identities = useIdentities().data;
   if (!identities) {
     return null; // storage data pending
   }
-
-  const credentialsIdentity = null;
-  // TODO: Use again when developing real credential API
-  // const credentialsIdentity = minBy(Object.values(identities), 'index') as Identity;
 
   const identitiesNumber = Object.values(identities).length;
 
@@ -113,7 +113,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       </p>
 
-      {identity === credentialsIdentity && (
+      {hasCredentials && (
         <Link
           to={generatePath(paths.identity.credentials, { address })}
           className={styles.credentials}
