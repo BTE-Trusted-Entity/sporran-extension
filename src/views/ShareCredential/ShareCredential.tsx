@@ -2,16 +2,26 @@ import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
 
-import { contentShareChannel } from '../../channels/ShareChannels/browserShareChannels';
+import { backgroundShareChannel } from '../../channels/ShareChannels/backgroundShareChannel';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { Identity, useIdentities } from '../../utilities/identities/identities';
+import { useIdentityCredentials } from '../../utilities/credentials/credentials';
+import { useQuery } from '../../utilities/useQuery/useQuery';
 
 import tableStyles from '../../components/Table/Table.module.css';
 import styles from './ShareCredential.module.css';
 
 export function ShareCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
+
+  const { cTypeHashes } = useQuery();
+  const cTypes = JSON.parse(cTypeHashes);
+
+  const credentials = useIdentityCredentials();
+  const matchingCredentials = credentials?.filter((credential) =>
+    cTypes.includes(credential.request.claim.cTypeHash),
+  );
 
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({
     '0': true,
@@ -47,30 +57,36 @@ export function ShareCredential(): JSX.Element | null {
     setPassword(event.target.value);
   }, []);
 
-  const handleCancel = useCallback(() => {
+  const handleCancel = useCallback(async () => {
+    await backgroundShareChannel.throw('Rejected');
     window.close();
   }, []);
 
-  const handleSubmit = useCallback(async (event) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
 
-    await contentShareChannel.return({});
-    window.close();
-  }, []);
+      if (!matchingCredentials) {
+        return;
+      }
+
+      const requests = Object.entries(checked)
+        .filter(([, value]) => value)
+        .map(([index]) => matchingCredentials[Number(index)].request);
+
+      await backgroundShareChannel.return(requests);
+      window.close();
+    },
+    [matchingCredentials, checked],
+  );
 
   const identities = useIdentities().data;
-  if (!identities) {
+  if (!credentials || !matchingCredentials || !identities) {
     return null; // storage data pending
   }
 
+  // The legacy design uses the first identity only, will be fixed with the new design
   const identity = minBy(Object.values(identities), 'index') as Identity;
-
-  const credentials: {
-    Name: string;
-    'Credential type': string;
-    Attester: string;
-    valid: boolean;
-  }[] = [];
 
   const allChecked = credentials.every((dummy, index) => checked[index]);
 
@@ -110,8 +126,8 @@ export function ShareCredential(): JSX.Element | null {
           </tr>
         </thead>
         <tbody>
-          {credentials.map((credential, index) => (
-            <tr key={credential.Name} className={tableStyles.tr}>
+          {matchingCredentials.map((credential, index) => (
+            <tr key={credential.name} className={tableStyles.tr}>
               <td className={tableStyles.td}>
                 <label>
                   <input
@@ -125,15 +141,17 @@ export function ShareCredential(): JSX.Element | null {
                   <span />
                 </label>
               </td>
-              <td className={tableStyles.td}>{credential.Name}</td>
-              <td className={tableStyles.td}>
-                {credential['Credential type']}
-              </td>
-              <td className={tableStyles.td}>{credential.Attester}</td>
+              <td className={tableStyles.td}>{credential.name}</td>
+              <td className={tableStyles.td}>{credential.cTypeTitle}</td>
+              <td className={tableStyles.td}>{credential.attester}</td>
               <td
-                className={credential.valid ? styles.valid : tableStyles.td}
+                className={
+                  credential.isAttested ? styles.valid : tableStyles.td
+                }
                 aria-label={
-                  credential.valid ? t('view_ShareCredential_valid') : undefined
+                  credential.isAttested
+                    ? t('view_ShareCredential_valid')
+                    : undefined
                 }
               />
             </tr>

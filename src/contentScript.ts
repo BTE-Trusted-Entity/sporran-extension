@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { toggleIcon } from './channels/toggleIconChannel/toggleIconChannel';
 import { initContentClaimChannel } from './channels/ClaimChannels/browserClaimChannels';
 import { initContentSaveChannel } from './channels/SaveChannels/browserSaveChannels';
-import { initContentShareChannel } from './channels/ShareChannels/browserShareChannels';
+import { initContentShareChannel } from './channels/ShareChannels/contentShareChannel';
 import { initContentIdentitiesChannel } from './dApps/identitiesDataProvider/identitiesDataProvider';
 import { initContentAccessChannel } from './dApps/checkAccess/checkAccess';
 import { initContentSignChannel } from './dApps/SignChannels/contentSignChannel';

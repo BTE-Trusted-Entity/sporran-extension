@@ -37,7 +37,10 @@ export const browser = {
             'evil\nhttps://example.com/evil': false,
             'good\nhttps://example.org/good': true,
           },
+          'credential:list': ['credential:0xclaimHash'],
           'credential:0xclaimHash': credentialsMock[0],
+          'credential:0xf53f460a9e96cf7ea3321ac001a89674850493e12fad28cbc868e026935436d2':
+            credentialsMock[0],
         };
       },
       async set(): Promise<void> {

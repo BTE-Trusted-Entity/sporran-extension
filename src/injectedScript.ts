@@ -4,7 +4,9 @@ import {
   IPublicIdentity,
   IRejectTerms,
   IRequestAttestationForClaim,
+  IRequestClaimsForCTypes,
   ISubmitAttestationForClaim,
+  ISubmitClaimsForCTypes,
   ISubmitTerms,
   MessageBodyType,
 } from '@kiltprotocol/types';
@@ -18,11 +20,6 @@ import {
 } from './dApps/injectIntoDApp/injectIntoDApp';
 import { configuration } from './configuration/configuration';
 
-async function showShareCredentialPopup(values: { [key: string]: string }) {
-  // Non-extension scripts cannot open windows with extension pages
-  return injectedShareChannel.get(values);
-}
-
 // TODO: switch to IEncryptedMessage
 interface PubSubSession {
   listen: (callback: (message: IMessage) => Promise<void>) => Promise<void>;
@@ -32,8 +29,6 @@ interface PubSubSession {
 }
 
 interface InjectedWindowProvider {
-  showShareCredentialPopup: typeof showShareCredentialPopup;
-
   startSession: (
     origin: string,
     account: IPublicIdentity,
@@ -104,6 +99,23 @@ async function processSubmitCredential(
   await injectedSaveChannel.get({ claimHash });
 }
 
+async function processShareCredential(
+  messageBody: IRequestClaimsForCTypes,
+): Promise<void> {
+  const content = await injectedShareChannel.get({
+    cTypeHashes: JSON.stringify(
+      messageBody.content.map(({ cTypeHash }) => cTypeHash),
+    ),
+  });
+
+  const credentialsBody: ISubmitClaimsForCTypes = {
+    content,
+    type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
+  };
+  const request = new Message(credentialsBody, sporranIdentity, dAppIdentity);
+  await onMessageFromSporran(request);
+}
+
 async function processMessageFromDApp(
   message: IMessage,
   dAppName: string,
@@ -116,6 +128,10 @@ async function processMessageFromDApp(
 
   if (message.body.type === MessageBodyType.SUBMIT_ATTESTATION_FOR_CLAIM) {
     await processSubmitCredential(message.body as ISubmitAttestationForClaim);
+  }
+
+  if (message.body.type === MessageBodyType.REQUEST_CLAIMS_FOR_CTYPES) {
+    await processShareCredential(message.body as IRequestClaimsForCTypes);
   }
 }
 
@@ -171,7 +187,6 @@ function main() {
   // Only injected scripts can create variables like this, content script cannot do this
   apiWindow.kilt ||= {};
   apiWindow.kilt.sporran = {
-    showShareCredentialPopup,
     startSession,
     version,
     specVersion: '0.1',
