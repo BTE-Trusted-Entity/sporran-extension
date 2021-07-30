@@ -39,7 +39,9 @@ export class PopupChannel<
     input: Input,
     sender: Parameters<typeof showPopup>[2],
   ): Promise<Output> {
+    console.log('Popup channel get input: ', input);
     const jsonInput = this.transform.inputToJson(input);
+    console.log('Json Input: ', jsonInput);
     await showPopup(this.action, jsonInput, sender);
 
     const result = makeControlledPromise<Output>();

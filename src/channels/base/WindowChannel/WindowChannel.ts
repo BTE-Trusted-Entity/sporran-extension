@@ -47,6 +47,7 @@ export class WindowChannel<Input, Output> {
   }
 
   async get(input: Input): Promise<Output> {
+    console.log('WindowChannel get input: ', input);
     const result = makeControlledPromise<Output>();
     const unsubscribe = this.subscribe(input, result.callback);
     return result.promise.finally(unsubscribe);

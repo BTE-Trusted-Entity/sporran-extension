@@ -40,7 +40,7 @@ interface InjectedWindowProvider {
 let dAppIdentity: IPublicIdentity;
 const sporranIdentity: IPublicIdentity = {
   // TODO: real values
-  address: '4tDFy3ubRSio33vtu2N9zWoACqC6U12i4zmCnEuawXjn5SEP',
+  address: '4quK7LGg8iGqoH8kmeEeCDN7VM1aN5wmKkAfcH1VVU8tFmMc',
   boxPublicKeyAsHex:
     '0xe5a91394ab38253ae192d22914618ce868601d15190ca8ed35b5b81a1c9cd10e',
 };
@@ -60,14 +60,19 @@ async function processSubmitTerms(
   const { claim, cTypes, quote, legitimations, delegationId } =
     messageBody.content;
   try {
-    const cType = find(cTypes, { hash: claim.cTypeHash });
+    // const cType = find(cTypes, { hash: claim.cTypeHash });
+    // console.log('Claim contents: ', claim.contents);
+    // const requestForAttestation = await injectedClaimChannel.get({
+    //   ...mapValues(claim.contents, (value) => String(value)),
+    //   ...(cType && { 'Credential type': cType.schema.title }),
+    //   claim: JSON.stringify(claim),
+    //   legitimations: JSON.stringify(legitimations),
+    //   ...(delegationId && { delegationId: JSON.stringify(delegationId) }),
+    //   ...(quote && { total: String(quote.cost.gross) }),
+    //   Attester: dAppName,
+    // });
     const requestForAttestation = await injectedClaimChannel.get({
-      ...mapValues(claim.contents, (value) => String(value)),
-      ...(cType && { 'Credential type': cType.schema.title }),
-      claim: JSON.stringify(claim),
-      legitimations: JSON.stringify(legitimations),
-      ...(delegationId && { delegationId: JSON.stringify(delegationId) }),
-      ...(quote && { total: String(quote.cost.gross) }),
+      ...messageBody.content,
       Attester: dAppName,
     });
 

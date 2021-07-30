@@ -26,6 +26,8 @@ export function SignQuote(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const allValues = useQuery();
+  console.log('All values: ', allValues);
+
   const costs = new BN(`${allValues.total}000000000000000`);
   const values = Object.entries(
     omit(allValues, ['total', 'claim', 'delegationId', 'legitimations']),

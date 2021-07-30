@@ -7,12 +7,18 @@ interface Serializable {
   toString: () => string;
 }
 
-function getPopupUrl(values: Record<string, Serializable>): string {
+function getPopupUrl(
+  values: Record<string, Serializable>,
+  action: PopupAction,
+): string {
   const url = new URL(browser.runtime.getURL('popup.html'));
 
-  Object.keys(values).forEach((key) => {
-    url.searchParams.append(key, values[key].toString());
-  });
+  // Object.keys(values).forEach((key) => {
+  //   url.searchParams.append(key, values[key].toString());
+  // });
+
+  url.searchParams.set('payload', window.btoa(JSON.stringify(values)));
+  url.searchParams.set('action', action);
 
   return url.toString();
 }
@@ -46,7 +52,10 @@ export async function showPopup(
   await closeExistingPopup();
 
   // scripts cannot show the extension popup itself, only create window popups
-  const url = getPopupUrl({ ...input, action });
+  const url = getPopupUrl(input, action);
+  console.log('URL: ', url);
+
+  // const url = getPopupUrl({ input: JSON.stringify({ ...input, action }) });
 
   const windowId = sender.tab?.windowId;
 
