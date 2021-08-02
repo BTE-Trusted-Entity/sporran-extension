@@ -11861,10 +11861,10 @@ rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-accessible-dropdown-menu-hook@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/react-accessible-dropdown-menu-hook/-/react-accessible-dropdown-menu-hook-2.3.0.tgz#a56fbe110d092c071a0af642ca84d6886580fb01"
-  integrity sha512-MbGDDEtlKDwGEt261eWmhH26kmKXPzrJzo94RnbqREvGzTXmdxapHgblBMor0jhgMPtFLawzWoR0BsbrZoSe9g==
+react-accessible-dropdown-menu-hook@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/react-accessible-dropdown-menu-hook/-/react-accessible-dropdown-menu-hook-2.3.1.tgz#70ec48e59043ce439d9cc026e34f01e55385b78f"
+  integrity sha512-vqX48mfFlifAV543m6biWf12Jx3ROGQol9UMrjtwq2HRMd7y1FNWA8cJg5bHQbet/YvyHkuQ/nh1iT3AHOMaaQ==
 
 react-colorful@^5.1.2:
   version "5.2.3"
