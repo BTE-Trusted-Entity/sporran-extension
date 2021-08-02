@@ -56,7 +56,6 @@ async function processSubmitTerms(
   messageBody: ISubmitTerms,
   dAppName: string,
 ): Promise<void> {
-  const { claim, legitimations, delegationId } = messageBody.content;
   try {
     const requestForAttestation = await injectedClaimChannel.get({
       ...messageBody.content,
@@ -74,6 +73,8 @@ async function processSubmitTerms(
     );
     await onMessageFromSporran(request);
   } catch (error) {
+    const { claim, legitimations, delegationId } = messageBody.content;
+
     const rejectionBody: IRejectTerms = {
       content: { claim, legitimations, delegationId },
       type: MessageBodyType.REJECT_TERMS,
