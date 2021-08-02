@@ -1,4 +1,3 @@
-import { find, mapValues } from 'lodash-es';
 import {
   IMessage,
   IPublicIdentity,
@@ -57,23 +56,11 @@ async function processSubmitTerms(
   messageBody: ISubmitTerms,
   dAppName: string,
 ): Promise<void> {
-  const { claim, cTypes, quote, legitimations, delegationId } =
-    messageBody.content;
+  const { claim, legitimations, delegationId } = messageBody.content;
   try {
-    // const cType = find(cTypes, { hash: claim.cTypeHash });
-    // console.log('Claim contents: ', claim.contents);
-    // const requestForAttestation = await injectedClaimChannel.get({
-    //   ...mapValues(claim.contents, (value) => String(value)),
-    //   ...(cType && { 'Credential type': cType.schema.title }),
-    //   claim: JSON.stringify(claim),
-    //   legitimations: JSON.stringify(legitimations),
-    //   ...(delegationId && { delegationId: JSON.stringify(delegationId) }),
-    //   ...(quote && { total: String(quote.cost.gross) }),
-    //   Attester: dAppName,
-    // });
     const requestForAttestation = await injectedClaimChannel.get({
       ...messageBody.content,
-      Attester: dAppName,
+      attester: dAppName,
     });
 
     const requestForAttestationBody: IRequestAttestationForClaim = {

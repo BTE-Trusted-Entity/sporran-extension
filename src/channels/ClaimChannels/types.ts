@@ -6,7 +6,7 @@ import { ITerms } from '@kiltprotocol/types';
 // }
 
 export interface ClaimInput extends ITerms {
-  Attester: string;
+  attester: string;
 }
 
 export type ClaimOutput = RequestForAttestation;

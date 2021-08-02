@@ -1,6 +1,6 @@
-import { Fragment, useCallback, useState } from 'react';
+import { Fragment, useCallback, useState, useMemo } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { minBy, omit } from 'lodash-es';
+import { find, minBy, omit } from 'lodash-es';
 import BN from 'bn.js';
 import { Claim, RequestForAttestation } from '@kiltprotocol/core';
 
@@ -21,16 +21,42 @@ import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { Avatar } from '../../components/Avatar/Avatar';
 
 import styles from './SignQuote.module.css';
+import { IClaim, ITerms } from '@kiltprotocol/types';
 
 export function SignQuote(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const allValues = useQuery();
-  console.log('All values: ', allValues);
+  type Terms = ITerms & { claim: IClaim; attester: string };
 
-  const costs = new BN(`${allValues.total}000000000000000`);
+  const { data } = useQuery();
+  const parsedValues = JSON.parse(window.atob(data)) as Terms;
+
+  const transformedValues = useMemo(() => {
+    const { claim, cTypes, quote, delegationId, attester } = parsedValues;
+    const cType = find(cTypes, { hash: claim.cTypeHash });
+
+    return {
+      ...Object.fromEntries(Object.entries(claim.contents)),
+      ...(cType
+        ? { 'Credential type': cType.schema.title }
+        : { 'Credential type': 'Not found' }),
+      ...(quote && { total: quote.cost.gross }),
+      claim,
+      legitimations: [],
+      delegationId,
+      attester,
+    };
+  }, [parsedValues]);
+
+  const costs = new BN(`${transformedValues.total}000000000000000`);
+
   const values = Object.entries(
-    omit(allValues, ['total', 'claim', 'delegationId', 'legitimations']),
+    omit(transformedValues, [
+      'total',
+      'claim',
+      'delegationId',
+      'legitimations',
+    ]),
   );
 
   const [name, setName] = useState('');
@@ -57,9 +83,9 @@ export function SignQuote(): JSX.Element | null {
         return;
       }
 
-      const claim = new Claim(JSON.parse(allValues.claim));
+      const claim = new Claim(transformedValues.claim);
 
-      const cTypeTitle = allValues['Credential type'];
+      const cTypeTitle = transformedValues['Credential type'];
       await saveCTypeTitle(claim.cTypeHash, cTypeTitle);
 
       const password = await passwordField.get(event);
@@ -71,9 +97,9 @@ export function SignQuote(): JSX.Element | null {
         claim,
         sdkIdentity,
         {
-          legitimations: JSON.parse(allValues.legitimations),
-          ...(allValues.delegationId && {
-            delegationId: JSON.parse(allValues.delegationId),
+          legitimations: transformedValues.legitimations,
+          ...(transformedValues.delegationId && {
+            delegationId: transformedValues.delegationId,
           }),
         },
       );
@@ -82,14 +108,14 @@ export function SignQuote(): JSX.Element | null {
         request: requestForAttestation,
         name,
         cTypeTitle,
-        attester: allValues['Attester'],
+        attester: transformedValues['attester'],
         isAttested: false,
       });
 
       await backgroundClaimChannel.return(requestForAttestation);
       window.close();
     },
-    [allValues, firstIdentity, name, passwordField],
+    [transformedValues, firstIdentity, name, passwordField],
   );
 
   if (!identities || !firstIdentity) {
