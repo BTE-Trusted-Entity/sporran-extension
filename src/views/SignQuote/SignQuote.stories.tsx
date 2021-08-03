@@ -1,6 +1,8 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
+import { mockClaim } from '../../utilities/cTypes/cTypes.mock';
+
 import { paths } from '../paths';
 
 import { SignQuote } from './SignQuote';
@@ -10,12 +12,11 @@ export default {
   component: SignQuote,
 } as Meta;
 
-const query =
-  'Full+Name=Ingo+R%C3%BCbe&Email=ingo%40kilt.io&Credential+type=BL-Mail-Simple&Attester=SocialKYC&total=2';
+const encodedData = window.btoa(JSON.stringify(mockClaim));
 
 export function Template(): JSX.Element {
   return (
-    <MemoryRouter initialEntries={[`${paths.popup.claim}?${query}`]}>
+    <MemoryRouter initialEntries={[`${paths.popup.claim}?data=${encodedData}`]}>
       <SignQuote />
     </MemoryRouter>
   );

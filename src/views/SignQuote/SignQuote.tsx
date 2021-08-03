@@ -1,8 +1,8 @@
-import { Fragment, useCallback, useState, useMemo } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { find, minBy, omit } from 'lodash-es';
+import { find, minBy } from 'lodash-es';
 import BN from 'bn.js';
-import { Claim, RequestForAttestation } from '@kiltprotocol/core';
+import { RequestForAttestation } from '@kiltprotocol/core';
 
 import {
   decryptIdentity,
@@ -29,35 +29,13 @@ export function SignQuote(): JSX.Element | null {
   type Terms = ITerms & { claim: IClaim; attester: string };
 
   const { data } = useQuery();
-  const parsedValues = JSON.parse(window.atob(data)) as Terms;
+  const parsedData = JSON.parse(window.atob(data)) as Terms;
 
-  const transformedValues = useMemo(() => {
-    const { claim, cTypes, quote, delegationId, attester } = parsedValues;
-    const cType = find(cTypes, { hash: claim.cTypeHash });
+  const { claim, cTypes, quote, delegationId, attester } = parsedData;
 
-    return {
-      ...Object.fromEntries(Object.entries(claim.contents)),
-      ...(cType
-        ? { 'Credential type': cType.schema.title }
-        : { 'Credential type': 'Not found' }),
-      ...(quote && { total: quote.cost.gross }),
-      claim,
-      legitimations: [],
-      delegationId,
-      attester,
-    };
-  }, [parsedValues]);
+  const cType = find(cTypes, { hash: claim.cTypeHash });
 
-  const costs = new BN(`${transformedValues.total}000000000000000`);
-
-  const values = Object.entries(
-    omit(transformedValues, [
-      'total',
-      'claim',
-      'delegationId',
-      'legitimations',
-    ]),
-  );
+  const costs = new BN(`${quote?.cost.gross}000000000000000`);
 
   const [name, setName] = useState('');
   const passwordField = usePasswordField();
@@ -79,13 +57,12 @@ export function SignQuote(): JSX.Element | null {
     async (event) => {
       event.preventDefault();
 
-      if (!firstIdentity) {
+      if (!firstIdentity || !cType) {
         return;
       }
 
-      const claim = new Claim(transformedValues.claim);
+      const cTypeTitle = cType.schema.title;
 
-      const cTypeTitle = transformedValues['Credential type'];
       await saveCTypeTitle(claim.cTypeHash, cTypeTitle);
 
       const password = await passwordField.get(event);
@@ -97,9 +74,9 @@ export function SignQuote(): JSX.Element | null {
         claim,
         sdkIdentity,
         {
-          legitimations: transformedValues.legitimations,
-          ...(transformedValues.delegationId && {
-            delegationId: transformedValues.delegationId,
+          legitimations: [],
+          ...(delegationId && {
+            delegationId: delegationId,
           }),
         },
       );
@@ -108,14 +85,14 @@ export function SignQuote(): JSX.Element | null {
         request: requestForAttestation,
         name,
         cTypeTitle,
-        attester: transformedValues['attester'],
+        attester,
         isAttested: false,
       });
 
       await backgroundClaimChannel.return(requestForAttestation);
       window.close();
     },
-    [transformedValues, firstIdentity, name, passwordField],
+    [firstIdentity, name, passwordField, attester, cType, delegationId, claim],
   );
 
   if (!identities || !firstIdentity) {
@@ -131,12 +108,17 @@ export function SignQuote(): JSX.Element | null {
       <h1 className={styles.heading}>{t('view_SignQuote_heading')}</h1>
 
       <dl className={styles.details}>
-        {values.map(([name, value]) => (
+        {Object.entries(claim.contents).map(([name, value]) => (
           <Fragment key={name}>
             <dt className={styles.detailName}>{name}:</dt>
             <dd className={styles.detailValue}>{value}</dd>
           </Fragment>
         ))}
+        <dt className={styles.detailName}>{t('view_SignQuote_cType')}:</dt>
+        <dd className={styles.detailValue}>{cType?.schema.title}</dd>
+
+        <dt className={styles.detailName}>{t('view_SignQuote_attester')}:</dt>
+        <dd className={styles.detailValue}>{attester}</dd>
       </dl>
 
       <p className={styles.costs}>

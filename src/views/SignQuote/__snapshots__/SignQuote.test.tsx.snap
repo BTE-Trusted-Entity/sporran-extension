@@ -39,7 +39,7 @@ exports[`SignQuote should render 1`] = `
       <dt
         class="detailName"
       >
-        Credential type
+        Credential Type
         :
       </dt>
       <dd
@@ -68,7 +68,7 @@ exports[`SignQuote should render 1`] = `
       <span
         class="amount"
       >
-        2
+        233
         <span
           class="fractional"
         >

@@ -511,6 +511,12 @@
   "view_SignQuote_costs": {
     "message": "Credential Costs: "
   },
+  "view_SignQuote_cType": {
+    "message": "Credential Type"
+  },
+  "view_SignQuote_attester": {
+    "message": "Attester"
+  },
   "view_SignQuote_name": {
     "message": "Give your credential a name:"
   },
