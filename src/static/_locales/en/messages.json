@@ -512,7 +512,7 @@
     "message": "Credential Costs: "
   },
   "view_SignQuote_cType": {
-    "message": "Credential Type"
+    "message": "Credential type"
   },
   "view_SignQuote_attester": {
     "message": "Attester"

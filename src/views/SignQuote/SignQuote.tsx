@@ -2,7 +2,7 @@ import { Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { find, minBy } from 'lodash-es';
 import BN from 'bn.js';
-import { RequestForAttestation } from '@kiltprotocol/core';
+import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
 
 import {
   decryptIdentity,
@@ -11,31 +11,31 @@ import {
 } from '../../utilities/identities/identities';
 import { saveCTypeTitle } from '../../utilities/cTypes/cTypes';
 import { saveCredential } from '../../utilities/credentials/credentials';
+import { usePopupData } from '../../utilities/popups/usePopupData';
 import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
-import { useQuery } from '../../utilities/useQuery/useQuery';
 import { backgroundClaimChannel } from '../../channels/ClaimChannels/browserClaimChannels';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { Avatar } from '../../components/Avatar/Avatar';
 
 import styles from './SignQuote.module.css';
-import { IClaim, ITerms } from '@kiltprotocol/types';
 
 export function SignQuote(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  type Terms = ITerms & { claim: IClaim; attester: string };
+  const data = usePopupData();
 
-  const { data } = useQuery();
-  const parsedData = JSON.parse(window.atob(data)) as Terms;
-
-  const { claim, cTypes, quote, delegationId, attester } = parsedData;
+  const { claim, cTypes, quote, legitimations, attester } = data;
 
   const cType = find(cTypes, { hash: claim.cTypeHash });
 
-  const costs = new BN(`${quote?.cost.gross}000000000000000`);
+  const costs = new BN(`${quote?.cost?.gross}000000000000000`);
+
+  const attestedClaims = legitimations.map((legitimation) => {
+    return AttestedClaim.fromAttestedClaim(legitimation);
+  });
 
   const [name, setName] = useState('');
   const passwordField = usePasswordField();
@@ -61,6 +61,8 @@ export function SignQuote(): JSX.Element | null {
         return;
       }
 
+      const { claim, delegationId, attester } = data;
+
       const cTypeTitle = cType.schema.title;
 
       await saveCTypeTitle(claim.cTypeHash, cTypeTitle);
@@ -70,14 +72,13 @@ export function SignQuote(): JSX.Element | null {
         firstIdentity.address,
         password,
       );
+
       const requestForAttestation = RequestForAttestation.fromClaimAndIdentity(
         claim,
         sdkIdentity,
         {
-          legitimations: [],
-          ...(delegationId && {
-            delegationId: delegationId,
-          }),
+          legitimations: attestedClaims,
+          ...(delegationId && { delegationId }),
         },
       );
 
@@ -92,7 +93,7 @@ export function SignQuote(): JSX.Element | null {
       await backgroundClaimChannel.return(requestForAttestation);
       window.close();
     },
-    [firstIdentity, name, passwordField, attester, cType, delegationId, claim],
+    [firstIdentity, name, passwordField, cType, data, attestedClaims],
   );
 
   if (!identities || !firstIdentity) {
@@ -115,7 +116,7 @@ export function SignQuote(): JSX.Element | null {
           </Fragment>
         ))}
         <dt className={styles.detailName}>{t('view_SignQuote_cType')}:</dt>
-        <dd className={styles.detailValue}>{cType?.schema.title}</dd>
+        <dd className={styles.detailValue}>{cType?.schema?.title}</dd>
 
         <dt className={styles.detailName}>{t('view_SignQuote_attester')}:</dt>
         <dd className={styles.detailValue}>{attester}</dd>

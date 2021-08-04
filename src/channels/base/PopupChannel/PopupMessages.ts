@@ -1,16 +1,11 @@
 import { browser } from 'webextension-polyfill-ts';
+import type { AnyJson } from '@polkadot/types/types';
+
 import { PopupAction } from '../../../utilities/popups/types';
 
 // TODO: move everything into PopupChannel or rename?
 
-interface Serializable {
-  toString: () => string;
-}
-
-function getPopupUrl(
-  values: Record<string, Serializable>,
-  action: PopupAction,
-): string {
+function getPopupUrl(values: AnyJson, action: PopupAction): string {
   const url = new URL(browser.runtime.getURL('popup.html'));
 
   url.searchParams.set('data', window.btoa(JSON.stringify(values)));
@@ -40,7 +35,7 @@ async function closeExistingPopup() {
 
 export async function showPopup(
   action: PopupAction,
-  input: Record<string, Serializable>,
+  input: AnyJson,
   sender: { tab?: { id?: number; windowId?: number } },
 ): Promise<void> {
   tabId = sender.tab?.id;

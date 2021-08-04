@@ -39,7 +39,7 @@ exports[`SignQuote should render 1`] = `
       <dt
         class="detailName"
       >
-        Credential Type
+        Credential type
         :
       </dt>
       <dd
