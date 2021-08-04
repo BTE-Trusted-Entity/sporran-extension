@@ -1,18 +1,20 @@
-import { CType } from '@kiltprotocol/core';
-
-const mockCType = CType.fromSchema({
-  $schema: 'http://kilt-protocol.org/draft-01/ctype#',
-  title: 'BL-Mail-Simple',
-  properties: {
-    'Full name': {
-      type: 'string',
+const mockCType = {
+  hash: '0x240c744923bd98797504328f9bef57ca6c777f5cbf3e1aada74f348c9879d78a',
+  owner: null,
+  schema: {
+    $schema: 'http://kilt-protocol.org/draft-01/ctype#',
+    title: 'BL-Mail-Simple',
+    properties: {
+      'Full name': {
+        type: 'string',
+      },
+      Email: {
+        type: 'string',
+      },
     },
-    Email: {
-      type: 'string',
-    },
+    type: 'object',
   },
-  type: 'object',
-});
+};
 
 export const mockClaim = {
   claim: {
@@ -41,7 +43,7 @@ export const mockClaim = {
       tax: { vat: 3.3 },
     },
     currency: 'KILT',
-    timeframe: new Date('2021-07-10'),
+    timeframe: new Date('2021-07-10').toString(),
     termsAndConditions: 'https://www.example.com/terms',
   },
   cTypes: [mockCType],

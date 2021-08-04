@@ -1,13 +1,19 @@
 import { useMemo } from 'react';
-import { ITerms, IClaim } from '@kiltprotocol/types';
+import type { AnyJson } from '@polkadot/types/types';
 
 import { useQuery } from '../useQuery/useQuery';
 
-type Terms = ITerms & { claim: IClaim; attester: string };
+export function jsonToBase64(object: Partial<AnyJson>): string {
+  return window.btoa(JSON.stringify(object));
+}
 
-export function usePopupData(): Terms {
+export function base64ToJson<Output>(base64: string): Output {
+  return JSON.parse(window.atob(base64));
+}
+
+export function usePopupData<Output>(): Output {
   const { data } = useQuery();
   return useMemo(() => {
-    return JSON.parse(window.atob(data));
+    return base64ToJson<Output>(data);
   }, [data]);
 }

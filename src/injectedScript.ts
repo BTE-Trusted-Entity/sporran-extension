@@ -87,19 +87,13 @@ async function processSubmitTerms(
 async function processSubmitCredential(
   messageBody: ISubmitAttestationForClaim,
 ): Promise<void> {
-  const { claimHash } = messageBody.content.attestation;
-
-  await injectedSaveChannel.get({ claimHash });
+  await injectedSaveChannel.get(messageBody.content.attestation);
 }
 
 async function processShareCredential(
   messageBody: IRequestClaimsForCTypes,
 ): Promise<void> {
-  const content = await injectedShareChannel.get({
-    cTypeHashes: JSON.stringify(
-      messageBody.content.map(({ cTypeHash }) => cTypeHash),
-    ),
-  });
+  const content = await injectedShareChannel.get(messageBody.content);
 
   const credentialsBody: ISubmitClaimsForCTypes = {
     content,

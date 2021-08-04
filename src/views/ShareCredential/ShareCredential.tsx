@@ -1,13 +1,14 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
+import { IRequestClaimsForCTypesContent } from '@kiltprotocol/types';
 
 import { backgroundShareChannel } from '../../channels/ShareChannels/backgroundShareChannel';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { Identity, useIdentities } from '../../utilities/identities/identities';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
-import { useQuery } from '../../utilities/useQuery/useQuery';
+import { usePopupData } from '../../utilities/popups/usePopupData';
 
 import tableStyles from '../../components/Table/Table.module.css';
 import styles from './ShareCredential.module.css';
@@ -15,12 +16,13 @@ import styles from './ShareCredential.module.css';
 export function ShareCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { cTypeHashes } = useQuery();
-  const cTypes = JSON.parse(cTypeHashes);
+  const data = usePopupData<IRequestClaimsForCTypesContent[]>();
+
+  const cTypeHashes = data.map(({ cTypeHash }) => cTypeHash);
 
   const credentials = useIdentityCredentials();
   const matchingCredentials = credentials?.filter((credential) =>
-    cTypes.includes(credential.request.claim.cTypeHash),
+    cTypeHashes.includes(credential.request.claim.cTypeHash),
   );
 
   const [checked, setChecked] = useState<{ [key: string]: boolean }>({

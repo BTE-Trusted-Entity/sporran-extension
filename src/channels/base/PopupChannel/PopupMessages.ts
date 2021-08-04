@@ -2,13 +2,14 @@ import { browser } from 'webextension-polyfill-ts';
 import type { AnyJson } from '@polkadot/types/types';
 
 import { PopupAction } from '../../../utilities/popups/types';
+import { jsonToBase64 } from '../../../utilities/popups/usePopupData';
 
 // TODO: move everything into PopupChannel or rename?
 
 function getPopupUrl(values: AnyJson, action: PopupAction): string {
   const url = new URL(browser.runtime.getURL('popup.html'));
 
-  url.searchParams.set('data', window.btoa(JSON.stringify(values)));
+  url.searchParams.set('data', jsonToBase64(values));
   url.searchParams.set('action', action);
 
   return url.toString();

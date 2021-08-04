@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
+import { jsonToBase64 } from '../../utilities/popups/usePopupData';
 import { paths } from '../paths';
 
 import { ShareCredential } from './ShareCredential';
@@ -10,12 +11,18 @@ export default {
   component: ShareCredential,
 } as Meta;
 
-const query =
-  'cTypeHashes=["0xf53f460a9e96cf7ea3321ac001a89674850493e12fad28cbc868e026935436d2"]';
+const mockClaimRequest = [
+  {
+    cTypeHash:
+      '0xf53f460a9e96cf7ea3321ac001a89674850493e12fad28cbc868e026935436d2',
+  },
+];
+
+const encodedData = jsonToBase64(mockClaimRequest);
 
 export function Template(): JSX.Element {
   return (
-    <MemoryRouter initialEntries={[`${paths.popup.share}?${query}`]}>
+    <MemoryRouter initialEntries={[`${paths.popup.share}?data=${encodedData}`]}>
       <ShareCredential />
     </MemoryRouter>
   );

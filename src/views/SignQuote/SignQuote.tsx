@@ -3,6 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { find, minBy } from 'lodash-es';
 import BN from 'bn.js';
 import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
+import { ITerms, IClaim } from '@kiltprotocol/types';
 
 import {
   decryptIdentity,
@@ -22,10 +23,12 @@ import { Avatar } from '../../components/Avatar/Avatar';
 
 import styles from './SignQuote.module.css';
 
+type Terms = ITerms & { claim: IClaim; attester: string };
+
 export function SignQuote(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const data = usePopupData();
+  const data = usePopupData<Terms>();
 
   const { claim, cTypes, quote, legitimations, attester } = data;
 
