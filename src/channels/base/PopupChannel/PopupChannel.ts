@@ -1,4 +1,4 @@
-import type { AnyJson } from '@polkadot/types/types';
+import { AnyJson } from '@polkadot/types/types';
 
 import { PopupAction } from '../../../utilities/popups/types';
 import { makeControlledPromise } from '../../../utilities/makeControlledPromise/makeControlledPromise';
