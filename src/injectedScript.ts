@@ -2,10 +2,8 @@ import {
   IMessage,
   IPublicIdentity,
   IRejectTerms,
-  IRequestAttestationForClaim,
   IRequestClaimsForCTypes,
   ISubmitAttestationForClaim,
-  ISubmitClaimsForCTypes,
   ISubmitTerms,
   MessageBodyType,
 } from '@kiltprotocol/types';
@@ -62,12 +60,8 @@ async function processSubmitTerms(
       attester: dAppName,
     });
 
-    const requestForAttestationBody: IRequestAttestationForClaim = {
-      content: { requestForAttestation },
-      type: MessageBodyType.REQUEST_ATTESTATION_FOR_CLAIM,
-    };
     const request = new Message(
-      requestForAttestationBody,
+      requestForAttestation,
       sporranIdentity,
       dAppIdentity,
     );
@@ -93,13 +87,9 @@ async function processSubmitCredential(
 async function processShareCredential(
   messageBody: IRequestClaimsForCTypes,
 ): Promise<void> {
-  const content = await injectedShareChannel.get(messageBody.content);
+  const submitCredentials = await injectedShareChannel.get(messageBody.content);
 
-  const credentialsBody: ISubmitClaimsForCTypes = {
-    content,
-    type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
-  };
-  const request = new Message(credentialsBody, sporranIdentity, dAppIdentity);
+  const request = new Message(submitCredentials, sporranIdentity, dAppIdentity);
   await onMessageFromSporran(request);
 }
 

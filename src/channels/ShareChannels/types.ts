@@ -1,8 +1,8 @@
 import {
-  IAttestedClaim,
   IRequestClaimsForCTypesContent,
+  ISubmitClaimsForCTypes,
 } from '@kiltprotocol/types';
 
 export type ShareInput = IRequestClaimsForCTypesContent[];
 
-export type ShareOutput = IAttestedClaim[];
+export type ShareOutput = ISubmitClaimsForCTypes;

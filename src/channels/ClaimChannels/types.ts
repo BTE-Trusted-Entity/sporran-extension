@@ -1,8 +1,7 @@
-import { RequestForAttestation } from '@kiltprotocol/core';
-import { ITerms } from '@kiltprotocol/types';
+import { ITerms, IRequestAttestationForClaim } from '@kiltprotocol/types';
 
 export interface ClaimInput extends ITerms {
   attester: string;
 }
 
-export type ClaimOutput = RequestForAttestation;
+export type ClaimOutput = IRequestAttestationForClaim;
