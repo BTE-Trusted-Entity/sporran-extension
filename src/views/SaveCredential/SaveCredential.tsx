@@ -13,8 +13,7 @@ import styles from './SaveCredential.module.css';
 export function SaveCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const data = usePopupData<IAttestation>();
-  const { claimHash } = data;
+  const { claimHash } = usePopupData<IAttestation>();
 
   // TODO: Is this whole flow necessary?
   const credential = useCredential(claimHash);

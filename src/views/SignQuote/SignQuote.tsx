@@ -36,9 +36,9 @@ export function SignQuote(): JSX.Element | null {
 
   const costs = new BN(`${quote?.cost?.gross}000000000000000`);
 
-  const attestedClaims = legitimations.map((legitimation) => {
-    return AttestedClaim.fromAttestedClaim(legitimation);
-  });
+  const attestedClaims = legitimations.map((legitimation) =>
+    AttestedClaim.fromAttestedClaim(legitimation),
+  );
 
   const [name, setName] = useState('');
   const passwordField = usePasswordField();
