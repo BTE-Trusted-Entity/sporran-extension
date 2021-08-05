@@ -1,10 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import {
-  IAttestedClaim,
-  IRequestForAttestation,
-  ISubmitClaimsForCTypes,
-  MessageBodyType,
-} from '@kiltprotocol/types';
+import { IAttestedClaim, IRequestForAttestation } from '@kiltprotocol/types';
 import { Attestation, AttestedClaim, disconnect } from '@kiltprotocol/core';
 
 import { PopupChannel } from '../base/PopupChannel/PopupChannel';
@@ -23,7 +18,7 @@ export const backgroundShareChannel = new PopupChannel<
 async function getAttestedClaims(
   input: Parameters<typeof contentShareChannel.get>[0],
   sender: SenderType,
-): Promise<ISubmitClaimsForCTypes> {
+): Promise<IAttestedClaim[]> {
   const requests = await backgroundShareChannel.get(input, sender);
 
   const attestedClaims: IAttestedClaim[] = [];
@@ -47,10 +42,7 @@ async function getAttestedClaims(
 
   await disconnect();
 
-  return {
-    content: attestedClaims,
-    type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
-  };
+  return attestedClaims;
 }
 
 export function initBackgroundShareChannel(): void {

@@ -3,12 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { find, minBy } from 'lodash-es';
 import BN from 'bn.js';
 import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
-import {
-  ITerms,
-  IClaim,
-  IRequestAttestationForClaim,
-  MessageBodyType,
-} from '@kiltprotocol/types';
+import { ITerms, IClaim } from '@kiltprotocol/types';
 
 import {
   decryptIdentity,
@@ -98,12 +93,7 @@ export function SignQuote(): JSX.Element | null {
         isAttested: false,
       });
 
-      const requestForAttestationBody: IRequestAttestationForClaim = {
-        content: { requestForAttestation },
-        type: MessageBodyType.REQUEST_ATTESTATION_FOR_CLAIM,
-      };
-
-      await backgroundClaimChannel.return(requestForAttestationBody);
+      await backgroundClaimChannel.return(requestForAttestation);
       window.close();
     },
     [firstIdentity, name, passwordField, cType, data],

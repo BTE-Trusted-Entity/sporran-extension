@@ -46,7 +46,7 @@ export class BrowserChannel<
     this.transform = makeTransforms(transform);
   }
 
-  async emitInput(input: Input): Promise<JsonOutput | ErrorMessage | void> {
+  async emitInput(input: Input): Promise<JsonOutput | void> {
     const message = {
       type: this.input,
       input: this.transform.inputToJson(input),
