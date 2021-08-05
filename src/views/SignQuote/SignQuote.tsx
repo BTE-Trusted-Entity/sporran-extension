@@ -30,7 +30,7 @@ export function SignQuote(): JSX.Element | null {
 
   const data = usePopupData<Terms>();
 
-  const { claim, cTypes, quote, legitimations, attester } = data;
+  const { claim, cTypes, quote, attester } = data;
 
   const cType = find(cTypes, { hash: claim.cTypeHash });
 
