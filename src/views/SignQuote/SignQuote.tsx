@@ -36,10 +36,6 @@ export function SignQuote(): JSX.Element | null {
 
   const costs = new BN(`${quote?.cost?.gross}000000000000000`);
 
-  const attestedClaims = legitimations.map((legitimation) =>
-    AttestedClaim.fromAttestedClaim(legitimation),
-  );
-
   const [name, setName] = useState('');
   const passwordField = usePasswordField();
 
@@ -64,7 +60,7 @@ export function SignQuote(): JSX.Element | null {
         return;
       }
 
-      const { claim, delegationId, attester } = data;
+      const { claim, delegationId, attester, legitimations } = data;
 
       const cTypeTitle = cType.schema.title;
 
@@ -74,6 +70,10 @@ export function SignQuote(): JSX.Element | null {
       const sdkIdentity = await decryptIdentity(
         firstIdentity.address,
         password,
+      );
+
+      const attestedClaims = legitimations.map((legitimation) =>
+        AttestedClaim.fromAttestedClaim(legitimation),
       );
 
       const requestForAttestation = RequestForAttestation.fromClaimAndIdentity(
@@ -96,7 +96,7 @@ export function SignQuote(): JSX.Element | null {
       await backgroundClaimChannel.return(requestForAttestation);
       window.close();
     },
-    [firstIdentity, name, passwordField, cType, data, attestedClaims],
+    [firstIdentity, name, passwordField, cType, data],
   );
 
   if (!identities || !firstIdentity) {
