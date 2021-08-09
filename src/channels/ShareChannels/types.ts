@@ -1,7 +1,8 @@
-import { IAttestedClaim } from '@kiltprotocol/types';
+import {
+  IAttestedClaim,
+  IRequestClaimsForCTypesContent,
+} from '@kiltprotocol/types';
 
-export interface ShareInput {
-  [key: string]: string;
-}
+export type ShareInput = IRequestClaimsForCTypesContent[];
 
 export type ShareOutput = IAttestedClaim[];

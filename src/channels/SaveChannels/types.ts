@@ -1,7 +1,5 @@
-export interface SaveInput {
-  [key: string]: string;
-}
+import { IAttestation } from '@kiltprotocol/types';
 
-export interface SaveOutput {
-  [key: string]: string;
-}
+export type SaveInput = IAttestation;
+
+export type SaveOutput = void;

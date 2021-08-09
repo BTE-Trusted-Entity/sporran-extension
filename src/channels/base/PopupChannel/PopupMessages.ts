@@ -1,18 +1,16 @@
 import { browser } from 'webextension-polyfill-ts';
+import type { AnyJson } from '@polkadot/types/types';
+
 import { PopupAction } from '../../../utilities/popups/types';
+import { jsonToBase64 } from '../../../utilities/popups/usePopupData';
 
 // TODO: move everything into PopupChannel or rename?
 
-interface Serializable {
-  toString: () => string;
-}
-
-function getPopupUrl(values: Record<string, Serializable>): string {
+function getPopupUrl(values: AnyJson, action: PopupAction): string {
   const url = new URL(browser.runtime.getURL('popup.html'));
 
-  Object.keys(values).forEach((key) => {
-    url.searchParams.append(key, values[key].toString());
-  });
+  url.searchParams.set('data', jsonToBase64(values));
+  url.searchParams.set('action', action);
 
   return url.toString();
 }
@@ -38,7 +36,7 @@ async function closeExistingPopup() {
 
 export async function showPopup(
   action: PopupAction,
-  input: Record<string, Serializable>,
+  input: AnyJson,
   sender: { tab?: { id?: number; windowId?: number } },
 ): Promise<void> {
   tabId = sender.tab?.id;
@@ -46,7 +44,7 @@ export async function showPopup(
   await closeExistingPopup();
 
   // scripts cannot show the extension popup itself, only create window popups
-  const url = getPopupUrl({ ...input, action });
+  const url = getPopupUrl(input, action);
 
   const windowId = sender.tab?.windowId;
 

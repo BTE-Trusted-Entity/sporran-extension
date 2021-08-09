@@ -1,8 +1,9 @@
 import { Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { minBy, omit } from 'lodash-es';
+import { find, minBy } from 'lodash-es';
 import BN from 'bn.js';
-import { Claim, RequestForAttestation } from '@kiltprotocol/core';
+import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
+import { ITerms, IClaim } from '@kiltprotocol/types';
 
 import {
   decryptIdentity,
@@ -11,25 +12,29 @@ import {
 } from '../../utilities/identities/identities';
 import { saveCTypeTitle } from '../../utilities/cTypes/cTypes';
 import { saveCredential } from '../../utilities/credentials/credentials';
+import { usePopupData } from '../../utilities/popups/usePopupData';
 import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
-import { useQuery } from '../../utilities/useQuery/useQuery';
 import { backgroundClaimChannel } from '../../channels/ClaimChannels/browserClaimChannels';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { Avatar } from '../../components/Avatar/Avatar';
 
 import styles from './SignQuote.module.css';
 
+type Terms = ITerms & { claim: IClaim; attester: string };
+
 export function SignQuote(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const allValues = useQuery();
-  const costs = new BN(`${allValues.total}000000000000000`);
-  const values = Object.entries(
-    omit(allValues, ['total', 'claim', 'delegationId', 'legitimations']),
-  );
+  const data = usePopupData<Terms>();
+
+  const { claim, cTypes, quote, attester } = data;
+
+  const cType = find(cTypes, { hash: claim.cTypeHash });
+
+  const costs = new BN(`${quote?.cost?.gross}000000000000000`);
 
   const [name, setName] = useState('');
   const passwordField = usePasswordField();
@@ -51,13 +56,14 @@ export function SignQuote(): JSX.Element | null {
     async (event) => {
       event.preventDefault();
 
-      if (!firstIdentity) {
+      if (!firstIdentity || !cType) {
         return;
       }
 
-      const claim = new Claim(JSON.parse(allValues.claim));
+      const { claim, delegationId, attester, legitimations } = data;
 
-      const cTypeTitle = allValues['Credential type'];
+      const cTypeTitle = cType.schema.title;
+
       await saveCTypeTitle(claim.cTypeHash, cTypeTitle);
 
       const password = await passwordField.get(event);
@@ -65,14 +71,17 @@ export function SignQuote(): JSX.Element | null {
         firstIdentity.address,
         password,
       );
+
+      const attestedClaims = legitimations.map((legitimation) =>
+        AttestedClaim.fromAttestedClaim(legitimation),
+      );
+
       const requestForAttestation = RequestForAttestation.fromClaimAndIdentity(
         claim,
         sdkIdentity,
         {
-          legitimations: JSON.parse(allValues.legitimations),
-          ...(allValues.delegationId && {
-            delegationId: JSON.parse(allValues.delegationId),
-          }),
+          legitimations: attestedClaims,
+          ...(delegationId && { delegationId }),
         },
       );
 
@@ -80,14 +89,14 @@ export function SignQuote(): JSX.Element | null {
         request: requestForAttestation,
         name,
         cTypeTitle,
-        attester: allValues['Attester'],
+        attester,
         isAttested: false,
       });
 
       await backgroundClaimChannel.return(requestForAttestation);
       window.close();
     },
-    [allValues, firstIdentity, name, passwordField],
+    [firstIdentity, name, passwordField, cType, data],
   );
 
   if (!identities || !firstIdentity) {
@@ -103,12 +112,17 @@ export function SignQuote(): JSX.Element | null {
       <h1 className={styles.heading}>{t('view_SignQuote_heading')}</h1>
 
       <dl className={styles.details}>
-        {values.map(([name, value]) => (
+        {Object.entries(claim.contents).map(([name, value]) => (
           <Fragment key={name}>
             <dt className={styles.detailName}>{name}:</dt>
             <dd className={styles.detailValue}>{value}</dd>
           </Fragment>
         ))}
+        <dt className={styles.detailName}>{t('view_SignQuote_cType')}:</dt>
+        <dd className={styles.detailValue}>{cType?.schema?.title}</dd>
+
+        <dt className={styles.detailName}>{t('view_SignQuote_attester')}:</dt>
+        <dd className={styles.detailValue}>{attester}</dd>
       </dl>
 
       <p className={styles.costs}>

@@ -1,3 +1,5 @@
+import { AnyJson } from '@polkadot/types/types';
+
 import { PopupAction } from '../../../utilities/popups/types';
 import { makeControlledPromise } from '../../../utilities/makeControlledPromise/makeControlledPromise';
 import {
@@ -7,19 +9,10 @@ import {
 import { BrowserChannel } from '../BrowserChannel/BrowserChannel';
 import { showPopup } from './PopupMessages';
 
-interface Serializable {
-  toString: () => string;
-}
-
 export class PopupChannel<
   Input = void,
   Output = void,
-  JsonInput extends Record<string, Serializable> = Input extends Record<
-    string,
-    Serializable
-  >
-    ? Input
-    : never,
+  JsonInput extends AnyJson = Input extends AnyJson ? Input : never,
   JsonOutput = Output,
 > {
   action: PopupAction;

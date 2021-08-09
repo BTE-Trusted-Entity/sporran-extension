@@ -1,18 +1,19 @@
 import { Fragment, useCallback, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
+import { IAttestation } from '@kiltprotocol/types';
 
-import { useQuery } from '../../utilities/useQuery/useQuery';
 import {
   saveCredential,
   useCredential,
 } from '../../utilities/credentials/credentials';
+import { usePopupData } from '../../utilities/popups/usePopupData';
 
 import styles from './SaveCredential.module.css';
 
 export function SaveCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { claimHash } = useQuery();
+  const { claimHash } = usePopupData<IAttestation>();
 
   // TODO: Is this whole flow necessary?
   const credential = useCredential(claimHash);
