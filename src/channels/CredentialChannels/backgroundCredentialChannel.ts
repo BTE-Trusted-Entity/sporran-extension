@@ -101,7 +101,8 @@ async function getCredentialPopup(
   sender: SenderType,
 ): Promise<IMessage | void> {
   const { message, dAppName, dAppIdentity, sporranIdentity } = input;
-  console.log('input: ', input);
+
+  // errorCheckMessageBody(message.body);
 
   if (!dAppMessageTypes.includes(message.body.type)) {
     throw new Error('Message type not supported');
