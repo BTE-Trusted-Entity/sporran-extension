@@ -76,8 +76,11 @@ export function SignQuote(): JSX.Element | null {
         AttestedClaim.fromAttestedClaim(legitimation),
       );
 
+      // The attester generated claim with the temporary identity, need to put real address in it
+      const identityClaim = { ...claim, owner: firstIdentity.address };
+
       const requestForAttestation = RequestForAttestation.fromClaimAndIdentity(
-        claim,
+        identityClaim,
         sdkIdentity,
         {
           legitimations: attestedClaims,
