@@ -22,12 +22,10 @@ import {
   onPopupConnect,
 } from './channels/ExtensionPopupMessages/ExtensionPopupMessages';
 import { initBackgroundSignChannel } from './dApps/SignChannels/backgroundSignChannel';
-import { initBackgroundSaveChannel } from './channels/SaveChannels/browserSaveChannels';
-import { initBackgroundClaimChannel } from './channels/ClaimChannels/browserClaimChannels';
-import { initBackgroundShareChannel } from './channels/ShareChannels/backgroundShareChannel';
 import { initBackgroundAccessChannel } from './dApps/AccessChannels/browserAccessChannels';
 import { initBackgroundExistentialDepositChannel } from './channels/existentialDepositChannel/existentialDepositChannel';
 import { initBackgroundGenesisHashChannel } from './dApps/genesisHashChannel/initBackgroundGenesisHashChannel';
+import { initBackgroundCredentialChannel } from './channels/CredentialChannels/backgroundCredentialChannel';
 
 import {
   initBackgroundHasVestedFundsChannel,
@@ -45,9 +43,7 @@ function initSavedPasswords() {
 
 function initDAppChannels() {
   initBackgroundAccessChannel();
-  initBackgroundClaimChannel();
-  initBackgroundSaveChannel();
-  initBackgroundShareChannel();
+  initBackgroundCredentialChannel();
   initBackgroundSignChannel();
   browser.tabs.onRemoved.addListener(popupTabRemovedListener);
 }

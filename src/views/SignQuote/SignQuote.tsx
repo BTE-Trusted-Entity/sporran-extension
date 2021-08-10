@@ -17,7 +17,7 @@ import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
-import { backgroundClaimChannel } from '../../channels/ClaimChannels/browserClaimChannels';
+import { backgroundClaimChannel } from '../../channels/ClaimChannels/backgroundClaimChannel';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { Avatar } from '../../components/Avatar/Avatar';
 

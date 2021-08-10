@@ -112,6 +112,7 @@
     "typescript-plugin-css-modules": "^3.4.0",
     "web-ext": "^6.2.0",
     "webpack": "^5.49.0",
+    "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.7.2",
     "webpack-extension-reloader": "^1.1.4",
     "webpack-merge": "^5.8.0"
