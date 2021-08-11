@@ -90,23 +90,13 @@ async function processShareCredential(
   return request;
 }
 
-const dAppMessageTypes = [
-  MessageBodyType.SUBMIT_TERMS,
-  MessageBodyType.SUBMIT_ATTESTATION_FOR_CLAIM,
-  MessageBodyType.REQUEST_CLAIMS_FOR_CTYPES,
-];
-
-async function getCredentialPopup(
-  input: Parameters<typeof backgroundCredentialChannel.get>[0],
+async function showCredentialPopup(
+  input: CredentialInput,
   sender: SenderType,
 ): Promise<IMessage | void> {
   const { message, dAppName, dAppIdentity, sporranIdentity } = input;
 
-  // errorCheckMessageBody(message.body);
-
-  if (!dAppMessageTypes.includes(message.body.type)) {
-    throw new Error('Message type not supported');
-  }
+  // TODO: errorCheckMessageBody(message.body);
 
   if (message.body.type === MessageBodyType.SUBMIT_TERMS) {
     return await processSubmitTerms(
@@ -134,5 +124,5 @@ async function getCredentialPopup(
 }
 
 export function initBackgroundCredentialChannel(): void {
-  contentCredentialChannel.produce(getCredentialPopup);
+  contentCredentialChannel.produce(showCredentialPopup);
 }

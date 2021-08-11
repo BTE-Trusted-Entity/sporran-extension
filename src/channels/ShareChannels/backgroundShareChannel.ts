@@ -43,7 +43,3 @@ export async function getAttestedClaims(
 
   return attestedClaims;
 }
-
-// export function initBackgroundShareChannel(): void {
-//   contentShareChannel.produce(getAttestedClaims);
-// }
