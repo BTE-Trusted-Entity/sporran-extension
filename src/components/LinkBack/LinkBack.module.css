@@ -1,9 +1,9 @@
 .linkBack {
   composes: buttonIcon from '../../components/Button/Button.module.css';
   position: absolute;
-  left: 1.5rem;
-  top: 2.5rem;
-  height: calc(13rem / 16);
-  width: 2rem;
-  background-image: url('../images/arrow-left.svg');
+  left: 0;
+  top: 0;
+  height: 5rem;
+  width: 5rem;
+  background: url('../images/arrow-left.svg') no-repeat center/auto;
 }
