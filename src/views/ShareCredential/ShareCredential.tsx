@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
 import { IRequestClaimsForCTypesContent } from '@kiltprotocol/types';
 
-import { backgroundShareChannel } from '../../channels/ShareChannels/backgroundShareChannel';
+import { shareChannel } from '../../channels/shareChannel/shareChannel';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { Identity, useIdentities } from '../../utilities/identities/identities';
@@ -60,7 +60,7 @@ export function ShareCredential(): JSX.Element | null {
   }, []);
 
   const handleCancel = useCallback(async () => {
-    await backgroundShareChannel.throw('Rejected');
+    await shareChannel.throw('Rejected');
     window.close();
   }, []);
 
@@ -76,7 +76,7 @@ export function ShareCredential(): JSX.Element | null {
         .filter(([, value]) => value)
         .map(([index]) => matchingCredentials[Number(index)].request);
 
-      await backgroundShareChannel.return(requests);
+      await shareChannel.return(requests);
       window.close();
     },
     [matchingCredentials, checked],

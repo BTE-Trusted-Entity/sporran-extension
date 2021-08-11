@@ -17,7 +17,7 @@ import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
-import { backgroundClaimChannel } from '../../channels/ClaimChannels/browserClaimChannels';
+import { claimChannel } from '../../channels/claimChannel/claimChannel';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { Avatar } from '../../components/Avatar/Avatar';
 
@@ -44,7 +44,7 @@ export function SignQuote(): JSX.Element | null {
   }, []);
 
   const handleCancel = useCallback(async () => {
-    await backgroundClaimChannel.throw('Rejected');
+    await claimChannel.throw('Rejected');
     window.close();
   }, []);
 
@@ -96,7 +96,7 @@ export function SignQuote(): JSX.Element | null {
         isAttested: false,
       });
 
-      await backgroundClaimChannel.return(requestForAttestation);
+      await claimChannel.return(requestForAttestation);
       window.close();
     },
     [firstIdentity, name, passwordField, cType, data],

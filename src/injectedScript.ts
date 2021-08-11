@@ -1,18 +1,6 @@
-import {
-  IMessage,
-  IPublicIdentity,
-  IRejectTerms,
-  IRequestAttestationForClaim,
-  IRequestClaimsForCTypes,
-  ISubmitAttestationForClaim,
-  ISubmitClaimsForCTypes,
-  ISubmitTerms,
-  MessageBodyType,
-} from '@kiltprotocol/types';
-import Message, { errorCheckMessageBody } from '@kiltprotocol/messaging';
-import { injectedClaimChannel } from './channels/ClaimChannels/injectedClaimChannel';
-import { injectedSaveChannel } from './channels/SaveChannels/injectedSaveChannel';
-import { injectedShareChannel } from './channels/ShareChannels/injectedShareChannel';
+import { IMessage, IPublicIdentity } from '@kiltprotocol/types';
+
+import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import {
   authenticate,
   injectIntoDApp,
@@ -52,76 +40,6 @@ async function storeMessageFromSporran(message: IMessage): Promise<void> {
   unprocessedMessagesFromSporran.push(message);
 }
 
-async function processSubmitTerms(
-  messageBody: ISubmitTerms,
-  dAppName: string,
-): Promise<void> {
-  try {
-    const requestForAttestation = await injectedClaimChannel.get({
-      ...messageBody.content,
-      attester: dAppName,
-    });
-
-    const requestForAttestationBody: IRequestAttestationForClaim = {
-      content: { requestForAttestation },
-      type: MessageBodyType.REQUEST_ATTESTATION_FOR_CLAIM,
-    };
-    const request = new Message(
-      requestForAttestationBody,
-      sporranIdentity,
-      dAppIdentity,
-    );
-    await onMessageFromSporran(request);
-  } catch (error) {
-    const { claim, legitimations, delegationId } = messageBody.content;
-
-    const rejectionBody: IRejectTerms = {
-      content: { claim, legitimations, delegationId },
-      type: MessageBodyType.REJECT_TERMS,
-    };
-    const rejection = new Message(rejectionBody, sporranIdentity, dAppIdentity);
-    await onMessageFromSporran(rejection);
-  }
-}
-
-async function processSubmitCredential(
-  messageBody: ISubmitAttestationForClaim,
-): Promise<void> {
-  await injectedSaveChannel.get(messageBody.content.attestation);
-}
-
-async function processShareCredential(
-  messageBody: IRequestClaimsForCTypes,
-): Promise<void> {
-  const content = await injectedShareChannel.get(messageBody.content);
-
-  const credentialsBody: ISubmitClaimsForCTypes = {
-    content,
-    type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
-  };
-  const request = new Message(credentialsBody, sporranIdentity, dAppIdentity);
-  await onMessageFromSporran(request);
-}
-
-async function processMessageFromDApp(
-  message: IMessage,
-  dAppName: string,
-): Promise<void> {
-  errorCheckMessageBody(message.body);
-
-  if (message.body.type === MessageBodyType.SUBMIT_TERMS) {
-    await processSubmitTerms(message.body as ISubmitTerms, dAppName);
-  }
-
-  if (message.body.type === MessageBodyType.SUBMIT_ATTESTATION_FOR_CLAIM) {
-    await processSubmitCredential(message.body as ISubmitAttestationForClaim);
-  }
-
-  if (message.body.type === MessageBodyType.REQUEST_CLAIMS_FOR_CTYPES) {
-    await processShareCredential(message.body as IRequestClaimsForCTypes);
-  }
-}
-
 async function startSession(unsafeDAppName: string, identity: IPublicIdentity) {
   dAppIdentity = identity;
 
@@ -153,7 +71,15 @@ async function startSession(unsafeDAppName: string, identity: IPublicIdentity) {
 
     /** dApp sends a message */
     async send(message: IMessage): Promise<void> {
-      await processMessageFromDApp(message, dAppName);
+      const messageFromSporran = await injectedCredentialChannel.get({
+        message,
+        dAppName,
+        dAppIdentity,
+        sporranIdentity,
+      });
+      if (messageFromSporran) {
+        await onMessageFromSporran(messageFromSporran);
+      }
     },
   };
 }
