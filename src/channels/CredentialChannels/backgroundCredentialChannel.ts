@@ -15,9 +15,9 @@ import Message from '@kiltprotocol/messaging';
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 import { CredentialInput, CredentialOutput } from './types';
 import { contentCredentialChannel } from './contentCredentialChannel';
-import { backgroundClaimChannel } from '../ClaimChannels/backgroundClaimChannel';
-import { backgroundSaveChannel } from '../SaveChannels/backgroundSaveChannel';
-import { getAttestedClaims } from '../ShareChannels/backgroundShareChannel';
+import { claimChannel } from '../claimChannel/claimChannel';
+import { saveChannel } from '../saveChannel/saveChannel';
+import { getAttestedClaims } from '../shareChannel/shareChannel';
 
 export const backgroundCredentialChannel = new BrowserChannel<
   CredentialInput,
@@ -36,7 +36,7 @@ async function processSubmitTerms(
   sender: SenderType,
 ): Promise<IMessage> {
   try {
-    const requestForAttestation = await backgroundClaimChannel.get(
+    const requestForAttestation = await claimChannel.get(
       {
         ...messageBody.content,
         attester: dAppName,
@@ -70,7 +70,7 @@ async function processSubmitCredential(
   messageBody: ISubmitAttestationForClaim,
   sender: SenderType,
 ): Promise<void> {
-  await backgroundSaveChannel.get(messageBody.content.attestation, sender);
+  await saveChannel.get(messageBody.content.attestation, sender);
 }
 
 async function processShareCredential(

@@ -9,16 +9,16 @@ type SenderType = Parameters<
   Parameters<typeof browser.runtime.onMessage.addListener>[0]
 >[1];
 
-export const backgroundShareChannel = new PopupChannel<
+export const shareChannel = new PopupChannel<
   ShareInput,
   IRequestForAttestation[]
 >('share');
 
 export async function getAttestedClaims(
-  input: Parameters<typeof backgroundShareChannel.get>[0],
+  input: Parameters<typeof shareChannel.get>[0],
   sender: SenderType,
 ): Promise<IAttestedClaim[]> {
-  const requests = await backgroundShareChannel.get(input, sender);
+  const requests = await shareChannel.get(input, sender);
 
   const attestedClaims: IAttestedClaim[] = [];
   for (const request of requests) {
