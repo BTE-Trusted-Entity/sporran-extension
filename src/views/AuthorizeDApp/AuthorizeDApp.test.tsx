@@ -1,17 +1,24 @@
 import { MemoryRouter } from 'react-router-dom';
 
+import { jsonToBase64 } from '../../utilities/popups/usePopupData';
 import { render } from '../../testing/testing';
-import { paths } from '../paths';
 
+import { paths } from '../paths';
 import { AuthorizeDApp } from './AuthorizeDApp';
 
-const query =
-  'name=KILT-Sporran&origin=https%3A%2F%2Fpolkadot.js.org%2Fapps%2F';
+const mockAccessData = {
+  name: 'KILT-Sporran',
+  origin: 'https://polkadot.js.org/apps/',
+};
+
+const encodedData = jsonToBase64(mockAccessData);
 
 describe('AuthorizeDApp', () => {
   it('should render', async () => {
     const { container } = render(
-      <MemoryRouter initialEntries={[`${paths.popup.authorize}?${query}`]}>
+      <MemoryRouter
+        initialEntries={[`${paths.popup.authorize}?data=${encodedData}`]}
+      >
         <AuthorizeDApp />
       </MemoryRouter>,
     );
