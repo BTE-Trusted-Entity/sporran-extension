@@ -30,7 +30,7 @@ async function main() {
     injectScript();
     initMessages();
   }
-  toggleIcon();
+  await toggleIcon();
 }
 
 main();
