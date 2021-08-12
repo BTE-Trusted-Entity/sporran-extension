@@ -1,15 +1,18 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback } from 'react';
 
-import { useQuery } from '../../utilities/useQuery/useQuery';
-import { backgroundAccessChannel } from '../../dApps/AccessChannels/browserAccessChannels';
+import { usePopupData } from '../../utilities/popups/usePopupData';
+import {
+  backgroundAccessChannel,
+  AccessInput,
+} from '../../dApps/AccessChannels/browserAccessChannels';
 
 import styles from './AuthorizeDApp.module.css';
 
 export function AuthorizeDApp(): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { name, origin } = useQuery();
+  const { name, origin } = usePopupData<AccessInput>();
 
   const handleAuthorizeClick = useCallback(async () => {
     await backgroundAccessChannel.return(true);
