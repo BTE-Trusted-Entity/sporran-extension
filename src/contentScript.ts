@@ -6,14 +6,8 @@ import { initContentAccessChannel } from './dApps/checkAccess/checkAccess';
 import { initContentSignChannel } from './dApps/SignChannels/contentSignChannel';
 import { initContentCredentialChannel } from './channels/CredentialChannels/contentCredentialChannel';
 
-async function injectScript() {
+function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
-
-  const identities = await getIdentities();
-  if (!Object.keys(identities).length) {
-    return;
-  }
-
   const script = document.createElement('script');
   script.type = 'module';
   script.async = true;
@@ -30,9 +24,12 @@ function initMessages() {
   initContentSignChannel(origin);
 }
 
-function main() {
-  injectScript();
-  initMessages();
+async function main() {
+  const identities = await getIdentities();
+  if (Object.keys(identities).length > 0) {
+    injectScript();
+    initMessages();
+  }
   toggleIcon();
 }
 
