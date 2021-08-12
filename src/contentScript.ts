@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+import { getIdentities } from './utilities/identities/getIdentities';
 import { toggleIcon } from './channels/toggleIconChannel/toggleIconChannel';
 import { initContentIdentitiesChannel } from './dApps/identitiesDataProvider/identitiesDataProvider';
 import { initContentAccessChannel } from './dApps/checkAccess/checkAccess';
@@ -23,10 +24,13 @@ function initMessages() {
   initContentSignChannel(origin);
 }
 
-function main() {
-  injectScript();
-  initMessages();
-  toggleIcon();
+async function main() {
+  const identities = await getIdentities();
+  if (Object.keys(identities).length > 0) {
+    injectScript();
+    initMessages();
+  }
+  await toggleIcon();
 }
 
 main();
