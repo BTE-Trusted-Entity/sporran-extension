@@ -29,6 +29,8 @@ const passwordField = {
   setIsEmpty: jest.fn(),
 };
 
+jest.useFakeTimers();
+
 describe('PasswordField', () => {
   beforeEach(() => {
     passwordField.set.mockReset();
@@ -81,6 +83,28 @@ describe('PasswordField', () => {
 
     expect(passwordField.setIsEmpty).toHaveBeenCalledTimes(2);
     expect(passwordField.setIsEmpty).toHaveBeenCalledWith(false);
+  });
+  it('should clear the password from state if it has been cleared from background memory', async () => {
+    const promise = Promise.resolve('password');
+    (getPasswordChannel.get as jest.Mock).mockReturnValue(promise);
+
+    render(
+      <form>
+        <PasswordField identity={identity} password={passwordField} />
+      </form>,
+    );
+    expect(await screen.findByLabelText(/Remember password/)).toBeChecked();
+    expect(await screen.findByLabelText(/Sign with password/)).toHaveValue(
+      '************',
+    );
+    jest.advanceTimersByTime(15 * 60 * 1000);
+
+    (getPasswordChannel.get as jest.Mock).mockResolvedValue(undefined);
+
+    jest.advanceTimersByTime(1 * 60 * 1000);
+
+    expect(await screen.findByLabelText(/Remember password/)).not.toBeChecked();
+    expect(await screen.findByLabelText(/Sign with password/)).toHaveValue('');
   });
 
   describe('password getter', () => {

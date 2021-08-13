@@ -14,6 +14,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { decryptIdentity } from '../../utilities/identities/identities';
 import { usePasswordType } from '../usePasswordType/usePasswordType';
+import { useInterval } from '../../utilities/useInterval/useInterval';
 import {
   forgetPasswordChannel,
   getPasswordChannel,
@@ -125,20 +126,24 @@ export function PasswordField({
     [passwordGetter, setPasswordGetter, setIsEmpty],
   );
 
-  useEffect(() => {
-    (async () => {
-      if (!address || !rememberRef.current) {
-        return;
-      }
-      const passwordString = await getPasswordChannel.get(address);
-      setSavedPassword(passwordString);
+  const getSavedPassword = useCallback(async () => {
+    if (!address || !rememberRef.current) {
+      return;
+    }
+    const passwordString = await getPasswordChannel.get(address);
+    setSavedPassword(passwordString);
 
-      rememberRef.current.checked = Boolean(passwordString);
-      setIsEmpty(!rememberRef.current.checked);
+    rememberRef.current.checked = Boolean(passwordString);
+    setIsEmpty(!rememberRef.current.checked);
 
-      setPasswordGetter(() => passwordGetter);
-    })();
+    setPasswordGetter(() => passwordGetter);
   }, [address, passwordGetter, setPasswordGetter, setIsEmpty]);
+
+  useInterval(getSavedPassword, 1 * 60 * 1000);
+
+  useEffect(() => {
+    getSavedPassword();
+  }, [getSavedPassword]);
 
   const { passwordType, passwordToggle } = usePasswordType();
 
