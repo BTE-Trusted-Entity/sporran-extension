@@ -15,11 +15,10 @@ export async function setAuthorized(authorized: AuthorizedType): Promise<void> {
 }
 
 export function makeDAppKey(name: string, origin: string): string {
-  const url = new URL(origin);
-  return `${name}\n${url.host}`;
+  return `${name}\n${origin}`;
 }
 
 export function getDAppHostName(key: string): string {
-  const [, host] = key.split('\n');
-  return host;
+  const [, origin] = key.split('\n');
+  return origin;
 }

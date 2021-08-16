@@ -18,7 +18,7 @@ function injectScript() {
 function initMessages() {
   initContentCredentialChannel();
 
-  const origin = window.location.href;
+  const origin = new URL(window.location.href).host;
   initContentAccessChannel(origin);
   initContentIdentitiesChannel(origin);
   initContentSignChannel(origin);
