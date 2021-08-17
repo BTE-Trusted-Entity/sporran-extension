@@ -12,14 +12,10 @@ import { paths } from '../paths';
 
 import styles from './ExternalAccess.module.css';
 
-interface Hosts {
-  [host: string]: boolean;
-}
-
 export function ExternalAccess(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const [hosts, setHosts] = useState<Hosts | null>(null);
+  const [hosts, setHosts] = useState<Record<string, boolean> | null>(null);
 
   useEffect(() => {
     (async () => {
