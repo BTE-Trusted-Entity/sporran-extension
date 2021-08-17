@@ -1106,7 +1106,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.14.0", "@babel/runtime@^7.14.6", "@babel/runtime@^7.14.8", "@babel/runtime@^7.15.3", "@babel/runtime@^7.3.1", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.14.0", "@babel/runtime@^7.14.6", "@babel/runtime@^7.15.3", "@babel/runtime@^7.3.1", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.15.3"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.15.3.tgz#2e1c2880ca118e5b2f9988322bd8a7656a32502b"
   integrity sha512-OvwMLqNXkCXSz1kSm58sEsNuhqOx/fKpnUnKnFB5v8uDda5bLNEHNgKPvhDN6IU0LDcnHQ90LlJ0Q6jnyBSIBA==
@@ -1698,12 +1698,12 @@
     "@polkadot/x-rxjs" "^6.11.1"
     eventemitter3 "^4.0.7"
 
-"@polkadot/extension-inject@^0.39.2":
-  version "0.39.2"
-  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.39.2.tgz#fdf5ad1530c049cfecf2e6e56264551e6635a2e6"
-  integrity sha512-50kkzSawmiAaVjduMjD4dSKtLaWzwN7U6LgQLNgG4uTalpPMm5sPAvGLW2TxKAo36CkJ/xBaDLebkliZgyuFNA==
+"@polkadot/extension-inject@^0.39.3":
+  version "0.39.3"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.39.3.tgz#b0f5e884cce11d148582873fddcd4f070aad030a"
+  integrity sha512-UZGP1wvXbNHMB9Uf4vh6Uz5xiLX/UYJDk020iMo9BNVyeuGpLF45ImCyjlykahDZ3bjOqFklQ6nhu1FGMDINew==
   dependencies:
-    "@babel/runtime" "^7.14.8"
+    "@babel/runtime" "^7.15.3"
 
 "@polkadot/keyring@^6.11.1", "@polkadot/keyring@^6.7.1":
   version "6.11.1"
