@@ -3,7 +3,6 @@ import { act, render, screen } from '../../testing/testing';
 
 import {
   getAuthorized,
-  getDAppHostName,
   setAuthorized,
 } from '../../utilities/authorizedStorage/authorizedStorage';
 
@@ -12,11 +11,10 @@ import { ExternalAccess } from './ExternalAccess';
 jest.mock('../../utilities/authorizedStorage/authorizedStorage');
 
 const getAuthorizedPromise = Promise.resolve({
-  'evil\nhttps://example.com/evil': false,
-  'good\nhttps://example.org/good': true,
+  'example.com': false,
+  'example.org': true,
 });
 (getAuthorized as jest.Mock).mockReturnValue(getAuthorizedPromise);
-(getDAppHostName as jest.Mock).mockReturnValue('example.org');
 
 describe('ExternalAccess', () => {
   it('should render', async () => {
@@ -34,14 +32,14 @@ describe('ExternalAccess', () => {
       await getAuthorizedPromise;
     });
 
-    userEvent.click(await screen.findByLabelText('example.orgdeniedallowed'));
+    userEvent.click(await screen.findByLabelText('example.comdeniedallowed'));
     await act(async () => {
       await getAuthorizedPromise;
     });
 
     expect(setAuthorized).toHaveBeenCalledWith({
-      'evil\nhttps://example.com/evil': true,
-      'good\nhttps://example.org/good': true,
+      'example.com': true,
+      'example.org': true,
     });
   });
 });
