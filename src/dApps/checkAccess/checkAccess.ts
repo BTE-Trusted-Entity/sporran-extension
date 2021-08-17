@@ -1,6 +1,5 @@
 import {
   getAuthorized,
-  makeDAppKey,
   setAuthorized,
 } from '../../utilities/authorizedStorage/authorizedStorage';
 import { injectedAccessChannel } from '../AccessChannels/injectedAccessChannel';
@@ -8,13 +7,12 @@ import { contentAccessChannel } from '../AccessChannels/browserAccessChannels';
 
 export async function checkAccess(name: string, origin: string): Promise<void> {
   const authorizedDApps = await getAuthorized();
-  const key = makeDAppKey(name, origin);
 
-  if (authorizedDApps[key]) {
+  if (authorizedDApps[origin]) {
     return;
   }
 
-  if (authorizedDApps[key] === false) {
+  if (authorizedDApps[origin] === false) {
     throw new Error('Not authorized');
   }
 
@@ -22,7 +20,7 @@ export async function checkAccess(name: string, origin: string): Promise<void> {
 
   await setAuthorized({
     ...authorizedDApps,
-    [key]: authorized,
+    [origin]: authorized,
   });
 
   if (!authorized) {

@@ -13,12 +13,3 @@ export async function getAuthorized(): Promise<AuthorizedType> {
 export async function setAuthorized(authorized: AuthorizedType): Promise<void> {
   await storage.set({ [authorizedKey]: authorized });
 }
-
-export function makeDAppKey(name: string, origin: string): string {
-  return `${name}\n${origin}`;
-}
-
-export function getDAppHostName(key: string): string {
-  const [, origin] = key.split('\n');
-  return origin;
-}

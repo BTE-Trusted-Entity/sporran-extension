@@ -1,77 +1,60 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
-import { groupBy, mapValues } from 'lodash-es';
 
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import {
   getAuthorized,
-  getDAppHostName,
   setAuthorized,
 } from '../../utilities/authorizedStorage/authorizedStorage';
 import { paths } from '../paths';
 
 import styles from './ExternalAccess.module.css';
 
-interface HostNames {
-  [hostName: string]: {
-    key: string;
-    checked: boolean;
-  }[];
+interface Hosts {
+  [host: string]: boolean;
 }
 
-function useHostNames(setHostNames: (hostNames: HostNames) => void): void {
+function useHosts(setHosts: (hosts: Hosts) => void): void {
   useEffect(() => {
     (async () => {
       const stored = await getAuthorized();
 
-      const keysAndAccess = mapValues(stored, (checked, key) => ({
-        key,
-        checked,
-      }));
-      const groupedHostNames = groupBy(keysAndAccess, ({ key }) =>
-        getDAppHostName(key),
-      );
-
-      setHostNames(groupedHostNames);
+      setHosts(stored);
     })();
-  }, [setHostNames]);
+  }, [setHosts]);
 }
 
 export function ExternalAccess(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const [hostNames, setHostNames] = useState<HostNames | null>(null);
-  useHostNames(setHostNames);
+  const [hosts, setHosts] = useState<Hosts | null>(null);
+  useHosts(setHosts);
 
   const handleChange = useCallback(
     (event) => {
-      if (!hostNames) {
+      if (!hosts) {
         return;
       }
 
       const { name, checked } = event.target;
-      const keysAndAccess = hostNames[name];
 
-      const updated = keysAndAccess.map(({ key }) => ({ key, checked }));
-      setHostNames({
-        ...hostNames,
-        [name]: updated,
+      setHosts({
+        ...hosts,
+        [name]: checked,
       });
 
       (async () => {
         const authorized = await getAuthorized();
-        keysAndAccess.forEach(({ key }) => {
-          authorized[key] = checked;
-        });
+        authorized[name] = checked;
         await setAuthorized(authorized);
       })();
     },
-    [hostNames],
+    [hosts],
   );
 
-  if (!hostNames) {
+  if (!hosts) {
     return null; // storage data pending
   }
 
@@ -83,18 +66,18 @@ export function ExternalAccess(): JSX.Element | null {
       <small className={styles.small}>{t('view_ExternalAccess_small')}</small>
 
       <ul className={styles.list}>
-        {Object.entries(hostNames).map(([hostName, keysAndAccess]) => (
-          <li key={hostName}>
+        {Object.entries(hosts).map(([host, checked]) => (
+          <li key={host}>
             <label className={styles.label}>
-              {hostName}
+              {host}
               <span className={styles.denied} aria-hidden>
                 {t('view_ExternalAccess_denied')}
               </span>
               <input
-                name={hostName}
+                name={host}
                 className={styles.toggle}
                 type="checkbox"
-                defaultChecked={keysAndAccess[0].checked}
+                defaultChecked={checked}
                 onClick={handleChange}
               />
               <span />
