@@ -27,7 +27,7 @@ exports[`ExternalAccess should render 1`] = `
         <label
           class="label"
         >
-          https://example.com/evil
+          example.com
           <span
             aria-hidden="true"
             class="denied"
@@ -36,7 +36,7 @@ exports[`ExternalAccess should render 1`] = `
           </span>
           <input
             class="toggle"
-            name="https://example.com/evil"
+            name="example.com"
             type="checkbox"
           />
           <span />
@@ -52,7 +52,7 @@ exports[`ExternalAccess should render 1`] = `
         <label
           class="label"
         >
-          https://example.org/good
+          example.org
           <span
             aria-hidden="true"
             class="denied"
@@ -62,7 +62,7 @@ exports[`ExternalAccess should render 1`] = `
           <input
             checked=""
             class="toggle"
-            name="https://example.org/good"
+            name="example.org"
             type="checkbox"
           />
           <span />

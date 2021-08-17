@@ -16,21 +16,16 @@ interface Hosts {
   [host: string]: boolean;
 }
 
-function useHosts(setHosts: (hosts: Hosts) => void): void {
-  useEffect(() => {
-    (async () => {
-      const stored = await getAuthorized();
-
-      setHosts(stored);
-    })();
-  }, [setHosts]);
-}
-
 export function ExternalAccess(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const [hosts, setHosts] = useState<Hosts | null>(null);
-  useHosts(setHosts);
+
+  useEffect(() => {
+    (async () => {
+      setHosts(await getAuthorized());
+    })();
+  }, [setHosts]);
 
   const handleChange = useCallback(
     (event) => {

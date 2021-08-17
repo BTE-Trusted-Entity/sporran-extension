@@ -11,8 +11,8 @@ import { ExternalAccess } from './ExternalAccess';
 jest.mock('../../utilities/authorizedStorage/authorizedStorage');
 
 const getAuthorizedPromise = Promise.resolve({
-  'https://example.com/evil': false,
-  'https://example.org/good': true,
+  'example.com': false,
+  'example.org': true,
 });
 (getAuthorized as jest.Mock).mockReturnValue(getAuthorizedPromise);
 
@@ -32,16 +32,14 @@ describe('ExternalAccess', () => {
       await getAuthorizedPromise;
     });
 
-    userEvent.click(
-      await screen.findByLabelText('https://example.com/evildeniedallowed'),
-    );
+    userEvent.click(await screen.findByLabelText('example.comdeniedallowed'));
     await act(async () => {
       await getAuthorizedPromise;
     });
 
     expect(setAuthorized).toHaveBeenCalledWith({
-      'https://example.com/evil': true,
-      'https://example.org/good': true,
+      'example.com': true,
+      'example.org': true,
     });
   });
 });

@@ -34,8 +34,8 @@ export const browser = {
       async get(): Promise<unknown> {
         return {
           authorizedDApps: {
-            'https://example.com/evil': false,
-            'https://example.org/good': true,
+            'example.com': false,
+            'example.org': true,
           },
           'credential:list': ['credential:0xclaimHash'],
           'credential:0xclaimHash': credentialsMock[0],
