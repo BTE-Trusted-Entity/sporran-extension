@@ -4,6 +4,7 @@ interface Features {
   endpoint: boolean;
   credentials: boolean;
   sendToken: boolean;
+  subscan: boolean;
 }
 
 export interface ConfigurationType {
@@ -15,12 +16,14 @@ const publicFeatures: Features = {
   endpoint: false,
   credentials: false,
   sendToken: false,
+  subscan: false,
 };
 
 export const internalFeatures: Features = {
   endpoint: true,
   credentials: true,
   sendToken: true,
+  subscan: true,
 };
 
 // Duplicates the value in src/static/manifest.json

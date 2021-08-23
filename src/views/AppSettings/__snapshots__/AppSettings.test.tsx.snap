@@ -31,6 +31,9 @@ Just start it again to continue.
         id="endpoints"
       >
         <option
+          value="wss://spiritnet.kilt.io"
+        />
+        <option
           value="wss://kilt-peregrine-k8s.kilt.io"
         />
         <option
@@ -52,7 +55,7 @@ Just start it again to continue.
         placeholder="wss://example.org:433"
         required=""
         type="url"
-        value="wss://kilt-peregrine-k8s.kilt.io"
+        value="wss://spiritnet.kilt.io"
       />
       <button
         aria-label="Save"
