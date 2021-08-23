@@ -132,6 +132,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           {t('view_IdentityOverview_subscan')}
         </a>
       )}
+
       <Stats />
 
       {hasSuccessOverlay && type && (
