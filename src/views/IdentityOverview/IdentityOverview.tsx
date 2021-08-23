@@ -113,7 +113,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       </p>
 
-      {hasCredentials && (
+      {features.credentials && hasCredentials && (
         <Link
           to={generatePath(paths.identity.credentials, { address })}
           className={styles.credentials}
@@ -122,15 +122,16 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       )}
 
-      <a
-        className={styles.subscan}
-        href={`https://kilt-testnet.subscan.io/account/${identity.address}?tab=transfer`}
-        target="_blank"
-        rel="noreferrer"
-      >
-        {t('view_IdentityOverview_subscan')}
-      </a>
-
+      {features.subscan && (
+        <a
+          className={styles.subscan}
+          href={`https://kilt-testnet.subscan.io/account/${identity.address}?tab=transfer`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {t('view_IdentityOverview_subscan')}
+        </a>
+      )}
       <Stats />
 
       {hasSuccessOverlay && type && (
