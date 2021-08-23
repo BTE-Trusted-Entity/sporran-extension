@@ -82,11 +82,13 @@ describe('IdentityOverview', () => {
     (useIdentityCredentials as jest.Mock).mockReturnValue(credentialsMock);
 
     render(
-      <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={identity} />
-        </Route>
-      </MemoryRouter>,
+      <InternalConfigurationContext>
+        <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
+          <Route path={paths.identity.overview}>
+            <IdentityOverview identity={identity} />
+          </Route>
+        </MemoryRouter>
+      </InternalConfigurationContext>,
     );
 
     expect(
