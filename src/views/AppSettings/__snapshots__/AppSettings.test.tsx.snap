@@ -34,16 +34,10 @@ Just start it again to continue.
           value="wss://spiritnet.kilt.io"
         />
         <option
-          value="wss://kilt-peregrine-k8s.kilt.io"
+          value="wss://peregrine.kilt.io/"
         />
         <option
-          value="wss://full-nodes.kilt.io:443"
-        />
-        <option
-          value="wss://full-nodes.staging.kilt.io:443"
-        />
-        <option
-          value="wss://full-nodes-lb.devnet.kilt.io:443"
+          value="wss://kilt-peregrine-stg.kilt.io"
         />
       </datalist>
       <input
