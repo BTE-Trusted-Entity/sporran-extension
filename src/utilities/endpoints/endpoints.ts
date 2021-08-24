@@ -5,7 +5,7 @@ const endpointKey = 'endpoints';
 
 export const endpoints = [
   'wss://spiritnet.kilt.io',
-  'wss://kilt-peregrine-k8s.kilt.io',
+  'wss://peregrine.kilt.io/',
   'wss://kilt-peregrine-stg.kilt.io',
   'wss://full-nodes.kilt.io:443',
   'wss://full-nodes.staging.kilt.io:443',
