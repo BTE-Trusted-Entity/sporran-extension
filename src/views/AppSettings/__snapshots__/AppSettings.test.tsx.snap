@@ -39,12 +39,6 @@ Just start it again to continue.
         <option
           value="wss://kilt-peregrine-stg.kilt.io"
         />
-        <option
-          value="wss://full-nodes.kilt.io:443"
-        />
-        <option
-          value="wss://full-nodes.staging.kilt.io:443"
-        />
       </datalist>
       <input
         aria-label="Custom endpoint"
