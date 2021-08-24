@@ -5,10 +5,8 @@ const endpointKey = 'endpoints';
 
 export const endpoints = [
   'wss://spiritnet.kilt.io',
-  'wss://kilt-peregrine-k8s.kilt.io',
-  'wss://full-nodes.kilt.io:443',
-  'wss://full-nodes.staging.kilt.io:443',
-  'wss://full-nodes-lb.devnet.kilt.io:443',
+  'wss://peregrine.kilt.io/',
+  'wss://kilt-peregrine-stg.kilt.io',
 ];
 
 export async function getEndpoint(): Promise<string> {
