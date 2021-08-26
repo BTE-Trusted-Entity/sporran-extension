@@ -1,7 +1,6 @@
 import { Meta } from '@storybook/react';
-import { MemoryRouter } from 'react-router-dom';
 
-import { jsonToBase64 } from '../../utilities/popups/usePopupData';
+import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 
 import { paths } from '../paths';
 import { AuthorizeDApp } from './AuthorizeDApp';
@@ -16,14 +15,10 @@ const mockAccessData = {
   origin: 'https://polkadot.js.org/apps/',
 };
 
-const encodedData = jsonToBase64(mockAccessData);
-
 export function Template(): JSX.Element {
   return (
-    <MemoryRouter
-      initialEntries={[`${paths.popup.authorize}?data=${encodedData}`]}
-    >
+    <PopupTestProvider path={paths.popup.authorize} data={mockAccessData}>
       <AuthorizeDApp />
-    </MemoryRouter>
+    </PopupTestProvider>
   );
 }

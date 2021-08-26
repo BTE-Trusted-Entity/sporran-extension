@@ -1,6 +1,4 @@
-import { MemoryRouter } from 'react-router-dom';
-
-import { jsonToBase64 } from '../../utilities/popups/usePopupData';
+import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { render } from '../../testing/testing';
 
 import { paths } from '../paths';
@@ -11,16 +9,12 @@ const mockAccessData = {
   origin: 'https://polkadot.js.org/apps/',
 };
 
-const encodedData = jsonToBase64(mockAccessData);
-
 describe('AuthorizeDApp', () => {
   it('should render', async () => {
     const { container } = render(
-      <MemoryRouter
-        initialEntries={[`${paths.popup.authorize}?data=${encodedData}`]}
-      >
+      <PopupTestProvider path={paths.popup.authorize} data={mockAccessData}>
         <AuthorizeDApp />
-      </MemoryRouter>,
+      </PopupTestProvider>,
     );
     expect(container).toMatchSnapshot();
   });

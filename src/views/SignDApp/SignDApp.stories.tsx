@@ -1,7 +1,6 @@
 import { Meta } from '@storybook/react';
-import { MemoryRouter } from 'react-router-dom';
 
-import { jsonToBase64 } from '../../utilities/popups/usePopupData';
+import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
 
 import { SignDApp } from './SignDApp';
@@ -23,12 +22,10 @@ const mockExtrinsic = {
   lifetimeEnd: 1000000,
 };
 
-const encodedData = jsonToBase64(mockExtrinsic);
-
 export function Template(): JSX.Element {
   return (
-    <MemoryRouter initialEntries={[`${paths.popup.sign}?data=${encodedData}`]}>
+    <PopupTestProvider path={paths.popup.sign} data={mockExtrinsic}>
       <SignDApp />
-    </MemoryRouter>
+    </PopupTestProvider>
   );
 }
