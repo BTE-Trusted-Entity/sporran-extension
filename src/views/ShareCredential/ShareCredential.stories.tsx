@@ -1,7 +1,6 @@
 import { Meta } from '@storybook/react';
-import { MemoryRouter } from 'react-router-dom';
 
-import { jsonToBase64 } from '../../utilities/popups/usePopupData';
+import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
 
 import { ShareCredential } from './ShareCredential';
@@ -18,12 +17,10 @@ const mockClaimRequest = [
   },
 ];
 
-const encodedData = jsonToBase64(mockClaimRequest);
-
 export function Template(): JSX.Element {
   return (
-    <MemoryRouter initialEntries={[`${paths.popup.share}?data=${encodedData}`]}>
+    <PopupTestProvider path={paths.popup.share} data={mockClaimRequest}>
       <ShareCredential />
-    </MemoryRouter>
+    </PopupTestProvider>
   );
 }
