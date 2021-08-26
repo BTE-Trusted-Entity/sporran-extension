@@ -12,7 +12,8 @@ export default {
 } as Meta;
 
 const mockExtrinsic = {
-  origin: 'example.com',
+  origin:
+    'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
   specVersion: 1,
   nonce: 1,

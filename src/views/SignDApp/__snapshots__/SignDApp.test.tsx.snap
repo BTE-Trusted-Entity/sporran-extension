@@ -47,9 +47,9 @@ exports[`SignDApp should render 1`] = `
       </dt>
       <dd
         class="detailValue"
-        title="example.com"
+        title="extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com"
       >
-        example.com
+        extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com
       </dd>
       <dt
         class="detailName"
