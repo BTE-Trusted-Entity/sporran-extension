@@ -2,18 +2,26 @@ import { Fragment, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import { useIdentities } from '../../utilities/identities/identities';
+import { usePopupData } from '../../utilities/popups/usePopupData';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
-import {
-  backgroundSignChannel,
-  useSignPopupQuery,
-} from '../../dApps/SignChannels/backgroundSignChannel';
+import { backgroundSignChannel } from '../../dApps/SignChannels/backgroundSignChannel';
 
 import styles from './SignDApp.module.css';
+
+interface ExtrinsicData {
+  origin: string;
+  address: string;
+  specVersion: number;
+  nonce: number;
+  method: string;
+  lifetimeStart?: number;
+  lifetimeEnd?: number;
+}
 
 function formatBlock(block: number) {
   const locale = browser.i18n.getUILanguage();
@@ -28,7 +36,7 @@ function getExtrinsicValues({
   method,
   lifetimeStart,
   lifetimeEnd,
-}: ReturnType<typeof useSignPopupQuery>) {
+}: ExtrinsicData) {
   const t = browser.i18n.getMessage;
 
   const lifetime =
@@ -51,8 +59,8 @@ function getExtrinsicValues({
 export function SignDApp(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const query = useSignPopupQuery();
-  const values = getExtrinsicValues(query);
+  const data = usePopupData<ExtrinsicData>();
+  const values = getExtrinsicValues(data);
 
   const addressRef = useRef<HTMLInputElement>(null);
   const copy = useCopyButton(addressRef);
@@ -60,7 +68,7 @@ export function SignDApp(): JSX.Element | null {
   const passwordField = usePasswordField();
 
   const identities = useIdentities().data;
-  const identity = identities && identities[query.address as string];
+  const identity = identities && identities[data.address as string];
 
   const handleSubmit = useCallback(
     async (event) => {

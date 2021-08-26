@@ -9,7 +9,6 @@ import type {
   ExtrinsicEra,
 } from '@polkadot/types/interfaces';
 
-import { makeUsePopupQuery } from '../../utilities/popups/usePopupQuery';
 import { PopupChannel } from '../../channels/base/PopupChannel/PopupChannel';
 import { decryptIdentity } from '../../utilities/identities/identities';
 import { contentSignChannel } from './contentSignChannel';
@@ -24,50 +23,16 @@ interface SignBgInput {
   lifetimeEnd?: number;
 }
 
-type SignBgJsonInput = {
-  origin: string;
-  address: string;
-  specVersion: string;
-  nonce: string;
-  method: string;
-  lifetimeStart?: string;
-  lifetimeEnd?: string;
-};
-
 type SignBgOutput = string;
 
 type SenderType = Parameters<
   Parameters<typeof browser.runtime.onMessage.addListener>[0]
 >[1];
 
-const transform = {
-  inputToJson: ({ lifetimeStart, lifetimeEnd, ...input }: SignBgInput) => ({
-    ...input,
-    specVersion: input.specVersion.toString(),
-    nonce: input.nonce.toString(),
-    ...(lifetimeStart &&
-      lifetimeEnd && {
-        lifetimeStart: lifetimeStart.toString(),
-        lifetimeEnd: lifetimeEnd.toString(),
-      }),
-  }),
-  jsonToInput: ({ lifetimeStart, lifetimeEnd, ...input }: SignBgJsonInput) => ({
-    ...input,
-    specVersion: parseInt(input.specVersion, 10),
-    nonce: parseInt(input.nonce, 10),
-    ...(lifetimeStart &&
-      lifetimeEnd && {
-        lifetimeStart: parseInt(lifetimeStart, 10),
-        lifetimeEnd: parseInt(lifetimeEnd, 10),
-      }),
-  }),
-};
-
 export const backgroundSignChannel = new PopupChannel<
   SignBgInput,
-  SignBgOutput,
-  SignBgJsonInput
->('sign', transform);
+  SignBgOutput
+>('sign');
 
 async function getExtrinsic(input: SignerPayloadJSON) {
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();
@@ -147,8 +112,3 @@ async function getSignature(
 export function initBackgroundSignChannel(): void {
   contentSignChannel.produce(getSignature);
 }
-
-export const useSignPopupQuery: () => SignBgInput = makeUsePopupQuery<
-  SignBgInput,
-  SignBgJsonInput
->(backgroundSignChannel.transform.jsonToInput);
