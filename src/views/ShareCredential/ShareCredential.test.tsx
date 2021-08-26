@@ -1,9 +1,7 @@
-import { MemoryRouter } from 'react-router-dom';
-
 import { render } from '../../testing/testing';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { credentialsMock } from '../../utilities/credentials/credentials.mock';
-import { jsonToBase64 } from '../../utilities/popups/usePopupData';
+import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
 
 import { ShareCredential } from './ShareCredential';
@@ -18,16 +16,12 @@ const mockClaimRequest = [
   },
 ];
 
-const encodedData = jsonToBase64(mockClaimRequest);
-
 describe('ShareCredential', () => {
   it('should render', async () => {
     const { container } = render(
-      <MemoryRouter
-        initialEntries={[`${paths.popup.share}?data=${encodedData}`]}
-      >
+      <PopupTestProvider path={paths.popup.share} data={mockClaimRequest}>
         <ShareCredential />
-      </MemoryRouter>,
+      </PopupTestProvider>,
     );
     expect(container).toMatchSnapshot();
   });

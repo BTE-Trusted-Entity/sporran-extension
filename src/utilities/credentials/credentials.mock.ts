@@ -76,7 +76,7 @@ export const credentialsMock = [
 
 export const mockAttestation = {
   claimHash:
-    '0x051e915e7f2803b54ab30d7206605662b55118412b7f295f30614b3940a2d539',
+    '0xf53f460a9e96cf7ea3321ac001a89674850493e12fad28cbc868e026935436d2',
   cTypeHash:
     '0x240c744923bd98797504328f9bef57ca6c777f5cbf3e1aada74f348c9879d78a',
   owner: '4quK7LGg8iGqoH8kmeEeCDN7VM1aN5wmKkAfcH1VVU8tFmMc',

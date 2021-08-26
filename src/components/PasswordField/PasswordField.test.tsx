@@ -1,5 +1,4 @@
 import { FormEvent } from 'react';
-import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 import {
@@ -15,6 +14,7 @@ import {
   getPasswordChannel,
   savePasswordChannel,
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
+import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { decryptIdentity } from '../../utilities/identities/identities';
 
 import { PasswordField } from './PasswordField';
@@ -53,11 +53,11 @@ describe('PasswordField', () => {
 
   it('should skip the reset link in popups', async () => {
     render(
-      <MemoryRouter initialEntries={[paths.popup.base]}>
+      <PopupTestProvider path={paths.popup.base}>
         <form>
           <PasswordField identity={identity} password={passwordField} />
         </form>
-      </MemoryRouter>,
+      </PopupTestProvider>,
     );
 
     expect(screen.queryByText('Reset Password')).not.toBeInTheDocument();
