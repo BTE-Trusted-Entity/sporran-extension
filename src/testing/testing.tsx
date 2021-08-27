@@ -44,6 +44,12 @@ export async function waitForDialogUpdate(): Promise<void> {
   await act(() => dialogPromise);
 }
 
+// this declaration is not present in the TS anymore (https://github.com/DefinitelyTyped/DefinitelyTyped/pull/54052)
+// but for us the implementation is provided by the dialog-polyfill
+declare const HTMLDialogElement: {
+  new (): HTMLDialogElement;
+  readonly prototype: HTMLDialogElement;
+};
 export function mockDialogShowModal(): void {
   (
     HTMLDialogElement.prototype as unknown as {
