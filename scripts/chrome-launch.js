@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import chromeLaunch from 'chrome-launch';
 
 chromeLaunch('about:blank', {
