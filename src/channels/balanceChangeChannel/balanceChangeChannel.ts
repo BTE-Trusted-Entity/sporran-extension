@@ -97,7 +97,7 @@ export async function publishBalanceChanges(
       const balance = computeBalance(responseAddress, rawBalances);
       publisher(null, balance);
     } catch (error) {
-      publisher(error);
+      publisher(error instanceof Error ? error : new Error(String(error)));
     }
   }
 

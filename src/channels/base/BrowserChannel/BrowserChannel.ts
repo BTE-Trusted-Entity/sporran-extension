@@ -76,7 +76,7 @@ export class BrowserChannel<
         const output = this.transform.jsonToOutput(message.output);
         handleOutput(null, output);
       } catch (error) {
-        handleOutput(error);
+        handleOutput(error instanceof Error ? error : new Error(String(error)));
       }
     };
 
@@ -93,7 +93,7 @@ export class BrowserChannel<
       try {
         await this.emitInput(input);
       } catch (error) {
-        handleOutput(error);
+        handleOutput(error instanceof Error ? error : new Error(String(error)));
       }
     })();
 
@@ -127,7 +127,9 @@ export class BrowserChannel<
           const output = await producer(input, sender);
           return this.transform.outputToJson(output);
         } catch (error) {
-          return { error: error.message };
+          return {
+            error: error instanceof Error ? error.message : String(error),
+          };
         }
       })();
     };
@@ -145,7 +147,7 @@ export class BrowserChannel<
         output: jsonOutput,
       });
     } catch (error) {
-      await this.throw(error.message);
+      await this.throw(error instanceof Error ? error.message : String(error));
     }
   }
 
@@ -171,7 +173,11 @@ export class BrowserChannel<
       try {
         await this.return(output as Output);
       } catch (anotherError) {
-        await this.throw(anotherError.toString());
+        await this.throw(
+          anotherError instanceof Error
+            ? anotherError.message
+            : String(anotherError),
+        );
       }
     };
 

@@ -120,7 +120,7 @@ describe('PasswordField', () => {
         try {
           await getPassword(event);
         } catch (e) {
-          error = e.message;
+          error = e instanceof Error ? e.message : String(e);
         }
       }
 

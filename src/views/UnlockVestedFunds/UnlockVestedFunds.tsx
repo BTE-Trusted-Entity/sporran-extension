@@ -59,7 +59,7 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
       } catch (error) {
         setTxStatus('error');
         console.error(error);
-        if (error.message === insufficientFunds) {
+        if (error instanceof Error && error.message === insufficientFunds) {
           setError(t('view_UnlockVestedFunds_insufficient_funds'));
         }
       }

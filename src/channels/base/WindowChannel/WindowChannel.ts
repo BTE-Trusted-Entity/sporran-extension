@@ -77,7 +77,7 @@ export class WindowChannel<Input, Output> {
         const output = await producer(data.input);
         this.return(output);
       } catch (error) {
-        this.throw(error.message);
+        this.throw(error instanceof Error ? error.message : String(error));
       }
     };
 
