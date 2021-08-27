@@ -100,7 +100,7 @@ export function PasswordField({
       try {
         await decryptIdentity(address, password);
       } catch (error) {
-        if (error.message === 'Invalid password') {
+        if (error instanceof Error && error.message === 'Invalid password') {
           setError(t('component_PasswordField_password_incorrect'));
         }
         throw error;
