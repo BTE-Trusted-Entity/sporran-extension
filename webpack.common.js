@@ -1,7 +1,7 @@
+import path from 'node:path';
+import { createRequire } from 'node:module';
 import webpack from 'webpack';
-import path from 'path';
 import CopyPlugin from 'copy-webpack-plugin';
-import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
 
