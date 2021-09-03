@@ -15,9 +15,11 @@ import { paths } from '../paths';
 import { IdentityOverview } from './IdentityOverview';
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
+import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { credentialsMock } from '../../utilities/credentials/credentials.mock';
 
 jest.mock('../../utilities/credentials/credentials');
+jest.mock('../../utilities/useSubscanHost/useSubscanHost');
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
@@ -63,6 +65,10 @@ describe('IdentityOverview', () => {
   });
 
   it('should render with link to send screen', async () => {
+    (useSubscanHost as jest.Mock).mockReturnValue(
+      'https://kilt-testnet.subscan.io',
+    );
+
     const { container } = render(
       <InternalConfigurationContext>
         <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
