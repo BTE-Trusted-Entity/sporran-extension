@@ -17,6 +17,7 @@ import {
 import { plural } from '../../utilities/plural/plural';
 import { generatePath, paths } from '../paths';
 import { useConfiguration } from '../../configuration/useConfiguration';
+import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { IdentityOverviewNew } from './IdentityOverviewNew';
 
 import styles from './IdentityOverview.module.css';
@@ -53,6 +54,8 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
   const credentials = useIdentityCredentials(identity.address);
   const hasCredentials = credentials && credentials.length > 0;
+
+  const subscanHost = useSubscanHost();
 
   const identities = useIdentities().data;
   if (!identities) {
@@ -122,10 +125,10 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       )}
 
-      {features.subscan && (
+      {features.subscan && subscanHost && (
         <a
           className={styles.subscan}
-          href={`https://kilt-testnet.subscan.io/account/${identity.address}?tab=transfer`}
+          href={`${subscanHost}/account/${identity.address}?tab=transfer`}
           target="_blank"
           rel="noreferrer"
         >

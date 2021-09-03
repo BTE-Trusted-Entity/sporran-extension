@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
 import { paths, generatePath } from '../../views/paths';
-
+import { useConfiguration } from '../../configuration/useConfiguration';
+import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { Avatar } from '../Avatar/Avatar';
 
 import styles from './TxStatusModal.module.css';
@@ -23,11 +24,13 @@ export function TxStatusModal({
   onDismissError,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
+  const { features } = useConfiguration();
 
-  const subscanLink = txHash && (
+  const subscanHost = useSubscanHost();
+  const subscanLink = features.subscan && subscanHost && txHash && (
     <a
       className={styles.subscan}
-      href={`https://kilt-testnet.subscan.io/extrinsic/${txHash}`}
+      href={`${subscanHost}/extrinsic/${txHash}`}
       target="_blank"
       rel="noreferrer"
     >
