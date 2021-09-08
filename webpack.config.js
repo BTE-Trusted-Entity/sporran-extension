@@ -2,10 +2,13 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
+import ExtensionReloader from 'webpack-extension-reloader';
 
 const require = createRequire(import.meta.url);
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 export default {
+  mode: isDevelopment ? 'development' : 'production',
   entry: {
     backgroundScript: path.resolve('./src/backgroundScript.ts'),
     popupScript: path.resolve('./src/popupScript.tsx'),
@@ -19,32 +22,26 @@ export default {
   module: {
     rules: [
       {
-        exclude: /node_modules/,
-        test: /\.tsx?$/,
         use: 'ts-loader',
-      },
-      {
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        test: /\.module.css$/,
+      },
+      {
         use: [
-          {
-            loader: 'style-loader', // Creates style nodes from JS strings
-          },
-          {
-            loader: '@teamsupercell/typings-for-css-modules-loader', // Help TS deal with CSS Modules
-          },
-          {
-            loader: 'css-loader', // Translates CSS into CommonJS
-          },
+          'style-loader', // Creates style nodes from JS strings
+          '@teamsupercell/typings-for-css-modules-loader', // Help TS deal with CSS Modules
+          'css-loader', // Translates CSS into CommonJS
         ],
+        test: /\.module.css$/,
+        exclude: /node_modules/,
       },
       {
-        test: /App.css$/,
         use: ['style-loader', 'css-loader'],
+        test: /App.css$/,
       },
       {
-        test: /\.(png|svg|woff2)$/i,
         type: 'asset',
+        test: /\.(png|svg|woff2)$/i,
         parser: {
           dataUrlCondition: {
             maxSize: 4 * 1024,
@@ -76,5 +73,7 @@ export default {
         },
       ],
     }),
+    ...(isDevelopment ? [new ExtensionReloader()] : []),
   ],
+  ...(isDevelopment && { devtool: 'inline-source-map' }),
 };
