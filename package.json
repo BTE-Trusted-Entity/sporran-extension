@@ -40,7 +40,7 @@
     "open-chrome": "node scripts/chrome-launch.js"
   },
   "dependencies": {
-    "@kiltprotocol/core": "^0.23.0-beta.2",
+    "@kiltprotocol/core": "^0.24.0-1",
     "@kiltprotocol/messaging": "^0.23.0-beta.2",
     "@polkadot/extension-inject": "^0.39.3",
     "@polkadot/ui-shared": "^0.85.3",
