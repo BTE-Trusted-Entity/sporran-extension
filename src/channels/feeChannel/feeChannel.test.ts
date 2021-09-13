@@ -1,6 +1,7 @@
 import BN from 'bn.js';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
-import { Identity } from '@kiltprotocol/core';
+
+import { makeKeyring } from '../../utilities/identities/identities';
 
 import { getFee } from './feeChannel';
 
@@ -9,11 +10,7 @@ jest.mock('@kiltprotocol/chain-helpers', () => ({
     getConnectionOrConnect: jest.fn(),
   },
 }));
-jest.mock('@kiltprotocol/core', () => ({
-  Identity: {
-    buildFromURI: jest.fn(),
-  },
-}));
+jest.mock('../../utilities/identities/identities');
 
 describe('feeChannel', () => {
   describe('getFee', () => {
@@ -50,7 +47,9 @@ describe('feeChannel', () => {
       ).mockResolvedValue(blockchainMock);
 
       const identityMock = { Alice: true };
-      (Identity.buildFromURI as jest.Mock).mockReturnValue(identityMock);
+      (makeKeyring as jest.Mock).mockReturnValue({
+        createFromUri: () => identityMock,
+      });
 
       const fee = await getFee({
         recipient: 'address',

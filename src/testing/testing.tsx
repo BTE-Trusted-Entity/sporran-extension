@@ -14,6 +14,8 @@ export {
   moreIdentitiesMock,
 } from '../utilities/identities/IdentitiesProvider.mock';
 
+jest.mock('@polkadot/keyring', () => ({}));
+jest.mock('@polkadot/util-crypto', () => ({}));
 jest.mock('@kiltprotocol/core', () => ({}));
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain', () => ({}));
 

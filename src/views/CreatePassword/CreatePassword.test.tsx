@@ -1,12 +1,8 @@
 import userEvent from '@testing-library/user-event';
-import { Identity } from '@kiltprotocol/core';
 
 import { render, screen } from '../../testing/testing';
 
 import { CreatePassword } from './CreatePassword';
-
-jest.mock('@kiltprotocol/core');
-(Identity.buildFromMnemonic as jest.Mock).mockImplementation(() => 'mnemonic');
 
 const onSuccess = jest.fn();
 

@@ -66,11 +66,11 @@ export function SignQuote(): JSX.Element | null {
 
       await saveCTypeTitle(claim.cTypeHash, cTypeTitle);
 
-      const password = await passwordField.get(event);
-      const sdkIdentity = await decryptIdentity(
-        firstIdentity.address,
-        password,
-      );
+      // const password = await passwordField.get(event);
+      // const sdkIdentity = await decryptIdentity(
+      //   firstIdentity.address,
+      //   password,
+      // );
 
       const attestedClaims = legitimations.map((legitimation) =>
         AttestedClaim.fromAttestedClaim(legitimation),
@@ -79,14 +79,15 @@ export function SignQuote(): JSX.Element | null {
       // The attester generated claim with the temporary identity, need to put real address in it
       const identityClaim = { ...claim, owner: firstIdentity.address };
 
-      const requestForAttestation = RequestForAttestation.fromClaimAndIdentity(
+      const requestForAttestation = RequestForAttestation.fromClaim(
         identityClaim,
-        sdkIdentity,
         {
           legitimations: attestedClaims,
           ...(delegationId && { delegationId }),
         },
       );
+      // TODO: implement signing
+      // await requestForAttestation.signWithDid()
 
       await saveCredential({
         request: requestForAttestation,
@@ -99,7 +100,7 @@ export function SignQuote(): JSX.Element | null {
       await claimChannel.return(requestForAttestation);
       window.close();
     },
-    [firstIdentity, name, passwordField, cType, data],
+    [firstIdentity, name, cType, data],
   );
 
   if (!identities || !firstIdentity) {
