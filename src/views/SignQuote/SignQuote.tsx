@@ -6,7 +6,7 @@ import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
 import { ITerms, IClaim } from '@kiltprotocol/types';
 
 import {
-  decryptIdentity,
+  // decryptIdentity,
   Identity,
   useIdentities,
 } from '../../utilities/identities/identities';
