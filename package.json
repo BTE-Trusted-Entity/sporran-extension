@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@kiltprotocol/core": "^0.23.0-beta.2",
-    "@kiltprotocol/messaging": "^0.23.0-beta.2",
+    "@kiltprotocol/messaging": "^0.24.0-1",
     "@polkadot/extension-inject": "^0.39.3",
     "@polkadot/ui-shared": "^0.85.3",
     "bn.js": "^4.12.0",
@@ -73,7 +73,7 @@
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
     "@testing-library/dom": "^8.3.0",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
+    "@testing-library/react": "^12.1.0",
     "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
