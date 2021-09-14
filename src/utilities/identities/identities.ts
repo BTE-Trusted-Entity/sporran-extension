@@ -3,6 +3,7 @@ import useSWR, { mutate, SWRResponse } from 'swr';
 import { Keyring } from '@polkadot/keyring';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { mnemonicToMiniSecret } from '@polkadot/util-crypto';
+import { LightDidDetails } from '@kiltprotocol/did';
 import { map, max } from 'lodash-es';
 
 import {
@@ -21,6 +22,7 @@ const CURRENT_IDENTITY_KEY = 'currentIdentity';
 
 export const NEW: Identity = {
   address: 'NEW',
+  did: '',
   name: '',
   index: -1,
 };
@@ -96,8 +98,7 @@ export function makeKeyring(): Keyring {
 }
 
 export function getKeyPairByBackupPhrase(backupPhrase: string): KeyringPair {
-  const seed = mnemonicToMiniSecret(backupPhrase);
-  return makeKeyring().addFromSeed(seed);
+  return makeKeyring().addFromUri(backupPhrase);
 }
 
 export async function encryptIdentity(
@@ -116,6 +117,9 @@ export async function createIdentity(
 ): Promise<Identity> {
   const address = await encryptIdentity(backupPhrase, password);
 
+  const authenticationKey = makeKeyring().addFromUri(`${backupPhrase}//did//0`);
+  const { did } = new LightDidDetails({ authenticationKey });
+
   const identities = await getIdentities();
   const largestIndex = max(map(identities, 'index')) || 0;
 
@@ -123,7 +127,7 @@ export async function createIdentity(
 
   const name = `KILT Identity ${index}`;
 
-  const identity = { name, address, index };
+  const identity = { name, address, did, index };
   await saveIdentity(identity);
 
   return identity;

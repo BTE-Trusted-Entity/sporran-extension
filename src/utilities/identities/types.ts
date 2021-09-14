@@ -1,5 +1,6 @@
 export interface Identity {
   address: string;
+  did: string;
   name: string;
   index: number;
 }
