@@ -9,7 +9,7 @@ import { mnemonicValidate } from '@polkadot/util-crypto';
 import { browser } from 'webextension-polyfill-ts';
 
 import { LinkBack } from '../../components/LinkBack/LinkBack';
-import { getKeyPairByBackupPhrase } from '../../utilities/identities/identities';
+import { getKeypairByBackupPhrase } from '../../utilities/identities/identities';
 
 import styles from './ImportBackupPhrase.module.css';
 
@@ -32,7 +32,7 @@ function isInvalid(
     return t('view_ImportBackupPhrase_error_invalid_backup_phrase');
   }
 
-  const { address } = getKeyPairByBackupPhrase(mnemonic);
+  const { address } = getKeypairByBackupPhrase(mnemonic);
 
   const noNeedToCompare = !expectedAddress;
   const matchesExpectations = expectedAddress === address;

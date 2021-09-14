@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { mnemonicValidate } from '@polkadot/util-crypto';
 
-import { getKeyPairByBackupPhrase } from '../../utilities/identities/identities';
+import { getKeypairByBackupPhrase } from '../../utilities/identities/identities';
 import { render, screen } from '../../testing/testing';
 
 import { ImportBackupPhrase } from './ImportBackupPhrase';
@@ -44,7 +44,7 @@ async function typeElevenWords() {
 
 describe('ImportBackupPhrase', () => {
   beforeEach(() => {
-    (getKeyPairByBackupPhrase as jest.Mock).mockReset();
+    (getKeypairByBackupPhrase as jest.Mock).mockReset();
   });
 
   it('should render for import', async () => {
@@ -111,7 +111,7 @@ describe('ImportBackupPhrase', () => {
 
   it('should report mismatching backup phrase', async () => {
     (mnemonicValidate as jest.Mock).mockReturnValue(true);
-    (getKeyPairByBackupPhrase as jest.Mock).mockReturnValue({
+    (getKeypairByBackupPhrase as jest.Mock).mockReturnValue({
       address: 'FAIL',
     });
 
@@ -130,7 +130,7 @@ describe('ImportBackupPhrase', () => {
 
   it('should allow backup phrase import', async () => {
     (mnemonicValidate as jest.Mock).mockReturnValue(true);
-    (getKeyPairByBackupPhrase as jest.Mock).mockReturnValue({
+    (getKeypairByBackupPhrase as jest.Mock).mockReturnValue({
       address: 'PASS',
     });
 
@@ -152,7 +152,7 @@ describe('ImportBackupPhrase', () => {
 
   it('should allow backup phrase reset', async () => {
     (mnemonicValidate as jest.Mock).mockReturnValue(true);
-    (getKeyPairByBackupPhrase as jest.Mock).mockReturnValue({
+    (getKeypairByBackupPhrase as jest.Mock).mockReturnValue({
       address: '4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos',
     });
 

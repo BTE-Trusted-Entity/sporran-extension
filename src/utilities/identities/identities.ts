@@ -97,8 +97,14 @@ export function makeKeyring(): Keyring {
   });
 }
 
-export function getKeyPairByBackupPhrase(backupPhrase: string): KeyringPair {
+export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
   return makeKeyring().addFromUri(backupPhrase);
+}
+
+export function deriveDidAuthenticationKeypair(
+  identityKeypair: KeyringPair,
+): KeyringPair {
+  return identityKeypair.derive('//did//0');
 }
 
 export async function encryptIdentity(
@@ -106,7 +112,7 @@ export async function encryptIdentity(
   password: string,
 ): Promise<string> {
   const seed = mnemonicToMiniSecret(backupPhrase);
-  const { address } = getKeyPairByBackupPhrase(backupPhrase);
+  const { address } = getKeypairByBackupPhrase(backupPhrase);
   await saveEncrypted(address, password, seed);
   return address;
 }
@@ -117,7 +123,8 @@ export async function createIdentity(
 ): Promise<Identity> {
   const address = await encryptIdentity(backupPhrase, password);
 
-  const authenticationKey = makeKeyring().addFromUri(`${backupPhrase}//did//0`);
+  const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
+  const authenticationKey = deriveDidAuthenticationKeypair(identityKeypair);
   const { did } = new LightDidDetails({ authenticationKey });
 
   const identities = await getIdentities();
