@@ -10,7 +10,7 @@ jest.mock('@polkadot/util-crypto', () => ({
   mnemonicValidate: jest.fn(),
 }));
 jest.mock('../../utilities/identities/identities', () => ({
-  getKeyPairByBackupPhrase: jest.fn(),
+  getKeypairByBackupPhrase: jest.fn(),
 }));
 
 (mnemonicValidate as jest.Mock).mockReturnValue(false);
