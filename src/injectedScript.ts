@@ -1,4 +1,4 @@
-import { IMessage, IPublicIdentity } from '@kiltprotocol/types';
+import { IMessage, IDidDetails } from '@kiltprotocol/types';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import {
@@ -12,25 +12,21 @@ interface PubSubSession {
   listen: (callback: (message: IMessage) => Promise<void>) => Promise<void>;
   close: () => Promise<void>;
   send: (message: IMessage) => Promise<void>;
-  account: IPublicIdentity;
+  account: IDidDetails['did'];
 }
 
 interface InjectedWindowProvider {
   startSession: (
     origin: string,
-    account: IPublicIdentity,
+    account: IDidDetails['did'],
   ) => Promise<PubSubSession>;
   version: string;
   specVersion: '0.1';
 }
 
-let dAppIdentity: IPublicIdentity;
-const sporranIdentity: IPublicIdentity = {
-  // TODO: real values
-  address: '4quK7LGg8iGqoH8kmeEeCDN7VM1aN5wmKkAfcH1VVU8tFmMc',
-  boxPublicKeyAsHex:
-    '0xe5a91394ab38253ae192d22914618ce868601d15190ca8ed35b5b81a1c9cd10e',
-};
+let dAppIdentity: IDidDetails['did'];
+const sporranIdentity: IDidDetails['did'] =
+  'did:kilt:light:014sxSYXakw1ZXBymzT9t3Yw91mUaqKST5bFUEjGEpvkTuckar';
 
 let onMessageFromSporran: (message: IMessage) => Promise<void>;
 
@@ -40,7 +36,10 @@ async function storeMessageFromSporran(message: IMessage): Promise<void> {
   unprocessedMessagesFromSporran.push(message);
 }
 
-async function startSession(unsafeDAppName: string, identity: IPublicIdentity) {
+async function startSession(
+  unsafeDAppName: string,
+  identity: IDidDetails['did'],
+) {
   dAppIdentity = identity;
 
   const dAppName = unsafeDAppName.substring(0, 50);

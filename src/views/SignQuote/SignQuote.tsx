@@ -3,10 +3,12 @@ import { browser } from 'webextension-polyfill-ts';
 import { find, minBy } from 'lodash-es';
 import BN from 'bn.js';
 import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
+import { LightDidDetails } from '@kiltprotocol/did';
 import { ITerms, IClaim } from '@kiltprotocol/types';
 
 import {
   decryptIdentity,
+  deriveDidAuthenticationKeypair,
   Identity,
   useIdentities,
 } from '../../utilities/identities/identities';
@@ -71,21 +73,32 @@ export function SignQuote(): JSX.Element | null {
         firstIdentity.address,
         password,
       );
+      const didKeypair = deriveDidAuthenticationKeypair(sdkIdentity);
+      const didDetails = new LightDidDetails({ authenticationKey: didKeypair });
 
       const attestedClaims = legitimations.map((legitimation) =>
         AttestedClaim.fromAttestedClaim(legitimation),
       );
 
       // The attester generated claim with the temporary identity, need to put real address in it
-      const identityClaim = { ...claim, owner: firstIdentity.address };
+      const identityClaim = { ...claim, owner: didDetails.did };
 
-      const requestForAttestation = RequestForAttestation.fromClaimAndIdentity(
+      const requestForAttestation = RequestForAttestation.fromClaim(
         identityClaim,
-        sdkIdentity,
         {
           legitimations: attestedClaims,
           ...(delegationId && { delegationId }),
         },
+      );
+
+      await requestForAttestation.signWithDid(
+        {
+          sign: async ({ data, alg }) => ({
+            data: didKeypair.sign(data, { withType: false }),
+            alg,
+          }),
+        },
+        didDetails,
       );
 
       await saveCredential({
@@ -99,7 +112,7 @@ export function SignQuote(): JSX.Element | null {
       await claimChannel.return(requestForAttestation);
       window.close();
     },
-    [firstIdentity, name, passwordField, cType, data],
+    [firstIdentity, cType, data, passwordField, name],
   );
 
   if (!identities || !firstIdentity) {

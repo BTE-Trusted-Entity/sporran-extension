@@ -1,14 +1,19 @@
 import userEvent from '@testing-library/user-event';
-import { Identity } from '@kiltprotocol/core';
+import { mnemonicValidate } from '@polkadot/util-crypto';
+
+import { getKeypairByBackupPhrase } from '../../utilities/identities/identities';
 import { render, screen } from '../../testing/testing';
 
 import { ImportBackupPhrase } from './ImportBackupPhrase';
 
-jest.mock('@kiltprotocol/core', () => ({
-  Identity: {
-    buildFromMnemonic: jest.fn(),
-  },
+jest.mock('@polkadot/util-crypto', () => ({
+  mnemonicValidate: jest.fn(),
 }));
+jest.mock('../../utilities/identities/identities', () => ({
+  getKeypairByBackupPhrase: jest.fn(),
+}));
+
+(mnemonicValidate as jest.Mock).mockReturnValue(false);
 
 const onImport = jest.fn();
 
@@ -39,7 +44,7 @@ async function typeElevenWords() {
 
 describe('ImportBackupPhrase', () => {
   beforeEach(() => {
-    (Identity.buildFromMnemonic as jest.Mock).mockReset();
+    (getKeypairByBackupPhrase as jest.Mock).mockReset();
   });
 
   it('should render for import', async () => {
@@ -105,7 +110,8 @@ describe('ImportBackupPhrase', () => {
   });
 
   it('should report mismatching backup phrase', async () => {
-    (Identity.buildFromMnemonic as jest.Mock).mockReturnValue({
+    (mnemonicValidate as jest.Mock).mockReturnValue(true);
+    (getKeypairByBackupPhrase as jest.Mock).mockReturnValue({
       address: 'FAIL',
     });
 
@@ -123,7 +129,8 @@ describe('ImportBackupPhrase', () => {
   });
 
   it('should allow backup phrase import', async () => {
-    (Identity.buildFromMnemonic as jest.Mock).mockReturnValue({
+    (mnemonicValidate as jest.Mock).mockReturnValue(true);
+    (getKeypairByBackupPhrase as jest.Mock).mockReturnValue({
       address: 'PASS',
     });
 
@@ -144,7 +151,8 @@ describe('ImportBackupPhrase', () => {
   });
 
   it('should allow backup phrase reset', async () => {
-    (Identity.buildFromMnemonic as jest.Mock).mockReturnValue({
+    (mnemonicValidate as jest.Mock).mockReturnValue(true);
+    (getKeypairByBackupPhrase as jest.Mock).mockReturnValue({
       address: '4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos',
     });
 

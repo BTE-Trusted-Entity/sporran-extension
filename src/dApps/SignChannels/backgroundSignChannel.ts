@@ -2,7 +2,7 @@ import BN from 'bn.js';
 import { map, zip } from 'lodash-es';
 import { browser } from 'webextension-polyfill-ts';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
-import { Identity } from '@kiltprotocol/core';
+import { KeyringPair } from '@polkadot/keyring/types';
 import { SignerPayloadJSON } from '@polkadot/types/types/extrinsic';
 import type {
   ExtrinsicPayload,
@@ -73,8 +73,8 @@ function getLifetime({ era }: { era: ExtrinsicEra }, hexBlockNumber: string) {
 
 let id = 0;
 
-function signExtrinsic(extrinsic: ExtrinsicPayload, identity: Identity) {
-  const { signature } = extrinsic.sign(identity.signKeyringPair);
+function signExtrinsic(extrinsic: ExtrinsicPayload, keypair: KeyringPair) {
+  const { signature } = extrinsic.sign(keypair);
 
   id += 1;
   return { signature, id };

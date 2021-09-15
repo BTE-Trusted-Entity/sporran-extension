@@ -1,8 +1,8 @@
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
-import { Identity } from '@kiltprotocol/core';
 import BN from 'bn.js';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+import { makeKeyring } from '../../utilities/identities/identities';
 
 interface FeeInput {
   recipient: string;
@@ -55,7 +55,7 @@ export async function getFee(input: FeeInput): Promise<BN> {
   );
 
   // Including any signature increases the transaction size and the fee
-  const fakeIdentity = Identity.buildFromURI('//Alice');
+  const fakeIdentity = makeKeyring().createFromUri('//Alice');
   const signedTx = await blockchain.signTx(fakeIdentity, tx, input.tip);
 
   const { partialFee } = await api.rpc.payment.queryInfo(signedTx.toHex());

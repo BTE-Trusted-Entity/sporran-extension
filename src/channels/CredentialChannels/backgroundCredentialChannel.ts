@@ -1,7 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
 import {
   IMessage,
-  IPublicIdentity,
+  IDidDetails,
   IRejectTerms,
   IRequestAttestationForClaim,
   IRequestClaimsForCTypes,
@@ -30,8 +30,8 @@ type SenderType = Parameters<
 
 async function processSubmitTerms(
   messageBody: ISubmitTerms,
-  sporranIdentity: IPublicIdentity,
-  dAppIdentity: IPublicIdentity,
+  sporranIdentity: IDidDetails['did'],
+  dAppIdentity: IDidDetails['did'],
   dAppName: string,
   sender: SenderType,
 ): Promise<IMessage> {
@@ -75,8 +75,8 @@ async function processSubmitCredential(
 
 async function processShareCredential(
   messageBody: IRequestClaimsForCTypes,
-  sporranIdentity: IPublicIdentity,
-  dAppIdentity: IPublicIdentity,
+  sporranIdentity: IDidDetails['did'],
+  dAppIdentity: IDidDetails['did'],
   sender: SenderType,
 ): Promise<IMessage> {
   const attestedClaims = await getAttestedClaims(messageBody.content, sender);

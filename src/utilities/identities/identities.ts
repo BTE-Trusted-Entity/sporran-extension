@@ -1,6 +1,9 @@
 import { useContext } from 'react';
 import useSWR, { mutate, SWRResponse } from 'swr';
-import { Identity as SdkIdentity } from '@kiltprotocol/core';
+import { Keyring } from '@polkadot/keyring';
+import { KeyringPair } from '@polkadot/keyring/types';
+import { mnemonicToMiniSecret } from '@polkadot/util-crypto';
+import { LightDidDetails } from '@kiltprotocol/did';
 import { map, max } from 'lodash-es';
 
 import {
@@ -19,6 +22,7 @@ const CURRENT_IDENTITY_KEY = 'currentIdentity';
 
 export const NEW: Identity = {
   address: 'NEW',
+  did: '',
   name: '',
   index: -1,
 };
@@ -83,11 +87,32 @@ export async function removeIdentity(identity: Identity): Promise<void> {
   await mutate(IDENTITIES_KEY);
 }
 
+// KILT has registered the ss58 prefix 38
+const ss58Format = 38;
+
+export function makeKeyring(): Keyring {
+  return new Keyring({
+    type: 'sr25519',
+    ss58Format,
+  });
+}
+
+export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
+  return makeKeyring().addFromUri(backupPhrase);
+}
+
+export function deriveDidAuthenticationKeypair(
+  identityKeypair: KeyringPair,
+): KeyringPair {
+  return identityKeypair.derive('//did//0');
+}
+
 export async function encryptIdentity(
   backupPhrase: string,
   password: string,
 ): Promise<string> {
-  const { address, seed } = SdkIdentity.buildFromMnemonic(backupPhrase);
+  const seed = mnemonicToMiniSecret(backupPhrase);
+  const { address } = getKeypairByBackupPhrase(backupPhrase);
   await saveEncrypted(address, password, seed);
   return address;
 }
@@ -98,6 +123,10 @@ export async function createIdentity(
 ): Promise<Identity> {
   const address = await encryptIdentity(backupPhrase, password);
 
+  const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
+  const authenticationKey = deriveDidAuthenticationKeypair(identityKeypair);
+  const { did } = new LightDidDetails({ authenticationKey });
+
   const identities = await getIdentities();
   const largestIndex = max(map(identities, 'index')) || 0;
 
@@ -105,7 +134,7 @@ export async function createIdentity(
 
   const name = `KILT Identity ${index}`;
 
-  const identity = { name, address, index };
+  const identity = { name, address, did, index };
   await saveIdentity(identity);
 
   return identity;
@@ -114,7 +143,7 @@ export async function createIdentity(
 export async function decryptIdentity(
   address: string,
   password: string,
-): Promise<SdkIdentity> {
+): Promise<KeyringPair> {
   const seed = await loadEncrypted(address, password);
-  return SdkIdentity.buildFromSeed(new Uint8Array(seed));
+  return makeKeyring().addFromSeed(new Uint8Array(seed));
 }

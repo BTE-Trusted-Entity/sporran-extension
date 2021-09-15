@@ -17,6 +17,7 @@ jest.spyOn(browser.runtime, 'sendMessage');
 const identity = {
   name: 'KILT Identity 1',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+  did: 'did:kilt:light:004rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
   index: 1,
 };
 
@@ -41,6 +42,7 @@ describe('IdentitySlide', () => {
     expect(saveIdentity).toHaveBeenCalledWith({
       name: 'KILT Identity 1 Foo',
       address: identity.address,
+      did: identity.did,
       index: 1,
     });
 

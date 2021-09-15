@@ -5,10 +5,11 @@ import {
   useState,
 } from 'react';
 import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/bip39-en';
-import { Identity } from '@kiltprotocol/core';
+import { mnemonicValidate } from '@polkadot/util-crypto';
 import { browser } from 'webextension-polyfill-ts';
 
 import { LinkBack } from '../../components/LinkBack/LinkBack';
+import { getKeypairByBackupPhrase } from '../../utilities/identities/identities';
 
 import styles from './ImportBackupPhrase.module.css';
 
@@ -25,19 +26,21 @@ function isInvalid(
   expectedAddress?: string,
 ): string | null {
   const t = browser.i18n.getMessage;
-  try {
-    const { address } = Identity.buildFromMnemonic(backupPhrase.join(' '));
 
-    const noNeedToCompare = !expectedAddress;
-    const matchesExpectations = expectedAddress === address;
-    if (noNeedToCompare || matchesExpectations) {
-      return noError;
-    }
-
-    return t('view_ImportBackupPhrase_error_mismatched_backup_phrase');
-  } catch {
+  const mnemonic = backupPhrase.join(' ');
+  if (!mnemonicValidate(mnemonic)) {
     return t('view_ImportBackupPhrase_error_invalid_backup_phrase');
   }
+
+  const { address } = getKeypairByBackupPhrase(mnemonic);
+
+  const noNeedToCompare = !expectedAddress;
+  const matchesExpectations = expectedAddress === address;
+  if (noNeedToCompare || matchesExpectations) {
+    return noError;
+  }
+
+  return t('view_ImportBackupPhrase_error_mismatched_backup_phrase');
 }
 
 function isMalformed(backupPhrase: BackupPhrase): string | null {

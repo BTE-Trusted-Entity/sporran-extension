@@ -1,9 +1,9 @@
-import { IMessage, IPublicIdentity } from '@kiltprotocol/types';
+import { IMessage, IDidDetails } from '@kiltprotocol/types';
 
 export interface CredentialInput {
   message: IMessage;
-  sporranIdentity: IPublicIdentity;
-  dAppIdentity: IPublicIdentity;
+  sporranIdentity: IDidDetails['did'];
+  dAppIdentity: IDidDetails['did'];
   dAppName: string;
 }
 

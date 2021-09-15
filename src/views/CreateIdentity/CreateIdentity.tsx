@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
 
-import { Identity } from '@kiltprotocol/core';
+import { mnemonicGenerate } from '@polkadot/util-crypto';
 
 import { SaveBackupPhrase } from '../SaveBackupPhrase/SaveBackupPhrase';
 import { Warning } from '../Warning/Warning';
@@ -11,7 +11,7 @@ import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
 import { paths } from '../paths';
 
 export function CreateIdentity(): JSX.Element {
-  const backupPhrase = useMemo(() => Identity.generateMnemonic(), []);
+  const backupPhrase = useMemo(() => mnemonicGenerate(), []);
   const history = useHistory();
 
   const onSuccess = useCallback(
