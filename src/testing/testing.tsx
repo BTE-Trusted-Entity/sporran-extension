@@ -18,6 +18,7 @@ jest.mock('@polkadot/keyring', () => ({}));
 jest.mock('@polkadot/util-crypto', () => ({}));
 jest.mock('@kiltprotocol/core', () => ({}));
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain', () => ({}));
+jest.mock('@kiltprotocol/did', () => ({}));
 
 jest.mock('../components/Avatar/Identicon', () => ({
   Identicon: () => 'Identicon',
