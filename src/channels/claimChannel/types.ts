@@ -5,4 +5,8 @@ export interface ClaimInput extends ITerms {
   attester: string;
 }
 
-export type ClaimOutput = RequestForAttestation;
+export interface ClaimOutput {
+  requestForAttestation: RequestForAttestation;
+  address: string;
+  password: string;
+}
