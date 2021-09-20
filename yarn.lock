@@ -1811,10 +1811,10 @@
     eventemitter3 "^4.0.7"
     rxjs "^7.3.0"
 
-"@polkadot/extension-inject@^0.40.2":
-  version "0.40.2"
-  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.40.2.tgz#6224022465ccaf67b68dd5f9a187bdf3b769660a"
-  integrity sha512-v83p90OcEE037Soht4Ye7CYgdrW3GELPC+sbaxxl4mN/jtKVG27Oi60bS9fAQqFWmxCcP861NCdkmxnmyPdcoQ==
+"@polkadot/extension-inject@^0.40.3":
+  version "0.40.3"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.40.3.tgz#98588999dceef03acbf6891ac41db0f69fad1dd3"
+  integrity sha512-0OvJVWhIl9gEck+Xy6dX1eLu+Uqk5yhhoDaC7t/ZBlg1gMpScWzrfpTdJ7Ftuf7DwmzR7y3L15G4J0CZjGNMvA==
   dependencies:
     "@babel/runtime" "^7.15.4"
 
