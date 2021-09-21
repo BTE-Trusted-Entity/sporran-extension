@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@kiltprotocol/core": "0.24.0-1",
-    "@kiltprotocol/messaging": "0.24.0-1",
+    "@kiltprotocol/messaging": "0.24.0-2",
     "@polkadot/extension-inject": "^0.40.3",
     "@polkadot/ui-shared": "^0.85.4",
     "bn.js": "^4.12.0",
