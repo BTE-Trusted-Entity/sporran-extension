@@ -114,17 +114,19 @@ export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
   return makeKeyring().addFromUri(backupPhrase);
 }
 
-export async function getIdentityDidEncryption(
-  address: string,
-  password: string,
-): Promise<{
+interface IdentityDidEncryption {
   didDetails: IDidDetails;
   keystore: KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'>;
   encrypt: (
     messageBody: MessageBody,
     dAppDidDetails: IDidDetails,
   ) => Promise<IEncryptedMessage>;
-}> {
+}
+
+export async function getIdentityDidEncryption(
+  address: string,
+  password: string,
+): Promise<IdentityDidEncryption> {
   const identityKeypair = await decryptIdentity(address, password);
 
   const authenticationKey = identityKeypair.derive('//did//0');
