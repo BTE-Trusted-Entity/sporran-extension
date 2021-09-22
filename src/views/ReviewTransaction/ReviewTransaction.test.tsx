@@ -1,6 +1,7 @@
 import BN from 'bn.js';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
+import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 
 import { ReviewTransaction } from './ReviewTransaction';
 
@@ -17,6 +18,7 @@ describe('ReviewTransaction', () => {
         tip={new BN(0.01e15)}
       />,
     );
+    await waitForGetPassword();
     expect(container).toMatchSnapshot();
   });
 });

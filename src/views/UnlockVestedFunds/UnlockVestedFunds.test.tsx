@@ -1,5 +1,6 @@
 import { render } from '../../testing/testing';
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 
 import { UnlockVestedFunds } from './UnlockVestedFunds';
 
@@ -12,6 +13,7 @@ describe('UnlockVestedFunds', () => {
         }
       />,
     );
+    await waitForGetPassword();
     expect(container).toMatchSnapshot();
   });
 });

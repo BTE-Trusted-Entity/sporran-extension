@@ -1,6 +1,7 @@
+import { render } from '../../testing/testing';
 import { mockClaim } from '../../utilities/cTypes/cTypes.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
-import { render } from '../../testing/testing';
+import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { paths } from '../paths';
 
 import { SignQuote } from './SignQuote';
@@ -12,6 +13,7 @@ describe('SignQuote', () => {
         <SignQuote />
       </PopupTestProvider>,
     );
+    await waitForGetPassword();
     expect(container).toMatchSnapshot();
   });
 });

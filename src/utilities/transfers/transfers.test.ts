@@ -5,9 +5,9 @@ import {
 } from '@kiltprotocol/chain-helpers';
 import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
-import { signTransfer, submitTransfer } from './transferChannels';
+import { signTransfer, submitTransfer } from './transfers';
 
-import { decryptIdentity } from '../../utilities/identities/identities';
+import { decryptIdentity } from '../identities/identities';
 
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
 jest.mock('@kiltprotocol/chain-helpers', () => ({
@@ -38,8 +38,8 @@ const chainMock = {
   chainMock,
 );
 
-describe('transferChannels', () => {
-  describe('signTransferChannel', () => {
+describe('transfers', () => {
+  describe('signTransfer', () => {
     it('should return the hash of the signed transaction', async () => {
       (decryptIdentity as jest.Mock).mockImplementation(() => ({
         sdkIdentity: true,
@@ -72,7 +72,8 @@ describe('transferChannels', () => {
       expect(txHash).toEqual({ hash: 'Signed tx hash' });
     });
   });
-  describe('submitTransferChannel', () => {
+
+  describe('submitTransfer', () => {
     it('should submit the transaction', async () => {
       await submitTransfer('Signed tx hash');
       expect(BlockchainUtils.submitSignedTx).toHaveBeenCalledWith(

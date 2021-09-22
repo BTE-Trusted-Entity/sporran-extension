@@ -3,8 +3,7 @@ import { Link, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { paths } from '../../views/paths';
-
-import { hasVestedFundsChannel } from '../../channels/VestingChannels/VestingChannels';
+import { hasVestedFunds } from '../../utilities/vesting/vesting';
 
 import styles from './BalanceUpdateLink.module.css';
 
@@ -19,7 +18,7 @@ export function BalanceUpdateLink({ address }: Props): JSX.Element {
 
   useEffect(() => {
     (async () => {
-      const identityHasVestedFunds = await hasVestedFundsChannel.get(address);
+      const identityHasVestedFunds = await hasVestedFunds(address);
       if (identityHasVestedFunds) {
         setDisabled(false);
       }

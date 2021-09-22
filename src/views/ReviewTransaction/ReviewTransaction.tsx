@@ -4,9 +4,9 @@ import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
 import {
-  signTransferChannel,
-  submitTransferChannel,
-} from '../../channels/transferChannels/transferChannels';
+  signTransfer,
+  submitTransfer,
+} from '../../utilities/transfers/transfers';
 
 import { Identity } from '../../utilities/identities/types';
 import { Stats } from '../../components/Stats/Stats';
@@ -71,7 +71,7 @@ export function ReviewTransaction({
 
         setTxStatus('pending');
 
-        const { hash } = await signTransferChannel.get({
+        const { hash } = await signTransfer({
           address,
           recipient,
           amount,
@@ -80,7 +80,7 @@ export function ReviewTransaction({
         });
         setTxHash(hash);
 
-        await submitTransferChannel.get(hash);
+        await submitTransfer(hash);
 
         setTxStatus('success');
       } catch (error) {
