@@ -2,7 +2,20 @@ import { useContext } from 'react';
 import useSWR, { mutate, SWRResponse } from 'swr';
 import { Keyring } from '@polkadot/keyring';
 import { KeyringPair } from '@polkadot/keyring/types';
-import { mnemonicToMiniSecret } from '@polkadot/util-crypto';
+import {
+  naclBoxKeypairFromSecret,
+  naclSeal,
+  mnemonicToMiniSecret,
+} from '@polkadot/util-crypto';
+import {
+  IDidDetails,
+  IEncryptedMessage,
+  KeyRelationship,
+  KeystoreSigner,
+  MessageBody,
+  NaclBoxCapable,
+} from '@kiltprotocol/types';
+import Message from '@kiltprotocol/messaging';
 import { LightDidDetails } from '@kiltprotocol/did';
 import { map, max } from 'lodash-es';
 
@@ -101,10 +114,77 @@ export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
   return makeKeyring().addFromUri(backupPhrase);
 }
 
-export function deriveDidAuthenticationKeypair(
-  identityKeypair: KeyringPair,
-): KeyringPair {
-  return identityKeypair.derive('//did//0');
+interface IdentityDidEncryption {
+  didDetails: IDidDetails;
+  keystore: KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'>;
+  encrypt: (
+    messageBody: MessageBody,
+    dAppDidDetails: IDidDetails,
+  ) => Promise<IEncryptedMessage>;
+}
+
+export async function getIdentityDidEncryption(
+  address: string,
+  password: string,
+): Promise<IdentityDidEncryption> {
+  const identityKeypair = await decryptIdentity(address, password);
+
+  const authenticationKey = identityKeypair.derive('//did//0');
+  const encryptionKeypair = naclBoxKeypairFromSecret(
+    identityKeypair
+      .derive('//did//keyAgreement//0')
+      .encryptMessage(
+        new Uint8Array(24).fill(0),
+        new Uint8Array(24).fill(0),
+        new Uint8Array(24).fill(0),
+      )
+      .slice(24), // first 24 bytes are the nonce
+  );
+  const encryptionKey = { ...encryptionKeypair, type: 'x25519' };
+
+  const didDetails = new LightDidDetails({ authenticationKey, encryptionKey });
+
+  const keystore: KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'> = {
+    sign: async ({ data, alg }) => ({
+      data: authenticationKey.sign(data, { withType: false }),
+      alg,
+    }),
+    async encrypt({ data, alg, peerPublicKey }) {
+      const { sealed, nonce } = naclSeal(
+        data,
+        encryptionKey.secretKey,
+        peerPublicKey,
+      );
+
+      return {
+        data: sealed,
+        alg,
+        nonce,
+      };
+    },
+  };
+
+  async function encrypt(
+    messageBody: MessageBody,
+    dAppDidDetails: IDidDetails,
+  ): Promise<IEncryptedMessage> {
+    const message = new Message(
+      messageBody,
+      didDetails.did,
+      dAppDidDetails.did,
+    );
+    return message.encrypt(
+      didDetails.getKeys(KeyRelationship.keyAgreement)[0],
+      dAppDidDetails.getKeys(KeyRelationship.keyAgreement)[0],
+      keystore,
+    );
+  }
+
+  return {
+    didDetails,
+    keystore,
+    encrypt,
+  };
 }
 
 export async function encryptIdentity(
@@ -123,9 +203,8 @@ export async function createIdentity(
 ): Promise<Identity> {
   const address = await encryptIdentity(backupPhrase, password);
 
-  const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
-  const authenticationKey = deriveDidAuthenticationKeypair(identityKeypair);
-  const { did } = new LightDidDetails({ authenticationKey });
+  const { did } = (await getIdentityDidEncryption(address, password))
+    .didDetails;
 
   const identities = await getIdentities();
   const largestIndex = max(map(identities, 'index')) || 0;

@@ -64,31 +64,34 @@ export function ShareCredential(): JSX.Element | null {
     window.close();
   }, []);
 
+  const identities = useIdentities().data;
+
+  // The legacy design uses the first identity only, will be fixed with the new design
+  const identity =
+    identities && (minBy(Object.values(identities), 'index') as Identity);
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
 
-      if (!matchingCredentials) {
+      if (!matchingCredentials || !identity) {
         return;
       }
 
+      const { address } = identity;
       const requests = Object.entries(checked)
         .filter(([, value]) => value)
         .map(([index]) => matchingCredentials[Number(index)].request);
 
-      await shareChannel.return(requests);
+      await shareChannel.return({ requests, address, password });
       window.close();
     },
-    [matchingCredentials, checked],
+    [matchingCredentials, identity, checked, password],
   );
 
-  const identities = useIdentities().data;
-  if (!credentials || !matchingCredentials || !identities) {
+  if (!credentials || !matchingCredentials || !identities || !identity) {
     return null; // storage data pending
   }
-
-  // The legacy design uses the first identity only, will be fixed with the new design
-  const identity = minBy(Object.values(identities), 'index') as Identity;
 
   const allChecked = credentials.every((dummy, index) => checked[index]);
 
