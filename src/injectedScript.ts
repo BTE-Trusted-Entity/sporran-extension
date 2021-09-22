@@ -1,4 +1,4 @@
-import { IMessage, IDidDetails } from '@kiltprotocol/types';
+import { IEncryptedMessage, IDidDetails } from '@kiltprotocol/types';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import {
@@ -6,54 +6,60 @@ import {
   injectIntoDApp,
 } from './dApps/injectIntoDApp/injectIntoDApp';
 import { configuration } from './configuration/configuration';
+import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
 
-// TODO: switch to IEncryptedMessage
 interface PubSubSession {
-  listen: (callback: (message: IMessage) => Promise<void>) => Promise<void>;
+  listen: (
+    callback: (message: IEncryptedMessage) => Promise<void>,
+  ) => Promise<void>;
   close: () => Promise<void>;
-  send: (message: IMessage) => Promise<void>;
-  account: IDidDetails['did'];
+  send: (message: IEncryptedMessage) => Promise<void>;
+  identity: IDidDetails['did'];
+  encryptedChallenge: string;
+  nonce: string;
 }
 
 interface InjectedWindowProvider {
   startSession: (
-    origin: string,
-    account: IDidDetails['did'],
+    dAppName: string,
+    dAppDid: IDidDetails['did'],
+    challenge: string,
   ) => Promise<PubSubSession>;
+  name: string;
   version: string;
   specVersion: '0.1';
 }
 
-let dAppIdentity: IDidDetails['did'];
-const sporranIdentity: IDidDetails['did'] =
-  'did:kilt:light:014sxSYXakw1ZXBymzT9t3Yw91mUaqKST5bFUEjGEpvkTuckar';
+let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
 
-let onMessageFromSporran: (message: IMessage) => Promise<void>;
+const unprocessedMessagesFromSporran: IEncryptedMessage[] = [];
 
-const unprocessedMessagesFromSporran: IMessage[] = [];
-
-async function storeMessageFromSporran(message: IMessage): Promise<void> {
+async function storeMessageFromSporran(
+  message: IEncryptedMessage,
+): Promise<void> {
   unprocessedMessagesFromSporran.push(message);
 }
 
 async function startSession(
   unsafeDAppName: string,
-  identity: IDidDetails['did'],
-) {
-  dAppIdentity = identity;
-
+  dAppDid: IDidDetails['did'],
+  challenge: string,
+): Promise<PubSubSession> {
   const dAppName = unsafeDAppName.substring(0, 50);
   await authenticate({ dAppName });
+
+  const { sporranDid, encryptedChallenge, nonce } =
+    await injectedChallengeChannel.get({ challenge, dAppDid });
 
   onMessageFromSporran = storeMessageFromSporran;
 
   return {
-    /** Sporran public identity */
-    account: sporranIdentity,
+    /** Sporran temporary identity */
+    identity: sporranDid,
 
     /** dApp will use given callback to process messages from Sporran */
     async listen(
-      dAppProcessesMessage: (message: IMessage) => Promise<void>,
+      dAppProcessesMessage: (message: IEncryptedMessage) => Promise<void>,
     ): Promise<void> {
       onMessageFromSporran = dAppProcessesMessage;
 
@@ -69,17 +75,18 @@ async function startSession(
     },
 
     /** dApp sends a message */
-    async send(message: IMessage): Promise<void> {
+    async send(message: IEncryptedMessage): Promise<void> {
       const messageFromSporran = await injectedCredentialChannel.get({
         message,
         dAppName,
-        dAppIdentity,
-        sporranIdentity,
       });
       if (messageFromSporran) {
         await onMessageFromSporran(messageFromSporran);
       }
     },
+
+    encryptedChallenge,
+    nonce,
   };
 }
 
@@ -92,7 +99,11 @@ function main() {
     kilt: { sporran?: InjectedWindowProvider };
   };
 
-  if (!configuration.features.credentials || apiWindow.kilt?.sporran) {
+  if (
+    !configuration.features.credentials ||
+    !apiWindow.kilt ||
+    apiWindow.kilt.sporran
+  ) {
     return;
   }
 
@@ -100,6 +111,7 @@ function main() {
   apiWindow.kilt ||= {};
   apiWindow.kilt.sporran = {
     startSession,
+    name: 'Sporran', // manifest_name
     version,
     specVersion: '0.1',
   };

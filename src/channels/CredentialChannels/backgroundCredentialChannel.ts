@@ -1,7 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 import {
-  IMessage,
-  IDidDetails,
+  IEncryptedMessage,
   IRejectTerms,
   IRequestAttestationForClaim,
   IRequestClaimsForCTypes,
@@ -10,7 +9,6 @@ import {
   ISubmitTerms,
   MessageBodyType,
 } from '@kiltprotocol/types';
-import Message from '@kiltprotocol/messaging';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 import { CredentialInput, CredentialOutput } from './types';
@@ -18,6 +16,8 @@ import { contentCredentialChannel } from './contentCredentialChannel';
 import { claimChannel } from '../claimChannel/claimChannel';
 import { saveChannel } from '../saveChannel/saveChannel';
 import { getAttestedClaims } from '../shareChannel/shareChannel';
+import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
+import { getIdentityDidEncryption } from '../../utilities/identities/identities';
 
 export const backgroundCredentialChannel = new BrowserChannel<
   CredentialInput,
@@ -30,13 +30,11 @@ type SenderType = Parameters<
 
 async function processSubmitTerms(
   messageBody: ISubmitTerms,
-  sporranIdentity: IDidDetails['did'],
-  dAppIdentity: IDidDetails['did'],
   dAppName: string,
   sender: SenderType,
-): Promise<IMessage> {
+): Promise<IEncryptedMessage> {
   try {
-    const requestForAttestation = await claimChannel.get(
+    const { requestForAttestation, address, password } = await claimChannel.get(
       {
         ...messageBody.content,
         attester: dAppName,
@@ -48,12 +46,11 @@ async function processSubmitTerms(
       content: { requestForAttestation },
       type: MessageBodyType.REQUEST_ATTESTATION_FOR_CLAIM,
     };
-    const request = new Message(
-      requestForAttestationBody,
-      sporranIdentity,
-      dAppIdentity,
-    );
-    return request;
+
+    const { encrypt } = await getIdentityDidEncryption(address, password);
+
+    const { dAppDidDetails } = await getTabEncryption(sender);
+    return encrypt(requestForAttestationBody, dAppDidDetails);
   } catch (error) {
     const { claim, legitimations, delegationId } = messageBody.content;
 
@@ -61,8 +58,9 @@ async function processSubmitTerms(
       content: { claim, legitimations, delegationId },
       type: MessageBodyType.REJECT_TERMS,
     };
-    const rejection = new Message(rejectionBody, sporranIdentity, dAppIdentity);
-    return rejection;
+
+    const { encrypt } = await getTabEncryption(sender);
+    return encrypt(rejectionBody);
   }
 }
 
@@ -75,34 +73,39 @@ async function processSubmitCredential(
 
 async function processShareCredential(
   messageBody: IRequestClaimsForCTypes,
-  sporranIdentity: IDidDetails['did'],
-  dAppIdentity: IDidDetails['did'],
   sender: SenderType,
-): Promise<IMessage> {
-  const attestedClaims = await getAttestedClaims(messageBody.content, sender);
+): Promise<IEncryptedMessage> {
+  const { attestedClaims, address, password } = await getAttestedClaims(
+    messageBody.content,
+    sender,
+  );
 
   const credentialsBody: ISubmitClaimsForCTypes = {
     content: attestedClaims,
     type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
   };
-  const request = new Message(credentialsBody, sporranIdentity, dAppIdentity);
 
-  return request;
+  const { encrypt } = await getIdentityDidEncryption(address, password);
+
+  const { dAppDidDetails } = await getTabEncryption(sender);
+  return encrypt(credentialsBody, dAppDidDetails);
 }
 
 async function showCredentialPopup(
   input: CredentialInput,
   sender: SenderType,
-): Promise<IMessage | void> {
-  const { message, dAppName, dAppIdentity, sporranIdentity } = input;
+): Promise<IEncryptedMessage | void> {
+  const { message: encrypted, dAppName } = input;
 
-  // TODO: errorCheckMessageBody(message.body);
+  const { decrypt } = await getTabEncryption(sender);
+  const message = await decrypt(encrypted);
+
+  // TODO: uncomment when it works without unsafe-eval
+  // errorCheckMessageBody(message.body);
 
   if (message.body.type === MessageBodyType.SUBMIT_TERMS) {
     return await processSubmitTerms(
       message.body as ISubmitTerms,
-      sporranIdentity,
-      dAppIdentity,
       dAppName,
       sender,
     );
@@ -116,8 +119,6 @@ async function showCredentialPopup(
   if (message.body.type === MessageBodyType.REQUEST_CLAIMS_FOR_CTYPES) {
     return await processShareCredential(
       message.body as IRequestClaimsForCTypes,
-      sporranIdentity,
-      dAppIdentity,
       sender,
     );
   }

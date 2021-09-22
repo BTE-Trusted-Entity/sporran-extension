@@ -5,6 +5,7 @@ import { initContentIdentitiesChannel } from './dApps/identitiesDataProvider/ide
 import { initContentAccessChannel } from './dApps/checkAccess/checkAccess';
 import { initContentSignChannel } from './dApps/SignChannels/contentSignChannel';
 import { initContentCredentialChannel } from './channels/CredentialChannels/contentCredentialChannel';
+import { initContentChallengeChannel } from './channels/ChallengeChannels/contentChallengeChannel';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -17,6 +18,7 @@ function injectScript() {
 
 function initMessages() {
   initContentCredentialChannel();
+  initContentChallengeChannel();
 
   const origin = new URL(window.location.href).host;
   initContentAccessChannel(origin);

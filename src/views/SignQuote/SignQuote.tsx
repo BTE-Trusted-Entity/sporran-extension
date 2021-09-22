@@ -3,12 +3,10 @@ import { browser } from 'webextension-polyfill-ts';
 import { find, minBy } from 'lodash-es';
 import BN from 'bn.js';
 import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
-import { LightDidDetails } from '@kiltprotocol/did';
 import { ITerms, IClaim } from '@kiltprotocol/types';
 
 import {
-  decryptIdentity,
-  deriveDidAuthenticationKeypair,
+  getIdentityDidEncryption,
   Identity,
   useIdentities,
 } from '../../utilities/identities/identities';
@@ -68,20 +66,12 @@ export function SignQuote(): JSX.Element | null {
 
       await saveCTypeTitle(claim.cTypeHash, cTypeTitle);
 
-      const password = await passwordField.get(event);
-      const sdkIdentity = await decryptIdentity(
-        firstIdentity.address,
-        password,
-      );
-      const didKeypair = deriveDidAuthenticationKeypair(sdkIdentity);
-      const didDetails = new LightDidDetails({ authenticationKey: didKeypair });
-
       const attestedClaims = legitimations.map((legitimation) =>
         AttestedClaim.fromAttestedClaim(legitimation),
       );
 
       // The attester generated claim with the temporary identity, need to put real address in it
-      const identityClaim = { ...claim, owner: didDetails.did };
+      const identityClaim = { ...claim, owner: firstIdentity.did };
 
       const requestForAttestation = RequestForAttestation.fromClaim(
         identityClaim,
@@ -91,15 +81,14 @@ export function SignQuote(): JSX.Element | null {
         },
       );
 
-      await requestForAttestation.signWithDid(
-        {
-          sign: async ({ data, alg }) => ({
-            data: didKeypair.sign(data, { withType: false }),
-            alg,
-          }),
-        },
-        didDetails,
+      const { address } = firstIdentity;
+      const password = await passwordField.get(event);
+      const { didDetails, keystore } = await getIdentityDidEncryption(
+        address,
+        password,
       );
+
+      await requestForAttestation.signWithDid(keystore, didDetails);
 
       await saveCredential({
         request: requestForAttestation,
@@ -109,7 +98,7 @@ export function SignQuote(): JSX.Element | null {
         isAttested: false,
       });
 
-      await claimChannel.return(requestForAttestation);
+      await claimChannel.return({ requestForAttestation, address, password });
       window.close();
     },
     [firstIdentity, cType, data, passwordField, name],
