@@ -52,7 +52,7 @@ Just start it again to continue.
         placeholder="wss://example.org:433"
         required=""
         type="url"
-        value="wss://spiritnet.api.onfinality.io/public-ws"
+        value="wss://kilt-peregrine-stg.kilt.io"
       />
       <button
         aria-label="Save"
