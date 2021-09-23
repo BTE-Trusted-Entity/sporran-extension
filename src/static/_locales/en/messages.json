@@ -715,5 +715,14 @@
   },
   "view_UnlockVestedFunds_CTA": {
     "message": "Update Balance"
+  },
+  "view_DidUpgrade_heading": {
+    "message": "Upgrade to on-chain DID"
+  },
+  "view_DidUpgrade_subline": {
+    "message": "TODO"
+  },
+  "view_DidUpgrade_CTA": {
+    "message": "Sign"
   }
 }

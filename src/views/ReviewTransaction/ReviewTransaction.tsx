@@ -63,15 +63,14 @@ export function ReviewTransaction({
     async (event) => {
       event.preventDefault();
 
-      setSubmitting(true);
-
       try {
         const password = await passwordField.get(event);
         const { address } = identity;
 
+        setSubmitting(true);
         setTxStatus('pending');
 
-        const { hash } = await signTransfer({
+        const hash = await signTransfer({
           address,
           recipient,
           amount,

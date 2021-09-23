@@ -7,6 +7,7 @@ import {
   setCurrentIdentity,
   useIdentities,
 } from '../../utilities/identities/identities';
+import { useConfiguration } from '../../configuration/useConfiguration';
 import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
 import { Welcome } from '../Welcome/Welcome';
 import { CreateIdentity } from '../CreateIdentity/CreateIdentity';
@@ -17,6 +18,7 @@ import { RemoveIdentity } from '../RemoveIdentity/RemoveIdentity';
 import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
 import { IdentityCredentials } from '../IdentityCredentials/IdentityCredentials';
 import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
+import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
 import { paths } from '../paths';
 
 interface Props {
@@ -24,6 +26,7 @@ interface Props {
 }
 
 export function SpecificIdentityRouter({ identities }: Props): JSX.Element {
+  const { features } = useConfiguration();
   const { address } = useParams() as { address: string };
 
   useEffect(() => {
@@ -64,6 +67,12 @@ export function SpecificIdentityRouter({ identities }: Props): JSX.Element {
         <Route path={paths.identity.vest}>
           <UnlockVestedFunds identity={identity} />
         </Route>
+
+        {features.fullDid && (
+          <Route path={paths.identity.did.start}>
+            <DidUpgradeFlow identity={identity} />
+          </Route>
+        )}
 
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={identity} />

@@ -11,7 +11,7 @@ import { decryptIdentity } from '../identities/identities';
 
 const currentTx: Record<string, SubmittableExtrinsic<'promise'>> = {};
 
-interface SignTransferInput {
+interface Input {
   address: string;
   recipient: string;
   amount: BN;
@@ -19,13 +19,7 @@ interface SignTransferInput {
   password: string;
 }
 
-interface SignTransferOutput {
-  hash: string;
-}
-
-export async function signTransfer(
-  input: SignTransferInput,
-): Promise<SignTransferOutput> {
+export async function signTransfer(input: Input): Promise<string> {
   const { address, recipient, amount, password, tip } = input;
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
@@ -38,7 +32,7 @@ export async function signTransfer(
   const hash = signedTx.hash.toHex();
   currentTx[hash] = signedTx;
 
-  return { hash };
+  return hash;
 }
 
 export async function submitTransfer(hash: string): Promise<void> {

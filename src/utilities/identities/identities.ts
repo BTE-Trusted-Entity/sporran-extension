@@ -123,12 +123,9 @@ interface IdentityDidEncryption {
   ) => Promise<IEncryptedMessage>;
 }
 
-export async function getIdentityDidEncryption(
-  address: string,
-  password: string,
+export async function getIdentityDidEncryptionFromKeypair(
+  identityKeypair: KeyringPair,
 ): Promise<IdentityDidEncryption> {
-  const identityKeypair = await decryptIdentity(address, password);
-
   const authenticationKey = identityKeypair.derive('//did//0');
   const encryptionKeypair = naclBoxKeypairFromSecret(
     identityKeypair
@@ -185,6 +182,14 @@ export async function getIdentityDidEncryption(
     keystore,
     encrypt,
   };
+}
+
+export async function getIdentityDidEncryption(
+  address: string,
+  password: string,
+): Promise<IdentityDidEncryption> {
+  const identityKeypair = await decryptIdentity(address, password);
+  return getIdentityDidEncryptionFromKeypair(identityKeypair);
 }
 
 export async function encryptIdentity(
