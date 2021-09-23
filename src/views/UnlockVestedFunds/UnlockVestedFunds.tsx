@@ -7,9 +7,9 @@ import { paths } from '../paths';
 
 import {
   insufficientFunds,
-  signVestChannel,
-  submitVestChannel,
-} from '../../channels/VestingChannels/VestingChannels';
+  signVest,
+  submitVest,
+} from '../../utilities/vesting/vesting';
 
 import { Avatar } from '../../components/Avatar/Avatar';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
@@ -50,10 +50,10 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
 
         setTxStatus('pending');
 
-        const hash = await signVestChannel.get({ address, password });
+        const hash = await signVest({ address, password });
         setTxHash(hash);
 
-        await submitVestChannel.get(hash);
+        await submitVest(hash);
 
         setTxStatus('success');
       } catch (error) {

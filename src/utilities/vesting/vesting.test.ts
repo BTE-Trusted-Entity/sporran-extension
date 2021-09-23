@@ -5,9 +5,9 @@ import {
 import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 
-import { decryptIdentity } from '../../utilities/identities/identities';
-import { originalBalancesMock } from '../balanceChangeChannel/balanceChangeChannel.mock';
-import { hasVestedFunds, signVest, submitVest } from './VestingChannels';
+import { decryptIdentity } from '../identities/identities';
+import { originalBalancesMock } from '../balanceChanges/balanceChanges.mock';
+import { hasVestedFunds, signVest, submitVest } from './vesting';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: {
@@ -74,7 +74,7 @@ const chainMock = {
   chainMock,
 );
 
-describe('VestingChannels', () => {
+describe('vesting', () => {
   describe('hasVestedFunds', () => {
     it('should return true when has vested funds', async () => {
       const hasVestedFundsResult = await hasVestedFunds(mockAddress);

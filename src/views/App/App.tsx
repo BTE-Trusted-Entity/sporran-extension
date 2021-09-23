@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
 import { RouteExcept } from '../../components/RouteExcept/RouteExcept';
@@ -13,6 +14,7 @@ import { Welcome } from '../Welcome/Welcome';
 import { IdentitiesRouter } from '../IdentitiesRouter/IdentitiesRouter';
 import { PopupsRouter } from '../PopupsRouter/PopupsRouter';
 import { AppSettings } from '../AppSettings/AppSettings';
+import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 
 import { paths } from '../paths';
 
@@ -22,6 +24,10 @@ import styles from './App.module.css';
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();
   const { features } = useConfiguration();
+
+  useEffect(() => {
+    initKiltSDK();
+  }, []);
 
   return (
     <div className={styles.container}>

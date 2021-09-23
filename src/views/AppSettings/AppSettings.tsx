@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import {
+  defaultEndpoint,
   endpoints,
   getEndpoint,
   setEndpoint,
@@ -36,7 +37,7 @@ export function AppSettings(): JSX.Element {
   );
 
   const handleReset = useCallback(async () => {
-    setEndpointValue(endpoints[0]);
+    setEndpointValue(defaultEndpoint);
   }, []);
 
   return (

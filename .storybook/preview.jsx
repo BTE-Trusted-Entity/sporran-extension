@@ -3,6 +3,7 @@ import { withConsole, setConsoleOptions } from '@storybook/addon-console';
 import { MemoryRouter } from 'react-router-dom';
 import { init } from '@kiltprotocol/core';
 
+import { endpoints } from '../src/utilities/endpoints/endpoints';
 import { localeGlobalTypes, withLocale } from './locales';
 import {
   configurationTypesForStorybook,
@@ -12,7 +13,7 @@ import { IdentitiesProviderMock } from '../src/utilities/identities/IdentitiesPr
 import { ViewDecorator } from '../src/components/View/ViewDecorator';
 import '../src/views/App/App.css';
 
-init({ address: 'wss://full-nodes-lb.devnet.kilt.io' });
+init({ address: endpoints[endpoints.length - 1] });
 
 // You'll start to receive all console messages, warnings, errors in your action logger panel - Everything except HMR logs.
 setConsoleOptions({

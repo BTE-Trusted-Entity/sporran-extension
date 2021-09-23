@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '../../testing/testing';
 import { IdentitiesProviderMock } from '../../utilities/identities/IdentitiesProvider.mock';
-import { waitForHasSavedPasswords } from '../../channels/SavedPasswordsChannels/hasSavedPasswords.mock';
+import { waitForHasSavedPasswords } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
 import { Settings } from './Settings';
 

@@ -1,5 +1,6 @@
 import { render } from '../../testing/testing';
 import '../../components/useCopyButton/useCopyButton.mock';
+import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
 
@@ -26,6 +27,7 @@ describe('SignDApp', () => {
         <SignDApp />
       </PopupTestProvider>,
     );
+    await waitForGetPassword();
     expect(container).toMatchSnapshot();
   });
 });

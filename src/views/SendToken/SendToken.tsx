@@ -4,8 +4,9 @@ import { browser } from 'webextension-polyfill-ts';
 import { useRouteMatch } from 'react-router-dom';
 import { find } from 'lodash-es';
 import { DataUtils } from '@kiltprotocol/utils';
+import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
-import { feeChannel } from '../../channels/feeChannel/feeChannel';
+import { getFee } from '../../utilities/getFee/getFee';
 import { Identity } from '../../utilities/identities/types';
 import { isNew } from '../../utilities/identities/identities';
 import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
@@ -16,7 +17,6 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
 import { useOnline } from '../../utilities/useOnline/useOnline';
-import { existentialDepositChannel } from '../../channels/existentialDepositChannel/existentialDepositChannel';
 
 import styles from './SendToken.module.css';
 
@@ -25,10 +25,6 @@ const nonNumberCharacters = /[^0-9,.]/g;
 const KILT_POWER = 15;
 const minimum = new BN(0.01e15);
 let existential: BN | undefined;
-
-(async () => {
-  existential = await existentialDepositChannel.get();
-})();
 
 function numberToBN(parsedValue: number): BN {
   const value = parsedValue.toFixed(KILT_POWER);
@@ -195,6 +191,13 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
 
+  useEffect(() => {
+    (async () => {
+      const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+      existential = api.consts.balances.existentialDeposit;
+    })();
+  }, []);
+
   const [fee, setFee] = useState<BN | null>(null);
 
   const balance = useAddressBalance(identity.address);
@@ -277,7 +280,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       if (recipient && !isValidAddress(recipient)) {
         return;
       }
-      const realFee = await feeChannel.get({
+      const realFee = await getFee({
         amount: amountBN,
         tip: tipBN,
         recipient,
