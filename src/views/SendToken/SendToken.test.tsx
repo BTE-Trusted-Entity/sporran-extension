@@ -1,6 +1,7 @@
 import BN from 'bn.js';
 import userEvent from '@testing-library/user-event';
 import { DataUtils } from '@kiltprotocol/utils';
+import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
 import { NEW } from '../../utilities/identities/identities';
 import {
@@ -9,14 +10,17 @@ import {
   runWithJSDOMErrorsDisabled,
   screen,
 } from '../../testing/testing';
-import { mockFeeChannel } from '../../channels/feeChannel/feeChannel.mock';
+import { getFee } from '../../utilities/getFee/getFee';
 import '../../components/usePasteButton/usePasteButton.mock';
 
 import { SendToken } from './SendToken';
 
-mockFeeChannel();
+jest.mock('../../utilities/getFee/getFee', () => ({ getFee: jest.fn() }));
+(getFee as jest.Mock).mockResolvedValue(new BN('1000000000000'));
 
-jest.mock('@kiltprotocol/chain-helpers', () => ({}));
+jest.mock('@kiltprotocol/chain-helpers', () => ({
+  BlockchainApiConnection: { getConnectionOrConnect: jest.fn() },
+}));
 jest.mock('@kiltprotocol/core', () => ({}));
 jest.mock('@kiltprotocol/utils', () => ({
   DataUtils: {
@@ -24,15 +28,12 @@ jest.mock('@kiltprotocol/utils', () => ({
   },
 }));
 
-jest.mock(
-  '../../channels/existentialDepositChannel/existentialDepositChannel',
-  () => ({
-    existentialDepositChannel: {
-      async get() {
-        return new BN('100000000000000');
-      },
+(BlockchainApiConnection.getConnectionOrConnect as jest.Mock).mockResolvedValue(
+  {
+    api: {
+      consts: { balances: { existentialDeposit: new BN('100000000000000') } },
     },
-  }),
+  },
 );
 
 const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];

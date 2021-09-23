@@ -5,10 +5,8 @@ import {
 import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import { SubmittableExtrinsic } from '@polkadot/api/types';
 
-import { decryptIdentity } from '../../utilities/identities/identities';
-import { transformBalances } from '../../utilities/transformBalances/transformBalances';
-
-import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+import { decryptIdentity } from '../identities/identities';
+import { transformBalances } from '../transformBalances/transformBalances';
 
 interface VestInput {
   address: string;
@@ -17,23 +15,11 @@ interface VestInput {
 
 const currentTx: Record<string, SubmittableExtrinsic<'promise'>> = {};
 
-export const hasVestedFundsChannel = new BrowserChannel<string, boolean>(
-  'hasVestedFunds',
-);
-
 export async function hasVestedFunds(address: string): Promise<boolean> {
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();
   const { isSome } = await api.query.vesting.vesting(address);
   return isSome;
 }
-
-export function initBackgroundHasVestedFundsChannel(): void {
-  hasVestedFundsChannel.produce(hasVestedFunds);
-}
-
-export const signVestChannel = new BrowserChannel<VestInput, string>(
-  'signVest',
-);
 
 export const insufficientFunds = 'Insufficient funds';
 
@@ -61,16 +47,9 @@ export async function signVest({
   return hash;
 }
 
-export const submitVestChannel = new BrowserChannel<string>('submitVest');
-
 export async function submitVest(hash: string): Promise<void> {
   await BlockchainUtils.submitSignedTx(currentTx[hash], {
     resolveOn: BlockchainUtils.IS_FINALIZED,
   });
   delete currentTx[hash];
-}
-
-export function initBackgroundVestChannels(): void {
-  signVestChannel.produce(signVest);
-  submitVestChannel.produce(submitVest);
 }

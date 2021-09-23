@@ -7,9 +7,9 @@ import { KiltAmount } from '../KiltAmount/KiltAmount';
 import { BalanceUpdateLink } from '../BalanceUpdateLink/BalanceUpdateLink';
 
 import {
-  balanceChangeChannel,
-  BalanceChangeOutput,
-} from '../../channels/balanceChangeChannel/balanceChangeChannel';
+  BalanceChange,
+  onAddressBalanceChange,
+} from '../../utilities/balanceChanges/balanceChanges';
 
 import styles from './Balance.module.css';
 
@@ -27,18 +27,15 @@ export function useAddressBalance(address: string): BalanceBN | null {
   useEffect(() => {
     setBalance(null);
 
-    return balanceChangeChannel.subscribe(
-      address,
-      (error, output?: BalanceChangeOutput) => {
-        if (error || !output) {
-          console.error(error);
-        } else {
-          if (output.address === address) {
-            setBalance(output.balances as BalanceBN);
-          }
+    return onAddressBalanceChange(address, (error, output?: BalanceChange) => {
+      if (error || !output) {
+        console.error(error);
+      } else {
+        if (output.address === address) {
+          setBalance(output.balances as BalanceBN);
         }
-      },
-    );
+      }
+    });
   }, [address]);
 
   return balance;

@@ -4,9 +4,9 @@ import { find, mapValues, omit } from 'lodash-es';
 
 import { IdentitiesMap } from '../../utilities/identities/identities';
 import {
-  balanceChangeChannel,
-  BalanceChangeOutput,
-} from '../../channels/balanceChangeChannel/balanceChangeChannel';
+  BalanceChange,
+  onAddressBalanceChange,
+} from '../../utilities/balanceChanges/balanceChanges';
 
 interface Balances {
   [address: string]: BN | null;
@@ -21,10 +21,7 @@ function subscribeToBalance(
   setBalances: (callback: (balances: Balances) => Balances) => void,
   subscriptions: Subscriptions,
 ) {
-  async function handleBalance(
-    error: Error | null,
-    balance?: BalanceChangeOutput,
-  ) {
+  async function handleBalance(error: Error | null, balance?: BalanceChange) {
     if (error || !balance) {
       console.error(error);
       return;
@@ -38,7 +35,7 @@ function subscribeToBalance(
     }));
   }
 
-  const unsubscribe = balanceChangeChannel.subscribe(address, handleBalance);
+  const unsubscribe = onAddressBalanceChange(address, handleBalance);
 
   subscriptions[address] = () => {
     unsubscribe();
