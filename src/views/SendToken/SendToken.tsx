@@ -6,7 +6,6 @@ import { find } from 'lodash-es';
 import { DataUtils } from '@kiltprotocol/utils';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
-import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 import { getFee } from '../../utilities/getFee/getFee';
 import { Identity } from '../../utilities/identities/types';
 import { isNew } from '../../utilities/identities/identities';
