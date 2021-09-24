@@ -17,6 +17,7 @@ import {
 } from '@kiltprotocol/types';
 import Message from '@kiltprotocol/messaging';
 import { DefaultResolver, LightDidDetails } from '@kiltprotocol/did';
+import { Crypto } from '@kiltprotocol/utils';
 import { map, max } from 'lodash-es';
 
 import {
@@ -117,6 +118,7 @@ export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
 interface IdentityDidCrypto {
   didDetails: IDidDetails;
   keystore: KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'>;
+  sign: (plaintext: string) => string;
   encrypt: (
     messageBody: MessageBody,
     dAppDidDetails: IDidDetails,
@@ -172,6 +174,10 @@ export async function getIdentityCryptoFromKeypair(
     },
   };
 
+  function sign(plaintext: string) {
+    return Crypto.u8aToHex(authenticationKey.sign(plaintext));
+  }
+
   async function encrypt(
     messageBody: MessageBody,
     dAppDidDetails: IDidDetails,
@@ -191,6 +197,7 @@ export async function getIdentityCryptoFromKeypair(
   return {
     didDetails,
     keystore,
+    sign,
     encrypt,
   };
 }

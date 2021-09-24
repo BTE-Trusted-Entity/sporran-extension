@@ -20,6 +20,7 @@ import { backgroundChallengeChannel } from './channels/ChallengeChannels/backgro
 import { initBackgroundAccessChannel } from './dApps/AccessChannels/browserAccessChannels';
 import { initBackgroundGenesisHashChannel } from './dApps/genesisHashChannel/initBackgroundGenesisHashChannel';
 import { initBackgroundCredentialChannel } from './channels/CredentialChannels/backgroundCredentialChannel';
+import { initBackgroundSignDidChannel } from './channels/SignDidChannels/backgroundSignDidChannel';
 
 function initSavedPasswords() {
   schedulePasswordsCheck();
@@ -49,6 +50,7 @@ function init() {
   initSavedPasswords();
   initDAppChannels();
   initBackgroundGenesisHashChannel();
+  initBackgroundSignDidChannel();
 }
 
 init();

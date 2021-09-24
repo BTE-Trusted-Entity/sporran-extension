@@ -744,5 +744,23 @@
         "content": "$1"
       }
     }
+  },
+  "view_SignDid_title": {
+    "message": "Sign with on-chain DID"
+  },
+  "view_SignDid_subline": {
+    "message": "Select your Identity and sign with your password"
+  },
+  "view_SignDid_origin": {
+    "message": "Request from:"
+  },
+  "view_SignDid_plaintext": {
+    "message": "Message to be signed:"
+  },
+  "view_SignDid_reject": {
+    "message": "Reject"
+  },
+  "view_SignDid_CTA": {
+    "message": "Sign"
   }
 }

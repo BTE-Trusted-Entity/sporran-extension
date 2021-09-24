@@ -4,6 +4,7 @@ import { toggleIcon } from './channels/toggleIconChannel/toggleIconChannel';
 import { initContentIdentitiesChannel } from './dApps/identitiesDataProvider/identitiesDataProvider';
 import { initContentAccessChannel } from './dApps/checkAccess/checkAccess';
 import { initContentSignChannel } from './dApps/SignChannels/contentSignChannel';
+import { initContentSignDidChannel } from './channels/SignDidChannels/contentSignDidChannel';
 import { initContentCredentialChannel } from './channels/CredentialChannels/contentCredentialChannel';
 import { initContentChallengeChannel } from './channels/ChallengeChannels/contentChallengeChannel';
 
@@ -24,6 +25,7 @@ function initMessages() {
   initContentAccessChannel(origin);
   initContentIdentitiesChannel(origin);
   initContentSignChannel(origin);
+  initContentSignDidChannel(origin);
 }
 
 async function main() {
