@@ -72,7 +72,7 @@ exports[`DidUpgrade should render 1`] = `
       <a
         aria-label="Upgrade information"
         class="info"
-        href="/identity/:address/did"
+        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did"
       />
        Deposit 
       1.0000
