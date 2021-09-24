@@ -731,6 +731,9 @@
   "view_DidUpgrade_fee": {
     "message": " + fee "
   },
+  "view_DidUpgrade_info": {
+    "message": "Upgrade information"
+  },
   "view_DidUpgrade_CTA": {
     "message": "Sign"
   },

@@ -24,7 +24,7 @@ import {
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-import { paths } from '../paths';
+import { generatePath, paths } from '../paths';
 
 import styles from './DidUpgrade.module.css';
 
@@ -62,7 +62,8 @@ function useCosts(address: string): {
 export function DidUpgrade({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { fee, deposit, total, error } = useCosts(identity.address);
+  const { address } = identity;
+  const { fee, deposit, total, error } = useCosts(address);
   const [txHash, setTxHash] = useState<string>();
 
   const [submitting, setSubmitting] = useState(false);
@@ -119,6 +120,11 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         <KiltAmount amount={total} type="costs" smallDecimals />
       </p>
       <p className={styles.details}>
+        <a
+          href={generatePath(paths.identity.did.start, { address })}
+          className={styles.info}
+          aria-label={t('view_DidUpgrade_info')}
+        />
         {t('view_DidUpgrade_deposit')}
         {asKiltCoins(deposit, 'costs')} <KiltCurrency />
         {t('view_DidUpgrade_fee')}

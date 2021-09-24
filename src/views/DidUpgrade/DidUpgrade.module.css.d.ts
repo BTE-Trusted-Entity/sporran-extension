@@ -7,6 +7,7 @@ declare namespace DidUpgradeModuleCssNamespace {
     details: string;
     errorTooltip: string;
     heading: string;
+    info: string;
     subline: string;
     submit: string;
   }

@@ -45,6 +45,9 @@ export async function getFee(): Promise<BN> {
   const fakeIdentity = makeKeyring().createFromUri('//Alice');
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
+  // TODO: remove to use real values
+  return blockchain.api.consts.balances.existentialDeposit;
+
   const signedTx = await getSignedTransaction(fakeIdentity);
 
   const { partialFee } = await blockchain.api.rpc.payment.queryInfo(
