@@ -17,7 +17,7 @@ import {
 export async function getDeposit(): Promise<BN> {
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
   // TODO: return blockchain.api.consts.did.deposit
-  return blockchain.api.consts.identity.basicDeposit;
+  return blockchain.api.consts.balances.existentialDeposit;
 }
 
 async function getSignedTransaction(

@@ -15,14 +15,18 @@ import {
   submit,
 } from '../../utilities/didUpgrade/didUpgrade';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
-import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
+import { useAddressBalance } from '../../components/Balance/Balance';
+import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
+import {
+  asKiltCoins,
+  KiltAmount,
+} from '../../components/KiltAmount/KiltAmount';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { paths } from '../paths';
 
 import styles from './DidUpgrade.module.css';
-import { useAddressBalance } from '../../components/Balance/Balance';
 
 interface Props {
   identity: Identity;
@@ -42,7 +46,7 @@ function useCosts(address: string): {
       setFee(await getFee());
       setDeposit(await getDeposit());
     })();
-  }, [deposit, fee]);
+  }, []);
 
   const total = useMemo(
     () => (fee && deposit ? fee.add(deposit) : undefined),
@@ -110,9 +114,16 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
 
       <IdentitySlide identity={identity} />
 
-      <KiltAmount amount={total} type="costs" smallDecimals />
-      <KiltAmount amount={fee} type="costs" />
-      <KiltAmount amount={deposit} type="costs" />
+      <p className={styles.costs}>
+        {t('view_DidUpgrade_total')}
+        <KiltAmount amount={total} type="costs" smallDecimals />
+      </p>
+      <p className={styles.details}>
+        {t('view_DidUpgrade_deposit')}
+        {asKiltCoins(deposit, 'costs')} <KiltCurrency />
+        {t('view_DidUpgrade_fee')}
+        {asKiltCoins(fee, 'costs')} <KiltCurrency />
+      </p>
 
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
@@ -120,11 +131,15 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         <Link to={paths.home} className={styles.cancel}>
           {t('common_action_cancel')}
         </Link>
-        <button type="submit" className={styles.submit} disabled={submitting}>
+        <button
+          type="submit"
+          className={styles.submit}
+          disabled={submitting || error}
+        >
           {t('view_DidUpgrade_CTA')}
         </button>
         <output className={styles.errorTooltip} hidden={!error}>
-          {error}
+          {t('view_DidUpgrade_insufficientFunds', asKiltCoins(total, 'costs'))}
         </output>
       </p>
 

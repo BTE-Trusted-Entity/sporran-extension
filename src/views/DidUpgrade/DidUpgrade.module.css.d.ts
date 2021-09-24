@@ -3,6 +3,8 @@ declare namespace DidUpgradeModuleCssNamespace {
     buttonsLine: string;
     cancel: string;
     container: string;
+    costs: string;
+    details: string;
     errorTooltip: string;
     heading: string;
     subline: string;

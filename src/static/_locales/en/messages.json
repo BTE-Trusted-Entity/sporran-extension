@@ -720,9 +720,26 @@
     "message": "Upgrade to on-chain DID"
   },
   "view_DidUpgrade_subline": {
-    "message": "TODO"
+    "message": "Sign upgrade"
+  },
+  "view_DidUpgrade_total": {
+    "message": "Total cost: "
+  },
+  "view_DidUpgrade_deposit": {
+    "message": " Deposit "
+  },
+  "view_DidUpgrade_fee": {
+    "message": " + fee "
   },
   "view_DidUpgrade_CTA": {
     "message": "Sign"
+  },
+  "view_DidUpgrade_insufficientFunds": {
+    "message": "You need at least $cost$ KILTs to upgrade",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
   }
 }
