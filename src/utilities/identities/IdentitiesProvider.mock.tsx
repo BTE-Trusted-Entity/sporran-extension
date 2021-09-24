@@ -11,7 +11,7 @@ export const identitiesMock: IdentitiesMap = {
   '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr': {
     name: 'KILT Identity 2',
     address: '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
-    did: 'did:kilt:light:004rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR52',
+    did: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
     index: 2,
   },
   '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL': {

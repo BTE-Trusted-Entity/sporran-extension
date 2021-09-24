@@ -148,6 +148,194 @@ exports[`IdentityOverview should render a normal identity 1`] = `
         Receive
       </a>
     </p>
+    <a
+      class="upgrade"
+      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/"
+    >
+      <div
+        class="avatarSmall"
+      >
+        Identicon
+      </div>
+      Upgrade to on-chain DID
+    </a>
+    <p
+      class="stats"
+    >
+      You have 3 Identities with a
+      <span
+        class="balance"
+      >
+         Total Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="KILT Coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </main>
+</div>
+`;
+
+exports[`IdentityOverview should render full DID identity 1`] = `
+<div>
+  <main
+    class="container"
+  >
+    <header>
+      <h1
+        class="heading"
+      >
+        Your Identities
+      </h1>
+      <p
+        class="info"
+      >
+        You have 3 Identities
+      </p>
+    </header>
+    <div
+      class="container"
+    >
+      <section>
+        <div
+          class="fullDid"
+        >
+          Identicon
+        </div>
+        <div
+          class="nameLine"
+        >
+          <span
+            class="name"
+          >
+            KILT Identity 2
+          </span>
+          <div
+            class="wrapper"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="Identity options"
+              class="toggle"
+              role="button"
+              tabindex="0"
+              title="Identity options"
+              type="button"
+            />
+          </div>
+        </div>
+      </section>
+      <a
+        aria-label="KILT Identity 1"
+        class="left"
+        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+        title="KILT Identity 1"
+      />
+      <a
+        aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+        class="right"
+        href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+        title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+      />
+      <ul
+        class="bubbles"
+      >
+        <li
+          class="item"
+        >
+          <a
+            aria-label="KILT Identity 1"
+            class="bubble"
+            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+            title="KILT Identity 1"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="KILT Identity 2"
+            class="bubble bubbleActive"
+            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
+            title="KILT Identity 2"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            class="bubble"
+            href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
+            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-label="Add Identity"
+            class="add"
+            href="/identity/NEW"
+            title="Add Identity"
+          />
+        </li>
+      </ul>
+    </div>
+    <p
+      class="balanceLine"
+    >
+      Total Balance: 
+      <span
+        class="amount"
+      >
+        1
+        <span
+          class="fractional"
+        >
+          .2340
+        </span>
+         
+        <span
+          aria-label="KILT Coin"
+          class="coin"
+        />
+      </span>
+      <button
+        aria-label="Show balance breakdown"
+        class="showBreakdown"
+        title="Show balance breakdown"
+        type="button"
+      />
+    </p>
+    <p>
+      <button
+        class="button"
+        type="button"
+      >
+        Send
+      </button>
+      <a
+        class="button"
+        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/receive"
+      >
+        Receive
+      </a>
+    </p>
+    <p
+      class="info"
+    >
+      On-chain DID
+    </p>
     <p
       class="stats"
     >
@@ -436,6 +624,17 @@ exports[`IdentityOverview should render upcoming feature modal 1`] = `
         Receive
       </a>
     </p>
+    <a
+      class="upgrade"
+      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/"
+    >
+      <div
+        class="avatarSmall"
+      >
+        Identicon
+      </div>
+      Upgrade to on-chain DID
+    </a>
     <p
       class="stats"
     >
@@ -638,6 +837,17 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
       target="_blank"
     >
       View Transactions
+    </a>
+    <a
+      class="upgrade"
+      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/"
+    >
+      <div
+        class="avatarSmall"
+      >
+        Identicon
+      </div>
+      Upgrade to on-chain DID
     </a>
     <p
       class="stats"

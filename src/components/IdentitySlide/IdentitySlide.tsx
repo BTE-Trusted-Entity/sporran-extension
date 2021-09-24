@@ -1,9 +1,11 @@
 import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import { IdentityOptions } from '../IdentityOptions/IdentityOptions';
-import { Identity, saveIdentity } from '../../utilities/identities/identities';
 import { Avatar } from '../Avatar/Avatar';
+import { IdentityOptions } from '../IdentityOptions/IdentityOptions';
+
+import { Identity, saveIdentity } from '../../utilities/identities/identities';
+import { isFullDid } from '../../utilities/did/did';
 
 import styles from './IdentitySlide.module.css';
 
@@ -45,7 +47,10 @@ export function IdentitySlide({
 
   return (
     <section>
-      <Avatar address={identity.address} />
+      <Avatar
+        address={identity.address}
+        className={isFullDid(identity.did) ? styles.fullDid : undefined}
+      />
       {!editing ? (
         <div className={options ? styles.nameLine : styles.centeredNameLine}>
           <span className={styles.name}>{identity.name}</span>

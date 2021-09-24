@@ -7,6 +7,7 @@ import dialogPolyfill from 'dialog-polyfill';
 import { ConfigurationProvider } from '../configuration/ConfigurationContext';
 import { IdentitiesProviderMock } from '../utilities/identities/IdentitiesProvider.mock';
 import { mockBalanceChanges } from '../utilities/balanceChanges/mockBalanceChanges';
+import { mockIsFullDid } from '../utilities/did/did.mock';
 
 export {
   IdentitiesProviderMock,
@@ -25,6 +26,7 @@ jest.mock('../components/Avatar/Identicon', () => ({
 }));
 
 mockBalanceChanges();
+mockIsFullDid(false);
 
 export function render(
   ui: Parameters<typeof externalRender>[0],

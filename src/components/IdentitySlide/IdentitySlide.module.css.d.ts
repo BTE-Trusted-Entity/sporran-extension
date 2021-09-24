@@ -4,6 +4,7 @@ declare namespace IdentitySlideModuleCssNamespace {
     cancel: string;
     centeredNameLine: string;
     form: string;
+    fullDid: string;
     input: string;
     name: string;
     nameLine: string;

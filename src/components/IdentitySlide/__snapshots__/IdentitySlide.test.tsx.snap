@@ -35,6 +35,41 @@ exports[`IdentitySlide should render 1`] = `
 </div>
 `;
 
+exports[`IdentitySlide should render full DID avatar style 1`] = `
+<div>
+  <section>
+    <div
+      class="fullDid"
+    >
+      Identicon
+    </div>
+    <div
+      class="nameLine"
+    >
+      <span
+        class="name"
+      >
+        KILT Identity 2
+      </span>
+      <div
+        class="wrapper"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Identity options"
+          class="toggle"
+          role="button"
+          tabindex="0"
+          title="Identity options"
+          type="button"
+        />
+      </div>
+    </div>
+  </section>
+</div>
+`;
+
 exports[`IdentitySlideNew should render 1`] = `
 <div>
   <section>

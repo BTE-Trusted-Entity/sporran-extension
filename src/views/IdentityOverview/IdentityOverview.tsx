@@ -7,6 +7,7 @@ import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
 import { UpcomingFeatureModal } from '../../components/UpcomingFeatureModal/UpcomingFeatureModal';
+import { Avatar } from '../../components/Avatar/Avatar';
 
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import {
@@ -14,6 +15,7 @@ import {
   isNew,
   useIdentities,
 } from '../../utilities/identities/identities';
+import { isFullDid } from '../../utilities/did/did';
 import { plural } from '../../utilities/plural/plural';
 import { generatePath, paths } from '../paths';
 import { useConfiguration } from '../../configuration/useConfiguration';
@@ -134,6 +136,16 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         >
           {t('view_IdentityOverview_subscan')}
         </a>
+      )}
+
+      {!isFullDid(identity.did) ? (
+        // TODO: link to DID explainer
+        <Link to={'#'} className={styles.upgrade}>
+          <Avatar address={identity.address} className={styles.avatarSmall} />
+          {t('view_IdentityOverview_upgrade')}
+        </Link>
+      ) : (
+        <p className={styles.info}>{t('view_IdentityOverview_on_chain')}</p>
       )}
 
       <Stats />

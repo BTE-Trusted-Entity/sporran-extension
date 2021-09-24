@@ -2,11 +2,13 @@ import userEvent from '@testing-library/user-event';
 import { browser } from 'webextension-polyfill-ts';
 
 import {
+  identitiesMock as identities,
   render,
   screen,
   waitForElementToBeRemoved,
 } from '../../testing/testing';
 import { saveIdentity } from '../../utilities/identities/identities';
+import { mockIsFullDid } from '../../utilities/did/did.mock';
 
 import { IdentitySlide } from './IdentitySlide';
 import { IdentitySlideNew } from './IdentitySlideNew';
@@ -14,12 +16,9 @@ import { IdentitySlideNew } from './IdentitySlideNew';
 jest.mock('../../utilities/identities/identities');
 jest.spyOn(browser.runtime, 'sendMessage');
 
-const identity = {
-  name: 'KILT Identity 1',
-  address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-  did: 'did:kilt:light:004rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-  index: 1,
-};
+const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const fullDidIdentity =
+  identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 describe('IdentitySlide', () => {
   it('should render', async () => {
@@ -47,6 +46,12 @@ describe('IdentitySlide', () => {
     });
 
     await waitForElementToBeRemoved(saveButton);
+  });
+
+  it('should render full DID avatar style', async () => {
+    mockIsFullDid(true);
+    const { container } = render(<IdentitySlide identity={fullDidIdentity} />);
+    expect(container).toMatchSnapshot();
   });
 });
 
