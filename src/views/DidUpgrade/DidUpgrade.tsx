@@ -14,6 +14,7 @@ import {
   sign,
   submit,
 } from '../../utilities/didUpgrade/didUpgrade';
+import { saveIdentity } from '../../utilities/identities/identities';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { useAddressBalance } from '../../components/Balance/Balance';
 import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
@@ -86,8 +87,10 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         const hash = await sign(identity, password);
         setTxHash(hash);
 
-        await submit(hash);
+        const did = await submit(hash);
         setStatus('success');
+
+        await saveIdentity({ ...identity, did });
       } catch (error) {
         setSubmitting(false);
         setStatus('error');

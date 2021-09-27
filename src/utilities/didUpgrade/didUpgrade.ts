@@ -1,6 +1,6 @@
 import BN from 'bn.js';
 import { KeyringPair } from '@polkadot/keyring/types';
-import { SubmittableExtrinsic } from '@kiltprotocol/types';
+import { IDidDetails, SubmittableExtrinsic } from '@kiltprotocol/types';
 import {
   BlockchainApiConnection,
   BlockchainUtils,
@@ -14,6 +14,11 @@ import {
   makeKeyring,
 } from '../identities/identities';
 
+interface DidTransaction {
+  extrinsic: SubmittableExtrinsic;
+  did: IDidDetails['did'];
+}
+
 export async function getDeposit(): Promise<BN> {
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
   // TODO: return blockchain.api.consts.did.deposit
@@ -22,21 +27,22 @@ export async function getDeposit(): Promise<BN> {
 
 async function getSignedTransaction(
   identity: KeyringPair,
-): Promise<SubmittableExtrinsic> {
+): Promise<DidTransaction> {
   const { didDetails, keystore } = await getIdentityCryptoFromKeypair(identity);
 
   // TODO: const tx = await DidUtils.upgradeDid(didDetails, keystore);
-  const tx = await (
+  const { extrinsic, did } = await (
     DidUtils as typeof DidUtils & {
       upgradeDid: (
         a: typeof didDetails,
         b: typeof keystore,
-      ) => SubmittableExtrinsic;
+      ) => Promise<DidTransaction>;
     }
   ).upgradeDid(didDetails, keystore);
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  return blockchain.signTx(identity, tx);
+  const tx = await blockchain.signTx(identity, extrinsic);
+  return { extrinsic: tx, did };
 }
 
 export async function getFee(): Promise<BN> {
@@ -46,31 +52,34 @@ export async function getFee(): Promise<BN> {
   // TODO: remove to use real values
   return blockchain.api.consts.balances.existentialDeposit;
 
-  const signedTx = await getSignedTransaction(fakeIdentity);
+  const { extrinsic } = await getSignedTransaction(fakeIdentity);
 
   const { partialFee } = await blockchain.api.rpc.payment.queryInfo(
-    signedTx.toHex(),
+    extrinsic.toHex(),
   );
   return partialFee;
 }
 
-const currentTx: Record<string, SubmittableExtrinsic> = {};
+const currentTx: Record<string, DidTransaction> = {};
 
 export async function sign(
   identity: Identity,
   password: string,
 ): Promise<string> {
   const sdkIdentity = await decryptIdentity(identity.address, password);
-  const signedTx = await getSignedTransaction(sdkIdentity);
+  const { extrinsic, did } = await getSignedTransaction(sdkIdentity);
 
-  const hash = signedTx.hash.toHex();
-  currentTx[hash] = signedTx;
+  const hash = extrinsic.hash.toHex();
+  currentTx[hash] = { extrinsic, did };
   return hash;
 }
 
-export async function submit(hash: string): Promise<void> {
-  await BlockchainUtils.submitSignedTx(currentTx[hash], {
+export async function submit(hash: string): Promise<string> {
+  const { extrinsic, did } = currentTx[hash];
+  await BlockchainUtils.submitSignedTx(extrinsic, {
     resolveOn: BlockchainUtils.IS_FINALIZED,
   });
   delete currentTx[hash];
+
+  return did;
 }
