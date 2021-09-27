@@ -12,7 +12,7 @@ interface UseCopyButton {
 }
 
 export function useCopyButton(
-  inputRef: RefObject<HTMLInputElement>,
+  inputRef: RefObject<HTMLInputElement | HTMLTextAreaElement>,
 ): UseCopyButton {
   const t = browser.i18n.getMessage;
   const title = t('component_useCopyButton_copy');

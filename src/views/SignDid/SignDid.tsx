@@ -1,11 +1,12 @@
 import { useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
+import { useRouteMatch } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import { getIdentityDidEncryption } from '../../utilities/identities/identities';
-import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
+import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import {
   PasswordField,
   usePasswordField,
@@ -22,9 +23,10 @@ interface Props {
 export function SignDid({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
+  const { path } = useRouteMatch();
   const { origin, plaintext } = usePopupData<SignDidPopupInput>();
 
-  const plaintextRef = useRef<HTMLInputElement>(null);
+  const plaintextRef = useRef<HTMLTextAreaElement>(null);
   const copy = useCopyButton(plaintextRef);
 
   const passwordField = usePasswordField();
@@ -55,7 +57,7 @@ export function SignDid({ identity }: Props): JSX.Element | null {
       <h1 className={styles.heading}>{t('view_SignDid_title')}</h1>
       <p className={styles.subline}>{t('view_SignDid_subline')}</p>
 
-      <IdentitySlide identity={identity} />
+      <IdentitiesCarousel path={path} identity={identity} />
 
       <p className={styles.label}>{t('view_SignDid_origin')}</p>
       <p className={styles.origin}>{origin}</p>
@@ -69,6 +71,7 @@ export function SignDid({ identity }: Props): JSX.Element | null {
           readOnly
           aria-labelledby="plaintext"
           value={plaintext}
+          ref={plaintextRef}
         />
         {copy.supported && (
           <button
