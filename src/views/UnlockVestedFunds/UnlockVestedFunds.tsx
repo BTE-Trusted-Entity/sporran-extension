@@ -80,7 +80,7 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
       <h1 className={styles.heading}>{t('view_UnlockVestedFunds_heading')}</h1>
       <p className={styles.subline}>{t('view_UnlockVestedFunds_subline')}</p>
 
-      <Avatar address={identity.address} className={styles.avatar} />
+      <Avatar identity={identity} className={styles.avatar} />
       <p className={styles.name}>{identity.name}</p>
 
       <p className={styles.explanation}>

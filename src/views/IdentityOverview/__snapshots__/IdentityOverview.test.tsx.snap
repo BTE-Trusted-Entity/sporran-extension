@@ -205,7 +205,7 @@ exports[`IdentityOverview should render full DID identity 1`] = `
     >
       <section>
         <div
-          class="fullDid"
+          class="avatar fullDid"
         >
           Identicon
         </div>

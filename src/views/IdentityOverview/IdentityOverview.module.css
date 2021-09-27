@@ -68,5 +68,7 @@
   align-self: center;
   margin-left: 0.5rem;
   margin-right: 1.5rem;
-  background: rgba(255, 101, 0, 0.6);
+
+  /* --color-orange */
+  background: rgba(255, 101, 0, 0.6) no-repeat;
 }

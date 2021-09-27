@@ -148,7 +148,7 @@ export function SignQuote(): JSX.Element | null {
       </label>
 
       <div className={styles.identity}>
-        <Avatar address={firstIdentity.address} className={styles.avatar} />
+        <Avatar identity={firstIdentity} className={styles.avatar} />
         <span className={styles.identityName}>{firstIdentity.name}</span>
       </div>
 

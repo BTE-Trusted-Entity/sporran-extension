@@ -27,7 +27,7 @@ export function IdentitySuccessOverlay({
 
   return (
     <Modal open className={styles.overlay}>
-      <Avatar address={identity.address} />
+      <Avatar identity={identity} />
       <h1 className={styles.heading}>
         {t('component_IdentitySuccessOverlay_heading')}
       </h1>

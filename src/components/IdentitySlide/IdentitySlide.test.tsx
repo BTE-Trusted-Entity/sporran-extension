@@ -8,7 +8,6 @@ import {
   waitForElementToBeRemoved,
 } from '../../testing/testing';
 import { saveIdentity } from '../../utilities/identities/identities';
-import { mockIsFullDid } from '../../utilities/did/did.mock';
 
 import { IdentitySlide } from './IdentitySlide';
 import { IdentitySlideNew } from './IdentitySlideNew';
@@ -17,8 +16,6 @@ jest.mock('../../utilities/identities/identities');
 jest.spyOn(browser.runtime, 'sendMessage');
 
 const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
-const fullDidIdentity =
-  identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 describe('IdentitySlide', () => {
   it('should render', async () => {
@@ -46,12 +43,6 @@ describe('IdentitySlide', () => {
     });
 
     await waitForElementToBeRemoved(saveButton);
-  });
-
-  it('should render full DID avatar style', async () => {
-    mockIsFullDid(true);
-    const { container } = render(<IdentitySlide identity={fullDidIdentity} />);
-    expect(container).toMatchSnapshot();
   });
 });
 
