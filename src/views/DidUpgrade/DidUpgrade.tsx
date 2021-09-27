@@ -54,7 +54,7 @@ function useCosts(address: string): {
   );
 
   const balance = useAddressBalance(address);
-  const error = Boolean(total && balance && balance.transferable.lte(total));
+  const error = Boolean(total && balance && balance.transferable.lt(total));
 
   return { fee, deposit, total, error };
 }
