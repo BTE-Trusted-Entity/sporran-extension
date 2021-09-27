@@ -26,7 +26,7 @@ export async function getDeposit(): Promise<BN> {
   return blockchain.api.consts.balances.existentialDeposit;
 }
 
-export async function getSignedTransaction(
+async function getSignedTransaction(
   identity: KeyringPair,
 ): Promise<DidTransaction> {
   const keystore = getKeystoreFromKeypair(identity);
