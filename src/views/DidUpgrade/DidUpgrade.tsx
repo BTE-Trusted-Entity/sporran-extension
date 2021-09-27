@@ -107,6 +107,12 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
     return null; // blockchain data pending
   }
 
+  const messages = {
+    pending: t('component_DidUpgradeModal_pending'),
+    success: t('component_DidUpgradeModal_success'),
+    error: t('component_DidUpgradeModal_error'),
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -158,6 +164,7 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
           status={status}
           txHash={txHash}
           onDismissError={closeModal}
+          messages={messages}
         />
       )}
 
