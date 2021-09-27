@@ -139,8 +139,10 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
       )}
 
       {!isFullDid(identity.did) ? (
-        // TODO: link to DID explainer
-        <Link to={'#'} className={styles.upgrade}>
+        <Link
+          to={generatePath(paths.identity.did.start, { address })}
+          className={styles.upgrade}
+        >
           <Avatar identity={identity} className={styles.avatarSmall} />
           {t('view_IdentityOverview_upgrade')}
         </Link>
