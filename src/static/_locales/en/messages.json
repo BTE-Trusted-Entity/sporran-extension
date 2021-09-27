@@ -390,6 +390,12 @@
   "view_IdentityOverview_subscan": {
     "message": "View Transactions"
   },
+  "view_IdentityOverview_upgrade": {
+    "message": "Upgrade to on-chain DID"
+  },
+  "view_IdentityOverview_on_chain": {
+    "message": "On-chain DID"
+  },
   "view_RemoveIdentity_heading": {
     "message": "Attention!"
   },

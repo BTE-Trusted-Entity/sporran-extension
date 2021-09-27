@@ -1,6 +1,7 @@
 declare namespace AvatarModuleCssNamespace {
   export interface IAvatarModuleCss {
     avatar: string;
+    fullDid: string;
     identicon: string;
   }
 }

@@ -15,6 +15,10 @@ export default {
 const uri = '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
+const fullDidUri = '/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr';
+const fullDidIdentity =
+  identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
+
 export function Template(): JSX.Element {
   return (
     <MemoryRouter initialEntries={[uri]}>
@@ -75,6 +79,16 @@ export function ResetSuccess(): JSX.Element {
     >
       <Route path={paths.identity.overview}>
         <IdentityOverview identity={identity} />
+      </Route>
+    </MemoryRouter>
+  );
+}
+
+export function withFullDid(): JSX.Element {
+  return (
+    <MemoryRouter initialEntries={[fullDidUri]}>
+      <Route path={paths.identity.overview}>
+        <IdentityOverview identity={fullDidIdentity} />
       </Route>
     </MemoryRouter>
   );

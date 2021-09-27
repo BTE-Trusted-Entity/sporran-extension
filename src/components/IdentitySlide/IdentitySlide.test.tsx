@@ -2,6 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { browser } from 'webextension-polyfill-ts';
 
 import {
+  identitiesMock as identities,
   render,
   screen,
   waitForElementToBeRemoved,
@@ -14,12 +15,7 @@ import { IdentitySlideNew } from './IdentitySlideNew';
 jest.mock('../../utilities/identities/identities');
 jest.spyOn(browser.runtime, 'sendMessage');
 
-const identity = {
-  name: 'KILT Identity 1',
-  address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-  did: 'did:kilt:light:004rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-  index: 1,
-};
+const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 describe('IdentitySlide', () => {
   it('should render', async () => {

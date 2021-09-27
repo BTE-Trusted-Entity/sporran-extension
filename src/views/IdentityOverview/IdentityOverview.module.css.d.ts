@@ -1,12 +1,15 @@
 declare namespace IdentityOverviewModuleCssNamespace {
   export interface IIdentityOverviewModuleCss {
     add: string;
+    avatarSmall: string;
     button: string;
+    buttonWide: string;
     container: string;
     credentials: string;
     heading: string;
     info: string;
     subscan: string;
+    upgrade: string;
   }
 }
 

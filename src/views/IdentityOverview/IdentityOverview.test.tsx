@@ -17,12 +17,16 @@ import { InternalConfigurationContext } from '../../configuration/InternalConfig
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { credentialsMock } from '../../utilities/credentials/credentials.mock';
+import { mockIsFullDid } from '../../utilities/did/did.mock';
 
 jest.mock('../../utilities/credentials/credentials');
 jest.mock('../../utilities/useSubscanHost/useSubscanHost');
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+
+const fullDidIdentity =
+  identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 describe('IdentityOverview', () => {
   it('should render a normal identity', async () => {
@@ -100,5 +104,18 @@ describe('IdentityOverview', () => {
     expect(
       await screen.findByRole('link', { name: 'Show Credentials' }),
     ).toBeInTheDocument();
+  });
+
+  it('should render full DID identity', async () => {
+    mockIsFullDid(true);
+
+    const { container } = render(
+      <MemoryRouter initialEntries={[`/identity/${fullDidIdentity.address}/`]}>
+        <Route path={paths.identity.overview}>
+          <IdentityOverview identity={fullDidIdentity} />
+        </Route>
+      </MemoryRouter>,
+    );
+    expect(container).toMatchSnapshot();
   });
 });

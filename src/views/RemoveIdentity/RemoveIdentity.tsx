@@ -47,7 +47,7 @@ export function RemoveIdentity({ identity }: Props): JSX.Element {
       <h1 className={styles.heading}>{t('view_RemoveIdentity_heading')}</h1>
       <p className={styles.subline}>{t('view_RemoveIdentity_subline')}</p>
 
-      <Avatar address={identity.address} />
+      <Avatar identity={identity} />
       <p className={styles.name}>{identity.name}</p>
 
       <Balance address={identity.address} />

@@ -41,7 +41,7 @@ export function TxStatusModal({
   const modals = {
     pending: (
       <Modal open className={styles.overlay}>
-        <Avatar address={identity.address} className={styles.transparent} />
+        <Avatar identity={identity} className={styles.transparent} />
         <h1 className={styles.heading}>
           {t('component_TxStatusModal_pending')}
         </h1>
@@ -59,7 +59,7 @@ export function TxStatusModal({
     success: (
       <Modal open className={styles.overlay}>
         <div className={styles.success}>
-          <Avatar address={identity.address} className={styles.transparent} />
+          <Avatar identity={identity} className={styles.transparent} />
         </div>
         <h1 className={styles.heading}>
           {t('component_TxStatusModal_success')}
@@ -78,7 +78,7 @@ export function TxStatusModal({
     error: (
       <Modal open className={styles.overlay}>
         <div className={styles.error}>
-          <Avatar address={identity.address} className={styles.transparent} />
+          <Avatar identity={identity} className={styles.transparent} />
         </div>
         <h1 className={styles.heading}>{t('component_TxStatusModal_error')}</h1>
         <button className={styles.confirm} onClick={onDismissError}>
