@@ -745,6 +745,15 @@
       }
     }
   },
+  "component_DidUpgradeModal_pending": {
+    "message": "Upgrade to on-chain is being processed"
+  },
+  "component_DidUpgradeModal_success": {
+    "message": "Upgrade to on-chain was successful"
+  },
+  "component_DidUpgradeModal_error": {
+    "message": "Upgrade to on-chain failed"
+  },
   "view_SignDid_title": {
     "message": "Sign with on-chain DID"
   },

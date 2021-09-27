@@ -158,6 +158,11 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
           status={status}
           txHash={txHash}
           onDismissError={closeModal}
+          messages={{
+            pending: t('component_DidUpgradeModal_pending'),
+            success: t('component_DidUpgradeModal_success'),
+            error: t('component_DidUpgradeModal_error'),
+          }}
         />
       )}
 

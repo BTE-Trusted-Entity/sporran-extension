@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Modal } from 'react-dialog-polyfill';
 import { Link } from 'react-router-dom';
@@ -10,18 +11,33 @@ import { Avatar } from '../Avatar/Avatar';
 
 import styles from './TxStatusModal.module.css';
 
+interface Messages {
+  pending: ReactNode;
+  success: ReactNode;
+  error: ReactNode;
+}
+
 interface Props {
   identity: Identity;
   status: 'pending' | 'success' | 'error';
   txHash?: string;
   onDismissError: () => void;
+  messages?: Messages;
 }
+
+const t = browser.i18n.getMessage;
+const defaultMessages: Messages = {
+  pending: t('component_TxStatusModal_pending'),
+  success: t('component_TxStatusModal_success'),
+  error: t('component_TxStatusModal_error'),
+};
 
 export function TxStatusModal({
   identity,
   status,
   txHash,
   onDismissError,
+  messages = defaultMessages,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const { features } = useConfiguration();
@@ -42,9 +58,7 @@ export function TxStatusModal({
     pending: (
       <Modal open className={styles.overlay}>
         <Avatar identity={identity} className={styles.transparent} />
-        <h1 className={styles.heading}>
-          {t('component_TxStatusModal_pending')}
-        </h1>
+        <h1 className={styles.heading}>{messages[status]}</h1>
         <Link
           className={styles.confirm}
           to={generatePath(paths.identity.overview, {
@@ -61,9 +75,7 @@ export function TxStatusModal({
         <div className={styles.success}>
           <Avatar identity={identity} className={styles.transparent} />
         </div>
-        <h1 className={styles.heading}>
-          {t('component_TxStatusModal_success')}
-        </h1>
+        <h1 className={styles.heading}>{messages[status]}</h1>
         <Link
           className={styles.confirm}
           to={generatePath(paths.identity.overview, {
@@ -80,7 +92,7 @@ export function TxStatusModal({
         <div className={styles.error}>
           <Avatar identity={identity} className={styles.transparent} />
         </div>
-        <h1 className={styles.heading}>{t('component_TxStatusModal_error')}</h1>
+        <h1 className={styles.heading}>{messages[status]}</h1>
         <button className={styles.confirm} onClick={onDismissError}>
           {t('common_action_confirm')}
         </button>
