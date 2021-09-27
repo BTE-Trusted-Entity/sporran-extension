@@ -1,6 +1,5 @@
 import { useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { useRouteMatch } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
@@ -23,7 +22,6 @@ interface Props {
 export function SignDid({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { path } = useRouteMatch();
   const { origin, plaintext } = usePopupData<SignDidPopupInput>();
 
   const plaintextRef = useRef<HTMLTextAreaElement>(null);
