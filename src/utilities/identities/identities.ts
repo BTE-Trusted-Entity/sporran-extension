@@ -17,7 +17,12 @@ import {
   NaclBoxCapable,
 } from '@kiltprotocol/types';
 import Message from '@kiltprotocol/messaging';
-import { DefaultResolver, LightDidDetails } from '@kiltprotocol/did';
+import {
+  DefaultResolver,
+  LightDidDetails,
+  DidUtils,
+  DidChain,
+} from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 import { map, max } from 'lodash-es';
 
@@ -241,7 +246,12 @@ export async function createIdentity(
   const address = await encryptIdentity(backupPhrase, password);
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
-  const { did } = lightDidFromKeypair(identityKeypair);
+  const { did: lightDid } = lightDidFromKeypair(identityKeypair);
+
+  const fullDid = DidUtils.getKiltDidFromIdentifier(address, 'full');
+  const onChain = Boolean(await DidChain.queryByDID(fullDid));
+
+  const did = onChain ? fullDid : lightDid;
 
   const identities = await getIdentities();
   const largestIndex = max(map(identities, 'index')) || 0;
