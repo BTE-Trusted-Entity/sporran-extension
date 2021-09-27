@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useRouteMatch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { plural } from '../../utilities/plural/plural';
 import { NEW, useIdentities } from '../../utilities/identities/identities';
@@ -12,7 +12,6 @@ import styles from './IdentityOverview.module.css';
 
 export function IdentityOverviewNew(): JSX.Element | null {
   const t = browser.i18n.getMessage;
-  const { path } = useRouteMatch();
 
   const identities = useIdentities().data;
   if (!identities) {
@@ -33,7 +32,7 @@ export function IdentityOverviewNew(): JSX.Element | null {
         </p>
       </header>
 
-      <IdentitiesCarousel path={path} identity={NEW} />
+      <IdentitiesCarousel identity={NEW} />
 
       <Link to={paths.identity.add} className={styles.add}>
         {t('view_IdentityOverview_add')}

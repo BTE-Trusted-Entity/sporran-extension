@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useParams, useRouteMatch, Redirect } from 'react-router-dom';
+import { Link, useParams, Redirect } from 'react-router-dom';
 
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Balance } from '../../components/Balance/Balance';
@@ -30,7 +30,6 @@ interface Props {
 
 export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
-  const { path } = useRouteMatch();
   const params = useParams() as { type?: 'created' | 'imported' | 'pwreset' };
 
   const { features } = useConfiguration();
@@ -88,7 +87,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </p>
       </header>
 
-      <IdentitiesCarousel path={path} identity={identity} />
+      <IdentitiesCarousel identity={identity} />
 
       <Balance address={address} breakdown smallDecimals />
 

@@ -1,10 +1,18 @@
 import { useEffect } from 'react';
-import { Redirect, Route, Switch, useParams } from 'react-router-dom';
+import {
+  Redirect,
+  Route,
+  Switch,
+  useHistory,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 
 import {
   IdentitiesMap,
   NEW,
   setCurrentIdentity,
+  useCurrentIdentity,
   useIdentities,
 } from '../../utilities/identities/identities';
 import { useConfiguration } from '../../configuration/useConfiguration';
@@ -19,13 +27,36 @@ import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
 import { IdentityCredentials } from '../IdentityCredentials/IdentityCredentials';
 import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
+import { SignDid } from '../SignDid/SignDid';
 import { paths } from '../paths';
 
 interface Props {
   identities: IdentitiesMap;
 }
 
-export function SpecificIdentityRouter({ identities }: Props): JSX.Element {
+function useRedirectToCurrent() {
+  const { address } = useParams() as { address: string };
+  const noAddressProvided = address === ':address';
+
+  const history = useHistory();
+  const { data: current } = useCurrentIdentity();
+
+  const location = useLocation();
+  const pathname = location.pathname.replace(address, current || '');
+  const url = `${pathname}${location.search}`;
+
+  useEffect(() => {
+    if (noAddressProvided && current) {
+      history.replace(url);
+    }
+  }, [noAddressProvided, current, address, history, url]);
+
+  return noAddressProvided;
+}
+
+export function SpecificIdentityRouter({
+  identities,
+}: Props): JSX.Element | null {
   const { features } = useConfiguration();
   const { address } = useParams() as { address: string };
 
@@ -34,6 +65,11 @@ export function SpecificIdentityRouter({ identities }: Props): JSX.Element {
       setCurrentIdentity(address);
     }
   }, [address, identities]);
+
+  const redirectIsPending = useRedirectToCurrent();
+  if (redirectIsPending) {
+    return null; // redirect pending
+  }
 
   const isNew = address === NEW.address;
   const identity = isNew ? NEW : identities[address];
@@ -67,6 +103,12 @@ export function SpecificIdentityRouter({ identities }: Props): JSX.Element {
         <Route path={paths.identity.vest}>
           <UnlockVestedFunds identity={identity} />
         </Route>
+
+        {features.fullDid && (
+          <Route path={paths.popup.signDid}>
+            <SignDid identity={identity} />
+          </Route>
+        )}
 
         {features.fullDid && (
           <Route path={paths.identity.did.start}>

@@ -45,5 +45,6 @@ export const paths = {
     save: '/popup/save',
     share: '/popup/share',
     sign: '/popup/sign',
+    signDid: '/identity/:address/did/sign',
   },
 };

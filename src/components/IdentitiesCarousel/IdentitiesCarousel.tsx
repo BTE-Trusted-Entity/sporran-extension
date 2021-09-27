@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { sortBy } from 'lodash-es';
 
@@ -15,19 +15,19 @@ import { generatePath } from '../../views/paths';
 import styles from './IdentitiesCarousel.module.css';
 
 interface IdentityLinkProps {
-  path: string;
   identity: Identity;
   identities: Identity[];
   direction: 'previous' | 'next';
 }
 
 function IdentityLink({
-  path,
   identity,
   identities,
   direction,
 }: IdentityLinkProps): JSX.Element {
   const t = browser.i18n.getMessage;
+  const { path } = useRouteMatch();
+  const { search } = useLocation();
 
   const { length } = identities;
 
@@ -49,7 +49,7 @@ function IdentityLink({
 
   return (
     <Link
-      to={generatePath(path, { address: linkedIdentity.address })}
+      to={generatePath(`${path}${search}`, { address: linkedIdentity.address })}
       title={title}
       aria-label={title}
       className={isPrevious ? styles.left : styles.right}
@@ -62,14 +62,14 @@ const maxIdentityBubbles = 5;
 
 interface IdentitiesBubblesProps {
   identities: Identity[];
-  path: string;
 }
 
 export function IdentitiesBubbles({
   identities,
-  path,
 }: IdentitiesBubblesProps): JSX.Element | null {
   const t = browser.i18n.getMessage;
+  const { path } = useRouteMatch();
+  const { search } = useLocation();
 
   if (identities.length > maxIdentityBubbles) {
     return null; // hide the component when too many identities
@@ -82,7 +82,7 @@ export function IdentitiesBubbles({
           <NavLink
             className={styles.bubble}
             activeClassName={styles.bubbleActive}
-            to={generatePath(path, { address: address })}
+            to={generatePath(`${path}${search}`, { address: address })}
             aria-label={name}
             title={name}
           />
@@ -102,14 +102,12 @@ export function IdentitiesBubbles({
 }
 
 interface Props {
-  path: string;
   identity: Identity;
   options?: boolean;
 }
 
 export function IdentitiesCarousel({
   identity,
-  path,
   options,
 }: Props): JSX.Element | null {
   const identities = useIdentities().data;
@@ -129,19 +127,17 @@ export function IdentitiesCarousel({
 
       <IdentityLink
         direction="previous"
-        path={path}
         identity={identity}
         identities={identitiesList}
       />
 
       <IdentityLink
         direction="next"
-        path={path}
         identity={identity}
         identities={identitiesList}
       />
 
-      <IdentitiesBubbles identities={identitiesList} path={path} />
+      <IdentitiesBubbles identities={identitiesList} />
     </div>
   );
 }

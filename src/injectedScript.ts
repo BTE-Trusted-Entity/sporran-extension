@@ -7,6 +7,7 @@ import {
 } from './dApps/injectIntoDApp/injectIntoDApp';
 import { configuration } from './configuration/configuration';
 import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
+import { injectedSignDidChannel } from './channels/SignDidChannels/injectedSignDidChannel';
 
 interface PubSubSession {
   listen: (
@@ -28,6 +29,9 @@ interface InjectedWindowProvider {
   name: string;
   version: string;
   specVersion: '0.1';
+  signWithDid: (
+    plaintext: string,
+  ) => Promise<{ signature: string; did: string }>;
 }
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
@@ -90,31 +94,42 @@ async function startSession(
   };
 }
 
+async function signWithDid(plaintext: string): Promise<{
+  signature: string;
+  did: string;
+}> {
+  return injectedSignDidChannel.get({ plaintext });
+}
+
 function main() {
   const { version } = configuration;
 
   injectIntoDApp(version);
 
   const apiWindow = window as unknown as {
-    kilt: { sporran?: InjectedWindowProvider };
+    kilt: { sporran?: Partial<InjectedWindowProvider> };
   };
 
-  if (
-    !configuration.features.credentials ||
-    !apiWindow.kilt ||
-    apiWindow.kilt.sporran
-  ) {
+  if (!apiWindow.kilt || apiWindow.kilt.sporran) {
     return;
   }
 
   // Only injected scripts can create variables like this, content script cannot do this
   apiWindow.kilt ||= {};
-  apiWindow.kilt.sporran = {
-    startSession,
-    name: 'Sporran', // manifest_name
-    version,
-    specVersion: '0.1',
-  };
+  apiWindow.kilt.sporran ||= {};
+
+  if (configuration.features.fullDid) {
+    Object.assign(apiWindow.kilt.sporran, { signWithDid });
+  }
+
+  if (configuration.features.credentials) {
+    Object.assign(apiWindow.kilt.sporran, {
+      startSession,
+      name: 'Sporran', // manifest_name
+      version,
+      specVersion: '0.1',
+    });
+  }
 }
 
 main();
