@@ -5,7 +5,6 @@ import {
   moreIdentitiesMock,
   IdentitiesProviderMock,
 } from '../../utilities/identities/IdentitiesProvider.mock';
-import { paths } from '../../views/paths';
 import { IdentitiesCarousel } from './IdentitiesCarousel';
 
 export default {
@@ -17,7 +16,6 @@ export default {
 export function Template(): JSX.Element {
   return (
     <IdentitiesCarousel
-      path={paths.identity.overview}
       identity={
         identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
       }
@@ -29,7 +27,6 @@ export function NoBubbles(): JSX.Element {
   return (
     <IdentitiesProviderMock identities={moreIdentitiesMock}>
       <IdentitiesCarousel
-        path={paths.identity.overview}
         identity={
           moreIdentitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
         }

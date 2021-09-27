@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
-import { useRouteMatch } from 'react-router-dom';
 import { find } from 'lodash-es';
 import { DataUtils } from '@kiltprotocol/utils';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
@@ -189,7 +188,6 @@ interface Props {
 
 export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const { path } = useRouteMatch();
 
   useEffect(() => {
     (async () => {
@@ -376,7 +374,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       <h1 className={styles.heading}>{t('view_SendToken_heading')}</h1>
       <p className={styles.subline}>{t('view_SendToken_subline')}</p>
 
-      <IdentitiesCarousel path={path} identity={identity} options={false} />
+      <IdentitiesCarousel identity={identity} options={false} />
       <Balance address={identity.address} smallDecimals />
 
       <small className={styles.maximum}>

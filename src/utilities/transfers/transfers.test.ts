@@ -69,7 +69,7 @@ describe('transfers', () => {
         { transaction: true },
         expect.anything(),
       );
-      expect(txHash).toEqual({ hash: 'Signed tx hash' });
+      expect(txHash).toEqual('Signed tx hash');
     });
   });
 

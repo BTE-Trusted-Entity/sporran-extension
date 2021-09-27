@@ -32,6 +32,11 @@ export const paths = {
     credentials: '/identity/:address/credentials',
     remove: '/identity/:address/remove',
     vest: '/identity/:address/vest',
+    did: {
+      start: '/identity/:address/did',
+      upgrade: '/identity/:address/did/upgrade',
+      remove: '/identity/:address/did/remove',
+    },
   },
   popup: {
     base: '/popup',
@@ -40,5 +45,6 @@ export const paths = {
     save: '/popup/save',
     share: '/popup/share',
     sign: '/popup/sign',
+    signDid: '/identity/:address/did/sign',
   },
 };

@@ -715,5 +715,52 @@
   },
   "view_UnlockVestedFunds_CTA": {
     "message": "Update Balance"
+  },
+  "view_DidUpgrade_heading": {
+    "message": "Upgrade to on-chain DID"
+  },
+  "view_DidUpgrade_subline": {
+    "message": "Sign upgrade"
+  },
+  "view_DidUpgrade_total": {
+    "message": "Total cost: "
+  },
+  "view_DidUpgrade_deposit": {
+    "message": " Deposit "
+  },
+  "view_DidUpgrade_fee": {
+    "message": " + fee "
+  },
+  "view_DidUpgrade_info": {
+    "message": "Upgrade information"
+  },
+  "view_DidUpgrade_CTA": {
+    "message": "Sign"
+  },
+  "view_DidUpgrade_insufficientFunds": {
+    "message": "You need at least $cost$ KILTs to upgrade",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_SignDid_title": {
+    "message": "Sign with on-chain DID"
+  },
+  "view_SignDid_subline": {
+    "message": "Select your Identity and sign with your password"
+  },
+  "view_SignDid_origin": {
+    "message": "Request from:"
+  },
+  "view_SignDid_plaintext": {
+    "message": "Message to be signed:"
+  },
+  "view_SignDid_reject": {
+    "message": "Reject"
+  },
+  "view_SignDid_CTA": {
+    "message": "Sign"
   }
 }

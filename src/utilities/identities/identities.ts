@@ -16,7 +16,8 @@ import {
   NaclBoxCapable,
 } from '@kiltprotocol/types';
 import Message from '@kiltprotocol/messaging';
-import { LightDidDetails } from '@kiltprotocol/did';
+import { DefaultResolver, LightDidDetails } from '@kiltprotocol/did';
+import { Crypto } from '@kiltprotocol/utils';
 import { map, max } from 'lodash-es';
 
 import {
@@ -114,21 +115,17 @@ export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
   return makeKeyring().addFromUri(backupPhrase);
 }
 
-interface IdentityDidEncryption {
+interface IdentityDidCrypto {
   didDetails: IDidDetails;
   keystore: KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'>;
+  sign: (plaintext: string) => string;
   encrypt: (
     messageBody: MessageBody,
     dAppDidDetails: IDidDetails,
   ) => Promise<IEncryptedMessage>;
 }
 
-export async function getIdentityDidEncryption(
-  address: string,
-  password: string,
-): Promise<IdentityDidEncryption> {
-  const identityKeypair = await decryptIdentity(address, password);
-
+function deriveDidKeys(identityKeypair: KeyringPair) {
   const authenticationKey = identityKeypair.derive('//did//0');
   const encryptionKeypair = naclBoxKeypairFromSecret(
     identityKeypair
@@ -141,8 +138,21 @@ export async function getIdentityDidEncryption(
       .slice(24), // first 24 bytes are the nonce
   );
   const encryptionKey = { ...encryptionKeypair, type: 'x25519' };
+  return { authenticationKey, encryptionKey };
+}
 
-  const didDetails = new LightDidDetails({ authenticationKey, encryptionKey });
+export async function getIdentityCryptoFromKeypair(
+  identityKeypair: KeyringPair,
+): Promise<IdentityDidCrypto> {
+  const { authenticationKey, encryptionKey } = deriveDidKeys(identityKeypair);
+
+  const identities = await getIdentities();
+  const { did } = identities[identityKeypair.address];
+
+  const didDetails = (await DefaultResolver.resolveDoc(did)) as IDidDetails;
+  if (!didDetails) {
+    throw new Error(`Cannot resolve the DID ${did}`);
+  }
 
   const keystore: KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'> = {
     sign: async ({ data, alg }) => ({
@@ -164,6 +174,10 @@ export async function getIdentityDidEncryption(
     },
   };
 
+  function sign(plaintext: string) {
+    return Crypto.u8aToHex(authenticationKey.sign(plaintext));
+  }
+
   async function encrypt(
     messageBody: MessageBody,
     dAppDidDetails: IDidDetails,
@@ -183,8 +197,17 @@ export async function getIdentityDidEncryption(
   return {
     didDetails,
     keystore,
+    sign,
     encrypt,
   };
+}
+
+export async function getIdentityDidEncryption(
+  address: string,
+  password: string,
+): Promise<IdentityDidCrypto> {
+  const identityKeypair = await decryptIdentity(address, password);
+  return getIdentityCryptoFromKeypair(identityKeypair);
 }
 
 export async function encryptIdentity(
@@ -203,8 +226,8 @@ export async function createIdentity(
 ): Promise<Identity> {
   const address = await encryptIdentity(backupPhrase, password);
 
-  const { did } = (await getIdentityDidEncryption(address, password))
-    .didDetails;
+  const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
+  const { did } = new LightDidDetails(deriveDidKeys(identityKeypair));
 
   const identities = await getIdentities();
   const largestIndex = max(map(identities, 'index')) || 0;
