@@ -28,10 +28,12 @@ export function App(): JSX.Element {
       <GenericError>
         <MemoryRouter initialEntries={initialEntries}>
           <RouteExcept path={paths.popup.base}>
-            <nav className={styles.menus}>
-              <AddIdentity />
-              <Settings />
-            </nav>
+            <RouteExcept path={paths.popup.signDid}>
+              <nav className={styles.menus}>
+                <AddIdentity />
+                <Settings />
+              </nav>
+            </RouteExcept>
           </RouteExcept>
 
           <Switch>

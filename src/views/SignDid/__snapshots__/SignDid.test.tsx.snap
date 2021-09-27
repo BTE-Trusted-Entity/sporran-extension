@@ -15,36 +15,100 @@ exports[`SignDid should render 1`] = `
     >
       Select your Identity and sign with your password
     </p>
-    <section>
-      <div
-        class="avatar"
-      >
-        Identicon
-      </div>
-      <div
-        class="nameLine"
-      >
-        <span
-          class="name"
-        >
-          KILT Identity 1
-        </span>
+    <div
+      class="container"
+    >
+      <section>
         <div
-          class="wrapper"
+          class="avatar"
         >
-          <button
-            aria-expanded="false"
-            aria-haspopup="true"
-            aria-label="Identity options"
-            class="toggle"
-            role="button"
-            tabindex="0"
-            title="Identity options"
-            type="button"
-          />
+          Identicon
         </div>
-      </div>
-    </section>
+        <div
+          class="nameLine"
+        >
+          <span
+            class="name"
+          >
+            KILT Identity 1
+          </span>
+          <div
+            class="wrapper"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="Identity options"
+              class="toggle"
+              role="button"
+              tabindex="0"
+              title="Identity options"
+              type="button"
+            />
+          </div>
+        </div>
+      </section>
+      <a
+        aria-label="Add Identity"
+        class="left"
+        href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+        title="Add Identity"
+      />
+      <a
+        aria-label="KILT Identity 2"
+        class="right"
+        href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+        title="KILT Identity 2"
+      />
+      <ul
+        class="bubbles"
+      >
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="KILT Identity 1"
+            class="bubble bubbleActive"
+            href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            title="KILT Identity 1"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="KILT Identity 2"
+            class="bubble bubbleActive"
+            href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            title="KILT Identity 2"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            class="bubble bubbleActive"
+            href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Add Identity"
+            class="add addActive"
+            href="/"
+            title="Add Identity"
+          />
+        </li>
+      </ul>
+    </div>
     <p
       class="label"
     >

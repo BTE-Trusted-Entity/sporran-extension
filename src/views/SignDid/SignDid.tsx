@@ -57,7 +57,7 @@ export function SignDid({ identity }: Props): JSX.Element | null {
       <h1 className={styles.heading}>{t('view_SignDid_title')}</h1>
       <p className={styles.subline}>{t('view_SignDid_subline')}</p>
 
-      <IdentitiesCarousel path={path} identity={identity} />
+      <IdentitiesCarousel identity={identity} />
 
       <p className={styles.label}>{t('view_SignDid_origin')}</p>
       <p className={styles.origin}>{origin}</p>

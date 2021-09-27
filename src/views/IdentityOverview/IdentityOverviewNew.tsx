@@ -33,7 +33,7 @@ export function IdentityOverviewNew(): JSX.Element | null {
         </p>
       </header>
 
-      <IdentitiesCarousel path={path} identity={NEW} />
+      <IdentitiesCarousel identity={NEW} />
 
       <Link to={paths.identity.add} className={styles.add}>
         {t('view_IdentityOverview_add')}

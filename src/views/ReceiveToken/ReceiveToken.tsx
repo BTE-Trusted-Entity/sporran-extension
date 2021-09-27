@@ -45,7 +45,7 @@ export function ReceiveToken({ identity }: Props): JSX.Element {
       <h1 className={styles.heading}>{t('view_ReceiveToken_heading')}</h1>
       <p className={styles.subline}>{t('view_ReceiveToken_explanation')}</p>
 
-      <IdentitiesCarousel path={path} identity={identity} options={false} />
+      <IdentitiesCarousel identity={identity} options={false} />
 
       <small id="addressLabel" className={styles.small}>
         {t('view_ReceiveToken_identity_address')}
