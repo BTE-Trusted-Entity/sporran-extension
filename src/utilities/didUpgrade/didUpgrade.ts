@@ -9,7 +9,7 @@ import { DidUtils } from '@kiltprotocol/did';
 
 import {
   decryptIdentity,
-  getIdentityDidEncryptionFromKeypair,
+  getIdentityCryptoFromKeypair,
   Identity,
   makeKeyring,
 } from '../identities/identities';
@@ -23,9 +23,7 @@ export async function getDeposit(): Promise<BN> {
 async function getSignedTransaction(
   identity: KeyringPair,
 ): Promise<SubmittableExtrinsic> {
-  const { didDetails, keystore } = await getIdentityDidEncryptionFromKeypair(
-    identity,
-  );
+  const { didDetails, keystore } = await getIdentityCryptoFromKeypair(identity);
 
   // TODO: const tx = await DidUtils.upgradeDid(didDetails, keystore);
   const tx = await (

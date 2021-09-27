@@ -123,7 +123,7 @@ interface IdentityDidEncryption {
   ) => Promise<IEncryptedMessage>;
 }
 
-export async function getIdentityDidEncryptionFromKeypair(
+export async function getIdentityCryptoFromKeypair(
   identityKeypair: KeyringPair,
 ): Promise<IdentityDidEncryption> {
   const authenticationKey = identityKeypair.derive('//did//0');
@@ -189,7 +189,7 @@ export async function getIdentityDidEncryption(
   password: string,
 ): Promise<IdentityDidEncryption> {
   const identityKeypair = await decryptIdentity(address, password);
-  return getIdentityDidEncryptionFromKeypair(identityKeypair);
+  return getIdentityCryptoFromKeypair(identityKeypair);
 }
 
 export async function encryptIdentity(
