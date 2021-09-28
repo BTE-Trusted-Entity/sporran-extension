@@ -77,6 +77,19 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a
+            href="https://support.kilt.io/"
+            rel="noreferrer"
+            role="menuitem"
+            tabindex="-1"
+            target="_blank"
+          >
+            Tech Support
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
             href="/access"
             role="menuitem"
             tabindex="-1"
@@ -87,10 +100,7 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
         <li
           class="listItem"
         >
-          <a
-            role="menuitem"
-            tabindex="-1"
-          >
+          <a>
             Version 2021.9.8
           </a>
         </li>
@@ -163,6 +173,19 @@ exports[`Settings should render the endpoint item in the internal build 1`] = `
           class="listItem"
         >
           <a
+            href="https://support.kilt.io/"
+            rel="noreferrer"
+            role="menuitem"
+            tabindex="-1"
+            target="_blank"
+          >
+            Tech Support
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
             href="/access"
             role="menuitem"
             tabindex="-1"
@@ -184,10 +207,7 @@ exports[`Settings should render the endpoint item in the internal build 1`] = `
         <li
           class="listItem"
         >
-          <a
-            role="menuitem"
-            tabindex="-1"
-          >
+          <a>
             Version 2021.9.8
           </a>
         </li>
