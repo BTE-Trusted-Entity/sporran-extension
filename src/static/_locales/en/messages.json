@@ -129,6 +129,9 @@
   "component_Settings_terms_and_conditions": {
     "message": "Terms & Conditions"
   },
+  "component_Settings_tech_support": {
+    "message": "Tech Support"
+  },
   "component_Settings_access": {
     "message": "Toggle Website Access"
   },
