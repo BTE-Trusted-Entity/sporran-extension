@@ -20,6 +20,7 @@ import Message from '@kiltprotocol/messaging';
 import { DefaultResolver, LightDidDetails } from '@kiltprotocol/did';
 
 import { makeKeyring } from '../identities/identities';
+import { verifyWellKnownDid } from '../wellKnownDid/wellKnownDid';
 
 interface TabEncryption {
   authenticationKey: KeyringPair;
@@ -65,7 +66,7 @@ export async function getTabEncryption(
   sender: Runtime.MessageSender,
   dAppDid?: IDidDetails['did'],
 ): Promise<TabEncryption> {
-  if (!sender.tab || !sender.tab.id) {
+  if (!sender.tab || !sender.tab.id || !sender.tab.url) {
     throw new Error('Message not from a tab');
   }
 
@@ -109,7 +110,7 @@ export async function getTabEncryption(
     throw new Error('Receiver key agreement key not found');
   }
 
-  // TODO: check the domain’s DID Configuration
+  await verifyWellKnownDid(dAppDidDetails.did, sender.tab.url);
 
   async function decrypt(encrypted: IEncryptedMessage): Promise<IMessage> {
     const senderDetails = dAppDidDetails;
