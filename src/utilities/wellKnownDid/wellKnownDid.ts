@@ -30,12 +30,15 @@ export async function verifyWellKnownDid(
     '@context': string;
     linked_dids: DomainLinkageCredential[];
   };
-  if (
-    didConfigResource.linked_dids.filter(
-      (credential) => credential.credentialSubject.id === did,
-    ).length > 0
-  ) {
-    return;
+  const credential = didConfigResource.linked_dids.find(
+    (credential) =>
+      credential.credentialSubject.id === did &&
+      url.origin === credential.credentialSubject.origin,
+  );
+  if (!credential) {
+    throw new Error(
+      'DID and origin do not match any domain linkage credentials',
+    );
   }
-  throw new Error('DID does not match any domain linkage credentials');
+  return;
 }
