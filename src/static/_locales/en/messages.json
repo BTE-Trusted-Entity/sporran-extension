@@ -748,6 +748,21 @@
       }
     }
   },
+  "view_DidExplainer_heading": {
+    "message": "Decentralized Identifier"
+  },
+  "view_DidExplainer_subline": {
+    "message": "Upgrade to an on-chain DID"
+  },
+  "view_DidExplainer_functionality": {
+    "message": "Upgrading enables you to sign with your on-chain DID and use new functionality."
+  },
+  "view_DidExplainer_deposit": {
+    "message": "To store your DID on the blockchain, a deposit needs to be paid. The deposit will be refunded if you remove your on-chain DID."
+  },
+  "view_DidExplainer_CTA": {
+    "message": "Upgrade"
+  },
   "component_DidUpgradeModal_pending": {
     "message": "Upgrade to on-chain is being processed"
   },
