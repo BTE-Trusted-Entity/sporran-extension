@@ -246,12 +246,14 @@ export async function createIdentity(
   const address = await encryptIdentity(backupPhrase, password);
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
-  const { did: lightDid } = lightDidFromKeypair(identityKeypair);
 
-  const fullDid = DidUtils.getKiltDidFromIdentifier(address, 'full');
+  const lightDidDetails = lightDidFromKeypair(identityKeypair);
+  const keystore = getKeystoreFromKeypair(identityKeypair);
+  const { did: fullDid } = await DidUtils.upgradeDid(lightDidDetails, keystore);
+
   const onChain = Boolean(await DidChain.queryByDID(fullDid));
 
-  const did = onChain ? fullDid : lightDid;
+  const did = onChain ? fullDid : lightDidDetails.did;
 
   const identities = await getIdentities();
   const largestIndex = max(map(identities, 'index')) || 0;
