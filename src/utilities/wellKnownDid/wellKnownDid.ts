@@ -85,9 +85,7 @@ export async function verifyDidConfigResource(
       const { verified } = DidUtils.verifyDidSignature({
         keyId: issuerDidDetails.getKeyIds(KeyRelationship.assertionMethod)[0],
         signature: credential.proof.signature as string,
-        message: new Uint8Array([
-          ...Crypto.coToUInt8(credentialSubject.rootHash),
-        ]),
+        message: Crypto.coToUInt8(credentialSubject.rootHash),
         didDetails: issuerDidDetails,
       });
       if (!verified) {
