@@ -9,6 +9,7 @@ import {
 } from '@polkadot/util-crypto';
 import {
   IDidDetails,
+  IDidResolvedDetails,
   IEncryptedMessage,
   KeyRelationship,
   KeystoreSigner,
@@ -149,7 +150,9 @@ export async function getIdentityCryptoFromKeypair(
   const identities = await getIdentities();
   const { did } = identities[identityKeypair.address];
 
-  const didDetails = (await DefaultResolver.resolveDoc(did)) as IDidDetails;
+  const { details: didDetails } = (await DefaultResolver.resolveDoc(
+    did,
+  )) as IDidResolvedDetails;
   if (!didDetails) {
     throw new Error(`Cannot resolve the DID ${did}`);
   }
