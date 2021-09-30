@@ -1,6 +1,17 @@
 import ky from 'ky';
-import { IDidDetails } from '@kiltprotocol/types';
-import { AnyJson } from '@polkadot/types/types';
+import {
+  IDidDetails,
+  IRequestForAttestation,
+  KeyRelationship,
+} from '@kiltprotocol/types';
+import { DidUtils, DefaultResolver } from '@kiltprotocol/did';
+import { Crypto } from '@kiltprotocol/utils';
+
+interface CredentialSubject {
+  id: IDidDetails['did'];
+  origin: string;
+  rootHash: string;
+}
 
 interface Proof {
   type: string;
@@ -12,14 +23,25 @@ interface Proof {
 interface DomainLinkageCredential {
   '@context': string[];
   type: string[];
-  credentialSubject: Record<string, AnyJson>;
+  credentialSubject: CredentialSubject;
   issuer: string;
   issuanceDate: string;
   expirationDate: string;
-  proof: Proof | Proof[];
+  signedRequest: IRequestForAttestation;
+  proof: Proof;
 }
 
-export async function verifyWellKnownDid(
+async function asyncSome(
+  credentials: DomainLinkageCredential[],
+  verify: (credential: DomainLinkageCredential) => Promise<boolean>,
+) {
+  for (const credential of credentials) {
+    if (await verify(credential)) return true;
+  }
+  return false;
+}
+
+export async function verifyDidConfigResource(
   did: IDidDetails['did'],
   tabUrl: string,
 ): Promise<void> {
@@ -30,15 +52,52 @@ export async function verifyWellKnownDid(
     '@context': string;
     linked_dids: DomainLinkageCredential[];
   };
-  const credential = didConfigResource.linked_dids.find(
-    (credential) =>
-      credential.credentialSubject.id === did &&
-      url.origin === credential.credentialSubject.origin,
+
+  // Verification steps outlined in Well Known DID Configuration
+  // https://identity.foundation/.well-known/resources/did-configuration/#did-configuration-resource-verification
+
+  const verified = await asyncSome(
+    didConfigResource.linked_dids,
+    async (credential) => {
+      const { issuer, credentialSubject } = credential;
+
+      const matchesSessionDid = did === credentialSubject.id;
+      if (!matchesSessionDid) {
+        return false;
+      }
+
+      const isDid = DidUtils.validateKiltDid(credentialSubject.id);
+      const matchesIssuer = issuer === credentialSubject.id;
+      if (!isDid || !matchesIssuer) {
+        return false;
+      }
+
+      const matchesOrigin = url.origin === credentialSubject.origin;
+      if (!credentialSubject.origin || !matchesOrigin) {
+        return false;
+      }
+
+      const issuerDidDetails = await DefaultResolver.resolveDoc(issuer);
+      if (!issuerDidDetails) {
+        return false;
+      }
+
+      const { verified } = DidUtils.verifyDidSignature({
+        keyId: issuerDidDetails.getKeyIds(KeyRelationship.assertionMethod)[0],
+        signature: credential.proof.signature as string,
+        message: new Uint8Array([
+          ...Crypto.coToUInt8(credentialSubject.rootHash),
+        ]),
+        didDetails: issuerDidDetails,
+      });
+      if (!verified) {
+        return false;
+      }
+      return true;
+    },
   );
-  if (!credential) {
-    throw new Error(
-      'DID and origin do not match any domain linkage credentials',
-    );
+  if (!verified) {
+    throw new Error('Verification of DID configuration resource failed');
   }
   return;
 }
