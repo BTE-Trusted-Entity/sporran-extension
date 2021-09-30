@@ -9,8 +9,9 @@ import { DidUtils } from '@kiltprotocol/did';
 
 import {
   decryptIdentity,
-  getIdentityCryptoFromKeypair,
+  getKeystoreFromKeypair,
   Identity,
+  lightDidFromKeypair,
   makeKeyring,
 } from '../identities/identities';
 
@@ -28,17 +29,14 @@ export async function getDeposit(): Promise<BN> {
 async function getSignedTransaction(
   identity: KeyringPair,
 ): Promise<DidTransaction> {
-  const { didDetails, keystore } = await getIdentityCryptoFromKeypair(identity);
+  const keystore = getKeystoreFromKeypair(identity);
 
-  // TODO: const tx = await DidUtils.upgradeDid(didDetails, keystore);
-  const { extrinsic, did } = await (
-    DidUtils as typeof DidUtils & {
-      upgradeDid: (
-        a: typeof didDetails,
-        b: typeof keystore,
-      ) => Promise<DidTransaction>;
-    }
-  ).upgradeDid(didDetails, keystore);
+  const lightDidDetails = lightDidFromKeypair(identity);
+
+  const { extrinsic, did } = await DidUtils.upgradeDid(
+    lightDidDetails,
+    keystore,
+  );
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
   const tx = await blockchain.signTx(identity, extrinsic);
@@ -48,9 +46,6 @@ async function getSignedTransaction(
 export async function getFee(): Promise<BN> {
   const fakeIdentity = makeKeyring().createFromUri('//Alice');
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-
-  // TODO: remove to use real values
-  return blockchain.api.consts.balances.existentialDeposit;
 
   const { extrinsic } = await getSignedTransaction(fakeIdentity);
 
