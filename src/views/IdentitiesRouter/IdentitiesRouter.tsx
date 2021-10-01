@@ -27,7 +27,7 @@ import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
 import { IdentityCredentials } from '../IdentityCredentials/IdentityCredentials';
 import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
-import { DidRemoveFlow } from '../DidRemoveFlow/DidRemoveFlow';
+import { DidDowngradeFlow } from '../DidDowngradeFlow/DidDowngradeFlow';
 import { SignDid } from '../SignDid/SignDid';
 import { paths } from '../paths';
 
@@ -118,8 +118,8 @@ export function SpecificIdentityRouter({
         )}
 
         {features.fullDid && (
-          <Route path={paths.identity.did.remove.start}>
-            <DidRemoveFlow identity={identity} />
+          <Route path={paths.identity.did.downgrade.start}>
+            <DidDowngradeFlow identity={identity} />
           </Route>
         )}
 

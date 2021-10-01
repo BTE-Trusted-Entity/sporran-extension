@@ -37,9 +37,9 @@ export const paths = {
         start: '/identity/:address/did/upgrade',
         sign: '/identity/:address/did/upgrade/sign',
       },
-      remove: {
-        start: '/identity/:address/did/remove',
-        sign: '/identity/:address/did/remove/sign',
+      downgrade: {
+        start: '/identity/:address/did/downgrade',
+        sign: '/identity/:address/did/downgrade/sign',
       },
     },
   },

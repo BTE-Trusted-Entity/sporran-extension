@@ -7,16 +7,16 @@ interface Props {
   identity: Identity;
 }
 
-export function DidRemoveFlow({}: Props): JSX.Element {
+export function DidDowngradeFlow({}: Props): JSX.Element {
   return (
     <Switch>
-      <Route path={paths.identity.did.remove.sign}>
+      <Route path={paths.identity.did.downgrade.sign}>
         {/* TODO: SK-436
-        <DidRemove identity={identity} /> */}
+        <DidDowngrade identity={identity} /> */}
       </Route>
-      <Route path={paths.identity.did.remove.start}>
+      <Route path={paths.identity.did.downgrade.start}>
         {/* TODO: SK-461
-        <DidRemoveExplainer identity={identity} /> */}
+        <DidDowngradeExplainer identity={identity} /> */}
       </Route>
     </Switch>
   );

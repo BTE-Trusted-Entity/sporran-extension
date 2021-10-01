@@ -79,12 +79,12 @@ export function IdentityOptions({ identity, onEdit }: Props): JSX.Element {
             {didUpgraded && (
               <li className={menuStyles.listItem}>
                 <Link
-                  to={generatePath(paths.identity.did.remove.start, {
+                  to={generatePath(paths.identity.did.downgrade.start, {
                     address,
                   })}
                   {...itemProps[3]}
                 >
-                  {t('component_IdentityOptions_did_remove')}
+                  {t('component_IdentityOptions_did_downgrade')}
                 </Link>
               </li>
             )}
