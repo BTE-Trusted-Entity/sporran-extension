@@ -58,7 +58,7 @@ exports[`DidExplainer should render 1`] = `
     <p
       class="deposit"
     >
-      To store your DID on the blockchain, a deposit needs to be made. The deposit will be refunded if you remove your on-chain DID.
+      To store your DID on the blockchain, a deposit needs to be reserved. The deposit will be refunded if you remove your on-chain DID.
     </p>
     <a
       class="upgrade"
