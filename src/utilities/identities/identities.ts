@@ -278,9 +278,9 @@ export async function importIdentity(
   const keystore = getKeystoreFromKeypair(identityKeypair);
   const { did: fullDid } = await DidUtils.upgradeDid(lightDidDetails, keystore);
 
-  const onChain = Boolean(await DidChain.queryByDID(fullDid));
+  const isOnChain = Boolean(await DidChain.queryByDID(fullDid));
 
-  const did = onChain ? fullDid : lightDidDetails.did;
+  const did = isOnChain ? fullDid : lightDidDetails.did;
 
   const { name, index } = await getIdentityName();
 
