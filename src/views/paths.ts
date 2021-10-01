@@ -33,9 +33,14 @@ export const paths = {
     remove: '/identity/:address/remove',
     vest: '/identity/:address/vest',
     did: {
-      start: '/identity/:address/did',
-      upgrade: '/identity/:address/did/upgrade',
-      remove: '/identity/:address/did/remove',
+      upgrade: {
+        start: '/identity/:address/did/upgrade',
+        sign: '/identity/:address/did/upgrade/sign',
+      },
+      remove: {
+        start: '/identity/:address/did/remove',
+        sign: '/identity/:address/did/remove/sign',
+      },
     },
   },
   popup: {

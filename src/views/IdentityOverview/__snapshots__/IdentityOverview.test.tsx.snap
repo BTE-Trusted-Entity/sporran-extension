@@ -150,7 +150,7 @@ exports[`IdentityOverview should render a normal identity 1`] = `
     </p>
     <a
       class="upgrade"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did"
+      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade"
     >
       <div
         class="avatarSmall"
@@ -626,7 +626,7 @@ exports[`IdentityOverview should render upcoming feature modal 1`] = `
     </p>
     <a
       class="upgrade"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did"
+      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade"
     >
       <div
         class="avatarSmall"
@@ -840,7 +840,7 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
     </a>
     <a
       class="upgrade"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did"
+      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade"
     >
       <div
         class="avatarSmall"

@@ -4,11 +4,11 @@ import { Meta } from '@storybook/react';
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { paths } from '../paths';
 
-import { DidExplainer } from './DidExplainer';
+import { DidUpgradeExplainer } from './DidUpgradeExplainer';
 
 export default {
-  title: 'Views/DidExplainer',
-  component: DidExplainer,
+  title: 'Views/DidUpgradeExplainer',
+  component: DidUpgradeExplainer,
 } as Meta;
 
 export function Template(): JSX.Element {
@@ -18,8 +18,8 @@ export function Template(): JSX.Element {
         '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade',
       ]}
     >
-      <Route path={paths.identity.did.start}>
-        <DidExplainer
+      <Route path={paths.identity.did.upgrade.start}>
+        <DidUpgradeExplainer
           identity={
             identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
           }

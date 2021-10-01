@@ -124,7 +124,7 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
       </p>
       <p className={styles.details}>
         <a
-          href={generatePath(paths.identity.did.start, { address })}
+          href={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.info}
           aria-label={t('view_DidUpgrade_info')}
         />
