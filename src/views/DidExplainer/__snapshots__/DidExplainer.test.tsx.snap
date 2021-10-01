@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DidExplainer should render 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Decentralized Identifier
+    </h1>
+    <p
+      class="subline"
+    >
+      Upgrade to an on-chain DID
+    </p>
+    <section>
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="nameLine"
+      >
+        <span
+          class="name"
+        >
+          KILT Identity 1
+        </span>
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Identity options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Identity options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <div
+      class="functionality"
+    >
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      Upgrading enables you to sign with your on-chain DID and use new functionality.
+    </div>
+    <p
+      class="deposit"
+    >
+      To store your DID on the blockchain, a deposit needs to be reserved. The deposit will be refunded if you remove your on-chain DID.
+    </p>
+    <a
+      class="upgrade"
+      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade"
+    >
+      Upgrade
+    </a>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+    <p
+      class="stats"
+    >
+      You have 3 Identities with a
+      <span
+        class="balance"
+      >
+         Total Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="KILT Coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </section>
+</div>
+`;

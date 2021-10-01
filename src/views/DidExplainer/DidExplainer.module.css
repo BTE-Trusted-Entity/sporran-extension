@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  margin: 0;
+}
+
+.subline {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  margin: 0 0 0.8125rem 0;
+}
+
+.explanation {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  line-height: 1.25rem;
+  margin: 0;
+}
+
+.functionality {
+  composes: explanation;
+  margin: 2rem 0 1rem 0;
+}
+
+.avatar {
+  composes: avatar from '../../components/Avatar/Avatar.module.css';
+
+  --size: calc(48rem / 16);
+
+  width: var(--size);
+  height: var(--size);
+  flex-shrink: 0;
+
+  /* --color-orange */
+  background: rgba(255, 101, 0, 0.6) no-repeat;
+}
+
+.deposit {
+  composes: explanation;
+  padding-left: calc(68rem / 16);
+  background: url('../../components/images/deposit.svg') no-repeat left center;
+}
+
+.upgrade {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+  margin-top: 1.75rem;
+}
