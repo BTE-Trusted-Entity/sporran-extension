@@ -142,22 +142,11 @@ function deriveDidKeys(identityKeypair: KeyringPair) {
   return { authenticationKey, encryptionKey };
 }
 
-export async function getIdentityCryptoFromKeypair(
+export function getKeystoreFromKeypair(
   identityKeypair: KeyringPair,
-): Promise<IdentityDidCrypto> {
+): KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'> {
   const { authenticationKey, encryptionKey } = deriveDidKeys(identityKeypair);
-
-  const identities = await getIdentities();
-  const { did } = identities[identityKeypair.address];
-
-  const { details: didDetails } = (await DefaultResolver.resolveDoc(
-    did,
-  )) as IDidResolvedDetails;
-  if (!didDetails) {
-    throw new Error(`Cannot resolve the DID ${did}`);
-  }
-
-  const keystore: KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'> = {
+  return {
     sign: async ({ data, alg }) => ({
       data: authenticationKey.sign(data, { withType: false }),
       alg,
@@ -176,6 +165,24 @@ export async function getIdentityCryptoFromKeypair(
       };
     },
   };
+}
+
+export async function getIdentityCryptoFromKeypair(
+  identityKeypair: KeyringPair,
+): Promise<IdentityDidCrypto> {
+  const { authenticationKey } = deriveDidKeys(identityKeypair);
+
+  const identities = await getIdentities();
+  const { did } = identities[identityKeypair.address];
+
+  const { details: didDetails } = (await DefaultResolver.resolveDoc(
+    did,
+  )) as IDidResolvedDetails;
+  if (!didDetails) {
+    throw new Error(`Cannot resolve the DID ${did}`);
+  }
+
+  const keystore = getKeystoreFromKeypair(identityKeypair);
 
   function sign(plaintext: string) {
     return Crypto.u8aToHex(authenticationKey.sign(plaintext));
@@ -223,6 +230,10 @@ export async function encryptIdentity(
   return address;
 }
 
+export function lightDidFromKeypair(keypair: KeyringPair): LightDidDetails {
+  return new LightDidDetails(deriveDidKeys(keypair));
+}
+
 export async function createIdentity(
   backupPhrase: string,
   password: string,
@@ -230,7 +241,7 @@ export async function createIdentity(
   const address = await encryptIdentity(backupPhrase, password);
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
-  const { did } = new LightDidDetails(deriveDidKeys(identityKeypair));
+  const { did } = lightDidFromKeypair(identityKeypair);
 
   const identities = await getIdentities();
   const largestIndex = max(map(identities, 'index')) || 0;
