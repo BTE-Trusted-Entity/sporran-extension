@@ -239,7 +239,34 @@ export function lightDidFromKeypair(keypair: KeyringPair): LightDidDetails {
   return new LightDidDetails(deriveDidKeys(keypair));
 }
 
+async function getIdentityName(): Promise<{ name: string; index: number }> {
+  const identities = await getIdentities();
+  const largestIndex = max(map(identities, 'index')) || 0;
+
+  const index = 1 + largestIndex;
+
+  return { name: `KILT Identity ${index}`, index };
+}
+
 export async function createIdentity(
+  backupPhrase: string,
+  password: string,
+): Promise<Identity> {
+  const address = await encryptIdentity(backupPhrase, password);
+
+  const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
+
+  const { did } = lightDidFromKeypair(identityKeypair);
+
+  const { name, index } = await getIdentityName();
+
+  const identity = { name, address, did, index };
+  await saveIdentity(identity);
+
+  return identity;
+}
+
+export async function importIdentity(
   backupPhrase: string,
   password: string,
 ): Promise<Identity> {
@@ -255,12 +282,7 @@ export async function createIdentity(
 
   const did = onChain ? fullDid : lightDidDetails.did;
 
-  const identities = await getIdentities();
-  const largestIndex = max(map(identities, 'index')) || 0;
-
-  const index = 1 + largestIndex;
-
-  const name = `KILT Identity ${index}`;
+  const { name, index } = await getIdentityName();
 
   const identity = { name, address, did, index };
   await saveIdentity(identity);
