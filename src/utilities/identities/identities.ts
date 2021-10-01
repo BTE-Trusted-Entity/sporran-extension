@@ -17,7 +17,12 @@ import {
   NaclBoxCapable,
 } from '@kiltprotocol/types';
 import Message from '@kiltprotocol/messaging';
-import { DefaultResolver, LightDidDetails } from '@kiltprotocol/did';
+import {
+  DefaultResolver,
+  LightDidDetails,
+  DidUtils,
+  DidChain,
+} from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 import { map, max } from 'lodash-es';
 
@@ -234,6 +239,15 @@ export function lightDidFromKeypair(keypair: KeyringPair): LightDidDetails {
   return new LightDidDetails(deriveDidKeys(keypair));
 }
 
+async function getIdentityName(): Promise<{ name: string; index: number }> {
+  const identities = await getIdentities();
+  const largestIndex = max(map(identities, 'index')) || 0;
+
+  const index = 1 + largestIndex;
+
+  return { name: `KILT Identity ${index}`, index };
+}
+
 export async function createIdentity(
   backupPhrase: string,
   password: string,
@@ -241,14 +255,34 @@ export async function createIdentity(
   const address = await encryptIdentity(backupPhrase, password);
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
+
   const { did } = lightDidFromKeypair(identityKeypair);
 
-  const identities = await getIdentities();
-  const largestIndex = max(map(identities, 'index')) || 0;
+  const { name, index } = await getIdentityName();
 
-  const index = 1 + largestIndex;
+  const identity = { name, address, did, index };
+  await saveIdentity(identity);
 
-  const name = `KILT Identity ${index}`;
+  return identity;
+}
+
+export async function importIdentity(
+  backupPhrase: string,
+  password: string,
+): Promise<Identity> {
+  const address = await encryptIdentity(backupPhrase, password);
+
+  const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
+
+  const lightDidDetails = lightDidFromKeypair(identityKeypair);
+  const keystore = getKeystoreFromKeypair(identityKeypair);
+  const { did: fullDid } = await DidUtils.upgradeDid(lightDidDetails, keystore);
+
+  const isOnChain = Boolean(await DidChain.queryByDID(fullDid));
+
+  const did = isOnChain ? fullDid : lightDidDetails.did;
+
+  const { name, index } = await getIdentityName();
 
   const identity = { name, address, did, index };
   await saveIdentity(identity);
