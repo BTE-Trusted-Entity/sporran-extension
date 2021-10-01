@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
 
-import { createIdentity } from '../../utilities/identities/identities';
+import { importIdentity } from '../../utilities/identities/identities';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { ImportBackupPhrase } from '../ImportBackupPhrase/ImportBackupPhrase';
 import { paths } from '../paths';
@@ -20,7 +20,7 @@ export function ImportIdentity(): JSX.Element {
 
   const onSuccess = useCallback(
     async (password: string) => {
-      const { address } = await createIdentity(backupPhrase, password);
+      const { address } = await importIdentity(backupPhrase, password);
       history.push(
         generatePath(paths.identity.overview, { address, type: 'imported' }),
       );
