@@ -61,7 +61,7 @@
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-typescript": "^7.15.0",
-    "@storybook/addon-actions": "^6.3.8",
+    "@storybook/addon-actions": "^6.3.9",
     "@storybook/addon-console": "^1.2.3",
     "@storybook/addon-controls": "^6.3.8",
     "@storybook/addon-links": "^6.3.8",
