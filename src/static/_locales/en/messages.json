@@ -789,5 +789,8 @@
   },
   "view_SignDid_CTA": {
     "message": "Sign"
+  },
+  "view_SignDid_error": {
+    "message": "You need to upgrade to an on-chain DID first"
   }
 }
