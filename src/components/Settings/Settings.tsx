@@ -18,7 +18,7 @@ function useItemsCount(onExistingIdentity: boolean, hasPasswords: boolean) {
   const { features } = useConfiguration();
 
   const itemCounts = {
-    generic: 3,
+    generic: 4,
     endpoint: features.endpoint ? 1 : 0,
     identity: onExistingIdentity ? 2 : 0,
     forgetPasswords: onExistingIdentity && hasPasswords ? 1 : 0,
