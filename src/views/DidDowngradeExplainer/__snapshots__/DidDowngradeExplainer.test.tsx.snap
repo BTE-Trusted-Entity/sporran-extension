@@ -53,7 +53,7 @@ exports[`DidDowngradeExplainer should render 1`] = `
     <p
       class="warning"
     >
-      Take care: this identity won't be able to upgrade to an on-chain DID again.
+      Take care: this identity won’t be able to upgrade to an on-chain DID again.
     </p>
     <a
       class="continue"

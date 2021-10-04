@@ -776,7 +776,7 @@
     "message": "Removing your on-chain DID needs to be signed by you. Your deposit will be returned."
   },
   "view_DidDowngradeExplainer_warning": {
-    "message": "Take care: this identity won't be able to upgrade to an on-chain DID again."
+    "message": "Take care: this identity won’t be able to upgrade to an on-chain DID again."
   },
   "view_DidDowngradeExplainer_CTA": {
     "message": "Continue"
