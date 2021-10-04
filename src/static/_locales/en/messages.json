@@ -766,6 +766,21 @@
   "view_DidUpgradeExplainer_CTA": {
     "message": "Upgrade"
   },
+  "view_DidDowngradeExplainer_heading": {
+    "message": "Remove on-chain DID"
+  },
+  "view_DidDowngradeExplainer_subline": {
+    "message": "Remove DID from the KILT blockchain"
+  },
+  "view_DidDowngradeExplainer_explanation": {
+    "message": "Removing your on-chain DID needs to be signed by you. Your deposit will be returned."
+  },
+  "view_DidDowngradeExplainer_warning": {
+    "message": "Take care: this identity won’t be able to upgrade to an on-chain DID again."
+  },
+  "view_DidDowngradeExplainer_CTA": {
+    "message": "Continue"
+  },
   "component_DidUpgradeModal_pending": {
     "message": "Upgrade to on-chain is being processed"
   },
