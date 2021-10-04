@@ -139,7 +139,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
       {!isFullDid(identity.did) ? (
         <Link
-          to={generatePath(paths.identity.did.start, { address })}
+          to={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.upgrade}
         >
           <Avatar identity={identity} className={styles.avatarSmall} />

@@ -43,7 +43,7 @@ exports[`AddIdentity menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a
-            href="/identity/ADDRESS/remove"
+            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/remove"
             role="menuitem"
             tabindex="-1"
           >
@@ -54,7 +54,7 @@ exports[`AddIdentity menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a
-            href="/identity/ADDRESS/reset"
+            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
             role="menuitem"
             tabindex="-1"
           >
@@ -82,6 +82,82 @@ exports[`AddIdentity should render 1`] = `
       title="Identity options"
       type="button"
     />
+  </div>
+</div>
+`;
+
+exports[`AddIdentity should show full Did option 1`] = `
+<div>
+  <div
+    class="wrapper"
+  >
+    <button
+      aria-expanded="true"
+      aria-haspopup="true"
+      aria-label="Identity options"
+      class="toggle"
+      role="button"
+      tabindex="0"
+      title="Identity options"
+      type="button"
+    />
+    <div
+      class="dropdown"
+      role="menu"
+    >
+      <h4
+        class="heading"
+      >
+        Identity
+      </h4>
+      <ul
+        class="list"
+      >
+        <li
+          class="listItem"
+        >
+          <button
+            class="listButton"
+            role="menuitem"
+            tabindex="-1"
+            type="button"
+          >
+            Edit Identity Name
+          </button>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/remove"
+            role="menuitem"
+            tabindex="-1"
+          >
+            Remove Identity
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/reset"
+            role="menuitem"
+            tabindex="-1"
+          >
+            Reset Password
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/downgrade"
+          >
+            Remove on-chain DID
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 `;
