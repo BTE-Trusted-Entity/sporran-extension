@@ -123,8 +123,8 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         <KiltAmount amount={total} type="costs" smallDecimals />
       </p>
       <p className={styles.details}>
-        <a
-          href={generatePath(paths.identity.did.upgrade.start, { address })}
+        <Link
+          to={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.info}
           aria-label={t('view_DidUpgrade_info')}
         />
