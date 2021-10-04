@@ -3,8 +3,10 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import { getIdentityDidEncryption } from '../../utilities/identities/identities';
+import { isFullDid } from '../../utilities/did/did';
+
+import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import {
   PasswordField,
@@ -21,6 +23,8 @@ interface Props {
 
 export function SignDid({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
+
+  const error = !isFullDid(identity.did);
 
   const { origin, plaintext } = usePopupData<SignDidPopupInput>();
 
@@ -92,9 +96,12 @@ export function SignDid({ identity }: Props): JSX.Element | null {
         >
           {t('view_SignDid_reject')}
         </button>
-        <button type="submit" className={styles.submit}>
+        <button type="submit" className={styles.submit} disabled={error}>
           {t('view_SignDid_CTA')}
         </button>
+        <output className={styles.errorTooltip} hidden={!error}>
+          {t('view_SignDid_error')}
+        </output>
       </p>
     </form>
   );
