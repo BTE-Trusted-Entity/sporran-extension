@@ -45,9 +45,9 @@ export async function verifyDidConfigResource(
   did: IDidDetails['did'],
   tabUrl: string,
 ): Promise<void> {
-  const url = new URL(tabUrl);
+  const { origin } = new URL(tabUrl);
   const didConfigResource = (await ky
-    .get(`${url.origin}/.well-known/did-configuration.json`)
+    .get(`${origin}/.well-known/did-configuration.json`)
     .json()) as {
     '@context': string;
     linked_dids: DomainLinkageCredential[];
@@ -72,8 +72,8 @@ export async function verifyDidConfigResource(
         return false;
       }
 
-      const matchesOrigin = url.origin === credentialSubject.origin;
-      if (!credentialSubject.origin || !matchesOrigin) {
+      const matchesOrigin = origin === credentialSubject.origin;
+      if (!matchesOrigin) {
         return false;
       }
 
@@ -88,14 +88,12 @@ export async function verifyDidConfigResource(
         message: Crypto.coToUInt8(credentialSubject.rootHash),
         didDetails: issuerDidDetails,
       });
-      if (!verified) {
-        return false;
-      }
-      return true;
+      return verified;
     },
   );
   if (!verified) {
-    throw new Error('Verification of DID configuration resource failed');
+    throw new Error(
+      `Verification of DID configuration resource of ${origin} failed for ${did}`,
+    );
   }
-  return;
 }
