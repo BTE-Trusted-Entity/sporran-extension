@@ -88,9 +88,9 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         setTxHash(hash);
 
         const did = await submit(hash);
-        setStatus('success');
-
         await saveIdentity({ ...identity, did });
+
+        setStatus('success');
       } catch (error) {
         setSubmitting(false);
         setStatus('error');
