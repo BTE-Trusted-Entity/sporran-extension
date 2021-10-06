@@ -15,10 +15,10 @@ export function Template(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade',
+        '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade/sign',
       ]}
     >
-      <Route path={paths.identity.did.upgrade}>
+      <Route path={paths.identity.did.upgrade.sign}>
         <DidUpgrade
           identity={
             identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']

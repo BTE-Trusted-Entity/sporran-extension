@@ -9,6 +9,7 @@ import {
 } from '@polkadot/util-crypto';
 import {
   IDidDetails,
+  IDidResolvedDetails,
   IEncryptedMessage,
   KeyRelationship,
   KeystoreSigner,
@@ -16,7 +17,12 @@ import {
   NaclBoxCapable,
 } from '@kiltprotocol/types';
 import Message from '@kiltprotocol/messaging';
-import { DefaultResolver, LightDidDetails } from '@kiltprotocol/did';
+import {
+  DefaultResolver,
+  LightDidDetails,
+  DidUtils,
+  DidChain,
+} from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 import { map, max } from 'lodash-es';
 
@@ -141,20 +147,11 @@ function deriveDidKeys(identityKeypair: KeyringPair) {
   return { authenticationKey, encryptionKey };
 }
 
-export async function getIdentityCryptoFromKeypair(
+export function getKeystoreFromKeypair(
   identityKeypair: KeyringPair,
-): Promise<IdentityDidCrypto> {
+): KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'> {
   const { authenticationKey, encryptionKey } = deriveDidKeys(identityKeypair);
-
-  const identities = await getIdentities();
-  const { did } = identities[identityKeypair.address];
-
-  const didDetails = (await DefaultResolver.resolveDoc(did)) as IDidDetails;
-  if (!didDetails) {
-    throw new Error(`Cannot resolve the DID ${did}`);
-  }
-
-  const keystore: KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'> = {
+  return {
     sign: async ({ data, alg }) => ({
       data: authenticationKey.sign(data, { withType: false }),
       alg,
@@ -173,6 +170,24 @@ export async function getIdentityCryptoFromKeypair(
       };
     },
   };
+}
+
+export async function getIdentityCryptoFromKeypair(
+  identityKeypair: KeyringPair,
+): Promise<IdentityDidCrypto> {
+  const { authenticationKey } = deriveDidKeys(identityKeypair);
+
+  const identities = await getIdentities();
+  const { did } = identities[identityKeypair.address];
+
+  const { details: didDetails } = (await DefaultResolver.resolveDoc(
+    did,
+  )) as IDidResolvedDetails;
+  if (!didDetails) {
+    throw new Error(`Cannot resolve the DID ${did}`);
+  }
+
+  const keystore = getKeystoreFromKeypair(identityKeypair);
 
   function sign(plaintext: string) {
     return Crypto.u8aToHex(authenticationKey.sign(plaintext));
@@ -220,6 +235,19 @@ export async function encryptIdentity(
   return address;
 }
 
+export function lightDidFromKeypair(keypair: KeyringPair): LightDidDetails {
+  return new LightDidDetails(deriveDidKeys(keypair));
+}
+
+async function getIdentityName(): Promise<{ name: string; index: number }> {
+  const identities = await getIdentities();
+  const largestIndex = max(map(identities, 'index')) || 0;
+
+  const index = 1 + largestIndex;
+
+  return { name: `KILT Identity ${index}`, index };
+}
+
 export async function createIdentity(
   backupPhrase: string,
   password: string,
@@ -227,14 +255,34 @@ export async function createIdentity(
   const address = await encryptIdentity(backupPhrase, password);
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
-  const { did } = new LightDidDetails(deriveDidKeys(identityKeypair));
 
-  const identities = await getIdentities();
-  const largestIndex = max(map(identities, 'index')) || 0;
+  const { did } = lightDidFromKeypair(identityKeypair);
 
-  const index = 1 + largestIndex;
+  const { name, index } = await getIdentityName();
 
-  const name = `KILT Identity ${index}`;
+  const identity = { name, address, did, index };
+  await saveIdentity(identity);
+
+  return identity;
+}
+
+export async function importIdentity(
+  backupPhrase: string,
+  password: string,
+): Promise<Identity> {
+  const address = await encryptIdentity(backupPhrase, password);
+
+  const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
+
+  const lightDidDetails = lightDidFromKeypair(identityKeypair);
+  const keystore = getKeystoreFromKeypair(identityKeypair);
+  const { did: fullDid } = await DidUtils.upgradeDid(lightDidDetails, keystore);
+
+  const isOnChain = Boolean(await DidChain.queryByDID(fullDid));
+
+  const did = isOnChain ? fullDid : lightDidDetails.did;
+
+  const { name, index } = await getIdentityName();
 
   const identity = { name, address, did, index };
   await saveIdentity(identity);

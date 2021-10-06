@@ -3,6 +3,7 @@ declare namespace SignDidModuleCssNamespace {
     address: string;
     buttonsLine: string;
     container: string;
+    errorTooltip: string;
     heading: string;
     label: string;
     origin: string;

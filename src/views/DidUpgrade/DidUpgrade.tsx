@@ -88,9 +88,9 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         setTxHash(hash);
 
         const did = await submit(hash);
-        setStatus('success');
-
         await saveIdentity({ ...identity, did });
+
+        setStatus('success');
       } catch (error) {
         setSubmitting(false);
         setStatus('error');
@@ -123,8 +123,8 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         <KiltAmount amount={total} type="costs" smallDecimals />
       </p>
       <p className={styles.details}>
-        <a
-          href={generatePath(paths.identity.did.start, { address })}
+        <Link
+          to={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.info}
           aria-label={t('view_DidUpgrade_info')}
         />

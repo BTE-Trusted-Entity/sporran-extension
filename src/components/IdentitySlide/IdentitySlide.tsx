@@ -51,10 +51,7 @@ export function IdentitySlide({
         <div className={options ? styles.nameLine : styles.centeredNameLine}>
           <span className={styles.name}>{identity.name}</span>
           {options && (
-            <IdentityOptions
-              address={identity.address}
-              onEdit={handleEditClick}
-            />
+            <IdentityOptions identity={identity} onEdit={handleEditClick} />
           )}
         </div>
       ) : (

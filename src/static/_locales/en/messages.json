@@ -111,6 +111,9 @@
   "component_IdentityOptions_reset_password": {
     "message": "Reset Password"
   },
+  "component_IdentityOptions_did_downgrade": {
+    "message": "Remove on-chain DID"
+  },
   "component_KiltCurrency_label": {
     "message": "KILT Coin"
   },
@@ -748,6 +751,36 @@
       }
     }
   },
+  "view_DidUpgradeExplainer_heading": {
+    "message": "Decentralized Identifier"
+  },
+  "view_DidUpgradeExplainer_subline": {
+    "message": "Upgrade to an on-chain DID"
+  },
+  "view_DidUpgradeExplainer_functionality": {
+    "message": "Upgrading enables you to sign with your on-chain DID and use new functionality."
+  },
+  "view_DidUpgradeExplainer_deposit": {
+    "message": "To store your DID on the blockchain, a deposit needs to be reserved. The deposit will be refunded if you remove your on-chain DID."
+  },
+  "view_DidUpgradeExplainer_CTA": {
+    "message": "Upgrade"
+  },
+  "view_DidDowngradeExplainer_heading": {
+    "message": "Remove on-chain DID"
+  },
+  "view_DidDowngradeExplainer_subline": {
+    "message": "Remove DID from the KILT blockchain"
+  },
+  "view_DidDowngradeExplainer_explanation": {
+    "message": "Removing your on-chain DID needs to be signed by you. Your deposit will be returned."
+  },
+  "view_DidDowngradeExplainer_warning": {
+    "message": "Take care: this identity won’t be able to upgrade to an on-chain DID again."
+  },
+  "view_DidDowngradeExplainer_CTA": {
+    "message": "Continue"
+  },
   "component_DidUpgradeModal_pending": {
     "message": "Upgrade to on-chain is being processed"
   },
@@ -774,5 +807,8 @@
   },
   "view_SignDid_CTA": {
     "message": "Sign"
+  },
+  "view_SignDid_error": {
+    "message": "You need to upgrade to an on-chain DID first"
   }
 }

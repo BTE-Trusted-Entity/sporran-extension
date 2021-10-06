@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DidDowngradeExplainer should render 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Remove on-chain DID
+    </h1>
+    <p
+      class="subline"
+    >
+      Remove DID from the KILT blockchain
+    </p>
+    <section>
+      <div
+        class="avatar fullDid"
+      >
+        Identicon
+      </div>
+      <div
+        class="nameLine"
+      >
+        <span
+          class="name"
+        >
+          KILT Identity 2
+        </span>
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Identity options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Identity options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <p
+      class="explanation"
+    >
+      Removing your on-chain DID needs to be signed by you. Your deposit will be returned.
+    </p>
+    <p
+      class="warning"
+    >
+      Take care: this identity won’t be able to upgrade to an on-chain DID again.
+    </p>
+    <a
+      class="continue"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/downgrade/sign"
+    >
+      Continue
+    </a>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+    <p
+      class="stats"
+    >
+      You have 3 Identities with a
+      <span
+        class="balance"
+      >
+         Total Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="KILT Coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </section>
+</div>
+`;

@@ -10,6 +10,7 @@ import {
 import {
   IDidDetails,
   IDidKeyDetails,
+  IDidResolvedDetails,
   IEncryptedMessage,
   IMessage,
   KeyRelationship,
@@ -97,9 +98,9 @@ export async function getTabEncryption(
     .getKeys(keyAgreement)
     .pop() as IDidKeyDetails<string>;
 
-  const dAppDidDetails = (await DefaultResolver.resolveDoc(
+  const { details: dAppDidDetails } = (await DefaultResolver.resolveDoc(
     dAppDid,
-  )) as IDidDetails;
+  )) as IDidResolvedDetails;
   if (!dAppDidDetails) {
     throw new Error(`Cannot resolve the dApp DID ${dAppDid}`);
   }
