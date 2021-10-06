@@ -1,6 +1,7 @@
 import ky from 'ky';
 import {
   IDidDetails,
+  IDidResolvedDetails,
   IRequestForAttestation,
   KeyRelationship,
 } from '@kiltprotocol/types';
@@ -77,16 +78,18 @@ export async function verifyDidConfigResource(
         return false;
       }
 
-      const issuerDidDetails = await DefaultResolver.resolveDoc(issuer);
+      const { details: issuerDidDetails } = (await DefaultResolver.resolveDoc(
+        issuer,
+      )) as IDidResolvedDetails;
       if (!issuerDidDetails) {
         return false;
       }
 
-      const { verified } = DidUtils.verifyDidSignature({
+      const { verified } = await DidUtils.verifyDidSignature({
         keyId: issuerDidDetails.getKeyIds(KeyRelationship.assertionMethod)[0],
         signature: credential.proof.signature as string,
         message: Crypto.coToUInt8(credentialSubject.rootHash),
-        didDetails: issuerDidDetails,
+        keyRelationship: KeyRelationship.assertionMethod,
       });
       return verified;
     },
