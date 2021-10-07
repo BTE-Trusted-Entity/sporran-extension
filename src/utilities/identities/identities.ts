@@ -213,7 +213,7 @@ export async function getIdentityCryptoFromKeypair(
   };
 }
 
-export async function getIdentityDidEncryption(
+export async function getIdentityDidCrypto(
   address: string,
   password: string,
 ): Promise<IdentityDidCrypto> {
@@ -231,7 +231,7 @@ export async function encryptIdentity(
   return address;
 }
 
-export function lightDidFromKeypair(keypair: KeyringPair): LightDidDetails {
+export function getLightDidFromKeypair(keypair: KeyringPair): LightDidDetails {
   return new LightDidDetails(deriveDidKeys(keypair));
 }
 
@@ -252,7 +252,7 @@ export async function createIdentity(
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
 
-  const { did } = lightDidFromKeypair(identityKeypair);
+  const { did } = getLightDidFromKeypair(identityKeypair);
 
   const { name, index } = await getIdentityName();
 
@@ -270,7 +270,7 @@ export async function importIdentity(
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
 
-  const lightDidDetails = lightDidFromKeypair(identityKeypair);
+  const lightDidDetails = getLightDidFromKeypair(identityKeypair);
   const keystore = getKeystoreFromKeypair(identityKeypair);
   const { did: fullDid } = await DidUtils.upgradeDid(lightDidDetails, keystore);
 
