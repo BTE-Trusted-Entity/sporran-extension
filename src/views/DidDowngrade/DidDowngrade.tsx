@@ -163,9 +163,9 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
           txHash={txHash}
           onDismissError={closeModal}
           messages={{
-            pending: t('component_DidDowngradeModal_pending'),
-            success: t('component_DidDowngradeModal_success'),
-            error: t('component_DidDowngradeModal_error'),
+            pending: t('view_DidDowngrade_pending'),
+            success: t('view_DidDowngrade_success'),
+            error: t('view_DidDowngrade_error'),
           }}
         />
       )}
