@@ -6,7 +6,7 @@ import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
 import { ITerms, IClaim } from '@kiltprotocol/types';
 
 import {
-  getIdentityDidEncryption,
+  getIdentityDidCrypto,
   Identity,
   useIdentities,
 } from '../../utilities/identities/identities';
@@ -83,7 +83,7 @@ export function SignQuote(): JSX.Element | null {
 
       const { address } = firstIdentity;
       const password = await passwordField.get(event);
-      const { didDetails, keystore } = await getIdentityDidEncryption(
+      const { didDetails, keystore } = await getIdentityDidCrypto(
         address,
         password,
       );

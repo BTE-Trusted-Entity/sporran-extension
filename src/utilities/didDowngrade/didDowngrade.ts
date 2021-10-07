@@ -16,7 +16,7 @@ import {
   decryptIdentity,
   getKeystoreFromKeypair,
   Identity,
-  lightDidFromKeypair,
+  getLightDidFromKeypair,
   makeKeyring,
 } from '../identities/identities';
 
@@ -65,7 +65,7 @@ async function getSignedTransaction(
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
   const tx = await blockchain.signTx(identity, didAuthorizedExtrinsic);
 
-  const { did } = lightDidFromKeypair(identity);
+  const { did } = getLightDidFromKeypair(identity);
   return { extrinsic: tx, did };
 }
 
