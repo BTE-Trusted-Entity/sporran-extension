@@ -37,8 +37,6 @@ async function getSignedTransaction(
   identity: KeyringPair,
   fullDid: IDidDetails['did'],
 ): Promise<DidTransaction> {
-  const keystore = getKeystoreFromKeypair(identity);
-
   const { details: didDetails } = (await DefaultResolver.resolveDoc(
     fullDid,
   )) as IDidResolvedDetails;
@@ -57,6 +55,7 @@ async function getSignedTransaction(
   });
 
   const extrinsic = await DidChain.getDeleteDidExtrinsic();
+  const keystore = getKeystoreFromKeypair(identity);
 
   const didAuthorizedExtrinsic = await fullDidDetails.authorizeExtrinsic(
     extrinsic,
