@@ -11,7 +11,7 @@ import {
   decryptIdentity,
   getKeystoreFromKeypair,
   Identity,
-  lightDidFromKeypair,
+  getLightDidFromKeypair,
   makeKeyring,
 } from '../identities/identities';
 
@@ -31,7 +31,7 @@ async function getSignedTransaction(
 ): Promise<DidTransaction> {
   const keystore = getKeystoreFromKeypair(identity);
 
-  const lightDidDetails = lightDidFromKeypair(identity);
+  const lightDidDetails = getLightDidFromKeypair(identity);
 
   const { extrinsic, did } = await DidUtils.upgradeDid(
     lightDidDetails,

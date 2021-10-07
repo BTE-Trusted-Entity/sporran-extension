@@ -17,7 +17,7 @@ import { claimChannel } from '../claimChannel/claimChannel';
 import { saveChannel } from '../saveChannel/saveChannel';
 import { getAttestedClaims } from '../shareChannel/shareChannel';
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
-import { getIdentityDidEncryption } from '../../utilities/identities/identities';
+import { getIdentityDidCrypto } from '../../utilities/identities/identities';
 
 export const backgroundCredentialChannel = new BrowserChannel<
   CredentialInput,
@@ -47,7 +47,7 @@ async function processSubmitTerms(
       type: MessageBodyType.REQUEST_ATTESTATION_FOR_CLAIM,
     };
 
-    const { encrypt } = await getIdentityDidEncryption(address, password);
+    const { encrypt } = await getIdentityDidCrypto(address, password);
 
     const { dAppDidDetails } = await getTabEncryption(sender);
     return encrypt(requestForAttestationBody, dAppDidDetails);
@@ -85,7 +85,7 @@ async function processShareCredential(
     type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
   };
 
-  const { encrypt } = await getIdentityDidEncryption(address, password);
+  const { encrypt } = await getIdentityDidCrypto(address, password);
 
   const { dAppDidDetails } = await getTabEncryption(sender);
   return encrypt(credentialsBody, dAppDidDetails);

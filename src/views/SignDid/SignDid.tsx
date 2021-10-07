@@ -3,7 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { getIdentityDidEncryption } from '../../utilities/identities/identities';
+import { getIdentityDidCrypto } from '../../utilities/identities/identities';
 import { isFullDid } from '../../utilities/did/did';
 
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
@@ -39,7 +39,7 @@ export function SignDid({ identity }: Props): JSX.Element | null {
 
       const { address, did } = identity;
       const password = await passwordField.get(event);
-      const { sign } = await getIdentityDidEncryption(address, password);
+      const { sign } = await getIdentityDidCrypto(address, password);
 
       const signature = sign(plaintext);
       await backgroundSignDidChannel.return({ signature, did });
