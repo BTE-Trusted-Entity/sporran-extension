@@ -24,7 +24,7 @@ import {
   DidChain,
 } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
-import { map, max } from 'lodash-es';
+import { map, max, memoize } from 'lodash-es';
 
 import {
   loadEncrypted,
@@ -81,10 +81,6 @@ export async function setCurrentIdentity(address: string): Promise<void> {
   }
   await storage.set({ [CURRENT_IDENTITY_KEY]: address });
   await mutate(CURRENT_IDENTITY_KEY);
-}
-
-export function useCurrentIdentity(): SWRResponse<string | null, unknown> {
-  return useSWR(CURRENT_IDENTITY_KEY, getCurrentIdentity);
 }
 
 export async function saveIdentity(identity: Identity): Promise<void> {
@@ -296,4 +292,50 @@ export async function decryptIdentity(
 ): Promise<KeyringPair> {
   const seed = await loadEncrypted(address, password);
   return makeKeyring().addFromSeed(new Uint8Array(seed));
+}
+
+/** Ensure that local information about the DID type matches stored on blockchain
+ * even if an error occurred while asynchronous update was running */
+async function syncDidStateWithBlockchain(address: string | null | undefined) {
+  if (!address) {
+    return;
+  }
+
+  const identities = await getIdentities();
+  const identity = identities[address];
+
+  const { did } = identity;
+  const { identifier, type } = DidUtils.parseDidUrl(did);
+  const unprefixedIdentifier = identifier.replace(/^00/, '');
+
+  const lightDid =
+    type === 'light'
+      ? did
+      : DidUtils.getKiltDidFromIdentifier(unprefixedIdentifier, 'light');
+
+  const fullDid =
+    type === 'full'
+      ? did
+      : DidUtils.getKiltDidFromIdentifier(unprefixedIdentifier, 'full');
+
+  const isOnChain = Boolean(await DidChain.queryByDID(fullDid));
+
+  const wasOnChain = type === 'full';
+  if (wasOnChain && !isOnChain) {
+    await saveIdentity({ ...identity, did: lightDid });
+  }
+  if (!wasOnChain && isOnChain) {
+    await saveIdentity({ ...identity, did: fullDid });
+  }
+}
+
+/** Memoized function will run only once per identity while the popup is open, do not use from backend */
+const noAwaitUpdateCachedDidStateOnce = memoize(syncDidStateWithBlockchain);
+
+export function useCurrentIdentity(): SWRResponse<string | null, unknown> {
+  const swrResponse = useSWR(CURRENT_IDENTITY_KEY, getCurrentIdentity);
+
+  noAwaitUpdateCachedDidStateOnce(swrResponse.data);
+
+  return swrResponse;
 }
