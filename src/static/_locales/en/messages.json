@@ -751,6 +751,35 @@
       }
     }
   },
+  "view_DidDowngrade_heading": {
+    "message": "Remove on-chain DID"
+  },
+  "view_DidDowngrade_subline": {
+    "message": "Remove DID from the KILT blockchain"
+  },
+  "view_DidDowngrade_total": {
+    "message": "Refund Amount: "
+  },
+  "view_DidDowngrade_deposit": {
+    "message": " Deposit "
+  },
+  "view_DidDowngrade_fee": {
+    "message": " - fee "
+  },
+  "view_DidDowngrade_info": {
+    "message": "DID removal information"
+  },
+  "view_DidDowngrade_CTA": {
+    "message": "Sign"
+  },
+  "view_DidDowngrade_insufficientFunds": {
+    "message": "You need at least $cost$ KILTs to pay the fee",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
+  },
   "view_DidUpgradeExplainer_heading": {
     "message": "Decentralized Identifier"
   },
@@ -789,6 +818,15 @@
   },
   "component_DidUpgradeModal_error": {
     "message": "Upgrade to on-chain failed"
+  },
+  "component_DidDowngradeModal_pending": {
+    "message": "Remove on-chain DID is being processed"
+  },
+  "component_DidDowngradeModal_success": {
+    "message": "Remove on-chain DID was successful"
+  },
+  "component_DidDowngradeModal_error": {
+    "message": "Remove on-chain DID failed"
   },
   "view_SignDid_title": {
     "message": "Sign with on-chain DID"
