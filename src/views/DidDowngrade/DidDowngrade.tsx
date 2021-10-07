@@ -2,12 +2,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
+import { IDidDetails } from '@kiltprotocol/types';
 
 import { Identity } from '../../utilities/identities/types';
-import {
-  PasswordField,
-  usePasswordField,
-} from '../../components/PasswordField/PasswordField';
 import {
   getDeposit,
   getFee,
@@ -15,7 +12,13 @@ import {
   submit,
 } from '../../utilities/didDowngrade/didDowngrade';
 import { saveIdentity } from '../../utilities/identities/identities';
+import { generatePath, paths } from '../paths';
+
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
+import {
+  PasswordField,
+  usePasswordField,
+} from '../../components/PasswordField/PasswordField';
 import { useAddressBalance } from '../../components/Balance/Balance';
 import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
 import {
@@ -25,10 +28,8 @@ import {
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-import { generatePath, paths } from '../paths';
 
 import styles from './DidDowngrade.module.css';
-import { IDidDetails } from '@kiltprotocol/types';
 
 interface Props {
   identity: Identity;
