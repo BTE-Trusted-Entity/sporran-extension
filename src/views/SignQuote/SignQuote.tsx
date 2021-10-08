@@ -116,7 +116,7 @@ export function SignQuote(): JSX.Element | null {
         type: MessageBodyType.REQUEST_ATTESTATION_FOR_CLAIM,
       };
 
-      const { encrypt } = await getIdentityDidEncryption(address, password);
+      const { encrypt } = await getIdentityDidCrypto(address, password);
 
       const { details: attesterDidDetails } = (await DefaultResolver.resolveDoc(
         attesterDid,

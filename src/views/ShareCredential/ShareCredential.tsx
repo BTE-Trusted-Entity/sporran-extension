@@ -15,7 +15,7 @@ import { shareChannel } from '../../channels/shareChannel/shareChannel';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import {
-  getIdentityDidEncryption,
+  getIdentityDidCrypto,
   Identity,
   useIdentities,
 } from '../../utilities/identities/identities';
@@ -119,7 +119,7 @@ export function ShareCredential(): JSX.Element | null {
         type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
       };
 
-      const { encrypt } = await getIdentityDidEncryption(address, password);
+      const { encrypt } = await getIdentityDidCrypto(address, password);
 
       const { details: verifierDidDetails } = (await DefaultResolver.resolveDoc(
         verifierDid,
