@@ -1,12 +1,8 @@
-import { RequestForAttestation } from '@kiltprotocol/core';
-import { ITerms } from '@kiltprotocol/types';
+import { ITerms, IDidDetails, IEncryptedMessage } from '@kiltprotocol/types';
 
 export interface ClaimInput extends ITerms {
-  attester: string;
+  attesterName: string;
+  attesterDid: IDidDetails['did'];
 }
 
-export interface ClaimOutput {
-  requestForAttestation: RequestForAttestation;
-  address: string;
-  password: string;
-}
+export type ClaimOutput = IEncryptedMessage;

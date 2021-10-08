@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import { mockClaim } from '../../utilities/cTypes/cTypes.mock';
+import { mockTerms } from '../../utilities/cTypes/cTypes.mock';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
@@ -14,7 +14,7 @@ export default {
 
 export function Template(): JSX.Element {
   return (
-    <PopupTestProvider path={paths.popup.claim} data={mockClaim}>
+    <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
       <SignQuote />
     </PopupTestProvider>
   );

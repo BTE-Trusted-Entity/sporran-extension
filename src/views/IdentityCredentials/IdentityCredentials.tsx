@@ -18,7 +18,7 @@ interface Props {
 export function IdentityCredentials({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const credentials = useIdentityCredentials(identity.address);
+  const credentials = useIdentityCredentials(identity.did);
   if (!credentials) {
     return null; // storage data pending
   }

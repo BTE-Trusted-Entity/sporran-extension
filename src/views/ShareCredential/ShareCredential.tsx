@@ -1,24 +1,43 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
-import { IRequestClaimsForCTypesContent } from '@kiltprotocol/types';
+import { AttestedClaim, Attestation } from '@kiltprotocol/core';
+import { DefaultResolver } from '@kiltprotocol/did';
+import {
+  IDidResolvedDetails,
+  IRequestClaimsForCTypesContent,
+  ISubmitClaimsForCTypes,
+  IDidDetails,
+  MessageBodyType,
+} from '@kiltprotocol/types';
 
 import { shareChannel } from '../../channels/shareChannel/shareChannel';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
-import { Identity, useIdentities } from '../../utilities/identities/identities';
+import {
+  getIdentityDidEncryption,
+  Identity,
+  useIdentities,
+} from '../../utilities/identities/identities';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 
 import tableStyles from '../../components/Table/Table.module.css';
 import styles from './ShareCredential.module.css';
 
+interface VerifierCredentialsRequest {
+  acceptedCTypes: IRequestClaimsForCTypesContent[];
+  verifierDid: IDidDetails['did'];
+}
+
 export function ShareCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const data = usePopupData<IRequestClaimsForCTypesContent[]>();
+  const data = usePopupData<VerifierCredentialsRequest>();
 
-  const cTypeHashes = data.map(({ cTypeHash }) => cTypeHash);
+  const { acceptedCTypes, verifierDid } = data;
+
+  const cTypeHashes = acceptedCTypes.map(({ cTypeHash }) => cTypeHash);
 
   const credentials = useIdentityCredentials();
   const matchingCredentials = credentials?.filter((credential) =>
@@ -83,10 +102,38 @@ export function ShareCredential(): JSX.Element | null {
         .filter(([, value]) => value)
         .map(([index]) => matchingCredentials[Number(index)].request);
 
-      await shareChannel.return({ requests, address, password });
+      const attestedClaims: AttestedClaim[] = [];
+      for (const request of requests) {
+        const attestation = await Attestation.query(request.rootHash);
+
+        if (!attestation) {
+          continue;
+        }
+        attestedClaims.push(
+          AttestedClaim.fromRequestAndAttestation(request, attestation),
+        );
+      }
+
+      const credentialsBody: ISubmitClaimsForCTypes = {
+        content: attestedClaims,
+        type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
+      };
+
+      const { encrypt } = await getIdentityDidEncryption(address, password);
+
+      const { details: verifierDidDetails } = (await DefaultResolver.resolveDoc(
+        verifierDid,
+      )) as IDidResolvedDetails;
+      if (!verifierDidDetails) {
+        throw new Error(`Cannot resolve the DID ${verifierDid}`);
+      }
+
+      const message = await encrypt(credentialsBody, verifierDidDetails);
+
+      await shareChannel.return(message);
       window.close();
     },
-    [matchingCredentials, identity, checked, password],
+    [matchingCredentials, identity, checked, password, verifierDid],
   );
 
   if (!credentials || !matchingCredentials || !identities || !identity) {

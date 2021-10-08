@@ -1,8 +1,12 @@
+import { IDidDetails } from '@kiltprotocol/types';
 import {
-  IAttestedClaim,
+  IEncryptedMessage,
   IRequestClaimsForCTypesContent,
 } from '@kiltprotocol/types';
 
-export type ShareInput = IRequestClaimsForCTypesContent[];
+export type ShareInput = {
+  acceptedCTypes: IRequestClaimsForCTypesContent[];
+  verifierDid: IDidDetails['did'];
+};
 
-export type ShareOutput = IAttestedClaim[];
+export type ShareOutput = IEncryptedMessage;
