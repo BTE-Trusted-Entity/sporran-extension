@@ -307,11 +307,12 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
   const { did } = identity;
   const { identifier, type } = DidUtils.parseDidUrl(did);
   const unprefixedIdentifier = identifier.replace(/^00/, '');
+  const prefixedIdentifier = '00' + identifier;
 
   const lightDid =
     type === 'light'
       ? did
-      : DidUtils.getKiltDidFromIdentifier(unprefixedIdentifier, 'light');
+      : DidUtils.getKiltDidFromIdentifier(prefixedIdentifier, 'light');
 
   const fullDid =
     type === 'full'
