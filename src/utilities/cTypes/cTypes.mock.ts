@@ -1,3 +1,5 @@
+import { identitiesMock } from '../identities/IdentitiesProvider.mock';
+
 const mockCType = {
   hash: '0x240c744923bd98797504328f9bef57ca6c777f5cbf3e1aada74f348c9879d78a',
   owner: null,
@@ -16,7 +18,7 @@ const mockCType = {
   },
 };
 
-export const mockClaim = {
+export const mockTerms = {
   claim: {
     cTypeHash:
       '0x240c744923bd98797504328f9bef57ca6c777f5cbf3e1aada74f348c9879d78a',
@@ -24,17 +26,18 @@ export const mockClaim = {
       'Full Name': 'Ingo Rübe',
       Email: 'ingo@kilt.io',
     },
-    owner: {
-      address: '4quK7LGg8iGqoH8kmeEeCDN7VM1aN5wmKkAfcH1VVU8tFmMc',
-      boxPublicKeyAsHex:
-        '0xe5a91394ab38253ae192d22914618ce868601d15190ca8ed35b5b81a1c9cd10e',
-    },
+    owner:
+      identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'].did,
   },
   legitimations: [],
   quote: {
-    attesterSignature:
-      '0x019c6604e385e3e483380f24fff4e8edeb22bc399a71288f1179867e024e7dfc43735ac6805e049fb44e0d288c334fa91bf79e81b35903bb4ccb050ead2f532a87',
-    attesterAddress: '4sQR3dfZrrxobV69jQmLvArxyUto5eJtmyc2f9xs1Hc4quu3',
+    attesterSignature: {
+      keyId:
+        'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY#0x59a56e1a4017b60a00c5450bfd6af21dc753e84ef72f2fd45dfc27dd5c3bdafb',
+      signature:
+        '0x30d01aefd64c7eea48bc743782fe54ba58f96b5a91e33d8d9ee5fae282964967bdea5e9ac3f31756fd251a40ea4d2e9a93ac9b1314cc037cdcb04a53a007e68f',
+    },
+    attesterDid: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
     cTypeHash:
       '0xbfad60977bc18cf9dfd76da88624ce219361f337b4332d5c42c047499f4b93c7',
     cost: {
@@ -47,5 +50,6 @@ export const mockClaim = {
     termsAndConditions: 'https://www.example.com/terms',
   },
   cTypes: [mockCType],
-  attester: 'SocialKYC',
+  attesterName: 'SocialKYC',
+  attesterDid: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
 };
