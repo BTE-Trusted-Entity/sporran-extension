@@ -1,3 +1,4 @@
+import { browser } from 'webextension-polyfill-ts';
 import { AnyJson } from '@polkadot/types/types';
 
 import { PopupAction } from '../../../utilities/popups/types';
@@ -32,10 +33,23 @@ export class PopupChannel<
     input: Input,
     sender: Parameters<typeof showPopup>[2],
   ): Promise<Output> {
-    const jsonInput = this.transform.inputToJson(input);
-    await showPopup(this.action, jsonInput, sender);
-
+    const { action } = this;
     const result = makeControlledPromise<Output>();
+
+    const jsonInput = this.transform.inputToJson(input);
+    const window = await showPopup(action, jsonInput, sender);
+
+    function handleClose(windowId: number) {
+      if (windowId === window.id) {
+        result.reject(new Error(`User closed the popup "${action}"`));
+      }
+    }
+
+    browser.windows.onRemoved.addListener(handleClose);
+    result.promise.finally(() =>
+      browser.windows.onRemoved.removeListener(handleClose),
+    );
+
     const unsubscribe = this.channel.listenForOutput(result.callback);
     return result.promise.finally(unsubscribe);
   }
