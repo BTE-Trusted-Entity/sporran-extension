@@ -53,7 +53,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
     setHasUpcomingFeatureModal(true);
   }, []);
 
-  const credentials = useIdentityCredentials(identity.address);
+  const credentials = useIdentityCredentials(identity.did);
   const hasCredentials = credentials && credentials.length > 0;
 
   const subscanHost = useSubscanHost();

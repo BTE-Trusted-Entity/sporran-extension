@@ -3,7 +3,13 @@ import { browser } from 'webextension-polyfill-ts';
 import { find, minBy } from 'lodash-es';
 import BN from 'bn.js';
 import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
-import { ITerms, IClaim } from '@kiltprotocol/types';
+import {
+  IDidResolvedDetails,
+  ITerms,
+  IClaim,
+  IRequestAttestationForClaim,
+  MessageBodyType,
+} from '@kiltprotocol/types';
 
 import {
   getIdentityDidCrypto,
@@ -22,15 +28,21 @@ import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { Avatar } from '../../components/Avatar/Avatar';
 
 import styles from './SignQuote.module.css';
+import { IDidDetails } from '@kiltprotocol/types';
+import { DefaultResolver } from '@kiltprotocol/did';
 
-type Terms = ITerms & { claim: IClaim; attester: string };
+type Terms = ITerms & {
+  claim: IClaim;
+  attesterName: string;
+  attesterDid: IDidDetails['did'];
+};
 
 export function SignQuote(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const data = usePopupData<Terms>();
 
-  const { claim, cTypes, quote, attester } = data;
+  const { claim, cTypes, quote, attesterName } = data;
 
   const cType = find(cTypes, { hash: claim.cTypeHash });
 
@@ -60,7 +72,8 @@ export function SignQuote(): JSX.Element | null {
         return;
       }
 
-      const { claim, delegationId, attester, legitimations } = data;
+      const { claim, delegationId, attesterName, attesterDid, legitimations } =
+        data;
 
       const cTypeTitle = cType.schema.title;
 
@@ -94,11 +107,29 @@ export function SignQuote(): JSX.Element | null {
         request: requestForAttestation,
         name,
         cTypeTitle,
-        attester,
+        attester: attesterName,
         isAttested: false,
       });
 
-      await claimChannel.return({ requestForAttestation, address, password });
+      const requestForAttestationBody: IRequestAttestationForClaim = {
+        content: { requestForAttestation },
+        type: MessageBodyType.REQUEST_ATTESTATION_FOR_CLAIM,
+      };
+
+      const { encrypt } = await getIdentityDidCrypto(address, password);
+
+      const { details: attesterDidDetails } = (await DefaultResolver.resolveDoc(
+        attesterDid,
+      )) as IDidResolvedDetails;
+      if (!attesterDidDetails) {
+        throw new Error(`Cannot resolve the DID ${attesterDid}`);
+      }
+      const message = await encrypt(
+        requestForAttestationBody,
+        attesterDidDetails,
+      );
+
+      await claimChannel.return(message);
       window.close();
     },
     [firstIdentity, cType, data, passwordField, name],
@@ -127,7 +158,7 @@ export function SignQuote(): JSX.Element | null {
         <dd className={styles.detailValue}>{cType?.schema?.title}</dd>
 
         <dt className={styles.detailName}>{t('view_SignQuote_attester')}:</dt>
-        <dd className={styles.detailValue}>{attester}</dd>
+        <dd className={styles.detailValue}>{attesterName}</dd>
       </dl>
 
       <p className={styles.costs}>

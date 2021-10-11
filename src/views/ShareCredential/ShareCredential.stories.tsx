@@ -10,16 +10,19 @@ export default {
   component: ShareCredential,
 } as Meta;
 
-const mockClaimRequest = [
-  {
-    cTypeHash:
-      '0xf53f460a9e96cf7ea3321ac001a89674850493e12fad28cbc868e026935436d2',
-  },
-];
+const mockCTypesRequest = {
+  acceptedCTypes: [
+    {
+      cTypeHash:
+        '0xf53f460a9e96cf7ea3321ac001a89674850493e12fad28cbc868e026935436d2',
+    },
+  ],
+  verifierDid: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+};
 
 export function Template(): JSX.Element {
   return (
-    <PopupTestProvider path={paths.popup.share} data={mockClaimRequest}>
+    <PopupTestProvider path={paths.popup.share} data={mockCTypesRequest}>
       <ShareCredential />
     </PopupTestProvider>
   );
