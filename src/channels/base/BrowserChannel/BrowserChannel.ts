@@ -4,6 +4,7 @@ import {
   makeTransforms,
   Transforms,
 } from '../ChannelTransforms/ChannelTransforms';
+import { exceptionToError } from '../../../utilities/exceptionToError/exceptionToError';
 import { ErrorFirstCallback } from '../types';
 
 interface ErrorMessage {
@@ -75,8 +76,8 @@ export class BrowserChannel<
       try {
         const output = this.transform.jsonToOutput(message.output);
         handleOutput(null, output);
-      } catch (error) {
-        handleOutput(error instanceof Error ? error : new Error(String(error)));
+      } catch (exception) {
+        handleOutput(exceptionToError(exception));
       }
     };
 
@@ -92,8 +93,8 @@ export class BrowserChannel<
     (async () => {
       try {
         await this.emitInput(input);
-      } catch (error) {
-        handleOutput(error instanceof Error ? error : new Error(String(error)));
+      } catch (exception) {
+        handleOutput(exceptionToError(exception));
       }
     })();
 
@@ -126,10 +127,9 @@ export class BrowserChannel<
           const input = this.transform.jsonToInput(message.input);
           const output = await producer(input, sender);
           return this.transform.outputToJson(output);
-        } catch (error) {
-          return {
-            error: error instanceof Error ? error.message : String(error),
-          };
+        } catch (exception) {
+          const error = exceptionToError(exception).message;
+          return { error };
         }
       })();
     };
@@ -146,8 +146,8 @@ export class BrowserChannel<
         type: this.output,
         output: jsonOutput,
       });
-    } catch (error) {
-      await this.throw(error instanceof Error ? error.message : String(error));
+    } catch (exception) {
+      await this.throw(exceptionToError(exception).message);
     }
   }
 
@@ -173,11 +173,7 @@ export class BrowserChannel<
       try {
         await this.return(output as Output);
       } catch (anotherError) {
-        await this.throw(
-          anotherError instanceof Error
-            ? anotherError.message
-            : String(anotherError),
-        );
+        await this.throw(exceptionToError(anotherError).message);
       }
     };
 

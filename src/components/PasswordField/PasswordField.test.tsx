@@ -16,6 +16,7 @@ import {
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { decryptIdentity } from '../../utilities/identities/identities';
+import { exceptionToError } from '../../utilities/exceptionToError/exceptionToError';
 
 import { PasswordField } from './PasswordField';
 
@@ -119,8 +120,8 @@ describe('PasswordField', () => {
         const getPassword = passwordField.set.mock.calls.pop()[0]();
         try {
           await getPassword(event);
-        } catch (e) {
-          error = e instanceof Error ? e.message : String(e);
+        } catch (exception) {
+          error = exceptionToError(exception).message;
         }
       }
 

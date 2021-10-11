@@ -4,6 +4,7 @@ import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.c
 import { ErrorFirstCallback } from '../../channels/base/types';
 
 import { transformBalances } from '../transformBalances/transformBalances';
+import { exceptionToError } from '../exceptionToError/exceptionToError';
 
 export interface Balances {
   free: BN;
@@ -46,8 +47,8 @@ export function onAddressBalanceChange(
     try {
       const balance = computeBalance(responseAddress, rawBalances);
       publisher(null, balance);
-    } catch (error) {
-      publisher(error instanceof Error ? error : new Error(String(error)));
+    } catch (exception) {
+      publisher(exceptionToError(exception));
     }
   }
 
