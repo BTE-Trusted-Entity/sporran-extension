@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import { browser, Windows } from 'webextension-polyfill-ts';
 import type { AnyJson } from '@polkadot/types/types';
 
 import { PopupAction } from '../../../utilities/popups/types';
@@ -38,7 +38,7 @@ export async function showPopup(
   action: PopupAction,
   input: AnyJson,
   sender: { tab?: { id?: number; windowId?: number } },
-): Promise<void> {
+): Promise<Windows.Window> {
   tabId = sender.tab?.id;
 
   await closeExistingPopup();
@@ -68,6 +68,8 @@ export async function showPopup(
     top,
   });
   popupId = window.id;
+
+  return window;
 }
 
 export function popupTabRemovedListener(
