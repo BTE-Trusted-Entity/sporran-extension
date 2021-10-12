@@ -67,7 +67,7 @@ export async function getTabEncryption(
   sender: Runtime.MessageSender,
   dAppDid?: IDidDetails['did'],
 ): Promise<TabEncryption> {
-  if (!sender.tab || !sender.tab.id || !sender.tab.url) {
+  if (!sender.tab || !sender.tab.id || !sender.url) {
     throw new Error('Message not from a tab');
   }
 
@@ -111,7 +111,7 @@ export async function getTabEncryption(
     throw new Error('Receiver key agreement key not found');
   }
 
-  await verifyDidConfigResource(dAppDidDetails.did, sender.tab.url);
+  await verifyDidConfigResource(dAppDidDetails.did, sender.url);
 
   async function decrypt(encrypted: IEncryptedMessage): Promise<IMessage> {
     const senderDetails = dAppDidDetails;

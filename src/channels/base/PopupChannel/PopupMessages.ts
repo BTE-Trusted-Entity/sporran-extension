@@ -7,11 +7,16 @@ import { isExtensionPopup } from '../../../utilities/isExtensionPopup/isExtensio
 
 // TODO: move everything into PopupChannel or rename?
 
-function getPopupUrl(values: AnyJson, action: PopupAction): string {
+function getPopupUrl(
+  values: AnyJson,
+  action: PopupAction,
+  callId: string,
+): string {
   const url = new URL(browser.runtime.getURL('popup.html'));
 
   url.searchParams.set('data', jsonToBase64(values));
   url.searchParams.set('action', action);
+  url.searchParams.set('callId', callId);
 
   return url.toString();
 }
@@ -58,6 +63,7 @@ export async function resizePopup(): Promise<void> {
 export async function showPopup(
   action: PopupAction,
   input: AnyJson,
+  callId: string,
   sender: { tab?: { id?: number; windowId?: number } },
 ): Promise<Windows.Window> {
   tabId = sender.tab?.id;
@@ -65,7 +71,7 @@ export async function showPopup(
   await closeExistingPopup();
 
   // scripts cannot show the extension popup itself, only create window popups
-  const url = getPopupUrl(input, action);
+  const url = getPopupUrl(input, action, callId);
 
   const windowId = sender.tab?.windowId;
 

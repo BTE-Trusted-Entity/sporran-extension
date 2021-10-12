@@ -19,21 +19,26 @@ export class WindowChannel<Input, Output> {
     this.output = `sporranExtension.injectedScript.${type}Output`;
   }
 
-  emitInput(input: Input): void {
+  emitInput(input: Input): string {
+    const callId = String(Math.random());
+
     const message = {
       type: this.input,
+      callId,
       input,
     };
     window.postMessage(message, window.location.href);
+
+    return callId;
   }
 
   subscribe(input: Input, listener: ErrorFirstCallback<Output>): () => void {
-    this.emitInput(input);
+    const callId = this.emitInput(input);
 
     const { output } = this;
 
     function responseListener({ source, data }: MessageEvent) {
-      if (source === window && data.type === output) {
+      if (source === window && data.type === output && data.callId === callId) {
         if (data.error) {
           listener(new Error(data.error));
         } else {
@@ -53,17 +58,19 @@ export class WindowChannel<Input, Output> {
     return result.promise.finally(unsubscribe);
   }
 
-  return(output: Output): void {
+  return(output: Output, callId: string): void {
     const message = {
       type: this.output,
+      callId,
       output,
     };
     window.postMessage(message, window.location.href);
   }
 
-  throw(error: string): void {
+  throw(error: string, callId: string): void {
     const message = {
       type: this.output,
+      callId,
       error,
     };
     window.postMessage(message, window.location.href);
@@ -76,9 +83,10 @@ export class WindowChannel<Input, Output> {
       }
       try {
         const output = await producer(data.input);
-        this.return(output);
+        this.return(output, data.callId);
       } catch (exception) {
-        this.throw(exceptionToError(exception).message);
+        const error = exceptionToError(exception).message;
+        this.throw(error, data.callId);
       }
     };
 
@@ -96,9 +104,9 @@ export class WindowChannel<Input, Output> {
       }
       subscriber(data.input, (error, output?) => {
         if (error) {
-          this.throw(error.message);
+          this.throw(error.message, data.callId);
         } else {
-          this.return(output as Output);
+          this.return(output as Output, data.callId);
         }
       });
     };
