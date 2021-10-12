@@ -1,4 +1,5 @@
 import { makeControlledPromise } from '../../../utilities/makeControlledPromise/makeControlledPromise';
+import { exceptionToError } from '../../../utilities/exceptionToError/exceptionToError';
 import { ErrorFirstCallback } from '../types';
 
 function addListener(listener: (message: MessageEvent) => void) {
@@ -76,8 +77,8 @@ export class WindowChannel<Input, Output> {
       try {
         const output = await producer(data.input);
         this.return(output);
-      } catch (error) {
-        this.throw(error instanceof Error ? error.message : String(error));
+      } catch (exception) {
+        this.throw(exceptionToError(exception).message);
       }
     };
 
