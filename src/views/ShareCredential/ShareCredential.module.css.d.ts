@@ -5,6 +5,7 @@ declare namespace ShareCredentialModuleCssNamespace {
     checkbox: string;
     container: string;
     credentials: string;
+    errorTooltip: string;
     heading: string;
     label: string;
     password: string;

@@ -1,7 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
-import { AttestedClaim, Attestation } from '@kiltprotocol/core';
+import { Attestation } from '@kiltprotocol/core';
 import { DefaultResolver } from '@kiltprotocol/did';
 import {
   IDidResolvedDetails,
@@ -13,7 +13,10 @@ import {
 
 import { shareChannel } from '../../channels/shareChannel/shareChannel';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
-import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
+import {
+  PasswordField,
+  usePasswordField,
+} from '../../components/PasswordField/PasswordField';
 import {
   getIdentityDidCrypto,
   Identity,
@@ -44,38 +47,14 @@ export function ShareCredential(): JSX.Element | null {
     cTypeHashes.includes(credential.request.claim.cTypeHash),
   );
 
-  const [checked, setChecked] = useState<{ [key: string]: boolean }>({
-    '0': true,
-  });
+  const [checked, setChecked] = useState<string>('0');
 
-  const { passwordType, passwordToggle } = usePasswordType();
-  const [password, setPassword] = useState('');
+  const passwordField = usePasswordField();
+  const [error, setError] = useState<string | null>(null);
 
-  const handleShareToggle = useCallback(
-    ({ target }) => {
-      setChecked({
-        ...checked,
-        [target.name]: target.checked,
-      });
-    },
-    [checked],
-  );
-
-  const handleShareAllToggle = useCallback(({ target }) => {
-    const newChecked: { [key: string]: boolean } = {};
-
-    const { elements } = target.form;
-    [...elements].forEach((input: HTMLInputElement) => {
-      if (input.type === 'checkbox' && input !== elements.all) {
-        newChecked[input.name] = elements.all.checked;
-      }
-    });
-
-    setChecked(newChecked);
-  }, []);
-
-  const handlePasswordInput = useCallback((event) => {
-    setPassword(event.target.value);
+  const handleShareToggle = useCallback(({ target }) => {
+    setError(null);
+    setChecked(target.name);
   }, []);
 
   const handleCancel = useCallback(async () => {
@@ -98,28 +77,24 @@ export function ShareCredential(): JSX.Element | null {
       }
 
       const { address } = identity;
-      const requests = Object.entries(checked)
-        .filter(([, value]) => value)
-        .map(([index]) => matchingCredentials[Number(index)].request);
+      const password = await passwordField.get(event);
+      const { encrypt } = await getIdentityDidCrypto(address, password);
 
-      const attestedClaims: AttestedClaim[] = [];
-      for (const request of requests) {
-        const attestation = await Attestation.query(request.rootHash);
+      const request = matchingCredentials[Number(checked)].request;
 
-        if (!attestation) {
-          continue;
-        }
-        attestedClaims.push(
-          AttestedClaim.fromRequestAndAttestation(request, attestation),
-        );
+      const attestation = await Attestation.query(request.rootHash);
+
+      if (!attestation) {
+        setError(t('view_ShareCredential_error'));
+        return;
       }
 
+      const attestedClaim = [{ request, attestation }];
+
       const credentialsBody: ISubmitClaimsForCTypes = {
-        content: attestedClaims,
+        content: attestedClaim,
         type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
       };
-
-      const { encrypt } = await getIdentityDidCrypto(address, password);
 
       const { details: verifierDidDetails } = (await DefaultResolver.resolveDoc(
         verifierDid,
@@ -133,14 +108,12 @@ export function ShareCredential(): JSX.Element | null {
       await shareChannel.return(message);
       window.close();
     },
-    [matchingCredentials, identity, checked, password, verifierDid],
+    [matchingCredentials, identity, checked, verifierDid, passwordField, t],
   );
 
   if (!credentials || !matchingCredentials || !identities || !identity) {
     return null; // storage data pending
   }
-
-  const allChecked = credentials.every((dummy, index) => checked[index]);
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
@@ -152,19 +125,7 @@ export function ShareCredential(): JSX.Element | null {
       <table className={styles.credentials}>
         <thead>
           <tr className={tableStyles.tr}>
-            <th className={tableStyles.th}>
-              <label>
-                <input
-                  type="checkbox"
-                  name="all"
-                  checked={allChecked}
-                  onChange={handleShareAllToggle}
-                  className={styles.checkbox}
-                />
-                <span />
-                {t('view_ShareCredential_all')}
-              </label>
-            </th>
+            <th className={tableStyles.th} />
             <th className={tableStyles.th}>{t('view_ShareCredential_name')}</th>
             <th className={tableStyles.th}>
               {t('view_ShareCredential_ctype')}
@@ -183,9 +144,9 @@ export function ShareCredential(): JSX.Element | null {
               <td className={tableStyles.td}>
                 <label>
                   <input
-                    type="checkbox"
+                    type="radio"
                     name={String(index)}
-                    checked={Boolean(checked[index])}
+                    checked={Number(checked) === index}
                     onChange={handleShareToggle}
                     className={styles.checkbox}
                     aria-label={t('view_ShareCredential_share')}
@@ -211,27 +172,22 @@ export function ShareCredential(): JSX.Element | null {
         </tbody>
       </table>
 
-      <label className={styles.label}>
-        {t('view_ShareCredential_password')}
-        <span className={styles.passwordLine}>
-          <input
-            name="password"
-            type={passwordType}
-            className={styles.password}
-            required
-            onInput={handlePasswordInput}
-          />
-          {passwordToggle}
-        </span>
-      </label>
+      <PasswordField identity={identity} password={passwordField} />
 
       <p className={styles.buttonsLine}>
         <button type="button" className={styles.cancel} onClick={handleCancel}>
           {t('common_action_cancel')}
         </button>
-        <button type="submit" className={styles.submit} disabled={!password}>
+        <button
+          type="submit"
+          className={styles.submit}
+          disabled={passwordField.isEmpty}
+        >
           {t('view_ShareCredential_CTA')}
         </button>
+        <output className={styles.errorTooltip} hidden={!error}>
+          {error}
+        </output>
       </p>
     </form>
   );

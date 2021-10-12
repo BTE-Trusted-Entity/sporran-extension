@@ -2,6 +2,7 @@ import { render } from '../../testing/testing';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { credentialsMock } from '../../utilities/credentials/credentials.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
+import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { paths } from '../paths';
 
 import { ShareCredential } from './ShareCredential';
@@ -26,6 +27,7 @@ describe('ShareCredential', () => {
         <ShareCredential />
       </PopupTestProvider>,
     );
+    await waitForGetPassword();
     expect(container).toMatchSnapshot();
   });
 });
