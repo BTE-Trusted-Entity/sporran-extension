@@ -1,10 +1,7 @@
-import { paths } from '../../views/paths';
-import { PopupAction } from './types';
 import { useMemo } from 'react';
-
-function isExtensionPopup() {
-  return !new URLSearchParams(window.location.search).has('action');
-}
+import { paths } from '../../views/paths';
+import { isExtensionPopup } from '../isExtensionPopup/isExtensionPopup';
+import { PopupAction } from './types';
 
 /** Transforms the URI of externally opened popup into internal URI */
 export function useInitialEntries(): string[] | undefined {

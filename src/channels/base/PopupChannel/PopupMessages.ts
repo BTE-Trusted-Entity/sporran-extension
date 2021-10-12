@@ -3,6 +3,7 @@ import type { AnyJson } from '@polkadot/types/types';
 
 import { PopupAction } from '../../../utilities/popups/types';
 import { jsonToBase64 } from '../../../utilities/popups/usePopupData';
+import { isExtensionPopup } from '../../../utilities/isExtensionPopup/isExtensionPopup';
 
 // TODO: move everything into PopupChannel or rename?
 
@@ -16,8 +17,8 @@ function getPopupUrl(values: AnyJson, action: PopupAction): string {
 }
 
 const type = 'popup';
-const width = 480 + 1; // +1 to compensate for the window chrome
-const height = 600 + 23; // +23 to compensate for the window
+const width = 480;
+const height = 600;
 
 let popupId: number | undefined;
 let tabId: number | undefined;
@@ -32,6 +33,26 @@ async function closeExistingPopup() {
     // ignore the error, can’t do anything here
   }
   popupId = undefined;
+}
+
+export async function resizePopup(): Promise<void> {
+  const { id } = await browser.windows.getCurrent();
+  if (!id || isExtensionPopup()) {
+    return;
+  }
+
+  const { innerWidth, innerHeight, outerWidth, outerHeight } = window;
+
+  const diffWidth = width - innerWidth;
+  const diffHeight = height - innerHeight;
+  if (diffWidth <= 0 && diffHeight <= 0) {
+    return;
+  }
+
+  await browser.windows.update(id, {
+    width: outerWidth + diffWidth,
+    height: outerHeight + diffHeight,
+  });
 }
 
 export async function showPopup(
