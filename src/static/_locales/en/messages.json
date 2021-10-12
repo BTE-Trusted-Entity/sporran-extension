@@ -577,9 +577,6 @@
   "view_ShareCredential_subline": {
     "message": "Pick a credential to share"
   },
-  "view_ShareCredential_all": {
-    "message": "all"
-  },
   "view_ShareCredential_name": {
     "message": "Name"
   },

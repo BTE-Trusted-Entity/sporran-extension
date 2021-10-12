@@ -172,7 +172,7 @@ export function ShareCredential(): JSX.Element | null {
         </tbody>
       </table>
 
-      <PasswordField identity={identity} autoFocus password={passwordField} />
+      <PasswordField identity={identity} password={passwordField} />
 
       <p className={styles.buttonsLine}>
         <button type="button" className={styles.cancel} onClick={handleCancel}>
