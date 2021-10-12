@@ -575,7 +575,7 @@
     "message": "Your Credentials"
   },
   "view_ShareCredential_subline": {
-    "message": "Pick credentials to sign and share"
+    "message": "Pick a credential to share"
   },
   "view_ShareCredential_all": {
     "message": "all"
@@ -592,11 +592,11 @@
   "view_ShareCredential_valid": {
     "message": "Valid"
   },
-  "view_ShareCredential_password": {
-    "message": "Sign with password:"
-  },
   "view_ShareCredential_CTA": {
     "message": "Share"
+  },
+  "view_ShareCredential_error": {
+    "message": "The selected credential has not been attested."
   },
   "view_AppSettings_heading": {
     "message": "Set Custom Endpoint"
