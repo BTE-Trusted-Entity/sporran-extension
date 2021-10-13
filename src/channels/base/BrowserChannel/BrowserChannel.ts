@@ -14,10 +14,12 @@ interface ErrorMessage {
 type MaybeSuccessMessage<JsonOutput> =
   | {
       type: string;
+      callId: string;
       output: JsonOutput;
     }
   | {
       type: string;
+      callId: string;
       error: string;
     };
 
@@ -47,9 +49,10 @@ export class BrowserChannel<
     this.transform = makeTransforms(transform);
   }
 
-  async emitInput(input: Input): Promise<JsonOutput | void> {
+  async emitInput(input: Input, callId: string): Promise<JsonOutput | void> {
     const message = {
       type: this.input,
+      callId,
       input: this.transform.inputToJson(input),
     };
     const result = (await this.emit(message)) as
@@ -64,9 +67,12 @@ export class BrowserChannel<
     return result;
   }
 
-  listenForOutput(handleOutput: ErrorFirstCallback<Output>): () => void {
+  listenForOutput(
+    handleOutput: ErrorFirstCallback<Output>,
+    callId: string,
+  ): () => void {
     const responseListener = (message: MaybeSuccessMessage<JsonOutput>) => {
-      if (message.type !== this.output) {
+      if (message.type !== this.output || message.callId !== callId) {
         return;
       }
       if ('error' in message) {
@@ -90,20 +96,23 @@ export class BrowserChannel<
     input: Input,
     handleOutput: ErrorFirstCallback<Output>,
   ): () => void {
+    const callId = String(Math.random());
+
     (async () => {
       try {
-        await this.emitInput(input);
+        await this.emitInput(input, callId);
       } catch (exception) {
         handleOutput(exceptionToError(exception));
       }
     })();
 
-    return this.listenForOutput(handleOutput);
+    return this.listenForOutput(handleOutput, callId);
   }
 
   async get(input: Input): Promise<Output> {
     if (!this.output) {
-      const jsonOutput = (await this.emitInput(input)) as JsonOutput;
+      const callId = String(Math.random());
+      const jsonOutput = (await this.emitInput(input, callId)) as JsonOutput;
       return this.transform.jsonToOutput(jsonOutput);
     } else {
       const result = makeControlledPromise<Output>();
@@ -139,21 +148,24 @@ export class BrowserChannel<
     return () => this.emitter.removeListener(wrappedProducer);
   }
 
-  async return(output: Output): Promise<void> {
+  async return(output: Output, callId: string): Promise<void> {
     try {
       const jsonOutput = this.transform.outputToJson(output);
       await this.emit({
         type: this.output,
+        callId,
         output: jsonOutput,
       });
     } catch (exception) {
-      await this.throw(exceptionToError(exception).message);
+      const error = exceptionToError(exception).message;
+      await this.throw(error, callId);
     }
   }
 
-  async throw(error: string): Promise<void> {
+  async throw(error: string, callId: string): Promise<void> {
     await this.emit({
       type: this.output,
+      callId,
       error,
     });
   }
@@ -165,27 +177,35 @@ export class BrowserChannel<
       sender: SenderType,
     ) => void,
   ): () => void {
-    const publisher = async (error: Error | null, output?: Output) => {
-      if (error) {
-        await this.throw(error.toString());
-        return;
-      }
-      try {
-        await this.return(output as Output);
-      } catch (anotherError) {
-        await this.throw(exceptionToError(anotherError).message);
-      }
-    };
-
     const wrappedSubscriber = (
-      message: { type: string; input: JsonInput },
+      message: {
+        type: string;
+        callId: string;
+        input: JsonInput;
+      },
       sender: SenderType,
     ) => {
       if (message.type !== this.input) {
         return;
       }
+      const { callId } = message;
       const input = this.transform.jsonToInput(message.input);
-      subscriber(input, publisher, sender);
+
+      subscriber(
+        input,
+        async (error: Error | null, output?: Output) => {
+          if (error) {
+            await this.throw(error.toString(), callId);
+            return;
+          }
+          try {
+            await this.return(output as Output, callId);
+          } catch (anotherError) {
+            await this.throw(exceptionToError(anotherError).message, callId);
+          }
+        },
+        sender,
+      );
     };
 
     this.emitter.addListener(wrappedSubscriber);

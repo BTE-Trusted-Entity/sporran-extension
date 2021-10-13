@@ -31,13 +31,14 @@ export class PopupChannel<
 
   async get(
     input: Input,
-    sender: Parameters<typeof showPopup>[2],
+    sender: Parameters<typeof showPopup>[3],
   ): Promise<Output> {
     const { action } = this;
     const result = makeControlledPromise<Output>();
 
+    const callId = String(Math.random());
     const jsonInput = this.transform.inputToJson(input);
-    const window = await showPopup(action, jsonInput, sender);
+    const window = await showPopup(action, jsonInput, callId, sender);
 
     function handleClose(windowId: number) {
       if (windowId === window.id) {
@@ -50,15 +51,19 @@ export class PopupChannel<
       browser.windows.onRemoved.removeListener(handleClose),
     );
 
-    const unsubscribe = this.channel.listenForOutput(result.callback);
+    const unsubscribe = this.channel.listenForOutput(result.callback, callId);
     return result.promise.finally(unsubscribe);
   }
 
+  getCallId(): string {
+    return new URLSearchParams(window.location.search).get('callId') as string;
+  }
+
   async return(output: Output): Promise<void> {
-    await this.channel.return(output);
+    await this.channel.return(output, this.getCallId());
   }
 
   async throw(error: string): Promise<void> {
-    await this.channel.throw(error);
+    await this.channel.throw(error, this.getCallId());
   }
 }
