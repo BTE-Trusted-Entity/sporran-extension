@@ -1,6 +1,5 @@
 declare namespace SignQuoteModuleCssNamespace {
   export interface ISignQuoteModuleCss {
-    avatar: string;
     buttonsLine: string;
     cancel: string;
     container: string;
@@ -9,10 +8,7 @@ declare namespace SignQuoteModuleCssNamespace {
     detailValue: string;
     details: string;
     heading: string;
-    identity: string;
-    identityName: string;
     label: string;
-    name: string;
     subline: string;
     submit: string;
   }

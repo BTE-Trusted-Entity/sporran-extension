@@ -28,6 +28,7 @@ import { IdentityCredentials } from '../IdentityCredentials/IdentityCredentials'
 import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
 import { DidDowngradeFlow } from '../DidDowngradeFlow/DidDowngradeFlow';
+import { SignQuote } from '../SignQuote/SignQuote';
 import { SignDid } from '../SignDid/SignDid';
 import { paths } from '../paths';
 
@@ -103,6 +104,10 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.identity.vest}>
           <UnlockVestedFunds identity={identity} />
+        </Route>
+
+        <Route path={paths.popup.claim}>
+          <SignQuote identity={identity} />
         </Route>
 
         {features.fullDid && (

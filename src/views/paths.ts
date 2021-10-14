@@ -46,7 +46,7 @@ export const paths = {
   popup: {
     base: '/popup',
     authorize: '/popup/authorize',
-    claim: '/popup/claim',
+    claim: '/identity/:address/claim',
     save: '/popup/save',
     share: '/popup/share',
     sign: '/popup/sign',
