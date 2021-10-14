@@ -70,7 +70,7 @@
     "@storybook/addon-viewport": "^6.3.11",
     "@storybook/builder-webpack5": "^6.3.11",
     "@storybook/manager-webpack5": "^6.3.11",
-    "@storybook/react": "^6.3.11",
+    "@storybook/react": "^6.3.12",
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
     "@testing-library/dom": "^8.9.0",
     "@testing-library/jest-dom": "^5.14.1",
