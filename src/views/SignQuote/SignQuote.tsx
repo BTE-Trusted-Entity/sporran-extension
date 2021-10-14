@@ -1,6 +1,6 @@
 import { Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { find } from 'lodash-es';
+import { find, filter } from 'lodash-es';
 import BN from 'bn.js';
 import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
 import { DefaultResolver } from '@kiltprotocol/did';
@@ -102,10 +102,8 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
       await requestForAttestation.signWithDid(keystore, didDetails);
 
-      const matchingCredentials = credentials.filter(
-        (credential) => credential.cTypeTitle === cTypeTitle,
-      );
-      const index = !matchingCredentials ? 1 : matchingCredentials.length + 1;
+      const matchingCredentials = filter(credentials, { cTypeTitle });
+      const index = matchingCredentials.length + 1;
       const name = `${cTypeTitle} ${index}`;
 
       await saveCredential({
