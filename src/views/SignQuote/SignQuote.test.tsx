@@ -1,6 +1,7 @@
 import { render } from '../../testing/testing';
 import { mockTerms } from '../../utilities/cTypes/cTypes.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
+import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { paths } from '../paths';
 
@@ -10,7 +11,11 @@ describe('SignQuote', () => {
   it('should render', async () => {
     const { container } = render(
       <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
-        <SignQuote />
+        <SignQuote
+          identity={
+            identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+          }
+        />
       </PopupTestProvider>,
     );
     await waitForGetPassword();

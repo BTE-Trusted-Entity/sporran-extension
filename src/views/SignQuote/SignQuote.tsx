@@ -1,9 +1,11 @@
-import { Fragment, useCallback, useState } from 'react';
+import { Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { find, minBy } from 'lodash-es';
+import { find, filter } from 'lodash-es';
 import BN from 'bn.js';
 import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
+import { DefaultResolver } from '@kiltprotocol/did';
 import {
+  IDidDetails,
   IDidResolvedDetails,
   ITerms,
   IClaim,
@@ -14,10 +16,12 @@ import {
 import {
   getIdentityDidCrypto,
   Identity,
-  useIdentities,
 } from '../../utilities/identities/identities';
 import { saveCTypeTitle } from '../../utilities/cTypes/cTypes';
-import { saveCredential } from '../../utilities/credentials/credentials';
+import {
+  saveCredential,
+  useIdentityCredentials,
+} from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import {
   PasswordField,
@@ -25,11 +29,9 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { claimChannel } from '../../channels/claimChannel/claimChannel';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
-import { Avatar } from '../../components/Avatar/Avatar';
+import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 
 import styles from './SignQuote.module.css';
-import { IDidDetails } from '@kiltprotocol/types';
-import { DefaultResolver } from '@kiltprotocol/did';
 
 type Terms = ITerms & {
   claim: IClaim;
@@ -37,7 +39,11 @@ type Terms = ITerms & {
   attesterDid: IDidDetails['did'];
 };
 
-export function SignQuote(): JSX.Element | null {
+interface Props {
+  identity: Identity;
+}
+
+export function SignQuote({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const data = usePopupData<Terms>();
@@ -48,27 +54,20 @@ export function SignQuote(): JSX.Element | null {
 
   const costs = new BN(`${quote?.cost?.gross}000000000000000`);
 
-  const [name, setName] = useState('');
   const passwordField = usePasswordField();
-
-  const handleNameInput = useCallback((event) => {
-    setName(event.target.value);
-  }, []);
 
   const handleCancel = useCallback(async () => {
     await claimChannel.throw('Rejected');
     window.close();
   }, []);
 
-  const identities = useIdentities().data;
-  const firstIdentity =
-    identities && (minBy(Object.values(identities), 'index') as Identity);
+  const credentials = useIdentityCredentials(identity.did);
 
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
 
-      if (!firstIdentity || !cType) {
+      if (!credentials || !cType) {
         return;
       }
 
@@ -84,7 +83,7 @@ export function SignQuote(): JSX.Element | null {
       );
 
       // The attester generated claim with the temporary identity, need to put real address in it
-      const identityClaim = { ...claim, owner: firstIdentity.did };
+      const identityClaim = { ...claim, owner: identity.did };
 
       const requestForAttestation = RequestForAttestation.fromClaim(
         identityClaim,
@@ -94,7 +93,7 @@ export function SignQuote(): JSX.Element | null {
         },
       );
 
-      const { address } = firstIdentity;
+      const { address } = identity;
       const password = await passwordField.get(event);
       const { didDetails, keystore } = await getIdentityDidCrypto(
         address,
@@ -102,6 +101,10 @@ export function SignQuote(): JSX.Element | null {
       );
 
       await requestForAttestation.signWithDid(keystore, didDetails);
+
+      const matchingCredentials = filter(credentials, { cTypeTitle });
+      const index = matchingCredentials.length + 1;
+      const name = `${cTypeTitle} ${index}`;
 
       await saveCredential({
         request: requestForAttestation,
@@ -132,12 +135,8 @@ export function SignQuote(): JSX.Element | null {
       await claimChannel.return(message);
       window.close();
     },
-    [firstIdentity, cType, data, passwordField, name],
+    [identity, cType, data, passwordField, credentials],
   );
-
-  if (!identities || !firstIdentity) {
-    return null; // storage data pending
-  }
 
   return (
     <form
@@ -146,6 +145,14 @@ export function SignQuote(): JSX.Element | null {
       autoComplete="off"
     >
       <h1 className={styles.heading}>{t('view_SignQuote_heading')}</h1>
+      <p className={styles.subline}>{t('view_SignQuote_subline')}</p>
+
+      <IdentitiesCarousel identity={identity} />
+
+      <p className={styles.costs}>
+        <span>{t('view_SignQuote_costs')}</span>
+        <KiltAmount amount={costs} type="costs" smallDecimals />
+      </p>
 
       <dl className={styles.details}>
         {Object.entries(claim.contents).map(([name, value]) => (
@@ -161,29 +168,7 @@ export function SignQuote(): JSX.Element | null {
         <dd className={styles.detailValue}>{attesterName}</dd>
       </dl>
 
-      <p className={styles.costs}>
-        <span>{t('view_SignQuote_costs')}</span>
-        <KiltAmount amount={costs} type="costs" smallDecimals />
-      </p>
-
-      <label className={styles.label}>
-        {t('view_SignQuote_name')}
-        <input
-          name="name"
-          className={styles.name}
-          required
-          onInput={handleNameInput}
-          autoComplete="off"
-          autoFocus
-        />
-      </label>
-
-      <div className={styles.identity}>
-        <Avatar identity={firstIdentity} className={styles.avatar} />
-        <span className={styles.identityName}>{firstIdentity.name}</span>
-      </div>
-
-      <PasswordField identity={firstIdentity} password={passwordField} />
+      <PasswordField identity={identity} password={passwordField} />
 
       <p className={styles.buttonsLine}>
         <button type="button" className={styles.cancel} onClick={handleCancel}>
@@ -192,7 +177,7 @@ export function SignQuote(): JSX.Element | null {
         <button
           type="submit"
           className={styles.submit}
-          disabled={!name || passwordField.isEmpty}
+          disabled={passwordField.isEmpty}
         >
           {t('view_SignQuote_CTA')}
         </button>

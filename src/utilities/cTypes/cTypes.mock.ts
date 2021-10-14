@@ -46,7 +46,7 @@ export const mockTerms = {
       tax: { vat: 3.3 },
     },
     currency: 'KILT',
-    timeframe: new Date('2021-07-10').toString(),
+    timeframe: 'Sat Jul 10 2021 00:00:00 GMT+0000 (Coordinated Universal Time)',
     termsAndConditions: 'https://www.example.com/terms',
   },
   cTypes: [mockCType],

@@ -520,6 +520,9 @@
   "view_SignQuote_heading": {
     "message": "Terms of Attestation"
   },
+  "view_SignQuote_subline": {
+    "message": "Choose an Identity for your credential"
+  },
   "view_SignQuote_costs": {
     "message": "Credential Costs: "
   },
@@ -529,14 +532,11 @@
   "view_SignQuote_attester": {
     "message": "Attester"
   },
-  "view_SignQuote_name": {
-    "message": "Give your credential a name:"
-  },
   "view_SignQuote_password": {
     "message": "Sign with password:"
   },
   "view_SignQuote_CTA": {
-    "message": "Accept"
+    "message": "Request Attestation"
   },
   "view_SaveCredential_heading": {
     "message": "Sporran"
