@@ -40,7 +40,7 @@
   height: 1.5rem;
   border: none;
   border-radius: calc(3rem / 16);
-  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 1px 0 rgba(var(--color-black-rgb), 0.4);
   margin: calc(3rem / 16);
   background: linear-gradient(rgba(168, 168, 168, 0.7) 0%, rgba(108, 107, 107, 0.7) 100%);
   color: var(--color-dark);
@@ -67,7 +67,7 @@
 }
 
 .incorrect {
-  background: linear-gradient(rgba(255, 101, 0, 0.6) 0%, rgba(186, 72, 34, 0.6) 100%);
+  background: linear-gradient(rgba(var(--color-orange-rgb), 0.6) 0%, rgba(186, 72, 34, 0.6) 100%);
   color: var(--color-grey-light);
 }
 
@@ -77,10 +77,10 @@
   width: calc(9rem / 16);
   height: calc(9rem / 16);
   line-height: calc(9rem / 16);
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(var(--color-black-rgb), 0.5);
+  box-shadow: 1px 1px 1px 0 rgba(var(--color-black-rgb), 0.4);
   border-radius: 50%;
-  background: linear-gradient(rgba(255, 101, 0, 0.6) 0%, rgba(186, 72, 34, 0.6) 100%);
+  background: linear-gradient(rgba(var(--color-orange-rgb), 0.6) 0%, rgba(186, 72, 34, 0.6) 100%);
   position: absolute;
   right: -0.25rem;
   top: -0.25rem;

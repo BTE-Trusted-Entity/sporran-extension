@@ -8,10 +8,10 @@
   border: 1px solid var(--color-white);
   border-radius: 1.125rem;
   padding: 0 2rem;
-  background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(rgba(var(--color-black-rgb), 0) 0%, rgba(var(--color-black-rgb), 0.4) 100%);
   box-shadow:
-    inset -1px 1px 1px 0 rgba(255, 255, 255, 0.1),
-    0.375rem 0.375rem 0.75rem 0 rgba(0, 0, 0, 0.2);
+    inset -1px 1px 1px 0 rgba(var(--color-white-rgb), 0.1),
+    0.375rem 0.375rem 0.75rem 0 rgba(var(--color-black-rgb), 0.2);
   cursor: pointer;
 }
 
@@ -19,7 +19,7 @@
 .buttonPrimary[aria-disabled=true] {
   opacity: 0.5;
   color: var(--color-grey-medium);
-  border: 1px solid rgba(242, 239, 238, 0.3);
+  border: 1px solid rgba(var(--color-grey-light-rgb), 0.3);
 }
 
 .buttonSecondary {
@@ -77,9 +77,9 @@
     linear-gradient(#335a87 0%, var(--color-dark) 100%);
   margin: 0 0.375rem 0 0.375rem;
   box-shadow:
-    inset -1px 1px 1px 0 rgba(255, 255, 255, 0.1),
-    0 0 0 2px rgba(255, 255, 255, 0.05),
-    0.375rem 0.375rem 0.75rem 0 rgba(0, 0, 0, 0.2);
+    inset -1px 1px 1px 0 rgba(var(--color-white-rgb), 0.1),
+    0 0 0 2px rgba(var(--color-white-rgb), 0.05),
+    0.375rem 0.375rem 0.75rem 0 rgba(var(--color-black-rgb), 0.2);
 }
 
 .buttonCross {
@@ -89,6 +89,6 @@
     url('../images/x-close.svg'),
     linear-gradient(#335a87 0%, #2f537e 33%, #264262 100%);
   box-shadow:
-    inset -1px 1px 1px 0 rgba(255, 255, 255, 0.1),
-    0.375rem 0.375rem 0.75rem 0 rgba(0, 0, 0, 0.2);
+    inset -1px 1px 1px 0 rgba(var(--color-white-rgb), 0.1),
+    0.375rem 0.375rem 0.75rem 0 rgba(var(--color-black-rgb), 0.2);
 }
