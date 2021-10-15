@@ -51,7 +51,6 @@ async function getSignedTransaction(
       [authentication]: didDetails.getKeyIds(authentication),
     },
     lastTxIndex: await DidChain.queryLastTxIndex(didDetails.did),
-    services: didDetails.getServices(),
   });
 
   const extrinsic = await DidChain.getDeleteDidExtrinsic();
@@ -60,6 +59,7 @@ async function getSignedTransaction(
   const didAuthorizedExtrinsic = await fullDidDetails.authorizeExtrinsic(
     extrinsic,
     keystore,
+    identity.address,
   );
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
