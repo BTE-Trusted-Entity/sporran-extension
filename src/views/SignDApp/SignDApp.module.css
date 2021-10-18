@@ -1,8 +1,5 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  text-align: center;
+  composes: container from '../../components/View/View.module.css';
 }
 
 .heading {
@@ -41,6 +38,7 @@
   composes: smallText from '../../components/Typography/Typography.module.css';
   font-size: 0.675rem;
   margin: 0;
+  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   text-align: left;

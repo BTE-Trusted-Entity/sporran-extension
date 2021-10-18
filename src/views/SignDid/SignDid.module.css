@@ -1,8 +1,5 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  text-align: center;
+  composes: container from '../../components/View/View.module.css';
 }
 
 .heading {
@@ -16,12 +13,14 @@
 
 .label {
   composes: smallText from '../../components/Typography/Typography.module.css';
+  width: 100%;
   margin: 0;
   text-align: left;
 }
 
 .origin {
   composes: inputText from '../../components/Typography/Typography.module.css';
+  width: 100%;
   margin: 0.5rem 0;
   text-align: left;
 }
@@ -66,5 +65,5 @@
 .errorTooltip {
   composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
   top: 2.5rem;
-  left: 64%;
+  left: 75%;
 }

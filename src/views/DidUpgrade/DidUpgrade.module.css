@@ -1,8 +1,5 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  text-align: center;
+  composes: container from '../../components/View/View.module.css';
 }
 
 .heading {
@@ -57,5 +54,5 @@
 .errorTooltip {
   composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
   top: 2.5rem;
-  left: 64%;
+  left: 75%;
 }
