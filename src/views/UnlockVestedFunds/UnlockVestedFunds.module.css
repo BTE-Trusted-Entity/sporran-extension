@@ -7,7 +7,6 @@
 
 .heading {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
-  margin: 0;
 }
 
 .subline {

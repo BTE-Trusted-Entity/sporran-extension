@@ -10,7 +10,6 @@
 
 .heading {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
-  margin-bottom: 0;
 }
 
 .info {

@@ -8,7 +8,7 @@
 .headline {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
   color: var(--color-orange);
-  margin: 0.75rem 0 0 0;
+  margin-top: 0.75rem;
 }
 
 .subline {
