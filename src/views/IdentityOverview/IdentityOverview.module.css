@@ -45,7 +45,7 @@
   composes: buttonWide;
   background:
     url('../../components/images/subscan-logo.svg') no-repeat 0.75rem center,
-    rgba(0, 0, 0, 0.3) url('../../components/images/chevron-right.svg')
+    rgba(var(--color-black-rgb), 0.3) url('../../components/images/chevron-right.svg')
     no-repeat right 5% center/0.375rem 0.75rem;
 }
 
@@ -53,7 +53,7 @@
   composes: buttonWide;
   justify-content: flex-start;
   background:
-    rgba(0, 0, 0, 0.3)
+    rgba(var(--color-black-rgb), 0.3)
     url('../../components/images/chevron-right.svg') no-repeat right 5%
     center/0.375rem 0.75rem;
 }
@@ -68,7 +68,5 @@
   align-self: center;
   margin-left: 0.5rem;
   margin-right: 1.5rem;
-
-  /* --color-orange */
-  background: rgba(255, 101, 0, 0.6) no-repeat;
+  background: rgba(var(--color-orange-rgb), 0.6) no-repeat;
 }
