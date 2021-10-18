@@ -22,7 +22,7 @@
   height: 1em;
   border-radius: 0.5em;
   background: linear-gradient(#335a87 0%, #2f537e 33.1%, #264262 100%);
-  box-shadow: inset 1px 1px 1px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: inset 1px 1px 1px 0 rgba(var(--color-black-rgb), 0.4);
 }
 
 .toggle + *::after {

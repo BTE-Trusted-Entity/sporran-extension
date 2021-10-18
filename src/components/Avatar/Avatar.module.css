@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3) no-repeat;
+  background: rgba(var(--color-white-rgb), 0.3) no-repeat;
 }
 
 .identicon {
@@ -17,6 +17,5 @@
 }
 
 .fullDid {
-  /* --color-orange */
-  background: rgba(255, 101, 0, 0.6) no-repeat;
+  background: rgba(var(--color-orange-rgb), 0.6) no-repeat;
 }

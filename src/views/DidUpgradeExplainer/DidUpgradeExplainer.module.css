@@ -38,9 +38,7 @@
   width: var(--size);
   height: var(--size);
   flex-shrink: 0;
-
-  /* --color-orange */
-  background: rgba(255, 101, 0, 0.6) no-repeat;
+  background: rgba(var(--color-orange-rgb), 0.6) no-repeat;
 }
 
 .deposit {

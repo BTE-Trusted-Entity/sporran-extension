@@ -50,7 +50,7 @@
   grid-area: code;
   height: 100%;
   background:
-    rgba(0, 0, 0, 0.7) url('../../components/images/search.svg')
+    rgba(var(--color-black-rgb), 0.7) url('../../components/images/search.svg')
     center center/1.5rem no-repeat;
   border: 0;
   position: relative;
@@ -69,7 +69,7 @@
 
 .dialog::backdrop,
 .dialog + :global(.backdrop) {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(var(--color-black-rgb), 0.7);
 }
 
 .dialogClose {
