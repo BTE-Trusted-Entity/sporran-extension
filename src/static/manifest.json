@@ -15,12 +15,12 @@
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["js/backgroundScript.js"],
+    "scripts": ["../backgroundScript.ts"],
     "persistent": true
   },
   "content_scripts": [{
     "matches": ["*://*/*"],
-    "js": ["js/contentScript.js"]
+    "js": ["../contentScript.ts"]
   }],
   "icons": {
     "16": "icon/light/16.png",
@@ -35,6 +35,6 @@
   ],
   "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self';",
   "web_accessible_resources": [
-    "js/injectedScript.js"
+    "../injectedScript.ts"
   ]
 }

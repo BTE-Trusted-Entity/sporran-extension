@@ -9,14 +9,14 @@
 .kiltLine {
   composes: line;
 
-  --copy-value-icon: url('../images/kilt-coin-circle.svg');
+  --copy-value-icon: url('/src/components/images/kilt-coin-circle.svg');
   --copy-value-icon-size: 1rem;
 }
 
 .didLine {
   composes: line;
 
-  --copy-value-icon: url('../images/manage-did.svg');
+  --copy-value-icon: url('/src/components/images/manage-did.svg');
   --copy-value-icon-size: 1.125rem;
 }
 

@@ -34,44 +34,44 @@
 .subscan {
   composes: buttonWide from '../../components/Button/Button.module.css';
 
-  --wide-button-icon: url('../../components/images/subscan-logo.svg');
+  --wide-button-icon: url('/src/components/images/subscan-logo.svg');
 }
 
 .credentials {
   composes: buttonWide from '../../components/Button/Button.module.css';
 
-  --wide-button-icon: url('../../components/images/show-credentials.svg');
+  --wide-button-icon: url('/src/components/images/show-credentials.svg');
 }
 
 .downloadPrompt {
   composes: credentials;
 
-  --wide-button-icon: url('../../components/images/download-prompt.svg');
+  --wide-button-icon: url('/src/components/images/download-prompt.svg');
 }
 
 .upgrade {
   composes: buttonWide from '../../components/Button/Button.module.css';
 
-  --wide-button-icon: url('../../components/images/manage-did.svg');
+  --wide-button-icon: url('/src/components/images/manage-did.svg');
 }
 
 .manage {
   composes: buttonWide from '../../components/Button/Button.module.css';
 
-  --wide-button-icon: url('../../components/images/manage-did.svg');
+  --wide-button-icon: url('/src/components/images/manage-did.svg');
 }
 
 .repair {
   composes: buttonWide from '../../components/Button/Button.module.css';
   color: var(--color-orange);
 
-  --wide-button-icon: url('../../components/images/repair-did.svg');
+  --wide-button-icon: url('/src/components/images/repair-did.svg');
 }
 
 .web3Name {
   composes: buttonWide from '../../components/Button/Button.module.css';
 
-  --wide-button-icon: url('../../components/images/web3name.svg');
+  --wide-button-icon: url('/src/components/images/web3name.svg');
 }
 
 .web3NameManage {

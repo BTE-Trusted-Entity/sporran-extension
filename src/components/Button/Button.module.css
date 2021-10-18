@@ -65,7 +65,7 @@
   box-shadow: none;
   margin: 0.25rem 0;
 
-  --wide-button-icon: url('../../components/images/chevron-right.svg');
+  --wide-button-icon: url('/src/components/images/chevron-right.svg');
 
   background: var(--wide-button-icon) no-repeat 0.75rem center/1.5rem,
     rgb(var(--color-black-rgb) / 30%)
@@ -77,7 +77,7 @@
   composes: buttonWide;
   position: relative;
 
-  --wide-button-icon: url('../../components/images/chevron-right.svg');
+  --wide-button-icon: url('/src/components/images/chevron-right.svg');
 }
 
 .buttonNew::after {

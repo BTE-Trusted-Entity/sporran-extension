@@ -255,20 +255,21 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
         throw new Error('No key relationship found');
       }
 
+      const attestationKey = deriveAttestationKeyFromSeed(seed);
+
+      async function customSign({ data, keyRelationship }: SignRequestData) {
+        const signingKey =
+          keyRelationship === 'assertionMethod'
+            ? attestationKey
+            : deriveAuthenticationKey(seed);
+        const signature = signingKey.sign(data, { withType: false });
+        const keyType = signingKey.type;
+
+        return { signature, keyType };
+      }
+
       if (keyRelationship === 'assertionMethod') {
         const api = ConfigService.get('api');
-        const attestationKey = deriveAttestationKeyFromSeed(seed);
-
-        async function sign({ data, keyRelationship }: SignRequestData) {
-          const signingKey =
-            keyRelationship === 'assertionMethod'
-              ? attestationKey
-              : deriveAuthenticationKey(seed);
-          const signature = signingKey.sign(data, { withType: false });
-          const keyType = signingKey.type;
-
-          return { signature, keyType };
-        }
 
         const authorized = await Did.authorizeBatch({
           batchFunction: api.tx.utility.batchAll,
@@ -278,7 +279,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
             extrinsic,
             api.tx.did.removeAttestationKey(),
           ],
-          sign,
+          sign: customSign,
           submitter,
         });
 

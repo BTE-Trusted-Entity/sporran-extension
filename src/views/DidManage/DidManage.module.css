@@ -24,30 +24,30 @@
   margin-bottom: 0.25rem;
 
   --copy-value-icon-size: 1.5rem;
-  --copy-value-icon: url('../../components/images/web3name.svg');
+  --copy-value-icon: url('/src/components/images/web3name.svg');
 }
 
 .linking {
   composes: buttonWide from '../../components/Button/Button.module.css';
   margin: 0.75rem 0 0;
 
-  --wide-button-icon: url('../../components/images/linking_page.svg');
+  --wide-button-icon: url('/src/components/images/linking_page.svg');
 }
 
 .endpoints {
   composes: link;
 
-  --wide-button-icon: url('../../components/images/service-endpoint.svg');
+  --wide-button-icon: url('/src/components/images/service-endpoint.svg');
 }
 
 .web3Name {
   composes: link;
 
-  --wide-button-icon: url('../../components/images/web3name.svg');
+  --wide-button-icon: url('/src/components/images/web3name.svg');
 }
 
 .downgrade {
   composes: link;
 
-  --wide-button-icon: url('../../components/images/manage-did.svg');
+  --wide-button-icon: url('/src/components/images/manage-did.svg');
 }
