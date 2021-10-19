@@ -86,18 +86,25 @@ describe('IdentitiesCarousel', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
         <Route path={paths.identity.overview}>
-          <IdentitiesBubbles identities={Object.values(identities)} />
+          <IdentitiesBubbles
+            identities={Object.values(identities)}
+            showAdd={true}
+          />
         </Route>
       </MemoryRouter>,
     );
 
     expect(container).toMatchSnapshot();
   });
+
   it('should not render bubbles if number of identities is more than the maximum', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
         <Route path={paths.identity.overview}>
-          <IdentitiesBubbles identities={Object.values(moreIdentities)} />
+          <IdentitiesBubbles
+            identities={Object.values(moreIdentities)}
+            showAdd={true}
+          />
         </Route>
       </MemoryRouter>,
     );
