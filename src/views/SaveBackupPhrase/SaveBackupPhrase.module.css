@@ -1,5 +1,6 @@
 .container {
   composes: container from '../../components/View/View.module.css';
+  justify-content: center;
 }
 
 .heading {
