@@ -272,7 +272,11 @@ export async function importIdentity(
 
   const lightDidDetails = getLightDidFromKeypair(identityKeypair);
   const keystore = getKeystoreFromKeypair(identityKeypair);
-  const { did: fullDid } = await DidUtils.upgradeDid(lightDidDetails, keystore);
+  const { did: fullDid } = await DidUtils.upgradeDid(
+    lightDidDetails,
+    address,
+    keystore,
+  );
 
   const isOnChain = Boolean(await DidChain.queryByDID(fullDid));
 
