@@ -72,7 +72,7 @@
     "@storybook/manager-webpack5": "^6.3.12",
     "@storybook/react": "^6.3.12",
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
-    "@testing-library/dom": "^8.9.1",
+    "@testing-library/dom": "^8.10.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
