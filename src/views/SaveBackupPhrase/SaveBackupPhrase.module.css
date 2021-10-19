@@ -1,13 +1,10 @@
 .container {
-  display: flex;
-  flex-direction: column;
+  composes: container from '../../components/View/View.module.css';
   justify-content: center;
-  align-items: center;
 }
 
 .heading {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
-  margin: 0;
 }
 
 .subheading {

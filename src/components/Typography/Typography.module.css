@@ -2,6 +2,7 @@
   font-family: "Montserrat SemiBold", sans-serif;
   font-size: 1.625rem;
   color: var(--color-light);
+  margin: 0;
 }
 
 .importantHeadline {

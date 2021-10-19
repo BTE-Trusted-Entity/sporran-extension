@@ -1,12 +1,9 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  composes: container from '../../components/View/View.module.css';
 }
 
 .heading {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
-  margin: 0;
 }
 
 .info {
@@ -24,6 +21,7 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  text-align: left;
 }
 
 .item::marker {

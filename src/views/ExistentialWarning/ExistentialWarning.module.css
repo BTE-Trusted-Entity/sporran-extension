@@ -1,14 +1,11 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  composes: container from '../../components/View/View.module.css';
 }
 
 .headline {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
   color: var(--color-orange);
-  margin: 0.75rem 0 0 0;
+  margin-top: 0.75rem;
 }
 
 .subline {
@@ -24,11 +21,7 @@
 }
 
 .buttonsLine {
-  margin: 1rem 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  composes: buttonsLine from '../../components/Button/Button.module.css';
 }
 
 .confirm {
