@@ -35,6 +35,7 @@ async function getSignedTransaction(
 
   const { extrinsic, did } = await DidUtils.upgradeDid(
     lightDidDetails,
+    identity.address,
     keystore,
   );
 
