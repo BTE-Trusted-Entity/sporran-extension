@@ -13,17 +13,20 @@ import { IdentitySlideNew } from '../IdentitySlide/IdentitySlideNew';
 import { generatePath } from '../../views/paths';
 
 import styles from './IdentitiesCarousel.module.css';
+import { isExtensionPopup } from '../../utilities/isExtensionPopup/isExtensionPopup';
 
 interface IdentityLinkProps {
   identity: Identity;
   identities: Identity[];
   direction: 'previous' | 'next';
+  showAdd: boolean;
 }
 
 function IdentityLink({
   identity,
   identities,
   direction,
+  showAdd,
 }: IdentityLinkProps): JSX.Element {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
@@ -40,12 +43,13 @@ function IdentityLink({
     : 0;
 
   const isInRange = 0 <= modifiedIndex && modifiedIndex < length;
+  const isNewIdentity = showAdd && !isInRange;
 
   const linkedIndex = (modifiedIndex + length) % length;
-  const linkedIdentity = isInRange ? identities[linkedIndex] : NEW;
-  const title = isInRange
-    ? linkedIdentity.name
-    : t('component_IdentityLink_title_new');
+  const linkedIdentity = isNewIdentity ? NEW : identities[linkedIndex];
+  const title = isNewIdentity
+    ? t('component_IdentityLink_title_new')
+    : linkedIdentity.name;
 
   return (
     <Link
@@ -62,17 +66,21 @@ const maxIdentityBubbles = 5;
 
 interface IdentitiesBubblesProps {
   identities: Identity[];
+  showAdd: boolean;
 }
 
 export function IdentitiesBubbles({
   identities,
+  showAdd,
 }: IdentitiesBubblesProps): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
   const { search } = useLocation();
 
-  if (identities.length > maxIdentityBubbles) {
-    return null; // hide the component when too many identities
+  const singleLink = !showAdd && identities.length <= 1;
+  const tooManyLinks = identities.length > maxIdentityBubbles;
+  if (singleLink || tooManyLinks) {
+    return null; // hide the component when it makes no sense
   }
 
   return (
@@ -88,15 +96,17 @@ export function IdentitiesBubbles({
           />
         </li>
       ))}
-      <li className={styles.item}>
-        <NavLink
-          className={styles.add}
-          activeClassName={styles.addActive}
-          to={generatePath(path, { address: NEW.address })}
-          aria-label={t('component_IdentitiesCarousel_title_new')}
-          title={t('component_IdentitiesCarousel_title_new')}
-        />
-      </li>
+      {showAdd && (
+        <li className={styles.item}>
+          <NavLink
+            className={styles.add}
+            activeClassName={styles.addActive}
+            to={generatePath(path, { address: NEW.address })}
+            aria-label={t('component_IdentitiesCarousel_title_new')}
+            title={t('component_IdentitiesCarousel_title_new')}
+          />
+        </li>
+      )}
     </ul>
   );
 }
@@ -116,6 +126,8 @@ export function IdentitiesCarousel({
   }
 
   const identitiesList = sortBy(Object.values(identities), 'index');
+  const showAdd = isExtensionPopup();
+  const showLinks = showAdd || identitiesList.length > 1;
 
   return (
     <div className={styles.container}>
@@ -125,19 +137,25 @@ export function IdentitiesCarousel({
         <IdentitySlide identity={identity} options={options} />
       )}
 
-      <IdentityLink
-        direction="previous"
-        identity={identity}
-        identities={identitiesList}
-      />
+      {showLinks && (
+        <IdentityLink
+          direction="previous"
+          identity={identity}
+          identities={identitiesList}
+          showAdd={showAdd}
+        />
+      )}
 
-      <IdentityLink
-        direction="next"
-        identity={identity}
-        identities={identitiesList}
-      />
+      {showLinks && (
+        <IdentityLink
+          direction="next"
+          identity={identity}
+          identities={identitiesList}
+          showAdd={showAdd}
+        />
+      )}
 
-      <IdentitiesBubbles identities={identitiesList} />
+      <IdentitiesBubbles identities={identitiesList} showAdd={showAdd} />
     </div>
   );
 }
