@@ -52,7 +52,8 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
   const cType = find(cTypes, { hash: claim.cTypeHash });
 
-  const costs = new BN(`${quote?.cost?.gross}000000000000000`);
+  const gross = quote?.cost?.gross;
+  const costs = gross ? new BN(`${gross}000000000000000`) : new BN(0);
 
   const passwordField = usePasswordField();
 
