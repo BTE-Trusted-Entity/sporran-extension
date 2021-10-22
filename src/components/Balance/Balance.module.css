@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .showBreakdown {
@@ -30,4 +31,12 @@
 
 .balance {
   margin: 0.25rem 0;
+}
+
+.connecting {
+  composes: spinner from '../../components/LoadingSpinner/LoadingSpinner.module.css';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

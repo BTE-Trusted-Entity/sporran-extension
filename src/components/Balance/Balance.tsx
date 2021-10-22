@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import BN from 'bn.js';
-import { ClipLoader } from 'react-spinners';
 import { browser } from 'webextension-polyfill-ts';
 
 import { KiltAmount } from '../KiltAmount/KiltAmount';
@@ -54,6 +53,7 @@ export function Balance({
 }: BalanceProps): JSX.Element {
   const t = browser.i18n.getMessage;
   const balance = useAddressBalance(address);
+  const connecting = balance === null;
 
   const [showBreakdown, setShowBreakdown] = useState(false);
 
@@ -68,8 +68,9 @@ export function Balance({
   return (
     <>
       <p className={styles.balanceLine}>
+        {connecting && <span className={styles.connecting}></span>}
         {t('component_Balance_label')}
-        {balance !== null && (
+        {!connecting && (
           <KiltAmount
             amount={balance.total}
             type="funds"
@@ -77,10 +78,8 @@ export function Balance({
           />
         )}
 
-        {balance === null && <ClipLoader size={10} />}
-
         {breakdown &&
-          balance !== null &&
+          !connecting &&
           (showBreakdown ? (
             <button
               type="button"
@@ -99,7 +98,7 @@ export function Balance({
             />
           ))}
       </p>
-      {showBreakdown && balance !== null && (
+      {showBreakdown && !connecting && (
         <>
           <ul className={styles.breakdown}>
             <li className={styles.balance}>
