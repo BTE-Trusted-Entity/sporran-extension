@@ -40,13 +40,13 @@
     "open-chrome": "node scripts/chrome-launch.js"
   },
   "dependencies": {
-    "@kiltprotocol/chain-helpers": "0.24.0-5",
+    "@kiltprotocol/chain-helpers": "0.24.0-6",
     "@kiltprotocol/core": "^0.24.0-5",
     "@kiltprotocol/did": "0.24.0-5",
     "@kiltprotocol/messaging": "^0.24.0-5",
     "@kiltprotocol/types": "0.24.0-5",
     "@kiltprotocol/utils": "0.24.0-5",
-    "@polkadot/extension-inject": "^0.40.3",
+    "@polkadot/extension-inject": "^0.40.4",
     "@polkadot/keyring": "^7.3.1",
     "@polkadot/types": "^5.9.1",
     "@polkadot/ui-shared": "^0.86.2",
