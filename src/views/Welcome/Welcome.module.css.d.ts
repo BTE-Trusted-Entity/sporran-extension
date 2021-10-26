@@ -5,7 +5,7 @@ declare namespace WelcomeModuleCssNamespace {
     container: string;
     create: string;
     heading: string;
-    import: string;
+    importPhrase: string;
     info: string;
     terms: string;
     termsLine: string;

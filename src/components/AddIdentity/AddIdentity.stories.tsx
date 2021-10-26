@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import menuStyles from '../Menu/Menu.module.css';
+import * as menuStyles from '../Menu/Menu.module.css';
 
 import { AddIdentity } from './AddIdentity';
 

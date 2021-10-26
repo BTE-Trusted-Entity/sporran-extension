@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import styles from './KiltCurrency.module.css';
+import * as styles from './KiltCurrency.module.css';
 
 export function KiltCurrency(): JSX.Element {
   const t = browser.i18n.getMessage;

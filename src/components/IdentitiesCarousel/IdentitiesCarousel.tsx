@@ -12,7 +12,7 @@ import { IdentitySlide } from '../IdentitySlide/IdentitySlide';
 import { IdentitySlideNew } from '../IdentitySlide/IdentitySlideNew';
 import { generatePath } from '../../views/paths';
 
-import styles from './IdentitiesCarousel.module.css';
+import * as styles from './IdentitiesCarousel.module.css';
 import { isExtensionPopup } from '../../utilities/isExtensionPopup/isExtensionPopup';
 
 interface IdentityLinkProps {

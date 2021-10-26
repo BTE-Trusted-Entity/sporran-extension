@@ -11,7 +11,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { getKeypairByBackupPhrase } from '../../utilities/identities/identities';
 
-import styles from './ImportBackupPhrase.module.css';
+import * as styles from './ImportBackupPhrase.module.css';
 
 type BackupPhrase = string[];
 

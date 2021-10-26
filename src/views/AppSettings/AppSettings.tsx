@@ -11,7 +11,7 @@ import {
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
 
-import styles from './AppSettings.module.css';
+import * as styles from './AppSettings.module.css';
 
 export function AppSettings(): JSX.Element {
   const t = browser.i18n.getMessage;

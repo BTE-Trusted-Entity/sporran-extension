@@ -44,7 +44,7 @@
   composes: buttonPrimary from '../../components/Button/Button.module.css';
 }
 
-.import {
+.importPhrase {
   composes: buttonSecondary from '../../components/Button/Button.module.css';
   margin-top: 1.25rem;
 }

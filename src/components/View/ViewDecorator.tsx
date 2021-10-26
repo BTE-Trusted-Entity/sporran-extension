@@ -1,6 +1,6 @@
 import { makeDecorator } from '@storybook/addons';
 
-import styles from './View.module.css';
+import * as styles from './View.module.css';
 
 export const ViewDecorator = makeDecorator({
   name: 'ViewDecorator',

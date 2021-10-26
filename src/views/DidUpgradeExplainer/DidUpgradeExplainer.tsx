@@ -9,7 +9,7 @@ import { Avatar } from '../../components/Avatar/Avatar';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 
-import styles from './DidUpgradeExplainer.module.css';
+import * as styles from './DidUpgradeExplainer.module.css';
 
 interface Props {
   identity: Identity;

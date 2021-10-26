@@ -17,7 +17,7 @@ import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
 import { useOnline } from '../../utilities/useOnline/useOnline';
 
-import styles from './SendToken.module.css';
+import * as styles from './SendToken.module.css';
 
 const noError = null;
 const nonNumberCharacters = /[^0-9,.]/g;

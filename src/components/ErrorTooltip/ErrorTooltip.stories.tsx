@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Meta } from '@storybook/react';
 
-import styles from './ErrorTooltip.module.css';
+import * as styles from './ErrorTooltip.module.css';
 
 export default {
   title: 'Components/ErrorTooltip',

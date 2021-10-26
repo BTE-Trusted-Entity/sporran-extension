@@ -1,7 +1,7 @@
 import { MouseEventHandler, RefObject, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import styles from './usePasteButton.module.css';
+import * as styles from './usePasteButton.module.css';
 
 interface UsePasteButton {
   supported: boolean;

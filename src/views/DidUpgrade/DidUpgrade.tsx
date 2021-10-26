@@ -27,7 +27,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { generatePath, paths } from '../paths';
 
-import styles from './DidUpgrade.module.css';
+import * as styles from './DidUpgrade.module.css';
 
 interface Props {
   identity: Identity;

@@ -25,8 +25,8 @@ import {
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 
-import tableStyles from '../../components/Table/Table.module.css';
-import styles from './ShareCredential.module.css';
+import * as tableStyles from '../../components/Table/Table.module.css';
+import * as styles from './ShareCredential.module.css';
 
 interface VerifierCredentialsRequest {
   acceptedCTypes: IRequestClaimsForCTypesContent[];

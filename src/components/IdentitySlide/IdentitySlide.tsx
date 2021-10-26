@@ -6,7 +6,7 @@ import { IdentityOptions } from '../IdentityOptions/IdentityOptions';
 
 import { Identity, saveIdentity } from '../../utilities/identities/identities';
 
-import styles from './IdentitySlide.module.css';
+import * as styles from './IdentitySlide.module.css';
 
 interface Props {
   identity: Identity;

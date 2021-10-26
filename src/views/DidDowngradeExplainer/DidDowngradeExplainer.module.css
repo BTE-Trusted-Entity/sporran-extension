@@ -33,7 +33,7 @@
   color: var(--color-orange);
 }
 
-.continue {
+.cta {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
   margin-top: 1.5rem;
 }

@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import styles from './LoadingSpinner.module.css';
+import * as styles from './LoadingSpinner.module.css';
 
 export default {
   title: 'Components/Loading Spinner',

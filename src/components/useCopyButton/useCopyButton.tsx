@@ -1,7 +1,7 @@
 import { MouseEventHandler, RefObject, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import styles from './useCopyButton.module.css';
+import * as styles from './useCopyButton.module.css';
 
 interface UseCopyButton {
   supported: boolean;

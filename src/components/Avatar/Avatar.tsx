@@ -5,7 +5,7 @@ import { Identicon } from './Identicon';
 import { isFullDid } from '../../utilities/did/did';
 import { Identity } from '../../utilities/identities/types';
 
-import styles from './Avatar.module.css';
+import * as styles from './Avatar.module.css';
 
 interface Props {
   identity: Identity;
