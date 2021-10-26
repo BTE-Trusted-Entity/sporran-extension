@@ -1,3 +1,5 @@
+// Inspired by https://github.com/keyz/identity-obj-proxy/issues/8#issuecomment-618429796
+
 const proxy = new Proxy(
   {},
   {
@@ -6,7 +8,7 @@ const proxy = new Proxy(
 );
 
 const Module = {
-  __esModule: true,
+  __esModule: true, // tricks Jest into seeing the named exports
   default: proxy,
 };
 
