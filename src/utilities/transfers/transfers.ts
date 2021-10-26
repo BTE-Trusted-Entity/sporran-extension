@@ -5,11 +5,11 @@ import {
   BlockchainUtils,
   BlockchainApiConnection,
 } from '@kiltprotocol/chain-helpers';
-import { SubmittableExtrinsic } from '@polkadot/api/types';
+import { SubmittableExtrinsic } from '@kiltprotocol/types';
 
 import { decryptIdentity } from '../identities/identities';
 
-const currentTx: Record<string, SubmittableExtrinsic<'promise'>> = {};
+const currentTx: Record<string, SubmittableExtrinsic> = {};
 
 interface Input {
   address: string;

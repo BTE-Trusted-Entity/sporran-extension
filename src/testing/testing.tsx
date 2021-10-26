@@ -1,5 +1,7 @@
+// We do want to override the `render` from testing-library
+// eslint-disable-next-line import/export
 export * from '@testing-library/react';
-export { waitForElementToBeRemoved } from '@testing-library/dom';
+
 import { act, render as externalRender } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import dialogPolyfill from 'dialog-polyfill';
@@ -28,6 +30,8 @@ jest.mock('../components/Avatar/Identicon', () => ({
 mockBalanceChanges();
 mockIsFullDid(false);
 
+// We do want to override the `render` from testing-library
+// eslint-disable-next-line import/export
 export function render(
   ui: Parameters<typeof externalRender>[0],
   options?: Parameters<typeof externalRender>[1],
