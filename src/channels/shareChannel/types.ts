@@ -1,5 +1,5 @@
-import { IDidDetails } from '@kiltprotocol/types';
 import {
+  IDidDetails,
   IEncryptedMessage,
   IRequestClaimsForCTypesContent,
 } from '@kiltprotocol/types';
