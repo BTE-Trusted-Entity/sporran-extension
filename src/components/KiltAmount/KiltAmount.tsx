@@ -3,7 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { KiltCurrency } from '../KiltCurrency/KiltCurrency';
 
-import styles from './KiltAmount.module.css';
+import * as styles from './KiltAmount.module.css';
 
 const KILT_POWER = 15;
 

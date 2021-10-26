@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import styles from './Typography.module.css';
+import * as styles from './Typography.module.css';
 
 export default {
   title: 'Components/Typography',

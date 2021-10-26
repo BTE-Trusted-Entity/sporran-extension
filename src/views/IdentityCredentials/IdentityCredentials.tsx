@@ -8,8 +8,8 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { paths } from '../paths';
 
-import tableStyles from '../../components/Table/Table.module.css';
-import styles from './IdentityCredentials.module.css';
+import * as tableStyles from '../../components/Table/Table.module.css';
+import * as styles from './IdentityCredentials.module.css';
 
 interface Props {
   identity: Identity;

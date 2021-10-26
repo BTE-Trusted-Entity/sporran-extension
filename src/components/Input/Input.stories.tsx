@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import styles from './Input.module.css';
+import * as styles from './Input.module.css';
 
 export default {
   title: 'Components/Input',

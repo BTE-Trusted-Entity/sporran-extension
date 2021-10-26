@@ -1,6 +1,6 @@
 import Code from 'qrcode.react';
 
-import styles from './QRCode.module.css';
+import * as styles from './QRCode.module.css';
 
 interface Props {
   address: string;

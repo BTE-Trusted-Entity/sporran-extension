@@ -15,7 +15,7 @@ import {
 import { backgroundSignDidChannel } from '../../channels/SignDidChannels/backgroundSignDidChannel';
 import { SignDidPopupInput } from '../../channels/SignDidChannels/types';
 
-import styles from './SignDid.module.css';
+import * as styles from './SignDid.module.css';
 
 interface Props {
   identity: Identity;

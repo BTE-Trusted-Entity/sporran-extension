@@ -4,7 +4,7 @@ import { Modal } from 'react-dialog-polyfill';
 import { Avatar } from '../Avatar/Avatar';
 import { Identity } from '../../utilities/identities/identities';
 
-import styles from './IdentitySuccessOverlay.module.css';
+import * as styles from './IdentitySuccessOverlay.module.css';
 
 interface Props {
   identity: Identity;

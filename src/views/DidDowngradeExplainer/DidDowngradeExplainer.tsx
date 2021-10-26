@@ -8,7 +8,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 
-import styles from './DidDowngradeExplainer.module.css';
+import * as styles from './DidDowngradeExplainer.module.css';
 
 interface Props {
   identity: Identity;
@@ -40,7 +40,7 @@ export function DidDowngradeExplainer({ identity }: Props): JSX.Element {
         to={generatePath(paths.identity.did.downgrade.sign, {
           address: identity.address,
         })}
-        className={styles.continue}
+        className={styles.cta}
       >
         {t('view_DidDowngradeExplainer_CTA')}
       </Link>

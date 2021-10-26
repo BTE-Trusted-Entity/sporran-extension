@@ -14,7 +14,7 @@ import { Stats } from '../../components/Stats/Stats';
 import { generatePath, paths } from '../paths';
 import { Avatar } from '../../components/Avatar/Avatar';
 
-import styles from './RemoveIdentity.module.css';
+import * as styles from './RemoveIdentity.module.css';
 
 interface Props {
   identity: Identity;

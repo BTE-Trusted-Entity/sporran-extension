@@ -17,7 +17,7 @@ import { AppSettings } from '../AppSettings/AppSettings';
 import { paths } from '../paths';
 
 import './App.css';
-import styles from './App.module.css';
+import * as styles from './App.module.css';
 
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();

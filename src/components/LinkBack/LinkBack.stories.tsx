@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { LinkBack } from './LinkBack';
 
-import styles from './LinkBack.module.css';
+import * as styles from './LinkBack.module.css';
 
 export default {
   title: 'Components/LinkBack',

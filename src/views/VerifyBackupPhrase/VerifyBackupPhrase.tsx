@@ -6,7 +6,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
 
-import styles from './VerifyBackupPhrase.module.css';
+import * as styles from './VerifyBackupPhrase.module.css';
 
 interface Props {
   backupPhrase: string;

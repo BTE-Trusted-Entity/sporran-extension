@@ -20,7 +20,7 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { paths } from '../paths';
 
-import styles from './ReviewTransaction.module.css';
+import * as styles from './ReviewTransaction.module.css';
 
 interface Props {
   identity: Identity;

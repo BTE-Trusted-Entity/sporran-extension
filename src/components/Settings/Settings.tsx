@@ -11,8 +11,8 @@ import {
 import { useConfiguration } from '../../configuration/useConfiguration';
 import { generatePath, paths } from '../../views/paths';
 
-import menuStyles from '../Menu/Menu.module.css';
-import styles from './Settings.module.css';
+import * as menuStyles from '../Menu/Menu.module.css';
+import * as styles from './Settings.module.css';
 
 function useItemsCount(onExistingIdentity: boolean, hasPasswords: boolean) {
   const { features } = useConfiguration();

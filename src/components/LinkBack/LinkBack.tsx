@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import styles from './LinkBack.module.css';
+import * as styles from './LinkBack.module.css';
 
 export function LinkBack(): JSX.Element {
   const t = browser.i18n.getMessage;

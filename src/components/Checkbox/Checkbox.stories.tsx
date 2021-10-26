@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import styles from './Checkbox.module.css';
+import * as styles from './Checkbox.module.css';
 
 export default {
   title: 'Components/Checkbox',

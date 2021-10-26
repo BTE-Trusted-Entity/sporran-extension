@@ -46,7 +46,7 @@ exports[`Welcome should match the snapshot with an identity 1`] = `
     </a>
     <a
       aria-disabled="true"
-      class="import"
+      class="importPhrase"
       href="/identity/import"
     >
       Import an Identity from pre-existing phrase
@@ -108,7 +108,7 @@ Add your first Identity to get started.
     </a>
     <a
       aria-disabled="true"
-      class="import"
+      class="importPhrase"
       href="/identity/import"
     >
       Import an Identity from pre-existing phrase

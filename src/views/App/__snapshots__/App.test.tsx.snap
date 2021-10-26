@@ -68,7 +68,7 @@ Add your first Identity to get started.
       </a>
       <a
         aria-disabled="true"
-        class="import"
+        class="importPhrase"
         href="/identity/import"
       >
         Import an Identity from pre-existing phrase

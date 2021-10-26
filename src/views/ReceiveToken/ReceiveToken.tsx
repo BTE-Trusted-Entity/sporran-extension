@@ -10,7 +10,7 @@ import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 
-import styles from './ReceiveToken.module.css';
+import * as styles from './ReceiveToken.module.css';
 
 interface Props {
   identity: Identity;

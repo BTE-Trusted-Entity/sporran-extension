@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import styles from './chromeMacBug.module.css';
+import * as styles from './chromeMacBug.module.css';
 
 const { screen, screenTop, screenLeft } = window;
 

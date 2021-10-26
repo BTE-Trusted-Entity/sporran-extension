@@ -10,7 +10,7 @@ import {
   onAddressBalanceChange,
 } from '../../utilities/balanceChanges/balanceChanges';
 
-import styles from './Balance.module.css';
+import * as styles from './Balance.module.css';
 
 interface BalanceBN {
   transferable: BN;

@@ -4,7 +4,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { paths } from '../../views/paths';
 import { useIdentities } from '../../utilities/identities/identities';
 
-import styles from './AddIdentity.module.css';
+import * as styles from './AddIdentity.module.css';
 
 export function AddIdentity(): JSX.Element | null {
   const t = browser.i18n.getMessage;

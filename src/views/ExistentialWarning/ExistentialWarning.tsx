@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 
-import styles from './ExistentialWarning.module.css';
+import * as styles from './ExistentialWarning.module.css';
 
 interface Props {
   nextPath: string;

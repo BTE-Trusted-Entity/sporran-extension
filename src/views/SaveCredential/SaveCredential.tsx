@@ -8,7 +8,7 @@ import {
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 
-import styles from './SaveCredential.module.css';
+import * as styles from './SaveCredential.module.css';
 
 export function SaveCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;

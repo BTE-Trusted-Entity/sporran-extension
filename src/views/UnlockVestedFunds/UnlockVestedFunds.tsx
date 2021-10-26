@@ -20,7 +20,7 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 
-import styles from './UnlockVestedFunds.module.css';
+import * as styles from './UnlockVestedFunds.module.css';
 
 interface Props {
   identity: Identity;

@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import menuStyles from '../Menu/Menu.module.css';
+import * as menuStyles from '../Menu/Menu.module.css';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import { IdentityOptions } from './IdentityOptions';

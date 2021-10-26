@@ -5,7 +5,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { paths } from '../../views/paths';
 import { hasVestedFunds } from '../../utilities/vesting/vesting';
 
-import styles from './BalanceUpdateLink.module.css';
+import * as styles from './BalanceUpdateLink.module.css';
 
 interface Props {
   address: string;

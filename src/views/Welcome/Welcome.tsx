@@ -10,7 +10,7 @@ import { plural } from '../../utilities/plural/plural';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { generatePath, paths } from '../paths';
 
-import styles from './Welcome.module.css';
+import * as styles from './Welcome.module.css';
 
 interface Props {
   again?: boolean;
@@ -101,7 +101,7 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
 
       <Link
         to={paths.identity.import.start}
-        className={styles.import}
+        className={styles.importPhrase}
         onClick={handleLinkClick}
         aria-disabled={!enabled}
       >

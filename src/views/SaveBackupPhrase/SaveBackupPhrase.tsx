@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
 
-import styles from './SaveBackupPhrase.module.css';
+import * as styles from './SaveBackupPhrase.module.css';
 interface Props {
   backupPhrase: string;
 }
