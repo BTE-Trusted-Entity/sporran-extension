@@ -29,7 +29,7 @@ import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 
-import styles from './DidDowngrade.module.css';
+import * as styles from './DidDowngrade.module.css';
 
 interface Props {
   identity: Identity;

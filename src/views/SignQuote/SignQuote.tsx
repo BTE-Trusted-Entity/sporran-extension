@@ -31,7 +31,7 @@ import { claimChannel } from '../../channels/claimChannel/claimChannel';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 
-import styles from './SignQuote.module.css';
+import * as styles from './SignQuote.module.css';
 
 type Terms = ITerms & {
   claim: IClaim;

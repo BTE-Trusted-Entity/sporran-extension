@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import tableStyles from './Table.module.css';
+import * as tableStyles from './Table.module.css';
 
 export default {
   title: 'Components/Table',

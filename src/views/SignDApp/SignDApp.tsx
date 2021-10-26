@@ -11,7 +11,7 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignChannel } from '../../dApps/SignChannels/backgroundSignChannel';
 
-import styles from './SignDApp.module.css';
+import * as styles from './SignDApp.module.css';
 
 interface ExtrinsicData {
   origin: string;

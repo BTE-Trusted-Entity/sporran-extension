@@ -7,8 +7,8 @@ import { useConfiguration } from '../../configuration/useConfiguration';
 import { Identity } from '../../utilities/identities/types';
 import { generatePath, paths } from '../../views/paths';
 
-import menuStyles from '../Menu/Menu.module.css';
-import styles from './IdentityOptions.module.css';
+import * as menuStyles from '../Menu/Menu.module.css';
+import * as styles from './IdentityOptions.module.css';
 import { isFullDid } from '../../utilities/did/did';
 
 interface Props {

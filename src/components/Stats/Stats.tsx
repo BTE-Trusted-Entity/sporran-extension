@@ -8,7 +8,7 @@ import {
 } from '../../utilities/identities/identities';
 import { useStats } from './useStats';
 
-import styles from './Stats.module.css';
+import * as styles from './Stats.module.css';
 
 interface Props {
   identities: IdentitiesMap;

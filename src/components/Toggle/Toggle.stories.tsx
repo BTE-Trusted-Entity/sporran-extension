@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import styles from './Toggle.module.css';
+import * as styles from './Toggle.module.css';
 
 export default {
   title: 'Components/Toggle',

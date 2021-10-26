@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 
 import storiesStyles from './Button.stories.module.css';
-import styles from './Button.module.css';
+import * as styles from './Button.module.css';
 
 export default {
   title: 'Components/Button',

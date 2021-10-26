@@ -1,7 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Modal } from 'react-dialog-polyfill';
 
-import styles from './UpcomingFeatureModal.module.css';
+import * as styles from './UpcomingFeatureModal.module.css';
 
 interface Props {
   onClose: () => void;

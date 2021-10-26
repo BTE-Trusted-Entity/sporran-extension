@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { IdentitiesProviderMock } from '../../utilities/identities/IdentitiesProvider.mock';
-import menuStyles from '../Menu/Menu.module.css';
+import * as menuStyles from '../Menu/Menu.module.css';
 
 import { Settings } from './Settings';
 

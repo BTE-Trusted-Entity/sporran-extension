@@ -2,8 +2,8 @@ import { Component } from 'react';
 import { Modal } from 'react-dialog-polyfill';
 import { browser } from 'webextension-polyfill-ts';
 
-import overlayStyles from '../../components/Overlay/Overlay.module.css';
-import styles from './GenericError.module.css';
+import * as overlayStyles from '../../components/Overlay/Overlay.module.css';
+import * as styles from './GenericError.module.css';
 
 interface Props {
   children: JSX.Element;

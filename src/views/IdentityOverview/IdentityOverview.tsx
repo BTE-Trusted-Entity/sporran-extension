@@ -22,7 +22,7 @@ import { useConfiguration } from '../../configuration/useConfiguration';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { IdentityOverviewNew } from './IdentityOverviewNew';
 
-import styles from './IdentityOverview.module.css';
+import * as styles from './IdentityOverview.module.css';
 
 interface Props {
   identity: Identity;

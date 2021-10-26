@@ -9,7 +9,7 @@ import { useConfiguration } from '../../configuration/useConfiguration';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { Avatar } from '../Avatar/Avatar';
 
-import styles from './TxStatusModal.module.css';
+import * as styles from './TxStatusModal.module.css';
 
 interface Messages {
   pending: ReactNode;

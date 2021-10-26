@@ -3,9 +3,23 @@ import { createRequire } from 'node:module';
 import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import ExtensionReloader from 'webpack-extension-reloader';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const require = createRequire(import.meta.url);
 const isDevelopment = process.env.NODE_ENV !== 'production';
+
+const stylesLoader = isDevelopment
+  ? 'style-loader'
+  : MiniCssExtractPlugin.loader;
+
+const cssLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: {
+      namedExport: true,
+    },
+  },
+};
 
 export default {
   mode: isDevelopment ? 'development' : 'production',
@@ -28,15 +42,15 @@ export default {
       },
       {
         use: [
-          'style-loader', // Creates style nodes from JS strings
-          '@teamsupercell/typings-for-css-modules-loader', // Help TS deal with CSS Modules
-          'css-loader', // Translates CSS into CommonJS
+          stylesLoader,
+          '@teamsupercell/typings-for-css-modules-loader',
+          cssLoader,
         ],
         test: /\.module.css$/,
         exclude: /node_modules/,
       },
       {
-        use: ['style-loader', 'css-loader'],
+        use: [stylesLoader, cssLoader],
         test: /App.css$/,
       },
       {
@@ -73,7 +87,21 @@ export default {
         },
       ],
     }),
-    ...(isDevelopment ? [new ExtensionReloader()] : []),
+    ...(isDevelopment
+      ? [new ExtensionReloader()]
+      : [new MiniCssExtractPlugin()]),
   ],
   ...(isDevelopment && { devtool: 'inline-source-map' }),
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          type: 'css/mini-extract',
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
+  },
 };

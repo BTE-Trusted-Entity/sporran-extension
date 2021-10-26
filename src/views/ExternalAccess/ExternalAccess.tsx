@@ -10,7 +10,7 @@ import {
 } from '../../utilities/authorizedStorage/authorizedStorage';
 import { paths } from '../paths';
 
-import styles from './ExternalAccess.module.css';
+import * as styles from './ExternalAccess.module.css';
 
 export function ExternalAccess(): JSX.Element | null {
   const t = browser.i18n.getMessage;

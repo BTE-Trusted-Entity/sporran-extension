@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import styles from './usePasswordType.module.css';
+import * as styles from './usePasswordType.module.css';
 
 interface usePasswordTypeType {
   passwordType: 'password' | 'text';

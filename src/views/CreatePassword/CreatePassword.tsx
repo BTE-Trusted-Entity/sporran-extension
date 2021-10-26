@@ -6,7 +6,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { usePasswordType } from '../../components/usePasswordType/usePasswordType';
 import { paths } from '../paths';
 
-import styles from './CreatePassword.module.css';
+import * as styles from './CreatePassword.module.css';
 
 function hasUpperCase(value: string): boolean {
   return /\p{Upper}/u.test(value);

@@ -7,7 +7,7 @@ import {
   AccessInput,
 } from '../../dApps/AccessChannels/browserAccessChannels';
 
-import styles from './AuthorizeDApp.module.css';
+import * as styles from './AuthorizeDApp.module.css';
 
 export function AuthorizeDApp(): JSX.Element {
   const t = browser.i18n.getMessage;

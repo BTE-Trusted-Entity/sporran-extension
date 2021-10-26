@@ -1,7 +1,7 @@
 declare namespace DidDowngradeExplainerModuleCssNamespace {
   export interface IDidDowngradeExplainerModuleCss {
     container: string;
-    continue: string;
+    cta: string;
     explanation: string;
     heading: string;
     info: string;

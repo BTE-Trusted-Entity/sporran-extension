@@ -8,7 +8,7 @@ import { paths } from '../paths';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Stats } from '../../components/Stats/Stats';
 
-import styles from './IdentityOverview.module.css';
+import * as styles from './IdentityOverview.module.css';
 
 export function IdentityOverviewNew(): JSX.Element | null {
   const t = browser.i18n.getMessage;
