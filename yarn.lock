@@ -1684,6 +1684,16 @@
     "@polkadot/types" "^5.4.1"
     tweetnacl "^1.0.3"
 
+"@kiltprotocol/types@0.24.0-6":
+  version "0.24.0-6"
+  resolved "https://registry.yarnpkg.com/@kiltprotocol/types/-/types-0.24.0-6.tgz#7f15e9a7d083439d48021c68558b6c8a1a2fdfed"
+  integrity sha512-IIPgx0pJ/3xrg5diRyGOLc/tachsmGVtMZhQ7nGeIKXIgj+x2sftCkX5FRw/ZiAUZIAUriByDfFVOMBPQU/Jdw==
+  dependencies:
+    "@polkadot/api" "^5.4.1"
+    "@polkadot/keyring" "^7.1.2"
+    "@polkadot/types" "^5.4.1"
+    tweetnacl "^1.0.3"
+
 "@kiltprotocol/utils@0.24.0-5":
   version "0.24.0-5"
   resolved "https://registry.yarnpkg.com/@kiltprotocol/utils/-/utils-0.24.0-5.tgz#8b650d9d60808fc420c966dfc14de570f59020d8"
