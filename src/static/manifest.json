@@ -3,7 +3,7 @@
   "name": "__MSG_manifest_name__",
   "short_name": "__MSG_manifest_short_name__",
   "description": "__MSG_manifest_description__",
-  "version": "2021.9.8",
+  "version": "2021.10.27",
   "default_locale": "en",
   "browser_action": {
     "default_icon": {
