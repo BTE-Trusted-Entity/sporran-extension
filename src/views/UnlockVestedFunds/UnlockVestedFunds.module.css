@@ -8,7 +8,7 @@
 
 .subline {
   composes: subline from '../../components/Typography/Typography.module.css';
-  margin: 0 0 0.8125rem 0;
+  margin: 0 0 0.8125rem;
 }
 
 .avatar {
@@ -18,7 +18,7 @@
 
 .name {
   composes: identityText from '../../components/Typography/Typography.module.css';
-  margin: 0.5rem 0 0.25rem 0;
+  margin: 0.5rem 0 0.25rem;
 }
 
 .explanation {

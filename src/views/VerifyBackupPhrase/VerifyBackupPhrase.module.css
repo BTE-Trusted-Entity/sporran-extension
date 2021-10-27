@@ -4,7 +4,7 @@
 
 .info {
   composes: subline from '../../components/Typography/Typography.module.css';
-  margin: 0.5rem 0.5rem 1.5rem 0.5rem;
+  margin: 0.5rem 0.5rem 1.5rem;
 }
 
 .heading {
@@ -21,7 +21,7 @@
   flex-wrap: wrap;
   width: 100%;
   height: calc(120rem / 16);
-  padding: 1rem 1rem;
+  padding: 1rem;
   margin-bottom: 1.5rem;
 }
 
@@ -36,9 +36,9 @@
   height: 1.5rem;
   border: none;
   border-radius: calc(3rem / 16);
-  box-shadow: 1px 1px 1px 0 rgba(var(--color-black-rgb), 0.4);
+  box-shadow: 1px 1px 1px 0 rgb(var(--color-black-rgb) / 40%);
   margin: calc(3rem / 16);
-  background: linear-gradient(rgba(168, 168, 168, 0.7) 0%, rgba(108, 107, 107, 0.7) 100%);
+  background: linear-gradient(rgb(168 168 168 / 70%) 0%, rgb(108 107 107 / 70%) 100%);
   color: var(--color-dark);
   cursor: pointer;
 }
@@ -49,7 +49,7 @@
 
 .correct {
   composes: smallText from '../../components/Typography/Typography.module.css';
-  background: linear-gradient(rgba(90, 185, 170, 0.6) 0%, rgba(56, 112, 103, 0.6) 100%);
+  background: linear-gradient(rgb(90 185 170 / 60%) 0%, rgb(56 112 103 / 60%) 100%);
   color: var(--color-grey-light);
 }
 
@@ -63,7 +63,7 @@
 }
 
 .incorrect {
-  background: linear-gradient(rgba(var(--color-orange-rgb), 0.6) 0%, rgba(186, 72, 34, 0.6) 100%);
+  background: linear-gradient(rgb(var(--color-orange-rgb) / 60%) 0%, rgb(186 72 34 / 60%) 100%);
   color: var(--color-grey-light);
 }
 
@@ -73,10 +73,10 @@
   width: calc(9rem / 16);
   height: calc(9rem / 16);
   line-height: calc(9rem / 16);
-  border: 1px solid rgba(var(--color-black-rgb), 0.5);
-  box-shadow: 1px 1px 1px 0 rgba(var(--color-black-rgb), 0.4);
+  border: 1px solid rgb(var(--color-black-rgb) / 50%);
+  box-shadow: 1px 1px 1px 0 rgb(var(--color-black-rgb) / 40%);
   border-radius: 50%;
-  background: linear-gradient(rgba(var(--color-orange-rgb), 0.6) 0%, rgba(186, 72, 34, 0.6) 100%);
+  background: linear-gradient(rgb(var(--color-orange-rgb) / 60%) 0%, rgb(186 72 34 / 60%) 100%);
   position: absolute;
   right: -0.25rem;
   top: -0.25rem;

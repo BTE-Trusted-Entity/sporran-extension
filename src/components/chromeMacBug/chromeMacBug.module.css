@@ -1,10 +1,10 @@
 @keyframes chromeMacBugRedraw {
   0% {
-    opacity: 1;
+    opacity: 100%;
   }
 
   100% {
-    opacity: 0.99;
+    opacity: 99%;
   }
 }
 

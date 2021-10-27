@@ -8,7 +8,7 @@
 
 .subline {
   composes: subline from '../../components/Typography/Typography.module.css';
-  margin: 0 0 0.8125rem 0;
+  margin: 0 0 0.8125rem;
 }
 
 .explanation {
@@ -23,7 +23,7 @@
 
 .functionality {
   composes: explanation;
-  margin: 2rem 0 1rem 0;
+  margin: 2rem 0 1rem;
 }
 
 .avatar {
@@ -34,7 +34,7 @@
   width: var(--size);
   height: var(--size);
   flex-shrink: 0;
-  background: rgba(var(--color-orange-rgb), 0.6) no-repeat;
+  background: rgb(var(--color-orange-rgb) / 60%) no-repeat;
 }
 
 .deposit {

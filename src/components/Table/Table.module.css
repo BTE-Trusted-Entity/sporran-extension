@@ -12,15 +12,15 @@
 }
 
 .th {
-  background-color: rgba(90, 185, 170, var(--opacity));
+  background-color: rgb(90 185 170 / var(--opacity));
 }
 
 .tr:nth-child(2n + 1) .td {
-  background-color: rgba(242, 239, 238, var(--opacity));
+  background-color: rgb(242 239 238 / var(--opacity));
 }
 
 .tr:nth-child(2n) .td {
-  background-color: rgba(168, 168, 168, var(--opacity));
+  background-color: rgb(168 168 168 / var(--opacity));
 }
 
 .th:first-child {
