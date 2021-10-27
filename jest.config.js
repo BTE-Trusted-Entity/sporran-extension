@@ -116,12 +116,12 @@ export default {
   transform: {
     '\\.tsx?$': 'ts-jest',
     'node_modules/lodash-es/.*': 'babel-jest',
-    'node_modules/@polkadot/.*': 'babel-jest',
+    'node_modules/(@kiltprotocol/.*)?@polkadot/.*': 'babel-jest',
     'node_modules/@babel/runtime/.*': 'babel-jest',
   },
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   transformIgnorePatterns: [
-    '/node_modules/(?!(lodash-es)|(@polkadot)|(@babel/runtime))',
+    '/node_modules/(?!(lodash-es)|(@polkadot)|(@kiltprotocol/.*/@polkadot)|(@babel/runtime))',
   ],
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,
