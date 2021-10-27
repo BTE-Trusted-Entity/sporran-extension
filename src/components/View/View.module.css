@@ -6,7 +6,7 @@
   height: var(--popup-height);
   max-height: var(--popup-height);
   background: url('../images/background.png') no-repeat center/contain;
-  padding: 4rem 1.5rem 0 1.5rem;
+  padding: 4rem 1.5rem 0;
   box-sizing: border-box;
   margin: auto;
 }

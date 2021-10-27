@@ -1,64 +1,64 @@
 .screenHeadline {
-  font-family: "Montserrat SemiBold", sans-serif;
+  font-family: 'Montserrat SemiBold', sans-serif;
   font-size: 1.625rem;
   color: var(--color-light);
   margin: 0;
 }
 
 .importantHeadline {
-  font-family: "Montserrat Bold", sans-serif;
+  font-family: 'Montserrat Bold', sans-serif;
   font-size: 1.5rem;
   color: var(--color-orange);
 }
 
 .subline {
-  font-family: "Montserrat Medium", sans-serif;
+  font-family: 'Montserrat Medium', sans-serif;
   font-size: 0.875rem;
   color: var(--color-grey-light);
 }
 
 .identityText {
-  font-family: "Montserrat SemiBold", sans-serif;
+  font-family: 'Montserrat SemiBold', sans-serif;
   font-size: 1rem;
   color: var(--color-grey-light);
 }
 
 .buttonText {
-  font-family: "Montserrat SemiBold", sans-serif;
+  font-family: 'Montserrat SemiBold', sans-serif;
   font-size: 0.875rem;
   color: var(--color-grey-light);
 }
 
 .buttonText:disabled {
-  color: rgba(var(--color-grey-light-rgb), 0.2);
+  color: rgb(var(--color-grey-light-rgb) / 20%);
 }
 
 .balanceText {
-  font-family: "Montserrat Medium", sans-serif;
+  font-family: 'Montserrat Medium', sans-serif;
   font-size: 1.25rem;
   color: var(--color-light);
 }
 
 .smallText {
-  font-family: "Montserrat Medium", sans-serif;
+  font-family: 'Montserrat Medium', sans-serif;
   font-size: 0.75rem;
   color: var(--color-grey-medium);
 }
 
 .smallImportant {
-  font-family: "Montserrat Medium", sans-serif;
+  font-family: 'Montserrat Medium', sans-serif;
   font-size: 0.75rem;
   color: var(--color-orange);
 }
 
 .inputText {
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
   font-size: 0.875rem;
   color: var(--color-grey-light);
 }
 
 .errorText {
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
   font-size: calc(11rem / 16);
   color: var(--color-grey-light);
 }

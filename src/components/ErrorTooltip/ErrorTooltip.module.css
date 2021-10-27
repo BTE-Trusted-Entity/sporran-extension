@@ -1,5 +1,5 @@
 .tooltip {
-  --background: rgba(255, 0, 0, 0.5);
+  --background: rgb(255 0 0 / 50%);
   --arrow: 0.25rem;
 
   composes: errorText from '../Typography/Typography.module.css';

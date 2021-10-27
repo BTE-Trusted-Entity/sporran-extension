@@ -4,6 +4,7 @@
     "stylelint-config-css-modules"
   ],
   "rules": {
+    "string-quotes": "single",
     "value-keyword-case": null,
     "declaration-block-no-duplicate-properties": [
       true,
@@ -11,6 +12,18 @@
         "ignoreProperties": [
           "composes"
         ]
+      }
+    ],
+    "selector-class-pattern": [
+      "^[a-z][a-zA-Z0-9]+$",
+      {
+        "message": "Expected class selector to be camelCase"
+      }
+    ],
+    "keyframes-name-pattern": [
+      "^[a-z][a-zA-Z0-9]+$",
+      {
+        "message": "Expected keyframe name to be camelCase"
       }
     ]
   }

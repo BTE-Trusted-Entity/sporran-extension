@@ -9,7 +9,7 @@
       #547099 70%,
       #547099 100%
     );
-  box-shadow: 0.375rem 0.375rem 0.75rem 0 rgba(var(--color-black-rgb), 0.5);
+  box-shadow: 0.375rem 0.375rem 0.75rem 0 rgb(var(--color-black-rgb) / 50%);
   position: absolute;
   top: calc(99rem / 16);
   left: 6.125rem;

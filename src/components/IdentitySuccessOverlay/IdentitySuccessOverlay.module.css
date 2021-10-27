@@ -4,7 +4,7 @@
 
 .overlay::backdrop,
 .overlay + :global(.backdrop) {
-  opacity: 0;
+  opacity: 0%;
 }
 
 .heading {

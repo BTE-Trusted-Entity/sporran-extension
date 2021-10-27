@@ -1,10 +1,10 @@
 .input {
   composes: inputText from '../Typography/Typography.module.css';
   height: 2rem;
-  padding: 0 1rem 0.125rem 1rem;
+  padding: 0 1rem 0.125rem;
   border: 0;
   border-radius: 1.125rem;
-  box-shadow: inset 1px 1px 1px 0 rgba(var(--color-black-rgb), 0.4);
+  box-shadow: inset 1px 1px 1px 0 rgb(var(--color-black-rgb) / 30%);
   background-color: var(--color-dark);
   background-image: var(--input-gradient);
   caret-color: var(--color-grey-light);
@@ -16,7 +16,7 @@
 
 .input::placeholder {
   color: var(--color-grey-medium);
-  opacity: 1;
+  opacity: 100%;
 }
 
 .inputKiltAmount {
@@ -30,10 +30,5 @@
 }
 
 .inputKiltAmount[type='number'] {
-  -moz-appearance: textfield;
-}
-
-.inputKiltAmount[type='number']::-webkit-inner-spin-button,
-.inputKiltAmount[type='number']::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+  appearance: none;
 }

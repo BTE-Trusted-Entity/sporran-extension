@@ -33,7 +33,7 @@
     "test": "jest",
     "lint": "yarn run lint-css && yarn run lint-js",
     "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.json \"src/**/*.ts*\"",
-    "lint-css": "stylelint \"src/**/*.css*\"",
+    "lint-css": "stylelint \"src/**/*.css\"",
     "prettify": "prettier --write \"src/**/*.ts*\"",
     "storybook": "start-storybook --port 6006",
     "open-firefox": "web-ext run --source-dir dist",

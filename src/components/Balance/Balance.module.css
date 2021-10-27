@@ -1,7 +1,7 @@
 .balanceLine {
   composes: smallText from '../Typography/Typography.module.css';
   font-size: 1.25rem;
-  margin: 1rem 0 0 0;
+  margin: 1rem 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +26,7 @@
   composes: smallText from '../../components/Typography/Typography.module.css';
   list-style: none;
   padding: 0;
-  margin: 0.25rem 0 0 0;
+  margin: 0.25rem 0 0;
 }
 
 .balance {
