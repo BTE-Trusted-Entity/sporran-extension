@@ -52,7 +52,7 @@ Just start it again to continue.
         placeholder="wss://example.org:433"
         required=""
         type="url"
-        value="wss://kilt-peregrine-stg.kilt.io"
+        value="wss://peregrine.kilt.io"
       />
       <button
         aria-label="Save"
