@@ -11,7 +11,7 @@ export const endpoints = [
 ];
 
 export const defaultEndpoint =
-  process.env.NODE_ENV === 'production' ? endpoints[0] : endpoints[3];
+  process.env.NODE_ENV === 'production' ? endpoints[0] : endpoints[2];
 
 export async function getEndpoint(): Promise<string> {
   return (await storage.get(endpointKey))[endpointKey] || defaultEndpoint;
