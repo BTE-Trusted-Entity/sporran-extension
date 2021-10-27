@@ -4,7 +4,7 @@
   padding: 0 1rem 0.125rem;
   border: 0;
   border-radius: 1.125rem;
-  box-shadow: inset 1px 1px 1px 0 rgb(var(--color-black-rgb) / 30%);
+  box-shadow: inset 1px 1px 1px 0 rgb(var(--color-black-rgb) / 40%);
   background-color: var(--color-dark);
   background-image: var(--input-gradient);
   caret-color: var(--color-grey-light);
@@ -30,5 +30,10 @@
 }
 
 .inputKiltAmount[type='number'] {
+  appearance: initial;
+}
+
+.inputKiltAmount[type='number']::-webkit-inner-spin-button,
+.inputKiltAmount[type='number']::-webkit-outer-spin-button {
   appearance: none;
 }
