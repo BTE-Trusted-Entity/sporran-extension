@@ -116,5 +116,15 @@
     "webpack-cli": "^4.9.1",
     "webpack-extension-reloader": "^1.1.4",
     "webpack-merge": "^5.8.0"
+  },
+  "resolutions": {
+    "@polkadot/keyring": "7.6.1",
+    "@polkadot/networks": "7.6.1",
+    "@polkadot/util-crypto": "7.6.1",
+    "@polkadot/util": "7.6.1",
+    "@polkadot/x-global": "7.6.1",
+    "@polkadot/x-randomvalues": "7.6.1",
+    "@polkadot/x-textdecoder": "7.6.1",
+    "@polkadot/x-textencoder": "7.6.1"
   }
 }
