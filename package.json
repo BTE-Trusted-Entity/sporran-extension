@@ -43,7 +43,7 @@
     "@kiltprotocol/chain-helpers": "^0.24.0-7",
     "@kiltprotocol/core": "^0.24.0-7",
     "@kiltprotocol/did": "^0.24.0-7",
-    "@kiltprotocol/messaging": "^0.24.0-7",
+    "@kiltprotocol/messaging": "^0.24.0-8",
     "@kiltprotocol/types": "^0.24.0-7",
     "@kiltprotocol/utils": "^0.24.0-7",
     "@polkadot/extension-inject": "^0.40.4",
