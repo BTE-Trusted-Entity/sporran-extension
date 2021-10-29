@@ -15,9 +15,14 @@ export function onPopupConnect(callback: (port: Runtime.Port) => void): void {
   });
 }
 
+const timeoutMs = 3000;
+
+let timeoutId: NodeJS.Timeout;
+
 export async function connectToBlockchain(port: Runtime.Port): Promise<void> {
-  port.onDisconnect.addListener(async () => {
-    await disconnect();
+  port.onDisconnect.addListener(() => {
+    timeoutId = setTimeout(disconnect, timeoutMs);
   });
+  clearTimeout(timeoutId);
   await connect();
 }
