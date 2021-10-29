@@ -4,21 +4,21 @@
 
 :root {
   --color-orange: #ff6500;
-  --color-orange-rgb: 255, 101, 0;
+  --color-orange-rgb: 255 101 0;
   --color-dark: #172a40;
-  --color-dark-rgb: 23, 42, 64;
+  --color-dark-rgb: 23 42 64;
   --color-light: #8aafe5;
-  --color-light-rgb: 138, 175, 229;
+  --color-light-rgb: 138 175 229;
   --color-green: #5ab9aa;
-  --color-green-rgb: 90, 185, 170;
+  --color-green-rgb: 90 185 170;
   --color-grey-light: #f2efee;
-  --color-grey-light-rgb: 242, 239, 238;
+  --color-grey-light-rgb: 242 239 238;
   --color-grey-medium: #a8a8a8;
-  --color-grey-medium-rgb: 168, 168, 168;
+  --color-grey-medium-rgb: 168 168 168;
   --color-black: black;
-  --color-black-rgb: 0, 0, 0;
+  --color-black-rgb: 0 0 0;
   --color-white: white;
-  --color-white-rgb: 255, 255, 255;
+  --color-white-rgb: 255 255 255;
   --input-gradient: linear-gradient(90deg, #335a87 0%, #2f537e 33%, #264262 100%);
   --popup-width: 480px;
   --popup-height: 600px;
@@ -46,5 +46,5 @@
 
 @font-face {
   font-family: 'Roboto Mono';
-  src: url(fonts/Roboto-Mono.woff2) format('woff2');
+  src: url('fonts/Roboto-Mono.woff2') format('woff2');
 }

@@ -12,7 +12,7 @@
   border: 0.125em solid var(--color-grey-light);
   border-radius: 0.375em;
   background: linear-gradient(#547099 0%, #304765 45%, #0a1b2f 100%);
-  box-shadow: inset 1px 1px 1px 0 rgba(var(--color-black-rgb), 0.2);
+  box-shadow: inset 1px 1px 1px 0 rgb(var(--color-black-rgb) / 20%);
   position: relative;
   cursor: pointer;
 }

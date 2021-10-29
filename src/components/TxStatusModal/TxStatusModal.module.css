@@ -4,7 +4,7 @@
 
 .transparent {
   composes: avatar from '../../components/Avatar/Avatar.module.css';
-  opacity: 0.2;
+  opacity: 20%;
 }
 
 .wrapper {
@@ -50,6 +50,6 @@
 
 .subscan {
   composes: buttonSecondary from '../../components/Button/Button.module.css';
-  padding: 0.5rem 0 1rem 0;
+  padding: 0.5rem 0 1rem;
   background: url('../images/subscan-logo-full.svg') no-repeat bottom center/50%;
 }

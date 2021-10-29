@@ -10,7 +10,7 @@ jobs:
       - name: Configure Node and package manager
         uses: actions/setup-node@v2.4.1
         with:
-          node-version: '14'
+          node-version: '16'
           cache: 'yarn'
 
       - name: Install dependencies

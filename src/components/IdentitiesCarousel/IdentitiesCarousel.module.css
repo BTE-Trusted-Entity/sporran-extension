@@ -37,24 +37,24 @@
   height: 0.5rem;
   width: 0.5rem;
   background: var(--color-grey-light);
-  opacity: 0.5;
+  opacity: 50%;
   border-radius: 50%;
   margin: 0 0.25rem;
 }
 
 .bubbleActive {
   composes: bubble;
-  opacity: 1;
+  opacity: 100%;
 }
 
 .add {
   composes: bubble;
   composes: buttonIcon from '../Button/Button.module.css';
   background: url('../images/plus-circle.svg') no-repeat center/contain;
-  opacity: 0.35;
+  opacity: 35%;
 }
 
 .addActive {
   composes: add;
-  opacity: 1;
+  opacity: 100%;
 }
