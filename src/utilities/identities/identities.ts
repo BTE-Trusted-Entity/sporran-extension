@@ -278,7 +278,7 @@ export async function importIdentity(
     keystore,
   );
 
-  const isOnChain = Boolean(await DidChain.queryByDID(fullDid));
+  const isOnChain = Boolean(await DidChain.queryDidDetails(fullDid));
 
   const did = isOnChain ? fullDid : lightDidDetails.did;
 
@@ -323,7 +323,7 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
       ? did
       : DidUtils.getKiltDidFromIdentifier(unprefixedIdentifier, 'full');
 
-  const isOnChain = Boolean(await DidChain.queryByDID(fullDid));
+  const isOnChain = Boolean(await DidChain.queryDidDetails(fullDid));
 
   const wasOnChain = type === 'full';
   if (wasOnChain && !isOnChain) {
