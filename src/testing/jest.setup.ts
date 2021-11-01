@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { TextDecoder } from 'util';
+import { TextDecoder } from 'node:util';
 
 // The cbor package (or its dependency) needs this to work, and it works in the browser,
 // but not in the jest-provided jsdom environment
