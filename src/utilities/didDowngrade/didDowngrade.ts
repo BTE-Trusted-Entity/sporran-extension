@@ -50,7 +50,7 @@ async function getSignedTransaction(
     keyRelationships: {
       [authentication]: didDetails.getKeyIds(authentication),
     },
-    lastTxIndex: await DidChain.queryLastTxIndex(didDetails.did),
+    lastTxIndex: await DidChain.queryLastTxCounter(didDetails.did),
   });
 
   const extrinsic = await DidChain.getDeleteDidExtrinsic(
