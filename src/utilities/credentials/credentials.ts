@@ -4,7 +4,7 @@ import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
 
 import { storage } from '../storage/storage';
 
-interface Credential {
+export interface Credential {
   request: IRequestForAttestation;
   name: string;
   cTypeTitle: string;

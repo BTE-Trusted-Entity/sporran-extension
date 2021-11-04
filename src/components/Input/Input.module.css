@@ -37,3 +37,12 @@
 .inputKiltAmount[type='number']::-webkit-outer-spin-button {
   appearance: none;
 }
+
+.inputName {
+  composes: input;
+  background-image: url('../images/pencil.svg'), var(--input-gradient);
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 0.75rem) center, 0;
+  padding-right: 2.25rem;
+}

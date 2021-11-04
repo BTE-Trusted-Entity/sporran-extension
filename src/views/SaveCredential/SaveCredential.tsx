@@ -1,14 +1,25 @@
-import { Fragment, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { IAttestation } from '@kiltprotocol/types';
 
 import {
+  Credential,
+  getCredential,
   saveCredential,
-  useCredential,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 
 import * as styles from './SaveCredential.module.css';
+
+function useSaveCredential(credential: Credential | null) {
+  useEffect(() => {
+    (async () => {
+      if (credential && credential.name && credential.name.length > 0) {
+        await saveCredential(credential);
+      }
+    })();
+  }, [credential]);
+}
 
 export function SaveCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
@@ -16,16 +27,31 @@ export function SaveCredential(): JSX.Element | null {
   const { claimHash } = usePopupData<IAttestation>();
 
   // TODO: Is this whole flow necessary?
-  const credential = useCredential(claimHash);
+  const [credential, setCredential] = useState<Credential | null>(null);
+
+  useSaveCredential(credential);
 
   useEffect(() => {
     (async () => {
-      if (credential) {
-        credential.isAttested = true;
-        await saveCredential(credential);
+      try {
+        const savedCredential = await getCredential(claimHash);
+        setCredential({ ...savedCredential, isAttested: true });
+      } catch (error) {
+        console.error(error);
+        // TODO: decide on the interface for an unknown credential
       }
     })();
-  }, [credential]);
+  }, [claimHash]);
+
+  const handleNameInput = useCallback(
+    async (event) => {
+      const name = event.target.value as string;
+      if (credential) {
+        setCredential({ ...credential, name });
+      }
+    },
+    [credential],
+  );
 
   const handleCancel = useCallback(() => {
     window.close();
@@ -35,30 +61,34 @@ export function SaveCredential(): JSX.Element | null {
     return null; // storage data pending
   }
 
-  const values = [
-    ...Object.entries(credential.request.claim.contents),
-    ['Credential type', credential.cTypeTitle],
-    ['Attester', credential.attester],
-  ];
-
-  const downloadName = `${credential.cTypeTitle}-${values[0][1]}.json`;
+  const downloadName = `${credential.cTypeTitle}-${credential.attester}.json`;
   const downloadBlob = window.btoa(JSON.stringify(credential));
 
   return (
     <main className={styles.container}>
       <h1 className={styles.heading}>{t('view_SaveCredential_heading')}</h1>
-      <p className={styles.subline}>{t('view_SaveCredential_subline')}</p>
 
       <dl className={styles.details}>
-        {values.map(([name, value]) => (
-          <Fragment key={name}>
-            <dt className={styles.detailName}>{name}:</dt>
-            <dd className={styles.detailValue}>{value}</dd>
-          </Fragment>
-        ))}
+        <dt className={styles.detailName}>Credential type:</dt>
+        <dd className={styles.detailValue}>{credential.cTypeTitle}</dd>
+
+        <dt className={styles.detailName}>Attester:</dt>
+        <dd className={styles.detailValue}>{credential.attester}</dd>
       </dl>
 
       <h2 className={styles.warning}>{t('view_SaveCredential_warning')}</h2>
+
+      <label className={styles.label}>
+        {t('view_SaveCredential_name')}
+        <input
+          name="name"
+          className={styles.name}
+          onInput={handleNameInput}
+          autoComplete="off"
+          autoFocus
+          defaultValue={credential.name}
+        />
+      </label>
 
       <p className={styles.buttonsLine}>
         <button type="button" className={styles.cancel} onClick={handleCancel}>
@@ -68,6 +98,7 @@ export function SaveCredential(): JSX.Element | null {
           download={downloadName}
           href={`data:text/json;base64,${downloadBlob}`}
           className={styles.submit}
+          aria-disabled={!credential.name || credential.name.length === 0}
         >
           {t('view_SaveCredential_CTA')}
         </a>

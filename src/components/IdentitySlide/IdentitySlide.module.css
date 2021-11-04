@@ -27,13 +27,8 @@
 }
 
 .input {
-  composes: input from '../Input/Input.module.css';
+  composes: inputName from '../Input/Input.module.css';
   width: calc(232rem / 16);
-  background-image: url('../images/pencil.svg'), var(--input-gradient);
-  background-size: auto;
-  background-repeat: no-repeat;
-  background-position: calc(100% - 0.75rem) center, 0;
-  padding-right: 2.25rem;
   margin: 1rem 0;
 }
 
@@ -47,7 +42,8 @@
 
 .add {
   composes: avatar from '../../components/Avatar/Avatar.module.css';
-  background: rgb(var(--color-black-rgb) / 30%) url('../images/plus-circle.svg') no-repeat center/100%;
+  background: rgb(var(--color-black-rgb) / 30%) url('../images/plus-circle.svg')
+    no-repeat center/100%;
   border-radius: 50%;
   margin-bottom: 1.625rem;
 }
