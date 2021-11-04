@@ -20,7 +20,7 @@ explicitly about both endpoints, so the production will be tested anyway,
 so there's no real downside. */
 
 export const defaultEndpoint =
-  process.env.NODE_ENV === 'production' || !isInternal
+  process.env.NODE_ENV === 'production' && !isInternal
     ? endpoints[0]
     : endpoints[2];
 
