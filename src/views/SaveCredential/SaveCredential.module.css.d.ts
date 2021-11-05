@@ -7,6 +7,8 @@ declare namespace SaveCredentialModuleCssNamespace {
     detailValue: string;
     details: string;
     heading: string;
+    label: string;
+    name: string;
     subline: string;
     submit: string;
     warning: string;

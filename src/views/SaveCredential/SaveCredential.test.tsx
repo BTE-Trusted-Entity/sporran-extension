@@ -1,5 +1,9 @@
+import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../testing/testing';
-import { useCredential } from '../../utilities/credentials/credentials';
+import {
+  getCredential,
+  saveCredential,
+} from '../../utilities/credentials/credentials';
 import {
   credentialsMock,
   mockAttestation,
@@ -13,7 +17,7 @@ jest.mock('../../utilities/credentials/credentials');
 
 describe('SaveCredential', () => {
   it('should render', async () => {
-    (useCredential as jest.Mock).mockReturnValue(credentialsMock[0]);
+    (getCredential as jest.Mock).mockReturnValue(credentialsMock[0]);
 
     const { container } = render(
       <PopupTestProvider path={paths.popup.save} data={mockAttestation}>
@@ -22,6 +26,13 @@ describe('SaveCredential', () => {
     );
 
     await screen.findByText('Trusted Entity attester');
+
+    userEvent.type(
+      await screen.findByLabelText('Give your credential a name:'),
+      'Blah',
+    );
+    expect(saveCredential).toHaveBeenCalledTimes(5);
+
     expect(container).toMatchSnapshot();
   });
 });

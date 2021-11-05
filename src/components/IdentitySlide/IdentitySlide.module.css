@@ -27,13 +27,8 @@
 }
 
 .input {
-  composes: input from '../Input/Input.module.css';
+  composes: inputName from '../Input/Input.module.css';
   width: calc(232rem / 16);
-  background-image: url('../images/pencil.svg'), var(--input-gradient);
-  background-size: auto;
-  background-repeat: no-repeat;
-  background-position: calc(100% - 0.75rem) center, 0;
-  padding-right: 2.25rem;
   margin: 1rem 0;
 }
 

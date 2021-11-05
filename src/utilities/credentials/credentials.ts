@@ -4,7 +4,7 @@ import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
 
 import { storage } from '../storage/storage';
 
-interface Credential {
+export interface Credential {
   request: IRequestForAttestation;
   name: string;
   cTypeTitle: string;
@@ -60,20 +60,6 @@ export async function deleteAttestedClaim(
   const list = await getList();
   remove(list, key);
   await saveList(list);
-}
-
-export function useCredential(hash: string): Credential | null {
-  const [credential, setCredential] = useState<Credential | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      const savedCredential = await getCredential(hash);
-      // TODO: decide on the interface for an unknown credential
-      setCredential(savedCredential);
-    })();
-  }, [hash]);
-
-  return credential;
 }
 
 export function useIdentityCredentials(

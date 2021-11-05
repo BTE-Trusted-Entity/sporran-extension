@@ -539,13 +539,13 @@
     "message": "Request Attestation"
   },
   "view_SaveCredential_heading": {
-    "message": "Sporran"
-  },
-  "view_SaveCredential_subline": {
-    "message": "Your attested credential was saved:"
+    "message": "Back Up Credential"
   },
   "view_SaveCredential_warning": {
-    "message": "Please back up your\ncredential now!"
+    "message": "Please back up your credential now!"
+  },
+  "view_SaveCredential_name": {
+    "message": "Give your credential a name:"
   },
   "view_SaveCredential_CTA": {
     "message": "Back Up Credential"
