@@ -41,22 +41,31 @@ async function closeExistingPopup() {
 }
 
 export async function resizePopup(): Promise<void> {
-  const { id } = await browser.windows.getCurrent();
+  const currentWindow = await browser.windows.getCurrent();
+  const { id } = currentWindow;
   if (!id || isExtensionPopup()) {
     return;
   }
 
-  const { innerWidth, innerHeight, outerWidth, outerHeight } = window;
+  const cssPxWidth = window.outerWidth;
+  const cssPxHeight = window.outerHeight;
 
-  const diffWidth = width - innerWidth;
-  const diffHeight = height - innerHeight;
-  if (diffWidth <= 0 && diffHeight <= 0) {
+  const cssPxDiffWidth = width - window.innerWidth;
+  const cssPxDiffHeight = height - window.innerHeight;
+  if (cssPxDiffWidth <= 0 && cssPxDiffHeight <= 0) {
     return;
   }
 
+  const zoom = await browser.tabs.getZoom();
+  const osPxDiffWidth = Math.ceil(cssPxDiffWidth * zoom);
+  const osPxDiffHeight = Math.ceil(cssPxDiffHeight * zoom);
+
+  const osPxWidth = currentWindow.width || cssPxWidth;
+  const osPxHeight = currentWindow.height || cssPxHeight;
+
   await browser.windows.update(id, {
-    width: outerWidth + diffWidth,
-    height: outerHeight + diffHeight,
+    width: osPxWidth + osPxDiffWidth,
+    height: osPxHeight + osPxDiffHeight,
   });
 }
 
