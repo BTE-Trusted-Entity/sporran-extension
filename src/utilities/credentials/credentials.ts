@@ -62,20 +62,6 @@ export async function deleteAttestedClaim(
   await saveList(list);
 }
 
-export function useCredential(hash: string): Credential | null {
-  const [credential, setCredential] = useState<Credential | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      const savedCredential = await getCredential(hash);
-      // TODO: decide on the interface for an unknown credential
-      setCredential(savedCredential);
-    })();
-  }, [hash]);
-
-  return credential;
-}
-
 export function useIdentityCredentials(
   did?: IDidDetails['did'],
 ): Credential[] | null {

@@ -26,7 +26,6 @@ export function SaveCredential(): JSX.Element | null {
 
   const { claimHash } = usePopupData<IAttestation>();
 
-  // TODO: Is this whole flow necessary?
   const [credential, setCredential] = useState<Credential | null>(null);
 
   useSaveCredential(credential);
@@ -84,7 +83,6 @@ export function SaveCredential(): JSX.Element | null {
           name="name"
           className={styles.name}
           onInput={handleNameInput}
-          autoComplete="off"
           autoFocus
           defaultValue={credential.name}
         />
