@@ -6,6 +6,7 @@ import {
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
 import { DidUtils } from '@kiltprotocol/did';
+import { U128 } from '@polkadot/types';
 
 import {
   decryptIdentity,
@@ -14,7 +15,6 @@ import {
   getLightDidFromKeypair,
   makeKeyring,
 } from '../identities/identities';
-import { U128 } from '@polkadot/types';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
