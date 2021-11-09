@@ -14,6 +14,7 @@ import {
   getLightDidFromKeypair,
   makeKeyring,
 } from '../identities/identities';
+import { U128 } from '@polkadot/types';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
@@ -22,8 +23,7 @@ interface DidTransaction {
 
 export async function getDeposit(): Promise<BN> {
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  // TODO: return blockchain.api.consts.did.deposit
-  return blockchain.api.consts.balances.existentialDeposit;
+  return blockchain.api.consts.did.deposit as U128;
 }
 
 async function getSignedTransaction(
