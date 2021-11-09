@@ -6,6 +6,7 @@ import {
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
 import { DidUtils } from '@kiltprotocol/did';
+import { U128 } from '@polkadot/types';
 
 import {
   decryptIdentity,
@@ -22,8 +23,7 @@ interface DidTransaction {
 
 export async function getDeposit(): Promise<BN> {
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  // TODO: return blockchain.api.consts.did.deposit
-  return blockchain.api.consts.balances.existentialDeposit;
+  return blockchain.api.consts.did.deposit as U128;
 }
 
 async function getSignedTransaction(
