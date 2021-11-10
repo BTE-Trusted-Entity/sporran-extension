@@ -85,8 +85,11 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           })}
         </p>
       </header>
+
       <IdentitiesCarousel identity={identity} />
+
       <Balance address={address} breakdown smallDecimals />
+
       <p>
         {features.sendToken ? (
           <Link
@@ -104,7 +107,6 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
             {t('view_IdentityOverview_send')}
           </button>
         )}
-
         <Link
           to={generatePath(paths.identity.receive, { address })}
           className={styles.button}
@@ -112,6 +114,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           {t('view_IdentityOverview_receive')}
         </Link>
       </p>
+
       {features.subscan && subscanHost && (
         <a
           className={styles.subscan}
@@ -122,15 +125,10 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           {t('view_IdentityOverview_subscan')}
         </a>
       )}
+
       {features.credentials && (
         <Link
-          to={
-            hasCredentials
-              ? generatePath(paths.identity.credentials, { address })
-              : // TODO: Link to credentials explainer screen if identity has no credentials
-                // https://kiltprotocol.atlassian.net/browse/SK-552}
-                ''
-          }
+          to={generatePath(paths.identity.credentials, { address })}
           className={styles.credentials}
         >
           {t('view_IdentityOverview_credentials')}
@@ -147,7 +145,9 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
       ) : (
         <p className={styles.info}>{t('view_IdentityOverview_on_chain')}</p>
       )}
+
       <Stats />
+
       {hasSuccessOverlay && type && (
         <IdentitySuccessOverlay
           successType={type}

@@ -45,7 +45,7 @@
   background:
     url('../../components/images/subscan-logo.svg') no-repeat 0.75rem center,
     rgb(var(--color-black-rgb) / 30%) url('../../components/images/chevron-right.svg')
-    no-repeat right 5% center/0.375rem 0.75rem;
+    no-repeat right 0.75rem center/0.375rem 0.75rem;
 }
 
 .credentials {
@@ -53,7 +53,7 @@
   background:
     url('../../components/images/show-credentials.svg') no-repeat 0.75rem center,
     rgb(var(--color-black-rgb) / 30%) url('../../components/images/chevron-right.svg')
-    no-repeat right 5% center/0.375rem 0.75rem;
+    no-repeat right 0.75rem center/0.375rem 0.75rem;
 }
 
 .upgrade {
@@ -61,7 +61,7 @@
   background:
     url('../../components/images/manage-did.svg') no-repeat 0.75rem center,
     rgb(var(--color-black-rgb) / 30%) url('../../components/images/chevron-right.svg')
-    no-repeat right 5% center/0.375rem 0.75rem;
+    no-repeat right 0.75rem center/0.375rem 0.75rem;
 }
 
 .avatarSmall {
