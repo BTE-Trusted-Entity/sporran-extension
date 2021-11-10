@@ -8,7 +8,6 @@ import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
 import { UpcomingFeatureModal } from '../../components/UpcomingFeatureModal/UpcomingFeatureModal';
 
-import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import {
   Identity,
   isNew,
@@ -51,9 +50,6 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const handleSendClick = useCallback(() => {
     setHasUpcomingFeatureModal(true);
   }, []);
-
-  const credentials = useIdentityCredentials(identity.did);
-  const hasCredentials = credentials && credentials.length > 0;
 
   const subscanHost = useSubscanHost();
 
