@@ -1848,6 +1848,16 @@
     "@polkadot/util-crypto" "^7.5.1"
     rxjs "^7.4.0"
 
+"@polkadot/types@6.7.2":
+  version "6.7.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/types/-/types-6.7.2.tgz#79ef404e5f8f948cff6bb61b46ae6b8c5020b9e8"
+  integrity sha512-5FD9snZhrEJmwg6tAIPKTBkavz8Fw6yfUn+OOiEmGHDyz9fP9PxUsEqgsPzXdTaptjvhjb9wKOxK43uF+xU5iQ==
+  dependencies:
+    "@babel/runtime" "^7.16.0"
+    "@polkadot/util" "^7.8.2"
+    "@polkadot/util-crypto" "^7.8.2"
+    rxjs "^7.4.0"
+
 "@polkadot/ui-shared@^0.86.5":
   version "0.86.5"
   resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-0.86.5.tgz#58c28c100089b90116580c5ec89430aabd7bee94"
@@ -1856,7 +1866,7 @@
     "@babel/runtime" "^7.16.0"
     color "^3.2.1"
 
-"@polkadot/util-crypto@7.5.1", "@polkadot/util-crypto@7.7.1", "@polkadot/util-crypto@^7.5.1", "@polkadot/util-crypto@^7.7.1":
+"@polkadot/util-crypto@7.5.1", "@polkadot/util-crypto@7.7.1", "@polkadot/util-crypto@^7.5.1", "@polkadot/util-crypto@^7.7.1", "@polkadot/util-crypto@^7.8.2":
   version "7.7.1"
   resolved "https://registry.yarnpkg.com/@polkadot/util-crypto/-/util-crypto-7.7.1.tgz#6c3b84558d4e971cc0a7190f99e34ce801eb498d"
   integrity sha512-K269URC/ofbYM1vFSIVLbuRi4Z+9bMdyJQ1k+59+jx0VwYu50l9vzNhFO8WMGoBZ6eDzqQkeWj7usCTKlU9xUw==
@@ -1879,7 +1889,7 @@
     tweetnacl "^1.0.3"
     xxhashjs "^0.2.2"
 
-"@polkadot/util@7.5.1", "@polkadot/util@7.7.1", "@polkadot/util@^7.5.1", "@polkadot/util@^7.7.1":
+"@polkadot/util@7.5.1", "@polkadot/util@7.7.1", "@polkadot/util@^7.5.1", "@polkadot/util@^7.7.1", "@polkadot/util@^7.8.2":
   version "7.7.1"
   resolved "https://registry.yarnpkg.com/@polkadot/util/-/util-7.7.1.tgz#b9c74f8c242669ff8ce26a3101630231914de7c7"
   integrity sha512-REw11iHZKUm7GeC7Ktx1HguT9y76mbmiVtZJyNXpUTDKmfm6z+SMqs3pOCL/rvzqm+6M3ag6ffRrlzTTgh0HAg==
