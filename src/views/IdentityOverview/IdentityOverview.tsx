@@ -7,9 +7,7 @@ import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
 import { UpcomingFeatureModal } from '../../components/UpcomingFeatureModal/UpcomingFeatureModal';
-import { Avatar } from '../../components/Avatar/Avatar';
 
-import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import {
   Identity,
   isNew,
@@ -52,9 +50,6 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const handleSendClick = useCallback(() => {
     setHasUpcomingFeatureModal(true);
   }, []);
-
-  const credentials = useIdentityCredentials(identity.did);
-  const hasCredentials = credentials && credentials.length > 0;
 
   const subscanHost = useSubscanHost();
 
@@ -108,7 +103,6 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
             {t('view_IdentityOverview_send')}
           </button>
         )}
-
         <Link
           to={generatePath(paths.identity.receive, { address })}
           className={styles.button}
@@ -116,15 +110,6 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           {t('view_IdentityOverview_receive')}
         </Link>
       </p>
-
-      {features.credentials && hasCredentials && (
-        <Link
-          to={generatePath(paths.identity.credentials, { address })}
-          className={styles.credentials}
-        >
-          {t('view_IdentityOverview_credentials')}
-        </Link>
-      )}
 
       {features.subscan && subscanHost && (
         <a
@@ -137,12 +122,20 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </a>
       )}
 
+      {features.credentials && (
+        <Link
+          to={generatePath(paths.identity.credentials, { address })}
+          className={styles.credentials}
+        >
+          {t('view_IdentityOverview_credentials')}
+        </Link>
+      )}
+
       {!isFullDid(identity.did) ? (
         <Link
           to={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.upgrade}
         >
-          <Avatar identity={identity} className={styles.avatarSmall} />
           {t('view_IdentityOverview_upgrade')}
         </Link>
       ) : (
