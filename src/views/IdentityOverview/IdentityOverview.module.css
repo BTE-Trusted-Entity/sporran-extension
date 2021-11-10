@@ -1,5 +1,12 @@
 .container {
   composes: container from '../../components/View/View.module.css';
+  height: calc(100% - 3rem);
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
 }
 
 .heading {
@@ -24,17 +31,13 @@
   margin-top: 1rem;
 }
 
-.credentials {
-  composes: buttonSecondary from '../../components/Button/Button.module.css';
-}
-
 .buttonWide {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
-  width: calc(284rem / 16);
+  width: 100%;
   padding: 0;
   border: none;
   box-shadow: none;
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
 }
 
 .subscan {
@@ -42,16 +45,23 @@
   background:
     url('../../components/images/subscan-logo.svg') no-repeat 0.75rem center,
     rgb(var(--color-black-rgb) / 30%) url('../../components/images/chevron-right.svg')
-    no-repeat right 5% center/0.375rem 0.75rem;
+    no-repeat right 0.75rem center/0.375rem 0.75rem;
+}
+
+.credentials {
+  composes: buttonWide;
+  background:
+    url('../../components/images/show-credentials.svg') no-repeat 0.75rem center,
+    rgb(var(--color-black-rgb) / 30%) url('../../components/images/chevron-right.svg')
+    no-repeat right 0.75rem center/0.375rem 0.75rem;
 }
 
 .upgrade {
   composes: buttonWide;
-  justify-content: flex-start;
   background:
-    rgb(var(--color-black-rgb) / 30%)
-    url('../../components/images/chevron-right.svg') no-repeat right 5%
-    center/0.375rem 0.75rem;
+    url('../../components/images/manage-did.svg') no-repeat 0.75rem center,
+    rgb(var(--color-black-rgb) / 30%) url('../../components/images/chevron-right.svg')
+    no-repeat right 0.75rem center/0.375rem 0.75rem;
 }
 
 .avatarSmall {
