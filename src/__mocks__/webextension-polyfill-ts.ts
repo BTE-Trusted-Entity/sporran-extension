@@ -7,8 +7,6 @@ import { setupGetMessageShim } from 'chrome-extension-i18n-shim';
 
 import messagesEN from '../static/_locales/en/messages.json';
 
-import { credentialsMock } from '../utilities/credentials/credentials.mock';
-
 export const browser = {
   tabs: {
     executeScript(
@@ -32,10 +30,6 @@ export const browser = {
             'example.com': false,
             'example.org': true,
           },
-          'credential:list': ['credential:0xclaimHash'],
-          'credential:0xclaimHash': credentialsMock[0],
-          'credential:0xf53f460a9e96cf7ea3321ac001a89674850493e12fad28cbc868e026935436d2':
-            credentialsMock[0],
         };
       },
       async set(): Promise<void> {

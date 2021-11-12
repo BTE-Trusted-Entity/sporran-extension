@@ -5,6 +5,7 @@ import { useInitialEntries } from '../../utilities/popups/useInitialEntries';
 import { ConfigurationProvider } from '../../configuration/ConfigurationContext';
 import { useConfiguration } from '../../configuration/useConfiguration';
 import { IdentitiesProvider } from '../../utilities/identities/IdentitiesContext';
+import { CredentialsProvider } from '../../utilities/credentials/CredentialsContext';
 import { GenericError } from '../GenericError/GenericError';
 import { AddIdentity } from '../../components/AddIdentity/AddIdentity';
 import { Settings } from '../../components/Settings/Settings';
@@ -69,7 +70,9 @@ export function AppWithProviders(): JSX.Element {
   return (
     <ConfigurationProvider>
       <IdentitiesProvider>
-        <App />
+        <CredentialsProvider>
+          <App />
+        </CredentialsProvider>
       </IdentitiesProvider>
     </ConfigurationProvider>
   );

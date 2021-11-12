@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
+import { credentialsMock } from '../../utilities/credentials/CredentialsProvider.mock';
 import { paths } from '../paths';
 
 import { ShareCredential } from './ShareCredential';
@@ -13,8 +14,7 @@ export default {
 const mockCTypesRequest = {
   acceptedCTypes: [
     {
-      cTypeHash:
-        '0xf53f460a9e96cf7ea3321ac001a89674850493e12fad28cbc868e026935436d2',
+      cTypeHash: credentialsMock[0].request.claim.cTypeHash,
     },
   ],
   verifierDid: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',

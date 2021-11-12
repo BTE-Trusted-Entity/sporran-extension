@@ -3,17 +3,18 @@ import { withConsole, setConsoleOptions } from '@storybook/addon-console';
 import { MemoryRouter } from 'react-router-dom';
 import { init } from '@kiltprotocol/core';
 
-import { endpoints } from '../src/utilities/endpoints/endpoints';
+import { defaultEndpoint } from '../src/utilities/endpoints/endpoints';
 import { localeGlobalTypes, withLocale } from './locales';
 import {
   configurationTypesForStorybook,
-  withConfigurationProvider
+  withConfigurationProvider,
 } from '../src/configuration/configurationForStorybook';
 import { IdentitiesProviderMock } from '../src/utilities/identities/IdentitiesProvider.mock';
+import { CredentialsProviderMock } from '../src/utilities/credentials/CredentialsProvider.mock';
 import { ViewDecorator } from '../src/components/View/ViewDecorator';
 import '../src/views/App/App.css';
 
-init({ address: endpoints[endpoints.length - 1] });
+init({ address: defaultEndpoint });
 
 // You'll start to receive all console messages, warnings, errors in your action logger panel - Everything except HMR logs.
 setConsoleOptions({
@@ -38,7 +39,9 @@ export const decorators = [
   (Story) => (
     <MemoryRouter>
       <IdentitiesProviderMock>
-        <Story />
+        <CredentialsProviderMock>
+          <Story />
+        </CredentialsProviderMock>
       </IdentitiesProviderMock>
     </MemoryRouter>
   ),

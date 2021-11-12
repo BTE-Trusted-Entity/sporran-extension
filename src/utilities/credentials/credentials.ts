@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { filter, pick, remove } from 'lodash-es';
 import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
+import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
+import { CredentialsContext } from './CredentialsContext';
 
 export interface Credential {
   request: IRequestForAttestation;
@@ -16,19 +18,21 @@ function toKey(hash: string): string {
   return `credential:${hash}`;
 }
 
-const listKey = toKey('list');
+export const LIST_KEY = toKey('list');
 
-async function getList(): Promise<string[]> {
-  return (await storage.get(listKey))[listKey] || [];
+export async function getList(): Promise<string[]> {
+  return (await storage.get(LIST_KEY))[LIST_KEY] || [];
 }
 
 async function saveList(list: string[]): Promise<void> {
-  await storage.set({ [listKey]: list });
+  await storage.set({ [LIST_KEY]: list });
+  await mutate(LIST_KEY);
 }
 
 export async function saveCredential(credential: Credential): Promise<void> {
   const key = toKey(credential.request.rootHash);
   await storage.set({ [key]: credential });
+  await mutate(key);
 
   const list = await getList();
   list.push(key);
@@ -44,40 +48,33 @@ export async function getCredential(hash: string): Promise<Credential> {
   return credential;
 }
 
-export async function getAllCredentials(): Promise<Credential[]> {
-  const keys = await getList();
+export async function getAllCredentials(keys: string[]): Promise<Credential[]> {
   const result = await storage.get(keys);
   const credentials = pick(result, keys);
   return Object.values(credentials);
 }
 
-export async function deleteAttestedClaim(
-  credential: Credential,
-): Promise<void> {
+export async function deleteCredential(credential: Credential): Promise<void> {
   const key = toKey(credential.request.rootHash);
   await storage.remove(key);
+  await mutate(key);
 
   const list = await getList();
   remove(list, key);
   await saveList(list);
 }
 
-export function useIdentityCredentials(
-  did?: IDidDetails['did'],
-): Credential[] | null {
-  const [credentials, setCredentials] = useState<Credential[] | null>(null);
+export function useCredentials(): Credential[] {
+  return useContext(CredentialsContext);
+}
 
-  useEffect(() => {
-    (async () => {
-      const all = await getAllCredentials();
-      if (did) {
-        const own = filter(all, { request: { claim: { owner: did } } });
-        setCredentials(own);
-      } else {
-        setCredentials(all);
-      }
-    })();
-  }, [did]);
+export function useIdentityCredentials(did?: IDidDetails['did']): Credential[] {
+  const all = useCredentials();
 
-  return credentials;
+  if (did) {
+    const own = filter(all, { request: { claim: { owner: did } } });
+    return own;
+  } else {
+    return all;
+  }
 }
