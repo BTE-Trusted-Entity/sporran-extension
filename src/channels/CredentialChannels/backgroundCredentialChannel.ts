@@ -55,10 +55,10 @@ async function showCredentialPopup(
       return encrypt(rejectionBody);
     }
   }
-  if (message.body.type === MessageBodyType.SUBMIT_ATTESTATION_FOR_CLAIM) {
+  if (message.body.type === MessageBodyType.SUBMIT_ATTESTATION) {
     await saveChannel.get(message.body.content.attestation, sender);
   }
-  if (message.body.type === MessageBodyType.REQUEST_CLAIMS_FOR_CTYPES) {
+  if (message.body.type === MessageBodyType.REQUEST_CREDENTIAL) {
     return await shareChannel.get(
       {
         acceptedCTypes: message.body.content,

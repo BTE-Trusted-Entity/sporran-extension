@@ -1,11 +1,11 @@
 import {
   IDidDetails,
   IEncryptedMessage,
-  IRequestClaimsForCTypesContent,
+  IRequestCredentialContent,
 } from '@kiltprotocol/types';
 
 export type ShareInput = {
-  acceptedCTypes: IRequestClaimsForCTypesContent[];
+  acceptedCTypes: IRequestCredentialContent;
   verifierDid: IDidDetails['did'];
 };
 

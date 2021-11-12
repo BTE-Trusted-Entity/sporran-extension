@@ -5,8 +5,8 @@ import { Attestation } from '@kiltprotocol/core';
 import { DefaultResolver } from '@kiltprotocol/did';
 import {
   IDidResolvedDetails,
-  IRequestClaimsForCTypesContent,
-  ISubmitClaimsForCTypes,
+  IRequestCredentialContent,
+  ISubmitCredential,
   IDidDetails,
   MessageBodyType,
 } from '@kiltprotocol/types';
@@ -29,7 +29,7 @@ import * as tableStyles from '../../components/Table/Table.module.css';
 import * as styles from './ShareCredential.module.css';
 
 interface VerifierCredentialsRequest {
-  acceptedCTypes: IRequestClaimsForCTypesContent[];
+  acceptedCTypes: IRequestCredentialContent;
   verifierDid: IDidDetails['did'];
 }
 
@@ -40,7 +40,7 @@ export function ShareCredential(): JSX.Element | null {
 
   const { acceptedCTypes, verifierDid } = data;
 
-  const cTypeHashes = acceptedCTypes.map(({ cTypeHash }) => cTypeHash);
+  const cTypeHashes = acceptedCTypes.cTypes.map(({ cTypeHash }) => cTypeHash);
 
   const credentials = useIdentityCredentials();
   const matchingCredentials = credentials?.filter((credential) =>
@@ -91,9 +91,9 @@ export function ShareCredential(): JSX.Element | null {
 
       const attestedClaim = [{ request, attestation }];
 
-      const credentialsBody: ISubmitClaimsForCTypes = {
+      const credentialsBody: ISubmitCredential = {
         content: attestedClaim,
-        type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
+        type: MessageBodyType.SUBMIT_CREDENTIAL,
       };
 
       const { details: verifierDidDetails } = (await DefaultResolver.resolveDoc(
