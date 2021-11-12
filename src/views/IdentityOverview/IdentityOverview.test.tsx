@@ -14,9 +14,7 @@ import { paths } from '../paths';
 
 import { IdentityOverview } from './IdentityOverview';
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
-import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
-import { credentialsMock } from '../../utilities/credentials/credentials.mock';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
 jest.mock('../../utilities/credentials/credentials');
@@ -89,8 +87,6 @@ describe('IdentityOverview', () => {
   });
 
   it('should render with link to credentials screen', async () => {
-    (useIdentityCredentials as jest.Mock).mockReturnValue(credentialsMock);
-
     render(
       <InternalConfigurationContext>
         <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>

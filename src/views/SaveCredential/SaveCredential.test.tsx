@@ -7,7 +7,7 @@ import {
 import {
   credentialsMock,
   mockAttestation,
-} from '../../utilities/credentials/credentials.mock';
+} from '../../utilities/credentials/CredentialsProvider.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
 

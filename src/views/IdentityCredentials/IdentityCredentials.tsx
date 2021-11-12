@@ -17,10 +17,10 @@ interface Props {
 
 export function IdentityCredentials({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
-
   const credentials = useIdentityCredentials(identity.did);
-  if (!credentials) {
+  if (credentials.length === 0) {
     return null; // storage data pending
+    // TODO: https://kiltprotocol.atlassian.net/browse/SK-594
   }
 
   return (
