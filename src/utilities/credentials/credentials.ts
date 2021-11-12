@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { filter, pick, remove } from 'lodash-es';
 import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
 import { mutate } from 'swr';
@@ -48,7 +48,7 @@ export async function getCredential(hash: string): Promise<Credential> {
   return credential;
 }
 
-export async function getAllCredentials(keys: string[]): Promise<Credential[]> {
+export async function getCredentials(keys: string[]): Promise<Credential[]> {
   const result = await storage.get(keys);
   const credentials = pick(result, keys);
   return Object.values(credentials);
@@ -71,10 +71,12 @@ export function useCredentials(): Credential[] {
 export function useIdentityCredentials(did?: IDidDetails['did']): Credential[] {
   const all = useCredentials();
 
-  if (did) {
-    const own = filter(all, { request: { claim: { owner: did } } });
-    return own;
-  } else {
-    return all;
-  }
+  return useMemo(() => {
+    if (did) {
+      const own = filter(all, { request: { claim: { owner: did } } });
+      return own;
+    } else {
+      return all;
+    }
+  }, [all, did]);
 }

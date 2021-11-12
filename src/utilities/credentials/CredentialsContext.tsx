@@ -1,12 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import useSWR from 'swr';
 
-import {
-  getAllCredentials,
-  Credential,
-  getList,
-  LIST_KEY,
-} from './credentials';
+import { Credential, getList, LIST_KEY, getCredentials } from './credentials';
 
 export const CredentialsContext = createContext<Credential[]>([]);
 
@@ -23,10 +18,9 @@ export function CredentialsProvider({
       if (!list) {
         return;
       }
-      setCredentials(await getAllCredentials(list));
+      setCredentials(await getCredentials(list));
     })();
   }, [list]);
-  console.log('value: ', credentials);
   return (
     <CredentialsContext.Provider value={credentials}>
       {children}
