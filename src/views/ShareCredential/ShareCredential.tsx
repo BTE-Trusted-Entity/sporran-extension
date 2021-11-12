@@ -1,13 +1,13 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
-import { Attestation } from '@kiltprotocol/core';
+import { Attestation, RequestForAttestation } from '@kiltprotocol/core';
 import { DefaultResolver } from '@kiltprotocol/did';
 import {
+  IDidDetails,
   IDidResolvedDetails,
   IRequestCredentialContent,
   ISubmitCredential,
-  IDidDetails,
   MessageBodyType,
 } from '@kiltprotocol/types';
 
@@ -29,7 +29,7 @@ import * as tableStyles from '../../components/Table/Table.module.css';
 import * as styles from './ShareCredential.module.css';
 
 interface VerifierCredentialsRequest {
-  acceptedCTypes: IRequestCredentialContent;
+  credentialRequest: IRequestCredentialContent;
   verifierDid: IDidDetails['did'];
 }
 
@@ -38,9 +38,10 @@ export function ShareCredential(): JSX.Element | null {
 
   const data = usePopupData<VerifierCredentialsRequest>();
 
-  const { acceptedCTypes, verifierDid } = data;
+  const { credentialRequest, verifierDid } = data;
 
-  const cTypeHashes = acceptedCTypes.cTypes.map(({ cTypeHash }) => cTypeHash);
+  const { cTypes, challenge } = credentialRequest;
+  const cTypeHashes = cTypes.map(({ cTypeHash }) => cTypeHash);
 
   const credentials = useIdentityCredentials();
   const matchingCredentials = credentials?.filter((credential) =>
@@ -78,9 +79,15 @@ export function ShareCredential(): JSX.Element | null {
 
       const { address } = identity;
       const password = await passwordField.get(event);
-      const { encrypt } = await getIdentityDidCrypto(address, password);
+      const { encrypt, keystore, didDetails } = await getIdentityDidCrypto(
+        address,
+        password,
+      );
 
-      const request = matchingCredentials[Number(checked)].request;
+      const request = RequestForAttestation.fromRequest(
+        matchingCredentials[Number(checked)].request,
+      );
+      await request.signWithDid(keystore, didDetails, challenge);
 
       const attestation = await Attestation.query(request.rootHash);
 
@@ -108,7 +115,15 @@ export function ShareCredential(): JSX.Element | null {
       await shareChannel.return(message);
       window.close();
     },
-    [matchingCredentials, identity, checked, verifierDid, passwordField, t],
+    [
+      matchingCredentials,
+      identity,
+      passwordField,
+      checked,
+      challenge,
+      verifierDid,
+      t,
+    ],
   );
 
   if (!credentials || !matchingCredentials || !identities || !identity) {

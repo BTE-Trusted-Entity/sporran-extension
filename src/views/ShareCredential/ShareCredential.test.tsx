@@ -7,7 +7,7 @@ import { paths } from '../paths';
 import { ShareCredential } from './ShareCredential';
 
 const mockCTypesRequest = {
-  acceptedCTypes: [
+  credentialRequest: [
     {
       cTypeHash: credentialsMock[0].request.claim.cTypeHash,
     },

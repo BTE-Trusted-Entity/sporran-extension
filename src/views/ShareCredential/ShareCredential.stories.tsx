@@ -12,7 +12,7 @@ export default {
 } as Meta;
 
 const mockCTypesRequest = {
-  acceptedCTypes: [
+  credentialRequest: [
     {
       cTypeHash: credentialsMock[0].request.claim.cTypeHash,
     },

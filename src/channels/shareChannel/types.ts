@@ -5,7 +5,7 @@ import {
 } from '@kiltprotocol/types';
 
 export type ShareInput = {
-  acceptedCTypes: IRequestCredentialContent;
+  credentialRequest: IRequestCredentialContent;
   verifierDid: IDidDetails['did'];
 };
 

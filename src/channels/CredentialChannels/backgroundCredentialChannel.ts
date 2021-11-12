@@ -61,7 +61,7 @@ async function showCredentialPopup(
   if (message.body.type === MessageBodyType.REQUEST_CREDENTIAL) {
     return await shareChannel.get(
       {
-        acceptedCTypes: message.body.content,
+        credentialRequest: message.body.content,
         verifierDid: dAppDidDetails.did,
       },
       sender,
