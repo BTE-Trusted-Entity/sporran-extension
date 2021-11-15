@@ -5,6 +5,8 @@ declare namespace ButtonModuleCssNamespace {
     buttonIcon: string;
     buttonPrimary: string;
     buttonSecondary: string;
+    buttonTertiary: string;
+    buttonWide: string;
     circle: string;
   }
 }

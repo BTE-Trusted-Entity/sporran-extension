@@ -3,7 +3,6 @@ declare namespace IdentityOverviewModuleCssNamespace {
     add: string;
     avatarSmall: string;
     button: string;
-    buttonWide: string;
     container: string;
     credentials: string;
     heading: string;

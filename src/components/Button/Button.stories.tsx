@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import storiesStyles from './Button.stories.module.css';
+import * as storiesStyles from './Button.stories.module.css';
 import * as styles from './Button.module.css';
 
 export default {
@@ -50,6 +50,14 @@ export function ButtonTertiary(): JSX.Element {
 export function ButtonTertiaryDisabled(): JSX.Element {
   return (
     <button className={styles.buttonTertiary} type="button" disabled>
+      Update Balance
+    </button>
+  );
+}
+
+export function ButtonWide(): JSX.Element {
+  return (
+    <button className={storiesStyles.wide} type="button">
       Update Balance
     </button>
   );
