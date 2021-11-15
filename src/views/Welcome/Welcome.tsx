@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ import {
   useIdentities,
   useCurrentIdentity,
 } from '../../utilities/identities/identities';
-import { plural } from '../../utilities/plural/plural';
+import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { generatePath, paths } from '../paths';
 
@@ -61,12 +61,14 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
       </h1>
 
       <h3 className={styles.info}>
-        {hasIdentities
-          ? plural(identitiesNumber, {
-              one: 'view_Welcome_hasOne',
-              other: 'view_Welcome_hasOther',
-            })
-          : t('view_Welcome_noIdentities')}
+        {hasIdentities ? (
+          <Fragment>
+            <YouHaveIdentities />
+            {t('view_Welcome_addAnother')}
+          </Fragment>
+        ) : (
+          t('view_Welcome_noIdentities')
+        )}
       </h3>
 
       <p className={styles.termsLine}>

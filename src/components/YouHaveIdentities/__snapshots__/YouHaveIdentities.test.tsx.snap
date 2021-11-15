@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`YouHaveIdentities should match the snapshot for multiple identities 1`] = `
+<div>
+  You have 3 Identities
+</div>
+`;
+
+exports[`YouHaveIdentities should match the snapshot for one identity 1`] = `
+<div>
+  You have 1 Identity
+</div>
+`;
