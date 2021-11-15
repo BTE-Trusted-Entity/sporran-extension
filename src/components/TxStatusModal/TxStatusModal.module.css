@@ -4,7 +4,7 @@
 
 .transparent {
   composes: avatar from '../../components/Avatar/Avatar.module.css';
-  opacity: 20%;
+  opacity: 0.2;
 }
 
 .wrapper {

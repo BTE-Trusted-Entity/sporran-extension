@@ -17,7 +17,7 @@
 
 .buttonPrimary:disabled,
 .buttonPrimary[aria-disabled='true'] {
-  opacity: 50%;
+  opacity: 0.5;
   color: var(--color-grey-medium);
   border: 1px solid rgb(var(--color-grey-light-rgb) / 30%);
 }
@@ -37,7 +37,7 @@
 
 .buttonSecondary:disabled,
 .buttonSecondary[aria-disabled='true'] {
-  opacity: 50%;
+  opacity: 0.5;
   color: var(--color-grey-medium);
 }
 
@@ -51,7 +51,7 @@
 
 .buttonTertiary:disabled,
 .buttonTertiary[aria-disabled='true'] {
-  opacity: 40%;
+  opacity: 0.4;
 }
 
 .buttonIcon {
