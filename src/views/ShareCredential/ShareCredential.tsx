@@ -1,13 +1,11 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
-import { Attestation } from '@kiltprotocol/core';
+import { Attestation, RequestForAttestation } from '@kiltprotocol/core';
 import { DefaultResolver } from '@kiltprotocol/did';
 import {
   IDidResolvedDetails,
-  IRequestClaimsForCTypesContent,
-  ISubmitClaimsForCTypes,
-  IDidDetails,
+  ISubmitCredential,
   MessageBodyType,
 } from '@kiltprotocol/types';
 
@@ -24,23 +22,20 @@ import {
 } from '../../utilities/identities/identities';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
+import { ShareInput } from '../../channels/shareChannel/types';
 
 import * as tableStyles from '../../components/Table/Table.module.css';
 import * as styles from './ShareCredential.module.css';
 
-interface VerifierCredentialsRequest {
-  acceptedCTypes: IRequestClaimsForCTypesContent[];
-  verifierDid: IDidDetails['did'];
-}
-
 export function ShareCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const data = usePopupData<VerifierCredentialsRequest>();
+  const data = usePopupData<ShareInput>();
 
-  const { acceptedCTypes, verifierDid } = data;
+  const { credentialRequest, verifierDid } = data;
 
-  const cTypeHashes = acceptedCTypes.map(({ cTypeHash }) => cTypeHash);
+  const { cTypes, challenge } = credentialRequest;
+  const cTypeHashes = cTypes.map(({ cTypeHash }) => cTypeHash);
 
   const credentials = useIdentityCredentials();
   const matchingCredentials = credentials?.filter((credential) =>
@@ -78,9 +73,15 @@ export function ShareCredential(): JSX.Element | null {
 
       const { address } = identity;
       const password = await passwordField.get(event);
-      const { encrypt } = await getIdentityDidCrypto(address, password);
+      const { encrypt, keystore, didDetails } = await getIdentityDidCrypto(
+        address,
+        password,
+      );
 
-      const request = matchingCredentials[Number(checked)].request;
+      const request = RequestForAttestation.fromRequest(
+        matchingCredentials[Number(checked)].request,
+      );
+      await request.signWithDid(keystore, didDetails, challenge);
 
       const attestation = await Attestation.query(request.rootHash);
 
@@ -91,9 +92,9 @@ export function ShareCredential(): JSX.Element | null {
 
       const attestedClaim = [{ request, attestation }];
 
-      const credentialsBody: ISubmitClaimsForCTypes = {
+      const credentialsBody: ISubmitCredential = {
         content: attestedClaim,
-        type: MessageBodyType.SUBMIT_CLAIMS_FOR_CTYPES,
+        type: MessageBodyType.SUBMIT_CREDENTIAL,
       };
 
       const { details: verifierDidDetails } = (await DefaultResolver.resolveDoc(
@@ -108,7 +109,15 @@ export function ShareCredential(): JSX.Element | null {
       await shareChannel.return(message);
       window.close();
     },
-    [matchingCredentials, identity, checked, verifierDid, passwordField, t],
+    [
+      matchingCredentials,
+      identity,
+      passwordField,
+      checked,
+      challenge,
+      verifierDid,
+      t,
+    ],
   );
 
   if (!credentials || !matchingCredentials || !identities || !identity) {

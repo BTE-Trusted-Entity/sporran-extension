@@ -13,7 +13,7 @@ import { backgroundSignChannel } from '../../dApps/SignChannels/backgroundSignCh
 
 import * as styles from './SignDApp.module.css';
 
-interface ExtrinsicData {
+export interface ExtrinsicData {
   origin: string;
   address: string;
   specVersion: number;
