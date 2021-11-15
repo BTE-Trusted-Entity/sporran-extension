@@ -1,3 +1,4 @@
+import { IAttestation } from '@kiltprotocol/types';
 import { Credential } from './credentials';
 import { CredentialsContext } from './CredentialsContext';
 
@@ -189,7 +190,7 @@ export const credentialsMock: Credential[] = [
   },
 ];
 
-export const mockAttestation = {
+export const mockAttestation: IAttestation = {
   claimHash:
     '0xf53f460a9e96cf7ea3321ac001a89674850493e12fad28cbc868e026935436d2',
   cTypeHash:

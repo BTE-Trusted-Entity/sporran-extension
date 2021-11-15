@@ -17,7 +17,7 @@ import {
   MessageBody,
   NaclBoxCapable,
 } from '@kiltprotocol/types';
-import Message from '@kiltprotocol/messaging';
+import { Message } from '@kiltprotocol/messaging';
 import { DefaultResolver, LightDidDetails } from '@kiltprotocol/did';
 
 import { makeKeyring } from '../identities/identities';
