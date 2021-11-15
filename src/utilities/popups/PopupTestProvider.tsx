@@ -5,7 +5,7 @@ import { jsonToBase64 } from './usePopupData';
 
 interface Props {
   path: string;
-  data?: AnyJson;
+  data?: unknown;
   children: JSX.Element;
 }
 
@@ -14,8 +14,9 @@ export function PopupTestProvider({
   data,
   children,
 }: Props): JSX.Element {
+  const serialized = jsonToBase64(data as AnyJson);
   return (
-    <MemoryRouter initialEntries={[`${path}?data=${jsonToBase64(data)}`]}>
+    <MemoryRouter initialEntries={[`${path}?data=${serialized}`]}>
       {children}
     </MemoryRouter>
   );

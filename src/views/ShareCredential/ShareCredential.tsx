@@ -24,19 +24,15 @@ import {
 } from '../../utilities/identities/identities';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
+import { ShareInput } from '../../channels/shareChannel/types';
 
 import * as tableStyles from '../../components/Table/Table.module.css';
 import * as styles from './ShareCredential.module.css';
 
-interface VerifierCredentialsRequest {
-  credentialRequest: IRequestCredentialContent;
-  verifierDid: IDidDetails['did'];
-}
-
 export function ShareCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const data = usePopupData<VerifierCredentialsRequest>();
+  const data = usePopupData<ShareInput>();
 
   const { credentialRequest, verifierDid } = data;
 

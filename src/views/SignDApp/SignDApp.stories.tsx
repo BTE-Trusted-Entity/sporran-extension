@@ -3,14 +3,14 @@ import { Meta } from '@storybook/react';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
 
-import { SignDApp } from './SignDApp';
+import { ExtrinsicData, SignDApp } from './SignDApp';
 
 export default {
   title: 'Views/SignDApp',
   component: SignDApp,
 } as Meta;
 
-const mockExtrinsic = {
+const mockExtrinsic: ExtrinsicData = {
   origin:
     'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',

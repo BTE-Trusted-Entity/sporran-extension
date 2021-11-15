@@ -33,7 +33,7 @@ import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/Identiti
 
 import * as styles from './SignQuote.module.css';
 
-type Terms = ITerms & {
+export type Terms = ITerms & {
   claim: IClaim;
   attesterName: string;
   attesterDid: IDidDetails['did'];
