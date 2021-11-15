@@ -31,9 +31,9 @@ export function CredentialCard({ credential }: Props): JSX.Element {
           onClick={handleExpand}
           aria-label="Expand Credential"
         >
-          <dl className={styles.details}>
-            <dt className={styles.detailName}>{credential.name}</dt>
-            <dd className={styles.detailFirstProp}>
+          <dl className={styles.collapsedDetails}>
+            <dt className={styles.collapsedName}>{credential.name}</dt>
+            <dd className={styles.collapsedFirstProp}>
               {Object.values(credential.request.claim.contents)[0]}
             </dd>
           </dl>
@@ -45,7 +45,7 @@ export function CredentialCard({ credential }: Props): JSX.Element {
         <section className={styles.expanded}>
           <button
             type="button"
-            aria-label="collapse"
+            aria-label="Collapse Credential"
             className={styles.collapse}
             onClick={handleCollapse}
           />
