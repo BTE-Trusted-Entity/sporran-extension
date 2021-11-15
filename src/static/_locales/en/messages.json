@@ -554,19 +554,7 @@
     "message": "Your Credentials"
   },
   "view_IdentityCredentials_subline": {
-    "message": "Overview"
-  },
-  "view_IdentityCredentials_name": {
-    "message": "Name"
-  },
-  "view_IdentityCredentials_ctype": {
-    "message": "C-Type"
-  },
-  "view_IdentityCredentials_attester": {
-    "message": "Attester"
-  },
-  "view_IdentityCredentials_valid": {
-    "message": "Valid"
+    "message": "View and manage your credentials"
   },
   "view_ShareCredential_share": {
     "message": "Share credential"
