@@ -139,7 +139,12 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           {t('view_IdentityOverview_upgrade')}
         </Link>
       ) : (
-        <p className={styles.info}>{t('view_IdentityOverview_on_chain')}</p>
+        <Link
+          to={generatePath(paths.identity.did.manage.start, { address })}
+          className={styles.manage}
+        >
+          {t('view_IdentityOverview_on_chain')}
+        </Link>
       )}
 
       <Stats />

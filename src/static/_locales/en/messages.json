@@ -400,7 +400,7 @@
     "message": "Upgrade to on-chain DID"
   },
   "view_IdentityOverview_on_chain": {
-    "message": "On-chain DID"
+    "message": "Manage on-chain DID"
   },
   "view_RemoveIdentity_heading": {
     "message": "Attention!"

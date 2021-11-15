@@ -41,6 +41,9 @@ export const paths = {
         start: '/identity/:address/did/downgrade',
         sign: '/identity/:address/did/downgrade/sign',
       },
+      manage: {
+        start: '/identity/:address/did',
+      },
     },
   },
   popup: {
