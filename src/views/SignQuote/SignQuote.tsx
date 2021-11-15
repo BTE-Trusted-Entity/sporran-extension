@@ -2,14 +2,14 @@ import { Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { find, filter } from 'lodash-es';
 import BN from 'bn.js';
-import { RequestForAttestation, AttestedClaim } from '@kiltprotocol/core';
+import { RequestForAttestation, Credential } from '@kiltprotocol/core';
 import { DefaultResolver } from '@kiltprotocol/did';
 import {
   IDidDetails,
   IDidResolvedDetails,
   ITerms,
   IClaim,
-  IRequestAttestationForClaim,
+  IRequestAttestation,
   MessageBodyType,
 } from '@kiltprotocol/types';
 
@@ -33,7 +33,7 @@ import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/Identiti
 
 import * as styles from './SignQuote.module.css';
 
-type Terms = ITerms & {
+export type Terms = ITerms & {
   claim: IClaim;
   attesterName: string;
   attesterDid: IDidDetails['did'];
@@ -80,7 +80,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       await saveCTypeTitle(claim.cTypeHash, cTypeTitle);
 
       const attestedClaims = legitimations.map((legitimation) =>
-        AttestedClaim.fromAttestedClaim(legitimation),
+        Credential.fromCredential(legitimation),
       );
 
       // The attester generated claim with the temporary identity, need to put real address in it
@@ -115,9 +115,9 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         isAttested: false,
       });
 
-      const requestForAttestationBody: IRequestAttestationForClaim = {
+      const requestForAttestationBody: IRequestAttestation = {
         content: { requestForAttestation },
-        type: MessageBodyType.REQUEST_ATTESTATION_FOR_CLAIM,
+        type: MessageBodyType.REQUEST_ATTESTATION,
       };
 
       const { encrypt } = await getIdentityDidCrypto(address, password);

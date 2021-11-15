@@ -40,18 +40,18 @@
     "open-chrome": "node scripts/chrome-launch.js"
   },
   "dependencies": {
-    "@kiltprotocol/chain-helpers": "^0.24.0-10",
-    "@kiltprotocol/core": "^0.24.0-10",
-    "@kiltprotocol/did": "^0.24.0-10",
-    "@kiltprotocol/messaging": "^0.24.0-10",
-    "@kiltprotocol/types": "^0.24.0-10",
-    "@kiltprotocol/utils": "^0.24.0-10",
+    "@kiltprotocol/chain-helpers": "^0.24.0-17",
+    "@kiltprotocol/core": "^0.24.0-17",
+    "@kiltprotocol/did": "^0.24.0-17",
+    "@kiltprotocol/messaging": "^0.24.0-17",
+    "@kiltprotocol/types": "^0.24.0-17",
+    "@kiltprotocol/utils": "^0.24.0-17",
     "@polkadot/extension-inject": "^0.41.1",
-    "@polkadot/keyring": "^7.7.1",
+    "@polkadot/keyring": "^7.8.2",
     "@polkadot/types": "6.4.2",
     "@polkadot/ui-shared": "^0.86.5",
-    "@polkadot/util": "^7.7.1",
-    "@polkadot/util-crypto": "^7.7.1",
+    "@polkadot/util": "^7.8.2",
+    "@polkadot/util-crypto": "^7.8.2",
     "bn.js": "^4.12.0",
     "classnames": "^2.3.1",
     "ky": "^0.28.7",
@@ -129,14 +129,13 @@
     "webpack-merge": "^5.8.0"
   },
   "resolutions": {
-    "@polkadot/keyring": "7.7.1",
-    "@polkadot/networks": "7.7.1",
-    "@polkadot/util-crypto": "7.7.1",
-    "@polkadot/util": "7.7.1",
-    "@polkadot/x-global": "7.7.1",
-    "@polkadot/x-randomvalues": "7.7.1",
-    "@polkadot/x-textdecoder": "7.7.1",
-    "@polkadot/x-textencoder": "7.7.1",
-    "cbor": "8.0.2"
+    "@polkadot/keyring": "7.8.2",
+    "@polkadot/networks": "7.8.2",
+    "@polkadot/util-crypto": "7.8.2",
+    "@polkadot/util": "7.8.2",
+    "@polkadot/x-global": "7.8.2",
+    "@polkadot/x-randomvalues": "7.8.2",
+    "@polkadot/x-textdecoder": "7.8.2",
+    "@polkadot/x-textencoder": "7.8.2"
   }
 }

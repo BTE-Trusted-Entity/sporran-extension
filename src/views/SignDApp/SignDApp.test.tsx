@@ -4,11 +4,11 @@ import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedP
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
 
-import { SignDApp } from './SignDApp';
+import { ExtrinsicData, SignDApp } from './SignDApp';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({}));
 
-const mockExtrinsic = {
+const mockExtrinsic: ExtrinsicData = {
   origin:
     'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
