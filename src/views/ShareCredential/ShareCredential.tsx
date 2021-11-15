@@ -4,9 +4,7 @@ import { minBy } from 'lodash-es';
 import { Attestation, RequestForAttestation } from '@kiltprotocol/core';
 import { DefaultResolver } from '@kiltprotocol/did';
 import {
-  IDidDetails,
   IDidResolvedDetails,
-  IRequestCredentialContent,
   ISubmitCredential,
   MessageBodyType,
 } from '@kiltprotocol/types';
