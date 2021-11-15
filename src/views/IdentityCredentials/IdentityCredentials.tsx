@@ -6,6 +6,8 @@ import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 
+import { isNew } from '../../utilities/identities/identities';
+import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 
 import * as styles from './IdentityCredentials.module.css';
@@ -16,7 +18,12 @@ interface Props {
 
 export function IdentityCredentials({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
+
   const credentials = useIdentityCredentials(identity.did).reverse();
+
+  if (isNew(identity)) {
+    return <IdentityOverviewNew />;
+  }
 
   if (credentials.length === 0) {
     return null; // storage data pending

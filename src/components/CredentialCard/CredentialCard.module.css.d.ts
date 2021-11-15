@@ -1,7 +1,7 @@
 declare namespace CredentialCardModuleCssNamespace {
   export interface ICredentialCardModuleCss {
     collapse: string;
-    collapsedDetails: string;
+    collapsedCredential: string;
     collapsedFirstProp: string;
     collapsedName: string;
     credential: string;

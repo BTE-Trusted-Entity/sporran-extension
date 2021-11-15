@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import { NEW } from '../../utilities/identities/identities';
 
 import { IdentityCredentials } from './IdentityCredentials';
 
@@ -14,4 +15,8 @@ export default {
 
 export function Template(): JSX.Element {
   return <IdentityCredentials identity={identity} />;
+}
+
+export function New(): JSX.Element {
+  return <IdentityCredentials identity={NEW} />;
 }

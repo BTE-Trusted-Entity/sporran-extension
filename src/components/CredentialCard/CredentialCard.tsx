@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { browser } from 'webextension-polyfill-ts';
 
 import { Credential } from '../../utilities/credentials/credentials';
 
@@ -9,6 +10,8 @@ interface Props {
 }
 
 export function CredentialCard({ credential }: Props): JSX.Element {
+  const t = browser.i18n.getMessage;
+
   const [expanded, setExpanded] = useState(false);
 
   const handleExpand = useCallback(() => {
@@ -19,24 +22,15 @@ export function CredentialCard({ credential }: Props): JSX.Element {
   }, []);
 
   return (
-    <li
-      className={styles.credential}
-      aria-label="Credential"
-      aria-expanded={expanded}
-    >
+    <li className={styles.credential} aria-expanded={expanded}>
       {!expanded && (
-        <button
-          type="button"
-          className={styles.expand}
-          onClick={handleExpand}
-          aria-label="Expand Credential"
-        >
-          <dl className={styles.collapsedDetails}>
-            <dt className={styles.collapsedName}>{credential.name}</dt>
-            <dd className={styles.collapsedFirstProp}>
+        <button type="button" className={styles.expand} onClick={handleExpand}>
+          <section className={styles.collapsedCredential}>
+            <h4 className={styles.collapsedName}>{credential.name}</h4>
+            <p className={styles.collapsedFirstProp}>
               {Object.values(credential.request.claim.contents)[0]}
-            </dd>
-          </dl>
+            </p>
+          </section>
         </button>
       )}
 
@@ -45,7 +39,7 @@ export function CredentialCard({ credential }: Props): JSX.Element {
         <section className={styles.expanded}>
           <button
             type="button"
-            aria-label="Collapse Credential"
+            aria-label={t('component_CredentialCard_collapse')}
             className={styles.collapse}
             onClick={handleCollapse}
           />
