@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/react';
+
+import * as styles from './Card.module.css';
+
+export default {
+  title: 'Components/Card',
+} as Meta;
+
+export function Collapsed(): JSX.Element {
+  return (
+    <ul className={styles.list}>
+      <li className={styles.card} aria-expanded="false">
+        <button type="button" className={styles.expand}>
+          <section className={styles.collapsedCard}>
+            <h4 className={styles.collapsedName}>Name</h4>
+            <p className={styles.collapsedFirstProp}>Value</p>
+          </section>
+        </button>
+      </li>
+    </ul>
+  );
+}
+
+export function Expanded(): JSX.Element {
+  return (
+    <ul className={styles.list}>
+      <li className={styles.card} aria-expanded="true">
+        <section className={styles.expanded}>
+          <button
+            type="button"
+            aria-label="Collapse"
+            className={styles.collapse}
+          />
+        </section>
+      </li>
+    </ul>
+  );
+}
