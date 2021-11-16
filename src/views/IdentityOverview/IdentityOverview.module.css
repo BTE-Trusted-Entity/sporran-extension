@@ -31,38 +31,23 @@
   margin-top: 1rem;
 }
 
-.buttonWide {
-  composes: buttonPrimary from '../../components/Button/Button.module.css';
-  width: 100%;
-  padding: 0;
-  border: none;
-  box-shadow: none;
-  margin: 0.25rem 0;
-}
-
 .subscan {
-  composes: buttonWide;
-  background:
-    url('../../components/images/subscan-logo.svg') no-repeat 0.75rem center,
-    rgb(var(--color-black-rgb) / 30%) url('../../components/images/chevron-right.svg')
-    no-repeat right 0.75rem center/0.375rem 0.75rem;
+  composes: buttonWide from '../../components/Button/Button.module.css';
+
+  --wide-button-icon: url('../../components/images/subscan-logo.svg');
 }
 
 .credentials {
-  composes: buttonWide;
-  background:
-    url('../../components/images/show-credentials.svg') no-repeat 0.75rem center,
-    rgb(var(--color-black-rgb) / 30%) url('../../components/images/chevron-right.svg')
-    no-repeat right 0.75rem center/0.375rem 0.75rem;
+  composes: buttonWide from '../../components/Button/Button.module.css';
+
+  --wide-button-icon: url('../../components/images/show-credentials.svg');
 }
 
 .upgrade,
 .manage {
-  composes: buttonWide;
-  background:
-    url('../../components/images/manage-did.svg') no-repeat 0.75rem center,
-    rgb(var(--color-black-rgb) / 30%) url('../../components/images/chevron-right.svg')
-    no-repeat right 0.75rem center/0.375rem 0.75rem;
+  composes: buttonWide from '../../components/Button/Button.module.css';
+
+  --wide-button-icon: url('../../components/images/manage-did.svg');
 }
 
 .avatarSmall {

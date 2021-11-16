@@ -1,6 +1,7 @@
 declare namespace ButtonStoriesModuleCssNamespace {
   export interface IButtonStoriesModuleCss {
     icon: string;
+    wide: string;
   }
 }
 

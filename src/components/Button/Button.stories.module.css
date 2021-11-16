@@ -4,3 +4,9 @@
   width: 2rem;
   height: 2rem;
 }
+
+.wide {
+  composes: buttonWide from './Button.module.css';
+
+  --wide-button-icon: url('../../components/images/subscan-logo.svg');
+}
