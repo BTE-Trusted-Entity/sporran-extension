@@ -12,7 +12,7 @@
 }
 
 .info a {
-  color: var(--color-light);
+  color: var(--color-lightest);
 }
 
 .close {

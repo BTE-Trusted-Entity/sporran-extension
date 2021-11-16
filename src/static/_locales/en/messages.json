@@ -200,6 +200,9 @@
   "component_UpcomingFeatureModal_info": {
     "message": "It is not yet possible to transfer KILT Coins via the KILT blockchain. Please visit <a href='https://sporran.org/' target='_blank' rel='noreferrer'>sporran.org</a> to check whether this functionality is live, then ensure your extension is up-to-date."
   },
+  "component_CredentialCard_collapse": {
+    "message": "Collapse credential details"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -554,19 +557,7 @@
     "message": "Your Credentials"
   },
   "view_IdentityCredentials_subline": {
-    "message": "Overview"
-  },
-  "view_IdentityCredentials_name": {
-    "message": "Name"
-  },
-  "view_IdentityCredentials_ctype": {
-    "message": "C-Type"
-  },
-  "view_IdentityCredentials_attester": {
-    "message": "Attester"
-  },
-  "view_IdentityCredentials_valid": {
-    "message": "Valid"
+    "message": "View and manage your credentials"
   },
   "view_ShareCredential_share": {
     "message": "Share credential"

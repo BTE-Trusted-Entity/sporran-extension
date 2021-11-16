@@ -1,7 +1,7 @@
 .screenHeadline {
   font-family: 'Montserrat SemiBold', sans-serif;
   font-size: 1.625rem;
-  color: var(--color-light);
+  color: var(--color-lightest);
   margin: 0;
 }
 
@@ -36,7 +36,7 @@
 .balanceText {
   font-family: 'Montserrat Medium', sans-serif;
   font-size: 1.25rem;
-  color: var(--color-light);
+  color: var(--color-lightest);
 }
 
 .smallText {
