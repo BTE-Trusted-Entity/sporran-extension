@@ -40,12 +40,12 @@
     "open-chrome": "node scripts/chrome-launch.js"
   },
   "dependencies": {
-    "@kiltprotocol/chain-helpers": "^0.24.0-17",
-    "@kiltprotocol/core": "^0.24.0-17",
-    "@kiltprotocol/did": "^0.24.0-17",
-    "@kiltprotocol/messaging": "^0.24.0-17",
-    "@kiltprotocol/types": "^0.24.0-17",
-    "@kiltprotocol/utils": "^0.24.0-17",
+    "@kiltprotocol/chain-helpers": "^0.24.0-18",
+    "@kiltprotocol/core": "^0.24.0-18",
+    "@kiltprotocol/did": "^0.24.0-18",
+    "@kiltprotocol/messaging": "^0.24.0-18",
+    "@kiltprotocol/types": "^0.24.0-18",
+    "@kiltprotocol/utils": "^0.24.0-18",
     "@polkadot/extension-inject": "^0.41.1",
     "@polkadot/keyring": "^7.8.2",
     "@polkadot/types": "6.4.2",
@@ -123,7 +123,7 @@
     "typescript": "^4.4.4",
     "typescript-plugin-css-modules": "^3.4.0",
     "web-ext": "^6.5.0",
-    "webpack": "^5.64.0",
+    "webpack": "^5.64.1",
     "webpack-cli": "^4.9.1",
     "webpack-extension-reloader": "^1.1.4",
     "webpack-merge": "^5.8.0"
