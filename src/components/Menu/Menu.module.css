@@ -34,7 +34,7 @@
 .toggle[aria-expanded='true'] {
   /* keep the toggle button visible on top of menu */
   z-index: 2;
-  opacity: 35%;
+  opacity: 0.35;
 }
 
 .heading {
@@ -87,7 +87,7 @@
 }
 
 .listButton:disabled {
-  opacity: 25%;
+  opacity: 0.25;
 }
 
 .listItem a {
