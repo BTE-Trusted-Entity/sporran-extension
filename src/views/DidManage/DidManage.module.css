@@ -13,12 +13,25 @@
 
 .link {
   composes: buttonWide from '../../components/Button/Button.module.css';
-
-  --wide-button-icon: url('../../components/images/subscan-logo.svg');
-
   margin: 0.75rem 0 0;
 }
 
-.link:first-of-type {
+.endpoints {
+  composes: link;
+
+  --wide-button-icon: url('../../components/images/service-endpoint.svg');
+
   margin-top: 1.5rem;
+}
+
+.connect {
+  composes: link;
+
+  --wide-button-icon: url('../../components/images/dotsama.svg');
+}
+
+.downgrade {
+  composes: link;
+
+  --wide-button-icon: url('../../components/images/manage-did.svg');
 }
