@@ -1,17 +1,11 @@
 import BN from 'bn.js';
 import { KeyringPair } from '@polkadot/keyring/types';
-import {
-  IDidDetails,
-  IDidResolvedDetails,
-  SubmittableExtrinsic,
-  KeyRelationship,
-} from '@kiltprotocol/types';
+import { IDidDetails, SubmittableExtrinsic } from '@kiltprotocol/types';
 import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { DidChain, FullDidDetails, DefaultResolver } from '@kiltprotocol/did';
-import { U128 } from '@polkadot/types';
+import { DidChain, DidUtils } from '@kiltprotocol/did';
 
 import {
   decryptIdentity,
@@ -20,41 +14,30 @@ import {
   getLightDidFromKeypair,
   makeKeyring,
 } from '../identities/identities';
+import { queryFullDetailsFromIdentifier } from '../did/did';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
   did: IDidDetails['did'];
 }
 
-const { authentication } = KeyRelationship;
-
 export async function getDeposit(): Promise<BN> {
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  return blockchain.api.consts.did.deposit as U128;
+  return DidChain.queryDepositAmount();
 }
 
 async function getSignedTransaction(
   identity: KeyringPair,
   fullDid: IDidDetails['did'],
 ): Promise<DidTransaction> {
-  const { details: didDetails } = (await DefaultResolver.resolveDoc(
-    fullDid,
-  )) as IDidResolvedDetails;
-  if (!didDetails) {
-    throw new Error(`Cannot resolve the dApp DID ${fullDid}`);
+  const fullDidDetails = await queryFullDetailsFromIdentifier(
+    DidUtils.parseDidUrl(fullDid).identifier,
+  );
+  if (!fullDidDetails) {
+    throw new Error(`Could not resolve DID ${fullDid}`);
   }
 
-  const fullDidDetails = new FullDidDetails({
-    did: didDetails.did,
-    keys: didDetails.getKeys(),
-    keyRelationships: {
-      [authentication]: didDetails.getKeyIds(authentication),
-    },
-    lastTxIndex: await DidChain.queryLastTxCounter(didDetails.did),
-  });
-
   const extrinsic = await DidChain.getDeleteDidExtrinsic(
-    await DidChain.queryEndpointsCounts(didDetails.did),
+    await DidChain.queryEndpointsCounts(fullDidDetails.did),
   );
   const keystore = getKeystoreFromKeypair(identity);
 

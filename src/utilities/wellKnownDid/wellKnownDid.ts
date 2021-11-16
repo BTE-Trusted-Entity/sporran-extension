@@ -1,12 +1,13 @@
 import ky from 'ky';
 import {
   IDidDetails,
-  IDidResolvedDetails,
   IRequestForAttestation,
   KeyRelationship,
 } from '@kiltprotocol/types';
-import { DidUtils, DefaultResolver } from '@kiltprotocol/did';
+import { DidUtils } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
+
+import { getDidDetails } from '../did/did';
 
 interface CredentialSubject {
   id: IDidDetails['did'];
@@ -18,6 +19,7 @@ interface Proof {
   type: string;
   created?: string;
   proofPurpose?: string;
+
   [key: string]: unknown;
 }
 
@@ -78,10 +80,10 @@ export async function verifyDidConfigResource(
         return false;
       }
 
-      const { details: issuerDidDetails } = (await DefaultResolver.resolveDoc(
-        issuer,
-      )) as IDidResolvedDetails;
-      if (!issuerDidDetails) {
+      let issuerDidDetails: IDidDetails;
+      try {
+        issuerDidDetails = await getDidDetails(issuer);
+      } catch {
         return false;
       }
 

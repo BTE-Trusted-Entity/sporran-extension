@@ -3,10 +3,8 @@ import { browser } from 'webextension-polyfill-ts';
 import { find, filter } from 'lodash-es';
 import BN from 'bn.js';
 import { RequestForAttestation, Credential } from '@kiltprotocol/core';
-import { DefaultResolver } from '@kiltprotocol/did';
 import {
   IDidDetails,
-  IDidResolvedDetails,
   ITerms,
   IClaim,
   IRequestAttestation,
@@ -23,6 +21,7 @@ import {
   useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
+import { getDidDetails } from '../../utilities/did/did';
 import {
   PasswordField,
   usePasswordField,
@@ -122,12 +121,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
       const { encrypt } = await getIdentityDidCrypto(address, password);
 
-      const { details: attesterDidDetails } = (await DefaultResolver.resolveDoc(
-        attesterDid,
-      )) as IDidResolvedDetails;
-      if (!attesterDidDetails) {
-        throw new Error(`Cannot resolve the DID ${attesterDid}`);
-      }
+      const attesterDidDetails = await getDidDetails(attesterDid);
       const message = await encrypt(
         requestForAttestationBody,
         attesterDidDetails,
