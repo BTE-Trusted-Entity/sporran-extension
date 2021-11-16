@@ -29,21 +29,21 @@ export function DidManage({ identity }: Props): JSX.Element | null {
       <IdentitySlide identity={identity} />
 
       <Link
-        className={styles.link}
+        className={styles.endpoints}
         to={generatePath(paths.identity.did.endpoints.start, { address })}
       >
         {t('view_DidManage_endpoints')}
       </Link>
 
       <Link
-        className={styles.link}
+        className={styles.connect}
         to={generatePath(paths.identity.did.connect.start, { address })}
       >
         {t('view_DidManage_connect')}
       </Link>
 
       <Link
-        className={styles.link}
+        className={styles.downgrade}
         to={generatePath(paths.identity.did.downgrade.start, { address })}
       >
         {t('view_DidManage_downgrade')}

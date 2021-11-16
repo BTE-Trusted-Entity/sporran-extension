@@ -46,19 +46,19 @@ exports[`DidManage should match the snapshot 1`] = `
       </div>
     </section>
     <a
-      class="link"
+      class="endpoints"
       href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/endpoints"
     >
       Service endpoints
     </a>
     <a
-      class="link"
+      class="connect"
       href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/connect"
     >
       Connect to Dotsama address
     </a>
     <a
-      class="link"
+      class="downgrade"
       href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/downgrade"
     >
       Remove on-chain DID
