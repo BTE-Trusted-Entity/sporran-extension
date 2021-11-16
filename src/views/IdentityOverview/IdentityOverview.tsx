@@ -8,13 +8,9 @@ import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
 import { UpcomingFeatureModal } from '../../components/UpcomingFeatureModal/UpcomingFeatureModal';
 
-import {
-  Identity,
-  isNew,
-  useIdentities,
-} from '../../utilities/identities/identities';
+import { Identity, isNew } from '../../utilities/identities/identities';
 import { isFullDid } from '../../utilities/did/did';
-import { plural } from '../../utilities/plural/plural';
+import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { generatePath, paths } from '../paths';
 import { useConfiguration } from '../../configuration/useConfiguration';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
@@ -53,13 +49,6 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
   const subscanHost = useSubscanHost();
 
-  const identities = useIdentities().data;
-  if (!identities) {
-    return null; // storage data pending
-  }
-
-  const identitiesNumber = Object.values(identities).length;
-
   const { address } = identity;
 
   if (params.type) {
@@ -75,10 +64,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
       <header>
         <h1 className={styles.heading}>{t('view_IdentityOverview_title')}</h1>
         <p className={styles.info}>
-          {plural(identitiesNumber, {
-            one: 'view_IdentityOverview_subtitle_one',
-            other: 'view_IdentityOverview_subtitle_other',
-          })}
+          <YouHaveIdentities />
         </p>
       </header>
 
@@ -140,7 +126,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       ) : (
         <Link
-          to={generatePath(paths.identity.did.manage.start, { address })}
+          to={generatePath(paths.identity.did.manage, { address })}
           className={styles.manage}
         >
           {t('view_IdentityOverview_on_chain')}

@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DidManage should match the snapshot 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Manage DID
+    </h1>
+    <p
+      class="subline"
+    >
+      You have 3 Identities
+    </p>
+    <section>
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="nameLine"
+      >
+        <span
+          class="name"
+        >
+          KILT Identity 2
+        </span>
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Identity options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Identity options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <a
+      class="endpoints"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/endpoints"
+    >
+      Service endpoints
+    </a>
+    <a
+      class="connect"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/connect"
+    >
+      Connect to Dotsama address
+    </a>
+    <a
+      class="downgrade"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/downgrade"
+    >
+      Remove on-chain DID
+    </a>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+    <p
+      class="stats"
+    >
+      You have 3 Identities with a
+      <span
+        class="balance"
+      >
+         Total Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="KILT Coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </section>
+</div>
+`;

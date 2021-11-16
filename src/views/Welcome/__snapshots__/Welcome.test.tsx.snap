@@ -13,7 +13,8 @@ exports[`Welcome should match the snapshot with an identity 1`] = `
     <h3
       class="info"
     >
-      You have 3 Identities. Add another one.
+      You have 3 Identities
+      . Add another one.
     </h3>
     <p
       class="termsLine"
