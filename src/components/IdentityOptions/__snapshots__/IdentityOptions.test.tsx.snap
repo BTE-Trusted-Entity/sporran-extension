@@ -147,15 +147,6 @@ exports[`AddIdentity should show full Did option 1`] = `
             Reset Password
           </a>
         </li>
-        <li
-          class="listItem"
-        >
-          <a
-            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/downgrade"
-          >
-            Remove on-chain DID
-          </a>
-        </li>
       </ul>
     </div>
   </div>

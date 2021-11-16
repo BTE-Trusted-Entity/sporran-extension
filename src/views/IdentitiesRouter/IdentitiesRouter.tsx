@@ -30,6 +30,7 @@ import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
 import { DidDowngradeFlow } from '../DidDowngradeFlow/DidDowngradeFlow';
 import { SignQuote } from '../SignQuote/SignQuote';
 import { SignDid } from '../SignDid/SignDid';
+import { DidManage } from '../DidManage/DidManage';
 import { paths } from '../paths';
 
 interface Props {
@@ -125,6 +126,12 @@ export function SpecificIdentityRouter({
         {features.fullDid && (
           <Route path={paths.identity.did.downgrade.start}>
             <DidDowngradeFlow identity={identity} />
+          </Route>
+        )}
+
+        {features.fullDid && (
+          <Route path={paths.identity.did.manage}>
+            <DidManage identity={identity} />
           </Route>
         )}
 

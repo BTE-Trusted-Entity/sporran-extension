@@ -3,13 +3,11 @@ import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 
-import { useConfiguration } from '../../configuration/useConfiguration';
 import { Identity } from '../../utilities/identities/types';
 import { generatePath, paths } from '../../views/paths';
 
 import * as menuStyles from '../Menu/Menu.module.css';
 import * as styles from './IdentityOptions.module.css';
-import { isFullDid } from '../../utilities/did/did';
 
 interface Props {
   identity: Identity;
@@ -18,15 +16,10 @@ interface Props {
 
 export function IdentityOptions({ identity, onEdit }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const { features } = useConfiguration();
 
-  const { address, did } = identity;
+  const { address } = identity;
 
-  const didUpgraded = isFullDid(did);
-
-  const itemCount = features.fullDid && didUpgraded ? 4 : 3;
-  const { buttonProps, itemProps, isOpen, setIsOpen } =
-    useDropdownMenu(itemCount);
+  const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(3);
 
   const handleClick = useCallback(() => {
     onEdit();
@@ -76,18 +69,6 @@ export function IdentityOptions({ identity, onEdit }: Props): JSX.Element {
                 {t('component_IdentityOptions_reset_password')}
               </Link>
             </li>
-            {didUpgraded && (
-              <li className={menuStyles.listItem}>
-                <Link
-                  to={generatePath(paths.identity.did.downgrade.start, {
-                    address,
-                  })}
-                  {...itemProps[3]}
-                >
-                  {t('component_IdentityOptions_did_downgrade')}
-                </Link>
-              </li>
-            )}
           </ul>
         </div>
       )}
