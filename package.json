@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@kiltprotocol/chain-helpers": "^0.24.0-17",
-    "@kiltprotocol/core": "^0.24.0-17",
+    "@kiltprotocol/core": "^0.24.0-18",
     "@kiltprotocol/did": "^0.24.0-17",
     "@kiltprotocol/messaging": "^0.24.0-17",
     "@kiltprotocol/types": "^0.24.0-17",
