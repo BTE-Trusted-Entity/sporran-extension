@@ -17,7 +17,7 @@ const publicFeatures: Features = {
   endpoint: false,
   credentials: false,
   sendToken: true,
-  subscan: false,
+  subscan: true,
   fullDid: false,
 };
 
