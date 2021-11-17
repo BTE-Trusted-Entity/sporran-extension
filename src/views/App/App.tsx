@@ -3,7 +3,6 @@ import { MemoryRouter, Route, Switch } from 'react-router-dom';
 import { RouteExcept } from '../../components/RouteExcept/RouteExcept';
 import { useInitialEntries } from '../../utilities/popups/useInitialEntries';
 import { ConfigurationProvider } from '../../configuration/ConfigurationContext';
-import { useConfiguration } from '../../configuration/useConfiguration';
 import { IdentitiesProvider } from '../../utilities/identities/IdentitiesContext';
 import { CredentialsProvider } from '../../utilities/credentials/CredentialsContext';
 import { GenericError } from '../GenericError/GenericError';
@@ -22,7 +21,6 @@ import * as styles from './App.module.css';
 
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();
-  const { features } = useConfiguration();
 
   return (
     <div className={styles.container}>
@@ -42,11 +40,9 @@ export function App(): JSX.Element {
               <Welcome />
             </Route>
 
-            {features.endpoint && (
-              <Route path={paths.settings}>
-                <AppSettings />
-              </Route>
-            )}
+            <Route path={paths.settings}>
+              <AppSettings />
+            </Route>
 
             <Route path={paths.access}>
               <ExternalAccess />

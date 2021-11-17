@@ -16,8 +16,8 @@ export interface ConfigurationType {
 const publicFeatures: Features = {
   endpoint: false,
   credentials: false,
-  sendToken: false,
-  subscan: false,
+  sendToken: true,
+  subscan: true,
   fullDid: false,
 };
 
