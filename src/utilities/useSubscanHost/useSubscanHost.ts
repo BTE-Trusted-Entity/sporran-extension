@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 import { getEndpoint } from '../endpoints/endpoints';
 
 const subscanHosts: Record<string, string> = {
-  'wss://peregrine.kilt.io/': 'https://kilt-testnet.subscan.io',
+  'wss://spiritnet.api.onfinality.io/public-ws': 'https://spiritnet.subscan.io',
+  'wss://spiritnet.kilt.io': 'https://spiritnet.subscan.io',
+  'wss://peregrine.kilt.io': 'https://kilt-testnet.subscan.io',
 };
 
 export function useSubscanHost(): string | null {
