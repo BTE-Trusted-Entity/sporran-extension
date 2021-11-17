@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useEffect, useState } from 'react';
 import { filter, pick, remove } from 'lodash-es';
 import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
 import { mutate } from 'swr';
@@ -6,12 +6,14 @@ import { mutate } from 'swr';
 import { storage } from '../storage/storage';
 import { CredentialsContext } from './CredentialsContext';
 
+type AttestationStatus = 'pending' | 'attested' | 'revoked';
+
 export interface Credential {
   request: IRequestForAttestation;
   name: string;
   cTypeTitle: string;
   attester: string;
-  isAttested: boolean;
+  status: AttestationStatus;
 }
 
 function toKey(hash: string): string {
@@ -79,4 +81,29 @@ export function useIdentityCredentials(did?: IDidDetails['did']): Credential[] {
       return all;
     }
   }, [all, did]);
+}
+
+interface CredentialDownload {
+  name: string;
+  url: string;
+}
+
+export function useCredentialDownload(
+  credential: Credential | null,
+): CredentialDownload | null {
+  const [download, setDownload] = useState<CredentialDownload | null>(null);
+
+  useEffect(() => {
+    if (!credential) {
+      return;
+    }
+    const downloadName = `${credential.name}-${credential.cTypeTitle}.json`;
+
+    const downloadBlob = window.btoa(JSON.stringify(credential));
+    const downloadUrl = `data:text/json;base64,${downloadBlob}`;
+
+    setDownload({ name: downloadName, url: downloadUrl });
+  }, [credential]);
+
+  return download;
 }

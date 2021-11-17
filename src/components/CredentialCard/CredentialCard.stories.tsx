@@ -14,7 +14,10 @@ export default {
 export function Template(): JSX.Element {
   return (
     <ul className={styles.credentialsList}>
-      <CredentialCard credential={credentialsMock[0]} />
+      <CredentialCard
+        credential={credentialsMock[0]}
+        listRef={{ current: null }}
+      />
     </ul>
   );
 }

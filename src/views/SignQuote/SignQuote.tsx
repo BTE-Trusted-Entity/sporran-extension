@@ -112,7 +112,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         name,
         cTypeTitle,
         attester: attesterName,
-        isAttested: false,
+        status: 'pending',
       });
 
       const requestForAttestationBody: IRequestAttestation = {

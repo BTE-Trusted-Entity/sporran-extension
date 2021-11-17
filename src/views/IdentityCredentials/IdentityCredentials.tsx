@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import { Identity } from '../../utilities/identities/types';
@@ -21,6 +22,8 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
 
   const credentials = useIdentityCredentials(identity.did).reverse();
 
+  const ref = useRef(null);
+
   if (isNew(identity)) {
     return <IdentityOverviewNew />;
   }
@@ -37,11 +40,12 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
 
       <IdentitiesCarousel identity={identity} />
 
-      <ul className={styles.credentials}>
+      <ul className={styles.credentials} ref={ref}>
         {credentials.map((credential) => (
           <CredentialCard
             key={credential.request.rootHash}
             credential={credential}
+            listRef={ref}
           />
         ))}
       </ul>

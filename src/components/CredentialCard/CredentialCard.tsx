@@ -1,16 +1,117 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect, RefObject } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import { Credential } from '../../utilities/credentials/credentials';
+import {
+  Credential,
+  useCredentialDownload,
+  saveCredential,
+} from '../../utilities/credentials/credentials';
 
 import * as styles from './CredentialCard.module.css';
 
-interface Props {
-  credential: Credential;
+function useScrollIntoView(
+  expanded: boolean,
+  listRef: RefObject<HTMLUListElement>,
+  cardRef: RefObject<HTMLLIElement>,
+) {
+  useEffect(() => {
+    if (expanded && cardRef.current && listRef.current) {
+      const card = cardRef.current.getBoundingClientRect();
+      const list = listRef.current.getBoundingClientRect();
+
+      const isCardOverflowing = card.bottom > list.bottom;
+
+      if (!isCardOverflowing) {
+        return;
+      }
+
+      if (card.height < list.height) {
+        cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      } else {
+        cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [expanded, listRef, cardRef]);
 }
 
-export function CredentialCard({ credential }: Props): JSX.Element {
+function CredentialName({
+  credential,
+}: {
+  credential: Credential;
+}): JSX.Element {
   const t = browser.i18n.getMessage;
+
+  const [isEditingName, setIsEditingName] = useState(false);
+
+  const ref = useRef<HTMLInputElement>(null);
+
+  const handleEditClick = useCallback(() => {
+    setIsEditingName(true);
+  }, []);
+
+  const handleKeyPress = useCallback((event) => {
+    if (event.key === 'Enter') {
+      ref.current?.blur();
+    }
+  }, []);
+
+  const handleBlur = useCallback(
+    async (event) => {
+      const name = event.target.value;
+      if (name) {
+        await saveCredential({ ...credential, name });
+      }
+      setIsEditingName(false);
+    },
+    [credential],
+  );
+
+  return isEditingName ? (
+    <div className={styles.detail}>
+      <label className={styles.detailName}>
+        {t('component_CredentialCard_name')}
+        <input
+          ref={ref}
+          defaultValue={credential.name}
+          autoFocus
+          className={styles.input}
+          onKeyPress={handleKeyPress}
+          onBlur={handleBlur}
+        />
+      </label>
+    </div>
+  ) : (
+    <div className={styles.detail}>
+      <dt className={styles.detailName}>
+        {t('component_CredentialCard_name')}
+      </dt>
+      <dd className={styles.nameValue}>
+        {credential.name}
+        <button
+          className={styles.editName}
+          aria-label={t('component_CredentialCard_edit_name')}
+          onClick={handleEditClick}
+        />
+      </dd>
+    </div>
+  );
+}
+
+interface Props {
+  credential: Credential;
+  listRef: RefObject<HTMLUListElement>;
+}
+
+export function CredentialCard({ credential, listRef }: Props): JSX.Element {
+  const t = browser.i18n.getMessage;
+
+  const messages = {
+    pending: t('component_CredentialCard_pending'),
+    attested: t('component_CredentialCard_attested'),
+    revoked: t('component_CredentialCard_revoked'),
+  };
+
+  const { status } = credential;
 
   const [expanded, setExpanded] = useState(false);
 
@@ -21,28 +122,91 @@ export function CredentialCard({ credential }: Props): JSX.Element {
     setExpanded(false);
   }, []);
 
+  const contents = Object.entries(credential.request.claim.contents);
+
+  const download = useCredentialDownload(credential);
+
+  const cardRef = useRef<HTMLLIElement>(null);
+
+  useScrollIntoView(expanded, listRef, cardRef);
+
   return (
-    <li className={styles.credential} aria-expanded={expanded}>
+    <li className={styles.credential} aria-expanded={expanded} ref={cardRef}>
       {!expanded && (
         <button type="button" className={styles.expand} onClick={handleExpand}>
           <section className={styles.collapsedCredential}>
             <h4 className={styles.collapsedName}>{credential.name}</h4>
-            <p className={styles.collapsedFirstProp}>
-              {Object.values(credential.request.claim.contents)[0]}
-            </p>
+            <p className={styles.collapsedFirstProp}>{contents[0][1]}</p>
           </section>
         </button>
       )}
 
       {expanded && (
-        // TODO: https://kiltprotocol.atlassian.net/browse/SK-410
         <section className={styles.expanded}>
-          <button
-            type="button"
-            aria-label={t('component_CredentialCard_collapse')}
-            className={styles.collapse}
-            onClick={handleCollapse}
-          />
+          <section className={styles.buttons}>
+            <button
+              type="button"
+              aria-label={t('component_CredentialCard_collapse')}
+              className={styles.collapse}
+              onClick={handleCollapse}
+            />
+            <a
+              download={download?.name}
+              href={download?.url}
+              aria-label={t('component_CredentialCard_backup')}
+              className={styles.backup}
+            />
+            <button
+              type="button"
+              aria-label={t('component_CredentialCard_remove')}
+              className={styles.remove}
+              // TODO: https://kiltprotocol.atlassian.net/browse/SK-589
+            />
+          </section>
+
+          <dl className={styles.details}>
+            <CredentialName credential={credential} />
+
+            <div className={styles.detail}>
+              <dt className={styles.detailName}>
+                {t('component_CredentialCard_status')}
+              </dt>
+              <dd className={styles.detailValue}>{messages[status]}</dd>
+            </div>
+
+            {contents.map(([name, value]) => (
+              <div key={name} className={styles.detail}>
+                <dt className={styles.detailName}>{name}</dt>
+                <dd className={styles.detailValue}>{value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <h4 className={styles.technical}>
+            {t('component_CredentialCard_technical')}
+          </h4>
+          <dl className={styles.details}>
+            <div className={styles.detail}>
+              <dt className={styles.detailName}>
+                {t('component_CredentialCard_ctype')}
+              </dt>
+              <dd className={styles.detailValue}>{credential.cTypeTitle}</dd>
+            </div>
+            <div className={styles.detail}>
+              <dt className={styles.detailName}>
+                {t('component_CredentialCard_attester')}
+              </dt>
+              <dd className={styles.detailValue}>{credential.attester}</dd>
+            </div>
+            <div className={styles.hash}>
+              <dt className={styles.detailName}>
+                {t('component_CredentialCard_hash')}
+              </dt>
+              <dd className={styles.detailValue}>
+                {credential.request.rootHash}
+              </dd>
+            </div>
+          </dl>
         </section>
       )}
     </li>

@@ -200,6 +200,42 @@
   "component_CredentialCard_collapse": {
     "message": "Collapse credential details"
   },
+  "component_CredentialCard_backup": {
+    "message": "Back up credential"
+  },
+  "component_CredentialCard_remove": {
+    "message": "Remove credential"
+  },
+  "component_CredentialCard_name": {
+    "message": "Credential Name"
+  },
+  "component_CredentialCard_edit_name": {
+    "message": "Edit credential name"
+  },
+  "component_CredentialCard_status": {
+    "message": "Status"
+  },
+  "component_CredentialCard_technical": {
+    "message": "Technical Details"
+  },
+  "component_CredentialCard_ctype": {
+    "message": "C-Type"
+  },
+  "component_CredentialCard_attester": {
+    "message": "Attester"
+  },
+  "component_CredentialCard_hash": {
+    "message": "Credential Hash"
+  },
+  "component_CredentialCard_pending": {
+    "message": "Pending"
+  },
+  "component_CredentialCard_attested": {
+    "message": "Attested"
+  },
+  "component_CredentialCard_revoked": {
+    "message": "Revoked"
+  },
   "component_YouHaveIdentities_one": {
     "message": "You have $number$ Identity",
     "placeholders": {
