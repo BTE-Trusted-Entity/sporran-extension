@@ -15,21 +15,13 @@ import menuStyles from '../Menu/Menu.module.css';
 import styles from './Settings.module.css';
 
 function useItemsCount(onExistingIdentity: boolean, hasPasswords: boolean) {
-  const { features } = useConfiguration();
-
   const itemCounts = {
-    generic: 3,
-    endpoint: features.endpoint ? 1 : 0,
+    generic: 4,
     identity: onExistingIdentity ? 2 : 0,
     forgetPasswords: onExistingIdentity && hasPasswords ? 1 : 0,
   };
 
-  return (
-    itemCounts.generic +
-    itemCounts.endpoint +
-    itemCounts.identity +
-    itemCounts.forgetPasswords
-  );
+  return itemCounts.generic + itemCounts.identity + itemCounts.forgetPasswords;
 }
 
 export function Settings(): JSX.Element {
@@ -42,7 +34,7 @@ export function Settings(): JSX.Element {
   const identities = useIdentities().data;
   const onExistingIdentity = Boolean(identities?.[address]);
 
-  const { version, features } = useConfiguration();
+  const { version } = useConfiguration();
 
   const count = useItemsCount(onExistingIdentity, hasPasswords);
   const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(count);
@@ -134,13 +126,11 @@ export function Settings(): JSX.Element {
               </Link>
             </li>
 
-            {features.endpoint && (
-              <li className={menuStyles.listItem}>
-                <Link to={paths.settings} {...itemProps.shift()}>
-                  {t('component_Settings_endpoint')}
-                </Link>
-              </li>
-            )}
+            <li className={menuStyles.listItem}>
+              <Link to={paths.settings} {...itemProps.shift()}>
+                {t('component_Settings_endpoint')}
+              </Link>
+            </li>
 
             <li className={menuStyles.listItem}>
               <a {...itemProps.shift()}>

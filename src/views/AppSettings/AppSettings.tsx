@@ -5,15 +5,19 @@ import { browser } from 'webextension-polyfill-ts';
 import {
   endpoints,
   getEndpoint,
+  publicEndpoints,
   setEndpoint,
 } from '../../utilities/endpoints/endpoints';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
+import { useConfiguration } from '../../configuration/useConfiguration';
 import { paths } from '../paths';
 
 import styles from './AppSettings.module.css';
 
 export function AppSettings(): JSX.Element {
   const t = browser.i18n.getMessage;
+
+  const { features } = useConfiguration();
 
   const [endpointValue, setEndpointValue] = useState('');
   useEffect(() => {
@@ -53,19 +57,37 @@ export function AppSettings(): JSX.Element {
             <option value={value} key={value} />
           ))}
         </datalist>
-        <input
-          className={styles.endpoint}
-          type="url"
-          pattern="wss?://.*"
-          name="endpoint"
-          list="endpoints"
-          onInput={handleEndpointInput}
-          value={endpointValue}
-          required
-          aria-label={t('view_AppSettings_endpoint')}
-          placeholder={t('view_AppSettings_endpoint_placeholder')}
-          autoFocus
-        />
+
+        {features.endpoint && (
+          <input
+            className={styles.endpoint}
+            type="url"
+            pattern="wss?://.*"
+            name="endpoint"
+            list="endpoints"
+            onInput={handleEndpointInput}
+            value={endpointValue}
+            required
+            aria-label={t('view_AppSettings_endpoint')}
+            placeholder={t('view_AppSettings_endpoint_placeholder')}
+            autoFocus
+          />
+        )}
+
+        {!features.endpoint && (
+          <select
+            className={styles.endpoint}
+            name="endpoint"
+            onInput={handleEndpointInput}
+            value={endpointValue}
+            aria-label={t('view_AppSettings_endpoint')}
+            autoFocus
+          >
+            {Object.entries(publicEndpoints).map(([label, value]) => (
+              <option label={label} value={value} key={value} />
+            ))}
+          </select>
+        )}
 
         <button
           className={styles.save}

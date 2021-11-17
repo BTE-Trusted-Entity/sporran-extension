@@ -10,6 +10,11 @@ export const endpoints = [
   'wss://kilt-peregrine-stg.kilt.io',
 ];
 
+export const publicEndpoints = {
+  OnFinality: 'wss://spiritnet.api.onfinality.io/public-ws',
+  'BOTLabs Trusted Entity': 'wss://spiritnet.kilt.io',
+};
+
 export async function getEndpoint(): Promise<string> {
   return (await storage.get(endpointKey))[endpointKey] || endpoints[0];
 }
