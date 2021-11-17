@@ -101,6 +101,17 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a
+            href="/settings"
+            role="menuitem"
+            tabindex="-1"
+          >
+            Custom Endpoint
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
             role="menuitem"
             tabindex="-1"
           >
