@@ -1,8 +1,8 @@
+import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../testing/testing';
 import { credentialsMock } from '../../utilities/credentials/CredentialsProvider.mock';
 
 import { CredentialCard } from './CredentialCard';
-import userEvent from '@testing-library/user-event';
 
 describe('CredentialCard', () => {
   it('should render collapsed card', async () => {

@@ -41,12 +41,12 @@ function CredentialName({
 }): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const [isEditingName, setIsEditingName] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const ref = useRef<HTMLInputElement>(null);
 
   const handleEditClick = useCallback(() => {
-    setIsEditingName(true);
+    setIsEditing(true);
   }, []);
 
   const handleKeyPress = useCallback((event) => {
@@ -61,12 +61,12 @@ function CredentialName({
       if (name) {
         await saveCredential({ ...credential, name });
       }
-      setIsEditingName(false);
+      setIsEditing(false);
     },
     [credential],
   );
 
-  return isEditingName ? (
+  return isEditing ? (
     <div className={styles.detail}>
       <label className={styles.detailName}>
         {t('component_CredentialCard_name')}
@@ -185,6 +185,7 @@ export function CredentialCard({ credential, listRef }: Props): JSX.Element {
           <h4 className={styles.technical}>
             {t('component_CredentialCard_technical')}
           </h4>
+
           <dl className={styles.details}>
             <div className={styles.detail}>
               <dt className={styles.detailName}>
