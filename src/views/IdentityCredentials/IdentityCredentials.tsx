@@ -12,6 +12,7 @@ import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 
 import * as styles from './IdentityCredentials.module.css';
+import { useMemo } from 'react';
 
 interface Props {
   identity: Identity;
@@ -20,7 +21,12 @@ interface Props {
 export function IdentityCredentials({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const credentials = useIdentityCredentials(identity.did).reverse();
+  const identityCredentials = useIdentityCredentials(identity.did);
+
+  const credentials = useMemo(
+    () => identityCredentials.concat().reverse(),
+    [identityCredentials],
+  );
 
   const credentialCount = credentials.length;
 
