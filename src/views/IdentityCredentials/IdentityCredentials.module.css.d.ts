@@ -3,7 +3,10 @@ declare namespace IdentityCredentialsModuleCssNamespace {
     container: string;
     credentials: string;
     credentialsContainer: string;
+    explainerLink: string;
     heading: string;
+    info: string;
+    noCredentials: string;
     subline: string;
   }
 }

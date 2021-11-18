@@ -97,9 +97,13 @@ function CredentialName({
 
 interface Props {
   credential: Credential;
+  expand?: boolean;
 }
 
-export function CredentialCard({ credential }: Props): JSX.Element {
+export function CredentialCard({
+  credential,
+  expand = false,
+}: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const statuses = {
@@ -110,7 +114,7 @@ export function CredentialCard({ credential }: Props): JSX.Element {
 
   const { status } = credential;
 
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(expand);
 
   const handleExpand = useCallback(() => {
     setExpanded(true);

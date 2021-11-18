@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { Identity } from '../../utilities/identities/types';
@@ -11,6 +12,7 @@ import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 
 import * as styles from './IdentityCredentials.module.css';
+import { useMemo } from 'react';
 
 interface Props {
   identity: Identity;
@@ -19,15 +21,17 @@ interface Props {
 export function IdentityCredentials({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const credentials = useIdentityCredentials(identity.did).reverse();
+  const identityCredentials = useIdentityCredentials(identity.did);
+
+  const credentials = useMemo(
+    () => identityCredentials.concat().reverse(),
+    [identityCredentials],
+  );
+
+  const credentialCount = credentials.length;
 
   if (isNew(identity)) {
     return <IdentityOverviewNew />;
-  }
-
-  if (credentials.length === 0) {
-    return null; // storage data pending
-    // TODO: https://kiltprotocol.atlassian.net/browse/SK-594
   }
 
   return (
@@ -37,15 +41,28 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
 
       <IdentitiesCarousel identity={identity} />
 
-      <ul className={styles.credentials}>
-        {credentials.map((credential) => (
-          <CredentialCard
-            key={credential.request.rootHash}
-            credential={credential}
-          />
-        ))}
-      </ul>
+      {credentials.length === 0 ? (
+        <section className={styles.noCredentials}>
+          <p className={styles.info}>
+            {t('view_IdentityCredentials_no_credentials')}
+          </p>
 
+          {/* TODO: link to https://kiltprotocol.atlassian.net/browse/SK-552 */}
+          <Link to="" className={styles.explainerLink}>
+            {t('view_IdentityCredentials_explainer')}
+          </Link>
+        </section>
+      ) : (
+        <ul className={styles.credentials}>
+          {credentials.map((credential, index) => (
+            <CredentialCard
+              key={credential.request.rootHash}
+              credential={credential}
+              expand={index + 1 === credentialCount && credentialCount < 7}
+            />
+          ))}
+        </ul>
+      )}
       <LinkBack />
       <Stats />
     </section>
