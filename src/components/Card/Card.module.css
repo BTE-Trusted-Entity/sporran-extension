@@ -11,9 +11,25 @@
   box-shadow: 0 -1px 2px 0 rgb(var(--color-black-rgb) / 30%);
 }
 
+.card:not(:first-child) {
+  margin-top: -1rem;
+}
+
+.card:nth-child(2n + 1) {
+  background-color: var(--color-medium);
+
+  --hr-border-top: var(--color-dark);
+  --hr-border-bottom: var(--color-lighter);
+}
+
+.card:nth-child(2n) {
+  background-color: var(--color-lighter);
+
+  --hr-border-top: var(--color-medium);
+  --hr-border-bottom: #637ba3;
+}
+
 .expand {
-  composes: smallText from '../../components/Typography/Typography.module.css';
-  color: var(--color-grey-light);
   display: inline-flex;
   width: 100%;
   height: 3.25rem;
@@ -23,19 +39,13 @@
   cursor: pointer;
 }
 
-.card:not(:first-child) {
-  margin-top: -1rem;
-}
-
-.card:nth-child(2n + 1) {
-  background-color: var(--color-medium);
-}
-
-.card:nth-child(2n) {
-  background-color: var(--color-lighter);
+.cardText {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  color: var(--color-grey-light);
 }
 
 .collapsedCard {
+  composes: cardText;
   display: flex;
   align-items: flex-start;
   margin: 0;
@@ -64,16 +74,66 @@
 }
 
 .expanded {
-  height: 12rem;
   position: relative;
+  padding: 1rem 2.5rem 2rem 1.5rem;
 }
 
 .collapse {
   composes: buttonIcon from '../../components/Button/Button.module.css';
-  position: absolute;
-  top: 0.75rem;
-  right: 1rem;
-  width: 0.75rem;
-  height: 0.75rem;
+  width: var(--button-size);
+  height: var(--button-size);
   background-image: url('../../components/images/chevron-up.svg');
+}
+
+.details {
+  width: 100%;
+  display: grid;
+  grid-template: auto / 1fr 1fr;
+  gap: 0.5rem 1.875rem;
+  justify-items: start;
+  text-align: start;
+  word-break: break-word;
+  margin: 0;
+}
+
+.detail {
+  width: 100%;
+}
+
+.detailName {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  font-size: 0.625rem;
+}
+
+.detailValue {
+  composes: cardText;
+  margin: 0;
+}
+
+.hash {
+  composes: detailValue;
+  grid-column: span 2;
+}
+
+.technical {
+  composes: balanceText from '../../components/Typography/Typography.module.css';
+  font-size: 0.625rem;
+  position: relative;
+  overflow: hidden;
+  text-align: start;
+  margin: 0.75rem 0;
+}
+
+.technical::after {
+  content: '';
+  box-sizing: border-box;
+  border-top: 1px solid var(--hr-border-top);
+  border-bottom: 1px solid var(--hr-border-bottom);
+  border-left: none;
+  border-right: none;
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  bottom: 2px;
+  margin-left: 0.25rem;
 }
