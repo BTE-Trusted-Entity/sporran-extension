@@ -207,7 +207,7 @@
     "message": "Remove credential"
   },
   "component_CredentialCard_name": {
-    "message": "Credential Name"
+    "message": "Credential name"
   },
   "component_CredentialCard_edit_name": {
     "message": "Edit credential name"
@@ -216,16 +216,16 @@
     "message": "Status"
   },
   "component_CredentialCard_technical": {
-    "message": "Technical Details"
+    "message": "Technical details"
   },
   "component_CredentialCard_ctype": {
-    "message": "C-Type"
+    "message": "CType"
   },
   "component_CredentialCard_attester": {
     "message": "Attester"
   },
   "component_CredentialCard_hash": {
-    "message": "Credential Hash"
+    "message": "Credential hash"
   },
   "component_CredentialCard_pending": {
     "message": "Pending"

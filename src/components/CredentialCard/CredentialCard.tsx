@@ -11,13 +11,14 @@ import * as styles from './CredentialCard.module.css';
 
 function useScrollIntoView(
   expanded: boolean,
-  listRef: RefObject<HTMLUListElement>,
   cardRef: RefObject<HTMLLIElement>,
 ) {
   useEffect(() => {
-    if (expanded && cardRef.current && listRef.current) {
+    const listElement = cardRef.current?.parentElement;
+
+    if (expanded && cardRef.current && listElement) {
       const card = cardRef.current.getBoundingClientRect();
-      const list = listRef.current.getBoundingClientRect();
+      const list = listElement.getBoundingClientRect();
 
       const isCardOverflowing = card.bottom > list.bottom;
 
@@ -31,7 +32,7 @@ function useScrollIntoView(
         cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  }, [expanded, listRef, cardRef]);
+  }, [expanded, cardRef]);
 }
 
 function CredentialName({
@@ -51,7 +52,7 @@ function CredentialName({
 
   const handleKeyPress = useCallback((event) => {
     if (event.key === 'Enter') {
-      ref.current?.blur();
+      event.target.blur();
     }
   }, []);
 
@@ -99,13 +100,12 @@ function CredentialName({
 
 interface Props {
   credential: Credential;
-  listRef: RefObject<HTMLUListElement>;
 }
 
-export function CredentialCard({ credential, listRef }: Props): JSX.Element {
+export function CredentialCard({ credential }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const messages = {
+  const statuses = {
     pending: t('component_CredentialCard_pending'),
     attested: t('component_CredentialCard_attested'),
     revoked: t('component_CredentialCard_revoked'),
@@ -128,7 +128,7 @@ export function CredentialCard({ credential, listRef }: Props): JSX.Element {
 
   const cardRef = useRef<HTMLLIElement>(null);
 
-  useScrollIntoView(expanded, listRef, cardRef);
+  useScrollIntoView(expanded, cardRef);
 
   return (
     <li className={styles.credential} aria-expanded={expanded} ref={cardRef}>
@@ -151,8 +151,8 @@ export function CredentialCard({ credential, listRef }: Props): JSX.Element {
               onClick={handleCollapse}
             />
             <a
-              download={download?.name}
-              href={download?.url}
+              download={download.name}
+              href={download.url}
               aria-label={t('component_CredentialCard_backup')}
               className={styles.backup}
             />
@@ -171,7 +171,7 @@ export function CredentialCard({ credential, listRef }: Props): JSX.Element {
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_status')}
               </dt>
-              <dd className={styles.detailValue}>{messages[status]}</dd>
+              <dd className={styles.detailValue}>{statuses[status]}</dd>
             </div>
 
             {contents.map(([name, value]) => (

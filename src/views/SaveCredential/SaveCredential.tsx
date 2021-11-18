@@ -93,8 +93,8 @@ export function SaveCredential(): JSX.Element | null {
           {t('common_action_cancel')}
         </button>
         <a
-          download={download?.name}
-          href={download?.url}
+          download={download.name}
+          href={download.url}
           className={styles.submit}
           aria-disabled={!credential.name || credential.name.length === 0}
         >

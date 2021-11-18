@@ -80,8 +80,8 @@
 
 .collapse {
   composes: buttonIcon from '../../components/Button/Button.module.css';
-  width: 0.75rem;
-  height: 0.75rem;
+  width: var(--button-size);
+  height: var(--button-size);
   background-image: url('../../components/images/chevron-up.svg');
 }
 
