@@ -1,4 +1,4 @@
-import { useContext, useMemo, useEffect, useState } from 'react';
+import { useContext, useMemo } from 'react';
 import { filter, pick, remove } from 'lodash-es';
 import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
 import { mutate } from 'swr';
@@ -88,22 +88,13 @@ interface CredentialDownload {
   url: string;
 }
 
-export function useCredentialDownload(
-  credential: Credential | null,
-): CredentialDownload | null {
-  const [download, setDownload] = useState<CredentialDownload | null>(null);
+export function getCredentialDownload(
+  credential: Credential,
+): CredentialDownload {
+  const name = `${credential.name}-${credential.cTypeTitle}.json`;
 
-  useEffect(() => {
-    if (!credential) {
-      return;
-    }
-    const downloadName = `${credential.name}-${credential.cTypeTitle}.json`;
+  const blob = window.btoa(JSON.stringify(credential));
+  const url = `data:text/json;base64,${blob}`;
 
-    const downloadBlob = window.btoa(JSON.stringify(credential));
-    const downloadUrl = `data:text/json;base64,${downloadBlob}`;
-
-    setDownload({ name: downloadName, url: downloadUrl });
-  }, [credential]);
-
-  return download;
+  return { name, url };
 }

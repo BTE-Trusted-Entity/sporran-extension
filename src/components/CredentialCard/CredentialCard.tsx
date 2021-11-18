@@ -3,7 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import {
   Credential,
-  useCredentialDownload,
+  getCredentialDownload,
   saveCredential,
 } from '../../utilities/credentials/credentials';
 
@@ -124,7 +124,7 @@ export function CredentialCard({ credential, listRef }: Props): JSX.Element {
 
   const contents = Object.entries(credential.request.claim.contents);
 
-  const download = useCredentialDownload(credential);
+  const download = getCredentialDownload(credential);
 
   const cardRef = useRef<HTMLLIElement>(null);
 

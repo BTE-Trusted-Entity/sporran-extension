@@ -5,7 +5,7 @@ import { IAttestation } from '@kiltprotocol/types';
 import {
   Credential,
   getCredential,
-  useCredentialDownload,
+  getCredentialDownload,
   saveCredential,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
@@ -57,11 +57,11 @@ export function SaveCredential(): JSX.Element | null {
     window.close();
   }, []);
 
-  const download = useCredentialDownload(credential);
-
   if (!credential) {
     return null; // storage data pending
   }
+
+  const download = getCredentialDownload(credential);
 
   return (
     <main className={styles.container}>
