@@ -5,6 +5,7 @@ import { IAttestation } from '@kiltprotocol/types';
 import {
   Credential,
   getCredential,
+  getCredentialDownload,
   saveCredential,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
@@ -34,7 +35,7 @@ export function SaveCredential(): JSX.Element | null {
     (async () => {
       try {
         const savedCredential = await getCredential(claimHash);
-        setCredential({ ...savedCredential, isAttested: true });
+        setCredential({ ...savedCredential, status: 'attested' });
       } catch (error) {
         console.error(error);
         // TODO: decide on the interface for an unknown credential
@@ -60,8 +61,7 @@ export function SaveCredential(): JSX.Element | null {
     return null; // storage data pending
   }
 
-  const downloadName = `${credential.cTypeTitle}-${credential.attester}.json`;
-  const downloadBlob = window.btoa(JSON.stringify(credential));
+  const download = getCredentialDownload(credential);
 
   return (
     <main className={styles.container}>
@@ -93,8 +93,8 @@ export function SaveCredential(): JSX.Element | null {
           {t('common_action_cancel')}
         </button>
         <a
-          download={downloadName}
-          href={`data:text/json;base64,${downloadBlob}`}
+          download={download.name}
+          href={download.url}
           className={styles.submit}
           aria-disabled={!credential.name || credential.name.length === 0}
         >

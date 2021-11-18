@@ -6,12 +6,14 @@ import { mutate } from 'swr';
 import { storage } from '../storage/storage';
 import { CredentialsContext } from './CredentialsContext';
 
+type AttestationStatus = 'pending' | 'attested' | 'revoked';
+
 export interface Credential {
   request: IRequestForAttestation;
   name: string;
   cTypeTitle: string;
   attester: string;
-  isAttested: boolean;
+  status: AttestationStatus;
 }
 
 function toKey(hash: string): string {
@@ -79,4 +81,20 @@ export function useIdentityCredentials(did?: IDidDetails['did']): Credential[] {
       return all;
     }
   }, [all, did]);
+}
+
+interface CredentialDownload {
+  name: string;
+  url: string;
+}
+
+export function getCredentialDownload(
+  credential: Credential,
+): CredentialDownload {
+  const name = `${credential.name}-${credential.cTypeTitle}.json`;
+
+  const blob = window.btoa(JSON.stringify(credential));
+  const url = `data:text/json;base64,${blob}`;
+
+  return { name, url };
 }
