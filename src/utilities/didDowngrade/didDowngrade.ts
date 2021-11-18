@@ -8,7 +8,6 @@ import {
 import { DidChain, DidUtils } from '@kiltprotocol/did';
 
 import {
-  decryptIdentity,
   getKeystoreFromKeypair,
   Identity,
   getLightDidFromKeypair,
@@ -70,9 +69,8 @@ const currentTx: Record<string, DidTransaction> = {};
 
 export async function sign(
   identity: Identity,
-  password: string,
+  sdkIdentity: KeyringPair,
 ): Promise<string> {
-  const sdkIdentity = await decryptIdentity(identity.address, password);
   const { extrinsic, did } = await getSignedTransaction(
     sdkIdentity,
     identity.did,

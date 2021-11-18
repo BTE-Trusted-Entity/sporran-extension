@@ -12,7 +12,7 @@ import {
 } from '@kiltprotocol/types';
 
 import {
-  getIdentityDidCrypto,
+  getIdentityCryptoFromKeypair,
   Identity,
 } from '../../utilities/identities/identities';
 import { saveCTypeTitle } from '../../utilities/cTypes/cTypes';
@@ -93,12 +93,9 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         },
       );
 
-      const { address } = identity;
-      const password = await passwordField.get(event);
-      const { didDetails, keystore } = await getIdentityDidCrypto(
-        address,
-        password,
-      );
+      const { keypair } = await passwordField.get(event);
+      const { didDetails, keystore, encrypt } =
+        await getIdentityCryptoFromKeypair(keypair);
 
       await requestForAttestation.signWithDid(keystore, didDetails);
 
@@ -118,8 +115,6 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         content: { requestForAttestation },
         type: MessageBodyType.REQUEST_ATTESTATION,
       };
-
-      const { encrypt } = await getIdentityDidCrypto(address, password);
 
       const attesterDidDetails = await getDidDetails(attesterDid);
       const message = await encrypt(

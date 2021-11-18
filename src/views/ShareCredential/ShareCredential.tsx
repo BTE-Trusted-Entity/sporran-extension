@@ -11,7 +11,7 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import {
-  getIdentityDidCrypto,
+  getIdentityCryptoFromKeypair,
   Identity,
   useIdentities,
 } from '../../utilities/identities/identities';
@@ -67,12 +67,9 @@ export function ShareCredential(): JSX.Element | null {
         return;
       }
 
-      const { address } = identity;
-      const password = await passwordField.get(event);
-      const { encrypt, keystore, didDetails } = await getIdentityDidCrypto(
-        address,
-        password,
-      );
+      const { keypair } = await passwordField.get(event);
+      const { encrypt, keystore, didDetails } =
+        await getIdentityCryptoFromKeypair(keypair);
 
       const request = RequestForAttestation.fromRequest(
         matchingCredentials[Number(checked)].request,
