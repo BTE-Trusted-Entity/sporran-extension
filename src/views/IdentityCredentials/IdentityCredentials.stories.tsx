@@ -4,6 +4,10 @@ import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mo
 import { NEW } from '../../utilities/identities/identities';
 
 import { IdentityCredentials } from './IdentityCredentials';
+import {
+  credentialsMock,
+  CredentialsProviderMock,
+} from '../../utilities/credentials/CredentialsProvider.mock';
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
@@ -19,4 +23,20 @@ export function Template(): JSX.Element {
 
 export function New(): JSX.Element {
   return <IdentityCredentials identity={NEW} />;
+}
+
+export function NoCredentials(): JSX.Element {
+  return (
+    <CredentialsProviderMock credentials={[]}>
+      <IdentityCredentials identity={identity} />
+    </CredentialsProviderMock>
+  );
+}
+
+export function FewCredentials(): JSX.Element {
+  return (
+    <CredentialsProviderMock credentials={credentialsMock.slice(0, 3)}>
+      <IdentityCredentials identity={identity} />
+    </CredentialsProviderMock>
+  );
 }
