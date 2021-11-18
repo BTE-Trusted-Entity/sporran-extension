@@ -98,7 +98,7 @@
     "buffer": "^6.0.3",
     "chrome-extension-i18n-shim": "^1.0.0",
     "chrome-launch": "^1.1.4",
-    "copy-webpack-plugin": "^9.1.0",
+    "copy-webpack-plugin": "^10.0.0",
     "crypto-browserify": "^3.12.0",
     "css-loader": "^6.5.1",
     "dialog-polyfill": "^0.5.6",
