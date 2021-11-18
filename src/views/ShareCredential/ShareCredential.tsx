@@ -168,10 +168,12 @@ export function ShareCredential(): JSX.Element | null {
               <td className={tableStyles.td}>{credential.attester}</td>
               <td
                 className={
-                  credential.isAttested ? styles.valid : tableStyles.td
+                  credential.status === 'attested'
+                    ? styles.valid
+                    : tableStyles.td
                 }
                 aria-label={
-                  credential.isAttested
+                  credential.status === 'attested'
                     ? t('view_ShareCredential_valid')
                     : undefined
                 }
