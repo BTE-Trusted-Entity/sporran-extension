@@ -22,6 +22,8 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
 
   const credentials = useIdentityCredentials(identity.did).reverse();
 
+  const credentialCount = credentials.length;
+
   if (isNew(identity)) {
     return <IdentityOverviewNew />;
   }
@@ -50,9 +52,7 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
             <CredentialCard
               key={credential.request.rootHash}
               credential={credential}
-              expand={
-                index === credentials.length - 1 && credentials.length < 7
-              }
+              expand={index + 1 === credentialCount && credentialCount < 7}
             />
           ))}
         </ul>
