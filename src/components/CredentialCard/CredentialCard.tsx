@@ -44,8 +44,6 @@ function CredentialName({
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const ref = useRef<HTMLInputElement>(null);
-
   const handleEditClick = useCallback(() => {
     setIsEditing(true);
   }, []);
@@ -72,7 +70,6 @@ function CredentialName({
       <label className={styles.detailName}>
         {t('component_CredentialCard_name')}
         <input
-          ref={ref}
           defaultValue={credential.name}
           autoFocus
           className={styles.input}
