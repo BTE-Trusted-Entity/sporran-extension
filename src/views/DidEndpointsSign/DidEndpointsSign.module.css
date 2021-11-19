@@ -11,20 +11,21 @@
   margin: 0 0 0.8125rem;
 }
 
-.credentials {
-  composes: list from '../../components/Card/Card.module.css';
-  height: calc(288rem / 16);
+.value {
+  composes: inputText from '../../components/Typography/Typography.module.css';
+  color: var(--color-grey-light);
+  margin: 0.75rem 0 0;
 }
 
-.info {
-  composes: importantHeadline from '../../components/Typography/Typography.module.css';
-  font-size: 2rem;
-  color: rgb(var(--color-white-rgb) / 33%);
-  white-space: pre-line;
-  margin: 1rem 0;
-  line-height: 2.5rem;
+.buttonsLine {
+  composes: buttonsLine from '../../components/Button/Button.module.css';
+  margin: 1.5rem 0 0;
 }
 
-.explainerLink {
+.cancel {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
+}
+
+.submit {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
 }

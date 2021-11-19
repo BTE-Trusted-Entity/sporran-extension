@@ -44,6 +44,7 @@ export const paths = {
       },
       endpoints: {
         start: '/identity/:address/did/endpoints',
+        sign: '/identity/:address/did/endpoints/sign',
       },
       connect: {
         start: '/identity/:address/did/connect',

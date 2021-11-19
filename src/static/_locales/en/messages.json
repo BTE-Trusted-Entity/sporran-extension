@@ -854,6 +854,51 @@
   "view_DidManage_downgrade": {
     "message": "Remove on-chain DID"
   },
+  "view_DidEndpointsForm_heading": {
+    "message": "Service Endpoints"
+  },
+  "view_DidEndpointsForm_subline": {
+    "message": "Add and remove Service Endpoints"
+  },
+  "view_DidEndpointsForm_add": {
+    "message": "+ Add service endpoint"
+  },
+  "view_DidEndpointsForm_url": {
+    "message": "URL"
+  },
+  "view_DidEndpointsForm_type": {
+    "message": "Type"
+  },
+  "view_DidEndpointsForm_id": {
+    "message": "Service ID"
+  },
+  "view_DidEndpointsSign_heading_remove": {
+    "message": "Remove Service Endpoint"
+  },
+  "view_DidEndpointsSign_subline": {
+    "message": "Sign with your password"
+  },
+  "view_DidEndpointsSign_add_pending": {
+    "message": "The new service endpoint is being created"
+  },
+  "view_DidEndpointsSign_add_success": {
+    "message": "The new service endpoint has been added"
+  },
+  "view_DidEndpointsSign_add_error": {
+    "message": "Adding the new service endpoint failed"
+  },
+  "view_DidEndpointsSign_remove_pending": {
+    "message": "The service endpoint is being removed"
+  },
+  "view_DidEndpointsSign_remove_success": {
+    "message": "The service endpoint was removed"
+  },
+  "view_DidEndpointsSign_remove_error": {
+    "message": "Removing the service endpoint failed"
+  },
+  "view_DidEndpointsSign_CTA": {
+    "message": "Sign"
+  },
   "view_SignDid_title": {
     "message": "Sign with on-chain DID"
   },

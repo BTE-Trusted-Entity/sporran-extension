@@ -42,7 +42,7 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
       <IdentitiesCarousel identity={identity} />
 
       {credentials.length === 0 ? (
-        <section className={styles.noCredentials}>
+        <section className={styles.credentials}>
           <p className={styles.info}>
             {t('view_IdentityCredentials_no_credentials')}
           </p>
