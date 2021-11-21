@@ -5,6 +5,7 @@ import BN from 'bn.js';
 import { identitiesMock, render } from '../../testing/testing';
 
 import { DidEndpointsSign } from './DidEndpointsSign';
+import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
@@ -15,12 +16,18 @@ const endpoint: IDidServiceEndpoint = {
   id: '123456',
 };
 
+const key = {
+  id: 'id',
+  type: 'type',
+  controller: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+  publicKeyHex: 'foo',
+};
 const fullDidDetails = new FullDidDetails({
-  did: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+  did: key.controller,
   keyRelationships: {
-    [KeyRelationship.authentication]: ['TODO'],
+    [KeyRelationship.authentication]: [key.id],
   },
-  keys: [],
+  keys: [key],
   lastTxIndex: new BN(0),
 });
 
@@ -34,6 +41,8 @@ describe('DidEndpointsSign', () => {
         fullDidDetails={fullDidDetails}
       />,
     );
+
+    await waitForGetPassword();
     expect(container).toMatchSnapshot();
   });
 
@@ -46,6 +55,8 @@ describe('DidEndpointsSign', () => {
         fullDidDetails={fullDidDetails}
       />,
     );
+
+    await waitForGetPassword();
     expect(container).toMatchSnapshot();
   });
 });
