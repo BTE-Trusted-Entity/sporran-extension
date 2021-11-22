@@ -872,6 +872,9 @@
   "view_DidEndpointsForm_id": {
     "message": "Service ID"
   },
+  "view_DidEndpointsForm_tooMany": {
+    "message": "You cannot add any more service endpoints"
+  },
   "view_DidEndpointsSign_heading_add": {
     "message": "Add Service Endpoint"
   },

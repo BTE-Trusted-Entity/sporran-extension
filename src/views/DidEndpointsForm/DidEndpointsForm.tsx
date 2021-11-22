@@ -117,6 +117,7 @@ export function DidEndpointsForm({
   }, [did]);
 
   const lastEndpoint = last(endpoints);
+  const hasTooManyEndpoints = endpoints && endpoints.length >= 25;
   const hasFewEndpoints = endpoints && endpoints.length < 7;
   const hasNoEndpoints = !endpoints || endpoints.length === 0;
   const collapsible = !hasNoEndpoints;
@@ -131,6 +132,10 @@ export function DidEndpointsForm({
 
   const handleSubmit = useCallback(
     (event) => {
+      if (hasTooManyEndpoints) {
+        return;
+      }
+
       const formData = new FormData(event.target as HTMLFormElement);
       const id = formData.get('id') as string;
       const url = formData.get('url') as string;
@@ -142,7 +147,7 @@ export function DidEndpointsForm({
         types: [type],
       });
     },
-    [onAdd],
+    [hasTooManyEndpoints, onAdd],
   );
 
   return (
@@ -199,9 +204,18 @@ export function DidEndpointsForm({
                       {t('common_action_cancel')}
                     </button>
                   )}
-                  <button type="submit" className={styles.submit}>
+                  <button
+                    type="submit"
+                    className={styles.submit}
+                    disabled={hasTooManyEndpoints}
+                  >
                     {t('common_action_next')}
                   </button>
+                  {hasTooManyEndpoints && (
+                    <output className={styles.errorTooltip}>
+                      {t('view_DidEndpointsForm_tooMany')}
+                    </output>
+                  )}
                 </p>
               </form>
             )}

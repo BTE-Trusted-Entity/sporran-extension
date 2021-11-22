@@ -11,6 +11,7 @@ declare namespace DidEndpointsFormModuleCssNamespace {
     collapsedUrl: string;
     container: string;
     endpoint: string;
+    errorTooltip: string;
     expand: string;
     heading: string;
     input: string;
