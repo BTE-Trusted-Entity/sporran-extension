@@ -3,9 +3,9 @@ import { FullDidDetails } from '@kiltprotocol/did';
 import BN from 'bn.js';
 
 import { identitiesMock, render } from '../../testing/testing';
+import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 
 import { DidEndpointsSign } from './DidEndpointsSign';
-import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];

@@ -5,7 +5,6 @@ import {
 import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 
-import { decryptIdentity } from '../identities/identities';
 import { originalBalancesMock } from '../balanceChanges/balanceChanges.mock';
 import { hasVestedFunds, signVest, submitVest } from './vesting';
 
@@ -20,10 +19,6 @@ jest.mock('@kiltprotocol/chain-helpers', () => ({
 
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain', () => ({
   getBalances: jest.fn(),
-}));
-
-jest.mock('../../utilities/identities/identities', () => ({
-  decryptIdentity: jest.fn(),
 }));
 
 const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
@@ -88,18 +83,11 @@ describe('vesting', () => {
     it('should return the hash of the signed transaction', async () => {
       const identityMock = {
         identity: true,
-      };
-
-      (decryptIdentity as jest.Mock).mockReturnValue(identityMock);
+      } as unknown as Parameters<typeof signVest>[0];
 
       (getBalances as jest.Mock).mockResolvedValue(originalBalancesMock);
 
-      const hash = await signVest({
-        address: mockAddress,
-        password: 'password',
-      });
-
-      expect(decryptIdentity).toHaveBeenCalledWith(mockAddress, 'password');
+      const hash = await signVest(identityMock);
 
       expect(apiMock.tx.vesting.vest).toHaveBeenCalled();
 
