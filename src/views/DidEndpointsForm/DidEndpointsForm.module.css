@@ -125,3 +125,7 @@
   margin-bottom: 0.75rem;
   word-break: break-word;
 }
+
+.linkBack {
+  composes: linkBack from '../../components/LinkBack/LinkBack.module.css';
+}

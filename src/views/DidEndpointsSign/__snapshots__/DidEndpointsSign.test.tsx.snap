@@ -126,6 +126,12 @@ exports[`DidEndpointsSign should match the snapshot when adding 1`] = `
       >
         Sign
       </button>
+      <output
+        class="errorTooltip"
+        hidden=""
+      >
+        You need at least undefined KILTs to pay the fee
+      </output>
     </p>
     <button
       aria-label="Back"
@@ -283,6 +289,12 @@ exports[`DidEndpointsSign should match the snapshot when removing 1`] = `
       >
         Sign
       </button>
+      <output
+        class="errorTooltip"
+        hidden=""
+      >
+        You need at least undefined KILTs to pay the fee
+      </output>
     </p>
     <button
       aria-label="Back"

@@ -1,8 +1,8 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { IDidServiceEndpoint } from '@kiltprotocol/types';
-import { DidChain, FullDidDetails } from '@kiltprotocol/did';
+import { DidChain, DidUtils, FullDidDetails } from '@kiltprotocol/did';
 
 import { Identity } from '../../utilities/identities/types';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
@@ -15,7 +15,10 @@ import {
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { getKeystoreFromKeypair } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { getFragment } from '../../utilities/did/did';
+import {
+  getFragment,
+  queryFullDetailsFromIdentifier,
+} from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 
 import * as styles from './DidEndpointsSign.module.css';
@@ -24,17 +27,27 @@ interface Props {
   identity: Identity;
   type: 'add' | 'remove';
   endpoint: IDidServiceEndpoint;
-  fullDidDetails: FullDidDetails;
 }
 
 export function DidEndpointsSign({
   identity,
   type,
   endpoint,
-  fullDidDetails,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const { address } = identity;
+  const { address, did } = identity;
+
+  const [fullDidDetails, setFullDidDetails] = useState<FullDidDetails>();
+  useEffect(() => {
+    (async () => {
+      const { identifier } = DidUtils.parseDidUrl(did);
+      const details = await queryFullDetailsFromIdentifier(identifier);
+      if (!details) {
+        throw new Error(`Could not resolve DID ${did}`);
+      }
+      setFullDidDetails(details);
+    })();
+  }, [did]);
 
   const passwordField = usePasswordField();
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
@@ -42,6 +55,9 @@ export function DidEndpointsSign({
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+      if (!fullDidDetails) {
+        return;
+      }
 
       const { keypair } = await passwordField.get(event);
 

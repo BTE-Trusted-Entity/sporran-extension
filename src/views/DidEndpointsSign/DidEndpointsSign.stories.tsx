@@ -1,7 +1,5 @@
 import { Meta } from '@storybook/react';
-import { IDidServiceEndpoint, KeyRelationship } from '@kiltprotocol/types';
-import { FullDidDetails } from '@kiltprotocol/did';
-import BN from 'bn.js';
+import { IDidServiceEndpoint } from '@kiltprotocol/types';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 
@@ -21,39 +19,14 @@ const endpoint: IDidServiceEndpoint = {
   id: `${identity.did}#123456`,
 };
 
-const key = {
-  id: 'id',
-  type: 'type',
-  controller: identity.did,
-  publicKeyHex: 'foo',
-};
-const fullDidDetails = new FullDidDetails({
-  did: identity.did,
-  keyRelationships: {
-    [KeyRelationship.authentication]: [key.id],
-  },
-  keys: [key],
-  lastTxIndex: new BN(0),
-});
-
 export function Add(): JSX.Element {
   return (
-    <DidEndpointsSign
-      type="add"
-      identity={identity}
-      endpoint={endpoint}
-      fullDidDetails={fullDidDetails}
-    />
+    <DidEndpointsSign type="add" identity={identity} endpoint={endpoint} />
   );
 }
 
 export function Remove(): JSX.Element {
   return (
-    <DidEndpointsSign
-      type="remove"
-      identity={identity}
-      endpoint={endpoint}
-      fullDidDetails={fullDidDetails}
-    />
+    <DidEndpointsSign type="remove" identity={identity} endpoint={endpoint} />
   );
 }

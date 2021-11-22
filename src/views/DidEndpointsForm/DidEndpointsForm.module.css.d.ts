@@ -15,6 +15,7 @@ declare namespace DidEndpointsFormModuleCssNamespace {
     heading: string;
     input: string;
     label: string;
+    linkBack: string;
     list: string;
     loading: string;
     name: string;

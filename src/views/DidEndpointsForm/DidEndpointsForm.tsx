@@ -1,13 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { IDidServiceEndpoint } from '@kiltprotocol/types';
+import { DidUtils } from '@kiltprotocol/did';
 import { last } from 'lodash-es';
+import { Link } from 'react-router-dom';
 
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
-import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
-import { getFragment } from '../../utilities/did/did';
+import {
+  getFragment,
+  queryFullDetailsFromIdentifier,
+} from '../../utilities/did/did';
+import { generatePath, paths } from '../paths';
 
 import * as styles from './DidEndpointsForm.module.css';
 
@@ -82,32 +87,40 @@ function DidEndpointCard({
 
 interface Props {
   identity: Identity;
-  endpoints: IDidServiceEndpoint[] | undefined;
   onAdd: (endpoint: IDidServiceEndpoint) => void;
   onRemove: (endpoint: IDidServiceEndpoint) => void;
 }
 
 export function DidEndpointsForm({
   identity,
-  endpoints,
   onAdd,
   onRemove,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
+  const { did, address } = identity;
+
+  const [endpoints, setEndpoints] = useState<IDidServiceEndpoint[]>();
+  useEffect(() => {
+    (async () => {
+      const { identifier } = DidUtils.parseDidUrl(did);
+      const details = await queryFullDetailsFromIdentifier(identifier);
+      if (!details) {
+        throw new Error(`Could not resolve DID ${did}`);
+      }
+      const loadedEndpoints = details.getEndpoints();
+      setEndpoints(loadedEndpoints);
+
+      if (loadedEndpoints.length > 0) {
+        setExpanded(false);
+      }
+    })();
+  }, [did]);
 
   const lastEndpoint = last(endpoints);
   const hasFewEndpoints = endpoints && endpoints.length < 7;
   const hasNoEndpoints = !endpoints || endpoints.length === 0;
   const collapsible = !hasNoEndpoints;
   const [expanded, setExpanded] = useState(hasNoEndpoints);
-
-  useEffect(() => {
-    // on the first render the endpoints are not yet loaded,
-    // so we need to update the form expanded state after their value is known
-    if (endpoints && endpoints.length > 0) {
-      setExpanded(false);
-    }
-  }, [endpoints]);
 
   const handleExpand = useCallback(() => {
     setExpanded(true);
@@ -205,7 +218,12 @@ export function DidEndpointsForm({
         ))}
       </ul>
 
-      <LinkBack />
+      <Link
+        title={t('common_action_back')}
+        aria-label={t('common_action_back')}
+        to={generatePath(paths.identity.did.endpoints.start, { address })}
+        className={styles.linkBack}
+      />
       <Stats />
     </section>
   );
