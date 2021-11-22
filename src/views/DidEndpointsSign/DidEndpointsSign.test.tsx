@@ -8,22 +8,22 @@ import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedP
 import { DidEndpointsSign } from './DidEndpointsSign';
 
 const identity =
-  identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+  identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 const endpoint: IDidServiceEndpoint = {
   urls: ['https://sporran.org/'],
   types: ['Some Type'],
-  id: '123456',
+  id: `${identity.did}#123456`,
 };
 
 const key = {
   id: 'id',
   type: 'type',
-  controller: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+  controller: identity.did,
   publicKeyHex: 'foo',
 };
 const fullDidDetails = new FullDidDetails({
-  did: key.controller,
+  did: identity.did,
   keyRelationships: {
     [KeyRelationship.authentication]: [key.id],
   },

@@ -28,7 +28,7 @@ exports[`DidEndpointsSign should match the snapshot when adding 1`] = `
         <span
           class="name"
         >
-          KILT Identity 1
+          KILT Identity 2
         </span>
         <div
           class="wrapper"
@@ -72,7 +72,7 @@ exports[`DidEndpointsSign should match the snapshot when adding 1`] = `
       </label>
       <a
         class="reset"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
+        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/reset"
       >
         Reset password
       </a>
@@ -185,7 +185,7 @@ exports[`DidEndpointsSign should match the snapshot when removing 1`] = `
         <span
           class="name"
         >
-          KILT Identity 1
+          KILT Identity 2
         </span>
         <div
           class="wrapper"
@@ -229,7 +229,7 @@ exports[`DidEndpointsSign should match the snapshot when removing 1`] = `
       </label>
       <a
         class="reset"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
+        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/reset"
       >
         Reset password
       </a>

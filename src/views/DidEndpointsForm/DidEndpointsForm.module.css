@@ -11,6 +11,11 @@
   margin: 0 0 0.8125rem;
 }
 
+.loading {
+  composes: spinner from '../../components/LoadingSpinner/LoadingSpinner.module.css';
+  margin: auto;
+}
+
 .list {
   composes: list from '../../components/Card/Card.module.css';
   height: calc(288rem / 16);
@@ -118,4 +123,5 @@
   composes: detailValue from '../../components/Card/Card.module.css';
   margin-top: 0.125rem;
   margin-bottom: 0.75rem;
+  word-break: break-word;
 }

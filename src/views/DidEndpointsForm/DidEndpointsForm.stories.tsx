@@ -12,18 +12,18 @@ export default {
 } as Meta;
 
 const identity =
-  identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+  identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 const endpoints: IDidServiceEndpoint[] = [
   {
     urls: ['https://sporran.org/'],
     types: ['Some Type'],
-    id: '123456',
+    id: `${identity.did}#123456`,
   },
   {
     urls: ['https://kilt.io/'],
     types: ['Another Type'],
-    id: '654321',
+    id: `${identity.did}#654321`,
   },
 ];
 

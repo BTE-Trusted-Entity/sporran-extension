@@ -15,6 +15,9 @@
   composes: inputText from '../../components/Typography/Typography.module.css';
   color: var(--color-grey-light);
   margin: 0.75rem 0 0;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .buttonsLine {

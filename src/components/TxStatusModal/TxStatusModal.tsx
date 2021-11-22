@@ -23,6 +23,7 @@ interface Props {
   txHash?: string;
   onDismissError: () => void;
   messages?: Messages;
+  destination?: string;
 }
 
 const t = browser.i18n.getMessage;
@@ -38,6 +39,7 @@ export function TxStatusModal({
   txHash,
   onDismissError,
   messages = defaultMessages,
+  destination,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const { features } = useConfiguration();
@@ -54,17 +56,16 @@ export function TxStatusModal({
     </a>
   );
 
+  const finalDestination =
+    destination ||
+    generatePath(paths.identity.overview, { address: identity.address });
+
   const modals = {
     pending: (
       <Modal open className={styles.overlay}>
         <Avatar identity={identity} className={styles.transparent} />
         <h1 className={styles.heading}>{messages[status]}</h1>
-        <Link
-          className={styles.confirm}
-          to={generatePath(paths.identity.overview, {
-            address: identity.address,
-          })}
-        >
+        <Link className={styles.confirm} to={finalDestination}>
           {t('common_action_confirm')}
         </Link>
         {subscanLink}
@@ -76,12 +77,7 @@ export function TxStatusModal({
           <Avatar identity={identity} className={styles.transparent} />
         </div>
         <h1 className={styles.heading}>{messages[status]}</h1>
-        <Link
-          className={styles.confirm}
-          to={generatePath(paths.identity.overview, {
-            address: identity.address,
-          })}
-        >
+        <Link className={styles.confirm} to={finalDestination}>
           {t('common_action_confirm')}
         </Link>
         {subscanLink}

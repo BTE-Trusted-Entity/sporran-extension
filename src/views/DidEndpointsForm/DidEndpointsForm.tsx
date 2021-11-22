@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { IDidServiceEndpoint } from '@kiltprotocol/types';
 import { last } from 'lodash-es';
@@ -7,6 +7,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
+import { getFragment } from '../../utilities/did/did';
 
 import * as styles from './DidEndpointsForm.module.css';
 
@@ -72,7 +73,7 @@ function DidEndpointCard({
           <dt className={styles.name}>{t('view_DidEndpointsForm_type')}</dt>
           <dd className={styles.value}>{type}</dd>
           <dt className={styles.name}>{t('view_DidEndpointsForm_id')}</dt>
-          <dd className={styles.value}>{id}</dd>
+          <dd className={styles.value}>{getFragment(id)}</dd>
         </dl>
       )}
     </li>
@@ -99,6 +100,14 @@ export function DidEndpointsForm({
   const hasNoEndpoints = !endpoints || endpoints.length === 0;
   const collapsible = !hasNoEndpoints;
   const [expanded, setExpanded] = useState(hasNoEndpoints);
+
+  useEffect(() => {
+    // on the first render the endpoints are not yet loaded,
+    // so we need to update the form expanded state after their value is known
+    if (endpoints && endpoints.length > 0) {
+      setExpanded(false);
+    }
+  }, [endpoints]);
 
   const handleExpand = useCallback(() => {
     setExpanded(true);
@@ -131,56 +140,60 @@ export function DidEndpointsForm({
       <IdentitySlide identity={identity} />
 
       <ul className={styles.list}>
-        <li className={styles.add} aria-expanded={expanded}>
-          <button
-            type="button"
-            className={styles.expand}
-            onClick={handleExpand}
-          >
-            {t('view_DidEndpointsForm_add')}
-          </button>
+        {!endpoints && <div className={styles.loading} />}
 
-          {expanded && (
-            <form onSubmit={handleSubmit}>
-              <label className={styles.label}>
-                {t('view_DidEndpointsForm_url')}
-                <input
-                  className={styles.input}
-                  type="url"
-                  name="url"
-                  required
-                />
-              </label>
-              <label className={styles.label}>
-                {t('view_DidEndpointsForm_type')}
-                <input className={styles.input} name="type" required />
-              </label>
-              <label className={styles.label}>
-                {t('view_DidEndpointsForm_id')}
-                <input
-                  className={styles.input}
-                  name="id"
-                  required
-                  defaultValue={String(Math.random()).substring(2, 8)}
-                />
-              </label>
-              <p className={styles.buttonsLine}>
-                {collapsible && (
-                  <button
-                    type="button"
-                    className={styles.cancel}
-                    onClick={handleCollapse}
-                  >
-                    {t('common_action_cancel')}
+        {endpoints && (
+          <li className={styles.add} aria-expanded={expanded}>
+            <button
+              type="button"
+              className={styles.expand}
+              onClick={handleExpand}
+            >
+              {t('view_DidEndpointsForm_add')}
+            </button>
+
+            {expanded && (
+              <form onSubmit={handleSubmit}>
+                <label className={styles.label}>
+                  {t('view_DidEndpointsForm_url')}
+                  <input
+                    className={styles.input}
+                    type="url"
+                    name="url"
+                    required
+                  />
+                </label>
+                <label className={styles.label}>
+                  {t('view_DidEndpointsForm_type')}
+                  <input className={styles.input} name="type" required />
+                </label>
+                <label className={styles.label}>
+                  {t('view_DidEndpointsForm_id')}
+                  <input
+                    className={styles.input}
+                    name="id"
+                    required
+                    defaultValue={String(Math.random()).substring(2, 8)}
+                  />
+                </label>
+                <p className={styles.buttonsLine}>
+                  {collapsible && (
+                    <button
+                      type="button"
+                      className={styles.cancel}
+                      onClick={handleCollapse}
+                    >
+                      {t('common_action_cancel')}
+                    </button>
+                  )}
+                  <button type="submit" className={styles.submit}>
+                    {t('common_action_next')}
                   </button>
-                )}
-                <button type="submit" className={styles.submit}>
-                  {t('common_action_next')}
-                </button>
-              </p>
-            </form>
-          )}
-        </li>
+                </p>
+              </form>
+            )}
+          </li>
+        )}
 
         {endpoints?.map((endpoint) => (
           <DidEndpointCard

@@ -13,20 +13,26 @@ export default {
 } as Meta;
 
 const identity =
-  identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+  identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 const endpoint: IDidServiceEndpoint = {
   urls: ['https://sporran.org/'],
   types: ['Some Type'],
-  id: '123456',
+  id: `${identity.did}#123456`,
 };
 
+const key = {
+  id: 'id',
+  type: 'type',
+  controller: identity.did,
+  publicKeyHex: 'foo',
+};
 const fullDidDetails = new FullDidDetails({
-  did: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+  did: identity.did,
   keyRelationships: {
-    [KeyRelationship.authentication]: ['TODO'],
+    [KeyRelationship.authentication]: [key.id],
   },
-  keys: [],
+  keys: [key],
   lastTxIndex: new BN(0),
 });
 

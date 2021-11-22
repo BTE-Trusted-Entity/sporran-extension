@@ -15,7 +15,8 @@ import {
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { getKeystoreFromKeypair } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { paths } from '../paths';
+import { getFragment } from '../../utilities/did/did';
+import { generatePath, paths } from '../paths';
 
 import * as styles from './DidEndpointsSign.module.css';
 
@@ -41,10 +42,11 @@ export function DidEndpointsSign({
     async (event) => {
       event.preventDefault();
 
+      // getRemoveEndpointExtrinsic expects just the fragment part, contrary to its type definition
       const draft =
         type === 'add'
           ? await DidChain.getAddEndpointExtrinsic(endpoint)
-          : await DidChain.getRemoveEndpointExtrinsic(endpoint.id);
+          : await DidChain.getRemoveEndpointExtrinsic(getFragment(endpoint.id));
 
       const { keypair } = await passwordField.get(event);
 
@@ -87,7 +89,7 @@ export function DidEndpointsSign({
 
       <p className={styles.value}>{endpoint.urls[0]}</p>
       <p className={styles.value}>{endpoint.types[0]}</p>
-      <p className={styles.value}>{endpoint.id}</p>
+      <p className={styles.value}>{getFragment(endpoint.id)}</p>
 
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
@@ -108,6 +110,9 @@ export function DidEndpointsSign({
           {...modalProps}
           identity={identity}
           messages={type === 'add' ? modalMessagesAdd : modalMessagesRemove}
+          destination={generatePath(paths.identity.did.endpoints.start, {
+            address: identity.address,
+          })}
         />
       )}
 

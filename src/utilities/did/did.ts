@@ -4,7 +4,12 @@ import {
   DidUtils,
   FullDidDetails,
 } from '@kiltprotocol/did';
-import { IDidDetails, IIdentity, KeyRelationship } from '@kiltprotocol/types';
+import {
+  IDidDetails,
+  IDidServiceEndpoint,
+  IIdentity,
+  KeyRelationship,
+} from '@kiltprotocol/types';
 
 export function isFullDid(did: IDidDetails['did']): boolean {
   return DidUtils.parseDidUrl(did).type === 'full';
@@ -18,6 +23,13 @@ export async function getDidDetails(
     throw new Error(`Cannot resolve DID ${did}`);
   }
   return resolved.details;
+}
+
+export function getFragment(id: IDidServiceEndpoint['id']): string {
+  if (!id.includes('#')) {
+    return id;
+  }
+  return DidUtils.parseDidUrl(id).fragment as string;
 }
 
 /** A copy of DefaultResolver.queryFullDetailsFromIdentifier which is not yet exported */
