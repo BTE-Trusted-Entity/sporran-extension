@@ -13,7 +13,7 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
     <p
       class="subline"
     >
-      Add and remove Service Endpoints
+      Add and remove service endpoints
     </p>
     <section>
       <div

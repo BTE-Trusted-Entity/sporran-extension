@@ -858,7 +858,7 @@
     "message": "Service Endpoints"
   },
   "view_DidEndpointsForm_subline": {
-    "message": "Add and remove Service Endpoints"
+    "message": "Add and remove service endpoints"
   },
   "view_DidEndpointsForm_add": {
     "message": "+ Add service endpoint"
