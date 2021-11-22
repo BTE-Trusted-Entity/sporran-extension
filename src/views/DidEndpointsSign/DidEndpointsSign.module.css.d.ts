@@ -3,6 +3,7 @@ declare namespace DidEndpointsSignModuleCssNamespace {
     buttonsLine: string;
     cancel: string;
     container: string;
+    errorTooltip: string;
     heading: string;
     subline: string;
     submit: string;

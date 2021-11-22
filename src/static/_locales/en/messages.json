@@ -881,6 +881,14 @@
   "view_DidEndpointsSign_subline": {
     "message": "Sign with your password"
   },
+  "view_DidEndpointsSign_insufficientFunds": {
+    "message": "You need at least $cost$ KILTs to pay the fee",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
+  },
   "view_DidEndpointsSign_add_pending": {
     "message": "The new service endpoint is being created"
   },

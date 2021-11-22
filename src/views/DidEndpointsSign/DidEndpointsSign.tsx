@@ -34,21 +34,22 @@ export function DidEndpointsSign({
   fullDidDetails,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
+  const { address } = identity;
 
   const passwordField = usePasswordField();
-  const { submit, modalProps, submitting } = useSubmitStates();
+  const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
 
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+
+      const { keypair } = await passwordField.get(event);
 
       // getRemoveEndpointExtrinsic expects just the fragment part, contrary to its type definition
       const draft =
         type === 'add'
           ? await DidChain.getAddEndpointExtrinsic(endpoint)
           : await DidChain.getRemoveEndpointExtrinsic(getFragment(endpoint.id));
-
-      const { keypair } = await passwordField.get(event);
 
       const authorized = await fullDidDetails.authorizeExtrinsic(
         draft,
@@ -100,9 +101,9 @@ export function DidEndpointsSign({
         <button type="submit" className={styles.submit} disabled={submitting}>
           {t('view_DidEndpointsSign_CTA')}
         </button>
-        {/*<output className={styles.errorTooltip} hidden={!error}>
-          {t('view_DidDowngrade_insufficientFunds', asKiltCoins(fee, 'costs'))}
-        </output>*/}
+        <output className={styles.errorTooltip} hidden={!unpaidCosts}>
+          {t('view_DidEndpointsSign_insufficientFunds', unpaidCosts)}
+        </output>
       </p>
 
       {modalProps && (
@@ -111,7 +112,7 @@ export function DidEndpointsSign({
           identity={identity}
           messages={type === 'add' ? modalMessagesAdd : modalMessagesRemove}
           destination={generatePath(paths.identity.did.endpoints.start, {
-            address: identity.address,
+            address,
           })}
         />
       )}
