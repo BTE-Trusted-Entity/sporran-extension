@@ -2,11 +2,9 @@ declare namespace IdentityCredentialsModuleCssNamespace {
   export interface IIdentityCredentialsModuleCss {
     container: string;
     credentials: string;
-    credentialsContainer: string;
     explainerLink: string;
     heading: string;
     info: string;
-    noCredentials: string;
     subline: string;
   }
 }

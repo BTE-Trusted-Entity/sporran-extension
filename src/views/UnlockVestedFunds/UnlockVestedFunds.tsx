@@ -43,14 +43,12 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
     async (event) => {
       event.preventDefault();
 
-      const { address } = identity;
-
       try {
-        const password = await passwordField.get(event);
+        const { keypair } = await passwordField.get(event);
 
         setTxStatus('pending');
 
-        const hash = await signVest({ address, password });
+        const hash = await signVest(keypair);
         setTxHash(hash);
 
         await submitVest(hash);
@@ -64,7 +62,7 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
         }
       }
     },
-    [t, identity, passwordField],
+    [t, passwordField],
   );
 
   const closeModal = useCallback(() => {

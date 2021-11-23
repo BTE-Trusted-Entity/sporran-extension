@@ -78,7 +78,7 @@ export function SignDApp(): JSX.Element | null {
         return;
       }
 
-      const password = await passwordField.get(event);
+      const { password } = await passwordField.get(event);
       await backgroundSignChannel.return(password);
 
       window.close();

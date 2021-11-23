@@ -79,12 +79,12 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
       event.preventDefault();
 
       try {
-        const password = await passwordField.get(event);
+        const { keypair } = await passwordField.get(event);
 
         setSubmitting(true);
         setStatus('pending');
 
-        const hash = await sign(identity, password);
+        const hash = await sign(identity, keypair);
         setTxHash(hash);
 
         const did = await submit(hash);

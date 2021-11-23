@@ -64,18 +64,16 @@ export function ReviewTransaction({
       event.preventDefault();
 
       try {
-        const password = await passwordField.get(event);
-        const { address } = identity;
+        const { keypair } = await passwordField.get(event);
 
         setSubmitting(true);
         setTxStatus('pending');
 
         const hash = await signTransfer({
-          address,
           recipient,
           amount,
           tip,
-          password,
+          keypair,
         });
         setTxHash(hash);
 
@@ -87,7 +85,7 @@ export function ReviewTransaction({
         setSubmitting(false);
       }
     },
-    [passwordField, amount, identity, recipient, tip],
+    [passwordField, amount, recipient, tip],
   );
 
   const totalFee = fee.add(tip);

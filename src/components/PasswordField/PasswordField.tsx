@@ -11,6 +11,7 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
+import { KeyringPair } from '@polkadot/keyring/types';
 
 import { decryptIdentity } from '../../utilities/identities/identities';
 import { usePasswordType } from '../usePasswordType/usePasswordType';
@@ -22,24 +23,30 @@ import {
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
 import { RouteExcept } from '../RouteExcept/RouteExcept';
 import { generatePath, paths } from '../../views/paths';
+import { exceptionToError } from '../../utilities/exceptionToError/exceptionToError';
 
 import * as styles from './PasswordField.module.css';
 
 // Okay, ESLint, I must have a parameter but cannot use it
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function defaultGetPassword(event: FormEvent): Promise<string> {
+async function defaultGetPassword(event: FormEvent): Promise<Value> {
   throw new Error('Not initialized yet, getPassword not set');
 }
 
 // To store a function in state I have to use this workaround since proper typing was not provided
 // https://github.com/DefinitelyTyped/DefinitelyTyped/pull/38160
 type SetPasswordGetterType = Dispatch<
-  SetStateAction<(event: FormEvent) => Promise<string>>
+  SetStateAction<(event: FormEvent) => Promise<Value>>
 >;
 
+interface Value {
+  password: string;
+  keypair: KeyringPair;
+}
+
 export function usePasswordField(): {
-  get: (event: FormEvent) => Promise<string>;
-  set: (getter: (event: FormEvent) => Promise<string>) => void;
+  get: (event: FormEvent) => Promise<Value>;
+  set: (getter: (event: FormEvent) => Promise<Value>) => void;
   isEmpty: boolean;
   setIsEmpty: (isEmpty: boolean) => void;
 } {
@@ -65,7 +72,7 @@ interface Props {
   identity: { address: string };
   autoFocus?: boolean;
   password: {
-    set: (getter: (event: FormEvent) => Promise<string>) => void;
+    set: (getter: (event: FormEvent) => Promise<Value>) => void;
     setIsEmpty: (isEmpty: boolean) => void;
   };
 }
@@ -97,13 +104,14 @@ export function PasswordField({
       const useSaved = savedPassword && providedPassword === asterisks;
       const password = useSaved ? savedPassword : providedPassword;
 
+      let keypair: KeyringPair;
       try {
-        await decryptIdentity(address, password);
-      } catch (error) {
-        if (error instanceof Error && error.message === 'Invalid password') {
+        keypair = await decryptIdentity(address, password);
+      } catch (exception) {
+        if (exceptionToError(exception).message === 'Invalid password') {
           setError(t('component_PasswordField_password_incorrect'));
         }
-        throw error;
+        throw exception;
       }
 
       if (rememberRef.current?.checked) {
@@ -112,7 +120,7 @@ export function PasswordField({
         await forgetPasswordChannel.get(address);
       }
 
-      return password;
+      return { password, keypair };
     },
     [address, rememberRef, savedPassword, t],
   );
