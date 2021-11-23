@@ -9,7 +9,6 @@ import {
 } from '@polkadot/util-crypto';
 import {
   IDidDetails,
-  IDidResolvedDetails,
   IEncryptedMessage,
   KeyRelationship,
   KeystoreSigner,
@@ -17,12 +16,7 @@ import {
   NaclBoxCapable,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
-import {
-  DefaultResolver,
-  LightDidDetails,
-  DidUtils,
-  DidChain,
-} from '@kiltprotocol/did';
+import { LightDidDetails, DidUtils, DidChain } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 import { map, max, memoize } from 'lodash-es';
 
@@ -31,6 +25,7 @@ import {
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
+import { getDidDetails } from '../did/did';
 import { storage } from '../storage/storage';
 import { IDENTITIES_KEY, getIdentities } from './getIdentities';
 
@@ -176,13 +171,7 @@ export async function getIdentityCryptoFromKeypair(
   const identities = await getIdentities();
   const { did } = identities[identityKeypair.address];
 
-  const { details: didDetails } = (await DefaultResolver.resolveDoc(
-    did,
-  )) as IDidResolvedDetails;
-  if (!didDetails) {
-    throw new Error(`Cannot resolve the DID ${did}`);
-  }
-
+  const didDetails = await getDidDetails(did);
   const keystore = getKeystoreFromKeypair(identityKeypair);
 
   function sign(plaintext: string) {

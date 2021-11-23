@@ -7,8 +7,6 @@ import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
 import { signTransfer, submitTransfer } from './transfers';
 
-import { decryptIdentity } from '../identities/identities';
-
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: {
@@ -17,9 +15,6 @@ jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainUtils: {
     submitSignedTx: jest.fn(),
   },
-}));
-jest.mock('../../utilities/identities/identities', () => ({
-  decryptIdentity: jest.fn(),
 }));
 
 const signedTxMock = {
@@ -41,31 +36,27 @@ const chainMock = {
 describe('transfers', () => {
   describe('signTransfer', () => {
     it('should return the hash of the signed transaction', async () => {
-      (decryptIdentity as jest.Mock).mockImplementation(() => ({
+      const keypairMock = {
         sdkIdentity: true,
-      }));
+      } as unknown as Parameters<typeof signTransfer>[0]['keypair'];
+
       (makeTransfer as jest.Mock).mockImplementation(() => ({
         transaction: true,
       }));
 
       const txHash = await signTransfer({
-        address: 'identity-address',
+        keypair: keypairMock,
         recipient: 'recipient-address',
         amount: new BN(125000000),
-        password: 'password',
         tip: new BN(0),
       });
 
-      expect(decryptIdentity).toHaveBeenCalledWith(
-        'identity-address',
-        'password',
-      );
       expect(makeTransfer).toHaveBeenCalledWith(
         'recipient-address',
         expect.anything(),
       );
       expect(chainMock.signTx).toHaveBeenCalledWith(
-        { sdkIdentity: true },
+        keypairMock,
         { transaction: true },
         expect.anything(),
       );

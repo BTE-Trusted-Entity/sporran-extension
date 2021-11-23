@@ -6,29 +6,25 @@ import {
   BlockchainApiConnection,
 } from '@kiltprotocol/chain-helpers';
 import { SubmittableExtrinsic } from '@kiltprotocol/types';
-
-import { decryptIdentity } from '../identities/identities';
+import { KeyringPair } from '@polkadot/keyring/types';
 
 const currentTx: Record<string, SubmittableExtrinsic> = {};
 
 interface Input {
-  address: string;
   recipient: string;
   amount: BN;
   tip: BN;
-  password: string;
+  keypair: KeyringPair;
 }
 
 export async function signTransfer(input: Input): Promise<string> {
-  const { address, recipient, amount, password, tip } = input;
+  const { recipient, amount, keypair, tip } = input;
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const sdkIdentity = await decryptIdentity(address, password);
-
   const tx = await makeTransfer(recipient, amount);
 
-  const signedTx = await blockchain.signTx(sdkIdentity, tx, tip);
+  const signedTx = await blockchain.signTx(keypair, tx, tip);
   const hash = signedTx.hash.toHex();
   currentTx[hash] = signedTx;
 

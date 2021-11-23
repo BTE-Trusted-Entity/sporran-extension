@@ -2,12 +2,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import { minBy } from 'lodash-es';
 import { Attestation, RequestForAttestation } from '@kiltprotocol/core';
-import { DefaultResolver } from '@kiltprotocol/did';
-import {
-  IDidResolvedDetails,
-  ISubmitCredential,
-  MessageBodyType,
-} from '@kiltprotocol/types';
+import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
 
 import { shareChannel } from '../../channels/shareChannel/shareChannel';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
@@ -16,10 +11,11 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import {
-  getIdentityDidCrypto,
+  getIdentityCryptoFromKeypair,
   Identity,
   useIdentities,
 } from '../../utilities/identities/identities';
+import { getDidDetails } from '../../utilities/did/did';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { ShareInput } from '../../channels/shareChannel/types';
@@ -71,12 +67,9 @@ export function ShareCredential(): JSX.Element | null {
         return;
       }
 
-      const { address } = identity;
-      const password = await passwordField.get(event);
-      const { encrypt, keystore, didDetails } = await getIdentityDidCrypto(
-        address,
-        password,
-      );
+      const { keypair } = await passwordField.get(event);
+      const { encrypt, keystore, didDetails } =
+        await getIdentityCryptoFromKeypair(keypair);
 
       const request = RequestForAttestation.fromRequest(
         matchingCredentials[Number(checked)].request,
@@ -97,13 +90,7 @@ export function ShareCredential(): JSX.Element | null {
         type: MessageBodyType.SUBMIT_CREDENTIAL,
       };
 
-      const { details: verifierDidDetails } = (await DefaultResolver.resolveDoc(
-        verifierDid,
-      )) as IDidResolvedDetails;
-      if (!verifierDidDetails) {
-        throw new Error(`Cannot resolve the DID ${verifierDid}`);
-      }
-
+      const verifierDidDetails = await getDidDetails(verifierDid);
       const message = await encrypt(credentialsBody, verifierDidDetails);
 
       await shareChannel.return(message);

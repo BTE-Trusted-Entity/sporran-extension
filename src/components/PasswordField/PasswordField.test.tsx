@@ -139,7 +139,7 @@ describe('PasswordField', () => {
     });
 
     it('should return the valid password', async () => {
-      let password = '';
+      let password: Record<string, string> = {};
 
       async function handleSubmit(event: FormEvent) {
         event.preventDefault();
@@ -160,15 +160,15 @@ describe('PasswordField', () => {
       );
       userEvent.click(await screen.findByText('Submit'));
 
-      await waitFor(() => password !== '');
-      expect(password).toEqual('PASS');
+      await waitFor(() => password !== {});
+      expect(password.password).toEqual('PASS');
     });
 
     it('should return the saved password and clear it', async () => {
       const promise = Promise.resolve('PASS');
       (getPasswordChannel.get as jest.Mock).mockReturnValue(promise);
 
-      let password = '';
+      let password: Record<string, string> = {};
 
       async function handleSubmit(event: FormEvent) {
         event.preventDefault();
@@ -189,8 +189,8 @@ describe('PasswordField', () => {
       userEvent.click(await screen.findByLabelText(/Remember password/));
       userEvent.click(await screen.findByText('Submit'));
 
-      await waitFor(() => password !== '');
-      expect(password).toEqual('PASS');
+      await waitFor(() => password !== {});
+      expect(password.password).toEqual('PASS');
       expect(forgetPasswordChannel.get).toHaveBeenCalledWith(identity.address);
     });
 

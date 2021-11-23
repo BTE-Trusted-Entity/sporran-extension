@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DidEndpointsForm should match the snapshot 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Service Endpoints
+    </h1>
+    <p
+      class="subline"
+    >
+      Add and remove service endpoints
+    </p>
+    <section>
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="nameLine"
+      >
+        <span
+          class="name"
+        >
+          KILT Identity 2
+        </span>
+        <div
+          class="wrapper"
+        >
+          <button
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-label="Identity options"
+            class="toggle"
+            role="button"
+            tabindex="0"
+            title="Identity options"
+            type="button"
+          />
+        </div>
+      </div>
+    </section>
+    <ul
+      class="list"
+    >
+      <li
+        aria-expanded="false"
+        class="add"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          + Add service endpoint
+        </button>
+      </li>
+      <li
+        aria-expanded="false"
+        class="endpoint"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCard"
+          >
+            <h4
+              class="collapsedUrl"
+            >
+              https://sporran.org/
+            </h4>
+            <p
+              class="collapsedType"
+            >
+              Some Type
+            </p>
+          </section>
+        </button>
+      </li>
+      <li
+        aria-expanded="true"
+        class="endpoint"
+      >
+        <section
+          class="buttons"
+        >
+          <button
+            class="remove"
+            type="button"
+          />
+        </section>
+        <dl>
+          <dt
+            class="name"
+          >
+            URL
+          </dt>
+          <dd
+            class="value"
+          >
+            https://kilt.io/
+          </dd>
+          <dt
+            class="name"
+          >
+            Type
+          </dt>
+          <dd
+            class="value"
+          >
+            Another Type
+          </dd>
+          <dt
+            class="name"
+          >
+            Service ID
+          </dt>
+          <dd
+            class="value"
+          >
+            654321
+          </dd>
+        </dl>
+      </li>
+    </ul>
+    <a
+      aria-label="Back"
+      class="linkBack"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/endpoints"
+      title="Back"
+    />
+    <p
+      class="stats"
+    >
+      You have 3 Identities with a
+      <span
+        class="balance"
+      >
+         Total Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="KILT Coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </section>
+</div>
+`;

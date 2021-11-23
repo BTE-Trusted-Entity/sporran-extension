@@ -5,11 +5,9 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { DidUtils } from '@kiltprotocol/did';
-import { U128 } from '@polkadot/types';
+import { DidChain, DidUtils } from '@kiltprotocol/did';
 
 import {
-  decryptIdentity,
   getKeystoreFromKeypair,
   Identity,
   getLightDidFromKeypair,
@@ -22,8 +20,7 @@ interface DidTransaction {
 }
 
 export async function getDeposit(): Promise<BN> {
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  return blockchain.api.consts.did.deposit as U128;
+  return DidChain.queryDepositAmount();
 }
 
 async function getSignedTransaction(
@@ -60,9 +57,8 @@ const currentTx: Record<string, DidTransaction> = {};
 
 export async function sign(
   identity: Identity,
-  password: string,
+  sdkIdentity: KeyringPair,
 ): Promise<string> {
-  const sdkIdentity = await decryptIdentity(identity.address, password);
   const { extrinsic, did } = await getSignedTransaction(sdkIdentity);
 
   const hash = extrinsic.hash.toHex();

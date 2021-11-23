@@ -10,7 +10,6 @@ import {
 import {
   IDidDetails,
   IDidKeyDetails,
-  IDidResolvedDetails,
   IEncryptedMessage,
   IMessage,
   KeyRelationship,
@@ -18,10 +17,11 @@ import {
   NaclBoxCapable,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
-import { DefaultResolver, LightDidDetails } from '@kiltprotocol/did';
+import { LightDidDetails } from '@kiltprotocol/did';
 
 import { makeKeyring } from '../identities/identities';
 import { verifyDidConfigResource } from '../wellKnownDid/wellKnownDid';
+import { getDidDetails } from '../did/did';
 
 interface TabEncryption {
   authenticationKey: KeyringPair;
@@ -98,12 +98,7 @@ export async function getTabEncryption(
     .getKeys(keyAgreement)
     .pop() as IDidKeyDetails<string>;
 
-  const { details: dAppDidDetails } = (await DefaultResolver.resolveDoc(
-    dAppDid,
-  )) as IDidResolvedDetails;
-  if (!dAppDidDetails) {
-    throw new Error(`Cannot resolve the dApp DID ${dAppDid}`);
-  }
+  const dAppDidDetails = await getDidDetails(dAppDid);
   const dAppEncryptionKey = dAppDidDetails
     .getKeys(keyAgreement)
     .pop() as IDidKeyDetails<string>;
