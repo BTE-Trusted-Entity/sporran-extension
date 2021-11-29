@@ -30,6 +30,7 @@
     "package": "cd dist && web-ext build --overwrite-dest",
     "dev": "env VARIANT=internal NODE_ENV=development webpack --watch",
     "dev-public": "env VARIANT=public NODE_ENV=development webpack --watch",
+    "identity": "node -e \"console.log(require('@polkadot/util-crypto').mnemonicGenerate())\"",
     "test": "jest",
     "lint": "yarn run lint-css && yarn run lint-js",
     "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.json \"src/**/*.ts*\"",

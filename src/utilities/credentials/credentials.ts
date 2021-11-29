@@ -1,9 +1,10 @@
 import { useContext, useMemo } from 'react';
-import { filter, pick, remove } from 'lodash-es';
+import { pick, remove } from 'lodash-es';
 import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
 import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
+import { parseDidUrl } from '../did/did';
 import { CredentialsContext } from './CredentialsContext';
 
 type AttestationStatus = 'pending' | 'attested' | 'revoked';
@@ -74,12 +75,14 @@ export function useIdentityCredentials(did?: IDidDetails['did']): Credential[] {
   const all = useCredentials();
 
   return useMemo(() => {
-    if (did) {
-      const own = filter(all, { request: { claim: { owner: did } } });
-      return own;
-    } else {
+    if (!did) {
       return all;
     }
+    const { fullDid } = parseDidUrl(did);
+    return all.filter(
+      (credential) =>
+        parseDidUrl(credential.request.claim.owner).fullDid === fullDid,
+    );
   }, [all, did]);
 }
 

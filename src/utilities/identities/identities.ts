@@ -25,7 +25,7 @@ import {
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
-import { getDidDetails } from '../did/did';
+import { getDidDetails, parseDidUrl } from '../did/did';
 import { storage } from '../storage/storage';
 import { IDENTITIES_KEY, getIdentities } from './getIdentities';
 
@@ -297,20 +297,7 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
   const identities = await getIdentities();
   const identity = identities[address];
 
-  const { did } = identity;
-  const { identifier, type } = DidUtils.parseDidUrl(did);
-  const unprefixedIdentifier = identifier.replace(/^00/, '');
-  const prefixedIdentifier = '00' + identifier;
-
-  const lightDid =
-    type === 'light'
-      ? did
-      : DidUtils.getKiltDidFromIdentifier(prefixedIdentifier, 'light');
-
-  const fullDid =
-    type === 'full'
-      ? did
-      : DidUtils.getKiltDidFromIdentifier(unprefixedIdentifier, 'full');
+  const { lightDid, fullDid, type } = parseDidUrl(identity.did);
 
   const isOnChain = Boolean(await DidChain.queryDidDetails(fullDid));
 

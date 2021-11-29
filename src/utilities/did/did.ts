@@ -73,3 +73,31 @@ export async function queryFullDetailsFromIdentifier(
     serviceEndpoints,
   });
 }
+
+export function parseDidUrl(did: IDidDetails['did']): ReturnType<
+  typeof DidUtils.parseDidUrl
+> & {
+  lightDid: IDidDetails['did'];
+  fullDid: IDidDetails['did'];
+} {
+  const parsed = DidUtils.parseDidUrl(did);
+  const { identifier, type } = parsed;
+  const unprefixedIdentifier = identifier.replace(/^00/, '');
+  const prefixedIdentifier = '00' + identifier;
+
+  const lightDid =
+    type === 'light'
+      ? did
+      : DidUtils.getKiltDidFromIdentifier(prefixedIdentifier, 'light');
+
+  const fullDid =
+    type === 'full'
+      ? did
+      : DidUtils.getKiltDidFromIdentifier(unprefixedIdentifier, 'full');
+
+  return {
+    ...parsed,
+    lightDid,
+    fullDid,
+  };
+}
