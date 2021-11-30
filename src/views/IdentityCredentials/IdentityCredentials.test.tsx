@@ -1,12 +1,19 @@
 import { identitiesMock, render } from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';
+import { parseDidUrl } from '../../utilities/did/did';
 import {
   credentialsMock,
   CredentialsProviderMock,
 } from '../../utilities/credentials/CredentialsProvider.mock';
 
 import { IdentityCredentials } from './IdentityCredentials';
+
+jest.mock('../../utilities/did/did');
+
+(parseDidUrl as jest.Mock).mockReturnValue({
+  fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
+});
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
