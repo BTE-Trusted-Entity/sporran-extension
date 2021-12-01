@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation, useRouteMatch } from 'react-router-dom';
+import { Link, NavLink, useLocation, useMatch } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { sortBy } from 'lodash-es';
 
@@ -29,7 +29,8 @@ function IdentityLink({
   showAdd,
 }: IdentityLinkProps): JSX.Element {
   const t = browser.i18n.getMessage;
-  const { path } = useRouteMatch();
+  const path = '/identity/:address/';
+  // TODO: const { path } = useMatch();
   const { search } = useLocation();
 
   const { length } = identities;
@@ -74,7 +75,8 @@ export function IdentitiesBubbles({
   showAdd,
 }: IdentitiesBubblesProps): JSX.Element | null {
   const t = browser.i18n.getMessage;
-  const { path } = useRouteMatch();
+  const path = '/identity/:address/';
+  // TODO: const { path } = useMatch();
   const { search } = useLocation();
 
   const singleLink = !showAdd && identities.length <= 1;

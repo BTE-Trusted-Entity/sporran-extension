@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 
 import { useIdentities } from '../../utilities/identities/identities';
 import {
@@ -29,7 +29,7 @@ export function Settings(): JSX.Element {
 
   const [hasPasswords, setHasPasswords] = useState(false);
 
-  const match = useRouteMatch(paths.identity.overview);
+  const match = useMatch(paths.identity.overview);
   const address = (match?.params as { address: string })?.address;
   const identities = useIdentities().data;
   const onExistingIdentity = Boolean(identities?.[address]);
