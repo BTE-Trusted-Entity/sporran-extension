@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Redirect, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import BN from 'bn.js';
 
 import { Identity } from '../../utilities/identities/types';
@@ -60,7 +60,7 @@ export function SendTokenFlow({ identity }: Props): JSX.Element {
               tip={tip}
             />
           ) : (
-            <Redirect
+            <Navigate
               to={generatePath(paths.identity.send.start, { address })}
             />
           )

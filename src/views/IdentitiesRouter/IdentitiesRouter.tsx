@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import {
-  Redirect,
+  Navigate,
   Route,
   Routes,
   useLocation,
@@ -78,7 +78,7 @@ export function SpecificIdentityRouter({
   const isNew = address === NEW.address;
   const identity = isNew ? NEW : identities[address];
   if (!identity) {
-    return <Redirect to={paths.home} />;
+    return <Navigate to={paths.home} />;
   }
 
   return (

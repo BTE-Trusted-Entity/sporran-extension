@@ -1,6 +1,6 @@
 import { Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import {
   useIdentities,
@@ -45,7 +45,7 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
 
   if (current.data && hasIdentities && !again) {
     return (
-      <Redirect
+      <Navigate
         to={generatePath(
           paths.identity.overview,
           identities.data[current.data] as { address: string },

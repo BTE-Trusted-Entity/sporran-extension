@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useParams, Redirect } from 'react-router-dom';
+import { Link, useParams, Navigate } from 'react-router-dom';
 
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Balance } from '../../components/Balance/Balance';
@@ -52,7 +52,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const { address } = identity;
 
   if (params.type) {
-    return <Redirect to={generatePath(paths.identity.overview, { address })} />;
+    return <Navigate to={generatePath(paths.identity.overview, { address })} />;
   }
 
   if (isNew(identity)) {
