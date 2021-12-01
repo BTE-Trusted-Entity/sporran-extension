@@ -88,8 +88,9 @@ export function IdentitiesBubbles({
       {identities.map(({ name, address }) => (
         <li className={styles.item} key={address}>
           <NavLink
-            className={styles.bubble}
-            activeClassName={styles.bubbleActive}
+            className={({ isActive }) =>
+              isActive ? styles.bubbleActive : styles.bubble
+            }
             to={generatePath(`${path}${search}`, { address: address })}
             aria-label={name}
             title={name}
@@ -99,8 +100,9 @@ export function IdentitiesBubbles({
       {showAdd && (
         <li className={styles.item}>
           <NavLink
-            className={styles.add}
-            activeClassName={styles.addActive}
+            className={({ isActive }) =>
+              isActive ? styles.addActive : styles.add
+            }
             to={generatePath(path, { address: NEW.address })}
             aria-label={t('component_IdentitiesCarousel_title_new')}
             title={t('component_IdentitiesCarousel_title_new')}
