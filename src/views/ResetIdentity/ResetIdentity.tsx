@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Routes, Switch, useHistory } from 'react-router-dom';
 
 import {
   Identity,
@@ -37,7 +37,7 @@ export function ResetIdentity({
   );
 
   return (
-    <Switch>
+    <Routes>
       <Route path={generatePath(paths.identity.reset.start, { address })} exact>
         <ImportBackupPhrase
           type="reset"
@@ -48,6 +48,6 @@ export function ResetIdentity({
       <Route path={generatePath(paths.identity.reset.password, { address })}>
         <CreatePassword onSuccess={onSuccess} />
       </Route>
-    </Switch>
+    </Routes>
   );
 }

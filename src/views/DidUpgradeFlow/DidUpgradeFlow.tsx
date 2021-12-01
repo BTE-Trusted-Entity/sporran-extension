@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes, Switch } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
 import { DidUpgradeExplainer } from '../DidUpgradeExplainer/DidUpgradeExplainer';
@@ -11,13 +11,13 @@ interface Props {
 
 export function DidUpgradeFlow({ identity }: Props): JSX.Element {
   return (
-    <Switch>
+    <Routes>
       <Route path={paths.identity.did.upgrade.sign}>
         <DidUpgrade identity={identity} />
       </Route>
       <Route path={paths.identity.did.upgrade.start}>
         <DidUpgradeExplainer identity={identity} />
       </Route>
-    </Switch>
+    </Routes>
   );
 }

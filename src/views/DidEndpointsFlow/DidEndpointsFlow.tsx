@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Routes, Switch, useHistory } from 'react-router-dom';
 import { IDidServiceEndpoint } from '@kiltprotocol/types';
 
 import { Identity } from '../../utilities/identities/types';
@@ -39,7 +39,7 @@ export function DidEndpointsFlow({ identity }: Props): JSX.Element {
   );
 
   return (
-    <Switch>
+    <Routes>
       <Route path={paths.identity.did.endpoints.sign}>
         {values && (
           <DidEndpointsSign identity={identity} type={type} endpoint={values} />
@@ -52,6 +52,6 @@ export function DidEndpointsFlow({ identity }: Props): JSX.Element {
           onRemove={onRemove}
         />
       </Route>
-    </Switch>
+    </Routes>
   );
 }

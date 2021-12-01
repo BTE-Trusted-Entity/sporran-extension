@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { MemoryRouter, Route } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { NEW } from '../../utilities/identities/identities';
@@ -23,11 +23,11 @@ const fullDidIdentity =
 export function Template(): JSX.Element {
   return (
     <MemoryRouter initialEntries={[uri]}>
-      <Switch>
+      <Routes>
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={identity} />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }
@@ -35,11 +35,11 @@ export function Template(): JSX.Element {
 export function New(): JSX.Element {
   return (
     <MemoryRouter initialEntries={['/identity/NEW/send']}>
-      <Switch>
+      <Routes>
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={NEW} />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }
@@ -52,11 +52,11 @@ export function CreateSuccess(): JSX.Element {
         uri,
       ]}
     >
-      <Switch>
+      <Routes>
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={identity} />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }
@@ -69,11 +69,11 @@ export function ImportSuccess(): JSX.Element {
         uri,
       ]}
     >
-      <Switch>
+      <Routes>
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={identity} />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }
@@ -86,11 +86,11 @@ export function ResetSuccess(): JSX.Element {
         uri,
       ]}
     >
-      <Switch>
+      <Routes>
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={identity} />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }
@@ -98,11 +98,11 @@ export function ResetSuccess(): JSX.Element {
 export function withFullDid(): JSX.Element {
   return (
     <MemoryRouter initialEntries={[fullDidUri]}>
-      <Switch>
+      <Routes>
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={fullDidIdentity} />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }

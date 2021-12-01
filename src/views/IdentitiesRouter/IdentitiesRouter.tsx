@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import {
   Redirect,
   Route,
+  Routes,
   Switch,
   useHistory,
   useLocation,
@@ -83,7 +84,7 @@ export function SpecificIdentityRouter({
 
   return (
     <>
-      <Switch>
+      <Routes>
         <Route path={paths.identity.receive}>
           <ReceiveToken identity={identity} />
         </Route>
@@ -145,7 +146,7 @@ export function SpecificIdentityRouter({
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={identity} />
         </Route>
-      </Switch>
+      </Routes>
     </>
   );
 }
@@ -154,7 +155,7 @@ export function IdentitiesRouter(): JSX.Element {
   const identities = useIdentities();
 
   return (
-    <Switch>
+    <Routes>
       <Route path={paths.identity.add}>
         <Welcome again />
       </Route>
@@ -172,6 +173,6 @@ export function IdentitiesRouter(): JSX.Element {
           <SpecificIdentityRouter identities={identities.data} />
         )}
       </Route>
-    </Switch>
+    </Routes>
   );
 }

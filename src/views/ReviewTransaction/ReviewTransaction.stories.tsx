@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { MemoryRouter, Route } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import BN from 'bn.js';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
@@ -20,7 +20,7 @@ export function Template(): JSX.Element {
         '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send/review',
       ]}
     >
-      <Switch>
+      <Routes>
         <Route path={paths.identity.send.review}>
           <ReviewTransaction
             identity={
@@ -32,7 +32,7 @@ export function Template(): JSX.Element {
             tip={new BN(0.01e15)}
           />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }

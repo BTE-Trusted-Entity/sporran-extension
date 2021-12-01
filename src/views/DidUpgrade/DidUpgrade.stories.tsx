@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { MemoryRouter, Route, Switch } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, Switch } from 'react-router-dom';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { paths } from '../paths';
@@ -18,7 +18,7 @@ export function Template(): JSX.Element {
         '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade/sign',
       ]}
     >
-      <Switch>
+      <Routes>
         <Route path={paths.identity.did.upgrade.sign}>
           <DidUpgrade
             identity={
@@ -26,7 +26,7 @@ export function Template(): JSX.Element {
             }
           />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }

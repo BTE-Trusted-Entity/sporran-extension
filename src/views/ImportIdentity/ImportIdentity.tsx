@@ -1,5 +1,11 @@
 import { useCallback, useState } from 'react';
-import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
+import {
+  generatePath,
+  Route,
+  Routes,
+  Switch,
+  useHistory,
+} from 'react-router-dom';
 
 import { importIdentity } from '../../utilities/identities/identities';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
@@ -29,13 +35,13 @@ export function ImportIdentity(): JSX.Element {
   );
 
   return (
-    <Switch>
+    <Routes>
       <Route path={paths.identity.import.start} exact>
         <ImportBackupPhrase onImport={onImport} />
       </Route>
       <Route path={paths.identity.import.password}>
         <CreatePassword onSuccess={onSuccess} />
       </Route>
-    </Switch>
+    </Routes>
   );
 }

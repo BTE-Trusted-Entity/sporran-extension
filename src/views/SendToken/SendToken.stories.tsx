@@ -1,4 +1,4 @@
-import { MemoryRouter, Route, Switch } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, Switch } from 'react-router-dom';
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -20,7 +20,7 @@ export function Template(): JSX.Element {
         '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send',
       ]}
     >
-      <Switch>
+      <Routes>
         <Route path={paths.identity.send.start}>
           <SendToken
             identity={
@@ -29,7 +29,7 @@ export function Template(): JSX.Element {
             onSuccess={action('onSuccess')}
           />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }
@@ -37,11 +37,11 @@ export function Template(): JSX.Element {
 export function New(): JSX.Element {
   return (
     <MemoryRouter initialEntries={['/identity/NEW/send']}>
-      <Switch>
+      <Routes>
         <Route path={paths.identity.send.start}>
           <SendToken identity={NEW} onSuccess={action('onSuccess')} />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }

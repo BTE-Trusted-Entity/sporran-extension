@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { MemoryRouter, Route } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { NEW } from '../../utilities/identities/identities';
@@ -20,7 +20,7 @@ export function Template(): JSX.Element {
         '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive',
       ]}
     >
-      <Switch>
+      <Routes>
         <Route path={paths.identity.receive}>
           <ReceiveToken
             identity={
@@ -28,7 +28,7 @@ export function Template(): JSX.Element {
             }
           />
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }
@@ -36,11 +36,11 @@ export function Template(): JSX.Element {
 export function New(): JSX.Element {
   return (
     <MemoryRouter initialEntries={['/identity/NEW/receive']}>
-      <Switch>
+      <Routes>
         <Route path={paths.identity.receive}>
           <ReceiveToken identity={NEW} />{' '}
         </Route>
-      </Switch>
+      </Routes>
     </MemoryRouter>
   );
 }

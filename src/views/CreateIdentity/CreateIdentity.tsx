@@ -1,5 +1,11 @@
 import { useCallback, useMemo } from 'react';
-import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
+import {
+  generatePath,
+  Route,
+  Routes,
+  Switch,
+  useHistory,
+} from 'react-router-dom';
 
 import { mnemonicGenerate } from '@polkadot/util-crypto';
 
@@ -26,7 +32,7 @@ export function CreateIdentity(): JSX.Element {
   );
 
   return (
-    <Switch>
+    <Routes>
       <Route path={paths.identity.create.start} exact>
         <Warning />
       </Route>
@@ -39,6 +45,6 @@ export function CreateIdentity(): JSX.Element {
       <Route path={paths.identity.create.password}>
         <CreatePassword onSuccess={onSuccess} />
       </Route>
-    </Switch>
+    </Routes>
   );
 }

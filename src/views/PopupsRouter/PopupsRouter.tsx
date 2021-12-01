@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes, Switch } from 'react-router-dom';
 
 import { AuthorizeDApp } from '../AuthorizeDApp/AuthorizeDApp';
 import { SaveCredential } from '../SaveCredential/SaveCredential';
@@ -8,7 +8,7 @@ import { paths } from '../paths';
 
 export function PopupsRouter(): JSX.Element {
   return (
-    <Switch>
+    <Routes>
       <Route path={paths.popup.authorize}>
         <AuthorizeDApp />
       </Route>
@@ -21,6 +21,6 @@ export function PopupsRouter(): JSX.Element {
       <Route path={paths.popup.sign}>
         <SignDApp />
       </Route>
-    </Switch>
+    </Routes>
   );
 }

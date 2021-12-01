@@ -1,4 +1,4 @@
-import { MemoryRouter, Route } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import {
   identitiesMock as identities,
@@ -18,11 +18,11 @@ describe('ReceiveToken', () => {
   it('should render a normal identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${identity.address}/receive`]}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.receive}>
             <ReceiveToken identity={identity} />,
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
     await waitForDialogUpdate();
@@ -32,11 +32,11 @@ describe('ReceiveToken', () => {
   it('should render the new identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={['/identity/NEW/receive']}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.receive}>
             <ReceiveToken identity={NEW} />,
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
     await waitForDialogUpdate();

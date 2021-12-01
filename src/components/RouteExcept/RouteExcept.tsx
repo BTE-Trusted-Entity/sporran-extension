@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes, Switch } from 'react-router-dom';
 
 interface Props {
   path: string | string[];
@@ -7,9 +7,9 @@ interface Props {
 
 export function RouteExcept({ path, children }: Props): JSX.Element {
   return (
-    <Switch>
+    <Routes>
       <Route path={path} />
       <Route>{children}</Route>
-    </Switch>
+    </Routes>
   );
 }

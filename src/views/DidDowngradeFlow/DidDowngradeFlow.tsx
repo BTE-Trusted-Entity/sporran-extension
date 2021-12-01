@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes, Switch } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
 import { paths } from '../paths';
@@ -12,13 +12,13 @@ interface Props {
 
 export function DidDowngradeFlow({ identity }: Props): JSX.Element {
   return (
-    <Switch>
+    <Routes>
       <Route path={paths.identity.did.downgrade.sign}>
         <DidDowngrade identity={identity} />
       </Route>
       <Route path={paths.identity.did.downgrade.start}>
         <DidDowngradeExplainer identity={identity} />
       </Route>
-    </Switch>
+    </Routes>
   );
 }

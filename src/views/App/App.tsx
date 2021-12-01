@@ -1,4 +1,4 @@
-import { MemoryRouter, Route, Switch } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, Switch } from 'react-router-dom';
 
 import { RouteExcept } from '../../components/RouteExcept/RouteExcept';
 import { useInitialEntries } from '../../utilities/popups/useInitialEntries';
@@ -35,7 +35,7 @@ export function App(): JSX.Element {
             </RouteExcept>
           </RouteExcept>
 
-          <Switch>
+          <Routes>
             <Route path={paths.home} exact>
               <Welcome />
             </Route>
@@ -55,7 +55,7 @@ export function App(): JSX.Element {
             <Route path={paths.popup.base}>
               <PopupsRouter />
             </Route>
-          </Switch>
+          </Routes>
         </MemoryRouter>
       </GenericError>
     </div>

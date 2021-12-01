@@ -1,4 +1,4 @@
-import { MemoryRouter, Route, Switch } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, Switch } from 'react-router-dom';
 import {
   identitiesMock as identities,
   moreIdentitiesMock as moreIdentities,
@@ -14,7 +14,7 @@ describe('IdentitiesCarousel', () => {
   it('should render normal identities', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.overview}>
             <IdentitiesCarousel
               identity={
@@ -22,7 +22,7 @@ describe('IdentitiesCarousel', () => {
               }
             />
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -31,7 +31,7 @@ describe('IdentitiesCarousel', () => {
   it('should render the first identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.overview}>
             <IdentitiesCarousel
               identity={
@@ -39,7 +39,7 @@ describe('IdentitiesCarousel', () => {
               }
             />
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -48,7 +48,7 @@ describe('IdentitiesCarousel', () => {
   it('should render the last identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.overview}>
             <IdentitiesCarousel
               identity={
@@ -56,7 +56,7 @@ describe('IdentitiesCarousel', () => {
               }
             />
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -65,11 +65,11 @@ describe('IdentitiesCarousel', () => {
   it('should render the new identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.overview}>
             <IdentitiesCarousel identity={NEW} />
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -78,7 +78,7 @@ describe('IdentitiesCarousel', () => {
   it('should support other paths', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.send.start]}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.send.start}>
             <IdentitiesCarousel
               identity={
@@ -86,7 +86,7 @@ describe('IdentitiesCarousel', () => {
               }
             />
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -95,14 +95,14 @@ describe('IdentitiesCarousel', () => {
   it('should render a bubble for each identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.overview}>
             <IdentitiesBubbles
               identities={Object.values(identities)}
               showAdd={true}
             />
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
 
@@ -112,14 +112,14 @@ describe('IdentitiesCarousel', () => {
   it('should not render bubbles if number of identities is more than the maximum', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.overview}>
             <IdentitiesBubbles
               identities={Object.values(moreIdentities)}
               showAdd={true}
             />
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
 

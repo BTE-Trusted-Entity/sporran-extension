@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Routes, Switch, useHistory } from 'react-router-dom';
 import BN from 'bn.js';
 
 import { Identity } from '../../utilities/identities/types';
@@ -38,7 +38,7 @@ export function SendTokenFlow({ identity }: Props): JSX.Element {
   );
 
   return (
-    <Switch>
+    <Routes>
       <Route path={paths.identity.send.warning}>
         <ExistentialWarning
           nextPath={generatePath(paths.identity.send.review, { address })}
@@ -62,6 +62,6 @@ export function SendTokenFlow({ identity }: Props): JSX.Element {
       <Route path={paths.identity.send.start}>
         <SendToken identity={identity} onSuccess={handleSendTokenSuccess} />
       </Route>
-    </Switch>
+    </Routes>
   );
 }

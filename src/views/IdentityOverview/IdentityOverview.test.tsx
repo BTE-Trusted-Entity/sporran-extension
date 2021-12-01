@@ -1,4 +1,4 @@
-import { MemoryRouter, Route } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { identitiesMock, render, screen } from '../../testing/testing';
 
@@ -24,11 +24,11 @@ describe('IdentityOverview', () => {
   it('should render a normal identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.overview}>
             <IdentityOverview identity={identity} />
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -37,11 +37,11 @@ describe('IdentityOverview', () => {
   it('should render the new identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={['/identity/NEW/']}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.overview}>
             <IdentityOverview identity={NEW} />
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -55,11 +55,11 @@ describe('IdentityOverview', () => {
     const { container } = render(
       <InternalConfigurationContext>
         <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
-          <Switch>
+          <Routes>
             <Route path={paths.identity.overview}>
               <IdentityOverview identity={identity} />
             </Route>
-          </Switch>
+          </Routes>
         </MemoryRouter>
       </InternalConfigurationContext>,
     );
@@ -73,11 +73,11 @@ describe('IdentityOverview', () => {
     render(
       <InternalConfigurationContext>
         <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
-          <Switch>
+          <Routes>
             <Route path={paths.identity.overview}>
               <IdentityOverview identity={identity} />
             </Route>
-          </Switch>
+          </Routes>
         </MemoryRouter>
       </InternalConfigurationContext>,
     );
@@ -92,11 +92,11 @@ describe('IdentityOverview', () => {
 
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${fullDidIdentity.address}/`]}>
-        <Switch>
+        <Routes>
           <Route path={paths.identity.overview}>
             <IdentityOverview identity={fullDidIdentity} />
           </Route>
-        </Switch>
+        </Routes>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
