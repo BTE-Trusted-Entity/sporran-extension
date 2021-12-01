@@ -85,67 +85,80 @@ export function SpecificIdentityRouter({
   return (
     <>
       <Routes>
-        <Route path={paths.identity.receive}>
-          <ReceiveToken identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.receive}
+          element={<ReceiveToken identity={identity} />}
+        />
 
-        <Route path={paths.identity.send.start}>
-          <SendTokenFlow identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.send.start}
+          element={<SendTokenFlow identity={identity} />}
+        />
 
-        <Route path={paths.identity.credentials}>
-          <IdentityCredentials identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.credentials}
+          element={<IdentityCredentials identity={identity} />}
+        />
 
-        <Route path={paths.identity.remove}>
-          <RemoveIdentity identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.remove}
+          element={<RemoveIdentity identity={identity} />}
+        />
 
-        <Route path={paths.identity.reset.start}>
-          <ResetIdentity identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.reset.start}
+          element={<ResetIdentity identity={identity} />}
+        />
 
-        <Route path={paths.identity.vest}>
-          <UnlockVestedFunds identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.vest}
+          element={<UnlockVestedFunds identity={identity} />}
+        />
 
-        <Route path={paths.popup.claim}>
-          <SignQuote identity={identity} />
-        </Route>
+        <Route
+          path={paths.popup.claim}
+          element={<SignQuote identity={identity} />}
+        />
 
         {features.fullDid && (
-          <Route path={paths.popup.signDid}>
-            <SignDid identity={identity} />
-          </Route>
+          <Route
+            path={paths.popup.signDid}
+            element={<SignDid identity={identity} />}
+          />
         )}
 
         {features.fullDid && (
-          <Route path={paths.identity.did.upgrade.start}>
-            <DidUpgradeFlow identity={identity} />
-          </Route>
+          <Route
+            path={paths.identity.did.upgrade.start}
+            element={<DidUpgradeFlow identity={identity} />}
+          />
         )}
 
         {features.fullDid && (
-          <Route path={paths.identity.did.downgrade.start}>
-            <DidDowngradeFlow identity={identity} />
-          </Route>
+          <Route
+            path={paths.identity.did.downgrade.start}
+            element={<DidDowngradeFlow identity={identity} />}
+          />
         )}
 
         {features.fullDid && (
-          <Route path={paths.identity.did.endpoints.start}>
-            <DidEndpointsFlow identity={identity} />
-          </Route>
+          <Route
+            path={paths.identity.did.endpoints.start}
+            element={<DidEndpointsFlow identity={identity} />}
+          />
         )}
 
         {features.fullDid && (
-          <Route path={paths.identity.did.manage}>
-            <DidManage identity={identity} />
-          </Route>
+          <Route
+            path={paths.identity.did.manage}
+            element={<DidManage identity={identity} />}
+          />
         )}
 
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.overview}
+          element={<IdentityOverview identity={identity} />}
+        />
       </Routes>
     </>
   );
@@ -156,23 +169,20 @@ export function IdentitiesRouter(): JSX.Element {
 
   return (
     <Routes>
-      <Route path={paths.identity.add}>
-        <Welcome again />
-      </Route>
+      <Route path={paths.identity.add} element={<Welcome again />} />
 
-      <Route path={paths.identity.create.start}>
-        <CreateIdentity />
-      </Route>
+      <Route path={paths.identity.create.start} element={<CreateIdentity />} />
 
-      <Route path={paths.identity.import.start}>
-        <ImportIdentity />
-      </Route>
+      <Route path={paths.identity.import.start} element={<ImportIdentity />} />
 
-      <Route path={paths.identity.overview}>
-        {identities.data && (
-          <SpecificIdentityRouter identities={identities.data} />
-        )}
-      </Route>
+      <Route
+        path={paths.identity.overview}
+        element={
+          identities.data && (
+            <SpecificIdentityRouter identities={identities.data} />
+          )
+        }
+      />
     </Routes>
   );
 }

@@ -12,12 +12,14 @@ interface Props {
 export function DidUpgradeFlow({ identity }: Props): JSX.Element {
   return (
     <Routes>
-      <Route path={paths.identity.did.upgrade.sign}>
-        <DidUpgrade identity={identity} />
-      </Route>
-      <Route path={paths.identity.did.upgrade.start}>
-        <DidUpgradeExplainer identity={identity} />
-      </Route>
+      <Route
+        path={paths.identity.did.upgrade.sign}
+        element={<DidUpgrade identity={identity} />}
+      />
+      <Route
+        path={paths.identity.did.upgrade.start}
+        element={<DidUpgradeExplainer identity={identity} />}
+      />
     </Routes>
   );
 }

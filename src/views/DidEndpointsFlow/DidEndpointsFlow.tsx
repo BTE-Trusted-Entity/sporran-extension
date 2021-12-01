@@ -40,18 +40,18 @@ export function DidEndpointsFlow({ identity }: Props): JSX.Element {
 
   return (
     <Routes>
-      <Route path={paths.identity.did.endpoints.sign}>
-        {values && (
+      <Route path={paths.identity.did.endpoints.sign} element={(
+        { values && (
           <DidEndpointsSign identity={identity} type={type} endpoint={values} />
         )}
-      </Route>
-      <Route path={paths.identity.did.endpoints.start}>
+        )} />
+      <Route path={paths.identity.did.endpoints.start} element={(
         <DidEndpointsForm
           identity={identity}
           onAdd={onAdd}
           onRemove={onRemove}
         />
-      </Route>
+      )} />
     </Routes>
   );
 }

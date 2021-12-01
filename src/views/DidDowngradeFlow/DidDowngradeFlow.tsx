@@ -13,12 +13,14 @@ interface Props {
 export function DidDowngradeFlow({ identity }: Props): JSX.Element {
   return (
     <Routes>
-      <Route path={paths.identity.did.downgrade.sign}>
-        <DidDowngrade identity={identity} />
-      </Route>
-      <Route path={paths.identity.did.downgrade.start}>
-        <DidDowngradeExplainer identity={identity} />
-      </Route>
+      <Route
+        path={paths.identity.did.downgrade.sign}
+        element={<DidDowngrade identity={identity} />}
+      />
+      <Route
+        path={paths.identity.did.downgrade.start}
+        element={<DidDowngradeExplainer identity={identity} />}
+      />
     </Routes>
   );
 }

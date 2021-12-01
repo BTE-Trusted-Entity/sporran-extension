@@ -39,29 +39,40 @@ export function SendTokenFlow({ identity }: Props): JSX.Element {
 
   return (
     <Routes>
-      <Route path={paths.identity.send.warning}>
-        <ExistentialWarning
-          nextPath={generatePath(paths.identity.send.review, { address })}
-        />
-      </Route>
-
-      <Route path={paths.identity.send.review}>
-        {recipient && amount && fee && tip ? (
-          <ReviewTransaction
-            identity={identity}
-            recipient={recipient}
-            amount={amount}
-            fee={fee}
-            tip={tip}
+      <Route
+        path={paths.identity.send.warning}
+        element={
+          <ExistentialWarning
+            nextPath={generatePath(paths.identity.send.review, { address })}
           />
-        ) : (
-          <Redirect to={generatePath(paths.identity.send.start, { address })} />
-        )}
-      </Route>
+        }
+      />
 
-      <Route path={paths.identity.send.start}>
-        <SendToken identity={identity} onSuccess={handleSendTokenSuccess} />
-      </Route>
+      <Route
+        path={paths.identity.send.review}
+        element={
+          recipient && amount && fee && tip ? (
+            <ReviewTransaction
+              identity={identity}
+              recipient={recipient}
+              amount={amount}
+              fee={fee}
+              tip={tip}
+            />
+          ) : (
+            <Redirect
+              to={generatePath(paths.identity.send.start, { address })}
+            />
+          )
+        }
+      />
+
+      <Route
+        path={paths.identity.send.start}
+        element={
+          <SendToken identity={identity} onSuccess={handleSendTokenSuccess} />
+        }
+      />
     </Routes>
   );
 }

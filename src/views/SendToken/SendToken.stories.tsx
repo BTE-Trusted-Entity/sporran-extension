@@ -21,14 +21,17 @@ export function Template(): JSX.Element {
       ]}
     >
       <Routes>
-        <Route path={paths.identity.send.start}>
-          <SendToken
-            identity={
-              identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
-            }
-            onSuccess={action('onSuccess')}
-          />
-        </Route>
+        <Route
+          path={paths.identity.send.start}
+          element={
+            <SendToken
+              identity={
+                identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+              }
+              onSuccess={action('onSuccess')}
+            />
+          }
+        />
       </Routes>
     </MemoryRouter>
   );
@@ -38,9 +41,10 @@ export function New(): JSX.Element {
   return (
     <MemoryRouter initialEntries={['/identity/NEW/send']}>
       <Routes>
-        <Route path={paths.identity.send.start}>
-          <SendToken identity={NEW} onSuccess={action('onSuccess')} />
-        </Route>
+        <Route
+          path={paths.identity.send.start}
+          element={<SendToken identity={NEW} onSuccess={action('onSuccess')} />}
+        />
       </Routes>
     </MemoryRouter>
   );

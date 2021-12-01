@@ -38,16 +38,20 @@ export function ResetIdentity({
 
   return (
     <Routes>
-      <Route path={generatePath(paths.identity.reset.start, { address })}>
-        <ImportBackupPhrase
-          type="reset"
-          address={address}
-          onImport={onImport}
-        />
-      </Route>
-      <Route path={generatePath(paths.identity.reset.password, { address })}>
-        <CreatePassword onSuccess={onSuccess} />
-      </Route>
+      <Route
+        path={generatePath(paths.identity.reset.start, { address })}
+        element={
+          <ImportBackupPhrase
+            type="reset"
+            address={address}
+            onImport={onImport}
+          />
+        }
+      />
+      <Route
+        path={generatePath(paths.identity.reset.password, { address })}
+        element={<CreatePassword onSuccess={onSuccess} />}
+      />
     </Routes>
   );
 }

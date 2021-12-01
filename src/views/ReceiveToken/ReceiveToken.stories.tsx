@@ -21,13 +21,16 @@ export function Template(): JSX.Element {
       ]}
     >
       <Routes>
-        <Route path={paths.identity.receive}>
-          <ReceiveToken
-            identity={
-              identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
-            }
-          />
-        </Route>
+        <Route
+          path={paths.identity.receive}
+          element={
+            <ReceiveToken
+              identity={
+                identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+              }
+            />
+          }
+        />
       </Routes>
     </MemoryRouter>
   );
@@ -37,9 +40,10 @@ export function New(): JSX.Element {
   return (
     <MemoryRouter initialEntries={['/identity/NEW/receive']}>
       <Routes>
-        <Route path={paths.identity.receive}>
-          <ReceiveToken identity={NEW} />{' '}
-        </Route>
+        <Route
+          path={paths.identity.receive}
+          element={<ReceiveToken identity={NEW} />}
+        />
       </Routes>
     </MemoryRouter>
   );

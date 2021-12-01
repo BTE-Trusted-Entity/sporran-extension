@@ -25,9 +25,10 @@ describe('IdentityOverview', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
         <Routes>
-          <Route path={paths.identity.overview}>
-            <IdentityOverview identity={identity} />
-          </Route>
+          <Route
+            path={paths.identity.overview}
+            element={<IdentityOverview identity={identity} />}
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -38,9 +39,10 @@ describe('IdentityOverview', () => {
     const { container } = render(
       <MemoryRouter initialEntries={['/identity/NEW/']}>
         <Routes>
-          <Route path={paths.identity.overview}>
-            <IdentityOverview identity={NEW} />
-          </Route>
+          <Route
+            path={paths.identity.overview}
+            element={<IdentityOverview identity={NEW} />}
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -56,9 +58,10 @@ describe('IdentityOverview', () => {
       <InternalConfigurationContext>
         <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
           <Routes>
-            <Route path={paths.identity.overview}>
-              <IdentityOverview identity={identity} />
-            </Route>
+            <Route
+              path={paths.identity.overview}
+              element={<IdentityOverview identity={identity} />}
+            />
           </Routes>
         </MemoryRouter>
       </InternalConfigurationContext>,
@@ -74,9 +77,10 @@ describe('IdentityOverview', () => {
       <InternalConfigurationContext>
         <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
           <Routes>
-            <Route path={paths.identity.overview}>
-              <IdentityOverview identity={identity} />
-            </Route>
+            <Route
+              path={paths.identity.overview}
+              element={<IdentityOverview identity={identity} />}
+            />
           </Routes>
         </MemoryRouter>
       </InternalConfigurationContext>,
@@ -93,9 +97,10 @@ describe('IdentityOverview', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${fullDidIdentity.address}/`]}>
         <Routes>
-          <Route path={paths.identity.overview}>
-            <IdentityOverview identity={fullDidIdentity} />
-          </Route>
+          <Route
+            path={paths.identity.overview}
+            element={<IdentityOverview identity={fullDidIdentity} />}
+          />
         </Routes>
       </MemoryRouter>,
     );

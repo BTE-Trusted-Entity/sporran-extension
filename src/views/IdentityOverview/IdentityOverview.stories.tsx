@@ -24,9 +24,10 @@ export function Template(): JSX.Element {
   return (
     <MemoryRouter initialEntries={[uri]}>
       <Routes>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.overview}
+          element={<IdentityOverview identity={identity} />}
+        />
       </Routes>
     </MemoryRouter>
   );
@@ -36,9 +37,10 @@ export function New(): JSX.Element {
   return (
     <MemoryRouter initialEntries={['/identity/NEW/send']}>
       <Routes>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={NEW} />
-        </Route>
+        <Route
+          path={paths.identity.overview}
+          element={<IdentityOverview identity={NEW} />}
+        />
       </Routes>
     </MemoryRouter>
   );
@@ -53,9 +55,10 @@ export function CreateSuccess(): JSX.Element {
       ]}
     >
       <Routes>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.overview}
+          element={<IdentityOverview identity={identity} />}
+        />
       </Routes>
     </MemoryRouter>
   );
@@ -70,9 +73,10 @@ export function ImportSuccess(): JSX.Element {
       ]}
     >
       <Routes>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.overview}
+          element={<IdentityOverview identity={identity} />}
+        />
       </Routes>
     </MemoryRouter>
   );
@@ -87,9 +91,10 @@ export function ResetSuccess(): JSX.Element {
       ]}
     >
       <Routes>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={identity} />
-        </Route>
+        <Route
+          path={paths.identity.overview}
+          element={<IdentityOverview identity={identity} />}
+        />
       </Routes>
     </MemoryRouter>
   );
@@ -99,9 +104,10 @@ export function withFullDid(): JSX.Element {
   return (
     <MemoryRouter initialEntries={[fullDidUri]}>
       <Routes>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={fullDidIdentity} />
-        </Route>
+        <Route
+          path={paths.identity.overview}
+          element={<IdentityOverview identity={fullDidIdentity} />}
+        />
       </Routes>
     </MemoryRouter>
   );

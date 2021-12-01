@@ -19,9 +19,10 @@ describe('ReceiveToken', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${identity.address}/receive`]}>
         <Routes>
-          <Route path={paths.identity.receive}>
-            <ReceiveToken identity={identity} />,
-          </Route>
+          <Route
+            path={paths.identity.receive}
+            element={<ReceiveToken identity={identity} />}
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -33,9 +34,10 @@ describe('ReceiveToken', () => {
     const { container } = render(
       <MemoryRouter initialEntries={['/identity/NEW/receive']}>
         <Routes>
-          <Route path={paths.identity.receive}>
-            <ReceiveToken identity={NEW} />,
-          </Route>
+          <Route
+            path={paths.identity.receive}
+            element={<ReceiveToken identity={NEW} />}
+          />
         </Routes>
       </MemoryRouter>,
     );

@@ -19,13 +19,16 @@ export function Template(): JSX.Element {
       ]}
     >
       <Routes>
-        <Route path={paths.identity.did.upgrade.sign}>
-          <DidUpgrade
-            identity={
-              identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
-            }
-          />
-        </Route>
+        <Route
+          path={paths.identity.did.upgrade.sign}
+          element={
+            <DidUpgrade
+              identity={
+                identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+              }
+            />
+          }
+        />
       </Routes>
     </MemoryRouter>
   );

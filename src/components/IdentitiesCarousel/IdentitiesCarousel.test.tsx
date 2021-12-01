@@ -15,13 +15,16 @@ describe('IdentitiesCarousel', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
         <Routes>
-          <Route path={paths.identity.overview}>
-            <IdentitiesCarousel
-              identity={
-                identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
-              }
-            />
-          </Route>
+          <Route
+            path={paths.identity.overview}
+            element={
+              <IdentitiesCarousel
+                identity={
+                  identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+                }
+              />
+            }
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -32,13 +35,16 @@ describe('IdentitiesCarousel', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
         <Routes>
-          <Route path={paths.identity.overview}>
-            <IdentitiesCarousel
-              identity={
-                identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
-              }
-            />
-          </Route>
+          <Route
+            path={paths.identity.overview}
+            element={
+              <IdentitiesCarousel
+                identity={
+                  identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+                }
+              />
+            }
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -49,13 +55,16 @@ describe('IdentitiesCarousel', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
         <Routes>
-          <Route path={paths.identity.overview}>
-            <IdentitiesCarousel
-              identity={
-                identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']
-              }
-            />
-          </Route>
+          <Route
+            path={paths.identity.overview}
+            element={
+              <IdentitiesCarousel
+                identity={
+                  identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']
+                }
+              />
+            }
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -66,9 +75,10 @@ describe('IdentitiesCarousel', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
         <Routes>
-          <Route path={paths.identity.overview}>
-            <IdentitiesCarousel identity={NEW} />
-          </Route>
+          <Route
+            path={paths.identity.overview}
+            element={<IdentitiesCarousel identity={NEW} />}
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -79,13 +89,16 @@ describe('IdentitiesCarousel', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.send.start]}>
         <Routes>
-          <Route path={paths.identity.send.start}>
-            <IdentitiesCarousel
-              identity={
-                identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']
-              }
-            />
-          </Route>
+          <Route
+            path={paths.identity.send.start}
+            element={
+              <IdentitiesCarousel
+                identity={
+                  identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']
+                }
+              />
+            }
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -96,12 +109,15 @@ describe('IdentitiesCarousel', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
         <Routes>
-          <Route path={paths.identity.overview}>
-            <IdentitiesBubbles
-              identities={Object.values(identities)}
-              showAdd={true}
-            />
-          </Route>
+          <Route
+            path={paths.identity.overview}
+            element={
+              <IdentitiesBubbles
+                identities={Object.values(identities)}
+                showAdd={true}
+              />
+            }
+          />
         </Routes>
       </MemoryRouter>,
     );
@@ -113,12 +129,15 @@ describe('IdentitiesCarousel', () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
         <Routes>
-          <Route path={paths.identity.overview}>
-            <IdentitiesBubbles
-              identities={Object.values(moreIdentities)}
-              showAdd={true}
-            />
-          </Route>
+          <Route
+            path={paths.identity.overview}
+            element={
+              <IdentitiesBubbles
+                identities={Object.values(moreIdentities)}
+                showAdd={true}
+              />
+            }
+          />
         </Routes>
       </MemoryRouter>,
     );

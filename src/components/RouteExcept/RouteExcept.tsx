@@ -9,7 +9,7 @@ export function RouteExcept({ path, children }: Props): JSX.Element {
   return (
     <Routes>
       <Route path={path} />
-      <Route>{children}</Route>
+      <Route element={children} />
     </Routes>
   );
 }

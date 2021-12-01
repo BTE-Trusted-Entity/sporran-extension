@@ -33,18 +33,19 @@ export function CreateIdentity(): JSX.Element {
 
   return (
     <Routes>
-      <Route path={paths.identity.create.start}>
-        <Warning />
-      </Route>
-      <Route path={paths.identity.create.backup}>
-        <SaveBackupPhrase backupPhrase={backupPhrase} />
-      </Route>
-      <Route path={paths.identity.create.verify}>
-        <VerifyBackupPhrase backupPhrase={backupPhrase} />
-      </Route>
-      <Route path={paths.identity.create.password}>
-        <CreatePassword onSuccess={onSuccess} />
-      </Route>
+      <Route path={paths.identity.create.start} element={<Warning />} />
+      <Route
+        path={paths.identity.create.backup}
+        element={<SaveBackupPhrase backupPhrase={backupPhrase} />}
+      />
+      <Route
+        path={paths.identity.create.verify}
+        element={<VerifyBackupPhrase backupPhrase={backupPhrase} />}
+      />
+      <Route
+        path={paths.identity.create.password}
+        element={<CreatePassword onSuccess={onSuccess} />}
+      />
     </Routes>
   );
 }

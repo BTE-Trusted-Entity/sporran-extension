@@ -36,12 +36,14 @@ export function ImportIdentity(): JSX.Element {
 
   return (
     <Routes>
-      <Route path={paths.identity.import.start}>
-        <ImportBackupPhrase onImport={onImport} />
-      </Route>
-      <Route path={paths.identity.import.password}>
-        <CreatePassword onSuccess={onSuccess} />
-      </Route>
+      <Route
+        path={paths.identity.import.start}
+        element={<ImportBackupPhrase onImport={onImport} />}
+      />
+      <Route
+        path={paths.identity.import.password}
+        element={<CreatePassword onSuccess={onSuccess} />}
+      />
     </Routes>
   );
 }

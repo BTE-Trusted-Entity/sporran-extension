@@ -9,18 +9,10 @@ import { paths } from '../paths';
 export function PopupsRouter(): JSX.Element {
   return (
     <Routes>
-      <Route path={paths.popup.authorize}>
-        <AuthorizeDApp />
-      </Route>
-      <Route path={paths.popup.save}>
-        <SaveCredential />
-      </Route>
-      <Route path={paths.popup.share}>
-        <ShareCredential />
-      </Route>
-      <Route path={paths.popup.sign}>
-        <SignDApp />
-      </Route>
+      <Route path={paths.popup.authorize} element={<AuthorizeDApp />} />
+      <Route path={paths.popup.save} element={<SaveCredential />} />
+      <Route path={paths.popup.share} element={<ShareCredential />} />
+      <Route path={paths.popup.sign} element={<SignDApp />} />
     </Routes>
   );
 }

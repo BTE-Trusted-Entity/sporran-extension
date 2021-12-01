@@ -36,25 +36,15 @@ export function App(): JSX.Element {
           </RouteExcept>
 
           <Routes>
-            <Route path={paths.home}>
-              <Welcome />
-            </Route>
+            <Route path={paths.home} element={<Welcome />} />
 
-            <Route path={paths.settings}>
-              <AppSettings />
-            </Route>
+            <Route path={paths.settings} element={<AppSettings />} />
 
-            <Route path={paths.access}>
-              <ExternalAccess />
-            </Route>
+            <Route path={paths.access} element={<ExternalAccess />} />
 
-            <Route path={paths.identity.base}>
-              <IdentitiesRouter />
-            </Route>
+            <Route path={paths.identity.base} element={<IdentitiesRouter />} />
 
-            <Route path={paths.popup.base}>
-              <PopupsRouter />
-            </Route>
+            <Route path={paths.popup.base} element={<PopupsRouter />} />
           </Routes>
         </MemoryRouter>
       </GenericError>
