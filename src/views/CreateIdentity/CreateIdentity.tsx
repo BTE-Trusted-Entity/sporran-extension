@@ -1,11 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import {
-  generatePath,
-  Route,
-  Routes,
-
-  useNavigate,
-} from 'react-router-dom';
+import { generatePath, Route, Routes, useNavigate } from 'react-router-dom';
 
 import { mnemonicGenerate } from '@polkadot/util-crypto';
 

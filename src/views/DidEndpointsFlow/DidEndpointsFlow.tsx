@@ -1,10 +1,5 @@
 import { useCallback, useState } from 'react';
-import {
-  Route,
-  Routes,
-
-  useNavigate,
-} from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { IDidServiceEndpoint } from '@kiltprotocol/types';
 
 import { Identity } from '../../utilities/identities/types';

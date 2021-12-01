@@ -1,11 +1,5 @@
 import { useCallback, useState } from 'react';
-import {
-  generatePath,
-  Route,
-  Routes,
-
-  useNavigate,
-} from 'react-router-dom';
+import { generatePath, Route, Routes, useNavigate } from 'react-router-dom';
 
 import { importIdentity } from '../../utilities/identities/identities';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
