@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Route, Routes, Switch, useHistory } from 'react-router-dom';
+import { Route, Routes, Switch, useNavigate } from 'react-router-dom';
 
 import {
   Identity,
@@ -16,24 +16,24 @@ export function ResetIdentity({
 }): JSX.Element {
   const { address } = identity;
   const [backupPhrase, setBackupPhrase] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onImport = useCallback(
     (phrase) => {
       setBackupPhrase(phrase);
-      history.push(generatePath(paths.identity.reset.password, { address }));
+      navigate(generatePath(paths.identity.reset.password, { address }));
     },
-    [history, address],
+    [navigate, address],
   );
 
   const onSuccess = useCallback(
     async (password: string) => {
       await encryptIdentity(backupPhrase, password);
-      history.push(
+      navigate(
         generatePath(paths.identity.overview, { address, type: 'pwreset' }),
       );
     },
-    [backupPhrase, history, address],
+    [backupPhrase, navigate, address],
   );
 
   return (

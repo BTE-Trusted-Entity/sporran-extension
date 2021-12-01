@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { map, without } from 'lodash-es';
 
 import { Identity } from '../../utilities/identities/types';
@@ -23,7 +23,7 @@ interface Props {
 export function RemoveIdentity({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const { data: identities } = useIdentities();
 
   const handleClick = useCallback(async () => {
@@ -37,10 +37,10 @@ export function RemoveIdentity({ identity }: Props): JSX.Element {
     const path = firstAddress
       ? generatePath(paths.identity.overview, { address: firstAddress })
       : paths.home;
-    history.push(path);
+    navigate(path);
 
     await removeIdentity(identity);
-  }, [history, identity, identities]);
+  }, [navigate, identity, identities]);
 
   return (
     <main className={styles.container}>

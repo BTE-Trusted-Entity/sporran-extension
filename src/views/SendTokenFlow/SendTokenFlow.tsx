@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Redirect, Route, Routes, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Routes, Switch, useNavigate } from 'react-router-dom';
 import BN from 'bn.js';
 
 import { Identity } from '../../utilities/identities/types';
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export function SendTokenFlow({ identity }: Props): JSX.Element {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [recipient, setRecipient] = useState<string | null>(null);
   const [amount, setAmount] = useState<BN | null>(null);
@@ -32,9 +32,9 @@ export function SendTokenFlow({ identity }: Props): JSX.Element {
       const nextPath = values.existentialWarning
         ? paths.identity.send.warning
         : paths.identity.send.review;
-      history.push(generatePath(nextPath, { address }));
+      navigate(generatePath(nextPath, { address }));
     },
-    [address, history],
+    [address, navigate],
   );
 
   return (

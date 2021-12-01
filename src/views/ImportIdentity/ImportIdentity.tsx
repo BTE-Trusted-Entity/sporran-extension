@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
   Switch,
-  useHistory,
+  useNavigate,
 } from 'react-router-dom';
 
 import { importIdentity } from '../../utilities/identities/identities';
@@ -14,24 +14,24 @@ import { paths } from '../paths';
 
 export function ImportIdentity(): JSX.Element {
   const [backupPhrase, setBackupPhrase] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onImport = useCallback(
     (phrase) => {
       setBackupPhrase(phrase);
-      history.push(paths.identity.import.password);
+      navigate(paths.identity.import.password);
     },
-    [history],
+    [navigate],
   );
 
   const onSuccess = useCallback(
     async (password: string) => {
       const { address } = await importIdentity(backupPhrase, password);
-      history.push(
+      navigate(
         generatePath(paths.identity.overview, { address, type: 'imported' }),
       );
     },
-    [backupPhrase, history],
+    [backupPhrase, navigate],
   );
 
   return (

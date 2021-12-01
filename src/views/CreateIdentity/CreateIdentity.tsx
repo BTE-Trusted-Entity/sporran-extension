@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
   Switch,
-  useHistory,
+  useNavigate,
 } from 'react-router-dom';
 
 import { mnemonicGenerate } from '@polkadot/util-crypto';
@@ -18,17 +18,17 @@ import { paths } from '../paths';
 
 export function CreateIdentity(): JSX.Element {
   const backupPhrase = useMemo(() => mnemonicGenerate(), []);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onSuccess = useCallback(
     async (password: string) => {
       const { address } = await createIdentity(backupPhrase, password);
 
-      history.push(
+      navigate(
         generatePath(paths.identity.overview, { address, type: 'created' }),
       );
     },
-    [backupPhrase, history],
+    [backupPhrase, navigate],
   );
 
   return (

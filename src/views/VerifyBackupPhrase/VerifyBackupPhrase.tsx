@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -14,7 +14,7 @@ interface Props {
 
 export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const expectedWords = backupPhrase.split(/\s+/);
   const selectableWords = [...expectedWords].sort();
@@ -51,9 +51,9 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      history.push(paths.identity.create.password);
+      navigate(paths.identity.create.password);
     },
-    [history],
+    [navigate],
   );
 
   return (

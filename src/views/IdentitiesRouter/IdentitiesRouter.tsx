@@ -4,8 +4,8 @@ import {
   Route,
   Routes,
   Switch,
-  useHistory,
   useLocation,
+  useNavigate,
   useParams,
 } from 'react-router-dom';
 
@@ -43,7 +43,7 @@ function useRedirectToCurrent() {
   const { address } = useParams() as { address: string };
   const noAddressProvided = address === ':address';
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const { data: current } = useCurrentIdentity();
 
   const location = useLocation();
@@ -52,9 +52,9 @@ function useRedirectToCurrent() {
 
   useEffect(() => {
     if (noAddressProvided && current) {
-      history.replace(url);
+      navigate(url, { replace: true });
     }
-  }, [noAddressProvided, current, address, history, url]);
+  }, [noAddressProvided, current, address, navigate, url]);
 
   return noAddressProvided;
 }

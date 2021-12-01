@@ -1,9 +1,10 @@
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 
 import * as styles from './ExistentialWarning.module.css';
+import { useCallback } from 'react';
 
 interface Props {
   nextPath: string;
@@ -11,7 +12,8 @@ interface Props {
 
 export function ExistentialWarning({ nextPath }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const { goBack } = useHistory();
+  const navigate = useNavigate();
+  const goBack = useCallback(() => navigate(-1), [navigate]);
 
   return (
     <div className={styles.container}>
