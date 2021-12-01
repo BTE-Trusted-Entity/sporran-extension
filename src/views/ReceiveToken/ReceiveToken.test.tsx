@@ -10,7 +10,6 @@ import '../../components/useCopyButton/useCopyButton.mock';
 import { paths } from '../paths';
 
 import { ReceiveToken } from './ReceiveToken';
-import { Switch } from 'react-router-dom';
 
 const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 

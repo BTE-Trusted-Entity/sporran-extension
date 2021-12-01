@@ -1,4 +1,4 @@
-import { MemoryRouter, Route, Routes, Switch } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 

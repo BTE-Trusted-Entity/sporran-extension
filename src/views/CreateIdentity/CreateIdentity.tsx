@@ -3,7 +3,7 @@ import {
   generatePath,
   Route,
   Routes,
-  Switch,
+
   useNavigate,
 } from 'react-router-dom';
 

@@ -6,7 +6,6 @@ import { identitiesMock as identities } from '../../utilities/identities/Identit
 import { paths } from '../paths';
 
 import { ReviewTransaction } from './ReviewTransaction';
-import { Switch } from 'react-router-dom';
 
 export default {
   title: 'Views/ReviewTransaction',

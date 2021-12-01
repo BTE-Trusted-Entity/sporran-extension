@@ -9,7 +9,6 @@ import { IdentityOverview } from './IdentityOverview';
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
-import { Switch } from 'react-router-dom';
 
 jest.mock('../../utilities/credentials/credentials');
 jest.mock('../../utilities/useSubscanHost/useSubscanHost');

@@ -1,4 +1,4 @@
-import { Route, Routes, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
 import { DidUpgradeExplainer } from '../DidUpgradeExplainer/DidUpgradeExplainer';

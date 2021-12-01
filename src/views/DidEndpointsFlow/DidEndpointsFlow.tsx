@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import {
   Route,
   Routes,
-  Switch,
+
   useNavigate,
 } from 'react-router-dom';
 import { IDidServiceEndpoint } from '@kiltprotocol/types';

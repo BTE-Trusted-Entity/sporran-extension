@@ -6,7 +6,6 @@ import { NEW } from '../../utilities/identities/identities';
 import { paths } from '../paths';
 
 import { ReceiveToken } from './ReceiveToken';
-import { Switch } from 'react-router-dom';
 
 export default {
   title: 'Views/ReceiveToken',
