@@ -1,4 +1,4 @@
-import { MemoryRouter, Route } from 'react-router-dom';
+import { MemoryRouter, Route, Switch } from 'react-router-dom';
 import {
   identitiesMock as identities,
   moreIdentitiesMock as moreIdentities,
@@ -14,13 +14,15 @@ describe('IdentitiesCarousel', () => {
   it('should render normal identities', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Route path={paths.identity.overview}>
-          <IdentitiesCarousel
-            identity={
-              identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
-            }
-          />
-        </Route>
+        <Switch>
+          <Route path={paths.identity.overview}>
+            <IdentitiesCarousel
+              identity={
+                identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+              }
+            />
+          </Route>
+        </Switch>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -29,13 +31,15 @@ describe('IdentitiesCarousel', () => {
   it('should render the first identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Route path={paths.identity.overview}>
-          <IdentitiesCarousel
-            identity={
-              identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
-            }
-          />
-        </Route>
+        <Switch>
+          <Route path={paths.identity.overview}>
+            <IdentitiesCarousel
+              identity={
+                identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+              }
+            />
+          </Route>
+        </Switch>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -44,13 +48,15 @@ describe('IdentitiesCarousel', () => {
   it('should render the last identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Route path={paths.identity.overview}>
-          <IdentitiesCarousel
-            identity={
-              identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']
-            }
-          />
-        </Route>
+        <Switch>
+          <Route path={paths.identity.overview}>
+            <IdentitiesCarousel
+              identity={
+                identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']
+              }
+            />
+          </Route>
+        </Switch>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -59,9 +65,11 @@ describe('IdentitiesCarousel', () => {
   it('should render the new identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Route path={paths.identity.overview}>
-          <IdentitiesCarousel identity={NEW} />
-        </Route>
+        <Switch>
+          <Route path={paths.identity.overview}>
+            <IdentitiesCarousel identity={NEW} />
+          </Route>
+        </Switch>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -70,13 +78,15 @@ describe('IdentitiesCarousel', () => {
   it('should support other paths', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.send.start]}>
-        <Route path={paths.identity.send.start}>
-          <IdentitiesCarousel
-            identity={
-              identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']
-            }
-          />
-        </Route>
+        <Switch>
+          <Route path={paths.identity.send.start}>
+            <IdentitiesCarousel
+              identity={
+                identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']
+              }
+            />
+          </Route>
+        </Switch>
       </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
@@ -85,12 +95,14 @@ describe('IdentitiesCarousel', () => {
   it('should render a bubble for each identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Route path={paths.identity.overview}>
-          <IdentitiesBubbles
-            identities={Object.values(identities)}
-            showAdd={true}
-          />
-        </Route>
+        <Switch>
+          <Route path={paths.identity.overview}>
+            <IdentitiesBubbles
+              identities={Object.values(identities)}
+              showAdd={true}
+            />
+          </Route>
+        </Switch>
       </MemoryRouter>,
     );
 
@@ -100,12 +112,14 @@ describe('IdentitiesCarousel', () => {
   it('should not render bubbles if number of identities is more than the maximum', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[paths.identity.overview]}>
-        <Route path={paths.identity.overview}>
-          <IdentitiesBubbles
-            identities={Object.values(moreIdentities)}
-            showAdd={true}
-          />
-        </Route>
+        <Switch>
+          <Route path={paths.identity.overview}>
+            <IdentitiesBubbles
+              identities={Object.values(moreIdentities)}
+              showAdd={true}
+            />
+          </Route>
+        </Switch>
       </MemoryRouter>,
     );
 
