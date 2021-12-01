@@ -37,13 +37,11 @@ export const decorators = [
   ViewDecorator,
 
   (Story) => (
-    <MemoryRouter>
-      <IdentitiesProviderMock>
-        <CredentialsProviderMock>
-          <Story />
-        </CredentialsProviderMock>
-      </IdentitiesProviderMock>
-    </MemoryRouter>
+    <IdentitiesProviderMock>
+      <CredentialsProviderMock>
+        <Story />
+      </CredentialsProviderMock>
+    </IdentitiesProviderMock>
   ),
 ];
 
