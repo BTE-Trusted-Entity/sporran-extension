@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 interface Props {
-  path: string | string[];
+  path: string;
   children: JSX.Element;
 }
 
