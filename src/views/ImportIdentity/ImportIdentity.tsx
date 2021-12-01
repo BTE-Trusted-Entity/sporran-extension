@@ -36,7 +36,7 @@ export function ImportIdentity(): JSX.Element {
 
   return (
     <Routes>
-      <Route path={paths.identity.import.start} exact>
+      <Route path={paths.identity.import.start}>
         <ImportBackupPhrase onImport={onImport} />
       </Route>
       <Route path={paths.identity.import.password}>

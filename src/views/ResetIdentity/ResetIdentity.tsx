@@ -38,7 +38,7 @@ export function ResetIdentity({
 
   return (
     <Routes>
-      <Route path={generatePath(paths.identity.reset.start, { address })} exact>
+      <Route path={generatePath(paths.identity.reset.start, { address })}>
         <ImportBackupPhrase
           type="reset"
           address={address}

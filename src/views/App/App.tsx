@@ -36,7 +36,7 @@ export function App(): JSX.Element {
           </RouteExcept>
 
           <Routes>
-            <Route path={paths.home} exact>
+            <Route path={paths.home}>
               <Welcome />
             </Route>
 

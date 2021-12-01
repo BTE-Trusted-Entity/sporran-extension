@@ -33,7 +33,7 @@ export function CreateIdentity(): JSX.Element {
 
   return (
     <Routes>
-      <Route path={paths.identity.create.start} exact>
+      <Route path={paths.identity.create.start}>
         <Warning />
       </Route>
       <Route path={paths.identity.create.backup}>
