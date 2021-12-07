@@ -1,3 +1,24 @@
+.cardsContainer {
+  height: calc(288rem / 16);
+  width: calc(100% + 3rem);
+  margin: 0.25rem -1.5rem 0;
+  padding: 0.75rem 0 0;
+  background: var(--color-dark);
+  box-shadow: inset 0 -3px 6px 0 rgb(var(--color-black-rgb) / 30%),
+    inset 0 3px 6px 0 rgb(var(--color-black-rgb) / 30%);
+  list-style: none;
+}
+
+.scrollContainer {
+  composes: cardsContainer;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
 .list {
   width: calc(100% + 3rem);
   margin: 0.25rem -1.5rem 0;
@@ -46,9 +67,14 @@
   width: 100%;
   height: 3.25rem;
   padding: calc(11rem / 16) 0 0;
-  background: url('../../components/images/chevron-down.svg') no-repeat right 1rem top 0.75rem/0.75rem;
+  background: url('../../components/images/chevron-down.svg') no-repeat right
+    1rem top 0.75rem/0.75rem;
   border: none;
   cursor: pointer;
+}
+
+.card:last-child .expand {
+  height: 2.25rem;
 }
 
 .cardText {
@@ -78,7 +104,7 @@
   margin: 0;
 }
 
-.collapsedFirstProp {
+.collapsedValue {
   composes: ellipsis;
   width: 60%;
   margin: 0;

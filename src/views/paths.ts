@@ -57,6 +57,7 @@ export const paths = {
     claim: '/identity/:address/claim',
     save: '/popup/save',
     share: '/popup/share',
+    shareSign: '/popup/share/sign',
     sign: '/popup/sign',
     signDid: '/identity/:address/did/sign',
   },

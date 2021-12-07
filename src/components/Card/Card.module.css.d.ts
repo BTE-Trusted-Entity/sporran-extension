@@ -1,5 +1,6 @@
 declare namespace CardModuleCssNamespace {
   export interface ICardModuleCss {
+    cardsContainer: string;
     collapse: string;
     collapsedCard: string;
     collapsedFirstProp: string;
@@ -8,6 +9,7 @@ declare namespace CardModuleCssNamespace {
     expand: string;
     expanded: string;
     list: string;
+    scrollContainer: string;
   }
 }
 

@@ -20,6 +20,7 @@
   opacity: 0.5;
   color: var(--color-grey-medium);
   border: 1px solid rgb(var(--color-grey-light-rgb) / 30%);
+  pointer-events: none;
 }
 
 .buttonSecondary {

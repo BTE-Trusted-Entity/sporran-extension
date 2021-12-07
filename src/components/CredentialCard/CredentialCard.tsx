@@ -141,7 +141,7 @@ export function CredentialCard({
         <button type="button" className={styles.expand} onClick={handleExpand}>
           <section className={styles.collapsedCredential}>
             <h4 className={styles.collapsedName}>{credential.name}</h4>
-            <p className={styles.collapsedFirstProp}>{contents[0][1]}</p>
+            <p className={styles.collapsedValue}>{contents[0][1]}</p>
           </section>
         </button>
       )}

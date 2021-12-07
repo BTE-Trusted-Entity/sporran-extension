@@ -236,6 +236,9 @@
   "component_CredentialCard_revoked": {
     "message": "Revoked"
   },
+  "component_ShareCredentialCard_required": {
+    "message": "* required"
+  },
   "component_YouHaveIdentities_one": {
     "message": "You have $number$ Identity",
     "placeholders": {
@@ -614,6 +617,15 @@
   },
   "view_ShareCredential_error": {
     "message": "The selected credential has not been attested."
+  },
+  "view_ShareCredentialSelect_heading": {
+    "message": "Select a Credential"
+  },
+  "view_ShareCredentialSelect_subline": {
+    "message": "Select a credential to sign and share"
+  },
+  "view_ShareCredentialSelect_next": {
+    "message": "Next"
   },
   "view_AppSettings_heading": {
     "message": "Set Custom Endpoint"
