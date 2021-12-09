@@ -580,10 +580,10 @@
     "message": "View and manage your credentials"
   },
   "view_IdentityCredentials_no_credentials": {
-    "message": ":(\nno credentials\navailable"
+    "message": "No credentials available"
   },
   "view_IdentityCredentials_explainer": {
-    "message": "How To Get Credentials"
+    "message": "Get Credentials"
   },
   "view_ShareCredential_share": {
     "message": "Share credential"

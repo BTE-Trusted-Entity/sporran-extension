@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { Identity } from '../../utilities/identities/types';
@@ -47,10 +46,9 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
             {t('view_IdentityCredentials_no_credentials')}
           </p>
 
-          {/* TODO: link to https://kiltprotocol.atlassian.net/browse/SK-552 */}
-          <Link to="" className={styles.explainerLink}>
+          <a href="https://socialkyc.io/" className={styles.explainerLink}>
             {t('view_IdentityCredentials_explainer')}
-          </Link>
+          </a>
         </section>
       ) : (
         <ul className={styles.credentials}>

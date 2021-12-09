@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
+import { useConfiguration } from '../../configuration/useConfiguration';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
@@ -18,6 +19,7 @@ export function DidManage({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const { address } = identity;
+  const { features } = useConfiguration();
 
   return (
     <section className={styles.container}>
@@ -35,12 +37,14 @@ export function DidManage({ identity }: Props): JSX.Element | null {
         {t('view_DidManage_endpoints')}
       </Link>
 
-      <Link
-        className={styles.connect}
-        to={generatePath(paths.identity.did.connect.start, { address })}
-      >
-        {t('view_DidManage_connect')}
-      </Link>
+      {features.dotsama && (
+        <Link
+          className={styles.connect}
+          to={generatePath(paths.identity.did.connect.start, { address })}
+        >
+          {t('view_DidManage_connect')}
+        </Link>
+      )}
 
       <Link
         className={styles.downgrade}

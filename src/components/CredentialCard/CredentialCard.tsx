@@ -157,12 +157,12 @@ export function CredentialCard({
               aria-label={t('component_CredentialCard_backup')}
               className={styles.backup}
             />
-            <button
+            {/*<button
               type="button"
               aria-label={t('component_CredentialCard_remove')}
               className={styles.remove}
               // TODO: https://kiltprotocol.atlassian.net/browse/SK-589
-            />
+            />*/}
           </section>
 
           <dl className={styles.details}>

@@ -6,6 +6,7 @@ interface Features {
   sendToken: boolean;
   subscan: boolean;
   fullDid: boolean;
+  dotsama: boolean;
 }
 
 export interface ConfigurationType {
@@ -15,10 +16,11 @@ export interface ConfigurationType {
 
 const publicFeatures: Features = {
   endpoint: false,
-  credentials: false,
+  credentials: true,
   sendToken: true,
   subscan: true,
-  fullDid: false,
+  fullDid: true,
+  dotsama: false,
 };
 
 export const internalFeatures: Features = {
@@ -27,11 +29,12 @@ export const internalFeatures: Features = {
   sendToken: true,
   subscan: true,
   fullDid: true,
+  dotsama: true,
 };
 
 // Duplicates the value in src/static/manifest.json
 // We can’t use browser.runtime.getManifest().version, as it’s unavailable in injected scripts
-const version = '2021.9.8';
+const version = '2021.12.9';
 
 export const configuration: ConfigurationType = {
   version,
