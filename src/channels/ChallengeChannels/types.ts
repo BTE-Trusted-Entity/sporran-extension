@@ -1,12 +1,12 @@
-import { IDidDetails } from '@kiltprotocol/types';
+import { IDidKeyDetails } from '@kiltprotocol/types';
 
 export interface ChallengeInput {
-  dAppDid: IDidDetails['did'];
+  dAppEncryptionKeyId: IDidKeyDetails['id'];
   challenge: string;
 }
 
 export interface ChallengeOutput {
-  sporranDid: IDidDetails['did'];
+  encryptionKeyId: IDidKeyDetails['id'];
   encryptedChallenge: string;
   nonce: string;
 }

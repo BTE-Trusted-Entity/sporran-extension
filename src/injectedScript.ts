@@ -1,4 +1,4 @@
-import { IEncryptedMessage, IDidDetails } from '@kiltprotocol/types';
+import { IEncryptedMessage, IDidKeyDetails } from '@kiltprotocol/types';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import {
@@ -15,7 +15,7 @@ interface PubSubSession {
   ) => Promise<void>;
   close: () => Promise<void>;
   send: (message: IEncryptedMessage) => Promise<void>;
-  identity: IDidDetails['did'];
+  encryptionKeyId: IDidKeyDetails['id'];
   encryptedChallenge: string;
   nonce: string;
 }
@@ -23,7 +23,7 @@ interface PubSubSession {
 interface InjectedWindowProvider {
   startSession: (
     dAppName: string,
-    dAppDid: IDidDetails['did'],
+    dAppEncryptionKeyId: IDidKeyDetails['id'],
     challenge: string,
   ) => Promise<PubSubSession>;
   name: string;
@@ -46,20 +46,20 @@ async function storeMessageFromSporran(
 
 async function startSession(
   unsafeDAppName: string,
-  dAppDid: IDidDetails['did'],
+  dAppEncryptionKeyId: IDidKeyDetails['id'],
   challenge: string,
 ): Promise<PubSubSession> {
   const dAppName = unsafeDAppName.substring(0, 50);
   await authenticate({ dAppName });
 
-  const { sporranDid, encryptedChallenge, nonce } =
-    await injectedChallengeChannel.get({ challenge, dAppDid });
+  const { encryptionKeyId, encryptedChallenge, nonce } =
+    await injectedChallengeChannel.get({ challenge, dAppEncryptionKeyId });
 
   onMessageFromSporran = storeMessageFromSporran;
 
   return {
     /** Sporran temporary identity */
-    identity: sporranDid,
+    encryptionKeyId,
 
     /** dApp will use given callback to process messages from Sporran */
     async listen(
