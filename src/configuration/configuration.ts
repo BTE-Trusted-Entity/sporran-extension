@@ -6,6 +6,7 @@ interface Features {
   sendToken: boolean;
   subscan: boolean;
   fullDid: boolean;
+  dotsama: boolean;
 }
 
 export interface ConfigurationType {
@@ -19,6 +20,7 @@ const publicFeatures: Features = {
   sendToken: true,
   subscan: true,
   fullDid: false,
+  dotsama: false,
 };
 
 export const internalFeatures: Features = {
@@ -27,6 +29,7 @@ export const internalFeatures: Features = {
   sendToken: true,
   subscan: true,
   fullDid: true,
+  dotsama: true,
 };
 
 // Duplicates the value in src/static/manifest.json
