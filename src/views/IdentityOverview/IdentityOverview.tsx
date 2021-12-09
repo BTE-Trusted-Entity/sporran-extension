@@ -117,14 +117,16 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       )}
 
-      {!isFullDid(identity.did) ? (
+      {features.fullDid && !isFullDid(identity.did) && (
         <Link
           to={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.upgrade}
         >
           {t('view_IdentityOverview_upgrade')}
         </Link>
-      ) : (
+      )}
+
+      {features.fullDid && isFullDid(identity.did) && (
         <Link
           to={generatePath(paths.identity.did.manage, { address })}
           className={styles.manage}
