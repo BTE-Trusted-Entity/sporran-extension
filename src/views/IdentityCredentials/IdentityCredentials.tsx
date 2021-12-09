@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { Identity } from '../../utilities/identities/types';
