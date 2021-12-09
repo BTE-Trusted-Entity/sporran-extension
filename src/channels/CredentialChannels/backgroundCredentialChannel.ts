@@ -28,11 +28,10 @@ async function showCredentialPopup(
 ): Promise<IEncryptedMessage | void> {
   const { message: encrypted, dAppName } = input;
 
-  const { encrypt, decrypt, dAppDidDetails } = await getTabEncryption(sender);
+  const { encrypt, decrypt, dAppEncryptionDidKey } = await getTabEncryption(
+    sender,
+  );
   const message = await decrypt(encrypted);
-
-  // TODO: uncomment when it works without unsafe-eval
-  // errorCheckMessageBody(message.body);
 
   if (message.body.type === MessageBodyType.SUBMIT_TERMS) {
     try {
@@ -40,7 +39,7 @@ async function showCredentialPopup(
         {
           ...message.body.content,
           attesterName: dAppName,
-          attesterDid: dAppDidDetails.did,
+          attesterDid: dAppEncryptionDidKey.controller,
         },
         sender,
       );
@@ -62,7 +61,7 @@ async function showCredentialPopup(
     return await shareChannel.get(
       {
         credentialRequest: message.body.content,
-        verifierDid: dAppDidDetails.did,
+        verifierDid: dAppEncryptionDidKey.controller,
       },
       sender,
     );
