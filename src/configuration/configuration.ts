@@ -19,7 +19,7 @@ const publicFeatures: Features = {
   credentials: true,
   sendToken: true,
   subscan: true,
-  fullDid: false,
+  fullDid: true,
   dotsama: false,
 };
 
