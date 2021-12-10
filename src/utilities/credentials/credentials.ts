@@ -1,6 +1,7 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { pick, remove } from 'lodash-es';
 import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
+import { Attestation } from '@kiltprotocol/core';
 import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
@@ -84,6 +85,20 @@ export function useIdentityCredentials(did?: IDidDetails['did']): Credential[] {
         parseDidUrl(credential.request.claim.owner).fullDid === fullDid,
     );
   }, [all, did]);
+}
+
+export function usePendingCredentialCheck(credential: Credential): void {
+  useEffect(() => {
+    if (credential.status !== 'pending') {
+      return;
+    }
+    (async () => {
+      const isAttested = await Attestation.query(credential.request.rootHash);
+      if (isAttested) {
+        await saveCredential({ ...credential, status: 'attested' });
+      }
+    })();
+  }, [credential]);
 }
 
 interface CredentialDownload {

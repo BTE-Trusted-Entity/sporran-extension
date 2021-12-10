@@ -1,10 +1,11 @@
-import { useState, useCallback, useRef, useEffect, RefObject } from 'react';
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import {
   Credential,
   getCredentialDownload,
   saveCredential,
+  usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
 
 import * as styles from './CredentialCard.module.css';
@@ -112,6 +113,7 @@ export function CredentialCard({
     revoked: t('component_CredentialCard_revoked'),
   };
 
+  usePendingCredentialCheck(credential);
   const { status } = credential;
 
   const [expanded, setExpanded] = useState(expand);
