@@ -46,7 +46,12 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
             {t('view_IdentityCredentials_no_credentials')}
           </p>
 
-          <a href="https://socialkyc.io/" className={styles.explainerLink}>
+          <a
+            href="https://socialkyc.io/"
+            target="_blank"
+            rel="noreferrer"
+            className={styles.explainerLink}
+          >
             {t('view_IdentityCredentials_explainer')}
           </a>
         </section>
