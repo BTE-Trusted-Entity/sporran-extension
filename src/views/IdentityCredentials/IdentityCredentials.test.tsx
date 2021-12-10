@@ -1,3 +1,4 @@
+import { Attestation } from '@kiltprotocol/core';
 import { identitiesMock, render } from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';
@@ -10,10 +11,12 @@ import {
 import { IdentityCredentials } from './IdentityCredentials';
 
 jest.mock('../../utilities/did/did');
-
 (parseDidUrl as jest.Mock).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 });
+
+jest.mock('@kiltprotocol/core', () => ({ Attestation: { query: jest.fn() } }));
+(Attestation.query as jest.Mock).mockResolvedValue(false);
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
