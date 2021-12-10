@@ -1,12 +1,12 @@
 import { useContext, useEffect, useMemo } from 'react';
 import { pick, remove } from 'lodash-es';
 import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
+import { Attestation } from '@kiltprotocol/core';
 import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
 import { parseDidUrl } from '../did/did';
 import { CredentialsContext } from './CredentialsContext';
-import { Attestation } from '@kiltprotocol/core';
 
 type AttestationStatus = 'pending' | 'attested' | 'revoked';
 
