@@ -47,6 +47,22 @@ exports[`DidEndpointsSign should match the snapshot when adding 1`] = `
       </div>
     </section>
     <p
+      class="didLine"
+    >
+      <input
+        aria-label="DID"
+        class="long"
+        readonly=""
+        value="did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY"
+      />
+      <button
+        aria-label="copy to clipboard"
+        class="copy"
+        title="copy to clipboard"
+        type="button"
+      />
+    </p>
+    <p
       class="value"
     >
       https://sporran.org/
@@ -209,6 +225,22 @@ exports[`DidEndpointsSign should match the snapshot when removing 1`] = `
         </div>
       </div>
     </section>
+    <p
+      class="didLine"
+    >
+      <input
+        aria-label="DID"
+        class="long"
+        readonly=""
+        value="did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY"
+      />
+      <button
+        aria-label="copy to clipboard"
+        class="copy"
+        title="copy to clipboard"
+        type="button"
+      />
+    </p>
     <p
       class="value"
     >

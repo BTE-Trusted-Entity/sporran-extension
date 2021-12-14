@@ -3,6 +3,7 @@ import { DidUtils } from '@kiltprotocol/did';
 
 import { identitiesMock, render, act } from '../../testing/testing';
 import { queryFullDetailsFromIdentifier } from '../../utilities/did/did';
+import '../../components/useCopyButton/useCopyButton.mock';
 
 import { DidEndpointsForm } from './DidEndpointsForm';
 

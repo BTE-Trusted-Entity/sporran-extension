@@ -11,6 +11,11 @@
   margin: 0 0 0.8125rem;
 }
 
+.didLine {
+  composes: line from '../../components/CopyValue/CopyValue.module.css';
+  margin-top: 1rem;
+}
+
 .value {
   composes: inputText from '../../components/Typography/Typography.module.css';
   color: var(--color-grey-light);

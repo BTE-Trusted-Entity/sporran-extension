@@ -2,6 +2,7 @@ declare namespace DidManageModuleCssNamespace {
   export interface IDidManageModuleCss {
     connect: string;
     container: string;
+    didLine: string;
     downgrade: string;
     endpoints: string;
     heading: string;

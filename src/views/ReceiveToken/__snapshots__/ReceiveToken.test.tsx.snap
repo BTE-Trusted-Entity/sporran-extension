@@ -103,7 +103,7 @@ exports[`ReceiveToken should render a normal identity 1`] = `
     >
       <input
         aria-labelledby="addressLabel"
-        class="address"
+        class="input"
         readonly=""
         value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       />

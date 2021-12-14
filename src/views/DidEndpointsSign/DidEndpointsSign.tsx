@@ -13,6 +13,7 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
+import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { getKeystoreFromKeypair } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
 import {
@@ -103,6 +104,8 @@ export function DidEndpointsSign({
       <p className={styles.subline}>{t('view_DidEndpointsSign_subline')}</p>
 
       <IdentitySlide identity={identity} />
+
+      <CopyValue value={identity.did} label="DID" className={styles.didLine} />
 
       <p className={styles.value}>{endpoint.urls[0]}</p>
       <p className={styles.value}>{endpoint.types[0]}</p>

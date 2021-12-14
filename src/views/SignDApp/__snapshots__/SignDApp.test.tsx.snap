@@ -25,7 +25,7 @@ exports[`SignDApp should render 1`] = `
     >
       <input
         aria-label="KILT Identity 1"
-        class="address"
+        class="input"
         readonly=""
         value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
       />

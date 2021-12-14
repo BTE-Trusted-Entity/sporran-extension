@@ -1,0 +1,17 @@
+.line {
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+
+.input {
+  composes: input from '../../components/Input/Input.module.css';
+  font-size: 0.75rem;
+  width: calc(100% - 3.5rem);
+  padding-right: 2.5rem;
+}
+
+.long {
+  composes: input;
+  font-size: calc(11rem / 16);
+}

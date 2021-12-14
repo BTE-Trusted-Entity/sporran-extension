@@ -10,6 +10,7 @@ declare namespace DidEndpointsFormModuleCssNamespace {
     collapsedType: string;
     collapsedUrl: string;
     container: string;
+    didLine: string;
     endpoint: string;
     errorTooltip: string;
     expand: string;

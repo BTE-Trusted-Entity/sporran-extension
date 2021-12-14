@@ -1,5 +1,7 @@
 import { identitiesMock as identities, render } from '../../testing/testing';
 
+import '../../components/useCopyButton/useCopyButton.mock';
+
 import { DidManage } from './DidManage';
 
 describe('DidManage', () => {
