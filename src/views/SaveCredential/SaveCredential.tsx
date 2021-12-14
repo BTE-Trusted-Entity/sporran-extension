@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { IAttestation } from '@kiltprotocol/types';
+import cx from 'classnames';
 
 import {
   Credential,
@@ -9,6 +10,8 @@ import {
   saveCredential,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
+
+import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 
 import * as styles from './SaveCredential.module.css';
 
@@ -43,17 +46,13 @@ export function SaveCredential(): JSX.Element | null {
     })();
   }, [claimHash]);
 
-  const handleNameInput = useCallback(
-    async (event) => {
-      const name = event.target.value as string;
-      if (credential) {
-        setCredential({ ...credential, name });
-      }
-    },
-    [credential],
-  );
+  const [isDownloaded, setIsDownloaded] = useState(false);
 
-  const handleCancel = useCallback(() => {
+  const handleDownloadClick = useCallback(() => {
+    setIsDownloaded(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
     window.close();
   }, []);
 
@@ -67,40 +66,31 @@ export function SaveCredential(): JSX.Element | null {
     <main className={styles.container}>
       <h1 className={styles.heading}>{t('view_SaveCredential_heading')}</h1>
 
-      <dl className={styles.details}>
-        <dt className={styles.detailName}>Credential type:</dt>
-        <dd className={styles.detailValue}>{credential.cTypeTitle}</dd>
+      <section className={styles.cardContainer}>
+        <CredentialCard credential={credential} expand buttons={false} />
+      </section>
 
-        <dt className={styles.detailName}>Attester:</dt>
-        <dd className={styles.detailValue}>{credential.attester}</dd>
-      </dl>
+      <h2 className={cx(styles.warning, { [styles.downloaded]: isDownloaded })}>
+        {t('view_SaveCredential_warning')}
+      </h2>
 
-      <h2 className={styles.warning}>{t('view_SaveCredential_warning')}</h2>
+      <a
+        download={download.name}
+        href={download.url}
+        className={styles.download}
+        onClick={handleDownloadClick}
+      >
+        {t('view_SaveCredential_CTA')}
+      </a>
 
-      <label className={styles.label}>
-        {t('view_SaveCredential_name')}
-        <input
-          name="name"
-          className={styles.name}
-          onInput={handleNameInput}
-          autoFocus
-          defaultValue={credential.name}
-        />
-      </label>
-
-      <p className={styles.buttonsLine}>
-        <button type="button" className={styles.cancel} onClick={handleCancel}>
-          {t('common_action_cancel')}
-        </button>
-        <a
-          download={download.name}
-          href={download.url}
-          className={styles.submit}
-          aria-disabled={!credential.name || credential.name.length === 0}
-        >
-          {t('view_SaveCredential_CTA')}
-        </a>
-      </p>
+      {isDownloaded && (
+        <p className={styles.done}>
+          {t('view_SaveCredential_done')}
+          <button type="button" className={styles.close} onClick={handleClose}>
+            {t('view_SaveCredential_close')}
+          </button>
+        </p>
+      )}
     </main>
   );
 }

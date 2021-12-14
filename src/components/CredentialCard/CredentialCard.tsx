@@ -99,11 +99,13 @@ function CredentialName({
 interface Props {
   credential: Credential;
   expand?: boolean;
+  buttons?: boolean;
 }
 
 export function CredentialCard({
   credential,
   expand = false,
+  buttons = true,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -146,26 +148,28 @@ export function CredentialCard({
 
       {expanded && (
         <section className={styles.expanded}>
-          <section className={styles.buttons}>
-            <button
-              type="button"
-              aria-label={t('component_CredentialCard_collapse')}
-              className={styles.collapse}
-              onClick={handleCollapse}
-            />
-            <a
-              download={download.name}
-              href={download.url}
-              aria-label={t('component_CredentialCard_backup')}
-              className={styles.backup}
-            />
-            {/*<button
+          {buttons && (
+            <section className={styles.buttons}>
+              <button
+                type="button"
+                aria-label={t('component_CredentialCard_collapse')}
+                className={styles.collapse}
+                onClick={handleCollapse}
+              />
+              <a
+                download={download.name}
+                href={download.url}
+                aria-label={t('component_CredentialCard_backup')}
+                className={styles.backup}
+              />
+              {/*<button
               type="button"
               aria-label={t('component_CredentialCard_remove')}
               className={styles.remove}
               // TODO: https://kiltprotocol.atlassian.net/browse/SK-589
             />*/}
-          </section>
+            </section>
+          )}
 
           <dl className={styles.details}>
             <CredentialName credential={credential} />

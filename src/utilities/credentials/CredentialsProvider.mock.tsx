@@ -383,10 +383,10 @@ export const credentialsMock: Credential[] = [
 
 export const mockAttestation: IAttestation = {
   claimHash:
-    '0xf53f460a9e96cf7ea3321ac001a89674850493e12fad28cbc868e026935436d2',
+    '0xbe7fcc7aa0186b05fd116c100e2d673fb951163693788640ce6032ad2f700dae',
   cTypeHash:
-    '0x240c744923bd98797504328f9bef57ca6c777f5cbf3e1aada74f348c9879d78a',
-  owner: '4quK7LGg8iGqoH8kmeEeCDN7VM1aN5wmKkAfcH1VVU8tFmMc',
+    '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
+  owner: 'did:kilt:light:004rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
   delegationId: null,
   revoked: false,
 };

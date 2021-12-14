@@ -1,16 +1,12 @@
 declare namespace SaveCredentialModuleCssNamespace {
   export interface ISaveCredentialModuleCss {
-    buttonsLine: string;
-    cancel: string;
+    cardContainer: string;
+    close: string;
     container: string;
-    detailName: string;
-    detailValue: string;
-    details: string;
+    download: string;
+    downloaded: string;
+    done: string;
     heading: string;
-    label: string;
-    name: string;
-    subline: string;
-    submit: string;
     warning: string;
   }
 }
