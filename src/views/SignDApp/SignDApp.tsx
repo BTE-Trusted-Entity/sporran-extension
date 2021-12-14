@@ -1,10 +1,10 @@
-import { Fragment, useCallback, useRef } from 'react';
+import { Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import { useIdentities } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { Avatar } from '../../components/Avatar/Avatar';
-import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
+import { CopyValue } from '../../components/CopyValue/CopyValue';
 import {
   PasswordField,
   usePasswordField,
@@ -62,9 +62,6 @@ export function SignDApp(): JSX.Element | null {
   const data = usePopupData<ExtrinsicData>();
   const values = getExtrinsicValues(data);
 
-  const addressRef = useRef<HTMLInputElement>(null);
-  const copy = useCopyButton(addressRef);
-
   const passwordField = usePasswordField();
 
   const identities = useIdentities().data;
@@ -102,24 +99,11 @@ export function SignDApp(): JSX.Element | null {
       <Avatar identity={identity} className={styles.avatar} />
       <h2 className={styles.identity}>{identity.name}</h2>
 
-      <p className={styles.addressLine}>
-        <input
-          className={styles.address}
-          ref={addressRef}
-          readOnly
-          value={identity.address}
-          aria-label={identity.name}
-        />
-        {copy.supported && (
-          <button
-            className={copy.className}
-            onClick={copy.handleCopyClick}
-            type="button"
-            aria-label={copy.title}
-            title={copy.title}
-          />
-        )}
-      </p>
+      <CopyValue
+        value={identity.address}
+        label={identity.name}
+        className={styles.addressLine}
+      />
 
       <dl className={styles.details}>
         {values.map(({ label, value }) => (

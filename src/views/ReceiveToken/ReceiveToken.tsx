@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Modal } from 'react-dialog-polyfill';
 
@@ -8,7 +8,7 @@ import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/Identiti
 import { QRCode } from '../../components/QRCode/QRCode';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
-import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
+import { CopyValue } from '../../components/CopyValue/CopyValue';
 
 import * as styles from './ReceiveToken.module.css';
 
@@ -18,9 +18,6 @@ interface Props {
 
 export function ReceiveToken({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-
-  const addressRef = useRef<HTMLInputElement>(null);
-  const copy = useCopyButton(addressRef);
 
   const [largeQR, setLargeQR] = useState(false);
 
@@ -48,24 +45,12 @@ export function ReceiveToken({ identity }: Props): JSX.Element {
       <small id="addressLabel" className={styles.small}>
         {t('view_ReceiveToken_identity_address')}
       </small>
-      <p className={styles.addressLine}>
-        <input
-          className={styles.address}
-          ref={addressRef}
-          readOnly
-          value={address}
-          aria-labelledby="addressLabel"
-        />
-        {copy.supported && (
-          <button
-            className={copy.className}
-            onClick={copy.handleCopyClick}
-            type="button"
-            aria-label={copy.title}
-            title={copy.title}
-          />
-        )}
-      </p>
+
+      <CopyValue
+        value={address}
+        labelledBy="addressLabel"
+        className={styles.addressLine}
+      />
 
       <button
         className={styles.qrCodeToggle}

@@ -1,6 +1,5 @@
 declare namespace ReceiveTokenModuleCssNamespace {
   export interface IReceiveTokenModuleCss {
-    address: string;
     addressLine: string;
     container: string;
     dialog: string;
