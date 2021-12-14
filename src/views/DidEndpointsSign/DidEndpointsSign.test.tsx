@@ -4,6 +4,7 @@ import { DidUtils } from '@kiltprotocol/did';
 import { identitiesMock, render } from '../../testing/testing';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { queryFullDetailsFromIdentifier } from '../../utilities/did/did';
+import '../../components/useCopyButton/useCopyButton.mock';
 
 import { DidEndpointsSign } from './DidEndpointsSign';
 

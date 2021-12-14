@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
+import { CopyValue } from '../../components/CopyValue/CopyValue';
 import {
   getFragment,
   queryFullDetailsFromIdentifier,
@@ -156,6 +157,8 @@ export function DidEndpointsForm({
       <p className={styles.subline}>{t('view_DidEndpointsForm_subline')}</p>
 
       <IdentitySlide identity={identity} />
+
+      <CopyValue value={identity.did} label="DID" className={styles.didLine} />
 
       <ul className={styles.list}>
         {!endpoints && <div className={styles.loading} />}

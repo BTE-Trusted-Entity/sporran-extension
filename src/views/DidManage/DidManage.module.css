@@ -16,12 +16,15 @@
   margin: 0.75rem 0 0;
 }
 
+.didLine {
+  composes: line from '../../components/CopyValue/CopyValue.module.css';
+  margin-top: 1.5rem;
+}
+
 .endpoints {
   composes: link;
 
   --wide-button-icon: url('../../components/images/service-endpoint.svg');
-
-  margin-top: 1.5rem;
 }
 
 .connect {

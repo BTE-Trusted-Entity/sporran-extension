@@ -7,6 +7,7 @@ import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
+import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { generatePath, paths } from '../paths';
 
 import * as styles from './DidManage.module.css';
@@ -29,6 +30,8 @@ export function DidManage({ identity }: Props): JSX.Element | null {
       </p>
 
       <IdentitySlide identity={identity} />
+
+      <CopyValue value={identity.did} label="DID" className={styles.didLine} />
 
       <Link
         className={styles.endpoints}
