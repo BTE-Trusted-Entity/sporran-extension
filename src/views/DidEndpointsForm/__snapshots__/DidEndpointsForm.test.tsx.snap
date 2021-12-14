@@ -132,7 +132,7 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
     <a
       aria-label="Back"
       class="linkBack"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/endpoints"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did"
       title="Back"
     />
     <p

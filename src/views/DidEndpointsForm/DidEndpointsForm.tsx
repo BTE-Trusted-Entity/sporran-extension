@@ -235,7 +235,7 @@ export function DidEndpointsForm({
       <Link
         title={t('common_action_back')}
         aria-label={t('common_action_back')}
-        to={generatePath(paths.identity.did.endpoints.start, { address })}
+        to={generatePath(paths.identity.did.manage, { address })}
         className={styles.linkBack}
       />
       <Stats />
