@@ -3,7 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { IDidServiceEndpoint } from '@kiltprotocol/types';
 import { DidUtils } from '@kiltprotocol/did';
 import { last } from 'lodash-es';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { Stats } from '../../components/Stats/Stats';
@@ -151,6 +151,15 @@ export function DidEndpointsForm({
     [hasTooManyEndpoints, onAdd],
   );
 
+  const history = useHistory();
+  const handleLinkBackClick = useCallback(() => {
+    // Pretend we have been on the identity overview page before the manage DID page,
+    // because we could have been redirected to this form from submitting the transaction,
+    // and then going back from manage DID would end in a wrong place.
+    history.push(generatePath(paths.identity.overview, { address }));
+    history.push(generatePath(paths.identity.did.manage, { address }));
+  }, [address, history]);
+
   return (
     <section className={styles.container}>
       <h1 className={styles.heading}>{t('view_DidEndpointsForm_heading')}</h1>
@@ -235,10 +244,10 @@ export function DidEndpointsForm({
         ))}
       </ul>
 
-      <Link
+      <button
         title={t('common_action_back')}
         aria-label={t('common_action_back')}
-        to={generatePath(paths.identity.did.manage, { address })}
+        onClick={handleLinkBackClick}
         className={styles.linkBack}
       />
       <Stats />
