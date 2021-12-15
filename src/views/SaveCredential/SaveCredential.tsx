@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { IAttestation } from '@kiltprotocol/types';
-import cx from 'classnames';
 
 import {
   Credential,
@@ -10,6 +9,8 @@ import {
   saveCredential,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
+
+import { saveChannel } from '../../channels/saveChannel/saveChannel';
 
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 
@@ -20,6 +21,7 @@ function useSaveCredential(credential: Credential | null) {
     (async () => {
       if (credential && credential.name && credential.name.length > 0) {
         await saveCredential(credential);
+        await saveChannel.return(undefined);
       }
     })();
   }, [credential]);
@@ -70,7 +72,7 @@ export function SaveCredential(): JSX.Element | null {
         <CredentialCard credential={credential} expand buttons={false} />
       </section>
 
-      <h2 className={cx(styles.warning, { [styles.downloaded]: isDownloaded })}>
+      <h2 className={isDownloaded ? styles.downloaded : styles.warning}>
         {t('view_SaveCredential_warning')}
       </h2>
 
