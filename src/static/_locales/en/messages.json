@@ -567,11 +567,14 @@
   "view_SaveCredential_warning": {
     "message": "Please back up your credential now!"
   },
-  "view_SaveCredential_name": {
-    "message": "Give your credential a name:"
-  },
   "view_SaveCredential_CTA": {
     "message": "Back Up Credential"
+  },
+  "view_SaveCredential_done": {
+    "message": "All done! You can "
+  },
+  "view_SaveCredential_close": {
+    "message": "close this popup now"
   },
   "view_IdentityCredentials_title": {
     "message": "Your Credentials"

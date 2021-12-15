@@ -1,9 +1,7 @@
-import userEvent from '@testing-library/user-event';
 import { render, screen } from '../../testing/testing';
 import {
   getCredential,
   getCredentialDownload,
-  saveCredential,
 } from '../../utilities/credentials/credentials';
 import {
   credentialsMock,
@@ -31,12 +29,6 @@ describe('SaveCredential', () => {
     );
 
     await screen.findByText('Trusted Entity attester');
-
-    userEvent.type(
-      await screen.findByLabelText('Give your credential a name:'),
-      'Blah',
-    );
-    expect(saveCredential).toHaveBeenCalledTimes(5);
 
     expect(container).toMatchSnapshot();
   });
