@@ -20,7 +20,7 @@ import { useOnline } from '../../utilities/useOnline/useOnline';
 import * as styles from './SendToken.module.css';
 
 const noError = null;
-const nonNumberCharacters = /[^0-9,.]/g;
+const nonNumberCharacters = /[^0-9,.\u066C\u2019\u202F]/g;
 const KILT_POWER = 15;
 const minimum = new BN(0.01e15);
 let existential: BN | undefined;

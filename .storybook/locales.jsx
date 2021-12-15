@@ -10,6 +10,7 @@ export const localeGlobalTypes = {
       items: [
         { value: 'en', left: '🇬🇧️', title: 'English' },
         { value: 'de', left: '🇩🇪️', title: 'Deutsch' },
+        { value: 'fr', left: '🇫🇷️', title: 'Français' },
       ],
     },
   },
