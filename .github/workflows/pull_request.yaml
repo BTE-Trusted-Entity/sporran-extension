@@ -28,6 +28,9 @@ jobs:
       - name: Package extension
         run: yarn package
 
+      - name: Rename artifact as PR
+        run: cd dist/web-ext-artifacts/ && mv * $(ls | sed 's/-/-PR-/')
+
       - name: Publish on GitHub
         uses: actions/upload-artifact@v2
         with:

@@ -33,6 +33,9 @@ jobs:
       - name: Package extension
         run: yarn package
 
+      - name: Rename artifact as internal
+        run: cd dist/web-ext-artifacts/ && mv * $(ls | sed 's/-/-internal-/')
+
       - name: Publish on GitHub
         uses: actions/upload-artifact@v2
         with:
