@@ -24,6 +24,9 @@ jobs:
       - name: Package extension
         run: yarn package
 
+      - name: Rename artifact as public
+        run: cd dist/web-ext-artifacts/ && mv * $(ls | sed 's/-/-public-/')
+
       - name: Publish on GitHub
         uses: actions/upload-artifact@v2
         with:
