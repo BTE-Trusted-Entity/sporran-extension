@@ -4,9 +4,9 @@ import { IAttestation } from '@kiltprotocol/types';
 
 import {
   Credential,
-  getCredential,
   getCredentialDownload,
   saveCredential,
+  useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 
@@ -16,7 +16,7 @@ import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 
 import * as styles from './SaveCredential.module.css';
 
-function useSaveCredential(credential: Credential | null) {
+function useSaveCredential(credential: Credential | undefined) {
   useEffect(() => {
     (async () => {
       if (credential && credential.name && credential.name.length > 0) {
@@ -32,21 +32,21 @@ export function SaveCredential(): JSX.Element | null {
 
   const { claimHash } = usePopupData<IAttestation>();
 
-  const [credential, setCredential] = useState<Credential | null>(null);
+  const credentials = useIdentityCredentials();
+
+  const [credential, setCredential] = useState<Credential>();
 
   useSaveCredential(credential);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const savedCredential = await getCredential(claimHash);
-        setCredential({ ...savedCredential, status: 'attested' });
-      } catch (error) {
-        console.error(error);
-        // TODO: decide on the interface for an unknown credential
-      }
-    })();
-  }, [claimHash]);
+    const credential = credentials.find(
+      (credential) => credential.request.rootHash === claimHash,
+    );
+    if (credential) {
+      setCredential({ ...credential, status: 'attested' });
+    }
+    // TODO: decide on interface for an unknown credential
+  }, [claimHash, credentials]);
 
   const [isDownloaded, setIsDownloaded] = useState(false);
 
