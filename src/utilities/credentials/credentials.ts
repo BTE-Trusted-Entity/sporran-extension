@@ -43,15 +43,6 @@ export async function saveCredential(credential: Credential): Promise<void> {
   await saveList(list);
 }
 
-export async function getCredential(hash: string): Promise<Credential> {
-  const key = toKey(hash);
-  const credential = (await storage.get(key))[key];
-  if (!credential) {
-    throw new Error(`Unknown credential ${hash}`);
-  }
-  return credential;
-}
-
 export async function getCredentials(keys: string[]): Promise<Credential[]> {
   const result = await storage.get(keys);
   const credentials = pick(result, keys);
