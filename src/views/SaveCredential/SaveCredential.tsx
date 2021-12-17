@@ -45,6 +45,7 @@ export function SaveCredential(): JSX.Element | null {
     if (credential) {
       setCredential({ ...credential, status: 'attested' });
     }
+    // TODO: decide on interface for an unknown credential
   }, [claimHash, credentials]);
 
   const [isDownloaded, setIsDownloaded] = useState(false);
