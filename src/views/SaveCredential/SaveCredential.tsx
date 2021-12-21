@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { IAttestation } from '@kiltprotocol/types';
 
@@ -7,6 +7,8 @@ import {
   useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
+
+import { saveChannel } from '../../channels/saveChannel/saveChannel';
 
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 
@@ -31,6 +33,12 @@ export function SaveCredential(): JSX.Element | null {
 
   const handleClose = useCallback(() => {
     window.close();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      await saveChannel.return(undefined);
+    })();
   }, []);
 
   if (credentials.length === 0) {
