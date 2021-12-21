@@ -5,7 +5,6 @@ import { IAttestation } from '@kiltprotocol/types';
 import {
   getCredentialDownload,
   useIdentityCredentials,
-  usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 
@@ -23,8 +22,6 @@ export function SaveCredential(): JSX.Element | null {
   const credential = credentials.find(
     (credential) => credential.request.rootHash === claimHash,
   );
-
-  usePendingCredentialCheck(credential);
 
   const [isDownloaded, setIsDownloaded] = useState(false);
 
