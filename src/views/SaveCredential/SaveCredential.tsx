@@ -1,11 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { IAttestation } from '@kiltprotocol/types';
 
 import {
-  Credential,
   getCredentialDownload,
-  saveCredential,
   useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
@@ -16,17 +14,6 @@ import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 
 import * as styles from './SaveCredential.module.css';
 
-function useSaveCredential(credential: Credential | undefined) {
-  useEffect(() => {
-    (async () => {
-      if (credential && credential.name && credential.name.length > 0) {
-        await saveCredential(credential);
-        await saveChannel.return(undefined);
-      }
-    })();
-  }, [credential]);
-}
-
 export function SaveCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
@@ -34,19 +21,9 @@ export function SaveCredential(): JSX.Element | null {
 
   const credentials = useIdentityCredentials();
 
-  const [credential, setCredential] = useState<Credential>();
-
-  useSaveCredential(credential);
-
-  useEffect(() => {
-    const credential = credentials.find(
-      (credential) => credential.request.rootHash === claimHash,
-    );
-    if (credential) {
-      setCredential({ ...credential, status: 'attested' });
-    }
-    // TODO: decide on interface for an unknown credential
-  }, [claimHash, credentials]);
+  const credential = credentials.find(
+    (credential) => credential.request.rootHash === claimHash,
+  );
 
   const [isDownloaded, setIsDownloaded] = useState(false);
 
@@ -58,8 +35,19 @@ export function SaveCredential(): JSX.Element | null {
     window.close();
   }, []);
 
-  if (!credential) {
+  useEffect(() => {
+    (async () => {
+      await saveChannel.return(undefined);
+    })();
+  }, []);
+
+  if (credentials.length === 0) {
     return null; // storage data pending
+  }
+
+  if (!credential) {
+    // TODO: decide on interface for an unknown credential
+    return null;
   }
 
   const download = getCredentialDownload(credential);
