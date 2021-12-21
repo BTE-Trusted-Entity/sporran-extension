@@ -78,9 +78,11 @@ export function useIdentityCredentials(did?: IDidDetails['did']): Credential[] {
   }, [all, did]);
 }
 
-export function usePendingCredentialCheck(credential: Credential): void {
+export function usePendingCredentialCheck(
+  credential: Credential | undefined,
+): void {
   useEffect(() => {
-    if (credential.status !== 'pending') {
+    if (!credential || credential.status !== 'pending') {
       return;
     }
     (async () => {
