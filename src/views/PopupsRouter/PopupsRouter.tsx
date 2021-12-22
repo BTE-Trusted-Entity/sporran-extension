@@ -15,7 +15,7 @@ export function PopupsRouter(): JSX.Element {
       <Route path={paths.popup.save}>
         <SaveCredential />
       </Route>
-      <Route path={paths.popup.share}>
+      <Route path={paths.popup.share.start}>
         <ShareCredential />
       </Route>
       <Route path={paths.popup.sign}>

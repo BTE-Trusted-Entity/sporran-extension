@@ -1,5 +1,6 @@
+import { useRef, useEffect, useState, RefObject } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { sortBy } from 'lodash-es';
 
 import { Identity } from '../../utilities/identities/types';
@@ -7,16 +8,17 @@ import { useIdentities } from '../../utilities/identities/identities';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { ShareInput } from '../../channels/shareChannel/types';
+
 import { paths } from '../paths';
 
 import { useAddressBalance } from '../../components/Balance/Balance';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { ShareCredentialCard } from '../../components/CredentialCard/ShareCredentialCard';
 import { Stats } from '../../components/Stats/Stats';
-
-import * as styles from './ShareCredentialSelect.module.css';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { Selected } from '../ShareCredential/ShareCredential';
+
+import * as styles from './ShareCredentialSelect.module.css';
 
 function MatchingIdentityCredentials({
   identity,
@@ -76,6 +78,20 @@ function MatchingIdentityCredentials({
   );
 }
 
+function useHasChildNodes(ref: RefObject<HTMLElement | null>) {
+  const [hasMatchingCredentials, setHasMatchingCredentials] =
+    useState<boolean>();
+
+  useEffect(() => {
+    const hasChildren = ref.current?.hasChildNodes();
+    console.log('current: ', ref.current);
+    console.log('has Children: ', hasChildren);
+    setHasMatchingCredentials(hasChildren);
+  }, [ref]);
+
+  return hasMatchingCredentials;
+}
+
 interface Props {
   onCancel: () => void;
   onSelect: (value: Selected) => void;
@@ -89,7 +105,13 @@ export function ShareCredentialSelect({
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
+  const { search } = useLocation();
+
   const identities = useIdentities().data;
+
+  const ref = useRef(null);
+
+  const hasMatchingCredentials = useHasChildNodes(ref);
 
   if (!identities) {
     return null; // storage data pending
@@ -106,7 +128,29 @@ export function ShareCredentialSelect({
         {t('view_ShareCredentialSelect_subline')}
       </p>
 
-      <form className={styles.allCredentials}>
+      {!hasMatchingCredentials && (
+        <section className={styles.noCredentials}>
+          <p className={styles.info}>
+            {t('view_ShareCredentialSelect_no_credentials')}
+          </p>
+
+          <a
+            href="https://socialkyc.io/"
+            target="_blank"
+            rel="noreferrer"
+            className={styles.explainerLink}
+          >
+            {t('view_ShareCredentialSelect_explainer')}
+          </a>
+        </section>
+      )}
+
+      <section
+        className={styles.allCredentials}
+        ref={ref}
+        id="allCredentials"
+        hidden={!hasMatchingCredentials}
+      >
         {identitiesList.map((identity) => (
           <MatchingIdentityCredentials
             key={identity.address}
@@ -115,16 +159,16 @@ export function ShareCredentialSelect({
             selected={selected}
           />
         ))}
-      </form>
+      </section>
 
       <p className={styles.buttonsLine}>
         <button type="button" className={styles.cancel} onClick={onCancel}>
           {t('common_action_cancel')}
         </button>
         <Link
-          to={paths.popup.shareSign}
+          to={paths.popup.share.sign + search}
           className={styles.next}
-          aria-disabled={!selected}
+          aria-disabled={!selected || selected.credential.status !== 'attested'}
         >
           {t('view_ShareCredentialSelect_next')}
         </Link>

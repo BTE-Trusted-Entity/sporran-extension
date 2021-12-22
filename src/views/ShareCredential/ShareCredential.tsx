@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import { Identity } from '../../utilities/identities/types';
 import { Credential } from '../../utilities/credentials/credentials';
 
 import { shareChannel } from '../../channels/shareChannel/shareChannel';
@@ -8,7 +9,6 @@ import { paths } from '../paths';
 
 import { ShareCredentialSign } from '../ShareCredentialSign/ShareCredentialSign';
 import { ShareCredentialSelect } from '../ShareCredentialSelect/ShareCredentialSelect';
-import { Identity } from '../../utilities/identities/types';
 
 export interface Selected {
   credential: Credential;
@@ -28,10 +28,12 @@ export function ShareCredential(): JSX.Element | null {
 
   return (
     <Switch>
-      {/* <Route path={paths.popup.shareSign}>
-          <ShareCredentialSign selected={Selected} />
-        </Route> */}
-      <Route path={paths.popup.share}>
+      <Route path={paths.popup.share.sign}>
+        {selected && (
+          <ShareCredentialSign selected={selected} onCancel={handleCancel} />
+        )}
+      </Route>
+      <Route path={paths.popup.share.start}>
         <ShareCredentialSelect
           onCancel={handleCancel}
           onSelect={handleSelect}

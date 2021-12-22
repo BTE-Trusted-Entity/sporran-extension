@@ -13,7 +13,7 @@ export function Collapsed(): JSX.Element {
         <button type="button" className={styles.expand}>
           <section className={styles.collapsedCard}>
             <h4 className={styles.collapsedName}>Name</h4>
-            <p className={styles.collapsedFirstProp}>Value</p>
+            <p className={styles.collapsedValue}>Value</p>
           </section>
         </button>
       </li>

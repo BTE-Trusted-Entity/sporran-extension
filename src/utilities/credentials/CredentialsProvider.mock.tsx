@@ -1,4 +1,5 @@
 import { IAttestation } from '@kiltprotocol/types';
+import { ShareInput } from '../../channels/shareChannel/types';
 import { Credential } from './credentials';
 import { CredentialsContext } from './CredentialsContext';
 
@@ -462,6 +463,18 @@ export const mockAttestation: IAttestation = {
   owner: 'did:kilt:light:004rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
   delegationId: null,
   revoked: false,
+};
+
+export const mockRequestCredential: ShareInput = {
+  credentialRequest: {
+    cTypes: [
+      {
+        cTypeHash: credentialsMock[0].request.claim.cTypeHash,
+      },
+    ],
+    challenge: 'PASS',
+  },
+  verifierDid: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
 };
 
 export function CredentialsProviderMock({

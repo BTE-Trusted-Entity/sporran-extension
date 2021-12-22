@@ -1,6 +1,10 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
-import { RequestForAttestation, Attestation } from '@kiltprotocol/core';
+import {
+  RequestForAttestation,
+  Attestation,
+  Credential,
+} from '@kiltprotocol/core';
 import { DefaultResolver } from '@kiltprotocol/did';
 import {
   IDidResolvedDetails,
@@ -8,10 +12,11 @@ import {
   MessageBodyType,
 } from '@kiltprotocol/types';
 
-import { Identity } from '../../utilities/identities/types';
-import { Credential } from '../../utilities/credentials/credentials';
 import { getIdentityDidCrypto } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
+
+import { ShareInput } from '../../channels/shareChannel/types';
+import { shareChannel } from '../../channels/shareChannel/shareChannel';
 
 import {
   PasswordField,
@@ -19,22 +24,19 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
-import { ShareInput } from '../../channels/shareChannel/types';
-import { shareChannel } from '../../channels/shareChannel/shareChannel';
+import { Selected } from '../ShareCredential/ShareCredential';
 
 import * as styles from './ShareCredentialSign.module.css';
 
 interface Props {
-  identity: Identity;
-  credential: Credential;
+  selected: Selected;
   onCancel: () => void;
 }
 
 export function ShareCredentialSign({
-  identity,
-  credential,
+  selected,
   onCancel,
-}: Props): JSX.Element {
+}: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const data = usePopupData<ShareInput>();
@@ -42,6 +44,8 @@ export function ShareCredentialSign({
   const { credentialRequest, verifierDid } = data;
 
   const { challenge } = credentialRequest;
+
+  const { credential, identity, sharedProps } = selected;
 
   const [error, setError] = useState<string | null>(null);
 
@@ -52,7 +56,7 @@ export function ShareCredentialSign({
       event.preventDefault();
 
       const { address } = identity;
-      const password = await passwordField.get(event);
+      const { password } = await passwordField.get(event);
       const { encrypt, keystore, didDetails } = await getIdentityDidCrypto(
         address,
         password,
@@ -64,14 +68,23 @@ export function ShareCredentialSign({
       const attestation = await Attestation.query(request.rootHash);
 
       if (!attestation) {
-        setError(t('view_ShareCredential_error'));
+        setError(t('view_ShareCredentialSign_error'));
         return;
       }
 
-      const attestedClaim = [{ request, attestation }];
+      const credentialInstance = Credential.fromCredential({
+        request,
+        attestation,
+      });
+
+      const presentation = await credentialInstance.createPresentation({
+        selectedAttributes: sharedProps,
+        signer: keystore,
+        claimerDid: didDetails,
+      });
 
       const credentialsBody: ISubmitCredential = {
-        content: attestedClaim,
+        content: [presentation],
         type: MessageBodyType.SUBMIT_CREDENTIAL,
       };
 
@@ -87,12 +100,49 @@ export function ShareCredentialSign({
       await shareChannel.return(message);
       window.close();
     },
-    [identity, credential, passwordField, challenge, verifierDid, t],
+    [
+      credential,
+      identity,
+      passwordField,
+      challenge,
+      verifierDid,
+      t,
+      sharedProps,
+    ],
   );
 
+  if (!selected) {
+    return null;
+  }
+
   return (
-    <form>
+    <form className={styles.container} onSubmit={handleSubmit}>
+      <h1 className={styles.heading}>
+        {t('view_ShareCredentialSign_heading')}
+      </h1>
+      <p className={styles.subline}>{t('view_ShareCredentialSign_subline')}</p>
+
       <IdentitySlide identity={identity} />
+
+      <section className={styles.detailsContainer}>
+        <dl className={styles.details}>
+          <div className={styles.name}>
+            <dt className={styles.detailName}>
+              {t('view_ShareCredentialSign_name')}
+            </dt>
+            <dd className={styles.detailValue}>{credential.name}</dd>
+          </div>
+
+          {sharedProps.map((sharedProp) => (
+            <div key={sharedProp} className={styles.detail}>
+              <dt className={styles.detailName}>{sharedProp}</dt>
+              <dd className={styles.detailValue}>
+                {credential.request.claim.contents[sharedProp]}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
 
       <PasswordField identity={identity} password={passwordField} />
 
@@ -105,7 +155,7 @@ export function ShareCredentialSign({
           className={styles.submit}
           disabled={passwordField.isEmpty}
         >
-          {t('view_ShareCredential_CTA')}
+          {t('view_ShareCredentialSign_CTA')}
         </button>
       </p>
 

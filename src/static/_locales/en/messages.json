@@ -591,33 +591,6 @@
   "view_IdentityCredentials_explainer": {
     "message": "Get Credentials"
   },
-  "view_ShareCredential_share": {
-    "message": "Share credential"
-  },
-  "view_ShareCredential_heading": {
-    "message": "Your Credentials"
-  },
-  "view_ShareCredential_subline": {
-    "message": "Pick a credential to share"
-  },
-  "view_ShareCredential_name": {
-    "message": "Name"
-  },
-  "view_ShareCredential_ctype": {
-    "message": "C-Type"
-  },
-  "view_ShareCredential_attester": {
-    "message": "Attester"
-  },
-  "view_ShareCredential_valid": {
-    "message": "Valid"
-  },
-  "view_ShareCredential_CTA": {
-    "message": "Share"
-  },
-  "view_ShareCredential_error": {
-    "message": "The selected credential has not been attested."
-  },
   "view_ShareCredentialSelect_heading": {
     "message": "Select a Credential"
   },
@@ -626,6 +599,27 @@
   },
   "view_ShareCredentialSelect_next": {
     "message": "Next"
+  },
+  "view_ShareCredentialSelect_no_credentials": {
+    "message": "No credentials available"
+  },
+  "view_ShareCredentialSelect_explainer": {
+    "message": "Get Credentials"
+  },
+  "view_ShareCredentialSign_heading": {
+    "message": "Share Credential"
+  },
+  "view_ShareCredentialSign_subline": {
+    "message": "Check the information you’re about to share"
+  },
+  "view_ShareCredentialSign_name": {
+    "message": "Credential name"
+  },
+  "view_ShareCredentialSign_CTA": {
+    "message": "Share"
+  },
+  "view_ShareCredentialSign_error": {
+    "message": "The selected credential has not been attested."
   },
   "view_AppSettings_heading": {
     "message": "Set Custom Endpoint"

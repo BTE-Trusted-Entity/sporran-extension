@@ -2,7 +2,16 @@ declare namespace ShareCredentialSignModuleCssNamespace {
   export interface IShareCredentialSignModuleCss {
     buttonsLine: string;
     cancel: string;
+    container: string;
     errorTooltip: string;
+    detail: string;
+    detailName: string;
+    details: string;
+    detailsContainer: string;
+    detailValue: string;
+    heading: string;
+    name: string;
+    subline: string;
     submit: string;
   }
 }

@@ -9,8 +9,11 @@ declare namespace ShareCredentialSelectModuleCssNamespace {
     identity: string;
     identityLine: string;
     identityCredentials: string;
+    info: string;
+    explainerLink: string;
     list: string;
     next: string;
+    noCredentials: string;
     subline: string;
   }
 }

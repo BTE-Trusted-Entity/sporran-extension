@@ -18,11 +18,15 @@ export function useInitialEntries(): string[] | undefined {
       return;
     }
 
-    const path = paths.popup[action as PopupAction];
+    const path =
+      action === 'share'
+        ? paths.popup.share.start
+        : paths.popup[action as PopupAction];
 
     params.delete('action');
 
     const internalUri = `${path}?${params.toString()}`;
+    console.log('internalUri: ', JSON.stringify(internalUri));
     return [internalUri];
   }, []);
 }
