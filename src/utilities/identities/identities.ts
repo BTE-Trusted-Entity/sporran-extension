@@ -3,7 +3,7 @@ import useSWR, { mutate, SWRResponse } from 'swr';
 import { Keyring } from '@polkadot/keyring';
 import { KeyringPair } from '@polkadot/keyring/types';
 import {
-  naclBoxKeypairFromSecret,
+  naclBoxPairFromSecret,
   naclSeal,
   mnemonicToMiniSecret,
 } from '@polkadot/util-crypto';
@@ -124,7 +124,7 @@ interface IdentityDidCrypto {
 
 function deriveDidKeys(identityKeypair: KeyringPair) {
   const authenticationKey = identityKeypair.derive('//did//0');
-  const encryptionKeypair = naclBoxKeypairFromSecret(
+  const encryptionKeypair = naclBoxPairFromSecret(
     identityKeypair
       .derive('//did//keyAgreement//0')
       .encryptMessage(
