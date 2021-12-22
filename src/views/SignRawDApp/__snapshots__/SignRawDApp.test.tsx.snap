@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignRawDApp should render 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Sign message
+    </h1>
+    <div
+      class="avatar"
+    >
+      Identicon
+    </div>
+    <h2
+      class="identity"
+    >
+      KILT Identity 1
+    </h2>
+    <p
+      class="addressLine"
+    >
+      <input
+        aria-label="KILT Identity 1"
+        class="input"
+        readonly=""
+        value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      />
+      <button
+        aria-label="copy to clipboard"
+        class="copy"
+        title="copy to clipboard"
+        type="button"
+      />
+    </p>
+    <dl
+      class="details"
+    >
+      <dt
+        class="detailName"
+      >
+        from
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com"
+      >
+        extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com
+      </dd>
+      <dt
+        class="detailName"
+      >
+        bytes
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="0xCAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFE"
+      >
+        0xCAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFE
+      </dd>
+    </dl>
+    <p
+      class="resetLine"
+    >
+      <label
+        class="passwordLabel"
+        for="password"
+      >
+        Sign with password:
+      </label>
+    </p>
+    <p
+      class="passwordLine"
+    >
+      <input
+        class="password"
+        id="password"
+        name="password"
+        type="password"
+        value=""
+      />
+      <button
+        aria-label="Show"
+        class="show"
+        title="Show"
+        type="button"
+      />
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+    <label
+      class="rememberLabel"
+    >
+      <span>
+        Remember password for the next 15 minutes
+      </span>
+      <input
+        class="remember"
+        name="remember"
+        type="checkbox"
+      />
+      <span />
+    </label>
+    <p
+      class="buttonsLine"
+    >
+      <button
+        class="reject"
+        type="button"
+      >
+        Reject
+      </button>
+      <button
+        class="submit"
+        type="submit"
+      >
+        Sign the Message
+      </button>
+    </p>
+  </form>
+</div>
+`;

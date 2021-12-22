@@ -61,6 +61,7 @@ export const paths = {
       sign: '/popup/share/sign',
     },
     sign: '/popup/sign',
+    signRaw: '/popup/signRaw',
     signDid: '/identity/:address/did/sign',
   },
 };
