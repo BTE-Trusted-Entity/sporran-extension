@@ -470,11 +470,23 @@ export const mockRequestCredential: ShareInput = {
     cTypes: [
       {
         cTypeHash: credentialsMock[0].request.claim.cTypeHash,
+        requiredProperties: ['Email'],
       },
     ],
     challenge: 'PASS',
   },
   verifierDid: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+};
+
+export const mockUnknownCType = {
+  ...mockRequestCredential,
+  credentialRequest: {
+    cTypes: [
+      {
+        cTypeHash: 'Some unknown cType',
+      },
+    ],
+  },
 };
 
 export function CredentialsProviderMock({

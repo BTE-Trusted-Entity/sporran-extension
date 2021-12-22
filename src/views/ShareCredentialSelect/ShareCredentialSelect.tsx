@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, RefObject } from 'react';
+import { useState, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useLocation } from 'react-router-dom';
 import { sortBy } from 'lodash-es';
@@ -24,10 +24,12 @@ function MatchingIdentityCredentials({
   identity,
   onSelect,
   selected,
+  match,
 }: {
   identity: Identity;
   onSelect: (value: Selected) => void;
   selected?: Selected;
+  match: () => void;
 }): JSX.Element | null {
   const data = usePopupData<ShareInput>();
 
@@ -43,6 +45,12 @@ function MatchingIdentityCredentials({
       cTypeHashes.includes(credential.request.claim.cTypeHash) &&
       credential.request.claim.owner === identity.did,
   );
+
+  useEffect(() => {
+    if (matchingCredentials.length > 0) {
+      match();
+    }
+  }, [matchingCredentials, match]);
 
   const balance = useAddressBalance(identity.address);
 
@@ -78,20 +86,6 @@ function MatchingIdentityCredentials({
   );
 }
 
-function useHasChildNodes(ref: RefObject<HTMLElement | null>) {
-  const [hasMatchingCredentials, setHasMatchingCredentials] =
-    useState<boolean>();
-
-  useEffect(() => {
-    const hasChildren = ref.current?.hasChildNodes();
-    console.log('current: ', ref.current);
-    console.log('has Children: ', hasChildren);
-    setHasMatchingCredentials(hasChildren);
-  }, [ref]);
-
-  return hasMatchingCredentials;
-}
-
 interface Props {
   onCancel: () => void;
   onSelect: (value: Selected) => void;
@@ -109,9 +103,11 @@ export function ShareCredentialSelect({
 
   const identities = useIdentities().data;
 
-  const ref = useRef(null);
+  const [hasSome, setHasSome] = useState(false);
 
-  const hasMatchingCredentials = useHasChildNodes(ref);
+  function match() {
+    setHasSome(true);
+  }
 
   if (!identities) {
     return null; // storage data pending
@@ -128,7 +124,7 @@ export function ShareCredentialSelect({
         {t('view_ShareCredentialSelect_subline')}
       </p>
 
-      {!hasMatchingCredentials && (
+      {!hasSome && (
         <section className={styles.noCredentials}>
           <p className={styles.info}>
             {t('view_ShareCredentialSelect_no_credentials')}
@@ -147,9 +143,8 @@ export function ShareCredentialSelect({
 
       <section
         className={styles.allCredentials}
-        ref={ref}
         id="allCredentials"
-        hidden={!hasMatchingCredentials}
+        hidden={!hasSome}
       >
         {identitiesList.map((identity) => (
           <MatchingIdentityCredentials
@@ -157,6 +152,7 @@ export function ShareCredentialSelect({
             identity={identity}
             onSelect={onSelect}
             selected={selected}
+            match={match}
           />
         ))}
       </section>
