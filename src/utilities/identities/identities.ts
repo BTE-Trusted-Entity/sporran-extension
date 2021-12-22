@@ -3,7 +3,7 @@ import useSWR, { mutate, SWRResponse } from 'swr';
 import { Keyring } from '@polkadot/keyring';
 import { KeyringPair } from '@polkadot/keyring/types';
 import {
-  naclBoxKeypairFromSecret,
+  naclBoxPairFromSecret,
   naclSeal,
   mnemonicToMiniSecret,
 } from '@polkadot/util-crypto';
@@ -16,7 +16,12 @@ import {
   NaclBoxCapable,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
-import { LightDidDetails, DidUtils, DidChain } from '@kiltprotocol/did';
+import {
+  LightDidDetails,
+  DidUtils,
+  DidChain,
+  DefaultResolver,
+} from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 import { map, max, memoize } from 'lodash-es';
 
@@ -124,7 +129,7 @@ interface IdentityDidCrypto {
 
 function deriveDidKeys(identityKeypair: KeyringPair) {
   const authenticationKey = identityKeypair.derive('//did//0');
-  const encryptionKeypair = naclBoxKeypairFromSecret(
+  const encryptionKeypair = naclBoxPairFromSecret(
     identityKeypair
       .derive('//did//keyAgreement//0')
       .encryptMessage(
@@ -163,9 +168,31 @@ export function getKeystoreFromKeypair(
   };
 }
 
+async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
+  const identities = await getIdentities();
+  const identity = identities[identityKeypair.address];
+
+  const { type } = DidUtils.parseDidUrl(identity.did);
+  if (type !== 'light') {
+    return;
+  }
+
+  try {
+    // If this light DID was created and stored using SDK@0.24.0 then its keys are serialized using base64,
+    // resulting in an invalid URI, so resolving would throw an exception.
+    await DefaultResolver.resolveDoc(identity.did);
+  } catch {
+    // We re-create the invalid DID from scratch and update its URI in the identity.
+    const { did } = getLightDidFromKeypair(identityKeypair);
+    await saveIdentity({ ...identity, did });
+  }
+}
+
 export async function getIdentityCryptoFromKeypair(
   identityKeypair: KeyringPair,
 ): Promise<IdentityDidCrypto> {
+  await fixLightDidBase64Encoding(identityKeypair);
+
   const { authenticationKey } = deriveDidKeys(identityKeypair);
 
   const identities = await getIdentities();

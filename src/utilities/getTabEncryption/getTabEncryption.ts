@@ -2,8 +2,8 @@ import { Runtime } from 'webextension-polyfill-ts';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { Keypair } from '@polkadot/util-crypto/types';
 import {
-  naclKeypairFromRandom,
-  naclBoxKeypairFromSecret,
+  ed25519PairFromRandom,
+  naclBoxPairFromSecret,
   naclOpen,
   naclSeal,
 } from '@polkadot/util-crypto';
@@ -79,7 +79,7 @@ export async function getTabEncryption(
   }
 
   const encryptionKey = {
-    ...naclBoxKeypairFromSecret(naclKeypairFromRandom().secretKey),
+    ...naclBoxPairFromSecret(ed25519PairFromRandom().secretKey),
     type: 'x25519',
   };
   const authenticationKey = makeKeyring()
