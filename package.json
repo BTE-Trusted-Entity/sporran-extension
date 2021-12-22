@@ -46,7 +46,7 @@
     "@kiltprotocol/did": "^0.24.1",
     "@kiltprotocol/messaging": "^0.24.1",
     "@kiltprotocol/types": "^0.24.1",
-    "@kiltprotocol/utils": "^0.24.1",
+    "@kiltprotocol/utils": "^0.24.2",
     "@polkadot/extension-inject": "^0.41.2",
     "@polkadot/keyring": "^8.2.2",
     "@polkadot/types": "^6.12.1",
