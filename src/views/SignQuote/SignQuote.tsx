@@ -125,7 +125,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       await claimChannel.return(message);
       window.close();
     },
-    [identity, cType, data, passwordField, credentials],
+    [cType, data, passwordField, credentials],
   );
 
   return (
