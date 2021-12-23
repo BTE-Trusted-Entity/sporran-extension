@@ -948,7 +948,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.16.5"
 
-"@babel/plugin-transform-typescript@^7.16.0":
+"@babel/plugin-transform-typescript@^7.16.1":
   version "7.16.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.16.1.tgz#cc0670b2822b0338355bc1b3d2246a42b8166409"
   integrity sha512-NO4XoryBng06jjw/qWEU2LhcLJr1tWkhpMam/H4eas/CDKMX/b2/Ylb6EI256Y7+FVPCawwSM1rrJNOpDiz+Lg==
@@ -1084,14 +1084,14 @@
     "@babel/plugin-transform-react-jsx-development" "^7.14.5"
     "@babel/plugin-transform-react-pure-annotations" "^7.14.5"
 
-"@babel/preset-typescript@^7.12.7", "@babel/preset-typescript@^7.16.0":
-  version "7.16.0"
-  resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.16.0.tgz#b0b4f105b855fb3d631ec036cdc9d1ffd1fa5eac"
-  integrity sha512-txegdrZYgO9DlPbv+9QOVpMnKbOtezsLHWsnsRF4AjbSIsVaujrq1qg8HK0mxQpWv0jnejt0yEoW1uWpvbrDTg==
+"@babel/preset-typescript@^7.12.7", "@babel/preset-typescript@^7.16.5":
+  version "7.16.5"
+  resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.16.5.tgz#b86a5b0ae739ba741347d2f58c52f52e63cf1ba1"
+  integrity sha512-lmAWRoJ9iOSvs3DqOndQpj8XqXkzaiQs50VG/zESiI9D3eoZhGriU675xNCr0UwvsuXrhMAGvyk1w+EVWF3u8Q==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.14.5"
+    "@babel/helper-plugin-utils" "^7.16.5"
     "@babel/helper-validator-option" "^7.14.5"
-    "@babel/plugin-transform-typescript" "^7.16.0"
+    "@babel/plugin-transform-typescript" "^7.16.1"
 
 "@babel/register@^7.12.1":
   version "7.14.5"
@@ -1751,10 +1751,10 @@
     eventemitter3 "^4.0.7"
     rxjs "^7.4.0"
 
-"@polkadot/extension-inject@^0.41.2":
-  version "0.41.2"
-  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.41.2.tgz#2ff17c475f6b281f3a323b2de888de05dcc03547"
-  integrity sha512-8NDq/C0u/SK755XcReg4Bhmb+KiK+dPt0n/0UEOURJnV7fNTOjQXpzIsIm+mKMFPi/uBuinbzaNID74xVqzRJg==
+"@polkadot/extension-inject@^0.42.2":
+  version "0.42.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/extension-inject/-/extension-inject-0.42.2.tgz#43c8533d75e85fa894eb2c73527077f7e7df12cd"
+  integrity sha512-vRr/xeOr+D4d5ON7LqG1z6AGaDAeib7ymDpDQrOy3EQ+i4UGjDBx9ciI4C6fdP0Qh9irU/6us5ggRbG3zBjkog==
   dependencies:
     "@babel/runtime" "^7.16.3"
 
@@ -1820,12 +1820,12 @@
     "@polkadot/util-crypto" "^8.1.2"
     rxjs "^7.4.0"
 
-"@polkadot/ui-shared@^0.87.3":
-  version "0.87.3"
-  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-0.87.3.tgz#ca291a2adecb13123c7ed86d656f581cf46179a2"
-  integrity sha512-yWmsVMXXQZV0rYbiXdbpPAcjJ2WiN/9I3TAqmSkeOI/Gcs1ej4qV89kkdBJc8lBHomNSuaoDPd87P57q1FRLyw==
+"@polkadot/ui-shared@^0.87.6":
+  version "0.87.6"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-0.87.6.tgz#b8af0368ff4632946a6c3f72ab1238b576f0386a"
+  integrity sha512-LxYXK9xAa1MTL4RxryC4f0T27yfz24FT2Ist6eYG+cTq4oKnsmFZATh4kwKVRH1nESz7aXUtM8ks6M10dPcasw==
   dependencies:
-    "@babel/runtime" "^7.16.3"
+    "@babel/runtime" "^7.16.5"
     color "^3.2.1"
 
 "@polkadot/util-crypto@8.2.2", "@polkadot/util-crypto@^8.1.2", "@polkadot/util-crypto@^8.2.2":
@@ -3094,10 +3094,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@>=16.9.0", "@types/react@^17.0.37":
-  version "17.0.37"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.37.tgz#6884d0aa402605935c397ae689deed115caad959"
-  integrity sha512-2FS1oTqBGcH/s0E+CjrCCR9+JMpsu9b69RTFO+40ua43ZqP5MmQ4iUde/dMjWR909KxZwmOQIFq6AV6NjEG5xg==
+"@types/react@*", "@types/react@>=16.9.0", "@types/react@^17.0.38":
+  version "17.0.38"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.38.tgz#f24249fefd89357d5fa71f739a686b8d7c7202bd"
+  integrity sha512-SI92X1IA+FMnP3qM5m4QReluXzhcmovhZnLNm3pyeQlooi02qI7sLiepEYqT678uNiyc25XfCqxREFpy3W7YhQ==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -11662,10 +11662,10 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@*, prettier@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.0.tgz#a6370e2d4594e093270419d9cc47f7670488f893"
-  integrity sha512-FM/zAKgWTxj40rH03VxzIPdXmj39SwSjwG0heUcNFwI+EMZJnY93yAiKXM3dObIKAM5TA88werc8T/EwhB45eg==
+prettier@*, prettier@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
+  integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==
 
 prettier@~2.2.1:
   version "2.2.1"
