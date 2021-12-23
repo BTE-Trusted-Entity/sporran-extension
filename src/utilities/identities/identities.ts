@@ -29,9 +29,11 @@ import {
   loadEncrypted,
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
-import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
+
 import { getDidDetails, parseDidUrl } from '../did/did';
 import { storage } from '../storage/storage';
+
+import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
 import { IDENTITIES_KEY, getIdentities } from './getIdentities';
 
 import { Identity, IdentitiesMap } from './types';

@@ -5,6 +5,7 @@ import { render, screen } from '../../testing/testing';
 import { IdentitiesProviderMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import { waitForHasSavedPasswords } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
+
 import { Settings } from './Settings';
 
 describe('Settings', () => {

@@ -2,6 +2,8 @@ import { useCallback, useState, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { IAttestation } from '@kiltprotocol/types';
 
+import * as styles from './SaveCredential.module.css';
+
 import {
   getCredentialDownload,
   useIdentityCredentials,
@@ -11,8 +13,6 @@ import { usePopupData } from '../../utilities/popups/usePopupData';
 import { saveChannel } from '../../channels/saveChannel/saveChannel';
 
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
-
-import * as styles from './SaveCredential.module.css';
 
 export function SaveCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;

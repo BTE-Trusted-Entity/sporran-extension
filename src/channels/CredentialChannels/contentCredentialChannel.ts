@@ -1,4 +1,5 @@
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+
 import { CredentialInput, CredentialOutput } from './types';
 import { injectedCredentialChannel } from './injectedCredentialChannel';
 

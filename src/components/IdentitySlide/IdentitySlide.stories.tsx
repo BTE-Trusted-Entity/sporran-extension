@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/react';
 
+import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
+
 import { IdentitySlide } from './IdentitySlide';
 import { IdentitySlideNew } from './IdentitySlideNew';
-
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 
 export default {
   title: 'Components/IdentitySlide',

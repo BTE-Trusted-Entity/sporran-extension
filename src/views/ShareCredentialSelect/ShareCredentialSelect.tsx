@@ -3,6 +3,8 @@ import { browser } from 'webextension-polyfill-ts';
 import { Link, useLocation } from 'react-router-dom';
 import { sortBy } from 'lodash-es';
 
+import * as styles from './ShareCredentialSelect.module.css';
+
 import { Identity } from '../../utilities/identities/types';
 import { useIdentities } from '../../utilities/identities/identities';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
@@ -18,8 +20,6 @@ import { ShareCredentialCard } from '../../components/CredentialCard/ShareCreden
 import { Stats } from '../../components/Stats/Stats';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { Selected } from '../ShareCredential/ShareCredential';
-
-import * as styles from './ShareCredentialSelect.module.css';
 
 function MatchingIdentityCredentials({
   identity,

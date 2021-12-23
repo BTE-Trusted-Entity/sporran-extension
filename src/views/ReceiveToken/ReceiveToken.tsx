@@ -2,6 +2,8 @@ import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Modal } from 'react-dialog-polyfill';
 
+import * as styles from './ReceiveToken.module.css';
+
 import { Identity, isNew } from '../../utilities/identities/identities';
 import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
@@ -9,8 +11,6 @@ import { QRCode } from '../../components/QRCode/QRCode';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
-
-import * as styles from './ReceiveToken.module.css';
 
 interface Props {
   identity: Identity;

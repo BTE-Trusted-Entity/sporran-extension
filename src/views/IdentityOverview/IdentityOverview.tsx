@@ -2,6 +2,8 @@ import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useParams, Redirect } from 'react-router-dom';
 
+import * as styles from './IdentityOverview.module.css';
+
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
@@ -14,9 +16,8 @@ import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIde
 import { generatePath, paths } from '../paths';
 import { useConfiguration } from '../../configuration/useConfiguration';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
-import { IdentityOverviewNew } from './IdentityOverviewNew';
 
-import * as styles from './IdentityOverview.module.css';
+import { IdentityOverviewNew } from './IdentityOverviewNew';
 
 interface Props {
   identity: Identity;

@@ -9,8 +9,9 @@ import { ShareInput } from '../../channels/shareChannel/types';
 
 import { paths } from '../paths';
 
-import { ShareCredentialSign } from './ShareCredentialSign';
 import { Selected } from '../ShareCredential/ShareCredential';
+
+import { ShareCredentialSign } from './ShareCredentialSign';
 
 export default {
   title: 'Views/ShareCredentialSign',

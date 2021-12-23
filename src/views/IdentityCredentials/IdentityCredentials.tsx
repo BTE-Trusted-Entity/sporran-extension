@@ -1,4 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
+import { useMemo } from 'react';
+
+import * as styles from './IdentityCredentials.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
@@ -9,9 +12,6 @@ import { useIdentityCredentials } from '../../utilities/credentials/credentials'
 import { isNew } from '../../utilities/identities/identities';
 import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
-
-import * as styles from './IdentityCredentials.module.css';
-import { useMemo } from 'react';
 
 interface Props {
   identity: Identity;

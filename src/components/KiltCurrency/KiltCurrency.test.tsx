@@ -1,4 +1,5 @@
 import { render } from '../../testing/testing';
+
 import { KiltCurrency } from './KiltCurrency';
 
 describe('KiltCurrency', () => {

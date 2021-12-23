@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 
-import { Identity } from '../../utilities/identities/types';
-import { generatePath, paths } from '../../views/paths';
-
 import * as menuStyles from '../Menu/Menu.module.css';
 import * as styles from './IdentityOptions.module.css';
+
+import { Identity } from '../../utilities/identities/types';
+import { generatePath, paths } from '../../views/paths';
 
 interface Props {
   identity: Identity;

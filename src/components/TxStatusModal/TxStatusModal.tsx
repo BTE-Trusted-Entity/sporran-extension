@@ -3,13 +3,13 @@ import { browser } from 'webextension-polyfill-ts';
 import { Modal } from 'react-dialog-polyfill';
 import { Link } from 'react-router-dom';
 
+import * as styles from './TxStatusModal.module.css';
+
 import { Identity } from '../../utilities/identities/types';
 import { paths, generatePath } from '../../views/paths';
 import { useConfiguration } from '../../configuration/useConfiguration';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { Avatar } from '../Avatar/Avatar';
-
-import * as styles from './TxStatusModal.module.css';
 
 interface Messages {
   pending: ReactNode;

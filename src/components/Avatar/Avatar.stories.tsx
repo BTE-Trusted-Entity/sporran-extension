@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/react';
 
-import { Avatar } from './Avatar';
-
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+
+import { Avatar } from './Avatar';
 
 export default {
   title: 'Components/Avatar',

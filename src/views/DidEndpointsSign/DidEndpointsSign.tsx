@@ -4,6 +4,8 @@ import { browser } from 'webextension-polyfill-ts';
 import { IDidServiceEndpoint } from '@kiltprotocol/types';
 import { DidChain, DidUtils, FullDidDetails } from '@kiltprotocol/did';
 
+import * as styles from './DidEndpointsSign.module.css';
+
 import { Identity } from '../../utilities/identities/types';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
@@ -21,8 +23,6 @@ import {
   queryFullDetailsFromIdentifier,
 } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
-
-import * as styles from './DidEndpointsSign.module.css';
 
 interface Props {
   identity: Identity;

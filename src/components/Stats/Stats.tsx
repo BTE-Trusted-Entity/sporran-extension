@@ -1,14 +1,15 @@
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './Stats.module.css';
+
 import { plural } from '../../utilities/plural/plural';
 import { KiltAmount } from '../KiltAmount/KiltAmount';
 import {
   IdentitiesMap,
   useIdentities,
 } from '../../utilities/identities/identities';
-import { useStats } from './useStats';
 
-import * as styles from './Stats.module.css';
+import { useStats } from './useStats';
 
 interface Props {
   identities: IdentitiesMap;

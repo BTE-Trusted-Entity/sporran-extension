@@ -2,6 +2,8 @@ import { Link, NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { sortBy } from 'lodash-es';
 
+import * as styles from './IdentitiesCarousel.module.css';
+
 import {
   Identity,
   isNew,
@@ -11,8 +13,6 @@ import {
 import { IdentitySlide } from '../IdentitySlide/IdentitySlide';
 import { IdentitySlideNew } from '../IdentitySlide/IdentitySlideNew';
 import { generatePath } from '../../views/paths';
-
-import * as styles from './IdentitiesCarousel.module.css';
 import { isExtensionPopup } from '../../utilities/isExtensionPopup/isExtensionPopup';
 
 interface IdentityLinkProps {

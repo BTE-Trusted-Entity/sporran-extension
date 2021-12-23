@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import * as menuStyles from '../Menu/Menu.module.css';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+
 import { IdentityOptions } from './IdentityOptions';
 
 export default {

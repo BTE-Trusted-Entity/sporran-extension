@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './AppSettings.module.css';
+
 import {
   defaultEndpoint,
   endpoints,
@@ -12,8 +14,6 @@ import {
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { useConfiguration } from '../../configuration/useConfiguration';
 import { paths } from '../paths';
-
-import * as styles from './AppSettings.module.css';
 
 export function AppSettings(): JSX.Element {
   const t = browser.i18n.getMessage;

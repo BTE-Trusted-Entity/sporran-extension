@@ -2,8 +2,10 @@ import userEvent from '@testing-library/user-event';
 
 import { render, screen } from '../../testing/testing';
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
-import { IdentityOptions } from './IdentityOptions';
+
 import { mockIsFullDid } from '../../utilities/did/did.mock';
+
+import { IdentityOptions } from './IdentityOptions';
 
 const onEdit = jest.fn();
 

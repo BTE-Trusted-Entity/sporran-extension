@@ -2,6 +2,8 @@ import { Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, Redirect } from 'react-router-dom';
 
+import * as styles from './Welcome.module.css';
+
 import {
   useIdentities,
   useCurrentIdentity,
@@ -9,8 +11,6 @@ import {
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { generatePath, paths } from '../paths';
-
-import * as styles from './Welcome.module.css';
 
 interface Props {
   again?: boolean;

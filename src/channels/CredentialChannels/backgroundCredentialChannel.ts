@@ -6,12 +6,13 @@ import {
 } from '@kiltprotocol/types';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
-import { CredentialInput, CredentialOutput } from './types';
-import { contentCredentialChannel } from './contentCredentialChannel';
 import { claimChannel } from '../claimChannel/claimChannel';
 import { saveChannel } from '../saveChannel/saveChannel';
 import { shareChannel } from '../shareChannel/shareChannel';
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
+
+import { contentCredentialChannel } from './contentCredentialChannel';
+import { CredentialInput, CredentialOutput } from './types';
 
 export const backgroundCredentialChannel = new BrowserChannel<
   CredentialInput,

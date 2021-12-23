@@ -1,5 +1,8 @@
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 
+import './App.css';
+import * as styles from './App.module.css';
+
 import { RouteExcept } from '../../components/RouteExcept/RouteExcept';
 import { useInitialEntries } from '../../utilities/popups/useInitialEntries';
 import { ConfigurationProvider } from '../../configuration/ConfigurationContext';
@@ -15,9 +18,6 @@ import { PopupsRouter } from '../PopupsRouter/PopupsRouter';
 import { AppSettings } from '../AppSettings/AppSettings';
 
 import { paths } from '../paths';
-
-import './App.css';
-import * as styles from './App.module.css';
 
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();

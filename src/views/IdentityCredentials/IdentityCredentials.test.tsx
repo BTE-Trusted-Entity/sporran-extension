@@ -1,4 +1,5 @@
 import { Attestation } from '@kiltprotocol/core';
+
 import { identitiesMock, render } from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';

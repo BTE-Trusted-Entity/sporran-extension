@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { KeyringPair } from '@polkadot/keyring/types';
 
+import * as styles from './PasswordField.module.css';
+
 import { decryptIdentity } from '../../utilities/identities/identities';
 import { usePasswordType } from '../usePasswordType/usePasswordType';
 import { useInterval } from '../../utilities/useInterval/useInterval';
@@ -24,8 +26,6 @@ import {
 import { RouteExcept } from '../RouteExcept/RouteExcept';
 import { generatePath, paths } from '../../views/paths';
 import { exceptionToError } from '../../utilities/exceptionToError/exceptionToError';
-
-import * as styles from './PasswordField.module.css';
 
 // Okay, ESLint, I must have a parameter but cannot use it
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

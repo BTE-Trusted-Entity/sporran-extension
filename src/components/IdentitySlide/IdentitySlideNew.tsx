@@ -1,9 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
-import { paths } from '../../views/paths';
-
 import * as styles from './IdentitySlide.module.css';
+
+import { paths } from '../../views/paths';
 
 export function IdentitySlideNew(): JSX.Element {
   const t = browser.i18n.getMessage;

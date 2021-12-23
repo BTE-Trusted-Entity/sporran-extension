@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './Balance.module.css';
+
 import { KiltAmount } from '../KiltAmount/KiltAmount';
 import { BalanceUpdateLink } from '../BalanceUpdateLink/BalanceUpdateLink';
 
@@ -9,8 +11,6 @@ import {
   BalanceChange,
   onAddressBalanceChange,
 } from '../../utilities/balanceChanges/balanceChanges';
-
-import * as styles from './Balance.module.css';
 
 interface BalanceBN {
   transferable: BN;

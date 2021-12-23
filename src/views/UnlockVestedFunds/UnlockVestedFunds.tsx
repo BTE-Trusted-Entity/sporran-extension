@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import * as styles from './UnlockVestedFunds.module.css';
+
 import { Identity } from '../../utilities/identities/types';
 import { paths } from '../paths';
 
@@ -19,8 +21,6 @@ import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
-
-import * as styles from './UnlockVestedFunds.module.css';
 
 interface Props {
   identity: Identity;

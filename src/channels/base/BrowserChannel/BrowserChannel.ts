@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+
 import { makeControlledPromise } from '../../../utilities/makeControlledPromise/makeControlledPromise';
 import {
   makeTransforms,

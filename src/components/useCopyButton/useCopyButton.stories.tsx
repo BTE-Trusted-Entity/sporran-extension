@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
-import { useCopyButton } from './useCopyButton';
 import { useRef } from 'react';
+
+import { useCopyButton } from './useCopyButton';
 
 export default {
   title: 'Components/useCopyButton',

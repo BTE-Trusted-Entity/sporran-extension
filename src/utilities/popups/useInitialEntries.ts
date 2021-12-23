@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
+
 import { paths } from '../../views/paths';
 import { isExtensionPopup } from '../isExtensionPopup/isExtensionPopup';
+
 import { PopupAction } from './types';
 
 /** Transforms the URI of externally opened popup into internal URI */

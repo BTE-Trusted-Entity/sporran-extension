@@ -7,6 +7,8 @@ import {
 } from '@kiltprotocol/core';
 import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
 
+import * as styles from './ShareCredentialSign.module.css';
+
 import { getIdentityDidCrypto } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 
@@ -21,7 +23,6 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 import { Selected } from '../ShareCredential/ShareCredential';
 
-import * as styles from './ShareCredentialSign.module.css';
 import { getDidDetails } from '../../utilities/did/did';
 
 interface Props {

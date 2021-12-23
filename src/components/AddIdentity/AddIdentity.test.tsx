@@ -1,4 +1,5 @@
 import { render } from '../../testing/testing';
+
 import { AddIdentity } from './AddIdentity';
 
 describe('AddIdentity', () => {

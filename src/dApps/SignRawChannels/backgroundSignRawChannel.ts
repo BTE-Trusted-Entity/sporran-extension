@@ -1,6 +1,7 @@
 import { SignerResult } from '@polkadot/types/types/extrinsic';
 
 import { PopupChannel } from '../../channels/base/PopupChannel/PopupChannel';
+
 import { contentSignRawChannel } from './contentSignRawChannel';
 
 interface SignBgInput {

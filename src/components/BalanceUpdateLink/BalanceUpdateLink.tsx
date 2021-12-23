@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './BalanceUpdateLink.module.css';
+
 import { paths } from '../../views/paths';
 import { hasVestedFunds } from '../../utilities/vesting/vesting';
-
-import * as styles from './BalanceUpdateLink.module.css';
 
 interface Props {
   address: string;

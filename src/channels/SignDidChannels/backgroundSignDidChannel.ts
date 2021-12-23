@@ -1,4 +1,5 @@
 import { PopupChannel } from '../base/PopupChannel/PopupChannel';
+
 import { contentSignDidChannel } from './contentSignDidChannel';
 import { SignDidPopupInput, SignDidPopupOutput } from './types';
 

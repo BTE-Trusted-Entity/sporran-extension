@@ -1,6 +1,8 @@
 import { Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './SignDApp.module.css';
+
 import { useIdentities } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { Avatar } from '../../components/Avatar/Avatar';
@@ -10,8 +12,6 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignChannel } from '../../dApps/SignChannels/backgroundSignChannel';
-
-import * as styles from './SignDApp.module.css';
 
 export interface ExtrinsicData {
   origin: string;

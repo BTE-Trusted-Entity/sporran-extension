@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { createRequire } from 'node:module';
+
 import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import ExtensionReloader from 'webpack-extension-reloader';

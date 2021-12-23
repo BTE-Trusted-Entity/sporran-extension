@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './ExternalAccess.module.css';
+
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import {
@@ -9,8 +11,6 @@ import {
   setAuthorized,
 } from '../../utilities/authorizedStorage/authorizedStorage';
 import { paths } from '../paths';
-
-import * as styles from './ExternalAccess.module.css';
 
 export function ExternalAccess(): JSX.Element | null {
   const t = browser.i18n.getMessage;

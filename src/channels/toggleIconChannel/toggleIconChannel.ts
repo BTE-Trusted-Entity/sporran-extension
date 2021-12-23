@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 
 export const toggleIconChannel = new BrowserChannel('toggleIcons');

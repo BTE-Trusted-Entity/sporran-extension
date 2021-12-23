@@ -1,9 +1,9 @@
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
-import { KiltCurrency } from '../KiltCurrency/KiltCurrency';
-
 import * as styles from './KiltAmount.module.css';
+
+import { KiltCurrency } from '../KiltCurrency/KiltCurrency';
 
 const KILT_POWER = 15;
 

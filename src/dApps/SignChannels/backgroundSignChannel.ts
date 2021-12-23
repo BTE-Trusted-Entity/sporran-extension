@@ -1,16 +1,18 @@
+import type {
+  ExtrinsicPayload,
+  ExtrinsicEra,
+} from '@polkadot/types/interfaces';
+
 import BN from 'bn.js';
 import { map, zip } from 'lodash-es';
 import { browser } from 'webextension-polyfill-ts';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { SignerPayloadJSON } from '@polkadot/types/types/extrinsic';
-import type {
-  ExtrinsicPayload,
-  ExtrinsicEra,
-} from '@polkadot/types/interfaces';
 
 import { PopupChannel } from '../../channels/base/PopupChannel/PopupChannel';
 import { decryptIdentity } from '../../utilities/identities/identities';
+
 import { contentSignChannel } from './contentSignChannel';
 
 interface SignBgInput {

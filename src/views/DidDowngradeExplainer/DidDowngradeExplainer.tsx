@@ -1,14 +1,14 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import * as styles from './DidDowngradeExplainer.module.css';
+
 import { Identity } from '../../utilities/identities/types';
 import { generatePath, paths } from '../paths';
 
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-
-import * as styles from './DidDowngradeExplainer.module.css';
 
 interface Props {
   identity: Identity;

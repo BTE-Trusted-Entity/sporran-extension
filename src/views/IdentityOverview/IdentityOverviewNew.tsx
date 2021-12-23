@@ -1,14 +1,14 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import * as styles from './IdentityOverview.module.css';
+
 import { NEW } from '../../utilities/identities/identities';
 import { paths } from '../paths';
 
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Stats } from '../../components/Stats/Stats';
-
-import * as styles from './IdentityOverview.module.css';
 
 export function IdentityOverviewNew(): JSX.Element | null {
   const t = browser.i18n.getMessage;

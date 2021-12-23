@@ -1,13 +1,13 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback } from 'react';
 
+import * as styles from './AuthorizeDApp.module.css';
+
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import {
   backgroundAccessChannel,
   AccessInput,
 } from '../../dApps/AccessChannels/browserAccessChannels';
-
-import * as styles from './AuthorizeDApp.module.css';
 
 export function AuthorizeDApp(): JSX.Element {
   const t = browser.i18n.getMessage;

@@ -3,6 +3,7 @@ import {
   render,
   waitForDialogUpdate,
 } from '../../testing/testing';
+
 import { GenericError } from './GenericError';
 
 describe('GenericError', () => {

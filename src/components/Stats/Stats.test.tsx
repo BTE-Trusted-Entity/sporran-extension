@@ -1,4 +1,5 @@
 import { IdentitiesProviderMock, render, screen } from '../../testing/testing';
+
 import { Stats } from './Stats';
 
 describe('Stats', () => {

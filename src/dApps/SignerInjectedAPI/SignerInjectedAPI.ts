@@ -3,6 +3,7 @@ import {
   SignerPayloadRaw,
   SignerResult,
 } from '@polkadot/types/types/extrinsic';
+
 import { injectedSignChannel } from '../SignChannels/injectedSignChannel';
 import { injectedSignRawChannel } from '../SignRawChannels/injectedSignRawChannel';
 

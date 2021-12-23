@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+
 import { getIdentities } from './utilities/identities/getIdentities';
 import { toggleIcon } from './channels/toggleIconChannel/toggleIconChannel';
 import { initContentIdentitiesChannel } from './dApps/identitiesDataProvider/identitiesDataProvider';

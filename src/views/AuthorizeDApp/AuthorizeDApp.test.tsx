@@ -3,6 +3,7 @@ import { render } from '../../testing/testing';
 
 import { AccessInput } from '../../dApps/AccessChannels/browserAccessChannels';
 import { paths } from '../paths';
+
 import { AuthorizeDApp } from './AuthorizeDApp';
 
 const mockAccessData: AccessInput = {

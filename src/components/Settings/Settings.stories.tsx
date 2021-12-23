@@ -1,8 +1,9 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { IdentitiesProviderMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import * as menuStyles from '../Menu/Menu.module.css';
+
+import { IdentitiesProviderMock } from '../../utilities/identities/IdentitiesProvider.mock';
 
 import { Settings } from './Settings';
 

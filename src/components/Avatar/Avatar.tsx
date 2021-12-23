@@ -1,11 +1,11 @@
 import cx from 'classnames';
 
-import { Identicon } from './Identicon';
+import * as styles from './Avatar.module.css';
 
 import { isFullDid } from '../../utilities/did/did';
 import { Identity } from '../../utilities/identities/types';
 
-import * as styles from './Avatar.module.css';
+import { Identicon } from './Identicon';
 
 interface Props {
   identity: Identity;

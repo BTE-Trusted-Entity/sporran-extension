@@ -33,7 +33,7 @@
     "identity": "node -e \"console.log(require('@polkadot/util-crypto').mnemonicGenerate())\"",
     "test": "jest",
     "lint": "yarn run lint-css && yarn run lint-js",
-    "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.json \"src/**/*.ts*\"",
+    "lint-js": "eslint --fix --max-warnings 0 --config ./.eslintrc.json \"src/**/*.ts*\"",
     "lint-css": "stylelint \"src/**/*.css\"",
     "prettify": "prettier --write \"src/**/*.ts*\"",
     "storybook": "start-storybook --port 6006",
