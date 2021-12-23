@@ -116,20 +116,13 @@ function main() {
 
   // Only injected scripts can create variables like this, content script cannot do this
   apiWindow.kilt ||= {};
-  apiWindow.kilt.sporran ||= {};
-
-  if (configuration.features.fullDid) {
-    Object.assign(apiWindow.kilt.sporran, { signWithDid });
-  }
-
-  if (configuration.features.credentials) {
-    Object.assign(apiWindow.kilt.sporran, {
-      startSession,
-      name: 'Sporran', // manifest_name
-      version,
-      specVersion: '0.1',
-    });
-  }
+  apiWindow.kilt.sporran ||= {
+    signWithDid,
+    startSession,
+    name: 'Sporran', // manifest_name
+    version,
+    specVersion: '0.1',
+  };
 }
 
 main();

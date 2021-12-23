@@ -15,7 +15,6 @@ import {
   useCurrentIdentity,
   useIdentities,
 } from '../../utilities/identities/identities';
-import { useConfiguration } from '../../configuration/useConfiguration';
 import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
 import { Welcome } from '../Welcome/Welcome';
 import { CreateIdentity } from '../CreateIdentity/CreateIdentity';
@@ -61,7 +60,6 @@ function useRedirectToCurrent() {
 export function SpecificIdentityRouter({
   identities,
 }: Props): JSX.Element | null {
-  const { features } = useConfiguration();
   const { address } = useParams() as { address: string };
 
   useEffect(() => {
@@ -112,35 +110,25 @@ export function SpecificIdentityRouter({
           <SignQuote identity={identity} />
         </Route>
 
-        {features.fullDid && (
-          <Route path={paths.popup.signDid}>
-            <SignDid identity={identity} />
-          </Route>
-        )}
+        <Route path={paths.popup.signDid}>
+          <SignDid identity={identity} />
+        </Route>
 
-        {features.fullDid && (
-          <Route path={paths.identity.did.upgrade.start}>
-            <DidUpgradeFlow identity={identity} />
-          </Route>
-        )}
+        <Route path={paths.identity.did.upgrade.start}>
+          <DidUpgradeFlow identity={identity} />
+        </Route>
 
-        {features.fullDid && (
-          <Route path={paths.identity.did.downgrade.start}>
-            <DidDowngradeFlow identity={identity} />
-          </Route>
-        )}
+        <Route path={paths.identity.did.downgrade.start}>
+          <DidDowngradeFlow identity={identity} />
+        </Route>
 
-        {features.fullDid && (
-          <Route path={paths.identity.did.endpoints.start}>
-            <DidEndpointsFlow identity={identity} />
-          </Route>
-        )}
+        <Route path={paths.identity.did.endpoints.start}>
+          <DidEndpointsFlow identity={identity} />
+        </Route>
 
-        {features.fullDid && (
-          <Route path={paths.identity.did.manage}>
-            <DidManage identity={identity} />
-          </Route>
-        )}
+        <Route path={paths.identity.did.manage}>
+          <DidManage identity={identity} />
+        </Route>
 
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={identity} />

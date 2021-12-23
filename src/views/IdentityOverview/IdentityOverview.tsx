@@ -8,13 +8,11 @@ import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/Identiti
 import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
-import { UpcomingFeatureModal } from '../../components/UpcomingFeatureModal/UpcomingFeatureModal';
 
 import { Identity, isNew } from '../../utilities/identities/identities';
 import { isFullDid } from '../../utilities/did/did';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { generatePath, paths } from '../paths';
-import { useConfiguration } from '../../configuration/useConfiguration';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 
 import { IdentityOverviewNew } from './IdentityOverviewNew';
@@ -27,8 +25,6 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
   const params = useParams() as { type?: 'created' | 'imported' | 'pwreset' };
 
-  const { features } = useConfiguration();
-
   const [hasSuccessOverlay, setHasSuccessOverlay] = useState(
     Boolean(params.type),
   );
@@ -36,16 +32,6 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
   const handleSuccessOverlayButtonClick = useCallback(() => {
     setHasSuccessOverlay(false);
-  }, []);
-
-  const [hasUpcomingFeatureModal, setHasUpcomingFeatureModal] = useState(false);
-
-  const handleUpcomingFeatureModalButtonClick = useCallback(() => {
-    setHasUpcomingFeatureModal(false);
-  }, []);
-
-  const handleSendClick = useCallback(() => {
-    setHasUpcomingFeatureModal(true);
   }, []);
 
   const subscanHost = useSubscanHost();
@@ -74,22 +60,12 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
       <Balance address={address} breakdown smallDecimals />
 
       <p>
-        {features.sendToken ? (
-          <Link
-            to={generatePath(paths.identity.send.start, { address })}
-            className={styles.button}
-          >
-            {t('view_IdentityOverview_send')}
-          </Link>
-        ) : (
-          <button
-            type="button"
-            className={styles.button}
-            onClick={handleSendClick}
-          >
-            {t('view_IdentityOverview_send')}
-          </button>
-        )}
+        <Link
+          to={generatePath(paths.identity.send.start, { address })}
+          className={styles.button}
+        >
+          {t('view_IdentityOverview_send')}
+        </Link>
         <Link
           to={generatePath(paths.identity.receive, { address })}
           className={styles.button}
@@ -98,7 +74,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       </p>
 
-      {features.subscan && subscanHost && (
+      {subscanHost && (
         <a
           className={styles.subscan}
           href={`${subscanHost}/account/${identity.address}?tab=transfer`}
@@ -109,16 +85,14 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </a>
       )}
 
-      {features.credentials && (
-        <Link
-          to={generatePath(paths.identity.credentials, { address })}
-          className={styles.credentials}
-        >
-          {t('view_IdentityOverview_credentials')}
-        </Link>
-      )}
+      <Link
+        to={generatePath(paths.identity.credentials, { address })}
+        className={styles.credentials}
+      >
+        {t('view_IdentityOverview_credentials')}
+      </Link>
 
-      {features.fullDid && !isFullDid(identity.did) && (
+      {!isFullDid(identity.did) && (
         <Link
           to={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.upgrade}
@@ -127,7 +101,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       )}
 
-      {features.fullDid && isFullDid(identity.did) && (
+      {isFullDid(identity.did) && (
         <Link
           to={generatePath(paths.identity.did.manage, { address })}
           className={styles.manage}
@@ -144,9 +118,6 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           identity={identity}
           onSuccessOverlayButtonClick={handleSuccessOverlayButtonClick}
         />
-      )}
-      {hasUpcomingFeatureModal && (
-        <UpcomingFeatureModal onClose={handleUpcomingFeatureModalButtonClick} />
       )}
     </main>
   );

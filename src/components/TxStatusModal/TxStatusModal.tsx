@@ -7,7 +7,6 @@ import * as styles from './TxStatusModal.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { paths, generatePath } from '../../views/paths';
-import { useConfiguration } from '../../configuration/useConfiguration';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { Avatar } from '../Avatar/Avatar';
 
@@ -42,10 +41,9 @@ export function TxStatusModal({
   destination,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
-  const { features } = useConfiguration();
 
   const subscanHost = useSubscanHost();
-  const subscanLink = features.subscan && subscanHost && txHash && (
+  const subscanLink = subscanHost && txHash && (
     <a
       className={styles.subscan}
       href={`${subscanHost}/extrinsic/${txHash}`}

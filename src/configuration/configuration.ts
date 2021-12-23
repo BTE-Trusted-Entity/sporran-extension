@@ -2,10 +2,6 @@ import { isInternal } from './variant';
 
 interface Features {
   endpoint: boolean;
-  credentials: boolean;
-  sendToken: boolean;
-  subscan: boolean;
-  fullDid: boolean;
   dotsama: boolean;
 }
 
@@ -16,19 +12,11 @@ export interface ConfigurationType {
 
 const publicFeatures: Features = {
   endpoint: false,
-  credentials: true,
-  sendToken: true,
-  subscan: true,
-  fullDid: true,
   dotsama: false,
 };
 
 export const internalFeatures: Features = {
   endpoint: true,
-  credentials: true,
-  sendToken: true,
-  subscan: true,
-  fullDid: true,
   dotsama: true,
 };
 
