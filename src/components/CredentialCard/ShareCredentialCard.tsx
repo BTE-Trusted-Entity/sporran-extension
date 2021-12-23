@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState, useEffect, useRef } from 'react';
-import { includes, without } from 'lodash-es';
+import { includes, without, find } from 'lodash-es';
 import cx from 'classnames';
 
 import { Credential } from '../../utilities/credentials/credentials';
@@ -14,26 +14,13 @@ import { Selected } from '../../views/ShareCredential/ShareCredential';
 
 import * as styles from './CredentialCard.module.css';
 
-function useRequiredProperties(credential: Credential, data: ShareInput) {
-  const [requiredProperties, setRequiredProperties] = useState<string[]>([]);
-
-  useEffect(() => {
-    const { cTypes } = data.credentialRequest;
-
-    const cType = cTypes.find(
-      ({ cTypeHash }) => cTypeHash === credential.request.claim.cTypeHash,
-    );
-    setRequiredProperties(cType?.requiredProperties || []);
-  }, [data, credential]);
-
-  return requiredProperties;
-}
+const noRequiredProperties: string[] = [];
 
 interface Props {
   credential: Credential;
   identity: Identity;
   onSelect: (value: Selected) => void;
-  isSelected: boolean;
+  isSelected?: boolean;
 }
 
 export function ShareCredentialCard({
@@ -47,11 +34,7 @@ export function ShareCredentialCard({
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    if (isSelected) {
-      setExpanded(true);
-    } else {
-      setExpanded(false);
-    }
+    setExpanded(isSelected);
   }, [isSelected]);
 
   const statuses = {
@@ -66,9 +49,14 @@ export function ShareCredentialCard({
 
   const data = usePopupData<ShareInput>();
 
-  const [checked, setChecked] = useState<string[]>([]);
+  const { cTypes } = data.credentialRequest;
 
-  const requiredProperties = useRequiredProperties(credential, data);
+  const { cTypeHash } = credential.request.claim;
+  const cType = find(cTypes, { cTypeHash });
+
+  const requiredProperties = cType?.requiredProperties || noRequiredProperties;
+
+  const [checked, setChecked] = useState<string[]>([]);
 
   useEffect(() => {
     setChecked(requiredProperties);
@@ -178,6 +166,7 @@ export function ShareCredentialCard({
                         checked={includes(checked, name)}
                         onChange={handlePropChecked}
                         disabled={!isAttested}
+                        readOnly={includes(requiredProperties, name)}
                       />
                       <span />
                       {value}

@@ -40,7 +40,6 @@ describe('CredentialCard', () => {
         <ShareCredentialCard
           credential={credentialsMock[0]}
           identity={identitiesMock[0]}
-          isSelected={false}
           onSelect={jest.fn()}
         />
       </PopupTestProvider>,
@@ -57,7 +56,7 @@ describe('CredentialCard', () => {
         <ShareCredentialCard
           credential={credentialsMock[0]}
           identity={identitiesMock[0]}
-          isSelected={true}
+          isSelected
           onSelect={jest.fn()}
         />
       </PopupTestProvider>,

@@ -5,12 +5,7 @@ import {
   Attestation,
   Credential,
 } from '@kiltprotocol/core';
-import { DefaultResolver } from '@kiltprotocol/did';
-import {
-  IDidResolvedDetails,
-  ISubmitCredential,
-  MessageBodyType,
-} from '@kiltprotocol/types';
+import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
 
 import { getIdentityDidCrypto } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
@@ -27,6 +22,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { Selected } from '../ShareCredential/ShareCredential';
 
 import * as styles from './ShareCredentialSign.module.css';
+import { getDidDetails } from '../../utilities/did/did';
 
 interface Props {
   selected: Selected;
@@ -47,7 +43,7 @@ export function ShareCredentialSign({
 
   const { credential, identity, sharedProps } = selected;
 
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>();
 
   const passwordField = usePasswordField();
 
@@ -89,12 +85,7 @@ export function ShareCredentialSign({
         type: MessageBodyType.SUBMIT_CREDENTIAL,
       };
 
-      const { details: verifierDidDetails } = (await DefaultResolver.resolveDoc(
-        verifierDid,
-      )) as IDidResolvedDetails;
-      if (!verifierDidDetails) {
-        throw new Error(`Cannot resolve the DID ${verifierDid}`);
-      }
+      const verifierDidDetails = await getDidDetails(verifierDid);
 
       const message = await encrypt(credentialsBody, verifierDidDetails);
 

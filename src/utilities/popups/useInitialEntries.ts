@@ -26,7 +26,6 @@ export function useInitialEntries(): string[] | undefined {
     params.delete('action');
 
     const internalUri = `${path}?${params.toString()}`;
-    console.log('internalUri: ', JSON.stringify(internalUri));
     return [internalUri];
   }, []);
 }

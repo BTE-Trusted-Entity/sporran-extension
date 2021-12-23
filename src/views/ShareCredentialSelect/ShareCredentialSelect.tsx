@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useLocation } from 'react-router-dom';
 import { sortBy } from 'lodash-es';
@@ -7,6 +7,7 @@ import { Identity } from '../../utilities/identities/types';
 import { useIdentities } from '../../utilities/identities/identities';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
+import { parseDidUrl } from '../../utilities/did/did';
 import { ShareInput } from '../../channels/shareChannel/types';
 
 import { paths } from '../paths';
@@ -43,7 +44,8 @@ function MatchingIdentityCredentials({
   const matchingCredentials = credentials?.filter(
     (credential) =>
       cTypeHashes.includes(credential.request.claim.cTypeHash) &&
-      credential.request.claim.owner === identity.did,
+      parseDidUrl(credential.request.claim.owner).fullDid ===
+        parseDidUrl(identity.did).fullDid,
   );
 
   useEffect(() => {
@@ -105,9 +107,7 @@ export function ShareCredentialSelect({
 
   const [hasSome, setHasSome] = useState(false);
 
-  function match() {
-    setHasSome(true);
-  }
+  const match = useCallback(() => setHasSome(true), []);
 
   if (!identities) {
     return null; // storage data pending

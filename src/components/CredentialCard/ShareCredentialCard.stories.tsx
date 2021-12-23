@@ -28,7 +28,7 @@ export function Selected(): JSX.Element {
         <ShareCredentialCard
           credential={credentialsMock[0]}
           identity={identitiesMock[0]}
-          isSelected={true}
+          isSelected
           onSelect={action('onSelect')}
         />
       </ul>
@@ -46,7 +46,6 @@ export function NotSelected(): JSX.Element {
         <ShareCredentialCard
           credential={credentialsMock[0]}
           identity={identitiesMock[0]}
-          isSelected={false}
           onSelect={action('onSelect')}
         />
       </ul>
@@ -64,7 +63,7 @@ export function NotAttested(): JSX.Element {
         <ShareCredentialCard
           credential={credentialsMock[1]}
           identity={identitiesMock[0]}
-          isSelected={true}
+          isSelected
           onSelect={action('onSelect')}
         />
       </ul>
