@@ -1,13 +1,21 @@
 declare namespace CardModuleCssNamespace {
   export interface ICardModuleCss {
+    card: string;
+    cardText: string;
     collapse: string;
     collapsedCard: string;
-    collapsedFirstProp: string;
     collapsedName: string;
-    card: string;
+    collapsedValue: string;
+    detail: string;
+    detailName: string;
+    details: string;
+    detailValue: string;
+    ellipsis: string;
     expand: string;
     expanded: string;
+    fullWidthDetail: string;
     list: string;
+    technical: string;
   }
 }
 
