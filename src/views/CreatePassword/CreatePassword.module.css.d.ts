@@ -1,29 +1,19 @@
-declare namespace CreatePasswordModuleCssNamespace {
-  export interface ICreatePasswordModuleCss {
-    cancel: string;
-    complexity: string;
-    complexityGood: string;
-    complexityMedium: string;
-    complexityNone: string;
-    complexityOk: string;
-    complexityPoor: string;
-    container: string;
-    criteria: string;
-    criteriaHeading: string;
-    errorTooltip: string;
-    heading: string;
-    input: string;
-    inputLine: string;
-    lock: string;
-    pass: string;
-    subline: string;
-    submit: string;
-  }
-}
-
-declare const CreatePasswordModuleCssModule: CreatePasswordModuleCssNamespace.ICreatePasswordModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: CreatePasswordModuleCssNamespace.ICreatePasswordModuleCss;
-};
-
-export = CreatePasswordModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const criteriaHeading: string;
+export const criteria: string;
+export const pass: string;
+export const inputLine: string;
+export const input: string;
+export const errorTooltip: string;
+export const cancel: string;
+export const submit: string;
+export const complexity: string;
+export const complexityNone: string;
+export const complexityPoor: string;
+export const complexityMedium: string;
+export const complexityGood: string;
+export const complexityOk: string;
+export const lock: string;

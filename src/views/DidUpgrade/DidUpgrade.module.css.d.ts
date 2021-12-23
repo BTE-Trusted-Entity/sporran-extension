@@ -1,21 +1,11 @@
-declare namespace DidUpgradeModuleCssNamespace {
-  export interface IDidUpgradeModuleCss {
-    buttonsLine: string;
-    cancel: string;
-    container: string;
-    costs: string;
-    details: string;
-    errorTooltip: string;
-    heading: string;
-    info: string;
-    subline: string;
-    submit: string;
-  }
-}
-
-declare const DidUpgradeModuleCssModule: DidUpgradeModuleCssNamespace.IDidUpgradeModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: DidUpgradeModuleCssNamespace.IDidUpgradeModuleCss;
-};
-
-export = DidUpgradeModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const costs: string;
+export const details: string;
+export const info: string;
+export const buttonsLine: string;
+export const cancel: string;
+export const submit: string;
+export const errorTooltip: string;

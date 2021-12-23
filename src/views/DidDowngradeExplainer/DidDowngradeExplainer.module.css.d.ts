@@ -1,18 +1,8 @@
-declare namespace DidDowngradeExplainerModuleCssNamespace {
-  export interface IDidDowngradeExplainerModuleCss {
-    container: string;
-    cta: string;
-    explanation: string;
-    heading: string;
-    info: string;
-    subline: string;
-    warning: string;
-  }
-}
-
-declare const DidDowngradeExplainerModuleCssModule: DidDowngradeExplainerModuleCssNamespace.IDidDowngradeExplainerModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: DidDowngradeExplainerModuleCssNamespace.IDidDowngradeExplainerModuleCss;
-};
-
-export = DidDowngradeExplainerModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const info: string;
+export const explanation: string;
+export const warning: string;
+export const cta: string;

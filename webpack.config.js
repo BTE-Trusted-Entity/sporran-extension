@@ -9,19 +9,6 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 const require = createRequire(import.meta.url);
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-const stylesLoader = isDevelopment
-  ? 'style-loader'
-  : MiniCssExtractPlugin.loader;
-
-const cssLoader = {
-  loader: 'css-loader',
-  options: {
-    modules: {
-      namedExport: true,
-    },
-  },
-};
-
 export default {
   mode: isDevelopment ? 'development' : 'production',
   entry: {
@@ -43,16 +30,18 @@ export default {
       },
       {
         use: [
-          stylesLoader,
-          '@teamsupercell/typings-for-css-modules-loader',
-          cssLoader,
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                namedExport: true,
+              },
+            },
+          },
         ],
-        test: /\.module.css$/,
+        test: /.css$/,
         exclude: /node_modules/,
-      },
-      {
-        use: [stylesLoader, cssLoader],
-        test: /App.css$/,
       },
       {
         type: 'asset',

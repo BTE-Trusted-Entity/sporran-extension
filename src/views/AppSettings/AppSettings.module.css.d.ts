@@ -1,19 +1,9 @@
-declare namespace AppSettingsModuleCssNamespace {
-  export interface IAppSettingsModuleCss {
-    cancel: string;
-    container: string;
-    endpoint: string;
-    endpointLine: string;
-    heading: string;
-    reset: string;
-    save: string;
-    subline: string;
-  }
-}
-
-declare const AppSettingsModuleCssModule: AppSettingsModuleCssNamespace.IAppSettingsModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: AppSettingsModuleCssNamespace.IAppSettingsModuleCss;
-};
-
-export = AppSettingsModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const endpointLine: string;
+export const endpoint: string;
+export const save: string;
+export const cancel: string;
+export const reset: string;

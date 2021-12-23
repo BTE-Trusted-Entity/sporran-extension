@@ -1,17 +1,7 @@
-declare namespace WarningModuleCssNamespace {
-  export interface IWarningModuleCss {
-    cancel: string;
-    confirm: string;
-    container: string;
-    heading: string;
-    important: string;
-    info: string;
-  }
-}
-
-declare const WarningModuleCssModule: WarningModuleCssNamespace.IWarningModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: WarningModuleCssNamespace.IWarningModuleCss;
-};
-
-export = WarningModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const important: string;
+export const info: string;
+export const confirm: string;
+export const cancel: string;

@@ -1,27 +1,17 @@
-declare namespace CardModuleCssNamespace {
-  export interface ICardModuleCss {
-    card: string;
-    cardText: string;
-    collapse: string;
-    collapsedCard: string;
-    collapsedName: string;
-    collapsedValue: string;
-    detail: string;
-    detailName: string;
-    details: string;
-    detailValue: string;
-    ellipsis: string;
-    expand: string;
-    expanded: string;
-    fullWidthDetail: string;
-    list: string;
-    technical: string;
-  }
-}
-
-declare const CardModuleCssModule: CardModuleCssNamespace.ICardModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: CardModuleCssNamespace.ICardModuleCss;
-};
-
-export = CardModuleCssModule;
+export const __esModule: true;
+export const list: string;
+export const card: string;
+export const expand: string;
+export const cardText: string;
+export const collapsedCard: string;
+export const ellipsis: string;
+export const collapsedName: string;
+export const collapsedValue: string;
+export const expanded: string;
+export const collapse: string;
+export const details: string;
+export const detail: string;
+export const detailName: string;
+export const detailValue: string;
+export const fullWidthDetail: string;
+export const technical: string;

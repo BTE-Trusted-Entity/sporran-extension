@@ -1,19 +1,9 @@
-declare namespace DidUpgradeExplainerModuleCssNamespace {
-  export interface IDidUpgradeExplainerModuleCss {
-    avatar: string;
-    container: string;
-    deposit: string;
-    explanation: string;
-    functionality: string;
-    heading: string;
-    subline: string;
-    upgrade: string;
-  }
-}
-
-declare const DidUpgradeExplainerModuleCssModule: DidUpgradeExplainerModuleCssNamespace.IDidUpgradeExplainerModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: DidUpgradeExplainerModuleCssNamespace.IDidUpgradeExplainerModuleCss;
-};
-
-export = DidUpgradeExplainerModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const explanation: string;
+export const functionality: string;
+export const avatar: string;
+export const deposit: string;
+export const upgrade: string;

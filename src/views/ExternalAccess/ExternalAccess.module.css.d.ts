@@ -1,21 +1,11 @@
-declare namespace ExternalAccessModuleCssNamespace {
-  export interface IExternalAccessModuleCss {
-    allowed: string;
-    back: string;
-    container: string;
-    denied: string;
-    heading: string;
-    label: string;
-    list: string;
-    small: string;
-    subline: string;
-    toggle: string;
-  }
-}
-
-declare const ExternalAccessModuleCssModule: ExternalAccessModuleCssNamespace.IExternalAccessModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: ExternalAccessModuleCssNamespace.IExternalAccessModuleCss;
-};
-
-export = ExternalAccessModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const small: string;
+export const list: string;
+export const label: string;
+export const toggle: string;
+export const denied: string;
+export const allowed: string;
+export const back: string;

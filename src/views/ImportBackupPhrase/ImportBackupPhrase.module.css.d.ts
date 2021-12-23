@@ -1,22 +1,12 @@
-declare namespace ImportBackupPhraseModuleCssNamespace {
-  export interface IImportBackupPhraseModuleCss {
-    button: string;
-    buttonLine: string;
-    container: string;
-    errorTooltip: string;
-    heading: string;
-    info: string;
-    input: string;
-    item: string;
-    items: string;
-    tooltip: string;
-    wordErrorTooltip: string;
-  }
-}
-
-declare const ImportBackupPhraseModuleCssModule: ImportBackupPhraseModuleCssNamespace.IImportBackupPhraseModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: ImportBackupPhraseModuleCssNamespace.IImportBackupPhraseModuleCss;
-};
-
-export = ImportBackupPhraseModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const info: string;
+export const items: string;
+export const item: string;
+export const input: string;
+export const wordErrorTooltip: string;
+export const tooltip: string;
+export const buttonLine: string;
+export const button: string;
+export const errorTooltip: string;

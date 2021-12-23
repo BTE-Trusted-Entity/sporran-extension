@@ -1,43 +1,32 @@
-declare namespace CredentialCardModuleCssNamespace {
-  export interface ICredentialCardModuleCss {
-    backup: string;
-    buttons: string;
-    collapse: string;
-    collapsedCredential: string;
-    collapsedName: string;
-    collapsedShareCredential: string;
-    collapsedValue: string;
-    credential: string;
-    credentialsList: string;
-    detail: string;
-    detailName: string;
-    detailValue: string;
-    details: string;
-    editName: string;
-    expand: string;
-    expanded: string;
-    hash: string;
-    input: string;
-    name: string;
-    nameValue: string;
-    notAttested: string;
-    required: string;
-    requiredInfo: string;
-    remove: string;
-    rule: string;
-    select: string;
-    selectable: string;
-    share: string;
-    shareExpanded: string;
-    shareLabel: string;
-    shareTechnical: string;
-    technical: string;
-  }
-}
-
-declare const CredentialCardModuleCssModule: CredentialCardModuleCssNamespace.ICredentialCardModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: CredentialCardModuleCssNamespace.ICredentialCardModuleCss;
-};
-
-export = CredentialCardModuleCssModule;
+export const __esModule: true;
+export const credentialsList: string;
+export const credential: string;
+export const selectable: string;
+export const expand: string;
+export const shareExpand: string;
+export const collapsedCredential: string;
+export const collapsedShareCredential: string;
+export const collapsedName: string;
+export const collapsedValue: string;
+export const expanded: string;
+export const shareExpanded: string;
+export const buttons: string;
+export const collapse: string;
+export const backup: string;
+export const remove: string;
+export const details: string;
+export const detail: string;
+export const detailName: string;
+export const detailValue: string;
+export const nameValue: string;
+export const editName: string;
+export const input: string;
+export const hash: string;
+export const technical: string;
+export const shareTechnical: string;
+export const select: string;
+export const share: string;
+export const shareLabel: string;
+export const notAttested: string;
+export const required: string;
+export const requiredInfo: string;

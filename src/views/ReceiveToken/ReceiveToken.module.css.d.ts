@@ -1,22 +1,12 @@
-declare namespace ReceiveTokenModuleCssNamespace {
-  export interface IReceiveTokenModuleCss {
-    addressLine: string;
-    container: string;
-    dialog: string;
-    dialogClose: string;
-    heading: string;
-    qrCode: string;
-    qrCodeLarge: string;
-    qrCodeShadow: string;
-    qrCodeToggle: string;
-    small: string;
-    subline: string;
-  }
-}
-
-declare const ReceiveTokenModuleCssModule: ReceiveTokenModuleCssNamespace.IReceiveTokenModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: ReceiveTokenModuleCssNamespace.IReceiveTokenModuleCss;
-};
-
-export = ReceiveTokenModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const small: string;
+export const addressLine: string;
+export const qrCodeToggle: string;
+export const qrCode: string;
+export const qrCodeShadow: string;
+export const qrCodeLarge: string;
+export const dialog: string;
+export const dialogClose: string;

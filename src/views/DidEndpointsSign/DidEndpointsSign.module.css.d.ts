@@ -1,20 +1,10 @@
-declare namespace DidEndpointsSignModuleCssNamespace {
-  export interface IDidEndpointsSignModuleCss {
-    buttonsLine: string;
-    cancel: string;
-    container: string;
-    didLine: string;
-    errorTooltip: string;
-    heading: string;
-    subline: string;
-    submit: string;
-    value: string;
-  }
-}
-
-declare const DidEndpointsSignModuleCssModule: DidEndpointsSignModuleCssNamespace.IDidEndpointsSignModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: DidEndpointsSignModuleCssNamespace.IDidEndpointsSignModuleCss;
-};
-
-export = DidEndpointsSignModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const didLine: string;
+export const value: string;
+export const buttonsLine: string;
+export const cancel: string;
+export const submit: string;
+export const errorTooltip: string;
