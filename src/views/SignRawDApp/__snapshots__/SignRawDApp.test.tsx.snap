@@ -8,7 +8,7 @@ exports[`SignRawDApp should render 1`] = `
     <h1
       class="heading"
     >
-      Sign message
+      Sign the Message
     </h1>
     <div
       class="avatar"
@@ -53,15 +53,27 @@ exports[`SignRawDApp should render 1`] = `
       </dd>
       <dt
         class="detailName"
+        id="message"
       >
-        bytes
+        message
         :
       </dt>
       <dd
         class="detailValue"
-        title="0xCAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFE"
       >
-        0xCAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFE
+        <textarea
+          aria-labelledby="message"
+          class="message"
+          readonly=""
+        >
+          0xCAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFE
+        </textarea>
+        <button
+          aria-label="copy to clipboard"
+          class="copy"
+          title="copy to clipboard"
+          type="button"
+        />
       </dd>
     </dl>
     <p
