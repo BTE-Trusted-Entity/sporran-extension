@@ -63,7 +63,7 @@
 }
 
 .collapsedType {
-  composes: collapsedFirstProp from '../../components/Card/Card.module.css';
+  composes: collapsedValue from '../../components/Card/Card.module.css';
 }
 
 .buttons {

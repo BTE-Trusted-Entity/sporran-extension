@@ -10,30 +10,33 @@ import {
 
 import * as styles from './CredentialCard.module.css';
 
-function useScrollIntoView(
+export function useScrollIntoView(
   expanded: boolean,
   cardRef: RefObject<HTMLLIElement>,
-) {
+  isContainerParent = true,
+): void {
   useEffect(() => {
-    const listElement = cardRef.current?.parentElement;
+    const containerElement = isContainerParent
+      ? cardRef.current?.parentElement
+      : document.getElementById('allCredentials');
 
-    if (expanded && cardRef.current && listElement) {
+    if (expanded && cardRef.current && containerElement) {
       const card = cardRef.current.getBoundingClientRect();
-      const list = listElement.getBoundingClientRect();
+      const container = containerElement.getBoundingClientRect();
 
-      const isCardOverflowing = card.bottom > list.bottom;
+      const isCardOverflowing = card.bottom > container.bottom;
 
       if (!isCardOverflowing) {
         return;
       }
 
-      if (card.height < list.height) {
+      if (card.height < container.height) {
         cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
       } else {
         cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  }, [expanded, cardRef]);
+  }, [expanded, cardRef, isContainerParent]);
 }
 
 function CredentialName({
@@ -141,7 +144,7 @@ export function CredentialCard({
         <button type="button" className={styles.expand} onClick={handleExpand}>
           <section className={styles.collapsedCredential}>
             <h4 className={styles.collapsedName}>{credential.name}</h4>
-            <p className={styles.collapsedFirstProp}>{contents[0][1]}</p>
+            <p className={styles.collapsedValue}>{contents[0][1]}</p>
           </section>
         </button>
       )}

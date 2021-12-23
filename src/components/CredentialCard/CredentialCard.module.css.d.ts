@@ -4,8 +4,9 @@ declare namespace CredentialCardModuleCssNamespace {
     buttons: string;
     collapse: string;
     collapsedCredential: string;
-    collapsedFirstProp: string;
     collapsedName: string;
+    collapsedShareCredential: string;
+    collapsedValue: string;
     credential: string;
     credentialsList: string;
     detail: string;
@@ -19,8 +20,17 @@ declare namespace CredentialCardModuleCssNamespace {
     input: string;
     name: string;
     nameValue: string;
+    notAttested: string;
+    required: string;
+    requiredInfo: string;
     remove: string;
     rule: string;
+    select: string;
+    selectable: string;
+    share: string;
+    shareExpanded: string;
+    shareLabel: string;
+    shareTechnical: string;
     technical: string;
   }
 }
