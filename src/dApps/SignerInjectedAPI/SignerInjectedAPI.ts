@@ -1,18 +1,30 @@
-import { SignerPayloadJSON } from '@polkadot/types/types/extrinsic';
-import { HexString } from '@polkadot/util/types';
+import {
+  SignerPayloadJSON,
+  SignerPayloadRaw,
+  SignerResult,
+} from '@polkadot/types/types/extrinsic';
 import { injectedSignChannel } from '../SignChannels/injectedSignChannel';
+import { injectedSignRawChannel } from '../SignRawChannels/injectedSignRawChannel';
 
 export class SignerInjectedAPI {
   dAppName: string;
 
   constructor(name: string) {
     this.dAppName = name;
+
+    this.signPayload = this.signPayload.bind(this);
+    this.signRaw = this.signRaw.bind(this);
   }
 
-  async signPayload(
-    payload: SignerPayloadJSON,
-  ): Promise<{ id: number; signature: HexString }> {
+  async signPayload(payload: SignerPayloadJSON): Promise<SignerResult> {
     return injectedSignChannel.get({
+      dAppName: this.dAppName,
+      payload,
+    });
+  }
+
+  async signRaw(payload: SignerPayloadRaw): Promise<SignerResult> {
+    return injectedSignRawChannel.get({
       dAppName: this.dAppName,
       payload,
     });

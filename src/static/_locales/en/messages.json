@@ -236,6 +236,9 @@
   "component_CredentialCard_revoked": {
     "message": "Revoked"
   },
+  "component_ShareCredentialCard_required": {
+    "message": "* required"
+  },
   "component_YouHaveIdentities_one": {
     "message": "You have $number$ Identity",
     "placeholders": {
@@ -588,31 +591,34 @@
   "view_IdentityCredentials_explainer": {
     "message": "Get Credentials"
   },
-  "view_ShareCredential_share": {
-    "message": "Share credential"
+  "view_ShareCredentialSelect_heading": {
+    "message": "Select a Credential"
   },
-  "view_ShareCredential_heading": {
-    "message": "Your Credentials"
+  "view_ShareCredentialSelect_subline": {
+    "message": "Select a credential to sign and share"
   },
-  "view_ShareCredential_subline": {
-    "message": "Pick a credential to share"
+  "view_ShareCredentialSelect_next": {
+    "message": "Next"
   },
-  "view_ShareCredential_name": {
-    "message": "Name"
+  "view_ShareCredentialSelect_no_credentials": {
+    "message": "No credentials available"
   },
-  "view_ShareCredential_ctype": {
-    "message": "C-Type"
+  "view_ShareCredentialSelect_explainer": {
+    "message": "Get Credentials"
   },
-  "view_ShareCredential_attester": {
-    "message": "Attester"
+  "view_ShareCredentialSign_heading": {
+    "message": "Share Credential"
   },
-  "view_ShareCredential_valid": {
-    "message": "Valid"
+  "view_ShareCredentialSign_subline": {
+    "message": "Check the information you’re about to share"
   },
-  "view_ShareCredential_CTA": {
+  "view_ShareCredentialSign_name": {
+    "message": "Credential name"
+  },
+  "view_ShareCredentialSign_CTA": {
     "message": "Share"
   },
-  "view_ShareCredential_error": {
+  "view_ShareCredentialSign_error": {
     "message": "The selected credential has not been attested."
   },
   "view_AppSettings_heading": {
@@ -690,6 +696,21 @@
   },
   "view_SignDApp_CTA": {
     "message": "Sign the Transaction"
+  },
+  "view_SignRawDApp_from": {
+    "message": "from"
+  },
+  "view_SignRawDApp_message": {
+    "message": "message"
+  },
+  "view_SignRawDApp_title": {
+    "message": "Sign the Message"
+  },
+  "view_SignRawDApp_reject": {
+    "message": "Reject"
+  },
+  "view_SignRawDApp_CTA": {
+    "message": "Sign the Message"
   },
   "view_ExternalAccess_heading": {
     "message": "Website Access"
