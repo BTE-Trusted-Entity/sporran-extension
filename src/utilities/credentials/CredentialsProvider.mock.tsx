@@ -1,5 +1,7 @@
 import { IAttestation } from '@kiltprotocol/types';
+
 import { ShareInput } from '../../channels/shareChannel/types';
+
 import { Credential } from './credentials';
 import { CredentialsContext } from './CredentialsContext';
 

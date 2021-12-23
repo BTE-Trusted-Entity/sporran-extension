@@ -1,6 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
+
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+
 import { IdentitySuccessOverlay } from './IdentitySuccessOverlay';
 
 export default {

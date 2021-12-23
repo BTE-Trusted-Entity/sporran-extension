@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { SaveBackupPhrase } from './SaveBackupPhrase';
 
 export default {

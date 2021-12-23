@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+
 import { configuration } from './configuration';
 
 export const ConfigurationContext = createContext(configuration);

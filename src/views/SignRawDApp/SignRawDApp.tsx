@@ -2,6 +2,8 @@ import { useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { u8aToHex } from '@polkadot/util';
 
+import * as styles from './SignRawDApp.module.css';
+
 import {
   decryptIdentity,
   useIdentities,
@@ -15,8 +17,6 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignRawChannel } from '../../dApps/SignRawChannels/backgroundSignRawChannel';
-
-import * as styles from './SignRawDApp.module.css';
 
 export interface SignRawData {
   origin: string;

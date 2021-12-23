@@ -3,16 +3,16 @@ import { useCallback, useState, useEffect, useRef } from 'react';
 import { includes, without, find } from 'lodash-es';
 import cx from 'classnames';
 
+import * as styles from './CredentialCard.module.css';
+
 import { Credential } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { Identity } from '../../utilities/identities/types';
 
 import { ShareInput } from '../../channels/shareChannel/types';
-
-import { useScrollIntoView } from './CredentialCard';
 import { Selected } from '../../views/ShareCredential/ShareCredential';
 
-import * as styles from './CredentialCard.module.css';
+import { useScrollIntoView } from './CredentialCard';
 
 const noRequiredProperties: string[] = [];
 

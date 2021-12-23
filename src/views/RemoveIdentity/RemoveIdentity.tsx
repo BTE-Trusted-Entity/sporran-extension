@@ -3,6 +3,8 @@ import { browser } from 'webextension-polyfill-ts';
 import { Link, useHistory } from 'react-router-dom';
 import { map, without } from 'lodash-es';
 
+import * as styles from './RemoveIdentity.module.css';
+
 import { Identity } from '../../utilities/identities/types';
 import { Balance } from '../../components/Balance/Balance';
 import {
@@ -13,8 +15,6 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { generatePath, paths } from '../paths';
 import { Avatar } from '../../components/Avatar/Avatar';
-
-import * as styles from './RemoveIdentity.module.css';
 
 interface Props {
   identity: Identity;

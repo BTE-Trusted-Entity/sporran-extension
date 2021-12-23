@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './DidUpgrade.module.css';
+
 import { Identity } from '../../utilities/identities/types';
 import {
   PasswordField,
@@ -26,8 +28,6 @@ import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { generatePath, paths } from '../paths';
-
-import * as styles from './DidUpgrade.module.css';
 
 interface Props {
   identity: Identity;

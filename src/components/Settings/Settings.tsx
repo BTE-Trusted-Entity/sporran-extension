@@ -3,6 +3,9 @@ import { browser } from 'webextension-polyfill-ts';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { Link, useRouteMatch } from 'react-router-dom';
 
+import * as menuStyles from '../Menu/Menu.module.css';
+import * as styles from './Settings.module.css';
+
 import { useIdentities } from '../../utilities/identities/identities';
 import {
   forgetAllPasswordsChannel,
@@ -10,9 +13,6 @@ import {
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
 import { useConfiguration } from '../../configuration/useConfiguration';
 import { generatePath, paths } from '../../views/paths';
-
-import * as menuStyles from '../Menu/Menu.module.css';
-import * as styles from './Settings.module.css';
 
 function useItemsCount(onExistingIdentity: boolean, hasPasswords: boolean) {
   const itemCounts = {

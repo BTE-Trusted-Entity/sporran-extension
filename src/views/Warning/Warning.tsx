@@ -1,10 +1,10 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import * as styles from './Warning.module.css';
+
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
-
-import * as styles from './Warning.module.css';
 
 export function Warning(): JSX.Element {
   const t = browser.i18n.getMessage;

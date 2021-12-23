@@ -4,6 +4,8 @@ import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { IDidDetails } from '@kiltprotocol/types';
 
+import * as styles from './DidDowngrade.module.css';
+
 import { Identity } from '../../utilities/identities/types';
 import {
   getDeposit,
@@ -28,8 +30,6 @@ import {
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-
-import * as styles from './DidDowngrade.module.css';
 
 interface Props {
   identity: Identity;

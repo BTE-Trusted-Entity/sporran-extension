@@ -8,8 +8,9 @@ import {
 
 import { paths } from '../paths';
 
-import { ShareCredentialSign } from './ShareCredentialSign';
 import { Selected } from '../ShareCredential/ShareCredential';
+
+import { ShareCredentialSign } from './ShareCredentialSign';
 
 const mockSelected: Selected = {
   credential: credentialsMock[0],

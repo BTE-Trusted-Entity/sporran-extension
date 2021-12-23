@@ -6,6 +6,7 @@ import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
 import { parseDidUrl } from '../did/did';
+
 import { CredentialsContext } from './CredentialsContext';
 
 type AttestationStatus = 'pending' | 'attested' | 'revoked';

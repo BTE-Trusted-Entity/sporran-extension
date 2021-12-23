@@ -1,6 +1,7 @@
 import userEvent from '@testing-library/user-event';
 
 import { render, screen } from '../../testing/testing';
+
 import { VerifyBackupPhrase } from './VerifyBackupPhrase';
 
 const backupPhrase =

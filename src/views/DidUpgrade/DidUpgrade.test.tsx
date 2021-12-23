@@ -1,4 +1,5 @@
 import BN from 'bn.js';
+
 import { render } from '../../testing/testing';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';

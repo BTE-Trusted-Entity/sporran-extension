@@ -1,6 +1,7 @@
 import BN from 'bn.js';
 
 import { render } from '../../testing/testing';
+
 import { asKiltCoins, KiltAmount } from './KiltAmount';
 
 describe('KiltAmount', () => {

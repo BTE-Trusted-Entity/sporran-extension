@@ -1,14 +1,14 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './CredentialCard.module.css';
+
 import {
   Credential,
   getCredentialDownload,
   saveCredential,
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
-
-import * as styles from './CredentialCard.module.css';
 
 export function useScrollIntoView(
   expanded: boolean,

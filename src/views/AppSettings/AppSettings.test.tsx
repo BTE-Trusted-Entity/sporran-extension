@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from '../../testing/testing';
+
 import { AppSettings } from './AppSettings';
 
 describe('AppSettings', () => {

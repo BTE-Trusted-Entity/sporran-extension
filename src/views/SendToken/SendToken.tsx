@@ -5,6 +5,8 @@ import { find } from 'lodash-es';
 import { DataUtils } from '@kiltprotocol/utils';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
+import * as styles from './SendToken.module.css';
+
 import { getFee } from '../../utilities/getFee/getFee';
 import { Identity } from '../../utilities/identities/types';
 import { isNew } from '../../utilities/identities/identities';
@@ -16,8 +18,6 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
 import { useOnline } from '../../utilities/useOnline/useOnline';
-
-import * as styles from './SendToken.module.css';
 
 const noError = null;
 const nonNumberCharacters = /[^0-9,.\u066C\u2019\u202F]/g;

@@ -1,8 +1,8 @@
 import { identitiesMock, render } from '../../testing/testing';
 
-import { Avatar } from './Avatar';
-
 import { mockIsFullDid } from '../../utilities/did/did.mock';
+
+import { Avatar } from './Avatar';
 
 describe('Avatar', () => {
   it('should render', async () => {

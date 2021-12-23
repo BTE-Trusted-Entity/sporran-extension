@@ -6,6 +6,7 @@ import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
 import BN from 'bn.js';
 
 import { originalBalancesMock } from '../balanceChanges/balanceChanges.mock';
+
 import { hasVestedFunds, signVest, submitVest } from './vesting';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({

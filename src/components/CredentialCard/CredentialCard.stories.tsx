@@ -1,10 +1,10 @@
 import { Meta } from '@storybook/react';
 
+import * as styles from './CredentialCard.module.css';
+
 import { credentialsMock } from '../../utilities/credentials/CredentialsProvider.mock';
 
 import { CredentialCard } from './CredentialCard';
-
-import * as styles from './CredentialCard.module.css';
 
 export default {
   title: 'Components/CredentialCard',

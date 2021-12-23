@@ -1,10 +1,11 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import * as styles from './SaveBackupPhrase.module.css';
+
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
 
-import * as styles from './SaveBackupPhrase.module.css';
 interface Props {
   backupPhrase: string;
 }

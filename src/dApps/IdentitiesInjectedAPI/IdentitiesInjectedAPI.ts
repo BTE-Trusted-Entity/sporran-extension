@@ -3,6 +3,7 @@ import {
   InjectedAccount,
   InjectedAccounts,
 } from '@polkadot/extension-inject/types';
+
 import { injectedIdentitiesChannel } from '../injectedIdentitiesChannel/injectedIdentitiesChannel';
 import { makeControlledPromise } from '../../utilities/makeControlledPromise/makeControlledPromise';
 

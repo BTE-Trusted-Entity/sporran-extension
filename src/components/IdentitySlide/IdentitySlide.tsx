@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './IdentitySlide.module.css';
+
 import { Avatar } from '../Avatar/Avatar';
 import { IdentityOptions } from '../IdentityOptions/IdentityOptions';
 
 import { Identity, saveIdentity } from '../../utilities/identities/identities';
-
-import * as styles from './IdentitySlide.module.css';
 
 interface Props {
   identity: Identity;

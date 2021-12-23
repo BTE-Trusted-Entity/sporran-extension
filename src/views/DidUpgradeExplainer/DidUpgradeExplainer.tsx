@@ -1,6 +1,8 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import * as styles from './DidUpgradeExplainer.module.css';
+
 import { Identity } from '../../utilities/identities/types';
 import { paths, generatePath } from '../paths';
 
@@ -8,8 +10,6 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-
-import * as styles from './DidUpgradeExplainer.module.css';
 
 interface Props {
   identity: Identity;

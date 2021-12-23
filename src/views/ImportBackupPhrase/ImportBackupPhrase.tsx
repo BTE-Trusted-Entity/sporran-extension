@@ -8,10 +8,10 @@ import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/bip39-en';
 import { mnemonicValidate } from '@polkadot/util-crypto';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './ImportBackupPhrase.module.css';
+
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { getKeypairByBackupPhrase } from '../../utilities/identities/identities';
-
-import * as styles from './ImportBackupPhrase.module.css';
 
 type BackupPhrase = string[];
 

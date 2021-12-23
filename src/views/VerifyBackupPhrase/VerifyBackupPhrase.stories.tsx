@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { VerifyBackupPhrase } from './VerifyBackupPhrase';
 
 export default {

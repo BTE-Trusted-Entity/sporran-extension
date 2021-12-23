@@ -4,6 +4,7 @@ import {
   render,
   waitForDialogUpdate,
 } from '../../testing/testing';
+
 import { IdentitySuccessOverlay } from './IdentitySuccessOverlay';
 
 const identity =

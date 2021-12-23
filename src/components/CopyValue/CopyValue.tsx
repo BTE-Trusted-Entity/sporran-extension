@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 
-import { useCopyButton } from '../useCopyButton/useCopyButton';
-
 import * as styles from './CopyValue.module.css';
+
+import { useCopyButton } from '../useCopyButton/useCopyButton';
 
 interface Props {
   value: string;

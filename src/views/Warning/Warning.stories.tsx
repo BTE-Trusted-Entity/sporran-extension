@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { Warning } from './Warning';
 
 export default {

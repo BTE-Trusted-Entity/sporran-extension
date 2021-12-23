@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/react';
 import { Link } from 'react-router-dom';
 
-import { LinkBack } from './LinkBack';
-
 import * as styles from './LinkBack.module.css';
+
+import { LinkBack } from './LinkBack';
 
 export default {
   title: 'Components/LinkBack',

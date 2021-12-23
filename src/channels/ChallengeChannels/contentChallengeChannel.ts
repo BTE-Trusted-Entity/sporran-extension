@@ -1,4 +1,5 @@
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+
 import { injectedChallengeChannel } from './injectedChallengeChannel';
 import { ChallengeInput, ChallengeOutput } from './types';
 

@@ -1,6 +1,8 @@
 import { useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './SignDid.module.css';
+
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { getIdentityCryptoFromKeypair } from '../../utilities/identities/identities';
@@ -14,8 +16,6 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignDidChannel } from '../../channels/SignDidChannels/backgroundSignDidChannel';
 import { SignDidPopupInput } from '../../channels/SignDidChannels/types';
-
-import * as styles from './SignDid.module.css';
 
 interface Props {
   identity: Identity;

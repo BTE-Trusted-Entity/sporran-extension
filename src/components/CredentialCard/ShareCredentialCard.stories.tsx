@@ -1,6 +1,8 @@
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
+import * as styles from './CredentialCard.module.css';
+
 import {
   mockRequestCredential,
   credentialsMock,
@@ -10,8 +12,6 @@ import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../../views/paths';
 
 import { ShareCredentialCard } from './ShareCredentialCard';
-
-import * as styles from './CredentialCard.module.css';
 
 export default {
   title: 'Components/ShareCredentialCard',

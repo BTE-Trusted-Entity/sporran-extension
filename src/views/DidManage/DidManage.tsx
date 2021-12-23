@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
+import * as styles from './DidManage.module.css';
+
 import { useConfiguration } from '../../configuration/useConfiguration';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
@@ -9,8 +11,6 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { generatePath, paths } from '../paths';
-
-import * as styles from './DidManage.module.css';
 
 interface Props {
   identity: Identity;

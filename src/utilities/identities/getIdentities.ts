@@ -1,4 +1,5 @@
 import { storage } from '../storage/storage';
+
 import { IdentitiesMap } from './types';
 
 export const IDENTITIES_KEY = 'identities';

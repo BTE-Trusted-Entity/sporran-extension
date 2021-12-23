@@ -1,10 +1,10 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Modal } from 'react-dialog-polyfill';
 
+import * as styles from './IdentitySuccessOverlay.module.css';
+
 import { Avatar } from '../Avatar/Avatar';
 import { Identity } from '../../utilities/identities/identities';
-
-import * as styles from './IdentitySuccessOverlay.module.css';
 
 interface Props {
   identity: Identity;

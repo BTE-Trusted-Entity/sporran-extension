@@ -3,11 +3,12 @@ import { Meta } from '@storybook/react';
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import { NEW } from '../../utilities/identities/identities';
 
-import { IdentityCredentials } from './IdentityCredentials';
 import {
   credentialsMock,
   CredentialsProviderMock,
 } from '../../utilities/credentials/CredentialsProvider.mock';
+
+import { IdentityCredentials } from './IdentityCredentials';
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];

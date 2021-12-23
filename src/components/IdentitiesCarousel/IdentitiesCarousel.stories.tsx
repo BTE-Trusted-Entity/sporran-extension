@@ -5,6 +5,7 @@ import {
   moreIdentitiesMock,
   IdentitiesProviderMock,
 } from '../../utilities/identities/IdentitiesProvider.mock';
+
 import { IdentitiesCarousel } from './IdentitiesCarousel';
 
 export default {

@@ -5,10 +5,11 @@ import { identitiesMock, render, screen } from '../../testing/testing';
 import { NEW } from '../../utilities/identities/identities';
 import { paths } from '../paths';
 
-import { IdentityOverview } from './IdentityOverview';
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
+
+import { IdentityOverview } from './IdentityOverview';
 
 jest.mock('../../utilities/credentials/credentials');
 jest.mock('../../utilities/useSubscanHost/useSubscanHost');

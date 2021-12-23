@@ -11,6 +11,8 @@ import {
   MessageBodyType,
 } from '@kiltprotocol/types';
 
+import * as styles from './SignQuote.module.css';
+
 import {
   getIdentityCryptoFromKeypair,
   Identity,
@@ -29,8 +31,6 @@ import {
 import { claimChannel } from '../../channels/claimChannel/claimChannel';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
-
-import * as styles from './SignQuote.module.css';
 
 export type Terms = ITerms & {
   claim: IClaim;

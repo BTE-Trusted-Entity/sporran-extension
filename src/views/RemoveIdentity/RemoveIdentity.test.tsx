@@ -1,4 +1,5 @@
 import { identitiesMock, render } from '../../testing/testing';
+
 import { RemoveIdentity } from './RemoveIdentity';
 
 const identity =

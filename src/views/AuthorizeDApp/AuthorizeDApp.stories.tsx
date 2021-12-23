@@ -4,6 +4,7 @@ import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 
 import { AccessInput } from '../../dApps/AccessChannels/browserAccessChannels';
 import { paths } from '../paths';
+
 import { AuthorizeDApp } from './AuthorizeDApp';
 
 export default {

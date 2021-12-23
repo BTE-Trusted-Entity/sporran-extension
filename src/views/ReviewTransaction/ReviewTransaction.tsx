@@ -3,6 +3,8 @@ import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
+import * as styles from './ReviewTransaction.module.css';
+
 import {
   signTransfer,
   submitTransfer,
@@ -19,8 +21,6 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { paths } from '../paths';
-
-import * as styles from './ReviewTransaction.module.css';
 
 interface Props {
   identity: Identity;

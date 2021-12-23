@@ -10,9 +10,9 @@ import {
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 
 import { paths } from '../paths';
+import { Selected } from '../ShareCredential/ShareCredential';
 
 import { ShareCredentialSelect } from './ShareCredentialSelect';
-import { Selected } from '../ShareCredential/ShareCredential';
 
 export default {
   title: 'Views/ShareCredentialSelect',

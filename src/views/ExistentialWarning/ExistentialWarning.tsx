@@ -1,9 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useHistory } from 'react-router-dom';
 
-import { LinkBack } from '../../components/LinkBack/LinkBack';
-
 import * as styles from './ExistentialWarning.module.css';
+
+import { LinkBack } from '../../components/LinkBack/LinkBack';
 
 interface Props {
   nextPath: string;

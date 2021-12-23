@@ -5,6 +5,8 @@ import { DidUtils } from '@kiltprotocol/did';
 import { last } from 'lodash-es';
 import { useHistory } from 'react-router-dom';
 
+import * as styles from './DidEndpointsForm.module.css';
+
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
@@ -14,8 +16,6 @@ import {
   queryFullDetailsFromIdentifier,
 } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
-
-import * as styles from './DidEndpointsForm.module.css';
 
 function DidEndpointCard({
   endpoint,

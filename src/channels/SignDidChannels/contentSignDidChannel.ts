@@ -1,4 +1,5 @@
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+
 import { injectedSignDidChannel } from './injectedSignDidChannel';
 import { SignDidPopupInput, SignDidPopupOutput } from './types';
 
