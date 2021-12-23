@@ -1,26 +1,16 @@
-declare namespace ShareCredentialSelectModuleCssNamespace {
-  export interface IShareCredentialSelectModuleCss {
-    allCredentials: string;
-    avatar: string;
-    buttonsLine: string;
-    cancel: string;
-    container: string;
-    heading: string;
-    identity: string;
-    identityLine: string;
-    identityCredentials: string;
-    info: string;
-    explainerLink: string;
-    list: string;
-    next: string;
-    noCredentials: string;
-    subline: string;
-  }
-}
-
-declare const ShareCredentialSelectModuleCssModule: ShareCredentialSelectModuleCssNamespace.IShareCredentialSelectModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: ShareCredentialSelectModuleCssNamespace.IShareCredentialSelectModuleCss;
-};
-
-export = ShareCredentialSelectModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const allCredentials: string;
+export const noCredentials: string;
+export const info: string;
+export const explainerLink: string;
+export const identityLine: string;
+export const identity: string;
+export const avatar: string;
+export const identityCredentials: string;
+export const list: string;
+export const buttonsLine: string;
+export const cancel: string;
+export const next: string;

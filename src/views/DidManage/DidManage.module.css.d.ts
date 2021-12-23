@@ -1,19 +1,9 @@
-declare namespace DidManageModuleCssNamespace {
-  export interface IDidManageModuleCss {
-    connect: string;
-    container: string;
-    didLine: string;
-    downgrade: string;
-    endpoints: string;
-    heading: string;
-    link: string;
-    subline: string;
-  }
-}
-
-declare const DidManageModuleCssModule: DidManageModuleCssNamespace.IDidManageModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: DidManageModuleCssNamespace.IDidManageModuleCss;
-};
-
-export = DidManageModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const link: string;
+export const didLine: string;
+export const endpoints: string;
+export const connect: string;
+export const downgrade: string;

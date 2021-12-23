@@ -1,21 +1,11 @@
-declare namespace UnlockVestedFundsModuleCssNamespace {
-  export interface IUnlockVestedFundsModuleCss {
-    avatar: string;
-    buttonsLine: string;
-    cancel: string;
-    container: string;
-    errorTooltip: string;
-    explanation: string;
-    heading: string;
-    name: string;
-    subline: string;
-    submit: string;
-  }
-}
-
-declare const UnlockVestedFundsModuleCssModule: UnlockVestedFundsModuleCssNamespace.IUnlockVestedFundsModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: UnlockVestedFundsModuleCssNamespace.IUnlockVestedFundsModuleCss;
-};
-
-export = UnlockVestedFundsModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const avatar: string;
+export const name: string;
+export const explanation: string;
+export const errorTooltip: string;
+export const buttonsLine: string;
+export const cancel: string;
+export const submit: string;

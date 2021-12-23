@@ -1,19 +1,9 @@
-declare namespace TxStatusModalModuleCssNamespace {
-  export interface ITxStatusModalModuleCss {
-    confirm: string;
-    error: string;
-    heading: string;
-    overlay: string;
-    subscan: string;
-    success: string;
-    transparent: string;
-    wrapper: string;
-  }
-}
-
-declare const TxStatusModalModuleCssModule: TxStatusModalModuleCssNamespace.ITxStatusModalModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: TxStatusModalModuleCssNamespace.ITxStatusModalModuleCss;
-};
-
-export = TxStatusModalModuleCssModule;
+export const __esModule: true;
+export const overlay: string;
+export const transparent: string;
+export const wrapper: string;
+export const success: string;
+export const error: string;
+export const heading: string;
+export const confirm: string;
+export const subscan: string;

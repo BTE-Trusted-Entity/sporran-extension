@@ -1,20 +1,11 @@
-declare namespace TypographyModuleCssNamespace {
-  export interface ITypographyModuleCss {
-    identityText: string;
-    balanceText: string;
-    buttonText: string;
-    importantHeadline: string;
-    inputText: string;
-    screenHeadline: string;
-    smallImportant: string;
-    smallText: string;
-    subline: string;
-  }
-}
-
-declare const TypographyModuleCssModule: TypographyModuleCssNamespace.ITypographyModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: TypographyModuleCssNamespace.ITypographyModuleCss;
-};
-
-export = TypographyModuleCssModule;
+export const __esModule: true;
+export const screenHeadline: string;
+export const importantHeadline: string;
+export const subline: string;
+export const identityText: string;
+export const buttonText: string;
+export const balanceText: string;
+export const smallText: string;
+export const smallImportant: string;
+export const inputText: string;
+export const errorText: string;

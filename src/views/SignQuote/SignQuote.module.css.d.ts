@@ -1,22 +1,12 @@
-declare namespace SignQuoteModuleCssNamespace {
-  export interface ISignQuoteModuleCss {
-    buttonsLine: string;
-    cancel: string;
-    container: string;
-    costs: string;
-    detailName: string;
-    detailValue: string;
-    details: string;
-    heading: string;
-    label: string;
-    subline: string;
-    submit: string;
-  }
-}
-
-declare const SignQuoteModuleCssModule: SignQuoteModuleCssNamespace.ISignQuoteModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: SignQuoteModuleCssNamespace.ISignQuoteModuleCss;
-};
-
-export = SignQuoteModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const details: string;
+export const detailName: string;
+export const detailValue: string;
+export const costs: string;
+export const label: string;
+export const buttonsLine: string;
+export const cancel: string;
+export const submit: string;

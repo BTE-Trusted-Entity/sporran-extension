@@ -1,19 +1,9 @@
-declare namespace PasswordFieldModuleCssNamespace {
-  export interface IPasswordFieldModuleCss {
-    errorTooltip: string;
-    password: string;
-    passwordLabel: string;
-    passwordLine: string;
-    remember: string;
-    rememberLabel: string;
-    reset: string;
-    resetLine: string;
-  }
-}
-
-declare const PasswordFieldModuleCssModule: PasswordFieldModuleCssNamespace.IPasswordFieldModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: PasswordFieldModuleCssNamespace.IPasswordFieldModuleCss;
-};
-
-export = PasswordFieldModuleCssModule;
+export const __esModule: true;
+export const resetLine: string;
+export const reset: string;
+export const passwordLabel: string;
+export const passwordLine: string;
+export const password: string;
+export const errorTooltip: string;
+export const rememberLabel: string;
+export const remember: string;

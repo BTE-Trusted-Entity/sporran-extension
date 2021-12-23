@@ -1,18 +1,8 @@
-declare namespace AuthorizeDAppModuleCssNamespace {
-  export interface IAuthorizeDAppModuleCss {
-    authorize: string;
-    container: string;
-    heading: string;
-    origin: string;
-    reject: string;
-    subline: string;
-    warning: string;
-  }
-}
-
-declare const AuthorizeDAppModuleCssModule: AuthorizeDAppModuleCssNamespace.IAuthorizeDAppModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: AuthorizeDAppModuleCssNamespace.IAuthorizeDAppModuleCss;
-};
-
-export = AuthorizeDAppModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const origin: string;
+export const warning: string;
+export const authorize: string;
+export const reject: string;

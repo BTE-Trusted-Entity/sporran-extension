@@ -1,14 +1,4 @@
-declare namespace QrCodeModuleCssNamespace {
-  export interface IQrCodeModuleCss {
-    code: string;
-    component: string;
-    logo: string;
-  }
-}
-
-declare const QrCodeModuleCssModule: QrCodeModuleCssNamespace.IQrCodeModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: QrCodeModuleCssNamespace.IQrCodeModuleCss;
-};
-
-export = QrCodeModuleCssModule;
+export const __esModule: true;
+export const component: string;
+export const code: string;
+export const logo: string;

@@ -1,18 +1,8 @@
-declare namespace ExistentialWarningModuleCssNamespace {
-  export interface IExistentialWarningModuleCss {
-    buttonsLine: string;
-    cancel: string;
-    confirm: string;
-    container: string;
-    headline: string;
-    subline: string;
-    warning: string;
-  }
-}
-
-declare const ExistentialWarningModuleCssModule: ExistentialWarningModuleCssNamespace.IExistentialWarningModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: ExistentialWarningModuleCssNamespace.IExistentialWarningModuleCss;
-};
-
-export = ExistentialWarningModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const headline: string;
+export const subline: string;
+export const warning: string;
+export const buttonsLine: string;
+export const confirm: string;
+export const cancel: string;

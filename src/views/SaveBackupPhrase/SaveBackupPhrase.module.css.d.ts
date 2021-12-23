@@ -1,20 +1,10 @@
-declare namespace SaveBackupPhraseModuleCssNamespace {
-  export interface ISaveBackupPhraseModuleCss {
-    buttons: string;
-    cancel: string;
-    container: string;
-    create: string;
-    heading: string;
-    item: string;
-    items: string;
-    subheading: string;
-    word: string;
-  }
-}
-
-declare const SaveBackupPhraseModuleCssModule: SaveBackupPhraseModuleCssNamespace.ISaveBackupPhraseModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: SaveBackupPhraseModuleCssNamespace.ISaveBackupPhraseModuleCss;
-};
-
-export = SaveBackupPhraseModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subheading: string;
+export const items: string;
+export const item: string;
+export const word: string;
+export const buttons: string;
+export const create: string;
+export const cancel: string;

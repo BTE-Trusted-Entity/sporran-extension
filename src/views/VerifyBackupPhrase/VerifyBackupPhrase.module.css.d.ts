@@ -1,23 +1,13 @@
-declare namespace VerifyBackupPhraseModuleCssNamespace {
-  export interface IVerifyBackupPhraseModuleCss {
-    cancel: string;
-    container: string;
-    correct: string;
-    heading: string;
-    incorrect: string;
-    index: string;
-    info: string;
-    selectableWords: string;
-    selectedWords: string;
-    submit: string;
-    tooltip: string;
-    word: string;
-  }
-}
-
-declare const VerifyBackupPhraseModuleCssModule: VerifyBackupPhraseModuleCssNamespace.IVerifyBackupPhraseModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: VerifyBackupPhraseModuleCssNamespace.IVerifyBackupPhraseModuleCss;
-};
-
-export = VerifyBackupPhraseModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const info: string;
+export const heading: string;
+export const selectedWords: string;
+export const selectableWords: string;
+export const word: string;
+export const correct: string;
+export const index: string;
+export const incorrect: string;
+export const tooltip: string;
+export const cancel: string;
+export const submit: string;

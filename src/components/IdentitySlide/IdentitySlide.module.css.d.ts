@@ -1,19 +1,9 @@
-declare namespace IdentitySlideModuleCssNamespace {
-  export interface IIdentitySlideModuleCss {
-    add: string;
-    cancel: string;
-    centeredNameLine: string;
-    form: string;
-    input: string;
-    name: string;
-    nameLine: string;
-    save: string;
-  }
-}
-
-declare const IdentitySlideModuleCssModule: IdentitySlideModuleCssNamespace.IIdentitySlideModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: IdentitySlideModuleCssNamespace.IIdentitySlideModuleCss;
-};
-
-export = IdentitySlideModuleCssModule;
+export const __esModule: true;
+export const nameLine: string;
+export const centeredNameLine: string;
+export const name: string;
+export const form: string;
+export const input: string;
+export const save: string;
+export const cancel: string;
+export const add: string;

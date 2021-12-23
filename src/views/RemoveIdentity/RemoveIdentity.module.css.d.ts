@@ -1,21 +1,11 @@
-declare namespace RemoveIdentityModuleCssNamespace {
-  export interface IRemoveIdentityModuleCss {
-    address: string;
-    addressLabel: string;
-    buttonsLine: string;
-    cancel: string;
-    container: string;
-    explanation: string;
-    heading: string;
-    name: string;
-    remove: string;
-    subline: string;
-  }
-}
-
-declare const RemoveIdentityModuleCssModule: RemoveIdentityModuleCssNamespace.IRemoveIdentityModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: RemoveIdentityModuleCssNamespace.IRemoveIdentityModuleCss;
-};
-
-export = RemoveIdentityModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const name: string;
+export const addressLabel: string;
+export const address: string;
+export const explanation: string;
+export const buttonsLine: string;
+export const cancel: string;
+export const remove: string;

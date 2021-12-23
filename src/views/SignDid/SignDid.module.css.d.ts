@@ -1,23 +1,13 @@
-declare namespace SignDidModuleCssNamespace {
-  export interface ISignDidModuleCss {
-    address: string;
-    buttonsLine: string;
-    container: string;
-    errorTooltip: string;
-    heading: string;
-    label: string;
-    origin: string;
-    plaintext: string;
-    plaintextLine: string;
-    reject: string;
-    subline: string;
-    submit: string;
-  }
-}
-
-declare const SignDidModuleCssModule: SignDidModuleCssNamespace.ISignDidModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: SignDidModuleCssNamespace.ISignDidModuleCss;
-};
-
-export = SignDidModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const label: string;
+export const origin: string;
+export const plaintextLine: string;
+export const plaintext: string;
+export const address: string;
+export const buttonsLine: string;
+export const reject: string;
+export const submit: string;
+export const errorTooltip: string;

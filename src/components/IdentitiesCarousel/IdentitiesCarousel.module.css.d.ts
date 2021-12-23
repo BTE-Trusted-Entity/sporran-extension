@@ -1,21 +1,11 @@
-declare namespace IdentitiesCarouselModuleCssNamespace {
-  export interface IIdentitiesCarouselModuleCss {
-    add: string;
-    addActive: string;
-    bubble: string;
-    bubbleActive: string;
-    bubbles: string;
-    chevron: string;
-    container: string;
-    item: string;
-    left: string;
-    right: string;
-  }
-}
-
-declare const IdentitiesCarouselModuleCssModule: IdentitiesCarouselModuleCssNamespace.IIdentitiesCarouselModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: IdentitiesCarouselModuleCssNamespace.IIdentitiesCarouselModuleCss;
-};
-
-export = IdentitiesCarouselModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const chevron: string;
+export const left: string;
+export const right: string;
+export const bubbles: string;
+export const item: string;
+export const bubble: string;
+export const bubbleActive: string;
+export const add: string;
+export const addActive: string;

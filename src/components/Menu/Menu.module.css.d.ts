@@ -1,19 +1,9 @@
-declare namespace MenuModuleCssNamespace {
-  export interface IMenuModuleCss {
-    disabled: string;
-    dropdown: string;
-    heading: string;
-    list: string;
-    listButton: string;
-    listItem: string;
-    toggle: string;
-    wrapper: string;
-  }
-}
-
-declare const MenuModuleCssModule: MenuModuleCssNamespace.IMenuModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: MenuModuleCssNamespace.IMenuModuleCss;
-};
-
-export = MenuModuleCssModule;
+export const __esModule: true;
+export const wrapper: string;
+export const dropdown: string;
+export const toggle: string;
+export const heading: string;
+export const list: string;
+export const listItem: string;
+export const disabled: string;
+export const listButton: string;

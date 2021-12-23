@@ -1,32 +1,22 @@
-declare namespace SendTokenModuleCssNamespace {
-  export interface ISendTokenModuleCss {
-    all: string;
-    amount: string;
-    amountError: string;
-    amountLine: string;
-    container: string;
-    decrease: string;
-    heading: string;
-    increase: string;
-    maximum: string;
-    offlineError: string;
-    recipient: string;
-    recipientError: string;
-    recipientLine: string;
-    recipientWithButton: string;
-    setTip: string;
-    subline: string;
-    submit: string;
-    submitLine: string;
-    tip: string;
-    total: string;
-    totalLine: string;
-  }
-}
-
-declare const SendTokenModuleCssModule: SendTokenModuleCssNamespace.ISendTokenModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: SendTokenModuleCssNamespace.ISendTokenModuleCss;
-};
-
-export = SendTokenModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const maximum: string;
+export const amountLine: string;
+export const amount: string;
+export const amountError: string;
+export const all: string;
+export const setTip: string;
+export const increase: string;
+export const decrease: string;
+export const totalLine: string;
+export const total: string;
+export const tip: string;
+export const recipientLine: string;
+export const recipient: string;
+export const recipientWithButton: string;
+export const recipientError: string;
+export const submitLine: string;
+export const submit: string;
+export const offlineError: string;

@@ -1,17 +1,7 @@
-declare namespace IdentityCredentialsModuleCssNamespace {
-  export interface IIdentityCredentialsModuleCss {
-    container: string;
-    credentials: string;
-    explainerLink: string;
-    heading: string;
-    info: string;
-    subline: string;
-  }
-}
-
-declare const IdentityCredentialsModuleCssModule: IdentityCredentialsModuleCssNamespace.IIdentityCredentialsModuleCss & {
-  /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: IdentityCredentialsModuleCssNamespace.IIdentityCredentialsModuleCss;
-};
-
-export = IdentityCredentialsModuleCssModule;
+export const __esModule: true;
+export const container: string;
+export const heading: string;
+export const subline: string;
+export const credentials: string;
+export const info: string;
+export const explainerLink: string;
