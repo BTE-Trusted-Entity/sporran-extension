@@ -194,9 +194,6 @@
   "component_PasswordField_remember": {
     "message": "Remember password for the next 15 minutes"
   },
-  "component_UpcomingFeatureModal_info": {
-    "message": "It is not yet possible to transfer KILT Coins via the KILT blockchain. Please visit <a href='https://sporran.org/' target='_blank' rel='noreferrer'>sporran.org</a> to check whether this functionality is live, then ensure your extension is up-to-date."
-  },
   "component_CredentialCard_collapse": {
     "message": "Collapse credential details"
   },
