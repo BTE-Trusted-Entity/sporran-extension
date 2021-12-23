@@ -81,6 +81,7 @@ export function ShareCredentialSign({
         selectedAttributes: sharedProps,
         signer: keystore,
         claimerDid: didDetails,
+        challenge,
       });
 
       const credentialsBody: ISubmitCredential = {
