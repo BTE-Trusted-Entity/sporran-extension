@@ -697,6 +697,21 @@
   "view_SignDApp_CTA": {
     "message": "Sign the Transaction"
   },
+  "view_SignRawDApp_from": {
+    "message": "from"
+  },
+  "view_SignRawDApp_message": {
+    "message": "message"
+  },
+  "view_SignRawDApp_title": {
+    "message": "Sign the Message"
+  },
+  "view_SignRawDApp_reject": {
+    "message": "Reject"
+  },
+  "view_SignRawDApp_CTA": {
+    "message": "Sign the Message"
+  },
   "view_ExternalAccess_heading": {
     "message": "Website Access"
   },

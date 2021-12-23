@@ -4,4 +4,5 @@ export type PopupAction =
   | 'save'
   | 'share'
   | 'sign'
+  | 'signRaw'
   | 'signDid';
