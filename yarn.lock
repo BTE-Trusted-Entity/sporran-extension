@@ -1865,7 +1865,7 @@
     "@babel/runtime" "^7.16.5"
     "@polkadot/util" "^8.2.2"
 
-"@polkadot/types@6.12.1", "@polkadot/types@^6.11.1", "@polkadot/types@^6.12.1":
+"@polkadot/types@6.12.1", "@polkadot/types@^6.11.1":
   version "6.12.1"
   resolved "https://registry.yarnpkg.com/@polkadot/types/-/types-6.12.1.tgz#e5d6dff997740c3da947fa67abe2e1ec144c4757"
   integrity sha512-O37cAGUL0xiXTuO3ySweVh0OuFUD6asrd0TfuzGsEp3jAISWdElEHV5QDiftWq8J9Vf8BMgTcP2QLFbmSusxqA==
