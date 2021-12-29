@@ -16,7 +16,10 @@ export const backgroundAccessChannel = new PopupChannel<
   AccessOutput
 >('authorize');
 
-async function checkAccess(input: AccessInput, sender: Runtime.MessageSender) {
+async function unsafeCheckAccess(
+  input: AccessInput,
+  sender: Runtime.MessageSender,
+) {
   const authorizedDApps = await getAuthorized();
 
   const origin = getOrigin(sender);
@@ -45,6 +48,8 @@ async function checkAccess(input: AccessInput, sender: Runtime.MessageSender) {
   return true;
 }
 
+export const checkAccess = debounceAsync(unsafeCheckAccess);
+
 export function initBackgroundAccessChannel(): void {
-  contentAccessChannel.produce(debounceAsync(checkAccess));
+  contentAccessChannel.produce(checkAccess);
 }
