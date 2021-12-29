@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import { browser, Runtime } from 'webextension-polyfill-ts';
 
 import { makeControlledPromise } from '../../../utilities/makeControlledPromise/makeControlledPromise';
 import {
@@ -23,10 +23,6 @@ type MaybeSuccessMessage<JsonOutput> =
       callId: string;
       error: string;
     };
-
-type SenderType = Parameters<
-  Parameters<typeof browser.runtime.onMessage.addListener>[0]
->[1];
 
 export class BrowserChannel<
   Input = void,
@@ -123,11 +119,11 @@ export class BrowserChannel<
   }
 
   produce(
-    producer: (input: Input, sender: SenderType) => Promise<Output>,
+    producer: (input: Input, sender: Runtime.MessageSender) => Promise<Output>,
   ): () => void {
     const wrappedProducer = (
       message: { type: string; input: JsonInput },
-      sender: SenderType,
+      sender: Runtime.MessageSender,
     ): Promise<JsonOutput | ErrorMessage> | void => {
       if (message.type !== this.input) {
         return;
@@ -175,7 +171,7 @@ export class BrowserChannel<
     subscriber: (
       input: Input,
       publisher: ErrorFirstCallback<Output>,
-      sender: SenderType,
+      sender: Runtime.MessageSender,
     ) => void,
   ): () => void {
     const wrappedSubscriber = (
@@ -184,7 +180,7 @@ export class BrowserChannel<
         callId: string;
         input: JsonInput;
       },
-      sender: SenderType,
+      sender: Runtime.MessageSender,
     ) => {
       if (message.type !== this.input) {
         return;
@@ -217,11 +213,11 @@ export class BrowserChannel<
   forward(channel: { get: (input: Input) => Promise<Output> }): () => void;
 
   forward(channel: {
-    get: (input: Input, sender: SenderType) => Promise<Output>;
+    get: (input: Input, sender: Runtime.MessageSender) => Promise<Output>;
   }): () => void;
 
   forward(channel: {
-    get: (input: Input, sender?: SenderType) => Promise<Output>;
+    get: (input: Input, sender?: Runtime.MessageSender) => Promise<Output>;
   }): () => void {
     return this.produce((input, sender) => channel.get(input, sender));
   }

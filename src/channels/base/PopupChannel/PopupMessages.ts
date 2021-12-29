@@ -1,6 +1,6 @@
 import type { AnyJson } from '@polkadot/types/types';
 
-import { browser, Windows } from 'webextension-polyfill-ts';
+import { browser, Runtime, Windows } from 'webextension-polyfill-ts';
 
 import { PopupAction } from '../../../utilities/popups/types';
 import { jsonToBase64 } from '../../../utilities/popups/usePopupData';
@@ -74,7 +74,7 @@ export async function showPopup(
   action: PopupAction,
   input: AnyJson,
   callId: string,
-  sender: { tab?: { id?: number; windowId?: number } },
+  sender: Runtime.MessageSender,
 ): Promise<Windows.Window> {
   tabId = sender.tab?.id;
 

@@ -1,11 +1,11 @@
 import type {
-  ExtrinsicPayload,
   ExtrinsicEra,
+  ExtrinsicPayload,
 } from '@polkadot/types/interfaces';
 
 import BN from 'bn.js';
 import { map, zip } from 'lodash-es';
-import { browser } from 'webextension-polyfill-ts';
+import { Runtime } from 'webextension-polyfill-ts';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { SignerPayloadJSON } from '@polkadot/types/types/extrinsic';
@@ -26,10 +26,6 @@ interface SignBgInput {
 }
 
 type SignBgOutput = string;
-
-type SenderType = Parameters<
-  Parameters<typeof browser.runtime.onMessage.addListener>[0]
->[1];
 
 export const backgroundSignChannel = new PopupChannel<
   SignBgInput,
@@ -84,7 +80,7 @@ function signExtrinsic(extrinsic: ExtrinsicPayload, keypair: KeyringPair) {
 
 async function getSignature(
   input: Parameters<typeof contentSignChannel.get>[0],
-  sender: SenderType,
+  sender: Runtime.MessageSender,
 ) {
   const { origin, address, genesisHash } = input;
 

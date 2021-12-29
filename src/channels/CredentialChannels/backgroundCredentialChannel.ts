@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import { Runtime } from 'webextension-polyfill-ts';
 import {
   IEncryptedMessage,
   IRejectTerms,
@@ -19,13 +19,9 @@ export const backgroundCredentialChannel = new BrowserChannel<
   CredentialOutput
 >('credential');
 
-type SenderType = Parameters<
-  Parameters<typeof browser.runtime.onMessage.addListener>[0]
->[1];
-
 async function showCredentialPopup(
   input: CredentialInput,
-  sender: SenderType,
+  sender: Runtime.MessageSender,
 ): Promise<IEncryptedMessage | void> {
   const { message: encrypted, dAppName } = input;
 
