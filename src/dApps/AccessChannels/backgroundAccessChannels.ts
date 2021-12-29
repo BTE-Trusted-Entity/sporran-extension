@@ -1,3 +1,6 @@
+import { Runtime } from 'webextension-polyfill-ts';
+
+import { debounceAsync } from '../../utilities/debounceAsync/debounceAsync';
 import { PopupChannel } from '../../channels/base/PopupChannel/PopupChannel';
 import {
   getAuthorized,
@@ -13,33 +16,35 @@ export const backgroundAccessChannel = new PopupChannel<
   AccessOutput
 >('authorize');
 
-export function initBackgroundAccessChannel(): void {
-  contentAccessChannel.produce(async (input, sender) => {
-    const authorizedDApps = await getAuthorized();
+async function checkAccess(input: AccessInput, sender: Runtime.MessageSender) {
+  const authorizedDApps = await getAuthorized();
 
-    const origin = getOrigin(sender);
-    if (authorizedDApps[origin]) {
-      return true;
-    }
-
-    if (authorizedDApps[origin] === false) {
-      throw new Error('Not authorized');
-    }
-
-    const authorized = await backgroundAccessChannel.get(
-      { ...input, origin },
-      sender,
-    );
-
-    await setAuthorized({
-      ...authorizedDApps,
-      [origin]: authorized,
-    });
-
-    if (!authorized) {
-      throw new Error('Not authorized');
-    }
-
+  const origin = getOrigin(sender);
+  if (authorizedDApps[origin]) {
     return true;
+  }
+
+  if (authorizedDApps[origin] === false) {
+    throw new Error('Not authorized');
+  }
+
+  const authorized = await backgroundAccessChannel.get(
+    { ...input, origin },
+    sender,
+  );
+
+  await setAuthorized({
+    ...authorizedDApps,
+    [origin]: authorized,
   });
+
+  if (!authorized) {
+    throw new Error('Not authorized');
+  }
+
+  return true;
+}
+
+export function initBackgroundAccessChannel(): void {
+  contentAccessChannel.produce(debounceAsync(checkAccess));
 }

@@ -13,7 +13,7 @@ describe('debounceAsync', () => {
     callback.mockClear();
 
     debounced(1);
-    await debounced(1);
+    debounced(1);
     expect(callback).toHaveBeenCalledTimes(1);
   });
 
