@@ -8,7 +8,7 @@ import {
   IDENTITIES_KEY,
   getIdentities,
 } from '../../utilities/identities/getIdentities';
-import { checkAccess } from '../checkAccess/checkAccess';
+import { contentAccessChannel } from '../AccessChannels/contentAccessChannel';
 
 async function getIdentitiesForInjectedAPI(): Promise<InjectedAccount[]> {
   const identities = await getIdentities();
@@ -46,7 +46,7 @@ function subscribe(
 
 export function initContentIdentitiesChannel(origin: string): () => void {
   return injectedIdentitiesChannel.publish(async (dAppName, publisher) => {
-    await checkAccess(dAppName, origin);
+    await contentAccessChannel.get({ dAppName, origin });
     publisher(null, await getIdentitiesForInjectedAPI());
     return subscribe((identities) => publisher(null, identities));
   });

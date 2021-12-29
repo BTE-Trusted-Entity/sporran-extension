@@ -1,12 +1,8 @@
 import { WindowChannel } from '../../channels/base/WindowChannel/WindowChannel';
 
-interface AccessInput {
-  dAppName: string;
-}
-
-type AccessOutput = void;
+import { AccessInput, AccessOutput } from './types';
 
 export const injectedAccessChannel = new WindowChannel<
-  AccessInput,
+  Omit<AccessInput, 'origin'>,
   AccessOutput
 >('access');

@@ -1,5 +1,5 @@
 import { BrowserChannel } from '../../channels/base/BrowserChannel/BrowserChannel';
-import { checkAccess } from '../checkAccess/checkAccess';
+import { contentAccessChannel } from '../AccessChannels/contentAccessChannel';
 
 import { injectedSignChannel } from './injectedSignChannel';
 import { SignPopupInput, SignPopupOutput } from './types';
@@ -11,7 +11,7 @@ export const contentSignChannel = new BrowserChannel<
 
 export function initContentSignChannel(origin: string): () => void {
   return injectedSignChannel.produce(async (input) => {
-    await checkAccess(input.dAppName, origin);
+    await contentAccessChannel.get({ dAppName: input.dAppName, origin });
     return contentSignChannel.get({ ...input, origin });
   });
 }

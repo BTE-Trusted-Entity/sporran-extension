@@ -4,15 +4,13 @@ import { useCallback } from 'react';
 import * as styles from './AuthorizeDApp.module.css';
 
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import {
-  backgroundAccessChannel,
-  AccessInput,
-} from '../../dApps/AccessChannels/browserAccessChannels';
+import { backgroundAccessChannel } from '../../dApps/AccessChannels/backgroundAccessChannels';
+import { AccessInput } from '../../dApps/AccessChannels/types';
 
 export function AuthorizeDApp(): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { name, origin } = usePopupData<AccessInput>();
+  const { dAppName, origin } = usePopupData<AccessInput>();
 
   const handleAuthorizeClick = useCallback(async () => {
     await backgroundAccessChannel.return(true);
@@ -28,7 +26,7 @@ export function AuthorizeDApp(): JSX.Element {
     <section className={styles.container}>
       <h1 className={styles.heading}>{t('view_AuthorizeDApp_title')}</h1>
       <p className={styles.subline}>
-        {t('view_AuthorizeDApp_subline', [name])}
+        {t('view_AuthorizeDApp_subline', [dAppName])}
       </p>
 
       <p className={styles.origin}>{origin}</p>
