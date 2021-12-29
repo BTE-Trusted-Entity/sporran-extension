@@ -8,8 +8,6 @@ export const contentAccessChannel = new BrowserChannel<
   AccessOutput
 >('access');
 
-export function initContentAccessChannel(origin: string): void {
-  injectedAccessChannel.produce(async (input) =>
-    contentAccessChannel.get({ dAppName: input.dAppName, origin }),
-  );
+export function initContentAccessChannel(): void {
+  injectedAccessChannel.forward(contentAccessChannel);
 }

@@ -44,9 +44,9 @@ function subscribe(
   return () => browser.storage.onChanged.removeListener(handleChanges);
 }
 
-export function initContentIdentitiesChannel(origin: string): () => void {
+export function initContentIdentitiesChannel(): () => void {
   return injectedIdentitiesChannel.publish(async (dAppName, publisher) => {
-    await contentAccessChannel.get({ dAppName, origin });
+    await contentAccessChannel.get({ dAppName });
     publisher(null, await getIdentitiesForInjectedAPI());
     return subscribe((identities) => publisher(null, identities));
   });

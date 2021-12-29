@@ -11,7 +11,7 @@ export const contentSignRawChannel = new BrowserChannel<
 
 export function initContentSignRawChannel(origin: string): () => void {
   return injectedSignRawChannel.produce(async (input) => {
-    await contentAccessChannel.get({ dAppName: input.dAppName, origin });
+    await contentAccessChannel.get(input);
     return contentSignRawChannel.get({ ...input, origin });
   });
 }

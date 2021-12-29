@@ -5,10 +5,11 @@ import {
 } from '../../utilities/authorizedStorage/authorizedStorage';
 
 import { contentAccessChannel } from './contentAccessChannel';
+import { getOrigin, Origin } from './getOrigin';
 import { AccessInput, AccessOutput } from './types';
 
 export const backgroundAccessChannel = new PopupChannel<
-  AccessInput,
+  AccessInput & Origin,
   AccessOutput
 >('authorize');
 
@@ -16,7 +17,7 @@ export function initBackgroundAccessChannel(): void {
   contentAccessChannel.produce(async (input, sender) => {
     const authorizedDApps = await getAuthorized();
 
-    const { origin, dAppName } = input;
+    const origin = getOrigin(sender);
     if (authorizedDApps[origin]) {
       return true;
     }
@@ -26,7 +27,7 @@ export function initBackgroundAccessChannel(): void {
     }
 
     const authorized = await backgroundAccessChannel.get(
-      { dAppName, origin },
+      { ...input, origin },
       sender,
     );
 

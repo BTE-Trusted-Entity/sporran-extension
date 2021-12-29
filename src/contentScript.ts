@@ -24,8 +24,8 @@ function initMessages() {
   initContentChallengeChannel();
 
   const origin = new URL(window.location.href).host;
-  initContentAccessChannel(origin);
-  initContentIdentitiesChannel(origin);
+  initContentAccessChannel();
+  initContentIdentitiesChannel();
   initContentSignChannel(origin);
   initContentSignRawChannel(origin);
   initContentSignDidChannel(origin);

@@ -11,7 +11,7 @@ export const contentSignChannel = new BrowserChannel<
 
 export function initContentSignChannel(origin: string): () => void {
   return injectedSignChannel.produce(async (input) => {
-    await contentAccessChannel.get({ dAppName: input.dAppName, origin });
+    await contentAccessChannel.get(input);
     return contentSignChannel.get({ ...input, origin });
   });
 }

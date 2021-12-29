@@ -6,11 +6,12 @@ import * as styles from './AuthorizeDApp.module.css';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { backgroundAccessChannel } from '../../dApps/AccessChannels/backgroundAccessChannels';
 import { AccessInput } from '../../dApps/AccessChannels/types';
+import { Origin } from '../../dApps/AccessChannels/getOrigin';
 
 export function AuthorizeDApp(): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { dAppName, origin } = usePopupData<AccessInput>();
+  const { dAppName, origin } = usePopupData<AccessInput & Origin>();
 
   const handleAuthorizeClick = useCallback(async () => {
     await backgroundAccessChannel.return(true);
