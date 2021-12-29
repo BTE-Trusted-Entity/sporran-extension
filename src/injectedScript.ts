@@ -96,7 +96,8 @@ async function signWithDid(plaintext: string): Promise<{
   signature: string;
   did: string;
 }> {
-  return injectedSignDidChannel.get({ plaintext });
+  const dAppName = document.title.substring(0, 50);
+  return injectedSignDidChannel.get({ plaintext, dAppName });
 }
 
 function main() {

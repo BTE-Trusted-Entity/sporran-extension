@@ -22,13 +22,11 @@ function injectScript() {
 function initMessages() {
   initContentCredentialChannel();
   initContentChallengeChannel();
-
-  const origin = new URL(window.location.href).host;
   initContentAccessChannel();
   initContentIdentitiesChannel();
-  initContentSignChannel(origin);
-  initContentSignRawChannel(origin);
-  initContentSignDidChannel(origin);
+  initContentSignChannel();
+  initContentSignRawChannel();
+  initContentSignDidChannel();
 }
 
 async function main() {

@@ -1,5 +1,5 @@
 import { PopupChannel } from '../../channels/base/PopupChannel/PopupChannel';
-import { checkAccess } from '../AccessChannels/backgroundAccessChannels';
+import { getAuthorizedOrigin } from '../AccessChannels/getAuthorizedOrigin';
 
 import { contentSignRawChannel } from './contentSignRawChannel';
 import { SignRawPopupInput, SignRawPopupOutput } from './types';
@@ -13,10 +13,11 @@ let id = 0;
 
 export function initBackgroundSignRawChannel(): void {
   contentSignRawChannel.produce(async (input, sender) => {
-    await checkAccess(input, sender);
+    const origin = await getAuthorizedOrigin(input, sender);
     return backgroundSignRawChannel.get(
       {
         ...input,
+        origin,
         id: ++id,
       },
       sender,

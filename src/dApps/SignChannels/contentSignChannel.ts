@@ -4,12 +4,10 @@ import { injectedSignChannel } from './injectedSignChannel';
 import { SignPopupInput, SignPopupOutput } from './types';
 
 export const contentSignChannel = new BrowserChannel<
-  SignPopupInput,
+  Omit<SignPopupInput, 'origin'>,
   SignPopupOutput
 >('sign');
 
-export function initContentSignChannel(origin: string): () => void {
-  return injectedSignChannel.produce(async (input) =>
-    contentSignChannel.get({ ...input, origin }),
-  );
+export function initContentSignChannel(): () => void {
+  return injectedSignChannel.forward(contentSignChannel);
 }

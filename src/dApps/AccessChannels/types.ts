@@ -2,4 +2,4 @@ export interface AccessInput {
   dAppName: string;
 }
 
-export type AccessOutput = boolean;
+export type AccessOutput = string;
