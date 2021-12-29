@@ -1,24 +1,17 @@
-import {
-  SignerPayloadJSON,
-  SignerResult,
-} from '@polkadot/types/types/extrinsic';
-
 import { BrowserChannel } from '../../channels/base/BrowserChannel/BrowserChannel';
 import { checkAccess } from '../checkAccess/checkAccess';
 
 import { injectedSignChannel } from './injectedSignChannel';
+import { SignPopupInput, SignPopupOutput } from './types';
 
-type SignInput = SignerPayloadJSON & { origin: string };
-
-type SignOutput = SignerResult;
-
-export const contentSignChannel = new BrowserChannel<SignInput, SignOutput>(
-  'dAppSign',
-);
+export const contentSignChannel = new BrowserChannel<
+  SignPopupInput,
+  SignPopupOutput
+>('sign');
 
 export function initContentSignChannel(origin: string): () => void {
-  return injectedSignChannel.produce(async ({ dAppName, payload }) => {
-    await checkAccess(dAppName, origin);
-    return contentSignChannel.get({ ...payload, origin });
+  return injectedSignChannel.produce(async (input) => {
+    await checkAccess(input.dAppName, origin);
+    return contentSignChannel.get({ ...input, origin });
   });
 }

@@ -3,7 +3,10 @@ import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './SignDApp.module.css';
 
-import { useIdentities } from '../../utilities/identities/identities';
+import {
+  decryptIdentity,
+  useIdentities,
+} from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
@@ -12,60 +15,20 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignChannel } from '../../dApps/SignChannels/backgroundSignChannel';
+import { SignPopupInput } from '../../dApps/SignChannels/types';
 
-export interface ExtrinsicData {
-  origin: string;
-  address: string;
-  specVersion: number;
-  nonce: number;
-  method: string;
-  lifetimeStart?: number;
-  lifetimeEnd?: number;
-}
-
-function formatBlock(block: number) {
-  const locale = browser.i18n.getUILanguage();
-  const formatter = new Intl.NumberFormat(locale, { useGrouping: true });
-  return formatter.format(block);
-}
-
-function getExtrinsicValues({
-  origin,
-  specVersion,
-  nonce,
-  method,
-  lifetimeStart,
-  lifetimeEnd,
-}: ExtrinsicData) {
-  const t = browser.i18n.getMessage;
-
-  const lifetime =
-    lifetimeStart && lifetimeEnd
-      ? t('view_SignDApp_mortal', [
-          formatBlock(lifetimeStart),
-          formatBlock(lifetimeEnd),
-        ])
-      : t('view_SignDApp_immortal');
-
-  return [
-    { value: origin, label: t('view_SignDApp_from') },
-    { value: specVersion, label: t('view_SignDApp_version') },
-    { value: nonce, label: t('view_SignDApp_nonce') },
-    { value: method, label: t('view_SignDApp_method') },
-    { value: lifetime, label: t('view_SignDApp_lifetime') },
-  ];
-}
+import { getExtrinsic, useExtrinsicValues } from './useExtrinsicValues';
 
 export function SignDApp(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const data = usePopupData<ExtrinsicData>();
-  const values = getExtrinsicValues(data);
+  const input = usePopupData<SignPopupInput>();
+  const values = useExtrinsicValues(input);
 
   const passwordField = usePasswordField();
 
   const identities = useIdentities().data;
-  const identity = identities && identities[data.address as string];
+  const identity = identities && identities[input.address as string];
 
   const handleSubmit = useCallback(
     async (event) => {
@@ -75,12 +38,18 @@ export function SignDApp(): JSX.Element | null {
         return;
       }
 
+      const { address, id } = input;
       const { password } = await passwordField.get(event);
-      await backgroundSignChannel.return(password);
+      const keypair = await decryptIdentity(address, password);
+
+      const extrinsic = await getExtrinsic(input);
+      const { signature } = extrinsic.sign(keypair);
+
+      await backgroundSignChannel.return({ signature, id });
 
       window.close();
     },
-    [identity, passwordField],
+    [input, identity, passwordField],
   );
 
   const handleCancelClick = useCallback(async () => {

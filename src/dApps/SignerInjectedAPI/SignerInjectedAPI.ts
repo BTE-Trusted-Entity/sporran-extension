@@ -20,7 +20,8 @@ export class SignerInjectedAPI {
   async signPayload(payload: SignerPayloadJSON): Promise<SignerResult> {
     return injectedSignChannel.get({
       dAppName: this.dAppName,
-      payload,
+      id: 0,
+      ...payload,
     });
   }
 
