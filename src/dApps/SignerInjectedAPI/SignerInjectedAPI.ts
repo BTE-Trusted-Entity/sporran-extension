@@ -27,7 +27,8 @@ export class SignerInjectedAPI {
   async signRaw(payload: SignerPayloadRaw): Promise<SignerResult> {
     return injectedSignRawChannel.get({
       dAppName: this.dAppName,
-      payload,
+      id: 0,
+      ...payload,
     });
   }
 }

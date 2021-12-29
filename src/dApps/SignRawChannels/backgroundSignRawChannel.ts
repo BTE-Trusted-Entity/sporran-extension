@@ -1,21 +1,11 @@
-import { SignerResult } from '@polkadot/types/types/extrinsic';
-
 import { PopupChannel } from '../../channels/base/PopupChannel/PopupChannel';
 
 import { contentSignRawChannel } from './contentSignRawChannel';
-
-interface SignBgInput {
-  origin: string;
-  address: string;
-  data: string;
-  id: number;
-}
-
-type SignBgOutput = SignerResult;
+import { SignRawPopupInput, SignRawPopupOutput } from './types';
 
 export const backgroundSignRawChannel = new PopupChannel<
-  SignBgInput,
-  SignBgOutput
+  SignRawPopupInput,
+  SignRawPopupOutput
 >('signRaw');
 
 let id = 0;

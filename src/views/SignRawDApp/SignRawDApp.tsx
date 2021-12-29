@@ -17,18 +17,12 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignRawChannel } from '../../dApps/SignRawChannels/backgroundSignRawChannel';
-
-export interface SignRawData {
-  origin: string;
-  address: string;
-  data: string;
-  id: number;
-}
+import { SignRawPopupInput } from '../../dApps/SignRawChannels/types';
 
 export function SignRawDApp(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const values = usePopupData<SignRawData>();
+  const values = usePopupData<SignRawPopupInput>();
 
   const passwordField = usePasswordField();
 
