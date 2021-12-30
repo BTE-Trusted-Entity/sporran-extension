@@ -70,7 +70,7 @@ export function DidEndpointsSign({
 
       const authorized = await fullDidDetails.authorizeExtrinsic(
         draft,
-        getKeystoreFromKeypair(keypair),
+        await getKeystoreFromKeypair(keypair),
         keypair.address,
       );
 

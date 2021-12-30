@@ -145,9 +145,11 @@ function deriveDidKeys(identityKeypair: KeyringPair) {
   return { authenticationKey, encryptionKey };
 }
 
-export function getKeystoreFromKeypair(
+export async function getKeystoreFromKeypair(
   identityKeypair: KeyringPair,
-): KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'> {
+): Promise<KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'>> {
+  await fixLightDidBase64Encoding(identityKeypair);
+
   const { authenticationKey, encryptionKey } = deriveDidKeys(identityKeypair);
   return {
     sign: async ({ data, alg }) => ({
@@ -174,8 +176,13 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
   const identities = await getIdentities();
   const identity = identities[identityKeypair.address];
 
-  const { type } = DidUtils.parseDidUrl(identity.did);
-  if (type !== 'light') {
+  if (!identity) {
+    // could be the Alice identity
+    return;
+  }
+
+  const parsed = identity.did && DidUtils.parseDidUrl(identity.did);
+  if (parsed && parsed.type !== 'light') {
     return;
   }
 
@@ -201,7 +208,7 @@ export async function getIdentityCryptoFromKeypair(
   const { did } = identities[identityKeypair.address];
 
   const didDetails = await getDidDetails(did);
-  const keystore = getKeystoreFromKeypair(identityKeypair);
+  const keystore = await getKeystoreFromKeypair(identityKeypair);
 
   function sign(plaintext: string) {
     return Crypto.u8aToHex(authenticationKey.sign(plaintext));
@@ -289,7 +296,7 @@ export async function importIdentity(
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
 
   const lightDidDetails = getLightDidFromKeypair(identityKeypair);
-  const keystore = getKeystoreFromKeypair(identityKeypair);
+  const keystore = await getKeystoreFromKeypair(identityKeypair);
   const { did: fullDid } = await DidUtils.upgradeDid(
     lightDidDetails,
     address,
@@ -325,6 +332,11 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
 
   const identities = await getIdentities();
   const identity = identities[address];
+
+  if (!identity.did) {
+    // could be a legacy identity without DID
+    return;
+  }
 
   const { lightDid, fullDid, type } = parseDidUrl(identity.did);
 
