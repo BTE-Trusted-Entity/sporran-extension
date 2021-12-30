@@ -26,7 +26,7 @@ export async function getDeposit(): Promise<BN> {
 async function getSignedTransaction(
   identity: KeyringPair,
 ): Promise<DidTransaction> {
-  const keystore = getKeystoreFromKeypair(identity);
+  const keystore = await getKeystoreFromKeypair(identity);
 
   const lightDidDetails = getLightDidFromKeypair(identity);
 

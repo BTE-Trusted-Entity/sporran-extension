@@ -12,6 +12,10 @@ import {
 } from '@kiltprotocol/types';
 
 export function isFullDid(did: IDidDetails['did']): boolean {
+  if (!did) {
+    // could be a legacy identity without DID
+    return false;
+  }
   return DidUtils.parseDidUrl(did).type === 'full';
 }
 
