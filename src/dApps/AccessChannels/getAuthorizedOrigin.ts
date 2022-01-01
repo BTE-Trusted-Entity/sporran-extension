@@ -9,10 +9,6 @@ import { debounceAsync } from '../../utilities/debounceAsync/debounceAsync';
 import { backgroundAccessChannel } from './backgroundAccessChannels';
 import { AccessInput, AccessOutput } from './types';
 
-export interface Origin {
-  origin: string;
-}
-
 export async function unsafeGetAuthorizedOrigin(
   input: AccessInput,
   sender: Runtime.MessageSender,
