@@ -68,7 +68,7 @@
     "webextension-polyfill-ts": "^0.26.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.5",
+    "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-typescript": "^7.16.5",
     "@storybook/addon-actions": "^6.3.12",
@@ -106,7 +106,7 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jest": "^25.3.2",
+    "eslint-plugin-jest": "^25.3.3",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
