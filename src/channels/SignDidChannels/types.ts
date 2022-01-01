@@ -1,8 +1,9 @@
-export interface SignDidPopupInput {
+import { DAppName } from '../../dApps/AccessChannels/DAppName';
+
+export type SignDidPopupInput = DAppName & {
   plaintext: string;
   origin: string;
-  dAppName: string;
-}
+};
 
 export interface SignDidPopupOutput {
   signature: string;
