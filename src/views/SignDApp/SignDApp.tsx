@@ -15,14 +15,14 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignChannel } from '../../dApps/SignChannels/backgroundSignChannel';
-import { SignPopupInput } from '../../dApps/SignChannels/types';
+import { SignInput } from '../../dApps/SignChannels/types';
 
 import { getExtrinsic, useExtrinsicValues } from './useExtrinsicValues';
 
 export function SignDApp(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const input = usePopupData<SignPopupInput>();
+  const input = usePopupData<SignInput>();
   const values = useExtrinsicValues(input);
 
   const passwordField = usePasswordField();

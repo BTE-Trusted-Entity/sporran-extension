@@ -1,8 +1,8 @@
 import { WindowChannel } from '../base/WindowChannel/WindowChannel';
 
-import { SignDidPopupInput, SignDidPopupOutput } from './types';
+import { SignDidInput, SignDidOutput } from './types';
 
 export const injectedSignDidChannel = new WindowChannel<
-  Omit<SignDidPopupInput, 'origin'>,
-  SignDidPopupOutput
+  Omit<SignDidInput, 'origin'>,
+  SignDidOutput
 >('signDid');

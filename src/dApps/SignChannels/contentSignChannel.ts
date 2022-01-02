@@ -1,11 +1,11 @@
 import { BrowserChannel } from '../../channels/base/BrowserChannel/BrowserChannel';
 
 import { injectedSignChannel } from './injectedSignChannel';
-import { SignPopupInput, SignPopupOutput } from './types';
+import { SignInput, SignOutput } from './types';
 
 export const contentSignChannel = new BrowserChannel<
-  Omit<SignPopupInput, 'origin'>,
-  SignPopupOutput
+  Omit<SignInput, 'origin'>,
+  SignOutput
 >('sign');
 
 export function initContentSignChannel(): () => void {

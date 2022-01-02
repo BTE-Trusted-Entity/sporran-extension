@@ -2,14 +2,14 @@ import { render } from '../../testing/testing';
 import '../../components/useCopyButton/useCopyButton.mock';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
-import { SignRawPopupInput } from '../../dApps/SignRawChannels/types';
+import { SignRawInput } from '../../dApps/SignRawChannels/types';
 import { paths } from '../paths';
 
 import { SignRawDApp } from './SignRawDApp';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({}));
 
-const mockData: SignRawPopupInput = {
+const mockData: SignRawInput = {
   origin:
     'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',

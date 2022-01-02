@@ -5,10 +5,10 @@ import {
 
 import { DAppName } from '../AccessChannels/DAppName';
 
-export type SignPopupInput = SignerPayloadJSON &
+export type SignInput = SignerPayloadJSON &
   DAppName & {
     id: number;
     origin: string;
   };
 
-export type SignPopupOutput = SignerResult;
+export type SignOutput = SignerResult;
