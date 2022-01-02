@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
-import { SignDidInput } from '../../channels/SignDidChannels/types';
+import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 import { paths } from '../paths';
 
 import { SignDid } from './SignDid';
@@ -12,7 +12,8 @@ export default {
   component: SignDid,
 } as Meta;
 
-const input: SignDidInput = {
+const input: SignDidOriginInput = {
+  dAppName: 'dApp',
   origin: 'https://example.org/foo',
   plaintext:
     'All your base are belong to us All your base are belong to us All your base are belong to us',

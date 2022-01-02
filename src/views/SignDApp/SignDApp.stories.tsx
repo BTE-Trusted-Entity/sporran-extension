@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
-import { SignInput } from '../../dApps/SignChannels/types';
+import { SignOriginInput } from '../../dApps/SignChannels/types';
 import { paths } from '../paths';
 
 import { SignDApp } from './SignDApp';
@@ -11,7 +11,7 @@ export default {
   component: SignDApp,
 } as Meta;
 
-const mockExtrinsic: SignInput = {
+const mockExtrinsic: SignOriginInput = {
   origin:
     'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',

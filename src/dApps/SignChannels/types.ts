@@ -4,11 +4,13 @@ import {
 } from '@polkadot/types/types/extrinsic';
 
 import { DAppName } from '../AccessChannels/DAppName';
+import { Origin } from '../AccessChannels/Origin';
 
 export type SignInput = SignerPayloadJSON &
   DAppName & {
     id: number;
-    origin: string;
   };
+
+export type SignOriginInput = SignInput & Origin;
 
 export type SignOutput = SignerResult;

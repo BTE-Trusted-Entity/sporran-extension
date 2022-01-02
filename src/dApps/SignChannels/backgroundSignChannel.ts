@@ -2,11 +2,12 @@ import { PopupChannel } from '../../channels/base/PopupChannel/PopupChannel';
 import { getAuthorizedOrigin } from '../AccessChannels/getAuthorizedOrigin';
 
 import { contentSignChannel } from './contentSignChannel';
-import { SignInput, SignOutput } from './types';
+import { SignOriginInput, SignOutput } from './types';
 
-export const backgroundSignChannel = new PopupChannel<SignInput, SignOutput>(
-  'sign',
-);
+export const backgroundSignChannel = new PopupChannel<
+  SignOriginInput,
+  SignOutput
+>('sign');
 
 let id = 0;
 

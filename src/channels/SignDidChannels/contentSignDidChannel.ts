@@ -4,7 +4,7 @@ import { injectedSignDidChannel } from './injectedSignDidChannel';
 import { SignDidInput, SignDidOutput } from './types';
 
 export const contentSignDidChannel = new BrowserChannel<
-  Omit<SignDidInput, 'origin'>,
+  SignDidInput,
   SignDidOutput
 >('signDid');
 

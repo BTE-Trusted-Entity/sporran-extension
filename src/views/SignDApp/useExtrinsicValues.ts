@@ -6,7 +6,7 @@ import { ExtrinsicPayload } from '@polkadot/types/interfaces';
 import { SignerPayloadJSON } from '@polkadot/types/types/extrinsic';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
-import { SignInput } from '../../dApps/SignChannels/types';
+import { SignOriginInput } from '../../dApps/SignChannels/types';
 
 export async function getExtrinsic(
   input: SignerPayloadJSON,
@@ -45,7 +45,7 @@ interface Value {
   label: string;
 }
 
-export function useExtrinsicValues(input: SignInput): Value[] {
+export function useExtrinsicValues(input: SignOriginInput): Value[] {
   const [values, setValues] = useState<Value[]>([]);
 
   useEffect(() => {

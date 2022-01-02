@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
-import { SignRawInput } from '../../dApps/SignRawChannels/types';
+import { SignRawOriginInput } from '../../dApps/SignRawChannels/types';
 import { paths } from '../paths';
 
 import { SignRawDApp } from './SignRawDApp';
@@ -11,7 +11,7 @@ export default {
   component: SignRawDApp,
 } as Meta;
 
-const mockExtrinsic: SignRawInput = {
+const mockExtrinsic: SignRawOriginInput = {
   origin:
     'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',

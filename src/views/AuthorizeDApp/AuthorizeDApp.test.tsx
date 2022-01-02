@@ -1,12 +1,12 @@
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { render } from '../../testing/testing';
 
-import { AccessInput } from '../../dApps/AccessChannels/types';
+import { AccessOriginInput } from '../../dApps/AccessChannels/types';
 import { paths } from '../paths';
 
 import { AuthorizeDApp } from './AuthorizeDApp';
 
-const mockAccessData: AccessInput = {
+const mockAccessData: AccessOriginInput = {
   dAppName: 'KILT-Sporran',
   origin: 'https://polkadot.js.org/apps/',
 };

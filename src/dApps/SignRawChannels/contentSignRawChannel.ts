@@ -4,7 +4,7 @@ import { injectedSignRawChannel } from './injectedSignRawChannel';
 import { SignRawInput, SignRawOutput } from './types';
 
 export const contentSignRawChannel = new BrowserChannel<
-  Omit<SignRawInput, 'origin'>,
+  SignRawInput,
   SignRawOutput
 >('signRaw');
 
