@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 
-import { AccessInput } from '../../dApps/AccessChannels/types';
+import { AccessOriginInput } from '../../dApps/AccessChannels/types';
 import { paths } from '../paths';
 
 import { AuthorizeDApp } from './AuthorizeDApp';
@@ -12,7 +12,7 @@ export default {
   component: AuthorizeDApp,
 } as Meta;
 
-const mockAccessData: AccessInput = {
+const mockAccessData: AccessOriginInput = {
   dAppName: 'KILT-Sporran',
   origin: 'https://polkadot.js.org/apps/',
 };
