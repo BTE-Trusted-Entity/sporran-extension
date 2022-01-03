@@ -22,7 +22,3 @@ export async function produceToggleIcon(): Promise<void> {
     },
   });
 }
-
-export function initBackgroundToggleIconChannel(): void {
-  toggleIconChannel.produce(produceToggleIcon);
-}

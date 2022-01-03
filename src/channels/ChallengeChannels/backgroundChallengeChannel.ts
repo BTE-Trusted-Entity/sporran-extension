@@ -4,10 +4,9 @@ import { Crypto } from '@kiltprotocol/utils';
 
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
 
-import { contentChallengeChannel } from './contentChallengeChannel';
 import { ChallengeInput, ChallengeOutput } from './types';
 
-async function produceEncryptedChallenge(
+export async function produceEncryptedChallenge(
   input: ChallengeInput,
   sender: Runtime.MessageSender,
 ): Promise<ChallengeOutput> {
@@ -28,8 +27,4 @@ async function produceEncryptedChallenge(
     encryptedChallenge: Crypto.u8aToHex(sealed),
     nonce: Crypto.u8aToHex(nonce),
   };
-}
-
-export function backgroundChallengeChannel(): void {
-  contentChallengeChannel.produce(produceEncryptedChallenge);
 }

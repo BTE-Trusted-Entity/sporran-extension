@@ -12,7 +12,6 @@ import { saveChannel } from '../saveChannel/saveChannel';
 import { shareChannel } from '../shareChannel/shareChannel';
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
 
-import { contentCredentialChannel } from './contentCredentialChannel';
 import { CredentialInput, CredentialOutput } from './types';
 
 export const backgroundCredentialChannel = new BrowserChannel<
@@ -20,7 +19,7 @@ export const backgroundCredentialChannel = new BrowserChannel<
   CredentialOutput
 >(channelsEnum.credential);
 
-async function showCredentialPopup(
+export async function showCredentialPopup(
   input: CredentialInput,
   sender: Runtime.MessageSender,
 ): Promise<IEncryptedMessage | void> {
@@ -64,8 +63,4 @@ async function showCredentialPopup(
       sender,
     );
   }
-}
-
-export function initBackgroundCredentialChannel(): void {
-  contentCredentialChannel.produce(showCredentialPopup);
 }
