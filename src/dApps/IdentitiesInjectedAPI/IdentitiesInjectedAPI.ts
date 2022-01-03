@@ -22,7 +22,8 @@ export class IdentitiesInjectedAPI implements InjectedAccounts {
 
     this.request = () => result.promise; // make sure the following only runs once
 
-    injectedIdentitiesChannel.subscribe(this.dAppName, (error, identities?) => {
+    const { dAppName } = this;
+    injectedIdentitiesChannel.subscribe({ dAppName }, (error, identities?) => {
       if (error) {
         result.reject(error);
         return;

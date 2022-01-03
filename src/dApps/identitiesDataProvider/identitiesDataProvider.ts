@@ -49,7 +49,7 @@ function subscribe(
 }
 
 export async function injectedIdentitiesSubscriber(
-  dAppName: IdentitiesInput,
+  { dAppName }: IdentitiesInput,
   publisher: ErrorFirstCallback<IdentitiesOutput>,
 ): Promise<() => void> {
   await contentAccessChannel.get({ dAppName });
