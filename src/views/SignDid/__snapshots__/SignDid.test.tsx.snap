@@ -51,13 +51,13 @@ exports[`SignDid should allow signing with full did 1`] = `
       <a
         aria-label="KILT Identity 1"
         class="left"
-        href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
         title="KILT Identity 1"
       />
       <a
         aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
         class="right"
-        href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
         title="KILT Identity 3 which has a very long name and might not even fit on the screen"
       />
       <ul
@@ -70,7 +70,7 @@ exports[`SignDid should allow signing with full did 1`] = `
             aria-current="page"
             aria-label="KILT Identity 1"
             class="bubble bubbleActive"
-            href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
             title="KILT Identity 1"
           />
         </li>
@@ -81,7 +81,7 @@ exports[`SignDid should allow signing with full did 1`] = `
             aria-current="page"
             aria-label="KILT Identity 2"
             class="bubble bubbleActive"
-            href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
             title="KILT Identity 2"
           />
         </li>
@@ -92,7 +92,7 @@ exports[`SignDid should allow signing with full did 1`] = `
             aria-current="page"
             aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
             class="bubble bubbleActive"
-            href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
             title="KILT Identity 3 which has a very long name and might not even fit on the screen"
           />
         </li>
@@ -269,13 +269,13 @@ exports[`SignDid should render 1`] = `
       <a
         aria-label="Add Identity"
         class="left"
-        href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
         title="Add Identity"
       />
       <a
         aria-label="KILT Identity 2"
         class="right"
-        href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
         title="KILT Identity 2"
       />
       <ul
@@ -288,7 +288,7 @@ exports[`SignDid should render 1`] = `
             aria-current="page"
             aria-label="KILT Identity 1"
             class="bubble bubbleActive"
-            href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
             title="KILT Identity 1"
           />
         </li>
@@ -299,7 +299,7 @@ exports[`SignDid should render 1`] = `
             aria-current="page"
             aria-label="KILT Identity 2"
             class="bubble bubbleActive"
-            href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
             title="KILT Identity 2"
           />
         </li>
@@ -310,7 +310,7 @@ exports[`SignDid should render 1`] = `
             aria-current="page"
             aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
             class="bubble bubbleActive"
-            href="/?data=eyJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
             title="KILT Identity 3 which has a very long name and might not even fit on the screen"
           />
         </li>

@@ -1,12 +1,9 @@
-import { InjectedAccount } from '@polkadot/extension-inject/types';
-
 import { WindowChannel } from '../../channels/base/WindowChannel/WindowChannel';
+import { channelsEnum } from '../../channels/base/channelsEnum';
 
-export type IdentitiesInput = string;
-
-export type IdentitiesOutput = InjectedAccount[];
+import { IdentitiesInput, IdentitiesOutput } from './types';
 
 export const injectedIdentitiesChannel = new WindowChannel<
   IdentitiesInput,
   IdentitiesOutput
->('identities');
+>(channelsEnum.identities);

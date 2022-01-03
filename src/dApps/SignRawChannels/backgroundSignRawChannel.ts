@@ -1,33 +1,29 @@
-import { SignerResult } from '@polkadot/types/types/extrinsic';
+import { Runtime } from 'webextension-polyfill-ts';
 
 import { PopupChannel } from '../../channels/base/PopupChannel/PopupChannel';
+import { getAuthorizedOrigin } from '../AccessChannels/getAuthorizedOrigin';
+import { popupsEnum } from '../../channels/base/channelsEnum';
 
-import { contentSignRawChannel } from './contentSignRawChannel';
-
-interface SignBgInput {
-  origin: string;
-  address: string;
-  data: string;
-  id: number;
-}
-
-type SignBgOutput = SignerResult;
+import { SignRawInput, SignRawOriginInput, SignRawOutput } from './types';
 
 export const backgroundSignRawChannel = new PopupChannel<
-  SignBgInput,
-  SignBgOutput
->('signRaw');
+  SignRawOriginInput,
+  SignRawOutput
+>(popupsEnum.signRaw);
 
 let id = 0;
 
-export function initBackgroundSignRawChannel(): void {
-  contentSignRawChannel.produce(async (input, sender) =>
-    backgroundSignRawChannel.get(
-      {
-        ...input,
-        id: ++id,
-      },
-      sender,
-    ),
+export async function getSignRawResult(
+  input: SignRawInput,
+  sender: Runtime.MessageSender,
+): Promise<SignRawOutput> {
+  const origin = await getAuthorizedOrigin(input, sender);
+  return backgroundSignRawChannel.get(
+    {
+      ...input,
+      origin,
+      id: ++id,
+    },
+    sender,
   );
 }

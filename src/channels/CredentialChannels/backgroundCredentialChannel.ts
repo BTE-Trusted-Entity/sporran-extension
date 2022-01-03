@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import { Runtime } from 'webextension-polyfill-ts';
 import {
   IEncryptedMessage,
   IRejectTerms,
@@ -6,26 +6,22 @@ import {
 } from '@kiltprotocol/types';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+import { channelsEnum } from '../base/channelsEnum';
 import { claimChannel } from '../claimChannel/claimChannel';
 import { saveChannel } from '../saveChannel/saveChannel';
 import { shareChannel } from '../shareChannel/shareChannel';
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
 
-import { contentCredentialChannel } from './contentCredentialChannel';
 import { CredentialInput, CredentialOutput } from './types';
 
 export const backgroundCredentialChannel = new BrowserChannel<
   CredentialInput,
   CredentialOutput
->('credential');
+>(channelsEnum.credential);
 
-type SenderType = Parameters<
-  Parameters<typeof browser.runtime.onMessage.addListener>[0]
->[1];
-
-async function showCredentialPopup(
+export async function showCredentialPopup(
   input: CredentialInput,
-  sender: SenderType,
+  sender: Runtime.MessageSender,
 ): Promise<IEncryptedMessage | void> {
   const { message: encrypted, dAppName } = input;
 
@@ -67,8 +63,4 @@ async function showCredentialPopup(
       sender,
     );
   }
-}
-
-export function initBackgroundCredentialChannel(): void {
-  contentCredentialChannel.produce(showCredentialPopup);
 }

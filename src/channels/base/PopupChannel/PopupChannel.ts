@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import { browser, Runtime } from 'webextension-polyfill-ts';
 import { AnyJson } from '@polkadot/types/types';
 
 import { PopupAction } from '../../../utilities/popups/types';
@@ -30,10 +30,7 @@ export class PopupChannel<
     this.transform = makeTransforms(transform);
   }
 
-  async get(
-    input: Input,
-    sender: Parameters<typeof showPopup>[3],
-  ): Promise<Output> {
+  async get(input: Input, sender: Runtime.MessageSender): Promise<Output> {
     const { action } = this;
     const result = makeControlledPromise<Output>();
 

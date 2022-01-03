@@ -1,13 +1,11 @@
 import { IEncryptedMessage, IDidKeyDetails } from '@kiltprotocol/types';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
-import {
-  authenticate,
-  injectIntoDApp,
-} from './dApps/injectIntoDApp/injectIntoDApp';
+import { injectIntoDApp } from './dApps/injectIntoDApp/injectIntoDApp';
 import { configuration } from './configuration/configuration';
 import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
 import { injectedSignDidChannel } from './channels/SignDidChannels/injectedSignDidChannel';
+import { injectedAccessChannel } from './dApps/AccessChannels/injectedAccessChannel';
 
 interface PubSubSession {
   listen: (
@@ -50,7 +48,7 @@ async function startSession(
   challenge: string,
 ): Promise<PubSubSession> {
   const dAppName = unsafeDAppName.substring(0, 50);
-  await authenticate({ dAppName });
+  await injectedAccessChannel.get({ dAppName });
 
   const { encryptionKeyId, encryptedChallenge, nonce } =
     await injectedChallengeChannel.get({ challenge, dAppEncryptionKeyId });
@@ -98,7 +96,8 @@ async function signWithDid(plaintext: string): Promise<{
   signature: string;
   did: string;
 }> {
-  return injectedSignDidChannel.get({ plaintext });
+  const dAppName = document.title.substring(0, 50);
+  return injectedSignDidChannel.get({ plaintext, dAppName });
 }
 
 function main() {

@@ -1,15 +1,9 @@
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+import { popupsEnum } from '../base/channelsEnum';
 
-import { injectedSignDidChannel } from './injectedSignDidChannel';
-import { SignDidPopupInput, SignDidPopupOutput } from './types';
+import { SignDidInput, SignDidOutput } from './types';
 
 export const contentSignDidChannel = new BrowserChannel<
-  SignDidPopupInput,
-  SignDidPopupOutput
->('signDid');
-
-export function initContentSignDidChannel(origin: string): () => void {
-  return injectedSignDidChannel.produce(async ({ plaintext }) =>
-    contentSignDidChannel.get({ plaintext, origin }),
-  );
-}
+  SignDidInput,
+  SignDidOutput
+>(popupsEnum.signDid);

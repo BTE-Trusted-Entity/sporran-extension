@@ -1,8 +1,9 @@
 import { WindowChannel } from '../base/WindowChannel/WindowChannel';
+import { popupsEnum } from '../base/channelsEnum';
 
-import { SignDidPopupInput, SignDidPopupOutput } from './types';
+import { SignDidInput, SignDidOutput } from './types';
 
 export const injectedSignDidChannel = new WindowChannel<
-  Omit<SignDidPopupInput, 'origin'>,
-  SignDidPopupOutput
->('signDid');
+  SignDidInput,
+  SignDidOutput
+>(popupsEnum.signDid);

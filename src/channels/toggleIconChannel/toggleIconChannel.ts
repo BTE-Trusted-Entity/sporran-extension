@@ -1,8 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+import { channelsEnum } from '../base/channelsEnum';
 
-export const toggleIconChannel = new BrowserChannel('toggleIcons');
+export const toggleIconChannel = new BrowserChannel(channelsEnum.toggleIcons);
 
 export async function toggleIcon(): Promise<void> {
   if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -20,8 +21,4 @@ export async function produceToggleIcon(): Promise<void> {
       128: 'icon/dark/128.png',
     },
   });
-}
-
-export function initBackgroundToggleIconChannel(): void {
-  toggleIconChannel.produce(produceToggleIcon);
 }

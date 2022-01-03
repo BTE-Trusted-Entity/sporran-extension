@@ -1,21 +1,24 @@
 import { Meta } from '@storybook/react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
+import { SignRawOriginInput } from '../../dApps/SignRawChannels/types';
 import { paths } from '../paths';
 
-import { SignRawData, SignRawDApp } from './SignRawDApp';
+import { SignRawDApp } from './SignRawDApp';
 
 export default {
   title: 'Views/SignRawDApp',
   component: SignRawDApp,
 } as Meta;
 
-const mockExtrinsic: SignRawData = {
+const mockExtrinsic: SignRawOriginInput = {
   origin:
     'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
   id: 1,
   data: '0xCAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFECAFE',
+  type: 'bytes',
+  dAppName: 'FOO',
 };
 
 export function Template(): JSX.Element {

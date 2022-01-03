@@ -15,7 +15,7 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignDidChannel } from '../../channels/SignDidChannels/backgroundSignDidChannel';
-import { SignDidPopupInput } from '../../channels/SignDidChannels/types';
+import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 
 interface Props {
   identity: Identity;
@@ -26,7 +26,7 @@ export function SignDid({ identity }: Props): JSX.Element | null {
 
   const error = !isFullDid(identity.did);
 
-  const { origin, plaintext } = usePopupData<SignDidPopupInput>();
+  const { origin, plaintext } = usePopupData<SignDidOriginInput>();
 
   const plaintextRef = useRef<HTMLTextAreaElement>(null);
   const copy = useCopyButton(plaintextRef);

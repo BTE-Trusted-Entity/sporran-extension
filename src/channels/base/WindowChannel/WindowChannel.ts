@@ -116,7 +116,7 @@ export class WindowChannel<Input, Output> {
     return () => removeListener(wrappedSubscriber);
   }
 
-  forward(channel: { get: (input: Input) => Promise<Output> }): void {
-    this.produce((input) => channel.get(input));
+  forward(channel: { get: (input: Input) => Promise<Output> }): () => void {
+    return this.produce((input) => channel.get(input));
   }
 }

@@ -1,14 +1,18 @@
 import { InjectedAccount } from '@polkadot/extension-inject/types';
 import { browser, Storage } from 'webextension-polyfill-ts';
 
-import { injectedIdentitiesChannel } from '../injectedIdentitiesChannel/injectedIdentitiesChannel';
 import { genesisHashChannel } from '../genesisHashChannel/genesisHashChannel';
 import { storageAreaName } from '../../utilities/storage/storage';
 import {
   IDENTITIES_KEY,
   getIdentities,
 } from '../../utilities/identities/getIdentities';
-import { checkAccess } from '../checkAccess/checkAccess';
+import { contentAccessChannel } from '../AccessChannels/contentAccessChannel';
+import {
+  IdentitiesInput,
+  IdentitiesOutput,
+} from '../injectedIdentitiesChannel/types';
+import { ErrorFirstCallback } from '../../channels/base/types';
 
 async function getIdentitiesForInjectedAPI(): Promise<InjectedAccount[]> {
   const identities = await getIdentities();
@@ -44,10 +48,11 @@ function subscribe(
   return () => browser.storage.onChanged.removeListener(handleChanges);
 }
 
-export function initContentIdentitiesChannel(origin: string): () => void {
-  return injectedIdentitiesChannel.publish(async (dAppName, publisher) => {
-    await checkAccess(dAppName, origin);
-    publisher(null, await getIdentitiesForInjectedAPI());
-    return subscribe((identities) => publisher(null, identities));
-  });
+export async function injectedIdentitiesSubscriber(
+  { dAppName }: IdentitiesInput,
+  publisher: ErrorFirstCallback<IdentitiesOutput>,
+): Promise<() => void> {
+  await contentAccessChannel.get({ dAppName });
+  publisher(null, await getIdentitiesForInjectedAPI());
+  return subscribe((identities) => publisher(null, identities));
 }

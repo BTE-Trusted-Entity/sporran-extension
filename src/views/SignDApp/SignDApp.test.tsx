@@ -4,20 +4,30 @@ import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedP
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
 
-import { ExtrinsicData, SignDApp } from './SignDApp';
+import { useExtrinsicValues } from './useExtrinsicValues';
+import { SignDApp } from './SignDApp';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({}));
 
-const mockExtrinsic: ExtrinsicData = {
-  origin:
-    'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
+jest.mock('./useExtrinsicValues');
+(useExtrinsicValues as jest.Mock).mockReturnValue([
+  {
+    label: 'from',
+    value:
+      'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
+  },
+  { label: 'version', value: '1' },
+  { label: 'nonce', value: '1' },
+  {
+    label: 'method data',
+    value:
+      'namespace.method(input = "some meaningful values you would definitely like to see")',
+  },
+  { label: 'lifetime', value: 'mortal, valid from 1 to 1,000,000' },
+]);
+
+const mockExtrinsic = {
   address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-  specVersion: 1,
-  nonce: 1,
-  method:
-    'namespace.method(input = "some meaningful values you would definitely like to see")',
-  lifetimeStart: 1,
-  lifetimeEnd: 1000000,
 };
 
 describe('SignDApp', () => {

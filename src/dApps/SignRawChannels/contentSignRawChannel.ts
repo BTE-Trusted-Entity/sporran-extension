@@ -1,25 +1,9 @@
-import {
-  SignerPayloadRaw,
-  SignerResult,
-} from '@polkadot/types/types/extrinsic';
-
 import { BrowserChannel } from '../../channels/base/BrowserChannel/BrowserChannel';
-import { checkAccess } from '../checkAccess/checkAccess';
+import { popupsEnum } from '../../channels/base/channelsEnum';
 
-import { injectedSignRawChannel } from './injectedSignRawChannel';
-
-type SignRawInput = SignerPayloadRaw & { origin: string };
-
-type SignRawOutput = SignerResult;
+import { SignRawInput, SignRawOutput } from './types';
 
 export const contentSignRawChannel = new BrowserChannel<
   SignRawInput,
   SignRawOutput
->('dAppSignRaw');
-
-export function initContentSignRawChannel(origin: string): () => void {
-  return injectedSignRawChannel.produce(async ({ dAppName, payload }) => {
-    await checkAccess(dAppName, origin);
-    return contentSignRawChannel.get({ ...payload, origin });
-  });
-}
+>(popupsEnum.signRaw);

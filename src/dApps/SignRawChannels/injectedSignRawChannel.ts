@@ -1,16 +1,9 @@
-import {
-  SignerPayloadRaw,
-  SignerResult,
-} from '@polkadot/types/types/extrinsic';
-
 import { WindowChannel } from '../../channels/base/WindowChannel/WindowChannel';
+import { popupsEnum } from '../../channels/base/channelsEnum';
 
-interface SignRawPopupInput {
-  dAppName: string;
-  payload: SignerPayloadRaw;
-}
+import { SignRawInput, SignRawOutput } from './types';
 
 export const injectedSignRawChannel = new WindowChannel<
-  SignRawPopupInput,
-  SignerResult
->('signRaw');
+  SignRawInput,
+  SignRawOutput
+>(popupsEnum.signRaw);

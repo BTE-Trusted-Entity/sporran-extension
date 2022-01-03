@@ -2,13 +2,20 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { getIdentities } from './utilities/identities/getIdentities';
 import { toggleIcon } from './channels/toggleIconChannel/toggleIconChannel';
-import { initContentIdentitiesChannel } from './dApps/identitiesDataProvider/identitiesDataProvider';
-import { initContentAccessChannel } from './dApps/checkAccess/checkAccess';
-import { initContentSignChannel } from './dApps/SignChannels/contentSignChannel';
-import { initContentSignRawChannel } from './dApps/SignRawChannels/contentSignRawChannel';
-import { initContentSignDidChannel } from './channels/SignDidChannels/contentSignDidChannel';
-import { initContentCredentialChannel } from './channels/CredentialChannels/contentCredentialChannel';
-import { initContentChallengeChannel } from './channels/ChallengeChannels/contentChallengeChannel';
+import { injectedIdentitiesSubscriber } from './dApps/identitiesDataProvider/identitiesDataProvider';
+import { contentAccessChannel } from './dApps/AccessChannels/contentAccessChannel';
+import { contentSignChannel } from './dApps/SignChannels/contentSignChannel';
+import { contentSignRawChannel } from './dApps/SignRawChannels/contentSignRawChannel';
+import { contentSignDidChannel } from './channels/SignDidChannels/contentSignDidChannel';
+import { contentCredentialChannel } from './channels/CredentialChannels/contentCredentialChannel';
+import { contentChallengeChannel } from './channels/ChallengeChannels/contentChallengeChannel';
+import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
+import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
+import { injectedAccessChannel } from './dApps/AccessChannels/injectedAccessChannel';
+import { injectedSignChannel } from './dApps/SignChannels/injectedSignChannel';
+import { injectedSignRawChannel } from './dApps/SignRawChannels/injectedSignRawChannel';
+import { injectedSignDidChannel } from './channels/SignDidChannels/injectedSignDidChannel';
+import { injectedIdentitiesChannel } from './dApps/injectedIdentitiesChannel/injectedIdentitiesChannel';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -20,15 +27,13 @@ function injectScript() {
 }
 
 function initMessages() {
-  initContentCredentialChannel();
-  initContentChallengeChannel();
-
-  const origin = new URL(window.location.href).host;
-  initContentAccessChannel(origin);
-  initContentIdentitiesChannel(origin);
-  initContentSignChannel(origin);
-  initContentSignRawChannel(origin);
-  initContentSignDidChannel(origin);
+  injectedCredentialChannel.forward(contentCredentialChannel);
+  injectedChallengeChannel.forward(contentChallengeChannel);
+  injectedAccessChannel.forward(contentAccessChannel);
+  injectedIdentitiesChannel.publish(injectedIdentitiesSubscriber);
+  injectedSignChannel.forward(contentSignChannel);
+  injectedSignRawChannel.forward(contentSignRawChannel);
+  injectedSignDidChannel.forward(contentSignDidChannel);
 }
 
 async function main() {

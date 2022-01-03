@@ -3,14 +3,15 @@ import '../../components/useCopyButton/useCopyButton.mock';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
-import { SignDidPopupInput } from '../../channels/SignDidChannels/types';
+import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 import { paths } from '../paths';
 
 import { SignDid } from './SignDid';
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({}));
 
-const input: SignDidPopupInput = {
+const input: SignDidOriginInput = {
+  dAppName: 'dApp',
   origin: 'https://example.org/foo',
   plaintext: 'All your base are belong to us',
 };

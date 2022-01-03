@@ -1,16 +1,8 @@
-import {
-  SignerPayloadJSON,
-  SignerResult,
-} from '@polkadot/types/types/extrinsic';
-
 import { WindowChannel } from '../../channels/base/WindowChannel/WindowChannel';
+import { popupsEnum } from '../../channels/base/channelsEnum';
 
-interface SignPopupInput {
-  dAppName: string;
-  payload: SignerPayloadJSON;
-}
+import { SignInput, SignOutput } from './types';
 
-export const injectedSignChannel = new WindowChannel<
-  SignPopupInput,
-  SignerResult
->('sign');
+export const injectedSignChannel = new WindowChannel<SignInput, SignOutput>(
+  popupsEnum.sign,
+);

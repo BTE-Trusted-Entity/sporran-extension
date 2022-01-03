@@ -1,9 +1,9 @@
-import { WindowChannel } from '../../channels/base/WindowChannel/WindowChannel';
+import { BrowserChannel } from '../../channels/base/BrowserChannel/BrowserChannel';
 import { popupsEnum } from '../../channels/base/channelsEnum';
 
 import { AccessInput, AccessOutput } from './types';
 
-export const injectedAccessChannel = new WindowChannel<
+export const contentAccessChannel = new BrowserChannel<
   AccessInput,
   AccessOutput
 >(popupsEnum.access);

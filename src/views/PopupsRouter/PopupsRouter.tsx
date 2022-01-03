@@ -10,7 +10,7 @@ import { paths } from '../paths';
 export function PopupsRouter(): JSX.Element {
   return (
     <Switch>
-      <Route path={paths.popup.authorize}>
+      <Route path={paths.popup.access}>
         <AuthorizeDApp />
       </Route>
       <Route path={paths.popup.save}>
