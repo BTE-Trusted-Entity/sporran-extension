@@ -6,6 +6,7 @@ import {
 } from '@kiltprotocol/types';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+import { channelsEnum } from '../base/channelsEnum';
 import { claimChannel } from '../claimChannel/claimChannel';
 import { saveChannel } from '../saveChannel/saveChannel';
 import { shareChannel } from '../shareChannel/shareChannel';
@@ -17,7 +18,7 @@ import { CredentialInput, CredentialOutput } from './types';
 export const backgroundCredentialChannel = new BrowserChannel<
   CredentialInput,
   CredentialOutput
->('credential');
+>(channelsEnum.credential);
 
 async function showCredentialPopup(
   input: CredentialInput,

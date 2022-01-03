@@ -19,7 +19,7 @@ const mockAccessData: AccessInput = {
 
 export function Template(): JSX.Element {
   return (
-    <PopupTestProvider path={paths.popup.authorize} data={mockAccessData}>
+    <PopupTestProvider path={paths.popup.access} data={mockAccessData}>
       <AuthorizeDApp />
     </PopupTestProvider>
   );

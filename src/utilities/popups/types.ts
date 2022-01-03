@@ -1,5 +1,5 @@
 export type PopupAction =
-  | 'authorize'
+  | 'access'
   | 'claim'
   | 'save'
   | 'share'

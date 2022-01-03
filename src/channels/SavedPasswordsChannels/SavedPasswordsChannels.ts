@@ -1,4 +1,5 @@
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+import { channelsEnum } from '../base/channelsEnum';
 
 interface SavedPassword {
   password: string;
@@ -13,7 +14,7 @@ interface SavePasswordInput {
 }
 
 export const savePasswordChannel = new BrowserChannel<SavePasswordInput>(
-  'savePassword',
+  channelsEnum.savePassword,
 );
 
 export async function savePassword({
@@ -30,7 +31,7 @@ export function initBackgroundSavePasswordChannel(): void {
 export const getPasswordChannel = new BrowserChannel<
   string,
   string | undefined
->('getPassword');
+>(channelsEnum.getPassword);
 
 export async function getPassword(
   address: string,
@@ -43,7 +44,7 @@ export function initBackgroundGetPasswordChannel(): void {
 }
 
 export const forgetPasswordChannel = new BrowserChannel<string>(
-  'forgetPassword',
+  channelsEnum.forgetPassword,
 );
 
 export async function forgetPassword(address: string): Promise<void> {
@@ -55,7 +56,7 @@ export function initBackgroundForgetPasswordChannel(): void {
 }
 
 export const hasSavedPasswordsChannel = new BrowserChannel<void, boolean>(
-  'hasSavedPasswords',
+  channelsEnum.hasSavedPasswords,
 );
 
 export async function hasSavedPasswords(): Promise<boolean> {
@@ -67,7 +68,7 @@ export function initBackgroundHasSavedPasswordsChannel(): void {
 }
 
 export const forgetAllPasswordsChannel = new BrowserChannel(
-  'forgetAllPasswords',
+  channelsEnum.forgetAllPasswords,
 );
 
 export async function forgetAllPasswords(): Promise<void> {

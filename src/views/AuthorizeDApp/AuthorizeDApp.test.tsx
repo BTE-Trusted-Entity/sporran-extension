@@ -14,7 +14,7 @@ const mockAccessData: AccessOriginInput = {
 describe('AuthorizeDApp', () => {
   it('should render', async () => {
     const { container } = render(
-      <PopupTestProvider path={paths.popup.authorize} data={mockAccessData}>
+      <PopupTestProvider path={paths.popup.access} data={mockAccessData}>
         <AuthorizeDApp />
       </PopupTestProvider>,
     );

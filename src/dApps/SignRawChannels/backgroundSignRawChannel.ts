@@ -1,5 +1,6 @@
 import { PopupChannel } from '../../channels/base/PopupChannel/PopupChannel';
 import { getAuthorizedOrigin } from '../AccessChannels/getAuthorizedOrigin';
+import { popupsEnum } from '../../channels/base/channelsEnum';
 
 import { contentSignRawChannel } from './contentSignRawChannel';
 import { SignRawOriginInput, SignRawOutput } from './types';
@@ -7,7 +8,7 @@ import { SignRawOriginInput, SignRawOutput } from './types';
 export const backgroundSignRawChannel = new PopupChannel<
   SignRawOriginInput,
   SignRawOutput
->('signRaw');
+>(popupsEnum.signRaw);
 
 let id = 0;
 

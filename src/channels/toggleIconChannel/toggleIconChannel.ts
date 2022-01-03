@@ -1,8 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+import { channelsEnum } from '../base/channelsEnum';
 
-export const toggleIconChannel = new BrowserChannel('toggleIcons');
+export const toggleIconChannel = new BrowserChannel(channelsEnum.toggleIcons);
 
 export async function toggleIcon(): Promise<void> {
   if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
