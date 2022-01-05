@@ -64,12 +64,14 @@ export function useCredentials(): Credential[] {
   return useContext(CredentialsContext);
 }
 
-export function useIdentityCredentials(did?: IDidDetails['did']): Credential[] {
+const noCredentials: Credential[] = [];
+
+export function useIdentityCredentials(did: IDidDetails['did']): Credential[] {
   const all = useCredentials();
 
   return useMemo(() => {
     if (!did) {
-      return all;
+      return noCredentials;
     }
     const { fullDid } = parseDidUrl(did);
     return all.filter(

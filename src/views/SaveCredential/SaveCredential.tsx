@@ -6,7 +6,7 @@ import * as styles from './SaveCredential.module.css';
 
 import {
   getCredentialDownload,
-  useIdentityCredentials,
+  useCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 
@@ -19,7 +19,7 @@ export function SaveCredential(): JSX.Element | null {
 
   const { claimHash } = usePopupData<IAttestation>();
 
-  const credentials = useIdentityCredentials();
+  const credentials = useCredentials();
 
   const credential = credentials.find(
     (credential) => credential.request.rootHash === claimHash,
