@@ -19,8 +19,11 @@ export class GenericError extends Component<Props, State> {
   state: State = {};
 
   static getDerivedStateFromError(error: Error): State {
+    const version = configuration.version;
+    const message = error.message;
+    const stack = String(error.stack).replace(/\/.*\//g, '');
     return {
-      errorText: `Sporran@${configuration.version}\n\n${error.message}\n\n${error.stack}`,
+      errorText: `Sporran@${version}\n\n${message}\n\n${stack}`,
     };
   }
 
@@ -42,6 +45,7 @@ export class GenericError extends Component<Props, State> {
           <textarea
             className={styles.details}
             readOnly
+            aria-label={t('view_GenericError_details')}
             defaultValue={this.state.errorText}
             onFocus={(event) => {
               (event.target as HTMLTextAreaElement).select();

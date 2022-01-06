@@ -19,12 +19,71 @@ exports[`GenericError should render generic error when an error happens 1`] = `
       >
         An error occurred; please try again. For help please contact  
         <a
-          href="mailto:support@sporran.org"
+          href="mailto:tech-support@sporran.org"
         >
-          support@sporran.org
+          tech-support@sporran.org
         </a>
-        .
+         and send over the following text in full.
       </p>
+      <textarea
+        aria-label="Error details"
+        class="details"
+      >
+        Sporran@2021.12.30
+
+Testing GenericError
+
+Error: Testing GenericError
+    at Failure (GenericError.test.tsx:23:13)
+    at renderWithHooks (react-dom.development.js:14985:18)
+    at mountIndeterminateComponent (react-dom.development.js:17811:13)
+    at beginWork (react-dom.development.js:19049:16)
+    at HTMLUnknownElement.callCallback (react-dom.development.js:3945:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (EventListener.js:26:30)
+    at innerInvokeEventListeners (EventTarget-impl.js:338:25)
+    at invokeEventListeners (EventTarget-impl.js:274:3)
+    at HTMLUnknownElementImpl._dispatch (EventTarget-impl.js:221:9)
+    at HTMLUnknownElementImpl.dispatchEvent (EventTarget-impl.js:94:17)
+    at HTMLUnknownElement.dispatchEvent (EventTarget.js:231:34)
+    at Object.invokeGuardedCallbackDev (react-dom.development.js:3994:16)
+    at invokeGuardedCallback (react-dom.development.js:4056:31)
+    at beginWork$1 (react-dom.development.js:23964:7)
+    at performUnitOfWork (react-dom.development.js:22779:12)
+    at workLoopSync (react-dom.development.js:22707:5)
+    at renderRootSync (react-dom.development.js:22670:7)
+    at performSyncWorkOnRoot (react-dom.development.js:22293:18)
+    at scheduleUpdateOnFiber (react-dom.development.js:21881:7)
+    at updateContainer (react-dom.development.js:25482:3)
+    at react-dom.development.js:26021:7
+    at unbatchedUpdates (react-dom.development.js:22431:12)
+    at legacyRenderSubtreeIntoContainer (react-dom.development.js:26020:5)
+    at Object.render (react-dom.development.js:26103:10)
+    at pure.js:101:25
+    at batchedUpdates$1 (react-dom.development.js:22380:12)
+    at act (react-dom-test-utils.development.js:1042:14)
+    at render (pure.js:97:26)
+    at render (testing.tsx:40:24)
+    at Object.&lt;anonymous&gt; (GenericError.test.tsx:29:33)
+    at Promise.then.completed (utils.js:391:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (utils.js:316:10)
+    at _callCircusTest (run.js:218:40)
+    at processTicksAndRejections (node:internaltask_queues:96:5)
+    at _runTest (run.js:155:3)
+    at _runTestsForDescribeBlock (run.js:66:9)
+    at _runTestsForDescribeBlock (run.js:60:9)
+    at run (run.js:25:3)
+    at runAndTransformResultsToJestFormat (jestAdapterInit.js:170:21)
+    at jestAdapter (jestAdapter.js:82:19)
+    at runTestInternal (runTest.js:389:16)
+    at runTest (runTest.js:475:34)
+    at TestRunner.runTests (index.js:111:12)
+    at TestScheduler.scheduleTests (TestScheduler.js:333:13)
+    at runJest (runJest.js:404:19)
+    at _run10000 (index.js:320:7)
+    at runCLI (index.js:173:3)
+    at Object.run (index.js:155:37)
+      </textarea>
       <button
         class="button"
         type="button"
