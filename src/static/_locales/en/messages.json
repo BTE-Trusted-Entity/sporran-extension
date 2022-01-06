@@ -740,7 +740,7 @@
     "message": "Confirm"
   },
   "view_GenericError_message": {
-    "message": "An error occurred; please try again. For help please contact  <a href='mailto:support@sporran.org'>support@sporran.org</a>."
+    "message": "An error occurred; please try again. For help please contact  <a href='mailto:support@sporran.org'>support@sporran.org</a> and send over the following text in full."
   },
   "view_UnlockVestedFunds_heading": {
     "message": "Update Balance"
