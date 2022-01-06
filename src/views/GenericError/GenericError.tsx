@@ -19,11 +19,8 @@ export class GenericError extends Component<Props, State> {
   state: State = {};
 
   static getDerivedStateFromError(error: Error): State {
-    const version = configuration.version;
-    const message = error.message;
-    const stack = String(error.stack).replace(/\/.*\//g, '');
     return {
-      errorText: `Sporran@${version}\n\n${message}\n\n${stack}`,
+      errorText: `Sporran@${configuration.version}\n\n${error.message}\n\n${error.stack}`,
     };
   }
 
