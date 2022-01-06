@@ -28,6 +28,7 @@ exports[`GenericError should render generic error when an error happens 1`] = `
       <textarea
         aria-label="Error details"
         class="details"
+        readonly=""
       >
         Sporran@2021.12.30
 
@@ -68,7 +69,6 @@ Error: Testing GenericError
     at new Promise (&lt;anonymous&gt;)
     at callAsyncCircusFn (utils.js:316:10)
     at _callCircusTest (run.js:218:40)
-    at processTicksAndRejections (node:internaltask_queues:96:5)
     at _runTest (run.js:155:3)
     at _runTestsForDescribeBlock (run.js:66:9)
     at _runTestsForDescribeBlock (run.js:60:9)
