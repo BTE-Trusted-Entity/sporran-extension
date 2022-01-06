@@ -1,10 +1,12 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { Modal } from 'react-dialog-polyfill';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './CredentialCard.module.css';
 
 import {
   Credential,
+  deleteCredential,
   getCredentialDownload,
   saveCredential,
   usePendingCredentialCheck,
@@ -99,6 +101,33 @@ function CredentialName({
   );
 }
 
+function ConfirmDelete({
+  onConfirm,
+  onCancel,
+}: {
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  const t = browser.i18n.getMessage;
+
+  return (
+    <Modal open className={styles.overlay}>
+      <h1 className={styles.warning}>
+        {t('component_CredentialCard_delete_warning')}
+      </h1>
+      <p className={styles.explanation}>
+        {t('component_CredentialCard_delete_explanation')}
+      </p>
+      <button type="button" className={styles.cancel} onClick={onCancel}>
+        {t('common_action_cancel')}
+      </button>
+      <button type="button" className={styles.confirm} onClick={onConfirm}>
+        {t('component_CredentialCard_delete_confirm')}
+      </button>
+    </Modal>
+  );
+}
+
 interface Props {
   credential: Credential;
   expand?: boolean;
@@ -138,6 +167,21 @@ export function CredentialCard({
 
   useScrollIntoView(expanded, cardRef);
 
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDeleteClick = useCallback(() => setDeleting(true), []);
+
+  const handleDeleteConfirm = useCallback(async () => {
+    try {
+      await deleteCredential(credential);
+    } catch (error) {
+      console.log('Error deleting credential: ', error);
+    }
+    setDeleting(false);
+  }, [credential]);
+
+  const handleDeleteCancel = useCallback(() => setDeleting(false), []);
+
   return (
     <li className={styles.credential} aria-expanded={expanded} ref={cardRef}>
       {!expanded && (
@@ -148,7 +192,6 @@ export function CredentialCard({
           </section>
         </button>
       )}
-
       {expanded && (
         <section className={styles.expanded}>
           {buttons && (
@@ -165,12 +208,12 @@ export function CredentialCard({
                 aria-label={t('component_CredentialCard_backup')}
                 className={styles.backup}
               />
-              {/*<button
-              type="button"
-              aria-label={t('component_CredentialCard_remove')}
-              className={styles.remove}
-              // TODO: https://kiltprotocol.atlassian.net/browse/SK-589
-            />*/}
+              <button
+                type="button"
+                aria-label={t('component_CredentialCard_remove')}
+                className={styles.remove}
+                onClick={handleDeleteClick}
+              />
             </section>
           )}
 
@@ -219,6 +262,13 @@ export function CredentialCard({
             </div>
           </dl>
         </section>
+      )}
+
+      {deleting && (
+        <ConfirmDelete
+          onConfirm={handleDeleteConfirm}
+          onCancel={handleDeleteCancel}
+        />
       )}
     </li>
   );
