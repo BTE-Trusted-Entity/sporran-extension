@@ -30,3 +30,8 @@ export const shareLabel: string;
 export const notAttested: string;
 export const required: string;
 export const requiredInfo: string;
+export const overlay: string;
+export const warning: string;
+export const explanation: string;
+export const cancel: string;
+export const confirm: string;
