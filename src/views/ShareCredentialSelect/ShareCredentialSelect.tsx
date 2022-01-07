@@ -41,11 +41,11 @@ function MatchingIdentityCredentials({
 
   const credentials = useIdentityCredentials(identity.did);
 
+  const fullDid = identity.did && parseDidUrl(identity.did).fullDid;
   const matchingCredentials = credentials?.filter(
     (credential) =>
       cTypeHashes.includes(credential.request.claim.cTypeHash) &&
-      parseDidUrl(credential.request.claim.owner).fullDid ===
-        parseDidUrl(identity.did).fullDid,
+      parseDidUrl(credential.request.claim.owner).fullDid === fullDid,
   );
 
   useEffect(() => {
