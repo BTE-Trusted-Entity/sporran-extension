@@ -101,33 +101,6 @@ function CredentialName({
   );
 }
 
-function ConfirmDelete({
-  onConfirm,
-  onCancel,
-}: {
-  onConfirm: () => void;
-  onCancel: () => void;
-}) {
-  const t = browser.i18n.getMessage;
-
-  return (
-    <Modal open className={styles.overlay}>
-      <h1 className={styles.warning}>
-        {t('component_CredentialCard_delete_warning')}
-      </h1>
-      <p className={styles.explanation}>
-        {t('component_CredentialCard_delete_explanation')}
-      </p>
-      <button type="button" className={styles.cancel} onClick={onCancel}>
-        {t('common_action_cancel')}
-      </button>
-      <button type="button" className={styles.confirm} onClick={onConfirm}>
-        {t('component_CredentialCard_delete_confirm')}
-      </button>
-    </Modal>
-  );
-}
-
 interface Props {
   credential: Credential;
   expand?: boolean;
@@ -261,10 +234,28 @@ export function CredentialCard({
       )}
 
       {deleting && (
-        <ConfirmDelete
-          onConfirm={handleDeleteConfirm}
-          onCancel={handleDeleteCancel}
-        />
+        <Modal open className={styles.overlay}>
+          <h1 className={styles.warning}>
+            {t('component_CredentialCard_delete_warning')}
+          </h1>
+          <p className={styles.explanation}>
+            {t('component_CredentialCard_delete_explanation')}
+          </p>
+          <button
+            type="button"
+            className={styles.cancel}
+            onClick={handleDeleteCancel}
+          >
+            {t('common_action_cancel')}
+          </button>
+          <button
+            type="button"
+            className={styles.confirm}
+            onClick={handleDeleteConfirm}
+          >
+            {t('component_CredentialCard_delete_confirm')}
+          </button>
+        </Modal>
       )}
     </li>
   );
