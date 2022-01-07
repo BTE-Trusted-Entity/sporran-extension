@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo } from 'react';
-import { pick, remove } from 'lodash-es';
+import { pick, pull } from 'lodash-es';
 import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
 import { Attestation } from '@kiltprotocol/core';
 import { mutate } from 'swr';
@@ -56,7 +56,8 @@ export async function deleteCredential(credential: Credential): Promise<void> {
   await mutate(key);
 
   const list = await getList();
-  remove(list, key);
+  pull(list, key);
+
   await saveList(list);
 }
 
