@@ -5,23 +5,27 @@ import { browser } from 'webextension-polyfill-ts';
 import * as overlayStyles from '../../components/Overlay/Overlay.module.css';
 import * as styles from './GenericError.module.css';
 
+import { configuration } from '../../configuration/configuration';
+
 interface Props {
   children: JSX.Element;
 }
 
 interface State {
-  hasError: boolean;
+  errorText?: string;
 }
 
 export class GenericError extends Component<Props, State> {
-  state: State = { hasError: false };
+  state: State = {};
 
-  static getDerivedStateFromError(): State {
-    return { hasError: true };
+  static getDerivedStateFromError(error: Error): State {
+    return {
+      errorText: `Sporran@${configuration.version}\n\n${error.message}\n\n${error.stack}`,
+    };
   }
 
   render(): JSX.Element {
-    if (!this.state.hasError) {
+    if (!this.state.errorText) {
       return this.props.children;
     }
 
@@ -33,6 +37,16 @@ export class GenericError extends Component<Props, State> {
           <p
             className={styles.text}
             dangerouslySetInnerHTML={{ __html: t('view_GenericError_message') }}
+          />
+
+          <textarea
+            className={styles.details}
+            readOnly
+            aria-label={t('view_GenericError_details')}
+            defaultValue={this.state.errorText}
+            onFocus={(event) => {
+              (event.target as HTMLTextAreaElement).select();
+            }}
           />
 
           <button

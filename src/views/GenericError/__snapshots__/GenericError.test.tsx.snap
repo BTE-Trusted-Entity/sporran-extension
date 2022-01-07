@@ -19,12 +19,23 @@ exports[`GenericError should render generic error when an error happens 1`] = `
       >
         An error occurred; please try again. For help please contact  
         <a
-          href="mailto:support@sporran.org"
+          href="mailto:tech-support@sporran.org"
         >
-          support@sporran.org
+          tech-support@sporran.org
         </a>
-        .
+         and send over the following text in full.
       </p>
+      <textarea
+        aria-label="Error details"
+        class="details"
+        readonly=""
+      >
+        Sporran@2021.12.30
+
+Testing GenericError
+
+test.js@123:12
+      </textarea>
       <button
         class="button"
         type="button"
