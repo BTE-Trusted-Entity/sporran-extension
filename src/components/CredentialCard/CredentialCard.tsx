@@ -172,11 +172,7 @@ export function CredentialCard({
   const handleDeleteClick = useCallback(() => setDeleting(true), []);
 
   const handleDeleteConfirm = useCallback(async () => {
-    try {
-      await deleteCredential(credential);
-    } catch (error) {
-      console.log('Error deleting credential: ', error);
-    }
+    await deleteCredential(credential);
     setDeleting(false);
   }, [credential]);
 

@@ -53,7 +53,6 @@ export async function getCredentials(keys: string[]): Promise<Credential[]> {
 export async function deleteCredential(credential: Credential): Promise<void> {
   const key = toKey(credential.request.rootHash);
   await storage.remove(key);
-  await mutate(key);
 
   const list = await getList();
   pull(list, key);
