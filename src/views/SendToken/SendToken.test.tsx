@@ -1,7 +1,10 @@
 import BN from 'bn.js';
 import userEvent from '@testing-library/user-event';
 import { DataUtils } from '@kiltprotocol/utils';
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import {
+  Blockchain,
+  BlockchainApiConnection,
+} from '@kiltprotocol/chain-helpers';
 
 import { NEW } from '../../utilities/identities/identities';
 import {
@@ -16,7 +19,7 @@ import '../../components/usePasteButton/usePasteButton.mock';
 import { SendToken } from './SendToken';
 
 jest.mock('../../utilities/getFee/getFee', () => ({ getFee: jest.fn() }));
-(getFee as jest.Mock).mockResolvedValue(new BN('1000000000000'));
+jest.mocked(getFee).mockResolvedValue(new BN('1000000000000'));
 
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: { getConnectionOrConnect: jest.fn() },
@@ -28,19 +31,17 @@ jest.mock('@kiltprotocol/utils', () => ({
   },
 }));
 
-(BlockchainApiConnection.getConnectionOrConnect as jest.Mock).mockResolvedValue(
-  {
-    api: {
-      consts: { balances: { existentialDeposit: new BN('100000000000000') } },
-    },
+jest.mocked(BlockchainApiConnection.getConnectionOrConnect).mockResolvedValue({
+  api: {
+    consts: { balances: { existentialDeposit: new BN('100000000000000') } },
   },
-);
+} as Blockchain);
 
 const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 describe('SendToken', () => {
   beforeEach(() => {
-    (DataUtils.validateAddress as jest.Mock).mockReset();
+    jest.mocked(DataUtils.validateAddress).mockReset();
     Object.defineProperty(window.navigator, 'onLine', {
       value: true,
       writable: true,
@@ -188,7 +189,7 @@ describe('SendToken', () => {
   });
 
   it('should report an invalid recipient', async () => {
-    (DataUtils.validateAddress as jest.Mock).mockImplementation(() => {
+    jest.mocked(DataUtils.validateAddress).mockImplementation(() => {
       throw new Error();
     });
 

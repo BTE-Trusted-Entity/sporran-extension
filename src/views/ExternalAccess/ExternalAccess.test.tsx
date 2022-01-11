@@ -15,7 +15,7 @@ const getAuthorizedPromise = Promise.resolve({
   'example.com': false,
   'example.org': true,
 });
-(getAuthorized as jest.Mock).mockReturnValue(getAuthorizedPromise);
+jest.mocked(getAuthorized).mockReturnValue(getAuthorizedPromise);
 
 describe('ExternalAccess', () => {
   it('should render', async () => {

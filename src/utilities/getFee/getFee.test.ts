@@ -1,5 +1,6 @@
 import BN from 'bn.js';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { Keyring } from '@polkadot/keyring';
 
 import { makeKeyring } from '../identities/identities';
 
@@ -27,7 +28,7 @@ describe('getFee', () => {
       },
     };
     const apiMock = {
-      tx: { balances: { transfer: jest.fn(() => txMock) } },
+      tx: { balances: { transfer: jest.fn().mockReturnValue(txMock) } },
       rpc: { payment: { queryInfo: jest.fn().mockResolvedValue(infoMock) } },
     };
 
@@ -46,9 +47,9 @@ describe('getFee', () => {
     ).mockResolvedValue(blockchainMock);
 
     const identityMock = { Alice: true };
-    (makeKeyring as jest.Mock).mockReturnValue({
+    jest.mocked(makeKeyring).mockReturnValue({
       createFromUri: () => identityMock,
-    });
+    } as unknown as Keyring);
 
     const fee = await getFee({
       recipient: 'address',
@@ -59,13 +60,11 @@ describe('getFee', () => {
     expect(fee.toString()).toEqual('partial fee');
     expect(BlockchainApiConnection.getConnectionOrConnect).toHaveBeenCalled();
 
-    expect(apiMock.tx.balances.transfer).toHaveBeenCalledWith(
-      'address',
-      expect.anything(),
-    );
-    expect(
-      (apiMock.tx.balances.transfer as jest.Mock).mock.calls[0][1].toString(10),
-    ).toEqual('125000000');
+    const transfer = apiMock.tx.balances.transfer;
+    expect(transfer).toHaveBeenCalledWith('address', expect.anything());
+
+    const args = jest.mocked(transfer).mock.calls?.[0];
+    expect(args?.[1]?.toString(10)).toEqual('125000000');
 
     expect(blockchainMock.signTx).toHaveBeenCalledWith(
       identityMock,

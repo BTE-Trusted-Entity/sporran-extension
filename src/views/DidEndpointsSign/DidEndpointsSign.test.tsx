@@ -1,5 +1,5 @@
 import { IDidServiceEndpoint } from '@kiltprotocol/types';
-import { DidUtils } from '@kiltprotocol/did';
+import { DidUtils, FullDidDetails } from '@kiltprotocol/did';
 
 import { identitiesMock, render } from '../../testing/testing';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
@@ -20,12 +20,12 @@ const endpoint: IDidServiceEndpoint = {
 jest.mock('@kiltprotocol/did', () => ({
   DidUtils: { parseDidUrl: jest.fn() },
 }));
-(DidUtils.parseDidUrl as jest.Mock).mockReturnValue({
+jest.mocked(DidUtils.parseDidUrl).mockReturnValue({
   identifier: '4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
-});
+} as ReturnType<typeof DidUtils.parseDidUrl>);
 
-const detailsPromise = Promise.resolve({});
-(queryFullDetailsFromIdentifier as jest.Mock).mockReturnValue(detailsPromise);
+const detailsPromise = Promise.resolve({} as FullDidDetails);
+jest.mocked(queryFullDetailsFromIdentifier).mockReturnValue(detailsPromise);
 
 describe('DidEndpointsSign', () => {
   it('should match the snapshot when adding', async () => {

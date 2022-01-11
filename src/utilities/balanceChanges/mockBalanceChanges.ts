@@ -5,8 +5,9 @@ import { onAddressBalanceChange } from './balanceChanges';
 jest.mock('./balanceChanges');
 
 export function mockBalanceChanges(): void {
-  (onAddressBalanceChange as jest.Mock).mockImplementation(
-    (address, publisher) => {
+  jest
+    .mocked(onAddressBalanceChange)
+    .mockImplementation((address, publisher) => {
       publisher(null, {
         address,
         balances: {
@@ -18,6 +19,5 @@ export function mockBalanceChanges(): void {
         },
       });
       return () => null;
-    },
-  );
+    });
 }

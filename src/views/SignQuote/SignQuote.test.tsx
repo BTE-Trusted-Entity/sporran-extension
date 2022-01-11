@@ -10,9 +10,9 @@ import { SignQuote } from './SignQuote';
 
 jest.mock('../../utilities/did/did');
 
-(parseDidUrl as jest.Mock).mockReturnValue({
+jest.mocked(parseDidUrl).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-});
+} as ReturnType<typeof parseDidUrl>);
 
 describe('SignQuote', () => {
   it('should render', async () => {

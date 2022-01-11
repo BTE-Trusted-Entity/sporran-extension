@@ -10,7 +10,7 @@ import { SignDApp } from './SignDApp';
 jest.mock('@kiltprotocol/chain-helpers', () => ({}));
 
 jest.mock('./useExtrinsicValues');
-(useExtrinsicValues as jest.Mock).mockReturnValue([
+jest.mocked(useExtrinsicValues).mockReturnValue([
   {
     label: 'from',
     value:

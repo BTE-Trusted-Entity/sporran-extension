@@ -50,7 +50,7 @@ export function render(
 }
 
 const dialogPromise = Promise.resolve();
-(dialogPolyfill.registerDialog as jest.Mock).mockReturnValue(dialogPromise);
+jest.mocked(dialogPolyfill.registerDialog).mockReturnValue(undefined);
 
 export async function waitForDialogUpdate(): Promise<void> {
   await act(() => dialogPromise);

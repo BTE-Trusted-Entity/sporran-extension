@@ -5,6 +5,7 @@ import {
   credentialsMock,
   mockRequestCredential,
 } from '../../utilities/credentials/CredentialsProvider.mock';
+import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 
 import { paths } from '../paths';
 
@@ -28,6 +29,8 @@ describe('ShareCredentialSign', () => {
         <ShareCredentialSign onCancel={jest.fn()} selected={mockSelected} />
       </PopupTestProvider>,
     );
+
+    await waitForGetPassword();
     expect(screen.queryByText('Mock Name')).not.toBeInTheDocument();
 
     expect(container).toMatchSnapshot();

@@ -44,9 +44,9 @@ describe('IdentityOverview', () => {
   });
 
   it('should render with link to send screen', async () => {
-    (useSubscanHost as jest.Mock).mockReturnValue(
-      'https://kilt-testnet.subscan.io',
-    );
+    jest
+      .mocked(useSubscanHost)
+      .mockReturnValue('https://kilt-testnet.subscan.io');
 
     const { container } = render(
       <InternalConfigurationContext>

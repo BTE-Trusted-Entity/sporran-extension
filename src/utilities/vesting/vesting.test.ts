@@ -1,4 +1,5 @@
 import {
+  Blockchain,
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
@@ -64,11 +65,11 @@ const signedTxMock = {
 const chainMock = {
   api: apiMock,
   signTx: jest.fn().mockResolvedValue(signedTxMock),
-};
+} as unknown as Blockchain;
 
-(BlockchainApiConnection.getConnectionOrConnect as jest.Mock).mockResolvedValue(
-  chainMock,
-);
+jest
+  .mocked(BlockchainApiConnection.getConnectionOrConnect)
+  .mockResolvedValue(chainMock);
 
 describe('vesting', () => {
   describe('hasVestedFunds', () => {
@@ -86,7 +87,7 @@ describe('vesting', () => {
         identity: true,
       } as unknown as Parameters<typeof signVest>[0];
 
-      (getBalances as jest.Mock).mockResolvedValue(originalBalancesMock);
+      jest.mocked(getBalances).mockResolvedValue(originalBalancesMock);
 
       const hash = await signVest(identityMock);
 
