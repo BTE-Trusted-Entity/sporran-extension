@@ -118,6 +118,7 @@ export function CredentialCard({
     pending: t('component_CredentialCard_pending'),
     attested: t('component_CredentialCard_attested'),
     revoked: t('component_CredentialCard_revoked'),
+    invalid: t('component_CredentialCard_invalid'),
   };
 
   usePendingCredentialCheck(credential);

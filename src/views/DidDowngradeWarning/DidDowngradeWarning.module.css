@@ -11,29 +11,24 @@
   margin: 0 0 0.8125rem;
 }
 
-.info {
-  composes: subline from '../../components/Typography/Typography.module.css';
-  text-align: left;
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  line-height: 1.25rem;
-  padding-left: calc(68rem / 16);
-  margin: 0.75rem 0;
-}
-
-.explanation {
-  composes: info;
-  background: url('../../components/images/deposit.svg') no-repeat left center;
-}
-
 .warning {
-  composes: info;
-  margin: 0;
+  composes: subline from '../../components/Typography/Typography.module.css';
   color: var(--color-orange);
+}
+
+.credentials {
+  composes: list from '../../components/Card/Card.module.css';
+  height: calc(200rem / 16);
+}
+
+.buttonsLine {
+  composes: buttonsLine from '../../components/Button/Button.module.css';
+}
+
+.cancel {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
 }
 
 .cta {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
-  margin-top: 1.5rem;
 }

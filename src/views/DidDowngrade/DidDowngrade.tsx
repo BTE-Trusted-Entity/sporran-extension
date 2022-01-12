@@ -14,7 +14,7 @@ import {
   submit,
 } from '../../utilities/didDowngrade/didDowngrade';
 import { saveIdentity } from '../../utilities/identities/identities';
-import { generatePath, paths } from '../paths';
+import { paths } from '../paths';
 
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import {
@@ -30,6 +30,10 @@ import {
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
+import {
+  useIdentityCredentials,
+  invalidateCredentials,
+} from '../../utilities/credentials/credentials';
 
 interface Props {
   identity: Identity;
@@ -77,6 +81,8 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
     null,
   );
 
+  const credentials = useIdentityCredentials(did);
+
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
     async (event) => {
@@ -92,7 +98,10 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
         setTxHash(hash);
 
         const did = await submit(hash);
+
         await saveIdentity({ ...identity, did });
+
+        await invalidateCredentials(credentials);
 
         setStatus('success');
       } catch (error) {
@@ -100,7 +109,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
         setStatus('error');
       }
     },
-    [identity, passwordField],
+    [identity, passwordField, credentials],
   );
 
   const closeModal = useCallback(() => {
@@ -120,23 +129,20 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
       <h1 className={styles.heading}>{t('view_DidDowngrade_heading')}</h1>
       <p className={styles.subline}>{t('view_DidDowngrade_subline')}</p>
 
-      <IdentitySlide identity={identity} />
+      <IdentitySlide identity={identity} options={false} />
 
       <p className={styles.costs}>
         {t('view_DidDowngrade_total')}
         <KiltAmount amount={total} type="costs" smallDecimals />
       </p>
       <p className={styles.details}>
-        <Link
-          to={generatePath(paths.identity.did.downgrade.start, { address })}
-          className={styles.info}
-          aria-label={t('view_DidDowngrade_info')}
-        />
         {t('view_DidDowngrade_deposit')}
         {asKiltCoins(deposit, 'costs')} <KiltCurrency />
         {t('view_DidDowngrade_fee')}
         {asKiltCoins(fee, 'costs')} <KiltCurrency />
       </p>
+
+      <p className={styles.explanation}>{t('view_DidDowngrade_explanation')}</p>
 
       <PasswordField identity={identity} autoFocus password={passwordField} />
 

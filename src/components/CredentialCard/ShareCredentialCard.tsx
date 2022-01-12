@@ -41,6 +41,7 @@ export function ShareCredentialCard({
     pending: t('component_CredentialCard_pending'),
     attested: t('component_CredentialCard_attested'),
     revoked: t('component_CredentialCard_revoked'),
+    invalid: t('component_CredentialCard_invalid'),
   };
 
   const contents = Object.entries(credential.request.claim.contents);

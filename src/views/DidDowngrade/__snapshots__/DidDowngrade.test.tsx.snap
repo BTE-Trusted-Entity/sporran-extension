@@ -23,27 +23,13 @@ exports[`DidDowngrade should render 1`] = `
         Identicon
       </div>
       <div
-        class="nameLine"
+        class="centeredNameLine"
       >
         <span
           class="name"
         >
           KILT Identity 2
         </span>
-        <div
-          class="wrapper"
-        >
-          <button
-            aria-expanded="false"
-            aria-haspopup="true"
-            aria-label="Identity options"
-            class="toggle"
-            role="button"
-            tabindex="0"
-            title="Identity options"
-            type="button"
-          />
-        </div>
       </div>
     </section>
     <p
@@ -69,11 +55,6 @@ exports[`DidDowngrade should render 1`] = `
     <p
       class="details"
     >
-      <a
-        aria-label="DID removal information"
-        class="info"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/downgrade"
-      />
        Deposit 
       1.0000
        
@@ -88,6 +69,11 @@ exports[`DidDowngrade should render 1`] = `
         aria-label="KILT Coin"
         class="coin"
       />
+    </p>
+    <p
+      class="explanation"
+    >
+      Take care: this identity won’t be able to upgrade to an on-chain DID again.
     </p>
     <p
       class="resetLine"

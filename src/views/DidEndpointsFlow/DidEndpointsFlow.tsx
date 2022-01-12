@@ -18,7 +18,9 @@ export function DidEndpointsFlow({ identity }: Props): JSX.Element {
   const [values, setValues] = useState<IDidServiceEndpoint | undefined>();
 
   const { address } = identity;
-  const signPath = generatePath(paths.identity.did.endpoints.sign, { address });
+  const signPath = generatePath(paths.identity.did.manage.endpoints.sign, {
+    address,
+  });
 
   const onAdd = useCallback(
     async (endpoint) => {
@@ -40,12 +42,12 @@ export function DidEndpointsFlow({ identity }: Props): JSX.Element {
 
   return (
     <Switch>
-      <Route path={paths.identity.did.endpoints.sign}>
+      <Route path={paths.identity.did.manage.endpoints.sign}>
         {values && (
           <DidEndpointsSign identity={identity} type={type} endpoint={values} />
         )}
       </Route>
-      <Route path={paths.identity.did.endpoints.start}>
+      <Route path={paths.identity.did.manage.endpoints.start}>
         <DidEndpointsForm
           identity={identity}
           onAdd={onAdd}

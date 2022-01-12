@@ -103,7 +103,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
       {isFullDid(identity.did) && (
         <Link
-          to={generatePath(paths.identity.did.manage, { address })}
+          to={generatePath(paths.identity.did.manage.start, { address })}
           className={styles.manage}
         >
           {t('view_IdentityOverview_on_chain')}

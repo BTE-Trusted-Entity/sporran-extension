@@ -11,6 +11,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { generatePath, paths } from '../paths';
+import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 
 interface Props {
   identity: Identity;
@@ -21,6 +22,13 @@ export function DidManage({ identity }: Props): JSX.Element | null {
 
   const { address } = identity;
   const { features } = useConfiguration();
+
+  const credentials = useIdentityCredentials(identity.did);
+
+  const downgradePath =
+    credentials.length === 0
+      ? paths.identity.did.manage.downgrade
+      : paths.identity.did.manage.warning;
 
   return (
     <section className={styles.container}>
@@ -35,7 +43,9 @@ export function DidManage({ identity }: Props): JSX.Element | null {
 
       <Link
         className={styles.endpoints}
-        to={generatePath(paths.identity.did.endpoints.start, { address })}
+        to={generatePath(paths.identity.did.manage.endpoints.start, {
+          address,
+        })}
       >
         {t('view_DidManage_endpoints')}
       </Link>
@@ -43,7 +53,9 @@ export function DidManage({ identity }: Props): JSX.Element | null {
       {features.dotsama && (
         <Link
           className={styles.connect}
-          to={generatePath(paths.identity.did.connect.start, { address })}
+          to={generatePath(paths.identity.did.manage.connect.start, {
+            address,
+          })}
         >
           {t('view_DidManage_connect')}
         </Link>
@@ -51,7 +63,7 @@ export function DidManage({ identity }: Props): JSX.Element | null {
 
       <Link
         className={styles.downgrade}
-        to={generatePath(paths.identity.did.downgrade.start, { address })}
+        to={generatePath(downgradePath, { address })}
       >
         {t('view_DidManage_downgrade')}
       </Link>
