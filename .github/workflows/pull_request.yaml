@@ -31,6 +31,9 @@ jobs:
       - name: Rename artifact as PR
         run: cd dist/web-ext-artifacts/ && mv * $(ls | sed 's/-/-PR-/')
 
+      - name: Add sources
+        run: cd .. && zip -r sporran-extension/dist/web-ext-artifacts/sporran-sources.zip sporran-extension -x 'sporran-extension/dist/*' 'sporran-extension/.git/*' 'sporran-extension/node_modules/*'
+
       - name: Publish on GitHub
         uses: actions/upload-artifact@v2
         with:
