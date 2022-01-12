@@ -15,7 +15,7 @@ interface Props {
 
 export function IdentitySlide({
   identity,
-  options = true,
+  options = false,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 

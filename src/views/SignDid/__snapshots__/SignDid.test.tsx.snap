@@ -25,27 +25,13 @@ exports[`SignDid should allow signing with full did 1`] = `
           Identicon
         </div>
         <div
-          class="nameLine"
+          class="centeredNameLine"
         >
           <span
             class="name"
           >
             KILT Identity 2
           </span>
-          <div
-            class="wrapper"
-          >
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="Identity options"
-              class="toggle"
-              role="button"
-              tabindex="0"
-              title="Identity options"
-              type="button"
-            />
-          </div>
         </div>
       </section>
       <a
@@ -243,27 +229,13 @@ exports[`SignDid should render 1`] = `
           Identicon
         </div>
         <div
-          class="nameLine"
+          class="centeredNameLine"
         >
           <span
             class="name"
           >
             KILT Identity 1
           </span>
-          <div
-            class="wrapper"
-          >
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="Identity options"
-              class="toggle"
-              role="button"
-              tabindex="0"
-              title="Identity options"
-              type="button"
-            />
-          </div>
         </div>
       </section>
       <a

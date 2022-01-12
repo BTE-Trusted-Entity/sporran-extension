@@ -22,27 +22,13 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
         Identicon
       </div>
       <div
-        class="nameLine"
+        class="centeredNameLine"
       >
         <span
           class="name"
         >
           KILT Identity 2
         </span>
-        <div
-          class="wrapper"
-        >
-          <button
-            aria-expanded="false"
-            aria-haspopup="true"
-            aria-label="Identity options"
-            class="toggle"
-            role="button"
-            tabindex="0"
-            title="Identity options"
-            type="button"
-          />
-        </div>
       </div>
     </section>
     <p
