@@ -27,6 +27,9 @@ jobs:
       - name: Rename artifact as public
         run: cd dist/web-ext-artifacts/ && mv * $(ls | sed 's/-/-public-/')
 
+      - name: Add sources
+        run: zip -r dist/web-ext-artifacts/sporran-sources.zip $(ls --almost-all) -x 'dist/*' '.git/*' 'node_modules/*'
+
       - name: Publish on GitHub
         uses: actions/upload-artifact@v2
         with:
