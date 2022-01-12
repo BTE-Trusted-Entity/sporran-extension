@@ -1,6 +1,24 @@
 # sporran-extension
 ![kilt](https://user-images.githubusercontent.com/1248214/110625865-49edbe00-81a0-11eb-9393-596c6a1f8eba.png)
 
+## Quick start _with play coins_
+
+1. We recommend using a different browser or a different profile of your browser
+   to avoid mixing up the real Sporran and the play coins Sporran
+1. Have git, Node.js, and yarn installed
+1. `git clone https://github.com/KILTprotocol/sporran-extension.git`
+1. `cd sporran-extension`
+1. `yarn install && yarn dev`
+1. Start Chrome and navigate to chrome://extensions (or in Firefox about:debugging#/runtime/this-firefox)
+1. Enable Developer Mode by clicking the toggle switch next to Developer mode (Chrome only)
+1. Click the _Load unpacked_ button and select the `sporran-extension/dist` directory
+   (or in Firefox click _Load Temporary Add-on..._ and select `sporran-extension/dist/manifest.json`)
+1. Now you have the internal version of Sporran installed. **DO NOT USE IT** for real KILT identities/addresses/coins!
+   Click the Sporran icon in the browser toolbar and follow the flow to create an Identity.
+   Click the _Receive_ link and copy the Identity address on the next screen.
+1. Visit the [Faucet](https://faucet.kilt.io/), paste the Identity address there, accept the Terms,
+   and click _Request Tokens_ to get some play KILT coins
+
 ## Testing in browser
 
 ### Getting the _internal_ version of extension
@@ -23,7 +41,7 @@
 
 1. Navigate to [chrome://extensions](chrome://extensions).
 1. Enable Developer Mode by clicking the toggle switch next to Developer mode.
-1. Click the _LOAD UNPACKED_ button and select the directory you have unpacked the extension into.
+1. Click the _Load unpacked_ button and select the directory you have unpacked the extension into.
 
 
 ### Testing in [Firefox](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/)
