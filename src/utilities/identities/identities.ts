@@ -189,7 +189,10 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
   try {
     // If this light DID was created and stored using SDK@0.24.0 then its keys are serialized using base64,
     // resulting in an invalid URI, so resolving would throw an exception.
-    await DefaultResolver.resolveDoc(identity.did);
+    const { details } = await DefaultResolver.resolveDoc(identity.did);
+    if (details.getKeys(KeyRelationship.keyAgreement).length === 0) {
+      throw new Error();
+    }
   } catch {
     // We re-create the invalid DID from scratch and update its URI in the identity.
     const { did } = getLightDidFromKeypair(identityKeypair);
