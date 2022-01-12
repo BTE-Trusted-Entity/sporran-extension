@@ -2,7 +2,9 @@ import BN from 'bn.js';
 import {
   BlockchainUtils,
   BlockchainApiConnection,
+  Blockchain,
 } from '@kiltprotocol/chain-helpers';
+import { SubmittableExtrinsic } from '@kiltprotocol/types';
 import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
 import { signTransfer, submitTransfer } from './transfers';
@@ -27,11 +29,11 @@ const signedTxMock = {
 
 const chainMock = {
   signTx: jest.fn().mockResolvedValue(signedTxMock),
-};
+} as unknown as Blockchain;
 
-(BlockchainApiConnection.getConnectionOrConnect as jest.Mock).mockResolvedValue(
-  chainMock,
-);
+jest
+  .mocked(BlockchainApiConnection.getConnectionOrConnect)
+  .mockResolvedValue(chainMock);
 
 describe('transfers', () => {
   describe('signTransfer', () => {
@@ -40,9 +42,10 @@ describe('transfers', () => {
         sdkIdentity: true,
       } as unknown as Parameters<typeof signTransfer>[0]['keypair'];
 
-      (makeTransfer as jest.Mock).mockImplementation(() => ({
+      const extrinsic = {
         transaction: true,
-      }));
+      } as unknown as SubmittableExtrinsic;
+      jest.mocked(makeTransfer).mockImplementation(async () => extrinsic);
 
       const txHash = await signTransfer({
         keypair: keypairMock,

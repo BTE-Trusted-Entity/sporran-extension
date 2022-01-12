@@ -13,8 +13,8 @@ jest.mock('../../utilities/didDowngrade/didDowngrade', () => ({
   getFee: jest.fn(),
   getDeposit: jest.fn(),
 }));
-(getFee as jest.Mock).mockResolvedValue(new BN(1e13));
-(getDeposit as jest.Mock).mockResolvedValue(new BN(1e15));
+jest.mocked(getFee).mockResolvedValue(new BN(1e13));
+jest.mocked(getDeposit).mockResolvedValue(new BN(1e15));
 
 describe('DidDowngrade', () => {
   it('should render', async () => {

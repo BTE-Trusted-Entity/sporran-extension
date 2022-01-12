@@ -36,10 +36,10 @@ describe('PasswordField', () => {
   beforeEach(() => {
     passwordField.set.mockReset();
     passwordField.setIsEmpty.mockReset();
-    (decryptIdentity as jest.Mock).mockReset();
-    (getPasswordChannel.get as jest.Mock).mockReset();
-    (savePasswordChannel.get as jest.Mock).mockReset();
-    (forgetPasswordChannel.get as jest.Mock).mockReset();
+    jest.mocked(decryptIdentity).mockReset();
+    jest.mocked(getPasswordChannel.get).mockReset();
+    jest.mocked(savePasswordChannel.get).mockReset();
+    jest.mocked(forgetPasswordChannel.get).mockReset();
   });
 
   it('should match the snapshot', async () => {
@@ -66,7 +66,7 @@ describe('PasswordField', () => {
 
   it('should indicate saved password', async () => {
     const promise = Promise.resolve('password');
-    (getPasswordChannel.get as jest.Mock).mockReturnValue(promise);
+    jest.mocked(getPasswordChannel.get).mockReturnValue(promise);
 
     render(
       <form>
@@ -87,7 +87,7 @@ describe('PasswordField', () => {
   });
   it('should clear the password from state if it has been cleared from background memory', async () => {
     const promise = Promise.resolve('password');
-    (getPasswordChannel.get as jest.Mock).mockReturnValue(promise);
+    jest.mocked(getPasswordChannel.get).mockReturnValue(promise);
 
     render(
       <form>
@@ -100,7 +100,7 @@ describe('PasswordField', () => {
     );
     jest.advanceTimersByTime(15 * 60 * 1000);
 
-    (getPasswordChannel.get as jest.Mock).mockResolvedValue(undefined);
+    jest.mocked(getPasswordChannel.get).mockResolvedValue(undefined);
 
     jest.advanceTimersByTime(1 * 60 * 1000);
 
@@ -110,7 +110,7 @@ describe('PasswordField', () => {
 
   describe('password getter', () => {
     it('should report an invalid password', async () => {
-      (decryptIdentity as jest.Mock).mockRejectedValue(
+      jest.mocked(decryptIdentity).mockRejectedValue(
         new Error('Invalid password'),
       );
       let error = '';
@@ -166,7 +166,7 @@ describe('PasswordField', () => {
 
     it('should return the saved password and clear it', async () => {
       const promise = Promise.resolve('PASS');
-      (getPasswordChannel.get as jest.Mock).mockReturnValue(promise);
+      jest.mocked(getPasswordChannel.get).mockReturnValue(promise);
 
       let password: Record<string, string> = {};
 

@@ -6,7 +6,7 @@ import { hasVestedFunds } from '../../utilities/vesting/vesting';
 import { Balance } from './Balance';
 
 jest.mock('../../utilities/vesting/vesting');
-(hasVestedFunds as jest.Mock).mockResolvedValue(false);
+jest.mocked(hasVestedFunds).mockResolvedValue(false);
 
 const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 

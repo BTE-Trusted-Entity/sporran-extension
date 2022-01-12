@@ -1,6 +1,10 @@
 import { listenToBalanceChanges } from '@kiltprotocol/core/lib/balance/Balance.chain';
 
-import { computeBalance, onAddressBalanceChange } from './balanceChanges';
+import {
+  Balances,
+  computeBalance,
+  onAddressBalanceChange,
+} from './balanceChanges';
 import { originalBalancesMock } from './balanceChanges.mock';
 
 jest.mock('@kiltprotocol/core/lib/balance/Balance.chain');
@@ -43,15 +47,14 @@ describe('balanceChanges', () => {
     });
 
     it('should run publisher on balance change', async () => {
-      (listenToBalanceChanges as jest.Mock).mockClear();
+      jest.mocked(listenToBalanceChanges).mockClear();
 
       const publisher = jest.fn();
       onAddressBalanceChange('address', publisher);
 
-      (listenToBalanceChanges as jest.Mock).mock.calls[0][1](
-        'address',
-        originalBalancesMock,
-      );
+      jest
+        .mocked(listenToBalanceChanges)
+        .mock.calls[0][1]('address', originalBalancesMock, {} as Balances);
 
       const { balances } = publisher.mock.calls[0][1];
       expect(expectedBalanceStrings).toEqual({

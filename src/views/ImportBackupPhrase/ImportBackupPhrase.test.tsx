@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { mnemonicValidate } from '@polkadot/util-crypto';
+import { KeyringPair } from '@polkadot/keyring/types';
 
 import { getKeypairByBackupPhrase } from '../../utilities/identities/identities';
 import { render, screen } from '../../testing/testing';
@@ -13,7 +14,7 @@ jest.mock('../../utilities/identities/identities', () => ({
   getKeypairByBackupPhrase: jest.fn(),
 }));
 
-(mnemonicValidate as jest.Mock).mockReturnValue(false);
+jest.mocked(mnemonicValidate).mockReturnValue(false);
 
 const onImport = jest.fn();
 
@@ -44,7 +45,7 @@ async function typeElevenWords() {
 
 describe('ImportBackupPhrase', () => {
   beforeEach(() => {
-    (getKeypairByBackupPhrase as jest.Mock).mockReset();
+    jest.mocked(getKeypairByBackupPhrase).mockReset();
   });
 
   it('should render for import', async () => {
@@ -110,10 +111,10 @@ describe('ImportBackupPhrase', () => {
   });
 
   it('should report mismatching backup phrase', async () => {
-    (mnemonicValidate as jest.Mock).mockReturnValue(true);
-    (getKeypairByBackupPhrase as jest.Mock).mockReturnValue({
+    jest.mocked(mnemonicValidate).mockReturnValue(true);
+    jest.mocked(getKeypairByBackupPhrase).mockReturnValue({
       address: 'FAIL',
-    });
+    } as KeyringPair);
 
     render(<ImportBackupPhrase {...props} type="reset" address="foo" />);
 
@@ -129,10 +130,10 @@ describe('ImportBackupPhrase', () => {
   });
 
   it('should allow backup phrase import', async () => {
-    (mnemonicValidate as jest.Mock).mockReturnValue(true);
-    (getKeypairByBackupPhrase as jest.Mock).mockReturnValue({
+    jest.mocked(mnemonicValidate).mockReturnValue(true);
+    jest.mocked(getKeypairByBackupPhrase).mockReturnValue({
       address: 'PASS',
-    });
+    } as KeyringPair);
 
     render(<ImportBackupPhrase {...props} address="PASS" />);
 
@@ -151,10 +152,10 @@ describe('ImportBackupPhrase', () => {
   });
 
   it('should allow backup phrase reset', async () => {
-    (mnemonicValidate as jest.Mock).mockReturnValue(true);
-    (getKeypairByBackupPhrase as jest.Mock).mockReturnValue({
+    jest.mocked(mnemonicValidate).mockReturnValue(true);
+    jest.mocked(getKeypairByBackupPhrase).mockReturnValue({
       address: '4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos',
-    });
+    } as KeyringPair);
 
     render(
       <ImportBackupPhrase

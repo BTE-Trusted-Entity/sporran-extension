@@ -13,9 +13,9 @@ import { ShareCredentialSelect } from './ShareCredentialSelect';
 
 jest.mock('../../utilities/did/did');
 
-(parseDidUrl as jest.Mock).mockReturnValue({
+jest.mocked(parseDidUrl).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-});
+} as ReturnType<typeof parseDidUrl>);
 
 describe('ShareCredentialSelect', () => {
   it('should render', async () => {

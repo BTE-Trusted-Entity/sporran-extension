@@ -1,5 +1,5 @@
 import { IDidServiceEndpoint } from '@kiltprotocol/types';
-import { DidUtils } from '@kiltprotocol/did';
+import { DidUtils, FullDidDetails } from '@kiltprotocol/did';
 
 import { identitiesMock, render, act } from '../../testing/testing';
 import { queryFullDetailsFromIdentifier } from '../../utilities/did/did';
@@ -26,12 +26,14 @@ const endpoints: IDidServiceEndpoint[] = [
 jest.mock('@kiltprotocol/did', () => ({
   DidUtils: { parseDidUrl: jest.fn() },
 }));
-(DidUtils.parseDidUrl as jest.Mock).mockReturnValue({
+jest.mocked(DidUtils.parseDidUrl).mockReturnValue({
   identifier: '4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
-});
+} as ReturnType<typeof DidUtils.parseDidUrl>);
 
-const detailsPromise = Promise.resolve({ getEndpoints: () => endpoints });
-(queryFullDetailsFromIdentifier as jest.Mock).mockReturnValue(detailsPromise);
+const detailsPromise = Promise.resolve({
+  getEndpoints: () => endpoints,
+} as FullDidDetails);
+jest.mocked(queryFullDetailsFromIdentifier).mockReturnValue(detailsPromise);
 
 describe('DidEndpointsForm', () => {
   it('should match the snapshot', async () => {

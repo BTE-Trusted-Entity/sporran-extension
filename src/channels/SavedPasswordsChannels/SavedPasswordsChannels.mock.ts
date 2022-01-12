@@ -8,9 +8,9 @@ import {
 jest.mock('./SavedPasswordsChannels');
 
 const hasSavedPasswordsPromise = Promise.resolve(false);
-(hasSavedPasswordsChannel.get as jest.Mock).mockReturnValue(
-  hasSavedPasswordsPromise,
-);
+jest
+  .mocked(hasSavedPasswordsChannel.get)
+  .mockReturnValue(hasSavedPasswordsPromise);
 
 export async function waitForHasSavedPasswords(): Promise<void> {
   await act(async () => {
@@ -18,8 +18,8 @@ export async function waitForHasSavedPasswords(): Promise<void> {
   });
 }
 
-const getPasswordPromise = Promise.resolve(false);
-(getPasswordChannel.get as jest.Mock).mockReturnValue(getPasswordPromise);
+const getPasswordPromise = Promise.resolve('');
+jest.mocked(getPasswordChannel.get).mockReturnValue(getPasswordPromise);
 
 export async function waitForGetPassword(): Promise<void> {
   await act(async () => {
