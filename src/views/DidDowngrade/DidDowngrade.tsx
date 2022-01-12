@@ -101,7 +101,9 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
         await saveIdentity({ ...identity, did });
 
-        credentials && (await invalidateCredentials(credentials));
+        if (credentials) {
+          await invalidateCredentials(credentials);
+        }
 
         setStatus('success');
       } catch (error) {
