@@ -1,5 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`IdentitySlide should enable editing the identity name 1`] = `
+<div>
+  <section>
+    <div
+      class="avatar"
+    >
+      Identicon
+    </div>
+    <div
+      class="nameLine"
+    >
+      <span
+        class="name"
+      >
+        KILT Identity 1
+      </span>
+      <div
+        class="wrapper"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Identity options"
+          class="toggle"
+          role="button"
+          tabindex="0"
+          title="Identity options"
+          type="button"
+        />
+      </div>
+    </div>
+  </section>
+</div>
+`;
+
 exports[`IdentitySlide should render 1`] = `
 <div>
   <section>
