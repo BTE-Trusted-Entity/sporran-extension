@@ -185,6 +185,8 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
     // If this light DID was created and stored using SDK@0.24.0 then its keys are serialized using base64,
     // resulting in an invalid URI, so resolving would throw an exception.
     const details = await getDidDetails(identity.did);
+
+    // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
     if (details.getKeys(KeyRelationship.keyAgreement).length === 0) {
       throw new Error();
     }
