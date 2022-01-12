@@ -10,12 +10,12 @@ import { parseDidUrl } from '../../utilities/did/did';
 import { DidDowngradeWarning } from './DidDowngradeWarning';
 
 jest.mock('../../utilities/did/did');
-(parseDidUrl as jest.Mock).mockReturnValue({
+jest.mocked(parseDidUrl).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-});
+} as ReturnType<typeof parseDidUrl>);
 
 jest.mock('@kiltprotocol/core', () => ({ Attestation: { query: jest.fn() } }));
-(Attestation.query as jest.Mock).mockResolvedValue(false);
+jest.mocked(Attestation.query).mockResolvedValue(null);
 
 describe('DidDowngradeWarning', () => {
   it('should render', async () => {
