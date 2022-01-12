@@ -16,12 +16,7 @@ import {
   NaclBoxCapable,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
-import {
-  LightDidDetails,
-  DidUtils,
-  DidChain,
-  DefaultResolver,
-} from '@kiltprotocol/did';
+import { LightDidDetails, DidUtils, DidChain } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 import { map, max, memoize } from 'lodash-es';
 
@@ -189,7 +184,7 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
   try {
     // If this light DID was created and stored using SDK@0.24.0 then its keys are serialized using base64,
     // resulting in an invalid URI, so resolving would throw an exception.
-    const { details } = await DefaultResolver.resolveDoc(identity.did);
+    const details = await getDidDetails(identity.did);
     if (details.getKeys(KeyRelationship.keyAgreement).length === 0) {
       throw new Error();
     }
