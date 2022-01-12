@@ -24,7 +24,7 @@ describe('IdentitySlide', () => {
   });
 
   it('should enable editing the identity name', async () => {
-    render(<IdentitySlide identity={identity} />);
+    const { container } = render(<IdentitySlide identity={identity} options />);
 
     userEvent.click(await screen.findByLabelText('Identity options'));
     userEvent.click(
@@ -43,6 +43,8 @@ describe('IdentitySlide', () => {
     });
 
     await waitForElementToBeRemoved(saveButton);
+
+    expect(container).toMatchSnapshot();
   });
 });
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IdentitySlide should render 1`] = `
+exports[`IdentitySlide should enable editing the identity name 1`] = `
 <div>
   <section>
     <div
@@ -30,6 +30,27 @@ exports[`IdentitySlide should render 1`] = `
           type="button"
         />
       </div>
+    </div>
+  </section>
+</div>
+`;
+
+exports[`IdentitySlide should render 1`] = `
+<div>
+  <section>
+    <div
+      class="avatar"
+    >
+      Identicon
+    </div>
+    <div
+      class="centeredNameLine"
+    >
+      <span
+        class="name"
+      >
+        KILT Identity 1
+      </span>
     </div>
   </section>
 </div>

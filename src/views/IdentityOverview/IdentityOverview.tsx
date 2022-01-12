@@ -55,7 +55,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </p>
       </header>
 
-      <IdentitiesCarousel identity={identity} />
+      <IdentitiesCarousel identity={identity} options />
 
       <Balance address={address} breakdown smallDecimals />
 

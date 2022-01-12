@@ -118,7 +118,7 @@ interface Props {
 
 export function IdentitiesCarousel({
   identity,
-  options,
+  options = false,
 }: Props): JSX.Element | null {
   const identities = useIdentities().data;
   if (!identities) {
