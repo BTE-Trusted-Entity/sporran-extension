@@ -825,9 +825,6 @@
   "view_DidDowngrade_fee": {
     "message": " - fee "
   },
-  "view_DidDowngrade_info": {
-    "message": "DID removal information"
-  },
   "view_DidDowngrade_CTA": {
     "message": "Sign"
   },
