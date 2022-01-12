@@ -7,9 +7,9 @@ import { parseDidUrl } from '../../utilities/did/did';
 import { DidManage } from './DidManage';
 
 jest.mock('../../utilities/did/did');
-(parseDidUrl as jest.Mock).mockReturnValue({
+jest.mocked(parseDidUrl).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-});
+} as ReturnType<typeof parseDidUrl>);
 
 describe('DidManage', () => {
   it('should match the snapshot', async () => {
