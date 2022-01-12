@@ -22,17 +22,21 @@ import { paths } from '../paths';
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();
 
+  const pathsWithoutTopButtons = [
+    paths.popup.base,
+    paths.popup.signDid,
+    paths.popup.claim,
+  ];
+
   return (
     <div className={styles.container}>
       <GenericError>
         <MemoryRouter initialEntries={initialEntries}>
-          <RouteExcept path={paths.popup.base}>
-            <RouteExcept path={paths.popup.signDid}>
-              <nav className={styles.menus}>
-                <AddIdentity />
-                <Settings />
-              </nav>
-            </RouteExcept>
+          <RouteExcept path={pathsWithoutTopButtons}>
+            <nav className={styles.menus}>
+              <AddIdentity />
+              <Settings />
+            </nav>
           </RouteExcept>
 
           <Switch>
