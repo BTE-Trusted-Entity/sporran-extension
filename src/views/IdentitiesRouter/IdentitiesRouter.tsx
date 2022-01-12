@@ -28,8 +28,8 @@ import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
 import { SignQuote } from '../SignQuote/SignQuote';
 import { SignDid } from '../SignDid/SignDid';
-import { paths } from '../paths';
 import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
+import { paths } from '../paths';
 
 interface Props {
   identities: IdentitiesMap;
