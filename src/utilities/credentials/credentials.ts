@@ -9,7 +9,7 @@ import { parseDidUrl } from '../did/did';
 
 import { CredentialsContext } from './CredentialsContext';
 
-type AttestationStatus = 'pending' | 'attested' | 'revoked';
+type AttestationStatus = 'pending' | 'attested' | 'revoked' | 'invalid';
 
 export interface Credential {
   request: IRequestForAttestation;
@@ -60,14 +60,20 @@ export async function deleteCredential(credential: Credential): Promise<void> {
   await saveList(list);
 }
 
-export function useCredentials(): Credential[] {
+export function useCredentials(): Credential[] | undefined {
   return useContext(CredentialsContext);
 }
 
-export function useIdentityCredentials(did: IDidDetails['did']): Credential[] {
+export function useIdentityCredentials(
+  did: IDidDetails['did'],
+): Credential[] | undefined {
   const all = useCredentials();
 
   return useMemo(() => {
+    if (!all) {
+      // storage data pending
+      return undefined;
+    }
     if (!did) {
       // could be a legacy identity without DID
       return [];
@@ -110,4 +116,12 @@ export function getCredentialDownload(
   const url = `data:text/json;base64,${blob}`;
 
   return { name, url };
+}
+
+export async function invalidateCredentials(
+  credentials: Credential[],
+): Promise<void> {
+  for (const credential of credentials) {
+    await saveCredential({ ...credential, status: 'invalid' });
+  }
 }

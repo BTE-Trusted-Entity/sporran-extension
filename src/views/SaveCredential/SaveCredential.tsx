@@ -21,7 +21,7 @@ export function SaveCredential(): JSX.Element | null {
 
   const credentials = useCredentials();
 
-  const credential = credentials.find(
+  const credential = credentials?.find(
     (credential) => credential.request.rootHash === claimHash,
   );
 
@@ -41,7 +41,7 @@ export function SaveCredential(): JSX.Element | null {
     })();
   }, []);
 
-  if (credentials.length === 0) {
+  if (!credentials) {
     return null; // storage data pending
   }
 

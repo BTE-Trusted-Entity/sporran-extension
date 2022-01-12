@@ -69,7 +69,7 @@ exports[`DidManage should match the snapshot 1`] = `
     </a>
     <a
       class="downgrade"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/downgrade"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/warning"
     >
       Remove on-chain DID
     </a>

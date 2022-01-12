@@ -23,15 +23,19 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
   const identityCredentials = useIdentityCredentials(identity.did);
 
   const credentials = useMemo(
-    () => identityCredentials.concat().reverse(),
+    () => identityCredentials?.concat().reverse(),
     [identityCredentials],
   );
-
-  const credentialCount = credentials.length;
 
   if (isNew(identity)) {
     return <IdentityOverviewNew />;
   }
+
+  if (!credentials) {
+    return null; // storage data pending
+  }
+
+  const credentialCount = credentials.length;
 
   return (
     <section className={styles.container}>

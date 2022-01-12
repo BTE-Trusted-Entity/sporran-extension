@@ -49,12 +49,16 @@ function MatchingIdentityCredentials({
   );
 
   useEffect(() => {
-    if (matchingCredentials.length > 0) {
+    if (matchingCredentials && matchingCredentials.length > 0) {
       match();
     }
   }, [matchingCredentials, match]);
 
   const balance = useAddressBalance(identity.address);
+
+  if (!matchingCredentials) {
+    return null; // storage data pending
+  }
 
   if (matchingCredentials.length === 0) {
     return null;

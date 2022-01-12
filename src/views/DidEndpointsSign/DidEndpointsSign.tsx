@@ -130,7 +130,7 @@ export function DidEndpointsSign({
           {...modalProps}
           identity={identity}
           messages={type === 'add' ? modalMessagesAdd : modalMessagesRemove}
-          destination={generatePath(paths.identity.did.endpoints.start, {
+          destination={generatePath(paths.identity.did.manage.endpoints.start, {
             address,
           })}
         />

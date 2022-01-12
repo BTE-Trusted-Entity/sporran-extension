@@ -157,7 +157,7 @@ export function DidEndpointsForm({
     // because we could have been redirected to this form from submitting the transaction,
     // and then going back from manage DID would end in a wrong place.
     history.push(generatePath(paths.identity.overview, { address }));
-    history.push(generatePath(paths.identity.did.manage, { address }));
+    history.push(generatePath(paths.identity.did.manage.start, { address }));
   }, [address, history]);
 
   return (

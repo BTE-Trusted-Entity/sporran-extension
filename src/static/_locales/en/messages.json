@@ -233,6 +233,9 @@
   "component_CredentialCard_revoked": {
     "message": "Revoked"
   },
+  "component_CredentialCard_invalid": {
+    "message": "Invalid"
+  },
   "component_CredentialCard_delete_warning": {
     "message": "Do you really want to delete this credential?"
   },
@@ -822,9 +825,6 @@
   "view_DidDowngrade_fee": {
     "message": " - fee "
   },
-  "view_DidDowngrade_info": {
-    "message": "DID removal information"
-  },
   "view_DidDowngrade_CTA": {
     "message": "Sign"
   },
@@ -845,6 +845,9 @@
   "view_DidDowngrade_error": {
     "message": "Remove on-chain DID failed"
   },
+  "view_DidDowngrade_explanation": {
+    "message": "Take care: this identity won’t be able to upgrade to an on-chain DID again."
+  },
   "view_DidUpgradeExplainer_heading": {
     "message": "Decentralized Identifier"
   },
@@ -860,19 +863,16 @@
   "view_DidUpgradeExplainer_CTA": {
     "message": "Upgrade"
   },
-  "view_DidDowngradeExplainer_heading": {
+  "view_DidDowngradeWarning_heading": {
     "message": "Remove on-chain DID"
   },
-  "view_DidDowngradeExplainer_subline": {
+  "view_DidDowngradeWarning_subline": {
     "message": "Remove DID from the KILT blockchain"
   },
-  "view_DidDowngradeExplainer_explanation": {
-    "message": "Removing your on-chain DID needs to be signed by you. Your deposit will be returned."
+  "view_DidDowngradeWarning_warning": {
+    "message": "Attention! This will render the following credentials unusable:"
   },
-  "view_DidDowngradeExplainer_warning": {
-    "message": "Take care: this identity won’t be able to upgrade to an on-chain DID again."
-  },
-  "view_DidDowngradeExplainer_CTA": {
+  "view_DidDowngradeWarning_CTA": {
     "message": "Continue"
   },
   "view_DidManage_heading": {

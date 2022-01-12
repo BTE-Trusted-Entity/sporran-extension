@@ -33,21 +33,21 @@ export const paths = {
     remove: '/identity/:address/remove',
     vest: '/identity/:address/vest',
     did: {
-      manage: '/identity/:address/did',
       upgrade: {
         start: '/identity/:address/did/upgrade',
         sign: '/identity/:address/did/upgrade/sign',
       },
-      downgrade: {
-        start: '/identity/:address/did/downgrade',
-        sign: '/identity/:address/did/downgrade/sign',
-      },
-      endpoints: {
-        start: '/identity/:address/did/endpoints',
-        sign: '/identity/:address/did/endpoints/sign',
-      },
-      connect: {
-        start: '/identity/:address/did/connect',
+      manage: {
+        start: '/identity/:address/did',
+        warning: '/identity/:address/did/warning',
+        downgrade: '/identity/:address/did/downgrade',
+        endpoints: {
+          start: '/identity/:address/did/endpoints',
+          sign: '/identity/:address/did/endpoints/sign',
+        },
+        connect: {
+          start: '/identity/:address/did/connect',
+        },
       },
     },
   },

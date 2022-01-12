@@ -9,3 +9,4 @@ export const buttonsLine: string;
 export const cancel: string;
 export const submit: string;
 export const errorTooltip: string;
+export const explanation: string;

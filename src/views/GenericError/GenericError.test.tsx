@@ -21,7 +21,7 @@ describe('GenericError', () => {
   it('should render generic error when an error happens', async () => {
     function Failure(): JSX.Element {
       const error = new Error('Testing GenericError');
-      error.stack = 'test.js@123:12'
+      error.stack = 'test.js@123:12';
       throw error;
     }
 

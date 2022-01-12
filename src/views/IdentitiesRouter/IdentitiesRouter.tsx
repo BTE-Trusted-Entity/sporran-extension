@@ -26,11 +26,9 @@ import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
 import { IdentityCredentials } from '../IdentityCredentials/IdentityCredentials';
 import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
-import { DidDowngradeFlow } from '../DidDowngradeFlow/DidDowngradeFlow';
 import { SignQuote } from '../SignQuote/SignQuote';
 import { SignDid } from '../SignDid/SignDid';
-import { DidManage } from '../DidManage/DidManage';
-import { DidEndpointsFlow } from '../DidEndpointsFlow/DidEndpointsFlow';
+import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
 import { paths } from '../paths';
 
 interface Props {
@@ -118,16 +116,8 @@ export function SpecificIdentityRouter({
           <DidUpgradeFlow identity={identity} />
         </Route>
 
-        <Route path={paths.identity.did.downgrade.start}>
-          <DidDowngradeFlow identity={identity} />
-        </Route>
-
-        <Route path={paths.identity.did.endpoints.start}>
-          <DidEndpointsFlow identity={identity} />
-        </Route>
-
-        <Route path={paths.identity.did.manage}>
-          <DidManage identity={identity} />
+        <Route path={paths.identity.did.manage.start}>
+          <DidManageRouter identity={identity} />
         </Route>
 
         <Route path={paths.identity.overview}>
