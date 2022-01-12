@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import * as styles from './DidDowngradeWarning.module.css';
 
@@ -21,8 +21,12 @@ export function DidDowngradeWarning({ identity }: Props): JSX.Element | null {
 
   const credentials = useIdentityCredentials(identity.did);
 
-  if (credentials.length === 0) {
+  if (!credentials) {
     return null; // storage data pending
+  }
+
+  if (credentials.length === 0) {
+    return <Redirect to={paths.identity.did.manage.downgrade} />;
   }
 
   return (

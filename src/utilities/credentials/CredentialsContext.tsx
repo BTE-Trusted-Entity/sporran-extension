@@ -3,14 +3,16 @@ import useSWR from 'swr';
 
 import { Credential, getList, LIST_KEY, getCredentials } from './credentials';
 
-export const CredentialsContext = createContext<Credential[]>([]);
+export const CredentialsContext = createContext<Credential[] | undefined>(
+  undefined,
+);
 
 export function CredentialsProvider({
   children,
 }: {
   children: JSX.Element;
 }): JSX.Element {
-  const [credentials, setCredentials] = useState<Credential[]>([]);
+  const [credentials, setCredentials] = useState<Credential[]>();
 
   const { data: list } = useSWR(LIST_KEY, getList);
   useEffect(() => {

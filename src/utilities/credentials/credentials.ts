@@ -60,14 +60,20 @@ export async function deleteCredential(credential: Credential): Promise<void> {
   await saveList(list);
 }
 
-export function useCredentials(): Credential[] {
+export function useCredentials(): Credential[] | undefined {
   return useContext(CredentialsContext);
 }
 
-export function useIdentityCredentials(did: IDidDetails['did']): Credential[] {
+export function useIdentityCredentials(
+  did: IDidDetails['did'],
+): Credential[] | undefined {
   const all = useCredentials();
 
   return useMemo(() => {
+    if (!all) {
+      // storage data pending
+      return undefined;
+    }
     if (!did) {
       // could be a legacy identity without DID
       return [];

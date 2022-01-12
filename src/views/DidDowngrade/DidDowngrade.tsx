@@ -101,7 +101,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
         await saveIdentity({ ...identity, did });
 
-        await invalidateCredentials(credentials);
+        credentials && (await invalidateCredentials(credentials));
 
         setStatus('success');
       } catch (error) {
@@ -118,6 +118,10 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
   if (!(fee && deposit && total)) {
     return null; // blockchain data pending
+  }
+
+  if (!credentials) {
+    return null; // storage data pending
   }
 
   return (

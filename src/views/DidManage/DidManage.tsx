@@ -11,7 +11,6 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { generatePath, paths } from '../paths';
-import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 
 interface Props {
   identity: Identity;
@@ -22,13 +21,6 @@ export function DidManage({ identity }: Props): JSX.Element | null {
 
   const { address } = identity;
   const { features } = useConfiguration();
-
-  const credentials = useIdentityCredentials(identity.did);
-
-  const downgradePath =
-    credentials.length === 0
-      ? paths.identity.did.manage.downgrade
-      : paths.identity.did.manage.warning;
 
   return (
     <section className={styles.container}>
@@ -63,7 +55,7 @@ export function DidManage({ identity }: Props): JSX.Element | null {
 
       <Link
         className={styles.downgrade}
-        to={generatePath(downgradePath, { address })}
+        to={generatePath(paths.identity.did.manage.warning, { address })}
       >
         {t('view_DidManage_downgrade')}
       </Link>
