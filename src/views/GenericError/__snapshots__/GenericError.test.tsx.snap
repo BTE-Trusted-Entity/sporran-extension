@@ -17,7 +17,7 @@ exports[`GenericError should render generic error when an error happens 1`] = `
       <p
         class="text"
       >
-        An error occurred; please try again. For help please contact  
+        An error occurred; please try again. For help please contact
         <a
           href="mailto:tech-support@sporran.org"
         >
@@ -30,7 +30,7 @@ exports[`GenericError should render generic error when an error happens 1`] = `
         class="details"
         readonly=""
       >
-        Sporran@2021.12.30
+        Sporran@2022.1.13
 
 Testing GenericError
 
