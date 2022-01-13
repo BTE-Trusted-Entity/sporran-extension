@@ -1,4 +1,11 @@
-import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import {
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  Fragment,
+} from 'react';
 import { Modal } from 'react-dialog-polyfill';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -104,12 +111,14 @@ function CredentialName({
 interface Props {
   credential: Credential;
   expand?: boolean;
+  collapsible?: boolean;
   buttons?: boolean;
 }
 
 export function CredentialCard({
   credential,
   expand = false,
+  collapsible = true,
   buttons = true,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
@@ -164,28 +173,32 @@ export function CredentialCard({
       )}
       {expanded && (
         <section className={styles.expanded}>
-          {buttons && (
-            <section className={styles.buttons}>
+          <section className={styles.buttons}>
+            {collapsible && (
               <button
                 type="button"
                 aria-label={t('component_CredentialCard_collapse')}
                 className={styles.collapse}
                 onClick={handleCollapse}
               />
-              <a
-                download={download.name}
-                href={download.url}
-                aria-label={t('component_CredentialCard_backup')}
-                className={styles.backup}
-              />
-              <button
-                type="button"
-                aria-label={t('component_CredentialCard_remove')}
-                className={styles.remove}
-                onClick={handleDeleteClick}
-              />
-            </section>
-          )}
+            )}
+            {buttons && (
+              <Fragment>
+                <a
+                  download={download.name}
+                  href={download.url}
+                  aria-label={t('component_CredentialCard_backup')}
+                  className={styles.backup}
+                />
+                <button
+                  type="button"
+                  aria-label={t('component_CredentialCard_remove')}
+                  className={styles.remove}
+                  onClick={handleDeleteClick}
+                />
+              </Fragment>
+            )}
+          </section>
 
           <dl className={styles.details}>
             <CredentialName credential={credential} />

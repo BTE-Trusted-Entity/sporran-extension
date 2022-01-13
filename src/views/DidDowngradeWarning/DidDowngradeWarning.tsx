@@ -45,6 +45,7 @@ export function DidDowngradeWarning({ identity }: Props): JSX.Element | null {
           <CredentialCard
             key={credential.request.rootHash}
             credential={credential}
+            buttons={false}
             expand={index + 1 === credentials.length && credentials.length < 5}
           />
         ))}
