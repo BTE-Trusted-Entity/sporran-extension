@@ -57,7 +57,12 @@ export function SaveCredential(): JSX.Element | null {
       <h1 className={styles.heading}>{t('view_SaveCredential_heading')}</h1>
 
       <section className={styles.cardContainer}>
-        <CredentialCard credential={credential} expand buttons={false} />
+        <CredentialCard
+          credential={credential}
+          expand
+          collapsible={false}
+          buttons={false}
+        />
       </section>
 
       <h2 className={isDownloaded ? styles.downloaded : styles.warning}>

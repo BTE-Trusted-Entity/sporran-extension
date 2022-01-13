@@ -20,7 +20,7 @@ describe('CredentialCard', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('should render expanded card', async () => {
+  it('should render expanded card on click', async () => {
     const { container } = render(
       <CredentialCard credential={credentialsMock[0]} />,
     );
@@ -28,6 +28,24 @@ describe('CredentialCard', () => {
       await screen.findByRole('button', {
         name: 'Email Credential mockEmail@mock.mock',
       }),
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render uncollapsible card', async () => {
+    const { container } = render(
+      <CredentialCard
+        credential={credentialsMock[0]}
+        expand
+        collapsible={false}
+      />,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render expanded card without backup and delete buttons', async () => {
+    const { container } = render(
+      <CredentialCard credential={credentialsMock[0]} expand buttons={false} />,
     );
     expect(container).toMatchSnapshot();
   });
