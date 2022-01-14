@@ -1,6 +1,6 @@
 import BN from 'bn.js';
 
-import { makeTransfer } from '@kiltprotocol/core/lib/balance/Balance.chain';
+import { Balance } from '@kiltprotocol/core';
 import {
   BlockchainUtils,
   BlockchainApiConnection,
@@ -22,7 +22,7 @@ export async function signTransfer(input: Input): Promise<string> {
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const tx = await makeTransfer(recipient, amount);
+  const tx = await Balance.makeTransfer(recipient, amount);
 
   const signedTx = await blockchain.signTx(keypair, tx, tip);
   const hash = signedTx.hash.toHex();
