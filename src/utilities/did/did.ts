@@ -105,3 +105,13 @@ export function parseDidUrl(did: IDidDetails['did']): ReturnType<
     fullDid,
   };
 }
+
+export function sameFullDid(
+  a: IDidDetails['did'],
+  b: IDidDetails['did'],
+): boolean {
+  if (!a || !b) {
+    return false;
+  }
+  return parseDidUrl(a).fullDid === parseDidUrl(b).fullDid;
+}

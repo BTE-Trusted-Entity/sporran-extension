@@ -2,11 +2,55 @@
 
 exports[`AddIdentity should render 1`] = `
 <div>
-  <a
-    aria-label="Add Identity"
-    class="toggle"
-    href="/identity/add"
-    title="Add Identity"
-  />
+  <div
+    class="wrapper"
+  >
+    <button
+      aria-expanded="true"
+      aria-haspopup="true"
+      aria-label="Add"
+      class="toggle"
+      role="button"
+      tabindex="0"
+      title="Add"
+      type="button"
+    />
+    <div
+      class="dropdown"
+      role="menu"
+    >
+      <h4
+        class="heading"
+      >
+        Add
+      </h4>
+      <ul
+        class="list"
+      >
+        <li
+          class="listItem"
+        >
+          <a
+            href="/identity/add"
+            role="menuitem"
+            tabindex="-1"
+          >
+            Create new Identity
+          </a>
+        </li>
+        <li
+          class="listItem"
+        >
+          <a
+            href="/import"
+            role="menuitem"
+            tabindex="-1"
+          >
+            Import credentials
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 `;

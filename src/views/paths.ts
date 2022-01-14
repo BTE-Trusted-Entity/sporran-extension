@@ -53,6 +53,7 @@ export const paths = {
   },
   popup: {
     base: '/popup',
+    import: '/popup/import',
     access: '/popup/access',
     claim: '/identity/:address/claim',
     save: '/popup/save',
