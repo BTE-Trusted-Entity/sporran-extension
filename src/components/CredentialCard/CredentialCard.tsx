@@ -149,7 +149,6 @@ export function CredentialCard({
   const contents = Object.entries(credential.request.claim.contents);
 
   const download = getCredentialDownload(credential);
-  const downloadLink = useRef<HTMLAnchorElement>(null);
 
   const cardRef = useRef<HTMLLIElement>(null);
 
@@ -168,15 +167,23 @@ export function CredentialCard({
 
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
 
-  const handleDownloadClick = useCallback(async () => {
-    const showDownloadModal = await getShowDownloadInfo();
+  const [showDownloadMessage, setShowDownloadMessage] = useState(true);
 
-    if (credential.isDownloaded || !showDownloadModal) {
-      downloadLink.current?.click();
-      await saveCredential({ ...credential, isDownloaded: true });
-    } else {
-      setDownloadModalOpen(true);
-    }
+  useEffect(() => {
+    (async () => {
+      const showMessage = await getShowDownloadInfo();
+      if (credential.isDownloaded || showMessage === false) {
+        setShowDownloadMessage(false);
+      }
+    })();
+  }, [credential]);
+
+  const handleDownloadButtonClick = useCallback(async () => {
+    setDownloadModalOpen(true);
+  }, []);
+
+  const handleDownloadLinkClick = useCallback(async () => {
+    await saveCredential({ ...credential, isDownloaded: true });
   }, [credential]);
 
   const [checked, setChecked] = useState(false);
@@ -186,7 +193,6 @@ export function CredentialCard({
   }, []);
 
   const handleDownloadConfirm = useCallback(async () => {
-    downloadLink.current?.click();
     await saveCredential({ ...credential, isDownloaded: true });
     await setShowDownloadInfo(!checked);
     setDownloadModalOpen(false);
@@ -233,21 +239,29 @@ export function CredentialCard({
             )}
             {buttons && (
               <Fragment>
-                <a
-                  download={download.name}
-                  href={download.url}
-                  ref={downloadLink}
-                  hidden
-                />
-                <button
-                  aria-label={t('component_CredentialCard_backup')}
-                  className={
-                    credential.isDownloaded
-                      ? styles.download
-                      : styles.downloadPromptExpanded
-                  }
-                  onClick={handleDownloadClick}
-                />
+                {showDownloadMessage ? (
+                  <button
+                    className={
+                      credential.isDownloaded
+                        ? styles.download
+                        : styles.downloadPromptExpanded
+                    }
+                    aria-label={t('component_CredentialCard_backup')}
+                    onClick={handleDownloadButtonClick}
+                  />
+                ) : (
+                  <a
+                    download={download.name}
+                    href={download.url}
+                    aria-label={t('component_CredentialCard_backup')}
+                    className={
+                      credential.isDownloaded
+                        ? styles.download
+                        : styles.downloadPromptExpanded
+                    }
+                    onClick={handleDownloadLinkClick}
+                  />
+                )}
                 <button
                   type="button"
                   aria-label={t('component_CredentialCard_remove')}
@@ -335,13 +349,14 @@ export function CredentialCard({
           <h2 className={styles.downloadInfo}>
             {t('component_CredentialCard_download_info')}
           </h2>
-          <button
-            type="button"
+          <a
+            download={download.name}
+            href={download.url}
             className={styles.confirmDownload}
             onClick={handleDownloadConfirm}
           >
             {t('component_CredentialCard_download_confirm')}
-          </button>
+          </a>
           <button
             type="button"
             className={styles.cancelDownload}
