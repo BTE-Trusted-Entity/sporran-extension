@@ -110,9 +110,9 @@ describe('PasswordField', () => {
 
   describe('password getter', () => {
     it('should report an invalid password', async () => {
-      jest.mocked(decryptIdentity).mockRejectedValue(
-        new Error('Invalid password'),
-      );
+      jest
+        .mocked(decryptIdentity)
+        .mockRejectedValue(new Error('Invalid password'));
       let error = '';
 
       async function handleSubmit(event: FormEvent) {
