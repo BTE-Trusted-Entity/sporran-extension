@@ -245,6 +245,18 @@
   "component_CredentialCard_delete_confirm": {
     "message": "Yes, Delete This Credential"
   },
+  "component_CredentialCard_download_info": {
+    "message": "Backing up your credential saves it to your computer. This is the only way to restore your credential in the event of its loss."
+  },
+  "component_CredentialCard_download_confirm": {
+    "message": "Backup Credential"
+  },
+  "component_CredentialCard_download_toggle": {
+    "message": "Don’t show this message again"
+  },
+  "component_CredentialCard_download_prompt": {
+    "message": "(Not backed up)"
+  },
   "component_ShareCredentialCard_required": {
     "message": "* required"
   },
@@ -436,6 +448,9 @@
   },
   "view_IdentityOverview_on_chain": {
     "message": "Manage on-chain DID"
+  },
+  "view_IdentityOverview_download_prompt": {
+    "message": "Some credentials have not been backed up"
   },
   "view_RemoveIdentity_heading": {
     "message": "Attention!"

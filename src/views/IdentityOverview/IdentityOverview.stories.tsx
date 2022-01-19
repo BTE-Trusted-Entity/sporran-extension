@@ -5,6 +5,11 @@ import { identitiesMock as identities } from '../../utilities/identities/Identit
 import { NEW } from '../../utilities/identities/identities';
 import { paths } from '../paths';
 
+import {
+  CredentialsProviderMock,
+  notDownloaded,
+} from '../../utilities/credentials/CredentialsProvider.mock';
+
 import { IdentityOverview } from './IdentityOverview';
 
 export default {
@@ -89,6 +94,18 @@ export function withFullDid(): JSX.Element {
     <MemoryRouter initialEntries={[fullDidUri]}>
       <Route path={paths.identity.overview}>
         <IdentityOverview identity={fullDidIdentity} />
+      </Route>
+    </MemoryRouter>
+  );
+}
+
+export function BackupWarning(): JSX.Element {
+  return (
+    <MemoryRouter initialEntries={[fullDidUri]}>
+      <Route path={paths.identity.overview}>
+        <CredentialsProviderMock credentials={notDownloaded}>
+          <IdentityOverview identity={fullDidIdentity} />
+        </CredentialsProviderMock>
       </Route>
     </MemoryRouter>
   );

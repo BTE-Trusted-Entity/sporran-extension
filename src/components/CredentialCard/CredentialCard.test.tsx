@@ -5,6 +5,7 @@ import { identitiesMock, render, screen } from '../../testing/testing';
 import {
   credentialsMock,
   mockRequestCredential,
+  notDownloaded,
 } from '../../utilities/credentials/CredentialsProvider.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../../views/paths';
@@ -46,6 +47,20 @@ describe('CredentialCard', () => {
   it('should render expanded card without backup and delete buttons', async () => {
     const { container } = render(
       <CredentialCard credential={credentialsMock[0]} expand buttons={false} />,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render collapsed card with backup notification', async () => {
+    const { container } = render(
+      <CredentialCard credential={notDownloaded[0]} />,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render expanded card with backup notification', async () => {
+    const { container } = render(
+      <CredentialCard expand credential={notDownloaded[0]} />,
     );
     expect(container).toMatchSnapshot();
   });

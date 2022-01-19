@@ -43,6 +43,12 @@
   --wide-button-icon: url('../../components/images/show-credentials.svg');
 }
 
+.downloadPrompt {
+  composes: credentials;
+
+  --wide-button-icon: url('../../components/images/download-prompt.svg');
+}
+
 .upgrade,
 .manage {
   composes: buttonWide from '../../components/Button/Button.module.css';

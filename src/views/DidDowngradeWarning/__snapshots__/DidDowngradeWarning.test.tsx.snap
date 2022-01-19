@@ -33,6 +33,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="Email Credential mockEmail@mock.mock "
           class="expand"
           type="button"
         >
@@ -57,6 +58,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="Alter Ego Email badboy69@hotmail.com "
           class="expand"
           type="button"
         >
@@ -81,6 +83,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="Sporran email sporran@sporran.org "
           class="expand"
           type="button"
         >
@@ -105,6 +108,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="A really long name for my credential which probably will not fit on the screen loremipsum@gmail.com "
           class="expand"
           type="button"
         >
@@ -129,6 +133,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="Mein Credential maxmustermann@gmx-123-z34-dfdsafsdf-42r421-2sdfag.de "
           class="expand"
           type="button"
         >
@@ -153,6 +158,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="Tweet Twit Twat tweety_bird "
           class="expand"
           type="button"
         >
@@ -177,6 +183,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="Believe me realDonaldTrump "
           class="expand"
           type="button"
         >
@@ -201,6 +208,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="Dotsama Credential God collator "
           class="expand"
           type="button"
         >
@@ -225,6 +233,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="All your stakes are belong to us This is a really long name for the first property of claim contents to check how the overflow looks "
           class="expand"
           type="button"
         >
@@ -249,6 +258,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="Lots of props Proppy "
           class="expand"
           type="button"
         >
@@ -273,6 +283,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="Sporran email sporran@sporran.org "
           class="expand"
           type="button"
         >
@@ -297,6 +308,7 @@ exports[`DidDowngradeWarning should render 1`] = `
         class="credential"
       >
         <button
+          aria-label="Email Credential mockEmail@mock.mock "
           class="expand"
           type="button"
         >

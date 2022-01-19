@@ -17,6 +17,7 @@ export interface Credential {
   cTypeTitle: string;
   attester: string;
   status: AttestationStatus;
+  isDownloaded?: boolean;
 }
 
 function toKey(hash: string): string {

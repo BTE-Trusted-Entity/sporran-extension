@@ -21,6 +21,8 @@
   border-radius: 0.75rem 0.75rem 0 0;
   border: 1px solid rgb(var(--color-white-rgb) / 10%);
   box-shadow: 0 -1px 2px 0 rgb(var(--color-black-rgb) / 30%);
+
+  --notification-size: 0.625rem;
 }
 
 .card:not(:first-child) {
@@ -30,15 +32,15 @@
 .card:nth-child(2n + 1) {
   background-color: var(--color-medium);
 
-  --hr-border-top: var(--color-dark);
-  --hr-border-bottom: var(--color-lighter);
+  --card-color-secondary: var(--color-dark);
+  --card-color-tertiary: var(--color-lighter);
 }
 
 .card:nth-child(2n) {
   background-color: var(--color-lighter);
 
-  --hr-border-top: var(--color-medium);
-  --hr-border-bottom: #637ba3;
+  --card-color-secondary: var(--color-medium);
+  --card-color-tertiary: #637ba3;
 }
 
 .expand {
@@ -49,6 +51,23 @@
   background: url('../../components/images/chevron-down.svg') no-repeat right 1rem top 0.75rem/0.75rem;
   border: none;
   cursor: pointer;
+}
+
+.downloadPrompt {
+  composes: expand;
+  position: relative;
+}
+
+.downloadPrompt::after {
+  content: '';
+  position: absolute;
+  width: var(--notification-size);
+  height: var(--notification-size);
+  border-radius: 50%;
+  top: calc(11rem / 16);
+  right: 2.25rem;
+  background: var(--color-orange);
+  border: 1px solid rgba(var(--color-black-rgb), 0.15);
 }
 
 .card:last-child .expand {
@@ -94,11 +113,57 @@
   padding: 1rem 2.5rem 2rem 1.5rem;
 }
 
-.collapse {
+.buttons {
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  --button-size: 1.75rem;
+  --icon-size: 0.75rem;
+}
+
+.button {
   composes: buttonIcon from '../../components/Button/Button.module.css';
   width: var(--button-size);
   height: var(--button-size);
+  background-size: var(--icon-size);
+}
+
+.collapse {
+  composes: button;
   background-image: url('../../components/images/chevron-up.svg');
+}
+
+.download {
+  composes: button;
+  background-image: url('../../components/images/backup.svg');
+}
+
+.downloadPromptExpanded {
+  composes: download;
+  position: relative;
+  background-color: var(--card-color-secondary);
+  border-radius: 50%;
+}
+
+.downloadPromptExpanded::after {
+  content: '';
+  position: absolute;
+  width: var(--notification-size);
+  height: var(--notification-size);
+  border-radius: 50%;
+  top: -0.125rem;
+  left: -0.125rem;
+  background: var(--color-orange);
+  border: 1px solid rgba(var(--color-black-rgb), 0.15);
+}
+
+.remove {
+  composes: button;
+  background-image: url('../../components/images/trash-bin.svg');
 }
 
 .details {
@@ -143,8 +208,8 @@
 .technical::after {
   content: '';
   box-sizing: border-box;
-  border-top: 1px solid var(--hr-border-top);
-  border-bottom: 1px solid var(--hr-border-bottom);
+  border-top: 1px solid var(--card-color-secondary);
+  border-bottom: 1px solid var(--card-color-tertiary);
   border-left: none;
   border-right: none;
   display: inline-block;
