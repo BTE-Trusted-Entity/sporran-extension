@@ -43,7 +43,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const credentials = useIdentityCredentials(did);
 
   const showDownloadPrompt =
-    credentials && credentials.some((credential) => !credential.isDownloaded);
+    credentials && credentials.some(({ isDownloaded }) => !isDownloaded);
 
   if (params.type) {
     return <Redirect to={generatePath(paths.identity.overview, { address })} />;
