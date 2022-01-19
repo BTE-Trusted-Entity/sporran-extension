@@ -206,11 +206,13 @@ export function CredentialCard({
             credential.isDownloaded ? styles.expand : styles.downloadPrompt
           }
           onClick={handleExpand}
-          aria-label={`${credential.name} ${contents[0][1]} ${
+          aria-label={
             !credential.isDownloaded
-              ? t('component_CredentialCard_download_prompt')
-              : ''
-          }`}
+              ? `${credential.name} ${contents[0][1]} ${t(
+                  'component_CredentialCard_download_prompt',
+                )}`
+              : undefined
+          }
         >
           <section className={styles.collapsedCredential}>
             <h4 className={styles.collapsedName}>{credential.name}</h4>

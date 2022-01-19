@@ -99,8 +99,10 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         }
         aria-label={
           showDownloadPrompt
-            ? t('view_IdentityOverview_download_prompt')
-            : t('view_IdentityOverview_credentials')
+            ? `${t('view_IdentityOverview_credentials')}. ${t(
+                'view_IdentityOverview_download_prompt',
+              )}`
+            : undefined
         }
       >
         {t('view_IdentityOverview_credentials')}

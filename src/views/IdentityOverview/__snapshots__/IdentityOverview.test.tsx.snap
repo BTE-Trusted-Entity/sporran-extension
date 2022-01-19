@@ -149,7 +149,6 @@ exports[`IdentityOverview should render a normal identity 1`] = `
       </a>
     </p>
     <a
-      aria-label="Show Credentials"
       class="credentials"
       href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/credentials"
     >
@@ -342,7 +341,6 @@ exports[`IdentityOverview should render full DID identity 1`] = `
       View Transactions
     </a>
     <a
-      aria-label="Show Credentials"
       class="credentials"
       href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/credentials"
     >
@@ -651,7 +649,6 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
       View Transactions
     </a>
     <a
-      aria-label="Show Credentials"
       class="credentials"
       href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/credentials"
     >
@@ -844,7 +841,7 @@ exports[`IdentityOverview should show notification for not backed up credentials
       View Transactions
     </a>
     <a
-      aria-label="Some credentials have not been backed up"
+      aria-label="Show Credentials. Some credentials have not been backed up"
       class="downloadPrompt"
       href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/credentials"
     >
