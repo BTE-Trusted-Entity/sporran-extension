@@ -18,6 +18,10 @@ import {
   saveCredential,
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
+import {
+  getShowDownloadInfo,
+  setShowDownloadInfo,
+} from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage';
 
 export function useScrollIntoView(
   expanded: boolean,
@@ -150,21 +154,72 @@ export function CredentialCard({
 
   useScrollIntoView(expanded, cardRef);
 
-  const [deleting, setDeleting] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  const handleDeleteClick = useCallback(() => setDeleting(true), []);
+  const handleDeleteClick = useCallback(() => setDeleteModalOpen(true), []);
 
   const handleDeleteConfirm = useCallback(async () => {
     await deleteCredential(credential);
-    setDeleting(false);
+    setDeleteModalOpen(false);
   }, [credential]);
 
-  const handleDeleteCancel = useCallback(() => setDeleting(false), []);
+  const handleDeleteCancel = useCallback(() => setDeleteModalOpen(false), []);
+
+  const [downloadModalOpen, setDownloadModalOpen] = useState(false);
+
+  const [showDownloadMessage, setShowDownloadMessage] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const showMessage = await getShowDownloadInfo();
+      if (credential.isDownloaded || showMessage === false) {
+        setShowDownloadMessage(false);
+      }
+    })();
+  }, [credential]);
+
+  const handleDownloadButtonClick = useCallback(async () => {
+    setDownloadModalOpen(true);
+  }, []);
+
+  const handleDownloadLinkClick = useCallback(async () => {
+    await saveCredential({ ...credential, isDownloaded: true });
+  }, [credential]);
+
+  const [checked, setChecked] = useState(false);
+
+  const handleToggle = useCallback((event) => {
+    setChecked(event.target.checked);
+  }, []);
+
+  const handleDownloadConfirm = useCallback(async () => {
+    await saveCredential({ ...credential, isDownloaded: true });
+    await setShowDownloadInfo(!checked);
+    setDownloadModalOpen(false);
+  }, [credential, checked]);
+
+  const handleDownloadCancel = useCallback(
+    () => setDownloadModalOpen(false),
+    [],
+  );
 
   return (
     <li className={styles.credential} aria-expanded={expanded} ref={cardRef}>
       {!expanded && (
-        <button type="button" className={styles.expand} onClick={handleExpand}>
+        <button
+          type="button"
+          className={
+            credential.isDownloaded ? styles.expand : styles.downloadPrompt
+          }
+          onClick={handleExpand}
+          aria-label={
+            !credential.isDownloaded
+              ? `${credential.name} ${contents[0][1]} ${t(
+                  'component_CredentialCard_download_prompt',
+                )}`
+              : undefined
+          }
+        >
           <section className={styles.collapsedCredential}>
             <h4 className={styles.collapsedName}>{credential.name}</h4>
             <p className={styles.collapsedValue}>{contents[0][1]}</p>
@@ -184,12 +239,29 @@ export function CredentialCard({
             )}
             {buttons && (
               <Fragment>
-                <a
-                  download={download.name}
-                  href={download.url}
-                  aria-label={t('component_CredentialCard_backup')}
-                  className={styles.backup}
-                />
+                {showDownloadMessage ? (
+                  <button
+                    className={
+                      credential.isDownloaded
+                        ? styles.download
+                        : styles.downloadPromptExpanded
+                    }
+                    aria-label={t('component_CredentialCard_backup')}
+                    onClick={handleDownloadButtonClick}
+                  />
+                ) : (
+                  <a
+                    download={download.name}
+                    href={download.url}
+                    aria-label={t('component_CredentialCard_backup')}
+                    className={
+                      credential.isDownloaded
+                        ? styles.download
+                        : styles.downloadPromptExpanded
+                    }
+                    onClick={handleDownloadLinkClick}
+                  />
+                )}
                 <button
                   type="button"
                   aria-label={t('component_CredentialCard_remove')}
@@ -247,7 +319,7 @@ export function CredentialCard({
         </section>
       )}
 
-      {deleting && (
+      {deleteModalOpen && (
         <Modal open className={styles.overlay}>
           <h1 className={styles.warning}>
             {t('component_CredentialCard_delete_warning')}
@@ -257,18 +329,51 @@ export function CredentialCard({
           </p>
           <button
             type="button"
-            className={styles.cancel}
+            className={styles.cancelDelete}
             onClick={handleDeleteCancel}
           >
             {t('common_action_cancel')}
           </button>
           <button
             type="button"
-            className={styles.confirm}
+            className={styles.confirmDelete}
             onClick={handleDeleteConfirm}
           >
             {t('component_CredentialCard_delete_confirm')}
           </button>
+        </Modal>
+      )}
+
+      {downloadModalOpen && (
+        <Modal open className={styles.overlay}>
+          <h2 className={styles.downloadInfo}>
+            {t('component_CredentialCard_download_info')}
+          </h2>
+          <a
+            download={download.name}
+            href={download.url}
+            className={styles.confirmDownload}
+            onClick={handleDownloadConfirm}
+          >
+            {t('component_CredentialCard_download_confirm')}
+          </a>
+          <button
+            type="button"
+            className={styles.cancelDownload}
+            onClick={handleDownloadCancel}
+          >
+            {t('common_action_close')}
+          </button>
+          <label className={styles.toggleLabel}>
+            {t('component_CredentialCard_download_toggle')}
+            <input
+              className={styles.toggle}
+              type="checkbox"
+              defaultChecked={false}
+              onClick={handleToggle}
+            />
+            <span />
+          </label>
         </Modal>
       )}
     </li>

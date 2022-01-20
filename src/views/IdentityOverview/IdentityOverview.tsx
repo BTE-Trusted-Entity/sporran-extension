@@ -15,6 +15,8 @@ import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIde
 import { generatePath, paths } from '../paths';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 
+import { useIdentityCredentials } from '../../utilities/credentials/credentials';
+
 import { IdentityOverviewNew } from './IdentityOverviewNew';
 
 interface Props {
@@ -36,7 +38,12 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
   const subscanHost = useSubscanHost();
 
-  const { address } = identity;
+  const { address, did } = identity;
+
+  const credentials = useIdentityCredentials(did);
+
+  const showDownloadPrompt =
+    credentials && credentials.some(({ isDownloaded }) => !isDownloaded);
 
   if (params.type) {
     return <Redirect to={generatePath(paths.identity.overview, { address })} />;
@@ -87,7 +94,16 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
       <Link
         to={generatePath(paths.identity.credentials, { address })}
-        className={styles.credentials}
+        className={
+          showDownloadPrompt ? styles.downloadPrompt : styles.credentials
+        }
+        aria-label={
+          showDownloadPrompt
+            ? `${t('view_IdentityOverview_credentials')}. ${t(
+                'view_IdentityOverview_download_prompt',
+              )}`
+            : undefined
+        }
       >
         {t('view_IdentityOverview_credentials')}
       </Link>

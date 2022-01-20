@@ -9,10 +9,15 @@ import { InternalConfigurationContext } from '../../configuration/InternalConfig
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
+import { notDownloaded } from '../../utilities/credentials/CredentialsProvider.mock';
+
+import { useIdentityCredentials } from '../../utilities/credentials/credentials';
+
 import { IdentityOverview } from './IdentityOverview';
 
-jest.mock('../../utilities/credentials/credentials');
 jest.mock('../../utilities/useSubscanHost/useSubscanHost');
+
+jest.mock('../../utilities/credentials/credentials');
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
@@ -86,6 +91,19 @@ describe('IdentityOverview', () => {
       <MemoryRouter initialEntries={[`/identity/${fullDidIdentity.address}/`]}>
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={fullDidIdentity} />
+        </Route>
+      </MemoryRouter>,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should show notification for not backed up credentials', async () => {
+    jest.mocked(useIdentityCredentials).mockReturnValue(notDownloaded);
+
+    const { container } = render(
+      <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
+        <Route path={paths.identity.overview}>
+          <IdentityOverview identity={identity} />
         </Route>
       </MemoryRouter>,
     );

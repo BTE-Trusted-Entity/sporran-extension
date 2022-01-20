@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { IAttestation } from '@kiltprotocol/types';
 
@@ -6,6 +6,7 @@ import * as styles from './SaveCredential.module.css';
 
 import {
   getCredentialDownload,
+  saveCredential,
   useCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
@@ -25,11 +26,12 @@ export function SaveCredential(): JSX.Element | null {
     (credential) => credential.request.rootHash === claimHash,
   );
 
-  const [isDownloaded, setIsDownloaded] = useState(false);
-
-  const handleDownloadClick = useCallback(() => {
-    setIsDownloaded(true);
-  }, []);
+  const handleDownloadClick = useCallback(async () => {
+    if (!credential) {
+      return;
+    }
+    await saveCredential({ ...credential, isDownloaded: true });
+  }, [credential]);
 
   const handleClose = useCallback(() => {
     window.close();
@@ -65,7 +67,9 @@ export function SaveCredential(): JSX.Element | null {
         />
       </section>
 
-      <h2 className={isDownloaded ? styles.downloaded : styles.warning}>
+      <h2
+        className={credential.isDownloaded ? styles.downloaded : styles.warning}
+      >
         {t('view_SaveCredential_warning')}
       </h2>
 
@@ -78,7 +82,7 @@ export function SaveCredential(): JSX.Element | null {
         {t('view_SaveCredential_CTA')}
       </a>
 
-      {isDownloaded && (
+      {credential.isDownloaded && (
         <p className={styles.done}>
           {t('view_SaveCredential_done')}
           <button type="button" className={styles.close} onClick={handleClose}>
