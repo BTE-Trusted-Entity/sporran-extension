@@ -7,6 +7,7 @@ import {
   naclBoxPairFromSecret,
   naclSeal,
   mnemonicToMiniSecret,
+  blake2AsU8a,
 } from '@polkadot/util-crypto';
 import {
   IDidDetails,
@@ -151,7 +152,7 @@ function deriveDidKeys(identityKeypair: KeyringPair, legacy?: boolean) {
     '//did//keyAgreement//0',
   );
 
-  const encryptionSecret = extractSecretKey(encryptionKeyringPair);
+  const encryptionSecret = blake2AsU8a(extractSecretKey(encryptionKeyringPair));
   const legacyEncryptionSecret = encryptionKeyringPair
     .encryptMessage(
       new Uint8Array(24).fill(0),
