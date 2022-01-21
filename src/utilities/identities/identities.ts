@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import useSWR, { mutate, SWRResponse } from 'swr';
+import ed2curve from 'ed2curve';
 import { Keyring } from '@polkadot/keyring';
 import { KeyringPair } from '@polkadot/keyring/types';
 import {
@@ -116,7 +117,7 @@ export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
 
 interface IdentityDidCrypto {
   didDetails: IDidDetails;
-  keystore: KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'>;
+  keystore: KeystoreSigner;
   sign: (plaintext: string) => string;
   encrypt: (
     messageBody: MessageBody,
@@ -124,46 +125,60 @@ interface IdentityDidCrypto {
   ) => Promise<IEncryptedMessage>;
 }
 
-function deriveDidKeys(identityKeypair: KeyringPair) {
+function extractSecretKey(keypair: KeyringPair) {
+  let secretKey: Uint8Array | undefined;
+
+  const { convertSecretKey } = ed2curve;
+  ed2curve.convertSecretKey = (secret) => {
+    secretKey = secret;
+    return convertSecretKey(secret);
+  };
+
+  keypair.encryptMessage('', '');
+
+  ed2curve.convertSecretKey = convertSecretKey;
+
+  if (!secretKey) {
+    throw new Error('Secret not extracted');
+  }
+
+  return secretKey;
+}
+
+function deriveDidKeys(identityKeypair: KeyringPair, legacy?: boolean) {
   const authenticationKey = identityKeypair.derive('//did//0');
+  const encryptionKeyringPair = identityKeypair.derive(
+    '//did//keyAgreement//0',
+  );
+
+  const encryptionSecret = extractSecretKey(encryptionKeyringPair);
+  const legacyEncryptionSecret = encryptionKeyringPair
+    .encryptMessage(
+      new Uint8Array(24).fill(0),
+      new Uint8Array(24).fill(0),
+      new Uint8Array(24).fill(0),
+    )
+    .slice(24); // first 24 bytes are the nonce
+
   const encryptionKeypair = naclBoxPairFromSecret(
-    identityKeypair
-      .derive('//did//keyAgreement//0')
-      .encryptMessage(
-        new Uint8Array(24).fill(0),
-        new Uint8Array(24).fill(0),
-        new Uint8Array(24).fill(0),
-      )
-      .slice(24), // first 24 bytes are the nonce
+    legacy ? legacyEncryptionSecret : encryptionSecret,
   );
   const encryptionKey = { ...encryptionKeypair, type: 'x25519' };
+
   return { authenticationKey, encryptionKey };
 }
 
 export async function getKeystoreFromKeypair(
   identityKeypair: KeyringPair,
-): Promise<KeystoreSigner & Pick<NaclBoxCapable, 'encrypt'>> {
+): Promise<KeystoreSigner> {
   await fixLightDidBase64Encoding(identityKeypair);
 
-  const { authenticationKey, encryptionKey } = deriveDidKeys(identityKeypair);
+  const { authenticationKey } = deriveDidKeys(identityKeypair);
   return {
     sign: async ({ data, alg }) => ({
       data: authenticationKey.sign(data, { withType: false }),
       alg,
     }),
-    async encrypt({ data, alg, peerPublicKey }) {
-      const { sealed, nonce } = naclSeal(
-        data,
-        encryptionKey.secretKey,
-        peerPublicKey,
-      );
-
-      return {
-        data: sealed,
-        alg,
-        nonce,
-      };
-    },
   };
 }
 
@@ -186,8 +201,17 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
     // resulting in an invalid URI, so resolving would throw an exception.
     const details = await getDidDetails(identity.did);
 
+    const keyAgreementKeys = details.getKeys(KeyRelationship.keyAgreement);
+
     // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
-    if (details.getKeys(KeyRelationship.keyAgreement).length === 0) {
+    if (keyAgreementKeys.length === 0) {
+      throw new Error();
+    }
+
+    // This public key also means the DID needs to be regenerated
+    const troubleKey =
+      '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
+    if (keyAgreementKeys[0].publicKeyHex === troubleKey) {
       throw new Error();
     }
   } catch {
@@ -199,16 +223,36 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
 
 export async function getIdentityCryptoFromKeypair(
   identityKeypair: KeyringPair,
+  legacy?: boolean,
 ): Promise<IdentityDidCrypto> {
   await fixLightDidBase64Encoding(identityKeypair);
 
-  const { authenticationKey } = deriveDidKeys(identityKeypair);
+  const { authenticationKey, encryptionKey } = deriveDidKeys(
+    identityKeypair,
+    legacy,
+  );
 
   const identities = await getIdentities();
   const { did } = identities[identityKeypair.address];
 
   const didDetails = await getDidDetails(did);
   const keystore = await getKeystoreFromKeypair(identityKeypair);
+
+  const encryptionKeystore: Pick<NaclBoxCapable, 'encrypt'> = {
+    async encrypt({ data, alg, peerPublicKey }) {
+      const { sealed, nonce } = naclSeal(
+        data,
+        encryptionKey.secretKey,
+        peerPublicKey,
+      );
+
+      return {
+        data: sealed,
+        alg,
+        nonce,
+      };
+    },
+  };
 
   function sign(plaintext: string) {
     return Crypto.u8aToHex(authenticationKey.sign(plaintext));
@@ -226,7 +270,7 @@ export async function getIdentityCryptoFromKeypair(
     return message.encrypt(
       didDetails.getKeys(KeyRelationship.keyAgreement)[0],
       dAppDidDetails.getKeys(KeyRelationship.keyAgreement)[0],
-      keystore,
+      encryptionKeystore,
     );
   }
 
@@ -236,14 +280,6 @@ export async function getIdentityCryptoFromKeypair(
     sign,
     encrypt,
   };
-}
-
-export async function getIdentityDidCrypto(
-  address: string,
-  password: string,
-): Promise<IdentityDidCrypto> {
-  const identityKeypair = await decryptIdentity(address, password);
-  return getIdentityCryptoFromKeypair(identityKeypair);
 }
 
 export async function encryptIdentity(
