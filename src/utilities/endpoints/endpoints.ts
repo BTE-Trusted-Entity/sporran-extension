@@ -9,7 +9,7 @@ export const endpoints = [
   'wss://spiritnet.api.onfinality.io/public-ws',
   'wss://spiritnet.kilt.io',
   'wss://peregrine.kilt.io',
-  'wss://kilt-peregrine-stg.kilt.io',
+  'wss://peregrine-stg.kilt.io/para',
 ];
 
 export const publicEndpoints = {
