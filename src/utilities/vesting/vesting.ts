@@ -2,7 +2,7 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
+import { Balance } from '@kiltprotocol/core';
 import { SubmittableExtrinsic } from '@kiltprotocol/types';
 import { KeyringPair } from '@polkadot/keyring/types';
 
@@ -29,7 +29,7 @@ export async function signVest(keypair: VestInput): Promise<string> {
 
   const { partialFee } = await api.rpc.payment.queryInfo(signedTx.toHex());
   const { usableForFees } = transformBalances(
-    await getBalances(keypair.address),
+    await Balance.getBalances(keypair.address),
   );
 
   if (usableForFees.lt(partialFee)) {

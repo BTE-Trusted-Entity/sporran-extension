@@ -5,7 +5,7 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
+import { Balance } from '@kiltprotocol/core';
 import BN from 'bn.js';
 
 import { makeKeyring } from '../identities/identities';
@@ -26,7 +26,9 @@ async function getUnpaidCosts(
     extrinsic.toHex(),
   );
 
-  const { transferable } = transformBalances(await getBalances(address));
+  const { transferable } = transformBalances(
+    await Balance.getBalances(address),
+  );
   const sufficient = transferable.gte(partialFee);
   if (sufficient) {
     return;
