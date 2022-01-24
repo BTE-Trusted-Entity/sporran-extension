@@ -42,7 +42,7 @@ exports[`AddIdentity should render 1`] = `
           class="listItem"
         >
           <a
-            href="/import"
+            href="/popup/import"
             role="menuitem"
             tabindex="-1"
           >
