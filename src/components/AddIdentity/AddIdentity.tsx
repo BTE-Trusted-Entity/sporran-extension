@@ -19,10 +19,10 @@ export function AddIdentity(): JSX.Element | null {
     setIsOpen(false);
   }, [setIsOpen]);
 
-  const handleImportClick = useCallback(
-    () => showPopup('import', {}, '', {}),
-    [],
-  );
+  const handleImportClick = useCallback(async () => {
+    await showPopup('import', {}, '', {});
+    window.close();
+  }, []);
 
   const match = useRouteMatch(paths.identity.overview);
   if (!match) {
