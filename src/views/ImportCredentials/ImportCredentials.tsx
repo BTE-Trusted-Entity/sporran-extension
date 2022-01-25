@@ -87,6 +87,7 @@ export function ImportCredentials(): JSX.Element | null {
             status,
             cTypeTitle,
             attester,
+            isDownloaded: true,
           });
 
           setSuccessfulImports((successfulImports) => [
