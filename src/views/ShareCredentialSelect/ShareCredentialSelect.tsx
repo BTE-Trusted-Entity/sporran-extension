@@ -9,16 +9,14 @@ import { Identity } from '../../utilities/identities/types';
 import { useIdentities } from '../../utilities/identities/identities';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { parseDidUrl } from '../../utilities/did/did';
+import { sameFullDid } from '../../utilities/did/did';
 import { ShareInput } from '../../channels/shareChannel/types';
 
 import { paths } from '../paths';
 
-import { useAddressBalance } from '../../components/Balance/Balance';
-import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { ShareCredentialCard } from '../../components/CredentialCard/ShareCredentialCard';
 import { Stats } from '../../components/Stats/Stats';
-import { Avatar } from '../../components/Avatar/Avatar';
+import { IdentityLine } from '../../components/IdentityLine/IdentityLine';
 import { Selected } from '../ShareCredential/ShareCredential';
 
 function MatchingIdentityCredentials({
@@ -41,11 +39,10 @@ function MatchingIdentityCredentials({
 
   const credentials = useIdentityCredentials(identity.did);
 
-  const fullDid = identity.did && parseDidUrl(identity.did).fullDid;
   const matchingCredentials = credentials?.filter(
     (credential) =>
       cTypeHashes.includes(credential.request.claim.cTypeHash) &&
-      parseDidUrl(credential.request.claim.owner).fullDid === fullDid,
+      sameFullDid(credential.request.claim.owner, identity.did),
   );
 
   useEffect(() => {
@@ -53,8 +50,6 @@ function MatchingIdentityCredentials({
       match();
     }
   }, [matchingCredentials, match]);
-
-  const balance = useAddressBalance(identity.address);
 
   if (!matchingCredentials) {
     return null; // storage data pending
@@ -66,13 +61,7 @@ function MatchingIdentityCredentials({
 
   return (
     <section className={styles.identityCredentials}>
-      <section className={styles.identityLine}>
-        <section className={styles.identity}>
-          <Avatar identity={identity} className={styles.avatar} />
-          {identity.name}
-        </section>
-        {balance && <KiltAmount amount={balance.total} type="funds" />}
-      </section>
+      <IdentityLine identity={identity} className={styles.identityLine} />
       <ul className={styles.list}>
         {matchingCredentials.map((credential) => (
           <ShareCredentialCard

@@ -5,7 +5,7 @@ import { Attestation } from '@kiltprotocol/core';
 import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
-import { parseDidUrl } from '../did/did';
+import { parseDidUrl, sameFullDid } from '../did/did';
 
 import { CredentialsContext } from './CredentialsContext';
 
@@ -80,9 +80,8 @@ export function useIdentityCredentials(
       return [];
     }
     const { fullDid } = parseDidUrl(did);
-    return all.filter(
-      (credential) =>
-        parseDidUrl(credential.request.claim.owner).fullDid === fullDid,
+    return all.filter((credential) =>
+      sameFullDid(credential.request.claim.owner, fullDid),
     );
   }, [all, did]);
 }

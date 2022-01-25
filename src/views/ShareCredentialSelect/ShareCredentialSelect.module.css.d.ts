@@ -7,8 +7,6 @@ export const noCredentials: string;
 export const info: string;
 export const explainerLink: string;
 export const identityLine: string;
-export const identity: string;
-export const avatar: string;
 export const identityCredentials: string;
 export const list: string;
 export const buttonsLine: string;

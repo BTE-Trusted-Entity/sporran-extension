@@ -3,7 +3,7 @@ import { Attestation } from '@kiltprotocol/core';
 import { identitiesMock, render } from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';
-import { parseDidUrl } from '../../utilities/did/did';
+import { parseDidUrl, sameFullDid } from '../../utilities/did/did';
 import {
   credentialsMock,
   CredentialsProviderMock,
@@ -15,6 +15,7 @@ jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUrl).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as ReturnType<typeof parseDidUrl>);
+jest.mocked(sameFullDid).mockReturnValue(true);
 
 jest.mock('@kiltprotocol/core', () => ({ Attestation: { query: jest.fn() } }));
 jest.mocked(Attestation.query).mockResolvedValue(null);

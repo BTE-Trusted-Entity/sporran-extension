@@ -50,9 +50,6 @@
   "component_BalanceUpdateLink_error": {
     "message": "Identity has no unlocked funds for update"
   },
-  "component_IdentitySlide_rename": {
-    "message": "Rename"
-  },
   "component_IdentitySlide_name": {
     "message": "Identity name:"
   },
@@ -64,9 +61,6 @@
   },
   "component_IdentitySlideNew_title": {
     "message": "Add Identity"
-  },
-  "component_IdentitySlideNew_or": {
-    "message": "or"
   },
   "component_Stats_identity_one": {
     "message": "You have $number$ Identity with a",
@@ -88,13 +82,13 @@
     "message": " Total Balance: "
   },
   "component_AddIdentity_label": {
-    "message": "Add Identity"
+    "message": "Add"
   },
   "component_AddIdentity_create": {
     "message": "Create new Identity"
   },
-  "component_AddIdentity_import": {
-    "message": "Import Identity from pre-existing phrase"
+  "component_AddIdentity_importCredentials": {
+    "message": "Import credentials"
   },
   "component_IdentityOptions_label": {
     "message": "Identity options"
@@ -160,9 +154,6 @@
   },
   "component_IdentitySuccessOverlay_message_reset": {
     "message": "You have successfully set a new password"
-  },
-  "component_IdentitySuccessOverlay_CTA": {
-    "message": "See the wallet"
   },
   "component_useCopyButton_copy": {
     "message": "Copy to clipboard"
@@ -582,9 +573,6 @@
   "view_SignQuote_attester": {
     "message": "Attester"
   },
-  "view_SignQuote_password": {
-    "message": "Sign with password:"
-  },
   "view_SignQuote_CTA": {
     "message": "Request Attestation"
   },
@@ -981,5 +969,47 @@
   },
   "view_SignDid_error": {
     "message": "You need to upgrade to an on-chain DID first"
+  },
+  "view_ImportCredentials_title": {
+    "message": "Import Credentials"
+  },
+  "view_ImportCredentials_subline": {
+    "message": "To import your credentials you need your backup files"
+  },
+  "view_ImportCredentials_drop": {
+    "message": "Drag’n’drop the backup files here"
+  },
+  "view_ImportCredentials_cta": {
+    "message": "or Browse Files"
+  },
+  "view_ImportCredentials_pendingImport": {
+    "message": "Processing…"
+  },
+  "view_ImportCredentials_successfulImport": {
+    "message": "Done"
+  },
+  "view_ImportCredentials_wrongFormatLabel": {
+    "message": "Wrong file format"
+  },
+  "view_ImportCredentials_wrongFormatInfo": {
+    "message": "Please make sure to upload only JSON files that were previously backed up from your Sporran."
+  },
+  "view_ImportCredentials_unknownIdentityLabel": {
+    "message": "Identity missing"
+  },
+  "view_ImportCredentials_unknownIdentityInfo": {
+    "message": "You uploaded a credential for an identity that is currently not in your Sporran. Please add this identity first and import the credential again."
+  },
+  "view_ImportCredentials_unexpectedErrorLabel": {
+    "message": "Unexpected error"
+  },
+  "view_ImportCredentials_unexpectedErrorInfo": {
+    "message": "An unexpected error happened. Please try again."
+  },
+  "view_ImportCredentials_hideError": {
+    "message": "Hide this message"
+  },
+  "view_ImportCredentials_more": {
+    "message": "Import More Credentials"
   }
 }

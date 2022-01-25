@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IdentityLine should match the snapshot 1`] = `
+<div>
+  <section
+    class="component"
+  >
+    <section
+      class="identity"
+    >
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      KILT Identity 1
+    </section>
+    <span
+      class="amount"
+    >
+      1.2340
+       
+      <span
+        aria-label="KILT Coin"
+        class="coin"
+      />
+    </span>
+  </section>
+</div>
+`;
