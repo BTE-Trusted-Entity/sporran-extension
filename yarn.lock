@@ -1671,7 +1671,7 @@
   resolved "https://registry.yarnpkg.com/@kiltprotocol/type-definitions/-/type-definitions-0.1.23.tgz#c54475dad7849dc4654975da33590872fc9acdde"
   integrity sha512-5bGUDo8aVTWttwUrV1gyRUlbBn9zllv6/ofAda9ejMbjY5o99YqsAWlXg1mro6BqE3rcF/i0tGbIdO9Z0tOttA==
 
-"@kiltprotocol/types@0.25.0", "@kiltprotocol/types@^0.25.0":
+"@kiltprotocol/types@0.25.0":
   version "0.25.0"
   resolved "https://registry.yarnpkg.com/@kiltprotocol/types/-/types-0.25.0.tgz#eeca63114231a8042c6a4523a90c1f409dbeae12"
   integrity sha512-19LKWpXx51QPTw404XoopWz96pGRpfwWSnC0QiVawfOzDJERcxO2Brqd8X8JfsemmE5bmhz9ohmoyj52grF5AA==
@@ -1681,12 +1681,35 @@
     "@polkadot/types" "^6.11.1"
     tweetnacl "^1.0.3"
 
-"@kiltprotocol/utils@0.25.0", "@kiltprotocol/utils@^0.25.0":
+"@kiltprotocol/types@0.25.1", "@kiltprotocol/types@^0.25.0":
+  version "0.25.1"
+  resolved "https://registry.yarnpkg.com/@kiltprotocol/types/-/types-0.25.1.tgz#a82e7c3402738f6b53f4513ea0b04d077de89b60"
+  integrity sha512-01+O4bxFnK7moqKM/CzITUIKIByrn3PjRsR52yDxMhtd3KfWcCeskcWuEOpQkNno+OrW9Jz7yfZutVkevPgc8g==
+  dependencies:
+    "@polkadot/api" "^6.11.1"
+    "@polkadot/keyring" "^8.1.2"
+    "@polkadot/types" "^6.11.1"
+    tweetnacl "^1.0.3"
+
+"@kiltprotocol/utils@0.25.0":
   version "0.25.0"
   resolved "https://registry.yarnpkg.com/@kiltprotocol/utils/-/utils-0.25.0.tgz#24e85c01144da4d33e3517033c05b8340aa614a1"
   integrity sha512-2wRngVKvOEmf2ei9oTRmt+yz8o/9Sdoqu5ZcK0AzAHyy5zDdzJzp1yQfWfv+pt40bg8/sM9o41BbpltagjUPcw==
   dependencies:
     "@kiltprotocol/types" "0.25.0"
+    "@polkadot/keyring" "^8.1.2"
+    "@polkadot/types" "^6.11.1"
+    "@polkadot/util" "^8.1.2"
+    "@polkadot/util-crypto" "^8.1.2"
+    tweetnacl "^1.0.3"
+    uuid "^8.1.0"
+
+"@kiltprotocol/utils@^0.25.1":
+  version "0.25.1"
+  resolved "https://registry.yarnpkg.com/@kiltprotocol/utils/-/utils-0.25.1.tgz#af4ae5e1ce183a8f7e99533fd9195495e4b5956e"
+  integrity sha512-wwwG3Y5vUIw5HZmC2RIUPYWaOhRhnZGddAS3Q7viXGoJDu9/XrenZeedVco2b9kCMXkmCMkN/vh/PRJloEw6WQ==
+  dependencies:
+    "@kiltprotocol/types" "0.25.1"
     "@polkadot/keyring" "^8.1.2"
     "@polkadot/types" "^6.11.1"
     "@polkadot/util" "^8.1.2"
