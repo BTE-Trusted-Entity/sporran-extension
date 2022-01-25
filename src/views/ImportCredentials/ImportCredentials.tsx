@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { filter, remove, sortBy } from 'lodash-es';
+import { filter, sortBy } from 'lodash-es';
 import { RequestForAttestation } from '@kiltprotocol/core';
 
 import {
@@ -101,7 +101,7 @@ export function ImportCredentials(): JSX.Element | null {
             { fileName, error: error.message },
           ]);
         } finally {
-          setPending((pending) => remove(pending, { fileName }));
+          setPending((pending) => filter(pending, { fileName }));
         }
       });
     },
