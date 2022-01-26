@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 
 import * as styles from './DidDowngradeWarning.module.css';
 
@@ -20,6 +20,8 @@ export function DidDowngradeWarning({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const credentials = useIdentityCredentials(identity.did);
+
+  const { goBack } = useHistory();
 
   if (!credentials) {
     return null; // storage data pending
@@ -52,14 +54,9 @@ export function DidDowngradeWarning({ identity }: Props): JSX.Element | null {
       </ul>
 
       <p className={styles.buttonsLine}>
-        <Link
-          to={generatePath(paths.identity.did.manage.start, {
-            address: identity.address,
-          })}
-          className={styles.cancel}
-        >
+        <button onClick={goBack} className={styles.cancel}>
           {t('common_action_cancel')}
-        </Link>
+        </button>
         <Link
           to={generatePath(paths.identity.did.manage.downgrade, {
             address: identity.address,
