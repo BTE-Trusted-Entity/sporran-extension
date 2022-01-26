@@ -52,58 +52,60 @@ export function ImportCredentials(): JSX.Element | null {
       setPending(pending);
       setProcessing(true);
 
-      filesList.forEach(async (file) => {
-        const fileName = file.name;
-        try {
-          const text = await file.text();
-          const credential = JSON.parse(text) as Credential;
+      (async () => {
+        for (const file of filesList) {
+          const fileName = file.name;
+          try {
+            const text = await file.text();
+            const credential = JSON.parse(text) as Credential;
 
-          const {
-            request,
-            name = fileName,
-            status = 'pending',
-            cTypeTitle,
-            attester,
-          } = credential;
+            const {
+              request,
+              name = fileName,
+              status = 'pending',
+              cTypeTitle,
+              attester,
+            } = credential;
 
-          if (
-            !cTypeTitle ||
-            !attester ||
-            !RequestForAttestation.verifyData(request)
-          ) {
-            throw new Error('invalid');
+            if (
+              !cTypeTitle ||
+              !attester ||
+              !RequestForAttestation.verifyData(request)
+            ) {
+              throw new Error('invalid');
+            }
+
+            const knownIdentity = identitiesList.find(({ did }) =>
+              sameFullDid(did, request.claim.owner),
+            );
+            if (!knownIdentity) {
+              throw new Error('orphaned');
+            }
+
+            await saveCredential({
+              request,
+              name,
+              status,
+              cTypeTitle,
+              attester,
+              isDownloaded: true,
+            });
+
+            setSuccessfulImports((successfulImports) => [
+              ...successfulImports,
+              { fileName, identityAddress: knownIdentity.address },
+            ]);
+          } catch (exception) {
+            const error = exceptionToError(exception);
+            setFailedImports((failedImports) => [
+              ...failedImports,
+              { fileName, error: error.message },
+            ]);
+          } finally {
+            setPending((pending) => reject(pending, { fileName }));
           }
-
-          const knownIdentity = identitiesList.find(({ did }) =>
-            sameFullDid(did, request.claim.owner),
-          );
-          if (!knownIdentity) {
-            throw new Error('orphaned');
-          }
-
-          await saveCredential({
-            request,
-            name,
-            status,
-            cTypeTitle,
-            attester,
-            isDownloaded: true,
-          });
-
-          setSuccessfulImports((successfulImports) => [
-            ...successfulImports,
-            { fileName, identityAddress: knownIdentity.address },
-          ]);
-        } catch (exception) {
-          const error = exceptionToError(exception);
-          setFailedImports((failedImports) => [
-            ...failedImports,
-            { fileName, error: error.message },
-          ]);
-        } finally {
-          setPending((pending) => reject(pending, { fileName }));
         }
-      });
+      })();
     },
     [identitiesList],
   );
