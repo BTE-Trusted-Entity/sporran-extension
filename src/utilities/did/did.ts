@@ -115,3 +115,12 @@ export function sameFullDid(
   }
   return parseDidUrl(a).fullDid === parseDidUrl(b).fullDid;
 }
+
+export async function needLegacyDidCrypto(did: string): Promise<boolean> {
+  return (
+    isFullDid(did) &&
+    (await getDidDetails(did)).getKeys(KeyRelationship.keyAgreement)[0]
+      .publicKeyHex ===
+      '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e'
+  );
+}

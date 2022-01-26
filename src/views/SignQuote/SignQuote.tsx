@@ -23,7 +23,7 @@ import {
   useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { getDidDetails } from '../../utilities/did/did';
+import { getDidDetails, needLegacyDidCrypto } from '../../utilities/did/did';
 import {
   PasswordField,
   usePasswordField,
@@ -83,8 +83,10 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       );
 
       const { keypair } = await passwordField.get(event);
-      const { didDetails, keystore, encrypt } =
-        await getIdentityCryptoFromKeypair(keypair);
+
+      const isLegacy = await needLegacyDidCrypto(identity.did);
+      const { encrypt, keystore, didDetails } =
+        await getIdentityCryptoFromKeypair(keypair, isLegacy);
 
       // The attester generated claim with the temporary identity, need to put real address in it
       const identityClaim = { ...claim, owner: didDetails.did };
@@ -125,7 +127,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       await claimChannel.return(message);
       window.close();
     },
-    [cType, data, passwordField, credentials],
+    [credentials, cType, data, passwordField, identity.did],
   );
 
   return (

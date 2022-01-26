@@ -9,7 +9,7 @@ import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
 
 import * as styles from './ShareCredentialSign.module.css';
 
-import { getIdentityDidCrypto } from '../../utilities/identities/identities';
+import { getIdentityCryptoFromKeypair } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 
 import { ShareInput } from '../../channels/shareChannel/types';
@@ -23,7 +23,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 import { Selected } from '../ShareCredential/ShareCredential';
 
-import { getDidDetails } from '../../utilities/did/did';
+import { getDidDetails, needLegacyDidCrypto } from '../../utilities/did/did';
 
 interface Props {
   selected: Selected;
@@ -52,12 +52,11 @@ export function ShareCredentialSign({
     async (event) => {
       event.preventDefault();
 
-      const { address } = identity;
-      const { password } = await passwordField.get(event);
-      const { encrypt, keystore, didDetails } = await getIdentityDidCrypto(
-        address,
-        password,
-      );
+      const { keypair } = await passwordField.get(event);
+
+      const isLegacy = await needLegacyDidCrypto(identity.did);
+      const { encrypt, keystore, didDetails } =
+        await getIdentityCryptoFromKeypair(keypair, isLegacy);
 
       const request = RequestForAttestation.fromRequest(credential.request);
       await request.signWithDid(keystore, didDetails, challenge);
