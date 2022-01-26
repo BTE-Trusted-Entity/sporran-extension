@@ -106,6 +106,16 @@ export function parseDidUrl(did: IDidDetails['did']): ReturnType<
   };
 }
 
+export function sameFullDid(
+  a: IDidDetails['did'],
+  b: IDidDetails['did'],
+): boolean {
+  if (!a || !b) {
+    return false;
+  }
+  return parseDidUrl(a).fullDid === parseDidUrl(b).fullDid;
+}
+
 export async function needLegacyDidCrypto(did: string): Promise<boolean> {
   return (
     isFullDid(did) &&

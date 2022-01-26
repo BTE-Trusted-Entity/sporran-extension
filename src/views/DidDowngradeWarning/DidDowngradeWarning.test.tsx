@@ -5,7 +5,7 @@ import { render } from '../../testing/testing';
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
-import { parseDidUrl } from '../../utilities/did/did';
+import { parseDidUrl, sameFullDid } from '../../utilities/did/did';
 
 import { DidDowngradeWarning } from './DidDowngradeWarning';
 
@@ -13,6 +13,7 @@ jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUrl).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as ReturnType<typeof parseDidUrl>);
+jest.mocked(sameFullDid).mockReturnValue(true);
 
 jest.mock('@kiltprotocol/core', () => ({ Attestation: { query: jest.fn() } }));
 jest.mocked(Attestation.query).mockResolvedValue(null);

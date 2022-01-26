@@ -37,10 +37,10 @@ Just start it again to continue.
           value="wss://spiritnet.kilt.io"
         />
         <option
-          value="wss://peregrine.kilt.io"
+          value="wss://peregrine.kilt.io/parachain-public-ws"
         />
         <option
-          value="wss://kilt-peregrine-stg.kilt.io"
+          value="wss://peregrine-stg.kilt.io/para"
         />
       </datalist>
       <select

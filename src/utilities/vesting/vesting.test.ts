@@ -3,7 +3,7 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { getBalances } from '@kiltprotocol/core/lib/balance/Balance.chain';
+import { Balance } from '@kiltprotocol/core';
 import BN from 'bn.js';
 
 import { originalBalancesMock } from '../balanceChanges/balanceChanges.mock';
@@ -19,8 +19,8 @@ jest.mock('@kiltprotocol/chain-helpers', () => ({
   },
 }));
 
-jest.mock('@kiltprotocol/core/lib/balance/Balance.chain', () => ({
-  getBalances: jest.fn(),
+jest.mock('@kiltprotocol/core', () => ({
+  Balance: { getBalances: jest.fn() },
 }));
 
 const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
@@ -87,7 +87,7 @@ describe('vesting', () => {
         identity: true,
       } as unknown as Parameters<typeof signVest>[0];
 
-      jest.mocked(getBalances).mockResolvedValue(originalBalancesMock);
+      jest.mocked(Balance.getBalances).mockResolvedValue(originalBalancesMock);
 
       const hash = await signVest(identityMock);
 

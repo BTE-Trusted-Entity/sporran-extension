@@ -1,0 +1,22 @@
+.component {
+  composes: subline from '../Typography/Typography.module.css';
+  margin: 0;
+  height: 3.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.avatar {
+  composes: avatar from '../Avatar/Avatar.module.css';
+  height: 1.75rem;
+  width: 1.75rem;
+  background: none;
+  margin-right: 0.75rem;
+}
