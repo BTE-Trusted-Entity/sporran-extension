@@ -14,15 +14,14 @@ export function CredentialsProvider({
 }): JSX.Element {
   const [credentials, setCredentials] = useState<Credential[]>();
 
-  const { data: list } = useSWR(LIST_KEY, getList);
+  const { data: list } = useSWR(LIST_KEY, async () =>
+    getCredentials(await getList()),
+  );
+
   useEffect(() => {
-    (async () => {
-      if (!list) {
-        return;
-      }
-      setCredentials(await getCredentials(list));
-    })();
+    setCredentials(list);
   }, [list]);
+
   return (
     <CredentialsContext.Provider value={credentials}>
       {children}

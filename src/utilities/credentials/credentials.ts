@@ -42,6 +42,7 @@ export async function saveCredential(credential: Credential): Promise<void> {
 
   const list = await getList();
   if (list.includes(key)) {
+    await mutate(LIST_KEY);
     return;
   }
   list.push(key);
