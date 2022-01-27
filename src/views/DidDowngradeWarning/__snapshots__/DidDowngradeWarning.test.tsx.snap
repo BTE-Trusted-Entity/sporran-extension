@@ -320,12 +320,11 @@ exports[`DidDowngradeWarning should render 1`] = `
     <p
       class="buttonsLine"
     >
-      <a
+      <button
         class="cancel"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did"
       >
         Cancel
-      </a>
+      </button>
       <a
         class="cta"
         href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/downgrade"
