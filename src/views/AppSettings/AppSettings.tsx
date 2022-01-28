@@ -99,7 +99,6 @@ export function AppSettings(): JSX.Element {
         <Link
           to={paths.home}
           className={styles.cancel}
-          type="button"
           aria-label={t('common_action_cancel')}
           title={t('common_action_cancel')}
         />
