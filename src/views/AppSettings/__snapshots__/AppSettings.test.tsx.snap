@@ -68,7 +68,6 @@ Just start it again to continue.
         class="cancel"
         href="/"
         title="Cancel"
-        type="button"
       />
     </p>
     <button
