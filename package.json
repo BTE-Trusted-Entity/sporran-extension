@@ -37,7 +37,7 @@
     "lint-css": "stylelint \"src/**/*.css\"",
     "css": "tcm --namedExports --pattern 'src/**/*.module.css' && eslint --fix --config ./.eslintrc.json \"src/**/*.css.d.ts\"",
     "prettify": "prettier --write \"src/**/*.ts*\"",
-    "storybook": "start-storybook --port 6006",
+    "storybook": "start-storybook --port 6006 --modern",
     "open-firefox": "web-ext run --source-dir dist",
     "open-chrome": "node scripts/chrome-launch.js"
   },
