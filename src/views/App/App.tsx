@@ -19,6 +19,11 @@ import { AppSettings } from '../AppSettings/AppSettings';
 
 import { paths } from '../paths';
 
+function confirmNavigation(message: string, callback: (ok: boolean) => void) {
+  const allowed = window.confirm(message);
+  callback(allowed);
+}
+
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();
 
@@ -31,7 +36,10 @@ export function App(): JSX.Element {
   return (
     <div className={styles.container}>
       <GenericError>
-        <MemoryRouter initialEntries={initialEntries}>
+        <MemoryRouter
+          initialEntries={initialEntries}
+          getUserConfirmation={confirmNavigation}
+        >
           <RouteExcept path={pathsWithoutTopButtons}>
             <nav className={styles.menus}>
               <AddIdentity />

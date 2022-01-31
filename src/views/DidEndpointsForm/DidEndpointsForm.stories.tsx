@@ -1,7 +1,9 @@
+import { MemoryRouter, Route } from 'react-router-dom';
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import { generatePath, paths } from '../paths';
 
 import { DidEndpointsForm } from './DidEndpointsForm';
 
@@ -15,10 +17,20 @@ const identity =
 
 export function Template(): JSX.Element {
   return (
-    <DidEndpointsForm
-      identity={identity}
-      onAdd={action('add')}
-      onRemove={action('remove')}
-    />
+    <MemoryRouter
+      initialEntries={[
+        generatePath(paths.identity.did.manage.endpoints.start, {
+          address: 'FOO',
+        }),
+      ]}
+    >
+      <Route path={paths.identity.did.manage.endpoints.edit}>
+        <DidEndpointsForm
+          identity={identity}
+          onAdd={action('add')}
+          onRemove={action('remove')}
+        />
+      </Route>
+    </MemoryRouter>
   );
 }

@@ -43,6 +43,8 @@ export const paths = {
         downgrade: '/identity/:address/did/downgrade',
         endpoints: {
           start: '/identity/:address/did/endpoints',
+          add: '/identity/:address/did/endpoints/add',
+          edit: '/identity/:address/did/endpoints/:id?',
           sign: '/identity/:address/did/endpoints/sign',
         },
         connect: {

@@ -131,9 +131,10 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
         </dl>
       </li>
     </ul>
-    <button
+    <a
       aria-label="Back"
       class="linkBack"
+      href="/identity/FOO/did"
       title="Back"
     />
     <p

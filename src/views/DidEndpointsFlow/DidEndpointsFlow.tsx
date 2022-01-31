@@ -47,7 +47,7 @@ export function DidEndpointsFlow({ identity }: Props): JSX.Element {
           <DidEndpointsSign identity={identity} type={type} endpoint={values} />
         )}
       </Route>
-      <Route path={paths.identity.did.manage.endpoints.start}>
+      <Route path={paths.identity.did.manage.endpoints.edit}>
         <DidEndpointsForm
           identity={identity}
           onAdd={onAdd}
