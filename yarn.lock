@@ -1671,10 +1671,20 @@
   resolved "https://registry.yarnpkg.com/@kiltprotocol/type-definitions/-/type-definitions-0.1.23.tgz#c54475dad7849dc4654975da33590872fc9acdde"
   integrity sha512-5bGUDo8aVTWttwUrV1gyRUlbBn9zllv6/ofAda9ejMbjY5o99YqsAWlXg1mro6BqE3rcF/i0tGbIdO9Z0tOttA==
 
-"@kiltprotocol/types@0.25.1", "@kiltprotocol/types@^0.25.1":
+"@kiltprotocol/types@0.25.1":
   version "0.25.1"
   resolved "https://registry.yarnpkg.com/@kiltprotocol/types/-/types-0.25.1.tgz#a82e7c3402738f6b53f4513ea0b04d077de89b60"
   integrity sha512-01+O4bxFnK7moqKM/CzITUIKIByrn3PjRsR52yDxMhtd3KfWcCeskcWuEOpQkNno+OrW9Jz7yfZutVkevPgc8g==
+  dependencies:
+    "@polkadot/api" "^6.11.1"
+    "@polkadot/keyring" "^8.1.2"
+    "@polkadot/types" "^6.11.1"
+    tweetnacl "^1.0.3"
+
+"@kiltprotocol/types@^0.25.2":
+  version "0.25.2"
+  resolved "https://registry.yarnpkg.com/@kiltprotocol/types/-/types-0.25.2.tgz#95a482a768e3ae6ee82e2b19b7b5034644675758"
+  integrity sha512-YRm0L0n5qCipRypon7bFmA6reUc/VZnnsgSGft+G77p7Pq39kzZVC4U8stQ6pkVaBlaBoty8H5PTBrndZwblDQ==
   dependencies:
     "@polkadot/api" "^6.11.1"
     "@polkadot/keyring" "^8.1.2"
