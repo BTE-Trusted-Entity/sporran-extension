@@ -9,5 +9,5 @@ export type SignDidOriginInput = SignDidInput & Origin;
 
 export interface SignDidOutput {
   signature: string;
-  did: string;
+  didKeyUri: string;
 }
