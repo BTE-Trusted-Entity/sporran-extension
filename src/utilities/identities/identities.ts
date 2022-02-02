@@ -119,7 +119,7 @@ export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
 interface IdentityDidCrypto {
   didDetails: IDidDetails;
   keystore: KeystoreSigner;
-  sign: (plaintext: string) => string;
+  sign: (plaintext: string) => { signature: string; didKeyUri: string };
   encrypt: (
     messageBody: MessageBody,
     dAppDidDetails: IDidDetails,
@@ -256,7 +256,9 @@ export async function getIdentityCryptoFromKeypair(
   };
 
   function sign(plaintext: string) {
-    return Crypto.u8aToHex(authenticationKey.sign(plaintext));
+    const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
+    const didKeyUri = didDetails.getKeyIds(KeyRelationship.authentication)[0];
+    return { signature, didKeyUri };
   }
 
   async function encrypt(

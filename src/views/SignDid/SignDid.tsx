@@ -37,16 +37,14 @@ export function SignDid({ identity }: Props): JSX.Element | null {
     async (event) => {
       event.preventDefault();
 
-      const { did } = identity;
       const { keypair } = await passwordField.get(event);
       const { sign } = await getIdentityCryptoFromKeypair(keypair);
 
-      const signature = sign(plaintext);
-      await backgroundSignDidChannel.return({ signature, did });
+      await backgroundSignDidChannel.return(sign(plaintext));
 
       window.close();
     },
-    [identity, passwordField, plaintext],
+    [passwordField, plaintext],
   );
 
   const handleCancelClick = useCallback(async () => {

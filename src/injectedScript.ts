@@ -29,7 +29,7 @@ interface InjectedWindowProvider {
   specVersion: '0.1';
   signWithDid: (
     plaintext: string,
-  ) => Promise<{ signature: string; did: string }>;
+  ) => Promise<{ signature: string; didKeyUri: string }>;
 }
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
@@ -94,7 +94,7 @@ async function startSession(
 
 async function signWithDid(plaintext: string): Promise<{
   signature: string;
-  did: string;
+  didKeyUri: string;
 }> {
   const dAppName = document.title.substring(0, 50);
   return injectedSignDidChannel.get({ plaintext, dAppName });
