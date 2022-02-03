@@ -3,7 +3,9 @@ import { browser } from 'webextension-polyfill-ts';
 import { plural } from './plural';
 
 jest.mock('webextension-polyfill-ts');
-jest.spyOn(browser.i18n, 'getMessage').mockImplementation((key) => key);
+jest
+  .spyOn(browser.i18n, 'getMessage')
+  .mockImplementation((key) => (key === 'messages_locale' ? 'en' : key));
 
 describe('plural', () => {
   it('should return proper form for one', async () => {
