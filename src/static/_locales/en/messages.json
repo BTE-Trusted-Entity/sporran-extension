@@ -1,4 +1,7 @@
 {
+  "messages_locale": {
+    "message": "en"
+  },
   "manifest_name": {
     "message": "Sporran"
   },
