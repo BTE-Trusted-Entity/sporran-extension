@@ -2,3 +2,8 @@
   composes: buttonTertiary from '../../components/Button/Button.module.css';
   margin-top: 0.5rem;
 }
+
+.update[aria-disabled='true'] {
+  pointer-events: auto;
+  cursor: not-allowed;
+}
