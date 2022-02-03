@@ -7,7 +7,7 @@ type Keys = {
 };
 
 export function plural(value: number, keys: Keys): string {
-  const locale = browser.i18n.getUILanguage();
+  const locale = browser.i18n.getMessage('messages_locale');
   const category = new Intl.PluralRules(locale).select(value);
 
   const key = keys[category];
