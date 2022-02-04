@@ -912,7 +912,7 @@
     "message": "Service ID"
   },
   "view_DidEndpointsForm_unsaved": {
-    "message": "Clicking OK will lose unsaved data in the form"
+    "message": "Clicking OK will cause unsaved form data to be lost"
   },
   "view_DidEndpointsForm_tooMany": {
     "message": "You cannot add any more service endpoints"
