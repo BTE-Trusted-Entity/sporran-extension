@@ -54,20 +54,20 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
         aria-expanded="false"
         class="add"
       >
-        <button
+        <a
           class="expand"
-          type="button"
+          href="/identity/FOO/did/endpoints/add"
         >
           + Add service endpoint
-        </button>
+        </a>
       </li>
       <li
         aria-expanded="false"
         class="endpoint"
       >
-        <button
+        <a
           class="expand"
-          type="button"
+          href="/identity/FOO/did/endpoints/did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY%23123456"
         >
           <section
             class="collapsedCard"
@@ -83,7 +83,7 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
               Some Type
             </p>
           </section>
-        </button>
+        </a>
       </li>
       <li
         aria-expanded="true"
