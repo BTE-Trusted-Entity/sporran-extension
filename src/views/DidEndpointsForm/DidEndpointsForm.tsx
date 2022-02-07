@@ -124,6 +124,7 @@ function DidNewEndpoint({
 
   const handleSubmit = useCallback(
     async (event) => {
+      event.preventDefault();
       if (tooMany) {
         return;
       }
