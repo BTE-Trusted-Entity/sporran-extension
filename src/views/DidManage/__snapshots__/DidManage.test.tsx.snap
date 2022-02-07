@@ -59,11 +59,11 @@ exports[`DidManage should match the snapshot 1`] = `
     >
       Remove on-chain DID
     </a>
-    <button
+    <a
       aria-label="Back"
       class="linkBack"
+      href="/identity/FOO"
       title="Back"
-      type="button"
     />
     <p
       class="stats"

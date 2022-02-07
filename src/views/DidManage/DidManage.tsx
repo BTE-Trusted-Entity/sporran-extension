@@ -60,7 +60,8 @@ export function DidManage({ identity }: Props): JSX.Element | null {
         {t('view_DidManage_downgrade')}
       </Link>
 
-      <LinkBack />
+      {/* One of the child sub-views uses the link form, so this view also has to use it. */}
+      <LinkBack to={paths.identity.overview} />
       <Stats />
     </section>
   );

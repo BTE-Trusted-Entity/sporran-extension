@@ -1,8 +1,11 @@
+import { MemoryRouter, Route } from 'react-router-dom';
+
 import { identitiesMock as identities, render } from '../../testing/testing';
 
 import '../../components/useCopyButton/useCopyButton.mock';
 
 import { parseDidUrl } from '../../utilities/did/did';
+import { generatePath, paths } from '../paths';
 
 import { DidManage } from './DidManage';
 
@@ -14,11 +17,19 @@ jest.mocked(parseDidUrl).mockReturnValue({
 describe('DidManage', () => {
   it('should match the snapshot', async () => {
     const { container } = render(
-      <DidManage
-        identity={
-          identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
-        }
-      />,
+      <MemoryRouter
+        initialEntries={[
+          generatePath(paths.identity.did.manage.start, { address: 'FOO' }),
+        ]}
+      >
+        <Route path={paths.identity.did.manage.start}>
+          <DidManage
+            identity={
+              identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+            }
+          />
+        </Route>
+      </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
   });

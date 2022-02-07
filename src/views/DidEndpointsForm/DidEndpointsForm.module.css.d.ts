@@ -23,4 +23,3 @@ export const errorTooltip: string;
 export const endpoint: string;
 export const name: string;
 export const value: string;
-export const linkBack: string;

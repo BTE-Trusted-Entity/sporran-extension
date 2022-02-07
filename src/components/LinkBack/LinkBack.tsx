@@ -1,11 +1,30 @@
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './LinkBack.module.css';
 
-export function LinkBack(): JSX.Element {
+import { generatePath } from '../../views/paths';
+
+interface Props {
+  to?: string;
+}
+
+export function LinkBack({ to }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
+
   const { goBack } = useHistory();
+  const params = useParams();
+
+  if (to) {
+    return (
+      <Link
+        title={t('common_action_back')}
+        aria-label={t('common_action_back')}
+        to={generatePath(to, params)}
+        className={styles.linkBack}
+      />
+    );
+  }
 
   return (
     <button

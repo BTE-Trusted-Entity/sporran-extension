@@ -1,12 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LinkBack should render 1`] = `
+exports[`LinkBack should render as button 1`] = `
 <div>
   <button
     aria-label="Back"
     class="linkBack"
     title="Back"
     type="button"
+  />
+</div>
+`;
+
+exports[`LinkBack should render as link 1`] = `
+<div>
+  <a
+    aria-label="Back"
+    class="linkBack"
+    href="/identity/FOO"
+    title="Back"
   />
 </div>
 `;
