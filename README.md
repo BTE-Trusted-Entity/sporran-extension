@@ -16,7 +16,7 @@
 1. Now you have the internal version of Sporran installed. **DO NOT USE IT** for real KILT identities/addresses/coins!
    Click the Sporran icon in the browser toolbar and follow the flow to create an Identity.
    Click the _Receive_ link and copy the Identity address on the next screen.
-1. Visit the [Faucet](https://faucet.kilt.io/), paste the Identity address there, accept the Terms,
+1. Visit the [Faucet](https://faucet.peregrine.kilt.io/), paste the Identity address there, accept the Terms,
    and click _Request Tokens_ to get some play KILT coins
 
 ## Testing in browser
