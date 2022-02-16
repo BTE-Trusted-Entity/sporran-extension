@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -11,6 +11,7 @@ import {
   BalanceChange,
   onAddressBalanceChange,
 } from '../../utilities/balanceChanges/balanceChanges';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 interface BalanceBN {
   transferable: BN;
@@ -55,15 +56,7 @@ export function Balance({
   const balance = useAddressBalance(address);
   const connecting = balance === null;
 
-  const [showBreakdown, setShowBreakdown] = useState(false);
-
-  const handleShowBreakdownClick = useCallback(async () => {
-    setShowBreakdown(true);
-  }, []);
-
-  const handleHideBreakdownClick = useCallback(() => {
-    setShowBreakdown(false);
-  }, []);
+  const breakdownVisibility = useBooleanState();
 
   return (
     <>
@@ -80,10 +73,10 @@ export function Balance({
 
         {breakdown &&
           !connecting &&
-          (showBreakdown ? (
+          (breakdownVisibility.current ? (
             <button
               type="button"
-              onClick={handleHideBreakdownClick}
+              onClick={breakdownVisibility.off}
               className={styles.hideBreakdown}
               title={t('component_Balance_hideBreakdown')}
               aria-label={t('component_Balance_hideBreakdown')}
@@ -91,14 +84,14 @@ export function Balance({
           ) : (
             <button
               type="button"
-              onClick={handleShowBreakdownClick}
+              onClick={breakdownVisibility.on}
               className={styles.showBreakdown}
               title={t('component_Balance_showBreakdown')}
               aria-label={t('component_Balance_showBreakdown')}
             />
           ))}
       </p>
-      {showBreakdown && !connecting && (
+      {breakdownVisibility.current && !connecting && (
         <>
           <ul className={styles.breakdown}>
             <li className={styles.balance}>

@@ -1,9 +1,9 @@
-import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Modal } from 'react-dialog-polyfill';
 
 import * as styles from './ReceiveToken.module.css';
 
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { Identity, isNew } from '../../utilities/identities/identities';
 import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
@@ -19,15 +19,7 @@ interface Props {
 export function ReceiveToken({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const [largeQR, setLargeQR] = useState(false);
-
-  const handleEnlargeClick = useCallback(() => {
-    setLargeQR(true);
-  }, []);
-
-  const handleCloseClick = useCallback(() => {
-    setLargeQR(false);
-  }, []);
+  const largeQR = useBooleanState();
 
   if (isNew(identity)) {
     return <IdentityOverviewNew />;
@@ -55,18 +47,18 @@ export function ReceiveToken({ identity }: Props): JSX.Element {
       <button
         className={styles.qrCodeToggle}
         type="button"
-        onClick={handleEnlargeClick}
+        onClick={largeQR.on}
         aria-label={t('view_ReceiveToken_enlarge')}
       >
         <QRCode address={address} className={styles.qrCode} />
         <span className={styles.qrCodeShadow} />
       </button>
 
-      <Modal open={largeQR} className={styles.dialog}>
+      <Modal open={largeQR.current} className={styles.dialog}>
         <QRCode address={address} className={styles.qrCodeLarge} />
         <button
           type="button"
-          onClick={handleCloseClick}
+          onClick={largeQR.on}
           className={styles.dialogClose}
           aria-label={t('common_action_close')}
         />

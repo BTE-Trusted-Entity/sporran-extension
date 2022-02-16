@@ -16,6 +16,7 @@ import {
   getFragment,
   queryFullDetailsFromIdentifier,
 } from '../../utilities/did/did';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { generatePath, paths } from '../paths';
 
 function useScrollEndpoint(ref: RefObject<HTMLLIElement>, id: string) {
@@ -119,8 +120,7 @@ function DidNewEndpoint({
   const ref = useRef<HTMLLIElement>(null);
   useScrollEndpoint(ref, 'add');
 
-  const [dirty, setDirty] = useState(false);
-  const handleFormInput = useCallback(() => setDirty(true), []);
+  const dirty = useBooleanState();
 
   const handleSubmit = useCallback(
     async (event) => {
@@ -134,7 +134,7 @@ function DidNewEndpoint({
       const url = formData.get('url') as string;
       const type = formData.get('type') as string;
 
-      setDirty(false);
+      dirty.off();
       // wait for React to update the dirty flag
       await new Promise((resolve) => setTimeout(resolve, 10));
 
@@ -144,7 +144,7 @@ function DidNewEndpoint({
         types: [type],
       });
     },
-    [tooMany, onAdd],
+    [tooMany, dirty, onAdd],
   );
 
   return (
@@ -164,8 +164,11 @@ function DidNewEndpoint({
       </Link>
 
       {isAdding && (
-        <form onSubmit={handleSubmit} onInput={handleFormInput}>
-          <Prompt when={dirty} message={t('view_DidEndpointsForm_unsaved')} />
+        <form onSubmit={handleSubmit} onInput={dirty.on}>
+          <Prompt
+            when={dirty.current}
+            message={t('view_DidEndpointsForm_unsaved')}
+          />
 
           <label className={styles.label}>
             {t('view_DidEndpointsForm_url')}

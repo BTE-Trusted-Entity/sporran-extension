@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './IdentitySlide.module.css';
@@ -7,6 +7,7 @@ import { Avatar } from '../Avatar/Avatar';
 import { IdentityOptions } from '../IdentityOptions/IdentityOptions';
 
 import { Identity, saveIdentity } from '../../utilities/identities/identities';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 interface Props {
   identity: Identity;
@@ -19,15 +20,7 @@ export function IdentitySlide({
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const [editing, setEditing] = useState(false);
-
-  const handleEditClick = useCallback(() => {
-    setEditing(true);
-  }, []);
-
-  const handleCancelClick = useCallback(() => {
-    setEditing(false);
-  }, []);
+  const editing = useBooleanState();
 
   const handleSubmit = useCallback(
     async (event) => {
@@ -39,19 +32,19 @@ export function IdentitySlide({
         name,
       });
 
-      setEditing(false);
+      editing.off();
     },
-    [identity],
+    [editing, identity],
   );
 
   return (
     <section>
       <Avatar identity={identity} />
-      {!editing ? (
+      {!editing.current ? (
         <div className={options ? styles.nameLine : styles.centeredNameLine}>
           <span className={styles.name}>{identity.name}</span>
           {options && (
-            <IdentityOptions identity={identity} onEdit={handleEditClick} />
+            <IdentityOptions identity={identity} onEdit={editing.on} />
           )}
         </div>
       ) : (
@@ -75,7 +68,7 @@ export function IdentitySlide({
           <button
             className={styles.cancel}
             type="button"
-            onClick={handleCancelClick}
+            onClick={editing.off}
             aria-label={t('common_action_cancel')}
             title={t('common_action_cancel')}
           />

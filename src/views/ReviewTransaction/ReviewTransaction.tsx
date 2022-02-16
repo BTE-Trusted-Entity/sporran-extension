@@ -10,6 +10,7 @@ import {
   submitTransfer,
 } from '../../utilities/transfers/transfers';
 
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { Identity } from '../../utilities/identities/types';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
@@ -39,15 +40,7 @@ export function ReviewTransaction({
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const [showDetails, setShowDetails] = useState(false);
-
-  const handleShowDetailsClick = useCallback(() => {
-    setShowDetails(true);
-  }, []);
-
-  const handleHideDetailsClick = useCallback(() => {
-    setShowDetails(false);
-  }, []);
+  const showDetails = useBooleanState();
 
   const passwordField = usePasswordField();
 
@@ -115,9 +108,9 @@ export function ReviewTransaction({
         <span>{t('view_ReviewTransaction_total')}</span>
         <KiltAmount amount={total} type="costs" smallDecimals />
 
-        {showDetails ? (
+        {showDetails.current ? (
           <button
-            onClick={handleHideDetailsClick}
+            onClick={showDetails.off}
             type="button"
             className={styles.hideDetails}
             title={t('view_ReviewTransaction_hideDetails')}
@@ -125,7 +118,7 @@ export function ReviewTransaction({
           />
         ) : (
           <button
-            onClick={handleShowDetailsClick}
+            onClick={showDetails.on}
             type="button"
             className={styles.showDetails}
             title={t('view_ReviewTransaction_showDetails')}
@@ -134,7 +127,9 @@ export function ReviewTransaction({
         )}
       </p>
 
-      <table className={showDetails ? styles.details : styles.detailsHidden}>
+      <table
+        className={showDetails.current ? styles.details : styles.detailsHidden}
+      >
         <thead>
           <tr>
             <th className={styles.detailName}>

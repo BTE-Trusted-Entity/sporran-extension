@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import { Link, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -14,25 +14,16 @@ interface Props {
 export function BalanceUpdateLink({ address }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const [disabled, setDisabled] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      const identityHasVestedFunds = await hasVestedFunds(address);
-      if (identityHasVestedFunds) {
-        setDisabled(false);
-      }
-    })();
-  }, [address]);
+  const enabled = useSWR(address, hasVestedFunds).data;
 
   return (
     <Link
-      onClick={(event) => disabled && event.preventDefault()}
+      onClick={(event) => !enabled && event.preventDefault()}
       to={generatePath(paths.identity.vest, { address })}
       className={styles.update}
-      aria-disabled={disabled}
-      title={disabled ? t('component_BalanceUpdateLink_error') : undefined}
-      aria-label={disabled ? t('component_BalanceUpdateLink_error') : undefined}
+      aria-disabled={!enabled}
+      title={enabled ? undefined : t('component_BalanceUpdateLink_error')}
+      aria-label={enabled ? undefined : t('component_BalanceUpdateLink_error')}
     >
       {t('component_BalanceUpdateLink_CTA')}
     </Link>

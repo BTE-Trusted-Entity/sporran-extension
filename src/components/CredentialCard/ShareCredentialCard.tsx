@@ -8,6 +8,7 @@ import * as styles from './CredentialCard.module.css';
 import { Credential } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { Identity } from '../../utilities/identities/types';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 import { ShareInput } from '../../channels/shareChannel/types';
 import { Selected } from '../../views/ShareCredential/ShareCredential';
@@ -31,11 +32,11 @@ export function ShareCredentialCard({
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const [expanded, setExpanded] = useState(false);
+  const expanded = useBooleanState();
 
   useEffect(() => {
-    setExpanded(isSelected);
-  }, [isSelected]);
+    expanded.set(isSelected);
+  }, [expanded, isSelected]);
 
   const statuses = {
     pending: t('component_CredentialCard_pending'),
@@ -45,8 +46,6 @@ export function ShareCredentialCard({
   };
 
   const contents = Object.entries(credential.request.claim.contents);
-
-  const handleCollapse = useCallback(() => setExpanded(false), []);
 
   const data = usePopupData<ShareInput>();
 
@@ -70,12 +69,6 @@ export function ShareCredentialCard({
     onSelect(selected);
   }, [credential, onSelect, checked, identity]);
 
-  const handleExpand = useCallback(() => {
-    if (!expanded) {
-      setExpanded(true);
-    }
-  }, [expanded]);
-
   const handlePropChecked = useCallback(
     (event) => {
       const name = event.target.name;
@@ -92,23 +85,27 @@ export function ShareCredentialCard({
 
   const cardRef = useRef<HTMLLIElement>(null);
 
-  useScrollIntoView(expanded, cardRef, false);
+  useScrollIntoView(expanded.current, cardRef, false);
 
   return (
-    <li className={styles.selectable} aria-expanded={expanded} ref={cardRef}>
+    <li
+      className={styles.selectable}
+      aria-expanded={expanded.current}
+      ref={cardRef}
+    >
       <input
         name="credential"
         type="radio"
         id={credential.request.rootHash}
         onChange={handleSelect}
-        onClick={handleExpand}
+        onClick={expanded.on}
         checked={isSelected}
         className={cx(styles.select, {
           [styles.notAttested]: !isAttested,
         })}
       />
 
-      {!expanded && (
+      {!expanded.current && (
         <label className={styles.expand} htmlFor={credential.request.rootHash}>
           <section
             className={cx(styles.collapsedShareCredential, {
@@ -121,14 +118,14 @@ export function ShareCredentialCard({
         </label>
       )}
 
-      {expanded && (
+      {expanded.current && (
         <section className={styles.shareExpanded}>
           <section className={styles.buttons}>
             <button
               type="button"
               aria-label={t('component_CredentialCard_collapse')}
               className={styles.collapse}
-              onClick={handleCollapse}
+              onClick={expanded.off}
             />
           </section>
 
