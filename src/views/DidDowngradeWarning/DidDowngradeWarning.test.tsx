@@ -3,6 +3,7 @@ import { Attestation } from '@kiltprotocol/core';
 import { render } from '../../testing/testing';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
+import { waitForDownloadInfo } from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage.mock';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
 import { parseDidUrl, sameFullDid } from '../../utilities/did/did';
@@ -28,6 +29,7 @@ describe('DidDowngradeWarning', () => {
         }
       />,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 });

@@ -4,6 +4,7 @@ import { identitiesMock, render } from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';
 import { parseDidUrl, sameFullDid } from '../../utilities/did/did';
+import { waitForDownloadInfo } from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage.mock';
 import {
   credentialsMock,
   CredentialsProviderMock,
@@ -24,22 +25,25 @@ const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 describe('IdentityCredentials', () => {
-  it('should render', () => {
+  it('should render', async () => {
     const { container } = render(<IdentityCredentials identity={identity} />);
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
-  it('should not render credentials for new identity', () => {
+  it('should not render credentials for new identity', async () => {
     const { container } = render(<IdentityCredentials identity={NEW} />);
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
-  it('should render when no credentials', () => {
+  it('should render when no credentials', async () => {
     const { container } = render(
       <CredentialsProviderMock credentials={[]}>
         <IdentityCredentials identity={identity} />
       </CredentialsProviderMock>,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
@@ -49,6 +53,7 @@ describe('IdentityCredentials', () => {
         <IdentityCredentials identity={identity} />
       </CredentialsProviderMock>,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 });

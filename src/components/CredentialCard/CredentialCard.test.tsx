@@ -9,6 +9,7 @@ import {
 } from '../../utilities/credentials/CredentialsProvider.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../../views/paths';
+import { waitForDownloadInfo } from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage.mock';
 
 import { CredentialCard } from './CredentialCard';
 import { ShareCredentialCard } from './ShareCredentialCard';
@@ -18,6 +19,7 @@ describe('CredentialCard', () => {
     const { container } = render(
       <CredentialCard credential={credentialsMock[0]} />,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
@@ -25,6 +27,7 @@ describe('CredentialCard', () => {
     const { container } = render(
       <CredentialCard credential={credentialsMock[0]} />,
     );
+    await waitForDownloadInfo();
     userEvent.click(
       await screen.findByRole('button', {
         name: 'Email Credential mockEmail@mock.mock',
@@ -41,6 +44,7 @@ describe('CredentialCard', () => {
         collapsible={false}
       />,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
@@ -48,6 +52,7 @@ describe('CredentialCard', () => {
     const { container } = render(
       <CredentialCard credential={credentialsMock[0]} expand buttons={false} />,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
@@ -55,6 +60,7 @@ describe('CredentialCard', () => {
     const { container } = render(
       <CredentialCard credential={notDownloaded[0]} />,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
@@ -62,6 +68,7 @@ describe('CredentialCard', () => {
     const { container } = render(
       <CredentialCard expand credential={notDownloaded[0]} />,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
@@ -78,6 +85,7 @@ describe('CredentialCard', () => {
         />
       </PopupTestProvider>,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
@@ -95,6 +103,7 @@ describe('CredentialCard', () => {
         />
       </PopupTestProvider>,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 });
