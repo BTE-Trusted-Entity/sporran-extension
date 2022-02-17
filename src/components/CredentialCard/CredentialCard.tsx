@@ -8,6 +8,7 @@ import {
 } from 'react';
 import { Modal } from 'react-dialog-polyfill';
 import { browser } from 'webextension-polyfill-ts';
+import useSWR from 'swr';
 
 import * as styles from './CredentialCard.module.css';
 
@@ -22,6 +23,7 @@ import {
   getShowDownloadInfo,
   setShowDownloadInfo,
 } from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 export function useScrollIntoView(
   expanded: boolean,
@@ -59,11 +61,7 @@ function CredentialName({
 }): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const [isEditing, setIsEditing] = useState(false);
-
-  const handleEditClick = useCallback(() => {
-    setIsEditing(true);
-  }, []);
+  const isEditing = useBooleanState();
 
   const handleKeyPress = useCallback((event) => {
     if (event.key === 'Enter') {
@@ -77,12 +75,12 @@ function CredentialName({
       if (name) {
         await saveCredential({ ...credential, name });
       }
-      setIsEditing(false);
+      isEditing.off();
     },
-    [credential],
+    [credential, isEditing],
   );
 
-  return isEditing ? (
+  return isEditing.current ? (
     <div className={styles.detail}>
       <label className={styles.detailName}>
         {t('component_CredentialCard_name')}
@@ -105,7 +103,7 @@ function CredentialName({
         <button
           className={styles.editName}
           aria-label={t('component_CredentialCard_edit_name')}
-          onClick={handleEditClick}
+          onClick={isEditing.on}
         />
       </dd>
     </div>
@@ -137,14 +135,7 @@ export function CredentialCard({
   usePendingCredentialCheck(credential);
   const { status } = credential;
 
-  const [expanded, setExpanded] = useState(expand);
-
-  const handleExpand = useCallback(() => {
-    setExpanded(true);
-  }, []);
-  const handleCollapse = useCallback(() => {
-    setExpanded(false);
-  }, []);
+  const expanded = useBooleanState(expand);
 
   const contents = Object.entries(credential.request.claim.contents);
 
@@ -152,35 +143,19 @@ export function CredentialCard({
 
   const cardRef = useRef<HTMLLIElement>(null);
 
-  useScrollIntoView(expanded, cardRef);
+  useScrollIntoView(expanded.current, cardRef);
 
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-
-  const handleDeleteClick = useCallback(() => setDeleteModalOpen(true), []);
+  const deleteModal = useBooleanState();
 
   const handleDeleteConfirm = useCallback(async () => {
     await deleteCredential(credential);
-    setDeleteModalOpen(false);
-  }, [credential]);
+    deleteModal.off();
+  }, [credential, deleteModal]);
 
-  const handleDeleteCancel = useCallback(() => setDeleteModalOpen(false), []);
-
-  const [downloadModalOpen, setDownloadModalOpen] = useState(false);
-
-  const [showDownloadMessage, setShowDownloadMessage] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      const showMessage = await getShowDownloadInfo();
-      if (credential.isDownloaded || showMessage === false) {
-        setShowDownloadMessage(false);
-      }
-    })();
-  }, [credential]);
-
-  const handleDownloadButtonClick = useCallback(async () => {
-    setDownloadModalOpen(true);
-  }, []);
+  const showDownloadMessage = useSWR(credential, async (credential) => {
+    const showMessage = await getShowDownloadInfo();
+    return !credential.isDownloaded && Boolean(showMessage);
+  }).data;
 
   const handleDownloadLinkClick = useCallback(async () => {
     await saveCredential({ ...credential, isDownloaded: true });
@@ -192,26 +167,27 @@ export function CredentialCard({
     setChecked(event.target.checked);
   }, []);
 
+  const downloadModal = useBooleanState();
+
   const handleDownloadConfirm = useCallback(async () => {
     await saveCredential({ ...credential, isDownloaded: true });
     await setShowDownloadInfo(!checked);
-    setDownloadModalOpen(false);
-  }, [credential, checked]);
-
-  const handleDownloadCancel = useCallback(
-    () => setDownloadModalOpen(false),
-    [],
-  );
+    downloadModal.off();
+  }, [credential, checked, downloadModal]);
 
   return (
-    <li className={styles.credential} aria-expanded={expanded} ref={cardRef}>
-      {!expanded && (
+    <li
+      className={styles.credential}
+      aria-expanded={expanded.current}
+      ref={cardRef}
+    >
+      {!expanded.current && (
         <button
           type="button"
           className={
             credential.isDownloaded ? styles.expand : styles.downloadPrompt
           }
-          onClick={handleExpand}
+          onClick={expanded.on}
           aria-label={
             !credential.isDownloaded
               ? `${credential.name} ${contents[0][1]} ${t(
@@ -226,7 +202,7 @@ export function CredentialCard({
           </section>
         </button>
       )}
-      {expanded && (
+      {expanded.current && (
         <section className={styles.expanded}>
           <section className={styles.buttons}>
             {collapsible && (
@@ -234,7 +210,7 @@ export function CredentialCard({
                 type="button"
                 aria-label={t('component_CredentialCard_collapse')}
                 className={styles.collapse}
-                onClick={handleCollapse}
+                onClick={expanded.off}
               />
             )}
             {buttons && (
@@ -247,7 +223,7 @@ export function CredentialCard({
                         : styles.downloadPromptExpanded
                     }
                     aria-label={t('component_CredentialCard_backup')}
-                    onClick={handleDownloadButtonClick}
+                    onClick={downloadModal.on}
                   />
                 ) : (
                   <a
@@ -266,7 +242,7 @@ export function CredentialCard({
                   type="button"
                   aria-label={t('component_CredentialCard_remove')}
                   className={styles.remove}
-                  onClick={handleDeleteClick}
+                  onClick={deleteModal.on}
                 />
               </Fragment>
             )}
@@ -319,7 +295,7 @@ export function CredentialCard({
         </section>
       )}
 
-      {deleteModalOpen && (
+      {deleteModal.current && (
         <Modal open className={styles.overlay}>
           <h1 className={styles.warning}>
             {t('component_CredentialCard_delete_warning')}
@@ -330,7 +306,7 @@ export function CredentialCard({
           <button
             type="button"
             className={styles.cancelDelete}
-            onClick={handleDeleteCancel}
+            onClick={deleteModal.off}
           >
             {t('common_action_cancel')}
           </button>
@@ -344,7 +320,7 @@ export function CredentialCard({
         </Modal>
       )}
 
-      {downloadModalOpen && (
+      {downloadModal.current && (
         <Modal open className={styles.overlay}>
           <h2 className={styles.downloadInfo}>
             {t('component_CredentialCard_download_info')}
@@ -360,7 +336,7 @@ export function CredentialCard({
           <button
             type="button"
             className={styles.cancelDownload}
-            onClick={handleDownloadCancel}
+            onClick={downloadModal.off}
           >
             {t('common_action_close')}
           </button>

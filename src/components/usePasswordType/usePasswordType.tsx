@@ -1,7 +1,8 @@
-import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './usePasswordType.module.css';
+
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 interface usePasswordTypeType {
   passwordType: 'password' | 'text';
@@ -10,22 +11,14 @@ interface usePasswordTypeType {
 
 export function usePasswordType(initiallyVisible = false): usePasswordTypeType {
   const t = browser.i18n.getMessage;
-  const [visible, setVisible] = useState(initiallyVisible);
+  const visible = useBooleanState(initiallyVisible);
 
-  const handleHideClick = useCallback(() => {
-    setVisible(false);
-  }, []);
+  const passwordType = visible.current ? 'text' : 'password';
 
-  const handleShowClick = useCallback(() => {
-    setVisible(true);
-  }, []);
-
-  const passwordType = visible ? 'text' : 'password';
-
-  const passwordToggle = visible ? (
+  const passwordToggle = visible.current ? (
     <button
       type="button"
-      onClick={handleHideClick}
+      onClick={visible.off}
       className={styles.hide}
       title={t('component_usePasswordType_hide')}
       aria-label={t('component_usePasswordType_hide')}
@@ -33,7 +26,7 @@ export function usePasswordType(initiallyVisible = false): usePasswordTypeType {
   ) : (
     <button
       type="button"
-      onClick={handleShowClick}
+      onClick={visible.on}
       className={styles.show}
       title={t('component_usePasswordType_show')}
       aria-label={t('component_usePasswordType_show')}

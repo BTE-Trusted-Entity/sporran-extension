@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useLocation } from 'react-router-dom';
 import { sortBy } from 'lodash-es';
@@ -9,6 +9,7 @@ import { Identity } from '../../utilities/identities/types';
 import { useIdentities } from '../../utilities/identities/identities';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { sameFullDid } from '../../utilities/did/did';
 import { ShareInput } from '../../channels/shareChannel/types';
 
@@ -98,9 +99,7 @@ export function ShareCredentialSelect({
 
   const identities = useIdentities().data;
 
-  const [hasSome, setHasSome] = useState(false);
-
-  const match = useCallback(() => setHasSome(true), []);
+  const hasSome = useBooleanState();
 
   if (!identities) {
     return null; // storage data pending
@@ -117,7 +116,7 @@ export function ShareCredentialSelect({
         {t('view_ShareCredentialSelect_subline')}
       </p>
 
-      {!hasSome && (
+      {!hasSome.current && (
         <section className={styles.noCredentials}>
           <p className={styles.info}>
             {t('view_ShareCredentialSelect_no_credentials')}
@@ -137,7 +136,7 @@ export function ShareCredentialSelect({
       <section
         className={styles.allCredentials}
         id="allCredentials"
-        hidden={!hasSome}
+        hidden={!hasSome.current}
       >
         {identitiesList.map((identity) => (
           <MatchingIdentityCredentials
@@ -145,7 +144,7 @@ export function ShareCredentialSelect({
             identity={identity}
             onSelect={onSelect}
             selected={selected}
-            match={match}
+            match={hasSome.on}
           />
         ))}
       </section>
