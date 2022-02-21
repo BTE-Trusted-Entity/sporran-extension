@@ -51,6 +51,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -75,6 +76,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -99,6 +101,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -123,6 +126,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -147,6 +151,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -171,6 +176,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -195,6 +201,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -219,6 +226,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -243,6 +251,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -267,6 +276,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -291,6 +301,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
       <li
         aria-expanded="false"
@@ -315,6 +326,7 @@ exports[`DidDowngradeWarning should render 1`] = `
             </p>
           </section>
         </button>
+        <div />
       </li>
     </ul>
     <p

@@ -29,7 +29,10 @@ export const paths = {
       warning: '/identity/:address/send/warning',
     },
     receive: '/identity/:address/receive',
-    credentials: '/identity/:address/credentials',
+    credentials: {
+      base: '/identity/:address/credentials',
+      presentation: '/identity/:address/credentials/:hash/presentation',
+    },
     remove: '/identity/:address/remove',
     vest: '/identity/:address/vest',
     did: {

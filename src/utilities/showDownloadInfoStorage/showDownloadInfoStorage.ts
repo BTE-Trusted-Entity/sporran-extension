@@ -1,15 +1,17 @@
+import useSWR from 'swr';
+
 import { storage } from '../storage/storage';
 
-const showDownloadInfoKey = 'showDownloadInfo';
+const key = 'showDownloadInfo';
 
-type ShowDownloadInfoType = boolean;
-
-export async function getShowDownloadInfo(): Promise<ShowDownloadInfoType> {
-  return (await storage.get(showDownloadInfoKey))[showDownloadInfoKey];
+export async function getShowDownloadInfo(): Promise<boolean> {
+  return (await storage.get(key))[key];
 }
 
-export async function setShowDownloadInfo(
-  show: ShowDownloadInfoType,
-): Promise<void> {
-  await storage.set({ [showDownloadInfoKey]: show });
+export async function setShowDownloadInfo(value: boolean): Promise<void> {
+  await storage.set({ [key]: value });
+}
+
+export function useShowDownloadInfo(): boolean {
+  return useSWR('showDownloadInfo', getShowDownloadInfo).data !== false;
 }
