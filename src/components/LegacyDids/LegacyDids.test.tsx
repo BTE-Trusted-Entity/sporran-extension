@@ -1,5 +1,3 @@
-import { act } from '@testing-library/react';
-
 import {
   mockDialogShowModal,
   render,
@@ -13,15 +11,10 @@ describe('LegacyDids', () => {
   beforeEach(mockDialogShowModal);
 
   it('should render', async () => {
-    const legacyPromise = Promise.resolve(true);
-
-    jest.mocked(needLegacyDidCrypto).mockReturnValue(legacyPromise);
+    jest.mocked(needLegacyDidCrypto).mockResolvedValue(true);
 
     const { container } = render(<LegacyDids />);
     await waitForDialogUpdate();
-    await act(async () => {
-      await legacyPromise;
-    });
     expect(container).toMatchSnapshot();
   });
 });
