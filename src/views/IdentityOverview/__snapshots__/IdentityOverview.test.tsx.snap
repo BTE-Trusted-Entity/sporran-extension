@@ -136,20 +136,20 @@ exports[`IdentityOverview should prompt to update legacy DID 1`] = `
     <p>
       <a
         class="button"
-        href="/identity/4q3RXnWC2HsNjctVrw2EA5FBMEzEa5VkS5F7dYJpK6e3bicv/send"
+        href="/identity/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1/send"
       >
         Send
       </a>
       <a
         class="button"
-        href="/identity/4q3RXnWC2HsNjctVrw2EA5FBMEzEa5VkS5F7dYJpK6e3bicv/receive"
+        href="/identity/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1/receive"
       >
         Receive
       </a>
     </p>
     <a
       class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4q3RXnWC2HsNjctVrw2EA5FBMEzEa5VkS5F7dYJpK6e3bicv?tab=transfer"
+      href="https://kilt-testnet.subscan.io/account/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1?tab=transfer"
       rel="noreferrer"
       target="_blank"
     >
@@ -158,13 +158,13 @@ exports[`IdentityOverview should prompt to update legacy DID 1`] = `
     <a
       aria-label="Show Credentials. Some credentials have not been backed up"
       class="downloadPrompt"
-      href="/identity/4q3RXnWC2HsNjctVrw2EA5FBMEzEa5VkS5F7dYJpK6e3bicv/credentials"
+      href="/identity/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1/credentials"
     >
       Show Credentials
     </a>
     <a
       class="repair"
-      href="/identity/4q3RXnWC2HsNjctVrw2EA5FBMEzEa5VkS5F7dYJpK6e3bicv/did/repair"
+      href="/identity/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1/did/repair"
     >
       Please update your on-chain DID
     </a>
