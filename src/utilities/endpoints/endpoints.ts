@@ -10,6 +10,7 @@ export const endpoints = [
   'wss://spiritnet.kilt.io',
   'wss://peregrine.kilt.io/parachain-public-ws',
   'wss://peregrine-stg.kilt.io/para',
+  'wss://sporran-testnet.kilt.io',
 ];
 
 export const publicEndpoints = {
@@ -28,7 +29,7 @@ so there's no real downside. */
 export const defaultEndpoint =
   process.env.NODE_ENV === 'production' && !isInternal
     ? endpoints[0]
-    : endpoints[2];
+    : endpoints[4];
 
 export async function getEndpoint(): Promise<string> {
   return (await storage.get(endpointKey))[endpointKey] || defaultEndpoint;
