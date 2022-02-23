@@ -17,7 +17,7 @@ describe('Stats', () => {
       '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire': {
         name: 'KILT Identity 1',
         address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
-        did: 'did:kilt:light:004rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
+        did: 'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
         index: 1,
       },
     };
