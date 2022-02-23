@@ -1048,7 +1048,7 @@
     "message": "Processing on-chain DID update"
   },
   "view_DidRepair_success": {
-    "message": "On-chain DID update successfull"
+    "message": "On-chain DID update successful"
   },
   "view_DidRepair_error": {
     "message": "On-chain DID update failed"
