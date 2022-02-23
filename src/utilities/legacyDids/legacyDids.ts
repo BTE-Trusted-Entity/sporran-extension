@@ -1,5 +1,3 @@
-import { has } from 'lodash-es';
-
 import { useState, useEffect } from 'react';
 
 import { needLegacyDidCrypto } from '../did/did';
@@ -12,10 +10,7 @@ export async function getLegacyDidIdentities(
   const legacyDidIdentities: IdentitiesMap = {};
 
   for (const identity of Object.values(identities)) {
-    if (
-      (await needLegacyDidCrypto(identity.did)) &&
-      !has(legacyDidIdentities, identity.address)
-    ) {
+    if (await needLegacyDidCrypto(identity.did)) {
       legacyDidIdentities[identity.address] = identity;
     }
   }
