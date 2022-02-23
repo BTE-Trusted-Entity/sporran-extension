@@ -51,6 +51,7 @@ export const paths = {
           start: '/identity/:address/did/connect',
         },
       },
+      repair: '/identity/:address/did/repair',
     },
   },
   popup: {

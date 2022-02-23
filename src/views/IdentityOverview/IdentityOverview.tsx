@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useParams, Redirect } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
 
 import { Identity, isNew } from '../../utilities/identities/identities';
-import { isFullDid } from '../../utilities/did/did';
+import { isFullDid, needLegacyDidCrypto } from '../../utilities/did/did';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { generatePath, paths } from '../paths';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
@@ -44,6 +44,22 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
   const showDownloadPrompt =
     credentials && credentials.some(({ isDownloaded }) => !isDownloaded);
+
+  const [hasLegacyDid, setHasLegacyDid] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      if (await needLegacyDidCrypto(identity.did)) {
+        setHasLegacyDid(true);
+      } else {
+        setHasLegacyDid(false);
+      }
+    })();
+  }, [identity, hasLegacyDid]);
+
+  const upgradeDid = !isFullDid(identity.did);
+  const manageDid = isFullDid(identity.did) && !hasLegacyDid;
+  const repairDid = hasLegacyDid;
 
   if (params.type) {
     return <Redirect to={generatePath(paths.identity.overview, { address })} />;
@@ -108,7 +124,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         {t('view_IdentityOverview_credentials')}
       </Link>
 
-      {!isFullDid(identity.did) && (
+      {upgradeDid && (
         <Link
           to={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.upgrade}
@@ -117,12 +133,23 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       )}
 
-      {isFullDid(identity.did) && (
+      {manageDid && (
         <Link
           to={generatePath(paths.identity.did.manage.start, { address })}
           className={styles.manage}
         >
           {t('view_IdentityOverview_on_chain')}
+        </Link>
+      )}
+
+      {repairDid && (
+        <Link
+          to={generatePath(paths.identity.did.repair, {
+            address: identity.address,
+          })}
+          className={styles.repair}
+        >
+          {t('view_IdentityOverview_did_repair')}
         </Link>
       )}
 

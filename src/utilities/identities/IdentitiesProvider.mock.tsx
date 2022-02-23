@@ -1,4 +1,4 @@
-import { IdentitiesMap } from './types';
+import { IdentitiesMap, Identity } from './types';
 import { IdentitiesContext } from './IdentitiesContext';
 
 export const identitiesMock: IdentitiesMap = {
@@ -42,6 +42,13 @@ export const moreIdentitiesMock: IdentitiesMap = {
     did: 'did:kilt:light:004rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR56',
     index: 6,
   },
+};
+
+export const legacyIdentityMock: Identity = {
+  name: 'Legacy Identity',
+  address: '4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1',
+  did: 'did:kilt:4ojbz1EuSxHeKXZQN9TaMpDGw4qWRSUsVwwKLfAs5f8umt6p',
+  index: 7,
 };
 
 export function IdentitiesProviderMock({

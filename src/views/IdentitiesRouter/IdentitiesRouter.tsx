@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import {
   Redirect,
   Route,
@@ -30,6 +30,9 @@ import { SignQuote } from '../SignQuote/SignQuote';
 import { SignDid } from '../SignDid/SignDid';
 import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
 import { paths } from '../paths';
+import { LegacyDids } from '../../components/LegacyDids/LegacyDids';
+import { useLegacyDidIdentities } from '../../utilities/legacyDids/legacyDids';
+import { DidRepair } from '../DidRepair/DidRepair';
 
 interface Props {
   identities: IdentitiesMap;
@@ -66,6 +69,21 @@ export function SpecificIdentityRouter({
     }
   }, [address, identities]);
 
+  const [showLegacyDids, setShowLegacyDids] = useState(false);
+
+  const legacyDidIdentities = useLegacyDidIdentities();
+
+  useEffect(() => {
+    if (Object.values(legacyDidIdentities).length === 0) {
+      return;
+    }
+    setShowLegacyDids(true);
+  }, [legacyDidIdentities]);
+
+  const closeLegacyDids = useCallback(() => {
+    setShowLegacyDids(false);
+  }, []);
+
   const redirectIsPending = useRedirectToCurrent();
   if (redirectIsPending) {
     return null; // redirect pending
@@ -79,6 +97,13 @@ export function SpecificIdentityRouter({
 
   return (
     <>
+      {showLegacyDids && (
+        <LegacyDids
+          identities={legacyDidIdentities}
+          onClose={closeLegacyDids}
+        />
+      )}
+
       <Switch>
         <Route path={paths.identity.receive}>
           <ReceiveToken identity={identity} />
@@ -114,6 +139,10 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.identity.did.upgrade.start}>
           <DidUpgradeFlow identity={identity} />
+        </Route>
+
+        <Route path={paths.identity.did.repair}>
+          <DidRepair identity={identity} />
         </Route>
 
         <Route path={paths.identity.did.manage.start}>

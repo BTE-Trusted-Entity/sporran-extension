@@ -161,7 +161,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
           className={styles.submit}
           disabled={submitting || error}
         >
-          {t('view_DidDowngrade_CTA')}
+          {t('common_action_sign')}
         </button>
         <output className={styles.errorTooltip} hidden={!error}>
           {t('view_DidDowngrade_insufficientFunds', asKiltCoins(fee, 'costs'))}

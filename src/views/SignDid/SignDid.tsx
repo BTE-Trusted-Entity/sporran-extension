@@ -95,7 +95,7 @@ export function SignDid({ identity }: Props): JSX.Element | null {
           {t('view_SignDid_reject')}
         </button>
         <button type="submit" className={styles.submit} disabled={error}>
-          {t('view_SignDid_CTA')}
+          {t('common_action_sign')}
         </button>
         <output className={styles.errorTooltip} hidden={!error}>
           {t('view_SignDid_error')}

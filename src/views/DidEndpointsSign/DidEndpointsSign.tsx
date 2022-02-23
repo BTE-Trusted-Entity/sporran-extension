@@ -118,7 +118,7 @@ export function DidEndpointsSign({
           {t('common_action_cancel')}
         </Link>
         <button type="submit" className={styles.submit} disabled={submitting}>
-          {t('view_DidEndpointsSign_CTA')}
+          {t('common_action_sign')}
         </button>
         <output className={styles.errorTooltip} hidden={!unpaidCosts}>
           {t('view_DidEndpointsSign_insufficientFunds', unpaidCosts)}
