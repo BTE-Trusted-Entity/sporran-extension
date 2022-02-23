@@ -47,13 +47,13 @@ async function getSignedTransaction(
 
   const existingKeyId = DidUtils.parseDidUrl(existingKey.id).fragment;
 
-  const { encryptionKey: newKeyId } = deriveDidKeys(identity);
+  const { encryptionKey } = deriveDidKeys(identity);
 
-  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const batchExtrinsic = api.tx.utility.batchAll([
+  const batchExtrinsic = blockchain.api.tx.utility.batchAll([
     await DidChain.getRemoveKeyExtrinsic(keyAgreement, existingKeyId),
-    await DidChain.getAddKeyExtrinsic(keyAgreement, newKeyId),
+    await DidChain.getAddKeyExtrinsic(keyAgreement, encryptionKey),
   ]);
 
   const keystore = await getKeystoreFromKeypair(identity);
@@ -64,8 +64,6 @@ async function getSignedTransaction(
     keystore,
     identity.address,
   );
-
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
   return await blockchain.signTx(identity, authorized);
 }

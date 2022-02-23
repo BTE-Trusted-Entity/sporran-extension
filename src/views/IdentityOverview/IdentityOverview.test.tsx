@@ -15,7 +15,7 @@ import { notDownloaded } from '../../utilities/credentials/CredentialsProvider.m
 
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 
-import { legacyIdentityMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import { legacyIdentity } from '../../utilities/identities/IdentitiesProvider.mock';
 
 import { needLegacyDidCrypto } from '../../utilities/did/did';
 
@@ -30,8 +30,6 @@ const identity =
 
 const fullDidIdentity =
   identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
-
-const legacyIdentity = legacyIdentityMock;
 
 describe('IdentityOverview', () => {
   it('should render a normal identity', async () => {

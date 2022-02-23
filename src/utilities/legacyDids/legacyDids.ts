@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import useSWR from 'swr';
 
 import { needLegacyDidCrypto } from '../did/did';
 import { IdentitiesMap } from '../identities/types';
@@ -20,18 +20,5 @@ export async function getLegacyDidIdentities(
 export function useLegacyDidIdentities(): IdentitiesMap {
   const identities = useIdentities().data;
 
-  const [legacyDidIdentities, setLegacyDidIdentities] = useState<IdentitiesMap>(
-    {},
-  );
-
-  useEffect(() => {
-    if (!identities) {
-      return;
-    }
-    (async () => {
-      setLegacyDidIdentities(await getLegacyDidIdentities(identities));
-    })();
-  }, [identities]);
-
-  return legacyDidIdentities;
+  return useSWR(identities, getLegacyDidIdentities).data || {};
 }

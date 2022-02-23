@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import { legacyIdentityMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import { legacyIdentity } from '../../utilities/identities/IdentitiesProvider.mock';
 
 import { DidRepair } from './DidRepair';
 
@@ -10,5 +10,5 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  return <DidRepair identity={legacyIdentityMock} />;
+  return <DidRepair identity={legacyIdentity} />;
 }

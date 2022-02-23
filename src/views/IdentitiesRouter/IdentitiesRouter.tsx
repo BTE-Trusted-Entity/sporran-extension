@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect } from 'react';
 import {
   Redirect,
   Route,
@@ -31,7 +31,6 @@ import { SignDid } from '../SignDid/SignDid';
 import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
 import { paths } from '../paths';
 import { LegacyDids } from '../../components/LegacyDids/LegacyDids';
-import { useLegacyDidIdentities } from '../../utilities/legacyDids/legacyDids';
 import { DidRepair } from '../DidRepair/DidRepair';
 
 interface Props {
@@ -69,21 +68,6 @@ export function SpecificIdentityRouter({
     }
   }, [address, identities]);
 
-  const [showLegacyDids, setShowLegacyDids] = useState(false);
-
-  const legacyDidIdentities = useLegacyDidIdentities();
-
-  useEffect(() => {
-    if (Object.values(legacyDidIdentities).length === 0) {
-      return;
-    }
-    setShowLegacyDids(true);
-  }, [legacyDidIdentities]);
-
-  const closeLegacyDids = useCallback(() => {
-    setShowLegacyDids(false);
-  }, []);
-
   const redirectIsPending = useRedirectToCurrent();
   if (redirectIsPending) {
     return null; // redirect pending
@@ -97,12 +81,7 @@ export function SpecificIdentityRouter({
 
   return (
     <>
-      {showLegacyDids && (
-        <LegacyDids
-          identities={legacyDidIdentities}
-          onClose={closeLegacyDids}
-        />
-      )}
+      <LegacyDids />
 
       <Switch>
         <Route path={paths.identity.receive}>

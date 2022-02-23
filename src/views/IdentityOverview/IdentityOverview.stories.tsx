@@ -3,7 +3,7 @@ import { MemoryRouter, Route } from 'react-router-dom';
 
 import {
   identitiesMock as identities,
-  legacyIdentityMock,
+  legacyIdentity,
 } from '../../utilities/identities/IdentitiesProvider.mock';
 import { NEW } from '../../utilities/identities/identities';
 import { paths } from '../paths';
@@ -26,8 +26,6 @@ const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 const fullDidUri = '/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr';
 const fullDidIdentity =
   identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
-
-const legacyIdentity = legacyIdentityMock;
 
 export function Template(): JSX.Element {
   return (

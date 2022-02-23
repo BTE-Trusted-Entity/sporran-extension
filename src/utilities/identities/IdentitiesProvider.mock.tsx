@@ -44,7 +44,7 @@ export const moreIdentitiesMock: IdentitiesMap = {
   },
 };
 
-export const legacyIdentityMock: Identity = {
+export const legacyIdentity: Identity = {
   name: 'Legacy Identity',
   address: '4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1',
   did: 'did:kilt:4ojbz1EuSxHeKXZQN9TaMpDGw4qWRSUsVwwKLfAs5f8umt6p',

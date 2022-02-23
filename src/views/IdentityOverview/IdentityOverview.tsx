@@ -1,6 +1,8 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useParams, Redirect } from 'react-router-dom';
+
+import useSWR from 'swr';
 
 import * as styles from './IdentityOverview.module.css';
 
@@ -45,17 +47,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const showDownloadPrompt =
     credentials && credentials.some(({ isDownloaded }) => !isDownloaded);
 
-  const [hasLegacyDid, setHasLegacyDid] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      if (await needLegacyDidCrypto(identity.did)) {
-        setHasLegacyDid(true);
-      } else {
-        setHasLegacyDid(false);
-      }
-    })();
-  }, [identity, hasLegacyDid]);
+  const hasLegacyDid = useSWR(identity.did, needLegacyDidCrypto).data;
 
   const upgradeDid = !isFullDid(identity.did);
   const manageDid = isFullDid(identity.did) && !hasLegacyDid;
@@ -144,9 +136,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
       {repairDid && (
         <Link
-          to={generatePath(paths.identity.did.repair, {
-            address: identity.address,
-          })}
+          to={generatePath(paths.identity.did.repair, { address })}
           className={styles.repair}
         >
           {t('view_IdentityOverview_did_repair')}

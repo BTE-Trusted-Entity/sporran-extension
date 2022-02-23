@@ -1,8 +1,9 @@
 import { Meta } from '@storybook/react';
 
-import { action } from '@storybook/addon-actions';
-
-import { moreIdentitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import {
+  IdentitiesProviderMock,
+  legacyIdentity,
+} from '../../utilities/identities/IdentitiesProvider.mock';
 
 import { LegacyDids } from './LegacyDids';
 
@@ -13,6 +14,10 @@ export default {
 
 export function Template(): JSX.Element {
   return (
-    <LegacyDids identities={moreIdentitiesMock} onClose={action('onClose')} />
+    <IdentitiesProviderMock
+      identities={{ [legacyIdentity.address]: legacyIdentity }}
+    >
+      <LegacyDids />
+    </IdentitiesProviderMock>
   );
 }
