@@ -42,6 +42,9 @@ Just start it again to continue.
         <option
           value="wss://peregrine-stg.kilt.io/para"
         />
+        <option
+          value="wss://sporran-testnet.kilt.io"
+        />
       </datalist>
       <select
         aria-label="Custom endpoint"
