@@ -26,6 +26,7 @@ export async function getDeposit(): Promise<BN> {
 
 async function getSignedTransaction(
   identity: KeyringPair,
+  seed: Uint8Array,
   fullDid: IDidDetails['did'],
 ): Promise<DidTransaction> {
   const fullDidDetails = await queryFullDetailsFromIdentifier(
@@ -49,7 +50,7 @@ async function getSignedTransaction(
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
   const tx = await blockchain.signTx(identity, didAuthorizedExtrinsic);
 
-  const { did } = getLightDidFromKeypair(identity);
+  const { did } = getLightDidFromKeypair(identity, seed);
   return { extrinsic: tx, did };
 }
 
@@ -57,7 +58,11 @@ export async function getFee(did: IDidDetails['did']): Promise<BN> {
   const fakeIdentity = makeKeyring().createFromUri('//Alice');
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const { extrinsic } = await getSignedTransaction(fakeIdentity, did);
+  const { extrinsic } = await getSignedTransaction(
+    fakeIdentity,
+    new Uint8Array(),
+    did,
+  );
 
   const { partialFee } = await blockchain.api.rpc.payment.queryInfo(
     extrinsic.toHex(),
@@ -70,9 +75,11 @@ const currentTx: Record<string, DidTransaction> = {};
 export async function sign(
   identity: Identity,
   sdkIdentity: KeyringPair,
+  seed: Uint8Array,
 ): Promise<string> {
   const { extrinsic, did } = await getSignedTransaction(
     sdkIdentity,
+    seed,
     identity.did,
   );
 

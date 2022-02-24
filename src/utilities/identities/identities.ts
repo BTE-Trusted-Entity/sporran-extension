@@ -177,7 +177,10 @@ export async function getKeystoreFromKeypair(
   };
 }
 
-async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
+async function fixLightDidBase64Encoding(
+  identityKeypair: KeyringPair,
+  seed: Uint8Array,
+) {
   const identities = await getIdentities();
   const identity = identities[identityKeypair.address];
 
@@ -211,7 +214,7 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
     }
   } catch {
     // We re-create the invalid DID from scratch and update its URI in the identity.
-    const { did } = getLightDidFromKeypair(identityKeypair);
+    const { did } = getLightDidFromKeypair(identityKeypair, seed);
     await saveIdentity({ ...identity, did });
   }
 }
@@ -221,7 +224,7 @@ export async function getIdentityCryptoFromKeypair(
   seed: Uint8Array,
   legacy?: boolean,
 ): Promise<IdentityDidCrypto> {
-  await fixLightDidBase64Encoding(identityKeypair);
+  await fixLightDidBase64Encoding(identityKeypair, seed);
 
   const authenticationKey = deriveAuthenticationKey(identityKeypair);
   const encryptionKey = legacy
@@ -290,9 +293,12 @@ export async function encryptIdentity(
   return address;
 }
 
-export function getLightDidFromKeypair(keypair: KeyringPair): LightDidDetails {
+export function getLightDidFromKeypair(
+  keypair: KeyringPair,
+  seed: Uint8Array,
+): LightDidDetails {
   const authenticationKey = deriveAuthenticationKey(keypair);
-  const encryptionKey = deriveEncryptionKeyLegacy(keypair);
+  const encryptionKey = deriveEncryptionKeyFromSeed(seed);
   return new LightDidDetails({ authenticationKey, encryptionKey });
 }
 
@@ -313,7 +319,7 @@ export async function createIdentity(
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
 
-  const { did } = getLightDidFromKeypair(identityKeypair);
+  const { did } = getLightDidFromKeypair(identityKeypair, seed);
 
   const { name, index } = await getIdentityName();
 
@@ -331,7 +337,7 @@ export async function importIdentity(
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
 
-  const lightDidDetails = getLightDidFromKeypair(identityKeypair);
+  const lightDidDetails = getLightDidFromKeypair(identityKeypair, seed);
   const keystore = await getKeystoreFromKeypair(identityKeypair);
   const { did: fullDid } = await DidUtils.upgradeDid(
     lightDidDetails,
