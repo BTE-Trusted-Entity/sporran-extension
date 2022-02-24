@@ -15,7 +15,7 @@ import {
   getKeystoreFromKeypair,
   Identity,
   makeKeyring,
-  deriveDidKeys,
+  deriveEncryptionKey,
 } from '../identities/identities';
 import { queryFullDetailsFromIdentifier } from '../did/did';
 import { didAuthorizeBatchExtrinsic } from '../didAuthorizeBatchExtrinsic/didAuthorizeBatchExtrinsic';
@@ -47,7 +47,7 @@ async function getSignedTransaction(
 
   const existingKeyId = DidUtils.parseDidUrl(existingKey.id).fragment;
 
-  const { encryptionKey } = deriveDidKeys(identity);
+  const encryptionKey = deriveEncryptionKey(identity);
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 

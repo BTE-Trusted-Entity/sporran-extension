@@ -146,18 +146,18 @@ function extractSecretKey(keypair: KeyringPair) {
   return secretKey;
 }
 
-export function deriveDidKeys(
+function deriveAuthenticationKey(identityKeypair: KeyringPair): KeyringPair {
+  return identityKeypair.derive('//did//0');
+}
+
+export function deriveEncryptionKey(
   identityKeypair: KeyringPair,
   legacy?: boolean,
 ): {
-  authenticationKey: KeyringPair;
-  encryptionKey: {
-    type: string;
-    publicKey: Uint8Array;
-    secretKey: Uint8Array;
-  };
+  type: string;
+  publicKey: Uint8Array;
+  secretKey: Uint8Array;
 } {
-  const authenticationKey = identityKeypair.derive('//did//0');
   const encryptionKeyringPair = identityKeypair.derive(
     '//did//keyAgreement//0',
   );
@@ -174,9 +174,7 @@ export function deriveDidKeys(
   const encryptionKeypair = naclBoxPairFromSecret(
     legacy ? legacyEncryptionSecret : encryptionSecret,
   );
-  const encryptionKey = { ...encryptionKeypair, type: 'x25519' };
-
-  return { authenticationKey, encryptionKey };
+  return { ...encryptionKeypair, type: 'x25519' };
 }
 
 export async function getKeystoreFromKeypair(
@@ -184,7 +182,7 @@ export async function getKeystoreFromKeypair(
 ): Promise<KeystoreSigner> {
   await fixLightDidBase64Encoding(identityKeypair);
 
-  const { authenticationKey } = deriveDidKeys(identityKeypair);
+  const authenticationKey = deriveAuthenticationKey(identityKeypair);
   return {
     sign: async ({ data, alg }) => ({
       data: authenticationKey.sign(data, { withType: false }),
@@ -238,10 +236,8 @@ export async function getIdentityCryptoFromKeypair(
 ): Promise<IdentityDidCrypto> {
   await fixLightDidBase64Encoding(identityKeypair);
 
-  const { authenticationKey, encryptionKey } = deriveDidKeys(
-    identityKeypair,
-    legacy,
-  );
+  const authenticationKey = deriveAuthenticationKey(identityKeypair);
+  const encryptionKey = deriveEncryptionKey(identityKeypair, legacy);
 
   const identities = await getIdentities();
   const { did } = identities[identityKeypair.address];
@@ -306,7 +302,9 @@ export async function encryptIdentity(
 }
 
 export function getLightDidFromKeypair(keypair: KeyringPair): LightDidDetails {
-  return new LightDidDetails(deriveDidKeys(keypair));
+  const authenticationKey = deriveAuthenticationKey(keypair);
+  const encryptionKey = deriveEncryptionKey(keypair);
+  return new LightDidDetails({ authenticationKey, encryptionKey });
 }
 
 async function getIdentityName(): Promise<{ name: string; index: number }> {
