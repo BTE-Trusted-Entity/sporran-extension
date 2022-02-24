@@ -118,6 +118,10 @@ export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
   return makeKeyring().addFromUri(backupPhrase);
 }
 
+export function getKeypairBySeed(seed: Uint8Array): KeyringPair {
+  return makeKeyring().addFromSeed(seed);
+}
+
 interface IdentityDidCrypto {
   didDetails: IDidDetails;
   keystore: KeystoreSigner;
@@ -128,8 +132,8 @@ interface IdentityDidCrypto {
   ) => Promise<IEncryptedMessage>;
 }
 
-function deriveAuthenticationKey(keypair: KeyringPair): KeyringPair {
-  return keypair.derive('//did//0');
+function deriveAuthenticationKey(seed: Uint8Array): KeyringPair {
+  return getKeypairBySeed(seed).derive('//did//0');
 }
 
 export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
@@ -146,7 +150,8 @@ export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
   };
 }
 
-function deriveEncryptionKeyLegacy(keypair: KeyringPair) {
+function deriveEncryptionKeyLegacy(seed: Uint8Array) {
+  const keypair = getKeypairBySeed(seed);
   const encryptionKeyringPair = keypair.derive('//did//keyAgreement//0');
 
   const secret = encryptionKeyringPair
@@ -161,13 +166,12 @@ function deriveEncryptionKeyLegacy(keypair: KeyringPair) {
   return { ...encryptionKeypair, type: 'x25519' };
 }
 
-export async function getKeystoreFromKeypair(
-  keypair: KeyringPair,
+export async function getKeystoreFromSeed(
   seed: Uint8Array,
 ): Promise<KeystoreSigner> {
-  await fixLightDidBase64Encoding(keypair, seed);
+  await fixLightDidBase64Encoding(seed);
 
-  const authenticationKey = deriveAuthenticationKey(keypair);
+  const authenticationKey = deriveAuthenticationKey(seed);
   return {
     sign: async ({ data, alg }) => ({
       data: authenticationKey.sign(data, { withType: false }),
@@ -176,12 +180,10 @@ export async function getKeystoreFromKeypair(
   };
 }
 
-async function fixLightDidBase64Encoding(
-  keypair: KeyringPair,
-  seed: Uint8Array,
-) {
+async function fixLightDidBase64Encoding(seed: Uint8Array) {
   const identities = await getIdentities();
-  const identity = identities[keypair.address];
+  const { address } = getKeypairBySeed(seed);
+  const identity = identities[address];
 
   if (!identity) {
     // could be the Alice identity
@@ -213,28 +215,28 @@ async function fixLightDidBase64Encoding(
     }
   } catch {
     // We re-create the invalid DID from scratch and update its URI in the identity.
-    const { did } = getLightDidFromKeypair(keypair, seed);
+    const { did } = getLightDidFromSeed(seed);
     await saveIdentity({ ...identity, did });
   }
 }
 
-export async function getIdentityCryptoFromKeypair(
-  keypair: KeyringPair,
+export async function getIdentityCryptoFromSeed(
   seed: Uint8Array,
   legacy?: boolean,
 ): Promise<IdentityDidCrypto> {
-  await fixLightDidBase64Encoding(keypair, seed);
+  await fixLightDidBase64Encoding(seed);
 
-  const authenticationKey = deriveAuthenticationKey(keypair);
+  const authenticationKey = deriveAuthenticationKey(seed);
   const encryptionKey = legacy
-    ? deriveEncryptionKeyLegacy(keypair)
+    ? deriveEncryptionKeyLegacy(seed)
     : deriveEncryptionKeyFromSeed(seed);
 
+  const { address } = getKeypairBySeed(seed);
   const identities = await getIdentities();
-  const { did } = identities[keypair.address];
+  const { did } = identities[address];
 
   const didDetails = await getDidDetails(did);
-  const keystore = await getKeystoreFromKeypair(keypair, seed);
+  const keystore = await getKeystoreFromSeed(seed);
 
   const encryptionKeystore: Pick<NaclBoxCapable, 'encrypt'> = {
     async encrypt({ data, alg, peerPublicKey }) {
@@ -292,11 +294,8 @@ export async function encryptIdentity(
   return address;
 }
 
-export function getLightDidFromKeypair(
-  keypair: KeyringPair,
-  seed: Uint8Array,
-): LightDidDetails {
-  const authenticationKey = deriveAuthenticationKey(keypair);
+export function getLightDidFromSeed(seed: Uint8Array): LightDidDetails {
+  const authenticationKey = deriveAuthenticationKey(seed);
   const encryptionKey = deriveEncryptionKeyFromSeed(seed);
   return new LightDidDetails({ authenticationKey, encryptionKey });
 }
@@ -316,10 +315,9 @@ export async function createIdentity(
 ): Promise<Identity> {
   const address = await encryptIdentity(backupPhrase, password);
 
-  const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
   const seed = mnemonicToMiniSecret(backupPhrase);
 
-  const { did } = getLightDidFromKeypair(identityKeypair, seed);
+  const { did } = getLightDidFromSeed(seed);
 
   const { name, index } = await getIdentityName();
 
@@ -335,11 +333,10 @@ export async function importIdentity(
 ): Promise<Identity> {
   const address = await encryptIdentity(backupPhrase, password);
 
-  const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
   const seed = mnemonicToMiniSecret(backupPhrase);
 
-  const lightDidDetails = getLightDidFromKeypair(identityKeypair, seed);
-  const keystore = await getKeystoreFromKeypair(identityKeypair, seed);
+  const lightDidDetails = getLightDidFromSeed(seed);
+  const keystore = await getKeystoreFromSeed(seed);
   const { did: fullDid } = await DidUtils.upgradeDid(
     lightDidDetails,
     address,
@@ -361,11 +358,9 @@ export async function importIdentity(
 export async function decryptIdentity(
   address: string,
   password: string,
-): Promise<{ seed: Uint8Array; keypair: KeyringPair }> {
+): Promise<Uint8Array> {
   const seed = await loadEncrypted(address, password);
-  const uint8Seed = new Uint8Array(seed);
-  const keypair = makeKeyring().addFromSeed(uint8Seed);
-  return { keypair, seed: uint8Seed };
+  return new Uint8Array(seed);
 }
 
 /** Ensure that local information about the DID type matches stored on blockchain

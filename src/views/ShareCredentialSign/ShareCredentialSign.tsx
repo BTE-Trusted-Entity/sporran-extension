@@ -9,7 +9,7 @@ import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
 
 import * as styles from './ShareCredentialSign.module.css';
 
-import { getIdentityCryptoFromKeypair } from '../../utilities/identities/identities';
+import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 
 import { ShareInput } from '../../channels/shareChannel/types';
@@ -52,11 +52,13 @@ export function ShareCredentialSign({
     async (event) => {
       event.preventDefault();
 
-      const { keypair, seed } = await passwordField.get(event);
+      const { seed } = await passwordField.get(event);
 
       const isLegacy = await needLegacyDidCrypto(identity.did);
-      const { encrypt, keystore, didDetails } =
-        await getIdentityCryptoFromKeypair(keypair, seed, isLegacy);
+      const { encrypt, keystore, didDetails } = await getIdentityCryptoFromSeed(
+        seed,
+        isLegacy,
+      );
 
       const request = RequestForAttestation.fromRequest(credential.request);
       await request.signWithDid(keystore, didDetails, challenge);

@@ -14,7 +14,7 @@ import {
 import * as styles from './SignQuote.module.css';
 
 import {
-  getIdentityCryptoFromKeypair,
+  getIdentityCryptoFromSeed,
   Identity,
 } from '../../utilities/identities/identities';
 import { saveCTypeTitle } from '../../utilities/cTypes/cTypes';
@@ -82,11 +82,13 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         Credential.fromCredential(legitimation),
       );
 
-      const { keypair, seed } = await passwordField.get(event);
+      const { seed } = await passwordField.get(event);
 
       const isLegacy = await needLegacyDidCrypto(identity.did);
-      const { encrypt, keystore, didDetails } =
-        await getIdentityCryptoFromKeypair(keypair, seed, isLegacy);
+      const { encrypt, keystore, didDetails } = await getIdentityCryptoFromSeed(
+        seed,
+        isLegacy,
+      );
 
       // The attester generated claim with the temporary identity, need to put real address in it
       const identityClaim = { ...claim, owner: didDetails.did };

@@ -1,5 +1,4 @@
 import BN from 'bn.js';
-import { KeyringPair } from '@polkadot/keyring/types';
 import {
   IDidDetails,
   KeyRelationship,
@@ -12,9 +11,8 @@ import {
 import { DidChain, DidUtils } from '@kiltprotocol/did';
 
 import {
-  getKeystoreFromKeypair,
-  Identity,
-  makeKeyring,
+  getKeystoreFromSeed,
+  getKeypairBySeed,
   deriveEncryptionKeyFromSeed,
 } from '../identities/identities';
 import { queryFullDetailsFromIdentifier } from '../did/did';
@@ -23,7 +21,6 @@ import { didAuthorizeBatchExtrinsic } from '../didAuthorizeBatchExtrinsic/didAut
 const { keyAgreement } = KeyRelationship;
 
 async function getSignedTransaction(
-  keypair: KeyringPair,
   seed: Uint8Array,
   fullDid: IDidDetails['did'],
 ): Promise<SubmittableExtrinsic> {
@@ -57,7 +54,8 @@ async function getSignedTransaction(
     await DidChain.getAddKeyExtrinsic(keyAgreement, encryptionKey),
   ]);
 
-  const keystore = await getKeystoreFromKeypair(keypair, seed);
+  const keystore = await getKeystoreFromSeed(seed);
+  const keypair = getKeypairBySeed(seed);
 
   const authorized = await didAuthorizeBatchExtrinsic(
     fullDidDetails,
@@ -70,14 +68,10 @@ async function getSignedTransaction(
 }
 
 export async function getFee(did: IDidDetails['did']): Promise<BN> {
-  const fakeIdentity = makeKeyring().createFromUri('//Alice');
+  const fakeSeed = new Uint8Array();
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const extrinsic = await getSignedTransaction(
-    fakeIdentity,
-    new Uint8Array(),
-    did,
-  );
+  const extrinsic = await getSignedTransaction(fakeSeed, did);
 
   const { partialFee } = await blockchain.api.rpc.payment.queryInfo(
     extrinsic.toHex(),
@@ -88,11 +82,10 @@ export async function getFee(did: IDidDetails['did']): Promise<BN> {
 const currentTx: Record<string, SubmittableExtrinsic> = {};
 
 export async function sign(
-  identity: Identity,
-  keypair: KeyringPair,
+  did: IDidDetails['did'],
   seed: Uint8Array,
 ): Promise<string> {
-  const extrinsic = await getSignedTransaction(keypair, seed, identity.did);
+  const extrinsic = await getSignedTransaction(seed, did);
 
   const hash = extrinsic.hash.toHex();
   currentTx[hash] = extrinsic;
