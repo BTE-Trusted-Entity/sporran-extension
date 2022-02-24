@@ -14,9 +14,9 @@ import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState
 export function LegacyDids(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const open = useBooleanState();
-
   const legacyDidIdentities = useLegacyDidIdentities();
+
+  const open = useBooleanState();
 
   const setOpen = open.set; // Get a stable reference.
   // TODO: refactor useBooleanState to return stable reference.
