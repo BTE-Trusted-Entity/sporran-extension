@@ -318,6 +318,7 @@ export async function createIdentity(
   const address = await encryptIdentity(backupPhrase, password);
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
+  const seed = mnemonicToMiniSecret(backupPhrase);
 
   const { did } = getLightDidFromKeypair(identityKeypair, seed);
 
@@ -336,6 +337,7 @@ export async function importIdentity(
   const address = await encryptIdentity(backupPhrase, password);
 
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
+  const seed = mnemonicToMiniSecret(backupPhrase);
 
   const lightDidDetails = getLightDidFromKeypair(identityKeypair, seed);
   const keystore = await getKeystoreFromKeypair(identityKeypair);
