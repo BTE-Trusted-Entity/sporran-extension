@@ -27,7 +27,7 @@ async function getSignedTransaction(
   identity: KeyringPair,
   seed: Uint8Array,
 ): Promise<DidTransaction> {
-  const keystore = await getKeystoreFromKeypair(identity);
+  const keystore = await getKeystoreFromKeypair(identity, seed);
 
   const lightDidDetails = getLightDidFromKeypair(identity, seed);
 

@@ -60,7 +60,7 @@ export function DidEndpointsSign({
         return;
       }
 
-      const { keypair } = await passwordField.get(event);
+      const { keypair, seed } = await passwordField.get(event);
 
       // getRemoveEndpointExtrinsic expects just the fragment part, contrary to its type definition
       const draft =
@@ -70,7 +70,7 @@ export function DidEndpointsSign({
 
       const authorized = await fullDidDetails.authorizeExtrinsic(
         draft,
-        await getKeystoreFromKeypair(keypair),
+        await getKeystoreFromKeypair(keypair, seed),
         keypair.address,
       );
 

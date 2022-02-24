@@ -165,8 +165,9 @@ function deriveEncryptionKeyLegacy(identityKeypair: KeyringPair) {
 
 export async function getKeystoreFromKeypair(
   identityKeypair: KeyringPair,
+  seed: Uint8Array,
 ): Promise<KeystoreSigner> {
-  await fixLightDidBase64Encoding(identityKeypair);
+  await fixLightDidBase64Encoding(identityKeypair, seed);
 
   const authenticationKey = deriveAuthenticationKey(identityKeypair);
   return {
@@ -235,7 +236,7 @@ export async function getIdentityCryptoFromKeypair(
   const { did } = identities[identityKeypair.address];
 
   const didDetails = await getDidDetails(did);
-  const keystore = await getKeystoreFromKeypair(identityKeypair);
+  const keystore = await getKeystoreFromKeypair(identityKeypair, seed);
 
   const encryptionKeystore: Pick<NaclBoxCapable, 'encrypt'> = {
     async encrypt({ data, alg, peerPublicKey }) {
@@ -340,7 +341,7 @@ export async function importIdentity(
   const seed = mnemonicToMiniSecret(backupPhrase);
 
   const lightDidDetails = getLightDidFromKeypair(identityKeypair, seed);
-  const keystore = await getKeystoreFromKeypair(identityKeypair);
+  const keystore = await getKeystoreFromKeypair(identityKeypair, seed);
   const { did: fullDid } = await DidUtils.upgradeDid(
     lightDidDetails,
     address,

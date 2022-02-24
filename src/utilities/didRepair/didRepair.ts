@@ -57,7 +57,7 @@ async function getSignedTransaction(
     await DidChain.getAddKeyExtrinsic(keyAgreement, encryptionKey),
   ]);
 
-  const keystore = await getKeystoreFromKeypair(identity);
+  const keystore = await getKeystoreFromKeypair(identity, seed);
 
   const authorized = await didAuthorizeBatchExtrinsic(
     fullDidDetails,
