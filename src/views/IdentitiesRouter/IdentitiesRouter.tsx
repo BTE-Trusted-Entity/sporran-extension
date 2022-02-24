@@ -30,6 +30,8 @@ import { SignQuote } from '../SignQuote/SignQuote';
 import { SignDid } from '../SignDid/SignDid';
 import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
 import { paths } from '../paths';
+import { LegacyDids } from '../../components/LegacyDids/LegacyDids';
+import { DidRepair } from '../DidRepair/DidRepair';
 
 interface Props {
   identities: IdentitiesMap;
@@ -79,6 +81,8 @@ export function SpecificIdentityRouter({
 
   return (
     <>
+      <LegacyDids />
+
       <Switch>
         <Route path={paths.identity.receive}>
           <ReceiveToken identity={identity} />
@@ -114,6 +118,10 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.identity.did.upgrade.start}>
           <DidUpgradeFlow identity={identity} />
+        </Route>
+
+        <Route path={paths.identity.did.repair}>
+          <DidRepair identity={identity} />
         </Route>
 
         <Route path={paths.identity.did.manage.start}>

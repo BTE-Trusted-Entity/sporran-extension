@@ -29,6 +29,9 @@
   "common_action_confirm": {
     "message": "OK"
   },
+  "common_action_sign": {
+    "message": "Sign"
+  },
   "component_Balance_label": {
     "message": "Total Balance: "
   },
@@ -270,6 +273,18 @@
       }
     }
   },
+  "component_LegacyDids_heading": {
+    "message": "Important Update"
+  },
+  "component_LegacyDids_explanation": {
+    "message": "We are updating on-chain DIDs for initial users, to reset the DID encryption feature for messaging in the future."
+  },
+  "component_LegacyDids_cta": {
+    "message": "Please update your on-chain DIDs by initiating a transaction for each one that you set up. We have already refunded the transaction fee to you."
+  },
+  "component_LegacyDids_dids": {
+    "message": "DIDs that need updating:"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -445,6 +460,9 @@
   },
   "view_IdentityOverview_download_prompt": {
     "message": "Some credentials have not been backed up"
+  },
+  "view_IdentityOverview_did_repair": {
+    "message": "Please update your on-chain DID"
   },
   "view_RemoveIdentity_heading": {
     "message": "Attention!"
@@ -796,9 +814,6 @@
   "view_DidUpgrade_info": {
     "message": "Upgrade information"
   },
-  "view_DidUpgrade_CTA": {
-    "message": "Sign"
-  },
   "view_DidUpgrade_insufficientFunds": {
     "message": "You need at least $cost$ KILTs to upgrade",
     "placeholders": {
@@ -830,9 +845,6 @@
   },
   "view_DidDowngrade_fee": {
     "message": " - fee "
-  },
-  "view_DidDowngrade_CTA": {
-    "message": "Sign"
   },
   "view_DidDowngrade_insufficientFunds": {
     "message": "You need at least $cost$ KILTs to pay the fee",
@@ -952,9 +964,6 @@
   "view_DidEndpointsSign_remove_error": {
     "message": "Removing the service endpoint failed"
   },
-  "view_DidEndpointsSign_CTA": {
-    "message": "Sign"
-  },
   "view_SignDid_title": {
     "message": "Sign with on-chain DID"
   },
@@ -969,9 +978,6 @@
   },
   "view_SignDid_reject": {
     "message": "Reject"
-  },
-  "view_SignDid_CTA": {
-    "message": "Sign"
   },
   "view_SignDid_error": {
     "message": "You need to upgrade to an on-chain DID first"
@@ -1017,5 +1023,34 @@
   },
   "view_ImportCredentials_more": {
     "message": "Import More Credentials"
+  },
+  "view_DidRepair_heading": {
+    "message": "On-Chain DID Update"
+  },
+  "view_DidRepair_subline": {
+    "message": "Please update your DID"
+  },
+  "view_DidRepair_fee": {
+    "message": "Fee "
+  },
+  "view_DidRepair_info": {
+    "message": "This transaction updates your on-chain DID.\nThe fee has already been refunded."
+  },
+  "view_DidRepair_insufficientFunds": {
+    "message": "You need at least $cost$ KILTs to update your DID",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_DidRepair_pending": {
+    "message": "Processing on-chain DID update"
+  },
+  "view_DidRepair_success": {
+    "message": "On-chain DID update successful"
+  },
+  "view_DidRepair_error": {
+    "message": "On-chain DID update failed"
   }
 }

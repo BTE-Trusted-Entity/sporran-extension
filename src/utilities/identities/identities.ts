@@ -146,7 +146,17 @@ function extractSecretKey(keypair: KeyringPair) {
   return secretKey;
 }
 
-function deriveDidKeys(identityKeypair: KeyringPair, legacy?: boolean) {
+export function deriveDidKeys(
+  identityKeypair: KeyringPair,
+  legacy?: boolean,
+): {
+  authenticationKey: KeyringPair;
+  encryptionKey: {
+    type: string;
+    publicKey: Uint8Array;
+    secretKey: Uint8Array;
+  };
+} {
   const authenticationKey = identityKeypair.derive('//did//0');
   const encryptionKeyringPair = identityKeypair.derive(
     '//did//keyAgreement//0',

@@ -1,5 +1,7 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 
+import { act } from '@testing-library/react';
+
 import { identitiesMock, render, screen } from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';
@@ -12,6 +14,10 @@ import { mockIsFullDid } from '../../utilities/did/did.mock';
 import { notDownloaded } from '../../utilities/credentials/CredentialsProvider.mock';
 
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
+
+import { legacyIdentity } from '../../utilities/identities/IdentitiesProvider.mock';
+
+import { needLegacyDidCrypto } from '../../utilities/did/did';
 
 import { IdentityOverview } from './IdentityOverview';
 
@@ -107,6 +113,26 @@ describe('IdentityOverview', () => {
         </Route>
       </MemoryRouter>,
     );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should prompt to update legacy DID', async () => {
+    const legacyPromise = Promise.resolve(true);
+
+    jest.mocked(needLegacyDidCrypto).mockReturnValue(legacyPromise);
+
+    const { container } = render(
+      <MemoryRouter initialEntries={[`/identity/${legacyIdentity.address}/`]}>
+        <Route path={paths.identity.overview}>
+          <IdentityOverview identity={legacyIdentity} />
+        </Route>
+      </MemoryRouter>,
+    );
+
+    await act(async () => {
+      await legacyPromise;
+    });
+
     expect(container).toMatchSnapshot();
   });
 });

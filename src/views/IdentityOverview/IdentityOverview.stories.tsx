@@ -1,7 +1,10 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
+import {
+  identitiesMock as identities,
+  legacyIdentity,
+} from '../../utilities/identities/IdentitiesProvider.mock';
 import { NEW } from '../../utilities/identities/identities';
 import { paths } from '../paths';
 
@@ -106,6 +109,16 @@ export function BackupWarning(): JSX.Element {
         <CredentialsProviderMock credentials={notDownloaded}>
           <IdentityOverview identity={fullDidIdentity} />
         </CredentialsProviderMock>
+      </Route>
+    </MemoryRouter>
+  );
+}
+
+export function RepairDid(): JSX.Element {
+  return (
+    <MemoryRouter initialEntries={[`/identity/${legacyIdentity.address}`]}>
+      <Route path={paths.identity.overview}>
+        <IdentityOverview identity={legacyIdentity} />
       </Route>
     </MemoryRouter>
   );

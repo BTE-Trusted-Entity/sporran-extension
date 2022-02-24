@@ -1,70 +1,51 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
-import * as styles from './DidUpgrade.module.css';
+import useSWR from 'swr';
+
+import * as styles from './DidRepair.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
-import {
-  getDeposit,
-  getFee,
-  sign,
-  submit,
-} from '../../utilities/didUpgrade/didUpgrade';
-import { saveIdentity } from '../../utilities/identities/identities';
+import { getFee, sign, submit } from '../../utilities/didRepair/didRepair';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { useAddressBalance } from '../../components/Balance/Balance';
 import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
-import {
-  asKiltCoins,
-  KiltAmount,
-} from '../../components/KiltAmount/KiltAmount';
+import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-import { generatePath, paths } from '../paths';
+import { paths } from '../paths';
 
 interface Props {
   identity: Identity;
 }
 
-function useCosts(address: string): {
+function useCosts(
+  address: string,
+  did: string,
+): {
   fee?: BN;
-  deposit?: BN;
-  total?: BN;
   error: boolean;
 } {
-  const [fee, setFee] = useState<BN | undefined>();
-  const [deposit, setDeposit] = useState<BN | undefined>();
-
-  useEffect(() => {
-    (async () => {
-      setFee(await getFee());
-      setDeposit(await getDeposit());
-    })();
-  }, []);
-
-  const total = useMemo(
-    () => (fee && deposit ? fee.add(deposit) : undefined),
-    [deposit, fee],
-  );
+  const fee = useSWR(did, getFee).data;
 
   const balance = useAddressBalance(address);
-  const error = Boolean(total && balance && balance.transferable.lt(total));
+  const error = Boolean(balance && fee && balance.transferable.lt(fee));
 
-  return { fee, deposit, total, error };
+  return { fee, error };
 }
 
-export function DidUpgrade({ identity }: Props): JSX.Element | null {
+export function DidRepair({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { address } = identity;
-  const { fee, deposit, total, error } = useCosts(address);
+  const { address, did } = identity;
+  const { fee, error } = useCosts(address, did);
   const [txHash, setTxHash] = useState<string>();
 
   const [submitting, setSubmitting] = useState(false);
@@ -87,8 +68,7 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         const hash = await sign(identity, keypair);
         setTxHash(hash);
 
-        const did = await submit(hash);
-        await saveIdentity({ ...identity, did });
+        await submit(hash);
 
         setStatus('success');
       } catch (error) {
@@ -103,7 +83,7 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
     setStatus(null);
   }, []);
 
-  if (!(fee && deposit && total)) {
+  if (!fee) {
     return null; // blockchain data pending
   }
 
@@ -113,26 +93,17 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
       className={styles.container}
       autoComplete="off"
     >
-      <h1 className={styles.heading}>{t('view_DidUpgrade_heading')}</h1>
-      <p className={styles.subline}>{t('view_DidUpgrade_subline')}</p>
+      <h1 className={styles.heading}>{t('view_DidRepair_heading')}</h1>
+      <p className={styles.subline}>{t('view_DidRepair_subline')}</p>
 
       <IdentitySlide identity={identity} />
 
-      <p className={styles.costs}>
-        {t('view_DidUpgrade_total')}
-        <KiltAmount amount={total} type="costs" smallDecimals />
-      </p>
-      <p className={styles.details}>
-        <Link
-          to={generatePath(paths.identity.did.upgrade.start, { address })}
-          className={styles.info}
-          aria-label={t('view_DidUpgrade_info')}
-        />
-        {t('view_DidUpgrade_deposit')}
-        {asKiltCoins(deposit, 'costs')} <KiltCurrency />
-        {t('view_DidUpgrade_fee')}
+      <p className={styles.fee}>
+        {t('view_DidRepair_fee')}
         {asKiltCoins(fee, 'costs')} <KiltCurrency />
       </p>
+
+      <p className={styles.info}>{t('view_DidRepair_info')}</p>
 
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
@@ -148,7 +119,7 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
           {t('common_action_sign')}
         </button>
         <output className={styles.errorTooltip} hidden={!error}>
-          {t('view_DidUpgrade_insufficientFunds', asKiltCoins(total, 'costs'))}
+          {t('view_DidRepair_insufficientFunds', asKiltCoins(fee, 'costs'))}
         </output>
       </p>
 
@@ -159,9 +130,9 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
           txHash={txHash}
           onDismissError={closeModal}
           messages={{
-            pending: t('view_DidUpgrade_pending'),
-            success: t('view_DidUpgrade_success'),
-            error: t('view_DidUpgrade_error'),
+            pending: t('view_DidRepair_pending'),
+            success: t('view_DidRepair_success'),
+            error: t('view_DidRepair_error'),
           }}
         />
       )}
