@@ -8,6 +8,9 @@ import {
   naclSeal,
   mnemonicToMiniSecret,
   blake2AsU8a,
+  keyFromPath,
+  keyExtractPath,
+  ed25519PairFromSeed,
 } from '@polkadot/util-crypto';
 import {
   IDidDetails,
@@ -148,6 +151,20 @@ function extractSecretKey(keypair: KeyringPair) {
 
 function deriveAuthenticationKey(identityKeypair: KeyringPair): KeyringPair {
   return identityKeypair.derive('//did//0');
+}
+
+export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
+  type: string;
+  publicKey: Uint8Array;
+  secretKey: Uint8Array;
+} {
+  const edKeypair = ed25519PairFromSeed(seed);
+  const { path } = keyExtractPath('//did//keyAgreement//0');
+  const { secretKey } = keyFromPath(edKeypair, path, 'ed25519');
+  return {
+    ...naclBoxPairFromSecret(blake2AsU8a(secretKey)),
+    type: 'x25519',
+  };
 }
 
 export function deriveEncryptionKey(
