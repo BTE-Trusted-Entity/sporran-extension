@@ -15,7 +15,7 @@ import {
   getKeystoreFromKeypair,
   Identity,
   makeKeyring,
-  deriveEncryptionKey,
+  deriveEncryptionKeyFromSeed,
 } from '../identities/identities';
 import { queryFullDetailsFromIdentifier } from '../did/did';
 import { didAuthorizeBatchExtrinsic } from '../didAuthorizeBatchExtrinsic/didAuthorizeBatchExtrinsic';
@@ -24,6 +24,7 @@ const { keyAgreement } = KeyRelationship;
 
 async function getSignedTransaction(
   identity: KeyringPair,
+  seed: Uint8Array,
   fullDid: IDidDetails['did'],
 ): Promise<SubmittableExtrinsic> {
   const fullDidDetails = await queryFullDetailsFromIdentifier(
@@ -47,7 +48,7 @@ async function getSignedTransaction(
 
   const existingKeyId = DidUtils.parseDidUrl(existingKey.id).fragment;
 
-  const encryptionKey = deriveEncryptionKey(identity);
+  const encryptionKey = deriveEncryptionKeyFromSeed(seed);
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
@@ -72,7 +73,11 @@ export async function getFee(did: IDidDetails['did']): Promise<BN> {
   const fakeIdentity = makeKeyring().createFromUri('//Alice');
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const extrinsic = await getSignedTransaction(fakeIdentity, did);
+  const extrinsic = await getSignedTransaction(
+    fakeIdentity,
+    new Uint8Array(),
+    did,
+  );
 
   const { partialFee } = await blockchain.api.rpc.payment.queryInfo(
     extrinsic.toHex(),
@@ -85,8 +90,9 @@ const currentTx: Record<string, SubmittableExtrinsic> = {};
 export async function sign(
   identity: Identity,
   sdkIdentity: KeyringPair,
+  seed: Uint8Array,
 ): Promise<string> {
-  const extrinsic = await getSignedTransaction(sdkIdentity, identity.did);
+  const extrinsic = await getSignedTransaction(sdkIdentity, seed, identity.did);
 
   const hash = extrinsic.hash.toHex();
   currentTx[hash] = extrinsic;
