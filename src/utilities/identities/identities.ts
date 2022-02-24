@@ -365,9 +365,11 @@ export async function importIdentity(
 export async function decryptIdentity(
   address: string,
   password: string,
-): Promise<KeyringPair> {
+): Promise<{ seed: Uint8Array; keypair: KeyringPair }> {
   const seed = await loadEncrypted(address, password);
-  return makeKeyring().addFromSeed(new Uint8Array(seed));
+  const uint8Seed = new Uint8Array(seed);
+  const keypair = makeKeyring().addFromSeed(uint8Seed);
+  return { keypair, seed: uint8Seed };
 }
 
 /** Ensure that local information about the DID type matches stored on blockchain

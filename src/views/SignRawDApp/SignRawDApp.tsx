@@ -40,7 +40,7 @@ export function SignRawDApp(): JSX.Element | null {
       const { address, data, id } = values;
       const { password } = await passwordField.get(event);
 
-      const keypair = await decryptIdentity(address, password);
+      const { keypair } = await decryptIdentity(address, password);
       const signature = u8aToHex(keypair.sign(data));
       await backgroundSignRawChannel.return({ id, signature });
 

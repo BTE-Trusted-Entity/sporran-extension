@@ -42,6 +42,7 @@ type SetPasswordGetterType = Dispatch<
 interface Value {
   password: string;
   keypair: KeyringPair;
+  seed: Uint8Array;
 }
 
 export function usePasswordField(): {
@@ -105,8 +106,9 @@ export function PasswordField({
       const password = useSaved ? savedPassword : providedPassword;
 
       let keypair: KeyringPair;
+      let seed: Uint8Array;
       try {
-        keypair = await decryptIdentity(address, password);
+        ({ keypair, seed } = await decryptIdentity(address, password));
       } catch (exception) {
         if (exceptionToError(exception).message === 'Invalid password') {
           setError(t('component_PasswordField_password_incorrect'));
@@ -120,7 +122,7 @@ export function PasswordField({
         await forgetPasswordChannel.get(address);
       }
 
-      return { password, keypair };
+      return { password, keypair, seed };
     },
     [address, rememberRef, savedPassword, t],
   );

@@ -40,7 +40,7 @@ export function SignDApp(): JSX.Element | null {
 
       const { address, id } = input;
       const { password } = await passwordField.get(event);
-      const keypair = await decryptIdentity(address, password);
+      const { keypair } = await decryptIdentity(address, password);
 
       const extrinsic = await getExtrinsic(input);
       const { signature } = extrinsic.sign(keypair);
