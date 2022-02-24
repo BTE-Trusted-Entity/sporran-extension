@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import useSWR, { mutate, SWRResponse } from 'swr';
-import ed2curve from 'ed2curve';
 import { Keyring } from '@polkadot/keyring';
 import { KeyringPair } from '@polkadot/keyring/types';
 import {
@@ -129,26 +128,6 @@ interface IdentityDidCrypto {
   ) => Promise<IEncryptedMessage>;
 }
 
-function extractSecretKey(keypair: KeyringPair) {
-  let secretKey: Uint8Array | undefined;
-
-  const { convertSecretKey } = ed2curve;
-  ed2curve.convertSecretKey = (secret) => {
-    secretKey = secret;
-    return convertSecretKey(secret);
-  };
-
-  keypair.encryptMessage('', '');
-
-  ed2curve.convertSecretKey = convertSecretKey;
-
-  if (!secretKey) {
-    throw new Error('Secret not extracted');
-  }
-
-  return secretKey;
-}
-
 function deriveAuthenticationKey(identityKeypair: KeyringPair): KeyringPair {
   return identityKeypair.derive('//did//0');
 }
@@ -167,20 +146,12 @@ export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
   };
 }
 
-export function deriveEncryptionKey(
-  identityKeypair: KeyringPair,
-  legacy?: boolean,
-): {
-  type: string;
-  publicKey: Uint8Array;
-  secretKey: Uint8Array;
-} {
+function deriveEncryptionKeyLegacy(identityKeypair: KeyringPair) {
   const encryptionKeyringPair = identityKeypair.derive(
     '//did//keyAgreement//0',
   );
 
-  const encryptionSecret = blake2AsU8a(extractSecretKey(encryptionKeyringPair));
-  const legacyEncryptionSecret = encryptionKeyringPair
+  const secret = encryptionKeyringPair
     .encryptMessage(
       new Uint8Array(24).fill(0),
       new Uint8Array(24).fill(0),
@@ -188,9 +159,7 @@ export function deriveEncryptionKey(
     )
     .slice(24); // first 24 bytes are the nonce
 
-  const encryptionKeypair = naclBoxPairFromSecret(
-    legacy ? legacyEncryptionSecret : encryptionSecret,
-  );
+  const encryptionKeypair = naclBoxPairFromSecret(secret);
   return { ...encryptionKeypair, type: 'x25519' };
 }
 
@@ -249,12 +218,15 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
 
 export async function getIdentityCryptoFromKeypair(
   identityKeypair: KeyringPair,
+  seed: Uint8Array,
   legacy?: boolean,
 ): Promise<IdentityDidCrypto> {
   await fixLightDidBase64Encoding(identityKeypair);
 
   const authenticationKey = deriveAuthenticationKey(identityKeypair);
-  const encryptionKey = deriveEncryptionKey(identityKeypair, legacy);
+  const encryptionKey = legacy
+    ? deriveEncryptionKeyLegacy(identityKeypair)
+    : deriveEncryptionKeyFromSeed(seed);
 
   const identities = await getIdentities();
   const { did } = identities[identityKeypair.address];
@@ -320,7 +292,7 @@ export async function encryptIdentity(
 
 export function getLightDidFromKeypair(keypair: KeyringPair): LightDidDetails {
   const authenticationKey = deriveAuthenticationKey(keypair);
-  const encryptionKey = deriveEncryptionKey(keypair);
+  const encryptionKey = deriveEncryptionKeyLegacy(keypair);
   return new LightDidDetails({ authenticationKey, encryptionKey });
 }
 

@@ -37,8 +37,8 @@ export function SignDid({ identity }: Props): JSX.Element | null {
     async (event) => {
       event.preventDefault();
 
-      const { keypair } = await passwordField.get(event);
-      const { sign } = await getIdentityCryptoFromKeypair(keypair);
+      const { keypair, seed } = await passwordField.get(event);
+      const { sign } = await getIdentityCryptoFromKeypair(keypair, seed);
 
       await backgroundSignDidChannel.return(sign(plaintext));
 

@@ -52,11 +52,11 @@ export function ShareCredentialSign({
     async (event) => {
       event.preventDefault();
 
-      const { keypair } = await passwordField.get(event);
+      const { keypair, seed } = await passwordField.get(event);
 
       const isLegacy = await needLegacyDidCrypto(identity.did);
       const { encrypt, keystore, didDetails } =
-        await getIdentityCryptoFromKeypair(keypair, isLegacy);
+        await getIdentityCryptoFromKeypair(keypair, seed, isLegacy);
 
       const request = RequestForAttestation.fromRequest(credential.request);
       await request.signWithDid(keystore, didDetails, challenge);

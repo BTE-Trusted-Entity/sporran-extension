@@ -82,11 +82,11 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         Credential.fromCredential(legitimation),
       );
 
-      const { keypair } = await passwordField.get(event);
+      const { keypair, seed } = await passwordField.get(event);
 
       const isLegacy = await needLegacyDidCrypto(identity.did);
       const { encrypt, keystore, didDetails } =
-        await getIdentityCryptoFromKeypair(keypair, isLegacy);
+        await getIdentityCryptoFromKeypair(keypair, seed, isLegacy);
 
       // The attester generated claim with the temporary identity, need to put real address in it
       const identityClaim = { ...claim, owner: didDetails.did };
