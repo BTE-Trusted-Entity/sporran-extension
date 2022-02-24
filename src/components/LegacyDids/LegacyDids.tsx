@@ -18,10 +18,12 @@ export function LegacyDids(): JSX.Element | null {
 
   const legacyDidIdentities = useLegacyDidIdentities();
 
+  const setOpen = open.set; // Get a stable reference.
+  // TODO: refactor useBooleanState to return stable reference.
+
   useEffect(() => {
-    open.set(Object.values(legacyDidIdentities).length > 0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [legacyDidIdentities]);
+    setOpen(Object.values(legacyDidIdentities).length > 0);
+  }, [legacyDidIdentities, setOpen]);
 
   if (!open.current) {
     return null;
