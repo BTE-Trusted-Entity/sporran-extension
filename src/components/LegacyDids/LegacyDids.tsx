@@ -23,8 +23,12 @@ export function LegacyDids(): JSX.Element | null {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [legacyDidIdentities]);
 
+  if (!open.current) {
+    return null;
+  }
+
   return (
-    <Modal open={open.current} className={styles.overlay}>
+    <Modal open className={styles.overlay}>
       <h1 className={styles.heading}>{t('component_LegacyDids_heading')}</h1>
 
       <p className={styles.explanation}>
