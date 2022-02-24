@@ -25,7 +25,7 @@ export async function getDeposit(): Promise<BN> {
 }
 
 async function getSignedTransaction(
-  identity: KeyringPair,
+  keypair: KeyringPair,
   seed: Uint8Array,
   fullDid: IDidDetails['did'],
 ): Promise<DidTransaction> {
@@ -39,18 +39,18 @@ async function getSignedTransaction(
   const extrinsic = await DidChain.getDeleteDidExtrinsic(
     await DidChain.queryEndpointsCounts(fullDidDetails.did),
   );
-  const keystore = await getKeystoreFromKeypair(identity, seed);
+  const keystore = await getKeystoreFromKeypair(keypair, seed);
 
   const didAuthorizedExtrinsic = await fullDidDetails.authorizeExtrinsic(
     extrinsic,
     keystore,
-    identity.address,
+    keypair.address,
   );
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  const tx = await blockchain.signTx(identity, didAuthorizedExtrinsic);
+  const tx = await blockchain.signTx(keypair, didAuthorizedExtrinsic);
 
-  const { did } = getLightDidFromKeypair(identity, seed);
+  const { did } = getLightDidFromKeypair(keypair, seed);
   return { extrinsic: tx, did };
 }
 
@@ -74,11 +74,11 @@ const currentTx: Record<string, DidTransaction> = {};
 
 export async function sign(
   identity: Identity,
-  sdkIdentity: KeyringPair,
+  keypair: KeyringPair,
   seed: Uint8Array,
 ): Promise<string> {
   const { extrinsic, did } = await getSignedTransaction(
-    sdkIdentity,
+    keypair,
     seed,
     identity.did,
   );

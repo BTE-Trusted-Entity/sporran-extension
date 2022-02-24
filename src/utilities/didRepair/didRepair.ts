@@ -23,7 +23,7 @@ import { didAuthorizeBatchExtrinsic } from '../didAuthorizeBatchExtrinsic/didAut
 const { keyAgreement } = KeyRelationship;
 
 async function getSignedTransaction(
-  identity: KeyringPair,
+  keypair: KeyringPair,
   seed: Uint8Array,
   fullDid: IDidDetails['did'],
 ): Promise<SubmittableExtrinsic> {
@@ -57,16 +57,16 @@ async function getSignedTransaction(
     await DidChain.getAddKeyExtrinsic(keyAgreement, encryptionKey),
   ]);
 
-  const keystore = await getKeystoreFromKeypair(identity, seed);
+  const keystore = await getKeystoreFromKeypair(keypair, seed);
 
   const authorized = await didAuthorizeBatchExtrinsic(
     fullDidDetails,
     batchExtrinsic,
     keystore,
-    identity.address,
+    keypair.address,
   );
 
-  return await blockchain.signTx(identity, authorized);
+  return await blockchain.signTx(keypair, authorized);
 }
 
 export async function getFee(did: IDidDetails['did']): Promise<BN> {
@@ -89,10 +89,10 @@ const currentTx: Record<string, SubmittableExtrinsic> = {};
 
 export async function sign(
   identity: Identity,
-  sdkIdentity: KeyringPair,
+  keypair: KeyringPair,
   seed: Uint8Array,
 ): Promise<string> {
-  const extrinsic = await getSignedTransaction(sdkIdentity, seed, identity.did);
+  const extrinsic = await getSignedTransaction(keypair, seed, identity.did);
 
   const hash = extrinsic.hash.toHex();
   currentTx[hash] = extrinsic;
