@@ -9,7 +9,7 @@ import {
   blake2AsU8a,
   keyFromPath,
   keyExtractPath,
-  ed25519PairFromSeed,
+  sr25519PairFromSeed,
 } from '@polkadot/util-crypto';
 import {
   IDidDetails,
@@ -141,9 +141,9 @@ export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
   publicKey: Uint8Array;
   secretKey: Uint8Array;
 } {
-  const edKeypair = ed25519PairFromSeed(seed);
+  const edKeypair = sr25519PairFromSeed(seed);
   const { path } = keyExtractPath('//did//keyAgreement//0');
-  const { secretKey } = keyFromPath(edKeypair, path, 'ed25519');
+  const { secretKey } = keyFromPath(edKeypair, path, 'sr25519');
   return {
     ...naclBoxPairFromSecret(blake2AsU8a(secretKey)),
     type: 'x25519',
