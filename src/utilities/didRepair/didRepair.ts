@@ -68,7 +68,7 @@ async function getSignedTransaction(
 }
 
 export async function getFee(did: IDidDetails['did']): Promise<BN> {
-  const fakeSeed = new Uint8Array();
+  const fakeSeed = new Uint8Array(32);
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
   const extrinsic = await getSignedTransaction(fakeSeed, did);
