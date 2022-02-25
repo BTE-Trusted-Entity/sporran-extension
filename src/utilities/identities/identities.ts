@@ -141,9 +141,9 @@ export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
   publicKey: Uint8Array;
   secretKey: Uint8Array;
 } {
-  const edKeypair = sr25519PairFromSeed(seed);
+  const keypair = sr25519PairFromSeed(seed);
   const { path } = keyExtractPath('//did//keyAgreement//0');
-  const { secretKey } = keyFromPath(edKeypair, path, 'sr25519');
+  const { secretKey } = keyFromPath(keypair, path, 'sr25519');
   return {
     ...naclBoxPairFromSecret(blake2AsU8a(secretKey)),
     type: 'x25519',
