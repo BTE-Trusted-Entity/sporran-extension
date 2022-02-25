@@ -169,7 +169,7 @@ function deriveEncryptionKeyLegacy(seed: Uint8Array) {
 export async function getKeystoreFromSeed(
   seed: Uint8Array,
 ): Promise<KeystoreSigner> {
-  await fixLightDidBase64Encoding(seed);
+  await fixLightDidIssues(seed);
 
   const authenticationKey = deriveAuthenticationKey(seed);
   return {
@@ -180,7 +180,7 @@ export async function getKeystoreFromSeed(
   };
 }
 
-async function fixLightDidBase64Encoding(seed: Uint8Array) {
+async function fixLightDidIssues(seed: Uint8Array) {
   const identities = await getIdentities();
   const { address } = getKeypairBySeed(seed);
   const identity = identities[address];
@@ -224,7 +224,7 @@ export async function getIdentityCryptoFromSeed(
   seed: Uint8Array,
   legacy?: boolean,
 ): Promise<IdentityDidCrypto> {
-  await fixLightDidBase64Encoding(seed);
+  await fixLightDidIssues(seed);
 
   const authenticationKey = deriveAuthenticationKey(seed);
   const encryptionKey = legacy
