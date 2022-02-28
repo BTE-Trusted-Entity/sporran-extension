@@ -1,6 +1,8 @@
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
+import { Fragment } from 'react';
 
 import './App.css';
+
 import * as styles from './App.module.css';
 
 import { RouteExcept } from '../../components/RouteExcept/RouteExcept';
@@ -18,6 +20,7 @@ import { PopupsRouter } from '../PopupsRouter/PopupsRouter';
 import { AppSettings } from '../AppSettings/AppSettings';
 
 import { paths } from '../paths';
+import { LegacyDids } from '../../components/LegacyDids/LegacyDids';
 
 function confirmNavigation(message: string, callback: (ok: boolean) => void) {
   const allowed = window.confirm(message);
@@ -41,10 +44,13 @@ export function App(): JSX.Element {
           getUserConfirmation={confirmNavigation}
         >
           <RouteExcept path={pathsWithoutTopButtons}>
-            <nav className={styles.menus}>
-              <AddIdentity />
-              <Settings />
-            </nav>
+            <Fragment>
+              <nav className={styles.menus}>
+                <AddIdentity />
+                <Settings />
+              </nav>
+              <LegacyDids />
+            </Fragment>
           </RouteExcept>
 
           <Switch>
