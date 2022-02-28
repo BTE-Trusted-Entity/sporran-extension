@@ -15,6 +15,7 @@ export const buttons: string;
 export const collapse: string;
 export const download: string;
 export const downloadPromptExpanded: string;
+export const presentation: string;
 export const remove: string;
 export const details: string;
 export const detail: string;

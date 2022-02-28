@@ -4,6 +4,7 @@ import { render } from '../../testing/testing';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { waitForDownloadInfo } from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage.mock';
+import { waitForPresentationInfo } from '../../utilities/showPresentationInfoStorage/showPresentationInfoStorage.mock';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
 import { parseDidUrl, sameFullDid } from '../../utilities/did/did';
@@ -30,6 +31,7 @@ describe('DidDowngradeWarning', () => {
       />,
     );
     await waitForDownloadInfo();
+    await waitForPresentationInfo();
     expect(container).toMatchSnapshot();
   });
 });

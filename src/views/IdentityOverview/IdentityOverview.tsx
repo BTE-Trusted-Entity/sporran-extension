@@ -101,7 +101,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
       )}
 
       <Link
-        to={generatePath(paths.identity.credentials, { address })}
+        to={generatePath(paths.identity.credentials.base, { address })}
         className={
           showDownloadPrompt ? styles.downloadPrompt : styles.credentials
         }

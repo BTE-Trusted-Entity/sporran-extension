@@ -142,6 +142,11 @@
   background-image: url('../../components/images/backup.svg');
 }
 
+.presentation {
+  composes: button;
+  background-image: url('../../components/images/share.svg');
+}
+
 .downloadPromptExpanded {
   composes: download;
   position: relative;

@@ -15,6 +15,7 @@ import {
   useCurrentIdentity,
   useIdentities,
 } from '../../utilities/identities/identities';
+import { useConfiguration } from '../../configuration/useConfiguration';
 import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
 import { Welcome } from '../Welcome/Welcome';
 import { CreateIdentity } from '../CreateIdentity/CreateIdentity';
@@ -23,6 +24,7 @@ import { IdentityOverview } from '../IdentityOverview/IdentityOverview';
 import { ResetIdentity } from '../ResetIdentity/ResetIdentity';
 import { RemoveIdentity } from '../RemoveIdentity/RemoveIdentity';
 import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
+import { CreatePresentation } from '../CreatePresentation/CreatePresentation';
 import { IdentityCredentials } from '../IdentityCredentials/IdentityCredentials';
 import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
@@ -67,6 +69,8 @@ export function SpecificIdentityRouter({
     }
   }, [address, identities]);
 
+  const { features } = useConfiguration();
+
   const redirectIsPending = useRedirectToCurrent();
   if (redirectIsPending) {
     return null; // redirect pending
@@ -89,7 +93,13 @@ export function SpecificIdentityRouter({
           <SendTokenFlow identity={identity} />
         </Route>
 
-        <Route path={paths.identity.credentials}>
+        {features.presentation && (
+          <Route path={paths.identity.credentials.presentation}>
+            <CreatePresentation identity={identity} />
+          </Route>
+        )}
+
+        <Route path={paths.identity.credentials.base}>
           <IdentityCredentials identity={identity} />
         </Route>
 

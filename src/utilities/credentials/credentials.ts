@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo } from 'react';
-import { pick, pull } from 'lodash-es';
+import { cloneDeep, pick, pull, without } from 'lodash-es';
 import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
-import { Attestation } from '@kiltprotocol/core';
+import { Attestation, RequestForAttestation } from '@kiltprotocol/core';
 import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
@@ -117,6 +117,25 @@ export function getCredentialDownload(
   const name = `${credential.name}-${credential.cTypeTitle}.json`;
 
   const blob = window.btoa(JSON.stringify(credential));
+  const url = `data:text/json;base64,${blob}`;
+
+  return { name, url };
+}
+
+export function getUnsignedPresentationDownload(
+  credential: Credential,
+  properties: string[],
+): CredentialDownload {
+  const name = `${credential.name}-${credential.cTypeTitle}-presentation.json`;
+
+  const { request } = credential;
+  const allProperties = Object.keys(request.claim.contents);
+  const needRemoving = without(allProperties, ...properties);
+
+  const requestInstance = RequestForAttestation.fromRequest(cloneDeep(request));
+  requestInstance.removeClaimProperties(needRemoving);
+
+  const blob = window.btoa(JSON.stringify(requestInstance));
   const url = `data:text/json;base64,${blob}`;
 
   return { name, url };
