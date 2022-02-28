@@ -12,8 +12,9 @@
 }
 
 .warning {
-  composes: subline from '../../components/Typography/Typography.module.css';
-  color: var(--color-orange);
+  composes: importantHeadline from '../../components/Typography/Typography.module.css';
+  font-size: 1.25rem;
+  margin: 0.75rem 0;
 }
 
 .credentials {
@@ -26,9 +27,9 @@
 }
 
 .cancel {
-  composes: buttonSecondary from '../../components/Button/Button.module.css';
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
 }
 
 .cta {
-  composes: buttonPrimary from '../../components/Button/Button.module.css';
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
 }
