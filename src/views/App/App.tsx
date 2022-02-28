@@ -2,7 +2,6 @@ import { MemoryRouter, Route, Switch } from 'react-router-dom';
 import { Fragment } from 'react';
 
 import './App.css';
-
 import * as styles from './App.module.css';
 
 import { RouteExcept } from '../../components/RouteExcept/RouteExcept';
@@ -30,11 +29,7 @@ function confirmNavigation(message: string, callback: (ok: boolean) => void) {
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();
 
-  const pathsWithoutTopButtons = [
-    paths.popup.base,
-    paths.popup.signDid,
-    paths.popup.claim,
-  ];
+  const popupPaths = [paths.popup.base, paths.popup.signDid, paths.popup.claim];
 
   return (
     <div className={styles.container}>
@@ -43,7 +38,7 @@ export function App(): JSX.Element {
           initialEntries={initialEntries}
           getUserConfirmation={confirmNavigation}
         >
-          <RouteExcept path={pathsWithoutTopButtons}>
+          <RouteExcept path={popupPaths}>
             <Fragment>
               <nav className={styles.menus}>
                 <AddIdentity />
