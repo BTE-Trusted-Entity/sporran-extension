@@ -1069,7 +1069,7 @@
     "message": "Select a Credential"
   },
   "view_CreatePresentation_subline": {
-    "message": "The presentation will contains the fields you choose"
+    "message": "The presentation will contain the fields you choose"
   },
   "view_CreatePresentation_download": {
     "message": "Download"

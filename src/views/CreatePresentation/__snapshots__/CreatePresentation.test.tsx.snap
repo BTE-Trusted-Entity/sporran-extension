@@ -13,7 +13,7 @@ exports[`CreatePresentation should match the snapshot 1`] = `
     <p
       class="subline"
     >
-      The presentation will contains the fields you choose
+      The presentation will contain the fields you choose
     </p>
     <div
       class="credentialsList"
