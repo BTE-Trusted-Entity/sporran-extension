@@ -43,12 +43,12 @@
     "version": "BEFORE=$(jq --raw-output .version src/static/manifest.json) && AFTER=$(date +%Y.%-m.%-d) && grep --files-with-matches --recursive $BEFORE src | xargs sed --in-place \"s/$BEFORE/$AFTER/g\" && git checkout -b version-bump && git commit --all --message=\"Version $AFTER\""
   },
   "dependencies": {
-    "@kiltprotocol/chain-helpers": "^0.25.3",
-    "@kiltprotocol/core": "^0.25.3",
-    "@kiltprotocol/did": "^0.25.3",
-    "@kiltprotocol/messaging": "^0.25.3",
-    "@kiltprotocol/types": "^0.25.3",
-    "@kiltprotocol/utils": "^0.25.3",
+    "@kiltprotocol/chain-helpers": "^0.25.5",
+    "@kiltprotocol/core": "^0.25.5",
+    "@kiltprotocol/did": "^0.25.5",
+    "@kiltprotocol/messaging": "^0.25.5",
+    "@kiltprotocol/types": "^0.25.5",
+    "@kiltprotocol/utils": "^0.25.5",
     "@polkadot/extension-inject": "^0.42.4",
     "@polkadot/keyring": "^8.2.2",
     "@polkadot/types": "^6.12.1",
