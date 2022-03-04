@@ -8,12 +8,12 @@ exports[`CreatePresentation should match the snapshot 1`] = `
     <h1
       class="heading"
     >
-      Select a Credential
+      Customize Credential
     </h1>
     <p
       class="subline"
     >
-      The presentation will contain the fields you choose
+      Select the information to disclose
     </p>
     <div
       class="credentialsList"
@@ -71,6 +71,7 @@ exports[`CreatePresentation should match the snapshot 1`] = `
                     class="shareLabel"
                   >
                     <input
+                      checked=""
                       class="share"
                       name="Email"
                       type="checkbox"
@@ -95,6 +96,7 @@ exports[`CreatePresentation should match the snapshot 1`] = `
                     class="shareLabel"
                   >
                     <input
+                      checked=""
                       class="share"
                       name="Name"
                       type="checkbox"

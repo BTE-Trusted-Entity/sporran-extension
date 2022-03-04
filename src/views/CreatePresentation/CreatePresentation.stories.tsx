@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { credentialsMock } from '../../utilities/credentials/CredentialsProvider.mock';
-import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import { moreIdentitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import { paths } from '../paths';
 
 import { CreatePresentation } from './CreatePresentation';
@@ -13,13 +13,13 @@ export default {
 } as Meta;
 
 const identity =
-  identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+  moreIdentitiesMock['4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos'];
 
 export function Template(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        `/identity/${identity.address}/credentials/${credentialsMock[0].request.rootHash}/presentation`,
+        `/identity/${identity.address}/credentials/${credentialsMock[12].request.rootHash}/presentation`,
       ]}
     >
       <Route path={paths.identity.credentials.presentation}>

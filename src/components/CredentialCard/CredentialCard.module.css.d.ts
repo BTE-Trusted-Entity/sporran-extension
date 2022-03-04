@@ -43,3 +43,5 @@ export const confirmDownload: string;
 export const cancelDownload: string;
 export const toggleLabel: string;
 export const toggle: string;
+export const learnMore: string;
+export const buttonsLine: string;

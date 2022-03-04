@@ -467,6 +467,44 @@ export const credentialsMock: Credential[] = [
     status: 'attested',
     isDownloaded: true,
   },
+  {
+    request: {
+      claim: {
+        cTypeHash:
+          '0xad52bd7a8bd8a52e03181a99d2743e00d0a5e96fdc0182626655fcf0c0a776d0',
+        contents: { Username: 'arty-name', 'User ID': '133055' },
+        owner: 'did:kilt:4osWk37p2ut2QQpGgEumheYw9wgwSy4e9eoY9gESKqUwKFWi',
+      },
+      claimHashes: [
+        '0xb04c4c8f3421f995e2afb7083ae0a28ca760eb20d520717e54100c7173c9cc9c',
+        '0xc2261fea01b49101c4978636bad4b80fd3c686f9a83fe2a118252991098988b6',
+        '0xd73bcd19fd7cf3516fb71ab27696c2d95881c990718c507e0f56cf273ef2392b',
+      ],
+      claimNonceMap: {
+        '0x7ce01e912b0418e0634c95ff139cd10a98ad79aaa7c4a45d2aad93c33e694314':
+          '104c3700-a835-4e4d-a2b9-ab6a2f015b94',
+        '0xc9cccabfbfc0c529263c97d9775ed8297df7832d53948229c7282667c2d15f7c':
+          'e07b01fd-5077-4f76-a6d9-ca00a3a8cb1b',
+        '0x800e8346b87610819d18304201c9aaee24ef2f69769e86713928937e37ffff99':
+          '4a63333e-7ec2-4262-80c8-c8e21e32abcc',
+      },
+      legitimations: [],
+      delegationId: null,
+      rootHash:
+        '0x6e63a2a0d6926b8763cd19377922f9f381afc7fdf8c2794153912a46d7ffd3c0',
+      claimerSignature: {
+        signature:
+          '0x4a73d9c90c57415a3a92c0fd1422d76ccf0ac95f3bc137c55f8c8019556a151befc3c0bd9c42adaeede6f31bffe9093e0f69507c55cffba113b0fe29cc30d989',
+        keyId:
+          'did:kilt:4osWk37p2ut2QQpGgEumheYw9wgwSy4e9eoY9gESKqUwKFWi#0xb7f88ab06c1aa772bd6ede14df99a2f05951d561530d88cef309cfed1bc8ad7b',
+      },
+    },
+    name: 'GitHub 9',
+    cTypeTitle: 'GitHub',
+    attester: 'SocialKYC',
+    status: 'attested',
+    isDownloaded: true,
+  },
 ];
 
 export const notDownloaded: Credential[] = [
