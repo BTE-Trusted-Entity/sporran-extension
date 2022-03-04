@@ -328,6 +328,31 @@ exports[`DidDowngradeWarning should render 1`] = `
         </button>
         <div />
       </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              GitHub 9
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              arty-name
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
     </ul>
     <p
       class="buttonsLine"

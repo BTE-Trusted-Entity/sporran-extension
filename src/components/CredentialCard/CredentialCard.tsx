@@ -330,13 +330,23 @@ function PresentationModal({
             >
               {t('component_CredentialCard_presentation_confirm')}
             </Link>
-            <button
-              type="button"
-              className={styles.cancelDownload}
-              onClick={visibility.off}
-            >
-              {t('common_action_close')}
-            </button>
+            <p className={styles.buttonsLine}>
+              <a
+                href="https://support.kilt.io/support/solutions/articles/80000987961"
+                target="_blank"
+                rel="noreferrer"
+                className={styles.learnMore}
+              >
+                {t('component_CredentialCard_more')}
+              </a>
+              <button
+                type="button"
+                className={styles.cancelDownload}
+                onClick={visibility.off}
+              >
+                {t('common_action_close')}
+              </button>
+            </p>
             <label className={styles.toggleLabel}>
               {t('component_CredentialCard_presentation_toggle')}
               <input

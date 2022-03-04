@@ -62,6 +62,7 @@ export function PresentCredentialCard({
                       type="checkbox"
                       name={name}
                       className={styles.share}
+                      defaultChecked
                       onChange={handlePropChecked}
                       disabled={!isAttested}
                     />

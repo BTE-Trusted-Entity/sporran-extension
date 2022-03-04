@@ -258,10 +258,13 @@
     "message": "(Not backed up)"
   },
   "component_CredentialCard_presentation_info": {
-    "message": "This creates a presentation of one of your credentials"
+    "message": "Create a version of your credential to save and share"
   },
   "component_CredentialCard_presentation_confirm": {
-    "message": "Create Presentation"
+    "message": "Continue"
+  },
+  "component_CredentialCard_more": {
+    "message": "Learn more"
   },
   "component_CredentialCard_presentation_toggle": {
     "message": "Don’t show this message again"
@@ -1066,10 +1069,10 @@
     "message": "On-chain DID update failed"
   },
   "view_CreatePresentation_title": {
-    "message": "Select a Credential"
+    "message": "Customize Credential"
   },
   "view_CreatePresentation_subline": {
-    "message": "The presentation will contain the fields you choose"
+    "message": "Select the information to disclose"
   },
   "view_CreatePresentation_download": {
     "message": "Download"

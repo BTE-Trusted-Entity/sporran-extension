@@ -42,6 +42,12 @@ export const moreIdentitiesMock: IdentitiesMap = {
     did: 'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
     index: 6,
   },
+  '4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos': {
+    name: 'KILT Identity 7',
+    address: '4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos',
+    did: 'did:kilt:4osWk37p2ut2QQpGgEumheYw9wgwSy4e9eoY9gESKqUwKFWi',
+    index: 7,
+  },
 };
 
 export const legacyIdentity: Identity = {
