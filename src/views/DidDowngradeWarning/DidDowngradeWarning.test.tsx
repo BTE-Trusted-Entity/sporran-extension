@@ -7,14 +7,14 @@ import { waitForDownloadInfo } from '../../utilities/showDownloadInfoStorage/sho
 import { waitForPresentationInfo } from '../../utilities/showPresentationInfoStorage/showPresentationInfoStorage.mock';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
-import { parseDidUrl, sameFullDid } from '../../utilities/did/did';
+import { parseDidUri, sameFullDid } from '../../utilities/did/did';
 
 import { DidDowngradeWarning } from './DidDowngradeWarning';
 
 jest.mock('../../utilities/did/did');
-jest.mocked(parseDidUrl).mockReturnValue({
+jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-} as ReturnType<typeof parseDidUrl>);
+} as ReturnType<typeof parseDidUri>);
 jest.mocked(sameFullDid).mockReturnValue(true);
 
 jest.mock('@kiltprotocol/core', () => ({ Attestation: { query: jest.fn() } }));

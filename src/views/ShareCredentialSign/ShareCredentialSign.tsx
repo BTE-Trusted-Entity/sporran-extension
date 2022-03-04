@@ -1,11 +1,15 @@
 import { browser } from 'webextension-polyfill-ts';
 import { useCallback, useState } from 'react';
 import {
-  RequestForAttestation,
   Attestation,
   Credential,
+  RequestForAttestation,
 } from '@kiltprotocol/core';
-import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
+import {
+  ISubmitCredential,
+  KeyRelationship,
+  MessageBodyType,
+} from '@kiltprotocol/types';
 
 import * as styles from './ShareCredentialSign.module.css';
 
@@ -59,7 +63,12 @@ export function ShareCredentialSign({
         await getIdentityCryptoFromKeypair(keypair, isLegacy);
 
       const request = RequestForAttestation.fromRequest(credential.request);
-      await request.signWithDid(keystore, didDetails, challenge);
+      await request.signWithDidKey(
+        keystore,
+        didDetails,
+        didDetails.getVerificationKeys(KeyRelationship.authentication),
+        challenge,
+      );
 
       const attestation = await Attestation.query(request.rootHash);
 

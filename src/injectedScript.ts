@@ -1,4 +1,4 @@
-import { IEncryptedMessage, IDidKeyDetails } from '@kiltprotocol/types';
+import { IEncryptedMessage, DidPublicKey } from '@kiltprotocol/types';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import { injectIntoDApp } from './dApps/injectIntoDApp/injectIntoDApp';
@@ -13,7 +13,7 @@ interface PubSubSession {
   ) => Promise<void>;
   close: () => Promise<void>;
   send: (message: IEncryptedMessage) => Promise<void>;
-  encryptionKeyId: IDidKeyDetails['id'];
+  encryptionKeyId: DidPublicKey['id'];
   encryptedChallenge: string;
   nonce: string;
 }
@@ -21,7 +21,7 @@ interface PubSubSession {
 interface InjectedWindowProvider {
   startSession: (
     dAppName: string,
-    dAppEncryptionKeyId: IDidKeyDetails['id'],
+    dAppEncryptionKeyId: DidPublicKey['id'],
     challenge: string,
   ) => Promise<PubSubSession>;
   name: string;
@@ -44,7 +44,7 @@ async function storeMessageFromSporran(
 
 async function startSession(
   unsafeDAppName: string,
-  dAppEncryptionKeyId: IDidKeyDetails['id'],
+  dAppEncryptionKeyId: DidPublicKey['id'],
   challenge: string,
 ): Promise<PubSubSession> {
   const dAppName = unsafeDAppName.substring(0, 50);

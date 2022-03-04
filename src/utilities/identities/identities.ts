@@ -10,15 +10,17 @@ import {
   blake2AsU8a,
 } from '@polkadot/util-crypto';
 import {
+  EncryptionKeyType,
   IDidDetails,
   IEncryptedMessage,
   KeyRelationship,
   KeystoreSigner,
   MessageBody,
   NaclBoxCapable,
+  VerificationKeyType,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
-import { LightDidDetails, DidUtils, DidChain } from '@kiltprotocol/did';
+import { DidResolver, DidUtils, LightDidDetails } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 import { map, max, memoize } from 'lodash-es';
 
@@ -27,7 +29,7 @@ import {
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 
-import { getDidDetails, parseDidUrl } from '../did/did';
+import { getDidDetails, parseDidUri } from '../did/did';
 import { storage } from '../storage/storage';
 
 import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
@@ -152,7 +154,7 @@ export function deriveDidKeys(
 ): {
   authenticationKey: KeyringPair;
   encryptionKey: {
-    type: string;
+    type: EncryptionKeyType.X25519;
     publicKey: Uint8Array;
     secretKey: Uint8Array;
   };
@@ -174,7 +176,10 @@ export function deriveDidKeys(
   const encryptionKeypair = naclBoxPairFromSecret(
     legacy ? legacyEncryptionSecret : encryptionSecret,
   );
-  const encryptionKey = { ...encryptionKeypair, type: 'x25519' };
+  const encryptionKey = {
+    ...encryptionKeypair,
+    type: EncryptionKeyType.X25519,
+  };
 
   return { authenticationKey, encryptionKey };
 }
@@ -202,7 +207,7 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
     return;
   }
 
-  const parsed = identity.did && DidUtils.parseDidUrl(identity.did);
+  const parsed = identity.did && DidUtils.parseDidUri(identity.did);
   if (parsed && parsed.type !== 'light') {
     return;
   }
@@ -212,7 +217,9 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
     // resulting in an invalid URI, so resolving would throw an exception.
     const details = await getDidDetails(identity.did);
 
-    const keyAgreementKeys = details.getKeys(KeyRelationship.keyAgreement);
+    const keyAgreementKeys = details.getEncryptionKeys(
+      KeyRelationship.keyAgreement,
+    );
 
     // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
     if (keyAgreementKeys.length === 0) {
@@ -222,7 +229,7 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
     // This public key also means the DID needs to be regenerated
     const troubleKey =
       '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
-    if (keyAgreementKeys[0].publicKeyHex === troubleKey) {
+    if (Crypto.u8aToHex(keyAgreementKeys[0].publicKey) === troubleKey) {
       throw new Error();
     }
   } catch {
@@ -267,7 +274,13 @@ export async function getIdentityCryptoFromKeypair(
 
   function sign(plaintext: string) {
     const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
-    const didKeyUri = didDetails.getKeyIds(KeyRelationship.authentication)[0];
+
+    const authorizationKey = didDetails.getVerificationKeys(
+      KeyRelationship.authentication,
+    )[0];
+    // TODO: replace with assembleKeyId when available
+    const didKeyUri = `${didDetails.did}#${authorizationKey.id}`;
+
     return { signature, didKeyUri };
   }
 
@@ -281,9 +294,10 @@ export async function getIdentityCryptoFromKeypair(
       dAppDidDetails.did,
     );
     return message.encrypt(
-      didDetails.getKeys(KeyRelationship.keyAgreement)[0],
-      dAppDidDetails.getKeys(KeyRelationship.keyAgreement)[0],
+      didDetails.getEncryptionKeys(KeyRelationship.keyAgreement)[0].id,
+      didDetails,
       encryptionKeystore,
+      dAppDidDetails.getEncryptionKeys(KeyRelationship.keyAgreement)[0].id,
     );
   }
 
@@ -306,7 +320,15 @@ export async function encryptIdentity(
 }
 
 export function getLightDidFromKeypair(keypair: KeyringPair): LightDidDetails {
-  return new LightDidDetails(deriveDidKeys(keypair));
+  const { authenticationKey, encryptionKey } = deriveDidKeys(keypair);
+
+  return LightDidDetails.fromDetails({
+    authenticationKey: {
+      ...authenticationKey,
+      type: VerificationKeyType.Sr25519,
+    },
+    encryptionKey,
+  });
 }
 
 async function getIdentityName(): Promise<{ name: string; index: number }> {
@@ -345,16 +367,12 @@ export async function importIdentity(
   const identityKeypair = getKeypairByBackupPhrase(backupPhrase);
 
   const lightDidDetails = getLightDidFromKeypair(identityKeypair);
-  const keystore = await getKeystoreFromKeypair(identityKeypair);
-  const { did: fullDid } = await DidUtils.upgradeDid(
-    lightDidDetails,
-    address,
-    keystore,
-  );
+  const resolved = await DidResolver.resolveDoc(lightDidDetails.did);
 
-  const isOnChain = Boolean(await DidChain.queryDidDetails(fullDid));
-
-  const did = isOnChain ? fullDid : lightDidDetails.did;
+  const did =
+    resolved && resolved.metadata && resolved.metadata.canonicalId
+      ? resolved.metadata.canonicalId
+      : lightDidDetails.did;
 
   const { name, index } = await getIdentityName();
 
@@ -387,9 +405,12 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
     return;
   }
 
-  const { lightDid, fullDid, type } = parseDidUrl(identity.did);
+  const { lightDid, fullDid, type } = parseDidUri(identity.did);
 
-  const isOnChain = Boolean(await DidChain.queryDidDetails(fullDid));
+  const resolved = await DidResolver.resolveDoc(identity.did);
+  const isOnChain = Boolean(
+    resolved && resolved.metadata && resolved.metadata.canonicalId,
+  );
 
   const wasOnChain = type === 'full';
   if (wasOnChain && !isOnChain) {

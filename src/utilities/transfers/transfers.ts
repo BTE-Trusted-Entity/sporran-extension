@@ -22,7 +22,7 @@ export async function signTransfer(input: Input): Promise<string> {
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const tx = await Balance.makeTransfer(recipient, amount);
+  const tx = await Balance.getTransferTx(recipient, amount);
 
   const signedTx = await blockchain.signTx(keypair, tx, tip);
   const hash = signedTx.hash.toHex();

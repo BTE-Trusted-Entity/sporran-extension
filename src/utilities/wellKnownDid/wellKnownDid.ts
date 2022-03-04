@@ -88,10 +88,13 @@ export async function verifyDidConfigResource(
       }
 
       const { verified } = await DidUtils.verifyDidSignature({
-        keyId: issuerDidDetails.getKeyIds(KeyRelationship.assertionMethod)[0],
-        signature: credential.proof.signature as string,
+        signature: {
+          keyId: issuerDidDetails.getVerificationKeys(
+            KeyRelationship.assertionMethod,
+          )[0].id,
+          signature: credential.proof.signature as string,
+        },
         message: Crypto.coToUInt8(credentialSubject.rootHash),
-        keyRelationship: KeyRelationship.assertionMethod,
       });
       return verified;
     },

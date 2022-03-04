@@ -9,7 +9,13 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { DidChain, DidUtils } from '@kiltprotocol/did';
+import {
+  DidBatchBuilder,
+  DidChain,
+  DidUtils,
+  FullDidDetails,
+} from '@kiltprotocol/did';
+import { Crypto } from '@kiltprotocol/utils';
 
 import {
   getKeystoreFromKeypair,
@@ -17,8 +23,6 @@ import {
   makeKeyring,
   deriveDidKeys,
 } from '../identities/identities';
-import { queryFullDetailsFromIdentifier } from '../did/did';
-import { didAuthorizeBatchExtrinsic } from '../didAuthorizeBatchExtrinsic/didAuthorizeBatchExtrinsic';
 
 const { keyAgreement } = KeyRelationship;
 
@@ -26,44 +30,39 @@ async function getSignedTransaction(
   identity: KeyringPair,
   fullDid: IDidDetails['did'],
 ): Promise<SubmittableExtrinsic> {
-  const fullDidDetails = await queryFullDetailsFromIdentifier(
-    DidUtils.parseDidUrl(fullDid).identifier,
+  const fullDidDetails = await FullDidDetails.fromChainInfo(
+    DidUtils.parseDidUri(fullDid).identifier,
   );
   if (!fullDidDetails) {
     throw new Error(`Could not resolve DID ${fullDid}`);
   }
 
-  const existingKey = fullDidDetails.getKeys(keyAgreement).pop();
+  const existingKey = fullDidDetails.encryptionKey;
   if (!existingKey) {
     throw new Error('Key agreement key not found');
   }
 
   const keyToUpdate =
     '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
-  const noUpdateNeeded = existingKey.publicKeyHex !== keyToUpdate;
+  const noUpdateNeeded = Crypto.u8aToHex(existingKey.publicKey) !== keyToUpdate;
   if (noUpdateNeeded) {
     throw new Error('DID repair not needed');
   }
 
-  const existingKeyId = DidUtils.parseDidUrl(existingKey.id).fragment;
+  const existingKeyId = DidUtils.parseDidUri(existingKey.id).fragment;
 
   const { encryptionKey } = deriveDidKeys(identity);
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const batchExtrinsic = blockchain.api.tx.utility.batchAll([
-    await DidChain.getRemoveKeyExtrinsic(keyAgreement, existingKeyId),
-    await DidChain.getAddKeyExtrinsic(keyAgreement, encryptionKey),
-  ]);
-
   const keystore = await getKeystoreFromKeypair(identity);
 
-  const authorized = await didAuthorizeBatchExtrinsic(
-    fullDidDetails,
-    batchExtrinsic,
-    keystore,
-    identity.address,
-  );
+  const authorized = await new DidBatchBuilder(blockchain.api, fullDidDetails)
+    .addMultipleExtrinsics([
+      await DidChain.getRemoveKeyExtrinsic(keyAgreement, existingKeyId),
+      await DidChain.getAddKeyExtrinsic(keyAgreement, encryptionKey),
+    ])
+    .consume(keystore, identity.address);
 
   return await blockchain.signTx(identity, authorized);
 }

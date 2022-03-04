@@ -19,7 +19,7 @@ export async function produceEncryptedChallenge(
   const { sealed, nonce } = naclSeal(
     Crypto.coToUInt8(challenge),
     encryption.encryptionKey.secretKey,
-    Crypto.coToUInt8(dAppEncryptionDidKey.publicKeyHex),
+    dAppEncryptionDidKey.publicKey,
   );
 
   return {

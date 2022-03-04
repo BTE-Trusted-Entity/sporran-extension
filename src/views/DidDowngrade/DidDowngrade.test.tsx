@@ -7,7 +7,7 @@ import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedP
 import { getDeposit, getFee } from '../../utilities/didDowngrade/didDowngrade';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
-import { parseDidUrl } from '../../utilities/did/did';
+import { parseDidUri } from '../../utilities/did/did';
 
 import { DidDowngrade } from './DidDowngrade';
 
@@ -19,9 +19,9 @@ jest.mocked(getFee).mockResolvedValue(new BN(1e13));
 jest.mocked(getDeposit).mockResolvedValue(new BN(1e15));
 
 jest.mock('../../utilities/did/did');
-jest.mocked(parseDidUrl).mockReturnValue({
+jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-} as ReturnType<typeof parseDidUrl>);
+} as ReturnType<typeof parseDidUri>);
 
 describe('DidDowngrade', () => {
   it('should render', async () => {

@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { IDidServiceEndpoint } from '@kiltprotocol/types';
+import { DidServiceEndpoint } from '@kiltprotocol/types';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 
@@ -13,7 +13,7 @@ export default {
 const identity =
   identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
-const endpoint: IDidServiceEndpoint = {
+const endpoint: DidServiceEndpoint = {
   urls: ['https://sporran.org/'],
   types: ['Some Type'],
   id: `${identity.did}#123456`,

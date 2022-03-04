@@ -5,7 +5,7 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { DidChain, DidUtils } from '@kiltprotocol/did';
+import { DidChain, DidUtils, FullDidDetails } from '@kiltprotocol/did';
 
 import {
   getKeystoreFromKeypair,
@@ -13,7 +13,6 @@ import {
   getLightDidFromKeypair,
   makeKeyring,
 } from '../identities/identities';
-import { queryFullDetailsFromIdentifier } from '../did/did';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
@@ -28,8 +27,8 @@ async function getSignedTransaction(
   identity: KeyringPair,
   fullDid: IDidDetails['did'],
 ): Promise<DidTransaction> {
-  const fullDidDetails = await queryFullDetailsFromIdentifier(
-    DidUtils.parseDidUrl(fullDid).identifier,
+  const fullDidDetails = await FullDidDetails.fromChainInfo(
+    DidUtils.parseDidUri(fullDid).identifier,
   );
   if (!fullDidDetails) {
     throw new Error(`Could not resolve DID ${fullDid}`);

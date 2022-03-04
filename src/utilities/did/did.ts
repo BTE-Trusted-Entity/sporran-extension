@@ -1,90 +1,43 @@
-import {
-  DefaultResolver,
-  DidChain,
-  DidUtils,
-  FullDidDetails,
-} from '@kiltprotocol/did';
+import { DidResolver, DidUtils } from '@kiltprotocol/did';
 import {
   IDidDetails,
-  IDidServiceEndpoint,
-  IIdentity,
+  DidServiceEndpoint,
   KeyRelationship,
 } from '@kiltprotocol/types';
+import { Crypto } from '@kiltprotocol/utils';
 
 export function isFullDid(did: IDidDetails['did']): boolean {
   if (!did) {
     // could be a legacy identity without DID
     return false;
   }
-  return DidUtils.parseDidUrl(did).type === 'full';
+  return DidUtils.parseDidUri(did).type === 'full';
 }
 
 export async function getDidDetails(
   did: IDidDetails['did'],
 ): Promise<IDidDetails> {
-  const resolved = await DefaultResolver.resolveDoc(did);
+  const resolved = await DidResolver.resolveDoc(did);
   if (!resolved || !resolved.details) {
     throw new Error(`Cannot resolve DID ${did}`);
   }
   return resolved.details;
 }
 
-export function getFragment(id: IDidServiceEndpoint['id']): string {
+export function getFragment(id: DidServiceEndpoint['id']): string {
   if (!id.includes('#')) {
     return id;
   }
-  return DidUtils.parseDidUrl(id).fragment as string;
+  return DidUtils.parseDidUri(id).fragment as string;
 }
 
-/** A copy of DefaultResolver.queryFullDetailsFromIdentifier which is not yet exported */
-export async function queryFullDetailsFromIdentifier(
-  identifier: IIdentity['address'],
-  version = FullDidDetails.FULL_DID_LATEST_VERSION,
-): Promise<FullDidDetails | null> {
-  const didRec = await DidChain.queryById(identifier);
-  if (!didRec) return null;
-  const {
-    publicKeys,
-    assertionMethodKey,
-    authenticationKey,
-    capabilityDelegationKey,
-    keyAgreementKeys,
-    lastTxCounter,
-  } = didRec;
-
-  const keyRelationships: FullDidDetails['keyRelationships'] = {
-    [KeyRelationship.authentication]: [authenticationKey],
-    [KeyRelationship.keyAgreement]: keyAgreementKeys,
-  };
-  if (assertionMethodKey) {
-    keyRelationships[KeyRelationship.assertionMethod] = [assertionMethodKey];
-  }
-  if (capabilityDelegationKey) {
-    keyRelationships[KeyRelationship.capabilityDelegation] = [
-      capabilityDelegationKey,
-    ];
-  }
-
-  const did = DidUtils.getKiltDidFromIdentifier(identifier, 'full', version);
-
-  const serviceEndpoints = await DidChain.queryServiceEndpoints(did);
-
-  return new FullDidDetails({
-    did,
-    keys: publicKeys,
-    keyRelationships,
-    lastTxIndex: lastTxCounter.toBn(),
-    serviceEndpoints,
-  });
-}
-
-export function parseDidUrl(did: IDidDetails['did']): ReturnType<
-  typeof DidUtils.parseDidUrl
+export function parseDidUri(did: IDidDetails['did']): ReturnType<
+  typeof DidUtils.parseDidUri
 > & {
   lightDid: IDidDetails['did'];
   fullDid: IDidDetails['did'];
 } {
-  const parsed = DidUtils.parseDidUrl(did);
+  const parsed = DidUtils.parseDidUri(did);
   const { identifier, type } = parsed;
   const unprefixedIdentifier = identifier.replace(/^00/, '');
   const prefixedIdentifier = '00' + identifier;
@@ -113,14 +66,20 @@ export function sameFullDid(
   if (!a || !b) {
     return false;
   }
-  return parseDidUrl(a).fullDid === parseDidUrl(b).fullDid;
+  return parseDidUri(a).fullDid === parseDidUri(b).fullDid;
 }
 
 export async function needLegacyDidCrypto(did: string): Promise<boolean> {
+  if (!isFullDid(did)) {
+    return false;
+  }
+
+  const didDetails = await getDidDetails(did);
+  const encryptionKey = didDetails.getEncryptionKeys(
+    KeyRelationship.keyAgreement,
+  )[0];
   return (
-    isFullDid(did) &&
-    (await getDidDetails(did)).getKeys(KeyRelationship.keyAgreement)[0]
-      .publicKeyHex ===
-      '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e'
+    Crypto.u8aToHex(encryptionKey.publicKey) ===
+    '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e'
   );
 }
