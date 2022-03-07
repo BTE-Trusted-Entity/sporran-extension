@@ -23,6 +23,7 @@ import { DidResolver, LightDidDetails } from '@kiltprotocol/did';
 
 import { makeKeyring } from '../identities/identities';
 import { verifyDidConfigResource } from '../wellKnownDid/wellKnownDid';
+import { getDidEncryptionKey } from '../did/did';
 
 interface TabEncryption {
   authenticationKey: KeyringPair;
@@ -96,8 +97,7 @@ export async function getTabEncryption(
     },
     encryptionKey,
   });
-  const sporranEncryptionKey =
-    sporranDidDetails.encryptionKey as DidEncryptionKey;
+  const sporranEncryptionKey = getDidEncryptionKey(sporranDidDetails);
 
   const dAppEncryptionKey = (await DidResolver.resolveKey(
     dAppEncryptionKeyId,

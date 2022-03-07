@@ -4,7 +4,11 @@ import {
   FullDidDetails,
   LightDidDetails,
 } from '@kiltprotocol/did';
-import { DidServiceEndpoint, IDidDetails } from '@kiltprotocol/types';
+import {
+  DidEncryptionKey,
+  DidServiceEndpoint,
+  IDidDetails,
+} from '@kiltprotocol/types';
 import { Crypto } from '@kiltprotocol/utils';
 
 export function isFullDid(did: IDidDetails['did']): boolean {
@@ -34,6 +38,14 @@ export async function getDidDetails(
   return isFullDid(did)
     ? await getFullDidDetails(did)
     : LightDidDetails.fromUri(did);
+}
+
+export function getDidEncryptionKey(details: DidDetails): DidEncryptionKey {
+  const { encryptionKey } = details;
+  if (!encryptionKey) {
+    throw new Error('encryptionKey is not defined somehow');
+  }
+  return encryptionKey;
 }
 
 export function getFragment(id: DidServiceEndpoint['id']): string {
@@ -86,10 +98,7 @@ export async function needLegacyDidCrypto(did: string): Promise<boolean> {
     return false;
   }
 
-  const { encryptionKey } = await getDidDetails(did);
-  if (!encryptionKey) {
-    throw new Error(`Cannot find encryption key`);
-  }
+  const encryptionKey = getDidEncryptionKey(await getDidDetails(did));
   return (
     Crypto.u8aToHex(encryptionKey.publicKey) ===
     '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e'

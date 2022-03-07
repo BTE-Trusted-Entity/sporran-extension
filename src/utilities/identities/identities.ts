@@ -32,7 +32,7 @@ import {
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 
-import { getDidDetails, parseDidUri } from '../did/did';
+import { getDidDetails, getDidEncryptionKey, parseDidUri } from '../did/did';
 import { storage } from '../storage/storage';
 
 import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
@@ -220,12 +220,8 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
     // resulting in an invalid URI, so resolving would throw an exception.
     const details = await getDidDetails(identity.did);
 
-    const { encryptionKey } = details;
-
     // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
-    if (!encryptionKey) {
-      throw new Error();
-    }
+    const encryptionKey = getDidEncryptionKey(details);
 
     // This public key also means the DID needs to be regenerated
     const troubleKey =
@@ -290,17 +286,11 @@ export async function getIdentityCryptoFromKeypair(
       didDetails.did,
       dAppDidDetails.did,
     );
-    if (!didDetails.encryptionKey) {
-      throw new Error(`Cannot find own encryption key`);
-    }
-    if (!dAppDidDetails.encryptionKey) {
-      throw new Error(`Cannot find dApp encryption key`);
-    }
     return message.encrypt(
-      didDetails.encryptionKey.id,
+      getDidEncryptionKey(didDetails).id,
       didDetails,
       encryptionKeystore,
-      dAppDidDetails.encryptionKey.id,
+      getDidEncryptionKey(dAppDidDetails).id,
     );
   }
 

@@ -13,7 +13,7 @@ import {
   getLightDidFromKeypair,
   makeKeyring,
 } from '../identities/identities';
-import { parseDidUri } from '../did/did';
+import { getDidEncryptionKey, parseDidUri } from '../did/did';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
@@ -33,13 +33,11 @@ async function getSignedTransaction(
   const { fullDid: did } = parseDidUri(lightDidDetails.did);
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  const { authenticationKey, encryptionKey } = lightDidDetails;
-  if (!encryptionKey) {
-    throw new Error('encryptionKey is not defined somehow');
-  }
+  const encryptionKey = getDidEncryptionKey(lightDidDetails);
+
   const extrinsic = await new FullDidCreationBuilder(
     blockchain.api,
-    authenticationKey,
+    lightDidDetails.authenticationKey,
   )
     .addEncryptionKey(encryptionKey)
     .consume(keystore, identity.address);
