@@ -6,9 +6,10 @@ import {
   useState,
   Fragment,
 } from 'react';
+import { createPortal } from 'react-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Modal } from 'react-dialog-polyfill';
 import { browser } from 'webextension-polyfill-ts';
-import useSWR from 'swr';
 
 import * as styles from './CredentialCard.module.css';
 
@@ -20,10 +21,17 @@ import {
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
 import {
-  getShowDownloadInfo,
   setShowDownloadInfo,
+  useShowDownloadInfo,
 } from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
+import {
+  setShowPresentationInfo,
+  useShowPresentationInfo,
+} from '../../utilities/showPresentationInfoStorage/showPresentationInfoStorage';
+import { isFullDid } from '../../utilities/did/did';
+import { useConfiguration } from '../../configuration/useConfiguration';
+import { generatePath, paths } from '../../views/paths';
 
 export function useScrollIntoView(
   expanded: boolean,
@@ -110,6 +118,252 @@ function CredentialName({
   );
 }
 
+function DeleteModal({
+  credential,
+  portalRef,
+}: {
+  credential: Credential;
+  portalRef: RefObject<HTMLElement>;
+}) {
+  const t = browser.i18n.getMessage;
+
+  const visibility = useBooleanState();
+
+  const handleConfirm = useCallback(async () => {
+    await deleteCredential(credential);
+    visibility.off();
+  }, [credential, visibility]);
+
+  return (
+    <Fragment>
+      <button
+        type="button"
+        aria-label={t('component_CredentialCard_remove')}
+        className={styles.remove}
+        onClick={visibility.on}
+      />
+
+      {visibility.current &&
+        portalRef.current &&
+        createPortal(
+          <Modal open className={styles.overlay}>
+            <h1 className={styles.warning}>
+              {t('component_CredentialCard_delete_warning')}
+            </h1>
+            <p className={styles.explanation}>
+              {t('component_CredentialCard_delete_explanation')}
+            </p>
+            <button
+              type="button"
+              className={styles.cancelDelete}
+              onClick={visibility.off}
+            >
+              {t('common_action_cancel')}
+            </button>
+            <button
+              type="button"
+              className={styles.confirmDelete}
+              onClick={handleConfirm}
+            >
+              {t('component_CredentialCard_delete_confirm')}
+            </button>
+          </Modal>,
+          portalRef.current,
+        )}
+    </Fragment>
+  );
+}
+
+function DownloadModal({
+  credential,
+  portalRef,
+}: {
+  credential: Credential;
+  portalRef: RefObject<HTMLElement>;
+}) {
+  const t = browser.i18n.getMessage;
+  const visibility = useBooleanState();
+
+  const markCredentialDownloaded = useCallback(async () => {
+    await saveCredential({ ...credential, isDownloaded: true });
+  }, [credential]);
+
+  const [checked, setChecked] = useState(false);
+
+  const handleToggle = useCallback((event) => {
+    setChecked(event.target.checked);
+  }, []);
+
+  const handleConfirm = useCallback(async () => {
+    await markCredentialDownloaded();
+    await setShowDownloadInfo(!checked);
+    visibility.off();
+  }, [markCredentialDownloaded, checked, visibility]);
+
+  const showInfo = useShowDownloadInfo();
+  const { isDownloaded } = credential;
+  const { name, url } = getCredentialDownload(credential);
+
+  return (
+    <Fragment>
+      {!isDownloaded && showInfo ? (
+        <button
+          className={
+            isDownloaded ? styles.download : styles.downloadPromptExpanded
+          }
+          aria-label={t('component_CredentialCard_backup')}
+          onClick={visibility.on}
+        />
+      ) : (
+        <a
+          download={name}
+          href={url}
+          aria-label={t('component_CredentialCard_backup')}
+          className={
+            isDownloaded ? styles.download : styles.downloadPromptExpanded
+          }
+          onClick={markCredentialDownloaded}
+        />
+      )}
+
+      {visibility.current &&
+        portalRef.current &&
+        createPortal(
+          <Modal open className={styles.overlay}>
+            <h2 className={styles.downloadInfo}>
+              {t('component_CredentialCard_download_info')}
+            </h2>
+            <a
+              download={name}
+              href={url}
+              className={styles.confirmDownload}
+              onClick={handleConfirm}
+            >
+              {t('component_CredentialCard_download_confirm')}
+            </a>
+            <button
+              type="button"
+              className={styles.cancelDownload}
+              onClick={visibility.off}
+            >
+              {t('common_action_close')}
+            </button>
+            <label className={styles.toggleLabel}>
+              {t('component_CredentialCard_download_toggle')}
+              <input
+                className={styles.toggle}
+                type="checkbox"
+                defaultChecked={false}
+                onClick={handleToggle}
+              />
+              <span />
+            </label>
+          </Modal>,
+          portalRef.current,
+        )}
+    </Fragment>
+  );
+}
+
+function PresentationModal({
+  credential,
+  portalRef,
+}: {
+  credential: Credential;
+  portalRef: RefObject<HTMLElement>;
+}) {
+  const t = browser.i18n.getMessage;
+  const visibility = useBooleanState();
+
+  const [checked, setChecked] = useState(false);
+
+  const handleToggle = useCallback((event) => {
+    setChecked(event.target.checked);
+  }, []);
+
+  const handleConfirm = useCallback(async () => {
+    await setShowPresentationInfo(!checked);
+    visibility.off();
+  }, [checked, visibility]);
+
+  const showInfo = useShowPresentationInfo();
+
+  const isAttested = credential.status === 'attested';
+  const { address } = useParams() as { address: string };
+  if (!address || !isAttested) {
+    return null; // only allow creating presentation when the identity is known and the credential is attested
+  }
+
+  const hash = credential.request.rootHash;
+  const url = generatePath(paths.identity.credentials.presentation, {
+    address,
+    hash,
+  });
+
+  return (
+    <Fragment>
+      {showInfo ? (
+        <button
+          className={styles.presentation}
+          aria-label={t('component_CredentialCard_presentation')}
+          onClick={visibility.on}
+        />
+      ) : (
+        <Link
+          to={url}
+          aria-label={t('component_CredentialCard_presentation')}
+          className={styles.presentation}
+        />
+      )}
+
+      {visibility.current &&
+        portalRef.current &&
+        createPortal(
+          <Modal open className={styles.overlay}>
+            <h2 className={styles.downloadInfo}>
+              {t('component_CredentialCard_presentation_info')}
+            </h2>
+            <Link
+              to={url}
+              className={styles.confirmDownload}
+              onClick={handleConfirm}
+            >
+              {t('component_CredentialCard_presentation_confirm')}
+            </Link>
+            <p className={styles.buttonsLine}>
+              <a
+                href="https://support.kilt.io/support/solutions/articles/80000987961"
+                target="_blank"
+                rel="noreferrer"
+                className={styles.learnMore}
+              >
+                {t('component_CredentialCard_more')}
+              </a>
+              <button
+                type="button"
+                className={styles.cancelDownload}
+                onClick={visibility.off}
+              >
+                {t('common_action_close')}
+              </button>
+            </p>
+            <label className={styles.toggleLabel}>
+              {t('component_CredentialCard_presentation_toggle')}
+              <input
+                className={styles.toggle}
+                type="checkbox"
+                defaultChecked={false}
+                onClick={handleToggle}
+              />
+              <span />
+            </label>
+          </Modal>,
+          portalRef.current,
+        )}
+    </Fragment>
+  );
+}
+
 interface Props {
   credential: Credential;
   expand?: boolean;
@@ -133,47 +387,19 @@ export function CredentialCard({
   };
 
   usePendingCredentialCheck(credential);
-  const { status } = credential;
 
   const expanded = useBooleanState(expand);
 
-  const contents = Object.entries(credential.request.claim.contents);
-
-  const download = getCredentialDownload(credential);
-
   const cardRef = useRef<HTMLLIElement>(null);
-
   useScrollIntoView(expanded.current, cardRef);
 
-  const deleteModal = useBooleanState();
+  const portalRef = useRef<HTMLDivElement>(null);
 
-  const handleDeleteConfirm = useCallback(async () => {
-    await deleteCredential(credential);
-    deleteModal.off();
-  }, [credential, deleteModal]);
+  const { features } = useConfiguration();
 
-  const showDownloadMessage = useSWR(credential, async (credential) => {
-    const showMessage = await getShowDownloadInfo();
-    return !credential.isDownloaded && Boolean(showMessage);
-  }).data;
-
-  const handleDownloadLinkClick = useCallback(async () => {
-    await saveCredential({ ...credential, isDownloaded: true });
-  }, [credential]);
-
-  const [checked, setChecked] = useState(false);
-
-  const handleToggle = useCallback((event) => {
-    setChecked(event.target.checked);
-  }, []);
-
-  const downloadModal = useBooleanState();
-
-  const handleDownloadConfirm = useCallback(async () => {
-    await saveCredential({ ...credential, isDownloaded: true });
-    await setShowDownloadInfo(!checked);
-    downloadModal.off();
-  }, [credential, checked, downloadModal]);
+  const { status, isDownloaded, request, name } = credential;
+  const contents = Object.entries(request.claim.contents);
+  const label = contents[0][1];
 
   return (
     <li
@@ -184,21 +410,19 @@ export function CredentialCard({
       {!expanded.current && (
         <button
           type="button"
-          className={
-            credential.isDownloaded ? styles.expand : styles.downloadPrompt
-          }
+          className={isDownloaded ? styles.expand : styles.downloadPrompt}
           onClick={expanded.on}
           aria-label={
-            !credential.isDownloaded
-              ? `${credential.name} ${contents[0][1]} ${t(
+            !isDownloaded
+              ? `${name} ${label} ${t(
                   'component_CredentialCard_download_prompt',
                 )}`
               : undefined
           }
         >
           <section className={styles.collapsedCredential}>
-            <h4 className={styles.collapsedName}>{credential.name}</h4>
-            <p className={styles.collapsedValue}>{contents[0][1]}</p>
+            <h4 className={styles.collapsedName}>{name}</h4>
+            <p className={styles.collapsedValue}>{label}</p>
           </section>
         </button>
       )}
@@ -215,35 +439,16 @@ export function CredentialCard({
             )}
             {buttons && (
               <Fragment>
-                {showDownloadMessage ? (
-                  <button
-                    className={
-                      credential.isDownloaded
-                        ? styles.download
-                        : styles.downloadPromptExpanded
-                    }
-                    aria-label={t('component_CredentialCard_backup')}
-                    onClick={downloadModal.on}
-                  />
-                ) : (
-                  <a
-                    download={download.name}
-                    href={download.url}
-                    aria-label={t('component_CredentialCard_backup')}
-                    className={
-                      credential.isDownloaded
-                        ? styles.download
-                        : styles.downloadPromptExpanded
-                    }
-                    onClick={handleDownloadLinkClick}
+                <DownloadModal credential={credential} portalRef={portalRef} />
+
+                {features.presentation && isFullDid(request.claim.owner) && (
+                  <PresentationModal
+                    credential={credential}
+                    portalRef={portalRef}
                   />
                 )}
-                <button
-                  type="button"
-                  aria-label={t('component_CredentialCard_remove')}
-                  className={styles.remove}
-                  onClick={deleteModal.on}
-                />
+
+                <DeleteModal credential={credential} portalRef={portalRef} />
               </Fragment>
             )}
           </section>
@@ -287,71 +492,13 @@ export function CredentialCard({
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_hash')}
               </dt>
-              <dd className={styles.detailValue}>
-                {credential.request.rootHash}
-              </dd>
+              <dd className={styles.detailValue}>{request.rootHash}</dd>
             </div>
           </dl>
         </section>
       )}
 
-      {deleteModal.current && (
-        <Modal open className={styles.overlay}>
-          <h1 className={styles.warning}>
-            {t('component_CredentialCard_delete_warning')}
-          </h1>
-          <p className={styles.explanation}>
-            {t('component_CredentialCard_delete_explanation')}
-          </p>
-          <button
-            type="button"
-            className={styles.cancelDelete}
-            onClick={deleteModal.off}
-          >
-            {t('common_action_cancel')}
-          </button>
-          <button
-            type="button"
-            className={styles.confirmDelete}
-            onClick={handleDeleteConfirm}
-          >
-            {t('component_CredentialCard_delete_confirm')}
-          </button>
-        </Modal>
-      )}
-
-      {downloadModal.current && (
-        <Modal open className={styles.overlay}>
-          <h2 className={styles.downloadInfo}>
-            {t('component_CredentialCard_download_info')}
-          </h2>
-          <a
-            download={download.name}
-            href={download.url}
-            className={styles.confirmDownload}
-            onClick={handleDownloadConfirm}
-          >
-            {t('component_CredentialCard_download_confirm')}
-          </a>
-          <button
-            type="button"
-            className={styles.cancelDownload}
-            onClick={downloadModal.off}
-          >
-            {t('common_action_close')}
-          </button>
-          <label className={styles.toggleLabel}>
-            {t('component_CredentialCard_download_toggle')}
-            <input
-              className={styles.toggle}
-              type="checkbox"
-              defaultChecked={false}
-              onClick={handleToggle}
-            />
-            <span />
-          </label>
-        </Modal>
-      )}
+      <div ref={portalRef} />
     </li>
   );
 }

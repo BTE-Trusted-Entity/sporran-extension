@@ -197,6 +197,9 @@
   "component_CredentialCard_backup": {
     "message": "Back up credential"
   },
+  "component_CredentialCard_presentation": {
+    "message": "Create presentation of credential"
+  },
   "component_CredentialCard_remove": {
     "message": "Remove credential"
   },
@@ -253,6 +256,18 @@
   },
   "component_CredentialCard_download_prompt": {
     "message": "(Not backed up)"
+  },
+  "component_CredentialCard_presentation_info": {
+    "message": "Create a version of your credential to save and share"
+  },
+  "component_CredentialCard_presentation_confirm": {
+    "message": "Continue"
+  },
+  "component_CredentialCard_more": {
+    "message": "Learn more"
+  },
+  "component_CredentialCard_presentation_toggle": {
+    "message": "Don’t show this message again"
   },
   "component_ShareCredentialCard_required": {
     "message": "* required"
@@ -1052,5 +1067,14 @@
   },
   "view_DidRepair_error": {
     "message": "On-chain DID update failed"
+  },
+  "view_CreatePresentation_title": {
+    "message": "Customize Credential"
+  },
+  "view_CreatePresentation_subline": {
+    "message": "Select the information to disclose"
+  },
+  "view_CreatePresentation_download": {
+    "message": "Download"
   }
 }

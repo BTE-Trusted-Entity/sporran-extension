@@ -5,6 +5,7 @@ import { identitiesMock, render } from '../../testing/testing';
 import { NEW } from '../../utilities/identities/identities';
 import { parseDidUrl, sameFullDid } from '../../utilities/did/did';
 import { waitForDownloadInfo } from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage.mock';
+import { waitForPresentationInfo } from '../../utilities/showPresentationInfoStorage/showPresentationInfoStorage.mock';
 import {
   credentialsMock,
   CredentialsProviderMock,
@@ -28,12 +29,14 @@ describe('IdentityCredentials', () => {
   it('should render', async () => {
     const { container } = render(<IdentityCredentials identity={identity} />);
     await waitForDownloadInfo();
+    await waitForPresentationInfo();
     expect(container).toMatchSnapshot();
   });
 
   it('should not render credentials for new identity', async () => {
     const { container } = render(<IdentityCredentials identity={NEW} />);
     await waitForDownloadInfo();
+    await waitForPresentationInfo();
     expect(container).toMatchSnapshot();
   });
 
@@ -44,6 +47,7 @@ describe('IdentityCredentials', () => {
       </CredentialsProviderMock>,
     );
     await waitForDownloadInfo();
+    await waitForPresentationInfo();
     expect(container).toMatchSnapshot();
   });
 
@@ -54,6 +58,7 @@ describe('IdentityCredentials', () => {
       </CredentialsProviderMock>,
     );
     await waitForDownloadInfo();
+    await waitForPresentationInfo();
     expect(container).toMatchSnapshot();
   });
 });
