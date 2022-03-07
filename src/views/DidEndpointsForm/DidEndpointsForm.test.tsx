@@ -3,6 +3,7 @@ import { DidServiceEndpoint } from '@kiltprotocol/types';
 import { DidUtils, FullDidDetails } from '@kiltprotocol/did';
 
 import { identitiesMock, render, act } from '../../testing/testing';
+import { getFullDidDetails } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 import '../../components/useCopyButton/useCopyButton.mock';
 
@@ -34,8 +35,8 @@ jest.mocked(DidUtils.parseDidUri).mockReturnValue({
 const detailsPromise = Promise.resolve({
   getEndpoints: () => endpoints,
 } as FullDidDetails);
-// TODO
-// jest.mocked(queryFullDetailsFromIdentifier).mockReturnValue(detailsPromise);
+jest.mock('../../utilities/did/did');
+jest.mocked(getFullDidDetails).mockReturnValue(detailsPromise);
 
 describe('DidEndpointsForm', () => {
   it('should match the snapshot', async () => {
