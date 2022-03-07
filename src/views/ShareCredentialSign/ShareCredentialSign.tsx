@@ -5,11 +5,7 @@ import {
   Credential,
   RequestForAttestation,
 } from '@kiltprotocol/core';
-import {
-  ISubmitCredential,
-  KeyRelationship,
-  MessageBodyType,
-} from '@kiltprotocol/types';
+import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
 
 import * as styles from './ShareCredentialSign.module.css';
 
@@ -66,8 +62,8 @@ export function ShareCredentialSign({
       await request.signWithDidKey(
         keystore,
         didDetails,
-        didDetails.getVerificationKeys(KeyRelationship.authentication),
-        challenge,
+        didDetails.authenticationKey.id,
+        { challenge },
       );
 
       const attestation = await Attestation.query(request.rootHash);

@@ -1,9 +1,10 @@
-import { DidResolver, DidUtils } from '@kiltprotocol/did';
 import {
-  IDidDetails,
-  DidServiceEndpoint,
-  KeyRelationship,
-} from '@kiltprotocol/types';
+  DidDetails,
+  DidUtils,
+  FullDidDetails,
+  LightDidDetails,
+} from '@kiltprotocol/did';
+import { DidServiceEndpoint, IDidDetails } from '@kiltprotocol/types';
 import { Crypto } from '@kiltprotocol/utils';
 
 export function isFullDid(did: IDidDetails['did']): boolean {
@@ -16,12 +17,18 @@ export function isFullDid(did: IDidDetails['did']): boolean {
 
 export async function getDidDetails(
   did: IDidDetails['did'],
-): Promise<IDidDetails> {
-  const resolved = await DidResolver.resolveDoc(did);
-  if (!resolved || !resolved.details) {
+): Promise<DidDetails> {
+  const { identifier } = DidUtils.parseDidUri(did);
+
+  const details = isFullDid(did)
+    ? await FullDidDetails.fromChainInfo(identifier)
+    : LightDidDetails.fromUri(did);
+
+  if (!details) {
     throw new Error(`Cannot resolve DID ${did}`);
   }
-  return resolved.details;
+
+  return details;
 }
 
 export function getFragment(id: DidServiceEndpoint['id']): string {
@@ -74,10 +81,10 @@ export async function needLegacyDidCrypto(did: string): Promise<boolean> {
     return false;
   }
 
-  const didDetails = await getDidDetails(did);
-  const encryptionKey = didDetails.getEncryptionKeys(
-    KeyRelationship.keyAgreement,
-  )[0];
+  const { encryptionKey } = await getDidDetails(did);
+  if (!encryptionKey) {
+    throw new Error(`Cannot find encryption key`);
+  }
   return (
     Crypto.u8aToHex(encryptionKey.publicKey) ===
     '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e'

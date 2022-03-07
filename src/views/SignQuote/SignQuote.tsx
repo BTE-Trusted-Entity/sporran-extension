@@ -8,7 +8,6 @@ import {
   IDidDetails,
   IRequestAttestation,
   ITerms,
-  KeyRelationship,
   MessageBodyType,
 } from '@kiltprotocol/types';
 
@@ -103,7 +102,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       await requestForAttestation.signWithDidKey(
         keystore,
         didDetails,
-        didDetails.getVerificationKeys(KeyRelationship.authentication),
+        didDetails.authenticationKey.id,
       );
 
       const matchingCredentials = filter(credentials, { cTypeTitle });

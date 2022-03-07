@@ -1,10 +1,6 @@
 import ky from 'ky';
-import {
-  IDidDetails,
-  IRequestForAttestation,
-  KeyRelationship,
-} from '@kiltprotocol/types';
-import { DidUtils } from '@kiltprotocol/did';
+import { IDidDetails, IRequestForAttestation } from '@kiltprotocol/types';
+import { DidDetails, DidUtils } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 
 import { getDidDetails } from '../did/did';
@@ -80,18 +76,22 @@ export async function verifyDidConfigResource(
         return false;
       }
 
-      let issuerDidDetails: IDidDetails;
+      let issuerDidDetails: DidDetails;
       try {
         issuerDidDetails = await getDidDetails(issuer);
       } catch {
         return false;
       }
 
+      if (!issuerDidDetails.attestationKey) {
+        return false;
+      }
+
       const { verified } = await DidUtils.verifyDidSignature({
         signature: {
-          keyId: issuerDidDetails.getVerificationKeys(
-            KeyRelationship.assertionMethod,
-          )[0].id,
+          keyId: issuerDidDetails.assembleKeyId(
+            issuerDidDetails.attestationKey.id,
+          ),
           signature: credential.proof.signature as string,
         },
         message: Crypto.coToUInt8(credentialSubject.rootHash),

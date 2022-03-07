@@ -11,16 +11,19 @@ import {
 } from '@polkadot/util-crypto';
 import {
   EncryptionKeyType,
-  IDidDetails,
   IEncryptedMessage,
-  KeyRelationship,
   KeystoreSigner,
   MessageBody,
   NaclBoxCapable,
   VerificationKeyType,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
-import { DidResolver, DidUtils, LightDidDetails } from '@kiltprotocol/did';
+import {
+  DidDetails,
+  DidResolver,
+  DidUtils,
+  LightDidDetails,
+} from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 import { map, max, memoize } from 'lodash-es';
 
@@ -119,12 +122,12 @@ export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
 }
 
 interface IdentityDidCrypto {
-  didDetails: IDidDetails;
+  didDetails: DidDetails;
   keystore: KeystoreSigner;
   sign: (plaintext: string) => { signature: string; didKeyUri: string };
   encrypt: (
     messageBody: MessageBody,
-    dAppDidDetails: IDidDetails,
+    dAppDidDetails: DidDetails,
   ) => Promise<IEncryptedMessage>;
 }
 
@@ -217,19 +220,17 @@ async function fixLightDidBase64Encoding(identityKeypair: KeyringPair) {
     // resulting in an invalid URI, so resolving would throw an exception.
     const details = await getDidDetails(identity.did);
 
-    const keyAgreementKeys = details.getEncryptionKeys(
-      KeyRelationship.keyAgreement,
-    );
+    const { encryptionKey } = details;
 
     // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
-    if (keyAgreementKeys.length === 0) {
+    if (!encryptionKey) {
       throw new Error();
     }
 
     // This public key also means the DID needs to be regenerated
     const troubleKey =
       '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
-    if (Crypto.u8aToHex(keyAgreementKeys[0].publicKey) === troubleKey) {
+    if (Crypto.u8aToHex(encryptionKey.publicKey) === troubleKey) {
       throw new Error();
     }
   } catch {
@@ -275,29 +276,31 @@ export async function getIdentityCryptoFromKeypair(
   function sign(plaintext: string) {
     const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
 
-    const authorizationKey = didDetails.getVerificationKeys(
-      KeyRelationship.authentication,
-    )[0];
-    // TODO: replace with assembleKeyId when available
-    const didKeyUri = `${didDetails.did}#${authorizationKey.id}`;
+    const didKeyUri = didDetails.assembleKeyId(didDetails.authenticationKey.id);
 
     return { signature, didKeyUri };
   }
 
   async function encrypt(
     messageBody: MessageBody,
-    dAppDidDetails: IDidDetails,
+    dAppDidDetails: DidDetails,
   ): Promise<IEncryptedMessage> {
     const message = new Message(
       messageBody,
       didDetails.did,
       dAppDidDetails.did,
     );
+    if (!didDetails.encryptionKey) {
+      throw new Error(`Cannot find own encryption key`);
+    }
+    if (!dAppDidDetails.encryptionKey) {
+      throw new Error(`Cannot find dApp encryption key`);
+    }
     return message.encrypt(
-      didDetails.getEncryptionKeys(KeyRelationship.keyAgreement)[0].id,
+      didDetails.encryptionKey.id,
       didDetails,
       encryptionKeystore,
-      dAppDidDetails.getEncryptionKeys(KeyRelationship.keyAgreement)[0].id,
+      dAppDidDetails.encryptionKey.id,
     );
   }
 
