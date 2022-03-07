@@ -94,7 +94,10 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
         <button type="submit" className={styles.submit}>
           {t('view_UnlockVestedFunds_CTA')}
         </button>
-        <output className={styles.errorTooltip} hidden={!error}>
+        <output
+          className={styles.errorTooltip}
+          hidden={!error || Boolean(txStatus)}
+        >
           {error}
         </output>
       </p>

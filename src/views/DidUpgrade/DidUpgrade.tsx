@@ -147,7 +147,10 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         >
           {t('common_action_sign')}
         </button>
-        <output className={styles.errorTooltip} hidden={!error}>
+        <output
+          className={styles.errorTooltip}
+          hidden={!error || Boolean(status)}
+        >
           {t('view_DidUpgrade_insufficientFunds', asKiltCoins(total, 'costs'))}
         </output>
       </p>
