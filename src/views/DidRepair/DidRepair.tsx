@@ -60,12 +60,12 @@ export function DidRepair({ identity }: Props): JSX.Element | null {
       event.preventDefault();
 
       try {
-        const { keypair } = await passwordField.get(event);
+        const { seed } = await passwordField.get(event);
 
         setSubmitting(true);
         setStatus('pending');
 
-        const hash = await sign(identity, keypair);
+        const hash = await sign(did, seed);
         setTxHash(hash);
 
         await submit(hash);
@@ -76,7 +76,7 @@ export function DidRepair({ identity }: Props): JSX.Element | null {
         setStatus('error');
       }
     },
-    [identity, passwordField],
+    [did, passwordField],
   );
 
   const closeModal = useCallback(() => {

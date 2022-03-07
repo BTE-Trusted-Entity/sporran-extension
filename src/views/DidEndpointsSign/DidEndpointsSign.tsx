@@ -16,7 +16,7 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
-import { getKeystoreFromKeypair } from '../../utilities/identities/identities';
+import { getKeystoreFromSeed } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
 import {
   getFragment,
@@ -60,7 +60,7 @@ export function DidEndpointsSign({
         return;
       }
 
-      const { keypair } = await passwordField.get(event);
+      const { keypair, seed } = await passwordField.get(event);
 
       // getRemoveEndpointExtrinsic expects just the fragment part, contrary to its type definition
       const draft =
@@ -70,7 +70,7 @@ export function DidEndpointsSign({
 
       const authorized = await fullDidDetails.authorizeExtrinsic(
         draft,
-        await getKeystoreFromKeypair(keypair),
+        await getKeystoreFromSeed(seed),
         keypair.address,
       );
 

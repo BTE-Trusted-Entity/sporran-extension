@@ -4,10 +4,7 @@ import { u8aToHex } from '@polkadot/util';
 
 import * as styles from './SignRawDApp.module.css';
 
-import {
-  decryptIdentity,
-  useIdentities,
-} from '../../utilities/identities/identities';
+import { useIdentities } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import { Avatar } from '../../components/Avatar/Avatar';
@@ -37,10 +34,9 @@ export function SignRawDApp(): JSX.Element | null {
         return;
       }
 
-      const { address, data, id } = values;
-      const { password } = await passwordField.get(event);
+      const { data, id } = values;
+      const { keypair } = await passwordField.get(event);
 
-      const keypair = await decryptIdentity(address, password);
       const signature = u8aToHex(keypair.sign(data));
       await backgroundSignRawChannel.return({ id, signature });
 

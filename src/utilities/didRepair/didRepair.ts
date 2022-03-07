@@ -1,5 +1,4 @@
 import BN from 'bn.js';
-import { KeyringPair } from '@polkadot/keyring/types';
 import {
   IDidDetails,
   KeyRelationship,
@@ -12,10 +11,9 @@ import {
 import { DidChain, DidUtils } from '@kiltprotocol/did';
 
 import {
-  getKeystoreFromKeypair,
-  Identity,
-  makeKeyring,
-  deriveDidKeys,
+  getKeystoreFromSeed,
+  getKeypairBySeed,
+  deriveEncryptionKeyFromSeed,
 } from '../identities/identities';
 import { queryFullDetailsFromIdentifier } from '../did/did';
 import { didAuthorizeBatchExtrinsic } from '../didAuthorizeBatchExtrinsic/didAuthorizeBatchExtrinsic';
@@ -23,7 +21,7 @@ import { didAuthorizeBatchExtrinsic } from '../didAuthorizeBatchExtrinsic/didAut
 const { keyAgreement } = KeyRelationship;
 
 async function getSignedTransaction(
-  identity: KeyringPair,
+  seed: Uint8Array,
   fullDid: IDidDetails['did'],
 ): Promise<SubmittableExtrinsic> {
   const fullDidDetails = await queryFullDetailsFromIdentifier(
@@ -47,7 +45,7 @@ async function getSignedTransaction(
 
   const existingKeyId = DidUtils.parseDidUrl(existingKey.id).fragment;
 
-  const { encryptionKey } = deriveDidKeys(identity);
+  const encryptionKey = deriveEncryptionKeyFromSeed(seed);
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
@@ -56,23 +54,24 @@ async function getSignedTransaction(
     await DidChain.getAddKeyExtrinsic(keyAgreement, encryptionKey),
   ]);
 
-  const keystore = await getKeystoreFromKeypair(identity);
+  const keystore = await getKeystoreFromSeed(seed);
+  const keypair = getKeypairBySeed(seed);
 
   const authorized = await didAuthorizeBatchExtrinsic(
     fullDidDetails,
     batchExtrinsic,
     keystore,
-    identity.address,
+    keypair.address,
   );
 
-  return await blockchain.signTx(identity, authorized);
+  return await blockchain.signTx(keypair, authorized);
 }
 
 export async function getFee(did: IDidDetails['did']): Promise<BN> {
-  const fakeIdentity = makeKeyring().createFromUri('//Alice');
+  const fakeSeed = new Uint8Array(32);
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const extrinsic = await getSignedTransaction(fakeIdentity, did);
+  const extrinsic = await getSignedTransaction(fakeSeed, did);
 
   const { partialFee } = await blockchain.api.rpc.payment.queryInfo(
     extrinsic.toHex(),
@@ -83,10 +82,10 @@ export async function getFee(did: IDidDetails['did']): Promise<BN> {
 const currentTx: Record<string, SubmittableExtrinsic> = {};
 
 export async function sign(
-  identity: Identity,
-  sdkIdentity: KeyringPair,
+  did: IDidDetails['did'],
+  seed: Uint8Array,
 ): Promise<string> {
-  const extrinsic = await getSignedTransaction(sdkIdentity, identity.did);
+  const extrinsic = await getSignedTransaction(seed, did);
 
   const hash = extrinsic.hash.toHex();
   currentTx[hash] = extrinsic;

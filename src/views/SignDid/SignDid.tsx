@@ -5,7 +5,7 @@ import * as styles from './SignDid.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { getIdentityCryptoFromKeypair } from '../../utilities/identities/identities';
+import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
 import { isFullDid } from '../../utilities/did/did';
 
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
@@ -37,8 +37,8 @@ export function SignDid({ identity }: Props): JSX.Element | null {
     async (event) => {
       event.preventDefault();
 
-      const { keypair } = await passwordField.get(event);
-      const { sign } = await getIdentityCryptoFromKeypair(keypair);
+      const { seed } = await passwordField.get(event);
+      const { sign } = await getIdentityCryptoFromSeed(seed);
 
       await backgroundSignDidChannel.return(sign(plaintext));
 

@@ -15,7 +15,10 @@ import { KeyringPair } from '@polkadot/keyring/types';
 
 import * as styles from './PasswordField.module.css';
 
-import { decryptIdentity } from '../../utilities/identities/identities';
+import {
+  decryptIdentity,
+  getKeypairBySeed,
+} from '../../utilities/identities/identities';
 import { usePasswordType } from '../usePasswordType/usePasswordType';
 import { useInterval } from '../../utilities/useInterval/useInterval';
 import {
@@ -42,6 +45,7 @@ type SetPasswordGetterType = Dispatch<
 interface Value {
   password: string;
   keypair: KeyringPair;
+  seed: Uint8Array;
 }
 
 export function usePasswordField(): {
@@ -104,9 +108,9 @@ export function PasswordField({
       const useSaved = savedPassword && providedPassword === asterisks;
       const password = useSaved ? savedPassword : providedPassword;
 
-      let keypair: KeyringPair;
+      let seed: Uint8Array;
       try {
-        keypair = await decryptIdentity(address, password);
+        seed = await decryptIdentity(address, password);
       } catch (exception) {
         if (exceptionToError(exception).message === 'Invalid password') {
           setError(t('component_PasswordField_password_incorrect'));
@@ -120,7 +124,8 @@ export function PasswordField({
         await forgetPasswordChannel.get(address);
       }
 
-      return { password, keypair };
+      const keypair = getKeypairBySeed(seed);
+      return { password, keypair, seed };
     },
     [address, rememberRef, savedPassword, t],
   );
