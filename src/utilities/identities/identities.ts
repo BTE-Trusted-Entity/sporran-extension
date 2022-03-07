@@ -154,7 +154,7 @@ export function deriveDidKeys(
 ): {
   authenticationKey: KeyringPair;
   encryptionKey: {
-    type: EncryptionKeyType.X25519;
+    type: EncryptionKeyType;
     publicKey: Uint8Array;
     secretKey: Uint8Array;
   };
