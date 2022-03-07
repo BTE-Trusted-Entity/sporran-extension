@@ -15,20 +15,25 @@ export function isFullDid(did: IDidDetails['did']): boolean {
   return DidUtils.parseDidUri(did).type === 'full';
 }
 
-export async function getDidDetails(
+export async function getFullDidDetails(
   did: IDidDetails['did'],
-): Promise<DidDetails> {
+): Promise<FullDidDetails> {
   const { identifier } = DidUtils.parseDidUri(did);
 
-  const details = isFullDid(did)
-    ? await FullDidDetails.fromChainInfo(identifier)
-    : LightDidDetails.fromUri(did);
-
+  const details = await FullDidDetails.fromChainInfo(identifier);
   if (!details) {
     throw new Error(`Cannot resolve DID ${did}`);
   }
 
   return details;
+}
+
+export async function getDidDetails(
+  did: IDidDetails['did'],
+): Promise<DidDetails> {
+  return isFullDid(did)
+    ? await getFullDidDetails(did)
+    : LightDidDetails.fromUri(did);
 }
 
 export function getFragment(id: DidServiceEndpoint['id']): string {

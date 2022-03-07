@@ -9,12 +9,7 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import {
-  DidBatchBuilder,
-  DidChain,
-  DidUtils,
-  FullDidDetails,
-} from '@kiltprotocol/did';
+import { DidBatchBuilder, DidChain, DidUtils } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 
 import {
@@ -23,6 +18,7 @@ import {
   makeKeyring,
   deriveDidKeys,
 } from '../identities/identities';
+import { getFullDidDetails } from '../did/did';
 
 const { keyAgreement } = KeyRelationship;
 
@@ -30,12 +26,7 @@ async function getSignedTransaction(
   identity: KeyringPair,
   fullDid: IDidDetails['did'],
 ): Promise<SubmittableExtrinsic> {
-  const fullDidDetails = await FullDidDetails.fromChainInfo(
-    DidUtils.parseDidUri(fullDid).identifier,
-  );
-  if (!fullDidDetails) {
-    throw new Error(`Could not resolve DID ${fullDid}`);
-  }
+  const fullDidDetails = await getFullDidDetails(fullDid);
 
   const existingKey = fullDidDetails.encryptionKey;
   if (!existingKey) {

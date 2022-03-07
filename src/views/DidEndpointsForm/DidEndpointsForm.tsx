@@ -2,7 +2,6 @@ import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { Link, Prompt, useHistory, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
-import { DidUtils, FullDidDetails } from '@kiltprotocol/did';
 import { last } from 'lodash-es';
 
 import * as styles from './DidEndpointsForm.module.css';
@@ -12,7 +11,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
-import { getFragment } from '../../utilities/did/did';
+import { getFragment, getFullDidDetails } from '../../utilities/did/did';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { generatePath, paths } from '../paths';
 
@@ -225,11 +224,7 @@ export function DidEndpointsForm({
   const [endpoints, setEndpoints] = useState<DidServiceEndpoint[]>();
   useEffect(() => {
     (async () => {
-      const { identifier } = DidUtils.parseDidUri(did);
-      const details = await FullDidDetails.fromChainInfo(identifier);
-      if (!details) {
-        throw new Error(`Could not resolve DID ${did}`);
-      }
+      const details = await getFullDidDetails(did);
       setEndpoints(details.getEndpoints());
     })();
   }, [address, did, history]);

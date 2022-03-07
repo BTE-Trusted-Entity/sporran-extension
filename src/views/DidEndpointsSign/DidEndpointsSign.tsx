@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
-import { DidChain, DidUtils, FullDidDetails } from '@kiltprotocol/did';
+import { DidChain, FullDidDetails } from '@kiltprotocol/did';
 
 import * as styles from './DidEndpointsSign.module.css';
 
@@ -18,7 +18,7 @@ import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { getKeystoreFromKeypair } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { getFragment } from '../../utilities/did/did';
+import { getFragment, getFullDidDetails } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 
 interface Props {
@@ -38,11 +38,7 @@ export function DidEndpointsSign({
   const [fullDidDetails, setFullDidDetails] = useState<FullDidDetails>();
   useEffect(() => {
     (async () => {
-      const { identifier } = DidUtils.parseDidUri(did);
-      const details = await FullDidDetails.fromChainInfo(identifier);
-      if (!details) {
-        throw new Error(`Could not resolve DID ${did}`);
-      }
+      const details = await getFullDidDetails(did);
       setFullDidDetails(details);
     })();
   }, [did]);
