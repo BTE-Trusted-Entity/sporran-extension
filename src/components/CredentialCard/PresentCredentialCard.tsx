@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import * as styles from './CredentialCard.module.css';
 
@@ -27,6 +27,10 @@ export function PresentCredentialCard({
     },
     [onSelect],
   );
+
+  useEffect(() => {
+    onSelect(Object.keys(request.claim.contents));
+  }, [onSelect, request.claim.contents]);
 
   const statuses = {
     pending: t('component_CredentialCard_pending'),
