@@ -14,7 +14,7 @@ export interface ConfigurationType {
 const publicFeatures: Features = {
   endpoint: false,
   dotsama: false,
-  presentation: false,
+  presentation: true,
 };
 
 export const internalFeatures: Features = {
@@ -25,7 +25,7 @@ export const internalFeatures: Features = {
 
 // Duplicates the value in src/static/manifest.json
 // We can’t use browser.runtime.getManifest().version, as it’s unavailable in injected scripts
-const version = '2022.3.2';
+const version = '2022.3.9';
 
 export const configuration: ConfigurationType = {
   version,
