@@ -3,10 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './SignDApp.module.css';
 
-import {
-  decryptIdentity,
-  useIdentities,
-} from '../../utilities/identities/identities';
+import { useIdentities } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
@@ -38,9 +35,8 @@ export function SignDApp(): JSX.Element | null {
         return;
       }
 
-      const { address, id } = input;
-      const { password } = await passwordField.get(event);
-      const keypair = await decryptIdentity(address, password);
+      const { id } = input;
+      const { keypair } = await passwordField.get(event);
 
       const extrinsic = await getExtrinsic(input);
       const { signature } = extrinsic.sign(keypair);

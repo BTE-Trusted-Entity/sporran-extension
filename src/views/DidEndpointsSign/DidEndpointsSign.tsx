@@ -16,7 +16,7 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
-import { getKeystoreFromKeypair } from '../../utilities/identities/identities';
+import { getKeystoreFromSeed } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
 import { getFragment, getFullDidDetails } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
@@ -53,7 +53,7 @@ export function DidEndpointsSign({
         return;
       }
 
-      const { keypair } = await passwordField.get(event);
+      const { keypair, seed } = await passwordField.get(event);
 
       // getRemoveEndpointExtrinsic expects just the fragment part, contrary to its type definition
       const draft =
@@ -63,7 +63,7 @@ export function DidEndpointsSign({
 
       const authorized = await fullDidDetails.authorizeExtrinsic(
         draft,
-        await getKeystoreFromKeypair(keypair),
+        await getKeystoreFromSeed(seed),
         keypair.address,
       );
 
@@ -113,7 +113,10 @@ export function DidEndpointsSign({
         <button type="submit" className={styles.submit} disabled={submitting}>
           {t('common_action_sign')}
         </button>
-        <output className={styles.errorTooltip} hidden={!unpaidCosts}>
+        <output
+          className={styles.errorTooltip}
+          hidden={!unpaidCosts || Boolean(modalProps)}
+        >
           {t('view_DidEndpointsSign_insufficientFunds', unpaidCosts)}
         </output>
       </p>
