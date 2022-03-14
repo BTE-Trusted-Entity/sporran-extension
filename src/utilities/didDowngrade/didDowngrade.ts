@@ -31,7 +31,7 @@ async function getSignedTransaction(
   const fullDidDetails = await getFullDidDetails(fullDid);
 
   const extrinsic = await DidChain.getDeleteDidExtrinsic(
-    await DidChain.queryEndpointsCounts(fullDidDetails.did),
+    await DidChain.queryEndpointsCounts(fullDidDetails.identifier),
   );
   const keystore = await getKeystoreFromKeypair(identity);
 

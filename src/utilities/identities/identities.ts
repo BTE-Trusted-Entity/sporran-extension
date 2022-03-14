@@ -290,7 +290,7 @@ export async function getIdentityCryptoFromKeypair(
       getDidEncryptionKey(didDetails).id,
       didDetails,
       encryptionKeystore,
-      getDidEncryptionKey(dAppDidDetails).id,
+      dAppDidDetails.assembleKeyId(getDidEncryptionKey(dAppDidDetails).id),
     );
   }
 
@@ -399,13 +399,13 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
   }
 
   const { lightDid, fullDid, type } = parseDidUri(identity.did);
+  const wasOnChain = type === 'full';
 
   const resolved = await DidResolver.resolveDoc(identity.did);
-  const isOnChain = Boolean(
-    resolved && resolved.metadata && resolved.metadata.canonicalId,
-  );
+  const isOnChain = wasOnChain
+    ? Boolean(resolved && resolved.metadata && !resolved.metadata.deactivated)
+    : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
 
-  const wasOnChain = type === 'full';
   if (wasOnChain && !isOnChain) {
     await saveIdentity({ ...identity, did: lightDid });
   }

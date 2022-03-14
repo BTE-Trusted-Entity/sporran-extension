@@ -8,7 +8,6 @@ import {
   naclSeal,
 } from '@polkadot/util-crypto';
 import {
-  DidEncryptionKey,
   DidPublicKey,
   EncryptionKeyType,
   IEncryptedMessage,
@@ -28,7 +27,7 @@ import { getDidEncryptionKey } from '../did/did';
 interface TabEncryption {
   authenticationKey: KeyringPair;
   encryptionKey: Keypair;
-  sporranEncryptionDidKey: DidEncryptionKey;
+  sporranEncryptionDidKeyUri: DidPublicKey['id'];
   dAppEncryptionDidKey: ResolvedDidKey;
   decrypt: (encrypted: IEncryptedMessage) => Promise<IMessage>;
   encrypt: (messageBody: MessageBody) => Promise<IEncryptedMessage>;
@@ -97,16 +96,19 @@ export async function getTabEncryption(
     },
     encryptionKey,
   });
-  const sporranEncryptionKey = getDidEncryptionKey(sporranDidDetails);
+  const sporranEncryptionDidKey = getDidEncryptionKey(sporranDidDetails);
+  const sporranEncryptionDidKeyUri = sporranDidDetails.assembleKeyId(
+    sporranEncryptionDidKey.id,
+  );
 
-  const dAppEncryptionKey = (await DidResolver.resolveKey(
+  const dAppEncryptionDidKey = (await DidResolver.resolveKey(
     dAppEncryptionKeyId,
   )) as ResolvedDidKey;
-  if (!dAppEncryptionKey) {
+  if (!dAppEncryptionDidKey) {
     throw new Error('Receiver key agreement key not found');
   }
 
-  const dAppDid = dAppEncryptionKey.controller;
+  const dAppDid = dAppEncryptionDidKey.controller;
   await verifyDidConfigResource(dAppDid, sender.url);
 
   async function decrypt(encrypted: IEncryptedMessage): Promise<IMessage> {
@@ -116,18 +118,18 @@ export async function getTabEncryption(
   async function encrypt(messageBody: MessageBody): Promise<IEncryptedMessage> {
     const message = new Message(messageBody, sporranDidDetails.did, dAppDid);
     return message.encrypt(
-      sporranEncryptionKey.id,
+      sporranEncryptionDidKey.id,
       sporranDidDetails,
       keystore,
-      dAppEncryptionKey.id,
+      dAppEncryptionKeyId as DidPublicKey['id'],
     );
   }
 
   tabEncryptions[tabId] = {
     authenticationKey,
     encryptionKey,
-    sporranEncryptionDidKey: sporranEncryptionKey,
-    dAppEncryptionDidKey: dAppEncryptionKey,
+    sporranEncryptionDidKeyUri,
+    dAppEncryptionDidKey,
     decrypt,
     encrypt,
   };

@@ -14,7 +14,7 @@ export async function produceEncryptedChallenge(
 
   const encryption = await getTabEncryption(sender, dAppEncryptionKeyId);
 
-  const { dAppEncryptionDidKey, sporranEncryptionDidKey } = encryption;
+  const { dAppEncryptionDidKey, sporranEncryptionDidKeyUri } = encryption;
 
   const { sealed, nonce } = naclSeal(
     Crypto.coToUInt8(challenge),
@@ -23,7 +23,7 @@ export async function produceEncryptedChallenge(
   );
 
   return {
-    encryptionKeyId: sporranEncryptionDidKey.id,
+    encryptionKeyId: sporranEncryptionDidKeyUri,
     encryptedChallenge: Crypto.u8aToHex(sealed),
     nonce: Crypto.u8aToHex(nonce),
   };
