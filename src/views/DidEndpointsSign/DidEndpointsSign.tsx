@@ -120,7 +120,10 @@ export function DidEndpointsSign({
         <button type="submit" className={styles.submit} disabled={submitting}>
           {t('common_action_sign')}
         </button>
-        <output className={styles.errorTooltip} hidden={!unpaidCosts}>
+        <output
+          className={styles.errorTooltip}
+          hidden={!unpaidCosts || Boolean(modalProps)}
+        >
           {t('view_DidEndpointsSign_insufficientFunds', unpaidCosts)}
         </output>
       </p>

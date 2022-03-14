@@ -118,7 +118,10 @@ export function DidRepair({ identity }: Props): JSX.Element | null {
         >
           {t('common_action_sign')}
         </button>
-        <output className={styles.errorTooltip} hidden={!error}>
+        <output
+          className={styles.errorTooltip}
+          hidden={!error || Boolean(status)}
+        >
           {t('view_DidRepair_insufficientFunds', asKiltCoins(fee, 'costs'))}
         </output>
       </p>
