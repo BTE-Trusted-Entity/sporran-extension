@@ -5,7 +5,10 @@ import cx from 'classnames';
 
 import * as styles from './CredentialCard.module.css';
 
-import { Credential } from '../../utilities/credentials/credentials';
+import {
+  Credential,
+  usePendingCredentialCheck,
+} from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { Identity } from '../../utilities/identities/types';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
@@ -31,6 +34,8 @@ export function ShareCredentialCard({
   isSelected = false,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
+
+  usePendingCredentialCheck(credential);
 
   const expanded = useBooleanState();
 
