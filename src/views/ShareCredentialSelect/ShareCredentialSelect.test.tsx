@@ -1,3 +1,5 @@
+import { Attestation } from '@kiltprotocol/core';
+
 import { render } from '../../testing/testing';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
@@ -6,7 +8,6 @@ import {
   mockUnknownCType,
 } from '../../utilities/credentials/CredentialsProvider.mock';
 import { parseDidUrl, sameFullDid } from '../../utilities/did/did';
-import { usePendingCredentialCheck } from '../../utilities/credentials/credentials';
 
 import { paths } from '../paths';
 
@@ -19,8 +20,8 @@ jest.mocked(parseDidUrl).mockReturnValue({
 } as ReturnType<typeof parseDidUrl>);
 jest.mocked(sameFullDid).mockReturnValue(true);
 
-jest.mock('../../utilities/credentials/credentials');
-jest.mocked(usePendingCredentialCheck).mockReturnValue();
+jest.mock('@kiltprotocol/core', () => ({ Attestation: { query: jest.fn() } }));
+jest.mocked(Attestation.query).mockResolvedValue(null);
 
 describe('ShareCredentialSelect', () => {
   it('should render', async () => {
