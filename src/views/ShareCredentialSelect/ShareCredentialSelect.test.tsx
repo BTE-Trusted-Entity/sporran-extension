@@ -6,6 +6,7 @@ import {
   mockUnknownCType,
 } from '../../utilities/credentials/CredentialsProvider.mock';
 import { parseDidUrl, sameFullDid } from '../../utilities/did/did';
+import { usePendingCredentialCheck } from '../../utilities/credentials/credentials';
 
 import { paths } from '../paths';
 
@@ -17,6 +18,9 @@ jest.mocked(parseDidUrl).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as ReturnType<typeof parseDidUrl>);
 jest.mocked(sameFullDid).mockReturnValue(true);
+
+jest.mock('../../utilities/credentials/credentials');
+jest.mocked(usePendingCredentialCheck).mockReturnValue();
 
 describe('ShareCredentialSelect', () => {
   it('should render', async () => {
