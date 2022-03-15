@@ -1,3 +1,5 @@
+import { Attestation } from '@kiltprotocol/core';
+
 import { render } from '../../testing/testing';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
@@ -17,6 +19,9 @@ jest.mocked(parseDidUrl).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as ReturnType<typeof parseDidUrl>);
 jest.mocked(sameFullDid).mockReturnValue(true);
+
+jest.mock('@kiltprotocol/core', () => ({ Attestation: { query: jest.fn() } }));
+jest.mocked(Attestation.query).mockResolvedValue(null);
 
 describe('ShareCredentialSelect', () => {
   it('should render', async () => {
