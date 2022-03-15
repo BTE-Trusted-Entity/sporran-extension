@@ -12,15 +12,20 @@ import {
   sr25519PairFromSeed,
 } from '@polkadot/util-crypto';
 import {
-  IDidDetails,
+  EncryptionKeyType,
   IEncryptedMessage,
-  KeyRelationship,
   KeystoreSigner,
   MessageBody,
   NaclBoxCapable,
+  VerificationKeyType,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
-import { LightDidDetails, DidUtils, DidChain } from '@kiltprotocol/did';
+import {
+  DidDetails,
+  DidResolver,
+  DidUtils,
+  LightDidDetails,
+} from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 import { map, max, memoize } from 'lodash-es';
 
@@ -29,7 +34,7 @@ import {
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 
-import { getDidDetails, parseDidUrl } from '../did/did';
+import { getDidDetails, getDidEncryptionKey, parseDidUri } from '../did/did';
 import { storage } from '../storage/storage';
 
 import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
@@ -123,12 +128,12 @@ export function getKeypairBySeed(seed: Uint8Array): KeyringPair {
 }
 
 interface IdentityDidCrypto {
-  didDetails: IDidDetails;
+  didDetails: DidDetails;
   keystore: KeystoreSigner;
   sign: (plaintext: string) => { signature: string; didKeyUri: string };
   encrypt: (
     messageBody: MessageBody,
-    dAppDidDetails: IDidDetails,
+    dAppDidDetails: DidDetails,
   ) => Promise<IEncryptedMessage>;
 }
 
@@ -137,7 +142,7 @@ function deriveAuthenticationKey(seed: Uint8Array): KeyringPair {
 }
 
 export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
-  type: string;
+  type: EncryptionKeyType;
   publicKey: Uint8Array;
   secretKey: Uint8Array;
 } {
@@ -146,7 +151,7 @@ export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
   const { secretKey } = keyFromPath(keypair, path, 'sr25519');
   return {
     ...naclBoxPairFromSecret(blake2AsU8a(secretKey)),
-    type: 'x25519',
+    type: EncryptionKeyType.X25519,
   };
 }
 
@@ -163,7 +168,7 @@ function deriveEncryptionKeyLegacy(seed: Uint8Array) {
     .slice(24); // first 24 bytes are the nonce
 
   const encryptionKeypair = naclBoxPairFromSecret(secret);
-  return { ...encryptionKeypair, type: 'x25519' };
+  return { ...encryptionKeypair, type: EncryptionKeyType.X25519 };
 }
 
 export async function getKeystoreFromSeed(
@@ -190,7 +195,7 @@ async function fixLightDidIssues(seed: Uint8Array) {
     return;
   }
 
-  const parsed = identity.did && DidUtils.parseDidUrl(identity.did);
+  const parsed = identity.did && DidUtils.parseDidUri(identity.did);
   if (parsed && parsed.type !== 'light') {
     return;
   }
@@ -200,17 +205,13 @@ async function fixLightDidIssues(seed: Uint8Array) {
     // resulting in an invalid URI, so resolving would throw an exception.
     const details = await getDidDetails(identity.did);
 
-    const keyAgreementKeys = details.getKeys(KeyRelationship.keyAgreement);
-
     // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
-    if (keyAgreementKeys.length === 0) {
-      throw new Error();
-    }
+    const encryptionKey = getDidEncryptionKey(details);
 
     // This public key also means the DID needs to be regenerated
     const troubleKey =
       '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
-    if (keyAgreementKeys[0].publicKeyHex === troubleKey) {
+    if (Crypto.u8aToHex(encryptionKey.publicKey) === troubleKey) {
       throw new Error();
     }
   } catch {
@@ -256,13 +257,15 @@ export async function getIdentityCryptoFromSeed(
 
   function sign(plaintext: string) {
     const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
-    const didKeyUri = didDetails.getKeyIds(KeyRelationship.authentication)[0];
+
+    const didKeyUri = didDetails.assembleKeyId(didDetails.authenticationKey.id);
+
     return { signature, didKeyUri };
   }
 
   async function encrypt(
     messageBody: MessageBody,
-    dAppDidDetails: IDidDetails,
+    dAppDidDetails: DidDetails,
   ): Promise<IEncryptedMessage> {
     const message = new Message(
       messageBody,
@@ -270,9 +273,10 @@ export async function getIdentityCryptoFromSeed(
       dAppDidDetails.did,
     );
     return message.encrypt(
-      didDetails.getKeys(KeyRelationship.keyAgreement)[0],
-      dAppDidDetails.getKeys(KeyRelationship.keyAgreement)[0],
+      getDidEncryptionKey(didDetails).id,
+      didDetails,
       encryptionKeystore,
+      dAppDidDetails.assembleKeyId(getDidEncryptionKey(dAppDidDetails).id),
     );
   }
 
@@ -297,7 +301,13 @@ export async function encryptIdentity(
 export function getLightDidFromSeed(seed: Uint8Array): LightDidDetails {
   const authenticationKey = deriveAuthenticationKey(seed);
   const encryptionKey = deriveEncryptionKeyFromSeed(seed);
-  return new LightDidDetails({ authenticationKey, encryptionKey });
+  return LightDidDetails.fromDetails({
+    authenticationKey: {
+      ...authenticationKey,
+      type: VerificationKeyType.Sr25519,
+    },
+    encryptionKey,
+  });
 }
 
 async function getIdentityName(): Promise<{ name: string; index: number }> {
@@ -336,16 +346,12 @@ export async function importIdentity(
   const seed = mnemonicToMiniSecret(backupPhrase);
 
   const lightDidDetails = getLightDidFromSeed(seed);
-  const keystore = await getKeystoreFromSeed(seed);
-  const { did: fullDid } = await DidUtils.upgradeDid(
-    lightDidDetails,
-    address,
-    keystore,
-  );
+  const resolved = await DidResolver.resolveDoc(lightDidDetails.did);
 
-  const isOnChain = Boolean(await DidChain.queryDidDetails(fullDid));
-
-  const did = isOnChain ? fullDid : lightDidDetails.did;
+  const did =
+    resolved && resolved.metadata && resolved.metadata.canonicalId
+      ? resolved.metadata.canonicalId
+      : lightDidDetails.did;
 
   const { name, index } = await getIdentityName();
 
@@ -378,11 +384,14 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
     return;
   }
 
-  const { lightDid, fullDid, type } = parseDidUrl(identity.did);
-
-  const isOnChain = Boolean(await DidChain.queryDidDetails(fullDid));
-
+  const { lightDid, fullDid, type } = parseDidUri(identity.did);
   const wasOnChain = type === 'full';
+
+  const resolved = await DidResolver.resolveDoc(identity.did);
+  const isOnChain = wasOnChain
+    ? Boolean(resolved && resolved.metadata && !resolved.metadata.deactivated)
+    : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
+
   if (wasOnChain && !isOnChain) {
     await saveIdentity({ ...identity, did: lightDid });
   }

@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { IDidServiceEndpoint } from '@kiltprotocol/types';
+import { DidServiceEndpoint } from '@kiltprotocol/types';
 
 import { Identity } from '../../utilities/identities/types';
 import { DidEndpointsForm } from '../DidEndpointsForm/DidEndpointsForm';
@@ -15,7 +15,7 @@ export function DidEndpointsFlow({ identity }: Props): JSX.Element {
   const history = useHistory();
 
   const [type, setType] = useState<'add' | 'remove'>('add');
-  const [values, setValues] = useState<IDidServiceEndpoint | undefined>();
+  const [values, setValues] = useState<DidServiceEndpoint | undefined>();
 
   const { address } = identity;
   const signPath = generatePath(paths.identity.did.manage.endpoints.sign, {

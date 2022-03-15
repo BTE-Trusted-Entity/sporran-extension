@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
-import { IDidServiceEndpoint } from '@kiltprotocol/types';
-import { DidChain, DidUtils, FullDidDetails } from '@kiltprotocol/did';
+import { DidServiceEndpoint } from '@kiltprotocol/types';
+import { DidChain, FullDidDetails } from '@kiltprotocol/did';
 
 import * as styles from './DidEndpointsSign.module.css';
 
@@ -18,16 +18,13 @@ import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { getKeystoreFromSeed } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import {
-  getFragment,
-  queryFullDetailsFromIdentifier,
-} from '../../utilities/did/did';
+import { getFragment, getFullDidDetails } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 
 interface Props {
   identity: Identity;
   type: 'add' | 'remove';
-  endpoint: IDidServiceEndpoint;
+  endpoint: DidServiceEndpoint;
 }
 
 export function DidEndpointsSign({
@@ -41,11 +38,7 @@ export function DidEndpointsSign({
   const [fullDidDetails, setFullDidDetails] = useState<FullDidDetails>();
   useEffect(() => {
     (async () => {
-      const { identifier } = DidUtils.parseDidUrl(did);
-      const details = await queryFullDetailsFromIdentifier(identifier);
-      if (!details) {
-        throw new Error(`Could not resolve DID ${did}`);
-      }
+      const details = await getFullDidDetails(did);
       setFullDidDetails(details);
     })();
   }, [did]);

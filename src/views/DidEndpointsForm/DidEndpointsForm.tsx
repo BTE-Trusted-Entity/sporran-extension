@@ -1,8 +1,7 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { Link, Prompt, useHistory, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
-import { IDidServiceEndpoint } from '@kiltprotocol/types';
-import { DidUtils } from '@kiltprotocol/did';
+import { DidServiceEndpoint } from '@kiltprotocol/types';
 import { last } from 'lodash-es';
 
 import * as styles from './DidEndpointsForm.module.css';
@@ -12,10 +11,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
-import {
-  getFragment,
-  queryFullDetailsFromIdentifier,
-} from '../../utilities/did/did';
+import { getFragment, getFullDidDetails } from '../../utilities/did/did';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { generatePath, paths } from '../paths';
 
@@ -34,9 +30,9 @@ function DidEndpointCard({
   startUrl,
   onRemove,
 }: {
-  endpoint: IDidServiceEndpoint;
+  endpoint: DidServiceEndpoint;
   startUrl?: string;
-  onRemove: (endpoint: IDidServiceEndpoint) => void;
+  onRemove: (endpoint: DidServiceEndpoint) => void;
 }): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -108,7 +104,7 @@ function DidNewEndpoint({
   tooMany,
   startUrl,
 }: {
-  onAdd: (endpoint: IDidServiceEndpoint) => void;
+  onAdd: (endpoint: DidServiceEndpoint) => void;
   tooMany: boolean;
   startUrl?: string;
 }): JSX.Element {
@@ -211,8 +207,8 @@ function DidNewEndpoint({
 
 interface Props {
   identity: Identity;
-  onAdd: (endpoint: IDidServiceEndpoint) => void;
-  onRemove: (endpoint: IDidServiceEndpoint) => void;
+  onAdd: (endpoint: DidServiceEndpoint) => void;
+  onRemove: (endpoint: DidServiceEndpoint) => void;
 }
 
 export function DidEndpointsForm({
@@ -225,14 +221,10 @@ export function DidEndpointsForm({
 
   const { did, address } = identity;
 
-  const [endpoints, setEndpoints] = useState<IDidServiceEndpoint[]>();
+  const [endpoints, setEndpoints] = useState<DidServiceEndpoint[]>();
   useEffect(() => {
     (async () => {
-      const { identifier } = DidUtils.parseDidUrl(did);
-      const details = await queryFullDetailsFromIdentifier(identifier);
-      if (!details) {
-        throw new Error(`Could not resolve DID ${did}`);
-      }
+      const details = await getFullDidDetails(did);
       setEndpoints(details.getEndpoints());
     })();
   }, [address, did, history]);

@@ -1,13 +1,13 @@
 import { Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { find, filter } from 'lodash-es';
+import { filter, find } from 'lodash-es';
 import BN from 'bn.js';
-import { RequestForAttestation, Credential } from '@kiltprotocol/core';
+import { Credential, RequestForAttestation } from '@kiltprotocol/core';
 import {
-  IDidDetails,
-  ITerms,
   IClaim,
+  IDidDetails,
   IRequestAttestation,
+  ITerms,
   MessageBodyType,
 } from '@kiltprotocol/types';
 
@@ -101,7 +101,11 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         },
       );
 
-      await requestForAttestation.signWithDid(keystore, didDetails);
+      await requestForAttestation.signWithDidKey(
+        keystore,
+        didDetails,
+        didDetails.authenticationKey.id,
+      );
 
       const matchingCredentials = filter(credentials, { cTypeTitle });
       const index = matchingCredentials.length + 1;

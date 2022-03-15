@@ -14,16 +14,16 @@ export async function produceEncryptedChallenge(
 
   const encryption = await getTabEncryption(sender, dAppEncryptionKeyId);
 
-  const { dAppEncryptionDidKey, sporranEncryptionDidKey } = encryption;
+  const { dAppEncryptionDidKey, sporranEncryptionDidKeyUri } = encryption;
 
   const { sealed, nonce } = naclSeal(
     Crypto.coToUInt8(challenge),
     encryption.encryptionKey.secretKey,
-    Crypto.coToUInt8(dAppEncryptionDidKey.publicKeyHex),
+    dAppEncryptionDidKey.publicKey,
   );
 
   return {
-    encryptionKeyId: sporranEncryptionDidKey.id,
+    encryptionKeyId: sporranEncryptionDidKeyUri,
     encryptedChallenge: Crypto.u8aToHex(sealed),
     nonce: Crypto.u8aToHex(nonce),
   };

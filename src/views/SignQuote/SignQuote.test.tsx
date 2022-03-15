@@ -1,7 +1,7 @@
 import { render } from '../../testing/testing';
 import { mockTerms } from '../../utilities/cTypes/cTypes.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
-import { parseDidUrl } from '../../utilities/did/did';
+import { parseDidUri } from '../../utilities/did/did';
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { paths } from '../paths';
@@ -10,9 +10,9 @@ import { SignQuote } from './SignQuote';
 
 jest.mock('../../utilities/did/did');
 
-jest.mocked(parseDidUrl).mockReturnValue({
+jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-} as ReturnType<typeof parseDidUrl>);
+} as ReturnType<typeof parseDidUri>);
 
 describe('SignQuote', () => {
   it('should render', async () => {

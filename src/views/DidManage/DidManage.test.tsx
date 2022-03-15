@@ -4,15 +4,15 @@ import { identitiesMock as identities, render } from '../../testing/testing';
 
 import '../../components/useCopyButton/useCopyButton.mock';
 
-import { parseDidUrl } from '../../utilities/did/did';
+import { parseDidUri } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 
 import { DidManage } from './DidManage';
 
 jest.mock('../../utilities/did/did');
-jest.mocked(parseDidUrl).mockReturnValue({
+jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-} as ReturnType<typeof parseDidUrl>);
+} as ReturnType<typeof parseDidUri>);
 
 describe('DidManage', () => {
   it('should match the snapshot', async () => {

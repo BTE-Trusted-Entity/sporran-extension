@@ -19,6 +19,9 @@ export {
 } from '../utilities/identities/IdentitiesProvider.mock';
 
 jest.mock('@polkadot/keyring', () => ({}));
+jest.mock('@polkadot/api-augment', () => ({}));
+jest.mock('@polkadot/util');
+jest.mock('@polkadot/wasm-crypto', () => ({}));
 jest.mock('@polkadot/util-crypto', () => ({}));
 jest.mock('@kiltprotocol/core', () => ({}));
 jest.mock('@kiltprotocol/did', () => ({}));
@@ -61,6 +64,7 @@ declare const HTMLDialogElement: {
   new (): HTMLDialogElement;
   readonly prototype: HTMLDialogElement;
 };
+
 export function mockDialogShowModal(): void {
   (
     HTMLDialogElement.prototype as unknown as {

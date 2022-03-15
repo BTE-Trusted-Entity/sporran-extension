@@ -10,7 +10,7 @@ import { Balance } from '@kiltprotocol/core';
 import { signTransfer, submitTransfer } from './transfers';
 
 jest.mock('@kiltprotocol/core', () => ({
-  Balance: { makeTransfer: jest.fn() },
+  Balance: { getTransferTx: jest.fn() },
 }));
 jest.mock('@kiltprotocol/chain-helpers', () => ({
   BlockchainApiConnection: {
@@ -48,7 +48,7 @@ describe('transfers', () => {
         transaction: true,
       } as unknown as SubmittableExtrinsic;
       jest
-        .mocked(Balance.makeTransfer)
+        .mocked(Balance.getTransferTx)
         .mockImplementation(async () => extrinsic);
 
       const txHash = await signTransfer({
@@ -58,7 +58,7 @@ describe('transfers', () => {
         tip: new BN(0),
       });
 
-      expect(Balance.makeTransfer).toHaveBeenCalledWith(
+      expect(Balance.getTransferTx).toHaveBeenCalledWith(
         'recipient-address',
         expect.anything(),
       );

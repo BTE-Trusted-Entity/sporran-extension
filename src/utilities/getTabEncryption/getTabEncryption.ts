@@ -8,31 +8,32 @@ import {
   naclSeal,
 } from '@polkadot/util-crypto';
 import {
-  IDidKeyDetails,
+  DidPublicKey,
+  EncryptionKeyType,
   IEncryptedMessage,
   IMessage,
-  KeyRelationship,
   MessageBody,
   NaclBoxCapable,
+  ResolvedDidKey,
+  VerificationKeyType,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
-import { DefaultResolver, LightDidDetails } from '@kiltprotocol/did';
+import { DidResolver, LightDidDetails } from '@kiltprotocol/did';
 
 import { makeKeyring } from '../identities/identities';
 import { verifyDidConfigResource } from '../wellKnownDid/wellKnownDid';
+import { getDidEncryptionKey } from '../did/did';
 
 interface TabEncryption {
   authenticationKey: KeyringPair;
   encryptionKey: Keypair;
-  sporranEncryptionDidKey: IDidKeyDetails;
-  dAppEncryptionDidKey: IDidKeyDetails;
+  sporranEncryptionDidKeyUri: DidPublicKey['id'];
+  dAppEncryptionDidKey: ResolvedDidKey;
   decrypt: (encrypted: IEncryptedMessage) => Promise<IMessage>;
   encrypt: (messageBody: MessageBody) => Promise<IEncryptedMessage>;
 }
 
 const tabEncryptions: Record<number, TabEncryption> = {};
-
-const { keyAgreement } = KeyRelationship;
 
 function makeKeystore({
   secretKey,
@@ -63,7 +64,7 @@ function makeKeystore({
 
 export async function getTabEncryption(
   sender: Runtime.MessageSender,
-  dAppEncryptionKeyId?: IDidKeyDetails['id'],
+  dAppEncryptionKeyId?: DidPublicKey['id'],
 ): Promise<TabEncryption> {
   if (!sender.tab || !sender.tab.id || !sender.url) {
     throw new Error('Message not from a tab');
@@ -80,7 +81,7 @@ export async function getTabEncryption(
 
   const encryptionKey = {
     ...naclBoxPairFromSecret(ed25519PairFromRandom().secretKey),
-    type: 'x25519',
+    type: EncryptionKeyType.X25519,
   };
   const authenticationKey = makeKeyring()
     .addFromSeed(encryptionKey.secretKey.slice(0, 32))
@@ -88,42 +89,47 @@ export async function getTabEncryption(
 
   const keystore = makeKeystore(encryptionKey);
 
-  const sporranDidDetails = new LightDidDetails({
-    authenticationKey,
+  const sporranDidDetails = LightDidDetails.fromDetails({
+    authenticationKey: {
+      ...authenticationKey,
+      type: VerificationKeyType.Sr25519,
+    },
     encryptionKey,
   });
-  const sporranEncryptionKey = sporranDidDetails
-    .getKeys(keyAgreement)
-    .pop() as IDidKeyDetails<string>;
-
-  const dAppEncryptionKey = await DefaultResolver.resolveKey(
-    dAppEncryptionKeyId,
+  const sporranEncryptionDidKey = getDidEncryptionKey(sporranDidDetails);
+  const sporranEncryptionDidKeyUri = sporranDidDetails.assembleKeyId(
+    sporranEncryptionDidKey.id,
   );
-  if (!dAppEncryptionKey) {
+
+  const dAppEncryptionDidKey = (await DidResolver.resolveKey(
+    dAppEncryptionKeyId,
+  )) as ResolvedDidKey;
+  if (!dAppEncryptionDidKey) {
     throw new Error('Receiver key agreement key not found');
   }
 
-  const dAppDid = dAppEncryptionKey.controller;
+  const dAppDid = dAppEncryptionDidKey.controller;
   await verifyDidConfigResource(dAppDid, sender.url);
 
   async function decrypt(encrypted: IEncryptedMessage): Promise<IMessage> {
-    return Message.decrypt(encrypted, keystore);
+    return Message.decrypt(encrypted, keystore, sporranDidDetails);
   }
 
   async function encrypt(messageBody: MessageBody): Promise<IEncryptedMessage> {
     const message = new Message(messageBody, sporranDidDetails.did, dAppDid);
     return message.encrypt(
-      sporranEncryptionKey,
-      dAppEncryptionKey as IDidKeyDetails,
+      sporranEncryptionDidKey.id,
+      sporranDidDetails,
       keystore,
+      dAppEncryptionKeyId as DidPublicKey['id'],
     );
   }
 
   tabEncryptions[tabId] = {
     authenticationKey,
     encryptionKey,
-    sporranEncryptionDidKey: sporranEncryptionKey,
-    dAppEncryptionDidKey: dAppEncryptionKey,
+    sporranEncryptionDidKeyUri,
+    dAppEncryptionDidKey,
     decrypt,
     encrypt,
   };

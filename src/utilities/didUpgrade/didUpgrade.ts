@@ -4,7 +4,7 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { DidChain, DidUtils } from '@kiltprotocol/did';
+import { DidChain, FullDidCreationBuilder } from '@kiltprotocol/did';
 
 import {
   getKeystoreFromSeed,
@@ -12,6 +12,7 @@ import {
   getLightDidFromSeed,
   getKeypairBySeed,
 } from '../identities/identities';
+import { getDidEncryptionKey, parseDidUri } from '../did/did';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
@@ -24,17 +25,21 @@ export async function getDeposit(): Promise<BN> {
 
 async function getSignedTransaction(seed: Uint8Array): Promise<DidTransaction> {
   const keystore = await getKeystoreFromSeed(seed);
+  const keypair = getKeypairBySeed(seed);
 
   const lightDidDetails = getLightDidFromSeed(seed);
-
-  const keypair = getKeypairBySeed(seed);
-  const { extrinsic, did } = await DidUtils.upgradeDid(
-    lightDidDetails,
-    keypair.address,
-    keystore,
-  );
+  const { fullDid: did } = parseDidUri(lightDidDetails.did);
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
+  const encryptionKey = getDidEncryptionKey(lightDidDetails);
+
+  const extrinsic = await new FullDidCreationBuilder(
+    blockchain.api,
+    lightDidDetails.authenticationKey,
+  )
+    .addEncryptionKey(encryptionKey)
+    .consume(keystore, keypair.address);
+
   const tx = await blockchain.signTx(keypair, extrinsic);
   return { extrinsic: tx, did };
 }
