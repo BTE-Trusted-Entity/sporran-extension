@@ -2,8 +2,6 @@ import { isInternal } from './variant';
 
 interface Features {
   endpoint: boolean;
-  dotsama: boolean;
-  presentation: boolean;
 }
 
 export interface ConfigurationType {
@@ -13,14 +11,10 @@ export interface ConfigurationType {
 
 const publicFeatures: Features = {
   endpoint: false,
-  dotsama: false,
-  presentation: true,
 };
 
 export const internalFeatures: Features = {
   endpoint: true,
-  dotsama: true,
-  presentation: true,
 };
 
 // Duplicates the value in src/static/manifest.json

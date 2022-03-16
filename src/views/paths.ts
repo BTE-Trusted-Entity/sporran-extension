@@ -50,9 +50,6 @@ export const paths = {
           edit: '/identity/:address/did/endpoints/:id?',
           sign: '/identity/:address/did/endpoints/sign',
         },
-        connect: {
-          start: '/identity/:address/did/connect',
-        },
       },
       repair: '/identity/:address/did/repair',
     },

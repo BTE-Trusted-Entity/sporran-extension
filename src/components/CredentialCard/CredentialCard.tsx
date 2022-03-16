@@ -30,7 +30,6 @@ import {
   useShowPresentationInfo,
 } from '../../utilities/showPresentationInfoStorage/showPresentationInfoStorage';
 import { isFullDid } from '../../utilities/did/did';
-import { useConfiguration } from '../../configuration/useConfiguration';
 import { generatePath, paths } from '../../views/paths';
 
 export function useScrollIntoView(
@@ -395,8 +394,6 @@ export function CredentialCard({
 
   const portalRef = useRef<HTMLDivElement>(null);
 
-  const { features } = useConfiguration();
-
   const { status, isDownloaded, request, name } = credential;
   const contents = Object.entries(request.claim.contents);
   const label = contents[0][1];
@@ -441,7 +438,7 @@ export function CredentialCard({
               <Fragment>
                 <DownloadModal credential={credential} portalRef={portalRef} />
 
-                {features.presentation && isFullDid(request.claim.owner) && (
+                {isFullDid(request.claim.owner) && (
                   <PresentationModal
                     credential={credential}
                     portalRef={portalRef}
