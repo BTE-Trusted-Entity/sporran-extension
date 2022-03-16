@@ -51,6 +51,13 @@ export const paths = {
           sign: '/identity/:address/did/endpoints/sign',
         },
       },
+      web3name: {
+        create: {
+          info: '/identity/:address/did/web3name/create/info',
+          form: '/identity/:address/did/web3name/create/form',
+          sign: '/identity/:address/did/web3name/create/sign',
+        },
+      },
       repair: '/identity/:address/did/repair',
     },
   },

@@ -27,6 +27,12 @@
   --wide-button-icon: url('../../components/images/service-endpoint.svg');
 }
 
+.web3Name {
+  composes: link;
+
+  --wide-button-icon: url('../../components/images/web3name.svg');
+}
+
 .downgrade {
   composes: link;
 

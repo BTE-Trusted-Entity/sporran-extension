@@ -5,4 +5,5 @@ export const subline: string;
 export const link: string;
 export const didLine: string;
 export const endpoints: string;
+export const web3Name: string;
 export const downgrade: string;
