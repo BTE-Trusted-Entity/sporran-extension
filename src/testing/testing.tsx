@@ -5,6 +5,7 @@ export * from '@testing-library/react';
 import { act, render as externalRender } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import dialogPolyfill from 'dialog-polyfill';
+import { HTMLDialog } from 'react-dialog-polyfill';
 
 import { ConfigurationProvider } from '../configuration/ConfigurationContext';
 import { IdentitiesProviderMock } from '../utilities/identities/IdentitiesProvider.mock';
@@ -88,16 +89,11 @@ export async function waitForDialogUpdate(): Promise<void> {
 // this declaration is not present in the TS anymore (https://github.com/DefinitelyTyped/DefinitelyTyped/pull/54052)
 // but for us the implementation is provided by the dialog-polyfill
 declare const HTMLDialogElement: {
-  new (): HTMLDialogElement;
-  readonly prototype: HTMLDialogElement;
+  readonly prototype: HTMLDialog;
 };
 
 export function mockDialogShowModal(): void {
-  (
-    HTMLDialogElement.prototype as unknown as {
-      showModal: () => void;
-    }
-  ).showModal = jest.fn();
+  HTMLDialogElement.prototype.showModal = jest.fn();
 }
 
 /** Helps against the warning `Not implemented: HTMLFormElement.prototype.submit`
