@@ -15,6 +15,7 @@ import {
   useCurrentIdentity,
   useIdentities,
 } from '../../utilities/identities/identities';
+
 import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
 import { Welcome } from '../Welcome/Welcome';
 import { CreateIdentity } from '../CreateIdentity/CreateIdentity';
