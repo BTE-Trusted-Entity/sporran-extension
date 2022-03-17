@@ -93,7 +93,7 @@ declare const HTMLDialogElement: {
 };
 
 export function mockDialogShowModal(): void {
-  HTMLDialogElement.prototype.showModal = jest.fn();
+  jest.spyOn(HTMLDialogElement.prototype, 'showModal');
 }
 
 /** Helps against the warning `Not implemented: HTMLFormElement.prototype.submit`
