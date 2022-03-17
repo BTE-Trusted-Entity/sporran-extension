@@ -27,12 +27,6 @@
   --wide-button-icon: url('../../components/images/service-endpoint.svg');
 }
 
-.connect {
-  composes: link;
-
-  --wide-button-icon: url('../../components/images/dotsama.svg');
-}
-
 .downgrade {
   composes: link;
 

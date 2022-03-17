@@ -15,7 +15,7 @@ import {
   useCurrentIdentity,
   useIdentities,
 } from '../../utilities/identities/identities';
-import { useConfiguration } from '../../configuration/useConfiguration';
+
 import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
 import { Welcome } from '../Welcome/Welcome';
 import { CreateIdentity } from '../CreateIdentity/CreateIdentity';
@@ -69,8 +69,6 @@ export function SpecificIdentityRouter({
     }
   }, [address, identities]);
 
-  const { features } = useConfiguration();
-
   const redirectIsPending = useRedirectToCurrent();
   if (redirectIsPending) {
     return null; // redirect pending
@@ -93,11 +91,9 @@ export function SpecificIdentityRouter({
           <SendTokenFlow identity={identity} />
         </Route>
 
-        {features.presentation && (
-          <Route path={paths.identity.credentials.presentation}>
-            <CreatePresentation identity={identity} />
-          </Route>
-        )}
+        <Route path={paths.identity.credentials.presentation}>
+          <CreatePresentation identity={identity} />
+        </Route>
 
         <Route path={paths.identity.credentials.base}>
           <IdentityCredentials identity={identity} />

@@ -914,9 +914,6 @@
   "view_DidManage_endpoints": {
     "message": "Service endpoints"
   },
-  "view_DidManage_connect": {
-    "message": "Connect to Dotsama address"
-  },
   "view_DidManage_downgrade": {
     "message": "Remove on-chain DID"
   },
