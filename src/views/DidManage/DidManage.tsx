@@ -15,7 +15,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidManage({ identity }: Props): JSX.Element | null {
+export function DidManage({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const { address } = identity;
