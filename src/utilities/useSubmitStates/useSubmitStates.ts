@@ -11,6 +11,7 @@ import BN from 'bn.js';
 import { makeKeyring } from '../identities/identities';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { transformBalances } from '../transformBalances/transformBalances';
+import { getExtrinsicFee } from '../getExtrinsicFee/getExtrinsicFee';
 
 async function getUnpaidCosts(
   { address }: { address: string },
@@ -22,19 +23,17 @@ async function getUnpaidCosts(
   const fakeIdentity = makeKeyring().createFromUri('//Alice');
   const extrinsic = await blockchain.signTx(fakeIdentity, draft, tip);
 
-  const { partialFee } = await blockchain.api.rpc.payment.queryInfo(
-    extrinsic.toHex(),
-  );
+  const fee = await getExtrinsicFee(extrinsic);
 
   const { transferable } = transformBalances(
     await Balance.getBalances(address),
   );
-  const sufficient = transferable.gte(partialFee);
+  const sufficient = transferable.gte(fee);
   if (sufficient) {
     return;
   }
 
-  return partialFee;
+  return fee;
 }
 
 async function submit(

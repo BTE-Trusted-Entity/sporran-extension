@@ -7,6 +7,7 @@ import { SubmittableExtrinsic } from '@kiltprotocol/types';
 import { KeyringPair } from '@polkadot/keyring/types';
 
 import { transformBalances } from '../transformBalances/transformBalances';
+import { getExtrinsicFee } from '../getExtrinsicFee/getExtrinsicFee';
 
 type VestInput = KeyringPair;
 
@@ -27,12 +28,12 @@ export async function signVest(keypair: VestInput): Promise<string> {
   const tx = api.tx.vesting.vest();
   const signedTx = await blockchain.signTx(keypair, tx);
 
-  const { partialFee } = await api.rpc.payment.queryInfo(signedTx.toHex());
+  const fee = await getExtrinsicFee(signedTx);
   const { usableForFees } = transformBalances(
     await Balance.getBalances(keypair.address),
   );
 
-  if (usableForFees.lt(partialFee)) {
+  if (usableForFees.lt(fee)) {
     throw new Error(insufficientFunds);
   }
 

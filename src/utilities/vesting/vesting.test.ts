@@ -7,6 +7,7 @@ import { Balance } from '@kiltprotocol/core';
 import BN from 'bn.js';
 
 import { originalBalancesMock } from '../balanceChanges/balanceChanges.mock';
+import { getExtrinsicFee } from '../getExtrinsicFee/getExtrinsicFee';
 
 import { hasVestedFunds, signVest, submitVest } from './vesting';
 
@@ -35,9 +36,8 @@ const txMock = {
   },
 };
 
-const queryInfoMock = {
-  partialFee: new BN(0.5e15),
-};
+jest.mock('../getExtrinsicFee/getExtrinsicFee');
+jest.mocked(getExtrinsicFee).mockResolvedValue(new BN(0.5e15));
 
 const apiMock = {
   query: {
@@ -45,9 +45,6 @@ const apiMock = {
   },
   tx: {
     vesting: { vest: jest.fn().mockReturnValue(txMock) },
-  },
-  rpc: {
-    payment: { queryInfo: jest.fn().mockResolvedValue(queryInfoMock) },
   },
 };
 
@@ -93,9 +90,7 @@ describe('vesting', () => {
 
       expect(apiMock.tx.vesting.vest).toHaveBeenCalled();
 
-      expect(apiMock.rpc.payment.queryInfo).toHaveBeenCalledWith(
-        'Signed tx hex',
-      );
+      expect(getExtrinsicFee).toHaveBeenCalledWith(signedTxMock);
 
       expect(chainMock.signTx).toHaveBeenCalledWith(identityMock, txMock);
 

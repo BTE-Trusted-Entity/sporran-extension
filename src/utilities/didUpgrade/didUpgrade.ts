@@ -13,6 +13,7 @@ import {
   getKeypairBySeed,
 } from '../identities/identities';
 import { getDidEncryptionKey, parseDidUri } from '../did/did';
+import { getExtrinsicFee } from '../getExtrinsicFee/getExtrinsicFee';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
@@ -46,14 +47,8 @@ async function getSignedTransaction(seed: Uint8Array): Promise<DidTransaction> {
 
 export async function getFee(): Promise<BN> {
   const fakeSeed = new Uint8Array(32);
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-
   const { extrinsic } = await getSignedTransaction(fakeSeed);
-
-  const { partialFee } = await blockchain.api.rpc.payment.queryInfo(
-    extrinsic.toHex(),
-  );
-  return partialFee;
+  return getExtrinsicFee(extrinsic);
 }
 
 const currentTx: Record<string, DidTransaction> = {};

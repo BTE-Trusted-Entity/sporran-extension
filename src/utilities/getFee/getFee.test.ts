@@ -1,8 +1,12 @@
 import BN from 'bn.js';
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import {
+  Blockchain,
+  BlockchainApiConnection,
+} from '@kiltprotocol/chain-helpers';
 import { Keyring } from '@polkadot/keyring';
 
 import { makeKeyring } from '../identities/identities';
+import { getExtrinsicFee } from '../getExtrinsicFee/getExtrinsicFee';
 
 import { getFee } from './getFee';
 
@@ -13,6 +17,13 @@ jest.mock('@kiltprotocol/chain-helpers', () => ({
 }));
 jest.mock('../../utilities/identities/identities');
 
+jest.mock('../getExtrinsicFee/getExtrinsicFee');
+jest.mocked(getExtrinsicFee).mockResolvedValue({
+  toString() {
+    return 'partial fee';
+  },
+} as BN);
+
 describe('getFee', () => {
   it('should respond with fee to the proper messages', async () => {
     const txMock = {
@@ -20,16 +31,8 @@ describe('getFee', () => {
         return 'hex transaction';
       },
     };
-    const infoMock = {
-      partialFee: {
-        toString() {
-          return 'partial fee';
-        },
-      },
-    };
     const apiMock = {
       tx: { balances: { transfer: jest.fn().mockReturnValue(txMock) } },
-      rpc: { payment: { queryInfo: jest.fn().mockResolvedValue(infoMock) } },
     };
 
     const signedTxMock = {
@@ -42,9 +45,9 @@ describe('getFee', () => {
       signTx: jest.fn().mockResolvedValue(signedTxMock),
     };
 
-    (
-      BlockchainApiConnection.getConnectionOrConnect as jest.Mock
-    ).mockResolvedValue(blockchainMock);
+    jest
+      .mocked(BlockchainApiConnection.getConnectionOrConnect)
+      .mockResolvedValue(blockchainMock as unknown as Blockchain);
 
     const identityMock = { Alice: true };
     jest.mocked(makeKeyring).mockReturnValue({
@@ -71,8 +74,6 @@ describe('getFee', () => {
       txMock,
       expect.anything(),
     );
-    expect(apiMock.rpc.payment.queryInfo).toHaveBeenCalledWith(
-      'Signed tx hash',
-    );
+    expect(getExtrinsicFee).toHaveBeenCalledWith(signedTxMock);
   });
 });
