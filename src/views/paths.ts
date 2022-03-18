@@ -53,6 +53,7 @@ export const paths = {
       },
       web3name: {
         create: {
+          base: '/identity/:address/did/web3name/create',
           info: '/identity/:address/did/web3name/create/info',
           form: '/identity/:address/did/web3name/create/form',
           sign: '/identity/:address/did/web3name/create/sign',
