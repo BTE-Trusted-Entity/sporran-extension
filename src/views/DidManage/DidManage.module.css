@@ -21,6 +21,11 @@
   margin-top: 1.5rem;
 }
 
+.web3NameLine {
+  composes: line from '../../components/CopyValue/CopyValue.module.css';
+  text-align: center;
+}
+
 .endpoints {
   composes: link;
 

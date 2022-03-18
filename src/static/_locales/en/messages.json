@@ -1114,5 +1114,40 @@
   },
   "view_W3NCreateForm_taken": {
     "message": "Too late, this web3name is already taken"
+  },
+  "view_W3NCreateSign_heading": {
+    "message": "web3name"
+  },
+  "view_W3NCreateSign_subline": {
+    "message": "Connect a web3name to your on-chain DID"
+  },
+  "view_W3NCreateSign_pending": {
+    "message": "Create web3name is being processed"
+  },
+  "view_W3NCreateSign_success": {
+    "message": "Create web3name was successful"
+  },
+  "view_W3NCreateSign_error": {
+    "message": "Create web3name failed"
+  },
+  "view_W3NCreateSign_total": {
+    "message": "Total cost: "
+  },
+  "view_W3NCreateSign_deposit": {
+    "message": " Deposit "
+  },
+  "view_W3NCreateSign_fee": {
+    "message": " + fee "
+  },
+  "view_W3NCreateSign_label": {
+    "message": "web3name: "
+  },
+  "view_W3NCreateSign_insufficientFunds": {
+    "message": "You need at least $cost$ KILTs to create the web3name",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
   }
 }
