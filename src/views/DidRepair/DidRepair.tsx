@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
-import useSWR from 'swr';
-
 import * as styles from './DidRepair.module.css';
 
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 import { Identity } from '../../utilities/identities/types';
 import {
   PasswordField,
@@ -33,7 +32,7 @@ function useCosts(
   fee?: BN;
   error: boolean;
 } {
-  const fee = useSWR(did, getFee).data;
+  const fee = useSwrDataOrThrow(did, getFee, 'DidRepair.getFee');
 
   const balance = useAddressBalance(address);
   const error = Boolean(balance && fee && balance.transferable.lt(fee));

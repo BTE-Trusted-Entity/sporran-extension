@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import useSWR from 'swr';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './ExternalAccess.module.css';
@@ -7,6 +8,7 @@ import * as styles from './ExternalAccess.module.css';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import {
+  authorizedKey,
   getAuthorized,
   setAuthorized,
 } from '../../utilities/authorizedStorage/authorizedStorage';
@@ -15,32 +17,18 @@ import { paths } from '../paths';
 export function ExternalAccess(): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const [hosts, setHosts] = useState<Record<string, boolean> | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      setHosts(await getAuthorized());
-    })();
-  }, [setHosts]);
+  const hosts = useSWR(authorizedKey, getAuthorized).data;
 
   const handleChange = useCallback(
-    (event) => {
+    async (event) => {
       if (!hosts) {
         return;
       }
 
       const { name, checked } = event.target;
 
-      setHosts({
-        ...hosts,
-        [name]: checked,
-      });
-
-      (async () => {
-        const authorized = await getAuthorized();
-        authorized[name] = checked;
-        await setAuthorized(authorized);
-      })();
+      hosts[name] = checked;
+      await setAuthorized(hosts);
     },
     [hosts],
   );

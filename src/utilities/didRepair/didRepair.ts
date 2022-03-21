@@ -1,25 +1,19 @@
 import BN from 'bn.js';
-import {
-  IDidDetails,
-  KeyRelationship,
-  SubmittableExtrinsic,
-} from '@kiltprotocol/types';
+import { IDidDetails, SubmittableExtrinsic } from '@kiltprotocol/types';
 import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { DidBatchBuilder, DidChain, DidUtils } from '@kiltprotocol/did';
+import { FullDidUpdateBuilder } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 
 import {
-  getKeystoreFromSeed,
-  getKeypairBySeed,
   deriveEncryptionKeyFromSeed,
+  getKeypairBySeed,
+  getKeystoreFromSeed,
 } from '../identities/identities';
 import { getFullDidDetails } from '../did/did';
 import { getExtrinsicFee } from '../getExtrinsicFee/getExtrinsicFee';
-
-const { keyAgreement } = KeyRelationship;
 
 async function getSignedTransaction(
   seed: Uint8Array,
@@ -39,8 +33,6 @@ async function getSignedTransaction(
     throw new Error('DID repair not needed');
   }
 
-  const existingKeyId = DidUtils.parseDidUri(existingKey.id).fragment;
-
   const encryptionKey = deriveEncryptionKeyFromSeed(seed);
 
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
@@ -48,11 +40,12 @@ async function getSignedTransaction(
   const keystore = await getKeystoreFromSeed(seed);
   const keypair = getKeypairBySeed(seed);
 
-  const authorized = await new DidBatchBuilder(blockchain.api, fullDidDetails)
-    .addMultipleExtrinsics([
-      await DidChain.getRemoveKeyExtrinsic(keyAgreement, existingKeyId),
-      await DidChain.getAddKeyExtrinsic(keyAgreement, encryptionKey),
-    ])
+  const authorized = await new FullDidUpdateBuilder(
+    blockchain.api,
+    fullDidDetails,
+  )
+    .removeEncryptionKey(existingKey.id)
+    .addEncryptionKey(encryptionKey)
     .consume(keystore, keypair.address);
 
   return await blockchain.signTx(keypair, authorized);

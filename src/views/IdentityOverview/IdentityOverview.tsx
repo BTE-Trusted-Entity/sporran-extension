@@ -2,10 +2,9 @@ import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useParams, Redirect } from 'react-router-dom';
 
-import useSWR from 'swr';
-
 import * as styles from './IdentityOverview.module.css';
 
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
@@ -47,7 +46,11 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const showDownloadPrompt =
     credentials && credentials.some(({ isDownloaded }) => !isDownloaded);
 
-  const hasLegacyDid = useSWR(identity.did, needLegacyDidCrypto).data;
+  const hasLegacyDid = useSwrDataOrThrow(
+    identity.did,
+    needLegacyDidCrypto,
+    'needLegacyDidCrypto',
+  );
 
   const upgradeDid = !isFullDid(identity.did);
   const manageDid = isFullDid(identity.did) && !hasLegacyDid;

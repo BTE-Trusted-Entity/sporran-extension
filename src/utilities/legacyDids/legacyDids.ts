@@ -1,11 +1,10 @@
-import useSWR from 'swr';
-
 import { needLegacyDidCrypto } from '../did/did';
 import { IdentitiesMap } from '../identities/types';
 import { useIdentities } from '../identities/identities';
+import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
 
 export async function getLegacyDidIdentities(
-  identities: IdentitiesMap,
+  identities: IdentitiesMap = {},
 ): Promise<IdentitiesMap> {
   const legacyDidIdentities: IdentitiesMap = {};
 
@@ -20,5 +19,11 @@ export async function getLegacyDidIdentities(
 export function useLegacyDidIdentities(): IdentitiesMap {
   const identities = useIdentities().data;
 
-  return useSWR(identities, getLegacyDidIdentities).data || {};
+  return (
+    useSwrDataOrThrow(
+      identities,
+      getLegacyDidIdentities,
+      'getLegacyDidIdentities',
+    ) || {}
+  );
 }

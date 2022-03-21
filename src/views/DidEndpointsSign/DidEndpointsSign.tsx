@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
-import { DidChain, FullDidDetails } from '@kiltprotocol/did';
+import { DidChain } from '@kiltprotocol/did';
 
 import * as styles from './DidEndpointsSign.module.css';
 
@@ -20,6 +20,7 @@ import { getKeystoreFromSeed } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
 import { getFragment, getFullDidDetails } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 interface Props {
   identity: Identity;
@@ -35,13 +36,11 @@ export function DidEndpointsSign({
   const t = browser.i18n.getMessage;
   const { address, did } = identity;
 
-  const [fullDidDetails, setFullDidDetails] = useState<FullDidDetails>();
-  useEffect(() => {
-    (async () => {
-      const details = await getFullDidDetails(did);
-      setFullDidDetails(details);
-    })();
-  }, [did]);
+  const fullDidDetails = useSwrDataOrThrow(
+    did,
+    getFullDidDetails,
+    'getFullDidDetails',
+  );
 
   const passwordField = usePasswordField();
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();

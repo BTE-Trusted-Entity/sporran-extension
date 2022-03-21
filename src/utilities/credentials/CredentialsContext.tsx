@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
-import useSWR from 'swr';
+
+import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
 
 import { Credential, getList, LIST_KEY, getCredentials } from './credentials';
 
@@ -14,8 +15,10 @@ export function CredentialsProvider({
 }): JSX.Element {
   const [credentials, setCredentials] = useState<Credential[]>();
 
-  const { data: list } = useSWR(LIST_KEY, async () =>
-    getCredentials(await getList()),
+  const list = useSwrDataOrThrow(
+    LIST_KEY,
+    async () => getCredentials(await getList()),
+    'getCredentials',
   );
 
   useEffect(() => {

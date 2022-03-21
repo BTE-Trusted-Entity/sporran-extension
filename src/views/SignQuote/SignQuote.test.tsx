@@ -1,5 +1,5 @@
 import { render } from '../../testing/testing';
-import { mockTerms } from '../../utilities/cTypes/cTypes.mock';
+import { mockTerms } from '../../utilities/mockTerms/mockTerms';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { parseDidUri } from '../../utilities/did/did';
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
