@@ -1,4 +1,3 @@
-import useSWR from 'swr';
 import { Link, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -6,6 +5,7 @@ import * as styles from './BalanceUpdateLink.module.css';
 
 import { paths } from '../../views/paths';
 import { hasVestedFunds } from '../../utilities/vesting/vesting';
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 interface Props {
   address: string;
@@ -14,7 +14,7 @@ interface Props {
 export function BalanceUpdateLink({ address }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const enabled = useSWR(address, hasVestedFunds).data;
+  const enabled = useSwrDataOrThrow(address, hasVestedFunds, 'hasVestedFunds');
 
   return (
     <Link

@@ -1,5 +1,5 @@
-import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
-import { Link, Prompt, useHistory, useParams } from 'react-router-dom';
+import { RefObject, useCallback, useEffect, useRef } from 'react';
+import { Link, Prompt, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
 import { last } from 'lodash-es';
@@ -14,6 +14,7 @@ import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { getFragment, getFullDidDetails } from '../../utilities/did/did';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { generatePath, paths } from '../paths';
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 function useScrollEndpoint(ref: RefObject<HTMLLIElement>, id: string) {
   const params: { id: string } = useParams();
@@ -217,17 +218,14 @@ export function DidEndpointsForm({
   onRemove,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const history = useHistory();
 
   const { did, address } = identity;
 
-  const [endpoints, setEndpoints] = useState<DidServiceEndpoint[]>();
-  useEffect(() => {
-    (async () => {
-      const details = await getFullDidDetails(did);
-      setEndpoints(details.getEndpoints());
-    })();
-  }, [address, did, history]);
+  const endpoints = useSwrDataOrThrow(
+    did,
+    async (did) => (await getFullDidDetails(did)).getEndpoints(),
+    'getDidEndpoints',
+  );
 
   const lastEndpoint = last(endpoints);
   const hasTooManyEndpoints = Boolean(endpoints && endpoints.length >= 25);

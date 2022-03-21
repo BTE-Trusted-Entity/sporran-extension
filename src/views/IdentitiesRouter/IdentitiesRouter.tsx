@@ -43,7 +43,7 @@ function useRedirectToCurrent() {
   const noAddressProvided = address === ':address';
 
   const history = useHistory();
-  const { data: current } = useCurrentIdentity();
+  const current = useCurrentIdentity();
 
   const location = useLocation();
   const pathname = location.pathname.replace(address, current || '');

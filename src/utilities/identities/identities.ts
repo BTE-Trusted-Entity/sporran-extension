@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import useSWR, { mutate, SWRResponse } from 'swr';
+import { mutate } from 'swr';
 import { Keyring } from '@polkadot/keyring';
 import { KeyringPair } from '@polkadot/keyring/types';
 import {
@@ -36,11 +36,12 @@ import {
 
 import { getDidDetails, getDidEncryptionKey, parseDidUri } from '../did/did';
 import { storage } from '../storage/storage';
+import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
 
 import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
 import { IDENTITIES_KEY, getIdentities } from './getIdentities';
 
-import { Identity, IdentitiesMap } from './types';
+import { Identity } from './types';
 
 export { Identity, IdentitiesMap } from './types';
 
@@ -62,8 +63,8 @@ export function useIdentities(): IdentitiesContextType {
 }
 
 async function getCurrentIdentity(): Promise<string | null> {
-  const stored = await storage.get([IDENTITIES_KEY, CURRENT_IDENTITY_KEY]);
-  const identities = stored[IDENTITIES_KEY] as IdentitiesMap;
+  const identities = await getIdentities();
+  const stored = await storage.get(CURRENT_IDENTITY_KEY);
   const current = stored[CURRENT_IDENTITY_KEY];
 
   if (identities[current]) {
@@ -403,10 +404,14 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
 /** Memoized function will run only once per identity while the popup is open, do not use from backend */
 const noAwaitUpdateCachedDidStateOnce = memoize(syncDidStateWithBlockchain);
 
-export function useCurrentIdentity(): SWRResponse<string | null, unknown> {
-  const swrResponse = useSWR(CURRENT_IDENTITY_KEY, getCurrentIdentity);
+export function useCurrentIdentity(): string | null | undefined {
+  const data = useSwrDataOrThrow(
+    CURRENT_IDENTITY_KEY,
+    getCurrentIdentity,
+    'getCurrentIdentity',
+  );
 
-  noAwaitUpdateCachedDidStateOnce(swrResponse.data);
+  noAwaitUpdateCachedDidStateOnce(data);
 
-  return swrResponse;
+  return data;
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
@@ -28,6 +28,7 @@ import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { generatePath, paths } from '../paths';
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 interface Props {
   identity: Identity;
@@ -39,15 +40,8 @@ function useCosts(address: string): {
   total?: BN;
   error: boolean;
 } {
-  const [fee, setFee] = useState<BN | undefined>();
-  const [deposit, setDeposit] = useState<BN | undefined>();
-
-  useEffect(() => {
-    (async () => {
-      setFee(await getFee());
-      setDeposit(await getDeposit());
-    })();
-  }, []);
+  const fee = useSwrDataOrThrow('', getFee, 'DidUpgrade.getFee');
+  const deposit = useSwrDataOrThrow('', getDeposit, 'DidUpgrade.getDeposit');
 
   const total = useMemo(
     () => (fee && deposit ? fee.add(deposit) : undefined),

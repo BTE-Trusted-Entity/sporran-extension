@@ -55,7 +55,7 @@ export function useExtrinsicValues(input: SignOriginInput): Value[] {
       const { genesisHash, origin } = input;
       const { api } = await BlockchainApiConnection.getConnectionOrConnect();
       const sameBlockchain = genesisHash === api.genesisHash.toString();
-      const errorLine = { value: 'WRONG genesisHash', label: genesisHash };
+      const errorLine = { label: 'WRONG genesisHash', value: genesisHash };
       const error = sameBlockchain ? [] : [errorLine];
 
       const extrinsic = await getExtrinsic(input);

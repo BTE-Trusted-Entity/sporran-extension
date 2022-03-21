@@ -16,7 +16,7 @@ export function IdentitiesProvider({
 }: {
   children: JSX.Element;
 }): JSX.Element {
-  const value = useSWR('identities', getIdentities);
+  const value = useSWR('getIdentities', getIdentities);
   return (
     <IdentitiesContext.Provider value={value}>
       {children}

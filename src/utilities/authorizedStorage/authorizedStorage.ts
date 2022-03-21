@@ -1,6 +1,8 @@
+import { mutate } from 'swr';
+
 import { storage } from '../storage/storage';
 
-const authorizedKey = 'authorizedDApps';
+export const authorizedKey = 'authorizedDApps';
 
 interface AuthorizedType {
   [key: string]: boolean;
@@ -12,4 +14,5 @@ export async function getAuthorized(): Promise<AuthorizedType> {
 
 export async function setAuthorized(authorized: AuthorizedType): Promise<void> {
   await storage.set({ [authorizedKey]: authorized });
+  await mutate(authorizedKey);
 }

@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import { mockTerms } from '../../utilities/cTypes/cTypes.mock';
+import { mockTerms } from '../../utilities/mockTerms/mockTerms';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';

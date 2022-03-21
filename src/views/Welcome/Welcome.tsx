@@ -43,12 +43,12 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
   const identitiesNumber = Object.values(identities.data).length;
   const hasIdentities = identitiesNumber > 0;
 
-  if (current.data && hasIdentities && !again) {
+  if (current && hasIdentities && !again) {
     return (
       <Redirect
         to={generatePath(
           paths.identity.overview,
-          identities.data[current.data] as { address: string },
+          identities.data[current] as { address: string },
         )}
       />
     );

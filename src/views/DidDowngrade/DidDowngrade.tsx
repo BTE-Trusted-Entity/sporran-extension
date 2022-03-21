@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
@@ -34,6 +34,7 @@ import {
   useIdentityCredentials,
   invalidateCredentials,
 } from '../../utilities/credentials/credentials';
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 interface Props {
   identity: Identity;
@@ -48,15 +49,8 @@ function useCosts(
   total?: BN;
   error: boolean;
 } {
-  const [fee, setFee] = useState<BN | undefined>();
-  const [deposit, setDeposit] = useState<BN | undefined>();
-
-  useEffect(() => {
-    (async () => {
-      setFee(await getFee(did));
-      setDeposit(await getDeposit());
-    })();
-  }, [did]);
+  const fee = useSwrDataOrThrow(did, getFee, 'DidDowngrade.getFee');
+  const deposit = useSwrDataOrThrow('', getDeposit, 'DidDowngrade.getDeposit');
 
   const total = useMemo(
     () => (fee && deposit ? deposit.sub(fee) : undefined),

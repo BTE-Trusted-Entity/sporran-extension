@@ -17,7 +17,6 @@ import {
   getIdentityCryptoFromSeed,
   Identity,
 } from '../../utilities/identities/identities';
-import { saveCTypeTitle } from '../../utilities/cTypes/cTypes';
 import {
   saveCredential,
   useIdentityCredentials,
@@ -75,8 +74,6 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         data;
 
       const cTypeTitle = cType.schema.title;
-
-      await saveCTypeTitle(claim.cTypeHash, cTypeTitle);
 
       const attestedClaims = legitimations.map((legitimation) =>
         Credential.fromCredential(legitimation),

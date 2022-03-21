@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 
 import { getEndpoint } from '../endpoints/endpoints';
 
@@ -9,15 +9,7 @@ const subscanHosts: Record<string, string> = {
   'wss://spiritnet.api.onfinality.io/public-ws': 'https://spiritnet.subscan.io',
 };
 
-export function useSubscanHost(): string | null {
-  const [host, setHost] = useState<string | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      const kiltEndpoint = await getEndpoint();
-      setHost(subscanHosts[kiltEndpoint] || null);
-    })();
-  }, []);
-
-  return host;
+export function useSubscanHost(): string | undefined {
+  const kiltEndpoint = useSWR('getEndpoint', getEndpoint).data;
+  return kiltEndpoint ? subscanHosts[kiltEndpoint] : undefined;
 }
