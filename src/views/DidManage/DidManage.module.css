@@ -17,13 +17,17 @@
 }
 
 .didLine {
-  composes: line from '../../components/CopyValue/CopyValue.module.css';
+  composes: didLine from '../../components/CopyValue/CopyValue.module.css';
   margin-top: 1.5rem;
 }
 
 .web3NameLine {
   composes: line from '../../components/CopyValue/CopyValue.module.css';
   text-align: center;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+
+  --copy-value-icon: url('../../components/images/web3name.svg');
 }
 
 .endpoints {

@@ -22,7 +22,7 @@
 }
 
 .addressLine {
-  composes: line from '../../components/CopyValue/CopyValue.module.css';
+  composes: kiltLine from '../../components/CopyValue/CopyValue.module.css';
   margin: 0.25rem 0 1rem;
 }
 

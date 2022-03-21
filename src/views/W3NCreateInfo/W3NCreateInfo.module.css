@@ -13,7 +13,7 @@
 }
 
 .didLine {
-  composes: line from '../../components/CopyValue/CopyValue.module.css';
+  composes: didLine from '../../components/CopyValue/CopyValue.module.css';
   margin-top: 1.5rem;
 }
 
