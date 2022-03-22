@@ -55,14 +55,16 @@ export function DidManage({ identity }: Props): JSX.Element {
         {t('view_DidManage_endpoints')}
       </Link>
 
-      <Link
-        className={styles.web3Name}
-        to={generatePath(paths.identity.did.web3name.create.info, {
-          address,
-        })}
-      >
-        {t('view_DidManage_web3name')}
-      </Link>
+      {!web3name && (
+        <Link
+          className={styles.web3Name}
+          to={generatePath(paths.identity.did.web3name.create.info, {
+            address,
+          })}
+        >
+          {t('view_DidManage_web3name')}
+        </Link>
+      )}
 
       <Link
         className={styles.downgrade}

@@ -52,7 +52,7 @@ jest.mock('@polkadot/x-fetch', () => ({}));
 jest.mock('@polkadot/x-randomvalues', () => ({}));
 jest.mock('@polkadot/x-ws', () => ({}));
 jest.mock('@kiltprotocol/core', () => ({}));
-jest.mock('@kiltprotocol/did', () => ({}));
+jest.mock('@kiltprotocol/did', () => ({ Web3Names: {} }));
 
 jest.mock('../components/Avatar/Identicon', () => ({
   Identicon: () => 'Identicon',
