@@ -39,6 +39,7 @@ export const paths = {
       upgrade: {
         start: '/identity/:address/did/upgrade',
         sign: '/identity/:address/did/upgrade/sign',
+        promo: '/identity/:address/did/upgrade/promo/:submitter',
       },
       manage: {
         start: '/identity/:address/did',

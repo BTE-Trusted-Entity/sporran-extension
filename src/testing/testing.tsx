@@ -58,6 +58,8 @@ jest.mock('../components/Avatar/Identicon', () => ({
   Identicon: () => 'Identicon',
 }));
 
+jest.mock('ky', () => ({}));
+
 mockBalanceChanges();
 mockIsFullDid(false);
 

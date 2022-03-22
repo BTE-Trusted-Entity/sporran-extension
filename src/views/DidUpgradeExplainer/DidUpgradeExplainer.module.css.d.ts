@@ -6,4 +6,8 @@ export const explanation: string;
 export const functionality: string;
 export const avatar: string;
 export const deposit: string;
+export const promo: string;
+export const promoLabel: string;
+export const buttonsLine: string;
+export const cancel: string;
 export const upgrade: string;
