@@ -1,3 +1,6 @@
+import { HexString } from '@polkadot/util/types';
+import { DidPublicKey } from '@kiltprotocol/types';
+
 import { DAppName } from '../../dApps/AccessChannels/DAppName';
 import { Origin } from '../../dApps/AccessChannels/Origin';
 
@@ -8,6 +11,6 @@ export type SignDidInput = DAppName & {
 export type SignDidOriginInput = SignDidInput & Origin;
 
 export interface SignDidOutput {
-  signature: string;
-  didKeyUri: string;
+  signature: HexString;
+  didKeyUri: DidPublicKey['id'];
 }

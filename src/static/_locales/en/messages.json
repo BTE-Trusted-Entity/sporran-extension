@@ -1216,5 +1216,23 @@
   },
   "view_W3NCreatePromo_info": {
     "message": "Free for you due to BTE promo"
+  },
+  "view_SignDidExtrinsic_from": {
+    "message": "from"
+  },
+  "view_SignDidExtrinsic_method": {
+    "message": "method data"
+  },
+  "view_SignDidExtrinsic_title": {
+    "message": "Sign with on-chain DID"
+  },
+  "view_SignDidExtrinsic_subline": {
+    "message": "Select your Identity and sign with your password"
+  },
+  "view_SignDidExtrinsic_reject": {
+    "message": "Reject"
+  },
+  "view_SignDidExtrinsic_error": {
+    "message": "You need to upgrade to an on-chain DID first"
   }
 }

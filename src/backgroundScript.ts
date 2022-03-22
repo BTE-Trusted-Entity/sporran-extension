@@ -37,6 +37,8 @@ import { contentSignChannel } from './dApps/SignChannels/contentSignChannel';
 import { contentSignRawChannel } from './dApps/SignRawChannels/contentSignRawChannel';
 import { contentSignDidChannel } from './channels/SignDidChannels/contentSignDidChannel';
 import { contentChallengeChannel } from './channels/ChallengeChannels/contentChallengeChannel';
+import { contentSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/contentSignDidExtrinsicChannel';
+import { getSignDidExtrinsicResult } from './channels/SignDidExtrinsicChannels/backgroundSignDidExtrinsicChannel';
 
 function init() {
   initKiltSDK();
@@ -53,6 +55,7 @@ function init() {
   contentSignChannel.produce(getSignResult);
   contentSignRawChannel.produce(getSignRawResult);
   contentSignDidChannel.produce(getSignDidResult);
+  contentSignDidExtrinsicChannel.produce(getSignDidExtrinsicResult);
   contentChallengeChannel.produce(produceEncryptedChallenge);
   browser.tabs.onRemoved.addListener(popupTabRemovedListener);
 
