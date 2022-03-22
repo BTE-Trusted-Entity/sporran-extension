@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { Web3Names } from '@kiltprotocol/did';
+import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { u32 } from '@polkadot/types';
 
 import * as styles from './W3NCreateForm.module.css';
 
@@ -31,6 +33,22 @@ export function W3NCreateForm({ identity, onSubmit }: Props): JSX.Element {
       const formData = new FormData(event.target as HTMLFormElement);
       const value = formData.get('name') as string;
       const name = value.trim();
+
+      const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+      const minLength = (api.consts.web3Names.minNameLength as u32).toNumber();
+      const maxLength = (api.consts.web3Names.maxNameLength as u32).toNumber();
+
+      const tooShort = name.length < minLength;
+      if (tooShort) {
+        setError(t('view_W3NCreateForm_short', minLength));
+        return;
+      }
+
+      const tooLong = name.length > maxLength;
+      if (tooLong) {
+        setError(t('view_W3NCreateForm_long', maxLength));
+        return;
+      }
 
       const unexpected = name.match(/[^.a-z0-9_-]/);
       if (unexpected) {
@@ -66,8 +84,6 @@ export function W3NCreateForm({ identity, onSubmit }: Props): JSX.Element {
           name="name"
           className={styles.input}
           required
-          minLength={3}
-          maxLength={32}
           placeholder={t('view_W3NCreateForm_placeholder')}
           onInput={handleInput}
         />

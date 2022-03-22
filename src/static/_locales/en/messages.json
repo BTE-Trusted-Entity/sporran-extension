@@ -1104,6 +1104,22 @@
   "view_W3NCreateForm_placeholder": {
     "message": "choose a unique web3name"
   },
+  "view_W3NCreateForm_short": {
+    "message": "You need to use at least $minimum$ characters",
+    "placeholders": {
+      "minimum": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_W3NCreateForm_long": {
+    "message": "You may use at most $maximum$ characters",
+    "placeholders": {
+      "maximum": {
+        "content": "$1"
+      }
+    }
+  },
   "view_W3NCreateForm_unexpected": {
     "message": "“$character$” is not a supported character",
     "placeholders": {
