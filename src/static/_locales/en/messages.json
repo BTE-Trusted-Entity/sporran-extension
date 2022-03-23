@@ -300,6 +300,9 @@
   "component_LegacyDids_dids": {
     "message": "DIDs that need updating:"
   },
+  "component_ExplainerModal_show": {
+    "message": "Information"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
