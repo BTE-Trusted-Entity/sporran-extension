@@ -56,6 +56,7 @@ export function W3NCreateForm({ identity, onSubmit }: Props): JSX.Element {
         return;
       }
 
+      // TODO: if the future blockchain versions do not fix the stale link issue, consider a workaround here
       const taken = Boolean(await Web3Names.queryDidForWeb3Name(name));
       if (taken) {
         setError(t('view_W3NCreateForm_taken'));
