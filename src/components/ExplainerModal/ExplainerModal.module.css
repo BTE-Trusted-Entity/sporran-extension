@@ -1,8 +1,5 @@
 .overlay {
   composes: overlay from '../Overlay/Overlay.module.css';
-  max-width: calc(100% - 3rem);
-  left: auto;
-  right: auto;
 }
 
 .info {
