@@ -32,7 +32,7 @@ export async function getList(): Promise<string[]> {
 
 async function saveList(list: string[]): Promise<void> {
   await storage.set({ [LIST_KEY]: list });
-  await mutate(LIST_KEY);
+  await mutate(['getCredentials', LIST_KEY]);
 }
 
 export async function saveCredential(credential: Credential): Promise<void> {
@@ -42,7 +42,7 @@ export async function saveCredential(credential: Credential): Promise<void> {
 
   const list = await getList();
   if (list.includes(key)) {
-    await mutate(LIST_KEY);
+    await mutate(['getCredentials', LIST_KEY]);
     return;
   }
   list.push(key);
