@@ -65,7 +65,7 @@ export function DidUpgradePromo({ identity }: Props): JSX.Element | null {
 
         const finalized = await waitFinalized(tx_hash);
         if (!finalized) {
-          throw new Error();
+          throw new Error('Error finalizing transaction');
         }
 
         const { did } = creationDetails;
