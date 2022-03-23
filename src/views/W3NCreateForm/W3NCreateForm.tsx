@@ -50,7 +50,7 @@ export function W3NCreateForm({ identity, onSubmit }: Props): JSX.Element {
         return;
       }
 
-      const unexpected = name.match(/[^.a-z0-9_-]/);
+      const unexpected = name.match(/[^a-z0-9_-]/);
       if (unexpected) {
         setError(t('view_W3NCreateForm_unexpected', unexpected[0]));
         return;

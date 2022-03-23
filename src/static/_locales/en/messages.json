@@ -1099,7 +1099,7 @@
     "message": "Connect a web3name to your on-chain DID"
   },
   "view_W3NCreateForm_info": {
-    "message": "Please choose a unique web3name.\nUse only these characters for your web3name:\nlowercase a to z, 0 to 9, “-”, “_” and “.”"
+    "message": "Please choose a unique web3name.\nUse only these characters for your web3name:\nlowercase a to z, 0 to 9, “-” and “_”"
   },
   "view_W3NCreateForm_placeholder": {
     "message": "choose a unique web3name"
