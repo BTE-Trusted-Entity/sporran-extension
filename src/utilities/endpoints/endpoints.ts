@@ -18,11 +18,15 @@ export const publicEndpoints = {
   'BOTLabs Trusted Entity': 'wss://spiritnet.kilt.io',
 };
 
-const backend = 'https://testnet-did-promo.sporran.org';
+const backend =
+  process.env.NODE_ENV !== 'production'
+    ? 'https://testnet-did-promo.sporran.org'
+    : ''; // TODO: add production url
 
 export const backendEndpoints = {
   promoStatus: `${backend}/promo_status`,
   createDid: `${backend}/create_did`,
+  waitFinalized: `${backend}/wait_finalized`,
 };
 
 /* Do we already build a production version first and ask QA to test it

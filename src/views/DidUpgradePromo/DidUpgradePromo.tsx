@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './DidUpgradePromo.module.css';
@@ -18,8 +18,10 @@ import { paths } from '../paths';
 import {
   createDid,
   getDidCreationDetails,
+  getPromoStatus,
   waitFinalised,
 } from '../../utilities/didUpgradePromo/didUpgradePromo';
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 interface Props {
   identity: Identity;
@@ -35,7 +37,7 @@ export function DidUpgradePromo({ identity }: Props): JSX.Element | null {
     null,
   );
 
-  const { submitter } = useParams() as { submitter: string };
+  const promoStatus = useSwrDataOrThrow('', getPromoStatus, 'getPromoStatus');
 
   const passwordField = usePasswordField();
 
@@ -44,16 +46,21 @@ export function DidUpgradePromo({ identity }: Props): JSX.Element | null {
       event.preventDefault();
 
       try {
+        if (!promoStatus) {
+          throw new Error();
+        }
+
         const { seed } = await passwordField.get(event);
 
         setSubmitting(true);
         setStatus('pending');
 
-        const creationDetails = await getDidCreationDetails(seed, submitter);
-        console.log('creation details: ', creationDetails);
+        const creationDetails = await getDidCreationDetails(
+          seed,
+          promoStatus.account,
+        );
 
         const { tx_hash } = await createDid(creationDetails);
-        console.log('tx hash: ', tx_hash);
         setTxHash(tx_hash);
 
         await waitFinalised();
@@ -67,7 +74,7 @@ export function DidUpgradePromo({ identity }: Props): JSX.Element | null {
         setStatus('error');
       }
     },
-    [identity, passwordField, submitter],
+    [identity, passwordField, promoStatus],
   );
 
   const closeModal = useCallback(() => {
@@ -93,9 +100,11 @@ export function DidUpgradePromo({ identity }: Props): JSX.Element | null {
         <Link to={paths.home} className={styles.cancel}>
           {t('common_action_cancel')}
         </Link>
-        <button type="submit" className={styles.submit} disabled={submitting}>
-          {t('common_action_sign')}
-        </button>
+        {promoStatus && (
+          <button type="submit" className={styles.submit} disabled={submitting}>
+            {t('common_action_sign')}
+          </button>
+        )}
       </p>
 
       {status && (
