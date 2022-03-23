@@ -21,7 +21,7 @@ export const publicEndpoints = {
 const backend =
   process.env.NODE_ENV !== 'production'
     ? 'https://testnet-did-promo.sporran.org'
-    : ''; // TODO: add production url
+    : 'https://testnet-did-promo.sporran.org'; // TODO: add production url when available
 
 export const backendEndpoints = {
   promoStatus: `${backend}/promo_status`,

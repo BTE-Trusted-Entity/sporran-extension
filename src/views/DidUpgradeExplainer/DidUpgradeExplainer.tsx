@@ -25,13 +25,11 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
 
   const promoStatus = useSwrDataOrThrow('', getPromoStatus, 'getPromoStatus');
 
+  const { address } = identity;
+
   const upgradePath = promoChecked.current
-    ? generatePath(paths.identity.did.upgrade.promo, {
-        address: identity.address,
-      })
-    : generatePath(paths.identity.did.upgrade.sign, {
-        address: identity.address,
-      });
+    ? generatePath(paths.identity.did.upgrade.promo, { address })
+    : generatePath(paths.identity.did.upgrade.sign, { address });
 
   return (
     <section className={styles.container}>
@@ -65,11 +63,9 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
         <Link to={paths.home} className={styles.cancel}>
           {t('common_action_cancel')}
         </Link>
-        {promoStatus && (
-          <Link to={upgradePath} className={styles.upgrade}>
-            {t('view_DidUpgradeExplainer_CTA')}
-          </Link>
-        )}
+        <Link to={upgradePath} className={styles.upgrade}>
+          {t('view_DidUpgradeExplainer_CTA')}
+        </Link>
       </p>
 
       <LinkBack />

@@ -47,7 +47,7 @@ export function DidUpgradePromo({ identity }: Props): JSX.Element | null {
 
       try {
         if (!promoStatus) {
-          throw new Error();
+          throw new Error('Promo status data missing');
         }
 
         const { seed } = await passwordField.get(event);
@@ -75,6 +75,7 @@ export function DidUpgradePromo({ identity }: Props): JSX.Element | null {
       } catch (error) {
         setSubmitting(false);
         setStatus('error');
+        console.error(error);
       }
     },
     [identity, passwordField, promoStatus],

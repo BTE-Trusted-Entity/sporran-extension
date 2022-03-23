@@ -7,13 +7,11 @@ import { DidUpgradeExplainer } from './DidUpgradeExplainer';
 
 jest.mock('../../utilities/didUpgradePromo/didUpgradePromo');
 
-const mockPromoStatus = {
+jest.mocked(getPromoStatus).mockResolvedValue({
   account: '4oY2qsDpYBf2LqahCTmEC4iudf667CRT3iNoBmMLfznZoGcM',
   remaining_dids: 1000,
   is_active: true,
-};
-
-jest.mocked(getPromoStatus).mockResolvedValue(mockPromoStatus);
+});
 
 describe('DidUpgradeExplainer', () => {
   it('should render', async () => {
