@@ -22,7 +22,7 @@ const identity =
 describe('W3NCreateSign', () => {
   it('should match the snapshot', async () => {
     const { container } = render(
-      <W3NCreateSign identity={identity} web3name="FancyName" />,
+      <W3NCreateSign identity={identity} web3name="fancy-name" />,
     );
     await waitForGetPassword();
     expect(container).toMatchSnapshot();

@@ -39,7 +39,7 @@ describe('DidManage', () => {
   });
 
   it('should match the snapshot with web3name', async () => {
-    jest.mocked(useSwrDataOrThrow).mockReturnValue('FancyName');
+    jest.mocked(useSwrDataOrThrow).mockReturnValue('fancy-name');
     const { container } = render(
       <MemoryRouter
         initialEntries={[

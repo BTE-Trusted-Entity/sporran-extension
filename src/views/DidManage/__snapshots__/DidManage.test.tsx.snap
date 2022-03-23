@@ -54,7 +54,7 @@ exports[`DidManage should match the snapshot with web3name 1`] = `
         aria-label="web3name"
         class="input"
         readonly=""
-        value="FancyName"
+        value="fancy-name"
       />
       <button
         aria-label="copy to clipboard"
