@@ -57,7 +57,10 @@ export async function createDid(
   return ky.post(backendEndpoints.createDid, { json: input }).json();
 }
 
-export async function waitFinalised(): Promise<unknown> {
-  // TODO: call backend endpoint when available
-  return new Promise((resolve) => setTimeout(resolve, 5000));
+export async function waitFinalized(txHash: string): Promise<boolean> {
+  return ky
+    .get(`${backendEndpoints.waitFinalized}?tx_hash=${txHash}`, {
+      timeout: false,
+    })
+    .json();
 }

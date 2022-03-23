@@ -19,7 +19,7 @@ import {
   createDid,
   getDidCreationDetails,
   getPromoStatus,
-  waitFinalised,
+  waitFinalized,
 } from '../../utilities/didUpgradePromo/didUpgradePromo';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
@@ -63,7 +63,10 @@ export function DidUpgradePromo({ identity }: Props): JSX.Element | null {
         const { tx_hash } = await createDid(creationDetails);
         setTxHash(tx_hash);
 
-        await waitFinalised();
+        const finalized = await waitFinalized(tx_hash);
+        if (!finalized) {
+          throw new Error();
+        }
 
         const { did } = creationDetails;
         await saveIdentity({ ...identity, did });
