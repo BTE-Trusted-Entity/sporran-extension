@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DidManage should match the snapshot with web3name 1`] = `
+exports[`W3NCreateInfo should match the snapshot for off-chain did 1`] = `
 <div>
   <section
     class="container"
@@ -8,12 +8,12 @@ exports[`DidManage should match the snapshot with web3name 1`] = `
     <h1
       class="heading"
     >
-      Manage DID
+      web3name
     </h1>
     <p
       class="subline"
     >
-      You have 3 Identities
+      Connect a web3name to your on-chain DID
     </p>
     <section>
       <div
@@ -27,59 +27,41 @@ exports[`DidManage should match the snapshot with web3name 1`] = `
         <span
           class="name"
         >
-          KILT Identity 2
+          KILT Identity 1
         </span>
       </div>
     </section>
     <p
-      class="didLine"
+      class="info"
     >
-      <input
-        aria-label="DID"
-        class="long"
-        readonly=""
-        value="did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY"
-      />
-      <button
-        aria-label="copy to clipboard"
-        class="copy"
-        title="copy to clipboard"
-        type="button"
-      />
+      Web3names are user-friendly names built on top of the KILT blockchain. With your on-chain DID, you can claim this alias which makes it easier for others to reference your identity, without the need to triple-check the DID’s long sequence of characters.
     </p>
     <p
-      class="web3NameLine"
+      class="warning"
     >
-      <input
-        aria-label="web3name"
-        class="input"
-        readonly=""
-        value="fancy-name"
-      />
-      <button
-        aria-label="copy to clipboard"
-        class="copy"
-        title="copy to clipboard"
-        type="button"
-      />
+      You need an on-chain DID to use this feature.
     </p>
-    <a
-      class="endpoints"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/endpoints"
+    <p
+      class="buttonsLine"
     >
-      Service endpoints
-    </a>
-    <a
-      class="downgrade"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/warning"
-    >
-      Remove on-chain DID
-    </a>
-    <a
+      <button
+        class="back"
+        type="button"
+      >
+        Back
+      </button>
+      <a
+        class="next"
+        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade"
+      >
+        Upgrade to on-chain DID
+      </a>
+    </p>
+    <button
       aria-label="Back"
       class="linkBack"
-      href="/identity/FOO"
       title="Back"
+      type="button"
     />
     <p
       class="stats"
@@ -105,7 +87,7 @@ exports[`DidManage should match the snapshot with web3name 1`] = `
 </div>
 `;
 
-exports[`DidManage should match the snapshot without web3name 1`] = `
+exports[`W3NCreateInfo should match the snapshot for on-chain did 1`] = `
 <div>
   <section
     class="container"
@@ -113,16 +95,16 @@ exports[`DidManage should match the snapshot without web3name 1`] = `
     <h1
       class="heading"
     >
-      Manage DID
+      web3name
     </h1>
     <p
       class="subline"
     >
-      You have 3 Identities
+      Connect a web3name to your on-chain DID
     </p>
     <section>
       <div
-        class="avatar"
+        class="avatar fullDid"
       >
         Identicon
       </div>
@@ -152,29 +134,32 @@ exports[`DidManage should match the snapshot without web3name 1`] = `
         type="button"
       />
     </p>
-    <a
-      class="endpoints"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/endpoints"
+    <p
+      class="info"
     >
-      Service endpoints
-    </a>
-    <a
-      class="web3Name"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/web3name/create/info"
+      Web3names are user-friendly names built on top of the KILT blockchain. With your on-chain DID, you can claim this alias which makes it easier for others to reference your identity, without the need to triple-check the DID’s long sequence of characters.
+    </p>
+    <p
+      class="buttonsLine"
     >
-      Create web3name
-    </a>
-    <a
-      class="downgrade"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/warning"
-    >
-      Remove on-chain DID
-    </a>
-    <a
+      <button
+        class="back"
+        type="button"
+      >
+        Back
+      </button>
+      <a
+        class="next"
+        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/web3name/create/form"
+      >
+        Next Step
+      </a>
+    </p>
+    <button
       aria-label="Back"
       class="linkBack"
-      href="/identity/FOO"
       title="Back"
+      type="button"
     />
     <p
       class="stats"

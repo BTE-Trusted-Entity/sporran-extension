@@ -33,6 +33,7 @@ import { SignDid } from '../SignDid/SignDid';
 import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
 import { paths } from '../paths';
 import { DidRepair } from '../DidRepair/DidRepair';
+import { W3NCreateFlow } from '../W3NCreateFlow/W3NCreateFlow';
 
 interface Props {
   identities: IdentitiesMap;
@@ -125,6 +126,10 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.identity.did.repair}>
           <DidRepair identity={identity} />
+        </Route>
+
+        <Route path={paths.identity.did.web3name.create.base}>
+          <W3NCreateFlow identity={identity} />
         </Route>
 
         <Route path={paths.identity.did.manage.start}>

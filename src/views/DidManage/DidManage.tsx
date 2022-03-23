@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
+import { Web3Names } from '@kiltprotocol/did';
+
 import * as styles from './DidManage.module.css';
 
 import { LinkBack } from '../../components/LinkBack/LinkBack';
@@ -10,16 +12,21 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { generatePath, paths } from '../paths';
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 interface Props {
   identity: Identity;
 }
 
-export function DidManage({ identity }: Props): JSX.Element | null {
+export function DidManage({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { address } = identity;
-
+  const { address, did } = identity;
+  const web3name = useSwrDataOrThrow(
+    did,
+    Web3Names.queryWeb3NameForDid,
+    'Web3Names.queryWeb3NameForDid',
+  );
   return (
     <section className={styles.container}>
       <h1 className={styles.heading}>{t('view_DidManage_heading')}</h1>
@@ -31,6 +38,14 @@ export function DidManage({ identity }: Props): JSX.Element | null {
 
       <CopyValue value={identity.did} label="DID" className={styles.didLine} />
 
+      {web3name && (
+        <CopyValue
+          value={web3name}
+          label="web3name"
+          className={styles.web3NameLine}
+        />
+      )}
+
       <Link
         className={styles.endpoints}
         to={generatePath(paths.identity.did.manage.endpoints.start, {
@@ -39,6 +54,17 @@ export function DidManage({ identity }: Props): JSX.Element | null {
       >
         {t('view_DidManage_endpoints')}
       </Link>
+
+      {!web3name && (
+        <Link
+          className={styles.web3Name}
+          to={generatePath(paths.identity.did.web3name.create.info, {
+            address,
+          })}
+        >
+          {t('view_DidManage_web3name')}
+        </Link>
+      )}
 
       <Link
         className={styles.downgrade}

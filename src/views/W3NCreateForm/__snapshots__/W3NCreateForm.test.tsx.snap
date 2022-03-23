@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`W3NCreateForm should match the snapshot 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      web3name
+    </h1>
+    <p
+      class="subline"
+    >
+      Connect a web3name to your on-chain DID
+    </p>
+    <section>
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="centeredNameLine"
+      >
+        <span
+          class="name"
+        >
+          KILT Identity 2
+        </span>
+      </div>
+    </section>
+    <p
+      class="didLine"
+    >
+      <input
+        aria-label="DID"
+        class="long"
+        readonly=""
+        value="did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY"
+      />
+      <button
+        aria-label="copy to clipboard"
+        class="copy"
+        title="copy to clipboard"
+        type="button"
+      />
+    </p>
+    <p
+      class="info"
+    >
+      Please choose a unique web3name.
+Use only these characters for your web3name:
+lowercase a to z, 0 to 9, “-”, “_” and “.”
+    </p>
+    <p
+      class="inputLine"
+    >
+      <input
+        class="input"
+        name="name"
+        placeholder="choose a unique web3name"
+        required=""
+        type="input"
+      />
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+    <p
+      class="buttonsLine"
+    >
+      <button
+        class="back"
+        type="button"
+      >
+        Back
+      </button>
+      <button
+        class="next"
+        type="submit"
+      >
+        Next Step
+      </button>
+    </p>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+    <p
+      class="stats"
+    >
+      You have 3 Identities with a
+      <span
+        class="balance"
+      >
+         Total Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="KILT Coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </form>
+</div>
+`;

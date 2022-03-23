@@ -13,6 +13,7 @@ export const buttons: string;
 export const button: string;
 export const collapse: string;
 export const download: string;
+export const presentation: string;
 export const downloadPromptExpanded: string;
 export const remove: string;
 export const details: string;
