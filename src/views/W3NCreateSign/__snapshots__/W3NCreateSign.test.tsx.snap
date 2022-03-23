@@ -70,6 +70,11 @@ exports[`W3NCreateSign should match the snapshot 1`] = `
     <p
       class="details"
     >
+      <button
+        aria-label="Information"
+        class="show"
+        type="button"
+      />
        Deposit 
       2.0000
        
@@ -167,6 +172,7 @@ exports[`W3NCreateSign should match the snapshot 1`] = `
         You need at least undefined KILTs to create the web3name
       </output>
     </p>
+    <div />
     <button
       aria-label="Back"
       class="linkBack"

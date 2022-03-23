@@ -1158,6 +1158,9 @@
   "view_W3NCreateSign_fee": {
     "message": " + fee "
   },
+  "view_W3NCreateSign_explainer": {
+    "message": "To store your web3name on the blockchain, a deposit needs to be reserved. The deposit will be refunded if you remove your web3name"
+  },
   "view_W3NCreateSign_label": {
     "message": "web3name: "
   },

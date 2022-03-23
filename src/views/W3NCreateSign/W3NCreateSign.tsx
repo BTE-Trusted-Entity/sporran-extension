@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -28,6 +28,7 @@ import {
   KiltAmount,
 } from '../../components/KiltAmount/KiltAmount';
 import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
+import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { getExtrinsicFee } from '../../utilities/getExtrinsicFee/getExtrinsicFee';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
@@ -104,6 +105,8 @@ export function W3NCreateSign({
     [fullDidDetails, passwordField, submit, web3name],
   );
 
+  const portalRef = useRef<HTMLDivElement>(null);
+
   if (!deposit || !fee || !fullDidDetails) {
     return null; // blockchain data pending
   }
@@ -124,6 +127,9 @@ export function W3NCreateSign({
         <KiltAmount amount={total} type="costs" smallDecimals />
       </p>
       <p className={styles.details}>
+        <ExplainerModal portalRef={portalRef}>
+          {t('view_W3NCreateSign_explainer')}
+        </ExplainerModal>
         {t('view_W3NCreateSign_deposit')}
         {asKiltCoins(deposit, 'costs')} <KiltCurrency />
         {t('view_W3NCreateSign_fee')}
@@ -165,6 +171,8 @@ export function W3NCreateSign({
           }}
         />
       )}
+
+      <div ref={portalRef} />
 
       <LinkBack />
       <Stats />

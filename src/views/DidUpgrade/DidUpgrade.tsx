@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
@@ -26,8 +26,9 @@ import {
 } from '../../components/KiltAmount/KiltAmount';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
+import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { Stats } from '../../components/Stats/Stats';
-import { generatePath, paths } from '../paths';
+import { paths } from '../paths';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 interface Props {
@@ -97,6 +98,8 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
     setStatus(null);
   }, []);
 
+  const portalRef = useRef<HTMLDivElement>(null);
+
   if (!(fee && deposit && total)) {
     return null; // blockchain data pending
   }
@@ -117,11 +120,9 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         <KiltAmount amount={total} type="costs" smallDecimals />
       </p>
       <p className={styles.details}>
-        <Link
-          to={generatePath(paths.identity.did.upgrade.start, { address })}
-          className={styles.info}
-          aria-label={t('view_DidUpgrade_info')}
-        />
+        <ExplainerModal label={t('view_DidUpgrade_info')} portalRef={portalRef}>
+          {t('view_DidUpgradeExplainer_deposit')}
+        </ExplainerModal>
         {t('view_DidUpgrade_deposit')}
         {asKiltCoins(deposit, 'costs')} <KiltCurrency />
         {t('view_DidUpgrade_fee')}
@@ -162,6 +163,8 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
           }}
         />
       )}
+
+      <div ref={portalRef} />
 
       <LinkBack />
       <Stats />
