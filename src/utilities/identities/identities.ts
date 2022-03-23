@@ -87,7 +87,7 @@ export async function setCurrentIdentity(address: string): Promise<void> {
     return;
   }
   await storage.set({ [CURRENT_IDENTITY_KEY]: address });
-  await mutate(CURRENT_IDENTITY_KEY);
+  await mutate(['getCurrentIdentity', CURRENT_IDENTITY_KEY]);
 }
 
 export async function saveIdentity(identity: Identity): Promise<void> {
