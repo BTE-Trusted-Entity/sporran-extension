@@ -10,17 +10,27 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { isFullDid } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { getPromoStatus } from '../../utilities/didUpgradePromo/didUpgradePromo';
 
 interface Props {
   identity: Identity;
+  hasPromo: boolean;
+  togglePromo: () => void;
 }
 
-export function W3NCreateInfo({ identity }: Props): JSX.Element {
+export function W3NCreateInfo({
+  identity,
+  hasPromo,
+  togglePromo,
+}: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { goBack } = useHistory();
 
   const { address } = identity;
   const canContinue = isFullDid(identity.did);
+
+  const promoStatus = useSwrDataOrThrow('', getPromoStatus, 'getPromoStatus');
 
   return (
     <section className={styles.container}>
@@ -41,6 +51,19 @@ export function W3NCreateInfo({ identity }: Props): JSX.Element {
 
       {!canContinue && (
         <p className={styles.warning}>{t('view_W3NCreateInfo_warning')}</p>
+      )}
+
+      {canContinue && promoStatus?.is_active && (
+        <label className={styles.promoLabel}>
+          <input
+            type="checkbox"
+            className={styles.promo}
+            onChange={togglePromo}
+            checked={hasPromo}
+          />
+          <span />
+          {t('view_DidUpgradeExplainer_promo')}
+        </label>
       )}
 
       <p className={styles.buttonsLine}>
