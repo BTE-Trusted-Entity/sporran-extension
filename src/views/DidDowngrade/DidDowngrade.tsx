@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
@@ -34,7 +34,7 @@ import {
   useIdentityCredentials,
   invalidateCredentials,
 } from '../../utilities/credentials/credentials';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { isFullDid } from '../../utilities/did/did';
 
 interface Props {
   identity: Identity;
@@ -49,8 +49,22 @@ function useCosts(
   total?: BN;
   error: boolean;
 } {
-  const fee = useSwrDataOrThrow(did, getFee, 'DidDowngrade.getFee');
-  const deposit = useSwrDataOrThrow('', getDeposit, 'DidDowngrade.getDeposit');
+  // useSwrDataOrThrow doesn’t fit here because some calls are conditional
+  const [fee, setFee] = useState<BN | undefined>();
+  const [deposit, setDeposit] = useState<BN | undefined>();
+
+  useEffect(() => {
+    (async () => {
+      // After the downgrade has happened we’re still on this screen but the DID is already a light one,
+      // so we can’t proceed updating the fee and deposit.
+      if (!isFullDid(did)) {
+        return;
+      }
+
+      setFee(await getFee(did));
+      setDeposit(await getDeposit());
+    })();
+  }, [did]);
 
   const total = useMemo(
     () => (fee && deposit ? deposit.sub(fee) : undefined),
