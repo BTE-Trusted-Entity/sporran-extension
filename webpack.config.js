@@ -20,6 +20,7 @@ export default {
   output: {
     path: path.resolve('./dist'),
     filename: 'js/[name].js',
+    publicPath: '/',
   },
   module: {
     rules: [
