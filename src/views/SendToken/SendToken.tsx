@@ -254,7 +254,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
 
     const remainingTransferable = maximum.sub(amountBN);
     // Including some tip slightly increases the transaction size and the fee, allow some room for it
-    const remainingAdjustedForTip = remainingTransferable.sub(fee.muln(0.01));
+    const remainingAdjustedForTip = remainingTransferable.sub(fee.muln(0.05));
 
     const finalTip = existentialWarning
       ? BN.max(remainingAdjustedForTip, tipBN)

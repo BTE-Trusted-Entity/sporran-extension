@@ -117,7 +117,7 @@ describe('SendToken', () => {
     const values = onSuccess.mock.calls[0][0];
 
     expect(values.existentialWarning).toBe(true);
-    expect(values.tip.toString()).toEqual('14990000671089');
+    expect(values.tip.toString()).toEqual('14950003355444');
   });
 
   it('should report too small an amount', async () => {
