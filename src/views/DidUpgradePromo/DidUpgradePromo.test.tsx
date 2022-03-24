@@ -1,9 +1,11 @@
 import { act, render } from '../../testing/testing';
-import { getPromoStatus } from '../../utilities/didUpgradePromo/didUpgradePromo';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
+import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 
-import { DidUpgradeExplainer } from './DidUpgradeExplainer';
+import { getPromoStatus } from '../../utilities/didUpgradePromo/didUpgradePromo';
+
+import { DidUpgradePromo } from './DidUpgradePromo';
 
 jest.mock('../../utilities/didUpgradePromo/didUpgradePromo');
 
@@ -13,10 +15,10 @@ jest.mocked(getPromoStatus).mockResolvedValue({
   is_active: true,
 });
 
-describe('DidUpgradeExplainer', () => {
+describe('DidUpgradePromo', () => {
   it('should render', async () => {
     const { container } = render(
-      <DidUpgradeExplainer
+      <DidUpgradePromo
         identity={
           identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
         }
@@ -25,6 +27,7 @@ describe('DidUpgradeExplainer', () => {
     await act(async () => {
       await getPromoStatus();
     });
+    await waitForGetPassword();
     expect(container).toMatchSnapshot();
   });
 });

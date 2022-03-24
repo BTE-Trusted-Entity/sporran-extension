@@ -846,6 +846,24 @@
   "view_DidUpgrade_error": {
     "message": "Upgrade to on-chain failed"
   },
+  "view_DidUpgradePromo_heading": {
+    "message": "Upgrade to on-chain DID"
+  },
+  "view_DidUpgradePromo_subline": {
+    "message": "Sign your upgrade"
+  },
+  "view_DidUpgradePromo_info": {
+    "message": "Sponsored by BTE"
+  },
+  "view_DidUpgradePromo_pending": {
+    "message": "Upgrade to on-chain is being processed"
+  },
+  "view_DidUpgradePromo_success": {
+    "message": "Upgrade to on-chain was successful"
+  },
+  "view_DidUpgradePromo_error": {
+    "message": "Upgrade to on-chain failed"
+  },
   "view_DidDowngrade_heading": {
     "message": "Remove on-chain DID"
   },
@@ -892,6 +910,9 @@
   },
   "view_DidUpgradeExplainer_deposit": {
     "message": "To store your DID on the blockchain, a deposit needs to be reserved. The deposit will be refunded if you remove your on-chain DID."
+  },
+  "view_DidUpgradeExplainer_promo": {
+    "message": "Use BTE promo"
   },
   "view_DidUpgradeExplainer_CTA": {
     "message": "Upgrade"

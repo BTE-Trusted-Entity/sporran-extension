@@ -43,7 +43,36 @@
   background: url('../../components/images/deposit.svg') no-repeat left center;
 }
 
+.promo {
+  composes: checkbox from '../../components/Checkbox/Checkbox.module.css';
+}
+
+.promoLabel {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding-left: calc(68rem / 16);
+  margin-top: 1.5rem;
+}
+
+.promo + * {
+  height: 0.75rem;
+  width: 0.75rem;
+  flex-shrink: 0;
+  margin-right: 0.25rem;
+}
+
+.buttonsLine {
+  composes: buttonsLine from '../../components/Button/Button.module.css';
+  margin-top: 1rem;
+}
+
+.cancel {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
+}
+
 .upgrade {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
-  margin-top: 1.75rem;
 }

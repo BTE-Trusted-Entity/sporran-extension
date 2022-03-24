@@ -18,6 +18,17 @@ export const publicEndpoints = {
   'BOTLabs Trusted Entity': 'wss://spiritnet.kilt.io',
 };
 
+const backend =
+  process.env.NODE_ENV !== 'production'
+    ? 'https://testnet-did-promo.sporran.org'
+    : 'https://testnet-did-promo.sporran.org'; // TODO: add production url when available
+
+export const backendEndpoints = {
+  promoStatus: `${backend}/promo_status`,
+  createDid: `${backend}/create_did`,
+  waitFinalized: `${backend}/wait_finalized`,
+};
+
 /* Do we already build a production version first and ask QA to test it
 before publishing it? Or do we suggest they test an internal version, and
 if it is ok, we package a production one an upload it? We follow the safer
