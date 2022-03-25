@@ -57,9 +57,10 @@ export async function createDid(
   return ky.post(backendEndpoints.createDid, { json: input }).json();
 }
 
-export async function waitFinalized(txHash: string): Promise<boolean> {
+export async function waitFinalized(tx_hash: string): Promise<boolean> {
   return ky
-    .get(`${backendEndpoints.waitFinalized}?tx_hash=${txHash}`, {
+    .get(backendEndpoints.waitFinalized, {
+      searchParams: { tx_hash },
       timeout: false,
     })
     .json();

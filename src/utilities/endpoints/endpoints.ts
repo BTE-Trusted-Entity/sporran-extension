@@ -26,6 +26,7 @@ const backend =
 export const backendEndpoints = {
   promoStatus: `${backend}/promo_status`,
   createDid: `${backend}/create_did`,
+  submitDidCall: `${backend}/submit_did_call`,
   waitFinalized: `${backend}/wait_finalized`,
 };
 
