@@ -10,14 +10,10 @@ const on = identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 const off = identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
-jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
-  return {
-    promoStatus: {
-      account: '4oY2qsDpYBf2LqahCTmEC4iudf667CRT3iNoBmMLfznZoGcM',
-      remaining_dids: 1000,
-      is_active: true,
-    },
-  }[name];
+jest.mocked(useSwrDataOrThrow).mockReturnValue({
+  account: '4oY2qsDpYBf2LqahCTmEC4iudf667CRT3iNoBmMLfznZoGcM',
+  remaining_dids: 1000,
+  is_active: true,
 });
 
 describe('W3NCreateInfo', () => {
