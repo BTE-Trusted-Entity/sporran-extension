@@ -37,14 +37,12 @@
 
 .promoLabel {
   composes: subline from '../../components/Typography/Typography.module.css';
+  align-self: flex-start;
   display: flex;
-  width: 100%;
   align-items: center;
 }
 
 .promo + * {
-  height: 0.875rem;
-  width: 0.875rem;
   flex-shrink: 0;
   margin-right: 0.25rem;
 }
