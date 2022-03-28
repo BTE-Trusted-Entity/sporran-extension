@@ -5,7 +5,7 @@
   background: var(--color-white);
 }
 
-.code {
+.component > svg {
   width: 100%;
   height: 100%;
 }
