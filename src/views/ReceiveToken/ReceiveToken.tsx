@@ -58,7 +58,7 @@ export function ReceiveToken({ identity }: Props): JSX.Element {
         <QRCode address={address} className={styles.qrCodeLarge} />
         <button
           type="button"
-          onClick={largeQR.on}
+          onClick={largeQR.off}
           className={styles.dialogClose}
           aria-label={t('common_action_close')}
         />

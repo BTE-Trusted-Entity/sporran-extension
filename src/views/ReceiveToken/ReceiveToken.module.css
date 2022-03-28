@@ -46,6 +46,8 @@
 }
 
 .qrCodeLarge {
+  composes: component from '../../components/QRCode/QRCode.module.css';
+  padding: 0;
   width: calc(var(--popup-width) - 4rem);
   display: inline-block;
 }

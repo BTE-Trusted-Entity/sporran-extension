@@ -1,4 +1,4 @@
-import Code from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 
 import * as styles from './QRCode.module.css';
 
@@ -13,12 +13,13 @@ export function QRCode({
 }: Props): JSX.Element {
   return (
     <span className={className}>
-      <Code
-        className={styles.code}
+      <QRCodeSVG
         value={address}
         level="H"
-        renderAs="svg"
         fgColor="#8c145a"
+        bgColor="#fff"
+        includeMargin={false}
+        size={128}
       />
       <span className={styles.logo} />
     </span>
