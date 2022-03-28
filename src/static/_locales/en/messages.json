@@ -941,6 +941,9 @@
   "view_DidManage_web3name": {
     "message": "Create web3name"
   },
+  "view_DidManage_web3name_remove": {
+    "message": "Remove web3name"
+  },
   "view_DidManage_downgrade": {
     "message": "Remove on-chain DID"
   },
@@ -1216,5 +1219,40 @@
   },
   "view_W3NCreatePromo_info": {
     "message": "Free for you due to BTE promo"
+  },
+  "view_W3NRemove_heading": {
+    "message": "Remove web3name"
+  },
+  "view_W3NRemove_subline": {
+    "message": "Remove web3name from the KILT blockchain"
+  },
+  "view_W3NRemove_total": {
+    "message": "Refund Amount: "
+  },
+  "view_W3NRemove_deposit": {
+    "message": " Deposit "
+  },
+  "view_W3NRemove_fee": {
+    "message": " - fee "
+  },
+  "view_W3NRemove_insufficientFunds": {
+    "message": "You need at least $cost$ KILTs to pay the fee",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_W3NRemove_pending": {
+    "message": "Remove web3name is being processed"
+  },
+  "view_W3NRemove_success": {
+    "message": "Remove web3name was successful"
+  },
+  "view_W3NRemove_error": {
+    "message": "Remove web3name failed"
+  },
+  "view_W3NRemove_explanation": {
+    "message": "Please note: if you remove your web3name, it can be claimed by someone else."
   }
 }

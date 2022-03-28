@@ -66,6 +66,15 @@ export function DidManage({ identity }: Props): JSX.Element {
         </Link>
       )}
 
+      {web3name && (
+        <Link
+          className={styles.web3Name}
+          to={generatePath(paths.identity.did.web3name.remove, { address })}
+        >
+          {t('view_DidManage_web3name_remove')}
+        </Link>
+      )}
+
       <Link
         className={styles.downgrade}
         to={generatePath(paths.identity.did.manage.warning, { address })}
