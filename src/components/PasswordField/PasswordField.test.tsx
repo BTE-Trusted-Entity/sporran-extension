@@ -17,6 +17,7 @@ import {
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { decryptIdentity } from '../../utilities/identities/identities';
 import { exceptionToError } from '../../utilities/exceptionToError/exceptionToError';
+import { useInterval } from '../../utilities/useInterval/useInterval';
 
 import { PasswordField } from './PasswordField';
 
@@ -30,7 +31,10 @@ const passwordField = {
   setIsEmpty: jest.fn(),
 };
 
-jest.useFakeTimers();
+jest.mock('../../utilities/useInterval/useInterval');
+jest.mocked(useInterval).mockImplementation(() => {
+  /* do nothing */
+});
 
 describe('PasswordField', () => {
   beforeEach(() => {
@@ -98,11 +102,11 @@ describe('PasswordField', () => {
     expect(await screen.findByLabelText(/Sign with password/)).toHaveValue(
       '************',
     );
-    jest.advanceTimersByTime(15 * 60 * 1000);
 
     jest.mocked(getPasswordChannel.get).mockResolvedValue(undefined);
 
-    jest.advanceTimersByTime(1 * 60 * 1000);
+    const callback = jest.mocked(useInterval).mock.calls.pop()?.[0];
+    callback?.();
 
     expect(await screen.findByLabelText(/Remember password/)).not.toBeChecked();
     expect(await screen.findByLabelText(/Sign with password/)).toHaveValue('');
@@ -132,7 +136,7 @@ describe('PasswordField', () => {
         </form>,
       );
 
-      userEvent.click(await screen.findByText('Submit'));
+      await userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => error !== '');
       expect(error).toEqual('Invalid password');
@@ -154,11 +158,11 @@ describe('PasswordField', () => {
         </form>,
       );
 
-      userEvent.type(
+      await userEvent.type(
         await screen.findByLabelText(/Sign with password/),
         'PASS',
       );
-      userEvent.click(await screen.findByText('Submit'));
+      await userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => password !== {});
       expect(password.password).toEqual('PASS');
@@ -186,8 +190,8 @@ describe('PasswordField', () => {
       await act(async () => {
         await promise;
       });
-      userEvent.click(await screen.findByLabelText(/Remember password/));
-      userEvent.click(await screen.findByText('Submit'));
+      await userEvent.click(await screen.findByLabelText(/Remember password/));
+      await userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => password !== {});
       expect(password.password).toEqual('PASS');
@@ -210,12 +214,12 @@ describe('PasswordField', () => {
         </form>,
       );
 
-      userEvent.type(
+      await userEvent.type(
         await screen.findByLabelText(/Sign with password/),
         'PASS',
       );
-      userEvent.click(await screen.findByLabelText(/Remember password/));
-      userEvent.click(await screen.findByText('Submit'));
+      await userEvent.click(await screen.findByLabelText(/Remember password/));
+      await userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => password !== '');
 

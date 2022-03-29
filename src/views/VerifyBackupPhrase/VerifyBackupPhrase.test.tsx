@@ -20,7 +20,7 @@ describe('VerifyBackupPhrase', () => {
 
   it('should indicate the correct word', async () => {
     render(<VerifyBackupPhrase backupPhrase={backupPhrase} />);
-    userEvent.click(await screen.findByRole('button', { name: 'one' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'one' }));
     expect(await screen.findByRole('button', { name: '01 one' })).toHaveClass(
       'correct',
     );
@@ -31,7 +31,7 @@ describe('VerifyBackupPhrase', () => {
 
   it('should indicate the incorrect word', async () => {
     render(<VerifyBackupPhrase backupPhrase={backupPhrase} />);
-    userEvent.click(await screen.findByRole('button', { name: 'seven' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'seven' }));
     expect(
       (await screen.findAllByRole('button', { name: 'seven' }))[0],
     ).toHaveClass('incorrect');
@@ -44,25 +44,33 @@ describe('VerifyBackupPhrase', () => {
     const { container } = render(
       <VerifyBackupPhrase backupPhrase={backupPhrase} />,
     );
-    userEvent.click(await screen.findByRole('button', { name: 'one' }));
-    userEvent.click(await screen.findByRole('button', { name: 'two' }));
-    userEvent.click(await screen.findByRole('button', { name: 'three' }));
-    userEvent.click(await screen.findByRole('button', { name: 'four' }));
-    userEvent.click(await screen.findByRole('button', { name: 'five' }));
-    userEvent.click(await screen.findByRole('button', { name: 'six' }));
-    userEvent.click(await screen.findByRole('button', { name: 'seven' }));
-    userEvent.click(await screen.findByRole('button', { name: 'eight' }));
-    userEvent.click(await screen.findByRole('button', { name: 'nine' }));
-    userEvent.click(await screen.findByRole('button', { name: 'ten' }));
-    userEvent.click(await screen.findByRole('button', { name: 'eleven' }));
-    userEvent.click(await screen.findByRole('button', { name: 'twelve' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'one' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'two' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'three' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'four' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'five' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'six' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'seven' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'eight' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'nine' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'ten' }));
+    await userEvent.click(
+      await screen.findByRole('button', { name: 'eleven' }),
+    );
+    await userEvent.click(
+      await screen.findByRole('button', { name: 'twelve' }),
+    );
 
     expect(container).toMatchSnapshot();
   });
 
   it('should handle duplicate words', async () => {
     render(<VerifyBackupPhrase backupPhrase={backupPhraseWithDupeWord} />);
-    userEvent.click((await screen.findAllByRole('button', { name: 'two' }))[0]);
+    await userEvent.click(
+      (
+        await screen.findAllByRole('button', { name: 'two' })
+      )[0],
+    );
 
     const buttons = await screen.findAllByRole('button', { name: 'two' });
     // button[0] is in the input field

@@ -27,7 +27,7 @@ describe('Balance', () => {
     const showBreakdown = await screen.findByRole('button', {
       name: 'Show balance breakdown',
     });
-    userEvent.click(showBreakdown);
+    await userEvent.click(showBreakdown);
 
     await screen.findByLabelText('Identity has no unlocked funds for update');
 

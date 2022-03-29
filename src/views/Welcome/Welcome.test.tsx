@@ -36,7 +36,7 @@ describe('Welcome', () => {
     expect(createLink).toHaveAttribute('aria-disabled', 'true');
     expect(importLink).toHaveAttribute('aria-disabled', 'true');
 
-    userEvent.click(await screen.findByLabelText(/agree to the/));
+    await userEvent.click(await screen.findByLabelText(/agree to the/));
 
     expect(createLink).not.toHaveAttribute('aria-disabled', 'true');
     expect(importLink).not.toHaveAttribute('aria-disabled', 'true');

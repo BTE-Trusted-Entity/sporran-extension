@@ -31,7 +31,7 @@ describe('CredentialCard', () => {
     );
     await waitForDownloadInfo();
     await waitForPresentationInfo();
-    userEvent.click(
+    await userEvent.click(
       await screen.findByRole('button', {
         name: 'Email Credential mockEmail@mock.mock',
       }),
