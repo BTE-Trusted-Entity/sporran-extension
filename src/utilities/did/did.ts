@@ -98,9 +98,15 @@ export async function needLegacyDidCrypto(did: string): Promise<boolean> {
     return false;
   }
 
-  const encryptionKey = getDidEncryptionKey(await getDidDetails(did));
-  return (
-    Crypto.u8aToHex(encryptionKey.publicKey) ===
-    '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e'
-  );
+  try {
+    const encryptionKey = getDidEncryptionKey(await getDidDetails(did));
+    return (
+      Crypto.u8aToHex(encryptionKey.publicKey) ===
+      '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e'
+    );
+  } catch {
+    // getDidDetails might throw if the DID is not on-chain anymore (removed, another endpoint),
+    // no legacy crypto needed in that case
+    return false;
+  }
 }
