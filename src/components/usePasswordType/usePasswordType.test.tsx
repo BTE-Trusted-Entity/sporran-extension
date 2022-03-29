@@ -19,10 +19,10 @@ describe('usePasswordType', () => {
     const { container } = render(<TestComponent />);
     expect(container).toMatchSnapshot();
 
-    userEvent.click(await screen.findByRole('button'));
+    await userEvent.click(await screen.findByRole('button'));
     expect(container).toMatchSnapshot();
 
-    userEvent.click(await screen.findByRole('button'));
+    await userEvent.click(await screen.findByRole('button'));
     expect(container).toMatchSnapshot();
   });
 });

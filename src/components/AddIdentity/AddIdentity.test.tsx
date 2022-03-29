@@ -17,7 +17,7 @@ describe('AddIdentity', () => {
       </MemoryRouter>,
     );
 
-    userEvent.click(await screen.findByLabelText('Add'));
+    await userEvent.click(await screen.findByLabelText('Add'));
 
     expect(container).toMatchSnapshot();
   });

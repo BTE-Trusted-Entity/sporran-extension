@@ -19,14 +19,14 @@ describe('CreatePassword', () => {
   it('should allow the strong password', async () => {
     render(<CreatePassword {...props} />);
 
-    userEvent.click(screen.getByText('Next Step'));
+    await userEvent.click(screen.getByText('Next Step'));
     expect(onSuccess).not.toHaveBeenCalled();
 
-    userEvent.type(
+    await userEvent.type(
       screen.getByLabelText('Please enter your password'),
       'Hello, World!11',
     );
-    userEvent.click(screen.getByText('Next Step'));
+    await userEvent.click(screen.getByText('Next Step'));
 
     expect(onSuccess).toHaveBeenCalled();
   });
@@ -35,10 +35,10 @@ describe('CreatePassword', () => {
     const { container } = render(<CreatePassword {...props} />);
     expect(container).toMatchSnapshot();
 
-    userEvent.click(screen.getByLabelText('Show'));
+    await userEvent.click(screen.getByLabelText('Show'));
     expect(container).toMatchSnapshot();
 
-    userEvent.click(screen.getByLabelText('Hide'));
+    await userEvent.click(screen.getByLabelText('Hide'));
     expect(container).toMatchSnapshot();
   });
 
@@ -46,20 +46,20 @@ describe('CreatePassword', () => {
     const { container } = render(<CreatePassword {...props} />);
     const password = screen.getByLabelText('Please enter your password');
 
-    userEvent.type(password, 'H');
+    await userEvent.type(password, 'H');
     expect(container).toMatchSnapshot();
 
-    userEvent.type(password, 'ello');
+    await userEvent.type(password, 'ello');
     expect(container).toMatchSnapshot();
 
-    userEvent.type(password, '1');
+    await userEvent.type(password, '1');
     expect(container).toMatchSnapshot();
 
-    userEvent.type(password, '!!!!!');
+    await userEvent.type(password, '!!!!!');
     expect(container).toMatchSnapshot();
 
     // here the test should not report any more errors
-    userEvent.type(password, 'f');
+    await userEvent.type(password, 'f');
     expect(container).toMatchSnapshot();
   });
 });

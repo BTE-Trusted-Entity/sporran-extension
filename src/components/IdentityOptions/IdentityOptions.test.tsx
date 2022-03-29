@@ -26,7 +26,7 @@ describe('AddIdentity', () => {
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'false');
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 
-    userEvent.click(openMenuButton);
+    await userEvent.click(openMenuButton);
 
     expect(await screen.findByRole('menu')).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
@@ -44,7 +44,7 @@ describe('AddIdentity', () => {
         onEdit={onEdit}
       />,
     );
-    userEvent.click(await screen.findByLabelText('Identity options'));
+    await userEvent.click(await screen.findByLabelText('Identity options'));
 
     expect(container).toMatchSnapshot();
   });

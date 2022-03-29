@@ -33,7 +33,9 @@ describe('ExternalAccess', () => {
       await getAuthorizedPromise;
     });
 
-    userEvent.click(await screen.findByLabelText('example.comdeniedallowed'));
+    await userEvent.click(
+      await screen.findByLabelText('example.comdeniedallowed'),
+    );
     await act(async () => {
       await getAuthorizedPromise;
     });

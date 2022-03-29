@@ -132,7 +132,7 @@ describe('PasswordField', () => {
         </form>,
       );
 
-      userEvent.click(await screen.findByText('Submit'));
+      await userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => error !== '');
       expect(error).toEqual('Invalid password');
@@ -154,11 +154,11 @@ describe('PasswordField', () => {
         </form>,
       );
 
-      userEvent.type(
+      await userEvent.type(
         await screen.findByLabelText(/Sign with password/),
         'PASS',
       );
-      userEvent.click(await screen.findByText('Submit'));
+      await userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => password !== {});
       expect(password.password).toEqual('PASS');
@@ -186,8 +186,8 @@ describe('PasswordField', () => {
       await act(async () => {
         await promise;
       });
-      userEvent.click(await screen.findByLabelText(/Remember password/));
-      userEvent.click(await screen.findByText('Submit'));
+      await userEvent.click(await screen.findByLabelText(/Remember password/));
+      await userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => password !== {});
       expect(password.password).toEqual('PASS');
@@ -210,12 +210,12 @@ describe('PasswordField', () => {
         </form>,
       );
 
-      userEvent.type(
+      await userEvent.type(
         await screen.findByLabelText(/Sign with password/),
         'PASS',
       );
-      userEvent.click(await screen.findByLabelText(/Remember password/));
-      userEvent.click(await screen.findByText('Submit'));
+      await userEvent.click(await screen.findByLabelText(/Remember password/));
+      await userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => password !== '');
 

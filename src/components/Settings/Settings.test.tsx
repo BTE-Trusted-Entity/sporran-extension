@@ -29,7 +29,7 @@ describe('Settings', () => {
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'false');
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 
-    userEvent.click(openMenuButton);
+    await userEvent.click(openMenuButton);
 
     expect(await screen.findByRole('menu')).toBeInTheDocument();
     expect(
@@ -48,7 +48,7 @@ describe('Settings', () => {
         <Settings />
       </MemoryRouter>,
     );
-    userEvent.click(await screen.findByLabelText('Settings'));
+    await userEvent.click(await screen.findByLabelText('Settings'));
 
     expect(
       screen.queryByRole('menuitem', { name: 'Forget current identity' }),
@@ -68,7 +68,7 @@ describe('Settings', () => {
         <Settings />
       </IdentitiesProviderMock>,
     );
-    userEvent.click(await screen.findByLabelText('Settings'));
+    await userEvent.click(await screen.findByLabelText('Settings'));
 
     expect(
       screen.queryByRole('menuitem', { name: 'Forget current identity' }),
@@ -88,7 +88,7 @@ describe('Settings', () => {
         <Settings />
       </InternalConfigurationContext>,
     );
-    userEvent.click(await screen.findByLabelText('Settings'));
+    await userEvent.click(await screen.findByLabelText('Settings'));
 
     expect(
       await screen.findByRole('menuitem', { name: 'Custom Endpoint' }),

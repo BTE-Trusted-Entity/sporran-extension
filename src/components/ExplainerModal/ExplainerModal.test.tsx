@@ -34,7 +34,7 @@ describe('ExplainerModal', () => {
   it('should match the snapshot when shown', async () => {
     mockDialogShowModal();
     const { container, findByLabelText } = render(<Component />);
-    userEvent.click(await findByLabelText('Click me!'));
+    await userEvent.click(await findByLabelText('Click me!'));
     await waitForDialogUpdate();
     expect(container).toMatchSnapshot();
   });

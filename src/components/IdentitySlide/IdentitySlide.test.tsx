@@ -26,14 +26,17 @@ describe('IdentitySlide', () => {
   it('should enable editing the identity name', async () => {
     const { container } = render(<IdentitySlide identity={identity} options />);
 
-    userEvent.click(await screen.findByLabelText('Identity options'));
-    userEvent.click(
+    await userEvent.click(await screen.findByLabelText('Identity options'));
+    await userEvent.click(
       await screen.findByRole('menuitem', { name: 'Edit Identity Name' }),
     );
-    userEvent.type(await screen.findByLabelText('Identity name:'), ' Foo');
+    await userEvent.type(
+      await screen.findByLabelText('Identity name:'),
+      ' Foo',
+    );
 
     const saveButton = await screen.findByRole('button', { name: 'Save' });
-    userEvent.click(saveButton);
+    await userEvent.click(saveButton);
 
     expect(saveIdentity).toHaveBeenCalledWith({
       name: 'KILT Identity 1 Foo',
