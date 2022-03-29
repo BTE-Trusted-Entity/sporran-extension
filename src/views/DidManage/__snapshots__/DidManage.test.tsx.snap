@@ -70,6 +70,12 @@ exports[`DidManage should match the snapshot with web3name 1`] = `
       Service endpoints
     </a>
     <a
+      class="web3Name"
+      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/web3name/remove"
+    >
+      Remove web3name
+    </a>
+    <a
       class="downgrade"
       href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/warning"
     >

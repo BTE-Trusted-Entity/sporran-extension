@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
+import BN from 'bn.js';
 
 import * as styles from './DidUpgradePromo.module.css';
 
@@ -14,6 +15,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
+import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { paths } from '../paths';
 import {
   createDid,
@@ -95,6 +97,11 @@ export function DidUpgradePromo({ identity }: Props): JSX.Element | null {
       <p className={styles.subline}>{t('view_DidUpgradePromo_subline')}</p>
 
       <IdentitySlide identity={identity} />
+
+      <p className={styles.costs}>
+        {t('view_DidUpgradePromo_total')}
+        <KiltAmount amount={new BN(0)} type="costs" smallDecimals />
+      </p>
 
       <p className={styles.info}>{t('view_DidUpgradePromo_info')}</p>
 

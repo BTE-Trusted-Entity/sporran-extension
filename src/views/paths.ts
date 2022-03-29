@@ -60,6 +60,7 @@ export const paths = {
           sign: '/identity/:address/did/web3name/create/sign',
           promo: '/identity/:address/did/web3name/create/promo',
         },
+        remove: '/identity/:address/did/web3name/remove',
       },
       repair: '/identity/:address/did/repair',
     },

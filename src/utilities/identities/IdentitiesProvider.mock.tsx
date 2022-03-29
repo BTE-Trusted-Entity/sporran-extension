@@ -30,16 +30,16 @@ export const moreIdentitiesMock: IdentitiesMap = {
     did: 'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
     index: 4,
   },
-  '4o9GN2oCv8E9GVrLMoYRgVWBYAtjXfWieKECsZmwKXevdSiV': {
+  '4qKSjytQkZEdEN42eViwkepoKfLihoHSPQ4uUrWvVY1h5Ru3': {
     name: 'KILT Identity 5',
-    address: '4o9GN2oCv8E9GVrLMoYRgVWBYAtjXfWieKECsZmwKXevdSiV',
-    did: 'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+    address: '4qKSjytQkZEdEN42eViwkepoKfLihoHSPQ4uUrWvVY1h5Ru3',
+    did: 'did:kilt:4tg2AJYg3VwS5pganh12fpQkCnHdtzEk24U5dfb9SiN2bPbU',
     index: 5,
   },
-  '4srs2Ag4NQJyr9uDszokjT4EdiHfDHiv2hzvuZtJL7KFCVWo': {
+  '4sdkkaM8jvLJijJmpHmJhCDC34JvRKqqs1qLUyHYKXvygQ5w': {
     name: 'KILT Identity 6',
-    address: '4srs2Ag4NQJyr9uDszokjT4EdiHfDHiv2hzvuZtJL7KFCVWo',
-    did: 'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+    address: '4sdkkaM8jvLJijJmpHmJhCDC34JvRKqqs1qLUyHYKXvygQ5w',
+    did: 'did:kilt:4tPjjdrKmURbWJfvcdZ9RnK3CccVFCqRUJEEpFjZwdc7VuHp',
     index: 6,
   },
   '4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos': {

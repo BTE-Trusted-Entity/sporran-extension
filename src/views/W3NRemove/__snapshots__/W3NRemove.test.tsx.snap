@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DidUpgradePromo should render 1`] = `
+exports[`W3NRemove should match the snapshot 1`] = `
 <div>
   <form
     autocomplete="off"
@@ -9,12 +9,12 @@ exports[`DidUpgradePromo should render 1`] = `
     <h1
       class="heading"
     >
-      Upgrade to on-chain DID
+      Remove web3name
     </h1>
     <p
       class="subline"
     >
-      Sign your upgrade
+      Remove web3name from the KILT blockchain
     </p>
     <section>
       <div
@@ -28,22 +28,22 @@ exports[`DidUpgradePromo should render 1`] = `
         <span
           class="name"
         >
-          KILT Identity 1
+          KILT Identity 2
         </span>
       </div>
     </section>
     <p
       class="costs"
     >
-      Total cost: 
+      Refund Amount: 
       <span
         class="amount"
       >
-        0
+        1
         <span
           class="fractional"
         >
-          .0000
+          .9900
         </span>
          
         <span
@@ -53,9 +53,27 @@ exports[`DidUpgradePromo should render 1`] = `
       </span>
     </p>
     <p
-      class="info"
+      class="details"
     >
-      Free for you due to BTE promo
+       Deposit 
+      2.0000
+       
+      <span
+        aria-label="KILT Coin"
+        class="coin"
+      />
+       - fee 
+      0.0100
+       
+      <span
+        aria-label="KILT Coin"
+        class="coin"
+      />
+    </p>
+    <p
+      class="explanation"
+    >
+      Please note: if you remove your web3name, it can be claimed by someone else.
     </p>
     <p
       class="resetLine"
@@ -68,7 +86,7 @@ exports[`DidUpgradePromo should render 1`] = `
       </label>
       <a
         class="reset"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
+        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/reset"
       >
         Reset password
       </a>
@@ -122,6 +140,12 @@ exports[`DidUpgradePromo should render 1`] = `
       >
         Sign
       </button>
+      <output
+        class="errorTooltip"
+        hidden=""
+      >
+        You need at least 0.0100 KILTs to pay the fee
+      </output>
     </p>
     <button
       aria-label="Back"
