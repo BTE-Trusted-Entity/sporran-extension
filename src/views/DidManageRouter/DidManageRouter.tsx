@@ -5,6 +5,7 @@ import { DidDowngrade } from '../DidDowngrade/DidDowngrade';
 import { DidDowngradeWarning } from '../DidDowngradeWarning/DidDowngradeWarning';
 import { DidEndpointsFlow } from '../DidEndpointsFlow/DidEndpointsFlow';
 import { DidManage } from '../DidManage/DidManage';
+import { W3NRemove } from '../W3NRemove/W3NRemove';
 import { paths } from '../paths';
 
 interface Props {
@@ -24,6 +25,10 @@ export function DidManageRouter({ identity }: Props): JSX.Element {
 
       <Route path={paths.identity.did.manage.endpoints.start}>
         <DidEndpointsFlow identity={identity} />
+      </Route>
+
+      <Route path={paths.identity.did.web3name.remove}>
+        <W3NRemove identity={identity} />
       </Route>
 
       <Route path={paths.identity.did.manage.start}>
