@@ -1,10 +1,16 @@
-import { IEncryptedMessage, DidPublicKey } from '@kiltprotocol/types';
+import { HexString } from '@polkadot/util/types';
+import {
+  IEncryptedMessage,
+  DidPublicKey,
+  IIdentity,
+} from '@kiltprotocol/types';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import { injectIntoDApp } from './dApps/injectIntoDApp/injectIntoDApp';
 import { configuration } from './configuration/configuration';
 import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
 import { injectedSignDidChannel } from './channels/SignDidChannels/injectedSignDidChannel';
+import { injectedSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/injectedSignDidExtrinsicChannel';
 import { injectedAccessChannel } from './dApps/AccessChannels/injectedAccessChannel';
 
 interface PubSubSession {
@@ -29,7 +35,11 @@ interface InjectedWindowProvider {
   specVersion: '0.1';
   signWithDid: (
     plaintext: string,
-  ) => Promise<{ signature: string; didKeyUri: string }>;
+  ) => Promise<{ signature: string; didKeyUri: DidPublicKey['id'] }>;
+  signExtrinsicWithDid: (
+    extrinsic: HexString,
+    signer: IIdentity['address'],
+  ) => Promise<{ signed: HexString; didKeyUri: DidPublicKey['id'] }>;
 }
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
@@ -93,11 +103,22 @@ async function startSession(
 }
 
 async function signWithDid(plaintext: string): Promise<{
-  signature: string;
-  didKeyUri: string;
+  signature: HexString;
+  didKeyUri: DidPublicKey['id'];
 }> {
   const dAppName = document.title.substring(0, 50);
   return injectedSignDidChannel.get({ plaintext, dAppName });
+}
+
+async function signExtrinsicWithDid(
+  extrinsic: HexString,
+  signer: IIdentity['address'],
+): Promise<{
+  signed: HexString;
+  didKeyUri: DidPublicKey['id'];
+}> {
+  const dAppName = document.title.substring(0, 50);
+  return injectedSignDidExtrinsicChannel.get({ extrinsic, signer, dAppName });
 }
 
 function main() {
@@ -117,6 +138,7 @@ function main() {
   apiWindow.kilt ||= {};
   apiWindow.kilt.sporran ||= {
     signWithDid,
+    signExtrinsicWithDid,
     startSession,
     name: 'Sporran', // manifest_name
     version,

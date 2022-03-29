@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { mutate } from 'swr';
 import { Keyring } from '@polkadot/keyring';
 import { KeyringPair } from '@polkadot/keyring/types';
+import { HexString } from '@polkadot/util/types';
 import {
   naclBoxPairFromSecret,
   naclSeal,
@@ -12,6 +13,7 @@ import {
   sr25519PairFromSeed,
 } from '@polkadot/util-crypto';
 import {
+  DidPublicKey,
   EncryptionKeyType,
   IEncryptedMessage,
   KeystoreSigner,
@@ -131,7 +133,10 @@ export function getKeypairBySeed(seed: Uint8Array): KeyringPair {
 interface IdentityDidCrypto {
   didDetails: DidDetails;
   keystore: KeystoreSigner;
-  sign: (plaintext: string) => { signature: string; didKeyUri: string };
+  sign: (plaintext: string) => {
+    signature: HexString;
+    didKeyUri: DidPublicKey['id'];
+  };
   encrypt: (
     messageBody: MessageBody,
     dAppDidDetails: DidDetails,

@@ -78,5 +78,6 @@ export const paths = {
     sign: '/popup/sign',
     signRaw: '/popup/signRaw',
     signDid: '/identity/:address/did/sign',
+    signDidExtrinsic: '/identity/:address/did/signExtrinsic',
   },
 };

@@ -30,6 +30,7 @@ import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
 import { SignQuote } from '../SignQuote/SignQuote';
 import { SignDid } from '../SignDid/SignDid';
+import { SignDidExtrinsic } from '../SignDidExtrinsic/SignDidExtrinsic';
 import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
 import { paths } from '../paths';
 import { DidRepair } from '../DidRepair/DidRepair';
@@ -118,6 +119,10 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.popup.signDid}>
           <SignDid identity={identity} />
+        </Route>
+
+        <Route path={paths.popup.signDidExtrinsic}>
+          <SignDidExtrinsic identity={identity} />
         </Route>
 
         <Route path={paths.identity.did.upgrade.start}>
