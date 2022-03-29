@@ -11,10 +11,18 @@
   margin: 0 0 0.8125rem;
 }
 
-.info {
+.costs {
   composes: smallText from '../../components/Typography/Typography.module.css';
   font-size: 1.25rem;
-  margin: 0.25rem 0 0;
+  margin: 0.5rem 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  margin: 0.5rem 0 0;
 }
 
 .buttonsLine {

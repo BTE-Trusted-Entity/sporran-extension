@@ -855,8 +855,11 @@
   "view_DidUpgradePromo_subline": {
     "message": "Sign your upgrade"
   },
+  "view_DidUpgradePromo_total": {
+    "message": "Total cost: "
+  },
   "view_DidUpgradePromo_info": {
-    "message": "Sponsored by BTE"
+    "message": "Free for you due to BTE promo"
   },
   "view_DidUpgradePromo_pending": {
     "message": "Upgrade to on-chain is being processed"
