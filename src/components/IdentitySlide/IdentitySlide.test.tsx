@@ -5,7 +5,6 @@ import {
   identitiesMock as identities,
   render,
   screen,
-  waitForElementToBeRemoved,
 } from '../../testing/testing';
 import { saveIdentity } from '../../utilities/identities/identities';
 
@@ -44,8 +43,6 @@ describe('IdentitySlide', () => {
       did: identity.did,
       index: 1,
     });
-
-    await waitForElementToBeRemoved(saveButton);
 
     expect(container).toMatchSnapshot();
   });
