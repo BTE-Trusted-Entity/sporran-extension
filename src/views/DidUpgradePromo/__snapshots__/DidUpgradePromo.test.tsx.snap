@@ -33,9 +33,29 @@ exports[`DidUpgradePromo should render 1`] = `
       </div>
     </section>
     <p
-      class="info"
+      class="costs"
     >
-      Sponsored by BTE
+      Total cost: 
+      <span
+        class="amount"
+      >
+        0
+        <span
+          class="fractional"
+        >
+          .0000
+        </span>
+         
+        <span
+          aria-label="KILT Coin"
+          class="coin"
+        />
+      </span>
+    </p>
+    <p
+      class="details"
+    >
+      Free for you due to BTE promo
     </p>
     <p
       class="resetLine"
