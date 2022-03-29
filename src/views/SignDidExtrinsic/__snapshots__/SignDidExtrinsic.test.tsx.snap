@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SignDid should allow signing with full did 1`] = `
+exports[`SignDidExtrinsic should allow signing with full did 1`] = `
 <div>
   <form
     class="container"
@@ -37,13 +37,13 @@ exports[`SignDid should allow signing with full did 1`] = `
       <a
         aria-label="KILT Identity 1"
         class="left"
-        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
         title="KILT Identity 1"
       />
       <a
         aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
         class="right"
-        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
         title="KILT Identity 3 which has a very long name and might not even fit on the screen"
       />
       <ul
@@ -56,7 +56,7 @@ exports[`SignDid should allow signing with full did 1`] = `
             aria-current="page"
             aria-label="KILT Identity 1"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
             title="KILT Identity 1"
           />
         </li>
@@ -67,7 +67,7 @@ exports[`SignDid should allow signing with full did 1`] = `
             aria-current="page"
             aria-label="KILT Identity 2"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
             title="KILT Identity 2"
           />
         </li>
@@ -78,7 +78,7 @@ exports[`SignDid should allow signing with full did 1`] = `
             aria-current="page"
             aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
             title="KILT Identity 3 which has a very long name and might not even fit on the screen"
           />
         </li>
@@ -95,39 +95,34 @@ exports[`SignDid should allow signing with full did 1`] = `
         </li>
       </ul>
     </div>
-    <p
-      class="label"
+    <dl
+      class="details"
     >
-      Request from:
-    </p>
-    <p
-      class="origin"
-    >
-      https://example.org/foo
-    </p>
-    <p
-      class="label"
-      id="plaintext"
-    >
-      Message to be signed:
-    </p>
-    <p
-      class="plaintextLine"
-    >
-      <textarea
-        aria-labelledby="plaintext"
-        class="plaintext"
-        readonly=""
+      <dt
+        class="detailName"
       >
-        All your base are belong to us
-      </textarea>
-      <button
-        aria-label="copy to clipboard"
-        class="copy"
-        title="copy to clipboard"
-        type="button"
-      />
-    </p>
+        from
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com"
+      >
+        extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com
+      </dd>
+      <dt
+        class="detailName"
+      >
+        method data
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="namespace.method(input = \\"some meaningful values you would definitely like to see\\")"
+      >
+        namespace.method(input = "some meaningful values you would definitely like to see")
+      </dd>
+    </dl>
     <p
       class="resetLine"
     >
@@ -204,7 +199,7 @@ exports[`SignDid should allow signing with full did 1`] = `
 </div>
 `;
 
-exports[`SignDid should render 1`] = `
+exports[`SignDidExtrinsic should render 1`] = `
 <div>
   <form
     class="container"
@@ -241,13 +236,13 @@ exports[`SignDid should render 1`] = `
       <a
         aria-label="Add Identity"
         class="left"
-        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
         title="Add Identity"
       />
       <a
         aria-label="KILT Identity 2"
         class="right"
-        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
         title="KILT Identity 2"
       />
       <ul
@@ -260,7 +255,7 @@ exports[`SignDid should render 1`] = `
             aria-current="page"
             aria-label="KILT Identity 1"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
             title="KILT Identity 1"
           />
         </li>
@@ -271,7 +266,7 @@ exports[`SignDid should render 1`] = `
             aria-current="page"
             aria-label="KILT Identity 2"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
             title="KILT Identity 2"
           />
         </li>
@@ -282,7 +277,7 @@ exports[`SignDid should render 1`] = `
             aria-current="page"
             aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbCB5b3VyIGJhc2UgYXJlIGJlbG9uZyB0byB1cyJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
             title="KILT Identity 3 which has a very long name and might not even fit on the screen"
           />
         </li>
@@ -299,39 +294,34 @@ exports[`SignDid should render 1`] = `
         </li>
       </ul>
     </div>
-    <p
-      class="label"
+    <dl
+      class="details"
     >
-      Request from:
-    </p>
-    <p
-      class="origin"
-    >
-      https://example.org/foo
-    </p>
-    <p
-      class="label"
-      id="plaintext"
-    >
-      Message to be signed:
-    </p>
-    <p
-      class="plaintextLine"
-    >
-      <textarea
-        aria-labelledby="plaintext"
-        class="plaintext"
-        readonly=""
+      <dt
+        class="detailName"
       >
-        All your base are belong to us
-      </textarea>
-      <button
-        aria-label="copy to clipboard"
-        class="copy"
-        title="copy to clipboard"
-        type="button"
-      />
-    </p>
+        from
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com"
+      >
+        extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com
+      </dd>
+      <dt
+        class="detailName"
+      >
+        method data
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="namespace.method(input = \\"some meaningful values you would definitely like to see\\")"
+      >
+        namespace.method(input = "some meaningful values you would definitely like to see")
+      </dd>
+    </dl>
     <p
       class="resetLine"
     >
