@@ -53,7 +53,7 @@ exports[`DidUpgradePromo should render 1`] = `
       </span>
     </p>
     <p
-      class="details"
+      class="info"
     >
       Free for you due to BTE promo
     </p>
