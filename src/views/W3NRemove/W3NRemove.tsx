@@ -1,14 +1,15 @@
 import { useCallback } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
-import { Deposit, IDidIdentifier } from '@kiltprotocol/types';
+import { Deposit } from '@kiltprotocol/types';
 
 import { FullDidDetails, Web3Names } from '@kiltprotocol/did';
 
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
-import { Option, Struct } from '@polkadot/types';
-import { AnyNumber } from '@polkadot/types/types';
+import { Option, Struct, u64 } from '@polkadot/types';
+
+import { AccountId } from '@polkadot/types/interfaces';
 
 import * as styles from './W3NRemove.module.css';
 
@@ -36,7 +37,6 @@ import { Stats } from '../../components/Stats/Stats';
 
 import { getFullDidDetails } from '../../utilities/did/did';
 
-import { getExtrinsicFee } from '../../utilities/getExtrinsicFee/getExtrinsicFee';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
@@ -56,14 +56,13 @@ async function getFee(fullDid?: FullDidDetails) {
     await getKeystoreFromSeed(fakeSeed),
     keypair.address,
   );
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  const signed = await blockchain.signTx(keypair, authorized);
-  return getExtrinsicFee(signed);
+
+  return (await authorized.paymentInfo(keypair)).partialFee;
 }
 
 interface Web3NameData extends Struct {
-  owner: IDidIdentifier;
-  claimedAt: AnyNumber;
+  owner: AccountId;
+  claimedAt: u64;
   deposit: Deposit;
 }
 
