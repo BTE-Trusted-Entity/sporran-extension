@@ -40,19 +40,19 @@ export function W3NCreateForm({ identity, onSubmit }: Props): JSX.Element {
 
       const tooShort = name.length < minLength;
       if (tooShort) {
-        setError(t('view_W3NCreateForm_short', minLength));
+        setError(t('view_W3NCreateForm_short', [minLength]));
         return;
       }
 
       const tooLong = name.length > maxLength;
       if (tooLong) {
-        setError(t('view_W3NCreateForm_long', maxLength));
+        setError(t('view_W3NCreateForm_long', [maxLength]));
         return;
       }
 
       const unexpected = name.match(/[^a-z0-9_-]/);
       if (unexpected) {
-        setError(t('view_W3NCreateForm_unexpected', unexpected[0]));
+        setError(t('view_W3NCreateForm_unexpected', [unexpected[0]]));
         return;
       }
 

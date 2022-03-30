@@ -146,7 +146,9 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
           className={styles.errorTooltip}
           hidden={!error || Boolean(status)}
         >
-          {t('view_DidUpgrade_insufficientFunds', asKiltCoins(total, 'costs'))}
+          {t('view_DidUpgrade_insufficientFunds', [
+            asKiltCoins(total, 'costs'),
+          ])}
         </output>
       </p>
 

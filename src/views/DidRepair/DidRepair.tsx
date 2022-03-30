@@ -121,7 +121,7 @@ export function DidRepair({ identity }: Props): JSX.Element | null {
           className={styles.errorTooltip}
           hidden={!error || Boolean(status)}
         >
-          {t('view_DidRepair_insufficientFunds', asKiltCoins(fee, 'costs'))}
+          {t('view_DidRepair_insufficientFunds', [asKiltCoins(fee, 'costs')])}
         </output>
       </p>
 

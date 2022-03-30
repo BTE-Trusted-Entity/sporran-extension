@@ -116,7 +116,7 @@ export function DidEndpointsSign({
           className={styles.errorTooltip}
           hidden={!unpaidCosts || Boolean(modalProps)}
         >
-          {t('view_DidEndpointsSign_insufficientFunds', unpaidCosts)}
+          {t('view_DidEndpointsSign_insufficientFunds', [unpaidCosts])}
         </output>
       </p>
 

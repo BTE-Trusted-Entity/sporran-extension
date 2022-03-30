@@ -155,7 +155,7 @@ export function W3NCreateSign({
           className={styles.errorTooltip}
           hidden={!unpaidCosts || Boolean(modalProps)}
         >
-          {t('view_W3NCreateSign_insufficientFunds', unpaidCosts)}
+          {t('view_W3NCreateSign_insufficientFunds', [unpaidCosts])}
         </output>
       </p>
 
