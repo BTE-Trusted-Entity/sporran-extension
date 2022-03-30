@@ -18,6 +18,8 @@ import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 
+import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
+
 import { IdentityOverviewNew } from './IdentityOverviewNew';
 
 interface Props {
@@ -47,14 +49,16 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
     credentials && credentials.some(({ isDownloaded }) => !isDownloaded);
 
   const hasLegacyDid = useSwrDataOrThrow(
-    identity.did,
+    did,
     needLegacyDidCrypto,
     'needLegacyDidCrypto',
   );
 
-  const upgradeDid = !isFullDid(identity.did);
-  const manageDid = isFullDid(identity.did) && !hasLegacyDid;
+  const upgradeDid = !isFullDid(did);
+  const manageDid = isFullDid(did) && !hasLegacyDid;
   const repairDid = hasLegacyDid;
+
+  const web3name = useWeb3Name(did);
 
   if (params.type) {
     return <Redirect to={generatePath(paths.identity.overview, { address })} />;
@@ -143,6 +147,26 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           className={styles.repair}
         >
           {t('view_IdentityOverview_did_repair')}
+        </Link>
+      )}
+
+      {!web3name && (
+        <Link
+          to={generatePath(paths.identity.did.web3name.create.info, {
+            address,
+          })}
+          className={styles.web3Name}
+        >
+          {t('view_IdentityOverview_web3name_create')}
+        </Link>
+      )}
+
+      {web3name && (
+        <Link
+          to={generatePath(paths.identity.did.manage.start, { address })}
+          className={styles.web3Name}
+        >
+          {t('view_IdentityOverview_web3name', [web3name])}
         </Link>
       )}
 

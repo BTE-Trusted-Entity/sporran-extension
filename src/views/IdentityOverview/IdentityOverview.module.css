@@ -63,6 +63,12 @@
   --wide-button-icon: url('../../components/images/repair-did.svg');
 }
 
+.web3Name {
+  composes: buttonWide from '../../components/Button/Button.module.css';
+
+  --wide-button-icon: url('../../components/images/web3name.svg');
+}
+
 .avatarSmall {
   composes: avatar from '../../components/Avatar/Avatar.module.css';
 

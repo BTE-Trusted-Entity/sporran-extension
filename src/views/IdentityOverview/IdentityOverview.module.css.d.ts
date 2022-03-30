@@ -10,4 +10,5 @@ export const downloadPrompt: string;
 export const upgrade: string;
 export const manage: string;
 export const repair: string;
+export const web3Name: string;
 export const avatarSmall: string;

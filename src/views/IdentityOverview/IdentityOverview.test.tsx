@@ -19,11 +19,15 @@ import { legacyIdentity } from '../../utilities/identities/IdentitiesProvider.mo
 
 import { needLegacyDidCrypto } from '../../utilities/did/did';
 
+import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
+
 import { IdentityOverview } from './IdentityOverview';
 
 jest.mock('../../utilities/useSubscanHost/useSubscanHost');
 
 jest.mock('../../utilities/credentials/credentials');
+
+jest.mock('../../utilities/useWeb3Name/useWeb3Name');
 
 const identity =
   identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
@@ -132,6 +136,20 @@ describe('IdentityOverview', () => {
     await act(async () => {
       await legacyPromise;
     });
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should show web3name', async () => {
+    jest.mocked(useWeb3Name).mockReturnValue('fancy-name');
+
+    const { container } = render(
+      <MemoryRouter initialEntries={[`/identity/${fullDidIdentity.address}/`]}>
+        <Route path={paths.identity.overview}>
+          <IdentityOverview identity={identity} />
+        </Route>
+      </MemoryRouter>,
+    );
 
     expect(container).toMatchSnapshot();
   });
