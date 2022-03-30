@@ -32,7 +32,7 @@ interface InjectedWindowProvider {
   ) => Promise<PubSubSession>;
   name: string;
   version: string;
-  specVersion: '0.1';
+  specVersion: '1.0';
   signWithDid: (
     plaintext: string,
   ) => Promise<{ signature: string; didKeyUri: DidPublicKey['id'] }>;
@@ -142,7 +142,7 @@ function main() {
     startSession,
     name: 'Sporran', // manifest_name
     version,
-    specVersion: '0.1',
+    specVersion: '1.0',
   };
 }
 
