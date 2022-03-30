@@ -182,7 +182,7 @@ export function W3NRemove({ identity }: Props): JSX.Element | null {
           className={styles.errorTooltip}
           hidden={!unpaidCosts || Boolean(modalProps)}
         >
-          {t('view_W3NRemove_insufficientFunds', asKiltCoins(fee, 'costs'))}
+          {t('view_W3NRemove_insufficientFunds', [asKiltCoins(fee, 'costs')])}
         </output>
       </p>
 
