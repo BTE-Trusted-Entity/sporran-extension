@@ -482,6 +482,17 @@
   "view_IdentityOverview_did_repair": {
     "message": "Please update your on-chain DID"
   },
+  "view_IdentityOverview_web3name_create": {
+    "message": "Create web3name"
+  },
+  "view_IdentityOverview_web3name": {
+    "message": "web3name: $web3name$",
+    "placeholders": {
+      "web3name": {
+        "content": "$1"
+      }
+    }
+  },
   "view_RemoveIdentity_heading": {
     "message": "Attention!"
   },
