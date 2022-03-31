@@ -46,16 +46,26 @@ exports[`DidUpgradeExplainer should render 1`] = `
     >
       To store your DID on the blockchain, a deposit needs to be reserved. The deposit will be refunded if you remove your on-chain DID.
     </p>
-    <label
-      class="promoLabel"
+    <p
+      class="promoLine"
     >
-      <input
-        class="promo"
-        type="checkbox"
-      />
-      <span />
-      Use BTE promo
-    </label>
+      <label>
+        <input
+          class="promo"
+          type="checkbox"
+        />
+        <span />
+        Use web3name Promo and accept 
+      </label>
+      <a
+        class="terms"
+        href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf "
+        rel="noreferrer"
+        target="_blank"
+      >
+        Terms
+      </a>
+    </p>
     <p
       class="buttonsLine"
     >

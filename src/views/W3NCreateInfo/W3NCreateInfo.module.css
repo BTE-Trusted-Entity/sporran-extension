@@ -31,20 +31,23 @@
   font-size: 0.875rem;
 }
 
-.promo {
-  composes: checkbox from '../../components/Checkbox/Checkbox.module.css';
-}
-
-.promoLabel {
+.promoLine {
   composes: subline from '../../components/Typography/Typography.module.css';
   align-self: flex-start;
-  display: flex;
-  align-items: center;
+  margin-top: 1rem;
+}
+
+.promo {
+  composes: checkbox from '../../components/Checkbox/Checkbox.module.css';
 }
 
 .promo + * {
   flex-shrink: 0;
   margin-right: 0.25rem;
+}
+
+.terms {
+  composes: subline from '../../components/Typography/Typography.module.css';
 }
 
 .buttonsLine {

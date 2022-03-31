@@ -54,16 +54,26 @@ export function W3NCreateInfo({
       )}
 
       {canContinue && promoStatus?.is_active && (
-        <label className={styles.promoLabel}>
-          <input
-            type="checkbox"
-            className={styles.promo}
-            onChange={togglePromo}
-            checked={hasPromo}
-          />
-          <span />
-          {t('view_DidUpgradeExplainer_promo')}
-        </label>
+        <p className={styles.promoLine}>
+          <label>
+            <input
+              type="checkbox"
+              className={styles.promo}
+              onChange={togglePromo}
+              checked={hasPromo}
+            />
+            <span />
+            {t('view_W3NCreateInfo_promo')}
+          </label>
+          <a
+            className={styles.terms}
+            href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf "
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t('view_W3NCreateInfo_terms')}
+          </a>
+        </p>
       )}
 
       <p className={styles.buttonsLine}>

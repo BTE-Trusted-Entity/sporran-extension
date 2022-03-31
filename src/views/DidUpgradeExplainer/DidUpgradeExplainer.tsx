@@ -47,16 +47,26 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
       <p className={styles.deposit}>{t('view_DidUpgradeExplainer_deposit')}</p>
 
       {promoStatus?.is_active && (
-        <label className={styles.promoLabel}>
-          <input
-            type="checkbox"
-            className={styles.promo}
-            onChange={promoChecked.toggle}
-            checked={promoChecked.current}
-          />
-          <span />
-          {t('view_DidUpgradeExplainer_promo')}
-        </label>
+        <p className={styles.promoLine}>
+          <label>
+            <input
+              type="checkbox"
+              className={styles.promo}
+              onChange={promoChecked.toggle}
+              checked={promoChecked.current}
+            />
+            <span />
+            {t('view_DidUpgradeExplainer_promo')}
+          </label>
+          <a
+            className={styles.terms}
+            href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf "
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t('view_DidUpgradeExplainer_terms')}
+          </a>
+        </p>
       )}
 
       <p className={styles.buttonsLine}>

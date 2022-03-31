@@ -139,17 +139,27 @@ exports[`W3NCreateInfo should match the snapshot for on-chain did 1`] = `
     >
       Web3names are user-friendly names built on top of the KILT blockchain. With your on-chain DID, you can claim this alias which makes it easier for others to reference your identity, without the need to triple-check the DID’s long sequence of characters.
     </p>
-    <label
-      class="promoLabel"
+    <p
+      class="promoLine"
     >
-      <input
-        checked=""
-        class="promo"
-        type="checkbox"
-      />
-      <span />
-      Use BTE promo
-    </label>
+      <label>
+        <input
+          checked=""
+          class="promo"
+          type="checkbox"
+        />
+        <span />
+        Use web3name Promo and accept 
+      </label>
+      <a
+        class="terms"
+        href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf "
+        rel="noreferrer"
+        target="_blank"
+      >
+        Terms
+      </a>
+    </p>
     <p
       class="buttonsLine"
     >
