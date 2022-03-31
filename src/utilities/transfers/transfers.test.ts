@@ -1,25 +1,12 @@
-import BN from 'bn.js';
 import {
   BlockchainUtils,
   BlockchainApiConnection,
   Blockchain,
 } from '@kiltprotocol/chain-helpers';
 import { SubmittableExtrinsic } from '@kiltprotocol/types';
-import { Balance } from '@kiltprotocol/core';
+import { Balance, BalanceUtils } from '@kiltprotocol/core';
 
 import { signTransfer, submitTransfer } from './transfers';
-
-jest.mock('@kiltprotocol/core', () => ({
-  Balance: { getTransferTx: jest.fn() },
-}));
-jest.mock('@kiltprotocol/chain-helpers', () => ({
-  BlockchainApiConnection: {
-    getConnectionOrConnect: jest.fn(),
-  },
-  BlockchainUtils: {
-    submitSignedTx: jest.fn(),
-  },
-}));
 
 const signedTxMock = {
   hash: {
@@ -54,8 +41,8 @@ describe('transfers', () => {
       const txHash = await signTransfer({
         keypair: keypairMock,
         recipient: 'recipient-address',
-        amount: new BN(125000000),
-        tip: new BN(0),
+        amount: BalanceUtils.toFemtoKilt(0.000000125),
+        tip: BalanceUtils.toFemtoKilt(0),
       });
 
       expect(Balance.getTransferTx).toHaveBeenCalledWith(

@@ -8,8 +8,6 @@ import { paths } from '../paths';
 
 import { SignDid } from './SignDid';
 
-jest.mock('@kiltprotocol/chain-helpers', () => ({}));
-
 const input: SignDidOriginInput = {
   dAppName: 'dApp',
   origin: 'https://example.org/foo',

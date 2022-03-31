@@ -16,9 +16,6 @@ const endpoint: DidServiceEndpoint = {
   id: `${identity.did}#123456`,
 };
 
-jest.mock('@kiltprotocol/did', () => ({
-  DidUtils: { parseDidUri: jest.fn() },
-}));
 jest.mocked(DidUtils.parseDidUri).mockReturnValue({
   identifier: '4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
 } as ReturnType<typeof DidUtils.parseDidUri>);

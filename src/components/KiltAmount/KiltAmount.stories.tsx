@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import BN from 'bn.js';
+import { BalanceUtils } from '@kiltprotocol/core';
 
 import { KiltAmount } from './KiltAmount';
 
@@ -9,9 +9,13 @@ export default {
 } as Meta;
 
 export function Funds(): JSX.Element {
-  return <KiltAmount amount={new BN(1.23459999e15)} type="funds" />;
+  return (
+    <KiltAmount amount={BalanceUtils.toFemtoKilt(1.23459999)} type="funds" />
+  );
 }
 
 export function Costs(): JSX.Element {
-  return <KiltAmount amount={new BN(1.23459999e15)} type="costs" />;
+  return (
+    <KiltAmount amount={BalanceUtils.toFemtoKilt(1.23459999)} type="costs" />
+  );
 }

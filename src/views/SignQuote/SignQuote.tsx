@@ -1,8 +1,11 @@
 import { Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { filter, find } from 'lodash-es';
-import BN from 'bn.js';
-import { Credential, RequestForAttestation } from '@kiltprotocol/core';
+import {
+  BalanceUtils,
+  Credential,
+  RequestForAttestation,
+} from '@kiltprotocol/core';
 import {
   IClaim,
   IDidDetails,
@@ -51,7 +54,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
   const cType = find(cTypes, { hash: claim.cTypeHash });
 
   const gross = quote?.cost?.gross;
-  const costs = gross ? new BN(`${gross}000000000000000`) : new BN(0);
+  const costs = BalanceUtils.toFemtoKilt(gross || 0);
 
   const passwordField = usePasswordField();
 

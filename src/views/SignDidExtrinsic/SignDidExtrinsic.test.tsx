@@ -9,8 +9,6 @@ import { paths } from '../paths';
 import { SignDidExtrinsic } from './SignDidExtrinsic';
 import { useExtrinsicValues } from './useExtrinsicValues';
 
-jest.mock('@kiltprotocol/chain-helpers', () => ({}));
-
 const input: SignDidExtrinsicOriginInput = {
   dAppName: 'dApp',
   origin: 'https://example.org/foo',

@@ -1,4 +1,4 @@
-import BN from 'bn.js';
+import { BalanceUtils } from '@kiltprotocol/core';
 
 import { render } from '../../testing/testing';
 
@@ -11,7 +11,7 @@ import { DidRepair } from './DidRepair';
 jest.mock('../../utilities/didRepair/didRepair', () => ({
   getFee: jest.fn(),
 }));
-jest.mocked(getFee).mockResolvedValue(new BN(1e13));
+jest.mocked(getFee).mockResolvedValue(BalanceUtils.toFemtoKilt(0.01));
 
 describe('DidRepair', () => {
   it('should render', async () => {
