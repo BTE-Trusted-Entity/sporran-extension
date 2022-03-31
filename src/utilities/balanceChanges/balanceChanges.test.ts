@@ -7,9 +7,6 @@ import {
 } from './balanceChanges';
 import { originalBalancesMock } from './balanceChanges.mock';
 
-jest.mock('@kiltprotocol/core', () => ({
-  Balance: { listenToBalanceChanges: jest.fn() },
-}));
 jest.unmock('./balanceChanges');
 
 const expectedBalanceStrings = {

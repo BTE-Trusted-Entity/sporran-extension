@@ -3,9 +3,6 @@ import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 
 import { App } from './App';
 
-jest.mock('@kiltprotocol/chain-helpers', () => ({}));
-jest.mock('@kiltprotocol/utils', () => ({}));
-
 jest.mock('../../utilities/initKiltSDK/initKiltSDK');
 jest.mocked(initKiltSDK).mockResolvedValue(undefined);
 

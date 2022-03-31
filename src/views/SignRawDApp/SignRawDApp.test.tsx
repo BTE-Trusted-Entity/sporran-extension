@@ -7,8 +7,6 @@ import { paths } from '../paths';
 
 import { SignRawDApp } from './SignRawDApp';
 
-jest.mock('@kiltprotocol/chain-helpers', () => ({}));
-
 const mockData: SignRawOriginInput = {
   origin:
     'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',

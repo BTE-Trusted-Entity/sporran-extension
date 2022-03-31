@@ -3,25 +3,11 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { Balance } from '@kiltprotocol/core';
-import BN from 'bn.js';
+import { Balance, BalanceUtils } from '@kiltprotocol/core';
 
 import { originalBalancesMock } from '../balanceChanges/balanceChanges.mock';
 
 import { hasVestedFunds, signVest, submitVest } from './vesting';
-
-jest.mock('@kiltprotocol/chain-helpers', () => ({
-  BlockchainApiConnection: {
-    getConnectionOrConnect: jest.fn(),
-  },
-  BlockchainUtils: {
-    submitSignedTx: jest.fn(),
-  },
-}));
-
-jest.mock('@kiltprotocol/core', () => ({
-  Balance: { getBalances: jest.fn() },
-}));
 
 const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
 
@@ -52,7 +38,7 @@ const signedTxMock = {
   },
   async paymentInfo() {
     return {
-      partialFee: new BN(0.5e15),
+      partialFee: BalanceUtils.toFemtoKilt(0.5),
     };
   },
 };

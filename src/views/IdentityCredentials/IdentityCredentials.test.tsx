@@ -18,8 +18,6 @@ jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as ReturnType<typeof parseDidUri>);
 jest.mocked(sameFullDid).mockReturnValue(true);
-
-jest.mock('@kiltprotocol/core', () => ({ Attestation: { query: jest.fn() } }));
 jest.mocked(Attestation.query).mockResolvedValue(null);
 
 const identity =

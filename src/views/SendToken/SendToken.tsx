@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { find } from 'lodash-es';
+import { BalanceUtils } from '@kiltprotocol/core';
 import { DataUtils } from '@kiltprotocol/utils';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
@@ -22,7 +23,7 @@ import { useOnline } from '../../utilities/useOnline/useOnline';
 const noError = null;
 const nonNumberCharacters = /[^0-9,.\u066C\u2019\u202F]/g;
 const KILT_POWER = 15;
-const minimum = new BN(0.01e15);
+const minimum = BalanceUtils.toFemtoKilt(0.01);
 let existential: BN | undefined;
 
 function numberToBN(parsedValue: number): BN {

@@ -1,4 +1,4 @@
-import BN from 'bn.js';
+import { BalanceUtils } from '@kiltprotocol/core';
 
 import { onAddressBalanceChange } from './balanceChanges';
 
@@ -11,11 +11,11 @@ export function mockBalanceChanges(): void {
       publisher(null, {
         address,
         balances: {
-          bonded: new BN('8000000000000'),
-          transferable: new BN('1216000000000000'),
-          usableForFees: new BN('1224000000000000'),
-          locked: new BN('10000000000000'),
-          total: new BN('1234000000000000'),
+          bonded: BalanceUtils.toFemtoKilt(0.008),
+          transferable: BalanceUtils.toFemtoKilt(1.216),
+          usableForFees: BalanceUtils.toFemtoKilt(1.224),
+          locked: BalanceUtils.toFemtoKilt(0.01),
+          total: BalanceUtils.toFemtoKilt(1.234),
         },
       });
       return () => null;

@@ -1,4 +1,4 @@
-import BN from 'bn.js';
+import { BalanceUtils } from '@kiltprotocol/core';
 
 import { render } from '../../testing/testing';
 
@@ -12,8 +12,8 @@ jest.mock('../../utilities/didUpgrade/didUpgrade', () => ({
   getFee: jest.fn(),
   getDeposit: jest.fn(),
 }));
-jest.mocked(getFee).mockResolvedValue(new BN(1e13));
-jest.mocked(getDeposit).mockResolvedValue(new BN(1e15));
+jest.mocked(getFee).mockResolvedValue(BalanceUtils.toFemtoKilt(0.01));
+jest.mocked(getDeposit).mockResolvedValue(BalanceUtils.toFemtoKilt(1));
 
 describe('DidUpgrade', () => {
   it('should render', async () => {

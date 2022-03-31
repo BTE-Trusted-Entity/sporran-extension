@@ -3,17 +3,13 @@ import {
   Blockchain,
   BlockchainApiConnection,
 } from '@kiltprotocol/chain-helpers';
+import { BalanceUtils } from '@kiltprotocol/core';
 import { Keyring } from '@polkadot/keyring';
 
 import { makeKeyring } from '../identities/identities';
 
 import { getFee } from './getFee';
 
-jest.mock('@kiltprotocol/chain-helpers', () => ({
-  BlockchainApiConnection: {
-    getConnectionOrConnect: jest.fn(),
-  },
-}));
 jest.mock('../../utilities/identities/identities');
 
 describe('getFee', () => {
@@ -54,8 +50,8 @@ describe('getFee', () => {
 
     const fee = await getFee({
       recipient: 'address',
-      amount: new BN(125000000),
-      tip: new BN(250000),
+      amount: BalanceUtils.toFemtoKilt(0.000000125),
+      tip: BalanceUtils.toFemtoKilt(0.000000000025),
     });
 
     expect(fee.toString()).toEqual('partial fee');

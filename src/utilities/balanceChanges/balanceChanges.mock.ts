@@ -1,10 +1,10 @@
-import BN from 'bn.js';
+import { BalanceUtils } from '@kiltprotocol/core';
 
 import { Balances } from './balanceChanges';
 
 export const originalBalancesMock: Balances = {
-  free: new BN(1.226e15),
-  miscFrozen: new BN(0.01e15),
-  feeFrozen: new BN(0.002e15),
-  reserved: new BN(0.008e15),
+  free: BalanceUtils.toFemtoKilt(1.226),
+  miscFrozen: BalanceUtils.toFemtoKilt(0.01),
+  feeFrozen: BalanceUtils.toFemtoKilt(0.002),
+  reserved: BalanceUtils.toFemtoKilt(0.008),
 };

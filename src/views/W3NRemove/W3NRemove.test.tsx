@@ -1,4 +1,4 @@
-import BN from 'bn.js';
+import { BalanceUtils } from '@kiltprotocol/core';
 
 import { identitiesMock, render } from '../../testing/testing';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
@@ -14,10 +14,10 @@ jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
 jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
   return {
     getFullDidDetails: {},
-    'Web3NameRemove.getFee': new BN(1e13),
+    'Web3NameRemove.getFee': BalanceUtils.toFemtoKilt(0.01),
     'Web3NameRemove.getDepositData': {
       owner: identity.address,
-      amount: new BN(2e15),
+      amount: BalanceUtils.toFemtoKilt(2),
     },
   }[name];
 });

@@ -1,5 +1,5 @@
-import BN from 'bn.js';
 import userEvent from '@testing-library/user-event';
+import { BalanceUtils } from '@kiltprotocol/core';
 import { DataUtils } from '@kiltprotocol/utils';
 import {
   Blockchain,
@@ -19,21 +19,13 @@ import '../../components/usePasteButton/usePasteButton.mock';
 import { SendToken } from './SendToken';
 
 jest.mock('../../utilities/getFee/getFee', () => ({ getFee: jest.fn() }));
-jest.mocked(getFee).mockResolvedValue(new BN('1000000000000'));
-
-jest.mock('@kiltprotocol/chain-helpers', () => ({
-  BlockchainApiConnection: { getConnectionOrConnect: jest.fn() },
-}));
-jest.mock('@kiltprotocol/core', () => ({}));
-jest.mock('@kiltprotocol/utils', () => ({
-  DataUtils: {
-    validateAddress: jest.fn(),
-  },
-}));
+jest.mocked(getFee).mockResolvedValue(BalanceUtils.toFemtoKilt(0.001));
 
 jest.mocked(BlockchainApiConnection.getConnectionOrConnect).mockResolvedValue({
   api: {
-    consts: { balances: { existentialDeposit: new BN('100000000000000') } },
+    consts: {
+      balances: { existentialDeposit: BalanceUtils.toFemtoKilt(0.1) },
+    },
   },
 } as Blockchain);
 

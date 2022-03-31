@@ -19,47 +19,6 @@ export {
   moreIdentitiesMock,
 } from '../utilities/identities/IdentitiesProvider.mock';
 
-// Mock most of polkadot code to optimize tests.
-// Cannot be mocked: x-bigint, x-textdecoder, x-textencoder.
-jest.mock('@polkadot/api-augment', () => ({}));
-jest.mock('@polkadot/api-base', () => ({}));
-jest.mock('@polkadot/api-derive', () => ({}));
-jest.mock('@polkadot/api', () => ({}));
-jest.mock('@polkadot/extension-inject', () => ({}));
-jest.mock('@polkadot/keyring', () => ({}));
-jest.mock('@polkadot/networks', () => ({}));
-jest.mock('@polkadot/rpc-augment', () => ({}));
-jest.mock('@polkadot/rpc-core', () => ({}));
-jest.mock('@polkadot/rpc-provider', () => ({}));
-jest.mock('@polkadot/types-augment', () => ({}));
-jest.mock('@polkadot/types-codec', () => ({}));
-jest.mock('@polkadot/types-create', () => ({}));
-jest.mock('@polkadot/types-known', () => ({}));
-jest.mock('@polkadot/types-support', () => ({}));
-jest.mock('@polkadot/types', () => ({}));
-jest.mock('@polkadot/ui-shared', () => ({}));
-jest.mock('@polkadot/util-crypto', () => ({}));
-jest.mock('@polkadot/util');
-jest.mock('@polkadot/wasm-crypto-asmjs', () => ({}));
-jest.mock('@polkadot/wasm-crypto-wasm', () => ({}));
-jest.mock('@polkadot/wasm-crypto', () => ({}));
-jest.mock('@polkadot/x-global', () => ({
-  xglobal: {},
-  extractGlobal: (name: string, fallback: string) =>
-    (globalThis as unknown as Record<string, string>)[name] || fallback,
-}));
-jest.mock('@polkadot/x-fetch', () => ({}));
-jest.mock('@polkadot/x-randomvalues', () => ({}));
-jest.mock('@polkadot/x-ws', () => ({}));
-jest.mock('@kiltprotocol/core', () => ({}));
-jest.mock('@kiltprotocol/did', () => ({ Web3Names: {} }));
-
-jest.mock('../components/Avatar/Identicon', () => ({
-  Identicon: () => 'Identicon',
-}));
-
-jest.mock('ky', () => ({}));
-
 mockBalanceChanges();
 mockIsFullDid(false);
 
