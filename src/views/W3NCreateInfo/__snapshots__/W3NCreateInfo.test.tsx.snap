@@ -153,7 +153,7 @@ exports[`W3NCreateInfo should match the snapshot for on-chain did 1`] = `
       </label>
       <a
         class="terms"
-        href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf "
+        href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf"
         rel="noreferrer"
         target="_blank"
       >

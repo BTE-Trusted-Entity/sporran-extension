@@ -60,7 +60,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
           </label>
           <a
             className={styles.terms}
-            href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf "
+            href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf"
             target="_blank"
             rel="noreferrer"
           >
