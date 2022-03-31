@@ -29,7 +29,7 @@ export async function createDid(input: {
   creationDetails: HexString;
   signature: HexString;
 }): Promise<{ tx_hash: HexString }> {
-  return (await getOrigin()).get('create_did', { json: input }).json();
+  return (await getOrigin()).post('create_did', { json: input }).json();
 }
 
 export async function submitDidCall(
@@ -39,7 +39,7 @@ export async function submitDidCall(
     call: extrinsic.args[0].toHex(),
     signature: extrinsic.args[1].toHex(),
   };
-  return (await getOrigin()).get('submit_did_call', { json: input }).json();
+  return (await getOrigin()).post('submit_did_call', { json: input }).json();
 }
 
 export async function waitFinalized(tx_hash: HexString): Promise<boolean> {
