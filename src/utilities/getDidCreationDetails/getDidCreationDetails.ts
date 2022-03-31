@@ -2,26 +2,17 @@ import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
 import { FullDidCreationBuilder } from '@kiltprotocol/did';
 
-import ky from 'ky';
+import { HexString } from '@polkadot/util/types';
 
 import {
   getKeystoreFromSeed,
   getLightDidFromSeed,
 } from '../identities/identities';
 import { getDidEncryptionKey, parseDidUri } from '../did/did';
-import { backendEndpoints } from '../endpoints/endpoints';
 
-export async function getPromoStatus(): Promise<{
-  account: string;
-  remaining_dids: number;
-  is_active: boolean;
-}> {
-  return await ky.get(backendEndpoints.promoStatus).json();
-}
-
-interface CreationDetails {
-  creationDetails: string;
-  signature: string;
+export interface CreationDetails {
+  creationDetails: HexString;
+  signature: HexString;
   did: string;
 }
 
@@ -49,19 +40,4 @@ export async function getDidCreationDetails(
     signature: extrinsic.args[1].toHex(),
     did,
   };
-}
-
-export async function createDid(
-  input: Omit<CreationDetails, 'did'>,
-): Promise<{ tx_hash: string }> {
-  return ky.post(backendEndpoints.createDid, { json: input }).json();
-}
-
-export async function waitFinalized(tx_hash: string): Promise<boolean> {
-  return ky
-    .get(backendEndpoints.waitFinalized, {
-      searchParams: { tx_hash },
-      timeout: false,
-    })
-    .json();
 }

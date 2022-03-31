@@ -1,11 +1,11 @@
 import { act, render } from '../../testing/testing';
-import { getPromoStatus } from '../../utilities/didUpgradePromo/didUpgradePromo';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
+import { getPromoStatus } from '../../utilities/promoBackend/promoBackend';
 
 import { DidUpgradeExplainer } from './DidUpgradeExplainer';
 
-jest.mock('../../utilities/didUpgradePromo/didUpgradePromo');
+jest.mock('../../utilities/promoBackend/promoBackend');
 
 jest.mocked(getPromoStatus).mockResolvedValue({
   account: '4oY2qsDpYBf2LqahCTmEC4iudf667CRT3iNoBmMLfznZoGcM',

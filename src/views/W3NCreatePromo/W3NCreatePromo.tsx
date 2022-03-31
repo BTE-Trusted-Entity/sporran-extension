@@ -22,8 +22,11 @@ import { getFullDidDetails } from '../../utilities/did/did';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
-import { getPromoStatus } from '../../utilities/didUpgradePromo/didUpgradePromo';
-import { submitDidCall, waitFinalized } from '../../utilities/didCall/didCall';
+import {
+  getPromoStatus,
+  submitDidCall,
+  waitFinalized,
+} from '../../utilities/promoBackend/promoBackend';
 
 interface Props {
   identity: Identity;

@@ -11,7 +11,7 @@ import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { isFullDid } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
-import { getPromoStatus } from '../../utilities/didUpgradePromo/didUpgradePromo';
+import { getPromoStatus } from '../../utilities/promoBackend/promoBackend';
 
 interface Props {
   identity: Identity;
