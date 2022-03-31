@@ -1,5 +1,4 @@
 import { Balance } from '@kiltprotocol/core';
-import BN from 'bn.js';
 
 import {
   Balances,
