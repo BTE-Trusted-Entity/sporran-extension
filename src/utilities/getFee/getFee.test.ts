@@ -6,7 +6,6 @@ import {
 import { Keyring } from '@polkadot/keyring';
 
 import { makeKeyring } from '../identities/identities';
-import { getExtrinsicFee } from '../getExtrinsicFee/getExtrinsicFee';
 
 import { getFee } from './getFee';
 
@@ -16,13 +15,6 @@ jest.mock('@kiltprotocol/chain-helpers', () => ({
   },
 }));
 jest.mock('../../utilities/identities/identities');
-
-jest.mock('../getExtrinsicFee/getExtrinsicFee');
-jest.mocked(getExtrinsicFee).mockResolvedValue({
-  toString() {
-    return 'partial fee';
-  },
-} as BN);
 
 describe('getFee', () => {
   it('should respond with fee to the proper messages', async () => {
@@ -36,8 +28,14 @@ describe('getFee', () => {
     };
 
     const signedTxMock = {
-      toHex() {
-        return 'Signed tx hash';
+      async paymentInfo() {
+        return {
+          partialFee: {
+            toString() {
+              return 'partial fee';
+            },
+          } as BN,
+        };
       },
     };
     const blockchainMock = {
@@ -74,6 +72,5 @@ describe('getFee', () => {
       txMock,
       expect.anything(),
     );
-    expect(getExtrinsicFee).toHaveBeenCalledWith(signedTxMock);
   });
 });

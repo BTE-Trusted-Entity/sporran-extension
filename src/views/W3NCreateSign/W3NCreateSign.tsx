@@ -29,7 +29,6 @@ import {
 } from '../../components/KiltAmount/KiltAmount';
 import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
 import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
-import { getExtrinsicFee } from '../../utilities/getExtrinsicFee/getExtrinsicFee';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
@@ -51,7 +50,7 @@ async function getFee(fullDid?: FullDidDetails) {
   );
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
   const signed = await blockchain.signTx(keypair, authorized);
-  return getExtrinsicFee(signed);
+  return (await signed.paymentInfo(keypair)).partialFee;
 }
 
 interface Props {
