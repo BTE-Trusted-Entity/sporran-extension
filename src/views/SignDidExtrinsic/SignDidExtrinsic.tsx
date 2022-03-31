@@ -89,11 +89,21 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
       <IdentitiesCarousel identity={identity} />
 
       <dl className={styles.details}>
-        {values.map(({ label, value }) => (
+        {values.map(({ label, value, details }) => (
           <Fragment key={label}>
             <dt className={styles.detailName}>{label}:</dt>
-            <dd className={styles.detailValue} title={String(value)}>
-              {value}
+            <dd
+              className={styles.detailValue}
+              title={!details ? String(value) : undefined}
+            >
+              {!details ? (
+                value
+              ) : (
+                <details>
+                  <summary>{value}</summary>
+                  {details}
+                </details>
+              )}
             </dd>
           </Fragment>
         ))}
