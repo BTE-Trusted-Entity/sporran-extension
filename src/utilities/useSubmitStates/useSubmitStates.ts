@@ -11,7 +11,6 @@ import BN from 'bn.js';
 import { makeKeyring } from '../identities/identities';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { transformBalances } from '../transformBalances/transformBalances';
-import { getExtrinsicFee } from '../getExtrinsicFee/getExtrinsicFee';
 
 async function getUnpaidCosts(
   { address }: { address: string },
@@ -23,7 +22,7 @@ async function getUnpaidCosts(
   const fakeIdentity = makeKeyring().createFromUri('//Alice');
   const extrinsic = await blockchain.signTx(fakeIdentity, draft, tip);
 
-  const fee = await getExtrinsicFee(extrinsic);
+  const fee = (await extrinsic.paymentInfo(fakeIdentity)).partialFee;
 
   const { transferable } = transformBalances(
     await Balance.getBalances(address),

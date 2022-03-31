@@ -13,7 +13,6 @@ import {
   getKeypairBySeed,
 } from '../identities/identities';
 import { getDidEncryptionKey, parseDidUri } from '../did/did';
-import { getExtrinsicFee } from '../getExtrinsicFee/getExtrinsicFee';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
@@ -47,8 +46,10 @@ async function getSignedTransaction(seed: Uint8Array): Promise<DidTransaction> {
 
 export async function getFee(): Promise<BN> {
   const fakeSeed = new Uint8Array(32);
+  const keypair = getKeypairBySeed(fakeSeed);
   const { extrinsic } = await getSignedTransaction(fakeSeed);
-  return getExtrinsicFee(extrinsic);
+
+  return (await extrinsic.paymentInfo(keypair)).partialFee;
 }
 
 const currentTx: Record<string, DidTransaction> = {};
