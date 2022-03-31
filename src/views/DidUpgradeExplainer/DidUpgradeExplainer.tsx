@@ -11,7 +11,7 @@ import { Avatar } from '../../components/Avatar/Avatar';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
-import { getPromoStatus } from '../../utilities/didUpgradePromo/didUpgradePromo';
+import { getPromoStatus } from '../../utilities/promoBackend/promoBackend';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 interface Props {

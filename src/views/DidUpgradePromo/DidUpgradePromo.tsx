@@ -17,12 +17,12 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { paths } from '../paths';
+import { getDidCreationDetails } from '../../utilities/getDidCreationDetails/getDidCreationDetails';
 import {
   createDid,
-  getDidCreationDetails,
   getPromoStatus,
   waitFinalized,
-} from '../../utilities/didUpgradePromo/didUpgradePromo';
+} from '../../utilities/promoBackend/promoBackend';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 interface Props {
