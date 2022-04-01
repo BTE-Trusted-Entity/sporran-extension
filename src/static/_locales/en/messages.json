@@ -870,7 +870,7 @@
     "message": "Total cost: "
   },
   "view_DidUpgradePromo_info": {
-    "message": "Free for you due to web3name promo"
+    "message": "Free for you thanks to web3name promo"
   },
   "view_DidUpgradePromo_pending": {
     "message": "Upgrade to on-chain is being processed"
@@ -1241,7 +1241,7 @@
     "message": "web3name: "
   },
   "view_W3NCreatePromo_info": {
-    "message": "Free for you due to web3name promo"
+    "message": "Free for you thanks to web3name promo"
   },
   "view_W3NRemove_heading": {
     "message": "Remove web3name"
