@@ -11,19 +11,35 @@ const identity =
   identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
-jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
-  return {
-    getFullDidDetails: {},
-    'Web3NameRemove.getFee': BalanceUtils.toFemtoKilt(0.01),
-    'Web3NameRemove.getDepositData': {
-      owner: identity.address,
-      amount: BalanceUtils.toFemtoKilt(2),
-    },
-  }[name];
-});
 
 describe('W3NRemove', () => {
-  it('should match the snapshot', async () => {
+  it('should show refund amount including deposit if promo was not used', async () => {
+    jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
+      return {
+        getFullDidDetails: {},
+        'Web3NameRemove.getFee': BalanceUtils.toFemtoKilt(0.01),
+        'Web3NameRemove.getDepositData': {
+          owner: identity.address,
+          amount: BalanceUtils.toFemtoKilt(2),
+        },
+      }[name];
+    });
+    const { container } = render(<W3NRemove identity={identity} />);
+    await waitForGetPassword();
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should show only fee amount if promo was used', async () => {
+    jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
+      return {
+        getFullDidDetails: {},
+        'Web3NameRemove.getFee': BalanceUtils.toFemtoKilt(0.01),
+        'Web3NameRemove.getDepositData': {
+          owner: 'some other deposit owner',
+          amount: BalanceUtils.toFemtoKilt(2),
+        },
+      }[name];
+    });
     const { container } = render(<W3NRemove identity={identity} />);
     await waitForGetPassword();
     expect(container).toMatchSnapshot();

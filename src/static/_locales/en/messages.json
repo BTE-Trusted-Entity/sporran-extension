@@ -1258,6 +1258,9 @@
   "view_W3NRemove_fee": {
     "message": " - fee "
   },
+  "view_W3NRemove_fee_as_total": {
+    "message": "Fee: "
+  },
   "view_W3NRemove_insufficientFunds": {
     "message": "You need at least $cost$ KILTs to pay the fee",
     "placeholders": {
