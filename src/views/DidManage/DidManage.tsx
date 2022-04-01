@@ -39,9 +39,10 @@ export function DidManage({ identity }: Props): JSX.Element {
       <CopyValue value={identity.did} label="DID" className={styles.didLine} />
 
       {web3name && (
-        <CopyValue
+        <input
           value={web3name}
-          label="web3name"
+          aria-label="web3name"
+          readOnly
           className={styles.web3NameLine}
         />
       )}
