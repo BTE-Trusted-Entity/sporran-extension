@@ -12,17 +12,19 @@ const identity =
 
 jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
 
+const swrDataMock: Record<string, unknown> = {
+  getFullDidDetails: {},
+  'Web3NameRemove.getFee': BalanceUtils.toFemtoKilt(0.01),
+  'Web3NameRemove.getDepositData': {
+    owner: identity.address,
+    amount: BalanceUtils.toFemtoKilt(2),
+  },
+};
+
 describe('W3NRemove', () => {
   it('should show refund amount including deposit if promo was not used', async () => {
     jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
-      return {
-        getFullDidDetails: {},
-        'Web3NameRemove.getFee': BalanceUtils.toFemtoKilt(0.01),
-        'Web3NameRemove.getDepositData': {
-          owner: identity.address,
-          amount: BalanceUtils.toFemtoKilt(2),
-        },
-      }[name];
+      return swrDataMock[name];
     });
     const { container } = render(<W3NRemove identity={identity} />);
     await waitForGetPassword();
@@ -32,8 +34,7 @@ describe('W3NRemove', () => {
   it('should show only fee amount if promo was used', async () => {
     jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
       return {
-        getFullDidDetails: {},
-        'Web3NameRemove.getFee': BalanceUtils.toFemtoKilt(0.01),
+        ...swrDataMock,
         'Web3NameRemove.getDepositData': {
           owner: 'some other deposit owner',
           amount: BalanceUtils.toFemtoKilt(2),
