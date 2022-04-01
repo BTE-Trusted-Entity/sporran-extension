@@ -55,7 +55,7 @@ exports[`DidUpgradePromo should render 1`] = `
     <p
       class="info"
     >
-      Free for you due to web3name promo
+      Free for you thanks to web3name promo
     </p>
     <p
       class="resetLine"
