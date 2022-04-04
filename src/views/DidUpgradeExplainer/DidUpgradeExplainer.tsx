@@ -1,5 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
+import { Fragment } from 'react';
 
 import * as styles from './DidUpgradeExplainer.module.css';
 
@@ -13,6 +14,7 @@ import { Stats } from '../../components/Stats/Stats';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 import { getPromoStatus } from '../../utilities/promoBackend/promoBackend';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
+import { getDidDeletionStatus } from '../../utilities/did/did';
 
 interface Props {
   identity: Identity;
@@ -25,11 +27,17 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
 
   const promoStatus = useSwrDataOrThrow('', getPromoStatus, 'getPromoStatus');
 
-  const { address } = identity;
+  const { address, did } = identity;
 
   const upgradePath = promoChecked.current
     ? generatePath(paths.identity.did.upgrade.promo, { address })
     : generatePath(paths.identity.did.upgrade.sign, { address });
+
+  const wasOnChainDidDeleted = useSwrDataOrThrow(
+    did,
+    getDidDeletionStatus,
+    'getDidDeletionStatus',
+  );
 
   return (
     <section className={styles.container}>
@@ -40,43 +48,63 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
 
       <IdentitySlide identity={identity} />
 
-      <div className={styles.functionality}>
-        <Avatar className={styles.avatar} identity={identity} />
-        {t('view_DidUpgradeExplainer_functionality')}
-      </div>
-      <p className={styles.deposit}>{t('view_DidUpgradeExplainer_deposit')}</p>
-
-      {promoStatus?.is_active && (
-        <p className={styles.promoLine}>
-          <label>
-            <input
-              type="checkbox"
-              className={styles.promo}
-              onChange={promoChecked.toggle}
-              checked={promoChecked.current}
-            />
-            <span />
-            {t('view_DidUpgradeExplainer_promo')}
-          </label>
-          <a
-            className={styles.terms}
-            href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {t('view_DidUpgradeExplainer_terms')}
-          </a>
-        </p>
+      {wasOnChainDidDeleted && (
+        <Fragment>
+          <p className={styles.deleted}>
+            {t('view_DidUpgradeExplainer_onchain_deleted')}
+          </p>
+          <Link to={paths.home} className={styles.back}>
+            {t('common_action_back')}
+          </Link>
+        </Fragment>
       )}
 
-      <p className={styles.buttonsLine}>
-        <Link to={paths.home} className={styles.cancel}>
-          {t('common_action_cancel')}
-        </Link>
-        <Link to={upgradePath} className={styles.upgrade}>
-          {t('view_DidUpgradeExplainer_CTA')}
-        </Link>
-      </p>
+      {!wasOnChainDidDeleted && (
+        <Fragment>
+          <div className={styles.functionality}>
+            <Avatar className={styles.avatar} identity={identity} />
+            {t('view_DidUpgradeExplainer_functionality')}
+          </div>
+          <p className={styles.deposit}>
+            {t('view_DidUpgradeExplainer_deposit')}
+          </p>
+
+          {promoStatus?.is_active && (
+            <p className={styles.promoLine}>
+              <label>
+                <input
+                  type="checkbox"
+                  className={styles.promo}
+                  onChange={promoChecked.toggle}
+                  checked={promoChecked.current}
+                />
+                <span />
+                {t('view_DidUpgradeExplainer_promo')}
+              </label>
+              <a
+                className={styles.terms}
+                href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t('view_DidUpgradeExplainer_terms')}
+              </a>
+            </p>
+          )}
+          <p className={styles.buttonsLine}>
+            <Link to={paths.home} className={styles.cancel}>
+              {t('common_action_cancel')}
+            </Link>
+            <Link
+              to={upgradePath}
+              className={styles.upgrade}
+              aria-disabled={wasOnChainDidDeleted}
+            >
+              {t('view_DidUpgradeExplainer_CTA')}
+            </Link>
+          </p>
+        </Fragment>
+      )}
 
       <LinkBack />
       <Stats />

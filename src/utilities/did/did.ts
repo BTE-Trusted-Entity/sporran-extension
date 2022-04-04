@@ -1,5 +1,6 @@
 import {
   DidDetails,
+  DidResolver,
   DidUtils,
   FullDidDetails,
   LightDidDetails,
@@ -108,5 +109,23 @@ export async function needLegacyDidCrypto(did: string): Promise<boolean> {
     // getDidDetails might throw if the DID is not on-chain anymore (removed, another endpoint),
     // no legacy crypto needed in that case
     return false;
+  }
+}
+
+export async function getDidDeletionStatus(
+  did: IDidDetails['did'],
+): Promise<boolean> {
+  if (!did) {
+    return false;
+  }
+
+  try {
+    const resolved = await DidResolver.resolveDoc(did);
+    return Boolean(
+      resolved && resolved.metadata && resolved.metadata.deactivated,
+    );
+  } catch (error) {
+    console.error(error);
+    throw new Error('Could not get DID deletion status');
   }
 }
