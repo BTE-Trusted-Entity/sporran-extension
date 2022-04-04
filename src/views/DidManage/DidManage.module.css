@@ -27,7 +27,7 @@
   margin-top: 0.75rem;
   margin-bottom: 0.25rem;
 
-  --icon-size: 1.5rem;
+  --copy-value-icon-size: 1.5rem;
   --copy-value-icon: url('../../components/images/web3name.svg');
 }
 

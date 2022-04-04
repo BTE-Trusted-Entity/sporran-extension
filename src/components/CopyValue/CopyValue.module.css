@@ -10,14 +10,14 @@
   composes: line;
 
   --copy-value-icon: url('../images/kilt-coin-circle.svg');
-  --icon-size: 1rem;
+  --copy-value-icon-size: 1rem;
 }
 
 .didLine {
   composes: line;
 
   --copy-value-icon: url('../images/manage-did.svg');
-  --icon-size: 1.125rem;
+  --copy-value-icon-size: 1.125rem;
 }
 
 .input {
@@ -26,7 +26,7 @@
   width: calc(100% - 4.5rem);
   padding-right: 2.5rem;
   padding-left: 2rem;
-  background: var(--copy-value-icon) no-repeat left 0.625rem center/var(--icon-size), var(--input-gradient);
+  background: var(--copy-value-icon) no-repeat left 0.625rem center/var(--copy-value-icon-size), var(--input-gradient);
 }
 
 .long {
