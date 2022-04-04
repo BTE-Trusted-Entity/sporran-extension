@@ -11,7 +11,7 @@ const backendOrigins: Record<string, string> = {
   'wss://spiritnet.kilt.io': 'https://did-promo.sporran.org/',
   'wss://sporran-testnet.kilt.io': 'https://testnet-did-promo.sporran.org/',
   'wss://peregrine.kilt.io/parachain-public-ws':
-    'https://peregrine-did-promo.sporran.org/ ',
+    'https://peregrine-did-promo.sporran.org/',
 };
 
 async function getOrigin() {
