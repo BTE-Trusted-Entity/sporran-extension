@@ -99,7 +99,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
               {!details ? (
                 value
               ) : (
-                <details>
+                <details className={styles.expanded}>
                   <summary>{value}</summary>
                   {details}
                 </details>

@@ -81,7 +81,7 @@ export function SignDApp(): JSX.Element | null {
               {!details ? (
                 value
               ) : (
-                <details>
+                <details className={styles.expanded}>
                   <summary>{value}</summary>
                   {details}
                 </details>

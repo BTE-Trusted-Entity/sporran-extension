@@ -37,6 +37,10 @@
   white-space: pre;
 }
 
+.expanded {
+  overflow: auto;
+}
+
 .buttonsLine {
   composes: buttonsLine from '../../components/Button/Button.module.css';
 }
