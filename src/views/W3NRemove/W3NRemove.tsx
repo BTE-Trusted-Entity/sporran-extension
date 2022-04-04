@@ -152,6 +152,13 @@ export function W3NRemove({ identity }: Props): JSX.Element | null {
 
       <IdentitySlide identity={identity} options={false} />
 
+      {!isDepositOwner && (
+        <p className={styles.costs}>
+          {t('view_W3NRemove_fee_as_total')}
+          <KiltAmount amount={fee} type="costs" smallDecimals />
+        </p>
+      )}
+
       {isDepositOwner && (
         <p className={styles.costs}>
           {t('view_W3NRemove_total')}
