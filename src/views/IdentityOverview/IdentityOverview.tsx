@@ -11,7 +11,11 @@ import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
 
 import { Identity, isNew } from '../../utilities/identities/identities';
-import { isFullDid, needLegacyDidCrypto } from '../../utilities/did/did';
+import {
+  getDidDeletionStatus,
+  isFullDid,
+  needLegacyDidCrypto,
+} from '../../utilities/did/did';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { generatePath, paths } from '../paths';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
@@ -59,6 +63,12 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const repairDid = hasLegacyDid;
 
   const web3name = useWeb3Name(did);
+
+  const wasOnChainDidDeleted = useSwrDataOrThrow(
+    did,
+    getDidDeletionStatus,
+    'getDidDeletionStatus',
+  );
 
   if (params.type) {
     return <Redirect to={generatePath(paths.identity.overview, { address })} />;
@@ -128,7 +138,9 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           to={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.upgrade}
         >
-          {t('view_IdentityOverview_upgrade')}
+          {wasOnChainDidDeleted
+            ? t('view_IdentityOverview_did_removed')
+            : t('view_IdentityOverview_upgrade')}
         </Link>
       )}
 

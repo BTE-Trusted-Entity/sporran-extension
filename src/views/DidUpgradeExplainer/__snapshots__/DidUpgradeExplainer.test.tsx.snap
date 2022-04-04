@@ -1,6 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DidUpgradeExplainer should render 1`] = `
+exports[`DidUpgradeExplainer should render DID already removed from chain 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Decentralized Identifier
+    </h1>
+    <p
+      class="subline"
+    >
+      Upgrade to an on-chain DID
+    </p>
+    <section>
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="centeredNameLine"
+      >
+        <span
+          class="name"
+        >
+          KILT Identity 1
+        </span>
+      </div>
+    </section>
+    <p
+      class="deleted"
+    >
+      You deleted your on-chain DID and can no longer use this feature. To start using an on-chain DID, please create a new identity.
+    </p>
+    <a
+      class="back"
+      href="/"
+    >
+      Back
+    </a>
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+    <p
+      class="stats"
+    >
+      You have 3 Identities with a
+      <span
+        class="balance"
+      >
+         Total Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="KILT Coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </section>
+</div>
+`;
+
+exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
 <div>
   <section
     class="container"
@@ -47,26 +119,6 @@ exports[`DidUpgradeExplainer should render 1`] = `
       To store your DID on the blockchain, a deposit needs to be reserved. The deposit will be refunded if you remove your on-chain DID.
     </p>
     <p
-      class="promoLine"
-    >
-      <label>
-        <input
-          class="promo"
-          type="checkbox"
-        />
-        <span />
-        Use web3name Promo and accept 
-      </label>
-      <a
-        class="terms"
-        href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf"
-        rel="noreferrer"
-        target="_blank"
-      >
-        Terms
-      </a>
-    </p>
-    <p
       class="buttonsLine"
     >
       <a
@@ -76,6 +128,7 @@ exports[`DidUpgradeExplainer should render 1`] = `
         Cancel
       </a>
       <a
+        aria-disabled="false"
         class="upgrade"
         href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade/sign"
       >

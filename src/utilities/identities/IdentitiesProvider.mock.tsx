@@ -24,10 +24,10 @@ export const identitiesMock: IdentitiesMap = {
 
 export const moreIdentitiesMock: IdentitiesMap = {
   ...identitiesMock,
-  '4ruKeJZXBuqvgTvsTpbsG1RChkTsdz1TDMGgFP7SYykK78R8': {
-    name: 'KILT Identity 4',
-    address: '4ruKeJZXBuqvgTvsTpbsG1RChkTsdz1TDMGgFP7SYykK78R8',
-    did: 'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+  '4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z': {
+    name: 'Identity with deleted on-chain DID',
+    address: '4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z',
+    did: 'did:kilt:light:004pNrw1Jr1zWGeRJus6VLnE8cXLghtHA3J1yqqhSs7mGx2FSS',
     index: 4,
   },
   '4qKSjytQkZEdEN42eViwkepoKfLihoHSPQ4uUrWvVY1h5Ru3': {
@@ -54,7 +54,7 @@ export const legacyIdentity: Identity = {
   name: 'Legacy Identity',
   address: '4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1',
   did: 'did:kilt:4ojbz1EuSxHeKXZQN9TaMpDGw4qWRSUsVwwKLfAs5f8umt6p',
-  index: 7,
+  index: 8,
 };
 
 export function IdentitiesProviderMock({

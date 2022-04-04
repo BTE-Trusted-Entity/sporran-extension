@@ -75,3 +75,13 @@
 .upgrade {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
 }
+
+.deleted {
+  composes: explanation;
+  text-align: center;
+  margin: 2rem 0 1rem;
+}
+
+.back {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+}

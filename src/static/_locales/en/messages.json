@@ -493,6 +493,9 @@
       }
     }
   },
+  "view_IdentityOverview_did_removed": {
+    "message": "On-chain DID removed"
+  },
   "view_RemoveIdentity_heading": {
     "message": "Attention!"
   },
@@ -927,6 +930,9 @@
   },
   "view_DidUpgradeExplainer_deposit": {
     "message": "To store your DID on the blockchain, a deposit needs to be reserved. The deposit will be refunded if you remove your on-chain DID."
+  },
+  "view_DidUpgradeExplainer_onchain_deleted": {
+    "message": "You deleted your on-chain DID and can no longer use this feature. To start using an on-chain DID, please create a new identity."
   },
   "view_DidUpgradeExplainer_promo": {
     "message": "Use web3name Promo and accept "

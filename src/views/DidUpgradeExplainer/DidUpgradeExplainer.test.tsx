@@ -1,20 +1,20 @@
-import { act, render } from '../../testing/testing';
+import { render } from '../../testing/testing';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
-import { getPromoStatus } from '../../utilities/promoBackend/promoBackend';
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 import { DidUpgradeExplainer } from './DidUpgradeExplainer';
 
-jest.mock('../../utilities/promoBackend/promoBackend');
-
-jest.mocked(getPromoStatus).mockResolvedValue({
-  account: '4oY2qsDpYBf2LqahCTmEC4iudf667CRT3iNoBmMLfznZoGcM',
-  remaining_dids: 1000,
-  is_active: true,
-});
+jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
 
 describe('DidUpgradeExplainer', () => {
-  it('should render', async () => {
+  it('should render DID not on chain yet', async () => {
+    jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
+      return {
+        getPromoStatus: { is_active: false },
+        getDidDeletionStatus: false,
+      }[name];
+    });
     const { container } = render(
       <DidUpgradeExplainer
         identity={
@@ -22,9 +22,23 @@ describe('DidUpgradeExplainer', () => {
         }
       />,
     );
-    await act(async () => {
-      await getPromoStatus();
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render DID already removed from chain', async () => {
+    jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
+      return {
+        getPromoStatus: { is_active: false },
+        getDidDeletionStatus: true,
+      }[name];
     });
+    const { container } = render(
+      <DidUpgradeExplainer
+        identity={
+          identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+        }
+      />,
+    );
     expect(container).toMatchSnapshot();
   });
 });

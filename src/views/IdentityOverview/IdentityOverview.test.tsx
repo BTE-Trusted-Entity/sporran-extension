@@ -1,8 +1,10 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 
-import { act } from '@testing-library/react';
-
-import { identitiesMock, render, screen } from '../../testing/testing';
+import {
+  moreIdentitiesMock as identities,
+  render,
+  screen,
+} from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';
 import { paths } from '../paths';
@@ -17,9 +19,9 @@ import { useIdentityCredentials } from '../../utilities/credentials/credentials'
 
 import { legacyIdentity } from '../../utilities/identities/IdentitiesProvider.mock';
 
-import { needLegacyDidCrypto } from '../../utilities/did/did';
-
 import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
+
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 import { IdentityOverview } from './IdentityOverview';
 
@@ -29,13 +31,18 @@ jest.mock('../../utilities/credentials/credentials');
 
 jest.mock('../../utilities/useWeb3Name/useWeb3Name');
 
-const identity =
-  identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
+
+const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
 const fullDidIdentity =
-  identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
+  identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 describe('IdentityOverview', () => {
+  beforeEach(() => {
+    jest.mocked(useSwrDataOrThrow).mockReset();
+  });
+
   it('should render a normal identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
@@ -121,9 +128,12 @@ describe('IdentityOverview', () => {
   });
 
   it('should prompt to update legacy DID', async () => {
-    const legacyPromise = Promise.resolve(true);
-
-    jest.mocked(needLegacyDidCrypto).mockReturnValue(legacyPromise);
+    jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
+      return {
+        needLegacyDidCrypto: true,
+        getDidDeletionStatus: false,
+      }[name];
+    });
 
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${legacyIdentity.address}/`]}>
@@ -132,10 +142,6 @@ describe('IdentityOverview', () => {
         </Route>
       </MemoryRouter>,
     );
-
-    await act(async () => {
-      await legacyPromise;
-    });
 
     expect(container).toMatchSnapshot();
   });
@@ -147,6 +153,34 @@ describe('IdentityOverview', () => {
       <MemoryRouter initialEntries={[`/identity/${fullDidIdentity.address}/`]}>
         <Route path={paths.identity.overview}>
           <IdentityOverview identity={identity} />
+        </Route>
+      </MemoryRouter>,
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should show on-chain DID removed', async () => {
+    mockIsFullDid(false);
+    jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
+      return {
+        needLegacyDidCrypto: false,
+        getDidDeletionStatus: true,
+      }[name];
+    });
+
+    const { container } = render(
+      <MemoryRouter
+        initialEntries={[
+          '/identity/4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z',
+        ]}
+      >
+        <Route path={paths.identity.overview}>
+          <IdentityOverview
+            identity={
+              identities['4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z']
+            }
+          />
         </Route>
       </MemoryRouter>,
     );
