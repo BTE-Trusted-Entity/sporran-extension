@@ -1,6 +1,6 @@
 import {
-  DidChain,
   DidDetails,
+  DidResolver,
   DidUtils,
   FullDidDetails,
   LightDidDetails,
@@ -120,10 +120,10 @@ export async function getDidDeletionStatus(
   }
 
   try {
-    const { identifier } = DidUtils.parseDidUri(did);
-    const unprefixedIdentifier = identifier.replace(/^00/, '');
-
-    return await DidChain.queryDidDeletionStatus(unprefixedIdentifier);
+    const resolved = await DidResolver.resolveDoc(did);
+    return Boolean(
+      resolved && resolved.metadata && resolved.metadata.deactivated,
+    );
   } catch (error) {
     console.error(error);
     throw new Error('Could not get DID deletion status');
