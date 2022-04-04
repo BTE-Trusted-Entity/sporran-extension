@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
+import { moreIdentitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 
 import { DidDowngrade } from './DidDowngrade';
 
@@ -9,7 +9,15 @@ export default {
   component: DidDowngrade,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Refund(): JSX.Element {
+  return (
+    <DidDowngrade
+      identity={identities['4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos']}
+    />
+  );
+}
+
+export function NoRefund(): JSX.Element {
   return (
     <DidDowngrade
       identity={identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']}

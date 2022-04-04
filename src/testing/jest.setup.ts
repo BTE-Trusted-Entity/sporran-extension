@@ -75,6 +75,7 @@ jest.mock('@kiltprotocol/chain-helpers', () => ({
 jest.mock('@kiltprotocol/did', () => ({
   Web3Names: {},
   DidUtils: { parseDidUri: jest.fn() },
+  DidChain: { queryDetails: jest.fn() },
 }));
 jest.mock('@kiltprotocol/utils', () => ({
   DataUtils: {

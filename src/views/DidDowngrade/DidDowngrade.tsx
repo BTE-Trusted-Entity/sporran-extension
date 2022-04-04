@@ -1,8 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { IDidDetails } from '@kiltprotocol/types';
+
+import { DidChain } from '@kiltprotocol/did';
 
 import * as styles from './DidDowngrade.module.css';
 
@@ -34,11 +36,8 @@ import {
   useIdentityCredentials,
   invalidateCredentials,
 } from '../../utilities/credentials/credentials';
-import { isFullDid } from '../../utilities/did/did';
-
-interface Props {
-  identity: Identity;
-}
+import { isFullDid, parseDidUri } from '../../utilities/did/did';
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 function useCosts(
   address: string,
@@ -77,6 +76,10 @@ function useCosts(
   return { fee, deposit, total, error };
 }
 
+interface Props {
+  identity: Identity;
+}
+
 export function DidDowngrade({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
@@ -90,6 +93,14 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
   );
 
   const credentials = useIdentityCredentials(did);
+
+  const { identifier } = parseDidUri(did);
+  const didChainRecord = useSwrDataOrThrow(
+    identifier,
+    DidChain.queryDetails,
+    'DidDowngrade.queryDetails',
+  );
+  const isDepositOwner = didChainRecord?.deposit?.owner === address;
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
@@ -145,16 +156,27 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
       <IdentitySlide identity={identity} options={false} />
 
-      <p className={styles.costs}>
-        {t('view_DidDowngrade_total')}
-        <KiltAmount amount={total} type="costs" smallDecimals />
-      </p>
-      <p className={styles.details}>
-        {t('view_DidDowngrade_deposit')}
-        {asKiltCoins(deposit, 'costs')} <KiltCurrency />
-        {t('view_DidDowngrade_fee')}
-        {asKiltCoins(fee, 'costs')} <KiltCurrency />
-      </p>
+      {isDepositOwner && (
+        <Fragment>
+          <p className={styles.costs}>
+            {t('view_DidDowngrade_total')}
+            <KiltAmount amount={total} type="costs" smallDecimals />
+          </p>
+          <p className={styles.details}>
+            {t('view_DidDowngrade_deposit')}
+            {asKiltCoins(deposit, 'costs')} <KiltCurrency />
+            {t('view_DidDowngrade_fee')}
+            {asKiltCoins(fee, 'costs')} <KiltCurrency />
+          </p>
+        </Fragment>
+      )}
+
+      {!isDepositOwner && (
+        <p className={styles.costs}>
+          {t('view_W3NRemove_fee_as_total')}
+          <KiltAmount amount={fee} type="costs" smallDecimals />
+        </p>
+      )}
 
       <p className={styles.explanation}>{t('view_DidDowngrade_explanation')}</p>
 

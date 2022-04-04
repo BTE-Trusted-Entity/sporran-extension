@@ -916,6 +916,9 @@
   "view_DidDowngrade_error": {
     "message": "Remove on-chain DID failed"
   },
+  "view_DidDowngrade_fee_as_total": {
+    "message": "Fee: "
+  },
   "view_DidDowngrade_explanation": {
     "message": "Take care: this identity won’t be able to upgrade to an on-chain DID again."
   },
