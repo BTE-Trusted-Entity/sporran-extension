@@ -164,7 +164,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
           </p>
           <p className={styles.details}>
             {t('view_DidDowngrade_deposit')}
-            {asKiltCoins(deposit, 'costs')} <KiltCurrency />
+            {asKiltCoins(deposit, 'funds')} <KiltCurrency />
             {t('view_DidDowngrade_fee')}
             {asKiltCoins(fee, 'costs')} <KiltCurrency />
           </p>

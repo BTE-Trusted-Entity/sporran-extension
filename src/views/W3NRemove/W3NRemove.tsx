@@ -168,7 +168,7 @@ export function W3NRemove({ identity }: Props): JSX.Element | null {
       {isDepositOwner && (
         <p className={styles.details}>
           {t('view_W3NRemove_deposit')}
-          {asKiltCoins(deposit.amount, 'costs')} <KiltCurrency />
+          {asKiltCoins(deposit.amount, 'funds')} <KiltCurrency />
           {t('view_W3NRemove_fee')}
           {asKiltCoins(fee, 'costs')} <KiltCurrency />
         </p>
