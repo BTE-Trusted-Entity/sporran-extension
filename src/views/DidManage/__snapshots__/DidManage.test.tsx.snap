@@ -47,22 +47,12 @@ exports[`DidManage should match the snapshot with web3name 1`] = `
         type="button"
       />
     </p>
-    <p
+    <input
+      aria-label="web3name"
       class="web3NameLine"
-    >
-      <input
-        aria-label="web3name"
-        class="input"
-        readonly=""
-        value="fancy-name"
-      />
-      <button
-        aria-label="copy to clipboard"
-        class="copy"
-        title="copy to clipboard"
-        type="button"
-      />
-    </p>
+      readonly=""
+      value="fancy-name"
+    />
     <a
       class="endpoints"
       href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/endpoints"

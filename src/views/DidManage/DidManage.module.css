@@ -22,11 +22,12 @@
 }
 
 .web3NameLine {
-  composes: line from '../../components/CopyValue/CopyValue.module.css';
+  composes: input from '../../components/CopyValue/CopyValue.module.css';
   text-align: center;
   margin-top: 0.75rem;
   margin-bottom: 0.25rem;
 
+  --copy-value-icon-size: 1.5rem;
   --copy-value-icon: url('../../components/images/web3name.svg');
 }
 
