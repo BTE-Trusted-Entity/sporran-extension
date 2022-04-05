@@ -18,12 +18,9 @@ export function LegacyDids(): JSX.Element | null {
 
   const open = useBooleanState();
 
-  const setOpen = open.set; // Get a stable reference.
-  // TODO: refactor useBooleanState to return stable reference.
-
   useEffect(() => {
-    setOpen(Object.values(legacyDidIdentities).length > 0);
-  }, [legacyDidIdentities, setOpen]);
+    open.set(Object.values(legacyDidIdentities).length > 0);
+  }, [legacyDidIdentities, open]);
 
   if (!open.current) {
     return null;

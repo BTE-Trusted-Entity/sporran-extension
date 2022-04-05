@@ -1,34 +1,30 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
+import { useRef, useState } from 'react';
 
 interface UseBooleanState {
   current: boolean;
   on: () => void;
   off: () => void;
   toggle: () => void;
-  set: Dispatch<SetStateAction<boolean>>;
+  set: (value: boolean) => void;
 }
 
 export function useBooleanState(initialState = false): UseBooleanState {
-  const [current, set] = useState(initialState);
+  const [, setCurrent] = useState(initialState);
 
-  const on = useCallback(() => set(true), []);
-  const off = useCallback(() => set(false), []);
-  const toggle = useCallback(() => set(!current), [current]);
+  function set(value: boolean) {
+    ref.current.current = value;
 
-  return useMemo(
-    () => ({
-      current,
-      on,
-      off,
-      toggle,
-      set,
-    }),
-    [current, on, off, toggle],
-  );
+    // update the state to notify React about changes
+    setCurrent(value);
+  }
+
+  const ref = useRef({
+    current: initialState,
+    on: () => set(true),
+    off: () => set(false),
+    toggle: () => set(!ref.current.current),
+    set: (value: boolean) => set(Boolean(value)),
+  });
+
+  return ref.current;
 }
