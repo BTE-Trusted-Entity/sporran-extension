@@ -34,7 +34,11 @@
   color: var(--color-grey-light);
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: pre;
+}
+
+.expanded {
+  overflow: auto;
 }
 
 .buttonsLine {

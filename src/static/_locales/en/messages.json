@@ -303,6 +303,12 @@
   "component_ExplainerModal_show": {
     "message": "Information"
   },
+  "component_extrinsicDetails_method": {
+    "message": "method data"
+  },
+  "component_extrinsicDetails_info": {
+    "message": "info"
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
@@ -1292,9 +1298,6 @@
   },
   "view_SignDidExtrinsic_from": {
     "message": "from"
-  },
-  "view_SignDidExtrinsic_method": {
-    "message": "method data"
   },
   "view_SignDidExtrinsic_title": {
     "message": "Sign with on-chain DID"
