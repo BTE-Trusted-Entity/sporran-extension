@@ -29,7 +29,7 @@ so there's no real downside. */
 export const defaultEndpoint =
   process.env.NODE_ENV === 'production' && !isInternal
     ? endpoints[0]
-    : endpoints[4];
+    : endpoints[2];
 
 export async function getEndpoint(): Promise<string> {
   return (await storage.get(endpointKey))[endpointKey] || defaultEndpoint;
