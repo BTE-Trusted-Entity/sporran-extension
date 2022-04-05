@@ -35,7 +35,7 @@ exports[`AddIdentity should render 1`] = `
             role="menuitem"
             tabindex="-1"
           >
-            Create new Identity
+            Add Identity
           </a>
         </li>
         <li
