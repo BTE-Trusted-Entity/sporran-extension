@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, Fragment } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { Deposit } from '@kiltprotocol/types';
@@ -71,13 +71,17 @@ async function getDepositData(did: string) {
 
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();
 
-  const { deposit } = (
-    await api.query.web3Names.owner<Option<Web3NameData>>(web3name)
-  ).unwrap();
+  const data = await api.query.web3Names.owner<Option<Web3NameData>>(web3name);
 
-  const { owner, amount } = deposit;
+  if (data.isSome) {
+    const { deposit } = data.unwrap();
 
-  return { owner: owner.toString(), amount };
+    const { owner, amount } = deposit;
+
+    return { owner: owner.toString(), amount };
+  } else {
+    console.error('No deposit data available for web3name');
+  }
 }
 
 interface Props {
@@ -135,11 +139,11 @@ export function W3NRemove({ identity }: Props): JSX.Element | null {
     [passwordField, fullDidDetails, submit],
   );
 
-  if (!fee || !deposit || !fullDidDetails) {
+  if (!fee || !fullDidDetails) {
     return null; // blockchain data pending
   }
 
-  const total = deposit.amount.sub(fee);
+  const total = deposit?.amount.sub(fee);
 
   return (
     <form
@@ -159,19 +163,20 @@ export function W3NRemove({ identity }: Props): JSX.Element | null {
         </p>
       )}
 
-      {isDepositOwner && (
-        <p className={styles.costs}>
-          {t('view_W3NRemove_total')}
-          <KiltAmount amount={total} type="costs" smallDecimals />
-        </p>
-      )}
-      {isDepositOwner && (
-        <p className={styles.details}>
-          {t('view_W3NRemove_deposit')}
-          {asKiltCoins(deposit.amount, 'funds')} <KiltCurrency />
-          {t('view_W3NRemove_fee')}
-          {asKiltCoins(fee, 'costs')} <KiltCurrency />
-        </p>
+      {isDepositOwner && total && (
+        <Fragment>
+          <p className={styles.costs}>
+            {t('view_W3NRemove_total')}
+            <KiltAmount amount={total} type="costs" smallDecimals />
+          </p>
+
+          <p className={styles.details}>
+            {t('view_W3NRemove_deposit')}
+            {asKiltCoins(deposit?.amount, 'funds')} <KiltCurrency />
+            {t('view_W3NRemove_fee')}
+            {asKiltCoins(fee, 'costs')} <KiltCurrency />
+          </p>
+        </Fragment>
       )}
 
       <p className={styles.explanation}>{t('view_W3NRemove_explanation')}</p>
