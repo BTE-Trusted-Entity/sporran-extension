@@ -76,6 +76,17 @@ function useCosts(
   return { fee, deposit, total, error };
 }
 
+async function getDepositOwner(did: IDidDetails['did']) {
+  const { identifier, type } = parseDidUri(did);
+  if (type === 'light') {
+    return;
+  }
+
+  const didChainRecord = await DidChain.queryDetails(identifier);
+
+  return didChainRecord?.deposit?.owner;
+}
+
 interface Props {
   identity: Identity;
 }
@@ -94,13 +105,12 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
   const credentials = useIdentityCredentials(did);
 
-  const { identifier } = parseDidUri(did);
-  const didChainRecord = useSwrDataOrThrow(
-    identifier,
-    DidChain.queryDetails,
-    'DidDowngrade.queryDetails',
+  const depositOwner = useSwrDataOrThrow(
+    did,
+    getDepositOwner,
+    'DidDowngrade.getDepositOwner',
   );
-  const isDepositOwner = didChainRecord?.deposit?.owner === address;
+  const isDepositOwner = depositOwner === address;
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
