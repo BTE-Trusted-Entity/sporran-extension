@@ -31,9 +31,9 @@ jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
 describe('DidDowngrade', () => {
   it('should show refund amount including deposit if promo was not used', async () => {
     mockIsFullDid(true);
-    jest.mocked(useSwrDataOrThrow).mockReturnValue({
-      deposit: { owner: '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr' },
-    });
+    jest
+      .mocked(useSwrDataOrThrow)
+      .mockReturnValue('4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr');
 
     const { container } = render(
       <DidDowngrade
@@ -48,9 +48,7 @@ describe('DidDowngrade', () => {
 
   it('should show only fee amount if promo was used', async () => {
     mockIsFullDid(true);
-    jest.mocked(useSwrDataOrThrow).mockReturnValue({
-      deposit: { owner: 'some other deposit owner' },
-    });
+    jest.mocked(useSwrDataOrThrow).mockReturnValue('some other deposit owner');
 
     const { container } = render(
       <DidDowngrade
