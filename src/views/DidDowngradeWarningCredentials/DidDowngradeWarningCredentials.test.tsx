@@ -9,7 +9,7 @@ import { mockIsFullDid } from '../../utilities/did/did.mock';
 
 import { parseDidUri, sameFullDid } from '../../utilities/did/did';
 
-import { DidDowngradeWarning } from './DidDowngradeWarning';
+import { DidDowngradeWarningCredentials } from './DidDowngradeWarningCredentials';
 
 jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({
@@ -18,11 +18,11 @@ jest.mocked(parseDidUri).mockReturnValue({
 jest.mocked(sameFullDid).mockReturnValue(true);
 jest.mocked(Attestation.query).mockResolvedValue(null);
 
-describe('DidDowngradeWarning', () => {
+describe('DidDowngradeWarningCredentials', () => {
   it('should render', async () => {
     mockIsFullDid(true);
     const { container } = render(
-      <DidDowngradeWarning
+      <DidDowngradeWarningCredentials
         identity={
           identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
         }

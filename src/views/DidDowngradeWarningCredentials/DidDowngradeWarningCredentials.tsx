@@ -1,7 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-import * as styles from './DidDowngradeWarning.module.css';
+import * as styles from './DidDowngradeWarningCredentials.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { generatePath, paths } from '../paths';
@@ -16,31 +16,37 @@ interface Props {
   identity: Identity;
 }
 
-export function DidDowngradeWarning({ identity }: Props): JSX.Element | null {
+export function DidDowngradeWarningCredentials({
+  identity,
+}: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const credentials = useIdentityCredentials(identity.did);
 
-  const { goBack } = useHistory();
+  const { address } = identity;
 
   if (!credentials) {
     return null; // storage data pending
   }
 
   if (credentials.length === 0) {
-    return <Redirect to={paths.identity.did.manage.downgrade} />;
+    return <Redirect to={paths.identity.did.manage.downgrade.sign} />;
   }
 
   return (
     <section className={styles.container}>
       <h1 className={styles.heading}>
-        {t('view_DidDowngradeWarning_heading')}
+        {t('view_DidDowngradeWarningCredentials_heading')}
       </h1>
-      <p className={styles.subline}>{t('view_DidDowngradeWarning_subline')}</p>
+      <p className={styles.subline}>
+        {t('view_DidDowngradeWarningCredentials_subline')}
+      </p>
 
       <Avatar identity={identity} />
 
-      <p className={styles.warning}>{t('view_DidDowngradeWarning_warning')}</p>
+      <p className={styles.warning}>
+        {t('view_DidDowngradeWarningCredentials_warning')}
+      </p>
 
       <ul className={styles.credentials}>
         {credentials.map((credential, index) => (
@@ -54,16 +60,19 @@ export function DidDowngradeWarning({ identity }: Props): JSX.Element | null {
       </ul>
 
       <p className={styles.buttonsLine}>
-        <button onClick={goBack} className={styles.cancel}>
-          {t('common_action_cancel')}
-        </button>
         <Link
-          to={generatePath(paths.identity.did.manage.downgrade, {
-            address: identity.address,
+          to={generatePath(paths.identity.did.manage.start, { address })}
+          className={styles.cancel}
+        >
+          {t('common_action_cancel')}
+        </Link>
+        <Link
+          to={generatePath(paths.identity.did.manage.downgrade.sign, {
+            address,
           })}
           className={styles.cta}
         >
-          {t('view_DidDowngradeWarning_CTA')}
+          {t('view_DidDowngradeWarningCredentials_CTA')}
         </Link>
       </p>
 

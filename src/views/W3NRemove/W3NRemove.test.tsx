@@ -15,7 +15,7 @@ jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
 const swrDataMock: Record<string, unknown> = {
   getFullDidDetails: {},
   'Web3NameRemove.getFee': BalanceUtils.toFemtoKilt(0.01),
-  'Web3NameRemove.getDepositData': {
+  'Web3NameRemove.getDepositWeb3Name': {
     owner: identity.address,
     amount: BalanceUtils.toFemtoKilt(2),
   },
@@ -35,7 +35,7 @@ describe('W3NRemove', () => {
     jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
       return {
         ...swrDataMock,
-        'Web3NameRemove.getDepositData': {
+        'Web3NameRemove.getDepositWeb3Name': {
           owner: 'some other deposit owner',
           amount: BalanceUtils.toFemtoKilt(2),
         },

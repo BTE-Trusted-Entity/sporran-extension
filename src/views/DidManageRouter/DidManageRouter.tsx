@@ -1,12 +1,11 @@
 import { Switch, Route } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
-import { DidDowngrade } from '../DidDowngrade/DidDowngrade';
-import { DidDowngradeWarning } from '../DidDowngradeWarning/DidDowngradeWarning';
 import { DidEndpointsFlow } from '../DidEndpointsFlow/DidEndpointsFlow';
 import { DidManage } from '../DidManage/DidManage';
 import { W3NRemove } from '../W3NRemove/W3NRemove';
 import { paths } from '../paths';
+import { DidDowngradeRouter } from '../DidDowngradeRouter/DidDowngradeRouter';
 
 interface Props {
   identity: Identity;
@@ -15,12 +14,8 @@ interface Props {
 export function DidManageRouter({ identity }: Props): JSX.Element {
   return (
     <Switch>
-      <Route path={paths.identity.did.manage.downgrade}>
-        <DidDowngrade identity={identity} />
-      </Route>
-
-      <Route path={paths.identity.did.manage.warning}>
-        <DidDowngradeWarning identity={identity} />
+      <Route path={paths.identity.did.manage.downgrade.base}>
+        <DidDowngradeRouter identity={identity} />
       </Route>
 
       <Route path={paths.identity.did.manage.endpoints.start}>

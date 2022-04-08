@@ -30,10 +30,10 @@ export const moreIdentitiesMock: IdentitiesMap = {
     did: 'did:kilt:light:004pNrw1Jr1zWGeRJus6VLnE8cXLghtHA3J1yqqhSs7mGx2FSS',
     index: 4,
   },
-  '4qKSjytQkZEdEN42eViwkepoKfLihoHSPQ4uUrWvVY1h5Ru3': {
+  '4pzncei2Jjap98Xks5XjoBKxBeYoCzofhbki7e3sZGnqDHvK': {
     name: 'KILT Identity 5',
-    address: '4qKSjytQkZEdEN42eViwkepoKfLihoHSPQ4uUrWvVY1h5Ru3',
-    did: 'did:kilt:4tg2AJYg3VwS5pganh12fpQkCnHdtzEk24U5dfb9SiN2bPbU',
+    address: '4pzncei2Jjap98Xks5XjoBKxBeYoCzofhbki7e3sZGnqDHvK',
+    did: 'did:kilt:4sVLgckXua92XtmqkHFFG2Dn7cRafHsafvZA9Km2r597FmV5',
     index: 5,
   },
   '4sdkkaM8jvLJijJmpHmJhCDC34JvRKqqs1qLUyHYKXvygQ5w': {

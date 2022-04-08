@@ -1,15 +1,8 @@
 import { useCallback, Fragment } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
-import { Deposit } from '@kiltprotocol/types';
 
 import { FullDidDetails, Web3Names } from '@kiltprotocol/did';
-
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
-
-import { Option, Struct, u64 } from '@polkadot/types';
-
-import { AccountId } from '@polkadot/types/interfaces';
 
 import * as styles from './W3NRemove.module.css';
 
@@ -40,6 +33,7 @@ import { getFullDidDetails } from '../../utilities/did/did';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
+import { getDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
 
 async function getFee(fullDid?: FullDidDetails) {
   if (!fullDid) {
@@ -60,30 +54,6 @@ async function getFee(fullDid?: FullDidDetails) {
   return (await authorized.paymentInfo(keypair)).partialFee;
 }
 
-interface Web3NameData extends Struct {
-  owner: AccountId;
-  claimedAt: u64;
-  deposit: Deposit;
-}
-
-async function getDepositData(did: string) {
-  const web3name = await Web3Names.queryWeb3NameForDid(did);
-
-  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
-
-  const data = await api.query.web3Names.owner<Option<Web3NameData>>(web3name);
-
-  if (data.isSome) {
-    const { deposit } = data.unwrap();
-
-    const { owner, amount } = deposit;
-
-    return { owner: owner.toString(), amount };
-  } else {
-    console.error('No deposit data available for web3name');
-  }
-}
-
 interface Props {
   identity: Identity;
 }
@@ -98,8 +68,8 @@ export function W3NRemove({ identity }: Props): JSX.Element | null {
 
   const deposit = useSwrDataOrThrow(
     did,
-    getDepositData,
-    'Web3NameRemove.getDepositData',
+    getDepositWeb3Name,
+    'Web3NameRemove.getDepositWeb3Name',
   );
 
   const isDepositOwner = deposit?.owner === address;

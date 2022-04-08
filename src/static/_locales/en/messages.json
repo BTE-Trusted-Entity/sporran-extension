@@ -952,16 +952,34 @@
   "view_DidUpgradeExplainer_CTA": {
     "message": "Upgrade"
   },
-  "view_DidDowngradeWarning_heading": {
+  "view_DidDowngradeWarningCredentials_heading": {
     "message": "Remove on-chain DID"
   },
-  "view_DidDowngradeWarning_subline": {
+  "view_DidDowngradeWarningCredentials_subline": {
     "message": "Remove DID from the KILT blockchain"
   },
-  "view_DidDowngradeWarning_warning": {
+  "view_DidDowngradeWarningCredentials_warning": {
     "message": "Attention! This will render the following credentials unusable:"
   },
-  "view_DidDowngradeWarning_CTA": {
+  "view_DidDowngradeWarningCredentials_CTA": {
+    "message": "Continue"
+  },
+  "view_DidDowngradeWarningWeb3Name_heading": {
+    "message": "Remove on-chain DID"
+  },
+  "view_DidDowngradeWarningWeb3Name_subline": {
+    "message": "Remove DID from the KILT blockchain"
+  },
+  "view_DidDowngradeWarningWeb3Name_warning": {
+    "message": "Attention! Removing your on-chain DID will also remove your web3name:"
+  },
+  "view_DidDowngradeWarningWeb3Name_web3name": {
+    "message": "web3name: "
+  },
+  "view_DidDowngradeWarningWeb3Name_explanation": {
+    "message": "Please note: if you remove your web3name, it can be claimed by someone else."
+  },
+  "view_DidDowngradeWarningWeb3Name_CTA": {
     "message": "Continue"
   },
   "view_DidManage_heading": {

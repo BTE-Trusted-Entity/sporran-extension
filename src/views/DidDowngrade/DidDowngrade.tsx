@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { IDidDetails } from '@kiltprotocol/types';
-
-import { DidChain } from '@kiltprotocol/did';
+import { IChainDeposit } from '@kiltprotocol/did/lib/cjs/Did.chain';
 
 import * as styles from './DidDowngrade.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import {
-  getDeposit,
   getFee,
   sign,
   submit,
@@ -36,8 +34,11 @@ import {
   useIdentityCredentials,
   invalidateCredentials,
 } from '../../utilities/credentials/credentials';
-import { isFullDid, parseDidUri } from '../../utilities/did/did';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { isFullDid } from '../../utilities/did/did';
+import {
+  getDepositDid,
+  getDepositWeb3Name,
+} from '../../utilities/getDeposit/getDeposit';
 
 function useCosts(
   address: string,
@@ -50,7 +51,8 @@ function useCosts(
 } {
   // useSwrDataOrThrow doesn’t fit here because some calls are conditional
   const [fee, setFee] = useState<BN | undefined>();
-  const [deposit, setDeposit] = useState<BN | undefined>();
+  const [depositDid, setDepositDid] = useState<IChainDeposit>();
+  const [depositWeb3Name, setDepositWeb3Name] = useState<IChainDeposit>();
 
   useEffect(() => {
     (async () => {
@@ -61,30 +63,35 @@ function useCosts(
       }
 
       setFee(await getFee(did));
-      setDeposit(await getDeposit());
+      setDepositDid(await getDepositDid(did));
+      setDepositWeb3Name(await getDepositWeb3Name(did));
     })();
   }, [did]);
 
+  const deposit = useMemo(() => {
+    if (!depositDid && !depositWeb3Name) {
+      return;
+    }
+    if (depositDid?.owner === address && depositWeb3Name?.owner === address) {
+      return depositDid.amount.add(depositWeb3Name.amount);
+    }
+    if (depositDid?.owner === address) {
+      return depositDid.amount;
+    }
+    if (depositWeb3Name?.owner === address) {
+      return depositWeb3Name.amount;
+    }
+  }, [address, depositDid, depositWeb3Name]);
+
   const total = useMemo(
     () => (fee && deposit ? deposit.sub(fee) : undefined),
-    [deposit, fee],
+    [fee, deposit],
   );
 
   const balance = useAddressBalance(address);
   const error = Boolean(fee && balance && balance.transferable.lt(fee));
 
   return { fee, deposit, total, error };
-}
-
-async function getDepositOwner(did: IDidDetails['did']) {
-  const { identifier, type } = parseDidUri(did);
-  if (type === 'light') {
-    return;
-  }
-
-  const didChainRecord = await DidChain.queryDetails(identifier);
-
-  return didChainRecord?.deposit?.owner;
 }
 
 interface Props {
@@ -104,13 +111,6 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
   );
 
   const credentials = useIdentityCredentials(did);
-
-  const depositOwner = useSwrDataOrThrow(
-    did,
-    getDepositOwner,
-    'DidDowngrade.getDepositOwner',
-  );
-  const isDepositOwner = depositOwner === address;
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
@@ -136,6 +136,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
         setStatus('success');
       } catch (error) {
+        console.error(error);
         setSubmitting(false);
         setStatus('error');
       }
@@ -166,7 +167,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
       <IdentitySlide identity={identity} options={false} />
 
-      {isDepositOwner && (
+      {total && (
         <Fragment>
           <p className={styles.costs}>
             {t('view_DidDowngrade_total')}
@@ -181,7 +182,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
         </Fragment>
       )}
 
-      {!isDepositOwner && (
+      {!total && (
         <p className={styles.costs}>
           {t('view_W3NRemove_fee_as_total')}
           <KiltAmount amount={fee} type="costs" smallDecimals />

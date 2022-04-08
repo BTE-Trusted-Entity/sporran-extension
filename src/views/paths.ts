@@ -43,8 +43,14 @@ export const paths = {
       },
       manage: {
         start: '/identity/:address/did',
-        warning: '/identity/:address/did/warning',
-        downgrade: '/identity/:address/did/downgrade',
+        downgrade: {
+          base: '/identity/:address/did/downgrade',
+          warning: {
+            web3name: '/identity/:address/did/downgrade/warning/web3name',
+            credentials: '/identity/:address/did/downgrade/warning/credentials',
+          },
+          sign: '/identity/:address/did/downgrade/sign',
+        },
         endpoints: {
           start: '/identity/:address/did/endpoints',
           add: '/identity/:address/did/endpoints/add',

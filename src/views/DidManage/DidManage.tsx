@@ -18,7 +18,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidManage({ identity }: Props): JSX.Element {
+export function DidManage({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const { address, did } = identity;
@@ -27,6 +27,11 @@ export function DidManage({ identity }: Props): JSX.Element {
     Web3Names.queryWeb3NameForDid,
     'Web3Names.queryWeb3NameForDid',
   );
+
+  const warningPath = web3name
+    ? paths.identity.did.manage.downgrade.warning.web3name
+    : paths.identity.did.manage.downgrade.warning.credentials;
+
   return (
     <section className={styles.container}>
       <h1 className={styles.heading}>{t('view_DidManage_heading')}</h1>
@@ -78,7 +83,7 @@ export function DidManage({ identity }: Props): JSX.Element {
 
       <Link
         className={styles.downgrade}
-        to={generatePath(paths.identity.did.manage.warning, { address })}
+        to={generatePath(warningPath, { address })}
       >
         {t('view_DidManage_downgrade')}
       </Link>
