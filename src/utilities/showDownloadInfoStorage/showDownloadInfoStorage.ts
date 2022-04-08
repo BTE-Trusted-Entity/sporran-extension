@@ -1,5 +1,4 @@
-import useSWR from 'swr';
-
+import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 import { storage } from '../storage/storage';
 
 const key = 'showDownloadInfo';
@@ -13,5 +12,5 @@ export async function setShowDownloadInfo(value: boolean): Promise<void> {
 }
 
 export function useShowDownloadInfo(): boolean {
-  return useSWR('showDownloadInfo', getShowDownloadInfo).data !== false;
+  return useAsyncValue(getShowDownloadInfo, []) !== false;
 }

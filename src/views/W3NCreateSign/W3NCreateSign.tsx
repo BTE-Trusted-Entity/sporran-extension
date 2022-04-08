@@ -21,7 +21,7 @@ import {
   getKeypairBySeed,
   getKeystoreFromSeed,
 } from '../../utilities/identities/identities';
-import { getFullDidDetails } from '../../utilities/did/did';
+import { useFullDidDetails } from '../../utilities/did/did';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import {
   asKiltCoins,
@@ -30,8 +30,8 @@ import {
 import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
 import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
-import { getDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
 
 async function getFee(fullDid?: FullDidDetails) {
   if (!fullDid) {
@@ -70,17 +70,9 @@ export function W3NCreateSign({
     address,
   });
 
-  const fullDidDetails = useSwrDataOrThrow(
-    did,
-    getFullDidDetails,
-    'getFullDidDetails',
-  );
-  const fee = useSwrDataOrThrow(fullDidDetails, getFee, 'W3NCreateSign.getFee');
-  const deposit = useSwrDataOrThrow(
-    did,
-    getDepositWeb3Name,
-    'W3NCreateSign.getDeposit',
-  )?.amount;
+  const fullDidDetails = useFullDidDetails(did);
+  const fee = useAsyncValue(getFee, [fullDidDetails]);
+  const deposit = useDepositWeb3Name(did)?.amount;
 
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
 

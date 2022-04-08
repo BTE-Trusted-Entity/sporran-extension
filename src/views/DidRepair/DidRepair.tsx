@@ -5,7 +5,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './DidRepair.module.css';
 
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { Identity } from '../../utilities/identities/types';
 import {
   PasswordField,
@@ -32,7 +32,7 @@ function useCosts(
   fee?: BN;
   error: boolean;
 } {
-  const fee = useSwrDataOrThrow(did, getFee, 'DidRepair.getFee');
+  const fee = useAsyncValue(getFee, [did]);
 
   const balance = useAddressBalance(address);
   const error = Boolean(balance && fee && balance.transferable.lt(fee));

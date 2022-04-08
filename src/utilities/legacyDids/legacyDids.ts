@@ -1,7 +1,7 @@
 import { needLegacyDidCrypto } from '../did/did';
 import { IdentitiesMap } from '../identities/types';
 import { useIdentities } from '../identities/identities';
-import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
+import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
 export async function getLegacyDidIdentities(
   identities: IdentitiesMap = {},
@@ -19,11 +19,5 @@ export async function getLegacyDidIdentities(
 export function useLegacyDidIdentities(): IdentitiesMap {
   const identities = useIdentities().data;
 
-  return (
-    useSwrDataOrThrow(
-      identities,
-      getLegacyDidIdentities,
-      'getLegacyDidIdentities',
-    ) || {}
-  );
+  return useAsyncValue(getLegacyDidIdentities, [identities]) || {};
 }

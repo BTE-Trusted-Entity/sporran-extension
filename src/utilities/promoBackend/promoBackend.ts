@@ -4,6 +4,7 @@ import { HexString } from '@polkadot/util/types';
 import { SubmittableExtrinsic } from '@kiltprotocol/types';
 
 import { getEndpoint } from '../endpoints/endpoints';
+import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
 const backendOrigins: Record<string, string> = {
   'wss://spiritnet.api.onfinality.io/public-ws':
@@ -19,12 +20,18 @@ async function getOrigin() {
   return ky.create({ prefixUrl: backendOrigins[kiltEndpoint] });
 }
 
-export async function getPromoStatus(): Promise<{
+interface PromoStatus {
   account: string;
   remaining_dids: number;
   is_active: boolean;
-}> {
+}
+
+export async function getPromoStatus(): Promise<PromoStatus> {
   return (await getOrigin()).get('promo_status').json();
+}
+
+export function usePromoStatus(): PromoStatus | undefined {
+  return useAsyncValue(getPromoStatus, []);
 }
 
 export async function createDid(input: {

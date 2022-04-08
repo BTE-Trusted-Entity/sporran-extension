@@ -12,26 +12,21 @@ import { paths } from '../paths';
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
-
 import { notDownloaded } from '../../utilities/credentials/CredentialsProvider.mock';
-
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
-
 import { legacyIdentity } from '../../utilities/identities/IdentitiesProvider.mock';
-
 import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
-
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+import { useDidDeletionStatus } from '../../utilities/did/useDidDeletionStatus';
 
 import { IdentityOverview } from './IdentityOverview';
 
 jest.mock('../../utilities/useSubscanHost/useSubscanHost');
-
 jest.mock('../../utilities/credentials/credentials');
-
 jest.mock('../../utilities/useWeb3Name/useWeb3Name');
-
-jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
+jest.mock('../../utilities/useAsyncValue/useAsyncValue');
+jest.mocked(useAsyncValue).mockReturnValue(false);
+jest.mock('../../utilities/did/useDidDeletionStatus');
 
 const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
 
@@ -39,10 +34,6 @@ const fullDidIdentity =
   identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
 
 describe('IdentityOverview', () => {
-  beforeEach(() => {
-    jest.mocked(useSwrDataOrThrow).mockReset();
-  });
-
   it('should render a normal identity', async () => {
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
@@ -128,12 +119,8 @@ describe('IdentityOverview', () => {
   });
 
   it('should prompt to update legacy DID', async () => {
-    jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
-      return {
-        needLegacyDidCrypto: true,
-        getDidDeletionStatus: false,
-      }[name];
-    });
+    jest.mocked(useDidDeletionStatus).mockReturnValue(false);
+    jest.mocked(useAsyncValue).mockReturnValueOnce(true);
 
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${legacyIdentity.address}/`]}>
@@ -147,7 +134,7 @@ describe('IdentityOverview', () => {
   });
 
   it('should show web3name', async () => {
-    jest.mocked(useWeb3Name).mockReturnValue('fancy-name');
+    jest.mocked(useWeb3Name).mockReturnValueOnce('fancy-name');
 
     const { container } = render(
       <MemoryRouter initialEntries={[`/identity/${fullDidIdentity.address}/`]}>
@@ -162,12 +149,8 @@ describe('IdentityOverview', () => {
 
   it('should show on-chain DID removed', async () => {
     mockIsFullDid(false);
-    jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
-      return {
-        needLegacyDidCrypto: false,
-        getDidDeletionStatus: true,
-      }[name];
-    });
+    jest.mocked(useDidDeletionStatus).mockReturnValue(true);
+    jest.mocked(useWeb3Name).mockReturnValueOnce('fancy-name');
 
     const { container } = render(
       <MemoryRouter

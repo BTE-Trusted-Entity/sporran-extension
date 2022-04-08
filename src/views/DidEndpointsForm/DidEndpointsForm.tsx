@@ -14,7 +14,7 @@ import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { getFragment, getFullDidDetails } from '../../utilities/did/did';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { generatePath, paths } from '../paths';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 function useScrollEndpoint(ref: RefObject<HTMLLIElement>, id: string) {
   const params: { id: string } = useParams();
@@ -221,10 +221,9 @@ export function DidEndpointsForm({
 
   const { did, address } = identity;
 
-  const endpoints = useSwrDataOrThrow(
-    did,
+  const endpoints = useAsyncValue(
     async (did) => (await getFullDidDetails(did)).getEndpoints(),
-    'getDidEndpoints',
+    [did],
   );
 
   const lastEndpoint = last(endpoints);

@@ -5,16 +5,15 @@ import { Fragment } from 'react';
 import * as styles from './DidUpgradeExplainer.module.css';
 
 import { Identity } from '../../utilities/identities/types';
-import { paths, generatePath } from '../paths';
+import { generatePath, paths } from '../paths';
 
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
-import { getPromoStatus } from '../../utilities/promoBackend/promoBackend';
+import { useDidDeletionStatus } from '../../utilities/did/useDidDeletionStatus';
+import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
-import { getDidDeletionStatus } from '../../utilities/did/did';
 
 interface Props {
   identity: Identity;
@@ -24,8 +23,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const promoChecked = useBooleanState();
-
-  const promoStatus = useSwrDataOrThrow('', getPromoStatus, 'getPromoStatus');
+  const promoStatus = usePromoStatus();
 
   const { address, did } = identity;
 
@@ -33,11 +31,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
     ? generatePath(paths.identity.did.upgrade.promo, { address })
     : generatePath(paths.identity.did.upgrade.sign, { address });
 
-  const wasOnChainDidDeleted = useSwrDataOrThrow(
-    did,
-    getDidDeletionStatus,
-    'getDidDeletionStatus',
-  );
+  const wasOnChainDidDeleted = useDidDeletionStatus(did);
 
   return (
     <section className={styles.container}>

@@ -1,5 +1,4 @@
-import useSWR from 'swr';
-
+import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 import { getEndpoint } from '../endpoints/endpoints';
 
 const subscanHosts: Record<string, string> = {
@@ -10,6 +9,6 @@ const subscanHosts: Record<string, string> = {
 };
 
 export function useSubscanHost(): string | undefined {
-  const kiltEndpoint = useSWR('getEndpoint', getEndpoint).data;
+  const kiltEndpoint = useAsyncValue(getEndpoint, []);
   return kiltEndpoint ? subscanHosts[kiltEndpoint] : undefined;
 }
