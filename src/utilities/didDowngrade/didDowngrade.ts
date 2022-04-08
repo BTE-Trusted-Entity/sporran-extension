@@ -35,30 +35,39 @@ async function getSignedTransaction(
 
   const web3name = await Web3Names.queryWeb3NameForDid(fullDidDetails.did);
 
-  let authorized: SubmittableExtrinsic;
+  let extrinsic: SubmittableExtrinsic;
 
   if (web3name) {
     const w3nRemoveExtrinsic = await Web3Names.getReleaseByOwnerTx();
 
-    const batchExtrinsic = blockchain.api.tx.utility.batchAll([
+    const w3nRemoveAuthorized = await fullDidDetails.authorizeExtrinsic(
       w3nRemoveExtrinsic,
-      didRemoveExtrinsic,
-    ]);
-
-    authorized = await fullDidDetails.authorizeExtrinsic(
-      batchExtrinsic,
       keystore,
       keypair.address,
     );
+
+    const txCounter = (await fullDidDetails.getNextNonce()).addn(1);
+
+    const didRemoveAuthorized = await fullDidDetails.authorizeExtrinsic(
+      didRemoveExtrinsic,
+      keystore,
+      keypair.address,
+      { txCounter },
+    );
+
+    extrinsic = blockchain.api.tx.utility.batchAll([
+      w3nRemoveAuthorized,
+      didRemoveAuthorized,
+    ]);
   } else {
-    authorized = await fullDidDetails.authorizeExtrinsic(
+    extrinsic = await fullDidDetails.authorizeExtrinsic(
       didRemoveExtrinsic,
       keystore,
       keypair.address,
     );
   }
 
-  const tx = await blockchain.signTx(keypair, authorized);
+  const tx = await blockchain.signTx(keypair, extrinsic);
 
   const { did } = getLightDidFromSeed(seed);
   return { extrinsic: tx, did };

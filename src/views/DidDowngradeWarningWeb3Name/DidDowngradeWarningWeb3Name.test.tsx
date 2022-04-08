@@ -4,7 +4,12 @@ import { identitiesMock as identities } from '../../utilities/identities/Identit
 
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
+import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+
 import { DidDowngradeWarningWeb3Name } from './DidDowngradeWarningWeb3Name';
+
+jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
+jest.mocked(useSwrDataOrThrow).mockReturnValue('fancy-name');
 
 describe('DidDowngradeWarningWeb3Name', () => {
   it('should render', async () => {

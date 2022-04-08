@@ -148,7 +148,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
     setStatus(null);
   }, []);
 
-  if (!(fee && deposit && total)) {
+  if (!fee) {
     return null; // blockchain data pending
   }
 
@@ -167,7 +167,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
       <IdentitySlide identity={identity} options={false} />
 
-      {total && (
+      {total && deposit && (
         <Fragment>
           <p className={styles.costs}>
             {t('view_DidDowngrade_total')}
