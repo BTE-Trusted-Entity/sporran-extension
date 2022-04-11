@@ -62,3 +62,9 @@ export async function getDepositDid(
 
   return details?.deposit;
 }
+
+export function useDepositDid(
+  did: IDidDetails['did'],
+): DepositData | undefined {
+  return useAsyncValue(getDepositDid, [did]);
+}
