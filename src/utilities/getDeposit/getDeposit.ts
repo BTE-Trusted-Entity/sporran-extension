@@ -25,7 +25,7 @@ export async function getDepositWeb3Name(
   const web3name = await Web3Names.queryWeb3NameForDid(did);
 
   if (!web3name) {
-    return;
+    return { amount: await Web3Names.queryDepositAmount() };
   }
 
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();

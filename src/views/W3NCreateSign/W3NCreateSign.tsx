@@ -31,6 +31,7 @@ import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
 import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { getDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
 
 async function getFee(fullDid?: FullDidDetails) {
   if (!fullDid) {
@@ -74,12 +75,12 @@ export function W3NCreateSign({
     getFullDidDetails,
     'getFullDidDetails',
   );
-  const fee = useSwrDataOrThrow(fullDidDetails, getFee, 'Web3Names.getFee');
+  const fee = useSwrDataOrThrow(fullDidDetails, getFee, 'W3NCreateSign.getFee');
   const deposit = useSwrDataOrThrow(
-    'deposit',
-    Web3Names.queryDepositAmount,
-    'Web3Names.queryDepositAmount',
-  );
+    did,
+    getDepositWeb3Name,
+    'W3NCreateSign.getDepositWeb3Name',
+  )?.amount;
 
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
 

@@ -11,8 +11,8 @@ jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
 jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
   return {
     getFullDidDetails: {},
-    'Web3Names.getFee': BalanceUtils.toFemtoKilt(0.01),
-    'Web3Names.queryDepositAmount': BalanceUtils.toFemtoKilt(2),
+    'W3NCreateSign.getFee': BalanceUtils.toFemtoKilt(0.01),
+    'W3NCreateSign.getDepositWeb3Name': { amount: BalanceUtils.toFemtoKilt(2) },
   }[name];
 });
 
