@@ -40,14 +40,15 @@ async function getSignedTransaction(
   if (web3name) {
     const w3nRemoveExtrinsic = await Web3Names.getReleaseByOwnerTx();
 
+    const txCounter = await fullDidDetails.getNextNonce();
+
     const w3nRemoveAuthorized = await fullDidDetails.authorizeExtrinsic(
       w3nRemoveExtrinsic,
       keystore,
       keypair.address,
+      { txCounter },
     );
-
-    const txCounter = (await fullDidDetails.getNextNonce()).addn(1);
-
+    txCounter.iaddn(1);
     const didRemoveAuthorized = await fullDidDetails.authorizeExtrinsic(
       didRemoveExtrinsic,
       keystore,
