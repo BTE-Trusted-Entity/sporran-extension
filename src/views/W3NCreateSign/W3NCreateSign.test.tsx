@@ -12,7 +12,7 @@ jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
   return {
     getFullDidDetails: {},
     'W3NCreateSign.getFee': BalanceUtils.toFemtoKilt(0.01),
-    'W3NCreateSign.getDepositWeb3Name': { amount: BalanceUtils.toFemtoKilt(2) },
+    'W3NCreateSign.getDeposit': { amount: BalanceUtils.toFemtoKilt(2) },
   }[name];
 });
 

@@ -79,7 +79,7 @@ export function W3NCreateSign({
   const deposit = useSwrDataOrThrow(
     did,
     getDepositWeb3Name,
-    'W3NCreateSign.getDepositWeb3Name',
+    'W3NCreateSign.getDeposit',
   )?.amount;
 
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
