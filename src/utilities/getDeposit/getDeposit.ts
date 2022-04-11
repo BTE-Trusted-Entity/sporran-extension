@@ -15,8 +15,8 @@ interface Web3NameData extends Struct {
 }
 
 interface DepositData {
-  owner?: IIdentity['address'];
   amount: BN;
+  owner?: IIdentity['address'];
 }
 
 export async function getDepositWeb3Name(
