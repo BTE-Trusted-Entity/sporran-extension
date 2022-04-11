@@ -6,6 +6,8 @@ import {
 } from '@kiltprotocol/chain-helpers';
 import { DidChain, FullDidCreationBuilder } from '@kiltprotocol/did';
 
+import { u32 } from '@polkadot/types';
+
 import {
   getKeystoreFromSeed,
   Identity,
@@ -48,8 +50,12 @@ export async function getFee(): Promise<BN> {
   const fakeSeed = new Uint8Array(32);
   const keypair = getKeypairBySeed(fakeSeed);
   const { extrinsic } = await getSignedTransaction(fakeSeed);
+  const extrinsicFee = (await extrinsic.paymentInfo(keypair)).partialFee;
 
-  return (await extrinsic.paymentInfo(keypair)).partialFee;
+  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+  const didCreationFee = api.consts.did.fee as u32;
+
+  return extrinsicFee.add(didCreationFee);
 }
 
 const currentTx: Record<string, DidTransaction> = {};
