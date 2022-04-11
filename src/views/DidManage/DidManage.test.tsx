@@ -5,8 +5,9 @@ import { identitiesMock as identities, render } from '../../testing/testing';
 import '../../components/useCopyButton/useCopyButton.mock';
 
 import { parseDidUri } from '../../utilities/did/did';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 import { generatePath, paths } from '../paths';
+
+import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
 
 import { DidManage } from './DidManage';
 
@@ -15,11 +16,11 @@ jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as ReturnType<typeof parseDidUri>);
 
-jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
+jest.mock('../../utilities/useWeb3Name/useWeb3Name');
 
 describe('DidManage', () => {
   it('should match the snapshot without web3name', async () => {
-    jest.mocked(useSwrDataOrThrow).mockReturnValue(undefined);
+    jest.mocked(useWeb3Name).mockReturnValue(undefined);
     const { container } = render(
       <MemoryRouter
         initialEntries={[
@@ -39,7 +40,7 @@ describe('DidManage', () => {
   });
 
   it('should match the snapshot with web3name', async () => {
-    jest.mocked(useSwrDataOrThrow).mockReturnValue('fancy-name');
+    jest.mocked(useWeb3Name).mockReturnValue('fancy-name');
     const { container } = render(
       <MemoryRouter
         initialEntries={[

@@ -4,7 +4,7 @@ import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { DidChain } from '@kiltprotocol/did';
+import { DidChain, Web3Names } from '@kiltprotocol/did';
 
 import {
   getKeystoreFromSeed,
@@ -19,30 +19,56 @@ interface DidTransaction {
   did: IDidDetails['did'];
 }
 
-export async function getDeposit(): Promise<BN> {
-  return DidChain.queryDepositAmount();
-}
-
 async function getSignedTransaction(
   seed: Uint8Array,
   fullDid: IDidDetails['did'],
 ): Promise<DidTransaction> {
   const fullDidDetails = await getFullDidDetails(fullDid);
 
-  const extrinsic = await DidChain.getDeleteDidExtrinsic(
-    await DidChain.queryEndpointsCounts(fullDidDetails.identifier),
-  );
+  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
   const keystore = await getKeystoreFromSeed(seed);
   const keypair = getKeypairBySeed(seed);
 
-  const didAuthorizedExtrinsic = await fullDidDetails.authorizeExtrinsic(
-    extrinsic,
-    keystore,
-    keypair.address,
+  const didRemoveExtrinsic = await DidChain.getDeleteDidExtrinsic(
+    await DidChain.queryEndpointsCounts(fullDidDetails.identifier),
   );
 
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  const tx = await blockchain.signTx(keypair, didAuthorizedExtrinsic);
+  const web3name = await Web3Names.queryWeb3NameForDid(fullDidDetails.did);
+
+  let extrinsic: SubmittableExtrinsic;
+
+  if (web3name) {
+    const w3nRemoveExtrinsic = await Web3Names.getReleaseByOwnerTx();
+
+    const txCounter = await fullDidDetails.getNextNonce();
+
+    const w3nRemoveAuthorized = await fullDidDetails.authorizeExtrinsic(
+      w3nRemoveExtrinsic,
+      keystore,
+      keypair.address,
+      { txCounter },
+    );
+    txCounter.iaddn(1);
+    const didRemoveAuthorized = await fullDidDetails.authorizeExtrinsic(
+      didRemoveExtrinsic,
+      keystore,
+      keypair.address,
+      { txCounter },
+    );
+
+    extrinsic = blockchain.api.tx.utility.batchAll([
+      w3nRemoveAuthorized,
+      didRemoveAuthorized,
+    ]);
+  } else {
+    extrinsic = await fullDidDetails.authorizeExtrinsic(
+      didRemoveExtrinsic,
+      keystore,
+      keypair.address,
+    );
+  }
+
+  const tx = await blockchain.signTx(keypair, extrinsic);
 
   const { did } = getLightDidFromSeed(seed);
   return { extrinsic: tx, did };

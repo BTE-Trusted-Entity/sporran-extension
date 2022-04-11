@@ -4,13 +4,10 @@ import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { IDidDetails } from '@kiltprotocol/types';
 
-import { DidChain } from '@kiltprotocol/did';
-
 import * as styles from './DidDowngrade.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import {
-  getDeposit,
   getFee,
   sign,
   submit,
@@ -36,8 +33,11 @@ import {
   useIdentityCredentials,
   invalidateCredentials,
 } from '../../utilities/credentials/credentials';
-import { isFullDid, parseDidUri } from '../../utilities/did/did';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { isFullDid } from '../../utilities/did/did';
+import {
+  getDepositDid,
+  getDepositWeb3Name,
+} from '../../utilities/getDeposit/getDeposit';
 
 function useCosts(
   address: string,
@@ -50,7 +50,10 @@ function useCosts(
 } {
   // useSwrDataOrThrow doesn’t fit here because some calls are conditional
   const [fee, setFee] = useState<BN | undefined>();
-  const [deposit, setDeposit] = useState<BN | undefined>();
+  const [depositDid, setDepositDid] =
+    useState<Awaited<ReturnType<typeof getDepositDid>>>();
+  const [depositWeb3Name, setDepositWeb3Name] =
+    useState<Awaited<ReturnType<typeof getDepositWeb3Name>>>();
 
   useEffect(() => {
     (async () => {
@@ -61,30 +64,28 @@ function useCosts(
       }
 
       setFee(await getFee(did));
-      setDeposit(await getDeposit());
+      setDepositDid(await getDepositDid(did));
+      setDepositWeb3Name(await getDepositWeb3Name(did));
     })();
   }, [did]);
 
+  const deposit = useMemo(() => {
+    const didAmount =
+      depositDid?.owner === address ? depositDid.amount : new BN(0);
+    const w3nAmount =
+      depositWeb3Name?.owner === address ? depositWeb3Name.amount : new BN(0);
+    return didAmount.add(w3nAmount);
+  }, [address, depositDid, depositWeb3Name]);
+
   const total = useMemo(
-    () => (fee && deposit ? deposit.sub(fee) : undefined),
-    [deposit, fee],
+    () => (fee && !deposit.isZero() ? deposit.sub(fee) : undefined),
+    [fee, deposit],
   );
 
   const balance = useAddressBalance(address);
   const error = Boolean(fee && balance && balance.transferable.lt(fee));
 
   return { fee, deposit, total, error };
-}
-
-async function getDepositOwner(did: IDidDetails['did']) {
-  const { identifier, type } = parseDidUri(did);
-  if (type === 'light') {
-    return;
-  }
-
-  const didChainRecord = await DidChain.queryDetails(identifier);
-
-  return didChainRecord?.deposit?.owner;
 }
 
 interface Props {
@@ -104,13 +105,6 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
   );
 
   const credentials = useIdentityCredentials(did);
-
-  const depositOwner = useSwrDataOrThrow(
-    did,
-    getDepositOwner,
-    'DidDowngrade.getDepositOwner',
-  );
-  const isDepositOwner = depositOwner === address;
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
@@ -136,6 +130,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
         setStatus('success');
       } catch (error) {
+        console.error(error);
         setSubmitting(false);
         setStatus('error');
       }
@@ -147,7 +142,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
     setStatus(null);
   }, []);
 
-  if (!(fee && deposit && total)) {
+  if (!fee) {
     return null; // blockchain data pending
   }
 
@@ -166,7 +161,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
       <IdentitySlide identity={identity} options={false} />
 
-      {isDepositOwner && (
+      {total && deposit && (
         <Fragment>
           <p className={styles.costs}>
             {t('view_DidDowngrade_total')}
@@ -181,7 +176,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
         </Fragment>
       )}
 
-      {!isDepositOwner && (
+      {!total && (
         <p className={styles.costs}>
           {t('view_W3NRemove_fee_as_total')}
           <KiltAmount amount={fee} type="costs" smallDecimals />

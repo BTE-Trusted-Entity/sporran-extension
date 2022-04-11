@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import { Web3Names } from '@kiltprotocol/did';
-
 import * as styles from './DidManage.module.css';
 
 import { LinkBack } from '../../components/LinkBack/LinkBack';
@@ -12,7 +10,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { generatePath, paths } from '../paths';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
 
 interface Props {
   identity: Identity;
@@ -22,11 +20,12 @@ export function DidManage({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const { address, did } = identity;
-  const web3name = useSwrDataOrThrow(
-    did,
-    Web3Names.queryWeb3NameForDid,
-    'Web3Names.queryWeb3NameForDid',
-  );
+  const web3name = useWeb3Name(did);
+
+  const warningPath = web3name
+    ? paths.identity.did.manage.downgrade.warning.web3name
+    : paths.identity.did.manage.downgrade.warning.credentials;
+
   return (
     <section className={styles.container}>
       <h1 className={styles.heading}>{t('view_DidManage_heading')}</h1>
@@ -78,7 +77,7 @@ export function DidManage({ identity }: Props): JSX.Element {
 
       <Link
         className={styles.downgrade}
-        to={generatePath(paths.identity.did.manage.warning, { address })}
+        to={generatePath(warningPath, { address })}
       >
         {t('view_DidManage_downgrade')}
       </Link>

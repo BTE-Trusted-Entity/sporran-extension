@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
+import { IDidDetails } from '@kiltprotocol/types';
+
 import * as styles from './DidUpgrade.module.css';
 
 import { Identity } from '../../utilities/identities/types';
@@ -10,12 +12,7 @@ import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
-import {
-  getDeposit,
-  getFee,
-  sign,
-  submit,
-} from '../../utilities/didUpgrade/didUpgrade';
+import { getFee, sign, submit } from '../../utilities/didUpgrade/didUpgrade';
 import { saveIdentity } from '../../utilities/identities/identities';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { useAddressBalance } from '../../components/Balance/Balance';
@@ -30,36 +27,44 @@ import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { Stats } from '../../components/Stats/Stats';
 import { paths } from '../paths';
 import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { getDepositDid } from '../../utilities/getDeposit/getDeposit';
 
 interface Props {
   identity: Identity;
 }
 
-function useCosts(address: string): {
+function useCosts(
+  address: string,
+  did: IDidDetails['did'],
+): {
   fee?: BN;
   deposit?: BN;
   total?: BN;
   error: boolean;
 } {
   const fee = useSwrDataOrThrow('', getFee, 'DidUpgrade.getFee');
-  const deposit = useSwrDataOrThrow('', getDeposit, 'DidUpgrade.getDeposit');
+  const deposit = useSwrDataOrThrow(
+    did,
+    getDepositDid,
+    'DidUpgrade.getDepositDid',
+  );
 
   const total = useMemo(
-    () => (fee && deposit ? fee.add(deposit) : undefined),
+    () => (fee && deposit ? fee.add(deposit.amount) : undefined),
     [deposit, fee],
   );
 
   const balance = useAddressBalance(address);
   const error = Boolean(total && balance && balance.transferable.lt(total));
 
-  return { fee, deposit, total, error };
+  return { fee, deposit: deposit?.amount, total, error };
 }
 
 export function DidUpgrade({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { address } = identity;
-  const { fee, deposit, total, error } = useCosts(address);
+  const { address, did } = identity;
+  const { fee, deposit, total, error } = useCosts(address, did);
   const [txHash, setTxHash] = useState<string>();
 
   const [submitting, setSubmitting] = useState(false);
