@@ -15,7 +15,7 @@ interface Web3NameData extends Struct {
 }
 
 interface DepositData {
-  owner: IIdentity['address'];
+  owner?: IIdentity['address'];
   amount: BN;
 }
 
@@ -45,7 +45,11 @@ export async function getDepositWeb3Name(
 export async function getDepositDid(
   did: IDidDetails['did'],
 ): Promise<DepositData | undefined> {
-  const { identifier } = parseDidUri(did);
+  const { identifier, type } = parseDidUri(did);
+
+  if (type === 'light') {
+    return { amount: await DidChain.queryDepositAmount() };
+  }
 
   const details = await DidChain.queryDetails(identifier);
 
