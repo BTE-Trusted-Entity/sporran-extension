@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { IDidDetails } from '@kiltprotocol/types';
-import { IChainDeposit } from '@kiltprotocol/did/lib/cjs/Did.chain';
 
 import * as styles from './DidDowngrade.module.css';
 
@@ -51,8 +50,10 @@ function useCosts(
 } {
   // useSwrDataOrThrow doesn’t fit here because some calls are conditional
   const [fee, setFee] = useState<BN | undefined>();
-  const [depositDid, setDepositDid] = useState<IChainDeposit>();
-  const [depositWeb3Name, setDepositWeb3Name] = useState<IChainDeposit>();
+  const [depositDid, setDepositDid] =
+    useState<Awaited<ReturnType<typeof getDepositDid>>>();
+  const [depositWeb3Name, setDepositWeb3Name] =
+    useState<Awaited<ReturnType<typeof getDepositWeb3Name>>>();
 
   useEffect(() => {
     (async () => {
@@ -69,22 +70,15 @@ function useCosts(
   }, [did]);
 
   const deposit = useMemo(() => {
-    if (!depositDid && !depositWeb3Name) {
-      return;
-    }
-    if (depositDid?.owner === address && depositWeb3Name?.owner === address) {
-      return depositDid.amount.add(depositWeb3Name.amount);
-    }
-    if (depositDid?.owner === address) {
-      return depositDid.amount;
-    }
-    if (depositWeb3Name?.owner === address) {
-      return depositWeb3Name.amount;
-    }
+    const didAmount =
+      depositDid?.owner === address ? depositDid.amount : new BN(0);
+    const w3nAmount =
+      depositWeb3Name?.owner === address ? depositWeb3Name.amount : new BN(0);
+    return didAmount.add(w3nAmount);
   }, [address, depositDid, depositWeb3Name]);
 
   const total = useMemo(
-    () => (fee && deposit ? deposit.sub(fee) : undefined),
+    () => (fee && !deposit.isZero() ? deposit.sub(fee) : undefined),
     [fee, deposit],
   );
 

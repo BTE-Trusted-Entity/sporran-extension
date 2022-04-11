@@ -1,9 +1,10 @@
 import { Web3Names, DidChain } from '@kiltprotocol/did';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
-import { Deposit, IDidDetails } from '@kiltprotocol/types';
-import { IChainDeposit } from '@kiltprotocol/did/lib/cjs/Did.chain';
+import { Deposit, IDidDetails, IIdentity } from '@kiltprotocol/types';
 import { Option, Struct, u64 } from '@polkadot/types';
 import { AccountId } from '@polkadot/types/interfaces';
+
+import BN from 'bn.js';
 
 import { parseDidUri } from '../did/did';
 
@@ -13,9 +14,14 @@ interface Web3NameData extends Struct {
   deposit: Deposit;
 }
 
+interface DepositData {
+  owner: IIdentity['address'];
+  amount: BN;
+}
+
 export async function getDepositWeb3Name(
   did: IDidDetails['did'],
-): Promise<IChainDeposit | undefined> {
+): Promise<DepositData | undefined> {
   const web3name = await Web3Names.queryWeb3NameForDid(did);
 
   if (!web3name) {
@@ -38,7 +44,7 @@ export async function getDepositWeb3Name(
 
 export async function getDepositDid(
   did: IDidDetails['did'],
-): Promise<IChainDeposit | undefined> {
+): Promise<DepositData | undefined> {
   const { identifier } = parseDidUri(did);
 
   const details = await DidChain.queryDetails(identifier);

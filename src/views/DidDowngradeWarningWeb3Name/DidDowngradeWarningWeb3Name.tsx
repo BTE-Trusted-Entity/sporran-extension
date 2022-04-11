@@ -1,8 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Web3Names } from '@kiltprotocol/did';
-
 import * as styles from './DidDowngradeWarningWeb3Name.module.css';
 
 import { Identity } from '../../utilities/identities/types';
@@ -11,7 +9,7 @@ import { generatePath, paths } from '../paths';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { Avatar } from '../../components/Avatar/Avatar';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
 
 interface Props {
   identity: Identity;
@@ -26,11 +24,7 @@ export function DidDowngradeWarningWeb3Name({
 
   const { address, did } = identity;
 
-  const web3name = useSwrDataOrThrow(
-    did,
-    Web3Names.queryWeb3NameForDid,
-    'Web3Names.queryWeb3NameForDid',
-  );
+  const web3name = useWeb3Name(did);
 
   return (
     <section className={styles.container}>
