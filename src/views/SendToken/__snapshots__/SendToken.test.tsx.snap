@@ -297,10 +297,14 @@ exports[`SendToken should render 1`] = `
     <p
       class="recipientLine"
     >
+      <datalist
+        id="identities"
+      />
       <input
         aria-label="Paste the recipient’s address here"
         class="recipientWithButton"
         id="recipient"
+        list="identities"
         name="recipient"
         placeholder="Paste the recipient’s address here"
         required=""

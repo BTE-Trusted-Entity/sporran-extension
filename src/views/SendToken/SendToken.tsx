@@ -10,7 +10,7 @@ import * as styles from './SendToken.module.css';
 
 import { getFee } from '../../utilities/getFee/getFee';
 import { Identity } from '../../utilities/identities/types';
-import { isNew } from '../../utilities/identities/identities';
+import { isNew, useIdentities } from '../../utilities/identities/identities';
 import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Balance, useAddressBalance } from '../../components/Balance/Balance';
@@ -19,6 +19,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
 import { useOnline } from '../../utilities/useOnline/useOnline';
+import { useConfiguration } from '../../configuration/useConfiguration';
 
 const noError = null;
 const nonNumberCharacters = /[^0-9,.\u066C\u2019\u202F]/g;
@@ -338,6 +339,9 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     setRecipient(value.trim());
   }, []);
 
+  const identities = useIdentities();
+  const { features } = useConfiguration();
+
   const recipientRef = useRef(null);
   const paste = usePasteButton(recipientRef, setRecipient);
 
@@ -451,9 +455,23 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       </small>
 
       <p className={styles.recipientLine}>
+        <datalist id="identities">
+          {features.recipientsList &&
+            identities.data &&
+            Object.values(identities.data).map(
+              ({ address, name }) =>
+                address !== identity.address && (
+                  <option value={address} key={address}>
+                    {name}
+                  </option>
+                ),
+            )}
+        </datalist>
+
         <input
           id="recipient"
           name="recipient"
+          list="identities"
           className={
             paste.supported ? styles.recipientWithButton : styles.recipient
           }
