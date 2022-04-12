@@ -7,6 +7,7 @@ import { AccountId } from '@polkadot/types/interfaces';
 import BN from 'bn.js';
 
 import { parseDidUri } from '../did/did';
+import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
 interface Web3NameData extends Struct {
   owner: AccountId;
@@ -42,6 +43,12 @@ export async function getDepositWeb3Name(
   return { owner: owner.toString(), amount };
 }
 
+export function useDepositWeb3Name(
+  did: IDidDetails['did'],
+): DepositData | undefined {
+  return useAsyncValue(getDepositWeb3Name, [did]);
+}
+
 export async function getDepositDid(
   did: IDidDetails['did'],
 ): Promise<DepositData | undefined> {
@@ -54,4 +61,10 @@ export async function getDepositDid(
   const details = await DidChain.queryDetails(identifier);
 
   return details?.deposit;
+}
+
+export function useDepositDid(
+  did: IDidDetails['did'],
+): DepositData | undefined {
+  return useAsyncValue(getDepositDid, [did]);
 }

@@ -1,5 +1,5 @@
-import { useCallback, Fragment } from 'react';
-import { Link, generatePath } from 'react-router-dom';
+import { Fragment, useCallback } from 'react';
+import { generatePath, Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { FullDidDetails, Web3Names } from '@kiltprotocol/did';
@@ -27,13 +27,10 @@ import {
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-
-import { getFullDidDetails } from '../../utilities/did/did';
-
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
-
+import { useFullDidDetails } from '../../utilities/did/did';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { getDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
 
 async function getFee(fullDid?: FullDidDetails) {
   if (!fullDid) {
@@ -66,25 +63,12 @@ export function W3NRemove({ identity }: Props): JSX.Element | null {
     address,
   });
 
-  const deposit = useSwrDataOrThrow(
-    did,
-    getDepositWeb3Name,
-    'Web3NameRemove.getDepositWeb3Name',
-  );
+  const deposit = useDepositWeb3Name(did);
 
   const isDepositOwner = deposit?.owner === address;
 
-  const fullDidDetails = useSwrDataOrThrow(
-    did,
-    getFullDidDetails,
-    'getFullDidDetails',
-  );
-
-  const fee = useSwrDataOrThrow(
-    fullDidDetails,
-    getFee,
-    'Web3NameRemove.getFee',
-  );
+  const fullDidDetails = useFullDidDetails(did);
+  const fee = useAsyncValue(getFee, [fullDidDetails]);
 
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
 

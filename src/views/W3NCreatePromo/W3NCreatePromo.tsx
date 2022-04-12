@@ -18,13 +18,12 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { getKeystoreFromSeed } from '../../utilities/identities/identities';
-import { getFullDidDetails } from '../../utilities/did/did';
+import { useFullDidDetails } from '../../utilities/did/did';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import {
-  getPromoStatus,
   submitDidCall,
+  usePromoStatus,
   waitFinalized,
 } from '../../utilities/promoBackend/promoBackend';
 
@@ -44,13 +43,9 @@ export function W3NCreatePromo({
     address,
   });
 
-  const fullDidDetails = useSwrDataOrThrow(
-    did,
-    getFullDidDetails,
-    'getFullDidDetails',
-  );
+  const fullDidDetails = useFullDidDetails(did);
 
-  const promoStatus = useSwrDataOrThrow('', getPromoStatus, 'getPromoStatus');
+  const promoStatus = usePromoStatus();
 
   const [txHash, setTxHash] = useState<string>();
 

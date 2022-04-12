@@ -10,15 +10,13 @@ import { mockIsFullDid } from '../../utilities/did/did.mock';
 import { parseDidUri } from '../../utilities/did/did';
 
 import {
-  getDepositDid,
-  getDepositWeb3Name,
+  useDepositDid,
+  useDepositWeb3Name,
 } from '../../utilities/getDeposit/getDeposit';
 
 import { DidDowngrade } from './DidDowngrade';
 
-jest.mock('../../utilities/didDowngrade/didDowngrade', () => ({
-  getFee: jest.fn(),
-}));
+jest.mock('../../utilities/didDowngrade/didDowngrade');
 jest.mocked(getFee).mockResolvedValue(BalanceUtils.toFemtoKilt(0.01));
 
 jest.mock('../../utilities/did/did');
@@ -27,20 +25,18 @@ jest.mocked(parseDidUri).mockReturnValue({
   identifier: '4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as ReturnType<typeof parseDidUri>);
 
-jest.mock('../../utilities/getDeposit/getDeposit', () => ({
-  getDepositDid: jest.fn(),
-  getDepositWeb3Name: jest.fn(),
-}));
+jest.mock('../../utilities/getDeposit/getDeposit');
+
 const depositAmount = BalanceUtils.toFemtoKilt(1);
 
 describe('DidDowngrade', () => {
   it('promo used for both web3name and DID', async () => {
     mockIsFullDid(true);
-    jest.mocked(getDepositDid).mockResolvedValue({
+    jest.mocked(useDepositDid).mockReturnValue({
       owner: 'promo account',
       amount: depositAmount,
     });
-    jest.mocked(getDepositWeb3Name).mockResolvedValue({
+    jest.mocked(useDepositWeb3Name).mockReturnValue({
       owner: 'promo account',
       amount: depositAmount,
     });
@@ -58,11 +54,11 @@ describe('DidDowngrade', () => {
 
   it('promo used for web3name but not DID', async () => {
     mockIsFullDid(true);
-    jest.mocked(getDepositDid).mockResolvedValue({
+    jest.mocked(useDepositDid).mockReturnValue({
       owner: 'promo account',
       amount: depositAmount,
     });
-    jest.mocked(getDepositWeb3Name).mockResolvedValue({
+    jest.mocked(useDepositWeb3Name).mockReturnValue({
       owner: '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
       amount: depositAmount,
     });
@@ -79,11 +75,11 @@ describe('DidDowngrade', () => {
   });
   it('promo used for DID but not web3name', async () => {
     mockIsFullDid(true);
-    jest.mocked(getDepositDid).mockResolvedValue({
+    jest.mocked(useDepositDid).mockReturnValue({
       owner: '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
       amount: depositAmount,
     });
-    jest.mocked(getDepositWeb3Name).mockResolvedValue({
+    jest.mocked(useDepositWeb3Name).mockReturnValue({
       owner: 'promo account',
       amount: depositAmount,
     });
@@ -100,11 +96,11 @@ describe('DidDowngrade', () => {
   });
   it('promo not used at all', async () => {
     mockIsFullDid(true);
-    jest.mocked(getDepositDid).mockResolvedValue({
+    jest.mocked(useDepositDid).mockReturnValue({
       owner: '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
       amount: depositAmount,
     });
-    jest.mocked(getDepositWeb3Name).mockResolvedValue({
+    jest.mocked(useDepositWeb3Name).mockReturnValue({
       owner: '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
       amount: depositAmount,
     });

@@ -18,9 +18,8 @@ import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { getKeystoreFromSeed } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { getFragment, getFullDidDetails } from '../../utilities/did/did';
+import { getFragment, useFullDidDetails } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 interface Props {
   identity: Identity;
@@ -36,11 +35,7 @@ export function DidEndpointsSign({
   const t = browser.i18n.getMessage;
   const { address, did } = identity;
 
-  const fullDidDetails = useSwrDataOrThrow(
-    did,
-    getFullDidDetails,
-    'getFullDidDetails',
-  );
+  const fullDidDetails = useFullDidDetails(did);
 
   const passwordField = usePasswordField();
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();

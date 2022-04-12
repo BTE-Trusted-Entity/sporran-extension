@@ -1,21 +1,18 @@
 import { useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useParams, Redirect } from 'react-router-dom';
+import { Link, Redirect, useParams } from 'react-router-dom';
 
 import * as styles from './IdentityOverview.module.css';
 
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
 
 import { Identity, isNew } from '../../utilities/identities/identities';
-import {
-  getDidDeletionStatus,
-  isFullDid,
-  needLegacyDidCrypto,
-} from '../../utilities/did/did';
+import { isFullDid, needLegacyDidCrypto } from '../../utilities/did/did';
+import { useDidDeletionStatus } from '../../utilities/did/useDidDeletionStatus';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { generatePath, paths } from '../paths';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
@@ -52,23 +49,14 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const showDownloadPrompt =
     credentials && credentials.some(({ isDownloaded }) => !isDownloaded);
 
-  const hasLegacyDid = useSwrDataOrThrow(
-    did,
-    needLegacyDidCrypto,
-    'needLegacyDidCrypto',
-  );
+  const hasLegacyDid = useAsyncValue(needLegacyDidCrypto, [did]);
 
   const upgradeDid = !isFullDid(did);
   const manageDid = isFullDid(did) && !hasLegacyDid;
   const repairDid = hasLegacyDid;
 
   const web3name = useWeb3Name(did);
-
-  const wasOnChainDidDeleted = useSwrDataOrThrow(
-    did,
-    getDidDeletionStatus,
-    'getDidDeletionStatus',
-  );
+  const wasOnChainDidDeleted = useDidDeletionStatus(did);
 
   if (params.type) {
     return <Redirect to={generatePath(paths.identity.overview, { address })} />;

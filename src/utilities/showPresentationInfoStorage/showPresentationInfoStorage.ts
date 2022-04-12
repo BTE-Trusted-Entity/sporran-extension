@@ -1,5 +1,4 @@
-import useSWR from 'swr';
-
+import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 import { storage } from '../storage/storage';
 
 const key = 'showPresentationInfo';
@@ -13,7 +12,5 @@ export async function setShowPresentationInfo(value: boolean): Promise<void> {
 }
 
 export function useShowPresentationInfo(): boolean {
-  return (
-    useSWR('showPresentationInfo', showPresentationInfoStorage).data !== false
-  );
+  return useAsyncValue(showPresentationInfoStorage, []) !== false;
 }

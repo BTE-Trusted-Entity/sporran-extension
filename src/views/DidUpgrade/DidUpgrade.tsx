@@ -26,7 +26,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { Stats } from '../../components/Stats/Stats';
 import { paths } from '../paths';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { getDepositDid } from '../../utilities/getDeposit/getDeposit';
 
 interface Props {
@@ -42,12 +42,8 @@ function useCosts(
   total?: BN;
   error: boolean;
 } {
-  const fee = useSwrDataOrThrow('', getFee, 'DidUpgrade.getFee');
-  const deposit = useSwrDataOrThrow(
-    did,
-    getDepositDid,
-    'DidUpgrade.getDepositDid',
-  );
+  const fee = useAsyncValue(getFee, []);
+  const deposit = useAsyncValue(getDepositDid, [did]);
 
   const total = useMemo(
     () => (fee && deposit ? fee.add(deposit.amount) : undefined),

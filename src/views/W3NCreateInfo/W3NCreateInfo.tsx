@@ -10,8 +10,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { isFullDid } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
-import { getPromoStatus } from '../../utilities/promoBackend/promoBackend';
+import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
 
 interface Props {
   identity: Identity;
@@ -30,7 +29,7 @@ export function W3NCreateInfo({
   const { address } = identity;
   const canContinue = isFullDid(identity.did);
 
-  const promoStatus = useSwrDataOrThrow('', getPromoStatus, 'getPromoStatus');
+  const promoStatus = usePromoStatus();
 
   return (
     <section className={styles.container}>

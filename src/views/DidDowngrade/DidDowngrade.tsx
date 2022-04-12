@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, Fragment } from 'react';
+import { Fragment, useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
@@ -30,14 +30,14 @@ import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import {
-  useIdentityCredentials,
   invalidateCredentials,
+  useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
-import { isFullDid } from '../../utilities/did/did';
 import {
-  getDepositDid,
-  getDepositWeb3Name,
+  useDepositDid,
+  useDepositWeb3Name,
 } from '../../utilities/getDeposit/getDeposit';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 function useCosts(
   address: string,
@@ -48,26 +48,9 @@ function useCosts(
   total?: BN;
   error: boolean;
 } {
-  // useSwrDataOrThrow doesn’t fit here because some calls are conditional
-  const [fee, setFee] = useState<BN | undefined>();
-  const [depositDid, setDepositDid] =
-    useState<Awaited<ReturnType<typeof getDepositDid>>>();
-  const [depositWeb3Name, setDepositWeb3Name] =
-    useState<Awaited<ReturnType<typeof getDepositWeb3Name>>>();
-
-  useEffect(() => {
-    (async () => {
-      // After the downgrade has happened we’re still on this screen but the DID is already a light one,
-      // so we can’t proceed updating the fee and deposit.
-      if (!isFullDid(did)) {
-        return;
-      }
-
-      setFee(await getFee(did));
-      setDepositDid(await getDepositDid(did));
-      setDepositWeb3Name(await getDepositWeb3Name(did));
-    })();
-  }, [did]);
+  const fee = useAsyncValue(getFee, [did]);
+  const depositDid = useDepositDid(did);
+  const depositWeb3Name = useDepositWeb3Name(did);
 
   const deposit = useMemo(() => {
     const didAmount =

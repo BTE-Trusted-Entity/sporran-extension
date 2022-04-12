@@ -1,11 +1,11 @@
-import { Link, generatePath } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './BalanceUpdateLink.module.css';
 
 import { paths } from '../../views/paths';
 import { hasVestedFunds } from '../../utilities/vesting/vesting';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 interface Props {
   address: string;
@@ -14,7 +14,7 @@ interface Props {
 export function BalanceUpdateLink({ address }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const enabled = useSwrDataOrThrow(address, hasVestedFunds, 'hasVestedFunds');
+  const enabled = useAsyncValue(hasVestedFunds, [address]);
 
   return (
     <Link

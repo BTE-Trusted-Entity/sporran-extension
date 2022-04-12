@@ -20,10 +20,9 @@ import { paths } from '../paths';
 import { getDidCreationDetails } from '../../utilities/getDidCreationDetails/getDidCreationDetails';
 import {
   createDid,
-  getPromoStatus,
+  usePromoStatus,
   waitFinalized,
 } from '../../utilities/promoBackend/promoBackend';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
 
 interface Props {
   identity: Identity;
@@ -39,7 +38,7 @@ export function DidUpgradePromo({ identity }: Props): JSX.Element | null {
     null,
   );
 
-  const promoStatus = useSwrDataOrThrow('', getPromoStatus, 'getPromoStatus');
+  const promoStatus = usePromoStatus();
 
   const passwordField = usePasswordField();
 

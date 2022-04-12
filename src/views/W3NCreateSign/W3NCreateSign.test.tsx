@@ -1,20 +1,25 @@
 import { BalanceUtils } from '@kiltprotocol/core';
+import { FullDidDetails } from '@kiltprotocol/did';
 
 import { identitiesMock, render } from '../../testing/testing';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import '../../components/useCopyButton/useCopyButton.mock';
-import { useSwrDataOrThrow } from '../../utilities/useSwrDataOrThrow/useSwrDataOrThrow';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
+import { useFullDidDetails } from '../../utilities/did/did';
 
 import { W3NCreateSign } from './W3NCreateSign';
 
-jest.mock('../../utilities/useSwrDataOrThrow/useSwrDataOrThrow');
-jest.mocked(useSwrDataOrThrow).mockImplementation((key, fetcher, name) => {
-  return {
-    getFullDidDetails: {},
-    'W3NCreateSign.getFee': BalanceUtils.toFemtoKilt(0.01),
-    'W3NCreateSign.getDeposit': { amount: BalanceUtils.toFemtoKilt(2) },
-  }[name];
-});
+jest.mock('../../utilities/useAsyncValue/useAsyncValue');
+jest.mocked(useAsyncValue).mockReturnValue(BalanceUtils.toFemtoKilt(0.01));
+
+jest.mock('../../utilities/getDeposit/getDeposit');
+jest
+  .mocked(useDepositWeb3Name)
+  .mockReturnValue({ amount: BalanceUtils.toFemtoKilt(2) });
+
+jest.mock('../../utilities/did/did');
+jest.mocked(useFullDidDetails).mockReturnValue({} as FullDidDetails);
 
 const identity =
   identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
