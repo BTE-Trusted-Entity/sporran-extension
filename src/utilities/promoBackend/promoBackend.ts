@@ -7,8 +7,7 @@ import { getEndpoint } from '../endpoints/endpoints';
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
 const backendOrigins: Record<string, string> = {
-  'wss://spiritnet.api.onfinality.io/public-ws':
-    'https://did-promo.sporran.org/',
+  'wss://kilt-rpc.dwellir.com': 'https://did-promo.sporran.org/',
   'wss://spiritnet.kilt.io': 'https://did-promo.sporran.org/',
   'wss://sporran-testnet.kilt.io': 'https://testnet-did-promo.sporran.org/',
   'wss://peregrine.kilt.io/parachain-public-ws':
