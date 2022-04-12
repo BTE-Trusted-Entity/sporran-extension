@@ -6,8 +6,7 @@ import { SubmittableExtrinsic } from '@kiltprotocol/types';
 import { getEndpoint } from '../endpoints/endpoints';
 
 const backendOrigins: Record<string, string> = {
-  'wss://spiritnet.api.onfinality.io/public-ws':
-    'https://did-promo.sporran.org/',
+  'wss://kilt-rpc.dwellir.com': 'https://did-promo.sporran.org/',
   'wss://spiritnet.kilt.io': 'https://did-promo.sporran.org/',
   'wss://sporran-testnet.kilt.io': 'https://testnet-did-promo.sporran.org/',
   'wss://peregrine.kilt.io/parachain-public-ws':

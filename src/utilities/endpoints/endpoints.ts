@@ -14,7 +14,7 @@ export const endpoints = [
 ];
 
 export const publicEndpoints = {
-  OnFinality: 'wss://spiritnet.api.onfinality.io/public-ws',
+  Dwellir: 'wss://kilt-rpc.dwellir.com',
   'BOTLabs Trusted Entity': 'wss://spiritnet.kilt.io',
 };
 

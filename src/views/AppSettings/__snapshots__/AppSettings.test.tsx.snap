@@ -52,8 +52,8 @@ Just start it again to continue.
         name="endpoint"
       >
         <option
-          label="OnFinality"
-          value="wss://spiritnet.api.onfinality.io/public-ws"
+          label="Dwellir"
+          value="wss://kilt-rpc.dwellir.com"
         />
         <option
           label="BOTLabs Trusted Entity"
