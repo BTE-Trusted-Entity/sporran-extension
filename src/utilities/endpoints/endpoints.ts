@@ -6,7 +6,7 @@ import { isInternal } from '../../configuration/variant';
 const endpointKey = 'endpoints';
 
 export const endpoints = [
-  'wss://spiritnet.api.onfinality.io/public-ws',
+  'wss://kilt-rpc.dwellir.com',
   'wss://spiritnet.kilt.io',
   'wss://peregrine.kilt.io/parachain-public-ws',
   'wss://peregrine-stg.kilt.io/para',
@@ -14,7 +14,7 @@ export const endpoints = [
 ];
 
 export const publicEndpoints = {
-  OnFinality: 'wss://spiritnet.api.onfinality.io/public-ws',
+  Dwellir: 'wss://kilt-rpc.dwellir.com',
   'BOTLabs Trusted Entity': 'wss://spiritnet.kilt.io',
 };
 
@@ -32,7 +32,18 @@ export const defaultEndpoint =
     : endpoints[2];
 
 export async function getEndpoint(): Promise<string> {
-  return (await storage.get(endpointKey))[endpointKey] || defaultEndpoint;
+  const stored = (await storage.get(endpointKey))[endpointKey];
+  if (!stored) {
+    return defaultEndpoint;
+  }
+
+  const isKnown = endpoints.includes(stored);
+  if (isKnown) {
+    return stored;
+  }
+
+  await storage.remove(endpointKey);
+  return defaultEndpoint;
 }
 
 export async function setEndpoint(endpoint: string): Promise<void> {
