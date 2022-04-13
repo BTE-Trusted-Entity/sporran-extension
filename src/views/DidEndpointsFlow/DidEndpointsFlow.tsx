@@ -23,7 +23,7 @@ export function DidEndpointsFlow({ identity }: Props): JSX.Element {
   });
 
   const onAdd = useCallback(
-    async (endpoint) => {
+    async (endpoint: DidServiceEndpoint) => {
       setType('add');
       setValues(endpoint);
       history.push(signPath);
@@ -32,7 +32,7 @@ export function DidEndpointsFlow({ identity }: Props): JSX.Element {
   );
 
   const onRemove = useCallback(
-    async (endpoint) => {
+    async (endpoint: DidServiceEndpoint) => {
       setType('remove');
       setValues(endpoint);
       history.push(signPath);

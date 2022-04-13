@@ -12,6 +12,8 @@ interface Props {
   identity: Identity;
 }
 
+type OnSuccess = Parameters<typeof SendToken>[0]['onSuccess'];
+
 export function SendTokenFlow({ identity }: Props): JSX.Element {
   const history = useHistory();
 
@@ -22,7 +24,7 @@ export function SendTokenFlow({ identity }: Props): JSX.Element {
 
   const { address } = identity;
 
-  const handleSendTokenSuccess = useCallback(
+  const handleSendTokenSuccess: OnSuccess = useCallback(
     (values) => {
       setRecipient(values.recipient);
       setAmount(values.amount);

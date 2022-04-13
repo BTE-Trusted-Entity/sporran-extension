@@ -87,7 +87,7 @@ export function useSubmitStates(): SubmitStates {
   const [unpaidCostsBN, setUnpaidCostsBN] = useState<BN>();
   const unpaidCosts = unpaidCostsBN && asKiltCoins(unpaidCostsBN, 'costs');
 
-  const submitWithStates = useCallback(
+  const submitWithStates: SubmitStates['submit'] = useCallback(
     async (keypair, draft, tip = new BN(0)) => {
       try {
         setSubmitting(true);

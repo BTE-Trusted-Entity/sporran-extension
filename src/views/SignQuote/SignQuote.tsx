@@ -156,7 +156,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         {Object.entries(claim.contents).map(([name, value]) => (
           <Fragment key={name}>
             <dt className={styles.detailName}>{name}:</dt>
-            <dd className={styles.detailValue}>{value}</dd>
+            <dd className={styles.detailValue}>{String(value)}</dd>
           </Fragment>
         ))}
         <dt className={styles.detailName}>{t('view_SignQuote_cType')}:</dt>
