@@ -173,7 +173,7 @@ export function ShareCredentialCard({
                         readOnly={includes(requiredProperties, name)}
                       />
                       <span />
-                      {value}
+                      {String(value)}
                     </label>
                   </dd>
                 </div>

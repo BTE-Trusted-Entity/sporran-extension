@@ -72,7 +72,7 @@ export function PresentCredentialCard({
                       disabled={!isAttested}
                     />
                     <span />
-                    {value}
+                    {String(value)}
                   </label>
                 </dd>
               </div>
