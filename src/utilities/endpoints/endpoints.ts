@@ -11,7 +11,9 @@ export const endpoints = [
   'wss://peregrine.kilt.io/parachain-public-ws',
   'wss://peregrine-stg.kilt.io/para',
   'wss://sporran-testnet.kilt.io',
-];
+] as const;
+
+export type KnownEndpoints = typeof endpoints[number];
 
 export const publicEndpoints = {
   Dwellir: 'wss://kilt-rpc.dwellir.com',
@@ -31,7 +33,7 @@ export const defaultEndpoint =
     ? endpoints[0]
     : endpoints[2];
 
-export async function getEndpoint(): Promise<string> {
+export async function getEndpoint(): Promise<KnownEndpoints> {
   const stored = (await storage.get(endpointKey))[endpointKey];
   if (!stored) {
     return defaultEndpoint;
