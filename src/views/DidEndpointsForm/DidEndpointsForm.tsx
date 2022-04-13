@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useEffect, useRef } from 'react';
+import { FormEvent, RefObject, useCallback, useEffect, useRef } from 'react';
 import { Link, Prompt, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
@@ -120,7 +120,7 @@ function DidNewEndpoint({
   const dirty = useBooleanState();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (tooMany) {
         return;

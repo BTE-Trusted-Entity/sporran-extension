@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -27,7 +27,7 @@ export function W3NCreateForm({ identity, onSubmit }: Props): JSX.Element {
   const handleInput = useCallback(() => setError(''), []);
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const formData = new FormData(event.target as HTMLFormElement);

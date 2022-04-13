@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { FormEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import { browser } from 'webextension-polyfill-ts';
@@ -20,12 +20,12 @@ export function ExternalAccess(): JSX.Element | null {
   const hosts = useSWR(authorizedKey, getAuthorized).data;
 
   const handleChange = useCallback(
-    async (event) => {
+    async (event: FormEvent<HTMLInputElement>) => {
       if (!hosts) {
         return;
       }
 
-      const { name, checked } = event.target;
+      const { name, checked } = event.target as HTMLInputElement;
 
       hosts[name] = checked;
       await setAuthorized(hosts);

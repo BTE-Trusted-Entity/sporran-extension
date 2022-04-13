@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { FormEvent, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './SignDid.module.css';
@@ -34,7 +34,7 @@ export function SignDid({ identity }: Props): JSX.Element | null {
   const passwordField = usePasswordField();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const { seed } = await passwordField.get(event);

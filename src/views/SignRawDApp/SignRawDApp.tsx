@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { FormEvent, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { u8aToHex } from '@polkadot/util';
 
@@ -27,7 +27,7 @@ export function SignRawDApp(): JSX.Element | null {
   const identity = identities && identities[values.address as string];
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       if (!identity) {

@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { find } from 'lodash-es';
@@ -289,16 +296,21 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     })();
   }, [amountBN, identity, recipient, tipBN]);
 
-  const handleAmountInput = useCallback((event) => {
-    const { value } = event.target;
-    if (value.match(nonNumberCharacters)) {
-      event.target.value = value.replace(nonNumberCharacters, '');
-    }
-    setAmount(value);
-  }, []);
+  const handleAmountInput = useCallback(
+    (event: FormEvent<HTMLInputElement>) => {
+      const target = event.target as HTMLInputElement;
+      const { value } = target;
+      if (value.match(nonNumberCharacters)) {
+        target.value = value.replace(nonNumberCharacters, '');
+      }
+      setAmount(value);
+    },
+    [],
+  );
 
-  const handleAmountBlur = useCallback((event) => {
-    const { value } = event.target;
+  const handleAmountBlur = useCallback((event: FormEvent) => {
+    const target = event.target as HTMLButtonElement;
+    const { value } = target;
     if (value.length === 0) {
       setAmount(value);
       return;
@@ -309,17 +321,17 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     }
     const femtoKilts = numberToBN(parsedValue);
     const formatted = formatKiltInput(femtoKilts);
-    event.target.value = formatted;
+    target.value = formatted;
     setAmount(formatted);
   }, []);
 
   const handleAllInClick = useCallback(
-    (event) => {
+    (event: FormEvent<HTMLButtonElement>) => {
       if (!maximum) {
         return;
       }
 
-      const input = event.target.form.amount;
+      const input = (event.target as HTMLButtonElement).form?.amount;
       input.value = formatKiltInput(maximum);
       setAmount(input.value);
     },
@@ -334,10 +346,13 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     setTipPercents(tipPercents + 1);
   }, [tipPercents]);
 
-  const handleRecipientInput = useCallback((event) => {
-    const { value } = event.target;
-    setRecipient(value.trim());
-  }, []);
+  const handleRecipientInput = useCallback(
+    (event: FormEvent<HTMLInputElement>) => {
+      const { value } = event.target as HTMLInputElement;
+      setRecipient(value.trim());
+    },
+    [],
+  );
 
   const identities = useIdentities();
   const { features } = useConfiguration();
@@ -346,7 +361,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const paste = usePasteButton(recipientRef, setRecipient);
 
   const handleSubmit = useCallback(
-    (event) => {
+    (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       if (!(recipient && fee && finalTip && numericAmount)) {

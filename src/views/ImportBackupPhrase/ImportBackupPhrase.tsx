@@ -1,6 +1,8 @@
 import {
   ChangeEventHandler,
+  ClipboardEvent,
   ClipboardEventHandler,
+  FormEvent,
   useCallback,
   useState,
 } from 'react';
@@ -122,15 +124,15 @@ export function ImportBackupPhrase({
     ].filter(Boolean)[0];
 
   const handleInput = useCallback(
-    (event) => {
-      const { name, value } = event.target;
-      backupPhrase[name] = value.trim().toLowerCase();
+    (event: FormEvent<HTMLInputElement>) => {
+      const { name, value } = event.target as HTMLInputElement;
+      backupPhrase[parseInt(name)] = value.trim().toLowerCase();
       setBackupPhrase([...backupPhrase]);
     },
     [backupPhrase],
   );
 
-  const handlePaste = useCallback((event) => {
+  const handlePaste = useCallback((event: ClipboardEvent<HTMLInputElement>) => {
     const text = event.clipboardData.getData('text');
     if (!text) {
       return;
@@ -144,7 +146,7 @@ export function ImportBackupPhrase({
   }, []);
 
   const handleSubmit = useCallback(
-    (event) => {
+    (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (error) {
         return;

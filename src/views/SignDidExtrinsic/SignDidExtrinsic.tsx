@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from 'react';
+import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 import { BaseDidKey } from '@kiltprotocol/types';
@@ -35,7 +35,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
   const passwordField = usePasswordField();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const { api } = await BlockchainApiConnection.getConnectionOrConnect();

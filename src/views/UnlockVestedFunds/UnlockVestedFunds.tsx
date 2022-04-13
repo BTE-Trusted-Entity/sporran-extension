@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
@@ -40,7 +40,7 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
   const passwordField = usePasswordField();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       try {

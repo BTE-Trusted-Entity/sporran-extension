@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useCallback, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import {
   Attestation,
   Credential,
@@ -49,7 +49,7 @@ export function ShareCredentialSign({
   const passwordField = usePasswordField();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const { seed } = await passwordField.get(event);

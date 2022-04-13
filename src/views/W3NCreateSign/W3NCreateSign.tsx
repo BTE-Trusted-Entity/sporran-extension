@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { FormEvent, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -78,7 +78,7 @@ export function W3NCreateSign({
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (!fullDidDetails) {
         return;

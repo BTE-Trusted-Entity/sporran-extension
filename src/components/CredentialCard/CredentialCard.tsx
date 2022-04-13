@@ -1,10 +1,12 @@
 import {
+  FormEvent,
+  Fragment,
+  KeyboardEvent,
   RefObject,
   useCallback,
   useEffect,
   useRef,
   useState,
-  Fragment,
 } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useParams } from 'react-router-dom';
@@ -70,15 +72,15 @@ function CredentialName({
 
   const isEditing = useBooleanState();
 
-  const handleKeyPress = useCallback((event) => {
+  const handleKeyPress = useCallback((event: KeyboardEvent) => {
     if (event.key === 'Enter') {
-      event.target.blur();
+      (event.target as HTMLInputElement).blur();
     }
   }, []);
 
   const handleBlur = useCallback(
-    async (event) => {
-      const name = event.target.value;
+    async (event: FormEvent<HTMLInputElement>) => {
+      const name = (event.target as HTMLInputElement).value;
       if (name) {
         await saveCredential({ ...credential, name });
       }
@@ -189,8 +191,8 @@ function DownloadModal({
 
   const [checked, setChecked] = useState(false);
 
-  const handleToggle = useCallback((event) => {
-    setChecked(event.target.checked);
+  const handleToggle = useCallback((event: FormEvent<HTMLInputElement>) => {
+    setChecked((event.target as HTMLInputElement).checked);
   }, []);
 
   const handleConfirm = useCallback(async () => {
@@ -276,8 +278,8 @@ function PresentationModal({
 
   const [checked, setChecked] = useState(false);
 
-  const handleToggle = useCallback((event) => {
-    setChecked(event.target.checked);
+  const handleToggle = useCallback((event: FormEvent<HTMLInputElement>) => {
+    setChecked((event.target as HTMLInputElement).checked);
   }, []);
 
   const handleConfirm = useCallback(async () => {

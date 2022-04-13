@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useCallback, useEffect } from 'react';
+import { FormEvent, useCallback, useEffect } from 'react';
 
 import * as styles from './CredentialCard.module.css';
 
@@ -21,8 +21,9 @@ export function PresentCredentialCard({
   const isAttested = status === 'attested';
 
   const handlePropChecked = useCallback(
-    (event) => {
-      const formData = new FormData(event.target.form as HTMLFormElement);
+    (event: FormEvent<HTMLInputElement>) => {
+      const input = event.target as HTMLInputElement;
+      const formData = new FormData(input.form as HTMLFormElement);
       onSelect([...formData.keys()]);
     },
     [onSelect],

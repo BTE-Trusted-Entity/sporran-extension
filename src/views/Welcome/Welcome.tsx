@@ -1,12 +1,12 @@
-import { Fragment, useCallback, useState } from 'react';
+import { FormEvent, Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, Redirect } from 'react-router-dom';
 
 import * as styles from './Welcome.module.css';
 
 import {
-  useIdentities,
   useCurrentIdentity,
+  useIdentities,
 } from '../../utilities/identities/identities';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
@@ -20,12 +20,12 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const [enabled, setEnabled] = useState(false);
-  const handleTermsClick = useCallback((event) => {
-    setEnabled(event.target.checked);
+  const handleTermsClick = useCallback((event: FormEvent<HTMLInputElement>) => {
+    setEnabled((event.target as HTMLInputElement).checked);
   }, []);
 
   const handleLinkClick = useCallback(
-    (event) => {
+    (event: FormEvent<HTMLAnchorElement>) => {
       if (!enabled) {
         event.preventDefault();
       }

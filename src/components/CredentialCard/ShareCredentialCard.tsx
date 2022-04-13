@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useCallback, useState, useEffect, useRef } from 'react';
-import { includes, without, find } from 'lodash-es';
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { find, includes, without } from 'lodash-es';
 import cx from 'classnames';
 
 import * as styles from './CredentialCard.module.css';
@@ -75,9 +75,10 @@ export function ShareCredentialCard({
   }, [credential, onSelect, checked, identity]);
 
   const handlePropChecked = useCallback(
-    (event) => {
-      const name = event.target.name;
-      if (event.target.checked && !includes(checked, name)) {
+    (event: FormEvent<HTMLInputElement>) => {
+      const target = event.target as HTMLInputElement;
+      const { name } = target;
+      if (target.checked && !includes(checked, name)) {
         setChecked([...checked, name]);
         onSelect({ credential, identity, sharedProps: [...checked, name] });
       } else if (!includes(requiredProperties, name)) {

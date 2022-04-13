@@ -98,13 +98,14 @@ export function PasswordField({
   const [error, setError] = useState<string | null>(null);
 
   const passwordGetter = useCallback(
-    async (event) => {
+    async (event: FormEvent<Element>) => {
       if (!address) {
         throw new Error('No identity address');
       }
 
-      const { elements } = event.target;
-      const providedPassword = elements.password.value;
+      const { elements } = event.target as HTMLFormElement;
+      const input = elements.namedItem('password') as HTMLInputElement;
+      const providedPassword = input.value;
       const useSaved = savedPassword && providedPassword === asterisks;
       const password = useSaved ? savedPassword : providedPassword;
 
@@ -131,9 +132,9 @@ export function PasswordField({
   );
 
   const handlePasswordInput = useCallback(
-    (event) => {
+    (event: FormEvent<HTMLInputElement>) => {
       setError(null);
-      setIsEmpty(event.target.value === '');
+      setIsEmpty((event.target as HTMLInputElement).value === '');
       setPasswordGetter(() => passwordGetter);
     },
     [passwordGetter, setPasswordGetter, setIsEmpty],
