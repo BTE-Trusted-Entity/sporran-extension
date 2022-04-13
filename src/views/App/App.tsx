@@ -34,6 +34,9 @@ export function App(): JSX.Element {
   return (
     <div className={styles.container}>
       <GenericError>
+        {/* Current MemoryRouter types do not declare children */}
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore */}
         <MemoryRouter
           initialEntries={initialEntries}
           getUserConfirmation={confirmNavigation}
