@@ -1,4 +1,5 @@
 export const __esModule: true;
+export const container: string;
 export const nameLine: string;
 export const centeredNameLine: string;
 export const name: string;

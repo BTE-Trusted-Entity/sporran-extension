@@ -13,10 +13,9 @@ export const credentialsMock: Credential[] = [
           '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
         contents: {
           Email: 'mockEmail@mock.mock',
-          Name: 'Mock Name',
         },
         owner:
-          'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+          'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -54,7 +53,7 @@ export const credentialsMock: Credential[] = [
           Email: 'badboy69@hotmail.com',
         },
         owner:
-          'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+          'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -92,7 +91,7 @@ export const credentialsMock: Credential[] = [
           Email: 'sporran@sporran.org',
         },
         owner:
-          'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+          'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -130,7 +129,7 @@ export const credentialsMock: Credential[] = [
           Email: 'loremipsum@gmail.com',
         },
         owner:
-          'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+          'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -168,7 +167,7 @@ export const credentialsMock: Credential[] = [
           Email: 'maxmustermann@gmx-123-z34-dfdsafsdf-42r421-2sdfag.de',
         },
         owner:
-          'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+          'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -206,7 +205,7 @@ export const credentialsMock: Credential[] = [
           Twitter: 'tweety_bird',
         },
         owner:
-          'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+          'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -244,7 +243,7 @@ export const credentialsMock: Credential[] = [
           Twitter: 'realDonaldTrump',
         },
         owner:
-          'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+          'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -282,7 +281,7 @@ export const credentialsMock: Credential[] = [
           Name: 'God collator',
         },
         owner:
-          'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+          'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -320,7 +319,7 @@ export const credentialsMock: Credential[] = [
           Name: 'This is a really long name for the first property of claim contents to check how the overflow looks',
         },
         owner:
-          'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+          'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -364,7 +363,7 @@ export const credentialsMock: Credential[] = [
           PropE: 'Prop E',
         },
         owner:
-          'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
+          'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -401,7 +400,7 @@ export const credentialsMock: Credential[] = [
         contents: {
           Email: 'sporran@sporran.org',
         },
-        owner: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+        owner: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -438,7 +437,7 @@ export const credentialsMock: Credential[] = [
         contents: {
           Email: 'mockEmail@mock.mock',
         },
-        owner: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+        owner: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -472,34 +471,34 @@ export const credentialsMock: Credential[] = [
       claim: {
         cTypeHash:
           '0xad52bd7a8bd8a52e03181a99d2743e00d0a5e96fdc0182626655fcf0c0a776d0',
-        contents: { Username: 'arty-name', 'User ID': '133055' },
-        owner: 'did:kilt:4osWk37p2ut2QQpGgEumheYw9wgwSy4e9eoY9gESKqUwKFWi',
+        contents: { 'User ID': '28846466', Username: 'lukeg90' },
+        owner: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
       },
       claimHashes: [
-        '0xb04c4c8f3421f995e2afb7083ae0a28ca760eb20d520717e54100c7173c9cc9c',
-        '0xc2261fea01b49101c4978636bad4b80fd3c686f9a83fe2a118252991098988b6',
-        '0xd73bcd19fd7cf3516fb71ab27696c2d95881c990718c507e0f56cf273ef2392b',
+        '0x66c9d9d95ebd89a0d4d0281b409e0ba0dc04b97bced30a586ee5a447d24bc58a',
+        '0x7097b65bfeec702611e428a88de28be75de5b3a02feefacc4bcd8285209d4861',
+        '0xf2335b05e532acf965883211228d2b171478d248cb2387353a9c2330b9323dfe',
       ],
       claimNonceMap: {
-        '0x7ce01e912b0418e0634c95ff139cd10a98ad79aaa7c4a45d2aad93c33e694314':
-          '104c3700-a835-4e4d-a2b9-ab6a2f015b94',
-        '0xc9cccabfbfc0c529263c97d9775ed8297df7832d53948229c7282667c2d15f7c':
-          'e07b01fd-5077-4f76-a6d9-ca00a3a8cb1b',
-        '0x800e8346b87610819d18304201c9aaee24ef2f69769e86713928937e37ffff99':
-          '4a63333e-7ec2-4262-80c8-c8e21e32abcc',
+        '0x0d043bde638b3bdd0651b1efc55186ae3b24534df654eb82778266fe9f1ee99a':
+          '0f88ac22-de8a-4c7c-bf7e-b3d781ca7433',
+        '0x01e659b349b968513737a0b7e821b4dfbdcd11d006429e31f9bdce7921fea236':
+          '1d762863-4971-4833-8fa8-8af674a65189',
+        '0xe524f074aa073fd96a6dc1f488c29d64c8d863b9e6b1ad18ec942c2d944a5800':
+          '86b324d3-a8f0-4251-9227-0d1dbf3e2f9e',
       },
       legitimations: [],
       delegationId: null,
       rootHash:
-        '0x6e63a2a0d6926b8763cd19377922f9f381afc7fdf8c2794153912a46d7ffd3c0',
+        '0xe4cc9f4eebf1112b3f26ad6bde36ef95ea79d544c481270f62a50d699fac819b',
       claimerSignature: {
         signature:
-          '0x4a73d9c90c57415a3a92c0fd1422d76ccf0ac95f3bc137c55f8c8019556a151befc3c0bd9c42adaeede6f31bffe9093e0f69507c55cffba113b0fe29cc30d989',
+          '0xdeee023d5597124fc80501a8ce23ef738882a297b87b1c35dd298b6f65f12d0734d52d8a80384a37d87399cfc8747ad5673238162bd48bb15d13e084d9885880',
         keyId:
-          'did:kilt:4osWk37p2ut2QQpGgEumheYw9wgwSy4e9eoY9gESKqUwKFWi#0xb7f88ab06c1aa772bd6ede14df99a2f05951d561530d88cef309cfed1bc8ad7b',
+          'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ#0x9f0de4a3a943f2ae8ce8775763376922b7e33e77bfe331786cd8bbd73d6e7f89',
       },
     },
-    name: 'GitHub 9',
+    name: 'GitHub 1',
     cTypeTitle: 'GitHub',
     attester: 'SocialKYC',
     status: 'attested',
@@ -516,7 +515,7 @@ export const notDownloaded: Credential[] = [
         contents: {
           Email: 'mockEmail@mock.mock',
         },
-        owner: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+        owner: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
       },
       claimHashes: [
         '0x144597d2845e325dffd4e51a94e3e9c04b52dc1573e66afc693846d91f31a713',
@@ -537,9 +536,9 @@ export const notDownloaded: Credential[] = [
       legitimations: [],
       delegationId: null,
       rootHash:
-        '0xbe7fcc7aa0186b05fd116c100e2d673fb951163693788640ce6032ad2f700dao',
+        '0x86a20051e6d1eecb0dd6e9c7b3b0cf946867e662b525ef2e9afe8428f6616ae0',
     },
-    name: 'Email Credential',
+    name: 'Not downloaded Email Credential',
     cTypeTitle: 'Email',
     attester: 'Trusted Entity attester',
     status: 'attested',
@@ -547,14 +546,28 @@ export const notDownloaded: Credential[] = [
   },
 ];
 
-export const mockAttestation: IAttestation = {
-  claimHash:
-    '0xbe7fcc7aa0186b05fd116c100e2d673fb951163693788640ce6032ad2f700dae',
-  cTypeHash:
-    '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
-  owner: 'did:kilt:light:004qe5tJgoBe2JJ7ejVVGBzkTxjjR4nPCGg7Q4nkZLqdHo7sPR',
-  delegationId: null,
-  revoked: false,
+export const mockAttestations: {
+  downloaded: IAttestation;
+  notDownloaded: IAttestation;
+} = {
+  downloaded: {
+    claimHash:
+      '0xbe7fcc7aa0186b05fd116c100e2d673fb951163693788640ce6032ad2f700dae',
+    cTypeHash:
+      '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
+    owner: 'did:kilt:light:004oUiK3EvTczc6ukYLEV57BuxzkW9zksKRchZXYGSocLmWE5N',
+    delegationId: null,
+    revoked: false,
+  },
+  notDownloaded: {
+    claimHash:
+      '0x86a20051e6d1eecb0dd6e9c7b3b0cf946867e662b525ef2e9afe8428f6616ae0',
+    cTypeHash:
+      '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
+    owner: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
+    delegationId: null,
+    revoked: false,
+  },
 };
 
 export const mockRequestCredential: ShareInput = {
@@ -567,7 +580,7 @@ export const mockRequestCredential: ShareInput = {
     ],
     challenge: 'PASS',
   },
-  verifierDid: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+  verifierDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
 };
 
 export const mockUnknownCType = {
@@ -582,7 +595,7 @@ export const mockUnknownCType = {
 };
 
 export function CredentialsProviderMock({
-  credentials = credentialsMock,
+  credentials = [...credentialsMock, ...notDownloaded],
   children,
 }: {
   credentials?: Credential[];

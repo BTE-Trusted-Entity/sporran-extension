@@ -16,17 +16,17 @@ export function Template(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send/review',
+        '/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send/review',
       ]}
     >
       <Route path={paths.identity.send.review}>
         <ReviewTransaction
           identity={
-            identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+            identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
           }
-          recipient="4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos"
+          recipient="4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
           amount={BalanceUtils.toFemtoKilt(120)}
-          fee={BalanceUtils.toFemtoKilt(0.00000001)}
+          fee={BalanceUtils.toFemtoKilt(0.01)}
           tip={BalanceUtils.toFemtoKilt(0.01)}
         />
       </Route>

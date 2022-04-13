@@ -29,7 +29,7 @@ jest.mocked(BlockchainApiConnection.getConnectionOrConnect).mockResolvedValue({
   },
 } as Blockchain);
 
-const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 describe('SendToken', () => {
   beforeEach(() => {
@@ -56,7 +56,7 @@ describe('SendToken', () => {
   });
 
   it('should submit correct values', async () => {
-    const address = '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr';
+    const address = '4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo';
     const onSuccess = jest.fn();
     render(<SendToken identity={identity} onSuccess={onSuccess} />);
 
@@ -88,7 +88,7 @@ describe('SendToken', () => {
   });
 
   it('should warn if balance will go below existential deposit', async () => {
-    const recipientAddress = '4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL';
+    const recipientAddress = '4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653';
     const onSuccess = jest.fn();
 
     render(<SendToken identity={identity} onSuccess={onSuccess} />);

@@ -18,7 +18,7 @@ export function Template(): JSX.Element {
     <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
       <SignQuote
         identity={
-          identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+          identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
         }
       />
     </PopupTestProvider>

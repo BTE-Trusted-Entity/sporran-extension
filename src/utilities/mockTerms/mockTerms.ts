@@ -27,17 +27,17 @@ export const mockTerms = {
       Email: 'ingo@kilt.io',
     },
     owner:
-      identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'].did,
+      identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'].did,
   },
   legitimations: [],
   quote: {
     attesterSignature: {
       keyId:
-        'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY#0x59a56e1a4017b60a00c5450bfd6af21dc753e84ef72f2fd45dfc27dd5c3bdafb',
+        'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ#0x59a56e1a4017b60a00c5450bfd6af21dc753e84ef72f2fd45dfc27dd5c3bdafb',
       signature:
         '0x30d01aefd64c7eea48bc743782fe54ba58f96b5a91e33d8d9ee5fae282964967bdea5e9ac3f31756fd251a40ea4d2e9a93ac9b1314cc037cdcb04a53a007e68f',
     },
-    attesterDid: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+    attesterDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
     cTypeHash:
       '0xbfad60977bc18cf9dfd76da88624ce219361f337b4332d5c42c047499f4b93c7',
     cost: {
@@ -51,5 +51,5 @@ export const mockTerms = {
   },
   cTypes: [mockCType],
   attesterName: 'SocialKYC',
-  attesterDid: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+  attesterDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
 };

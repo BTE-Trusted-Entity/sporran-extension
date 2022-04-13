@@ -28,10 +28,10 @@ jest.mock('../../utilities/useAsyncValue/useAsyncValue');
 jest.mocked(useAsyncValue).mockReturnValue(false);
 jest.mock('../../utilities/did/useDidDeletionStatus');
 
-const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 const fullDidIdentity =
-  identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
+  identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
 describe('IdentityOverview', () => {
   it('should render a normal identity', async () => {
@@ -155,13 +155,13 @@ describe('IdentityOverview', () => {
     const { container } = render(
       <MemoryRouter
         initialEntries={[
-          '/identity/4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z',
+          '/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB',
         ]}
       >
         <Route path={paths.identity.overview}>
           <IdentityOverview
             identity={
-              identities['4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z']
+              identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']
             }
           />
         </Route>

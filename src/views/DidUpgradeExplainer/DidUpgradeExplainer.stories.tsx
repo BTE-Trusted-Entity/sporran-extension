@@ -12,7 +12,7 @@ export default {
 export function NotOnChain(): JSX.Element {
   return (
     <DidUpgradeExplainer
-      identity={identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+      identity={identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']}
     />
   );
 }
@@ -20,7 +20,7 @@ export function NotOnChain(): JSX.Element {
 export function DeletedFromChain(): JSX.Element {
   return (
     <DidUpgradeExplainer
-      identity={identities['4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z']}
+      identity={identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']}
     />
   );
 }

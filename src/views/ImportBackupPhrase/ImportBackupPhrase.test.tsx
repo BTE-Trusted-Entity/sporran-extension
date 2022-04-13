@@ -58,7 +58,7 @@ describe('ImportBackupPhrase', () => {
       <ImportBackupPhrase
         {...props}
         type="reset"
-        address="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+        address="4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
       />,
     );
     expect(container).toMatchSnapshot();
@@ -154,14 +154,14 @@ describe('ImportBackupPhrase', () => {
   it('should allow backup phrase reset', async () => {
     jest.mocked(mnemonicValidate).mockReturnValue(true);
     jest.mocked(getKeypairByBackupPhrase).mockReturnValue({
-      address: '4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos',
+      address: '4p273cfeZ2JRz46AcJoQvTRHCH8Vaj92jts2VxepZtQwbTBB',
     } as KeyringPair);
 
     render(
       <ImportBackupPhrase
         {...props}
         type="reset"
-        address="4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos"
+        address="4p273cfeZ2JRz46AcJoQvTRHCH8Vaj92jts2VxepZtQwbTBB"
       />,
     );
 

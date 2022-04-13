@@ -16,7 +16,9 @@ exports[`DidEndpointsSign should match the snapshot when adding 1`] = `
     >
       Sign with your password
     </p>
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar"
       >
@@ -28,7 +30,7 @@ exports[`DidEndpointsSign should match the snapshot when adding 1`] = `
         <span
           class="name"
         >
-          KILT Identity 2
+          Identity with on-chain DID and lots of coins
         </span>
       </div>
     </section>
@@ -39,7 +41,7 @@ exports[`DidEndpointsSign should match the snapshot when adding 1`] = `
         aria-label="DID"
         class="long"
         readonly=""
-        value="did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY"
+        value="did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ"
       />
       <button
         aria-label="copy to clipboard"
@@ -74,7 +76,7 @@ exports[`DidEndpointsSign should match the snapshot when adding 1`] = `
       </label>
       <a
         class="reset"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/reset"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/reset"
       >
         Reset password
       </a>
@@ -181,7 +183,9 @@ exports[`DidEndpointsSign should match the snapshot when removing 1`] = `
     >
       Sign with your password
     </p>
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar"
       >
@@ -193,7 +197,7 @@ exports[`DidEndpointsSign should match the snapshot when removing 1`] = `
         <span
           class="name"
         >
-          KILT Identity 2
+          Identity with on-chain DID and lots of coins
         </span>
       </div>
     </section>
@@ -204,7 +208,7 @@ exports[`DidEndpointsSign should match the snapshot when removing 1`] = `
         aria-label="DID"
         class="long"
         readonly=""
-        value="did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY"
+        value="did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ"
       />
       <button
         aria-label="copy to clipboard"
@@ -239,7 +243,7 @@ exports[`DidEndpointsSign should match the snapshot when removing 1`] = `
       </label>
       <a
         class="reset"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/reset"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/reset"
       >
         Reset password
       </a>

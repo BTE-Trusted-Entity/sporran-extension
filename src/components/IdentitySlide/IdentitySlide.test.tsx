@@ -14,7 +14,7 @@ import { IdentitySlideNew } from './IdentitySlideNew';
 jest.mock('../../utilities/identities/identities');
 jest.spyOn(browser.runtime, 'sendMessage');
 
-const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 describe('IdentitySlide', () => {
   it('should render', async () => {
@@ -38,7 +38,7 @@ describe('IdentitySlide', () => {
     await userEvent.click(saveButton);
 
     expect(saveIdentity).toHaveBeenCalledWith({
-      name: 'KILT Identity 1 Foo',
+      name: 'Light DID Identity Foo',
       address: identity.address,
       did: identity.did,
       index: 1,

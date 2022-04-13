@@ -11,7 +11,7 @@ import { Welcome } from './Welcome';
 jest.mock('../../utilities/identities/identities');
 jest
   .mocked(useCurrentIdentity)
-  .mockReturnValue('4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire');
+  .mockReturnValue('4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1');
 
 describe('Welcome', () => {
   it('should match the snapshot without identities', () => {

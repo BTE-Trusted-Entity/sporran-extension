@@ -27,18 +27,18 @@ export function Results(): JSX.Element {
       grouped={[
         {
           identity:
-            identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'],
+            identitiesMock['4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653'],
           imports: [
             {
               fileName: 'Twitter-1.json',
               identityAddress:
-                '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+                '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1',
             },
             {
               fileName:
                 'Twitter-2-very-long-name-that-overflows-the-space.json',
               identityAddress:
-                '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+                '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1',
             },
           ],
         },

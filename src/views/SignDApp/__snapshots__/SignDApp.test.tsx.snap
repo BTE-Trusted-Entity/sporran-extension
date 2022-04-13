@@ -18,16 +18,16 @@ exports[`SignDApp should render 1`] = `
     <h2
       class="identity"
     >
-      KILT Identity 1
+      Light DID Identity
     </h2>
     <p
       class="addressLine"
     >
       <input
-        aria-label="KILT Identity 1"
+        aria-label="Light DID Identity"
         class="input"
         readonly=""
-        value="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+        value="4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
       />
       <button
         aria-label="copy to clipboard"

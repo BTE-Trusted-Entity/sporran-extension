@@ -10,7 +10,7 @@ import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
 import { W3NCreatePromo } from './W3NCreatePromo';
 
 const identity =
-  identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
+  identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
 jest.mock('../../utilities/did/did');
 jest.mocked(useFullDidDetails).mockReturnValue({} as FullDidDetails);

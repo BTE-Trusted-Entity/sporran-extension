@@ -20,7 +20,7 @@ export function IdentityLine({
     <section className={className}>
       <section className={styles.identity}>
         <Avatar identity={identity} className={styles.avatar} />
-        {identity.name}
+        <p className={styles.name}>{identity.name}</p>
       </section>
       {balance && <KiltAmount amount={balance.total} type="funds" />}
     </section>

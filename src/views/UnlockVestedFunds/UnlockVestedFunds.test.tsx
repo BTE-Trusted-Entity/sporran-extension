@@ -1,5 +1,4 @@
-import { render } from '../../testing/testing';
-import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import { identitiesMock, render } from '../../testing/testing';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 
 import { UnlockVestedFunds } from './UnlockVestedFunds';
@@ -9,7 +8,7 @@ describe('UnlockVestedFunds', () => {
     const { container } = render(
       <UnlockVestedFunds
         identity={
-          identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+          identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
         }
       />,
     );

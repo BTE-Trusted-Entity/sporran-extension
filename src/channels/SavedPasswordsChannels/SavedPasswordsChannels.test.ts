@@ -7,7 +7,7 @@ import {
   schedulePasswordsCheck,
 } from './SavedPasswordsChannels';
 
-const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
+const mockAddress = '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1';
 jest.useFakeTimers();
 schedulePasswordsCheck();
 
@@ -54,7 +54,7 @@ describe('SavedPasswordsChannels', () => {
   });
 
   it('should forget all passwords when requested', async () => {
-    const mockAddress2 = '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr';
+    const mockAddress2 = '4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo';
 
     await savePassword({
       address: mockAddress,

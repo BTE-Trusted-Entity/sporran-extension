@@ -1,8 +1,7 @@
 import { BalanceUtils } from '@kiltprotocol/core';
 
-import { render } from '../../testing/testing';
+import { identitiesMock as identities, render } from '../../testing/testing';
 
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { getFee } from '../../utilities/didUpgrade/didUpgrade';
 
@@ -17,7 +16,7 @@ jest.mock('../../utilities/getDeposit/getDeposit');
 jest.mocked(getFee).mockResolvedValue(BalanceUtils.toFemtoKilt(0.01));
 jest.mocked(getDepositDid).mockResolvedValue({
   amount: BalanceUtils.toFemtoKilt(1),
-  owner: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+  owner: '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1',
 });
 
 describe('DidUpgrade', () => {
@@ -25,7 +24,7 @@ describe('DidUpgrade', () => {
     const { container } = render(
       <DidUpgrade
         identity={
-          identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+          identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
         }
       />,
     );

@@ -1,6 +1,5 @@
-import { render } from '../../testing/testing';
+import { identitiesMock as identities, render } from '../../testing/testing';
 
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { useDidDeletionStatus } from '../../utilities/did/useDidDeletionStatus';
 import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
 
@@ -20,7 +19,7 @@ describe('DidUpgradeExplainer', () => {
     const { container } = render(
       <DidUpgradeExplainer
         identity={
-          identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+          identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
         }
       />,
     );
@@ -33,7 +32,7 @@ describe('DidUpgradeExplainer', () => {
     const { container } = render(
       <DidUpgradeExplainer
         identity={
-          identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+          identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
         }
       />,
     );

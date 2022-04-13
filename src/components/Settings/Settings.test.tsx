@@ -19,7 +19,7 @@ describe('Settings', () => {
     const { container } = render(
       <MemoryRouter
         initialEntries={[
-          '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+          '/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1',
         ]}
       >
         <Settings />

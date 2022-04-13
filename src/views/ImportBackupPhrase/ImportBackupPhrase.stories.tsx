@@ -13,12 +13,12 @@ export function Import(): JSX.Element {
 }
 
 export function Reset(): JSX.Element {
-  // backup phrase: century answer price repeat carpet truck swarm boost fine siege brain fog
+  // backup phrase: pool ahead ask clock then morning invest raise atom grace fly valve
   return (
     <ImportBackupPhrase
       onImport={action('onImport')}
       type="reset"
-      address="4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos"
+      address="4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
     />
   );
 }

@@ -1,8 +1,7 @@
 import { BalanceUtils } from '@kiltprotocol/core';
 
-import { render } from '../../testing/testing';
+import { identitiesMock as identities, render } from '../../testing/testing';
 
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { getFee } from '../../utilities/didRepair/didRepair';
 
@@ -18,7 +17,7 @@ describe('DidRepair', () => {
     const { container } = render(
       <DidRepair
         identity={
-          identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
         }
       />,
     );

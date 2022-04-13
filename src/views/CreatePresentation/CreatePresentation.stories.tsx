@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { credentialsMock } from '../../utilities/credentials/CredentialsProvider.mock';
-import { moreIdentitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import { moreIdentitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { paths } from '../paths';
 
 import { CreatePresentation } from './CreatePresentation';
@@ -12,8 +12,7 @@ export default {
   component: CreatePresentation,
 } as Meta;
 
-const identity =
-  moreIdentitiesMock['4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos'];
+const identity = identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
 export function Template(): JSX.Element {
   return (

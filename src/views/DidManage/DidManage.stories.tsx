@@ -21,7 +21,7 @@ export function WithoutWeb3Name(): JSX.Element {
       <Route path={paths.identity.did.manage.start}>
         <DidManage
           identity={
-            identities['4sdkkaM8jvLJijJmpHmJhCDC34JvRKqqs1qLUyHYKXvygQ5w']
+            identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
           }
         />
       </Route>
@@ -39,7 +39,7 @@ export function WithWeb3Name(): JSX.Element {
       <Route path={paths.identity.did.manage.start}>
         <DidManage
           identity={
-            identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+            identities['4q11Jce9wqM4A9GPB2z8n4K8LF9w2sQgZKFddhuKXwQ2Qo4q']
           }
         />
       </Route>

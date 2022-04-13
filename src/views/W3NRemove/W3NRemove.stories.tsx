@@ -12,7 +12,7 @@ export default {
 export function NoRefund(): JSX.Element {
   return (
     <W3NRemove
-      identity={identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']}
+      identity={identities['4tayr7qa5BoqQjbpDdVSkJNHYBCx9BZ2baf5fkJjFXehZKKe']}
     />
   );
 }
@@ -20,7 +20,7 @@ export function NoRefund(): JSX.Element {
 export function Refund(): JSX.Element {
   return (
     <W3NRemove
-      identity={identities['4pzncei2Jjap98Xks5XjoBKxBeYoCzofhbki7e3sZGnqDHvK']}
+      identity={identities['4q11Jce9wqM4A9GPB2z8n4K8LF9w2sQgZKFddhuKXwQ2Qo4q']}
     />
   );
 }

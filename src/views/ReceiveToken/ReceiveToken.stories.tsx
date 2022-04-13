@@ -16,13 +16,13 @@ export function Template(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive',
+        '/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/receive',
       ]}
     >
       <Route path={paths.identity.receive}>
         <ReceiveToken
           identity={
-            identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+            identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
           }
         />
       </Route>

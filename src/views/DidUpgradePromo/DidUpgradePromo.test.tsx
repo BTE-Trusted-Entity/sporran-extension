@@ -1,6 +1,5 @@
-import { render } from '../../testing/testing';
+import { identitiesMock as identities, render } from '../../testing/testing';
 
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 
 import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
@@ -19,7 +18,7 @@ describe('DidUpgradePromo', () => {
     const { container } = render(
       <DidUpgradePromo
         identity={
-          identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+          identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
         }
       />,
     );

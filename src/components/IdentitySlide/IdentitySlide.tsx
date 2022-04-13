@@ -38,7 +38,7 @@ export function IdentitySlide({
   );
 
   return (
-    <section>
+    <section className={styles.container}>
       <Avatar identity={identity} />
       {!editing.current ? (
         <div className={options ? styles.nameLine : styles.centeredNameLine}>

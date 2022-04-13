@@ -20,7 +20,9 @@ exports[`IdentityOverview should prompt to update legacy DID 1`] = `
     <div
       class="container"
     >
-      <section>
+      <section
+        class="container"
+      >
         <div
           class="avatar fullDid"
         >
@@ -57,10 +59,10 @@ exports[`IdentityOverview should prompt to update legacy DID 1`] = `
         title="Add Identity"
       />
       <a
-        aria-label="KILT Identity 1"
+        aria-label="Light DID Identity"
         class="right"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-        title="KILT Identity 1"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+        title="Light DID Identity"
       />
       <ul
         class="bubbles"
@@ -69,30 +71,30 @@ exports[`IdentityOverview should prompt to update legacy DID 1`] = `
           class="item"
         >
           <a
-            aria-label="KILT Identity 1"
+            aria-label="Light DID Identity"
             class="bubble"
-            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-            title="KILT Identity 1"
+            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+            title="Light DID Identity"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 2"
+            aria-label="Identity with on-chain DID and lots of coins"
             class="bubble"
-            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-            title="KILT Identity 2"
+            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+            title="Identity with on-chain DID and lots of coins"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble"
-            href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -136,20 +138,20 @@ exports[`IdentityOverview should prompt to update legacy DID 1`] = `
     <p>
       <a
         class="button"
-        href="/identity/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1/send"
+        href="/identity/4qp7KB8jbwqS6XXL8zH8qZn3GCdnZDt6Nmq5M47ztGKhXJVh/send"
       >
         Send
       </a>
       <a
         class="button"
-        href="/identity/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1/receive"
+        href="/identity/4qp7KB8jbwqS6XXL8zH8qZn3GCdnZDt6Nmq5M47ztGKhXJVh/receive"
       >
         Receive
       </a>
     </p>
     <a
       class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1?tab=transfer"
+      href="https://kilt-testnet.subscan.io/account/4qp7KB8jbwqS6XXL8zH8qZn3GCdnZDt6Nmq5M47ztGKhXJVh?tab=transfer"
       rel="noreferrer"
       target="_blank"
     >
@@ -158,19 +160,19 @@ exports[`IdentityOverview should prompt to update legacy DID 1`] = `
     <a
       aria-label="Show Credentials. Some credentials have not been backed up"
       class="downloadPrompt"
-      href="/identity/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1/credentials"
+      href="/identity/4qp7KB8jbwqS6XXL8zH8qZn3GCdnZDt6Nmq5M47ztGKhXJVh/credentials"
     >
       Show Credentials
     </a>
     <a
       class="repair"
-      href="/identity/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1/did/repair"
+      href="/identity/4qp7KB8jbwqS6XXL8zH8qZn3GCdnZDt6Nmq5M47ztGKhXJVh/did/repair"
     >
       Please update your on-chain DID
     </a>
     <a
       class="web3Name"
-      href="/identity/4s8JLRR2Q7B4XQSVzeNjj18YThACcoSFDLFMLP9qRhFZ5Bi1/did/web3name/create/info"
+      href="/identity/4qp7KB8jbwqS6XXL8zH8qZn3GCdnZDt6Nmq5M47ztGKhXJVh/did/web3name/create/info"
     >
       Create web3name
     </a>
@@ -218,7 +220,9 @@ exports[`IdentityOverview should render a normal identity 1`] = `
     <div
       class="container"
     >
-      <section>
+      <section
+        class="container"
+      >
         <div
           class="avatar"
         >
@@ -230,7 +234,7 @@ exports[`IdentityOverview should render a normal identity 1`] = `
           <span
             class="name"
           >
-            KILT Identity 1
+            Light DID Identity
           </span>
           <div
             class="wrapper"
@@ -255,10 +259,10 @@ exports[`IdentityOverview should render a normal identity 1`] = `
         title="Add Identity"
       />
       <a
-        aria-label="KILT Identity 2"
+        aria-label="Identity with on-chain DID and lots of coins"
         class="right"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-        title="KILT Identity 2"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+        title="Identity with on-chain DID and lots of coins"
       />
       <ul
         class="bubbles"
@@ -268,30 +272,30 @@ exports[`IdentityOverview should render a normal identity 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 1"
+            aria-label="Light DID Identity"
             class="bubble bubbleActive"
-            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-            title="KILT Identity 1"
+            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+            title="Light DID Identity"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 2"
+            aria-label="Identity with on-chain DID and lots of coins"
             class="bubble"
-            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-            title="KILT Identity 2"
+            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+            title="Identity with on-chain DID and lots of coins"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble"
-            href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -335,32 +339,32 @@ exports[`IdentityOverview should render a normal identity 1`] = `
     <p>
       <a
         class="button"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send"
       >
         Send
       </a>
       <a
         class="button"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/receive"
       >
         Receive
       </a>
     </p>
     <a
       class="credentials"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/credentials"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/credentials"
     >
       Show Credentials
     </a>
     <a
       class="upgrade"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade"
     >
       Upgrade to on-chain DID
     </a>
     <a
       class="web3Name"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/web3name/create/info"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/web3name/create/info"
     >
       Create web3name
     </a>
@@ -408,7 +412,9 @@ exports[`IdentityOverview should render full DID identity 1`] = `
     <div
       class="container"
     >
-      <section>
+      <section
+        class="container"
+      >
         <div
           class="avatar fullDid"
         >
@@ -420,7 +426,7 @@ exports[`IdentityOverview should render full DID identity 1`] = `
           <span
             class="name"
           >
-            KILT Identity 2
+            Identity with on-chain DID and lots of coins
           </span>
           <div
             class="wrapper"
@@ -439,16 +445,16 @@ exports[`IdentityOverview should render full DID identity 1`] = `
         </div>
       </section>
       <a
-        aria-label="KILT Identity 1"
+        aria-label="Light DID Identity"
         class="left"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-        title="KILT Identity 1"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+        title="Light DID Identity"
       />
       <a
-        aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+        aria-label="Identity which has a very very very very long name and might not even fit on the screen"
         class="right"
-        href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-        title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+        href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+        title="Identity which has a very very very very long name and might not even fit on the screen"
       />
       <ul
         class="bubbles"
@@ -457,10 +463,10 @@ exports[`IdentityOverview should render full DID identity 1`] = `
           class="item"
         >
           <a
-            aria-label="KILT Identity 1"
+            aria-label="Light DID Identity"
             class="bubble"
-            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-            title="KILT Identity 1"
+            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+            title="Light DID Identity"
           />
         </li>
         <li
@@ -468,20 +474,20 @@ exports[`IdentityOverview should render full DID identity 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 2"
+            aria-label="Identity with on-chain DID and lots of coins"
             class="bubble bubbleActive"
-            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-            title="KILT Identity 2"
+            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+            title="Identity with on-chain DID and lots of coins"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble"
-            href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -525,20 +531,20 @@ exports[`IdentityOverview should render full DID identity 1`] = `
     <p>
       <a
         class="button"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/send"
       >
         Send
       </a>
       <a
         class="button"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/receive"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/receive"
       >
         Receive
       </a>
     </p>
     <a
       class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr?tab=transfer"
+      href="https://kilt-testnet.subscan.io/account/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo?tab=transfer"
       rel="noreferrer"
       target="_blank"
     >
@@ -546,19 +552,19 @@ exports[`IdentityOverview should render full DID identity 1`] = `
     </a>
     <a
       class="credentials"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/credentials"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/credentials"
     >
       Show Credentials
     </a>
     <a
       class="manage"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did"
     >
       Manage on-chain DID
     </a>
     <a
       class="web3Name"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/web3name/create/info"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/web3name/create/info"
     >
       Create web3name
     </a>
@@ -615,16 +621,16 @@ exports[`IdentityOverview should render the new identity 1`] = `
         />
       </section>
       <a
-        aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+        aria-label="Identity which has a very very very very long name and might not even fit on the screen"
         class="left"
-        href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-        title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+        href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+        title="Identity which has a very very very very long name and might not even fit on the screen"
       />
       <a
-        aria-label="KILT Identity 1"
+        aria-label="Light DID Identity"
         class="right"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-        title="KILT Identity 1"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+        title="Light DID Identity"
       />
       <ul
         class="bubbles"
@@ -633,30 +639,30 @@ exports[`IdentityOverview should render the new identity 1`] = `
           class="item"
         >
           <a
-            aria-label="KILT Identity 1"
+            aria-label="Light DID Identity"
             class="bubble"
-            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-            title="KILT Identity 1"
+            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+            title="Light DID Identity"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 2"
+            aria-label="Identity with on-chain DID and lots of coins"
             class="bubble"
-            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-            title="KILT Identity 2"
+            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+            title="Identity with on-chain DID and lots of coins"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble"
-            href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -722,7 +728,9 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
     <div
       class="container"
     >
-      <section>
+      <section
+        class="container"
+      >
         <div
           class="avatar"
         >
@@ -734,7 +742,7 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
           <span
             class="name"
           >
-            KILT Identity 1
+            Light DID Identity
           </span>
           <div
             class="wrapper"
@@ -759,10 +767,10 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
         title="Add Identity"
       />
       <a
-        aria-label="KILT Identity 2"
+        aria-label="Identity with on-chain DID and lots of coins"
         class="right"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-        title="KILT Identity 2"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+        title="Identity with on-chain DID and lots of coins"
       />
       <ul
         class="bubbles"
@@ -772,30 +780,30 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 1"
+            aria-label="Light DID Identity"
             class="bubble bubbleActive"
-            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-            title="KILT Identity 1"
+            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+            title="Light DID Identity"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 2"
+            aria-label="Identity with on-chain DID and lots of coins"
             class="bubble"
-            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-            title="KILT Identity 2"
+            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+            title="Identity with on-chain DID and lots of coins"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble"
-            href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -839,20 +847,20 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
     <p>
       <a
         class="button"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send"
       >
         Send
       </a>
       <a
         class="button"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/receive"
       >
         Receive
       </a>
     </p>
     <a
       class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire?tab=transfer"
+      href="https://kilt-testnet.subscan.io/account/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1?tab=transfer"
       rel="noreferrer"
       target="_blank"
     >
@@ -860,19 +868,19 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
     </a>
     <a
       class="credentials"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/credentials"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/credentials"
     >
       Show Credentials
     </a>
     <a
       class="upgrade"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/upgrade"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade"
     >
       Upgrade to on-chain DID
     </a>
     <a
       class="web3Name"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/web3name/create/info"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/web3name/create/info"
     >
       Create web3name
     </a>
@@ -920,7 +928,9 @@ exports[`IdentityOverview should show notification for not backed up credentials
     <div
       class="container"
     >
-      <section>
+      <section
+        class="container"
+      >
         <div
           class="avatar fullDid"
         >
@@ -932,7 +942,7 @@ exports[`IdentityOverview should show notification for not backed up credentials
           <span
             class="name"
           >
-            KILT Identity 1
+            Light DID Identity
           </span>
           <div
             class="wrapper"
@@ -957,10 +967,10 @@ exports[`IdentityOverview should show notification for not backed up credentials
         title="Add Identity"
       />
       <a
-        aria-label="KILT Identity 2"
+        aria-label="Identity with on-chain DID and lots of coins"
         class="right"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-        title="KILT Identity 2"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+        title="Identity with on-chain DID and lots of coins"
       />
       <ul
         class="bubbles"
@@ -970,30 +980,30 @@ exports[`IdentityOverview should show notification for not backed up credentials
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 1"
+            aria-label="Light DID Identity"
             class="bubble bubbleActive"
-            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-            title="KILT Identity 1"
+            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+            title="Light DID Identity"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 2"
+            aria-label="Identity with on-chain DID and lots of coins"
             class="bubble"
-            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-            title="KILT Identity 2"
+            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+            title="Identity with on-chain DID and lots of coins"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble"
-            href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -1037,20 +1047,20 @@ exports[`IdentityOverview should show notification for not backed up credentials
     <p>
       <a
         class="button"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send"
       >
         Send
       </a>
       <a
         class="button"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/receive"
       >
         Receive
       </a>
     </p>
     <a
       class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire?tab=transfer"
+      href="https://kilt-testnet.subscan.io/account/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1?tab=transfer"
       rel="noreferrer"
       target="_blank"
     >
@@ -1059,19 +1069,19 @@ exports[`IdentityOverview should show notification for not backed up credentials
     <a
       aria-label="Show Credentials. Some credentials have not been backed up"
       class="downloadPrompt"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/credentials"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/credentials"
     >
       Show Credentials
     </a>
     <a
       class="manage"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did"
     >
       Manage on-chain DID
     </a>
     <a
       class="web3Name"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did/web3name/create/info"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/web3name/create/info"
     >
       Create web3name
     </a>
@@ -1119,7 +1129,9 @@ exports[`IdentityOverview should show on-chain DID removed 1`] = `
     <div
       class="container"
     >
-      <section>
+      <section
+        class="container"
+      >
         <div
           class="avatar"
         >
@@ -1156,10 +1168,10 @@ exports[`IdentityOverview should show on-chain DID removed 1`] = `
         title="Add Identity"
       />
       <a
-        aria-label="KILT Identity 1"
+        aria-label="Light DID Identity"
         class="right"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-        title="KILT Identity 1"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+        title="Light DID Identity"
       />
       <ul
         class="bubbles"
@@ -1168,30 +1180,30 @@ exports[`IdentityOverview should show on-chain DID removed 1`] = `
           class="item"
         >
           <a
-            aria-label="KILT Identity 1"
+            aria-label="Light DID Identity"
             class="bubble"
-            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-            title="KILT Identity 1"
+            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+            title="Light DID Identity"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 2"
+            aria-label="Identity with on-chain DID and lots of coins"
             class="bubble"
-            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-            title="KILT Identity 2"
+            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+            title="Identity with on-chain DID and lots of coins"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble"
-            href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -1235,20 +1247,20 @@ exports[`IdentityOverview should show on-chain DID removed 1`] = `
     <p>
       <a
         class="button"
-        href="/identity/4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z/send"
+        href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/send"
       >
         Send
       </a>
       <a
         class="button"
-        href="/identity/4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z/receive"
+        href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/receive"
       >
         Receive
       </a>
     </p>
     <a
       class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z?tab=transfer"
+      href="https://kilt-testnet.subscan.io/account/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB?tab=transfer"
       rel="noreferrer"
       target="_blank"
     >
@@ -1257,19 +1269,19 @@ exports[`IdentityOverview should show on-chain DID removed 1`] = `
     <a
       aria-label="Show Credentials. Some credentials have not been backed up"
       class="downloadPrompt"
-      href="/identity/4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z/credentials"
+      href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/credentials"
     >
       Show Credentials
     </a>
     <a
       class="upgrade"
-      href="/identity/4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z/did/upgrade"
+      href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/did/upgrade"
     >
       On-chain DID removed
     </a>
     <a
       class="web3Name"
-      href="/identity/4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z/did"
+      href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/did"
     >
       web3name: fancy-name
     </a>
@@ -1317,7 +1329,9 @@ exports[`IdentityOverview should show web3name 1`] = `
     <div
       class="container"
     >
-      <section>
+      <section
+        class="container"
+      >
         <div
           class="avatar fullDid"
         >
@@ -1329,7 +1343,7 @@ exports[`IdentityOverview should show web3name 1`] = `
           <span
             class="name"
           >
-            KILT Identity 1
+            Light DID Identity
           </span>
           <div
             class="wrapper"
@@ -1354,10 +1368,10 @@ exports[`IdentityOverview should show web3name 1`] = `
         title="Add Identity"
       />
       <a
-        aria-label="KILT Identity 2"
+        aria-label="Identity with on-chain DID and lots of coins"
         class="right"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-        title="KILT Identity 2"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+        title="Identity with on-chain DID and lots of coins"
       />
       <ul
         class="bubbles"
@@ -1366,10 +1380,10 @@ exports[`IdentityOverview should show web3name 1`] = `
           class="item"
         >
           <a
-            aria-label="KILT Identity 1"
+            aria-label="Light DID Identity"
             class="bubble"
-            href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-            title="KILT Identity 1"
+            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+            title="Light DID Identity"
           />
         </li>
         <li
@@ -1377,20 +1391,20 @@ exports[`IdentityOverview should show web3name 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 2"
+            aria-label="Identity with on-chain DID and lots of coins"
             class="bubble bubbleActive"
-            href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-            title="KILT Identity 2"
+            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+            title="Identity with on-chain DID and lots of coins"
           />
         </li>
         <li
           class="item"
         >
           <a
-            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble"
-            href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -1434,20 +1448,20 @@ exports[`IdentityOverview should show web3name 1`] = `
     <p>
       <a
         class="button"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send"
       >
         Send
       </a>
       <a
         class="button"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/receive"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/receive"
       >
         Receive
       </a>
     </p>
     <a
       class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire?tab=transfer"
+      href="https://kilt-testnet.subscan.io/account/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1?tab=transfer"
       rel="noreferrer"
       target="_blank"
     >
@@ -1456,19 +1470,19 @@ exports[`IdentityOverview should show web3name 1`] = `
     <a
       aria-label="Show Credentials. Some credentials have not been backed up"
       class="downloadPrompt"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/credentials"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/credentials"
     >
       Show Credentials
     </a>
     <a
       class="manage"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did"
     >
       Manage on-chain DID
     </a>
     <a
       class="web3Name"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/did"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did"
     >
       web3name: fancy-name
     </a>

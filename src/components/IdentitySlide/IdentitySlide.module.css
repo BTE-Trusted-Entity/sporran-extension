@@ -1,3 +1,7 @@
+.container {
+  width: 100%;
+}
+
 .nameLine {
   composes: identityText from '../Typography/Typography.module.css';
   position: relative;

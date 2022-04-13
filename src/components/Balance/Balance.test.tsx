@@ -8,7 +8,7 @@ import { Balance } from './Balance';
 jest.mock('../../utilities/vesting/vesting');
 jest.mocked(hasVestedFunds).mockResolvedValue(false);
 
-const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
+const mockAddress = '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1';
 
 describe('Balance', () => {
   it('should render', async () => {

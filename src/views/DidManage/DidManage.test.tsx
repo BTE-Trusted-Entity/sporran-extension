@@ -30,7 +30,7 @@ describe('DidManage', () => {
         <Route path={paths.identity.did.manage.start}>
           <DidManage
             identity={
-              identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+              identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
             }
           />
         </Route>
@@ -50,7 +50,7 @@ describe('DidManage', () => {
         <Route path={paths.identity.did.manage.start}>
           <DidManage
             identity={
-              identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+              identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
             }
           />
         </Route>

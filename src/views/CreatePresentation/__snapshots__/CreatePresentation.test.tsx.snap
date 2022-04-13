@@ -81,31 +81,6 @@ exports[`CreatePresentation should match the snapshot 1`] = `
                   </label>
                 </dd>
               </div>
-              <div
-                class="detail"
-              >
-                <dt
-                  class="detailName"
-                >
-                  Name
-                </dt>
-                <dd
-                  class="detailValue"
-                >
-                  <label
-                    class="shareLabel"
-                  >
-                    <input
-                      checked=""
-                      class="share"
-                      name="Name"
-                      type="checkbox"
-                    />
-                    <span />
-                    Mock Name
-                  </label>
-                </dd>
-              </div>
             </dl>
           </section>
           <h4

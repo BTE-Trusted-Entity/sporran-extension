@@ -11,14 +11,14 @@ import {
 import { IdentityCredentials } from './IdentityCredentials';
 
 const identity =
-  identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+  identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 export default {
   title: 'Views/IdentityCredentials',
   component: IdentityCredentials,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function ManyCredentials(): JSX.Element {
   return <IdentityCredentials identity={identity} />;
 }
 

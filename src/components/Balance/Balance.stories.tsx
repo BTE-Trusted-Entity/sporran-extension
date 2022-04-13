@@ -8,13 +8,13 @@ export default {
 } as Meta;
 
 export function Template(): JSX.Element {
-  return <Balance address="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire" />;
+  return <Balance address="4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1" />;
 }
 
 export function WithBreakdown(): JSX.Element {
   return (
     <Balance
-      address="4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
+      address="4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
       breakdown
       smallDecimals
     />

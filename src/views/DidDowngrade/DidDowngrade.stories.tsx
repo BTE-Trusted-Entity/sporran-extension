@@ -9,10 +9,26 @@ export default {
   component: DidDowngrade,
 } as Meta;
 
-export function Refund(): JSX.Element {
+export function DidRefund(): JSX.Element {
   return (
     <DidDowngrade
-      identity={identities['4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos']}
+      identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}
+    />
+  );
+}
+
+export function W3NRefund(): JSX.Element {
+  return (
+    <DidDowngrade
+      identity={identities['4p273cfeZ2JRz46AcJoQvTRHCH8Vaj92jts2VxepZtQwbTBB']}
+    />
+  );
+}
+
+export function DidAndW3NRefund(): JSX.Element {
+  return (
+    <DidDowngrade
+      identity={identities['4q11Jce9wqM4A9GPB2z8n4K8LF9w2sQgZKFddhuKXwQ2Qo4q']}
     />
   );
 }
@@ -20,7 +36,7 @@ export function Refund(): JSX.Element {
 export function NoRefund(): JSX.Element {
   return (
     <DidDowngrade
-      identity={identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']}
+      identity={identities['4su6rRjEVPfNYCuaXw7iF3os1REHE6Gan23mYo2vc6fT7jZq']}
     />
   );
 }

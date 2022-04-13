@@ -1,7 +1,7 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import {
-  identitiesMock as identities,
+  identitiesMock as fewIdentities,
   moreIdentitiesMock as moreIdentities,
   render,
 } from '../../testing/testing';
@@ -18,7 +18,7 @@ describe('IdentitiesCarousel', () => {
         <Route path={paths.identity.overview}>
           <IdentitiesCarousel
             identity={
-              identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+              fewIdentities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
             }
           />
         </Route>
@@ -33,7 +33,7 @@ describe('IdentitiesCarousel', () => {
         <Route path={paths.identity.overview}>
           <IdentitiesCarousel
             identity={
-              identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+              fewIdentities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
             }
           />
         </Route>
@@ -48,7 +48,7 @@ describe('IdentitiesCarousel', () => {
         <Route path={paths.identity.overview}>
           <IdentitiesCarousel
             identity={
-              identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']
+              fewIdentities['4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653']
             }
           />
         </Route>
@@ -74,7 +74,7 @@ describe('IdentitiesCarousel', () => {
         <Route path={paths.identity.send.start}>
           <IdentitiesCarousel
             identity={
-              identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']
+              fewIdentities['4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653']
             }
           />
         </Route>
@@ -88,7 +88,7 @@ describe('IdentitiesCarousel', () => {
       <MemoryRouter initialEntries={[paths.identity.overview]}>
         <Route path={paths.identity.overview}>
           <IdentitiesBubbles
-            identities={Object.values(identities)}
+            identities={Object.values(fewIdentities)}
             showAdd={true}
           />
         </Route>
