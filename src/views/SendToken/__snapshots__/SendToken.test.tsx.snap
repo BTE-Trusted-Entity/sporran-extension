@@ -29,16 +29,16 @@ exports[`SendToken should not render for new identity 1`] = `
         />
       </section>
       <a
-        aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+        aria-label="Identity which has a very very very very long name and might not even fit on the screen"
         class="left"
         href="/"
-        title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+        title="Identity which has a very very very very long name and might not even fit on the screen"
       />
       <a
-        aria-label="KILT Identity 1"
+        aria-label="Light DID Identity"
         class="right"
         href="/"
-        title="KILT Identity 1"
+        title="Light DID Identity"
       />
       <ul
         class="bubbles"
@@ -48,10 +48,10 @@ exports[`SendToken should not render for new identity 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 1"
+            aria-label="Light DID Identity"
             class="bubble bubbleActive"
             href="/"
-            title="KILT Identity 1"
+            title="Light DID Identity"
           />
         </li>
         <li
@@ -59,10 +59,10 @@ exports[`SendToken should not render for new identity 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 2"
+            aria-label="Identity with on-chain DID and lots of coins"
             class="bubble bubbleActive"
             href="/"
-            title="KILT Identity 2"
+            title="Identity with on-chain DID and lots of coins"
           />
         </li>
         <li
@@ -70,10 +70,10 @@ exports[`SendToken should not render for new identity 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble bubbleActive"
             href="/"
-            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
         <li
@@ -138,7 +138,9 @@ exports[`SendToken should render 1`] = `
     <div
       class="container"
     >
-      <section>
+      <section
+        class="container"
+      >
         <div
           class="avatar"
         >
@@ -150,7 +152,7 @@ exports[`SendToken should render 1`] = `
           <span
             class="name"
           >
-            KILT Identity 1
+            Light DID Identity
           </span>
         </div>
       </section>
@@ -161,10 +163,10 @@ exports[`SendToken should render 1`] = `
         title="Add Identity"
       />
       <a
-        aria-label="KILT Identity 2"
+        aria-label="Identity with on-chain DID and lots of coins"
         class="right"
         href="/"
-        title="KILT Identity 2"
+        title="Identity with on-chain DID and lots of coins"
       />
       <ul
         class="bubbles"
@@ -174,10 +176,10 @@ exports[`SendToken should render 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 1"
+            aria-label="Light DID Identity"
             class="bubble bubbleActive"
             href="/"
-            title="KILT Identity 1"
+            title="Light DID Identity"
           />
         </li>
         <li
@@ -185,10 +187,10 @@ exports[`SendToken should render 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 2"
+            aria-label="Identity with on-chain DID and lots of coins"
             class="bubble bubbleActive"
             href="/"
-            title="KILT Identity 2"
+            title="Identity with on-chain DID and lots of coins"
           />
         </li>
         <li
@@ -196,10 +198,10 @@ exports[`SendToken should render 1`] = `
         >
           <a
             aria-current="page"
-            aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble bubbleActive"
             href="/"
-            title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
         <li

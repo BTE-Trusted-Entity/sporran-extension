@@ -7,7 +7,7 @@ import {
   credentialsMock,
   notDownloaded,
 } from '../../utilities/credentials/CredentialsProvider.mock';
-import { moreIdentitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import { paths } from '../../views/paths';
 
 import { CredentialCard } from './CredentialCard';
@@ -35,7 +35,7 @@ export function DownloadPrompt(): JSX.Element {
 
 export function PresentationPrompt(): JSX.Element {
   const identity =
-    moreIdentitiesMock['4p1VA6zuhqKuZ8EdJA7QtjcB9mVLt3L31EKWVXfbJ6GaiQos'];
+    identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
   return (
     <MemoryRouter
       initialEntries={[

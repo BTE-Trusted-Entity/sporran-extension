@@ -24,7 +24,7 @@ export function Template(): JSX.Element {
     <PopupTestProvider path={paths.popup.sign} data={input}>
       <SignDid
         identity={
-          identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
         }
       />
     </PopupTestProvider>

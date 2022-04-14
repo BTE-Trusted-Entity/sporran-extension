@@ -9,7 +9,7 @@ export default {
   component: UnlockVestedFunds,
 } as Meta;
 
-const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 export function Template(): JSX.Element {
   return <UnlockVestedFunds identity={identity} />;

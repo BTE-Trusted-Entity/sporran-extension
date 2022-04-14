@@ -1,16 +1,13 @@
 import userEvent from '@testing-library/user-event';
 
-import { render, screen } from '../../testing/testing';
-import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
-
-import { mockIsFullDid } from '../../utilities/did/did.mock';
+import { identitiesMock, render, screen } from '../../testing/testing';
 
 import { IdentityOptions } from './IdentityOptions';
 
 const onEdit = jest.fn();
 
 const props = {
-  identity: identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'],
+  identity: identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'],
   onEdit,
 };
 
@@ -30,21 +27,6 @@ describe('AddIdentity', () => {
 
     expect(await screen.findByRole('menu')).toBeInTheDocument();
     expect(openMenuButton).toHaveAttribute('aria-expanded', 'true');
-
-    expect(container).toMatchSnapshot();
-  });
-
-  it('should show full Did option', async () => {
-    mockIsFullDid(true);
-    const { container } = render(
-      <IdentityOptions
-        identity={
-          identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
-        }
-        onEdit={onEdit}
-      />,
-    );
-    await userEvent.click(await screen.findByLabelText('Identity options'));
 
     expect(container).toMatchSnapshot();
   });

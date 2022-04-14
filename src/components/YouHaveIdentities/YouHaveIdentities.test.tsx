@@ -11,8 +11,8 @@ describe('YouHaveIdentities', () => {
     const { container } = render(
       <IdentitiesProviderMock
         identities={{
-          '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire':
-            identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'],
+          '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1':
+            identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'],
         }}
       >
         <YouHaveIdentities />

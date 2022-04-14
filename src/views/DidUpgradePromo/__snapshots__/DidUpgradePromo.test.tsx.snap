@@ -16,7 +16,9 @@ exports[`DidUpgradePromo should render 1`] = `
     >
       Sign your upgrade
     </p>
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar"
       >
@@ -28,7 +30,7 @@ exports[`DidUpgradePromo should render 1`] = `
         <span
           class="name"
         >
-          KILT Identity 1
+          Light DID Identity
         </span>
       </div>
     </section>
@@ -68,7 +70,7 @@ exports[`DidUpgradePromo should render 1`] = `
       </label>
       <a
         class="reset"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/reset"
       >
         Reset password
       </a>

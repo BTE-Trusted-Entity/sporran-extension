@@ -1,10 +1,9 @@
-import { render } from '../../testing/testing';
+import { identitiesMock as identities, render } from '../../testing/testing';
 import { paths, generatePath } from '../paths';
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 
 import { ExistentialWarning } from './ExistentialWarning';
 
-const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 const reviewPath = generatePath(paths.identity.send.review, {
   address: identity.address,

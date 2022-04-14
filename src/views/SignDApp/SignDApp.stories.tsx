@@ -14,7 +14,7 @@ export default {
 const mockExtrinsic: SignOriginInput = {
   origin:
     'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
-  address: '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire',
+  address: '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1',
   specVersion: '0x00002846',
   nonce: '0x000000000000001a',
   method:

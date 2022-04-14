@@ -24,7 +24,7 @@ import { PasswordField } from './PasswordField';
 jest.mock('../../channels/SavedPasswordsChannels/SavedPasswordsChannels');
 jest.mock('../../utilities/identities/identities');
 
-const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 const passwordField = {
   set: jest.fn(),

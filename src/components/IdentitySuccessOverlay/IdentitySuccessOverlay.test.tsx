@@ -8,7 +8,7 @@ import {
 import { IdentitySuccessOverlay } from './IdentitySuccessOverlay';
 
 const identity =
-  identitiesMock['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
+  identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
 describe('IdentitySuccessOverlay', () => {
   beforeEach(mockDialogShowModal);

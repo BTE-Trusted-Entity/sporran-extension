@@ -20,7 +20,7 @@ describe('SignDid', () => {
       <PopupTestProvider path={paths.popup.signDid} data={input}>
         <SignDid
           identity={
-            identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+            identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
           }
         />
       </PopupTestProvider>,
@@ -35,7 +35,7 @@ describe('SignDid', () => {
       <PopupTestProvider path={paths.popup.signDid} data={input}>
         <SignDid
           identity={
-            identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+            identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
           }
         />
       </PopupTestProvider>,

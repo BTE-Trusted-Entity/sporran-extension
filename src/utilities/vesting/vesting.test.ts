@@ -9,7 +9,7 @@ import { originalBalancesMock } from '../balanceChanges/balanceChanges.mock';
 
 import { hasVestedFunds, signVest, submitVest } from './vesting';
 
-const mockAddress = '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
+const mockAddress = '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1';
 
 const vestingInfoMock = {
   isSome: true,

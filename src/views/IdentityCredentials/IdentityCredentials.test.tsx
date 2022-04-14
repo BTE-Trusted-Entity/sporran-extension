@@ -21,7 +21,7 @@ jest.mocked(sameFullDid).mockReturnValue(true);
 jest.mocked(Attestation.query).mockResolvedValue(null);
 
 const identity =
-  identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+  identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 describe('IdentityCredentials', () => {
   it('should render', async () => {

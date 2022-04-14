@@ -11,30 +11,30 @@ exports[`IdentitiesCarousel should render a bubble for each identity 1`] = `
       class="item"
     >
       <a
-        aria-label="KILT Identity 1"
+        aria-label="Light DID Identity"
         class="bubble"
-        href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-        title="KILT Identity 1"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+        title="Light DID Identity"
       />
     </li>
     <li
       class="item"
     >
       <a
-        aria-label="KILT Identity 2"
+        aria-label="Identity with on-chain DID and lots of coins"
         class="bubble"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-        title="KILT Identity 2"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+        title="Identity with on-chain DID and lots of coins"
       />
     </li>
     <li
       class="item"
     >
       <a
-        aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+        aria-label="Identity which has a very very very very long name and might not even fit on the screen"
         class="bubble"
-        href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-        title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+        href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+        title="Identity which has a very very very very long name and might not even fit on the screen"
       />
     </li>
     <li
@@ -56,7 +56,9 @@ exports[`IdentitiesCarousel should render normal identities 1`] = `
   <div
     class="container"
   >
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar"
       >
@@ -68,21 +70,21 @@ exports[`IdentitiesCarousel should render normal identities 1`] = `
         <span
           class="name"
         >
-          KILT Identity 2
+          Identity with on-chain DID and lots of coins
         </span>
       </div>
     </section>
     <a
-      aria-label="KILT Identity 1"
+      aria-label="Light DID Identity"
       class="left"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-      title="KILT Identity 1"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+      title="Light DID Identity"
     />
     <a
-      aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+      aria-label="Identity which has a very very very very long name and might not even fit on the screen"
       class="right"
-      href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-      title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+      href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+      title="Identity which has a very very very very long name and might not even fit on the screen"
     />
     <ul
       class="bubbles"
@@ -91,30 +93,30 @@ exports[`IdentitiesCarousel should render normal identities 1`] = `
         class="item"
       >
         <a
-          aria-label="KILT Identity 1"
+          aria-label="Light DID Identity"
           class="bubble"
-          href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-          title="KILT Identity 1"
+          href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+          title="Light DID Identity"
         />
       </li>
       <li
         class="item"
       >
         <a
-          aria-label="KILT Identity 2"
+          aria-label="Identity with on-chain DID and lots of coins"
           class="bubble"
-          href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-          title="KILT Identity 2"
+          href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+          title="Identity with on-chain DID and lots of coins"
         />
       </li>
       <li
         class="item"
       >
         <a
-          aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          aria-label="Identity which has a very very very very long name and might not even fit on the screen"
           class="bubble"
-          href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-          title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+          title="Identity which has a very very very very long name and might not even fit on the screen"
         />
       </li>
       <li
@@ -137,7 +139,9 @@ exports[`IdentitiesCarousel should render the first identity 1`] = `
   <div
     class="container"
   >
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar"
       >
@@ -149,7 +153,7 @@ exports[`IdentitiesCarousel should render the first identity 1`] = `
         <span
           class="name"
         >
-          KILT Identity 1
+          Light DID Identity
         </span>
       </div>
     </section>
@@ -160,10 +164,10 @@ exports[`IdentitiesCarousel should render the first identity 1`] = `
       title="Add Identity"
     />
     <a
-      aria-label="KILT Identity 2"
+      aria-label="Identity with on-chain DID and lots of coins"
       class="right"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-      title="KILT Identity 2"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+      title="Identity with on-chain DID and lots of coins"
     />
     <ul
       class="bubbles"
@@ -172,30 +176,30 @@ exports[`IdentitiesCarousel should render the first identity 1`] = `
         class="item"
       >
         <a
-          aria-label="KILT Identity 1"
+          aria-label="Light DID Identity"
           class="bubble"
-          href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-          title="KILT Identity 1"
+          href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+          title="Light DID Identity"
         />
       </li>
       <li
         class="item"
       >
         <a
-          aria-label="KILT Identity 2"
+          aria-label="Identity with on-chain DID and lots of coins"
           class="bubble"
-          href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-          title="KILT Identity 2"
+          href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+          title="Identity with on-chain DID and lots of coins"
         />
       </li>
       <li
         class="item"
       >
         <a
-          aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          aria-label="Identity which has a very very very very long name and might not even fit on the screen"
           class="bubble"
-          href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-          title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+          title="Identity which has a very very very very long name and might not even fit on the screen"
         />
       </li>
       <li
@@ -218,7 +222,9 @@ exports[`IdentitiesCarousel should render the last identity 1`] = `
   <div
     class="container"
   >
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar"
       >
@@ -230,15 +236,15 @@ exports[`IdentitiesCarousel should render the last identity 1`] = `
         <span
           class="name"
         >
-          KILT Identity 3 which has a very long name and might not even fit on the screen
+          Identity which has a very very very very long name and might not even fit on the screen
         </span>
       </div>
     </section>
     <a
-      aria-label="KILT Identity 2"
+      aria-label="Identity with on-chain DID and lots of coins"
       class="left"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-      title="KILT Identity 2"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+      title="Identity with on-chain DID and lots of coins"
     />
     <a
       aria-label="Add Identity"
@@ -253,30 +259,30 @@ exports[`IdentitiesCarousel should render the last identity 1`] = `
         class="item"
       >
         <a
-          aria-label="KILT Identity 1"
+          aria-label="Light DID Identity"
           class="bubble"
-          href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-          title="KILT Identity 1"
+          href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+          title="Light DID Identity"
         />
       </li>
       <li
         class="item"
       >
         <a
-          aria-label="KILT Identity 2"
+          aria-label="Identity with on-chain DID and lots of coins"
           class="bubble"
-          href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-          title="KILT Identity 2"
+          href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+          title="Identity with on-chain DID and lots of coins"
         />
       </li>
       <li
         class="item"
       >
         <a
-          aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          aria-label="Identity which has a very very very very long name and might not even fit on the screen"
           class="bubble"
-          href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-          title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+          title="Identity which has a very very very very long name and might not even fit on the screen"
         />
       </li>
       <li
@@ -308,16 +314,16 @@ exports[`IdentitiesCarousel should render the new identity 1`] = `
       />
     </section>
     <a
-      aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+      aria-label="Identity which has a very very very very long name and might not even fit on the screen"
       class="left"
-      href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-      title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+      href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+      title="Identity which has a very very very very long name and might not even fit on the screen"
     />
     <a
-      aria-label="KILT Identity 1"
+      aria-label="Light DID Identity"
       class="right"
-      href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-      title="KILT Identity 1"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+      title="Light DID Identity"
     />
     <ul
       class="bubbles"
@@ -326,30 +332,30 @@ exports[`IdentitiesCarousel should render the new identity 1`] = `
         class="item"
       >
         <a
-          aria-label="KILT Identity 1"
+          aria-label="Light DID Identity"
           class="bubble"
-          href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire"
-          title="KILT Identity 1"
+          href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
+          title="Light DID Identity"
         />
       </li>
       <li
         class="item"
       >
         <a
-          aria-label="KILT Identity 2"
+          aria-label="Identity with on-chain DID and lots of coins"
           class="bubble"
-          href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr"
-          title="KILT Identity 2"
+          href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+          title="Identity with on-chain DID and lots of coins"
         />
       </li>
       <li
         class="item"
       >
         <a
-          aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          aria-label="Identity which has a very very very very long name and might not even fit on the screen"
           class="bubble"
-          href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL"
-          title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
+          title="Identity which has a very very very very long name and might not even fit on the screen"
         />
       </li>
       <li
@@ -372,7 +378,9 @@ exports[`IdentitiesCarousel should support other paths 1`] = `
   <div
     class="container"
   >
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar"
       >
@@ -384,15 +392,15 @@ exports[`IdentitiesCarousel should support other paths 1`] = `
         <span
           class="name"
         >
-          KILT Identity 3 which has a very long name and might not even fit on the screen
+          Identity which has a very very very very long name and might not even fit on the screen
         </span>
       </div>
     </section>
     <a
-      aria-label="KILT Identity 2"
+      aria-label="Identity with on-chain DID and lots of coins"
       class="left"
-      href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
-      title="KILT Identity 2"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/send"
+      title="Identity with on-chain DID and lots of coins"
     />
     <a
       aria-label="Add Identity"
@@ -407,30 +415,30 @@ exports[`IdentitiesCarousel should support other paths 1`] = `
         class="item"
       >
         <a
-          aria-label="KILT Identity 1"
+          aria-label="Light DID Identity"
           class="bubble"
-          href="/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/send"
-          title="KILT Identity 1"
+          href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send"
+          title="Light DID Identity"
         />
       </li>
       <li
         class="item"
       >
         <a
-          aria-label="KILT Identity 2"
+          aria-label="Identity with on-chain DID and lots of coins"
           class="bubble"
-          href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/send"
-          title="KILT Identity 2"
+          href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/send"
+          title="Identity with on-chain DID and lots of coins"
         />
       </li>
       <li
         class="item"
       >
         <a
-          aria-label="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          aria-label="Identity which has a very very very very long name and might not even fit on the screen"
           class="bubble"
-          href="/identity/4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL/send"
-          title="KILT Identity 3 which has a very long name and might not even fit on the screen"
+          href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653/send"
+          title="Identity which has a very very very very long name and might not even fit on the screen"
         />
       </li>
       <li

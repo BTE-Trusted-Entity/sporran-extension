@@ -2,7 +2,9 @@
 
 exports[`IdentitySlide should enable editing the identity name 1`] = `
 <div>
-  <section>
+  <section
+    class="container"
+  >
     <div
       class="avatar"
     >
@@ -14,7 +16,7 @@ exports[`IdentitySlide should enable editing the identity name 1`] = `
       <span
         class="name"
       >
-        KILT Identity 1
+        Light DID Identity
       </span>
       <div
         class="wrapper"
@@ -37,7 +39,9 @@ exports[`IdentitySlide should enable editing the identity name 1`] = `
 
 exports[`IdentitySlide should render 1`] = `
 <div>
-  <section>
+  <section
+    class="container"
+  >
     <div
       class="avatar"
     >
@@ -49,7 +53,7 @@ exports[`IdentitySlide should render 1`] = `
       <span
         class="name"
       >
-        KILT Identity 1
+        Light DID Identity
       </span>
     </div>
   </section>

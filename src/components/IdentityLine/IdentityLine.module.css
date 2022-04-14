@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   margin: 0;
+  justify-content: flex-start;
 }
 
 .avatar {
@@ -19,4 +20,12 @@
   width: 1.75rem;
   background: none;
   margin-right: 0.75rem;
+}
+
+.name {
+  width: 18rem;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

@@ -15,7 +15,9 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
     >
       Add and remove service endpoints
     </p>
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar"
       >
@@ -27,7 +29,7 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
         <span
           class="name"
         >
-          KILT Identity 2
+          Identity with on-chain DID and lots of coins
         </span>
       </div>
     </section>
@@ -38,7 +40,7 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
         aria-label="DID"
         class="long"
         readonly=""
-        value="did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY"
+        value="did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ"
       />
       <button
         aria-label="copy to clipboard"
@@ -67,7 +69,7 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
       >
         <a
           class="expand"
-          href="/identity/FOO/did/endpoints/did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY%23123456"
+          href="/identity/FOO/did/endpoints/did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ%23123456"
         >
           <section
             class="collapsedCard"

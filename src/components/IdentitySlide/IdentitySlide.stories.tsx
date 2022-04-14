@@ -14,7 +14,7 @@ export default {
 export function Template(): JSX.Element {
   return (
     <IdentitySlide
-      identity={identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']}
+      identity={identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']}
     />
   );
 }
@@ -22,7 +22,7 @@ export function Template(): JSX.Element {
 export function LongName(): JSX.Element {
   return (
     <IdentitySlide
-      identity={identities['4oyRTDhHL22Chv9T89Vv2TanfUxFzBnPeMuq4EFL3gUiHbtL']}
+      identity={identities['4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653']}
     />
   );
 }
@@ -34,7 +34,7 @@ export function New(): JSX.Element {
 export function withFullDid(): JSX.Element {
   return (
     <IdentitySlide
-      identity={identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']}
+      identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}
     />
   );
 }

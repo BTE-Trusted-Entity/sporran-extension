@@ -28,12 +28,12 @@ const mockShareInput: ShareInput = {
     ],
     challenge: 'PASS',
   },
-  verifierDid: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+  verifierDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
 };
 
 const mockSelected: Selected = {
   credential: credentialsMock[4],
-  identity: identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'],
+  identity: identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'],
   sharedProps: ['Email'],
 };
 

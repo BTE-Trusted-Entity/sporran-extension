@@ -16,7 +16,9 @@ exports[`DidDowngrade promo not used at all 1`] = `
     >
       Remove DID from the KILT blockchain
     </p>
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar fullDid"
       >
@@ -28,7 +30,7 @@ exports[`DidDowngrade promo not used at all 1`] = `
         <span
           class="name"
         >
-          KILT Identity 2
+          Identity with on-chain DID and lots of coins
         </span>
       </div>
     </section>
@@ -86,7 +88,7 @@ exports[`DidDowngrade promo not used at all 1`] = `
       </label>
       <a
         class="reset"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/reset"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/reset"
       >
         Reset password
       </a>
@@ -193,7 +195,9 @@ exports[`DidDowngrade promo used for DID but not web3name 1`] = `
     >
       Remove DID from the KILT blockchain
     </p>
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar fullDid"
       >
@@ -205,7 +209,7 @@ exports[`DidDowngrade promo used for DID but not web3name 1`] = `
         <span
           class="name"
         >
-          KILT Identity 2
+          Identity with on-chain DID and lots of coins
         </span>
       </div>
     </section>
@@ -263,7 +267,7 @@ exports[`DidDowngrade promo used for DID but not web3name 1`] = `
       </label>
       <a
         class="reset"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/reset"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/reset"
       >
         Reset password
       </a>
@@ -370,7 +374,9 @@ exports[`DidDowngrade promo used for both web3name and DID 1`] = `
     >
       Remove DID from the KILT blockchain
     </p>
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar fullDid"
       >
@@ -382,7 +388,7 @@ exports[`DidDowngrade promo used for both web3name and DID 1`] = `
         <span
           class="name"
         >
-          KILT Identity 2
+          Identity with on-chain DID and lots of coins
         </span>
       </div>
     </section>
@@ -422,7 +428,7 @@ exports[`DidDowngrade promo used for both web3name and DID 1`] = `
       </label>
       <a
         class="reset"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/reset"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/reset"
       >
         Reset password
       </a>
@@ -529,7 +535,9 @@ exports[`DidDowngrade promo used for web3name but not DID 1`] = `
     >
       Remove DID from the KILT blockchain
     </p>
-    <section>
+    <section
+      class="container"
+    >
       <div
         class="avatar fullDid"
       >
@@ -541,7 +549,7 @@ exports[`DidDowngrade promo used for web3name but not DID 1`] = `
         <span
           class="name"
         >
-          KILT Identity 2
+          Identity with on-chain DID and lots of coins
         </span>
       </div>
     </section>
@@ -599,7 +607,7 @@ exports[`DidDowngrade promo used for web3name but not DID 1`] = `
       </label>
       <a
         class="reset"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/reset"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/reset"
       >
         Reset password
       </a>

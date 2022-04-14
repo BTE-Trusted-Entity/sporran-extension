@@ -50,7 +50,7 @@ exports[`DidDowngradeWarningWeb3Name should render 1`] = `
       </button>
       <a
         class="cta"
-        href="/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr/did/downgrade/warning/credentials"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/downgrade/warning/credentials"
       >
         Continue
       </a>

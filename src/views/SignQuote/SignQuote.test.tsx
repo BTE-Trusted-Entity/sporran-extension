@@ -1,8 +1,7 @@
-import { render } from '../../testing/testing';
+import { identitiesMock as identities, render } from '../../testing/testing';
 import { mockTerms } from '../../utilities/mockTerms/mockTerms';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { parseDidUri } from '../../utilities/did/did';
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { paths } from '../paths';
 
@@ -20,7 +19,7 @@ describe('SignQuote', () => {
       <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
         <SignQuote
           identity={
-            identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire']
+            identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
           }
         />
       </PopupTestProvider>,

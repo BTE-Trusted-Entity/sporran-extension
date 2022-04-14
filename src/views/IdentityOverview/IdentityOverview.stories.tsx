@@ -20,12 +20,15 @@ export default {
   component: IdentityOverview,
 } as Meta;
 
-const uri = '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
-const identity = identities['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+const uri = '/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1';
+const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
-const fullDidUri = '/identity/4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr';
+const fullDidUri = '/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo';
 const fullDidIdentity =
-  identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr'];
+  identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
+
+const web3NameIdentity =
+  identities['4q11Jce9wqM4A9GPB2z8n4K8LF9w2sQgZKFddhuKXwQ2Qo4q'];
 
 export function Template(): JSX.Element {
   return (
@@ -51,7 +54,7 @@ export function CreateSuccess(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/created',
+        '/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/created',
         uri,
       ]}
     >
@@ -66,7 +69,7 @@ export function ImportSuccess(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/imported',
+        '/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/imported',
         uri,
       ]}
     >
@@ -81,7 +84,7 @@ export function ResetSuccess(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/identity/4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire/reset',
+        '/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/pwreset',
         uri,
       ]}
     >
@@ -97,6 +100,16 @@ export function withFullDid(): JSX.Element {
     <MemoryRouter initialEntries={[fullDidUri]}>
       <Route path={paths.identity.overview}>
         <IdentityOverview identity={fullDidIdentity} />
+      </Route>
+    </MemoryRouter>
+  );
+}
+
+export function withWeb3Name(): JSX.Element {
+  return (
+    <MemoryRouter initialEntries={[fullDidUri]}>
+      <Route path={paths.identity.overview}>
+        <IdentityOverview identity={web3NameIdentity} />
       </Route>
     </MemoryRouter>
   );
@@ -128,13 +141,13 @@ export function onChainDidRemoved(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        '/identity/4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z',
+        '/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB',
       ]}
     >
       <Route path={paths.identity.overview}>
         <IdentityOverview
           identity={
-            identities['4oESHtb7Hu6grwwQVpqTj8G1XdvEsbDUmWNnT8CdbhVGQx7Z']
+            identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']
           }
         />
       </Route>

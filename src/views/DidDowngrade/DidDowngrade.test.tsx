@@ -1,8 +1,7 @@
 import { BalanceUtils } from '@kiltprotocol/core';
 
-import { render } from '../../testing/testing';
+import { identitiesMock as identities, render } from '../../testing/testing';
 
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { getFee } from '../../utilities/didDowngrade/didDowngrade';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
@@ -44,7 +43,7 @@ describe('DidDowngrade', () => {
     const { container } = render(
       <DidDowngrade
         identity={
-          identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
         }
       />,
     );
@@ -59,14 +58,14 @@ describe('DidDowngrade', () => {
       amount: depositAmount,
     });
     jest.mocked(useDepositWeb3Name).mockReturnValue({
-      owner: '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
+      owner: '4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo',
       amount: depositAmount,
     });
 
     const { container } = render(
       <DidDowngrade
         identity={
-          identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
         }
       />,
     );
@@ -76,7 +75,7 @@ describe('DidDowngrade', () => {
   it('promo used for DID but not web3name', async () => {
     mockIsFullDid(true);
     jest.mocked(useDepositDid).mockReturnValue({
-      owner: '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
+      owner: '4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo',
       amount: depositAmount,
     });
     jest.mocked(useDepositWeb3Name).mockReturnValue({
@@ -87,7 +86,7 @@ describe('DidDowngrade', () => {
     const { container } = render(
       <DidDowngrade
         identity={
-          identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
         }
       />,
     );
@@ -97,18 +96,18 @@ describe('DidDowngrade', () => {
   it('promo not used at all', async () => {
     mockIsFullDid(true);
     jest.mocked(useDepositDid).mockReturnValue({
-      owner: '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
+      owner: '4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo',
       amount: depositAmount,
     });
     jest.mocked(useDepositWeb3Name).mockReturnValue({
-      owner: '4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr',
+      owner: '4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo',
       amount: depositAmount,
     });
 
     const { container } = render(
       <DidDowngrade
         identity={
-          identities['4sm9oDiYFe22D7Ck2aBy5Y2gzxi2HhmGML98W9ZD2qmsqKCr']
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
         }
       />,
     );

@@ -10,7 +10,7 @@ interface FeeInput {
 }
 
 const fallbackAddressForFee =
-  '4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire';
+  '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1';
 
 export async function getFee(input: FeeInput): Promise<BN> {
   const blockchain = await BlockchainApiConnection.getConnectionOrConnect();

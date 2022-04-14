@@ -10,7 +10,7 @@ export default {
 } as Meta;
 
 const identity =
-  identitiesMock['4tJbxxKqYRv3gDvY66BKyKzZheHEH8a27VBiMfeGX2iQrire'];
+  identitiesMock['4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653'];
 
 export function Template(): JSX.Element {
   return <IdentityLine identity={identity} />;

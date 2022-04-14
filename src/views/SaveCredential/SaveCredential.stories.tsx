@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 
-import { mockAttestation } from '../../utilities/credentials/CredentialsProvider.mock';
+import { mockAttestations } from '../../utilities/credentials/CredentialsProvider.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
 
@@ -11,9 +11,19 @@ export default {
   component: SaveCredential,
 } as Meta;
 
-export function Template(): JSX.Element {
+const { downloaded, notDownloaded } = mockAttestations;
+
+export function Downloaded(): JSX.Element {
   return (
-    <PopupTestProvider path={paths.popup.save} data={mockAttestation}>
+    <PopupTestProvider path={paths.popup.save} data={downloaded}>
+      <SaveCredential />
+    </PopupTestProvider>
+  );
+}
+
+export function NotDownloaded(): JSX.Element {
+  return (
+    <PopupTestProvider path={paths.popup.save} data={notDownloaded}>
       <SaveCredential />
     </PopupTestProvider>
   );

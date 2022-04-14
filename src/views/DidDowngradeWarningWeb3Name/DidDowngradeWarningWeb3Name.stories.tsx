@@ -12,7 +12,7 @@ export default {
 export function Template(): JSX.Element {
   return (
     <DidDowngradeWarningWeb3Name
-      identity={identities['4pzncei2Jjap98Xks5XjoBKxBeYoCzofhbki7e3sZGnqDHvK']}
+      identity={identities['4q11Jce9wqM4A9GPB2z8n4K8LF9w2sQgZKFddhuKXwQ2Qo4q']}
     />
   );
 }
