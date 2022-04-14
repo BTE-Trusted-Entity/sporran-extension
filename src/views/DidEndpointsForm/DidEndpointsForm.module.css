@@ -90,6 +90,10 @@
   background-image: url('../../components/images/trash-bin.svg');
 }
 
+.labelLine {
+  position: relative;
+}
+
 .label {
   composes: smallText from '../../components/Typography/Typography.module.css';
   font-size: 0.625rem;
@@ -115,6 +119,11 @@
 
 .cancel {
   composes: buttonSecondary from '../../components/Button/Button.module.css';
+}
+
+.errorTooltipID {
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
+  top: 2.5rem;
 }
 
 .errorTooltip {

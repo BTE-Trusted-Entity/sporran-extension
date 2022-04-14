@@ -1021,6 +1021,9 @@
   "view_DidEndpointsForm_tooMany": {
     "message": "You cannot add any more service endpoints"
   },
+  "view_DidEndpointsForm_formatID": {
+    "message": "Please use letters from A to Z and numbers from 0 through 9"
+  },
   "view_DidEndpointsSign_heading_add": {
     "message": "Add Service Endpoint"
   },
