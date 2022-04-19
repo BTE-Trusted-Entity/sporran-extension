@@ -16,7 +16,14 @@ const identity =
 const endpoint: DidServiceEndpoint = {
   urls: ['https://sporran.org/'],
   types: ['Some Type'],
-  id: `${identity.did}#123456`,
+  id: '123456',
+};
+
+const longUrlEndpoint: DidServiceEndpoint = {
+  ...endpoint,
+  urls: [
+    'https://www.this-is-a-super-long-url/which-just-keeps-going-and-going/to-test-the-overflow-behaviour-of-the-url-value',
+  ],
 };
 
 export function Add(): JSX.Element {
@@ -28,5 +35,15 @@ export function Add(): JSX.Element {
 export function Remove(): JSX.Element {
   return (
     <DidEndpointsSign type="remove" identity={identity} endpoint={endpoint} />
+  );
+}
+
+export function LongUrl(): JSX.Element {
+  return (
+    <DidEndpointsSign
+      type="add"
+      identity={identity}
+      endpoint={longUrlEndpoint}
+    />
   );
 }

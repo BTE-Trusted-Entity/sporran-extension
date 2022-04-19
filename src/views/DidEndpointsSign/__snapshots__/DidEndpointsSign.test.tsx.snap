@@ -51,20 +51,71 @@ exports[`DidEndpointsSign should match the snapshot when adding 1`] = `
       />
     </p>
     <p
-      class="value"
+      class="fee"
     >
-      https://sporran.org/
+      Fee: 
+      <span
+        class="amount"
+      >
+        0
+        <span
+          class="fractional"
+        >
+          .0100
+        </span>
+         
+        <span
+          aria-label="KILT Coin"
+          class="coin"
+        />
+      </span>
     </p>
-    <p
-      class="value"
+    <dl
+      class="details"
     >
-      Some Type
-    </p>
-    <p
-      class="value"
-    >
-      123456
-    </p>
+      <div
+        class="fullWidthDetail"
+      >
+        <dt
+          class="detailName"
+        >
+          URL
+        </dt>
+        <dd
+          class="detailValue"
+        >
+          https://sporran.org/
+        </dd>
+      </div>
+      <div
+        class="detail"
+      >
+        <dt
+          class="detailName"
+        >
+          Type
+        </dt>
+        <dd
+          class="detailValue"
+        >
+          Some Type
+        </dd>
+      </div>
+      <div
+        class="detail"
+      >
+        <dt
+          class="detailName"
+        >
+          Service ID
+        </dt>
+        <dd
+          class="detailValue"
+        >
+          123456
+        </dd>
+      </div>
+    </dl>
     <p
       class="resetLine"
     >
@@ -218,20 +269,71 @@ exports[`DidEndpointsSign should match the snapshot when removing 1`] = `
       />
     </p>
     <p
-      class="value"
+      class="fee"
     >
-      https://sporran.org/
+      Fee: 
+      <span
+        class="amount"
+      >
+        0
+        <span
+          class="fractional"
+        >
+          .0100
+        </span>
+         
+        <span
+          aria-label="KILT Coin"
+          class="coin"
+        />
+      </span>
     </p>
-    <p
-      class="value"
+    <dl
+      class="details"
     >
-      Some Type
-    </p>
-    <p
-      class="value"
-    >
-      123456
-    </p>
+      <div
+        class="fullWidthDetail"
+      >
+        <dt
+          class="detailName"
+        >
+          URL
+        </dt>
+        <dd
+          class="detailValue"
+        >
+          https://sporran.org/
+        </dd>
+      </div>
+      <div
+        class="detail"
+      >
+        <dt
+          class="detailName"
+        >
+          Type
+        </dt>
+        <dd
+          class="detailValue"
+        >
+          Some Type
+        </dd>
+      </div>
+      <div
+        class="detail"
+      >
+        <dt
+          class="detailName"
+        >
+          Service ID
+        </dt>
+        <dd
+          class="detailValue"
+        >
+          123456
+        </dd>
+      </div>
+    </dl>
     <p
       class="resetLine"
     >

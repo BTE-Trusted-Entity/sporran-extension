@@ -16,18 +16,47 @@
   margin-top: 1rem;
 }
 
-.value {
-  composes: inputText from '../../components/Typography/Typography.module.css';
-  color: var(--color-grey-light);
-  margin: 0.75rem 0 0;
+.fee {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  font-size: 1.25rem;
+  margin: 0.5rem 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.details {
+  composes: details from '../../components/Card/Card.module.css';
+}
+
+.detail {
+  composes: detail from '../../components/Card/Card.module.css';
+}
+
+.fullWidthDetail {
+  composes: fullWidthDetail from '../../components/Card/Card.module.css';
+}
+
+.detailName {
+  composes: detailName from '../../components/Card/Card.module.css';
+}
+
+.detailValue {
+  composes: detailValue from '../../components/Card/Card.module.css';
+  font-size: 0.875rem;
   max-width: 100%;
   overflow-x: auto;
   white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.detailValue::-webkit-scrollbar {
+  display: none;
 }
 
 .buttonsLine {
   composes: buttonsLine from '../../components/Button/Button.module.css';
-  margin: 1.5rem 0 0;
+  margin-top: 0.5rem;
 }
 
 .cancel {

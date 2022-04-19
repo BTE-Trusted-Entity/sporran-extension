@@ -1056,6 +1056,18 @@
   "view_DidEndpointsSign_remove_error": {
     "message": "Removing the service endpoint failed"
   },
+  "view_DidEndpointsSign_fee": {
+    "message": "Fee: "
+  },
+  "view_DidEndpointsSign_url": {
+    "message": "URL"
+  },
+  "view_DidEndpointsSign_type": {
+    "message": "Type"
+  },
+  "view_DidEndpointsSign_id": {
+    "message": "Service ID"
+  },
   "view_SignDid_title": {
     "message": "Sign with on-chain DID"
   },
