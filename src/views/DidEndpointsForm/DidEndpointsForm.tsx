@@ -238,7 +238,7 @@ function DidNewEndpoint({
                 maxLength={maxIdLength}
               />
               {endpointIdError && (
-                <output className={styles.errorTooltip}>
+                <output className={styles.errorTooltipId}>
                   {endpointIdError}
                 </output>
               )}

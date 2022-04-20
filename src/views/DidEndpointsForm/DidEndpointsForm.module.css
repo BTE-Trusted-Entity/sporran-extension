@@ -121,7 +121,7 @@
   composes: buttonSecondary from '../../components/Button/Button.module.css';
 }
 
-.errorTooltipID {
+.errorTooltipId {
   composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
   top: 2.5rem;
 }
