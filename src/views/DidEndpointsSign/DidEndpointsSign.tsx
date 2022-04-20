@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
-import { DidServiceEndpoint } from '@kiltprotocol/types';
+import { DidServiceEndpoint, IDidDetails } from '@kiltprotocol/types';
 import { DidChain } from '@kiltprotocol/did';
 
 import * as styles from './DidEndpointsSign.module.css';
@@ -16,14 +16,62 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
-import { getKeystoreFromSeed } from '../../utilities/identities/identities';
+import {
+  getKeypairBySeed,
+  getKeystoreFromSeed,
+} from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { getFragment, useFullDidDetails } from '../../utilities/did/did';
+import { getFragment, getFullDidDetails } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
+
+type ActionType = 'add' | 'remove';
+
+async function getDidAuthorizedExtrinsic(
+  seed: Uint8Array,
+  did: IDidDetails['did'],
+  endpoint: DidServiceEndpoint,
+  type: ActionType,
+) {
+  const keystore = await getKeystoreFromSeed(seed);
+  const keypair = getKeypairBySeed(seed);
+  const fullDidDetails = await getFullDidDetails(did);
+
+  // getRemoveEndpointExtrinsic expects just the fragment part
+  const draft =
+    type === 'add'
+      ? await DidChain.getAddEndpointExtrinsic(endpoint)
+      : await DidChain.getRemoveEndpointExtrinsic(getFragment(endpoint.id));
+
+  return await fullDidDetails.authorizeExtrinsic(
+    draft,
+    keystore,
+    keypair.address,
+  );
+}
+
+async function getFee(
+  did: IDidDetails['did'],
+  endpoint: DidServiceEndpoint,
+  type: ActionType,
+) {
+  const fakeSeed = new Uint8Array(32);
+  const keypair = getKeypairBySeed(fakeSeed);
+
+  const authorized = await getDidAuthorizedExtrinsic(
+    fakeSeed,
+    did,
+    endpoint,
+    type,
+  );
+
+  return (await authorized.paymentInfo(keypair)).partialFee;
+}
 
 interface Props {
   identity: Identity;
-  type: 'add' | 'remove';
+  type: ActionType;
   endpoint: DidServiceEndpoint;
 }
 
@@ -35,7 +83,7 @@ export function DidEndpointsSign({
   const t = browser.i18n.getMessage;
   const { address, did } = identity;
 
-  const fullDidDetails = useFullDidDetails(did);
+  const fee = useAsyncValue(getFee, [did, endpoint, type]);
 
   const passwordField = usePasswordField();
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
@@ -43,27 +91,19 @@ export function DidEndpointsSign({
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
-      if (!fullDidDetails) {
-        return;
-      }
 
       const { keypair, seed } = await passwordField.get(event);
 
-      // getRemoveEndpointExtrinsic expects just the fragment part, contrary to its type definition
-      const draft =
-        type === 'add'
-          ? await DidChain.getAddEndpointExtrinsic(endpoint)
-          : await DidChain.getRemoveEndpointExtrinsic(getFragment(endpoint.id));
-
-      const authorized = await fullDidDetails.authorizeExtrinsic(
-        draft,
-        await getKeystoreFromSeed(seed),
-        keypair.address,
+      const authorized = await getDidAuthorizedExtrinsic(
+        seed,
+        did,
+        endpoint,
+        type,
       );
 
       await submit(keypair, authorized);
     },
-    [endpoint, fullDidDetails, passwordField, submit, type],
+    [endpoint, did, passwordField, submit, type],
   );
 
   const modalMessagesAdd = {
@@ -94,9 +134,31 @@ export function DidEndpointsSign({
 
       <CopyValue value={identity.did} label="DID" className={styles.didLine} />
 
-      <p className={styles.value}>{endpoint.urls[0]}</p>
-      <p className={styles.value}>{endpoint.types[0]}</p>
-      <p className={styles.value}>{getFragment(endpoint.id)}</p>
+      {fee && (
+        <p className={styles.fee}>
+          {t('view_DidEndpointsSign_fee')}
+          <KiltAmount amount={fee} type="costs" smallDecimals />
+        </p>
+      )}
+
+      <dl className={styles.details}>
+        <div className={styles.fullWidthDetail}>
+          <dt className={styles.detailName}>
+            {t('view_DidEndpointsSign_url')}
+          </dt>
+          <dd className={styles.detailValue}>{endpoint.urls[0]}</dd>
+        </div>
+        <div className={styles.detail}>
+          <dt className={styles.detailName}>
+            {t('view_DidEndpointsSign_type')}
+          </dt>
+          <dd className={styles.detailValue}>{endpoint.types[0]}</dd>
+        </div>
+        <div className={styles.detail}>
+          <dt className={styles.detailName}>{t('view_DidEndpointsSign_id')}</dt>
+          <dd className={styles.detailValue}>{getFragment(endpoint.id)}</dd>
+        </div>
+      </dl>
 
       <PasswordField identity={identity} autoFocus password={passwordField} />
 

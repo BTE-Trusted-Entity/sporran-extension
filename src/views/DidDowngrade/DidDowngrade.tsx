@@ -161,7 +161,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
       {!total && (
         <p className={styles.costs}>
-          {t('view_W3NRemove_fee_as_total')}
+          {t('view_DidDowngrade_fee_as_total')}
           <KiltAmount amount={fee} type="costs" smallDecimals />
         </p>
       )}
