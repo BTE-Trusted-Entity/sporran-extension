@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
 
 import { Identity } from '../../utilities/identities/types';
@@ -45,6 +45,13 @@ export function DidEndpointsFlow({ identity }: Props): JSX.Element {
       <Route path={paths.identity.did.manage.endpoints.sign}>
         {values && (
           <DidEndpointsSign identity={identity} type={type} endpoint={values} />
+        )}
+        {!values && (
+          <Redirect
+            to={generatePath(paths.identity.did.manage.endpoints.edit, {
+              address,
+            })}
+          />
         )}
       </Route>
       <Route path={paths.identity.did.manage.endpoints.edit}>
