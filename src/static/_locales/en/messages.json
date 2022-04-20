@@ -846,6 +846,9 @@
   "view_DidUpgrade_deposit": {
     "message": " Deposit "
   },
+  "view_DidUpgrade_deposit_explainer": {
+    "message": "A deposit is needed to create your on-chain DID. The deposit will be refunded if you remove your on-chain DID."
+  },
   "view_DidUpgrade_fee": {
     "message": " + fee "
   },
@@ -938,7 +941,7 @@
     "message": "Upgrading enables you to sign with your on-chain DID and use new functionality."
   },
   "view_DidUpgradeExplainer_deposit": {
-    "message": "To store your DID on the blockchain, a deposit needs to be reserved. The deposit will be refunded if you remove your on-chain DID."
+    "message": "A deposit is needed to create your on-chain DID. The deposit will be refunded if you remove your on-chain DID."
   },
   "view_DidUpgradeExplainer_onchain_deleted": {
     "message": "You deleted your on-chain DID and can no longer use this feature. To start using an on-chain DID, please create a new identity."
@@ -1254,7 +1257,7 @@
     "message": " + fee "
   },
   "view_W3NCreateSign_explainer": {
-    "message": "To store your web3name on the blockchain, a deposit needs to be reserved. The deposit will be refunded if you remove your web3name."
+    "message": "A deposit is needed to claim your web3name. The deposit will be refunded if you remove your web3name."
   },
   "view_W3NCreateSign_label": {
     "message": "web3name: "

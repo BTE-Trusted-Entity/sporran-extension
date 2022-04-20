@@ -122,7 +122,7 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
       </p>
       <p className={styles.details}>
         <ExplainerModal label={t('view_DidUpgrade_info')} portalRef={portalRef}>
-          {t('view_DidUpgradeExplainer_deposit')}
+          {t('view_DidUpgrade_deposit_explainer')}
         </ExplainerModal>
         {t('view_DidUpgrade_deposit')}
         {asKiltCoins(deposit, 'costs')} <KiltCurrency />
