@@ -38,7 +38,7 @@ async function getDidAuthorizedExtrinsic(
   const keypair = getKeypairBySeed(seed);
   const fullDidDetails = await getFullDidDetails(did);
 
-  // getRemoveEndpointExtrinsic expects just the fragment part, contrary to its type definition
+  // getRemoveEndpointExtrinsic expects just the fragment part
   const draft =
     type === 'add'
       ? await DidChain.getAddEndpointExtrinsic(endpoint)
@@ -156,7 +156,7 @@ export function DidEndpointsSign({
         </div>
         <div className={styles.detail}>
           <dt className={styles.detailName}>{t('view_DidEndpointsSign_id')}</dt>
-          <dd className={styles.detailValue}>{endpoint.id}</dd>
+          <dd className={styles.detailValue}>{getFragment(endpoint.id)}</dd>
         </div>
       </dl>
 
