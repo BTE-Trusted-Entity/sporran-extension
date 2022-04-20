@@ -133,22 +133,22 @@ function DidNewEndpoint({
 
   const dirty = useBooleanState();
 
-  const ns = useAsyncValue(
+  const namespace = useAsyncValue(
     async () =>
       (await BlockchainApiConnection.getConnectionOrConnect()).api.consts.did,
     [],
   );
   const maxIdLength = useMemo(
-    () => apiConstToNumber(ns?.maxServiceIdLength),
-    [ns],
+    () => apiConstToNumber(namespace?.maxServiceIdLength),
+    [namespace],
   );
   const maxTypeLength = useMemo(
-    () => apiConstToNumber(ns?.maxServiceTypeLength),
-    [ns],
+    () => apiConstToNumber(namespace?.maxServiceTypeLength),
+    [namespace],
   );
   const maxUrlLength = useMemo(
-    () => apiConstToNumber(ns?.maxServiceUrlLength),
-    [ns],
+    () => apiConstToNumber(namespace?.maxServiceUrlLength),
+    [namespace],
   );
 
   const [endpointIdError, setEndpointIdError] = useState('');
