@@ -1,7 +1,17 @@
-import { RefObject, useCallback, useEffect, useRef } from 'react';
+import {
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Link, Prompt, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
+import { u32 } from '@polkadot/types';
+import { Codec } from '@polkadot/types/types';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
+import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 import { last } from 'lodash-es';
 
 import * as styles from './DidEndpointsForm.module.css';
@@ -100,6 +110,10 @@ function DidEndpointCard({
   );
 }
 
+function apiConstToNumber(value?: Codec): number | undefined {
+  return value === undefined ? undefined : (value as u32).toNumber();
+}
+
 function DidNewEndpoint({
   onAdd,
   tooMany,
@@ -119,17 +133,44 @@ function DidNewEndpoint({
 
   const dirty = useBooleanState();
 
+  const namespace = useAsyncValue(
+    async () =>
+      (await BlockchainApiConnection.getConnectionOrConnect()).api.consts.did,
+    [],
+  );
+  const maxIdLength = useMemo(
+    () => apiConstToNumber(namespace?.maxServiceIdLength),
+    [namespace],
+  );
+  const maxTypeLength = useMemo(
+    () => apiConstToNumber(namespace?.maxServiceTypeLength),
+    [namespace],
+  );
+  const maxUrlLength = useMemo(
+    () => apiConstToNumber(namespace?.maxServiceUrlLength),
+    [namespace],
+  );
+
+  const [endpointIdError, setEndpointIdError] = useState('');
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+      setEndpointIdError('');
       if (tooMany) {
         return;
       }
 
       const formData = new FormData(event.target as HTMLFormElement);
-      const id = formData.get('id') as string;
-      const url = formData.get('url') as string;
-      const type = formData.get('type') as string;
+      const id = (formData.get('id') as string).trim();
+      const url = (formData.get('url') as string).trim();
+      const type = (formData.get('type') as string).trim();
+
+      const idHasUnsupportedCharacter = id.match(/[^a-z\d]/i);
+      if (idHasUnsupportedCharacter) {
+        setEndpointIdError(t('view_DidEndpointsForm_formatID'));
+        return;
+      }
 
       dirty.off();
       // wait for React to update the dirty flag
@@ -141,7 +182,7 @@ function DidNewEndpoint({
         types: [type],
       });
     },
-    [tooMany, dirty, onAdd],
+    [tooMany, dirty, onAdd, t],
   );
 
   return (
@@ -169,21 +210,40 @@ function DidNewEndpoint({
 
           <label className={styles.label}>
             {t('view_DidEndpointsForm_url')}
-            <input className={styles.input} type="url" name="url" required />
+            <input
+              className={styles.input}
+              type="url"
+              name="url"
+              required
+              maxLength={maxUrlLength}
+            />
           </label>
           <label className={styles.label}>
             {t('view_DidEndpointsForm_type')}
-            <input className={styles.input} name="type" required />
-          </label>
-          <label className={styles.label}>
-            {t('view_DidEndpointsForm_id')}
             <input
               className={styles.input}
-              name="id"
+              name="type"
               required
-              defaultValue={String(Math.random()).substring(2, 8)}
+              maxLength={maxTypeLength}
             />
           </label>
+          <div className={styles.labelLine}>
+            <label className={styles.label}>
+              {t('view_DidEndpointsForm_id')}
+              <input
+                className={styles.input}
+                name="id"
+                required
+                defaultValue={String(Math.random()).substring(2, 8)}
+                maxLength={maxIdLength}
+              />
+              {endpointIdError && (
+                <output className={styles.errorTooltipId}>
+                  {endpointIdError}
+                </output>
+              )}
+            </label>
+          </div>
 
           <p className={styles.buttonsLine}>
             {startUrl && (
@@ -226,8 +286,15 @@ export function DidEndpointsForm({
     [did],
   );
 
+  const maxEndpoints = useAsyncValue(async () => {
+    const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+    return apiConstToNumber(api.consts.did.maxNumberOfServicesPerDid);
+  }, []);
+
   const lastEndpoint = last(endpoints);
-  const hasTooManyEndpoints = Boolean(endpoints && endpoints.length >= 25);
+  const hasTooManyEndpoints = Boolean(
+    endpoints && maxEndpoints && endpoints.length >= maxEndpoints,
+  );
   const hasFewEndpoints = endpoints && endpoints.length < 7;
   const hasNoEndpoints = !endpoints || endpoints.length === 0;
   const collapsible = !hasNoEndpoints;

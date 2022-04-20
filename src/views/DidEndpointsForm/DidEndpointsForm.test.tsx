@@ -1,6 +1,11 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
 import { DidUtils, FullDidDetails } from '@kiltprotocol/did';
+import {
+  Blockchain,
+  BlockchainApiConnection,
+} from '@kiltprotocol/chain-helpers';
+import { Codec } from '@polkadot/types/types';
 
 import { identitiesMock, render, act } from '../../testing/testing';
 import { getFullDidDetails } from '../../utilities/did/did';
@@ -24,6 +29,19 @@ const endpoints: DidServiceEndpoint[] = [
     id: `${identity.did}#654321`,
   },
 ];
+
+jest.mocked(BlockchainApiConnection.getConnectionOrConnect).mockResolvedValue({
+  api: {
+    consts: {
+      did: {
+        maxServiceIdLength: { toNumber: () => 50 } as unknown as Codec,
+        maxServiceTypeLength: { toNumber: () => 50 } as unknown as Codec,
+        maxServiceUrlLength: { toNumber: () => 200 } as unknown as Codec,
+        maxNumberOfServicesPerDid: { toNumber: () => 25 } as unknown as Codec,
+      },
+    },
+  },
+} as unknown as Blockchain);
 
 jest.mocked(DidUtils.parseDidUri).mockReturnValue({
   identifier: '4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
