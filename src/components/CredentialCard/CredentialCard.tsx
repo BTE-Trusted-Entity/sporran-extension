@@ -33,16 +33,24 @@ import { isFullDid } from '../../utilities/did/did';
 import { generatePath, paths } from '../../views/paths';
 
 export function useScrollIntoView(
+  initialExpand: boolean,
   expanded: boolean,
   cardRef: RefObject<HTMLLIElement>,
   isContainerParent = true,
 ): void {
+  const isInitial = useBooleanState(initialExpand);
+
   useEffect(() => {
     const containerElement = isContainerParent
       ? cardRef.current?.parentElement
       : document.getElementById('allCredentials');
 
     if (expanded && cardRef.current && containerElement) {
+      if (isInitial.current) {
+        isInitial.off();
+        return;
+      }
+
       const card = cardRef.current.getBoundingClientRect();
       const container = containerElement.getBoundingClientRect();
 
@@ -58,7 +66,7 @@ export function useScrollIntoView(
         cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  }, [expanded, cardRef, isContainerParent]);
+  }, [expanded, cardRef, isContainerParent, isInitial]);
 }
 
 function CredentialName({
@@ -390,7 +398,7 @@ export function CredentialCard({
   const expanded = useBooleanState(expand);
 
   const cardRef = useRef<HTMLLIElement>(null);
-  useScrollIntoView(expanded.current, cardRef);
+  useScrollIntoView(expand, expanded.current, cardRef);
 
   const portalRef = useRef<HTMLDivElement>(null);
 

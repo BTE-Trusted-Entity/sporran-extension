@@ -36,7 +36,7 @@ export function NoCredentials(): JSX.Element {
 
 export function FewCredentials(): JSX.Element {
   return (
-    <CredentialsProviderMock credentials={credentialsMock.slice(0, 3)}>
+    <CredentialsProviderMock credentials={credentialsMock.slice(0, 4)}>
       <IdentityCredentials identity={identity} />
     </CredentialsProviderMock>
   );
