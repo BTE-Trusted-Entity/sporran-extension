@@ -1,11 +1,15 @@
 import { FullDidDetails } from '@kiltprotocol/did';
 
+import { MemoryRouter, Route } from 'react-router-dom';
+
 import { identitiesMock, render } from '../../testing/testing';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import '../../components/useCopyButton/useCopyButton.mock';
 
 import { useFullDidDetails } from '../../utilities/did/did';
 import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
+
+import { generatePath, paths } from '../paths';
 
 import { W3NCreatePromo } from './W3NCreatePromo';
 
@@ -25,7 +29,18 @@ jest.mocked(usePromoStatus).mockReturnValue({
 describe('W3NCreatePromo', () => {
   it('should match the snapshot', async () => {
     const { container } = render(
-      <W3NCreatePromo identity={identity} web3name="fancy-name" />,
+      <MemoryRouter
+        initialEntries={[
+          generatePath(paths.identity.did.web3name.create.promo.sign, {
+            address: 'FOO',
+            web3name: 'fancy-name',
+          }),
+        ]}
+      >
+        <Route path={paths.identity.did.web3name.create.promo.sign}>
+          <W3NCreatePromo identity={identity} />
+        </Route>
+      </MemoryRouter>,
     );
     await waitForGetPassword();
     expect(container).toMatchSnapshot();

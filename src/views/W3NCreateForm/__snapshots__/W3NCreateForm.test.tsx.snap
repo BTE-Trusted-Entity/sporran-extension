@@ -61,7 +61,7 @@ lowercase a to z, 0 to 9, “-” and “_”
     >
       <input
         class="input"
-        name="name"
+        name="web3name"
         placeholder="choose a unique web3name"
         required=""
         type="input"

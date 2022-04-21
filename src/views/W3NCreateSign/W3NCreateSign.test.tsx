@@ -1,12 +1,16 @@
 import { BalanceUtils } from '@kiltprotocol/core';
 import { FullDidDetails } from '@kiltprotocol/did';
 
+import { MemoryRouter, Route } from 'react-router-dom';
+
 import { identitiesMock, render } from '../../testing/testing';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import '../../components/useCopyButton/useCopyButton.mock';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
 import { useFullDidDetails } from '../../utilities/did/did';
+
+import { generatePath, paths } from '../paths';
 
 import { W3NCreateSign } from './W3NCreateSign';
 
@@ -27,7 +31,18 @@ const identity =
 describe('W3NCreateSign', () => {
   it('should match the snapshot', async () => {
     const { container } = render(
-      <W3NCreateSign identity={identity} web3name="fancy-name" />,
+      <MemoryRouter
+        initialEntries={[
+          generatePath(paths.identity.did.web3name.create.sign, {
+            address: 'FOO',
+            web3name: 'fancy-name',
+          }),
+        ]}
+      >
+        <Route path={paths.identity.did.web3name.create.sign}>
+          <W3NCreateSign identity={identity} />
+        </Route>
+      </MemoryRouter>,
     );
     await waitForGetPassword();
     expect(container).toMatchSnapshot();

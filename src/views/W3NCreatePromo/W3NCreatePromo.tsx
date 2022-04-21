@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import BN from 'bn.js';
 
@@ -29,14 +29,12 @@ import {
 
 interface Props {
   identity: Identity;
-  web3name: string;
 }
 
-export function W3NCreatePromo({
-  identity,
-  web3name,
-}: Props): JSX.Element | null {
+export function W3NCreatePromo({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
+
+  const { web3name } = useParams() as { web3name: string };
 
   const { address, did } = identity;
   const destination = generatePath(paths.identity.did.manage.start, {

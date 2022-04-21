@@ -11,18 +11,13 @@ import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { isFullDid } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 interface Props {
   identity: Identity;
-  hasPromo: boolean;
-  togglePromo: () => void;
 }
 
-export function W3NCreateInfo({
-  identity,
-  hasPromo,
-  togglePromo,
-}: Props): JSX.Element {
+export function W3NCreateInfo({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { goBack } = useHistory();
 
@@ -30,6 +25,12 @@ export function W3NCreateInfo({
   const canContinue = isFullDid(identity.did);
 
   const promoStatus = usePromoStatus();
+
+  const hasPromo = useBooleanState();
+
+  const formPath = hasPromo.current
+    ? paths.identity.did.web3name.create.promo.form
+    : paths.identity.did.web3name.create.form;
 
   return (
     <section className={styles.container}>
@@ -58,8 +59,8 @@ export function W3NCreateInfo({
             <input
               type="checkbox"
               className={styles.promo}
-              onChange={togglePromo}
-              checked={hasPromo}
+              onChange={hasPromo.toggle}
+              checked={hasPromo.current}
             />
             <span />
             {t('view_W3NCreateInfo_promo')}
@@ -82,7 +83,7 @@ export function W3NCreateInfo({
 
         {canContinue && (
           <Link
-            to={generatePath(paths.identity.did.web3name.create.form, {
+            to={generatePath(formPath, {
               address,
             })}
             className={styles.next}

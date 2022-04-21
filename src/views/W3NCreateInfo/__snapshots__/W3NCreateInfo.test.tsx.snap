@@ -148,7 +148,6 @@ exports[`W3NCreateInfo should match the snapshot for on-chain did 1`] = `
     >
       <label>
         <input
-          checked=""
           class="promo"
           type="checkbox"
         />
