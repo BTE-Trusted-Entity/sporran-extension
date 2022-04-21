@@ -37,7 +37,14 @@ export function useScrollIntoView(
   cardRef: RefObject<HTMLLIElement>,
   isContainerParent = true,
 ): void {
+  const isFirstRun = useBooleanState(true);
+
   useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.off();
+      return;
+    }
+
     const containerElement = isContainerParent
       ? cardRef.current?.parentElement
       : document.getElementById('allCredentials');
@@ -58,7 +65,7 @@ export function useScrollIntoView(
         cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  }, [expanded, cardRef, isContainerParent]);
+  }, [expanded, cardRef, isContainerParent, isFirstRun]);
 }
 
 function CredentialName({
