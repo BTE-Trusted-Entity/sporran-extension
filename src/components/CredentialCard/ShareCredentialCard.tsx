@@ -90,7 +90,7 @@ export function ShareCredentialCard({
 
   const cardRef = useRef<HTMLLIElement>(null);
 
-  useScrollIntoView(isSelected, expanded.current, cardRef, false);
+  useScrollIntoView(expanded.current, cardRef, false);
 
   return (
     <li
