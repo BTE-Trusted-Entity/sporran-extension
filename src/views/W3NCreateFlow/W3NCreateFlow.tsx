@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
 import { generatePath, paths } from '../paths';
@@ -16,13 +16,14 @@ export function W3NCreateFlow({ identity }: Props): JSX.Element {
   const { address } = identity;
 
   const history = useHistory();
-  const [web3name, setWeb3name] = useState('');
 
   const handleSubmit = useCallback(
     (web3name: string) => {
-      setWeb3name(web3name);
       history.push(
-        generatePath(paths.identity.did.web3name.create.sign, { address }),
+        generatePath(paths.identity.did.web3name.create.sign, {
+          address,
+          web3name,
+        }),
       );
     },
     [address, history],
@@ -30,10 +31,10 @@ export function W3NCreateFlow({ identity }: Props): JSX.Element {
 
   const handlePromoSubmit = useCallback(
     (web3name: string) => {
-      setWeb3name(web3name);
       history.push(
         generatePath(paths.identity.did.web3name.create.promo.sign, {
           address,
+          web3name,
         }),
       );
     },
@@ -49,10 +50,10 @@ export function W3NCreateFlow({ identity }: Props): JSX.Element {
         <W3NCreateForm identity={identity} onSubmit={handlePromoSubmit} />
       </Route>
       <Route path={paths.identity.did.web3name.create.sign}>
-        <W3NCreateSign identity={identity} web3name={web3name} />
+        <W3NCreateSign identity={identity} />
       </Route>
       <Route path={paths.identity.did.web3name.create.promo.sign}>
-        <W3NCreatePromo identity={identity} web3name={web3name} />
+        <W3NCreatePromo identity={identity} />
       </Route>
       <Route path={paths.identity.did.web3name.create.info}>
         <W3NCreateInfo identity={identity} />

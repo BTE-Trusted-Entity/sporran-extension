@@ -63,10 +63,10 @@ export const paths = {
           base: '/identity/:address/did/web3name/create',
           info: '/identity/:address/did/web3name/create/info',
           form: '/identity/:address/did/web3name/create/form',
-          sign: '/identity/:address/did/web3name/create/sign',
+          sign: '/identity/:address/did/web3name/create/sign/:web3name',
           promo: {
             form: '/identity/:address/did/web3name/create/promo/form',
-            sign: '/identity/:address/did/web3name/create/promo/sign',
+            sign: '/identity/:address/did/web3name/create/promo/sign/:web3name',
           },
         },
         remove: '/identity/:address/did/web3name/remove',

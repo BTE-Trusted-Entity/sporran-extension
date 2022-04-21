@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { FullDidDetails, Web3Names } from '@kiltprotocol/did';
@@ -56,14 +56,12 @@ async function getFee(fullDid?: FullDidDetails) {
 
 interface Props {
   identity: Identity;
-  web3name: string;
 }
 
-export function W3NCreateSign({
-  identity,
-  web3name,
-}: Props): JSX.Element | null {
+export function W3NCreateSign({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
+
+  const { web3name } = useParams() as { web3name: string };
 
   const { address, did } = identity;
   const destination = generatePath(paths.identity.did.manage.start, {
