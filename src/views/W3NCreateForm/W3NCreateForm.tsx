@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { Web3Names } from '@kiltprotocol/did';
@@ -16,12 +16,15 @@ import { Stats } from '../../components/Stats/Stats';
 
 interface Props {
   identity: Identity;
-  onSubmit: (name: string) => void;
+  signPath: string;
 }
 
-export function W3NCreateForm({ identity, onSubmit }: Props): JSX.Element {
+export function W3NCreateForm({ identity, signPath }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const { goBack } = useHistory();
+  const { address } = identity;
+
+  const history = useHistory();
+  const { goBack } = history;
 
   const [error, setError] = useState('');
   const handleInput = useCallback(() => setError(''), []);
@@ -31,41 +34,41 @@ export function W3NCreateForm({ identity, onSubmit }: Props): JSX.Element {
       event.preventDefault();
 
       const formData = new FormData(event.target as HTMLFormElement);
-      const value = formData.get('name') as string;
-      const name = value.trim();
+      const value = formData.get('web3name') as string;
+      const web3name = value.trim();
 
       const { api } = await BlockchainApiConnection.getConnectionOrConnect();
       const minLength = (api.consts.web3Names.minNameLength as u32).toNumber();
       const maxLength = (api.consts.web3Names.maxNameLength as u32).toNumber();
 
-      const tooShort = name.length < minLength;
+      const tooShort = web3name.length < minLength;
       if (tooShort) {
         setError(t('view_W3NCreateForm_short', [minLength]));
         return;
       }
 
-      const tooLong = name.length > maxLength;
+      const tooLong = web3name.length > maxLength;
       if (tooLong) {
         setError(t('view_W3NCreateForm_long', [maxLength]));
         return;
       }
 
-      const unexpected = name.match(/[^a-z0-9_-]/);
+      const unexpected = web3name.match(/[^a-z0-9_-]/);
       if (unexpected) {
         setError(t('view_W3NCreateForm_unexpected', [unexpected[0]]));
         return;
       }
 
       // TODO: if the future blockchain versions do not fix the stale link issue, consider a workaround here
-      const taken = Boolean(await Web3Names.queryDidForWeb3Name(name));
+      const taken = Boolean(await Web3Names.queryDidForWeb3Name(web3name));
       if (taken) {
         setError(t('view_W3NCreateForm_taken'));
         return;
       }
 
-      onSubmit(name);
+      history.push(generatePath(signPath, { address, web3name }));
     },
-    [t, onSubmit],
+    [t, address, signPath, history],
   );
 
   return (
@@ -82,7 +85,7 @@ export function W3NCreateForm({ identity, onSubmit }: Props): JSX.Element {
       <p className={styles.inputLine}>
         <input
           type="input"
-          name="name"
+          name="web3name"
           className={styles.input}
           required
           placeholder={t('view_W3NCreateForm_placeholder')}

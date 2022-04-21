@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 
@@ -14,5 +13,5 @@ const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
 export function Template(): JSX.Element {
-  return <W3NCreateForm identity={identity} onSubmit={action('onSubmit')} />;
+  return <W3NCreateForm identity={identity} signPath="/sign-path" />;
 }
