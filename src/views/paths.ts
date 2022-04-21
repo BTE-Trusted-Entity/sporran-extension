@@ -64,7 +64,10 @@ export const paths = {
           info: '/identity/:address/did/web3name/create/info',
           form: '/identity/:address/did/web3name/create/form',
           sign: '/identity/:address/did/web3name/create/sign',
-          promo: '/identity/:address/did/web3name/create/promo',
+          promo: {
+            form: '/identity/:address/did/web3name/create/promo/form',
+            sign: '/identity/:address/did/web3name/create/promo/sign',
+          },
         },
         remove: '/identity/:address/did/web3name/remove',
       },

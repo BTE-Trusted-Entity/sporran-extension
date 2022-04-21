@@ -19,16 +19,12 @@ jest.mocked(usePromoStatus).mockReturnValue({
 describe('W3NCreateInfo', () => {
   it('should match the snapshot for off-chain did', async () => {
     mockIsFullDid(false);
-    const { container } = render(
-      <W3NCreateInfo identity={off} hasPromo={false} togglePromo={jest.fn()} />,
-    );
+    const { container } = render(<W3NCreateInfo identity={off} />);
     expect(container).toMatchSnapshot();
   });
   it('should match the snapshot for on-chain did', async () => {
     mockIsFullDid(true);
-    const { container } = render(
-      <W3NCreateInfo identity={on} hasPromo={true} togglePromo={jest.fn()} />,
-    );
+    const { container } = render(<W3NCreateInfo identity={on} />);
     expect(container).toMatchSnapshot();
   });
 });
