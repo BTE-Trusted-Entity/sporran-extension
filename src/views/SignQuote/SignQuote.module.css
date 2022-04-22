@@ -58,5 +58,4 @@
 .errorTooltip {
   composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
   top: 2.5rem;
-  left: 50%;
 }
