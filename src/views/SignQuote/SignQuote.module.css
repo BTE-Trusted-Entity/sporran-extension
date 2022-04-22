@@ -54,3 +54,8 @@
 .submit {
   composes: buttonPrimary from '../../components/Button/Button.module.css';
 }
+
+.errorTooltip {
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
+  top: 2.5rem;
+}

@@ -17,7 +17,7 @@ import { useIdentityCredentials } from '../../utilities/credentials/credentials'
 import { legacyIdentity } from '../../utilities/identities/IdentitiesProvider.mock';
 import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-import { useDidDeletionStatus } from '../../utilities/did/useDidDeletionStatus';
+import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 
 import { IdentityOverview } from './IdentityOverview';
 
@@ -26,7 +26,7 @@ jest.mock('../../utilities/credentials/credentials');
 jest.mock('../../utilities/useWeb3Name/useWeb3Name');
 jest.mock('../../utilities/useAsyncValue/useAsyncValue');
 jest.mocked(useAsyncValue).mockReturnValue(false);
-jest.mock('../../utilities/did/useDidDeletionStatus');
+jest.mock('../../utilities/did/useIsOnChainDidDeleted');
 
 const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
@@ -119,7 +119,7 @@ describe('IdentityOverview', () => {
   });
 
   it('should prompt to update legacy DID', async () => {
-    jest.mocked(useDidDeletionStatus).mockReturnValue(false);
+    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(false);
     jest.mocked(useAsyncValue).mockReturnValueOnce(true);
 
     const { container } = render(
@@ -149,7 +149,7 @@ describe('IdentityOverview', () => {
 
   it('should show on-chain DID removed', async () => {
     mockIsFullDid(false);
-    jest.mocked(useDidDeletionStatus).mockReturnValue(true);
+    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(true);
     jest.mocked(useWeb3Name).mockReturnValueOnce('fancy-name');
 
     const { container } = render(

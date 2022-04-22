@@ -33,6 +33,7 @@ import {
 import { claimChannel } from '../../channels/claimChannel/claimChannel';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
+import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 
 export type Terms = ITerms & {
   claim: IClaim;
@@ -48,6 +49,9 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const data = usePopupData<Terms>();
+
+  const { did } = identity;
+  const error = useIsOnChainDidDeleted(did);
 
   const { claim, cTypes, quote, attesterName } = data;
 
@@ -175,10 +179,13 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         <button
           type="submit"
           className={styles.submit}
-          disabled={passwordField.isEmpty}
+          disabled={passwordField.isEmpty || error}
         >
           {t('view_SignQuote_CTA')}
         </button>
+        <output className={styles.errorTooltip} hidden={!error}>
+          {t('view_SignQuote_on_chain_did_deleted')}
+        </output>
       </p>
     </form>
   );
