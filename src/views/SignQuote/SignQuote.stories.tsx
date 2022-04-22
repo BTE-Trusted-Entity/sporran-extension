@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react';
 import { mockTerms } from '../../utilities/mockTerms/mockTerms';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
-import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
+import { moreIdentitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { paths } from '../paths';
 
 import { SignQuote } from './SignQuote';
@@ -19,6 +19,18 @@ export function Template(): JSX.Element {
       <SignQuote
         identity={
           identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
+        }
+      />
+    </PopupTestProvider>
+  );
+}
+
+export function OnChainDidDeleted(): JSX.Element {
+  return (
+    <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
+      <SignQuote
+        identity={
+          identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']
         }
       />
     </PopupTestProvider>

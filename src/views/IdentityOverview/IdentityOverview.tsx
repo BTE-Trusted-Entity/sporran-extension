@@ -12,7 +12,7 @@ import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/
 
 import { Identity, isNew } from '../../utilities/identities/identities';
 import { isFullDid, needLegacyDidCrypto } from '../../utilities/did/did';
-import { useDidDeletionStatus } from '../../utilities/did/useDidDeletionStatus';
+import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { generatePath, paths } from '../paths';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
@@ -56,7 +56,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const repairDid = hasLegacyDid;
 
   const web3name = useWeb3Name(did);
-  const wasOnChainDidDeleted = useDidDeletionStatus(did);
+  const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
 
   if (params.type) {
     return <Redirect to={generatePath(paths.identity.overview, { address })} />;

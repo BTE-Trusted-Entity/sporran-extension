@@ -632,6 +632,9 @@
   "view_SignQuote_attester": {
     "message": "Attester"
   },
+  "view_SignQuote_on_chain_did_deleted": {
+    "message": "On-chain DID deleted, please select a different Identity."
+  },
   "view_SignQuote_CTA": {
     "message": "Request Attestation"
   },

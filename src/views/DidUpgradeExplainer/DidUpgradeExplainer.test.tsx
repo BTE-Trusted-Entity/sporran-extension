@@ -1,11 +1,11 @@
 import { identitiesMock as identities, render } from '../../testing/testing';
 
-import { useDidDeletionStatus } from '../../utilities/did/useDidDeletionStatus';
+import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
 
 import { DidUpgradeExplainer } from './DidUpgradeExplainer';
 
-jest.mock('../../utilities/did/useDidDeletionStatus');
+jest.mock('../../utilities/did/useIsOnChainDidDeleted');
 
 jest.mock('../../utilities/promoBackend/promoBackend');
 jest
@@ -14,7 +14,7 @@ jest
 
 describe('DidUpgradeExplainer', () => {
   it('should render DID not on chain yet', async () => {
-    jest.mocked(useDidDeletionStatus).mockReturnValue(false);
+    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(false);
 
     const { container } = render(
       <DidUpgradeExplainer
@@ -27,7 +27,7 @@ describe('DidUpgradeExplainer', () => {
   });
 
   it('should render DID already removed from chain', async () => {
-    jest.mocked(useDidDeletionStatus).mockReturnValue(true);
+    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(true);
 
     const { container } = render(
       <DidUpgradeExplainer

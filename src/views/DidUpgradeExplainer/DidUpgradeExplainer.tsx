@@ -11,7 +11,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-import { useDidDeletionStatus } from '../../utilities/did/useDidDeletionStatus';
+import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
@@ -31,7 +31,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
     ? generatePath(paths.identity.did.upgrade.promo, { address })
     : generatePath(paths.identity.did.upgrade.sign, { address });
 
-  const wasOnChainDidDeleted = useDidDeletionStatus(did);
+  const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
 
   return (
     <section className={styles.container}>

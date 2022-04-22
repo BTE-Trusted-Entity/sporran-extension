@@ -3,7 +3,9 @@ import { DidResolver } from '@kiltprotocol/did';
 
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
-async function getDidDeletionStatus(did: IDidDetails['did']): Promise<boolean> {
+async function getIsOnChainDidDeleted(
+  did: IDidDetails['did'],
+): Promise<boolean> {
   if (!did) {
     return false;
   }
@@ -19,8 +21,8 @@ async function getDidDeletionStatus(did: IDidDetails['did']): Promise<boolean> {
   }
 }
 
-export function useDidDeletionStatus(
+export function useIsOnChainDidDeleted(
   did: IDidDetails['did'],
 ): boolean | undefined {
-  return useAsyncValue(getDidDeletionStatus, [did]);
+  return useAsyncValue(getIsOnChainDidDeleted, [did]);
 }
