@@ -93,10 +93,9 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+      const { seed } = await passwordField.get(event);
 
       try {
-        const { seed } = await passwordField.get(event);
-
         setSubmitting(true);
         setStatus('pending');
 

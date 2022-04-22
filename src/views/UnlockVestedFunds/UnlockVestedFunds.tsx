@@ -42,10 +42,9 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+      const { keypair } = await passwordField.get(event);
 
       try {
-        const { keypair } = await passwordField.get(event);
-
         setTxStatus('pending');
 
         const hash = await signVest(keypair);

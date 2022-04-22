@@ -55,10 +55,9 @@ export function ReviewTransaction({
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+      const { keypair } = await passwordField.get(event);
 
       try {
-        const { keypair } = await passwordField.get(event);
-
         setSubmitting(true);
         setTxStatus('pending');
 
