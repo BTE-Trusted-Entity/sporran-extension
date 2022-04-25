@@ -12,13 +12,13 @@ import {
 
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { Identity } from '../../utilities/identities/types';
-import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';

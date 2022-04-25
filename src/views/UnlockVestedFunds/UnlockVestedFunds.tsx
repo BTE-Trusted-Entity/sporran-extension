@@ -12,13 +12,13 @@ import {
   signVest,
   submitVest,
 } from '../../utilities/vesting/vesting';
-import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 import { Avatar } from '../../components/Avatar/Avatar';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';

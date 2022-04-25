@@ -14,6 +14,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { generatePath, paths } from '../paths';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
@@ -26,7 +27,6 @@ import {
   usePromoStatus,
   waitFinalized,
 } from '../../utilities/promoBackend/promoBackend';
-import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 interface Props {
   identity: Identity;

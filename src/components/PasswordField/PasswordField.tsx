@@ -29,6 +29,7 @@ import {
 import { RouteExcept } from '../RouteExcept/RouteExcept';
 import { generatePath, paths } from '../../views/paths';
 import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
+export { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 // Okay, ESLint, I must have a parameter but cannot use it
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

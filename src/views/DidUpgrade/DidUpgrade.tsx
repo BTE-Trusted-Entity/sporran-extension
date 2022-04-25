@@ -9,6 +9,7 @@ import * as styles from './DidUpgrade.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
@@ -28,7 +29,6 @@ import { Stats } from '../../components/Stats/Stats';
 import { paths } from '../paths';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { getDepositDid } from '../../utilities/getDeposit/getDeposit';
-import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 interface Props {
   identity: Identity;

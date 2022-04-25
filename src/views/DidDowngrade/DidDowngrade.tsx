@@ -17,6 +17,7 @@ import { paths } from '../paths';
 
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
@@ -38,7 +39,6 @@ import {
   useDepositWeb3Name,
 } from '../../utilities/getDeposit/getDeposit';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 function useCosts(
   address: string,

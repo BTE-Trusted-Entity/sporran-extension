@@ -7,8 +7,8 @@ import * as styles from './DidRepair.module.css';
 
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { Identity } from '../../utilities/identities/types';
-import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';

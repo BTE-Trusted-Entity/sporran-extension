@@ -7,6 +7,7 @@ import * as styles from './DidUpgradePromo.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
@@ -23,7 +24,6 @@ import {
   usePromoStatus,
   waitFinalized,
 } from '../../utilities/promoBackend/promoBackend';
-import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 interface Props {
   identity: Identity;
