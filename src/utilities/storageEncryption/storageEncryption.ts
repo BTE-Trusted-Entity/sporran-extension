@@ -12,11 +12,7 @@ type SaltsAndCipherStrings = {
   cipherString: string;
 };
 
-export class PasswordError extends Error {
-  constructor(message: string) {
-    super(message);
-  }
-}
+export class PasswordError extends Error {}
 
 async function deriveKeyFromPassword(
   password: string,
