@@ -18,6 +18,7 @@ import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
@@ -55,6 +56,9 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
 
         setTxStatus('success');
       } catch (error) {
+        if (error instanceof PasswordError) {
+          return;
+        }
         setTxStatus('error');
         console.error(error);
         if (error instanceof Error && error.message === insufficientFunds) {

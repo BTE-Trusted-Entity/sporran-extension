@@ -18,6 +18,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
@@ -74,6 +75,9 @@ export function ReviewTransaction({
 
         setTxStatus('success');
       } catch (error) {
+        if (error instanceof PasswordError) {
+          return;
+        }
         setTxStatus('error');
         setSubmitting(false);
       }

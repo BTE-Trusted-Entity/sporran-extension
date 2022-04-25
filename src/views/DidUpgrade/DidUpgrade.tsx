@@ -9,6 +9,7 @@ import * as styles from './DidUpgrade.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
@@ -88,6 +89,9 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
 
         setStatus('success');
       } catch (error) {
+        if (error instanceof PasswordError) {
+          return;
+        }
         setSubmitting(false);
         setStatus('error');
       }

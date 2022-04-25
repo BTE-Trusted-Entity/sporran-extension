@@ -8,6 +8,7 @@ import * as styles from './DidRepair.module.css';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { Identity } from '../../utilities/identities/types';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
@@ -71,6 +72,9 @@ export function DidRepair({ identity }: Props): JSX.Element | null {
 
         setStatus('success');
       } catch (error) {
+        if (error instanceof PasswordError) {
+          return;
+        }
         setSubmitting(false);
         setStatus('error');
       }

@@ -17,6 +17,7 @@ import { paths } from '../paths';
 
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
@@ -113,6 +114,9 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
         setStatus('success');
       } catch (error) {
+        if (error instanceof PasswordError) {
+          return;
+        }
         console.error(error);
         setSubmitting(false);
         setStatus('error');

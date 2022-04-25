@@ -14,6 +14,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { generatePath, paths } from '../paths';
 import {
+  PasswordError,
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
@@ -87,6 +88,9 @@ export function W3NCreatePromo({ identity }: Props): JSX.Element | null {
 
         setStatus('success');
       } catch (error) {
+        if (error instanceof PasswordError) {
+          return;
+        }
         setSubmitting(false);
         setStatus('error');
         console.error(error);
