@@ -12,6 +12,12 @@ type SaltsAndCipherStrings = {
   cipherString: string;
 };
 
+export class PasswordError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
 async function deriveKeyFromPassword(
   password: string,
   keySaltBytes: ArrayBuffer,
@@ -78,7 +84,7 @@ export async function decrypt(
       cipherBytes,
     );
   } catch {
-    throw new Error('Invalid password');
+    throw new PasswordError('Invalid password');
   }
 }
 

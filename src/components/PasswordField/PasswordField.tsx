@@ -28,7 +28,7 @@ import {
 } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels';
 import { RouteExcept } from '../RouteExcept/RouteExcept';
 import { generatePath, paths } from '../../views/paths';
-import { exceptionToError } from '../../utilities/exceptionToError/exceptionToError';
+import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 // Okay, ESLint, I must have a parameter but cannot use it
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -112,7 +112,7 @@ export function PasswordField({
       try {
         seed = await decryptIdentity(address, password);
       } catch (exception) {
-        if (exceptionToError(exception).message === 'Invalid password') {
+        if (exception instanceof PasswordError) {
           setError(t('component_PasswordField_password_incorrect'));
         }
         throw exception;

@@ -38,6 +38,7 @@ import {
   useDepositWeb3Name,
 } from '../../utilities/getDeposit/getDeposit';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 function useCosts(
   address: string,
@@ -113,6 +114,9 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
         setStatus('success');
       } catch (error) {
+        if (error instanceof PasswordError) {
+          return;
+        }
         console.error(error);
         setSubmitting(false);
         setStatus('error');

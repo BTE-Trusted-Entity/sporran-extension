@@ -12,6 +12,7 @@ import {
   signVest,
   submitVest,
 } from '../../utilities/vesting/vesting';
+import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 import { Avatar } from '../../components/Avatar/Avatar';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
@@ -55,6 +56,9 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
 
         setTxStatus('success');
       } catch (error) {
+        if (error instanceof PasswordError) {
+          return;
+        }
         setTxStatus('error');
         console.error(error);
         if (error instanceof Error && error.message === insufficientFunds) {

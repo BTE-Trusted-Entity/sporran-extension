@@ -28,6 +28,7 @@ import { Stats } from '../../components/Stats/Stats';
 import { paths } from '../paths';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { getDepositDid } from '../../utilities/getDeposit/getDeposit';
+import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 interface Props {
   identity: Identity;
@@ -88,6 +89,9 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
 
         setStatus('success');
       } catch (error) {
+        if (error instanceof PasswordError) {
+          return;
+        }
         setSubmitting(false);
         setStatus('error');
       }

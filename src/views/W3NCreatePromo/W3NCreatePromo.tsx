@@ -26,6 +26,7 @@ import {
   usePromoStatus,
   waitFinalized,
 } from '../../utilities/promoBackend/promoBackend';
+import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 interface Props {
   identity: Identity;
@@ -87,6 +88,9 @@ export function W3NCreatePromo({ identity }: Props): JSX.Element | null {
 
         setStatus('success');
       } catch (error) {
+        if (error instanceof PasswordError) {
+          return;
+        }
         setSubmitting(false);
         setStatus('error');
         console.error(error);
