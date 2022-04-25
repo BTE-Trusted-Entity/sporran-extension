@@ -8,6 +8,7 @@ import {
 } from 'react';
 import { Link, Prompt, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
+import { stringToU8a } from '@polkadot/util';
 import { u32 } from '@polkadot/types';
 import { Codec } from '@polkadot/types/types';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
@@ -152,11 +153,17 @@ function DidNewEndpoint({
   );
 
   const [endpointIdError, setEndpointIdError] = useState('');
+  const [endpointUrlError, setEndpointUrlError] = useState('');
+  const [endpointTypeError, setEndpointTypeError] = useState('');
 
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+
       setEndpointIdError('');
+      setEndpointUrlError('');
+      setEndpointTypeError('');
+
       if (tooMany) {
         return;
       }
@@ -172,6 +179,30 @@ function DidNewEndpoint({
         return;
       }
 
+      const idBytes = stringToU8a(id).length;
+      if (maxIdLength && idBytes > maxIdLength) {
+        setEndpointIdError(
+          t('view_DidEndpointsForm_tooLong', [idBytes, maxIdLength]),
+        );
+        return;
+      }
+
+      const urlBytes = stringToU8a(url).length;
+      if (maxUrlLength && urlBytes > maxUrlLength) {
+        setEndpointUrlError(
+          t('view_DidEndpointsForm_tooLong', [urlBytes, maxUrlLength]),
+        );
+        return;
+      }
+
+      const typeBytes = stringToU8a(type).length;
+      if (maxTypeLength && typeBytes > maxTypeLength) {
+        setEndpointTypeError(
+          t('view_DidEndpointsForm_tooLong', [typeBytes, maxTypeLength]),
+        );
+        return;
+      }
+
       dirty.off();
       // wait for React to update the dirty flag
       await new Promise((resolve) => setTimeout(resolve, 10));
@@ -182,7 +213,7 @@ function DidNewEndpoint({
         types: [type],
       });
     },
-    [tooMany, dirty, onAdd, t],
+    [tooMany, maxIdLength, maxTypeLength, maxUrlLength, dirty, onAdd, t],
   );
 
   return (
@@ -208,25 +239,30 @@ function DidNewEndpoint({
             message={t('view_DidEndpointsForm_unsaved')}
           />
 
-          <label className={styles.label}>
-            {t('view_DidEndpointsForm_url')}
-            <input
-              className={styles.input}
-              type="url"
-              name="url"
-              required
-              maxLength={maxUrlLength}
-            />
-          </label>
-          <label className={styles.label}>
-            {t('view_DidEndpointsForm_type')}
-            <input
-              className={styles.input}
-              name="type"
-              required
-              maxLength={maxTypeLength}
-            />
-          </label>
+          <div className={styles.labelLine}>
+            <label className={styles.label}>
+              {t('view_DidEndpointsForm_url')}
+              <input className={styles.input} type="url" name="url" required />
+            </label>
+            {endpointUrlError && (
+              <output className={styles.errorTooltipField}>
+                {endpointUrlError}
+              </output>
+            )}
+          </div>
+
+          <div className={styles.labelLine}>
+            <label className={styles.label}>
+              {t('view_DidEndpointsForm_type')}
+              <input className={styles.input} name="type" required />
+            </label>
+            {endpointTypeError && (
+              <output className={styles.errorTooltipField}>
+                {endpointTypeError}
+              </output>
+            )}
+          </div>
+
           <div className={styles.labelLine}>
             <label className={styles.label}>
               {t('view_DidEndpointsForm_id')}
@@ -235,10 +271,9 @@ function DidNewEndpoint({
                 name="id"
                 required
                 defaultValue={String(Math.random()).substring(2, 8)}
-                maxLength={maxIdLength}
               />
               {endpointIdError && (
-                <output className={styles.errorTooltipId}>
+                <output className={styles.errorTooltipField}>
                   {endpointIdError}
                 </output>
               )}

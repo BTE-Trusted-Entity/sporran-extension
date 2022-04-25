@@ -20,7 +20,7 @@ export const input: string;
 export const buttonsLine: string;
 export const submit: string;
 export const cancel: string;
-export const errorTooltipId: string;
+export const errorTooltipField: string;
 export const errorTooltip: string;
 export const endpoint: string;
 export const name: string;
