@@ -56,8 +56,6 @@ export function W3NCreatePromo({ identity }: Props): JSX.Element | null {
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
-      const { seed } = await passwordField.get(event);
-
       try {
         if (!fullDidDetails) {
           throw new Error('Did details missing');
@@ -65,6 +63,8 @@ export function W3NCreatePromo({ identity }: Props): JSX.Element | null {
         if (!promoStatus) {
           throw new Error('Promo status data missing');
         }
+
+        const { seed } = await passwordField.get(event);
 
         setSubmitting(true);
         setStatus('pending');
