@@ -1031,7 +1031,7 @@
     "message": "Please use letters from A to Z and numbers from 0 through 9"
   },
   "view_DidEndpointsForm_tooLong": {
-    "message": "This string takes up $current$ bytes, the maximum allowed is $maximum$",
+    "message": "This string is $current$ bytes; the maximum allowed is $maximum$.",
     "placeholders": {
       "current": {
         "content": "$1"
