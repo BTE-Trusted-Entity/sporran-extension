@@ -121,9 +121,10 @@
   composes: buttonSecondary from '../../components/Button/Button.module.css';
 }
 
-.errorTooltipId {
+.errorTooltipField {
   composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
   top: 2.5rem;
+  left: 60%;
 }
 
 .errorTooltip {
