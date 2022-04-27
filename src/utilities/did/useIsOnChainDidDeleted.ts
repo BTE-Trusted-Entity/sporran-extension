@@ -16,8 +16,8 @@ async function getIsOnChainDidDeleted(
       resolved && resolved.metadata && resolved.metadata.deactivated,
     );
   } catch (error) {
-    console.error(error);
-    throw new Error('Could not get DID deletion status');
+    console.error(error, 'Could not get DID deletion status');
+    return false;
   }
 }
 
