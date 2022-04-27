@@ -6,6 +6,7 @@ import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
 import { parseDidUri, sameFullDid } from '../did/did';
+import { jsonToBase64 } from '../base64/base64';
 
 import { CredentialsContext } from './CredentialsContext';
 
@@ -116,7 +117,7 @@ export function getCredentialDownload(
 ): CredentialDownload {
   const name = `${credential.name}-${credential.cTypeTitle}.json`;
 
-  const blob = window.btoa(JSON.stringify(credential));
+  const blob = jsonToBase64(credential);
   const url = `data:text/json;base64,${blob}`;
 
   return { name, url };
@@ -135,7 +136,7 @@ export function getUnsignedPresentationDownload(
   const requestInstance = RequestForAttestation.fromRequest(cloneDeep(request));
   requestInstance.removeClaimProperties(needRemoving);
 
-  const blob = window.btoa(JSON.stringify(requestInstance));
+  const blob = jsonToBase64(requestInstance);
   const url = `data:text/json;base64,${blob}`;
 
   return { name, url };

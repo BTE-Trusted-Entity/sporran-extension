@@ -3,7 +3,7 @@ import type { AnyJson } from '@polkadot/types/types';
 import { browser, Runtime, Windows } from 'webextension-polyfill-ts';
 
 import { PopupAction } from '../../../utilities/popups/types';
-import { jsonToBase64 } from '../../../utilities/popups/usePopupData';
+import { jsonToBase64 } from '../../../utilities/base64/base64';
 import { isExtensionPopup } from '../../../utilities/isExtensionPopup/isExtensionPopup';
 
 // TODO: move everything into PopupChannel or rename?

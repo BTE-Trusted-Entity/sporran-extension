@@ -85,11 +85,14 @@ export async function decrypt(
 }
 
 function arrayBufferToBase64(arrayBuffer: ArrayBuffer): string {
-  return btoa(String.fromCodePoint(...Array.from(new Uint8Array(arrayBuffer))));
+  const bytes = new Uint8Array(arrayBuffer);
+  const asciiString = String.fromCodePoint(...bytes);
+  return window.btoa(asciiString);
 }
 
 function base64ToArrayBuffer(base64: string): ArrayBuffer {
-  return Uint8Array.from(atob(base64), (c) => c.charCodeAt(0)).buffer;
+  const asciiString = window.atob(base64);
+  return Uint8Array.from(asciiString, (c) => c.charCodeAt(0)).buffer;
 }
 
 function serializeEncrypted({

@@ -1,7 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
-import { AnyJson } from '@polkadot/types/types';
 
-import { jsonToBase64 } from './usePopupData';
+import { jsonToBase64 } from '../base64/base64';
 
 interface Props {
   path: string;
@@ -14,7 +13,7 @@ export function PopupTestProvider({
   data,
   children,
 }: Props): JSX.Element {
-  const serialized = jsonToBase64(data as AnyJson);
+  const serialized = jsonToBase64(data);
   return (
     <MemoryRouter initialEntries={[`${path}?data=${serialized}`]}>
       {children}
