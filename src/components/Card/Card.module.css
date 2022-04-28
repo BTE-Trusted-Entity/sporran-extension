@@ -174,7 +174,7 @@
 .details {
   width: 100%;
   display: grid;
-  grid-template: auto / 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 0.5rem 1.875rem;
   justify-items: start;
   text-align: start;
