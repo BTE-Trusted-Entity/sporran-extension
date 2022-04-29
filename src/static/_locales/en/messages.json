@@ -1358,7 +1358,25 @@
   "view_SignDidExtrinsic_reject": {
     "message": "Reject"
   },
-  "view_SignDidExtrinsic_error": {
+  "view_SignDidExtrinsic_error_light_did": {
     "message": "You need to upgrade to an on-chain DID first"
+  },
+  "view_SignDidExtrinsic_error_forbidden": {
+    "message": "Signing DID calls not allowed"
+  },
+  "view_SignDidExtrinsic_endpoint_title": {
+    "message": "Add Service Endpoint"
+  },
+  "view_SignDidExtrinsic_endpoint_subline": {
+    "message": "Sign with your password"
+  },
+  "view_SignDidExtrinsic_endpoint_url": {
+    "message": "URL"
+  },
+  "view_SignDidExtrinsic_endpoint_type": {
+    "message": "Type"
+  },
+  "view_SignDidExtrinsic_endpoint_id": {
+    "message": "Service ID"
   }
 }

@@ -7,7 +7,7 @@ import { SignDidExtrinsicOriginInput } from '../../channels/SignDidExtrinsicChan
 import { paths } from '../paths';
 
 import { SignDidExtrinsic } from './SignDidExtrinsic';
-import { useExtrinsicValues } from './useExtrinsicValues';
+import { useExtrinsicValues } from './useExtrinsic';
 
 const input: SignDidExtrinsicOriginInput = {
   dAppName: 'dApp',
@@ -16,7 +16,7 @@ const input: SignDidExtrinsicOriginInput = {
   signer: '4tMMYZHsFfqzfCsgCPLJSBmomBv2d6cBEYzHKMGVKz2VjACR',
 };
 
-jest.mock('./useExtrinsicValues');
+jest.mock('./useExtrinsic');
 jest.mocked(useExtrinsicValues).mockReturnValue([
   {
     label: 'from',
@@ -44,6 +44,7 @@ describe('SignDidExtrinsic', () => {
     await waitForGetPassword();
     expect(container).toMatchSnapshot();
   });
+
   it('should allow signing with full did', async () => {
     mockIsFullDid(true);
 
