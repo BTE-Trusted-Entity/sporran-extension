@@ -55,7 +55,7 @@
     "@polkadot/ui-shared": "^2.0.1",
     "@polkadot/util": "^8.4.1",
     "@polkadot/util-crypto": "^8.4.1",
-    "@polkadot/x-textdecoder": "8.4.1",
+    "@polkadot/x-textdecoder": "9.1.1",
     "@polkadot/x-textencoder": "8.4.1",
     "bn.js": "^5.2.0",
     "classnames": "^2.3.1",
