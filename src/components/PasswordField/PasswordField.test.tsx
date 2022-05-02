@@ -58,7 +58,7 @@ describe('PasswordField', () => {
 
   it('should skip the reset link in popups', async () => {
     render(
-      <PopupTestProvider path={paths.popup.base}>
+      <PopupTestProvider path={paths.popup.base} data={{}}>
         <form>
           <PasswordField identity={identity} password={passwordField} />
         </form>

@@ -68,7 +68,7 @@ export default {
   // Run tests from one or more projects
   // projects: null,
   // Use this configuration option to add custom reporters to Jest
-  // reporters: undefined,
+  reporters: ['default', 'github-actions'],
   // Automatically reset mock state between every test
   // resetMocks: false,
   // Reset the module registry before running each individual test
@@ -115,7 +115,7 @@ export default {
   // A map from regular expressions to paths to transformers
   // transform: null,
   transform: {
-    '\\.tsx?$': 'ts-jest',
+    '\\.tsx?$': 'ts-jest/legacy',
     'node_modules/lodash-es/.*': 'babel-jest',
     'node_modules/@polkadot/.*': 'babel-jest',
   },
