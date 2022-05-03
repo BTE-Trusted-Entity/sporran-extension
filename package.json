@@ -90,7 +90,7 @@
     "@testing-library/react-hooks": "^8.0.0",
     "@testing-library/user-event": "^14.1.1",
     "@types/ed2curve": "^0.2.2",
-    "@types/jest": "^27.4.1",
+    "@types/jest": "^27.5.0",
     "@types/lodash-es": "^4.17.6",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^18.0.3",
