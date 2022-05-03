@@ -14092,10 +14092,10 @@ ts-essentials@^2.0.3:
   resolved "https://registry.yarnpkg.com/ts-essentials/-/ts-essentials-2.0.12.tgz#c9303f3d74f75fa7528c3d49b80e089ab09d8745"
   integrity sha512-3IVX4nI6B5cc31/GFFE+i8ey/N2eA0CZDbo6n0yrz0zDX8ZJ8djmU1p+XRz7G3is0F3bB3pu2pAroFdAWQKU3w==
 
-ts-jest@^28.0.0-next.3:
-  version "28.0.0-next.3"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-28.0.0-next.3.tgz#df236176c74923fc76a289317106937a7a072d58"
-  integrity sha512-R1mD18XKfd2Cb1qpjXfB3FfJ+yX8G75czuSnDu3hAcccPumeC3FKwAM6dGMvt5Yl0RSGw+bUQskp4zDma3Gdgg==
+ts-jest@^28.0.0:
+  version "28.0.0"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-28.0.0.tgz#8a696cd1696c471154f7f0c81184ac99b526f400"
+  integrity sha512-JOUGExRO4vNaQdc920/sJjFZxe9lBGa6WIuNWkvtZoORGI9dyHTBqhuaJUdBVWIfqj+vaK3TRt/B1T0hQ0ROaA==
   dependencies:
     bs-logger "0.x"
     fast-json-stable-stringify "2.x"
