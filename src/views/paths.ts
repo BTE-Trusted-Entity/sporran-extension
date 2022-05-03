@@ -87,6 +87,8 @@ export const paths = {
     sign: '/popup/sign',
     signRaw: '/popup/signRaw',
     signDid: '/identity/:address/did/sign',
+    addEndpoint: '/identity/:address/did/signExtrinsic/addEndpoint',
+    removeEndpoint: '/identity/:address/did/signExtrinsic/removeEndpoint',
     signDidExtrinsic: '/identity/:address/did/signExtrinsic',
   },
 };

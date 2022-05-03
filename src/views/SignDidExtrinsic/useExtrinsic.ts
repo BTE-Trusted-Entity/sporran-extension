@@ -39,6 +39,8 @@ export function getExtrinsicValues(
     method: Parameters<typeof getExtrinsicCallEntry>[0];
   };
 
+  console.log('human: ', human);
+
   const forbidden = human.method.section === 'did';
   const errorLine = {
     label: 'FORBIDDEN',
@@ -89,6 +91,11 @@ export function useRemoveServiceEndpointValues(
   const [error, setError] = useState('');
 
   useEffect(() => {
+    setId('');
+    setServiceTypes([]);
+    setUrls([]);
+    setError('');
+
     (async () => {
       const human = extrinsic.toHuman() as {
         method: Parameters<typeof getExtrinsicCallEntry>[0];
