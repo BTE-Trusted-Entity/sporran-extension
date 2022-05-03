@@ -4,7 +4,7 @@ import { jsonToBase64 } from '../base64/base64';
 
 interface Props {
   path: string;
-  data?: unknown;
+  data: unknown;
   children: JSX.Element;
 }
 
