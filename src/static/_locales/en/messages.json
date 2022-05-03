@@ -1362,10 +1362,13 @@
     "message": "You need to upgrade to an on-chain DID first"
   },
   "view_SignDidExtrinsic_error_forbidden": {
-    "message": "Signing DID calls not allowed"
+    "message": "This DID call is forbidden"
   },
-  "view_SignDidExtrinsic_endpoint_title": {
+  "view_SignDidExtrinsic_endpoint_title_add": {
     "message": "Add Service Endpoint"
+  },
+  "view_SignDidExtrinsic_endpoint_title_remove": {
+    "message": "Remove Service Endpoint"
   },
   "view_SignDidExtrinsic_endpoint_subline": {
     "message": "Sign with your password"
@@ -1378,5 +1381,8 @@
   },
   "view_SignDidExtrinsic_endpoint_id": {
     "message": "Service ID"
+  },
+  "view_SignDidExtrinsic_endpoint_remove_error": {
+    "message": "No service endpoint found for DID"
   }
 }

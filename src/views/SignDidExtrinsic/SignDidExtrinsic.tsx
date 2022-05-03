@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { BaseDidKey } from '@kiltprotocol/types';
 import { GenericExtrinsic } from '@polkadot/types';
@@ -24,9 +24,10 @@ import { SignDidExtrinsicOriginInput } from '../../channels/SignDidExtrinsicChan
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 
 import {
-  useExtrinsicValues,
+  getExtrinsicValues,
+  getAddServiceEndpointValues,
   useExtrinsic,
-  getServiceEndpointValues,
+  useRemoveServiceEndpointValues,
 } from './useExtrinsic';
 
 function DidExtrinsic({
@@ -41,7 +42,7 @@ function DidExtrinsic({
   const data = usePopupData<SignDidExtrinsicOriginInput>();
   const { origin } = data;
 
-  const values = useExtrinsicValues(extrinsic, origin);
+  const values = getExtrinsicValues(extrinsic, origin);
 
   return (
     <Fragment>
@@ -73,6 +74,47 @@ function DidExtrinsic({
     </Fragment>
   );
 }
+
+function EndpointValues({
+  values,
+}: {
+  values: {
+    id: string;
+    serviceTypes?: string[];
+    urls?: string[];
+  };
+}): JSX.Element {
+  const t = browser.i18n.getMessage;
+
+  return (
+    <dl className={styles.endpointDetails}>
+      {values.urls && values.urls.length > 0 && (
+        <div className={styles.fullWidthDetail}>
+          <dt className={styles.endpointName}>
+            {t('view_SignDidExtrinsic_endpoint_url')}
+          </dt>
+          <dd className={styles.endpointValue}>{values.urls[0]}</dd>
+        </div>
+      )}
+
+      {values.serviceTypes && values.serviceTypes.length > 0 && (
+        <div className={styles.endpointDetail}>
+          <dt className={styles.endpointName}>
+            {t('view_SignDidExtrinsic_endpoint_type')}
+          </dt>
+          <dd className={styles.endpointValue}>{values.serviceTypes[0]}</dd>
+        </div>
+      )}
+
+      <div className={styles.endpointDetail}>
+        <dt className={styles.endpointName}>
+          {t('view_SignDidExtrinsic_endpoint_id')}
+        </dt>
+        <dd className={styles.endpointValue}>{getFragment(values.id)}</dd>
+      </div>
+    </dl>
+  );
+}
 function AddServiceEndpointExtrinsic({
   identity,
   extrinsic,
@@ -84,12 +126,12 @@ function AddServiceEndpointExtrinsic({
 
   const { did } = identity;
 
-  const values = getServiceEndpointValues(extrinsic);
+  const values = getAddServiceEndpointValues(extrinsic);
 
   return (
     <Fragment>
       <h1 className={styles.heading}>
-        {t('view_SignDidExtrinsic_endpoint_title')}
+        {t('view_SignDidExtrinsic_endpoint_title_add')}
       </h1>
       <p className={styles.subline}>
         {t('view_SignDidExtrinsic_endpoint_subline')}
@@ -105,26 +147,47 @@ function AddServiceEndpointExtrinsic({
         />
       )}
 
-      <dl className={styles.endpointDetails}>
-        <div className={styles.fullWidthDetail}>
-          <dt className={styles.endpointName}>
-            {t('view_SignDidExtrinsic_endpoint_url')}
-          </dt>
-          <dd className={styles.endpointValue}>{values.urls[0]}</dd>
-        </div>
-        <div className={styles.endpointDetail}>
-          <dt className={styles.endpointName}>
-            {t('view_SignDidExtrinsic_endpoint_type')}
-          </dt>
-          <dd className={styles.endpointValue}>{values.serviceTypes[0]}</dd>
-        </div>
-        <div className={styles.endpointDetail}>
-          <dt className={styles.endpointName}>
-            {t('view_SignDidExtrinsic_endpoint_id')}
-          </dt>
-          <dd className={styles.endpointValue}>{getFragment(values.id)}</dd>
-        </div>
-      </dl>
+      <EndpointValues values={values} />
+    </Fragment>
+  );
+}
+
+function RemoveServiceEndpointExtrinsic({
+  identity,
+  extrinsic,
+  setError,
+}: {
+  identity: Identity;
+  extrinsic: GenericExtrinsic;
+  setError: React.Dispatch<React.SetStateAction<string>>;
+}): JSX.Element {
+  const t = browser.i18n.getMessage;
+
+  const { did } = identity;
+
+  const { values, error } = useRemoveServiceEndpointValues(extrinsic, did);
+
+  if (error) {
+    setError(error);
+  }
+
+  return (
+    <Fragment>
+      <h1 className={styles.heading}>
+        {t('view_SignDidExtrinsic_endpoint_title_remove')}
+      </h1>
+      <p className={styles.subline}>
+        {t('view_SignDidExtrinsic_endpoint_subline')}
+      </p>
+      <IdentitiesCarousel identity={identity} />;
+      {isFullDid(did) && (
+        <CopyValue
+          value={identity.did}
+          label="DID"
+          className={styles.didLine}
+        />
+      )}
+      <EndpointValues values={values} />
     </Fragment>
   );
 }
@@ -141,15 +204,19 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
 
   const extrinsic = useExtrinsic(data);
 
-  const isAddServiceEndpointExtrinsic =
-    extrinsic?.method.method === 'addServiceEndpoint';
+  const [removeEndpointError, setRemoveEndpointError] = useState('');
+
+  const isServiceEndpointExtrinsic =
+    extrinsic?.method.method === 'addServiceEndpoint' ||
+    extrinsic?.method.method === 'removeServiceEndpoint';
 
   const isForbidden =
-    extrinsic?.method.section === 'did' && !isAddServiceEndpointExtrinsic;
+    extrinsic?.method.section === 'did' && !isServiceEndpointExtrinsic;
 
   const error = [
     !isFullDid(identity.did) && t('view_SignDidExtrinsic_error_light_did'),
     isForbidden && t('view_SignDidExtrinsic_error_forbidden'),
+    removeEndpointError,
   ].filter(Boolean)[0];
 
   const passwordField = usePasswordField();
@@ -163,7 +230,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
       }
 
       if (isForbidden) {
-        throw new Error('Signing DID calls not allowed');
+        throw new Error('This DID call is forbidden');
       }
 
       const fullDidDetails = await getFullDidDetails(identity.did);
@@ -208,13 +275,21 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      {isAddServiceEndpointExtrinsic ? (
+      {!isServiceEndpointExtrinsic && (
+        <DidExtrinsic identity={identity} extrinsic={extrinsic} />
+      )}
+      {extrinsic?.method.method === 'addServiceEndpoint' && (
         <AddServiceEndpointExtrinsic
           identity={identity}
           extrinsic={extrinsic}
         />
-      ) : (
-        <DidExtrinsic identity={identity} extrinsic={extrinsic} />
+      )}
+      {extrinsic?.method.method === 'removeServiceEndpoint' && (
+        <RemoveServiceEndpointExtrinsic
+          identity={identity}
+          extrinsic={extrinsic}
+          setError={setRemoveEndpointError}
+        />
       )}
 
       <PasswordField identity={identity} autoFocus password={passwordField} />

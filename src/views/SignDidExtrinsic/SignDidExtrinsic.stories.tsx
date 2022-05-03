@@ -24,6 +24,10 @@ const input: Record<string, SignDidExtrinsicOriginInput> = {
     extrinsic:
       '0x900440081837303634333904146473616664044468747470733a2f2f73646664732e636f6d',
   },
+  removeEndpoint: {
+    ...dApp,
+    extrinsic: '0x2804400918343935373831',
+  },
   web3name: {
     ...dApp,
     extrinsic: '0x3404440024746573742d6e616d65',
@@ -40,6 +44,21 @@ export function AddEndpoint(): JSX.Element {
     <PopupTestProvider
       path={paths.popup.signDidExtrinsic}
       data={input.addEndpoint}
+    >
+      <SignDidExtrinsic
+        identity={
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+        }
+      />
+    </PopupTestProvider>
+  );
+}
+
+export function RemoveEndpoint(): JSX.Element {
+  return (
+    <PopupTestProvider
+      path={paths.popup.signDidExtrinsic}
+      data={input.removeEndpoint}
     >
       <SignDidExtrinsic
         identity={
@@ -74,6 +93,21 @@ export function Forbidden(): JSX.Element {
       <SignDidExtrinsic
         identity={
           identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+        }
+      />
+    </PopupTestProvider>
+  );
+}
+
+export function LightDid(): JSX.Element {
+  return (
+    <PopupTestProvider
+      path={paths.popup.signDidExtrinsic}
+      data={input.addEndpoint}
+    >
+      <SignDidExtrinsic
+        identity={
+          identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
         }
       />
     </PopupTestProvider>

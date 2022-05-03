@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SignDidExtrinsic should allow signing with full did 1`] = `
+exports[`SignDidExtrinsic should allow signing service endpoint extrinsic 1`] = `
 <div>
   <form
     class="container"
@@ -39,13 +39,13 @@ exports[`SignDidExtrinsic should allow signing with full did 1`] = `
       <a
         aria-label="Light DID Identity"
         class="left"
-        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4OTAwNDQwMDgxODM3MzAzNjM0MzMzOTA0MTQ2NDczNjE2NjY0MDQ0NDY4NzQ3NDcwNzMzYTJmMmY3MzY0NjY2NDczMmU2MzZmNmQifQ=="
         title="Light DID Identity"
       />
       <a
         aria-label="Identity which has a very very very very long name and might not even fit on the screen"
         class="right"
-        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4OTAwNDQwMDgxODM3MzAzNjM0MzMzOTA0MTQ2NDczNjE2NjY0MDQ0NDY4NzQ3NDcwNzMzYTJmMmY3MzY0NjY2NDczMmU2MzZmNmQifQ=="
         title="Identity which has a very very very very long name and might not even fit on the screen"
       />
       <ul
@@ -58,7 +58,7 @@ exports[`SignDidExtrinsic should allow signing with full did 1`] = `
             aria-current="page"
             aria-label="Light DID Identity"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4OTAwNDQwMDgxODM3MzAzNjM0MzMzOTA0MTQ2NDczNjE2NjY0MDQ0NDY4NzQ3NDcwNzMzYTJmMmY3MzY0NjY2NDczMmU2MzZmNmQifQ=="
             title="Light DID Identity"
           />
         </li>
@@ -69,7 +69,7 @@ exports[`SignDidExtrinsic should allow signing with full did 1`] = `
             aria-current="page"
             aria-label="Identity with on-chain DID and lots of coins"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4OTAwNDQwMDgxODM3MzAzNjM0MzMzOTA0MTQ2NDczNjE2NjY0MDQ0NDY4NzQ3NDcwNzMzYTJmMmY3MzY0NjY2NDczMmU2MzZmNmQifQ=="
             title="Identity with on-chain DID and lots of coins"
           />
         </li>
@@ -80,7 +80,7 @@ exports[`SignDidExtrinsic should allow signing with full did 1`] = `
             aria-current="page"
             aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4OTAwNDQwMDgxODM3MzAzNjM0MzMzOTA0MTQ2NDczNjE2NjY0MDQ0NDY4NzQ3NDcwNzMzYTJmMmY3MzY0NjY2NDczMmU2MzZmNmQifQ=="
             title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
@@ -193,8 +193,207 @@ exports[`SignDidExtrinsic should allow signing with full did 1`] = `
       <output
         class="errorTooltip"
         hidden=""
+      />
+    </p>
+  </form>
+</div>
+`;
+
+exports[`SignDidExtrinsic should not allow signing forbidden DID extrinsics 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Sign with on-chain DID
+    </h1>
+    <p
+      class="subline"
+    >
+      Select your Identity and sign with your password
+    </p>
+    <div
+      class="container"
+    >
+      <section
+        class="container"
       >
-        You need to upgrade to an on-chain DID first
+        <div
+          class="avatar fullDid"
+        >
+          Identicon
+        </div>
+        <div
+          class="centeredNameLine"
+        >
+          <span
+            class="name"
+          >
+            Identity with on-chain DID and lots of coins
+          </span>
+        </div>
+      </section>
+      <a
+        aria-label="Light DID Identity"
+        class="left"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4OTAwNDQwMDYwMGRlZjEyZTQyZjNlNDg3ZTliMTQwOTVhYThkNWNjMTZhMzM0OTFmMWI1MGRhZGNmODgxMWQxNDgwZjNmYTg2MjcifQ=="
+        title="Light DID Identity"
+      />
+      <a
+        aria-label="Identity which has a very very very very long name and might not even fit on the screen"
+        class="right"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4OTAwNDQwMDYwMGRlZjEyZTQyZjNlNDg3ZTliMTQwOTVhYThkNWNjMTZhMzM0OTFmMWI1MGRhZGNmODgxMWQxNDgwZjNmYTg2MjcifQ=="
+        title="Identity which has a very very very very long name and might not even fit on the screen"
+      />
+      <ul
+        class="bubbles"
+      >
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Light DID Identity"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4OTAwNDQwMDYwMGRlZjEyZTQyZjNlNDg3ZTliMTQwOTVhYThkNWNjMTZhMzM0OTFmMWI1MGRhZGNmODgxMWQxNDgwZjNmYTg2MjcifQ=="
+            title="Light DID Identity"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Identity with on-chain DID and lots of coins"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4OTAwNDQwMDYwMGRlZjEyZTQyZjNlNDg3ZTliMTQwOTVhYThkNWNjMTZhMzM0OTFmMWI1MGRhZGNmODgxMWQxNDgwZjNmYTg2MjcifQ=="
+            title="Identity with on-chain DID and lots of coins"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4OTAwNDQwMDYwMGRlZjEyZTQyZjNlNDg3ZTliMTQwOTVhYThkNWNjMTZhMzM0OTFmMWI1MGRhZGNmODgxMWQxNDgwZjNmYTg2MjcifQ=="
+            title="Identity which has a very very very very long name and might not even fit on the screen"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Add Identity"
+            class="add addActive"
+            href="/"
+            title="Add Identity"
+          />
+        </li>
+      </ul>
+    </div>
+    <dl
+      class="details"
+    >
+      <dt
+        class="detailName"
+      >
+        from
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com"
+      >
+        extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com
+      </dd>
+      <dt
+        class="detailName"
+      >
+        method data
+        :
+      </dt>
+      <dd
+        class="detailValue"
+        title="namespace.method(input = \\"some meaningful values you would definitely like to see\\")"
+      >
+        namespace.method(input = "some meaningful values you would definitely like to see")
+      </dd>
+    </dl>
+    <p
+      class="resetLine"
+    >
+      <label
+        class="passwordLabel"
+        for="password"
+      >
+        Sign with password:
+      </label>
+      <a
+        class="reset"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/reset"
+      >
+        Reset password
+      </a>
+    </p>
+    <p
+      class="passwordLine"
+    >
+      <input
+        class="password"
+        id="password"
+        name="password"
+        type="password"
+        value=""
+      />
+      <button
+        aria-label="Show"
+        class="show"
+        title="Show"
+        type="button"
+      />
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+    <label
+      class="rememberLabel"
+    >
+      <span>
+        Remember password for the next 15 minutes
+      </span>
+      <input
+        class="remember"
+        name="remember"
+        type="checkbox"
+      />
+      <span />
+    </label>
+    <p
+      class="buttonsLine"
+    >
+      <button
+        class="reject"
+        type="button"
+      >
+        Reject
+      </button>
+      <button
+        class="submit"
+        disabled=""
+        type="submit"
+      >
+        Sign
+      </button>
+      <output
+        class="errorTooltip"
+      >
+        This DID call is forbidden
       </output>
     </p>
   </form>
@@ -240,13 +439,13 @@ exports[`SignDidExtrinsic should render 1`] = `
       <a
         aria-label="Add Identity"
         class="left"
-        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4MzQwNDQ0MDAyNDc0NjU3Mzc0MmQ2ZTYxNmQ2NSJ9"
         title="Add Identity"
       />
       <a
         aria-label="Identity with on-chain DID and lots of coins"
         class="right"
-        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4MzQwNDQ0MDAyNDc0NjU3Mzc0MmQ2ZTYxNmQ2NSJ9"
         title="Identity with on-chain DID and lots of coins"
       />
       <ul
@@ -259,7 +458,7 @@ exports[`SignDidExtrinsic should render 1`] = `
             aria-current="page"
             aria-label="Light DID Identity"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4MzQwNDQ0MDAyNDc0NjU3Mzc0MmQ2ZTYxNmQ2NSJ9"
             title="Light DID Identity"
           />
         </li>
@@ -270,7 +469,7 @@ exports[`SignDidExtrinsic should render 1`] = `
             aria-current="page"
             aria-label="Identity with on-chain DID and lots of coins"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4MzQwNDQ0MDAyNDc0NjU3Mzc0MmQ2ZTYxNmQ2NSJ9"
             title="Identity with on-chain DID and lots of coins"
           />
         </li>
@@ -281,7 +480,7 @@ exports[`SignDidExtrinsic should render 1`] = `
             aria-current="page"
             aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble bubbleActive"
-            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsImV4dHJpbnNpYyI6IjB4MWMwNDI2MDAwYzY2NmY2ZiIsInNpZ25lciI6IjR0TU1ZWkhzRmZxemZDc2dDUExKU0Jtb21CdjJkNmNCRVl6SEtNR1ZLejJWakFDUiJ9"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInNpZ25lciI6IjRzYWZxUk5zVHlRbmpCaDJ5cTlZZW8yTUM4Qm5EcERvbWdzZDhQV2ltVGNQNUZTaCIsImV4dHJpbnNpYyI6IjB4MzQwNDQ0MDAyNDc0NjU3Mzc0MmQ2ZTYxNmQ2NSJ9"
             title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
