@@ -44,8 +44,6 @@ async function getDidAuthorizedExtrinsic(
       ? await DidChain.getAddEndpointExtrinsic(endpoint)
       : await DidChain.getRemoveEndpointExtrinsic(getFragment(endpoint.id));
 
-  console.log('extrinsic: ', draft.toHex());
-  console.log('Extrinsic human: ', draft.toHuman());
   return await fullDidDetails.authorizeExtrinsic(
     draft,
     keystore,
@@ -102,9 +100,6 @@ export function DidEndpointsSign({
         endpoint,
         type,
       );
-
-      console.log('authorized: ', authorized.toHex());
-      console.log('authorized human: ', authorized.toHuman());
 
       await submit(keypair, authorized);
     },

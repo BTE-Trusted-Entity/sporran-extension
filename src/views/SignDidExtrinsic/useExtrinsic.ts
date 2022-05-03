@@ -39,8 +39,6 @@ export function getExtrinsicValues(
     method: Parameters<typeof getExtrinsicCallEntry>[0];
   };
 
-  console.log('human: ', human);
-
   const forbidden = human.method.section === 'did';
   const errorLine = {
     label: 'FORBIDDEN',
