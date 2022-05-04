@@ -22,6 +22,7 @@ import { backgroundSignDidExtrinsicChannel } from '../../channels/SignDidExtrins
 import { SignDidExtrinsicOriginInput } from '../../channels/SignDidExtrinsicChannels/types';
 
 import { CopyValue } from '../../components/CopyValue/CopyValue';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 import {
   getExtrinsicValues,
@@ -73,61 +74,18 @@ function EndpointValues({
 function AddServiceEndpointExtrinsic({
   identity,
   extrinsic,
-  onCancel,
 }: {
   identity: Identity;
   extrinsic: GenericExtrinsic;
-  onCancel: () => Promise<void>;
 }): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { signer } = usePopupData<SignDidExtrinsicOriginInput>();
-
   const { did } = identity;
-
-  const error = !isFullDid(did) && t('view_SignDidExtrinsic_error_light_did');
 
   const values = getAddServiceEndpointValues(extrinsic);
 
-  const passwordField = usePasswordField();
-
-  const handleSubmit = useCallback(
-    async (event) => {
-      event.preventDefault();
-
-      const fullDidDetails = await getFullDidDetails(did);
-
-      const { seed } = await passwordField.get(event);
-      const { keystore } = await getIdentityCryptoFromSeed(seed);
-
-      let didKey: BaseDidKey | undefined;
-      const authorized = await fullDidDetails.authorizeExtrinsic(
-        extrinsic,
-        keystore,
-        signer,
-        {
-          async keySelection([key]) {
-            didKey = key;
-            return key;
-          },
-        },
-      );
-
-      if (!didKey) {
-        throw new Error('No extrinsic signing key stored');
-      }
-      const didKeyUri = fullDidDetails.assembleKeyId(didKey.id);
-      const signed = authorized.toHex();
-
-      await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });
-
-      window.close();
-    },
-    [extrinsic, signer, passwordField, did],
-  );
-
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <Fragment>
       <h1 className={styles.heading}>
         {t('view_SignDidExtrinsic_endpoint_title_add')}
       </h1>
@@ -138,100 +96,31 @@ function AddServiceEndpointExtrinsic({
       <IdentitiesCarousel identity={identity} />
 
       {isFullDid(did) && (
-        <CopyValue
-          value={identity.did}
-          label="DID"
-          className={styles.didLine}
-        />
+        <CopyValue value={did} label="DID" className={styles.didLine} />
       )}
 
       <EndpointValues values={values} />
-
-      <PasswordField identity={identity} autoFocus password={passwordField} />
-
-      <p className={styles.buttonsLine}>
-        <button onClick={onCancel} type="button" className={styles.reject}>
-          {t('view_SignDidExtrinsic_reject')}
-        </button>
-        <button
-          type="submit"
-          className={styles.submit}
-          disabled={Boolean(error)}
-        >
-          {t('common_action_sign')}
-        </button>
-        <output className={styles.errorTooltip} hidden={!error}>
-          {error}
-        </output>
-      </p>
-    </form>
+    </Fragment>
   );
 }
 
 function RemoveServiceEndpointExtrinsic({
   identity,
   extrinsic,
-  onCancel,
+  error,
 }: {
   identity: Identity;
   extrinsic: GenericExtrinsic;
-  onCancel: () => Promise<void>;
+  error: ReturnType<typeof useBooleanState>;
 }): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { signer } = usePopupData<SignDidExtrinsicOriginInput>();
-
   const { did } = identity;
 
-  const passwordField = usePasswordField();
-
-  const { values, error: removeEndpointError } = useRemoveServiceEndpointValues(
-    extrinsic,
-    did,
-  );
-
-  const error = [
-    !isFullDid(identity.did) && t('view_SignDidExtrinsic_error_light_did'),
-    removeEndpointError,
-  ].filter(Boolean)[0];
-
-  const handleSubmit = useCallback(
-    async (event) => {
-      event.preventDefault();
-
-      const fullDidDetails = await getFullDidDetails(did);
-
-      const { seed } = await passwordField.get(event);
-      const { keystore } = await getIdentityCryptoFromSeed(seed);
-
-      let didKey: BaseDidKey | undefined;
-      const authorized = await fullDidDetails.authorizeExtrinsic(
-        extrinsic,
-        keystore,
-        signer,
-        {
-          async keySelection([key]) {
-            didKey = key;
-            return key;
-          },
-        },
-      );
-
-      if (!didKey) {
-        throw new Error('No extrinsic signing key stored');
-      }
-      const didKeyUri = fullDidDetails.assembleKeyId(didKey.id);
-      const signed = authorized.toHex();
-
-      await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });
-
-      window.close();
-    },
-    [extrinsic, signer, passwordField, did],
-  );
+  const values = useRemoveServiceEndpointValues(extrinsic, did, error);
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <Fragment>
       <h1 className={styles.heading}>
         {t('view_SignDidExtrinsic_endpoint_title_remove')}
       </h1>
@@ -242,65 +131,98 @@ function RemoveServiceEndpointExtrinsic({
       <IdentitiesCarousel identity={identity} />
 
       {isFullDid(did) && (
-        <CopyValue
-          value={identity.did}
-          label="DID"
-          className={styles.didLine}
-        />
+        <CopyValue value={did} label="DID" className={styles.didLine} />
       )}
 
       <EndpointValues values={values} />
-
-      <PasswordField identity={identity} autoFocus password={passwordField} />
-
-      <p className={styles.buttonsLine}>
-        <button onClick={onCancel} type="button" className={styles.reject}>
-          {t('view_SignDidExtrinsic_reject')}
-        </button>
-        <button
-          type="submit"
-          className={styles.submit}
-          disabled={Boolean(error)}
-        >
-          {t('common_action_sign')}
-        </button>
-        <output className={styles.errorTooltip} hidden={!error}>
-          {error}
-        </output>
-      </p>
-    </form>
+    </Fragment>
   );
 }
 
 function DidExtrinsic({
   identity,
   extrinsic,
-  onCancel,
+  origin,
 }: {
   identity: Identity;
   extrinsic: GenericExtrinsic;
-  onCancel: () => Promise<void>;
+  origin: string;
 }) {
   const t = browser.i18n.getMessage;
 
-  const { signer, origin } = usePopupData<SignDidExtrinsicOriginInput>();
+  const values = getExtrinsicValues(extrinsic, origin);
+
+  return (
+    <Fragment>
+      <h1 className={styles.heading}>{t('view_SignDidExtrinsic_title')}</h1>
+      <p className={styles.subline}>{t('view_SignDidExtrinsic_subline')}</p>
+
+      <IdentitiesCarousel identity={identity} />
+
+      <dl className={styles.details}>
+        {values.map(({ label, value, details }) => (
+          <Fragment key={label}>
+            <dt className={styles.detailName}>{label}:</dt>
+            <dd
+              className={styles.detailValue}
+              title={!details ? String(value) : undefined}
+            >
+              {!details ? (
+                value
+              ) : (
+                <details className={styles.expanded}>
+                  <summary>{value}</summary>
+                  {details}
+                </details>
+              )}
+            </dd>
+          </Fragment>
+        ))}
+      </dl>
+    </Fragment>
+  );
+}
+
+interface Props {
+  identity: Identity;
+}
+
+export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
+  const t = browser.i18n.getMessage;
 
   const { did } = identity;
 
-  const values = getExtrinsicValues(extrinsic, origin);
+  const data = usePopupData<SignDidExtrinsicOriginInput>();
 
-  const passwordField = usePasswordField();
+  const { signer, origin } = data;
 
-  const isForbidden = extrinsic.method.section === 'did';
+  const extrinsic = useExtrinsic(data);
+
+  const removeEndpointError = useBooleanState();
+
+  const isServiceEndpointExtrinsic =
+    extrinsic?.method.method === 'addServiceEndpoint' ||
+    extrinsic?.method.method === 'removeServiceEndpoint';
+
+  const isForbidden =
+    extrinsic?.method.section === 'did' && !isServiceEndpointExtrinsic;
 
   const error = [
-    !isFullDid(identity.did) && t('view_SignDidExtrinsic_error_light_did'),
+    !isFullDid(did) && t('view_SignDidExtrinsic_error_light_did'),
     isForbidden && t('view_SignDidExtrinsic_error_forbidden'),
+    removeEndpointError.current &&
+      t('view_SignDidExtrinsic_endpoint_remove_error'),
   ].filter(Boolean)[0];
+
+  const passwordField = usePasswordField();
 
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+
+      if (!extrinsic) {
+        throw new Error('Missing extrinsic');
+      }
 
       if (isForbidden) {
         throw new Error('This DID call is forbidden');
@@ -337,38 +259,48 @@ function DidExtrinsic({
     [extrinsic, signer, passwordField, did, isForbidden],
   );
 
+  const handleCancelClick = useCallback(async () => {
+    await backgroundSignDidExtrinsicChannel.throw('Rejected');
+    window.close();
+  }, []);
+
+  if (!extrinsic) {
+    return null; // blockchain data pending
+  }
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      <h1 className={styles.heading}>{t('view_SignDidExtrinsic_title')}</h1>
-      <p className={styles.subline}>{t('view_SignDidExtrinsic_subline')}</p>
+      {extrinsic.method.method === 'addServiceEndpoint' && (
+        <AddServiceEndpointExtrinsic
+          identity={identity}
+          extrinsic={extrinsic}
+        />
+      )}
 
-      <IdentitiesCarousel identity={identity} />
+      {extrinsic.method.method === 'removeServiceEndpoint' && (
+        <RemoveServiceEndpointExtrinsic
+          identity={identity}
+          extrinsic={extrinsic}
+          error={removeEndpointError}
+        />
+      )}
 
-      <dl className={styles.details}>
-        {values.map(({ label, value, details }) => (
-          <Fragment key={label}>
-            <dt className={styles.detailName}>{label}:</dt>
-            <dd
-              className={styles.detailValue}
-              title={!details ? String(value) : undefined}
-            >
-              {!details ? (
-                value
-              ) : (
-                <details className={styles.expanded}>
-                  <summary>{value}</summary>
-                  {details}
-                </details>
-              )}
-            </dd>
-          </Fragment>
-        ))}
-      </dl>
+      {!isServiceEndpointExtrinsic && (
+        <DidExtrinsic
+          identity={identity}
+          extrinsic={extrinsic}
+          origin={origin}
+        />
+      )}
 
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
-        <button onClick={onCancel} type="button" className={styles.reject}>
+        <button
+          onClick={handleCancelClick}
+          type="button"
+          className={styles.reject}
+        >
           {t('view_SignDidExtrinsic_reject')}
         </button>
         <button
@@ -383,52 +315,5 @@ function DidExtrinsic({
         </output>
       </p>
     </form>
-  );
-}
-
-interface Props {
-  identity: Identity;
-}
-
-export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
-  const data = usePopupData<SignDidExtrinsicOriginInput>();
-
-  const extrinsic = useExtrinsic(data);
-
-  const handleCancelClick = useCallback(async () => {
-    await backgroundSignDidExtrinsicChannel.throw('Rejected');
-    window.close();
-  }, []);
-
-  if (!extrinsic) {
-    return null; // blockchain data pending
-  }
-
-  if (extrinsic.method.method === 'addServiceEndpoint') {
-    return (
-      <AddServiceEndpointExtrinsic
-        identity={identity}
-        extrinsic={extrinsic}
-        onCancel={handleCancelClick}
-      />
-    );
-  }
-
-  if (extrinsic.method.method === 'removeServiceEndpoint') {
-    return (
-      <RemoveServiceEndpointExtrinsic
-        identity={identity}
-        extrinsic={extrinsic}
-        onCancel={handleCancelClick}
-      />
-    );
-  }
-
-  return (
-    <DidExtrinsic
-      identity={identity}
-      extrinsic={extrinsic}
-      onCancel={handleCancelClick}
-    />
   );
 }

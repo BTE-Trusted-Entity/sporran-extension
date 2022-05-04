@@ -13,7 +13,8 @@ import {
   getExtrinsicDocsEntry,
   Value,
 } from '../../utilities/extrinsicDetails/extrinsicDetails';
-import { parseDidUri } from '../../utilities/did/did';
+import { parseDidUri, isFullDid } from '../../utilities/did/did';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 export function useExtrinsic(
   input: SignDidExtrinsicOriginInput,
@@ -42,7 +43,7 @@ export function getExtrinsicValues(
   const forbidden = human.method.section === 'did';
   const errorLine = {
     label: 'FORBIDDEN',
-    value: 'All did.* calls are forbidden',
+    value: 'This DID call is forbidden',
   };
   const error = !forbidden ? [] : [errorLine];
 
@@ -73,26 +74,23 @@ export function getAddServiceEndpointValues(extrinsic: GenericExtrinsic): {
 export function useRemoveServiceEndpointValues(
   extrinsic: GenericExtrinsic,
   did: IDidDetails['did'],
+  error: ReturnType<typeof useBooleanState>,
 ): {
-  values: {
-    id: string;
-    serviceTypes?: string[];
-    urls?: string[];
-  };
-  error?: string;
+  id: string;
+  serviceTypes?: string[];
+  urls?: string[];
 } {
   const t = browser.i18n.getMessage;
 
   const [id, setId] = useState('');
   const [serviceTypes, setServiceTypes] = useState<string[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     setId('');
     setServiceTypes([]);
     setUrls([]);
-    setError('');
+    error.off();
 
     (async () => {
       const human = extrinsic.toHuman() as {
@@ -102,19 +100,23 @@ export function useRemoveServiceEndpointValues(
       const id = human.method.args['service_id'] as string;
       setId(id);
 
+      if (!isFullDid(did)) {
+        return;
+      }
+
       const { identifier } = parseDidUri(did);
 
       const result = await DidChain.queryServiceEndpoint(identifier, id);
 
       if (!result) {
-        setError(t('view_SignDidExtrinsic_endpoint_remove_error'));
+        error.on();
       } else {
         const { types, urls } = result;
         setServiceTypes(types);
         setUrls(urls);
       }
     })();
-  }, [extrinsic, did, t]);
+  }, [extrinsic, did, t, error]);
 
-  return { values: { id, serviceTypes, urls }, error };
+  return { id, serviceTypes, urls };
 }

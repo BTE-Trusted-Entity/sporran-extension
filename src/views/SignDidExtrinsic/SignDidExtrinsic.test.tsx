@@ -89,11 +89,9 @@ describe('SignDidExtrinsic', () => {
       method: { section: 'did', method: 'removeServiceEndpoint' },
     } as unknown as GenericExtrinsic);
     jest.mocked(useRemoveServiceEndpointValues).mockReturnValue({
-      values: {
-        id: '123456',
-        serviceTypes: ['Some type'],
-        urls: ['https://sporran.org'],
-      },
+      id: '123456',
+      serviceTypes: ['Some type'],
+      urls: ['https://sporran.org'],
     });
 
     const { container } = render(
