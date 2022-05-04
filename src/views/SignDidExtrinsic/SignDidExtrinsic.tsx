@@ -3,8 +3,6 @@ import { browser } from 'webextension-polyfill-ts';
 import { BaseDidKey } from '@kiltprotocol/types';
 import { GenericExtrinsic } from '@polkadot/types';
 
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
-
 import * as styles from './SignDidExtrinsic.module.css';
 
 import { Identity } from '../../utilities/identities/types';
@@ -24,8 +22,6 @@ import { backgroundSignDidExtrinsicChannel } from '../../channels/SignDidExtrins
 import { SignDidExtrinsicOriginInput } from '../../channels/SignDidExtrinsicChannels/types';
 
 import { CopyValue } from '../../components/CopyValue/CopyValue';
-
-import { paths } from '../paths';
 
 import {
   getExtrinsicValues,
@@ -98,10 +94,6 @@ function AddServiceEndpointExtrinsic({
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
-
-      if (!extrinsic) {
-        throw new Error('No extrinsic to sign');
-      }
 
       const fullDidDetails = await getFullDidDetails(did);
 
@@ -207,10 +199,6 @@ function RemoveServiceEndpointExtrinsic({
     async (event) => {
       event.preventDefault();
 
-      if (!extrinsic) {
-        throw new Error('No extrinsic to sign');
-      }
-
       const fullDidDetails = await getFullDidDetails(did);
 
       const { seed } = await passwordField.get(event);
@@ -293,9 +281,6 @@ function DidExtrinsic({
   extrinsic: GenericExtrinsic;
   onCancel: () => Promise<void>;
 }) {
-  // Redirect does not preserve search query
-  const { search } = useLocation();
-
   const t = browser.i18n.getMessage;
 
   const { signer, origin } = usePopupData<SignDidExtrinsicOriginInput>();
@@ -316,10 +301,6 @@ function DidExtrinsic({
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
-
-      if (!extrinsic) {
-        throw new Error('No extrinsic to sign');
-      }
 
       if (isForbidden) {
         throw new Error('This DID call is forbidden');
@@ -355,14 +336,6 @@ function DidExtrinsic({
     },
     [extrinsic, signer, passwordField, did, isForbidden],
   );
-
-  if (extrinsic.method.method === 'addServiceEndpoint') {
-    return <Redirect to={{ pathname: paths.popup.addEndpoint, search }} />;
-  }
-
-  if (extrinsic.method.method === 'removeServiceEndpoint') {
-    return <Redirect to={{ pathname: paths.popup.removeEndpoint, search }} />;
-  }
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
@@ -428,32 +401,34 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
   }, []);
 
   if (!extrinsic) {
-    return null;
+    return null; // blockchain data pending
+  }
+
+  if (extrinsic.method.method === 'addServiceEndpoint') {
+    return (
+      <AddServiceEndpointExtrinsic
+        identity={identity}
+        extrinsic={extrinsic}
+        onCancel={handleCancelClick}
+      />
+    );
+  }
+
+  if (extrinsic.method.method === 'removeServiceEndpoint') {
+    return (
+      <RemoveServiceEndpointExtrinsic
+        identity={identity}
+        extrinsic={extrinsic}
+        onCancel={handleCancelClick}
+      />
+    );
   }
 
   return (
-    <Switch>
-      <Route path={paths.popup.addEndpoint}>
-        <AddServiceEndpointExtrinsic
-          identity={identity}
-          extrinsic={extrinsic}
-          onCancel={handleCancelClick}
-        />
-      </Route>
-      <Route path={paths.popup.removeEndpoint}>
-        <RemoveServiceEndpointExtrinsic
-          identity={identity}
-          extrinsic={extrinsic}
-          onCancel={handleCancelClick}
-        />
-      </Route>
-      <Route path={paths.popup.signDidExtrinsic}>
-        <DidExtrinsic
-          identity={identity}
-          extrinsic={extrinsic}
-          onCancel={handleCancelClick}
-        />
-      </Route>
-    </Switch>
+    <DidExtrinsic
+      identity={identity}
+      extrinsic={extrinsic}
+      onCancel={handleCancelClick}
+    />
   );
 }
