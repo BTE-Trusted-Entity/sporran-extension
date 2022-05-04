@@ -47,7 +47,7 @@ export function getExtrinsicValues(
   ];
 }
 
-export function getAddServiceEndpointValues(
+export function getAddServiceEndpoint(
   extrinsic: GenericExtrinsic,
 ): DidServiceEndpoint {
   const human = extrinsic.toHuman() as {
@@ -67,7 +67,7 @@ export function getAddServiceEndpointValues(
   return { id, types, urls };
 }
 
-export async function getRemoveServiceEndpointValues(
+export async function getRemoveServiceEndpoint(
   extrinsic: GenericExtrinsic,
   did: IDidDetails['did'],
   error: ReturnType<typeof useBooleanState>,

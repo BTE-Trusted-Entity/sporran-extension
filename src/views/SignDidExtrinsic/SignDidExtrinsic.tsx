@@ -28,35 +28,31 @@ import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 import {
   getExtrinsicValues,
-  getAddServiceEndpointValues,
-  getRemoveServiceEndpointValues,
+  getAddServiceEndpoint,
+  getRemoveServiceEndpoint,
   getExtrinsic,
 } from './didExtrinsic';
 
-function EndpointValues({
-  values,
-}: {
-  values: DidServiceEndpoint;
-}): JSX.Element {
+function Endpoint({ endpoint }: { endpoint: DidServiceEndpoint }): JSX.Element {
   const t = browser.i18n.getMessage;
 
   return (
     <dl className={styles.endpointDetails}>
-      {values.urls && values.urls.length > 0 && (
+      {endpoint.urls && endpoint.urls.length > 0 && (
         <div className={styles.fullWidthDetail}>
           <dt className={styles.endpointName}>
             {t('view_SignDidExtrinsic_endpoint_url')}
           </dt>
-          <dd className={styles.endpointValue}>{values.urls[0]}</dd>
+          <dd className={styles.endpointValue}>{endpoint.urls[0]}</dd>
         </div>
       )}
 
-      {values.types && values.types.length > 0 && (
+      {endpoint.types && endpoint.types.length > 0 && (
         <div className={styles.endpointDetail}>
           <dt className={styles.endpointName}>
             {t('view_SignDidExtrinsic_endpoint_type')}
           </dt>
-          <dd className={styles.endpointValue}>{values.types[0]}</dd>
+          <dd className={styles.endpointValue}>{endpoint.types[0]}</dd>
         </div>
       )}
 
@@ -64,7 +60,7 @@ function EndpointValues({
         <dt className={styles.endpointName}>
           {t('view_SignDidExtrinsic_endpoint_id')}
         </dt>
-        <dd className={styles.endpointValue}>{getFragment(values.id)}</dd>
+        <dd className={styles.endpointValue}>{getFragment(endpoint.id)}</dd>
       </div>
     </dl>
   );
@@ -80,7 +76,7 @@ function AddServiceEndpointExtrinsic({
 
   const { did } = identity;
 
-  const values = getAddServiceEndpointValues(extrinsic);
+  const endpoint = getAddServiceEndpoint(extrinsic);
 
   return (
     <Fragment>
@@ -97,7 +93,7 @@ function AddServiceEndpointExtrinsic({
         <CopyValue value={did} label="DID" className={styles.didLine} />
       )}
 
-      <EndpointValues values={values} />
+      <Endpoint endpoint={endpoint} />
     </Fragment>
   );
 }
@@ -115,7 +111,7 @@ function RemoveServiceEndpointExtrinsic({
 
   const { did } = identity;
 
-  const values = useAsyncValue(getRemoveServiceEndpointValues, [
+  const endpoint = useAsyncValue(getRemoveServiceEndpoint, [
     extrinsic,
     did,
     error,
@@ -136,7 +132,7 @@ function RemoveServiceEndpointExtrinsic({
         <CopyValue value={did} label="DID" className={styles.didLine} />
       )}
 
-      {values && <EndpointValues values={values} />}
+      {endpoint && <Endpoint endpoint={endpoint} />}
     </Fragment>
   );
 }

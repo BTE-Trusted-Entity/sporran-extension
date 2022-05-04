@@ -12,8 +12,8 @@ import { SignDidExtrinsic } from './SignDidExtrinsic';
 import {
   getExtrinsic,
   getExtrinsicValues,
-  getAddServiceEndpointValues,
-  getRemoveServiceEndpointValues,
+  getAddServiceEndpoint,
+  getRemoveServiceEndpoint,
 } from './didExtrinsic';
 
 const input: SignDidExtrinsicOriginInput = {
@@ -64,7 +64,7 @@ describe('SignDidExtrinsic', () => {
     jest.mocked(getExtrinsic).mockResolvedValue({
       method: { section: 'did', method: 'addServiceEndpoint' },
     } as unknown as GenericExtrinsic);
-    jest.mocked(getAddServiceEndpointValues).mockReturnValue({
+    jest.mocked(getAddServiceEndpoint).mockReturnValue({
       id: '123456',
       types: ['Some type'],
       urls: ['https://sporran.org'],
@@ -88,7 +88,7 @@ describe('SignDidExtrinsic', () => {
     jest.mocked(getExtrinsic).mockResolvedValue({
       method: { section: 'did', method: 'removeServiceEndpoint' },
     } as unknown as GenericExtrinsic);
-    jest.mocked(getRemoveServiceEndpointValues).mockResolvedValue({
+    jest.mocked(getRemoveServiceEndpoint).mockResolvedValue({
       id: '123456',
       types: ['Some type'],
       urls: ['https://sporran.org'],
