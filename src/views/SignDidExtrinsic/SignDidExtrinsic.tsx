@@ -200,9 +200,11 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
 
   const removeEndpointError = useBooleanState();
 
+  const extrinsicMethod = extrinsic?.method.method;
+
   const isServiceEndpointExtrinsic =
-    extrinsic?.method.method === 'addServiceEndpoint' ||
-    extrinsic?.method.method === 'removeServiceEndpoint';
+    extrinsicMethod === 'addServiceEndpoint' ||
+    extrinsicMethod === 'removeServiceEndpoint';
 
   const isForbidden =
     extrinsic?.method.section === 'did' && !isServiceEndpointExtrinsic;
@@ -270,14 +272,14 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      {extrinsic.method.method === 'addServiceEndpoint' && (
+      {extrinsicMethod === 'addServiceEndpoint' && (
         <AddServiceEndpointExtrinsic
           identity={identity}
           extrinsic={extrinsic}
         />
       )}
 
-      {extrinsic.method.method === 'removeServiceEndpoint' && (
+      {extrinsicMethod === 'removeServiceEndpoint' && (
         <RemoveServiceEndpointExtrinsic
           identity={identity}
           extrinsic={extrinsic}
