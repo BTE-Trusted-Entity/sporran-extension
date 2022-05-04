@@ -10,11 +10,11 @@ import { paths } from '../paths';
 
 import { SignDidExtrinsic } from './SignDidExtrinsic';
 import {
+  getExtrinsic,
   getExtrinsicValues,
-  useExtrinsic,
   getAddServiceEndpointValues,
-  useRemoveServiceEndpointValues,
-} from './useExtrinsic';
+  getRemoveServiceEndpointValues,
+} from './didExtrinsic';
 
 const input: SignDidExtrinsicOriginInput = {
   dAppName: 'dApp',
@@ -23,13 +23,13 @@ const input: SignDidExtrinsicOriginInput = {
   signer: '4tMMYZHsFfqzfCsgCPLJSBmomBv2d6cBEYzHKMGVKz2VjACR',
 };
 
-jest.mock('./useExtrinsic');
+jest.mock('./didExtrinsic');
 
 describe('SignDidExtrinsic', () => {
   it('should render extrinsic', async () => {
     mockIsFullDid(true);
 
-    jest.mocked(useExtrinsic).mockReturnValue({
+    jest.mocked(getExtrinsic).mockResolvedValue({
       method: { section: 'web3Names', method: 'claim' },
     } as unknown as GenericExtrinsic);
 
@@ -61,12 +61,12 @@ describe('SignDidExtrinsic', () => {
 
   it('should render add endpoint extrinsic', async () => {
     mockIsFullDid(true);
-    jest.mocked(useExtrinsic).mockReturnValue({
+    jest.mocked(getExtrinsic).mockResolvedValue({
       method: { section: 'did', method: 'addServiceEndpoint' },
     } as unknown as GenericExtrinsic);
     jest.mocked(getAddServiceEndpointValues).mockReturnValue({
       id: '123456',
-      serviceTypes: ['Some type'],
+      types: ['Some type'],
       urls: ['https://sporran.org'],
     });
     const { container } = render(
@@ -85,12 +85,12 @@ describe('SignDidExtrinsic', () => {
   it('should render remove endpoint extrinsic', async () => {
     mockIsFullDid(true);
 
-    jest.mocked(useExtrinsic).mockReturnValue({
+    jest.mocked(getExtrinsic).mockResolvedValue({
       method: { section: 'did', method: 'removeServiceEndpoint' },
     } as unknown as GenericExtrinsic);
-    jest.mocked(useRemoveServiceEndpointValues).mockReturnValue({
+    jest.mocked(getRemoveServiceEndpointValues).mockResolvedValue({
       id: '123456',
-      serviceTypes: ['Some type'],
+      types: ['Some type'],
       urls: ['https://sporran.org'],
     });
 
@@ -109,7 +109,7 @@ describe('SignDidExtrinsic', () => {
 
   it('should render forbidden DID extrinsic', async () => {
     mockIsFullDid(true);
-    jest.mocked(useExtrinsic).mockReturnValue({
+    jest.mocked(getExtrinsic).mockResolvedValue({
       method: { section: 'did', method: 'addKey' },
     } as unknown as GenericExtrinsic);
 

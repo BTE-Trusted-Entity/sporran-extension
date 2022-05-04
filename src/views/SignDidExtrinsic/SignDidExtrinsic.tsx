@@ -1,6 +1,6 @@
 import { Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { BaseDidKey } from '@kiltprotocol/types';
+import { BaseDidKey, DidServiceEndpoint } from '@kiltprotocol/types';
 import { GenericExtrinsic } from '@polkadot/types';
 
 import * as styles from './SignDidExtrinsic.module.css';
@@ -24,21 +24,19 @@ import { SignDidExtrinsicOriginInput } from '../../channels/SignDidExtrinsicChan
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+
 import {
   getExtrinsicValues,
   getAddServiceEndpointValues,
-  useExtrinsic,
-  useRemoveServiceEndpointValues,
-} from './useExtrinsic';
+  getRemoveServiceEndpointValues,
+  getExtrinsic,
+} from './didExtrinsic';
 
 function EndpointValues({
   values,
 }: {
-  values: {
-    id: string;
-    serviceTypes?: string[];
-    urls?: string[];
-  };
+  values: DidServiceEndpoint;
 }): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -53,12 +51,12 @@ function EndpointValues({
         </div>
       )}
 
-      {values.serviceTypes && values.serviceTypes.length > 0 && (
+      {values.types && values.types.length > 0 && (
         <div className={styles.endpointDetail}>
           <dt className={styles.endpointName}>
             {t('view_SignDidExtrinsic_endpoint_type')}
           </dt>
-          <dd className={styles.endpointValue}>{values.serviceTypes[0]}</dd>
+          <dd className={styles.endpointValue}>{values.types[0]}</dd>
         </div>
       )}
 
@@ -117,7 +115,11 @@ function RemoveServiceEndpointExtrinsic({
 
   const { did } = identity;
 
-  const values = useRemoveServiceEndpointValues(extrinsic, did, error);
+  const values = useAsyncValue(getRemoveServiceEndpointValues, [
+    extrinsic,
+    did,
+    error,
+  ]);
 
   return (
     <Fragment>
@@ -134,7 +136,7 @@ function RemoveServiceEndpointExtrinsic({
         <CopyValue value={did} label="DID" className={styles.didLine} />
       )}
 
-      <EndpointValues values={values} />
+      {values && <EndpointValues values={values} />}
     </Fragment>
   );
 }
@@ -196,7 +198,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
 
   const { signer, origin } = data;
 
-  const extrinsic = useExtrinsic(data);
+  const extrinsic = useAsyncValue(getExtrinsic, [data]);
 
   const removeEndpointError = useBooleanState();
 
