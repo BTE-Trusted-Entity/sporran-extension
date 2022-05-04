@@ -29,7 +29,12 @@ function confirmNavigation(message: string, callback: (ok: boolean) => void) {
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();
 
-  const popupPaths = [paths.popup.base, paths.popup.signDid, paths.popup.claim];
+  const popupPaths = [
+    paths.popup.base,
+    paths.popup.signDid,
+    paths.popup.claim,
+    paths.popup.signDidExtrinsic,
+  ];
 
   return (
     <div className={styles.container}>
