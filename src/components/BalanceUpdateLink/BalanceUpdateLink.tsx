@@ -4,7 +4,7 @@ import { browser } from 'webextension-polyfill-ts';
 import * as styles from './BalanceUpdateLink.module.css';
 
 import { paths } from '../../views/paths';
-import { hasVestedFunds } from '../../utilities/vesting/vesting';
+import { hasVestedFunds } from '../../utilities/hasVestedFunds/hasVestedFunds';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 interface Props {

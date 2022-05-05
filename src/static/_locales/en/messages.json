@@ -832,7 +832,12 @@
     "message": "Your unlocked vested coins need to be released manually. Sign this transaction to release the coins to your transferable balance. A fee is required."
   },
   "view_UnlockVestedFunds_insufficient_funds": {
-    "message": "You don’t have enough usable balance to make this transaction"
+    "message": "You need at least $cost$ KILTs to pay the fee",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
   },
   "view_UnlockVestedFunds_CTA": {
     "message": "Update Balance"

@@ -16,15 +16,43 @@ exports[`UnlockVestedFunds should render 1`] = `
     >
       Update transaction for releasing unlocked coins
     </p>
-    <div
-      class="avatar"
+    <section
+      class="container"
     >
-      Identicon
-    </div>
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="centeredNameLine"
+      >
+        <span
+          class="name"
+        >
+          Light DID Identity
+        </span>
+      </div>
+    </section>
     <p
-      class="name"
+      class="fee"
     >
-      Light DID Identity
+      Fee: 
+      <span
+        class="amount"
+      >
+        0
+        <span
+          class="fractional"
+        >
+          .0100
+        </span>
+         
+        <span
+          aria-label="KILT Coin"
+          class="coin"
+        />
+      </span>
     </p>
     <p
       class="explanation"
@@ -99,7 +127,9 @@ exports[`UnlockVestedFunds should render 1`] = `
       <output
         class="errorTooltip"
         hidden=""
-      />
+      >
+        You need at least undefined KILTs to pay the fee
+      </output>
     </p>
     <button
       aria-label="Back"
