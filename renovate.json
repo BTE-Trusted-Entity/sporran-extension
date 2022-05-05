@@ -13,6 +13,7 @@
     },
     {
       "matchPackagePatterns": ["polkadot"],
+      "excludePackageNames": ["@polkadot/extension-inject"],
       "groupName": "polkadot"
     }
   ]
