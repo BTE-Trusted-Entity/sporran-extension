@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "rangeStrategy": "bump",
+  "postUpdateOptions": [
+    "yarnDedupeHighest"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["kiltprotocol"],
+      "groupName": "kiltprotocol"
+    },
+    {
+      "matchPackagePatterns": ["polkadot"],
+      "excludePackageNames": ["@polkadot/extension-inject"],
+      "groupName": "polkadot"
+    }
+  ]
+}
