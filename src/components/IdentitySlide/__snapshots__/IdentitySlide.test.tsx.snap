@@ -10,6 +10,45 @@ exports[`IdentitySlide should enable editing the identity name 1`] = `
     >
       Identicon
     </div>
+    <form
+      class="form"
+    >
+      <input
+        aria-label="Identity name:"
+        autocomplete="off"
+        class="input"
+        name="name"
+        placeholder="Identity name:"
+        required=""
+        value="Light DID Identity"
+      />
+      <button
+        aria-label="Save"
+        class="save"
+        title="Save"
+        type="submit"
+      />
+      <button
+        aria-label="Cancel"
+        class="cancel"
+        title="Cancel"
+        type="button"
+      />
+    </form>
+  </section>
+</div>
+`;
+
+exports[`IdentitySlide should enable editing the identity name 2`] = `
+<div>
+  <section
+    class="container"
+  >
+    <div
+      class="avatar"
+    >
+      Identicon
+    </div>
     <div
       class="nameLine"
     >
