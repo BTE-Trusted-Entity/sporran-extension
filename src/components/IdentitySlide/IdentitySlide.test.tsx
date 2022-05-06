@@ -34,6 +34,8 @@ describe('IdentitySlide', () => {
       ' Foo',
     );
 
+    expect(container).toMatchSnapshot();
+
     const saveButton = await screen.findByRole('button', { name: 'Save' });
     await userEvent.click(saveButton);
 
@@ -43,6 +45,10 @@ describe('IdentitySlide', () => {
       did: identity.did,
       index: 1,
     });
+
+    expect(
+      await screen.findByLabelText('Identity options'),
+    ).toBeInTheDocument();
 
     expect(container).toMatchSnapshot();
   });
