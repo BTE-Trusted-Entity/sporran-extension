@@ -1,14 +1,14 @@
 import userEvent from '@testing-library/user-event';
 
 import { render, screen } from '../../testing/testing';
-import { hasVestedFunds } from '../../utilities/vesting/vesting';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 import { Balance } from './Balance';
 
-jest.mock('../../utilities/vesting/vesting');
-jest.mocked(hasVestedFunds).mockResolvedValue(false);
-
 const mockAddress = '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1';
+
+jest.mock('../../utilities/useAsyncValue/useAsyncValue');
+jest.mocked(useAsyncValue).mockReturnValue(false);
 
 describe('Balance', () => {
   it('should render', async () => {
