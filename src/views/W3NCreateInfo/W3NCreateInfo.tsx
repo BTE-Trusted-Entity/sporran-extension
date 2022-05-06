@@ -10,8 +10,6 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { isFullDid } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
-import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
-import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 interface Props {
   identity: Identity;
@@ -23,14 +21,6 @@ export function W3NCreateInfo({ identity }: Props): JSX.Element {
 
   const { address } = identity;
   const canContinue = isFullDid(identity.did);
-
-  const promoStatus = usePromoStatus();
-
-  const hasPromo = useBooleanState();
-
-  const formPath = hasPromo.current
-    ? paths.identity.did.web3name.create.promo.form
-    : paths.identity.did.web3name.create.form;
 
   return (
     <section className={styles.container}>
@@ -53,29 +43,6 @@ export function W3NCreateInfo({ identity }: Props): JSX.Element {
         <p className={styles.warning}>{t('view_W3NCreateInfo_warning')}</p>
       )}
 
-      {canContinue && promoStatus?.is_active && (
-        <p className={styles.promoLine}>
-          <label>
-            <input
-              type="checkbox"
-              className={styles.promo}
-              onChange={hasPromo.toggle}
-              checked={hasPromo.current}
-            />
-            <span />
-            {t('view_W3NCreateInfo_promo')}
-          </label>
-          <a
-            className={styles.terms}
-            href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {t('view_W3NCreateInfo_terms')}
-          </a>
-        </p>
-      )}
-
       <p className={styles.buttonsLine}>
         <button type="button" onClick={goBack} className={styles.back}>
           {t('common_action_back')}
@@ -83,7 +50,7 @@ export function W3NCreateInfo({ identity }: Props): JSX.Element {
 
         {canContinue && (
           <Link
-            to={generatePath(formPath, {
+            to={generatePath(paths.identity.did.web3name.create.form, {
               address,
             })}
             className={styles.next}

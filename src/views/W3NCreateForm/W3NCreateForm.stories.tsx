@@ -13,5 +13,5 @@ const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
 export function Template(): JSX.Element {
-  return <W3NCreateForm identity={identity} signPath="/sign-path" />;
+  return <W3NCreateForm identity={identity} />;
 }

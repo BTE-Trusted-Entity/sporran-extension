@@ -13,13 +13,13 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
+import { paths } from '../paths';
 
 interface Props {
   identity: Identity;
-  signPath: string;
 }
 
-export function W3NCreateForm({ identity, signPath }: Props): JSX.Element {
+export function W3NCreateForm({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { address } = identity;
 
@@ -66,9 +66,14 @@ export function W3NCreateForm({ identity, signPath }: Props): JSX.Element {
         return;
       }
 
-      history.push(generatePath(signPath, { address, web3name }));
+      history.push(
+        generatePath(paths.identity.did.web3name.create.sign, {
+          address,
+          web3name,
+        }),
+      );
     },
-    [t, address, signPath, history],
+    [t, address, history],
   );
 
   return (

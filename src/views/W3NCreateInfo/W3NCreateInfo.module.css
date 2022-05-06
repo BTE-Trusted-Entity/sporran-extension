@@ -31,25 +31,6 @@
   font-size: 0.875rem;
 }
 
-.promoLine {
-  composes: subline from '../../components/Typography/Typography.module.css';
-  align-self: flex-start;
-  margin-top: 1rem;
-}
-
-.promo {
-  composes: checkbox from '../../components/Checkbox/Checkbox.module.css';
-}
-
-.promo + * {
-  flex-shrink: 0;
-  margin-right: 0.25rem;
-}
-
-.terms {
-  composes: subline from '../../components/Typography/Typography.module.css';
-}
-
 .buttonsLine {
   composes: buttonsLine from '../../components/Button/Button.module.css';
   margin-top: auto;

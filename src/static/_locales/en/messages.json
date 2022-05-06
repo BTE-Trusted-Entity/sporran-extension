@@ -883,27 +883,6 @@
   "view_DidUpgrade_error": {
     "message": "Upgrade to on-chain failed"
   },
-  "view_DidUpgradePromo_heading": {
-    "message": "Upgrade to on-chain DID"
-  },
-  "view_DidUpgradePromo_subline": {
-    "message": "Sign your upgrade"
-  },
-  "view_DidUpgradePromo_total": {
-    "message": "Total cost: "
-  },
-  "view_DidUpgradePromo_info": {
-    "message": "Free for you thanks to web3name promo"
-  },
-  "view_DidUpgradePromo_pending": {
-    "message": "Upgrade to on-chain is being processed"
-  },
-  "view_DidUpgradePromo_success": {
-    "message": "Upgrade to on-chain was successful"
-  },
-  "view_DidUpgradePromo_error": {
-    "message": "Upgrade to on-chain failed"
-  },
   "view_DidDowngrade_heading": {
     "message": "Remove on-chain DID"
   },
@@ -956,12 +935,6 @@
   },
   "view_DidUpgradeExplainer_onchain_deleted": {
     "message": "You deleted your on-chain DID and can no longer use this feature. To start using an on-chain DID, please create a new identity."
-  },
-  "view_DidUpgradeExplainer_promo": {
-    "message": "Use web3name Promo and accept "
-  },
-  "view_DidUpgradeExplainer_terms": {
-    "message": "Terms"
   },
   "view_DidUpgradeExplainer_CTA": {
     "message": "Upgrade"
@@ -1206,12 +1179,6 @@
   "view_W3NCreateInfo_warning": {
     "message": "You need an on-chain DID to use this feature."
   },
-  "view_W3NCreateInfo_promo": {
-    "message": "Use web3name Promo and accept "
-  },
-  "view_W3NCreateInfo_terms": {
-    "message": "Terms"
-  },
   "view_W3NCreateInfo_upgradeCTA": {
     "message": "Upgrade to on-chain DID"
   },
@@ -1291,30 +1258,6 @@
         "content": "$1"
       }
     }
-  },
-  "view_W3NCreatePromo_heading": {
-    "message": "web3name"
-  },
-  "view_W3NCreatePromo_subline": {
-    "message": "Connect a web3name to your on-chain DID"
-  },
-  "view_W3NCreatePromo_pending": {
-    "message": "Create web3name is being processed"
-  },
-  "view_W3NCreatePromo_success": {
-    "message": "Create web3name was successful"
-  },
-  "view_W3NCreatePromo_error": {
-    "message": "Create web3name failed"
-  },
-  "view_W3NCreatePromo_total": {
-    "message": "Total cost: "
-  },
-  "view_W3NCreatePromo_label": {
-    "message": "web3name: "
-  },
-  "view_W3NCreatePromo_info": {
-    "message": "Free for you thanks to web3name promo"
   },
   "view_W3NRemove_heading": {
     "message": "Remove web3name"

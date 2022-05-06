@@ -12,8 +12,6 @@ import { Avatar } from '../../components/Avatar/Avatar';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
-import { usePromoStatus } from '../../utilities/promoBackend/promoBackend';
-import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 interface Props {
   identity: Identity;
@@ -22,14 +20,7 @@ interface Props {
 export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const promoChecked = useBooleanState();
-  const promoStatus = usePromoStatus();
-
   const { address, did } = identity;
-
-  const upgradePath = promoChecked.current
-    ? generatePath(paths.identity.did.upgrade.promo, { address })
-    : generatePath(paths.identity.did.upgrade.sign, { address });
 
   const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
 
@@ -63,34 +54,12 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
             {t('view_DidUpgradeExplainer_deposit')}
           </p>
 
-          {promoStatus?.is_active && (
-            <p className={styles.promoLine}>
-              <label>
-                <input
-                  type="checkbox"
-                  className={styles.promo}
-                  onChange={promoChecked.toggle}
-                  checked={promoChecked.current}
-                />
-                <span />
-                {t('view_DidUpgradeExplainer_promo')}
-              </label>
-              <a
-                className={styles.terms}
-                href="https://www.trusted-entity.io/assets/pdf/web3namePromo_Terms_2022.pdf"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {t('view_DidUpgradeExplainer_terms')}
-              </a>
-            </p>
-          )}
           <p className={styles.buttonsLine}>
             <Link to={paths.home} className={styles.cancel}>
               {t('common_action_cancel')}
             </Link>
             <Link
-              to={upgradePath}
+              to={generatePath(paths.identity.did.upgrade.sign, { address })}
               className={styles.upgrade}
               aria-disabled={wasOnChainDidDeleted}
             >
