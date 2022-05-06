@@ -1,4 +1,4 @@
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { browser } from 'webextension-polyfill-ts';
 
 import { AppWithProviders } from './views/App/App';
@@ -19,5 +19,6 @@ import { initKiltSDK } from './utilities/initKiltSDK/initKiltSDK';
   await chromeMacBug();
   document.documentElement.lang = browser.i18n.getUILanguage();
 
-  render(<AppWithProviders />, document.getElementById('popup'));
+  const root = createRoot(document.getElementById('popup') as HTMLElement);
+  root.render(<AppWithProviders />);
 })();
