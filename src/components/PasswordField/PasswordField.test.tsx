@@ -98,6 +98,11 @@ describe('PasswordField', () => {
         <PasswordField identity={identity} password={passwordField} />
       </form>,
     );
+
+    await act(async () => {
+      await getPasswordChannel.get('');
+    });
+
     expect(await screen.findByLabelText(/Remember password/)).toBeChecked();
     expect(await screen.findByLabelText(/Sign with password/)).toHaveValue(
       '************',
@@ -107,6 +112,10 @@ describe('PasswordField', () => {
 
     const callback = jest.mocked(useInterval).mock.calls.pop()?.[0];
     callback?.();
+
+    await act(async () => {
+      await getPasswordChannel.get('');
+    });
 
     expect(await screen.findByLabelText(/Remember password/)).not.toBeChecked();
     expect(await screen.findByLabelText(/Sign with password/)).toHaveValue('');
