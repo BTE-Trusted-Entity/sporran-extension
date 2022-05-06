@@ -31,7 +31,7 @@ async function getUnsignedExtrinsic() {
   return api.tx.vesting.vest();
 }
 
-export async function getFee(): Promise<BN> {
+async function getFee(): Promise<BN> {
   const fakeSeed = new Uint8Array(32);
   const keypair = getKeypairBySeed(fakeSeed);
 
