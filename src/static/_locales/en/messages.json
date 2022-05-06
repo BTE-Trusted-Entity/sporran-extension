@@ -828,6 +828,9 @@
   "view_UnlockVestedFunds_subline": {
     "message": "Update transaction for releasing unlocked coins"
   },
+  "view_UnlockVestedFunds_fee": {
+    "message": "Fee: "
+  },
   "view_UnlockVestedFunds_explanation": {
     "message": "Your unlocked vested coins need to be released manually. Sign this transaction to release the coins to your transferable balance. A fee is required."
   },

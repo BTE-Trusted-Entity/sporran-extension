@@ -78,7 +78,7 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
 
       {fee && (
         <p className={styles.fee}>
-          {t('view_DidEndpointsSign_fee')}
+          {t('view_UnlockVestedFunds_fee')}
           <KiltAmount amount={fee} type="costs" smallDecimals />
         </p>
       )}
