@@ -43,26 +43,6 @@
   background: url('../../components/images/deposit.svg') no-repeat left center;
 }
 
-.promoLine {
-  composes: subline from '../../components/Typography/Typography.module.css';
-  align-self: flex-start;
-  padding-left: calc(68rem / 16);
-  margin-top: 1.5rem;
-}
-
-.promo {
-  composes: checkbox from '../../components/Checkbox/Checkbox.module.css';
-}
-
-.promo + * {
-  flex-shrink: 0;
-  margin-right: 0.25rem;
-}
-
-.terms {
-  composes: subline from '../../components/Typography/Typography.module.css';
-}
-
 .buttonsLine {
   composes: buttonsLine from '../../components/Button/Button.module.css';
   margin-top: 1rem;

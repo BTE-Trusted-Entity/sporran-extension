@@ -39,7 +39,6 @@ export const paths = {
       upgrade: {
         start: '/identity/:address/did/upgrade',
         sign: '/identity/:address/did/upgrade/sign',
-        promo: '/identity/:address/did/upgrade/promo',
       },
       manage: {
         start: '/identity/:address/did',
@@ -64,10 +63,6 @@ export const paths = {
           info: '/identity/:address/did/web3name/create/info',
           form: '/identity/:address/did/web3name/create/form',
           sign: '/identity/:address/did/web3name/create/sign/:web3name',
-          promo: {
-            form: '/identity/:address/did/web3name/create/promo/form',
-            sign: '/identity/:address/did/web3name/create/promo/sign/:web3name',
-          },
         },
         remove: '/identity/:address/did/web3name/remove',
       },

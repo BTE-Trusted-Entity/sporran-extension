@@ -8,9 +8,7 @@ const identity =
 
 describe('W3NCreateForm', () => {
   it('should match the snapshot', async () => {
-    const { container } = render(
-      <W3NCreateForm identity={identity} signPath="/sign-path" />,
-    );
+    const { container } = render(<W3NCreateForm identity={identity} />);
     expect(container).toMatchSnapshot();
   });
 });
