@@ -92,7 +92,7 @@
     "@types/ed2curve": "^0.2.2",
     "@types/jest": "^27.5.0",
     "@types/lodash-es": "^4.17.6",
-    "@types/react": "^17.0.44",
+    "@types/react": "^17.0.45",
     "@types/react-dom": "^18.0.3",
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
