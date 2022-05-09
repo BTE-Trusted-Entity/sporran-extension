@@ -1,5 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
+
+import { Link } from 'react-router-dom';
 
 import * as styles from './IdentityCredentials.module.css';
 
@@ -12,6 +14,8 @@ import { useIdentityCredentials } from '../../utilities/credentials/credentials'
 import { isNew } from '../../utilities/identities/identities';
 import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
+import { paths } from '../paths';
+import { showPopup } from '../../channels/base/PopupChannel/PopupMessages';
 
 interface Props {
   identity: Identity;
@@ -26,6 +30,11 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
     () => identityCredentials?.concat().reverse(),
     [identityCredentials],
   );
+
+  const handleImportClick = useCallback(async () => {
+    await showPopup('import', {}, '', {});
+    window.close();
+  }, []);
 
   if (isNew(identity)) {
     return <IdentityOverviewNew />;
@@ -44,32 +53,43 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
 
       <IdentitiesCarousel identity={identity} />
 
-      {credentials.length === 0 ? (
-        <section className={styles.credentials}>
-          <p className={styles.info}>
-            {t('view_IdentityCredentials_no_credentials')}
-          </p>
-
-          <a
-            href="https://socialkyc.io/"
-            target="_blank"
-            rel="noreferrer"
-            className={styles.explainerLink}
+      <ul className={styles.credentials}>
+        <li>
+          <Link
+            to={paths.popup.import}
+            onClick={handleImportClick}
+            className={styles.importCredential}
           >
-            {t('view_IdentityCredentials_explainer')}
-          </a>
-        </section>
-      ) : (
-        <ul className={styles.credentials}>
-          {credentials.map((credential, index) => (
+            {t('view_IdentityCredentials_import')}
+          </Link>
+        </li>
+
+        {credentials.length === 0 ? (
+          <li className={styles.noCredentials}>
+            <p className={styles.info}>
+              {t('view_IdentityCredentials_no_credentials')}
+            </p>
+
+            <a
+              href="https://socialkyc.io/"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.explainerLink}
+            >
+              {t('view_IdentityCredentials_explainer')}
+            </a>
+          </li>
+        ) : (
+          credentials.map((credential, index) => (
             <CredentialCard
               key={credential.request.rootHash}
               credential={credential}
               expand={index + 1 === credentialCount && credentialCount < 7}
             />
-          ))}
-        </ul>
-      )}
+          ))
+        )}
+      </ul>
+
       <LinkBack />
       <Stats />
     </section>

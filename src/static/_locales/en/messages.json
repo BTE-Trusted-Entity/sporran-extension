@@ -659,11 +659,14 @@
   "view_IdentityCredentials_subline": {
     "message": "View and manage your credentials"
   },
+  "view_IdentityCredentials_import": {
+    "message": "+ Import Credential"
+  },
   "view_IdentityCredentials_no_credentials": {
     "message": "No credentials available"
   },
   "view_IdentityCredentials_explainer": {
-    "message": "Get Credentials"
+    "message": "How To Get Credentials"
   },
   "view_ShareCredentialSelect_heading": {
     "message": "Select a Credential"
