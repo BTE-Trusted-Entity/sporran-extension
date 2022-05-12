@@ -6,7 +6,7 @@ import { AccountId } from '@polkadot/types/interfaces';
 
 import BN from 'bn.js';
 
-import { parseDidUri } from '../did/did';
+import { isFullDid, parseDidUri } from '../did/did';
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
 interface Web3NameData extends Struct {
@@ -20,13 +20,21 @@ interface DepositData {
   owner?: IIdentity['address'];
 }
 
-export async function getDepositWeb3Name(
+async function getDefaultDeposit() {
+  return { amount: await Web3Names.queryDepositAmount() };
+}
+
+async function getDepositWeb3Name(
   did: IDidDetails['did'],
 ): Promise<DepositData | undefined> {
+  if (!isFullDid(did)) {
+    return getDefaultDeposit();
+  }
+
   const web3name = await Web3Names.queryWeb3NameForDid(did);
 
   if (!web3name) {
-    return { amount: await Web3Names.queryDepositAmount() };
+    return getDefaultDeposit();
   }
 
   const { api } = await BlockchainApiConnection.getConnectionOrConnect();
@@ -55,7 +63,7 @@ export async function getDepositDid(
   const { identifier, type } = parseDidUri(did);
 
   if (type === 'light') {
-    return { amount: await DidChain.queryDepositAmount() };
+    return getDefaultDeposit();
   }
 
   const details = await DidChain.queryDetails(identifier);

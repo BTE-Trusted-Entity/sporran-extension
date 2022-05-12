@@ -12,7 +12,7 @@ import {
   getLightDidFromSeed,
   getKeypairBySeed,
 } from '../identities/identities';
-import { getFullDidDetails } from '../did/did';
+import { getFullDidDetails, isFullDid } from '../did/did';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
@@ -75,6 +75,9 @@ async function getSignedTransaction(
 }
 
 export async function getFee(did: IDidDetails['did']): Promise<BN> {
+  if (!isFullDid(did)) {
+    return new BN(0);
+  }
   const fakeSeed = new Uint8Array(32);
   const keypair = getKeypairBySeed(fakeSeed);
   const { extrinsic } = await getSignedTransaction(fakeSeed, did);
