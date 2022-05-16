@@ -63,7 +63,7 @@ export async function getDepositDid(
   const { identifier, type } = parseDidUri(did);
 
   if (type === 'light') {
-    return getDefaultDeposit();
+    return { amount: await DidChain.queryDepositAmount() };
   }
 
   const details = await DidChain.queryDetails(identifier);
