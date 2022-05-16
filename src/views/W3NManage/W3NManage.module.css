@@ -11,11 +11,6 @@
   margin: 0 0 0.8125rem;
 }
 
-.link {
-  composes: buttonWide from '../../components/Button/Button.module.css';
-  margin: 0.75rem 0 0;
-}
-
 .didLine {
   composes: didLine from '../../components/CopyValue/CopyValue.module.css';
   margin-top: 1.5rem;
@@ -31,8 +26,9 @@
   --copy-value-icon: url('../../components/images/web3name.svg');
 }
 
-.web3Name {
-  composes: link;
+.remove {
+  composes: buttonWide from '../../components/Button/Button.module.css';
+  margin: 0.75rem 0 0;
 
   --wide-button-icon: url('../../components/images/web3name.svg');
 }

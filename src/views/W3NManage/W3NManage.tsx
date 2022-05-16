@@ -44,15 +44,14 @@ export function W3NManage({ identity }: Props): JSX.Element {
 
       {web3name && (
         <Link
-          className={styles.web3Name}
+          className={styles.remove}
           to={generatePath(paths.identity.web3name.manage.remove, { address })}
         >
           {t('view_W3NManage_remove')}
         </Link>
       )}
 
-      {/* One of the child sub-views uses the link form, so this view also has to use it. */}
-      <LinkBack to={paths.identity.overview} />
+      <LinkBack />
       <Stats />
     </section>
   );

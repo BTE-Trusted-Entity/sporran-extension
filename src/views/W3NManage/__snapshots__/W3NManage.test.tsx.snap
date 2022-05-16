@@ -56,16 +56,16 @@ exports[`W3NManage should render 1`] = `
       value="fancy-name"
     />
     <a
-      class="web3Name"
+      class="remove"
       href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/web3name/remove"
     >
       Remove web3name
     </a>
-    <a
+    <button
       aria-label="Back"
       class="linkBack"
-      href="/identity/FOO"
       title="Back"
+      type="button"
     />
     <p
       class="stats"
