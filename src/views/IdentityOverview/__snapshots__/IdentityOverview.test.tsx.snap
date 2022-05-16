@@ -1283,7 +1283,11 @@ exports[`IdentityOverview should show on-chain DID removed 1`] = `
       class="web3Name"
       href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/web3name"
     >
-      Manage web3name: fancy-name
+      <span
+        class="web3NameManage"
+      >
+        Manage web3name: fancy-name
+      </span>
     </a>
     <p
       class="stats"
@@ -1484,7 +1488,11 @@ exports[`IdentityOverview should show web3name 1`] = `
       class="web3Name"
       href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/web3name"
     >
-      Manage web3name: fancy-name
+      <span
+        class="web3NameManage"
+      >
+        Manage web3name: fancy-name
+      </span>
     </a>
     <p
       class="stats"

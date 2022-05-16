@@ -69,6 +69,13 @@
   --wide-button-icon: url('../../components/images/web3name.svg');
 }
 
+.web3NameManage {
+  width: 80%;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .avatarSmall {
   composes: avatar from '../../components/Avatar/Avatar.module.css';
 

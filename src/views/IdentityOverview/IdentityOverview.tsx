@@ -166,7 +166,9 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           to={generatePath(paths.identity.web3name.manage.start, { address })}
           className={styles.web3Name}
         >
-          {t('view_IdentityOverview_web3name_manage', [web3name])}
+          <span className={styles.web3NameManage}>
+            {t('view_IdentityOverview_web3name_manage', [web3name])}
+          </span>
         </Link>
       )}
 
