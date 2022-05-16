@@ -10,11 +10,6 @@ exports[`W3NManage should render 1`] = `
     >
       Manage web3name
     </h1>
-    <p
-      class="subline"
-    >
-      You have 3 Identities
-    </p>
     <section
       class="container"
     >
