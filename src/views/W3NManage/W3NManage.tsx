@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import * as styles from './DidManage.module.css';
+import * as styles from './W3NManage.module.css';
 
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
@@ -16,19 +16,15 @@ interface Props {
   identity: Identity;
 }
 
-export function DidManage({ identity }: Props): JSX.Element {
+export function W3NManage({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const { address, did } = identity;
   const web3name = useWeb3Name(did);
 
-  const warningPath = web3name
-    ? paths.identity.did.manage.downgrade.warning.web3name
-    : paths.identity.did.manage.downgrade.warning.credentials;
-
   return (
     <section className={styles.container}>
-      <h1 className={styles.heading}>{t('view_DidManage_heading')}</h1>
+      <h1 className={styles.heading}>{t('view_W3NManage_heading')}</h1>
       <p className={styles.subline}>
         <YouHaveIdentities />
       </p>
@@ -46,21 +42,14 @@ export function DidManage({ identity }: Props): JSX.Element {
         />
       )}
 
-      <Link
-        className={styles.endpoints}
-        to={generatePath(paths.identity.did.manage.endpoints.start, {
-          address,
-        })}
-      >
-        {t('view_DidManage_endpoints')}
-      </Link>
-
-      <Link
-        className={styles.downgrade}
-        to={generatePath(warningPath, { address })}
-      >
-        {t('view_DidManage_downgrade')}
-      </Link>
+      {web3name && (
+        <Link
+          className={styles.web3Name}
+          to={generatePath(paths.identity.web3name.manage.remove, { address })}
+        >
+          {t('view_W3NManage_remove')}
+        </Link>
+      )}
 
       {/* One of the child sub-views uses the link form, so this view also has to use it. */}
       <LinkBack to={paths.identity.overview} />

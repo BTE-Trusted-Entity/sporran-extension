@@ -57,16 +57,19 @@ export const paths = {
           sign: '/identity/:address/did/endpoints/sign',
         },
       },
-      web3name: {
-        create: {
-          base: '/identity/:address/did/web3name/create',
-          info: '/identity/:address/did/web3name/create/info',
-          form: '/identity/:address/did/web3name/create/form',
-          sign: '/identity/:address/did/web3name/create/sign/:web3name',
-        },
-        remove: '/identity/:address/did/web3name/remove',
-      },
       repair: '/identity/:address/did/repair',
+    },
+    web3name: {
+      create: {
+        base: '/identity/:address/web3name/create',
+        info: '/identity/:address/web3name/create/info',
+        form: '/identity/:address/web3name/create/form',
+        sign: '/identity/:address/web3name/create/sign/:web3name',
+      },
+      manage: {
+        start: '/identity/:address/web3name',
+        remove: '/identity/:address/web3name/remove',
+      },
     },
   },
   popup: {

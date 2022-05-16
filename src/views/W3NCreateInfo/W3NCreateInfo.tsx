@@ -50,7 +50,7 @@ export function W3NCreateInfo({ identity }: Props): JSX.Element {
 
         {canContinue && (
           <Link
-            to={generatePath(paths.identity.did.web3name.create.form, {
+            to={generatePath(paths.identity.web3name.create.form, {
               address,
             })}
             className={styles.next}

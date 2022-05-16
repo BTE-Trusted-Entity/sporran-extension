@@ -33,13 +33,13 @@ describe('W3NCreateSign', () => {
     const { container } = render(
       <MemoryRouter
         initialEntries={[
-          generatePath(paths.identity.did.web3name.create.sign, {
+          generatePath(paths.identity.web3name.create.sign, {
             address: 'FOO',
             web3name: 'fancy-name',
           }),
         ]}
       >
-        <Route path={paths.identity.did.web3name.create.sign}>
+        <Route path={paths.identity.web3name.create.sign}>
           <W3NCreateSign identity={identity} />
         </Route>
       </MemoryRouter>,

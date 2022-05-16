@@ -491,8 +491,8 @@
   "view_IdentityOverview_web3name_create": {
     "message": "Create web3name"
   },
-  "view_IdentityOverview_web3name": {
-    "message": "web3name: $web3name$",
+  "view_IdentityOverview_web3name_manage": {
+    "message": "Manage web3name: $web3name$",
     "placeholders": {
       "web3name": {
         "content": "$1"
@@ -978,12 +978,6 @@
   "view_DidManage_endpoints": {
     "message": "Service endpoints"
   },
-  "view_DidManage_web3name": {
-    "message": "Create web3name"
-  },
-  "view_DidManage_web3name_remove": {
-    "message": "Remove web3name"
-  },
   "view_DidManage_downgrade": {
     "message": "Remove on-chain DID"
   },
@@ -1338,5 +1332,11 @@
   },
   "view_SignDidExtrinsic_endpoint_remove_error": {
     "message": "No service endpoint found for DID"
+  },
+  "view_W3NManage_heading": {
+    "message": "Manage web3name"
+  },
+  "view_W3NManage_remove": {
+    "message": "Remove web3name"
   }
 }

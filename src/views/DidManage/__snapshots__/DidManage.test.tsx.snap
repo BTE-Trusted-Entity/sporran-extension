@@ -62,12 +62,6 @@ exports[`DidManage should match the snapshot with web3name 1`] = `
       Service endpoints
     </a>
     <a
-      class="web3Name"
-      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/web3name/remove"
-    >
-      Remove web3name
-    </a>
-    <a
       class="downgrade"
       href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/downgrade/warning/web3name"
     >
@@ -157,12 +151,6 @@ exports[`DidManage should match the snapshot without web3name 1`] = `
       href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/endpoints"
     >
       Service endpoints
-    </a>
-    <a
-      class="web3Name"
-      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/web3name/create/info"
-    >
-      Create web3name
     </a>
     <a
       class="downgrade"

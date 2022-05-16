@@ -152,7 +152,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
       {!web3name && (
         <Link
-          to={generatePath(paths.identity.did.web3name.create.info, {
+          to={generatePath(paths.identity.web3name.create.info, {
             address,
           })}
           className={styles.web3Name}
@@ -163,10 +163,10 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
       {web3name && (
         <Link
-          to={generatePath(paths.identity.did.manage.start, { address })}
+          to={generatePath(paths.identity.web3name.manage.start, { address })}
           className={styles.web3Name}
         >
-          {t('view_IdentityOverview_web3name', [web3name])}
+          {t('view_IdentityOverview_web3name_manage', [web3name])}
         </Link>
       )}
 
