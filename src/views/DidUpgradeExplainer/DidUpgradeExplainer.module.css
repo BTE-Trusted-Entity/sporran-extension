@@ -11,6 +11,11 @@
   margin: 0 0 0.8125rem;
 }
 
+.didLine {
+  composes: didLine from '../../components/CopyValue/CopyValue.module.css';
+  margin-top: 1.5rem;
+}
+
 .explanation {
   composes: subline from '../../components/Typography/Typography.module.css';
   text-align: left;

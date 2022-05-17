@@ -13,7 +13,7 @@ exports[`DidUpgradeExplainer should render DID already removed from chain 1`] = 
     <p
       class="subline"
     >
-      Upgrade to an on-chain DID
+      On-chain DID was deleted
     </p>
     <section
       class="container"
@@ -29,10 +29,26 @@ exports[`DidUpgradeExplainer should render DID already removed from chain 1`] = 
         <span
           class="name"
         >
-          Light DID Identity
+          Identity with deleted on-chain DID
         </span>
       </div>
     </section>
+    <p
+      class="didLine"
+    >
+      <input
+        aria-label="DID"
+        class="long"
+        readonly=""
+        value="did:kilt:4tPoYT9j4i429JktnyX9EEu9StL58YfdPCi8cUkYnvtAKRbK"
+      />
+      <button
+        aria-label="copy to clipboard"
+        class="copy"
+        title="copy to clipboard"
+        type="button"
+      />
+    </p>
     <p
       class="deleted"
     >

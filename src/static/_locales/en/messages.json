@@ -939,6 +939,9 @@
   "view_DidUpgradeExplainer_onchain_deleted": {
     "message": "You deleted your on-chain DID and can no longer use this feature. To start using an on-chain DID, please create a new identity."
   },
+  "view_DidUpgradeExplainer_onchain_deleted_subline": {
+    "message": "On-chain DID was deleted"
+  },
   "view_DidUpgradeExplainer_CTA": {
     "message": "Upgrade"
   },
