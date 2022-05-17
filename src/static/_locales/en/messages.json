@@ -1082,7 +1082,7 @@
     "message": "Request from:"
   },
   "view_SignDid_plaintext": {
-    "message": "Message to be signed:"
+    "message": "Data to be signed:"
   },
   "view_SignDid_reject": {
     "message": "Reject"

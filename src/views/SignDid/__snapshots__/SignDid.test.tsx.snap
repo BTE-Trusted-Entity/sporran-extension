@@ -111,7 +111,7 @@ exports[`SignDid should allow signing with full did 1`] = `
       class="label"
       id="plaintext"
     >
-      Message to be signed:
+      Data to be signed:
     </p>
     <p
       class="plaintextLine"
@@ -317,7 +317,7 @@ exports[`SignDid should render 1`] = `
       class="label"
       id="plaintext"
     >
-      Message to be signed:
+      Data to be signed:
     </p>
     <p
       class="plaintextLine"
