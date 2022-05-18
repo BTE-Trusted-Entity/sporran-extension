@@ -7,7 +7,6 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
-import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { generatePath, paths } from '../paths';
 import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
@@ -29,9 +28,6 @@ export function DidManage({ identity }: Props): JSX.Element {
   return (
     <section className={styles.container}>
       <h1 className={styles.heading}>{t('view_DidManage_heading')}</h1>
-      <p className={styles.subline}>
-        <YouHaveIdentities />
-      </p>
 
       <IdentitySlide identity={identity} />
 

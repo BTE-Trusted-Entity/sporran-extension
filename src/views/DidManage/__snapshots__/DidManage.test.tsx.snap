@@ -10,11 +10,6 @@ exports[`DidManage should match the snapshot with web3name 1`] = `
     >
       Manage DID
     </h1>
-    <p
-      class="subline"
-    >
-      You have 3 Identities
-    </p>
     <section
       class="container"
     >
@@ -107,11 +102,6 @@ exports[`DidManage should match the snapshot without web3name 1`] = `
     >
       Manage DID
     </h1>
-    <p
-      class="subline"
-    >
-      You have 3 Identities
-    </p>
     <section
       class="container"
     >
