@@ -11,4 +11,5 @@ export const upgrade: string;
 export const manage: string;
 export const repair: string;
 export const web3Name: string;
+export const web3NameManage: string;
 export const avatarSmall: string;

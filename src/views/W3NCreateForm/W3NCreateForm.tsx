@@ -67,7 +67,7 @@ export function W3NCreateForm({ identity }: Props): JSX.Element {
       }
 
       history.push(
-        generatePath(paths.identity.did.web3name.create.sign, {
+        generatePath(paths.identity.web3name.create.sign, {
           address,
           web3name,
         }),

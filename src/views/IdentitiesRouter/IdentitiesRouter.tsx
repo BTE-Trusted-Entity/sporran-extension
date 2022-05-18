@@ -35,6 +35,7 @@ import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
 import { paths } from '../paths';
 import { DidRepair } from '../DidRepair/DidRepair';
 import { W3NCreateFlow } from '../W3NCreateFlow/W3NCreateFlow';
+import { W3NManageRouter } from '../W3NManageRouter/W3NManageRouter';
 
 interface Props {
   identities: IdentitiesMap;
@@ -133,12 +134,16 @@ export function SpecificIdentityRouter({
           <DidRepair identity={identity} />
         </Route>
 
-        <Route path={paths.identity.did.web3name.create.base}>
+        <Route path={paths.identity.did.manage.start}>
+          <DidManageRouter identity={identity} />
+        </Route>
+
+        <Route path={paths.identity.web3name.create.base}>
           <W3NCreateFlow identity={identity} />
         </Route>
 
-        <Route path={paths.identity.did.manage.start}>
-          <DidManageRouter identity={identity} />
+        <Route path={paths.identity.web3name.manage.start}>
+          <W3NManageRouter identity={identity} />
         </Route>
 
         <Route path={paths.identity.overview}>

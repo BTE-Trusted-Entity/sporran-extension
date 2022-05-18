@@ -13,13 +13,13 @@ interface Props {
 export function W3NCreateFlow({ identity }: Props): JSX.Element {
   return (
     <Switch>
-      <Route path={paths.identity.did.web3name.create.form}>
+      <Route path={paths.identity.web3name.create.form}>
         <W3NCreateForm identity={identity} />
       </Route>
-      <Route path={paths.identity.did.web3name.create.sign}>
+      <Route path={paths.identity.web3name.create.sign}>
         <W3NCreateSign identity={identity} />
       </Route>
-      <Route path={paths.identity.did.web3name.create.info}>
+      <Route path={paths.identity.web3name.create.info}>
         <W3NCreateInfo identity={identity} />
       </Route>
     </Switch>
