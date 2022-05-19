@@ -18,6 +18,6 @@ export function mockBalanceChanges(): void {
           total: BalanceUtils.toFemtoKilt(1.234),
         },
       });
-      return () => null;
+      return () => null; // eslint-disable-line react/display-name
     });
 }
