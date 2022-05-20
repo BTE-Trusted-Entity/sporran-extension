@@ -25,7 +25,6 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
   const { address, did } = identity;
 
   const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
-  console.log(parseDidUri(did).fullDid);
 
   return (
     <section className={styles.container}>

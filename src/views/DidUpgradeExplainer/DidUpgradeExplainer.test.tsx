@@ -37,7 +37,6 @@ describe('DidUpgradeExplainer', () => {
       <DidUpgradeExplainer
         identity={
           identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']
-          // identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
         }
       />,
     );
