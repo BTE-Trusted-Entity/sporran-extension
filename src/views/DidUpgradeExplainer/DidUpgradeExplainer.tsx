@@ -5,10 +5,12 @@ import { Fragment } from 'react';
 import * as styles from './DidUpgradeExplainer.module.css';
 
 import { Identity } from '../../utilities/identities/types';
+import { parseDidUri } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { Avatar } from '../../components/Avatar/Avatar';
+import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
@@ -29,12 +31,20 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
       <h1 className={styles.heading}>
         {t('view_DidUpgradeExplainer_heading')}
       </h1>
-      <p className={styles.subline}>{t('view_DidUpgradeExplainer_subline')}</p>
-
-      <IdentitySlide identity={identity} />
 
       {wasOnChainDidDeleted && (
         <Fragment>
+          <p className={styles.subline}>
+            {t('view_DidUpgradeExplainer_onchain_deleted_subline')}
+          </p>
+
+          <IdentitySlide identity={identity} />
+
+          <CopyValue
+            value={parseDidUri(did).fullDid}
+            label="DID"
+            className={styles.didLine}
+          />
           <p className={styles.deleted}>
             {t('view_DidUpgradeExplainer_onchain_deleted')}
           </p>
@@ -46,6 +56,12 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
 
       {!wasOnChainDidDeleted && (
         <Fragment>
+          <p className={styles.subline}>
+            {t('view_DidUpgradeExplainer_subline')}
+          </p>
+
+          <IdentitySlide identity={identity} />
+
           <div className={styles.functionality}>
             <Avatar className={styles.avatar} identity={identity} />
             {t('view_DidUpgradeExplainer_functionality')}
