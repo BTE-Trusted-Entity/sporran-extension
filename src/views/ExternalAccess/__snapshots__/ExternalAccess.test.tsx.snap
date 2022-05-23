@@ -27,7 +27,11 @@ exports[`ExternalAccess should render 1`] = `
         <label
           class="label"
         >
-          example.com
+          <span
+            class="host"
+          >
+            example.com
+          </span>
           <span
             aria-hidden="true"
             class="denied"
@@ -52,7 +56,11 @@ exports[`ExternalAccess should render 1`] = `
         <label
           class="label"
         >
-          example.org
+          <span
+            class="host"
+          >
+            example.org
+          </span>
           <span
             aria-hidden="true"
             class="denied"
