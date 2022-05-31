@@ -24,10 +24,10 @@ async function getUnpaidCosts(
 
   const fee = (await extrinsic.paymentInfo(fakeIdentity)).partialFee;
 
-  const { transferable } = transformBalances(
+  const { usableForFees } = transformBalances(
     await Balance.getBalances(address),
   );
-  const sufficient = transferable.gte(fee);
+  const sufficient = usableForFees.gte(fee);
   if (sufficient) {
     return;
   }
