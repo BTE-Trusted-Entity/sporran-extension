@@ -30,7 +30,6 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
     return null; // blockchain data pending
   }
 
-  // console.log('moo', wasOnChainDidDeleted);
   return (
     <section className={styles.container}>
       <h1 className={styles.heading}>
