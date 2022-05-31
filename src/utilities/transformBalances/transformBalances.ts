@@ -17,8 +17,8 @@ interface TransformedBalances {
 
 export function transformBalances(balances: rawBalances): TransformedBalances {
   const { free, reserved, miscFrozen, feeFrozen } = balances;
-  const transferable = free.sub(miscFrozen);
-  const usableForFees = free.sub(feeFrozen);
+  const transferable = BN.max(free.sub(miscFrozen), new BN(0));
+  const usableForFees = BN.max(free.sub(feeFrozen), new BN(0));
   const total = free.add(reserved);
 
   return {
