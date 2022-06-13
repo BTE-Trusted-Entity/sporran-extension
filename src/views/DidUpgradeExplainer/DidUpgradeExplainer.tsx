@@ -19,12 +19,16 @@ interface Props {
   identity: Identity;
 }
 
-export function DidUpgradeExplainer({ identity }: Props): JSX.Element {
+export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const { address, did } = identity;
 
   const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
+
+  if (wasOnChainDidDeleted === undefined) {
+    return null; // blockchain data pending
+  }
 
   return (
     <section className={styles.container}>
