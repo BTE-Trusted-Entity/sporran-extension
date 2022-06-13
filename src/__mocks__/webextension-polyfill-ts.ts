@@ -28,6 +28,8 @@ export const browser = {
         return {
           authorizedDApps: {
             'example.com': false,
+            'examplesuperlong.dfghrtydfghklyuihjwertyxcvbn3456rty56782345678yudfgghtyuwertyudfghsdfgh-domain.org':
+              true,
             'example.org': true,
           },
         };

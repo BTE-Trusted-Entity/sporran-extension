@@ -48,7 +48,7 @@ export function ExternalAccess(): JSX.Element | null {
         {Object.entries(hosts).map(([host, checked]) => (
           <li key={host}>
             <label className={styles.label}>
-              {host}
+              <span className={styles.host}>{host}</span>
               <span className={styles.denied} aria-hidden>
                 {t('view_ExternalAccess_denied')}
               </span>
