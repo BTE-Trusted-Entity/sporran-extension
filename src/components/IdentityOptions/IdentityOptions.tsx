@@ -46,7 +46,7 @@ export function IdentityOptions({ identity, onEdit }: Props): JSX.Element {
             <li className={menuStyles.listItem}>
               <button
                 type="button"
-                {...(itemProps[0] as unknown)}
+                {...(itemProps[0] as Record<string, unknown>)}
                 onClick={handleClick}
                 className={menuStyles.listButton}
               >

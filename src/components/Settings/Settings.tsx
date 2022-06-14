@@ -99,7 +99,8 @@ export function Settings(): JSX.Element {
                   <button
                     type="button"
                     className={menuStyles.listButton}
-                    {...(hasPasswords && (itemProps.shift() as unknown))}
+                    {...(hasPasswords &&
+                      (itemProps.shift() as Record<string, unknown>))}
                     onClick={handleForgetAllClick}
                     disabled={!hasPasswords}
                   >
