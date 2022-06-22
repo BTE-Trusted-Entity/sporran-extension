@@ -17,7 +17,7 @@
   box-sizing: border-box;
   margin-top: 1.5rem;
   padding: 0.75rem 1.5rem;
-  max-height: calc(120rem / 16);
+  max-height: calc(140rem / 16);
   display: flex;
   flex-wrap: wrap;
   text-align: left;

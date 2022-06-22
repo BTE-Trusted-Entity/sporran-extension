@@ -1078,9 +1078,6 @@
   "view_SignDid_plaintext": {
     "message": "Data to be signed:"
   },
-  "view_SignDid_credential": {
-    "message": "Credential:"
-  },
   "view_SignDid_credentials": {
     "message": "Credentials:"
   },

@@ -1,6 +1,12 @@
 import { useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
+import {
+  RequestForAttestation,
+  Attestation,
+  Credential,
+} from '@kiltprotocol/core';
+
 import * as styles from './SignDid.module.css';
 
 import { Identity } from '../../utilities/identities/types';
@@ -51,18 +57,47 @@ export function SignDid({ identity, credentials }: Props): JSX.Element | null {
     async (event) => {
       event.preventDefault();
 
+      if (!credentials) {
+        // set error
+        return;
+      }
+
       const { seed } = await passwordField.get(event);
       const { sign, keystore, didDetails } = await getIdentityCryptoFromSeed(
         seed,
       );
 
+      const presentations = [];
+
+      for (const { credential, sharedContents } of credentials) {
+        const request = RequestForAttestation.fromRequest(credential.request);
+
+        const attestation = await Attestation.query(request.rootHash);
+        if (!attestation) {
+          // set error
+          return;
+        }
+
+        const credentialInstance = Credential.fromCredential({
+          request,
+          attestation,
+        });
+        const presentation = await credentialInstance.createPresentation({
+          selectedAttributes: sharedContents,
+          signer: keystore,
+          claimerDid: didDetails,
+        });
+
+        presentations.push({ name: credential.name, credential: presentation });
+      }
+
       const signature = sign(plaintext);
 
-      await backgroundSignDidChannel.return(sign(plaintext));
+      await backgroundSignDidChannel.return({ ...presentations, ...signature });
 
       window.close();
     },
-    [passwordField, plaintext],
+    [passwordField, plaintext, credentials],
   );
 
   const handleCancelClick = useCallback(async () => {
@@ -73,7 +108,7 @@ export function SignDid({ identity, credentials }: Props): JSX.Element | null {
   return (
     <form
       className={styles.container}
-      onSubmit={credentials?.length ? handleSubmitCredentials : handleSubmit}
+      onSubmit={credentials ? handleSubmitCredentials : handleSubmit}
     >
       <h1 className={styles.heading}>{t('view_SignDid_title')}</h1>
 
@@ -87,11 +122,7 @@ export function SignDid({ identity, credentials }: Props): JSX.Element | null {
           <dt className={styles.detailName}>{t('view_SignDid_plaintext')}</dt>
           <dd className={styles.data}>{plaintext}</dd>
 
-          <dt className={styles.detailName}>
-            {credentials.length === 1
-              ? t('view_SignDid_credential')
-              : t('view_SignDid_credentials')}
-          </dt>
+          <dt className={styles.detailName}>{t('view_SignDid_credentials')}</dt>
           <dd className={styles.detailValue}>
             {credentials.map(({ credential }) => credential.name).join(', ')}
           </dd>

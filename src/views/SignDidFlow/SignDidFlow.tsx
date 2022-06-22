@@ -26,10 +26,10 @@ export function SignDidFlow({ identity }: Props) {
 
   const [credentials, setCredentials] = useState<SharedCredential[]>();
 
-  // when navigating back to start after submitting credential selection
+  // reset state when navigating back to start after submitting credential selection
   if (
     useRouteMatch({ path: paths.popup.signDid.start, exact: true }) &&
-    credentials?.length
+    credentials
   ) {
     setCredentials(undefined);
   }
@@ -52,7 +52,7 @@ export function SignDidFlow({ identity }: Props) {
         <SignDid identity={identity} credentials={credentials} />
       </Route>
 
-      <Route path={paths.popup.signDid.credentials.select}>
+      <Route path={paths.popup.signDid.credentials}>
         <SignDidCredentialsSelect
           identity={identity}
           onCancel={onCancel}

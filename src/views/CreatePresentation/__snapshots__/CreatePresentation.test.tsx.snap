@@ -16,7 +16,7 @@ exports[`CreatePresentation should match the snapshot 1`] = `
       Select the information to disclose
     </p>
     <div
-      class="credentialsList"
+      class="credentialContainer"
     >
       <form
         class="credential"

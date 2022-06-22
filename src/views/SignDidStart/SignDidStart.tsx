@@ -23,17 +23,19 @@ export function SignDidStart({ identity, setPopupQuery }: Props) {
   const t = browser.i18n.getMessage;
 
   const { search: popupQuery } = useLocation();
+
   useEffect(() => {
-    if (!popupQuery) {
-      return;
-    }
     setPopupQuery(popupQuery);
   }, [popupQuery, setPopupQuery]);
 
   const { address, did } = identity;
 
   const credentials = useIdentityCredentials(did);
-  const attestedCredentials = filter(credentials, { status: 'attested' });
+
+  const attestedCredentials = filter(
+    credentials,
+    ({ status }) => status === 'attested' || status === 'pending',
+  );
 
   const errorDid = !isFullDid(did) && t('view_SignDidStart_error_did');
   const errorCredentials = [
@@ -55,7 +57,7 @@ export function SignDidStart({ identity, setPopupQuery }: Props) {
 
       <Link
         onClick={(event) => errorCredentials && event.preventDefault()}
-        to={generatePath(paths.popup.signDid.credentials.select, {
+        to={generatePath(paths.popup.signDid.credentials, {
           address,
         })}
         className={styles.withCredentials}

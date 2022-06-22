@@ -87,10 +87,7 @@ export const paths = {
     signDid: {
       start: '/identity/:address/did/sign',
       sign: '/identity/:address/did/sign/password',
-      credentials: {
-        select: '/identity/:address/did/sign/credentials',
-        sign: '/identity/:address/did/sign/credentials/password',
-      },
+      credentials: '/identity/:address/did/sign/credentials',
     },
     signDidExtrinsic: '/identity/:address/did/signExtrinsic',
   },
