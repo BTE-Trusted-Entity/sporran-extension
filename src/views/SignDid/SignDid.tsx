@@ -1,4 +1,4 @@
-import { useCallback, Fragment, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './SignDid.module.css';
@@ -13,14 +13,14 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignDidChannel } from '../../channels/SignDidChannels/backgroundSignDidChannel';
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
-import { Presentation } from '../SignDidFlow/SignDidFlow';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
+import { SharedCredential } from '../../utilities/credentials/credentials';
 
 interface Props {
   identity: Identity;
-  credentials?: Presentation[];
+  credentials?: SharedCredential[];
 }
 
 export function SignDid({ identity, credentials }: Props): JSX.Element | null {
@@ -79,7 +79,7 @@ export function SignDid({ identity, credentials }: Props): JSX.Element | null {
 
       <IdentitySlide identity={identity} />
 
-      {credentials?.length && (
+      {credentials && (
         <dl className={styles.details}>
           <dt className={styles.detailName}>{t('view_SignDid_origin')}</dt>
           <dd className={styles.detailValue}>{origin}</dd>
@@ -98,7 +98,7 @@ export function SignDid({ identity, credentials }: Props): JSX.Element | null {
         </dl>
       )}
 
-      {!credentials?.length && (
+      {!credentials && (
         <section className={styles.noCredentials}>
           <p className={styles.label}>{t('view_SignDid_origin')}</p>
           <p className={styles.origin}>{origin}</p>
@@ -141,6 +141,8 @@ export function SignDid({ identity, credentials }: Props): JSX.Element | null {
           {t('common_action_sign')}
         </button>
       </p>
+
+      <LinkBack />
     </form>
   );
 }

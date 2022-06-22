@@ -1,71 +1,67 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
-import { useState, useCallback } from 'react';
-
-import { omit } from 'lodash-es';
+import { useCallback, useState } from 'react';
 
 import { Identity } from '../../utilities/identities/types';
-import { paths } from '../paths';
+import { generatePath, paths } from '../paths';
 import { SignDid } from '../SignDid/SignDid';
 import { SignDidCredentialsSelect } from '../SignDidCredentialsSelect/SignDidCredentialsSelect';
 import { SignDidStart } from '../SignDidStart/SignDidStart';
-import { Credential } from '../../utilities/credentials/credentials';
 import { backgroundSignDidChannel } from '../../channels/SignDidChannels/backgroundSignDidChannel';
-
-export interface Presentation {
-  credential: Credential;
-  sharedContents: string[];
-}
+import { SharedCredential } from '../../utilities/credentials/credentials';
 
 interface Props {
   identity: Identity;
 }
 
 export function SignDidFlow({ identity }: Props) {
-  const handleCancel = useCallback(async () => {
+  const history = useHistory();
+
+  const [popupQuery, setPopupQuery] = useState<string>();
+
+  const onCancel = useCallback(async () => {
     await backgroundSignDidChannel.throw('Rejected');
     window.close();
   }, []);
 
-  const [presentations, setPresentations] =
-    useState<Record<string, Presentation>>();
+  const [credentials, setCredentials] = useState<SharedCredential[]>();
 
-  const handleSelect = useCallback(
-    (presentation: Presentation) => {
-      const key = presentation.credential.request.rootHash;
-      setPresentations({ ...presentations, [key]: presentation });
-    },
-    [presentations],
-  );
+  // when navigating back to start after submitting credential selection
+  if (
+    useRouteMatch({ path: paths.popup.signDid.start, exact: true }) &&
+    credentials?.length
+  ) {
+    setCredentials(undefined);
+  }
 
-  const handleUnSelect = useCallback(
-    (key: string) => {
-      setPresentations(omit(presentations, key));
+  const onSubmit = useCallback(
+    (selected: SharedCredential[]) => {
+      setCredentials(selected);
+      history.push(
+        generatePath(paths.popup.signDid.sign + popupQuery, {
+          address: identity.address,
+        }),
+      );
     },
-    [presentations],
+    [history, identity, popupQuery],
   );
 
   return (
     <Switch>
       <Route path={paths.popup.signDid.sign}>
-        <SignDid
-          identity={identity}
-          credentials={presentations ? Object.values(presentations) : undefined}
-        />
+        <SignDid identity={identity} credentials={credentials} />
       </Route>
 
       <Route path={paths.popup.signDid.credentials.select}>
         <SignDidCredentialsSelect
           identity={identity}
-          onSelect={handleSelect}
-          onUnSelect={handleUnSelect}
-          onCancel={handleCancel}
-          selected={presentations}
+          onCancel={onCancel}
+          onSubmit={onSubmit}
         />
       </Route>
 
       <Route path={paths.popup.signDid.start}>
-        <SignDidStart identity={identity} />
+        <SignDidStart identity={identity} setPopupQuery={setPopupQuery} />
       </Route>
     </Switch>
   );

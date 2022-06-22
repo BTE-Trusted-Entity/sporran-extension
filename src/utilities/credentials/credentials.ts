@@ -21,6 +21,11 @@ export interface Credential {
   isDownloaded?: boolean;
 }
 
+export interface SharedCredential {
+  credential: Credential;
+  sharedContents: string[];
+}
+
 function toKey(hash: string): string {
   return `credential:${hash}`;
 }

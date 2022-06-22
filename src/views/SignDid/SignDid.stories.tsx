@@ -5,8 +5,9 @@ import { identitiesMock as identities } from '../../utilities/identities/Identit
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 import { paths } from '../paths';
 
-import { Presentation } from '../SignDidFlow/SignDidFlow';
 import { credentialsMock } from '../../utilities/credentials/CredentialsProvider.mock';
+
+import { SharedCredential } from '../../utilities/credentials/credentials';
 
 import { SignDid } from './SignDid';
 
@@ -34,7 +35,7 @@ export function NoCredentials(): JSX.Element {
   );
 }
 
-const mockSingleCredential: Presentation[] = [
+const mockSingleCredential: SharedCredential[] = [
   {
     credential: credentialsMock[0],
     sharedContents: ['Email'],
@@ -54,7 +55,7 @@ export function SingleCredential(): JSX.Element {
   );
 }
 
-const mockMultipleCredentials: Presentation[] = [
+const mockMultipleCredentials: SharedCredential[] = [
   {
     credential: credentialsMock[0],
     sharedContents: ['Email'],

@@ -4,6 +4,8 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { filter } from 'lodash-es';
 
+import { Dispatch, SetStateAction, useEffect } from 'react';
+
 import * as styles from './SignDidStart.module.css';
 
 import { Identity } from '../../utilities/identities/types';
@@ -14,17 +16,24 @@ import { useIdentityCredentials } from '../../utilities/credentials/credentials'
 
 interface Props {
   identity: Identity;
+  setPopupQuery: Dispatch<SetStateAction<string | undefined>>;
 }
 
-export function SignDidStart({ identity }: Props) {
+export function SignDidStart({ identity, setPopupQuery }: Props) {
   const t = browser.i18n.getMessage;
+
+  const { search: popupQuery } = useLocation();
+  useEffect(() => {
+    if (!popupQuery) {
+      return;
+    }
+    setPopupQuery(popupQuery);
+  }, [popupQuery, setPopupQuery]);
 
   const { address, did } = identity;
 
   const credentials = useIdentityCredentials(did);
   const attestedCredentials = filter(credentials, { status: 'attested' });
-
-  const { search: popupData } = useLocation();
 
   const errorDid = !isFullDid(did) && t('view_SignDidStart_error_did');
   const errorCredentials = [
@@ -46,7 +55,7 @@ export function SignDidStart({ identity }: Props) {
 
       <Link
         onClick={(event) => errorCredentials && event.preventDefault()}
-        to={generatePath(paths.popup.signDid.credentials.select + popupData, {
+        to={generatePath(paths.popup.signDid.credentials.select, {
           address,
         })}
         className={styles.withCredentials}
@@ -59,7 +68,7 @@ export function SignDidStart({ identity }: Props) {
 
       <Link
         onClick={(event) => errorDid && event.preventDefault()}
-        to={generatePath(paths.popup.signDid.sign + popupData, { address })}
+        to={generatePath(paths.popup.signDid.sign + popupQuery, { address })}
         className={styles.withoutCredentials}
         aria-disabled={Boolean(errorDid)}
         title={errorDid || undefined}

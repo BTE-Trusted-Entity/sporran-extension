@@ -1,44 +1,64 @@
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useLocation } from 'react-router-dom';
 
-import { useRef } from 'react';
+import { useRef, useState, useCallback } from 'react';
+
+import { omit } from 'lodash-es';
 
 import * as styles from './SignDidCredentialsSelect.module.css';
 
 import { Identity } from '../../utilities/identities/types';
-import { useIdentityCredentials } from '../../utilities/credentials/credentials';
-
-import { generatePath, paths } from '../paths';
+import {
+  SharedCredential,
+  useIdentityCredentials,
+} from '../../utilities/credentials/credentials';
 
 import { IdentityLine } from '../../components/IdentityLine/IdentityLine';
 import { SignDidCredentialCard } from '../../components/CredentialCard/SignDidCredentialCard';
-import { Presentation } from '../SignDidFlow/SignDidFlow';
+import { LinkBack } from '../../components/LinkBack/LinkBack';
 
 interface Props {
   identity: Identity;
   onCancel: () => void;
-  onSelect: (value: Presentation) => void;
-  onUnSelect: (rootHash: string) => void;
-  selected?: Record<string, Presentation>;
+  onSubmit: (selected: SharedCredential[]) => void;
 }
 
 export function SignDidCredentialsSelect({
   identity,
   onCancel,
-  onSelect,
-  onUnSelect,
-  selected,
+  onSubmit,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
-
-  const { search: popupData } = useLocation();
 
   const credentials = useIdentityCredentials(identity.did);
 
   const ref = useRef<HTMLElement>(null);
 
+  const [selected, setSelected] = useState<Record<string, SharedCredential>>();
+
+  const onSelect = useCallback(
+    (presentation: SharedCredential) => {
+      const key = presentation.credential.request.rootHash;
+      setSelected({ ...selected, [key]: presentation });
+    },
+    [selected],
+  );
+
+  const onUnSelect = useCallback(
+    (key: string) => {
+      setSelected(omit(selected, key));
+    },
+    [selected],
+  );
+
+  const handleSubmit = useCallback(() => {
+    if (!selected) {
+      return;
+    }
+    onSubmit(Object.values(selected));
+  }, [selected, onSubmit]);
+
   return (
-    <section className={styles.container}>
+    <form className={styles.container} onSubmit={handleSubmit}>
       <h1 className={styles.heading}>
         {t('view_SignDidCredentialsSelect_heading')}
       </h1>
@@ -66,16 +86,16 @@ export function SignDidCredentialsSelect({
         <button type="button" className={styles.cancel} onClick={onCancel}>
           {t('common_action_cancel')}
         </button>
-        <Link
-          to={generatePath(paths.popup.signDid.sign + popupData, {
-            address: identity.address,
-          })}
+        <button
+          type="submit"
           className={styles.next}
-          aria-disabled={!selected || !Object.entries(selected).length}
+          disabled={!selected || !Object.entries(selected).length}
         >
           {t('view_SignDidCredentialsSelect_next')}
-        </Link>
+        </button>
       </p>
-    </section>
+
+      <LinkBack />
+    </form>
   );
 }
