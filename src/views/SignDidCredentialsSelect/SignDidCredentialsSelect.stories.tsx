@@ -1,27 +1,26 @@
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
+import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import {
   credentialsMock,
   mockRequestCredential,
-  mockUnknownCType,
 } from '../../utilities/credentials/CredentialsProvider.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 
 import { paths } from '../paths';
-import { Selected } from '../ShareCredential/ShareCredential';
 
-import { ShareCredentialSelect } from './ShareCredentialSelect';
+import { Selected } from '../SignDidFlow/SignDidFlow';
+
+import { SignDidCredentialsSelect } from './SignDidCredentialsSelect';
 
 export default {
-  title: 'Views/ShareCredentialSelect',
-  component: ShareCredentialSelect,
+  title: 'Views/SignDidCredentialsSelect',
+  component: SignDidCredentialsSelect,
 } as Meta;
 
 const mockSelected: Selected = {
   credential: credentialsMock[4],
-  identity: identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'],
   sharedContents: ['Email'],
 };
 
@@ -31,22 +30,14 @@ export function Template(): JSX.Element {
       path={paths.popup.share.start}
       data={mockRequestCredential}
     >
-      <ShareCredentialSelect
+      <SignDidCredentialsSelect
+        identity={
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+        }
         selected={mockSelected}
         onCancel={action('onCancel')}
         onSelect={action('onSelect')}
-      />
-    </PopupTestProvider>
-  );
-}
-
-export function NoMatchingCredentials(): JSX.Element {
-  return (
-    <PopupTestProvider path={paths.popup.share.start} data={mockUnknownCType}>
-      <ShareCredentialSelect
-        selected={mockSelected}
-        onCancel={action('onCancel')}
-        onSelect={action('onSelect')}
+        onUnSelect={action('onUnSelect')}
       />
     </PopupTestProvider>
   );

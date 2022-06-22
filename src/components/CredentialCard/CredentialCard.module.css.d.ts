@@ -28,6 +28,8 @@ export const hash: string;
 export const technical: string;
 export const shareTechnical: string;
 export const select: string;
+export const selectOne: string;
+export const selectMultiple: string;
 export const share: string;
 export const shareLabel: string;
 export const notAttested: string;

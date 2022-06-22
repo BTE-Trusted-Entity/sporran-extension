@@ -42,7 +42,7 @@ export function ShareCredentialSign({
 
   const { challenge } = credentialRequest;
 
-  const { credential, identity, sharedProps } = selected;
+  const { credential, identity, sharedContents } = selected;
 
   const [error, setError] = useState<string>();
 
@@ -81,7 +81,7 @@ export function ShareCredentialSign({
       });
 
       const presentation = await credentialInstance.createPresentation({
-        selectedAttributes: sharedProps,
+        selectedAttributes: sharedContents,
         signer: keystore,
         claimerDid: didDetails,
         challenge,
@@ -106,7 +106,7 @@ export function ShareCredentialSign({
       challenge,
       verifierDid,
       t,
-      sharedProps,
+      sharedContents,
     ],
   );
 
@@ -132,7 +132,7 @@ export function ShareCredentialSign({
             <dd className={styles.detailValue}>{credential.name}</dd>
           </div>
 
-          {sharedProps.map((sharedProp) => (
+          {sharedContents.map((sharedProp) => (
             <div key={sharedProp} className={styles.detail}>
               <dt className={styles.detailName}>{sharedProp}</dt>
               <dd className={styles.detailValue}>

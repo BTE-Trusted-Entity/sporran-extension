@@ -44,7 +44,7 @@ export function CreatePresentation({ identity }: Props): JSX.Element | null {
       <h1 className={styles.heading}>{t('view_CreatePresentation_title')}</h1>
       <p className={styles.subline}>{t('view_CreatePresentation_subline')}</p>
 
-      <div className={styles.credentialsList}>
+      <div className={styles.credentialContainer}>
         <PresentCredentialCard credential={credential} onSelect={setChecked} />
       </div>
 

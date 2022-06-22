@@ -84,7 +84,14 @@ export const paths = {
     },
     sign: '/popup/sign',
     signRaw: '/popup/signRaw',
-    signDid: '/identity/:address/did/sign',
+    signDid: {
+      start: '/identity/:address/did/sign',
+      sign: '/identity/:address/did/sign/password',
+      credentials: {
+        select: '/identity/:address/did/sign/credentials',
+        sign: '/identity/:address/did/sign/credentials/password',
+      },
+    },
     signDidExtrinsic: '/identity/:address/did/signExtrinsic',
   },
 };

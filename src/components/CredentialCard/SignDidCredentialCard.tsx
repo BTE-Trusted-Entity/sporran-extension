@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useCallback, useState, useEffect, useRef, RefObject } from 'react';
-import { includes, without, find } from 'lodash-es';
+import { useCallback, useState, useRef, RefObject } from 'react';
+import { includes, without } from 'lodash-es';
 import cx from 'classnames';
 
 import * as styles from './CredentialCard.module.css';
@@ -9,41 +9,81 @@ import {
   Credential,
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
-import { usePopupData } from '../../utilities/popups/usePopupData';
-import { Identity } from '../../utilities/identities/types';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
-import { ShareInput } from '../../channels/shareChannel/types';
-import { Selected } from '../../views/ShareCredential/ShareCredential';
+import { Presentation } from '../../views/SignDidFlow/SignDidFlow';
 
 import { useScrollIntoView } from './CredentialCard';
 
-const noRequiredProperties: string[] = [];
-
 interface Props {
   credential: Credential;
-  identity: Identity;
-  onSelect: (value: Selected) => void;
+  onSelect: (value: Presentation) => void;
+  onUnSelect: (rootHash: string) => void;
   viewRef: RefObject<HTMLElement>;
-  isSelected?: boolean;
 }
 
-export function ShareCredentialCard({
+export function SignDidCredentialCard({
   credential,
-  identity,
   onSelect,
+  onUnSelect,
   viewRef,
-  isSelected = false,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   usePendingCredentialCheck(credential);
 
-  const expanded = useBooleanState();
+  const isAttested = credential.status === 'attested';
 
-  useEffect(() => {
-    expanded.set(isSelected);
-  }, [expanded, isSelected]);
+  const isExpanded = useBooleanState();
+  const isSelected = useBooleanState();
+
+  const [contentsChecked, setContentsChecked] = useState<string[]>([]);
+
+  const handleChecked = useCallback(
+    (event) => {
+      const name = event.target.name;
+      if (event.target.checked && !includes(contentsChecked, name)) {
+        !isSelected.current && isSelected.on();
+
+        setContentsChecked([...contentsChecked, name]);
+        onSelect({ credential, sharedContents: [...contentsChecked, name] });
+      } else {
+        setContentsChecked(without(contentsChecked, name));
+        onSelect({
+          credential,
+          sharedContents: without(contentsChecked, name),
+        });
+      }
+    },
+    [contentsChecked, credential, onSelect, isSelected],
+  );
+
+  const handleSelect = useCallback(
+    (event) => {
+      if (!isAttested) {
+        return;
+      }
+
+      if (event.target.checked) {
+        isSelected.on();
+        onSelect({ credential, sharedContents: contentsChecked });
+      } else {
+        isSelected.off();
+        isExpanded.off();
+        setContentsChecked([]);
+        onUnSelect(credential.request.rootHash);
+      }
+    },
+    [
+      credential,
+      contentsChecked,
+      onSelect,
+      onUnSelect,
+      isExpanded,
+      isSelected,
+      isAttested,
+    ],
+  );
 
   const statuses = {
     pending: t('component_CredentialCard_pending'),
@@ -54,89 +94,52 @@ export function ShareCredentialCard({
 
   const contents = Object.entries(credential.request.claim.contents);
 
-  const data = usePopupData<ShareInput>();
-
-  const { cTypes } = data.credentialRequest;
-
-  const { cTypeHash } = credential.request.claim;
-  const cType = find(cTypes, { cTypeHash });
-
-  const requiredProperties = cType?.requiredProperties || noRequiredProperties;
-
-  const [checked, setChecked] = useState<string[]>([]);
-
-  useEffect(() => {
-    setChecked(requiredProperties);
-  }, [requiredProperties]);
-
-  const isAttested = credential.status === 'attested';
-
-  const handleSelect = useCallback(() => {
-    const selected = { credential, identity, sharedContents: checked };
-    onSelect(selected);
-  }, [credential, onSelect, checked, identity]);
-
-  const handlePropChecked = useCallback(
-    (event) => {
-      const name = event.target.name;
-      if (event.target.checked && !includes(checked, name)) {
-        setChecked([...checked, name]);
-        onSelect({ credential, identity, sharedContents: [...checked, name] });
-      } else if (!includes(requiredProperties, name)) {
-        setChecked(without(checked, name));
-        onSelect({
-          credential,
-          identity,
-          sharedContents: without(checked, name),
-        });
-      }
-    },
-    [checked, requiredProperties, credential, identity, onSelect],
-  );
-
   const cardRef = useRef<HTMLLIElement>(null);
 
-  useScrollIntoView(expanded.current, cardRef, viewRef);
+  useScrollIntoView(isExpanded.current, cardRef, viewRef);
 
   return (
     <li
       className={styles.selectable}
-      aria-expanded={expanded.current}
+      aria-expanded={isExpanded.current}
       ref={cardRef}
     >
       <input
         name="credential"
-        type="radio"
+        type="checkbox"
         id={credential.request.rootHash}
         onChange={handleSelect}
-        onClick={expanded.on}
-        checked={isSelected}
-        className={cx(styles.selectOne, {
-          [styles.notAttested]: !isAttested,
-        })}
+        checked={isSelected.current}
+        disabled={!isAttested}
+        className={styles.selectMultiple}
+        aria-labelledby={
+          isExpanded.current ? 'expandedLabel' : 'collapsedLabel'
+        }
       />
 
-      {!expanded.current && (
-        <label className={styles.expand} htmlFor={credential.request.rootHash}>
+      {!isExpanded.current && (
+        <button className={styles.expand} onClick={isExpanded.on}>
           <section
             className={cx(styles.collapsedShareCredential, {
               [styles.notAttested]: !isAttested,
             })}
           >
-            <h4 className={styles.collapsedName}>{credential.name}</h4>
+            <h4 className={styles.collapsedName} id="collapsedLabel">
+              {credential.name}
+            </h4>
             <p className={styles.collapsedValue}>{credential.attester}</p>
           </section>
-        </label>
+        </button>
       )}
 
-      {expanded.current && (
+      {isExpanded.current && (
         <section className={styles.shareExpanded}>
           <section className={styles.buttons}>
             <button
               type="button"
               aria-label={t('component_CredentialCard_collapse')}
               className={styles.collapse}
-              onClick={expanded.off}
+              onClick={isExpanded.off}
             />
           </section>
 
@@ -146,7 +149,9 @@ export function ShareCredentialCard({
                 <dt className={styles.detailName}>
                   {t('component_CredentialCard_name')}
                 </dt>
-                <dd className={styles.detailValue}>{credential.name}</dd>
+                <dd className={styles.detailValue} id="expandedLabel">
+                  {credential.name}
+                </dd>
               </div>
               <div className={styles.detail}>
                 <dt className={styles.detailName}>
@@ -159,23 +164,16 @@ export function ShareCredentialCard({
 
               {contents.map(([name, value]) => (
                 <div key={name} className={styles.detail}>
-                  <dt
-                    className={cx(styles.detailName, {
-                      [styles.required]: includes(requiredProperties, name),
-                    })}
-                  >
-                    {name}
-                  </dt>
+                  <dt className={styles.detailName}>{name}</dt>
                   <dd className={styles.detailValue}>
                     <label className={styles.shareLabel}>
                       <input
                         type="checkbox"
                         name={name}
                         className={styles.share}
-                        checked={includes(checked, name)}
-                        onChange={handlePropChecked}
+                        checked={includes(contentsChecked, name)}
+                        onChange={handleChecked}
                         disabled={!isAttested}
-                        readOnly={includes(requiredProperties, name)}
                       />
                       <span />
                       {value}
@@ -184,12 +182,6 @@ export function ShareCredentialCard({
                 </div>
               ))}
             </dl>
-
-            {requiredProperties.length > 0 && (
-              <p className={styles.requiredInfo}>
-                {t('component_ShareCredentialCard_required')}
-              </p>
-            )}
           </section>
 
           <h4 className={styles.shareTechnical}>

@@ -11,8 +11,8 @@
   margin: 0.25rem 0 0.5rem;
 }
 
-.credentialsList {
-  composes: list from '../../components/Card/Card.module.css';
+.credentialContainer {
+  composes: fullWidthContainer from '../../components/View/View.module.css';
 }
 
 .buttonsLine {

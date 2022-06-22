@@ -13,7 +13,7 @@ import { ShareCredentialSelect } from '../ShareCredentialSelect/ShareCredentialS
 export interface Selected {
   credential: Credential;
   identity: Identity;
-  sharedProps: string[];
+  sharedContents: string[];
 }
 
 export function ShareCredential(): JSX.Element | null {

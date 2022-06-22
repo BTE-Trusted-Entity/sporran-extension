@@ -16,7 +16,7 @@ import { ShareCredentialSign } from './ShareCredentialSign';
 const mockSelected: Selected = {
   credential: credentialsMock[0],
   identity: identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'],
-  sharedProps: ['Email'],
+  sharedContents: ['Email'],
 };
 
 describe('ShareCredentialSign', () => {

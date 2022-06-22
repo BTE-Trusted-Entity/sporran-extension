@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, Fragment, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './SignDid.module.css';
@@ -6,25 +6,25 @@ import * as styles from './SignDid.module.css';
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
-import { isFullDid } from '../../utilities/did/did';
 
-import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
-import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignDidChannel } from '../../channels/SignDidChannels/backgroundSignDidChannel';
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
+import { Presentation } from '../SignDidFlow/SignDidFlow';
+import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
+import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
+import { LinkBack } from '../../components/LinkBack/LinkBack';
 
 interface Props {
   identity: Identity;
+  credentials?: Presentation[];
 }
 
-export function SignDid({ identity }: Props): JSX.Element | null {
+export function SignDid({ identity, credentials }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
-
-  const error = !isFullDid(identity.did);
 
   const { origin, plaintext } = usePopupData<SignDidOriginInput>();
 
@@ -47,42 +47,85 @@ export function SignDid({ identity }: Props): JSX.Element | null {
     [passwordField, plaintext],
   );
 
+  const handleSubmitCredentials = useCallback(
+    async (event) => {
+      event.preventDefault();
+
+      const { seed } = await passwordField.get(event);
+      const { sign, keystore, didDetails } = await getIdentityCryptoFromSeed(
+        seed,
+      );
+
+      const signature = sign(plaintext);
+
+      await backgroundSignDidChannel.return(sign(plaintext));
+
+      window.close();
+    },
+    [passwordField, plaintext],
+  );
+
   const handleCancelClick = useCallback(async () => {
     await backgroundSignDidChannel.throw('Rejected');
     window.close();
   }, []);
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <form
+      className={styles.container}
+      onSubmit={credentials?.length ? handleSubmitCredentials : handleSubmit}
+    >
       <h1 className={styles.heading}>{t('view_SignDid_title')}</h1>
-      <p className={styles.subline}>{t('view_SignDid_subline')}</p>
 
-      <IdentitiesCarousel identity={identity} />
+      <IdentitySlide identity={identity} />
 
-      <p className={styles.label}>{t('view_SignDid_origin')}</p>
-      <p className={styles.origin}>{origin}</p>
+      {credentials?.length && (
+        <dl className={styles.details}>
+          <dt className={styles.detailName}>{t('view_SignDid_origin')}</dt>
+          <dd className={styles.detailValue}>{origin}</dd>
 
-      <p className={styles.label} id="plaintext">
-        {t('view_SignDid_plaintext')}
-      </p>
-      <p className={styles.plaintextLine}>
-        <textarea
-          className={styles.plaintext}
-          readOnly
-          aria-labelledby="plaintext"
-          value={plaintext}
-          ref={plaintextRef}
-        />
-        {copy.supported && (
-          <button
-            className={copy.className}
-            onClick={copy.handleCopyClick}
-            type="button"
-            aria-label={copy.title}
-            title={copy.title}
-          />
-        )}
-      </p>
+          <dt className={styles.detailName}>{t('view_SignDid_plaintext')}</dt>
+          <dd className={styles.data}>{plaintext}</dd>
+
+          <dt className={styles.detailName}>
+            {credentials.length === 1
+              ? t('view_SignDid_credential')
+              : t('view_SignDid_credentials')}
+          </dt>
+          <dd className={styles.detailValue}>
+            {credentials.map(({ credential }) => credential.name).join(', ')}
+          </dd>
+        </dl>
+      )}
+
+      {!credentials?.length && (
+        <section className={styles.noCredentials}>
+          <p className={styles.label}>{t('view_SignDid_origin')}</p>
+          <p className={styles.origin}>{origin}</p>
+
+          <p className={styles.label} id="plaintext">
+            {t('view_SignDid_plaintext')}
+          </p>
+          <p className={styles.plaintextLine}>
+            <textarea
+              className={styles.plaintext}
+              readOnly
+              aria-labelledby="plaintext"
+              value={plaintext}
+              ref={plaintextRef}
+            />
+            {copy.supported && (
+              <button
+                className={copy.className}
+                onClick={copy.handleCopyClick}
+                type="button"
+                aria-label={copy.title}
+                title={copy.title}
+              />
+            )}
+          </p>
+        </section>
+      )}
 
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
@@ -94,12 +137,9 @@ export function SignDid({ identity }: Props): JSX.Element | null {
         >
           {t('view_SignDid_reject')}
         </button>
-        <button type="submit" className={styles.submit} disabled={error}>
+        <button type="submit" className={styles.submit}>
           {t('common_action_sign')}
         </button>
-        <output className={styles.errorTooltip} hidden={!error}>
-          {t('view_SignDid_error')}
-        </output>
       </p>
     </form>
   );
