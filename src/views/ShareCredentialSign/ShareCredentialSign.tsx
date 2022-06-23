@@ -10,7 +10,6 @@ import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
 import * as styles from './ShareCredentialSign.module.css';
 
 import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
-import { usePopupData } from '../../utilities/popups/usePopupData';
 
 import { ShareInput } from '../../channels/shareChannel/types';
 import { shareChannel } from '../../channels/shareChannel/shareChannel';
@@ -28,17 +27,17 @@ import { getDidDetails, needLegacyDidCrypto } from '../../utilities/did/did';
 interface Props {
   selected: Selected;
   onCancel: () => void;
+  popupData: ShareInput;
 }
 
 export function ShareCredentialSign({
   selected,
   onCancel,
+  popupData,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const data = usePopupData<ShareInput>();
-
-  const { credentialRequest, verifierDid } = data;
+  const { credentialRequest, verifierDid } = popupData;
 
   const { challenge } = credentialRequest;
 

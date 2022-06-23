@@ -13,28 +13,16 @@ import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/Identiti
 import { generatePath, paths } from '../paths';
 import { isFullDid } from '../../utilities/did/did';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
-import { usePopupData } from '../../utilities/popups/usePopupData';
-import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 
 interface Props {
   identity: Identity;
-  onPopupData: (popupData: SignDidOriginInput) => void;
   resetCredentials: () => void;
 }
 
-export function SignDidStart({
-  identity,
-  onPopupData,
-  resetCredentials,
-}: Props) {
+export function SignDidStart({ identity, resetCredentials }: Props) {
   const t = browser.i18n.getMessage;
 
   useEffect(() => resetCredentials, [resetCredentials]);
-
-  const popupData = usePopupData<SignDidOriginInput>();
-  useEffect(() => {
-    onPopupData(popupData);
-  }, [popupData, onPopupData]);
 
   const { address, did } = identity;
 

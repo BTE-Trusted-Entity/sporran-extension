@@ -1,6 +1,6 @@
 import { useEffect, useRef, RefObject } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { sortBy } from 'lodash-es';
 
 import * as styles from './ShareCredentialSelect.module.css';
@@ -98,8 +98,6 @@ export function ShareCredentialSelect({
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { search } = useLocation();
-
   const identities = useIdentities().data;
 
   const hasSome = useBooleanState();
@@ -160,7 +158,7 @@ export function ShareCredentialSelect({
           {t('common_action_cancel')}
         </button>
         <Link
-          to={paths.popup.share.sign + search}
+          to={paths.popup.share.sign}
           className={styles.next}
           aria-disabled={!selected || selected.credential.status !== 'attested'}
         >

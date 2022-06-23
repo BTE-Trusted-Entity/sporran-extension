@@ -9,6 +9,8 @@ import { paths } from '../paths';
 
 import { ShareCredentialSign } from '../ShareCredentialSign/ShareCredentialSign';
 import { ShareCredentialSelect } from '../ShareCredentialSelect/ShareCredentialSelect';
+import { usePopupData } from '../../utilities/popups/usePopupData';
+import { ShareInput } from '../../channels/shareChannel/types';
 
 export interface Selected {
   credential: Credential;
@@ -22,6 +24,8 @@ export function ShareCredential(): JSX.Element | null {
     window.close();
   }, []);
 
+  const popupData = usePopupData<ShareInput>();
+
   const [selected, setSelected] = useState<Selected>();
 
   const handleSelect = useCallback((value) => setSelected(value), []);
@@ -30,7 +34,11 @@ export function ShareCredential(): JSX.Element | null {
     <Switch>
       <Route path={paths.popup.share.sign}>
         {selected && (
-          <ShareCredentialSign selected={selected} onCancel={handleCancel} />
+          <ShareCredentialSign
+            selected={selected}
+            onCancel={handleCancel}
+            popupData={popupData}
+          />
         )}
       </Route>
       <Route path={paths.popup.share.start}>

@@ -26,7 +26,11 @@ describe('ShareCredentialSign', () => {
         path={paths.popup.share.sign}
         data={mockRequestCredential}
       >
-        <ShareCredentialSign onCancel={jest.fn()} selected={mockSelected} />
+        <ShareCredentialSign
+          onCancel={jest.fn()}
+          selected={mockSelected}
+          popupData={mockRequestCredential}
+        />
       </PopupTestProvider>,
     );
 

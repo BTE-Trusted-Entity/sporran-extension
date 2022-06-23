@@ -26,7 +26,7 @@ import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState
 
 interface Props {
   identity: Identity;
-  popupData: SignDidOriginInput | undefined;
+  popupData: SignDidOriginInput;
   onCancel: () => void;
   credentials?: SharedCredential[];
 }
@@ -38,6 +38,8 @@ export function SignDid({
   credentials,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
+
+  const { origin, plaintext } = popupData;
 
   const plaintextRef = useRef<HTMLTextAreaElement>(null);
   const copy = useCopyButton(plaintextRef);
@@ -52,16 +54,12 @@ export function SignDid({
       error.off();
 
       try {
-        if (!popupData) {
-          throw new Error('No popup data');
-        }
-
         const { seed } = await passwordField.get(event);
         const { sign, keystore, didDetails } = await getIdentityCryptoFromSeed(
           seed,
         );
 
-        const signature = sign(popupData.plaintext);
+        const signature = sign(plaintext);
 
         if (!credentials) {
           await backgroundSignDidChannel.return(signature);
@@ -110,7 +108,7 @@ export function SignDid({
         error.on();
       }
     },
-    [passwordField, popupData, credentials, error],
+    [passwordField, plaintext, credentials, error],
   );
 
   return (
@@ -122,10 +120,10 @@ export function SignDid({
       {credentials && (
         <dl className={styles.details}>
           <dt className={styles.detailName}>{t('view_SignDid_origin')}</dt>
-          <dd className={styles.detailValue}>{popupData?.origin}</dd>
+          <dd className={styles.detailValue}>{origin}</dd>
 
           <dt className={styles.detailName}>{t('view_SignDid_plaintext')}</dt>
-          <dd className={styles.data}>{popupData?.plaintext}</dd>
+          <dd className={styles.data}>{plaintext}</dd>
 
           <dt className={styles.detailName}>{t('view_SignDid_credentials')}</dt>
           <dd className={styles.detailValue}>
@@ -137,7 +135,7 @@ export function SignDid({
       {!credentials && (
         <section className={styles.noCredentials}>
           <p className={styles.label}>{t('view_SignDid_origin')}</p>
-          <p className={styles.origin}>{popupData?.origin}</p>
+          <p className={styles.origin}>{origin}</p>
 
           <p className={styles.label} id="plaintext">
             {t('view_SignDid_plaintext')}
@@ -147,7 +145,7 @@ export function SignDid({
               className={styles.plaintext}
               readOnly
               aria-labelledby="plaintext"
-              value={popupData?.plaintext}
+              value={plaintext}
               ref={plaintextRef}
             />
             {copy.supported && (

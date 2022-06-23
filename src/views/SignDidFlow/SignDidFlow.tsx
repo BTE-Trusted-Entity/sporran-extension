@@ -9,6 +9,7 @@ import { SignDidCredentialsSelect } from '../SignDidCredentialsSelect/SignDidCre
 import { SignDidStart } from '../SignDidStart/SignDidStart';
 import { backgroundSignDidChannel } from '../../channels/SignDidChannels/backgroundSignDidChannel';
 import { SharedCredential } from '../../utilities/credentials/credentials';
+import { usePopupData } from '../../utilities/popups/usePopupData';
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 
 interface Props {
@@ -21,10 +22,7 @@ export function SignDidFlow({ identity }: Props) {
     window.close();
   }, []);
 
-  const [popupData, setPopupData] = useState<SignDidOriginInput>();
-  const onPopupData = useCallback((popupData: SignDidOriginInput) => {
-    setPopupData(popupData);
-  }, []);
+  const popupData = usePopupData<SignDidOriginInput>();
 
   const [credentials, setCredentials] = useState<SharedCredential[]>();
 
@@ -66,11 +64,7 @@ export function SignDidFlow({ identity }: Props) {
       </Route>
 
       <Route path={paths.popup.signDid.start}>
-        <SignDidStart
-          identity={identity}
-          onPopupData={onPopupData}
-          resetCredentials={resetCredentials}
-        />
+        <SignDidStart identity={identity} resetCredentials={resetCredentials} />
       </Route>
     </Switch>
   );

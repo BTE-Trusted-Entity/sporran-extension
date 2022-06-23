@@ -28,7 +28,6 @@ export function FullDidWithCredentials(): JSX.Element {
         identity={
           identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
         }
-        onPopupData={action('onPopupData')}
         resetCredentials={action('resetCredentials')}
       />
     </PopupTestProvider>
@@ -42,7 +41,6 @@ export function FullDidNoCredentials(): JSX.Element {
         identity={
           identities['4q11Jce9wqM4A9GPB2z8n4K8LF9w2sQgZKFddhuKXwQ2Qo4q']
         }
-        onPopupData={action('onPopupData')}
         resetCredentials={action('resetCredentials')}
       />
     </PopupTestProvider>
@@ -56,7 +54,6 @@ export function LightDid(): JSX.Element {
         identity={
           identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
         }
-        onPopupData={action('onPopupData')}
         resetCredentials={action('resetCredentials')}
       />
     </PopupTestProvider>
