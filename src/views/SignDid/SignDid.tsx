@@ -166,7 +166,7 @@ export function SignDid({
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
-        <button onClick={onCancel} type="button" className={styles.reject}>
+        <button onClick={onCancel} type="button" className={styles.cancel}>
           {t('common_action_cancel')}
         </button>
         <button type="submit" className={styles.submit}>

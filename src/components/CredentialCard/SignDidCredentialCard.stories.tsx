@@ -28,6 +28,7 @@ export function Selected(): JSX.Element {
           credential={credentialsMock[0]}
           onSelect={action('onSelect')}
           onUnSelect={action('onUnSelect')}
+          viewRef={{ current: null }}
         />
       </ul>
     </PopupTestProvider>
@@ -45,6 +46,7 @@ export function NotAttested(): JSX.Element {
           credential={credentialsMock[1]}
           onSelect={action('onSelect')}
           onUnSelect={action('onUnSelect')}
+          viewRef={{ current: null }}
         />
       </ul>
     </PopupTestProvider>

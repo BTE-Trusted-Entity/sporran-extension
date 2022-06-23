@@ -7,20 +7,16 @@ import * as styles from './CredentialCard.module.css';
 
 import {
   Credential,
+  SharedCredential,
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 import { useScrollIntoView } from './CredentialCard';
 
-interface Selected {
-  credential: Credential;
-  sharedContents: string[];
-}
-
 interface Props {
   credential: Credential;
-  onSelect: (value: Selected) => void;
+  onSelect: (value: SharedCredential) => void;
   onUnSelect: (rootHash: string) => void;
   viewRef: RefObject<HTMLElement>;
 }
