@@ -32,6 +32,7 @@ describe('SignDidStart', () => {
             identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
           }
           onPopupData={jest.fn()}
+          resetCredentials={jest.fn()}
         />
       </PopupTestProvider>,
     );
@@ -49,6 +50,7 @@ describe('SignDidStart', () => {
             identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
           }
           onPopupData={jest.fn()}
+          resetCredentials={jest.fn()}
         />
       </PopupTestProvider>,
     );
@@ -65,6 +67,7 @@ describe('SignDidStart', () => {
             identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
           }
           onPopupData={jest.fn()}
+          resetCredentials={jest.fn()}
         />
       </PopupTestProvider>,
     );

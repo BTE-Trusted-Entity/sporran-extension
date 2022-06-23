@@ -116,7 +116,7 @@ exports[`SignDid should render with credentials 1`] = `
       class="buttonsLine"
     >
       <button
-        class="reject"
+        class="cancel"
         type="button"
       >
         Cancel
@@ -263,7 +263,7 @@ exports[`SignDid should render without credentials 1`] = `
       class="buttonsLine"
     >
       <button
-        class="reject"
+        class="cancel"
         type="button"
       >
         Cancel

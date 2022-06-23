@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { filter } from 'lodash-es';
 
@@ -19,12 +19,17 @@ import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 interface Props {
   identity: Identity;
   onPopupData: (popupData: SignDidOriginInput) => void;
+  resetCredentials: () => void;
 }
 
-export function SignDidStart({ identity, onPopupData }: Props) {
+export function SignDidStart({
+  identity,
+  onPopupData,
+  resetCredentials,
+}: Props) {
   const t = browser.i18n.getMessage;
 
-  const { search: popupQuery } = useLocation();
+  useEffect(() => resetCredentials, [resetCredentials]);
 
   const popupData = usePopupData<SignDidOriginInput>();
   useEffect(() => {
@@ -73,7 +78,7 @@ export function SignDidStart({ identity, onPopupData }: Props) {
 
       <Link
         onClick={(event) => errorDid && event.preventDefault()}
-        to={generatePath(paths.popup.signDid.sign + popupQuery, { address })}
+        to={generatePath(paths.popup.signDid.sign, { address })}
         className={styles.withoutCredentials}
         aria-disabled={Boolean(errorDid)}
         title={errorDid || undefined}

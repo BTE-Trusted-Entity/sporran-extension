@@ -1,4 +1,4 @@
-import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 
 import { useCallback, useState } from 'react';
 
@@ -28,13 +28,9 @@ export function SignDidFlow({ identity }: Props) {
 
   const [credentials, setCredentials] = useState<SharedCredential[]>();
 
-  // reset state when navigating back to start after submitting credential selection
-  if (
-    useRouteMatch({ path: paths.popup.signDid.start, exact: true }) &&
-    credentials
-  ) {
+  const resetCredentials = useCallback(() => {
     setCredentials(undefined);
-  }
+  }, []);
 
   const history = useHistory();
 
@@ -70,7 +66,11 @@ export function SignDidFlow({ identity }: Props) {
       </Route>
 
       <Route path={paths.popup.signDid.start}>
-        <SignDidStart identity={identity} onPopupData={onPopupData} />
+        <SignDidStart
+          identity={identity}
+          onPopupData={onPopupData}
+          resetCredentials={resetCredentials}
+        />
       </Route>
     </Switch>
   );
