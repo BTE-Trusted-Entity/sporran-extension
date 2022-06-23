@@ -24,9 +24,9 @@
 .withCredentials,
 .withoutCredentials {
   composes: buttonWide from '../../components/Button/Button.module.css';
-  background: rgb(var(--color-black-rgb) / 30%)
-    url('../../components/images/chevron-right.svg') no-repeat right 0.75rem
-    center/0.375rem 0.75rem;
+  background:
+    rgb(var(--color-black-rgb) / 30%)
+    url('../../components/images/chevron-right.svg') no-repeat right 0.75rem center/0.375rem 0.75rem;
 }
 
 .withCredentials[aria-disabled='true'],
