@@ -39,13 +39,13 @@ exports[`SignDidStart should render full DID with credentials 1`] = `
       <a
         aria-label="Light DID Identity"
         class="left"
-        href="/"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
         title="Light DID Identity"
       />
       <a
         aria-label="Identity which has a very very very very long name and might not even fit on the screen"
         class="right"
-        href="/"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
         title="Identity which has a very very very very long name and might not even fit on the screen"
       />
       <ul
@@ -58,7 +58,7 @@ exports[`SignDidStart should render full DID with credentials 1`] = `
             aria-current="page"
             aria-label="Light DID Identity"
             class="bubble bubbleActive"
-            href="/"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
             title="Light DID Identity"
           />
         </li>
@@ -69,7 +69,7 @@ exports[`SignDidStart should render full DID with credentials 1`] = `
             aria-current="page"
             aria-label="Identity with on-chain DID and lots of coins"
             class="bubble bubbleActive"
-            href="/"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
             title="Identity with on-chain DID and lots of coins"
           />
         </li>
@@ -80,7 +80,7 @@ exports[`SignDidStart should render full DID with credentials 1`] = `
             aria-current="page"
             aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble bubbleActive"
-            href="/"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
             title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
@@ -121,7 +121,7 @@ exports[`SignDidStart should render full DID with credentials 1`] = `
     <a
       aria-disabled="false"
       class="withoutCredentials"
-      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/sign/password"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/sign/password?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
     >
       Sign without credentials
     </a>
@@ -168,13 +168,13 @@ exports[`SignDidStart should render full DID with no credentials 1`] = `
       <a
         aria-label="Light DID Identity"
         class="left"
-        href="/"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
         title="Light DID Identity"
       />
       <a
         aria-label="Identity which has a very very very very long name and might not even fit on the screen"
         class="right"
-        href="/"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
         title="Identity which has a very very very very long name and might not even fit on the screen"
       />
       <ul
@@ -187,7 +187,7 @@ exports[`SignDidStart should render full DID with no credentials 1`] = `
             aria-current="page"
             aria-label="Light DID Identity"
             class="bubble bubbleActive"
-            href="/"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
             title="Light DID Identity"
           />
         </li>
@@ -198,7 +198,7 @@ exports[`SignDidStart should render full DID with no credentials 1`] = `
             aria-current="page"
             aria-label="Identity with on-chain DID and lots of coins"
             class="bubble bubbleActive"
-            href="/"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
             title="Identity with on-chain DID and lots of coins"
           />
         </li>
@@ -209,7 +209,7 @@ exports[`SignDidStart should render full DID with no credentials 1`] = `
             aria-current="page"
             aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble bubbleActive"
-            href="/"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
             title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
@@ -252,7 +252,7 @@ exports[`SignDidStart should render full DID with no credentials 1`] = `
     <a
       aria-disabled="false"
       class="withoutCredentials"
-      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/sign/password"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/sign/password?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
     >
       Sign without credentials
     </a>
@@ -299,13 +299,13 @@ exports[`SignDidStart should render light DID 1`] = `
       <a
         aria-label="Add Identity"
         class="left"
-        href="/"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
         title="Add Identity"
       />
       <a
         aria-label="Identity with on-chain DID and lots of coins"
         class="right"
-        href="/"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
         title="Identity with on-chain DID and lots of coins"
       />
       <ul
@@ -318,7 +318,7 @@ exports[`SignDidStart should render light DID 1`] = `
             aria-current="page"
             aria-label="Light DID Identity"
             class="bubble bubbleActive"
-            href="/"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
             title="Light DID Identity"
           />
         </li>
@@ -329,7 +329,7 @@ exports[`SignDidStart should render light DID 1`] = `
             aria-current="page"
             aria-label="Identity with on-chain DID and lots of coins"
             class="bubble bubbleActive"
-            href="/"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
             title="Identity with on-chain DID and lots of coins"
           />
         </li>
@@ -340,7 +340,7 @@ exports[`SignDidStart should render light DID 1`] = `
             aria-current="page"
             aria-label="Identity which has a very very very very long name and might not even fit on the screen"
             class="bubble bubbleActive"
-            href="/"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
             title="Identity which has a very very very very long name and might not even fit on the screen"
           />
         </li>
@@ -384,7 +384,7 @@ exports[`SignDidStart should render light DID 1`] = `
       aria-disabled="true"
       aria-label="You need to upgrade to an on-chain DID first"
       class="withoutCredentials"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/sign/password"
+      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/sign/password?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInBsYWludGV4dCI6IkFsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91c0FsbHlvdXJiYXNlYXJlYmVsb25ndG91cyJ9"
       title="You need to upgrade to an on-chain DID first"
     >
       Sign without credentials

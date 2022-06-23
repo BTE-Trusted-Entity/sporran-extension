@@ -1,8 +1,3 @@
-.list {
-  composes: fullWidthContainer from '../../components/View/View.module.css';
-  list-style: none;
-}
-
 .card {
   box-sizing: border-box;
   width: 100%;

@@ -9,19 +9,21 @@ import { SignDidCredentialsSelect } from '../SignDidCredentialsSelect/SignDidCre
 import { SignDidStart } from '../SignDidStart/SignDidStart';
 import { backgroundSignDidChannel } from '../../channels/SignDidChannels/backgroundSignDidChannel';
 import { SharedCredential } from '../../utilities/credentials/credentials';
+import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 
 interface Props {
   identity: Identity;
 }
 
 export function SignDidFlow({ identity }: Props) {
-  const history = useHistory();
-
-  const [popupQuery, setPopupQuery] = useState<string>();
-
   const onCancel = useCallback(async () => {
     await backgroundSignDidChannel.throw('Rejected');
     window.close();
+  }, []);
+
+  const [popupData, setPopupData] = useState<SignDidOriginInput>();
+  const onPopupData = useCallback((popupData: SignDidOriginInput) => {
+    setPopupData(popupData);
   }, []);
 
   const [credentials, setCredentials] = useState<SharedCredential[]>();
@@ -34,34 +36,41 @@ export function SignDidFlow({ identity }: Props) {
     setCredentials(undefined);
   }
 
+  const history = useHistory();
+
   const onSubmit = useCallback(
     (selected: SharedCredential[]) => {
       setCredentials(selected);
       history.push(
-        generatePath(paths.popup.signDid.sign + popupQuery, {
+        generatePath(paths.popup.signDid.sign, {
           address: identity.address,
         }),
       );
     },
-    [history, identity, popupQuery],
+    [history, identity],
   );
 
   return (
     <Switch>
       <Route path={paths.popup.signDid.sign}>
-        <SignDid identity={identity} credentials={credentials} />
+        <SignDid
+          identity={identity}
+          credentials={credentials}
+          popupData={popupData}
+          onCancel={onCancel}
+        />
       </Route>
 
       <Route path={paths.popup.signDid.credentials}>
         <SignDidCredentialsSelect
           identity={identity}
-          onCancel={onCancel}
           onSubmit={onSubmit}
+          onCancel={onCancel}
         />
       </Route>
 
       <Route path={paths.popup.signDid.start}>
-        <SignDidStart identity={identity} setPopupQuery={setPopupQuery} />
+        <SignDidStart identity={identity} onPopupData={onPopupData} />
       </Route>
     </Switch>
   );

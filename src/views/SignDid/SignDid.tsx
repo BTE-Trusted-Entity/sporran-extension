@@ -10,7 +10,6 @@ import {
 import * as styles from './SignDid.module.css';
 
 import { Identity } from '../../utilities/identities/types';
-import { usePopupData } from '../../utilities/popups/usePopupData';
 import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
 
 import {
@@ -23,93 +22,99 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { SharedCredential } from '../../utilities/credentials/credentials';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 interface Props {
   identity: Identity;
+  popupData: SignDidOriginInput | undefined;
+  onCancel: () => void;
   credentials?: SharedCredential[];
 }
 
-export function SignDid({ identity, credentials }: Props): JSX.Element | null {
+export function SignDid({
+  identity,
+  popupData,
+  onCancel,
+  credentials,
+}: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
-
-  const { origin, plaintext } = usePopupData<SignDidOriginInput>();
 
   const plaintextRef = useRef<HTMLTextAreaElement>(null);
   const copy = useCopyButton(plaintextRef);
 
   const passwordField = usePasswordField();
 
+  const error = useBooleanState();
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+      error.off();
 
-      const { seed } = await passwordField.get(event);
-      const { sign } = await getIdentityCryptoFromSeed(seed);
-
-      await backgroundSignDidChannel.return(sign(plaintext));
-
-      window.close();
-    },
-    [passwordField, plaintext],
-  );
-
-  const handleSubmitCredentials = useCallback(
-    async (event) => {
-      event.preventDefault();
-
-      if (!credentials) {
-        // set error
-        return;
-      }
-
-      const { seed } = await passwordField.get(event);
-      const { sign, keystore, didDetails } = await getIdentityCryptoFromSeed(
-        seed,
-      );
-
-      const presentations = [];
-
-      for (const { credential, sharedContents } of credentials) {
-        const request = RequestForAttestation.fromRequest(credential.request);
-
-        const attestation = await Attestation.query(request.rootHash);
-        if (!attestation) {
-          // set error
-          return;
+      try {
+        if (!popupData) {
+          throw new Error('No popup data');
         }
 
-        const credentialInstance = Credential.fromCredential({
-          request,
-          attestation,
-        });
-        const presentation = await credentialInstance.createPresentation({
-          selectedAttributes: sharedContents,
-          signer: keystore,
-          claimerDid: didDetails,
-        });
+        const { seed } = await passwordField.get(event);
+        const { sign, keystore, didDetails } = await getIdentityCryptoFromSeed(
+          seed,
+        );
 
-        presentations.push({ name: credential.name, credential: presentation });
+        const signature = sign(popupData.plaintext);
+
+        if (!credentials) {
+          await backgroundSignDidChannel.return(signature);
+        }
+
+        if (credentials) {
+          const presentations = [];
+
+          for (const { credential, sharedContents } of credentials) {
+            const request = RequestForAttestation.fromRequest(
+              credential.request,
+            );
+
+            const attestation = await Attestation.query(request.rootHash);
+            if (!attestation) {
+              throw new Error(
+                `Unable to verify attestation for ${credential.name}`,
+              );
+            }
+
+            const credentialInstance = Credential.fromCredential({
+              request,
+              attestation,
+            });
+            const presentation = await credentialInstance.createPresentation({
+              selectedAttributes: sharedContents,
+              signer: keystore,
+              claimerDid: didDetails,
+            });
+
+            presentations.push({
+              name: credential.name,
+              credential: presentation,
+            });
+          }
+
+          await backgroundSignDidChannel.return({
+            ...presentations,
+            ...signature,
+          });
+        }
+
+        window.close();
+      } catch (exception) {
+        console.error(exception);
+        error.on();
       }
-
-      const signature = sign(plaintext);
-
-      await backgroundSignDidChannel.return({ ...presentations, ...signature });
-
-      window.close();
     },
-    [passwordField, plaintext, credentials],
+    [passwordField, popupData, credentials, error],
   );
 
-  const handleCancelClick = useCallback(async () => {
-    await backgroundSignDidChannel.throw('Rejected');
-    window.close();
-  }, []);
-
   return (
-    <form
-      className={styles.container}
-      onSubmit={credentials ? handleSubmitCredentials : handleSubmit}
-    >
+    <form className={styles.container} onSubmit={handleSubmit}>
       <h1 className={styles.heading}>{t('view_SignDid_title')}</h1>
 
       <IdentitySlide identity={identity} />
@@ -117,10 +122,10 @@ export function SignDid({ identity, credentials }: Props): JSX.Element | null {
       {credentials && (
         <dl className={styles.details}>
           <dt className={styles.detailName}>{t('view_SignDid_origin')}</dt>
-          <dd className={styles.detailValue}>{origin}</dd>
+          <dd className={styles.detailValue}>{popupData?.origin}</dd>
 
           <dt className={styles.detailName}>{t('view_SignDid_plaintext')}</dt>
-          <dd className={styles.data}>{plaintext}</dd>
+          <dd className={styles.data}>{popupData?.plaintext}</dd>
 
           <dt className={styles.detailName}>{t('view_SignDid_credentials')}</dt>
           <dd className={styles.detailValue}>
@@ -132,7 +137,7 @@ export function SignDid({ identity, credentials }: Props): JSX.Element | null {
       {!credentials && (
         <section className={styles.noCredentials}>
           <p className={styles.label}>{t('view_SignDid_origin')}</p>
-          <p className={styles.origin}>{origin}</p>
+          <p className={styles.origin}>{popupData?.origin}</p>
 
           <p className={styles.label} id="plaintext">
             {t('view_SignDid_plaintext')}
@@ -142,7 +147,7 @@ export function SignDid({ identity, credentials }: Props): JSX.Element | null {
               className={styles.plaintext}
               readOnly
               aria-labelledby="plaintext"
-              value={plaintext}
+              value={popupData?.plaintext}
               ref={plaintextRef}
             />
             {copy.supported && (
@@ -161,16 +166,15 @@ export function SignDid({ identity, credentials }: Props): JSX.Element | null {
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
-        <button
-          onClick={handleCancelClick}
-          type="button"
-          className={styles.reject}
-        >
-          {t('view_SignDid_reject')}
+        <button onClick={onCancel} type="button" className={styles.reject}>
+          {t('common_action_cancel')}
         </button>
         <button type="submit" className={styles.submit}>
           {t('common_action_sign')}
         </button>
+        <output className={styles.errorTooltip} hidden={!error.current}>
+          {t('view_SignDid_error')}
+        </output>
       </p>
 
       <LinkBack />

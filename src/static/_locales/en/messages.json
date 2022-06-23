@@ -1081,8 +1081,8 @@
   "view_SignDid_credentials": {
     "message": "Credentials:"
   },
-  "view_SignDid_reject": {
-    "message": "Reject"
+  "view_SignDid_error": {
+    "message": "Unexpected error"
   },
   "view_SignDidStart_title": {
     "message": "Sign with on-chain DID"

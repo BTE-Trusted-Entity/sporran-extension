@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { filter } from 'lodash-es';
 
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import * as styles from './SignDidStart.module.css';
 
@@ -13,20 +13,23 @@ import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/Identiti
 import { generatePath, paths } from '../paths';
 import { isFullDid } from '../../utilities/did/did';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
+import { usePopupData } from '../../utilities/popups/usePopupData';
+import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 
 interface Props {
   identity: Identity;
-  setPopupQuery: Dispatch<SetStateAction<string | undefined>>;
+  onPopupData: (popupData: SignDidOriginInput) => void;
 }
 
-export function SignDidStart({ identity, setPopupQuery }: Props) {
+export function SignDidStart({ identity, onPopupData }: Props) {
   const t = browser.i18n.getMessage;
 
   const { search: popupQuery } = useLocation();
 
+  const popupData = usePopupData<SignDidOriginInput>();
   useEffect(() => {
-    setPopupQuery(popupQuery);
-  }, [popupQuery, setPopupQuery]);
+    onPopupData(popupData);
+  }, [popupData, onPopupData]);
 
   const { address, did } = identity;
 

@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/react';
 
-import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
+import { action } from '@storybook/addon-actions';
+
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
-import { paths } from '../paths';
 
 import { credentialsMock } from '../../utilities/credentials/CredentialsProvider.mock';
 
@@ -16,7 +16,7 @@ export default {
   component: SignDid,
 } as Meta;
 
-const input: SignDidOriginInput = {
+const mockPopupData: SignDidOriginInput = {
   dAppName: 'dApp',
   origin: 'https://example.org/foo',
   plaintext:
@@ -25,13 +25,11 @@ const input: SignDidOriginInput = {
 
 export function NoCredentials(): JSX.Element {
   return (
-    <PopupTestProvider path={paths.popup.sign} data={input}>
-      <SignDid
-        identity={
-          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
-        }
-      />
-    </PopupTestProvider>
+    <SignDid
+      identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}
+      popupData={mockPopupData}
+      onCancel={action('onCancel')}
+    />
   );
 }
 
@@ -44,14 +42,12 @@ const mockSingleCredential: SharedCredential[] = [
 
 export function SingleCredential(): JSX.Element {
   return (
-    <PopupTestProvider path={paths.popup.sign} data={input}>
-      <SignDid
-        identity={
-          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
-        }
-        credentials={mockSingleCredential}
-      />
-    </PopupTestProvider>
+    <SignDid
+      identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}
+      popupData={mockPopupData}
+      onCancel={action('onCancel')}
+      credentials={mockSingleCredential}
+    />
   );
 }
 
@@ -72,13 +68,11 @@ const mockMultipleCredentials: SharedCredential[] = [
 
 export function MultipleCredentials(): JSX.Element {
   return (
-    <PopupTestProvider path={paths.popup.sign} data={input}>
-      <SignDid
-        identity={
-          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
-        }
-        credentials={mockMultipleCredentials}
-      />
-    </PopupTestProvider>
+    <SignDid
+      identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}
+      popupData={mockPopupData}
+      onCancel={action('onCancel')}
+      credentials={mockMultipleCredentials}
+    />
   );
 }

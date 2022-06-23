@@ -1,9 +1,7 @@
 import { identitiesMock as identities, render } from '../../testing/testing';
 import '../../components/useCopyButton/useCopyButton.mock';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
-import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
-import { paths } from '../paths';
 
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
@@ -12,7 +10,7 @@ import { SharedCredential } from '../../utilities/credentials/credentials';
 
 import { SignDid } from './SignDid';
 
-const input: SignDidOriginInput = {
+const mockPopupData: SignDidOriginInput = {
   dAppName: 'dApp',
   origin: 'https://example.org/foo',
   plaintext: 'All your base are belong to us',
@@ -34,27 +32,27 @@ const mockSharedCredentials: SharedCredential[] = [
 describe('SignDid', () => {
   it('should render without credentials', async () => {
     const { container } = render(
-      <PopupTestProvider path={paths.popup.signDid.sign} data={input}>
-        <SignDid
-          identity={
-            identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
-          }
-        />
-      </PopupTestProvider>,
+      <SignDid
+        identity={
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+        }
+        onCancel={jest.fn()}
+        popupData={mockPopupData}
+      />,
     );
     await waitForGetPassword();
     expect(container).toMatchSnapshot();
   });
   it('should render with credentials', async () => {
     const { container } = render(
-      <PopupTestProvider path={paths.popup.signDid.sign} data={input}>
-        <SignDid
-          identity={
-            identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
-          }
-          credentials={mockSharedCredentials}
-        />
-      </PopupTestProvider>,
+      <SignDid
+        identity={
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+        }
+        popupData={mockPopupData}
+        onCancel={jest.fn()}
+        credentials={mockSharedCredentials}
+      />,
     );
     await waitForGetPassword();
     expect(container).toMatchSnapshot();
