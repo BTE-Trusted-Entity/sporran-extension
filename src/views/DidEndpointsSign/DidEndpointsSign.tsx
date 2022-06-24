@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
-import { DidServiceEndpoint, IDidDetails } from '@kiltprotocol/types';
-import { DidChain } from '@kiltprotocol/did';
+import { DidServiceEndpoint, DidUri } from '@kiltprotocol/types';
+import { Chain } from '@kiltprotocol/did';
 
 import * as styles from './DidEndpointsSign.module.css';
 
@@ -21,7 +21,7 @@ import {
   getKeystoreFromSeed,
 } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { getFragment, getFullDidDetails } from '../../utilities/did/did';
+import { getFullDidDetails } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
@@ -30,7 +30,7 @@ type ActionType = 'add' | 'remove';
 
 async function getDidAuthorizedExtrinsic(
   seed: Uint8Array,
-  did: IDidDetails['did'],
+  did: DidUri,
   endpoint: DidServiceEndpoint,
   type: ActionType,
 ) {
@@ -41,8 +41,8 @@ async function getDidAuthorizedExtrinsic(
   // getRemoveEndpointExtrinsic expects just the fragment part
   const draft =
     type === 'add'
-      ? await DidChain.getAddEndpointExtrinsic(endpoint)
-      : await DidChain.getRemoveEndpointExtrinsic(getFragment(endpoint.id));
+      ? await Chain.getAddEndpointExtrinsic(endpoint)
+      : await Chain.getRemoveEndpointExtrinsic(endpoint.id);
 
   return await fullDidDetails.authorizeExtrinsic(
     draft,
@@ -52,7 +52,7 @@ async function getDidAuthorizedExtrinsic(
 }
 
 async function getFee(
-  did: IDidDetails['did'],
+  did: DidUri,
   endpoint: DidServiceEndpoint,
   type: ActionType,
 ) {
@@ -156,7 +156,7 @@ export function DidEndpointsSign({
         </div>
         <div className={styles.detail}>
           <dt className={styles.detailName}>{t('view_DidEndpointsSign_id')}</dt>
-          <dd className={styles.detailValue}>{getFragment(endpoint.id)}</dd>
+          <dd className={styles.detailValue}>{endpoint.id}</dd>
         </div>
       </dl>
 

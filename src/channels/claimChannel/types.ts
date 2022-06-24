@@ -1,8 +1,8 @@
-import { ITerms, IDidDetails, IEncryptedMessage } from '@kiltprotocol/types';
+import { ITerms, DidUri, IEncryptedMessage } from '@kiltprotocol/types';
 
 export interface ClaimInput extends ITerms {
   attesterName: string;
-  attesterDid: IDidDetails['did'];
+  attesterDid: DidUri;
 }
 
 export type ClaimOutput = IEncryptedMessage;

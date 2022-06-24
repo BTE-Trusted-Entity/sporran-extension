@@ -1,6 +1,6 @@
-import { Web3Names, DidChain } from '@kiltprotocol/did';
+import { Web3Names, Chain } from '@kiltprotocol/did';
 import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
-import { Deposit, IDidDetails, IIdentity } from '@kiltprotocol/types';
+import { Deposit, DidUri, IIdentity } from '@kiltprotocol/types';
 import { Option, Struct, u64 } from '@polkadot/types';
 import { AccountId } from '@polkadot/types/interfaces';
 
@@ -25,7 +25,7 @@ async function getDefaultDeposit() {
 }
 
 async function getDepositWeb3Name(
-  did: IDidDetails['did'],
+  did: DidUri,
 ): Promise<DepositData | undefined> {
   if (!isFullDid(did)) {
     return getDefaultDeposit();
@@ -51,28 +51,24 @@ async function getDepositWeb3Name(
   return { owner: owner.toString(), amount };
 }
 
-export function useDepositWeb3Name(
-  did: IDidDetails['did'],
-): DepositData | undefined {
+export function useDepositWeb3Name(did: DidUri): DepositData | undefined {
   return useAsyncValue(getDepositWeb3Name, [did]);
 }
 
 export async function getDepositDid(
-  did: IDidDetails['did'],
+  did: DidUri,
 ): Promise<DepositData | undefined> {
   const { identifier, type } = parseDidUri(did);
 
   if (type === 'light') {
-    return { amount: await DidChain.queryDepositAmount() };
+    return { amount: await Chain.queryDepositAmount() };
   }
 
-  const details = await DidChain.queryDetails(identifier);
+  const details = await Chain.queryDetails(identifier);
 
   return details?.deposit;
 }
 
-export function useDepositDid(
-  did: IDidDetails['did'],
-): DepositData | undefined {
+export function useDepositDid(did: DidUri): DepositData | undefined {
   return useAsyncValue(getDepositDid, [did]);
 }

@@ -1,5 +1,5 @@
 import BN from 'bn.js';
-import { IDidDetails, SubmittableExtrinsic } from '@kiltprotocol/types';
+import { DidUri, SubmittableExtrinsic } from '@kiltprotocol/types';
 import {
   BlockchainApiConnection,
   BlockchainUtils,
@@ -16,7 +16,7 @@ import { getFullDidDetails } from '../did/did';
 
 async function getSignedTransaction(
   seed: Uint8Array,
-  fullDid: IDidDetails['did'],
+  fullDid: DidUri,
 ): Promise<SubmittableExtrinsic> {
   const fullDidDetails = await getFullDidDetails(fullDid);
 
@@ -45,12 +45,12 @@ async function getSignedTransaction(
   )
     .removeEncryptionKey(existingKey.id)
     .addEncryptionKey(encryptionKey)
-    .consume(keystore, keypair.address);
+    .build(keystore, keypair.address);
 
   return await blockchain.signTx(keypair, authorized);
 }
 
-export async function getFee(did: IDidDetails['did']): Promise<BN> {
+export async function getFee(did: DidUri): Promise<BN> {
   const fakeSeed = new Uint8Array(32);
   const keypair = getKeypairBySeed(fakeSeed);
   const extrinsic = await getSignedTransaction(fakeSeed, did);
@@ -60,10 +60,7 @@ export async function getFee(did: IDidDetails['did']): Promise<BN> {
 
 const currentTx: Record<string, SubmittableExtrinsic> = {};
 
-export async function sign(
-  did: IDidDetails['did'],
-  seed: Uint8Array,
-): Promise<string> {
+export async function sign(did: DidUri, seed: Uint8Array): Promise<string> {
   const extrinsic = await getSignedTransaction(seed, did);
 
   const hash = extrinsic.hash.toHex();

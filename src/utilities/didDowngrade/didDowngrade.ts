@@ -1,10 +1,10 @@
 import BN from 'bn.js';
-import { IDidDetails, SubmittableExtrinsic } from '@kiltprotocol/types';
+import { DidUri, SubmittableExtrinsic } from '@kiltprotocol/types';
 import {
   BlockchainApiConnection,
   BlockchainUtils,
 } from '@kiltprotocol/chain-helpers';
-import { DidChain, Web3Names } from '@kiltprotocol/did';
+import { Chain, Web3Names } from '@kiltprotocol/did';
 
 import {
   getKeystoreFromSeed,
@@ -16,12 +16,12 @@ import { getFullDidDetails, isFullDid } from '../did/did';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
-  did: IDidDetails['did'];
+  did: DidUri;
 }
 
 async function getSignedTransaction(
   seed: Uint8Array,
-  fullDid: IDidDetails['did'],
+  fullDid: DidUri,
 ): Promise<DidTransaction> {
   const fullDidDetails = await getFullDidDetails(fullDid);
 
@@ -29,11 +29,11 @@ async function getSignedTransaction(
   const keystore = await getKeystoreFromSeed(seed);
   const keypair = getKeypairBySeed(seed);
 
-  const didRemoveExtrinsic = await DidChain.getDeleteDidExtrinsic(
-    await DidChain.queryEndpointsCounts(fullDidDetails.identifier),
+  const didRemoveExtrinsic = await Chain.getDeleteDidExtrinsic(
+    await Chain.queryEndpointsCounts(fullDidDetails.identifier),
   );
 
-  const web3name = await Web3Names.queryWeb3NameForDid(fullDidDetails.did);
+  const web3name = await Web3Names.queryWeb3NameForDid(fullDidDetails.uri);
 
   let extrinsic: SubmittableExtrinsic;
 
@@ -70,11 +70,11 @@ async function getSignedTransaction(
 
   const tx = await blockchain.signTx(keypair, extrinsic);
 
-  const { did } = getLightDidFromSeed(seed);
-  return { extrinsic: tx, did };
+  const { uri } = getLightDidFromSeed(seed);
+  return { extrinsic: tx, did: uri };
 }
 
-export async function getFee(did: IDidDetails['did']): Promise<BN> {
+export async function getFee(did: DidUri): Promise<BN> {
   if (!isFullDid(did)) {
     return new BN(0);
   }
@@ -98,7 +98,7 @@ export async function sign(
   return hash;
 }
 
-export async function submit(hash: string): Promise<string> {
+export async function submit(hash: string): Promise<DidUri> {
   const { extrinsic, did } = currentTx[hash];
   await BlockchainUtils.submitSignedTx(extrinsic, {
     resolveOn: BlockchainUtils.IS_FINALIZED,

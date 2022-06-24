@@ -1,6 +1,6 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
-import { DidUtils, FullDidDetails } from '@kiltprotocol/did';
+import { Utils, FullDidDetails } from '@kiltprotocol/did';
 import {
   Blockchain,
   BlockchainApiConnection,
@@ -43,9 +43,9 @@ jest.mocked(BlockchainApiConnection.getConnectionOrConnect).mockResolvedValue({
   },
 } as unknown as Blockchain);
 
-jest.mocked(DidUtils.parseDidUri).mockReturnValue({
+jest.mocked(Utils.parseDidUri).mockReturnValue({
   identifier: '4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
-} as ReturnType<typeof DidUtils.parseDidUri>);
+} as ReturnType<typeof Utils.parseDidUri>);
 
 const detailsPromise = Promise.resolve({
   getEndpoints: () => endpoints,

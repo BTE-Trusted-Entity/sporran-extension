@@ -13,5 +13,5 @@ export type SignDidExtrinsicOriginInput = SignDidExtrinsicInput & Origin;
 
 export interface SignDidExtrinsicOutput {
   signed: HexString;
-  didKeyUri: DidPublicKey['id'];
+  didKeyUri: DidPublicKey['uri'];
 }

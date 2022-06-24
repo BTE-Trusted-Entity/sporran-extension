@@ -14,6 +14,6 @@ export type SignDidOriginInput = SignDidInput & Origin;
 
 export interface SignDidOutput {
   signature: HexString;
-  didKeyUri: DidPublicKey['id'];
+  didKeyUri: DidPublicKey['uri'];
   credentials?: { name: string; credential: RequestForAttestation }[];
 }

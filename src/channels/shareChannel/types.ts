@@ -1,12 +1,12 @@
 import {
-  IDidDetails,
+  DidUri,
   IEncryptedMessage,
   IRequestCredentialContent,
 } from '@kiltprotocol/types';
 
 export type ShareInput = {
   credentialRequest: IRequestCredentialContent;
-  verifierDid: IDidDetails['did'];
+  verifierDid: DidUri;
 };
 
 export type ShareOutput = IEncryptedMessage;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
-import { IDidDetails } from '@kiltprotocol/types';
+import { DidUri } from '@kiltprotocol/types';
 
 import * as styles from './DidUpgrade.module.css';
 
@@ -36,7 +36,7 @@ interface Props {
 
 function useCosts(
   address: string,
-  did: IDidDetails['did'],
+  did: DidUri,
 ): {
   fee?: BN;
   deposit?: BN;

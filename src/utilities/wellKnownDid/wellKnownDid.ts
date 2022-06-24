@@ -1,12 +1,12 @@
 import ky from 'ky';
-import { IDidDetails, IRequestForAttestation } from '@kiltprotocol/types';
-import { DidDetails, DidUtils } from '@kiltprotocol/did';
+import { DidUri, IRequestForAttestation } from '@kiltprotocol/types';
+import { DidDetails, Utils, verifyDidSignature } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 
 import { getDidDetails } from '../did/did';
 
 interface CredentialSubject {
-  id: IDidDetails['did'];
+  id: DidUri;
   origin: string;
   rootHash: string;
 }
@@ -41,7 +41,7 @@ async function asyncSome(
 }
 
 export async function verifyDidConfigResource(
-  did: IDidDetails['did'],
+  did: DidUri,
   tabUrl: string,
 ): Promise<void> {
   const { origin } = new URL(tabUrl);
@@ -65,7 +65,7 @@ export async function verifyDidConfigResource(
         return false;
       }
 
-      const isDid = DidUtils.validateKiltDid(credentialSubject.id);
+      const isDid = Utils.validateKiltDidUri(credentialSubject.id);
       const matchesIssuer = issuer === credentialSubject.id;
       if (!isDid || !matchesIssuer) {
         return false;
@@ -87,9 +87,9 @@ export async function verifyDidConfigResource(
         return false;
       }
 
-      const { verified } = await DidUtils.verifyDidSignature({
+      const { verified } = await verifyDidSignature({
         signature: {
-          keyId: issuerDidDetails.assembleKeyId(
+          keyUri: issuerDidDetails.assembleKeyUri(
             issuerDidDetails.attestationKey.id,
           ),
           signature: credential.proof.signature as string,

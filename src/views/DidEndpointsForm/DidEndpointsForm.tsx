@@ -22,7 +22,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
-import { getFragment, getFullDidDetails } from '../../utilities/did/did';
+import { getFullDidDetails } from '../../utilities/did/did';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { generatePath, paths } from '../paths';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
@@ -104,7 +104,7 @@ function DidEndpointCard({
           <dt className={styles.name}>{t('view_DidEndpointsForm_type')}</dt>
           <dd className={styles.value}>{type}</dd>
           <dt className={styles.name}>{t('view_DidEndpointsForm_id')}</dt>
-          <dd className={styles.value}>{getFragment(id)}</dd>
+          <dd className={styles.value}>{id}</dd>
         </dl>
       )}
     </li>

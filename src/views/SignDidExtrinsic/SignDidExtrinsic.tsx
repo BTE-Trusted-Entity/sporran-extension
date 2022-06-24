@@ -8,11 +8,7 @@ import * as styles from './SignDidExtrinsic.module.css';
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
-import {
-  getFragment,
-  getFullDidDetails,
-  isFullDid,
-} from '../../utilities/did/did';
+import { getFullDidDetails, isFullDid } from '../../utilities/did/did';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import {
   PasswordField,
@@ -60,7 +56,7 @@ function Endpoint({ endpoint }: { endpoint: DidServiceEndpoint }): JSX.Element {
         <dt className={styles.endpointName}>
           {t('view_SignDidExtrinsic_endpoint_id')}
         </dt>
-        <dd className={styles.endpointValue}>{getFragment(endpoint.id)}</dd>
+        <dd className={styles.endpointValue}>{endpoint.id}</dd>
       </div>
     </dl>
   );
@@ -249,7 +245,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
       if (!didKey) {
         throw new Error('No extrinsic signing key stored');
       }
-      const didKeyUri = fullDidDetails.assembleKeyId(didKey.id);
+      const didKeyUri = fullDidDetails.assembleKeyUri(didKey.id);
       const signed = authorized.toHex();
 
       await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });

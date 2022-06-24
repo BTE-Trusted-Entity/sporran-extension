@@ -20,12 +20,13 @@ import {
   MessageBody,
   NaclBoxCapable,
   VerificationKeyType,
+  DidUri,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
 import {
   DidDetails,
   DidResolver,
-  DidUtils,
+  Utils,
   LightDidDetails,
 } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
@@ -51,7 +52,7 @@ const CURRENT_IDENTITY_KEY = 'currentIdentity';
 
 export const NEW: Identity = {
   address: 'NEW',
-  did: '',
+  did: '' as DidUri,
   name: '',
   index: -1,
 };
@@ -135,7 +136,7 @@ interface IdentityDidCrypto {
   keystore: KeystoreSigner;
   sign: (plaintext: string) => {
     signature: HexString;
-    didKeyUri: DidPublicKey['id'];
+    didKeyUri: DidPublicKey['uri'];
   };
   encrypt: (
     messageBody: MessageBody,
@@ -201,7 +202,7 @@ async function fixLightDidIssues(seed: Uint8Array) {
     return;
   }
 
-  const parsed = identity.did && DidUtils.parseDidUri(identity.did);
+  const parsed = identity.did && Utils.parseDidUri(identity.did);
   if (parsed && parsed.type !== 'light') {
     return;
   }
@@ -222,8 +223,8 @@ async function fixLightDidIssues(seed: Uint8Array) {
     }
   } catch {
     // We re-create the invalid DID from scratch and update its URI in the identity.
-    const { did } = getLightDidFromSeed(seed);
-    await saveIdentity({ ...identity, did });
+    const { uri } = getLightDidFromSeed(seed);
+    await saveIdentity({ ...identity, did: uri });
   }
 }
 
@@ -264,7 +265,9 @@ export async function getIdentityCryptoFromSeed(
   function sign(plaintext: string) {
     const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
 
-    const didKeyUri = didDetails.assembleKeyId(didDetails.authenticationKey.id);
+    const didKeyUri = didDetails.assembleKeyUri(
+      didDetails.authenticationKey.id,
+    );
 
     return { signature, didKeyUri };
   }
@@ -275,14 +278,14 @@ export async function getIdentityCryptoFromSeed(
   ): Promise<IEncryptedMessage> {
     const message = new Message(
       messageBody,
-      didDetails.did,
-      dAppDidDetails.did,
+      didDetails.uri,
+      dAppDidDetails.uri,
     );
     return message.encrypt(
       getDidEncryptionKey(didDetails).id,
       didDetails,
       encryptionKeystore,
-      dAppDidDetails.assembleKeyId(getDidEncryptionKey(dAppDidDetails).id),
+      dAppDidDetails.assembleKeyUri(getDidEncryptionKey(dAppDidDetails).id),
     );
   }
 
@@ -333,11 +336,11 @@ export async function createIdentity(
 
   const seed = mnemonicToMiniSecret(backupPhrase);
 
-  const { did } = getLightDidFromSeed(seed);
+  const { uri } = getLightDidFromSeed(seed);
 
   const { name, index } = await getIdentityName();
 
-  const identity = { name, address, did, index };
+  const identity = { name, address, did: uri, index };
   await saveIdentity(identity);
 
   return identity;
@@ -352,12 +355,12 @@ export async function importIdentity(
   const seed = mnemonicToMiniSecret(backupPhrase);
 
   const lightDidDetails = getLightDidFromSeed(seed);
-  const resolved = await DidResolver.resolveDoc(lightDidDetails.did);
+  const resolved = await DidResolver.resolveDoc(lightDidDetails.uri);
 
   const did =
     resolved && resolved.metadata && resolved.metadata.canonicalId
       ? resolved.metadata.canonicalId
-      : lightDidDetails.did;
+      : lightDidDetails.uri;
 
   const { name, index } = await getIdentityName();
 

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
+import { DidUri } from '@kiltprotocol/types';
+
 import * as styles from './DidRepair.module.css';
 
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
@@ -28,7 +30,7 @@ interface Props {
 
 function useCosts(
   address: string,
-  did: string,
+  did: DidUri,
 ): {
   fee?: BN;
   error: boolean;
