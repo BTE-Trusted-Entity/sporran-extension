@@ -43,7 +43,9 @@ export function SignDidCredentialCard({
       const name = event.target.name;
       const checked = event.target.checked;
 
-      checked && !isSelected.current && isSelected.on();
+      if (checked && !isSelected.current) {
+        isSelected.on();
+      }
 
       const newContents = checked
         ? [...contentsChecked, name]

@@ -58,33 +58,31 @@ export function SignDid({
         return;
       }
 
-      if (credentials) {
-        const presentations: {
-          name: string;
-          credential: RequestForAttestation;
-        }[] = [];
+      const presentations: {
+        name: string;
+        credential: RequestForAttestation;
+      }[] = [];
 
-        for (const { credential, sharedContents } of credentials) {
-          const { request } = credential;
-          const allProperties = Object.keys(request.claim.contents);
-          const needRemoving = without(allProperties, ...sharedContents);
+      for (const { credential, sharedContents } of credentials) {
+        const { request } = credential;
+        const allProperties = Object.keys(request.claim.contents);
+        const needRemoving = without(allProperties, ...sharedContents);
 
-          const requestInstance = RequestForAttestation.fromRequest(
-            cloneDeep(request),
-          );
-          requestInstance.removeClaimProperties(needRemoving);
+        const requestInstance = RequestForAttestation.fromRequest(
+          cloneDeep(request),
+        );
+        requestInstance.removeClaimProperties(needRemoving);
 
-          presentations.push({
-            name: credential.name,
-            credential: requestInstance,
-          });
-        }
-
-        await backgroundSignDidChannel.return({
-          ...presentations,
-          ...signature,
+        presentations.push({
+          name: credential.name,
+          credential: requestInstance,
         });
       }
+
+      await backgroundSignDidChannel.return({
+        ...presentations,
+        ...signature,
+      });
 
       window.close();
     },
