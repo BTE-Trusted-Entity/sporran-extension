@@ -10,7 +10,6 @@ import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
 import * as styles from './ShareCredentialSign.module.css';
 
 import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
-import { usePopupData } from '../../utilities/popups/usePopupData';
 
 import { ShareInput } from '../../channels/shareChannel/types';
 import { shareChannel } from '../../channels/shareChannel/shareChannel';
@@ -28,21 +27,21 @@ import { getDidDetails, needLegacyDidCrypto } from '../../utilities/did/did';
 interface Props {
   selected: Selected;
   onCancel: () => void;
+  popupData: ShareInput;
 }
 
 export function ShareCredentialSign({
   selected,
   onCancel,
+  popupData,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const data = usePopupData<ShareInput>();
-
-  const { credentialRequest, verifierDid } = data;
+  const { credentialRequest, verifierDid } = popupData;
 
   const { challenge } = credentialRequest;
 
-  const { credential, identity, sharedProps } = selected;
+  const { credential, identity, sharedContents } = selected;
 
   const [error, setError] = useState<string>();
 
@@ -81,7 +80,7 @@ export function ShareCredentialSign({
       });
 
       const presentation = await credentialInstance.createPresentation({
-        selectedAttributes: sharedProps,
+        selectedAttributes: sharedContents,
         signer: keystore,
         claimerDid: didDetails,
         challenge,
@@ -106,7 +105,7 @@ export function ShareCredentialSign({
       challenge,
       verifierDid,
       t,
-      sharedProps,
+      sharedContents,
     ],
   );
 
@@ -132,7 +131,7 @@ export function ShareCredentialSign({
             <dd className={styles.detailValue}>{credential.name}</dd>
           </div>
 
-          {sharedProps.map((sharedProp) => (
+          {sharedContents.map((sharedProp) => (
             <div key={sharedProp} className={styles.detail}>
               <dt className={styles.detailName}>{sharedProp}</dt>
               <dd className={styles.detailValue}>

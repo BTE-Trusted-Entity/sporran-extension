@@ -3,11 +3,8 @@ import { action } from '@storybook/addon-actions';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import { credentialsMock } from '../../utilities/credentials/CredentialsProvider.mock';
-import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 
 import { ShareInput } from '../../channels/shareChannel/types';
-
-import { paths } from '../paths';
 
 import { Selected } from '../ShareCredential/ShareCredential';
 
@@ -34,16 +31,15 @@ const mockShareInput: ShareInput = {
 const mockSelected: Selected = {
   credential: credentialsMock[4],
   identity: identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'],
-  sharedProps: ['Email'],
+  sharedContents: ['Email'],
 };
 
 export function Template(): JSX.Element {
   return (
-    <PopupTestProvider path={paths.popup.share.sign} data={mockShareInput}>
-      <ShareCredentialSign
-        selected={mockSelected}
-        onCancel={action('onCancel')}
-      />
-    </PopupTestProvider>
+    <ShareCredentialSign
+      selected={mockSelected}
+      onCancel={action('onCancel')}
+      popupData={mockShareInput}
+    />
   );
 }

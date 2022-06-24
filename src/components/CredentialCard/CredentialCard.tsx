@@ -35,7 +35,7 @@ import { generatePath, paths } from '../../views/paths';
 export function useScrollIntoView(
   expanded: boolean,
   cardRef: RefObject<HTMLLIElement>,
-  isContainerParent = true,
+  viewRef?: RefObject<HTMLElement>,
 ): void {
   const isFirstRun = useBooleanState(true);
 
@@ -45,9 +45,7 @@ export function useScrollIntoView(
       return;
     }
 
-    const containerElement = isContainerParent
-      ? cardRef.current?.parentElement
-      : document.getElementById('allCredentials');
+    const containerElement = viewRef?.current || cardRef.current?.parentElement;
 
     if (expanded && cardRef.current && containerElement) {
       const card = cardRef.current.getBoundingClientRect();
@@ -65,7 +63,7 @@ export function useScrollIntoView(
         cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  }, [expanded, cardRef, isContainerParent, isFirstRun]);
+  }, [expanded, cardRef, viewRef, isFirstRun]);
 }
 
 function CredentialName({

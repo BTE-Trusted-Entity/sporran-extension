@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, RefObject } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { sortBy } from 'lodash-es';
 
 import * as styles from './ShareCredentialSelect.module.css';
@@ -25,11 +25,13 @@ function MatchingIdentityCredentials({
   onSelect,
   selected,
   match,
+  viewRef,
 }: {
   identity: Identity;
   onSelect: (value: Selected) => void;
   selected?: Selected;
   match: () => void;
+  viewRef: RefObject<HTMLElement>;
 }): JSX.Element | null {
   const data = usePopupData<ShareInput>();
 
@@ -75,6 +77,7 @@ function MatchingIdentityCredentials({
                 selected.credential.request.rootHash ===
                   credential.request.rootHash,
             )}
+            viewRef={viewRef}
           />
         ))}
       </ul>
@@ -95,11 +98,11 @@ export function ShareCredentialSelect({
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { search } = useLocation();
-
   const identities = useIdentities().data;
 
   const hasSome = useBooleanState();
+
+  const ref = useRef<HTMLElement>(null);
 
   if (!identities) {
     return null; // storage data pending
@@ -135,7 +138,7 @@ export function ShareCredentialSelect({
 
       <section
         className={styles.allCredentials}
-        id="allCredentials"
+        ref={ref}
         hidden={!hasSome.current}
       >
         {identitiesList.map((identity) => (
@@ -145,6 +148,7 @@ export function ShareCredentialSelect({
             onSelect={onSelect}
             selected={selected}
             match={hasSome.on}
+            viewRef={ref}
           />
         ))}
       </section>
@@ -154,7 +158,7 @@ export function ShareCredentialSelect({
           {t('common_action_cancel')}
         </button>
         <Link
-          to={paths.popup.share.sign + search}
+          to={paths.popup.share.sign}
           className={styles.next}
           aria-disabled={!selected || selected.credential.status !== 'attested'}
         >

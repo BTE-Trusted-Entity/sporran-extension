@@ -22,7 +22,7 @@ export default {
 const mockSelected: Selected = {
   credential: credentialsMock[4],
   identity: identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'],
-  sharedProps: ['Email'],
+  sharedContents: ['Email'],
 };
 
 export function Template(): JSX.Element {

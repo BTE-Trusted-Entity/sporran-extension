@@ -14,6 +14,7 @@ import { waitForPresentationInfo } from '../../utilities/showPresentationInfoSto
 
 import { CredentialCard } from './CredentialCard';
 import { ShareCredentialCard } from './ShareCredentialCard';
+import { SignDidCredentialCard } from './SignDidCredentialCard';
 
 describe('CredentialCard', () => {
   it('should render collapsed card', async () => {
@@ -79,7 +80,7 @@ describe('CredentialCard', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('should render collapased share credential card', async () => {
+  it('should render collapased share credential card', () => {
     const { container } = render(
       <PopupTestProvider
         path={paths.popup.share.start}
@@ -89,15 +90,14 @@ describe('CredentialCard', () => {
           credential={credentialsMock[0]}
           identity={identitiesMock[0]}
           onSelect={jest.fn()}
+          viewRef={{ current: null }}
         />
       </PopupTestProvider>,
     );
-    await waitForDownloadInfo();
-    await waitForPresentationInfo();
     expect(container).toMatchSnapshot();
   });
 
-  it('should render expanded share credential card', async () => {
+  it('should render expanded share credential card', () => {
     const { container } = render(
       <PopupTestProvider
         path={paths.popup.share.start}
@@ -108,11 +108,53 @@ describe('CredentialCard', () => {
           identity={identitiesMock[0]}
           isSelected
           onSelect={jest.fn()}
+          viewRef={{ current: null }}
         />
       </PopupTestProvider>,
     );
-    await waitForDownloadInfo();
-    await waitForPresentationInfo();
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render collapsed signDid credential card', () => {
+    const { container } = render(
+      <PopupTestProvider
+        path={paths.popup.share.start}
+        data={mockRequestCredential}
+      >
+        <SignDidCredentialCard
+          credential={credentialsMock[0]}
+          onSelect={jest.fn()}
+          onUnSelect={jest.fn()}
+          viewRef={{ current: null }}
+        />
+      </PopupTestProvider>,
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render expanded signDid credential card', async () => {
+    const { container } = render(
+      <PopupTestProvider
+        path={paths.popup.share.start}
+        data={mockRequestCredential}
+      >
+        <SignDidCredentialCard
+          credential={credentialsMock[0]}
+          onSelect={jest.fn()}
+          onUnSelect={jest.fn()}
+          viewRef={{ current: null }}
+        />
+      </PopupTestProvider>,
+    );
+
+    await userEvent.click(
+      await screen.findByRole('button', {
+        name: 'Email Credential Trusted Entity attester',
+      }),
+    );
+
     expect(container).toMatchSnapshot();
   });
 });

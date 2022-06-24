@@ -21,8 +21,8 @@ export function useInitialEntries(): string[] | undefined {
     }
 
     const path =
-      action === 'share'
-        ? paths.popup.share.start
+      action === 'share' || action === 'signDid'
+        ? paths.popup[action].start
         : paths.popup[action as PopupAction];
 
     params.delete('action');

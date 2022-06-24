@@ -1,32 +1,42 @@
 import { useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
+import { RequestForAttestation } from '@kiltprotocol/core';
+
+import { without, cloneDeep } from 'lodash-es';
+
 import * as styles from './SignDid.module.css';
 
 import { Identity } from '../../utilities/identities/types';
-import { usePopupData } from '../../utilities/popups/usePopupData';
 import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
-import { isFullDid } from '../../utilities/did/did';
 
-import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
-import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { backgroundSignDidChannel } from '../../channels/SignDidChannels/backgroundSignDidChannel';
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
+import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
+import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
+import { LinkBack } from '../../components/LinkBack/LinkBack';
+import { SharedCredential } from '../../utilities/credentials/credentials';
 
 interface Props {
   identity: Identity;
+  popupData: SignDidOriginInput;
+  onCancel: () => void;
+  credentials?: SharedCredential[];
 }
 
-export function SignDid({ identity }: Props): JSX.Element | null {
+export function SignDid({
+  identity,
+  popupData,
+  onCancel,
+  credentials,
+}: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const error = !isFullDid(identity.did);
-
-  const { origin, plaintext } = usePopupData<SignDidOriginInput>();
+  const { origin, plaintext } = popupData;
 
   const plaintextRef = useRef<HTMLTextAreaElement>(null);
   const copy = useCopyButton(plaintextRef);
@@ -40,67 +50,107 @@ export function SignDid({ identity }: Props): JSX.Element | null {
       const { seed } = await passwordField.get(event);
       const { sign } = await getIdentityCryptoFromSeed(seed);
 
-      await backgroundSignDidChannel.return(sign(plaintext));
+      const signature = sign(plaintext);
+
+      if (!credentials) {
+        await backgroundSignDidChannel.return(signature);
+        window.close();
+        return;
+      }
+
+      const presentations: {
+        name: string;
+        credential: RequestForAttestation;
+      }[] = [];
+
+      for (const { credential, sharedContents } of credentials) {
+        const { request } = credential;
+        const allProperties = Object.keys(request.claim.contents);
+        const needRemoving = without(allProperties, ...sharedContents);
+
+        const requestInstance = RequestForAttestation.fromRequest(
+          cloneDeep(request),
+        );
+        requestInstance.removeClaimProperties(needRemoving);
+
+        presentations.push({
+          name: credential.name,
+          credential: requestInstance,
+        });
+      }
+
+      await backgroundSignDidChannel.return({
+        ...presentations,
+        ...signature,
+      });
 
       window.close();
     },
-    [passwordField, plaintext],
+    [passwordField, plaintext, credentials],
   );
-
-  const handleCancelClick = useCallback(async () => {
-    await backgroundSignDidChannel.throw('Rejected');
-    window.close();
-  }, []);
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <h1 className={styles.heading}>{t('view_SignDid_title')}</h1>
-      <p className={styles.subline}>{t('view_SignDid_subline')}</p>
 
-      <IdentitiesCarousel identity={identity} />
+      <IdentitySlide identity={identity} />
 
-      <p className={styles.label}>{t('view_SignDid_origin')}</p>
-      <p className={styles.origin}>{origin}</p>
+      {credentials && (
+        <dl className={styles.details}>
+          <dt className={styles.detailName}>{t('view_SignDid_origin')}</dt>
+          <dd className={styles.detailValue}>{origin}</dd>
 
-      <p className={styles.label} id="plaintext">
-        {t('view_SignDid_plaintext')}
-      </p>
-      <p className={styles.plaintextLine}>
-        <textarea
-          className={styles.plaintext}
-          readOnly
-          aria-labelledby="plaintext"
-          value={plaintext}
-          ref={plaintextRef}
-        />
-        {copy.supported && (
-          <button
-            className={copy.className}
-            onClick={copy.handleCopyClick}
-            type="button"
-            aria-label={copy.title}
-            title={copy.title}
-          />
-        )}
-      </p>
+          <dt className={styles.detailName}>{t('view_SignDid_plaintext')}</dt>
+          <dd className={styles.data}>{plaintext}</dd>
+
+          <dt className={styles.detailName}>{t('view_SignDid_credentials')}</dt>
+          <dd className={styles.detailValue}>
+            {credentials.map(({ credential }) => credential.name).join(', ')}
+          </dd>
+        </dl>
+      )}
+
+      {!credentials && (
+        <section className={styles.noCredentials}>
+          <p className={styles.label}>{t('view_SignDid_origin')}</p>
+          <p className={styles.origin}>{origin}</p>
+
+          <p className={styles.label} id="plaintext">
+            {t('view_SignDid_plaintext')}
+          </p>
+          <p className={styles.plaintextLine}>
+            <textarea
+              className={styles.plaintext}
+              readOnly
+              aria-labelledby="plaintext"
+              value={plaintext}
+              ref={plaintextRef}
+            />
+            {copy.supported && (
+              <button
+                className={copy.className}
+                onClick={copy.handleCopyClick}
+                type="button"
+                aria-label={copy.title}
+                title={copy.title}
+              />
+            )}
+          </p>
+        </section>
+      )}
 
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
-        <button
-          onClick={handleCancelClick}
-          type="button"
-          className={styles.reject}
-        >
-          {t('view_SignDid_reject')}
+        <button onClick={onCancel} type="button" className={styles.cancel}>
+          {t('common_action_cancel')}
         </button>
-        <button type="submit" className={styles.submit} disabled={error}>
+        <button type="submit" className={styles.submit}>
           {t('common_action_sign')}
         </button>
-        <output className={styles.errorTooltip} hidden={!error}>
-          {t('view_SignDid_error')}
-        </output>
       </p>
+
+      <LinkBack />
     </form>
   );
 }

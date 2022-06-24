@@ -1,5 +1,4 @@
 export const __esModule: true;
-export const list: string;
 export const card: string;
 export const expand: string;
 export const downloadPrompt: string;

@@ -4,11 +4,45 @@
 
 .heading {
   composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  margin-bottom: calc(31rem / 16);
 }
 
-.subline {
-  composes: subline from '../../components/Typography/Typography.module.css';
-  margin: 0 0 0.8125rem;
+.details {
+  composes: fullWidthContainer from '../../components/View/View.module.css';
+  box-sizing: border-box;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  max-height: calc(140rem / 16);
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.detailName {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  font-size: calc(11rem / 16);
+  width: 7rem;
+  margin: 0.25rem 0;
+}
+
+.detailValue {
+  composes: inputText from '../../components/Typography/Typography.module.css';
+  font-size: calc(11rem / 16);
+  width: calc(100% - 8rem);
+  max-width: calc(100% - 8rem);
+  margin: 0.25rem;
+  text-align: left;
+  color: var(--color-grey-light);
+}
+
+.data {
+  composes: detailValue;
+  word-break: break-word;
+}
+
+.noCredentials {
+  margin-top: 1.5rem;
+  width: 100%;
 }
 
 .label {
@@ -49,7 +83,7 @@
   composes: buttonsLine from '../../components/Button/Button.module.css';
 }
 
-.reject {
+.cancel {
   composes: buttonSecondary from '../../components/Button/Button.module.css';
 }
 
