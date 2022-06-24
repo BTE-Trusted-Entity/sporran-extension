@@ -1,11 +1,9 @@
 import { useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import {
-  RequestForAttestation,
-  Attestation,
-  Credential,
-} from '@kiltprotocol/core';
+import { RequestForAttestation } from '@kiltprotocol/core';
+
+import { without, cloneDeep } from 'lodash-es';
 
 import * as styles from './SignDid.module.css';
 
@@ -22,7 +20,6 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { SharedCredential } from '../../utilities/credentials/credentials';
-import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 interface Props {
   identity: Identity;
@@ -46,69 +43,52 @@ export function SignDid({
 
   const passwordField = usePasswordField();
 
-  const error = useBooleanState();
-
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
-      error.off();
 
-      try {
-        const { seed } = await passwordField.get(event);
-        const { sign, keystore, didDetails } = await getIdentityCryptoFromSeed(
-          seed,
-        );
+      const { seed } = await passwordField.get(event);
+      const { sign } = await getIdentityCryptoFromSeed(seed);
 
-        const signature = sign(plaintext);
+      const signature = sign(plaintext);
 
-        if (!credentials) {
-          await backgroundSignDidChannel.return(signature);
-        }
+      if (!credentials) {
+        await backgroundSignDidChannel.return(signature);
+        window.close();
+        return;
+      }
 
-        if (credentials) {
-          const presentations = [];
+      if (credentials) {
+        const presentations: {
+          name: string;
+          credential: RequestForAttestation;
+        }[] = [];
 
-          for (const { credential, sharedContents } of credentials) {
-            const request = RequestForAttestation.fromRequest(
-              credential.request,
-            );
+        for (const { credential, sharedContents } of credentials) {
+          const { request } = credential;
+          const allProperties = Object.keys(request.claim.contents);
+          const needRemoving = without(allProperties, ...sharedContents);
 
-            const attestation = await Attestation.query(request.rootHash);
-            if (!attestation) {
-              throw new Error(
-                `Unable to verify attestation for ${credential.name}`,
-              );
-            }
+          const requestInstance = RequestForAttestation.fromRequest(
+            cloneDeep(request),
+          );
+          requestInstance.removeClaimProperties(needRemoving);
 
-            const credentialInstance = Credential.fromCredential({
-              request,
-              attestation,
-            });
-            const presentation = await credentialInstance.createPresentation({
-              selectedAttributes: sharedContents,
-              signer: keystore,
-              claimerDid: didDetails,
-            });
-
-            presentations.push({
-              name: credential.name,
-              credential: presentation,
-            });
-          }
-
-          await backgroundSignDidChannel.return({
-            ...presentations,
-            ...signature,
+          presentations.push({
+            name: credential.name,
+            credential: requestInstance,
           });
         }
 
-        window.close();
-      } catch (exception) {
-        console.error(exception);
-        error.on();
+        await backgroundSignDidChannel.return({
+          ...presentations,
+          ...signature,
+        });
       }
+
+      window.close();
     },
-    [passwordField, plaintext, credentials, error],
+    [passwordField, plaintext, credentials],
   );
 
   return (
@@ -170,9 +150,6 @@ export function SignDid({
         <button type="submit" className={styles.submit}>
           {t('common_action_sign')}
         </button>
-        <output className={styles.errorTooltip} hidden={!error.current}>
-          {t('view_SignDid_error')}
-        </output>
       </p>
 
       <LinkBack />

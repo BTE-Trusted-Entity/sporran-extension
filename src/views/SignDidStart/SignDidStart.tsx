@@ -2,8 +2,6 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { Link } from 'react-router-dom';
 
-import { filter } from 'lodash-es';
-
 import { useEffect } from 'react';
 
 import * as styles from './SignDidStart.module.css';
@@ -28,16 +26,14 @@ export function SignDidStart({ identity, resetCredentials }: Props) {
 
   const credentials = useIdentityCredentials(did);
 
-  const attestedCredentials = filter(
-    credentials,
+  const noAttestedCredentials = !credentials?.some(
     ({ status }) => status === 'attested' || status === 'pending',
   );
 
   const errorDid = !isFullDid(did) && t('view_SignDidStart_error_did');
-  const errorCredentials = [
-    errorDid,
-    !attestedCredentials?.length && t('view_SignDidStart_error_credentials'),
-  ].filter(Boolean)[0];
+  const errorUnattested =
+    noAttestedCredentials && t('view_SignDidStart_error_credentials');
+  const errorCredentials = [errorDid, errorUnattested].filter(Boolean)[0];
 
   return (
     <section className={styles.container}>
@@ -56,7 +52,7 @@ export function SignDidStart({ identity, resetCredentials }: Props) {
         to={generatePath(paths.popup.signDid.credentials, {
           address,
         })}
-        className={styles.withCredentials}
+        className={styles.next}
         aria-disabled={Boolean(errorCredentials)}
         title={errorCredentials || undefined}
         aria-label={errorCredentials || undefined}
@@ -67,7 +63,7 @@ export function SignDidStart({ identity, resetCredentials }: Props) {
       <Link
         onClick={(event) => errorDid && event.preventDefault()}
         to={generatePath(paths.popup.signDid.sign, { address })}
-        className={styles.withoutCredentials}
+        className={styles.next}
         aria-disabled={Boolean(errorDid)}
         title={errorDid || undefined}
         aria-label={errorDid || undefined}

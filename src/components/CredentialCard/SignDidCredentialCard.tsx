@@ -41,18 +41,16 @@ export function SignDidCredentialCard({
   const handleChecked = useCallback(
     (event) => {
       const name = event.target.name;
-      if (event.target.checked && !includes(contentsChecked, name)) {
-        !isSelected.current && isSelected.on();
+      const checked = event.target.checked;
 
-        setContentsChecked([...contentsChecked, name]);
-        onSelect({ credential, sharedContents: [...contentsChecked, name] });
-      } else {
-        setContentsChecked(without(contentsChecked, name));
-        onSelect({
-          credential,
-          sharedContents: without(contentsChecked, name),
-        });
-      }
+      checked && !isSelected.current && isSelected.on();
+
+      const newContents = checked
+        ? [...contentsChecked, name]
+        : without(contentsChecked, name);
+
+      setContentsChecked(newContents);
+      onSelect({ credential, sharedContents: newContents });
     },
     [contentsChecked, credential, onSelect, isSelected],
   );

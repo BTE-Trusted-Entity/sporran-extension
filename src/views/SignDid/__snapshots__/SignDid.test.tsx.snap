@@ -127,12 +127,6 @@ exports[`SignDid should render with credentials 1`] = `
       >
         Sign
       </button>
-      <output
-        class="errorTooltip"
-        hidden=""
-      >
-        Unexpected error
-      </output>
     </p>
     <button
       aria-label="Back"
@@ -274,12 +268,6 @@ exports[`SignDid should render without credentials 1`] = `
       >
         Sign
       </button>
-      <output
-        class="errorTooltip"
-        hidden=""
-      >
-        Unexpected error
-      </output>
     </p>
     <button
       aria-label="Back"
