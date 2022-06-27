@@ -21,12 +21,12 @@ const endpoints: DidServiceEndpoint[] = [
   {
     urls: ['https://sporran.org/'],
     types: ['Some Type'],
-    id: `${identity.did}#123456`,
+    id: '123456',
   },
   {
     urls: ['https://kilt.io/'],
     types: ['Another Type'],
-    id: `${identity.did}#654321`,
+    id: '654321',
   },
 ];
 

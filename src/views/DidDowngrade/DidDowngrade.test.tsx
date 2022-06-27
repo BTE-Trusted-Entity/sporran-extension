@@ -22,7 +22,7 @@ jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
   identifier: '4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-} as ReturnType<typeof parseDidUri>);
+} as unknown as ReturnType<typeof parseDidUri>);
 
 jest.mock('../../utilities/getDeposit/getDeposit');
 

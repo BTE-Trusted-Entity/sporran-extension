@@ -11,7 +11,7 @@ jest.mock('../../utilities/did/did');
 
 jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
-} as ReturnType<typeof parseDidUri>);
+} as unknown as ReturnType<typeof parseDidUri>);
 
 const input: SignDidOriginInput = {
   dAppName: 'dApp',

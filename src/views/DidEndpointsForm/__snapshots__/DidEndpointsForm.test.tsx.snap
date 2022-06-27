@@ -69,7 +69,7 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
       >
         <a
           class="expand"
-          href="/identity/FOO/did/endpoints/did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ%23123456"
+          href="/identity/FOO/did/endpoints/123456"
         >
           <section
             class="collapsedCard"
