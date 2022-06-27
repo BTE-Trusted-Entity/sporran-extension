@@ -80,7 +80,7 @@ export function SignDid({
       }
 
       await backgroundSignDidChannel.return({
-        ...presentations,
+        credentials: presentations,
         ...signature,
       });
 
