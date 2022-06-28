@@ -978,6 +978,9 @@
   "view_DidManage_heading": {
     "message": "Manage DID"
   },
+  "view_DidManage_linking": {
+    "message": "Linking accounts"
+  },
   "view_DidManage_endpoints": {
     "message": "Service endpoints"
   },
