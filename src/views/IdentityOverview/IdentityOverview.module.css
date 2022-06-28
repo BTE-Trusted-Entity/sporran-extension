@@ -49,9 +49,14 @@
   --wide-button-icon: url('../../components/images/download-prompt.svg');
 }
 
-.upgrade,
-.manage {
+.upgrade {
   composes: buttonWide from '../../components/Button/Button.module.css';
+
+  --wide-button-icon: url('../../components/images/manage-did.svg');
+}
+
+.manage {
+  composes: buttonNew from '../../components/Button/Button.module.css';
 
   --wide-button-icon: url('../../components/images/manage-did.svg');
 }

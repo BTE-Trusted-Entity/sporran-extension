@@ -3,6 +3,7 @@ export const buttonPrimary: string;
 export const buttonSecondary: string;
 export const buttonTertiary: string;
 export const buttonWide: string;
+export const buttonNew: string;
 export const buttonIcon: string;
 export const circle: string;
 export const buttonCheckmark: string;

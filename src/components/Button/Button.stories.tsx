@@ -63,6 +63,14 @@ export function ButtonWide(): JSX.Element {
   );
 }
 
+export function ButtonTriangleNew(): JSX.Element {
+  return (
+    <button className={storiesStyles.triangleNew} type="button">
+      Manage On-Chain DID
+    </button>
+  );
+}
+
 export function ButtonIcon(): JSX.Element {
   return <button className={storiesStyles.icon} type="button" />;
 }
