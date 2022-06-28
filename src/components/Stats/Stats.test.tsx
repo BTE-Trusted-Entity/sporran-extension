@@ -1,4 +1,5 @@
 import { IdentitiesProviderMock, render, screen } from '../../testing/testing';
+import { IdentitiesMap } from '../../utilities/identities/types';
 
 import { Stats } from './Stats';
 
@@ -13,7 +14,7 @@ describe('Stats', () => {
   });
 
   it('should not render for single identity', async () => {
-    const identities = {
+    const identities: IdentitiesMap = {
       '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1': {
         name: 'Light DID Identity',
         address: '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1',
