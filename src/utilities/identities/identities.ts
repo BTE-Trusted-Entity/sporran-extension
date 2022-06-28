@@ -13,7 +13,6 @@ import {
   sr25519PairFromSeed,
 } from '@polkadot/util-crypto';
 import {
-  DidPublicKey,
   EncryptionKeyType,
   IEncryptedMessage,
   KeystoreSigner,
@@ -21,6 +20,7 @@ import {
   NaclBoxCapable,
   VerificationKeyType,
   DidUri,
+  DidResourceUri,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
 import {
@@ -45,7 +45,6 @@ import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
 import { IDENTITIES_KEY, getIdentities } from './getIdentities';
 
 import { Identity } from './types';
-
 export { Identity, IdentitiesMap } from './types';
 
 const CURRENT_IDENTITY_KEY = 'currentIdentity';
@@ -136,7 +135,7 @@ interface IdentityDidCrypto {
   keystore: KeystoreSigner;
   sign: (plaintext: string) => {
     signature: HexString;
-    didKeyUri: DidPublicKey['uri'];
+    didKeyUri: DidResourceUri;
   };
   encrypt: (
     messageBody: MessageBody,

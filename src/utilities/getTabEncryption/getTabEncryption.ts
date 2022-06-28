@@ -8,7 +8,6 @@ import {
   naclSeal,
 } from '@polkadot/util-crypto';
 import {
-  DidPublicKey,
   EncryptionKeyType,
   IEncryptedMessage,
   IMessage,
@@ -16,6 +15,7 @@ import {
   NaclBoxCapable,
   ResolvedDidKey,
   VerificationKeyType,
+  DidResourceUri,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
 import { DidResolver, LightDidDetails } from '@kiltprotocol/did';
@@ -27,7 +27,7 @@ import { getDidEncryptionKey } from '../did/did';
 interface TabEncryption {
   authenticationKey: KeyringPair;
   encryptionKey: Keypair;
-  sporranEncryptionDidKeyUri: DidPublicKey['uri'];
+  sporranEncryptionDidKeyUri: DidResourceUri;
   dAppEncryptionDidKey: ResolvedDidKey;
   decrypt: (encrypted: IEncryptedMessage) => Promise<IMessage>;
   encrypt: (messageBody: MessageBody) => Promise<IEncryptedMessage>;
@@ -64,7 +64,7 @@ function makeKeystore({
 
 export async function getTabEncryption(
   sender: Runtime.MessageSender,
-  dAppEncryptionKeyUri?: DidPublicKey['uri'],
+  dAppEncryptionKeyUri?: DidResourceUri,
 ): Promise<TabEncryption> {
   if (!sender.tab || !sender.tab.id || !sender.url) {
     throw new Error('Message not from a tab');
@@ -121,7 +121,7 @@ export async function getTabEncryption(
       sporranEncryptionDidKey.id,
       sporranDidDetails,
       keystore,
-      dAppEncryptionKeyUri as DidPublicKey['uri'],
+      dAppEncryptionKeyUri as DidResourceUri,
     );
   }
 

@@ -1,8 +1,8 @@
 import { HexString } from '@polkadot/util/types';
 import {
   IEncryptedMessage,
-  DidPublicKey,
   IIdentity,
+  DidResourceUri,
 } from '@kiltprotocol/types';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
@@ -19,7 +19,7 @@ interface PubSubSession {
   ) => Promise<void>;
   close: () => Promise<void>;
   send: (message: IEncryptedMessage) => Promise<void>;
-  encryptionKeyId: DidPublicKey['uri'];
+  encryptionKeyId: DidResourceUri;
   encryptedChallenge: string;
   nonce: string;
 }
@@ -27,7 +27,7 @@ interface PubSubSession {
 interface InjectedWindowProvider {
   startSession: (
     dAppName: string,
-    dAppEncryptionKeyId: DidPublicKey['uri'],
+    dAppEncryptionKeyId: DidResourceUri,
     challenge: string,
   ) => Promise<PubSubSession>;
   name: string;
@@ -35,11 +35,11 @@ interface InjectedWindowProvider {
   specVersion: '1.0';
   signWithDid: (
     plaintext: string,
-  ) => Promise<{ signature: string; didKeyUri: DidPublicKey['uri'] }>;
+  ) => Promise<{ signature: string; didKeyUri: DidResourceUri }>;
   signExtrinsicWithDid: (
     extrinsic: HexString,
     signer: IIdentity['address'],
-  ) => Promise<{ signed: HexString; didKeyUri: DidPublicKey['uri'] }>;
+  ) => Promise<{ signed: HexString; didKeyUri: DidResourceUri }>;
 }
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
@@ -54,7 +54,7 @@ async function storeMessageFromSporran(
 
 async function startSession(
   unsafeDAppName: string,
-  dAppEncryptionKeyId: DidPublicKey['uri'],
+  dAppEncryptionKeyId: DidResourceUri,
   challenge: string,
 ): Promise<PubSubSession> {
   const dAppName = unsafeDAppName.substring(0, 50);
@@ -104,7 +104,7 @@ async function startSession(
 
 async function signWithDid(plaintext: string): Promise<{
   signature: HexString;
-  didKeyUri: DidPublicKey['uri'];
+  didKeyUri: DidResourceUri;
 }> {
   const dAppName = document.title.substring(0, 50);
   return injectedSignDidChannel.get({ plaintext, dAppName });
@@ -115,7 +115,7 @@ async function signExtrinsicWithDid(
   signer: IIdentity['address'],
 ): Promise<{
   signed: HexString;
-  didKeyUri: DidPublicKey['uri'];
+  didKeyUri: DidResourceUri;
 }> {
   const dAppName = document.title.substring(0, 50);
   return injectedSignDidExtrinsicChannel.get({ extrinsic, signer, dAppName });
