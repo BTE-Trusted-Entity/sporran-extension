@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo } from 'react';
 import { cloneDeep, pick, pull, without } from 'lodash-es';
-import { IRequestForAttestation, IDidDetails } from '@kiltprotocol/types';
+import { IRequestForAttestation, DidUri } from '@kiltprotocol/types';
 import { Attestation, RequestForAttestation } from '@kiltprotocol/core';
 import { mutate } from 'swr';
 
@@ -75,9 +75,7 @@ export function useCredentials(): Credential[] | undefined {
   return useContext(CredentialsContext);
 }
 
-export function useIdentityCredentials(
-  did: IDidDetails['did'],
-): Credential[] | undefined {
+export function useIdentityCredentials(did: DidUri): Credential[] | undefined {
   const all = useCredentials();
 
   return useMemo(() => {

@@ -3,8 +3,8 @@ import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
 
 import { GenericExtrinsic } from '@polkadot/types';
 
-import { DidChain } from '@kiltprotocol/did';
-import { IDidDetails, DidServiceEndpoint } from '@kiltprotocol/types';
+import { Chain } from '@kiltprotocol/did';
+import { DidUri, DidServiceEndpoint } from '@kiltprotocol/types';
 
 import { SignDidExtrinsicOriginInput } from '../../channels/SignDidExtrinsicChannels/types';
 import {
@@ -69,7 +69,7 @@ export function getAddServiceEndpoint(
 
 export async function getRemoveServiceEndpoint(
   extrinsic: GenericExtrinsic,
-  did: IDidDetails['did'],
+  did: DidUri,
   error: ReturnType<typeof useBooleanState>,
 ): Promise<DidServiceEndpoint> {
   error.off();
@@ -86,7 +86,7 @@ export async function getRemoveServiceEndpoint(
 
   const { identifier } = parseDidUri(did);
 
-  const result = await DidChain.queryServiceEndpoint(identifier, id);
+  const result = await Chain.queryServiceEndpoint(identifier, id);
 
   if (!result) {
     error.on();

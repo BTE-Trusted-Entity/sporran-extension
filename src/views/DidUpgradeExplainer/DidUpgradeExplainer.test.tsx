@@ -14,7 +14,7 @@ jest.mock('../../utilities/did/useIsOnChainDidDeleted');
 jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4tPoYT9j4i429JktnyX9EEu9StL58YfdPCi8cUkYnvtAKRbK',
-} as ReturnType<typeof parseDidUri>);
+} as unknown as ReturnType<typeof parseDidUri>);
 
 describe('DidUpgradeExplainer', () => {
   it('should render DID not on chain yet', async () => {

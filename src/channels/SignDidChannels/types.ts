@@ -1,5 +1,5 @@
 import { HexString } from '@polkadot/util/types';
-import { DidPublicKey } from '@kiltprotocol/types';
+import { DidResourceUri } from '@kiltprotocol/types';
 
 import { RequestForAttestation } from '@kiltprotocol/core';
 
@@ -14,6 +14,6 @@ export type SignDidOriginInput = SignDidInput & Origin;
 
 export interface SignDidOutput {
   signature: HexString;
-  didKeyUri: DidPublicKey['id'];
+  didKeyUri: DidResourceUri;
   credentials?: { name: string; credential: RequestForAttestation }[];
 }

@@ -1,32 +1,24 @@
 import {
   DidDetails,
-  DidUtils,
+  Utils,
   FullDidDetails,
   LightDidDetails,
 } from '@kiltprotocol/did';
-import {
-  DidEncryptionKey,
-  DidServiceEndpoint,
-  IDidDetails,
-} from '@kiltprotocol/types';
+import { DidEncryptionKey, DidUri } from '@kiltprotocol/types';
 import { Crypto } from '@kiltprotocol/utils';
 
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
-export function isFullDid(did: IDidDetails['did']): boolean {
+export function isFullDid(did: DidUri): boolean {
   if (!did) {
     // could be a legacy identity without DID
     return false;
   }
-  return DidUtils.parseDidUri(did).type === 'full';
+  return Utils.parseDidUri(did).type === 'full';
 }
 
-export async function getFullDidDetails(
-  did: IDidDetails['did'],
-): Promise<FullDidDetails> {
-  const { identifier } = DidUtils.parseDidUri(did);
-
-  const details = await FullDidDetails.fromChainInfo(identifier);
+export async function getFullDidDetails(did: DidUri): Promise<FullDidDetails> {
+  const details = await FullDidDetails.fromChainInfo(did);
   if (!details) {
     throw new Error(`Cannot resolve DID ${did}`);
   }
@@ -34,15 +26,11 @@ export async function getFullDidDetails(
   return details;
 }
 
-export function useFullDidDetails(
-  did: IDidDetails['did'],
-): FullDidDetails | undefined {
+export function useFullDidDetails(did: DidUri): FullDidDetails | undefined {
   return useAsyncValue(getFullDidDetails, [did]);
 }
 
-export async function getDidDetails(
-  did: IDidDetails['did'],
-): Promise<DidDetails> {
+export async function getDidDetails(did: DidUri): Promise<DidDetails> {
   return isFullDid(did)
     ? await getFullDidDetails(did)
     : LightDidDetails.fromUri(did);
@@ -56,20 +44,13 @@ export function getDidEncryptionKey(details: DidDetails): DidEncryptionKey {
   return encryptionKey;
 }
 
-export function getFragment(id: DidServiceEndpoint['id']): string {
-  if (!id.includes('#')) {
-    return id;
-  }
-  return DidUtils.parseDidUri(id).fragment as string;
-}
-
-export function parseDidUri(did: IDidDetails['did']): ReturnType<
-  typeof DidUtils.parseDidUri
+export function parseDidUri(did: DidUri): ReturnType<
+  typeof Utils.parseDidUri
 > & {
-  lightDid: IDidDetails['did'];
-  fullDid: IDidDetails['did'];
+  lightDid: DidUri;
+  fullDid: DidUri;
 } {
-  const parsed = DidUtils.parseDidUri(did);
+  const parsed = Utils.parseDidUri(did);
   const { identifier, type } = parsed;
   const unprefixedIdentifier = identifier.replace(/^00/, '');
   const prefixedIdentifier = '00' + identifier;
@@ -77,12 +58,12 @@ export function parseDidUri(did: IDidDetails['did']): ReturnType<
   const lightDid =
     type === 'light'
       ? did
-      : DidUtils.getKiltDidFromIdentifier(prefixedIdentifier, 'light');
+      : Utils.getKiltDidFromIdentifier(prefixedIdentifier, 'light');
 
   const fullDid =
     type === 'full'
       ? did
-      : DidUtils.getKiltDidFromIdentifier(unprefixedIdentifier, 'full');
+      : Utils.getKiltDidFromIdentifier(unprefixedIdentifier, 'full');
 
   return {
     ...parsed,
@@ -91,17 +72,14 @@ export function parseDidUri(did: IDidDetails['did']): ReturnType<
   };
 }
 
-export function sameFullDid(
-  a: IDidDetails['did'],
-  b: IDidDetails['did'],
-): boolean {
+export function sameFullDid(a: DidUri, b: DidUri): boolean {
   if (!a || !b) {
     return false;
   }
   return parseDidUri(a).fullDid === parseDidUri(b).fullDid;
 }
 
-export async function needLegacyDidCrypto(did: string): Promise<boolean> {
+export async function needLegacyDidCrypto(did: DidUri): Promise<boolean> {
   if (!isFullDid(did)) {
     return false;
   }

@@ -12,7 +12,7 @@ jest.mock('../../utilities/did/did');
 
 jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
-} as ReturnType<typeof parseDidUri>);
+} as unknown as ReturnType<typeof parseDidUri>);
 mockIsFullDid(true);
 jest.mocked(sameFullDid).mockReturnValue(true);
 jest.mocked(Attestation.query).mockResolvedValue(null);

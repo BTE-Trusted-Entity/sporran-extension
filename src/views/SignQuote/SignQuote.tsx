@@ -8,7 +8,7 @@ import {
 } from '@kiltprotocol/core';
 import {
   IClaim,
-  IDidDetails,
+  DidUri,
   IRequestAttestation,
   ITerms,
   MessageBodyType,
@@ -38,7 +38,7 @@ import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDelet
 export type Terms = ITerms & {
   claim: IClaim;
   attesterName: string;
-  attesterDid: IDidDetails['did'];
+  attesterDid: DidUri;
 };
 
 interface Props {
@@ -95,7 +95,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       );
 
       // The attester generated claim with the temporary identity, need to put real address in it
-      const identityClaim = { ...claim, owner: didDetails.did };
+      const identityClaim = { ...claim, owner: didDetails.uri };
 
       const requestForAttestation = RequestForAttestation.fromClaim(
         identityClaim,

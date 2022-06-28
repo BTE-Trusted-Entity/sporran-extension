@@ -8,7 +8,6 @@ import {
   naclSeal,
 } from '@polkadot/util-crypto';
 import {
-  DidPublicKey,
   EncryptionKeyType,
   IEncryptedMessage,
   IMessage,
@@ -16,6 +15,7 @@ import {
   NaclBoxCapable,
   ResolvedDidKey,
   VerificationKeyType,
+  DidResourceUri,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
 import { DidResolver, LightDidDetails } from '@kiltprotocol/did';
@@ -27,7 +27,7 @@ import { getDidEncryptionKey } from '../did/did';
 interface TabEncryption {
   authenticationKey: KeyringPair;
   encryptionKey: Keypair;
-  sporranEncryptionDidKeyUri: DidPublicKey['id'];
+  sporranEncryptionDidKeyUri: DidResourceUri;
   dAppEncryptionDidKey: ResolvedDidKey;
   decrypt: (encrypted: IEncryptedMessage) => Promise<IMessage>;
   encrypt: (messageBody: MessageBody) => Promise<IEncryptedMessage>;
@@ -64,7 +64,7 @@ function makeKeystore({
 
 export async function getTabEncryption(
   sender: Runtime.MessageSender,
-  dAppEncryptionKeyId?: DidPublicKey['id'],
+  dAppEncryptionKeyUri?: DidResourceUri,
 ): Promise<TabEncryption> {
   if (!sender.tab || !sender.tab.id || !sender.url) {
     throw new Error('Message not from a tab');
@@ -75,7 +75,7 @@ export async function getTabEncryption(
   if (tabId in tabEncryptions) {
     return tabEncryptions[tabId];
   }
-  if (!dAppEncryptionKeyId) {
+  if (!dAppEncryptionKeyUri) {
     throw new Error('Cannot generate encryption outside challenge flow');
   }
 
@@ -97,12 +97,12 @@ export async function getTabEncryption(
     encryptionKey,
   });
   const sporranEncryptionDidKey = getDidEncryptionKey(sporranDidDetails);
-  const sporranEncryptionDidKeyUri = sporranDidDetails.assembleKeyId(
+  const sporranEncryptionDidKeyUri = sporranDidDetails.assembleKeyUri(
     sporranEncryptionDidKey.id,
   );
 
   const dAppEncryptionDidKey = (await DidResolver.resolveKey(
-    dAppEncryptionKeyId,
+    dAppEncryptionKeyUri,
   )) as ResolvedDidKey;
   if (!dAppEncryptionDidKey) {
     throw new Error('Receiver key agreement key not found');
@@ -116,12 +116,12 @@ export async function getTabEncryption(
   }
 
   async function encrypt(messageBody: MessageBody): Promise<IEncryptedMessage> {
-    const message = new Message(messageBody, sporranDidDetails.did, dAppDid);
+    const message = new Message(messageBody, sporranDidDetails.uri, dAppDid);
     return message.encrypt(
       sporranEncryptionDidKey.id,
       sporranDidDetails,
       keystore,
-      dAppEncryptionKeyId as DidPublicKey['id'],
+      dAppEncryptionKeyUri as DidResourceUri,
     );
   }
 
