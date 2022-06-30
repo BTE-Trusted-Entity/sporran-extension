@@ -12,11 +12,6 @@
   margin: 0.75rem 0 0;
 }
 
-.linkNew {
-  composes: buttonNew from '../../components/Button/Button.module.css';
-  margin: 0.75rem 0 0;
-}
-
 .didLine {
   composes: didLine from '../../components/CopyValue/CopyValue.module.css';
   margin-top: 1.5rem;
@@ -33,7 +28,8 @@
 }
 
 .linking {
-  composes: linkNew;
+  composes: buttonNew from '../../components/Button/Button.module.css';
+  margin: 0.75rem 0 0;
 
   --wide-button-icon: url('../../components/images/linking_page.svg');
 }
