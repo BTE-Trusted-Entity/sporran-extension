@@ -12,6 +12,7 @@ import {
   IRequestAttestation,
   ITerms,
   MessageBodyType,
+  DidSignature,
 } from '@kiltprotocol/types';
 
 import * as styles from './SignQuote.module.css';
@@ -40,6 +41,16 @@ export type Terms = ITerms & {
   attesterName: string;
   attesterDid: DidUri;
 };
+
+type CompatibleSignature = DidSignature & { keyId?: DidSignature['keyUri'] };
+
+function makeBackwardsCompatible(signature: CompatibleSignature) {
+  signature.keyId = signature.keyUri;
+}
+
+function makeFutureProof(signature: CompatibleSignature) {
+  signature.keyUri = signature.keyUri || signature.keyId;
+}
 
 interface Props {
   identity: Identity;
@@ -110,6 +121,11 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         didDetails,
         didDetails.authenticationKey.id,
       );
+
+      if (requestForAttestation.claimerSignature) {
+        makeBackwardsCompatible(requestForAttestation.claimerSignature);
+        makeFutureProof(requestForAttestation.claimerSignature);
+      }
 
       const matchingCredentials = filter(credentials, { cTypeTitle });
       const index = matchingCredentials.length + 1;
