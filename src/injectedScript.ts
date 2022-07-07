@@ -52,6 +52,21 @@ async function storeMessageFromSporran(
   unprocessedMessagesFromSporran.push(message);
 }
 
+type CompatibleMessage = IEncryptedMessage & {
+  receiverKeyId?: IEncryptedMessage['receiverKeyUri'];
+  senderKeyId?: IEncryptedMessage['senderKeyUri'];
+};
+
+function makeBackwardsCompatible(message: CompatibleMessage) {
+  message.receiverKeyId = message.receiverKeyUri;
+  message.senderKeyId = message.senderKeyUri;
+}
+
+function makeFutureProof(message: CompatibleMessage) {
+  message.senderKeyUri = message.senderKeyUri || message.senderKeyId;
+  message.receiverKeyUri = message.receiverKeyUri || message.receiverKeyId;
+}
+
 async function startSession(
   unsafeDAppName: string,
   dAppEncryptionKeyId: DidResourceUri,
@@ -77,6 +92,7 @@ async function startSession(
 
       let message;
       while ((message = unprocessedMessagesFromSporran.pop())) {
+        makeBackwardsCompatible(message);
         await onMessageFromSporran(message);
       }
     },
@@ -88,11 +104,14 @@ async function startSession(
 
     /** dApp sends a message */
     async send(message: IEncryptedMessage): Promise<void> {
+      makeFutureProof(message);
+
       const messageFromSporran = await injectedCredentialChannel.get({
         message,
         dAppName,
       });
       if (messageFromSporran) {
+        makeBackwardsCompatible(messageFromSporran);
         await onMessageFromSporran(messageFromSporran);
       }
     },
