@@ -42,6 +42,15 @@ export function DidManage({ identity }: Props): JSX.Element {
         />
       )}
 
+      <a
+        className={styles.linking}
+        href="https://linking.trusted-entity.io/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        {t('view_DidManage_linking')}
+      </a>
+
       <Link
         className={styles.endpoints}
         to={generatePath(paths.identity.did.manage.endpoints.start, {
