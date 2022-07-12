@@ -1069,7 +1069,7 @@
     pirates "^4.0.0"
     source-map-support "^0.5.16"
 
-"@babel/runtime@7.18.6", "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.17.8", "@babel/runtime@^7.18.3", "@babel/runtime@^7.3.1", "@babel/runtime@^7.5.0", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@7.18.6", "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.17.8", "@babel/runtime@^7.18.3", "@babel/runtime@^7.18.6", "@babel/runtime@^7.3.1", "@babel/runtime@^7.5.0", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.6.tgz#6a1ef59f838debd670421f8c7f2cbb8da9751580"
   integrity sha512-t9wi7/AW6XtKahAe20Yw0/mMljKq0B1r2fPdvaAdV/KPDZewFXdaaa6K7lxmZBZ8FBNpCiAT6iHPmd6QO9bKfQ==
@@ -1833,12 +1833,12 @@
     "@polkadot/util-crypto" "^9.5.1"
     rxjs "^7.5.5"
 
-"@polkadot/ui-shared@^2.6.2":
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-2.6.2.tgz#7f8a31d0151bbed71f0f0df6219480a89f2feb20"
-  integrity sha512-TvquDdkPlzVH3EIOAM4iFHcm6D5XOLbEKT9+zLSNddKdW/7053v19f5NzNB4par5Q62A8zscXB+1KbjpwwPQKA==
+"@polkadot/ui-shared@^2.8.2":
+  version "2.8.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-2.8.2.tgz#0528fdfcbfe3c1b52358bf14cf0665b9dc21f8ad"
+  integrity sha512-QLnkhvEPf+em2gOMLjJjE6wFYadw5/UtInBPmceaDBXs+aHb13/aUdSBWWsAIMm4Roq2EapSq3Z3gmr1CBQ12w==
   dependencies:
-    "@babel/runtime" "^7.18.3"
+    "@babel/runtime" "^7.18.6"
     color "^3.2.1"
 
 "@polkadot/util-crypto@9.6.1", "@polkadot/util-crypto@^9.0.0", "@polkadot/util-crypto@^9.4.1", "@polkadot/util-crypto@^9.5.1":
