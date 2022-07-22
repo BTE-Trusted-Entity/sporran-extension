@@ -111,7 +111,7 @@ export function ShareCredentialCard({
         onChange={handleSelect}
         onClick={expanded.on}
         checked={isSelected}
-        className={cx(styles.selectOne, {
+        className={cx(styles.select, {
           [styles.notAttested]: !isAttested,
         })}
       />

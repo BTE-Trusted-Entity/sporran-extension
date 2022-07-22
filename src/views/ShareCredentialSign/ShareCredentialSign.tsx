@@ -22,7 +22,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 import { Selected } from '../ShareCredential/ShareCredential';
 
-import { getDidDetails, needLegacyDidCrypto } from '../../utilities/did/did';
+import { getDidDetails } from '../../utilities/did/did';
 
 interface Props {
   selected: Selected;
@@ -53,10 +53,8 @@ export function ShareCredentialSign({
 
       const { seed } = await passwordField.get(event);
 
-      const isLegacy = await needLegacyDidCrypto(identity.did);
       const { encrypt, keystore, didDetails } = await getIdentityCryptoFromSeed(
         seed,
-        isLegacy,
       );
 
       const request = RequestForAttestation.fromRequest(credential.request);
@@ -98,15 +96,7 @@ export function ShareCredentialSign({
       await shareChannel.return(message);
       window.close();
     },
-    [
-      credential,
-      identity,
-      passwordField,
-      challenge,
-      verifierDid,
-      t,
-      sharedContents,
-    ],
+    [credential, passwordField, challenge, verifierDid, t, sharedContents],
   );
 
   if (!selected) {

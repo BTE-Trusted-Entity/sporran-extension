@@ -19,16 +19,6 @@ exports[`IdentityLine should match the snapshot 1`] = `
         Light DID Identity
       </p>
     </section>
-    <span
-      class="amount"
-    >
-      1.2340
-       
-      <span
-        aria-label="KILT Coin"
-        class="coin"
-      />
-    </span>
   </section>
 </div>
 `;

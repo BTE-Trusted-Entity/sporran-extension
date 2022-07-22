@@ -1,18 +1,13 @@
 import { Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { filter, find } from 'lodash-es';
-import {
-  BalanceUtils,
-  Credential,
-  RequestForAttestation,
-} from '@kiltprotocol/core';
+import { Credential, RequestForAttestation } from '@kiltprotocol/core';
 import {
   IClaim,
   DidUri,
   IRequestAttestation,
   ITerms,
   MessageBodyType,
-  DidSignature,
 } from '@kiltprotocol/types';
 
 import * as styles from './SignQuote.module.css';
@@ -26,31 +21,19 @@ import {
   useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { getDidDetails, needLegacyDidCrypto } from '../../utilities/did/did';
+import { getDidDetails } from '../../utilities/did/did';
 import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { claimChannel } from '../../channels/claimChannel/claimChannel';
-import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
-import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 
 export type Terms = ITerms & {
   claim: IClaim;
   attesterName: string;
   attesterDid: DidUri;
 };
-
-type CompatibleSignature = DidSignature & { keyId?: DidSignature['keyUri'] };
-
-function makeBackwardsCompatible(signature: CompatibleSignature) {
-  signature.keyId = signature.keyUri;
-}
-
-function makeFutureProof(signature: CompatibleSignature) {
-  signature.keyUri = signature.keyUri || signature.keyId;
-}
 
 interface Props {
   identity: Identity;
@@ -61,15 +44,9 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
   const data = usePopupData<Terms>();
 
-  const { did } = identity;
-  const error = useIsOnChainDidDeleted(did);
-
-  const { claim, cTypes, quote, attesterName } = data;
+  const { claim, cTypes, attesterName } = data;
 
   const cType = find(cTypes, { hash: claim.cTypeHash });
-
-  const gross = quote?.cost?.gross;
-  const costs = BalanceUtils.toFemtoKilt(gross || 0);
 
   const passwordField = usePasswordField();
 
@@ -99,10 +76,8 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
       const { seed } = await passwordField.get(event);
 
-      const isLegacy = await needLegacyDidCrypto(identity.did);
       const { encrypt, keystore, didDetails } = await getIdentityCryptoFromSeed(
         seed,
-        isLegacy,
       );
 
       // The attester generated claim with the temporary identity, need to put real address in it
@@ -121,11 +96,6 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         didDetails,
         didDetails.authenticationKey.id,
       );
-
-      if (requestForAttestation.claimerSignature) {
-        makeBackwardsCompatible(requestForAttestation.claimerSignature);
-        makeFutureProof(requestForAttestation.claimerSignature);
-      }
 
       const matchingCredentials = filter(credentials, { cTypeTitle });
       const index = matchingCredentials.length + 1;
@@ -153,7 +123,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       await claimChannel.return(message);
       window.close();
     },
-    [credentials, cType, data, passwordField, identity.did],
+    [credentials, cType, data, passwordField],
   );
 
   return (
@@ -166,11 +136,6 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       <p className={styles.subline}>{t('view_SignQuote_subline')}</p>
 
       <IdentitiesCarousel identity={identity} />
-
-      <p className={styles.costs}>
-        <span>{t('view_SignQuote_costs')}</span>
-        <KiltAmount amount={costs} type="costs" smallDecimals />
-      </p>
 
       <dl className={styles.details}>
         {Object.entries(claim.contents).map(([name, value]) => (
@@ -195,13 +160,10 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         <button
           type="submit"
           className={styles.submit}
-          disabled={passwordField.isEmpty || error}
+          disabled={passwordField.isEmpty}
         >
           {t('view_SignQuote_CTA')}
         </button>
-        <output className={styles.errorTooltip} hidden={!error}>
-          {t('view_SignQuote_on_chain_did_deleted')}
-        </output>
       </p>
     </form>
   );

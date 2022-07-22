@@ -23,21 +23,16 @@ import {
   DidResourceUri,
 } from '@kiltprotocol/types';
 import { Message } from '@kiltprotocol/messaging';
-import {
-  DidDetails,
-  DidResolver,
-  Utils,
-  LightDidDetails,
-} from '@kiltprotocol/did';
+import { DidDetails, DidResolver, LightDidDetails } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
-import { map, max, memoize } from 'lodash-es';
+import { map, max } from 'lodash-es';
 
 import {
   loadEncrypted,
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 
-import { getDidDetails, getDidEncryptionKey, parseDidUri } from '../did/did';
+import { getDidDetails, getDidEncryptionKey } from '../did/did';
 import { storage } from '../storage/storage';
 import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
 
@@ -161,27 +156,9 @@ export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
   };
 }
 
-function deriveEncryptionKeyLegacy(seed: Uint8Array) {
-  const keypair = getKeypairBySeed(seed);
-  const encryptionKeyringPair = keypair.derive('//did//keyAgreement//0');
-
-  const secret = encryptionKeyringPair
-    .encryptMessage(
-      new Uint8Array(24).fill(0),
-      new Uint8Array(24).fill(0),
-      new Uint8Array(24).fill(0),
-    )
-    .slice(24); // first 24 bytes are the nonce
-
-  const encryptionKeypair = naclBoxPairFromSecret(secret);
-  return { ...encryptionKeypair, type: EncryptionKeyType.X25519 };
-}
-
 export async function getKeystoreFromSeed(
   seed: Uint8Array,
 ): Promise<KeystoreSigner> {
-  await fixLightDidIssues(seed);
-
   const authenticationKey = deriveAuthenticationKey(seed);
   return {
     sign: async ({ data, alg }) => ({
@@ -191,52 +168,11 @@ export async function getKeystoreFromSeed(
   };
 }
 
-async function fixLightDidIssues(seed: Uint8Array) {
-  const identities = await getIdentities();
-  const { address } = getKeypairBySeed(seed);
-  const identity = identities[address];
-
-  if (!identity) {
-    // could be the Alice identity
-    return;
-  }
-
-  const parsed = identity.did && Utils.parseDidUri(identity.did);
-  if (parsed && parsed.type !== 'light') {
-    return;
-  }
-
-  try {
-    // If this light DID was created and stored using SDK@0.24.0 then its keys are serialized using base64,
-    // resulting in an invalid URI, so resolving would throw an exception.
-    const details = await getDidDetails(identity.did);
-
-    // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
-    const encryptionKey = getDidEncryptionKey(details);
-
-    // This public key also means the DID needs to be regenerated
-    const troubleKey =
-      '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
-    if (Crypto.u8aToHex(encryptionKey.publicKey) === troubleKey) {
-      throw new Error();
-    }
-  } catch {
-    // We re-create the invalid DID from scratch and update its URI in the identity.
-    const { uri } = getLightDidFromSeed(seed);
-    await saveIdentity({ ...identity, did: uri });
-  }
-}
-
 export async function getIdentityCryptoFromSeed(
   seed: Uint8Array,
-  legacy?: boolean,
 ): Promise<IdentityDidCrypto> {
-  await fixLightDidIssues(seed);
-
   const authenticationKey = deriveAuthenticationKey(seed);
-  const encryptionKey = legacy
-    ? deriveEncryptionKeyLegacy(seed)
-    : deriveEncryptionKeyFromSeed(seed);
+  const encryptionKey = deriveEncryptionKeyFromSeed(seed);
 
   const { address } = getKeypairBySeed(seed);
   const identities = await getIdentities();
@@ -377,48 +313,12 @@ export async function decryptIdentity(
   return new Uint8Array(seed);
 }
 
-/** Ensure that local information about the DID type matches stored on blockchain
- * even if an error occurred while asynchronous update was running */
-async function syncDidStateWithBlockchain(address: string | null | undefined) {
-  if (!address) {
-    return;
-  }
-
-  const identities = await getIdentities();
-  const identity = identities[address];
-
-  if (!identity.did) {
-    // could be a legacy identity without DID
-    return;
-  }
-
-  const { lightDid, fullDid, type } = parseDidUri(identity.did);
-  const wasOnChain = type === 'full';
-
-  const resolved = await DidResolver.resolveDoc(identity.did);
-  const isOnChain = wasOnChain
-    ? Boolean(resolved && resolved.metadata && !resolved.metadata.deactivated)
-    : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
-
-  if (wasOnChain && !isOnChain) {
-    await saveIdentity({ ...identity, did: lightDid });
-  }
-  if (!wasOnChain && isOnChain) {
-    await saveIdentity({ ...identity, did: fullDid });
-  }
-}
-
-/** Memoized function will run only once per identity while the popup is open, do not use from backend */
-const noAwaitUpdateCachedDidStateOnce = memoize(syncDidStateWithBlockchain);
-
 export function useCurrentIdentity(): string | null | undefined {
   const data = useSwrDataOrThrow(
     CURRENT_IDENTITY_KEY,
     getCurrentIdentity,
     'getCurrentIdentity',
   );
-
-  noAwaitUpdateCachedDidStateOnce(data);
 
   return data;
 }

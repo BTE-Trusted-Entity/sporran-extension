@@ -8,7 +8,6 @@ import {
 } from '../../utilities/credentials/credentials';
 import { exceptionToError } from '../../utilities/exceptionToError/exceptionToError';
 import { useIdentities } from '../../utilities/identities/identities';
-import { sameFullDid } from '../../utilities/did/did';
 
 import { ImportCredentialsForm } from './ImportCredentialsForm';
 import { ImportCredentialsResults } from './ImportCredentialsResults';
@@ -75,8 +74,8 @@ export function ImportCredentials(): JSX.Element | null {
               throw new Error('invalid');
             }
 
-            const knownIdentity = identitiesList.find(({ did }) =>
-              sameFullDid(did, request.claim.owner),
+            const knownIdentity = identitiesList.find(
+              ({ did }) => did === request.claim.owner,
             );
             if (!knownIdentity) {
               throw new Error('orphaned');

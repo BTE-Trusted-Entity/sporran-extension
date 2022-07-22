@@ -7,7 +7,6 @@ import * as styles from './ImportCredentials.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { IdentityLine } from '../../components/IdentityLine/IdentityLine';
-import { Stats } from '../../components/Stats/Stats';
 
 import { FailedImport, Import, SuccessfulImport } from './types';
 
@@ -157,8 +156,6 @@ export function ImportCredentialsResults({
           {t('common_action_close')}
         </button>
       </div>
-
-      <Stats />
     </section>
   );
 }

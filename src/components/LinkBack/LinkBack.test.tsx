@@ -15,10 +15,10 @@ describe('LinkBack', () => {
     const { container } = render(
       <MemoryRouter
         initialEntries={[
-          generatePath(paths.identity.send.start, { address: 'FOO' }),
+          generatePath(paths.identity.remove, { address: 'FOO' }),
         ]}
       >
-        <Route path={paths.identity.send.start}>
+        <Route path={paths.identity.remove}>
           <LinkBack to={paths.identity.overview} />
         </Route>
       </MemoryRouter>,

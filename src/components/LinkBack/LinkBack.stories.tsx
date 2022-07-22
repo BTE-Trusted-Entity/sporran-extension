@@ -22,11 +22,9 @@ export function AsButton(): JSX.Element {
 export function AsLink(): JSX.Element {
   return (
     <MemoryRouter
-      initialEntries={[
-        generatePath(paths.identity.send.start, { address: 'FOO' }),
-      ]}
+      initialEntries={[generatePath(paths.identity.remove, { address: 'FOO' })]}
     >
-      <Route path={paths.identity.send.start}>
+      <Route path={paths.identity.remove}>
         <LinkBack to={paths.identity.overview} />
       </Route>
     </MemoryRouter>

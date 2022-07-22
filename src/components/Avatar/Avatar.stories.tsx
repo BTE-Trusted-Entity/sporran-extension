@@ -19,13 +19,3 @@ export function Template(): JSX.Element {
     />
   );
 }
-
-export function withFullDid(): JSX.Element {
-  return (
-    <Avatar
-      identity={
-        identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
-      }
-    />
-  );
-}

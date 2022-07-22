@@ -19,25 +19,6 @@
   opacity: 1;
 }
 
-.inputKiltAmount {
-  composes: input;
-  text-align: right;
-  background-image: url('../images/kilt-coin.svg'), var(--input-gradient);
-  background-size: calc(13rem / 16) 1rem, auto;
-  background-repeat: no-repeat;
-  background-position: calc(100% - 0.75rem) center, 0;
-  padding-right: 2rem;
-}
-
-.inputKiltAmount[type='number'] {
-  appearance: initial;
-}
-
-.inputKiltAmount[type='number']::-webkit-inner-spin-button,
-.inputKiltAmount[type='number']::-webkit-outer-spin-button {
-  appearance: none;
-}
-
 .inputName {
   composes: input;
   background-image: url('../images/pencil.svg'), var(--input-gradient);

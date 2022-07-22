@@ -7,18 +7,11 @@ import {
   mockRequestCredential,
   mockUnknownCType,
 } from '../../utilities/credentials/CredentialsProvider.mock';
-import { parseDidUri, sameFullDid } from '../../utilities/did/did';
 
 import { paths } from '../paths';
 
 import { ShareCredentialSelect } from './ShareCredentialSelect';
 
-jest.mock('../../utilities/did/did');
-
-jest.mocked(parseDidUri).mockReturnValue({
-  fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-} as unknown as ReturnType<typeof parseDidUri>);
-jest.mocked(sameFullDid).mockReturnValue(true);
 jest.mocked(Attestation.query).mockResolvedValue(null);
 
 describe('ShareCredentialSelect', () => {

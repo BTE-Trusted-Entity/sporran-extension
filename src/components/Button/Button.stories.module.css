@@ -8,11 +8,5 @@
 .wide {
   composes: buttonWide from './Button.module.css';
 
-  --wide-button-icon: url('../../components/images/subscan-logo.svg');
-}
-
-.triangleNew {
-  composes: buttonNew from './Button.module.css';
-
-  --wide-button-icon: url('../../components/images/manage-did.svg');
+  --wide-button-icon: url('../../components/images/import.svg');
 }

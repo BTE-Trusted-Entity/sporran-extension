@@ -1,5 +1,4 @@
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
-import { Fragment } from 'react';
 
 import './App.css';
 import * as styles from './App.module.css';
@@ -19,7 +18,6 @@ import { PopupsRouter } from '../PopupsRouter/PopupsRouter';
 import { AppSettings } from '../AppSettings/AppSettings';
 
 import { paths } from '../paths';
-import { LegacyDids } from '../../components/LegacyDids/LegacyDids';
 
 function confirmNavigation(message: string, callback: (ok: boolean) => void) {
   const allowed = window.confirm(message);
@@ -29,12 +27,7 @@ function confirmNavigation(message: string, callback: (ok: boolean) => void) {
 export function App(): JSX.Element {
   const initialEntries = useInitialEntries();
 
-  const popupPaths = [
-    paths.popup.base,
-    paths.popup.signDid.start,
-    paths.popup.claim,
-    paths.popup.signDidExtrinsic,
-  ];
+  const popupPaths = [paths.popup.base, paths.popup.claim];
 
   return (
     <div className={styles.container}>
@@ -44,13 +37,10 @@ export function App(): JSX.Element {
           getUserConfirmation={confirmNavigation}
         >
           <RouteExcept path={popupPaths}>
-            <Fragment>
-              <nav className={styles.menus}>
-                <AddIdentity />
-                <Settings />
-              </nav>
-              <LegacyDids />
-            </Fragment>
+            <nav className={styles.menus}>
+              <AddIdentity />
+              <Settings />
+            </nav>
           </RouteExcept>
 
           <Switch>

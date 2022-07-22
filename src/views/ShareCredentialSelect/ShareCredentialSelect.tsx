@@ -10,13 +10,11 @@ import { useIdentities } from '../../utilities/identities/identities';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
-import { sameFullDid } from '../../utilities/did/did';
 import { ShareInput } from '../../channels/shareChannel/types';
 
 import { paths } from '../paths';
 
 import { ShareCredentialCard } from '../../components/CredentialCard/ShareCredentialCard';
-import { Stats } from '../../components/Stats/Stats';
 import { IdentityLine } from '../../components/IdentityLine/IdentityLine';
 import { Selected } from '../ShareCredential/ShareCredential';
 
@@ -45,7 +43,7 @@ function MatchingIdentityCredentials({
   const matchingCredentials = credentials?.filter(
     (credential) =>
       cTypeHashes.includes(credential.request.claim.cTypeHash) &&
-      sameFullDid(credential.request.claim.owner, identity.did),
+      credential.request.claim.owner === identity.did,
   );
 
   useEffect(() => {
@@ -165,8 +163,6 @@ export function ShareCredentialSelect({
           {t('view_ShareCredentialSelect_next')}
         </Link>
       </p>
-
-      <Stats />
     </section>
   );
 }

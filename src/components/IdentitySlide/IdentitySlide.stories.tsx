@@ -30,11 +30,3 @@ export function LongName(): JSX.Element {
 export function New(): JSX.Element {
   return <IdentitySlideNew />;
 }
-
-export function withFullDid(): JSX.Element {
-  return (
-    <IdentitySlide
-      identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}
-    />
-  );
-}

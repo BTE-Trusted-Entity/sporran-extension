@@ -7,7 +7,6 @@ import {
   Fragment,
 } from 'react';
 import { createPortal } from 'react-dom';
-import { Link, useParams } from 'react-router-dom';
 import { Modal } from 'react-dialog-polyfill';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -25,12 +24,6 @@ import {
   useShowDownloadInfo,
 } from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
-import {
-  setShowPresentationInfo,
-  useShowPresentationInfo,
-} from '../../utilities/showPresentationInfoStorage/showPresentationInfoStorage';
-import { isFullDid } from '../../utilities/did/did';
-import { generatePath, paths } from '../../views/paths';
 
 export function useScrollIntoView(
   expanded: boolean,
@@ -269,105 +262,6 @@ function DownloadModal({
   );
 }
 
-function PresentationModal({
-  credential,
-  portalRef,
-}: {
-  credential: Credential;
-  portalRef: RefObject<HTMLElement>;
-}) {
-  const t = browser.i18n.getMessage;
-  const visibility = useBooleanState();
-
-  const [checked, setChecked] = useState(false);
-
-  const handleToggle = useCallback((event) => {
-    setChecked(event.target.checked);
-  }, []);
-
-  const handleConfirm = useCallback(async () => {
-    await setShowPresentationInfo(!checked);
-    visibility.off();
-  }, [checked, visibility]);
-
-  const showInfo = useShowPresentationInfo();
-
-  const isAttested = credential.status === 'attested';
-  const { address } = useParams() as { address: string };
-  if (!address || !isAttested) {
-    return null; // only allow creating presentation when the identity is known and the credential is attested
-  }
-
-  const hash = credential.request.rootHash;
-  const url = generatePath(paths.identity.credentials.presentation, {
-    address,
-    hash,
-  });
-
-  return (
-    <Fragment>
-      {showInfo ? (
-        <button
-          className={styles.presentation}
-          aria-label={t('component_CredentialCard_presentation')}
-          onClick={visibility.on}
-        />
-      ) : (
-        <Link
-          to={url}
-          aria-label={t('component_CredentialCard_presentation')}
-          className={styles.presentation}
-        />
-      )}
-
-      {visibility.current &&
-        portalRef.current &&
-        createPortal(
-          <Modal open className={styles.overlay}>
-            <h2 className={styles.downloadInfo}>
-              {t('component_CredentialCard_presentation_info')}
-            </h2>
-            <Link
-              to={url}
-              className={styles.confirmDownload}
-              onClick={handleConfirm}
-            >
-              {t('component_CredentialCard_presentation_confirm')}
-            </Link>
-            <p className={styles.buttonsLine}>
-              <a
-                href="https://support.kilt.io/support/solutions/articles/80000987961"
-                target="_blank"
-                rel="noreferrer"
-                className={styles.learnMore}
-              >
-                {t('component_CredentialCard_more')}
-              </a>
-              <button
-                type="button"
-                className={styles.cancelDownload}
-                onClick={visibility.off}
-              >
-                {t('common_action_close')}
-              </button>
-            </p>
-            <label className={styles.toggleLabel}>
-              {t('component_CredentialCard_presentation_toggle')}
-              <input
-                className={styles.toggle}
-                type="checkbox"
-                defaultChecked={false}
-                onClick={handleToggle}
-              />
-              <span />
-            </label>
-          </Modal>,
-          portalRef.current,
-        )}
-    </Fragment>
-  );
-}
-
 interface Props {
   credential: Credential;
   expand?: boolean;
@@ -442,13 +336,6 @@ export function CredentialCard({
             {buttons && (
               <Fragment>
                 <DownloadModal credential={credential} portalRef={portalRef} />
-
-                {isFullDid(request.claim.owner) && (
-                  <PresentationModal
-                    credential={credential}
-                    portalRef={portalRef}
-                  />
-                )}
 
                 <DeleteModal credential={credential} portalRef={portalRef} />
               </Fragment>

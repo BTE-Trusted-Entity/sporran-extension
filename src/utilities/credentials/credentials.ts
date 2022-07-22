@@ -1,11 +1,10 @@
 import { useContext, useEffect, useMemo } from 'react';
-import { cloneDeep, pick, pull, without } from 'lodash-es';
+import { pick, pull } from 'lodash-es';
 import { IRequestForAttestation, DidUri } from '@kiltprotocol/types';
-import { Attestation, RequestForAttestation } from '@kiltprotocol/core';
+import { Attestation } from '@kiltprotocol/core';
 import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
-import { parseDidUri, sameFullDid } from '../did/did';
 import { jsonToBase64 } from '../base64/base64';
 
 import { CredentialsContext } from './CredentialsContext';
@@ -83,14 +82,7 @@ export function useIdentityCredentials(did: DidUri): Credential[] | undefined {
       // storage data pending
       return undefined;
     }
-    if (!did) {
-      // could be a legacy identity without DID
-      return [];
-    }
-    const { fullDid } = parseDidUri(did);
-    return all.filter((credential) =>
-      sameFullDid(credential.request.claim.owner, fullDid),
-    );
+    return all.filter((credential) => credential.request.claim.owner === did);
   }, [all, did]);
 }
 
@@ -124,31 +116,4 @@ export function getCredentialDownload(
   const url = `data:text/json;base64,${blob}`;
 
   return { name, url };
-}
-
-export function getUnsignedPresentationDownload(
-  credential: Credential,
-  properties: string[],
-): CredentialDownload {
-  const name = `${credential.name}-${credential.cTypeTitle}-presentation.json`;
-
-  const { request } = credential;
-  const allProperties = Object.keys(request.claim.contents);
-  const needRemoving = without(allProperties, ...properties);
-
-  const requestInstance = RequestForAttestation.fromRequest(cloneDeep(request));
-  requestInstance.removeClaimProperties(needRemoving);
-
-  const blob = jsonToBase64(requestInstance);
-  const url = `data:text/json;base64,${blob}`;
-
-  return { name, url };
-}
-
-export async function invalidateCredentials(
-  credentials: Credential[],
-): Promise<void> {
-  for (const credential of credentials) {
-    await saveCredential({ ...credential, status: 'invalid' });
-  }
 }

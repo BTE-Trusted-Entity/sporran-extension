@@ -9,13 +9,3 @@ exports[`Avatar should render 1`] = `
   </div>
 </div>
 `;
-
-exports[`Avatar should render full DID avatar style 1`] = `
-<div>
-  <div
-    class="avatar fullDid"
-  >
-    Identicon
-  </div>
-</div>
-`;

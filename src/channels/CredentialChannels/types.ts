@@ -1,6 +1,6 @@
 import { IEncryptedMessage } from '@kiltprotocol/types';
 
-import { DAppName } from '../../dApps/AccessChannels/DAppName';
+import { DAppName } from '../../channels/AccessChannels/DAppName';
 
 export type CredentialInput = DAppName & {
   message: IEncryptedMessage;
