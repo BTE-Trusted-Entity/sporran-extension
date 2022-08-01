@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from 'react';
+import { FormEvent, Fragment, useCallback } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -74,7 +74,7 @@ export function W3NRemove({ identity }: Props): JSX.Element | null {
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
       if (!fullDidDetails) {
         return;

@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { FormEvent, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './IdentitySlide.module.css';
@@ -23,10 +23,14 @@ export function IdentitySlide({
   const editing = useBooleanState();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
-      const name = event.target.elements.name.value;
+      const target = event.target as unknown as {
+        elements: Record<string, HTMLInputElement>;
+      };
+
+      const name = target.elements.name.value;
       await saveIdentity({
         ...identity,
         name,

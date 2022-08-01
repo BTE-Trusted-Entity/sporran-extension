@@ -1,5 +1,13 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useCallback, useState, useEffect, useRef, RefObject } from 'react';
+import {
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+  RefObject,
+  ChangeEvent,
+  Fragment,
+} from 'react';
 import { includes, without, find } from 'lodash-es';
 import cx from 'classnames';
 
@@ -77,7 +85,7 @@ export function ShareCredentialCard({
   }, [credential, onSelect, checked, identity]);
 
   const handlePropChecked = useCallback(
-    (event) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       const name = event.target.name;
       if (event.target.checked && !includes(checked, name)) {
         setChecked([...checked, name]);
@@ -168,17 +176,19 @@ export function ShareCredentialCard({
                   </dt>
                   <dd className={styles.detailValue}>
                     <label className={styles.shareLabel}>
-                      <input
-                        type="checkbox"
-                        name={name}
-                        className={styles.share}
-                        checked={includes(checked, name)}
-                        onChange={handlePropChecked}
-                        disabled={!isAttested}
-                        readOnly={includes(requiredProperties, name)}
-                      />
-                      <span />
-                      {value}
+                      <Fragment>
+                        <input
+                          type="checkbox"
+                          name={name}
+                          className={styles.share}
+                          checked={includes(checked, name)}
+                          onChange={handlePropChecked}
+                          disabled={!isAttested}
+                          readOnly={includes(requiredProperties, name)}
+                        />
+                        <span />
+                        {value}
+                      </Fragment>
                     </label>
                   </dd>
                 </div>

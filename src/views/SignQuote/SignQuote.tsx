@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from 'react';
+import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { filter, find } from 'lodash-es';
 import {
@@ -81,7 +81,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
   const credentials = useIdentityCredentials(identity.did);
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       if (!credentials || !cType) {

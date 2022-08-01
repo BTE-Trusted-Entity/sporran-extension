@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import { browser } from 'webextension-polyfill-ts';
@@ -20,7 +20,7 @@ export function ExternalAccess(): JSX.Element | null {
   const hosts = useSWR(authorizedKey, getAuthorized).data;
 
   const handleChange = useCallback(
-    async (event) => {
+    async (event: ChangeEvent<HTMLInputElement>) => {
       if (!hosts) {
         return;
       }
@@ -57,7 +57,7 @@ export function ExternalAccess(): JSX.Element | null {
                 className={styles.toggle}
                 type="checkbox"
                 defaultChecked={checked}
-                onClick={handleChange}
+                onChange={handleChange}
               />
               <span />
               <span className={styles.allowed} aria-hidden>

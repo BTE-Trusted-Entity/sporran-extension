@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -28,12 +28,13 @@ export function AppSettings(): JSX.Element {
     })();
   }, []);
 
-  const handleEndpointInput = useCallback(async (event) => {
-    setEndpointValue(event.target.value);
+  const handleEndpointInput = useCallback(async (event: FormEvent) => {
+    const target = event.target as HTMLInputElement | HTMLSelectElement;
+    setEndpointValue(target.value);
   }, []);
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
       await setEndpoint(endpointValue);
     },

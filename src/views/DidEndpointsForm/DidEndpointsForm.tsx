@@ -1,4 +1,5 @@
 import {
+  FormEvent,
   RefObject,
   useCallback,
   useEffect,
@@ -157,7 +158,7 @@ function DidNewEndpoint({
   const [endpointTypeError, setEndpointTypeError] = useState('');
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       setEndpointIdError('');

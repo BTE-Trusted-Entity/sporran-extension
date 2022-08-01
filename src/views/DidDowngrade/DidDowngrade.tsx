@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useMemo, useState } from 'react';
+import { FormEvent, Fragment, useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
@@ -92,7 +92,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       try {
