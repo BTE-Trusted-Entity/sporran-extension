@@ -19,7 +19,7 @@ export function ResetIdentity({
   const history = useHistory();
 
   const onImport = useCallback(
-    (phrase) => {
+    (phrase: string) => {
       setBackupPhrase(phrase);
       history.push(generatePath(paths.identity.reset.password, { address }));
     },

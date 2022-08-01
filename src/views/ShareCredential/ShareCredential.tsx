@@ -28,7 +28,7 @@ export function ShareCredential(): JSX.Element | null {
 
   const [selected, setSelected] = useState<Selected>();
 
-  const handleSelect = useCallback((value) => setSelected(value), []);
+  const handleSelect = useCallback((value: Selected) => setSelected(value), []);
 
   return (
     <Switch>

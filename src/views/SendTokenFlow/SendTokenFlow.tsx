@@ -23,7 +23,13 @@ export function SendTokenFlow({ identity }: Props): JSX.Element {
   const { address } = identity;
 
   const handleSendTokenSuccess = useCallback(
-    (values) => {
+    (values: {
+      recipient: string;
+      amount: BN;
+      fee: BN;
+      tip: BN;
+      existentialWarning: boolean;
+    }) => {
       setRecipient(values.recipient);
       setAmount(values.amount);
       setFee(values.fee);

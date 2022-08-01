@@ -1,12 +1,11 @@
 import { browser } from 'webextension-polyfill-ts';
-import {
+import React, {
   useCallback,
   useState,
   useEffect,
   useRef,
   RefObject,
   ChangeEvent,
-  Fragment,
 } from 'react';
 import { includes, without, find } from 'lodash-es';
 import cx from 'classnames';
@@ -176,19 +175,20 @@ export function ShareCredentialCard({
                   </dt>
                   <dd className={styles.detailValue}>
                     <label className={styles.shareLabel}>
-                      <Fragment>
-                        <input
-                          type="checkbox"
-                          name={name}
-                          className={styles.share}
-                          checked={includes(checked, name)}
-                          onChange={handlePropChecked}
-                          disabled={!isAttested}
-                          readOnly={includes(requiredProperties, name)}
-                        />
-                        <span />
-                        {value}
-                      </Fragment>
+                      <input
+                        type="checkbox"
+                        name={name}
+                        className={styles.share}
+                        checked={includes(checked, name)}
+                        onChange={handlePropChecked}
+                        disabled={!isAttested}
+                        readOnly={includes(requiredProperties, name)}
+                      />
+                      <span />
+                      {/* TODO: How to display object values? */}
+                      {typeof value === 'object'
+                        ? JSON.stringify(value)
+                        : value}
                     </label>
                   </dd>
                 </div>

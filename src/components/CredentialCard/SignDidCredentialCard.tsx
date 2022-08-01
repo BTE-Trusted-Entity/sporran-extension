@@ -175,7 +175,10 @@ export function SignDidCredentialCard({
                         disabled={!isAttested}
                       />
                       <span />
-                      {value}
+                      {/* TODO: How to display object values? */}
+                      {typeof value === 'object'
+                        ? JSON.stringify(value)
+                        : value}
                     </label>
                   </dd>
                 </div>
