@@ -65,6 +65,7 @@ export function SignDidCredentialCard({
 
       if (event.target.checked) {
         isSelected.on();
+        isExpanded.on();
         onSelect({ credential, sharedContents: contentsChecked });
       } else {
         isSelected.off();
