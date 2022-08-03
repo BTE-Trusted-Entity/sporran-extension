@@ -299,16 +299,19 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     })();
   }, [amountBN, identity, recipient, tipBN]);
 
-  const handleAmountInput = useCallback((event: FormEvent) => {
-    const { value } = event.target as HTMLInputElement;
-    if (value.match(nonNumberCharacters)) {
-      (event.target as HTMLInputElement).value = value.replace(
-        nonNumberCharacters,
-        '',
-      );
-    }
-    setAmount(value);
-  }, []);
+  const handleAmountInput = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      if (value.match(nonNumberCharacters)) {
+        (event.target as HTMLInputElement).value = value.replace(
+          nonNumberCharacters,
+          '',
+        );
+      }
+      setAmount(value);
+    },
+    [],
+  );
 
   const handleAmountBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>) => {
@@ -330,7 +333,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   );
 
   const handleAllInClick = useCallback(
-    (event: MouseEvent) => {
+    (event: MouseEvent<HTMLButtonElement>) => {
       if (!maximum) {
         return;
       }

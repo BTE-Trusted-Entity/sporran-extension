@@ -26,9 +26,12 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const [enabled, setEnabled] = useState(false);
-  const handleTermsClick = useCallback((event: ChangeEvent) => {
-    setEnabled((event.target as HTMLInputElement).checked);
-  }, []);
+  const handleTermsClick = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setEnabled(event.target.checked);
+    },
+    [],
+  );
 
   const handleLinkClick = useCallback(
     (event: MouseEvent) => {
