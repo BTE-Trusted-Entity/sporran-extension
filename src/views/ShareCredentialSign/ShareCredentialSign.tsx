@@ -135,13 +135,7 @@ export function ShareCredentialSign({
             <div key={sharedProp} className={styles.detail}>
               <dt className={styles.detailName}>{sharedProp}</dt>
               <dd className={styles.detailValue}>
-                {typeof credential.request.claim.contents[sharedProp] ===
-                'object'
-                  ? String(credential.request.claim.contents[sharedProp])
-                  : (credential.request.claim.contents[sharedProp] as
-                      | string
-                      | number
-                      | boolean)}
+                {String(credential.request.claim.contents[sharedProp])}
               </dd>
             </div>
           ))}

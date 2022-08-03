@@ -430,9 +430,7 @@ export function CredentialCard({
         >
           <section className={styles.collapsedCredential}>
             <h4 className={styles.collapsedName}>{name}</h4>
-            <p className={styles.collapsedValue}>
-              {typeof label === 'object' ? String(label) : label}
-            </p>
+            <p className={styles.collapsedValue}>{String(label)}</p>
           </section>
         </button>
       )}
