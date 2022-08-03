@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
@@ -58,7 +58,7 @@ export function DidRepair({ identity }: Props): JSX.Element | null {
   const passwordField = usePasswordField();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       try {

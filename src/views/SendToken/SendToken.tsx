@@ -1,4 +1,14 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  FocusEvent,
+  FormEvent,
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { find } from 'lodash-es';
@@ -289,37 +299,49 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     })();
   }, [amountBN, identity, recipient, tipBN]);
 
-  const handleAmountInput = useCallback((event) => {
-    const { value } = event.target;
-    if (value.match(nonNumberCharacters)) {
-      event.target.value = value.replace(nonNumberCharacters, '');
-    }
-    setAmount(value);
-  }, []);
-
-  const handleAmountBlur = useCallback((event) => {
-    const { value } = event.target;
-    if (value.length === 0) {
+  const handleAmountInput = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      if (value.match(nonNumberCharacters)) {
+        event.target.value = value.replace(nonNumberCharacters, '');
+      }
       setAmount(value);
-      return;
-    }
-    const parsedValue = parseFloatLocale(value);
-    if (Number.isNaN(parsedValue)) {
-      return;
-    }
-    const femtoKilts = numberToBN(parsedValue);
-    const formatted = formatKiltInput(femtoKilts);
-    event.target.value = formatted;
-    setAmount(formatted);
-  }, []);
+    },
+    [],
+  );
+
+  const handleAmountBlur = useCallback(
+    (event: FocusEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      if (value.length === 0) {
+        setAmount(value);
+        return;
+      }
+      const parsedValue = parseFloatLocale(value);
+      if (Number.isNaN(parsedValue)) {
+        return;
+      }
+      const femtoKilts = numberToBN(parsedValue);
+      const formatted = formatKiltInput(femtoKilts);
+      event.target.value = formatted;
+      setAmount(formatted);
+    },
+    [],
+  );
 
   const handleAllInClick = useCallback(
-    (event) => {
+    (event: MouseEvent<HTMLButtonElement>) => {
       if (!maximum) {
         return;
       }
 
-      const input = event.target.form.amount;
+      const form = event.currentTarget.form;
+
+      if (!form) {
+        throw new Error('All in button must be in a form');
+      }
+
+      const input = form.amount;
       input.value = formatKiltInput(maximum);
       setAmount(input.value);
     },
@@ -334,10 +356,13 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     setTipPercents(tipPercents + 1);
   }, [tipPercents]);
 
-  const handleRecipientInput = useCallback((event) => {
-    const { value } = event.target;
-    setRecipient(value.trim());
-  }, []);
+  const handleRecipientInput = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      setRecipient(value.trim());
+    },
+    [],
+  );
 
   const identities = useIdentities();
   const { features } = useConfiguration();
@@ -346,7 +371,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const paste = usePasteButton(recipientRef, setRecipient);
 
   const handleSubmit = useCallback(
-    (event) => {
+    (event: FormEvent) => {
       event.preventDefault();
 
       if (!(recipient && fee && finalTip && numericAmount)) {

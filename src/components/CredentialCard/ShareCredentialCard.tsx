@@ -1,5 +1,12 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useCallback, useState, useEffect, useRef, RefObject } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+  RefObject,
+  ChangeEvent,
+} from 'react';
 import { includes, without, find } from 'lodash-es';
 import cx from 'classnames';
 
@@ -77,7 +84,7 @@ export function ShareCredentialCard({
   }, [credential, onSelect, checked, identity]);
 
   const handlePropChecked = useCallback(
-    (event) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       const name = event.target.name;
       if (event.target.checked && !includes(checked, name)) {
         setChecked([...checked, name]);
@@ -178,7 +185,7 @@ export function ShareCredentialCard({
                         readOnly={includes(requiredProperties, name)}
                       />
                       <span />
-                      {value}
+                      {String(value)}
                     </label>
                   </dd>
                 </div>

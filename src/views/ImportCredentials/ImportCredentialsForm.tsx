@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { ChangeEvent, DragEvent, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './ImportCredentials.module.css';
@@ -13,8 +13,8 @@ export function ImportCredentialsForm({ handleFiles }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
   const handleChange = useCallback(
-    (event) => {
-      const input = event.target as HTMLInputElement;
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const input = event.target;
       if (input.files) {
         handleFiles(input.files);
       }
@@ -23,7 +23,7 @@ export function ImportCredentialsForm({ handleFiles }: Props): JSX.Element {
   );
 
   const handleDrop = useCallback(
-    (event) => {
+    (event: DragEvent) => {
       event.preventDefault();
       event.stopPropagation();
 
@@ -32,7 +32,7 @@ export function ImportCredentialsForm({ handleFiles }: Props): JSX.Element {
     [handleFiles],
   );
 
-  const handleDrag = useCallback((event) => {
+  const handleDrag = useCallback((event: DragEvent) => {
     event.preventDefault();
     event.stopPropagation();
   }, []);

@@ -1,4 +1,10 @@
-import { Fragment, useCallback, useState } from 'react';
+import {
+  ChangeEvent,
+  Fragment,
+  MouseEvent,
+  useCallback,
+  useState,
+} from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -20,12 +26,15 @@ export function Welcome({ again = false }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const [enabled, setEnabled] = useState(false);
-  const handleTermsClick = useCallback((event) => {
-    setEnabled(event.target.checked);
-  }, []);
+  const handleTermsClick = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setEnabled(event.target.checked);
+    },
+    [],
+  );
 
   const handleLinkClick = useCallback(
-    (event) => {
+    (event: MouseEvent) => {
       if (!enabled) {
         event.preventDefault();
       }

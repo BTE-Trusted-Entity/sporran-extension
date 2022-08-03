@@ -1,4 +1,5 @@
 import {
+  FormEvent,
   RefObject,
   useCallback,
   useEffect,
@@ -157,7 +158,7 @@ function DidNewEndpoint({
   const [endpointTypeError, setEndpointTypeError] = useState('');
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       setEndpointIdError('');
@@ -168,7 +169,7 @@ function DidNewEndpoint({
         return;
       }
 
-      const formData = new FormData(event.target as HTMLFormElement);
+      const formData = new FormData(event.currentTarget);
       const id = (formData.get('id') as string).trim();
       const url = (formData.get('url') as string).trim();
       const type = (formData.get('type') as string).trim();

@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useCallback, useState, useRef, RefObject } from 'react';
+import { useCallback, useState, useRef, RefObject, ChangeEvent } from 'react';
 import { includes, without } from 'lodash-es';
 import cx from 'classnames';
 
@@ -39,7 +39,7 @@ export function SignDidCredentialCard({
   const [contentsChecked, setContentsChecked] = useState<string[]>([]);
 
   const handleChecked = useCallback(
-    (event) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       const name = event.target.name;
       const checked = event.target.checked;
 
@@ -58,7 +58,7 @@ export function SignDidCredentialCard({
   );
 
   const handleSelect = useCallback(
-    (event) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       if (!isAttested) {
         return;
       }
@@ -176,7 +176,7 @@ export function SignDidCredentialCard({
                         disabled={!isAttested}
                       />
                       <span />
-                      {value}
+                      {String(value)}
                     </label>
                   </dd>
                 </div>

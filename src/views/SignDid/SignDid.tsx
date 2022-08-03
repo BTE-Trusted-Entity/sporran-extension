@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { FormEvent, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import { RequestForAttestation } from '@kiltprotocol/core';
@@ -44,7 +44,7 @@ export function SignDid({
   const passwordField = usePasswordField();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       const { seed } = await passwordField.get(event);

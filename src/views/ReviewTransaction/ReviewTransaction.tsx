@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
@@ -54,7 +54,7 @@ export function ReviewTransaction({
   const [txHash, setTxHash] = useState<string>();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       try {

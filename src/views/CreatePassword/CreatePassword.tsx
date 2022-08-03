@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
@@ -70,7 +70,7 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
   const modified = password !== '';
   const { passwordType, passwordToggle } = usePasswordType();
 
-  const handleInput = useCallback((event) => {
+  const handleInput = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   }, []);
 
@@ -85,7 +85,7 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
     ].filter(Boolean)[0];
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       if (modified && !error) {

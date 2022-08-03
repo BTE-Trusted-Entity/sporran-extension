@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from 'react';
+import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './SignDApp.module.css';
@@ -28,7 +28,7 @@ export function SignDApp(): JSX.Element | null {
   const identity = identities && identities[input.address as string];
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       if (!identity) {

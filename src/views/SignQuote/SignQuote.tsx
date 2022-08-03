@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from 'react';
+import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { filter, find } from 'lodash-es';
 import {
@@ -81,7 +81,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
   const credentials = useIdentityCredentials(identity.did);
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       if (!credentials || !cType) {
@@ -176,7 +176,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         {Object.entries(claim.contents).map(([name, value]) => (
           <Fragment key={name}>
             <dt className={styles.detailName}>{name}:</dt>
-            <dd className={styles.detailValue}>{value}</dd>
+            <dd className={styles.detailValue}>{String(value)}</dd>
           </Fragment>
         ))}
         <dt className={styles.detailName}>{t('view_SignQuote_cType')}:</dt>

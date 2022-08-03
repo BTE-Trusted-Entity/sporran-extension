@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { FormEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { DidServiceEndpoint, DidUri } from '@kiltprotocol/types';
@@ -89,7 +89,7 @@ export function DidEndpointsSign({
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       const { keypair, seed } = await passwordField.get(event);

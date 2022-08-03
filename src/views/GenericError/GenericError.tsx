@@ -45,7 +45,7 @@ export class GenericError extends Component<Props, State> {
             aria-label={t('view_GenericError_details')}
             defaultValue={this.state.errorText}
             onFocus={(event) => {
-              (event.target as HTMLTextAreaElement).select();
+              event.target.select();
             }}
           />
 

@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from 'react';
+import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { BaseDidKey, DidServiceEndpoint } from '@kiltprotocol/types';
 import { GenericExtrinsic } from '@polkadot/types';
@@ -213,7 +213,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
   const passwordField = usePasswordField();
 
   const handleSubmit = useCallback(
-    async (event) => {
+    async (event: FormEvent) => {
       event.preventDefault();
 
       if (!extrinsic) {

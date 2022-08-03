@@ -88,7 +88,11 @@ export function useSubmitStates(): SubmitStates {
   const unpaidCosts = unpaidCostsBN && asKiltCoins(unpaidCostsBN, 'costs');
 
   const submitWithStates = useCallback(
-    async (keypair, draft, tip = new BN(0)) => {
+    async (
+      keypair: KeyringPair,
+      draft: SubmittableExtrinsic,
+      tip = new BN(0),
+    ) => {
       try {
         setSubmitting(true);
         setStatus('pending');

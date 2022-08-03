@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, MouseEvent, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import cx from 'classnames';
 import { browser } from 'webextension-polyfill-ts';
@@ -31,16 +31,16 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const error = !wordsAreInOrder && t('view_VerifyBackupPhrase_error');
 
   const selectWord = useCallback(
-    (event) => {
-      const selectedIndex = parseInt(event.target.value, 10);
+    (event: MouseEvent<HTMLButtonElement>) => {
+      const selectedIndex = parseInt(event.currentTarget.value, 10);
       setSelectedIndexes([...selectedIndexes, selectedIndex]);
     },
     [selectedIndexes],
   );
 
   const unselectWord = useCallback(
-    (event) => {
-      const unselectedIndex = parseInt(event.target.value, 10);
+    (event: MouseEvent<HTMLButtonElement>) => {
+      const unselectedIndex = parseInt(event.currentTarget.value, 10);
       setSelectedIndexes(
         selectedIndexes.filter((index) => index !== unselectedIndex),
       );
@@ -49,7 +49,7 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   );
 
   const handleSubmit = useCallback(
-    (event) => {
+    (event: FormEvent) => {
       event.preventDefault();
       history.push(paths.identity.create.password);
     },

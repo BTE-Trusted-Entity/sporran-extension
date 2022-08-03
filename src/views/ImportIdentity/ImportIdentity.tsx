@@ -11,7 +11,7 @@ export function ImportIdentity(): JSX.Element {
   const history = useHistory();
 
   const onImport = useCallback(
-    (phrase) => {
+    (phrase: string) => {
       setBackupPhrase(phrase);
       history.push(paths.identity.import.password);
     },
