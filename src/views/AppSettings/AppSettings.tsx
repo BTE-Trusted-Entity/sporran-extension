@@ -28,10 +28,14 @@ export function AppSettings(): JSX.Element {
     })();
   }, []);
 
-  const handleEndpointInput = useCallback(async (event: FormEvent) => {
-    const target = event.target as HTMLInputElement | HTMLSelectElement;
-    setEndpointValue(target.value);
-  }, []);
+  const handleEndpointInput = useCallback(
+    async (
+      event: FormEvent<HTMLInputElement> | FormEvent<HTMLSelectElement>,
+    ) => {
+      setEndpointValue(event.currentTarget.value);
+    },
+    [],
+  );
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {

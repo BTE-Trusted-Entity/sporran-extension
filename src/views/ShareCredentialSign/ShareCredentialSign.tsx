@@ -135,12 +135,9 @@ export function ShareCredentialSign({
             <div key={sharedProp} className={styles.detail}>
               <dt className={styles.detailName}>{sharedProp}</dt>
               <dd className={styles.detailValue}>
-                {/* TODO: How to display object values? */}
                 {typeof credential.request.claim.contents[sharedProp] ===
                 'object'
-                  ? JSON.stringify(
-                      credential.request.claim.contents[sharedProp],
-                    )
+                  ? String(credential.request.claim.contents[sharedProp])
                   : (credential.request.claim.contents[sharedProp] as
                       | string
                       | number

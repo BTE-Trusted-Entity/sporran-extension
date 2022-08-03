@@ -14,7 +14,7 @@ export function ImportCredentialsForm({ handleFiles }: Props): JSX.Element {
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const input = event.target as HTMLInputElement;
+      const input = event.target;
       if (input.files) {
         handleFiles(input.files);
       }

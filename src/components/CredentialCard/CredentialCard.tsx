@@ -431,8 +431,7 @@ export function CredentialCard({
           <section className={styles.collapsedCredential}>
             <h4 className={styles.collapsedName}>{name}</h4>
             <p className={styles.collapsedValue}>
-              {/* TODO: How to display object values? */}
-              {typeof label === 'object' ? JSON.stringify(label) : label}
+              {typeof label === 'object' ? String(label) : label}
             </p>
           </section>
         </button>
@@ -478,8 +477,7 @@ export function CredentialCard({
               <div key={name} className={styles.detail}>
                 <dt className={styles.detailName}>{name}</dt>
                 <dd className={styles.detailValue}>
-                  {/* TODO: How to display object values? */}
-                  {typeof value === 'object' ? JSON.stringify(value) : value}
+                  {typeof value === 'object' ? String(value) : value}
                 </dd>
               </div>
             ))}

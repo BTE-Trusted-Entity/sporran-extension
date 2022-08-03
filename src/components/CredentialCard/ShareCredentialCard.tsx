@@ -185,10 +185,7 @@ export function ShareCredentialCard({
                         readOnly={includes(requiredProperties, name)}
                       />
                       <span />
-                      {/* TODO: How to display object values? */}
-                      {typeof value === 'object'
-                        ? JSON.stringify(value)
-                        : value}
+                      {typeof value === 'object' ? String(value) : value}
                     </label>
                   </dd>
                 </div>

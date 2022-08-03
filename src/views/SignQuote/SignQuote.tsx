@@ -177,8 +177,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
           <Fragment key={name}>
             <dt className={styles.detailName}>{name}:</dt>
             <dd className={styles.detailValue}>
-              {/* TODO: How to display object values? */}
-              {typeof value === 'object' ? JSON.stringify(value) : value}
+              {typeof value === 'object' ? String(value) : value}
             </dd>
           </Fragment>
         ))}

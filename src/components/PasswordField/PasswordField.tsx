@@ -1,4 +1,5 @@
 import {
+  ChangeEvent,
   Dispatch,
   FormEvent,
   Fragment,
@@ -135,9 +136,9 @@ export function PasswordField({
   );
 
   const handlePasswordInput = useCallback(
-    (event: FormEvent) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       setError(null);
-      setIsEmpty((event.target as HTMLInputElement).value === '');
+      setIsEmpty(event.target.value === '');
       setPasswordGetter(() => passwordGetter);
     },
     [passwordGetter, setPasswordGetter, setIsEmpty],

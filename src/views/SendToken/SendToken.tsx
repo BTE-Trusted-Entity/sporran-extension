@@ -303,10 +303,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       if (value.match(nonNumberCharacters)) {
-        (event.target as HTMLInputElement).value = value.replace(
-          nonNumberCharacters,
-          '',
-        );
+        event.target.value = value.replace(nonNumberCharacters, '');
       }
       setAmount(value);
     },
@@ -338,11 +335,13 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
         return;
       }
 
-      const target = event.target as unknown as {
-        form: HTMLFormElement;
-      };
+      const form = event.currentTarget.form;
 
-      const input = target.form.amount;
+      if (!form) {
+        throw new Error('All in button must be in a form');
+      }
+
+      const input = form.amount;
       input.value = formatKiltInput(maximum);
       setAmount(input.value);
     },

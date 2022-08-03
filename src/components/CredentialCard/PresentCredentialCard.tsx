@@ -71,8 +71,7 @@ export function PresentCredentialCard({
                       disabled={!isAttested}
                     />
                     <span />
-                    {/* TODO: How to display object values? */}
-                    {typeof value === 'object' ? JSON.stringify(value) : value}
+                    {typeof value === 'object' ? String(value) : value}
                   </label>
                 </dd>
               </div>

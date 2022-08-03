@@ -31,22 +31,16 @@ export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
   const error = !wordsAreInOrder && t('view_VerifyBackupPhrase_error');
 
   const selectWord = useCallback(
-    (event: MouseEvent) => {
-      const selectedIndex = parseInt(
-        (event.target as HTMLButtonElement).value,
-        10,
-      );
+    (event: MouseEvent<HTMLButtonElement>) => {
+      const selectedIndex = parseInt(event.currentTarget.value, 10);
       setSelectedIndexes([...selectedIndexes, selectedIndex]);
     },
     [selectedIndexes],
   );
 
   const unselectWord = useCallback(
-    (event: MouseEvent) => {
-      const unselectedIndex = parseInt(
-        (event.target as HTMLButtonElement).value,
-        10,
-      );
+    (event: MouseEvent<HTMLButtonElement>) => {
+      const unselectedIndex = parseInt(event.currentTarget.value, 10);
       setSelectedIndexes(
         selectedIndexes.filter((index) => index !== unselectedIndex),
       );
