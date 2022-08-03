@@ -185,7 +185,7 @@ export function ShareCredentialCard({
                         readOnly={includes(requiredProperties, name)}
                       />
                       <span />
-                      {typeof value === 'object' ? String(value) : value}
+                      {String(value)}
                     </label>
                   </dd>
                 </div>

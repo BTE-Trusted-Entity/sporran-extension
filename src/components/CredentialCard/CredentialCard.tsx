@@ -476,9 +476,7 @@ export function CredentialCard({
             {contents.map(([name, value]) => (
               <div key={name} className={styles.detail}>
                 <dt className={styles.detailName}>{name}</dt>
-                <dd className={styles.detailValue}>
-                  {typeof value === 'object' ? String(value) : value}
-                </dd>
+                <dd className={styles.detailValue}>{String(value)}</dd>
               </div>
             ))}
           </dl>

@@ -175,7 +175,7 @@ export function SignDidCredentialCard({
                         disabled={!isAttested}
                       />
                       <span />
-                      {typeof value === 'object' ? String(value) : value}
+                      {String(value)}
                     </label>
                   </dd>
                 </div>
