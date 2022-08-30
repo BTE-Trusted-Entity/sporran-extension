@@ -25,6 +25,12 @@ jobs:
       - name: Build code
         run: yarn build
 
+      - name: Save stats TODO remove me
+        uses: actions/upload-artifact@v3
+        with:
+          name: stats
+          path: dist/stats.json
+
       - name: Package extension
         run: yarn package
 
