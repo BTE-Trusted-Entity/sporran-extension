@@ -136,5 +136,23 @@
     "webpack-cli": "^4.10.0",
     "webpack-extension-reloader": "^1.1.4",
     "webpack-merge": "^5.8.0"
+  },
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "dist/*.*",
+        "maxSize": "2MB"
+      },
+      {
+        "path": "dist/**/*.*",
+        "maxSize": "2MB"
+      }
+    ],
+    "ci": {
+      "trackBranches": [
+        "main"
+      ]
+    },
+    "defaultCompression": "none"
   }
 }
