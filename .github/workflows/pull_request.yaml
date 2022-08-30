@@ -42,4 +42,7 @@ jobs:
           BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
           CI_BASE: master
           CI_BRANCH_BASE: master
-        run: yarn run bundlewatch dist/**/*.*
+        run: |
+          export | grep main
+          export | grep bundlewatch
+          yarn run bundlewatch dist/**/*.*
