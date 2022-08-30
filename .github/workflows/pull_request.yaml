@@ -56,4 +56,4 @@ jobs:
         with:
           base-stats-json-path: 'main-stats/stats.json'
           current-stats-json-path: 'stats.json'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
