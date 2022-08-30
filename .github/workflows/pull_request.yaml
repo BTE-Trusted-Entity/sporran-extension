@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: stats
-          path: dist/stats.json
+          path: stats.json
 
       - name: Package extension
         run: yarn package
@@ -42,3 +42,18 @@ jobs:
         with:
           name: sporran-extension-${{ github.sha }}
           path: dist/web-ext-artifacts/*
+
+      - name: Download previous stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RUN_ID=`gh run list --workflow "pull_request.yaml" --json databaseId --limit 1 --jq ".[0].databaseId"`
+          gh run download ${RUN_ID} --name stats --dir main-stats
+          ls -la main-stats/
+
+      - name: Report sizes
+        uses: chronotruck/webpack-stats-diff-action@1.0.0
+        with:
+          base_stats_path: 'main-stats/stats.json'
+          head_stats_path: 'stats.json'
+          token: ${{ secrets.GITHUB_TOKEN }}

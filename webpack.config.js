@@ -84,6 +84,7 @@ export default {
       : [new MiniCssExtractPlugin()]),
     new BundleAnalyzerPlugin({
       generateStatsFile: true,
+      statsFilename: '../stats.json',
       analyzerMode: 'disabled',
     }),
   ],
