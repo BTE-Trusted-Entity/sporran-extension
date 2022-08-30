@@ -47,7 +47,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          RUN_ID=`gh run list --workflow "pull_request.yaml" --json databaseId --limit 1 --jq ".[0].databaseId"`
+          RUN_ID=`gh run list --workflow "pull_request.yaml" --json databaseId --limit 2 --jq ".[1].databaseId"`
           gh run download ${RUN_ID} --name stats --dir main-stats
           ls -la main-stats/
 
