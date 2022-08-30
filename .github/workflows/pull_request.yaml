@@ -41,7 +41,9 @@ jobs:
         env:
           BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
           CI_BASE: master
+          GITHUB_BASE_REF: master
           CI_BRANCH_BASE: master
+          GITHUB_HEAD_REF: master
         run: |
           export | grep main
           export | grep bundlewatch
