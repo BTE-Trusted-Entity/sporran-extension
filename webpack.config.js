@@ -5,6 +5,7 @@ import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import ExtensionReloader from 'webpack-extension-reloader';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const require = createRequire(import.meta.url);
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -81,6 +82,10 @@ export default {
     ...(isDevelopment
       ? [new ExtensionReloader()]
       : [new MiniCssExtractPlugin()]),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,
+      analyzerMode: 'disabled',
+    }),
   ],
   ...(isDevelopment && { devtool: 'inline-source-map' }),
   optimization: {

@@ -30,6 +30,12 @@ jobs:
       - name: Build code
         run: yarn build
 
+      - name: Save stats
+        uses: actions/upload-artifact@v3
+        with:
+          name: stats
+          path: dist/stats.json
+
       - name: Package extension
         run: yarn package
 
