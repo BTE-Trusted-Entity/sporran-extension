@@ -16,11 +16,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Run linter
-        run: yarn lint
-
-      - name: Run tests
-        run: yarn test --maxWorkers=2
+#      - name: Run linter
+#        run: yarn lint
+#
+#      - name: Run tests
+#        run: yarn test --maxWorkers=2
 
       - name: Build code
         run: yarn build
@@ -36,3 +36,9 @@ jobs:
         with:
           name: sporran-extension-${{ github.sha }}
           path: dist/web-ext-artifacts/*
+
+      - name: BundleWatch
+        env:
+          BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+          CI_BRANCH_BASE: bundlewatch
+        run: yarn run bundlewatch dist/**/*.*
