@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: stats
-          path: dist/stats.json
+          path: stats.json
 
       - name: Package extension
         run: yarn package

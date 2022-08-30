@@ -16,20 +16,14 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-#      - name: Run linter
-#        run: yarn lint
+      - name: Run linter
+        run: yarn lint
 
-#      - name: Run tests
-#        run: yarn test --maxWorkers=2
+      - name: Run tests
+        run: yarn test --maxWorkers=2
 
       - name: Build code
         run: yarn build
-
-      - name: Save stats TODO remove me
-        uses: actions/upload-artifact@v3
-        with:
-          name: stats
-          path: stats.json
 
       - name: Package extension
         run: yarn package
@@ -47,7 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          RUN_ID=`gh run list --workflow "pull_request.yaml" --json databaseId --limit 2 --jq ".[1].databaseId"`
+          RUN_ID=`gh run list --workflow "publish.yaml" --json databaseId --limit 2 --jq ".[0].databaseId"`
           gh run download ${RUN_ID} --name stats --dir main-stats
 
       - name: Report sizes
