@@ -81,12 +81,14 @@ export default {
     }),
     ...(isDevelopment
       ? [new ExtensionReloader()]
-      : [new MiniCssExtractPlugin()]),
-    new BundleAnalyzerPlugin({
-      generateStatsFile: true,
-      statsFilename: '../stats.json',
-      analyzerMode: 'disabled',
-    }),
+      : [
+          new MiniCssExtractPlugin(),
+          new BundleAnalyzerPlugin({
+            generateStatsFile: true,
+            statsFilename: '../stats.json',
+            analyzerMode: 'disabled',
+          }),
+        ]),
   ],
   ...(isDevelopment && { devtool: 'inline-source-map' }),
   optimization: {

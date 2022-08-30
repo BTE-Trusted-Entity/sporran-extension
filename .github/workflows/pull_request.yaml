@@ -49,7 +49,6 @@ jobs:
         run: |
           RUN_ID=`gh run list --workflow "pull_request.yaml" --json databaseId --limit 2 --jq ".[1].databaseId"`
           gh run download ${RUN_ID} --name stats --dir main-stats
-          ls -la main-stats/
 
       - name: Report sizes
         uses: github/webpack-bundlesize-compare-action@v1.5.0
