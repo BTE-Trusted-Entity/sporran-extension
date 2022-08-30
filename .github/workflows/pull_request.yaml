@@ -47,4 +47,4 @@ jobs:
         run: |
           export | grep main
           export | grep bundlewatch
-          yarn run bundlewatch dist/**/*.*
+          env GITHUB_BASE_REF="master" GITHUB_HEAD_REF="master" yarn run bundlewatch dist/**/*.*
