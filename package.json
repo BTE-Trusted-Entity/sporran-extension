@@ -32,6 +32,7 @@
     "dev-public": "env VARIANT=public NODE_ENV=development webpack --watch",
     "identity": "node -e \"console.log(require('@polkadot/util-crypto').mnemonicGenerate())\"",
     "test": "node --no-compilation-cache --expose-gc node_modules/.bin/jest --logHeapUsage",
+    "test-size": "bundlewatch --config bundlewatch.config.json",
     "lint": "yarn run lint-css && yarn run lint-js",
     "lint-js": "eslint --fix --max-warnings 0 --config ./.eslintrc.json \"src/**/*.ts*\"",
     "lint-css": "stylelint \"src/**/*.css\"",

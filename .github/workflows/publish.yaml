@@ -30,10 +30,10 @@ jobs:
       - name: Build code
         run: yarn build
 
-      - name: BundleWatch
+      - name: Test size
         env:
           BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
-        run: yarn run bundlewatch
+        run: yarn run test-size
 
       - name: Package extension
         run: yarn package
