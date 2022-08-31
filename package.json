@@ -140,10 +140,6 @@
   "bundlewatch": {
     "files": [
       {
-        "path": "dist/*.*",
-        "maxSize": "2MB"
-      },
-      {
         "path": "dist/**/*.*",
         "maxSize": "2MB"
       }
