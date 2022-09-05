@@ -81,7 +81,7 @@ function CredentialName({
   const handleKeyPress = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'Enter') {
-        event.target.blur();
+        event.currentTarget.blur();
       }
     },
     [],
