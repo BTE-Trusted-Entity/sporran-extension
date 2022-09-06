@@ -90,7 +90,14 @@ export function TxStatusModal({
         <button className={styles.confirm} onClick={onDismissError}>
           {t('common_action_confirm')}
         </button>
-        {subscanLink}
+        <a
+          className={styles.status}
+          href="https://status.kilt.io/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {t('component_TxStatusModal_status')}
+        </a>
       </Modal>
     ),
   };

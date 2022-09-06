@@ -48,8 +48,12 @@
   margin-top: 0.75rem;
 }
 
-.subscan {
+.status {
   composes: buttonSecondary from '../../components/Button/Button.module.css';
   padding: 0.5rem 0 1rem;
+}
+
+.subscan {
+  composes: status;
   background: url('../images/subscan-logo-full.svg') no-repeat bottom center/50%;
 }

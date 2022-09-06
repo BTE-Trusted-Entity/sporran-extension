@@ -53,6 +53,14 @@ exports[`TxStatusModal should show error status 1`] = `
     >
       OK
     </button>
+    <a
+      class="status"
+      href="https://status.kilt.io/"
+      rel="noreferrer"
+      target="_blank"
+    >
+      Check Status on status.kilt.io
+    </a>
   </dialog>
 </div>
 `;

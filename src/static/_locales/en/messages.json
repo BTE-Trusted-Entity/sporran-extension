@@ -179,6 +179,9 @@
   "component_TxStatusModal_subscan": {
     "message": "Check Status on Subscan"
   },
+  "component_TxStatusModal_status": {
+    "message": "Check Status on status.kilt.io"
+  },
   "component_PasswordField_reset": {
     "message": "Reset password"
   },
