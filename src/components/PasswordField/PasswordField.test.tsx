@@ -173,7 +173,7 @@ describe('PasswordField', () => {
       );
       await userEvent.click(await screen.findByText('Submit'));
 
-      await waitFor(() => password !== {});
+      await waitFor(() => Object.entries(password).length);
       expect(password.password).toEqual('PASS');
     });
 
@@ -202,7 +202,7 @@ describe('PasswordField', () => {
       await userEvent.click(await screen.findByLabelText(/Remember password/));
       await userEvent.click(await screen.findByText('Submit'));
 
-      await waitFor(() => password !== {});
+      await waitFor(() => Object.entries(password).length);
       expect(password.password).toEqual('PASS');
       expect(forgetPasswordChannel.get).toHaveBeenCalledWith(identity.address);
     });

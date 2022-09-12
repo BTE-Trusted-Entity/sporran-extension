@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "path": "dist/**/*.*",
+      "maxSize": "2MB"
+    }
+  ],
+  "ci": {
+    "trackBranches": [
+      "main"
+    ]
+  },
+  "defaultCompression": "none"
+}

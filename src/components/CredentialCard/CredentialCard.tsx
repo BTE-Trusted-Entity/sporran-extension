@@ -5,6 +5,9 @@ import {
   useRef,
   useState,
   Fragment,
+  KeyboardEvent,
+  FocusEvent,
+  ChangeEvent,
 } from 'react';
 import { createPortal } from 'react-dom';
 import { Modal } from 'react-dialog-polyfill';
@@ -68,14 +71,17 @@ function CredentialName({
 
   const isEditing = useBooleanState();
 
-  const handleKeyPress = useCallback((event) => {
-    if (event.key === 'Enter') {
-      event.target.blur();
-    }
-  }, []);
+  const handleKeyPress = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        event.currentTarget.blur();
+      }
+    },
+    [],
+  );
 
   const handleBlur = useCallback(
-    async (event) => {
+    async (event: FocusEvent<HTMLInputElement>) => {
       const name = event.target.value;
       if (name) {
         await saveCredential({ ...credential, name });
@@ -187,7 +193,7 @@ function DownloadModal({
 
   const [checked, setChecked] = useState(false);
 
-  const handleToggle = useCallback((event) => {
+  const handleToggle = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   }, []);
 
@@ -251,7 +257,7 @@ function DownloadModal({
                 className={styles.toggle}
                 type="checkbox"
                 defaultChecked={false}
-                onClick={handleToggle}
+                onChange={handleToggle}
               />
               <span />
             </label>
@@ -318,7 +324,7 @@ export function CredentialCard({
         >
           <section className={styles.collapsedCredential}>
             <h4 className={styles.collapsedName}>{name}</h4>
-            <p className={styles.collapsedValue}>{label}</p>
+            <p className={styles.collapsedValue}>{String(label)}</p>
           </section>
         </button>
       )}
@@ -355,7 +361,7 @@ export function CredentialCard({
             {contents.map(([name, value]) => (
               <div key={name} className={styles.detail}>
                 <dt className={styles.detailName}>{name}</dt>
-                <dd className={styles.detailValue}>{value}</dd>
+                <dd className={styles.detailValue}>{String(value)}</dd>
               </div>
             ))}
           </dl>
