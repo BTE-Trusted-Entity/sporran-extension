@@ -12,7 +12,8 @@ import { CredentialsContext } from './CredentialsContext';
 type AttestationStatus = 'pending' | 'attested' | 'revoked' | 'invalid';
 
 export interface Credential {
-  kiltCredential: ICredential;
+  // TODO: request is now a misleading name for this property
+  request: ICredential;
   name: string;
   cTypeTitle: string;
   attester: string;
@@ -41,7 +42,7 @@ async function saveList(list: string[]): Promise<void> {
 }
 
 export async function saveCredential(credential: Credential): Promise<void> {
-  const key = toKey(credential.kiltCredential.rootHash);
+  const key = toKey(credential.request.rootHash);
   await storage.set({ [key]: credential });
   await mutate(key);
 
@@ -61,7 +62,7 @@ export async function getCredentials(keys: string[]): Promise<Credential[]> {
 }
 
 export async function deleteCredential(credential: Credential): Promise<void> {
-  const key = toKey(credential.kiltCredential.rootHash);
+  const key = toKey(credential.request.rootHash);
   await storage.remove(key);
 
   const list = await getList();
@@ -83,7 +84,7 @@ export function useIdentityCredentials(did: DidUri): Credential[] | undefined {
       return undefined;
     }
     return all.filter(
-      (credential) => credential.kiltCredential.claim.owner === did,
+      (credential) => credential.request.claim.owner === did,
     );
   }, [all, did]);
 }
@@ -97,7 +98,7 @@ export function usePendingCredentialCheck(
     }
     (async () => {
       const isAttested = await Attestation.query(
-        credential.kiltCredential.rootHash,
+        credential.request.rootHash,
       );
       if (isAttested) {
         await saveCredential({ ...credential, status: 'attested' });

@@ -19,7 +19,7 @@ const mockShareInput: ShareInput = {
   credentialRequest: {
     cTypes: [
       {
-        cTypeHash: credentialsMock[0].kiltCredential.claim.cTypeHash,
+        cTypeHash: credentialsMock[0].request.claim.cTypeHash,
         requiredProperties: ['Email'],
       },
     ],

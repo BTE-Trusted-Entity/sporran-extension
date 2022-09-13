@@ -42,8 +42,8 @@ function MatchingIdentityCredentials({
 
   const matchingCredentials = credentials?.filter(
     (credential) =>
-      cTypeHashes.includes(credential.kiltCredential.claim.cTypeHash) &&
-      credential.kiltCredential.claim.owner === identity.did,
+      cTypeHashes.includes(credential.request.claim.cTypeHash) &&
+      credential.request.claim.owner === identity.did,
   );
 
   useEffect(() => {
@@ -66,14 +66,14 @@ function MatchingIdentityCredentials({
       <ul className={styles.list}>
         {matchingCredentials.map((credential) => (
           <ShareCredentialCard
-            key={credential.kiltCredential.rootHash}
+            key={credential.request.rootHash}
             credential={credential}
             identity={identity}
             onSelect={onSelect}
             isSelected={Boolean(
               selected &&
-                selected.credential.kiltCredential.rootHash ===
-                  credential.kiltCredential.rootHash,
+                selected.credential.request.rootHash ===
+                  credential.request.rootHash,
             )}
             viewRef={viewRef}
           />

@@ -59,13 +59,13 @@ export function ShareCredentialCard({
     invalid: t('component_CredentialCard_invalid'),
   };
 
-  const contents = Object.entries(credential.kiltCredential.claim.contents);
+  const contents = Object.entries(credential.request.claim.contents);
 
   const data = usePopupData<ShareInput>();
 
   const { cTypes } = data.credentialRequest;
 
-  const { cTypeHash } = credential.kiltCredential.claim;
+  const { cTypeHash } = credential.request.claim;
   const cType = find(cTypes, { cTypeHash });
 
   const requiredProperties = cType?.requiredProperties || noRequiredProperties;
@@ -114,7 +114,7 @@ export function ShareCredentialCard({
       <input
         name="credential"
         type="radio"
-        id={credential.kiltCredential.rootHash}
+        id={credential.request.rootHash}
         onChange={handleSelect}
         onClick={expanded.on}
         checked={isSelected}
@@ -126,7 +126,7 @@ export function ShareCredentialCard({
       {!expanded.current && (
         <label
           className={styles.expand}
-          htmlFor={credential.kiltCredential.rootHash}
+          htmlFor={credential.request.rootHash}
         >
           <section
             className={cx(styles.collapsedShareCredential, {
@@ -224,7 +224,7 @@ export function ShareCredentialCard({
                 {t('component_CredentialCard_hash')}
               </dt>
               <dd className={styles.detailValue}>
-                {credential.kiltCredential.rootHash}
+                {credential.request.rootHash}
               </dd>
             </div>
           </dl>

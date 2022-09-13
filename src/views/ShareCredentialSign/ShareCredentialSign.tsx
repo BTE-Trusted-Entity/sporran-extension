@@ -38,7 +38,7 @@ export function ShareCredentialSign({
   const { challenge } = credentialRequest;
 
   const {
-    credential: { kiltCredential, name },
+    credential: { request, name },
     identity,
     sharedContents,
   } = selected;
@@ -57,7 +57,7 @@ export function ShareCredentialSign({
         seed,
       );
 
-      const attestation = await Attestation.query(kiltCredential.rootHash);
+      const attestation = await Attestation.query(request.rootHash);
 
       if (!attestation) {
         setError(t('view_ShareCredentialSign_error'));
@@ -65,7 +65,7 @@ export function ShareCredentialSign({
       }
 
       const presentation = await Credential.createPresentation({
-        credential: kiltCredential,
+        credential: request,
         selectedAttributes: sharedContents,
         signCallback: sign,
         claimerDid: didDetails,
@@ -84,7 +84,7 @@ export function ShareCredentialSign({
       await shareChannel.return(message);
       window.close();
     },
-    [kiltCredential, passwordField, challenge, verifierDid, t, sharedContents],
+    [request, passwordField, challenge, verifierDid, t, sharedContents],
   );
 
   if (!selected) {
@@ -113,7 +113,7 @@ export function ShareCredentialSign({
             <div key={sharedProp} className={styles.detail}>
               <dt className={styles.detailName}>{sharedProp}</dt>
               <dd className={styles.detailValue}>
-                {String(kiltCredential.claim.contents[sharedProp])}
+                {String(request.claim.contents[sharedProp])}
               </dd>
             </div>
           ))}

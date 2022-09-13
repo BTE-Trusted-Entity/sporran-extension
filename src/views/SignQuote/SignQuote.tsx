@@ -90,7 +90,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       const name = `${cTypeTitle} ${index}`;
 
       await saveCredential({
-        kiltCredential: requestedCredential,
+        request: requestedCredential,
         name,
         cTypeTitle,
         attester: attesterName,

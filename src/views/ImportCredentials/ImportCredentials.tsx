@@ -59,30 +59,27 @@ export function ImportCredentials(): JSX.Element | null {
             const credential = JSON.parse(text) as Credential;
 
             const {
-              kiltCredential,
+              request,
               name = fileName,
               status = 'pending',
               cTypeTitle,
               attester,
             } = credential;
 
-            if (
-              !cTypeTitle ||
-              !attester ||
-              !KiltCredential.verifyCredential(kiltCredential)
-            ) {
+            if (!cTypeTitle || !attester) {
               throw new Error('invalid');
             }
+            await KiltCredential.verifyCredential(request);
 
             const knownIdentity = identitiesList.find(
-              ({ did }) => did === kiltCredential.claim.owner,
+              ({ did }) => did === request.claim.owner,
             );
             if (!knownIdentity) {
               throw new Error('orphaned');
             }
 
             await saveCredential({
-              kiltCredential,
+              request,
               name,
               status,
               cTypeTitle,
