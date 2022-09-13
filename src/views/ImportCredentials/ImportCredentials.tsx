@@ -69,6 +69,10 @@ export function ImportCredentials(): JSX.Element | null {
             if (!cTypeTitle || !attester) {
               throw new Error('invalid');
             }
+
+            //@ts-expect-error
+            delete request.claimerSignature
+
             await KiltCredential.verifyCredential(request);
 
             const knownIdentity = identitiesList.find(

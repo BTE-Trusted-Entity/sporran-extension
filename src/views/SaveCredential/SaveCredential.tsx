@@ -52,6 +52,9 @@ export function SaveCredential(): JSX.Element | null {
     return null;
   }
 
+  // @ts-expect-error
+  delete credential.claimerSignature;
+
   const download = getCredentialDownload(credential);
 
   return (
