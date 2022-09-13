@@ -18,7 +18,7 @@ import {
   NewDidEncryptionKey,
 } from '@kiltprotocol/types';
 import * as Message from '@kiltprotocol/messaging';
-import Did, { createLightDidDocument } from '@kiltprotocol/did';
+import * as Did from '@kiltprotocol/did';
 
 import { makeKeyring } from '../identities/identities';
 import { verifyDidConfigResource } from '../wellKnownDid/wellKnownDid';
@@ -60,7 +60,7 @@ export async function getTabEncryption(
     .addFromSeed(encryptionKey.secretKey.slice(0, 32))
     .derive('//authentication');
 
-  const sporranDidDocument = createLightDidDocument({
+  const sporranDidDocument = Did.createLightDidDocument({
     authentication: [
       {
         ...authenticationKey,

@@ -1,6 +1,8 @@
 import { disconnect, connect } from '@kiltprotocol/core';
 import { browser, Runtime } from 'webextension-polyfill-ts';
 
+import { getEndpoint } from '../../utilities/endpoints/endpoints';
+
 const name = 'popup';
 
 export function connectToBackground(): void {
@@ -24,5 +26,6 @@ export async function connectToBlockchain(port: Runtime.Port): Promise<void> {
     timeoutId = setTimeout(disconnect, timeoutMs);
   });
   clearTimeout(timeoutId);
-  await connect();
+  const address = await getEndpoint();
+  await connect(address);
 }
