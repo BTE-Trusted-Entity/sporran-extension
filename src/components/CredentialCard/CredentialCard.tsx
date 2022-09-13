@@ -299,8 +299,8 @@ export function CredentialCard({
 
   const portalRef = useRef<HTMLDivElement>(null);
 
-  const { status, isDownloaded, request, name } = credential;
-  const contents = Object.entries(request.claim.contents);
+  const { status, isDownloaded, kiltCredential, name } = credential;
+  const contents = Object.entries(kiltCredential.claim.contents);
   const label = contents[0][1];
 
   return (
@@ -387,7 +387,7 @@ export function CredentialCard({
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_hash')}
               </dt>
-              <dd className={styles.detailValue}>{request.rootHash}</dd>
+              <dd className={styles.detailValue}>{kiltCredential.rootHash}</dd>
             </div>
           </dl>
         </section>

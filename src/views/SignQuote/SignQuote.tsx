@@ -1,13 +1,12 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { filter, find } from 'lodash-es';
-import { Credential, RequestForAttestation } from '@kiltprotocol/core';
+import { Credential } from '@kiltprotocol/core';
 import {
   IClaim,
   DidUri,
   IRequestAttestation,
   ITerms,
-  MessageBodyType,
 } from '@kiltprotocol/types';
 
 import * as styles from './SignQuote.module.css';
@@ -21,7 +20,7 @@ import {
   useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { getDidDetails } from '../../utilities/did/did';
+import { getDidDocument } from '../../utilities/did/did';
 import {
   PasswordField,
   usePasswordField,
@@ -70,39 +69,28 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
       const cTypeTitle = cType.schema.title;
 
-      const attestedClaims = legitimations.map((legitimation) =>
-        Credential.fromCredential(legitimation),
+      legitimations.forEach((legitimation) =>
+        Credential.verifyDataStructure(legitimation),
       );
 
       const { seed } = await passwordField.get(event);
 
-      const { encrypt, keystore, didDetails } = await getIdentityCryptoFromSeed(
-        seed,
-      );
+      const { encryptMsg, didDetails } = await getIdentityCryptoFromSeed(seed);
 
       // The attester generated claim with the temporary identity, need to put real address in it
       const identityClaim = { ...claim, owner: didDetails.uri };
 
-      const requestForAttestation = RequestForAttestation.fromClaim(
-        identityClaim,
-        {
-          legitimations: attestedClaims,
-          ...(delegationId && { delegationId }),
-        },
-      );
-
-      await requestForAttestation.signWithDidKey(
-        keystore,
-        didDetails,
-        didDetails.authenticationKey.id,
-      );
+      const requestedCredential = Credential.fromClaim(identityClaim, {
+        legitimations,
+        ...(delegationId && { delegationId }),
+      });
 
       const matchingCredentials = filter(credentials, { cTypeTitle });
       const index = matchingCredentials.length + 1;
       const name = `${cTypeTitle} ${index}`;
 
       await saveCredential({
-        request: requestForAttestation,
+        kiltCredential: requestedCredential,
         name,
         cTypeTitle,
         attester: attesterName,
@@ -110,14 +98,14 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       });
 
       const requestForAttestationBody: IRequestAttestation = {
-        content: { requestForAttestation },
-        type: MessageBodyType.REQUEST_ATTESTATION,
+        content: { credential: requestedCredential },
+        type: 'request-attestation',
       };
 
-      const attesterDidDetails = await getDidDetails(attesterDid);
-      const message = await encrypt(
+      const attesterDidDocument = await getDidDocument(attesterDid);
+      const message = await encryptMsg(
         requestForAttestationBody,
-        attesterDidDetails,
+        attesterDidDocument,
       );
 
       await claimChannel.return(message);

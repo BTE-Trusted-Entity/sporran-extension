@@ -1,9 +1,5 @@
 import { Runtime } from 'webextension-polyfill-ts';
-import {
-  IEncryptedMessage,
-  IRejectTerms,
-  MessageBodyType,
-} from '@kiltprotocol/types';
+import { IEncryptedMessage, IRejectTerms } from '@kiltprotocol/types';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 import { channelsEnum } from '../base/channelsEnum';
@@ -30,7 +26,7 @@ export async function showCredentialPopup(
   );
   const message = await decrypt(encrypted);
 
-  if (message.body.type === MessageBodyType.SUBMIT_TERMS) {
+  if (message.body.type === 'submit-terms') {
     try {
       return await claimChannel.get(
         {
@@ -45,16 +41,16 @@ export async function showCredentialPopup(
 
       const rejectionBody: IRejectTerms = {
         content: { claim, legitimations, delegationId },
-        type: MessageBodyType.REJECT_TERMS,
+        type: 'reject-terms',
       };
 
       return encrypt(rejectionBody);
     }
   }
-  if (message.body.type === MessageBodyType.SUBMIT_ATTESTATION) {
+  if (message.body.type === 'submit-attestation') {
     await saveChannel.get(message.body.content.attestation, sender);
   }
-  if (message.body.type === MessageBodyType.REQUEST_CREDENTIAL) {
+  if (message.body.type === 'request-credential') {
     return await shareChannel.get(
       {
         credentialRequest: message.body.content,

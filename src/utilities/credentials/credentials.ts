@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo } from 'react';
 import { pick, pull } from 'lodash-es';
-import { IRequestForAttestation, DidUri } from '@kiltprotocol/types';
+import { DidUri, ICredential } from '@kiltprotocol/types';
 import { Attestation } from '@kiltprotocol/core';
 import { mutate } from 'swr';
 
@@ -12,7 +12,7 @@ import { CredentialsContext } from './CredentialsContext';
 type AttestationStatus = 'pending' | 'attested' | 'revoked' | 'invalid';
 
 export interface Credential {
-  request: IRequestForAttestation;
+  kiltCredential: ICredential;
   name: string;
   cTypeTitle: string;
   attester: string;
@@ -41,7 +41,7 @@ async function saveList(list: string[]): Promise<void> {
 }
 
 export async function saveCredential(credential: Credential): Promise<void> {
-  const key = toKey(credential.request.rootHash);
+  const key = toKey(credential.kiltCredential.rootHash);
   await storage.set({ [key]: credential });
   await mutate(key);
 
@@ -61,7 +61,7 @@ export async function getCredentials(keys: string[]): Promise<Credential[]> {
 }
 
 export async function deleteCredential(credential: Credential): Promise<void> {
-  const key = toKey(credential.request.rootHash);
+  const key = toKey(credential.kiltCredential.rootHash);
   await storage.remove(key);
 
   const list = await getList();
@@ -82,7 +82,9 @@ export function useIdentityCredentials(did: DidUri): Credential[] | undefined {
       // storage data pending
       return undefined;
     }
-    return all.filter((credential) => credential.request.claim.owner === did);
+    return all.filter(
+      (credential) => credential.kiltCredential.claim.owner === did,
+    );
   }, [all, did]);
 }
 
@@ -94,7 +96,9 @@ export function usePendingCredentialCheck(
       return;
     }
     (async () => {
-      const isAttested = await Attestation.query(credential.request.rootHash);
+      const isAttested = await Attestation.query(
+        credential.kiltCredential.rootHash,
+      );
       if (isAttested) {
         await saveCredential({ ...credential, status: 'attested' });
       }

@@ -1,9 +1,9 @@
 import ky from 'ky';
-import { DidUri, IRequestForAttestation } from '@kiltprotocol/types';
-import { DidDetails, Utils, verifyDidSignature } from '@kiltprotocol/did';
+import { DidUri, DidDocument, ICredential } from '@kiltprotocol/types';
+import { Utils, verifyDidSignature } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 
-import { getDidDetails } from '../did/did';
+import { getDidDocument } from '../did/did';
 
 interface CredentialSubject {
   id: DidUri;
@@ -26,7 +26,7 @@ interface DomainLinkageCredential {
   issuer: string;
   issuanceDate: string;
   expirationDate: string;
-  signedRequest: IRequestForAttestation;
+  signedRequest: ICredential;
   proof: Proof;
 }
 
@@ -65,7 +65,7 @@ export async function verifyDidConfigResource(
         return false;
       }
 
-      const isDid = Utils.validateKiltDidUri(credentialSubject.id);
+      const isDid = Utils.isKiltDidUri(credentialSubject.id);
       const matchesIssuer = issuer === credentialSubject.id;
       if (!isDid || !matchesIssuer) {
         return false;
@@ -76,22 +76,20 @@ export async function verifyDidConfigResource(
         return false;
       }
 
-      let issuerDidDetails: DidDetails;
+      let issuerDidDocument: DidDocument;
       try {
-        issuerDidDetails = await getDidDetails(issuer);
+        issuerDidDocument = await getDidDocument(issuer);
       } catch {
         return false;
       }
 
-      if (!issuerDidDetails.attestationKey) {
+      if (!issuerDidDocument.assertionMethod?.[0]) {
         return false;
       }
 
       const { verified } = await verifyDidSignature({
         signature: {
-          keyUri: issuerDidDetails.assembleKeyUri(
-            issuerDidDetails.attestationKey.id,
-          ),
+          keyUri: `${issuerDidDocument.uri}${issuerDidDocument.assertionMethod[0].id}`,
           signature: credential.proof.signature as string,
         },
         message: Crypto.coToUInt8(credentialSubject.rootHash),

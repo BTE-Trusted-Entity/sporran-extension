@@ -1,7 +1,7 @@
-import { DidUri } from '@kiltprotocol/types';
+import { DidUri, KiltAddress } from '@kiltprotocol/types';
 
 export interface Identity {
-  address: string;
+  address: KiltAddress;
   did: DidUri;
   name: string;
   index: number;

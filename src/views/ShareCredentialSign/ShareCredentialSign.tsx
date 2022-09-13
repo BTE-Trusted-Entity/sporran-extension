@@ -1,11 +1,7 @@
 import { browser } from 'webextension-polyfill-ts';
 import { FormEvent, useCallback, useState } from 'react';
-import {
-  Attestation,
-  Credential,
-  RequestForAttestation,
-} from '@kiltprotocol/core';
-import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
+import { Attestation, Credential } from '@kiltprotocol/core';
+import { ISubmitCredential } from '@kiltprotocol/types';
 
 import * as styles from './ShareCredentialSign.module.css';
 
@@ -22,7 +18,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 import { Selected } from '../ShareCredential/ShareCredential';
 
-import { getDidDetails } from '../../utilities/did/did';
+import { getDidDocument } from '../../utilities/did/did';
 
 interface Props {
   selected: Selected;
@@ -41,7 +37,11 @@ export function ShareCredentialSign({
 
   const { challenge } = credentialRequest;
 
-  const { credential, identity, sharedContents } = selected;
+  const {
+    credential: { kiltCredential, name },
+    identity,
+    sharedContents,
+  } = selected;
 
   const [error, setError] = useState<string>();
 
@@ -53,50 +53,38 @@ export function ShareCredentialSign({
 
       const { seed } = await passwordField.get(event);
 
-      const { encrypt, keystore, didDetails } = await getIdentityCryptoFromSeed(
+      const { encryptMsg, didDetails, sign } = await getIdentityCryptoFromSeed(
         seed,
       );
 
-      const request = RequestForAttestation.fromRequest(credential.request);
-      await request.signWithDidKey(
-        keystore,
-        didDetails,
-        didDetails.authenticationKey.id,
-        { challenge },
-      );
-
-      const attestation = await Attestation.query(request.rootHash);
+      const attestation = await Attestation.query(kiltCredential.rootHash);
 
       if (!attestation) {
         setError(t('view_ShareCredentialSign_error'));
         return;
       }
 
-      const credentialInstance = Credential.fromCredential({
-        request,
-        attestation,
-      });
-
-      const presentation = await credentialInstance.createPresentation({
+      const presentation = await Credential.createPresentation({
+        credential: kiltCredential,
         selectedAttributes: sharedContents,
-        signer: keystore,
+        signCallback: sign,
         claimerDid: didDetails,
         challenge,
       });
 
       const credentialsBody: ISubmitCredential = {
         content: [presentation],
-        type: MessageBodyType.SUBMIT_CREDENTIAL,
+        type: 'submit-credential',
       };
 
-      const verifierDidDetails = await getDidDetails(verifierDid);
+      const verifierDidDocument = await getDidDocument(verifierDid);
 
-      const message = await encrypt(credentialsBody, verifierDidDetails);
+      const message = await encryptMsg(credentialsBody, verifierDidDocument);
 
       await shareChannel.return(message);
       window.close();
     },
-    [credential, passwordField, challenge, verifierDid, t, sharedContents],
+    [kiltCredential, passwordField, challenge, verifierDid, t, sharedContents],
   );
 
   if (!selected) {
@@ -118,14 +106,14 @@ export function ShareCredentialSign({
             <dt className={styles.detailName}>
               {t('view_ShareCredentialSign_name')}
             </dt>
-            <dd className={styles.detailValue}>{credential.name}</dd>
+            <dd className={styles.detailValue}>{name}</dd>
           </div>
 
           {sharedContents.map((sharedProp) => (
             <div key={sharedProp} className={styles.detail}>
               <dt className={styles.detailName}>{sharedProp}</dt>
               <dd className={styles.detailValue}>
-                {String(credential.request.claim.contents[sharedProp])}
+                {String(kiltCredential.claim.contents[sharedProp])}
               </dd>
             </div>
           ))}

@@ -1,10 +1,5 @@
-import {
-  DidDetails,
-  Utils,
-  FullDidDetails,
-  LightDidDetails,
-} from '@kiltprotocol/did';
-import { DidEncryptionKey, DidUri } from '@kiltprotocol/types';
+import { resolve, Utils } from '@kiltprotocol/did';
+import { DidDocument, DidEncryptionKey, DidUri } from '@kiltprotocol/types';
 
 export function isFullDid(did: DidUri): boolean {
   if (!did) {
@@ -14,25 +9,23 @@ export function isFullDid(did: DidUri): boolean {
   return Utils.parseDidUri(did).type === 'full';
 }
 
-export async function getFullDidDetails(did: DidUri): Promise<FullDidDetails> {
-  const details = await FullDidDetails.fromChainInfo(did);
-  if (!details) {
+export async function getDidDocument(did: DidUri): Promise<DidDocument> {
+  const details = await resolve(did);
+  if (
+    !details?.document ||
+    details.metadata.deactivated ||
+    details.metadata.canonicalId
+  ) {
     throw new Error(`Cannot resolve DID ${did}`);
   }
 
-  return details;
+  return details.document;
 }
 
-export async function getDidDetails(did: DidUri): Promise<DidDetails> {
-  return isFullDid(did)
-    ? await getFullDidDetails(did)
-    : LightDidDetails.fromUri(did);
-}
-
-export function getDidEncryptionKey(details: DidDetails): DidEncryptionKey {
-  const { encryptionKey } = details;
-  if (!encryptionKey) {
+export function getDidEncryptionKey(details: DidDocument): DidEncryptionKey {
+  const { keyAgreement } = details;
+  if (!keyAgreement?.length) {
     throw new Error('encryptionKey is not defined somehow');
   }
-  return encryptionKey;
+  return keyAgreement[0];
 }

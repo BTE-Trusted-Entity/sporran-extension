@@ -8,17 +8,17 @@ import {
   naclSeal,
 } from '@polkadot/util-crypto';
 import {
-  EncryptionKeyType,
   IEncryptedMessage,
   IMessage,
   MessageBody,
-  NaclBoxCapable,
   ResolvedDidKey,
-  VerificationKeyType,
   DidResourceUri,
+  EncryptCallback,
+  DecryptCallback,
+  NewDidEncryptionKey,
 } from '@kiltprotocol/types';
-import { Message } from '@kiltprotocol/messaging';
-import { DidResolver, LightDidDetails } from '@kiltprotocol/did';
+import * as Message from '@kiltprotocol/messaging';
+import Did, { createLightDidDocument } from '@kiltprotocol/did';
 
 import { makeKeyring } from '../identities/identities';
 import { verifyDidConfigResource } from '../wellKnownDid/wellKnownDid';
@@ -34,33 +34,6 @@ interface TabEncryption {
 }
 
 const tabEncryptions: Record<number, TabEncryption> = {};
-
-function makeKeystore({
-  secretKey,
-}: Keypair): Pick<NaclBoxCapable, 'decrypt' | 'encrypt'> {
-  return {
-    async decrypt({ data, alg, nonce, peerPublicKey }) {
-      const decrypted = naclOpen(data, nonce, peerPublicKey, secretKey);
-      if (!decrypted) {
-        throw new Error('Failed to decrypt with given key');
-      }
-
-      return {
-        data: decrypted,
-        alg,
-      };
-    },
-    async encrypt({ data, alg, peerPublicKey }) {
-      const { sealed, nonce } = naclSeal(data, secretKey, peerPublicKey);
-
-      return {
-        data: sealed,
-        alg,
-        nonce,
-      };
-    },
-  };
-}
 
 export async function getTabEncryption(
   sender: Runtime.MessageSender,
@@ -79,29 +52,27 @@ export async function getTabEncryption(
     throw new Error('Cannot generate encryption outside challenge flow');
   }
 
-  const encryptionKey = {
+  const encryptionKey: NewDidEncryptionKey & Keypair = {
     ...naclBoxPairFromSecret(ed25519PairFromRandom().secretKey),
-    type: EncryptionKeyType.X25519,
+    type: 'x25519',
   };
   const authenticationKey = makeKeyring()
     .addFromSeed(encryptionKey.secretKey.slice(0, 32))
     .derive('//authentication');
 
-  const keystore = makeKeystore(encryptionKey);
-
-  const sporranDidDetails = LightDidDetails.fromDetails({
-    authenticationKey: {
-      ...authenticationKey,
-      type: VerificationKeyType.Sr25519,
-    },
-    encryptionKey,
+  const sporranDidDocument = createLightDidDocument({
+    authentication: [
+      {
+        ...authenticationKey,
+        type: 'sr25519',
+      },
+    ],
+    keyAgreement: [encryptionKey],
   });
-  const sporranEncryptionDidKey = getDidEncryptionKey(sporranDidDetails);
-  const sporranEncryptionDidKeyUri = sporranDidDetails.assembleKeyUri(
-    sporranEncryptionDidKey.id,
-  );
+  const sporranEncryptionDidKey = getDidEncryptionKey(sporranDidDocument);
+  const sporranEncryptionDidKeyUri: DidResourceUri = `${sporranDidDocument.uri}${sporranEncryptionDidKey.id}`;
 
-  const dAppEncryptionDidKey = (await DidResolver.resolveKey(
+  const dAppEncryptionDidKey = (await Did.resolveKey(
     dAppEncryptionKeyUri,
   )) as ResolvedDidKey;
   if (!dAppEncryptionDidKey) {
@@ -111,16 +82,60 @@ export async function getTabEncryption(
   const dAppDid = dAppEncryptionDidKey.controller;
   await verifyDidConfigResource(dAppDid, sender.url);
 
+  const decryptBytes: DecryptCallback = async ({
+    data,
+    alg,
+    nonce,
+    peerPublicKey,
+  }) => {
+    const decrypted = naclOpen(
+      data,
+      nonce,
+      peerPublicKey,
+      encryptionKey.secretKey,
+    );
+    if (!decrypted) {
+      throw new Error('Failed to decrypt with given key');
+    }
+
+    return {
+      data: decrypted,
+      alg,
+    };
+  };
+  const encryptBytes: EncryptCallback = async ({
+    data,
+    alg,
+    peerPublicKey,
+  }) => {
+    const { sealed, nonce } = naclSeal(
+      data,
+      encryptionKey.secretKey,
+      peerPublicKey,
+    );
+
+    return {
+      data: sealed,
+      alg,
+      nonce,
+    };
+  };
+
   async function decrypt(encrypted: IEncryptedMessage): Promise<IMessage> {
-    return Message.decrypt(encrypted, keystore, sporranDidDetails);
+    return Message.decrypt(encrypted, decryptBytes, sporranDidDocument);
   }
 
   async function encrypt(messageBody: MessageBody): Promise<IEncryptedMessage> {
-    const message = new Message(messageBody, sporranDidDetails.uri, dAppDid);
-    return message.encrypt(
+    const message = Message.fromBody(
+      messageBody,
+      sporranDidDocument.uri,
+      dAppDid,
+    );
+    return Message.encrypt(
+      message,
       sporranEncryptionDidKey.id,
-      sporranDidDetails,
-      keystore,
+      sporranDidDocument,
+      encryptBytes,
       dAppEncryptionKeyUri as DidResourceUri,
     );
   }

@@ -15,16 +15,17 @@ import {
 import {
   EncryptionKeyType,
   IEncryptedMessage,
-  KeystoreSigner,
   MessageBody,
-  NaclBoxCapable,
-  VerificationKeyType,
   DidUri,
   DidResourceUri,
+  SignCallback,
+  EncryptCallback,
+  DidDocument,
+  KiltAddress,
 } from '@kiltprotocol/types';
-import { Message } from '@kiltprotocol/messaging';
-import { DidDetails, DidResolver, LightDidDetails } from '@kiltprotocol/did';
+import * as Message from '@kiltprotocol/messaging';
 import { Crypto } from '@kiltprotocol/utils';
+import { createLightDidDocument, resolve } from '@kiltprotocol/did';
 import { map, max } from 'lodash-es';
 
 import {
@@ -32,7 +33,7 @@ import {
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 
-import { getDidDetails, getDidEncryptionKey } from '../did/did';
+import { getDidDocument, getDidEncryptionKey } from '../did/did';
 import { storage } from '../storage/storage';
 import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
 
@@ -45,7 +46,7 @@ export { Identity, IdentitiesMap } from './types';
 const CURRENT_IDENTITY_KEY = 'currentIdentity';
 
 export const NEW: Identity = {
-  address: 'NEW',
+  address: 'NEW' as KiltAddress,
   did: '' as DidUri,
   name: '',
   index: -1,
@@ -126,15 +127,16 @@ export function getKeypairBySeed(seed: Uint8Array): KeyringPair {
 }
 
 interface IdentityDidCrypto {
-  didDetails: DidDetails;
-  keystore: KeystoreSigner;
-  sign: (plaintext: string) => {
+  didDetails: DidDocument;
+  sign: SignCallback;
+  encrypt: EncryptCallback;
+  signStr: (plaintext: string) => {
     signature: HexString;
     didKeyUri: DidResourceUri;
   };
-  encrypt: (
+  encryptMsg: (
     messageBody: MessageBody,
-    dAppDidDetails: DidDetails,
+    dAppDidDocument: DidDocument,
   ) => Promise<IEncryptedMessage>;
 }
 
@@ -152,20 +154,18 @@ export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
   const { secretKey } = keyFromPath(keypair, path, 'sr25519');
   return {
     ...naclBoxPairFromSecret(blake2AsU8a(secretKey)),
-    type: EncryptionKeyType.X25519,
+    type: 'x25519',
   };
 }
 
-export async function getKeystoreFromSeed(
+export async function getSignCallbackFromSeed(
   seed: Uint8Array,
-): Promise<KeystoreSigner> {
+): Promise<SignCallback> {
   const authenticationKey = deriveAuthenticationKey(seed);
-  return {
-    sign: async ({ data, alg }) => ({
-      data: authenticationKey.sign(data, { withType: false }),
-      alg,
-    }),
-  };
+  return async ({ data, alg }) => ({
+    data: authenticationKey.sign(data, { withType: false }),
+    alg,
+  });
 }
 
 export async function getIdentityCryptoFromSeed(
@@ -178,79 +178,80 @@ export async function getIdentityCryptoFromSeed(
   const identities = await getIdentities();
   const { did } = identities[address];
 
-  const didDetails = await getDidDetails(did);
-  const keystore = await getKeystoreFromSeed(seed);
+  const didDetails = await getDidDocument(did);
 
-  const encryptionKeystore: Pick<NaclBoxCapable, 'encrypt'> = {
-    async encrypt({ data, alg, peerPublicKey }) {
-      const { sealed, nonce } = naclSeal(
-        data,
-        encryptionKey.secretKey,
-        peerPublicKey,
-      );
+  const sign = await getSignCallbackFromSeed(seed);
 
-      return {
-        data: sealed,
-        alg,
-        nonce,
-      };
-    },
+  const encrypt: EncryptCallback = async ({ data, alg, peerPublicKey }) => {
+    const { sealed, nonce } = naclSeal(
+      data,
+      encryptionKey.secretKey,
+      peerPublicKey,
+    );
+
+    return {
+      data: sealed,
+      alg,
+      nonce,
+    };
   };
 
-  function sign(plaintext: string) {
+  function signStr(plaintext: string) {
     const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
 
-    const didKeyUri = didDetails.assembleKeyUri(
-      didDetails.authenticationKey.id,
-    );
+    const didKeyUri: DidResourceUri = `${didDetails.uri}${didDetails.authentication[0].id}`;
 
     return { signature, didKeyUri };
   }
 
-  async function encrypt(
+  async function encryptMsg(
     messageBody: MessageBody,
-    dAppDidDetails: DidDetails,
+    dAppDidDocument: DidDocument,
   ): Promise<IEncryptedMessage> {
-    const message = new Message(
+    const message = Message.fromBody(
       messageBody,
       didDetails.uri,
-      dAppDidDetails.uri,
+      dAppDidDocument.uri,
     );
-    return message.encrypt(
+    return Message.encrypt(
+      message,
       getDidEncryptionKey(didDetails).id,
       didDetails,
-      encryptionKeystore,
-      dAppDidDetails.assembleKeyUri(getDidEncryptionKey(dAppDidDetails).id),
+      encrypt,
+      `${dAppDidDocument.uri}${getDidEncryptionKey(dAppDidDocument).id}`,
     );
   }
 
   return {
     didDetails,
-    keystore,
     sign,
     encrypt,
+    signStr,
+    encryptMsg,
   };
 }
 
 export async function encryptIdentity(
   backupPhrase: string,
   password: string,
-): Promise<string> {
+): Promise<KiltAddress> {
   const seed = mnemonicToMiniSecret(backupPhrase);
   const { address } = getKeypairByBackupPhrase(backupPhrase);
   await saveEncrypted(address, password, seed);
-  return address;
+  return address as KiltAddress;
 }
 
-export function getLightDidFromSeed(seed: Uint8Array): LightDidDetails {
+export function getLightDidFromSeed(seed: Uint8Array): DidDocument {
   const authenticationKey = deriveAuthenticationKey(seed);
   const encryptionKey = deriveEncryptionKeyFromSeed(seed);
-  return LightDidDetails.fromDetails({
-    authenticationKey: {
-      ...authenticationKey,
-      type: VerificationKeyType.Sr25519,
-    },
-    encryptionKey,
+  return createLightDidDocument({
+    authentication: [
+      {
+        ...authenticationKey,
+        type: 'sr25519',
+      },
+    ],
+    keyAgreement: [encryptionKey],
   });
 }
 
@@ -289,13 +290,13 @@ export async function importIdentity(
 
   const seed = mnemonicToMiniSecret(backupPhrase);
 
-  const lightDidDetails = getLightDidFromSeed(seed);
-  const resolved = await DidResolver.resolveDoc(lightDidDetails.uri);
+  const lightDidDocument = getLightDidFromSeed(seed);
+  const resolved = await resolve(lightDidDocument.uri);
 
   const did =
     resolved && resolved.metadata && resolved.metadata.canonicalId
       ? resolved.metadata.canonicalId
-      : lightDidDetails.uri;
+      : lightDidDocument.uri;
 
   const { name, index } = await getIdentityName();
 

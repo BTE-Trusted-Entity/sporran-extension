@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { filter, reject, sortBy } from 'lodash-es';
-import { RequestForAttestation } from '@kiltprotocol/core';
+import { Credential as KiltCredential } from '@kiltprotocol/core';
 
 import {
   Credential,
@@ -59,7 +59,7 @@ export function ImportCredentials(): JSX.Element | null {
             const credential = JSON.parse(text) as Credential;
 
             const {
-              request,
+              kiltCredential,
               name = fileName,
               status = 'pending',
               cTypeTitle,
@@ -69,20 +69,20 @@ export function ImportCredentials(): JSX.Element | null {
             if (
               !cTypeTitle ||
               !attester ||
-              !RequestForAttestation.verifyData(request)
+              !KiltCredential.verifyCredential(kiltCredential)
             ) {
               throw new Error('invalid');
             }
 
             const knownIdentity = identitiesList.find(
-              ({ did }) => did === request.claim.owner,
+              ({ did }) => did === kiltCredential.claim.owner,
             );
             if (!knownIdentity) {
               throw new Error('orphaned');
             }
 
             await saveCredential({
-              request,
+              kiltCredential,
               name,
               status,
               cTypeTitle,
