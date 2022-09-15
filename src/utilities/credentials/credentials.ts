@@ -83,9 +83,7 @@ export function useIdentityCredentials(did: DidUri): Credential[] | undefined {
       // storage data pending
       return undefined;
     }
-    return all.filter(
-      (credential) => credential.request.claim.owner === did,
-    );
+    return all.filter((credential) => credential.request.claim.owner === did);
   }, [all, did]);
 }
 
@@ -97,9 +95,7 @@ export function usePendingCredentialCheck(
       return;
     }
     (async () => {
-      const isAttested = await Attestation.query(
-        credential.request.rootHash,
-      );
+      const isAttested = await Attestation.query(credential.request.rootHash);
       if (isAttested) {
         await saveCredential({ ...credential, status: 'attested' });
       }

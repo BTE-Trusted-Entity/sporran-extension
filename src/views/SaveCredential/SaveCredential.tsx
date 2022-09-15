@@ -52,7 +52,7 @@ export function SaveCredential(): JSX.Element | null {
     return null;
   }
 
-  // @ts-expect-error
+  // @ts-expect-error We removed the claimerSignature property from the interface. If a saved credential still has it, we drop it.
   delete credential.claimerSignature;
 
   const download = getCredentialDownload(credential);

@@ -70,7 +70,7 @@ export function ImportCredentials(): JSX.Element | null {
               throw new Error('invalid');
             }
 
-            // @ts-expect-error
+            // @ts-expect-error We removed the claimerSignature property from the interface. If an imported credential still has it, we drop it.
             delete request.claimerSignature;
 
             await KiltCredential.verifyCredential(request);

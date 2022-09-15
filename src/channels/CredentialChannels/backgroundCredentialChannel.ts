@@ -8,8 +8,9 @@ import { saveChannel } from '../saveChannel/saveChannel';
 import { shareChannel } from '../shareChannel/shareChannel';
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
 
-import { CredentialInput, CredentialOutput } from './types';
 import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
+
+import { CredentialInput, CredentialOutput } from './types';
 
 export const backgroundCredentialChannel = new BrowserChannel<
   CredentialInput,
@@ -22,7 +23,7 @@ export async function showCredentialPopup(
 ): Promise<IEncryptedMessage | void> {
   const { message: encrypted, dAppName } = input;
 
-  await initKiltSDK()
+  await initKiltSDK();
 
   const { encrypt, decrypt, dAppEncryptionDidKey } = await getTabEncryption(
     sender,

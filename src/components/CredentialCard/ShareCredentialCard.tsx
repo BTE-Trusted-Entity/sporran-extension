@@ -124,10 +124,7 @@ export function ShareCredentialCard({
       />
 
       {!expanded.current && (
-        <label
-          className={styles.expand}
-          htmlFor={credential.request.rootHash}
-        >
+        <label className={styles.expand} htmlFor={credential.request.rootHash}>
           <section
             className={cx(styles.collapsedShareCredential, {
               [styles.notAttested]: !isAttested,

@@ -1,4 +1,4 @@
-import { disconnect, connect } from '@kiltprotocol/core';
+import { disconnect } from '@kiltprotocol/core';
 import { browser, Runtime } from 'webextension-polyfill-ts';
 
 import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
