@@ -70,8 +70,8 @@ export function ImportCredentials(): JSX.Element | null {
               throw new Error('invalid');
             }
 
-            //@ts-expect-error
-            delete request.claimerSignature
+            // @ts-expect-error
+            delete request.claimerSignature;
 
             await KiltCredential.verifyCredential(request);
 

@@ -5,12 +5,15 @@ import { Crypto } from '@kiltprotocol/utils';
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
 
 import { ChallengeInput, ChallengeOutput } from './types';
+import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 
 export async function produceEncryptedChallenge(
   input: ChallengeInput,
   sender: Runtime.MessageSender,
 ): Promise<ChallengeOutput> {
   const { challenge, dAppEncryptionKeyId } = input;
+
+  await initKiltSDK();
 
   const encryption = await getTabEncryption(sender, dAppEncryptionKeyId);
 
