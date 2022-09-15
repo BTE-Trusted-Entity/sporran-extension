@@ -3,11 +3,16 @@ import { browser } from 'webextension-polyfill-ts';
 import { BaseDidKey, DidServiceEndpoint } from '@kiltprotocol/types';
 import { GenericExtrinsic } from '@polkadot/types';
 
+import { find } from 'lodash-es';
+
 import * as styles from './SignDidExtrinsic.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
+import {
+  getIdentityCryptoFromSeed,
+  useIdentities,
+} from '../../utilities/identities/identities';
 import { getFullDidDetails, isFullDid } from '../../utilities/did/did';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import {
@@ -21,6 +26,8 @@ import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+
+import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 import {
   getExtrinsicValues,
@@ -137,10 +144,12 @@ function DidExtrinsic({
   identity,
   extrinsic,
   origin,
+  canSelect,
 }: {
   identity: Identity;
   extrinsic: GenericExtrinsic;
   origin: string;
+  canSelect?: boolean;
 }) {
   const t = browser.i18n.getMessage;
 
@@ -151,7 +160,11 @@ function DidExtrinsic({
       <h1 className={styles.heading}>{t('view_SignDidExtrinsic_title')}</h1>
       <p className={styles.subline}>{t('view_SignDidExtrinsic_subline')}</p>
 
-      <IdentitiesCarousel identity={identity} />
+      {canSelect ? (
+        <IdentitiesCarousel identity={identity} />
+      ) : (
+        <IdentitySlide identity={identity} />
+      )}
 
       <dl className={styles.details}>
         {values.map(({ label, value, details }) => (
@@ -181,14 +194,25 @@ interface Props {
   identity: Identity;
 }
 
-export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
+export function SignDidExtrinsic({
+  identity: currentIdentity,
+}: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
-
-  const { did } = identity;
 
   const data = usePopupData<SignDidExtrinsicOriginInput>();
 
-  const { signer, origin } = data;
+  const { signer, origin, signingDid } = data;
+
+  const did = signingDid || currentIdentity.did;
+
+  const identities = useIdentities().data;
+
+  const signingDidIdentity =
+    signingDid &&
+    identities &&
+    find(Object.values(identities), { did: signingDid });
+
+  const identity = signingDidIdentity || currentIdentity;
 
   const extrinsic = useAsyncValue(getExtrinsic, [data]);
 
@@ -286,6 +310,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
           identity={identity}
           extrinsic={extrinsic}
           origin={origin}
+          canSelect={!signingDidIdentity}
         />
       )}
 

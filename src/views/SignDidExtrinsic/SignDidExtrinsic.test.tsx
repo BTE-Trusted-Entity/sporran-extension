@@ -23,6 +23,11 @@ const input: SignDidExtrinsicOriginInput = {
   signer: '4tMMYZHsFfqzfCsgCPLJSBmomBv2d6cBEYzHKMGVKz2VjACR',
 };
 
+const linkingInput: SignDidExtrinsicOriginInput = {
+  ...input,
+  signingDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
+};
+
 jest.mock('./didExtrinsic');
 
 describe('SignDidExtrinsic', () => {
@@ -127,6 +132,42 @@ describe('SignDidExtrinsic', () => {
     ]);
     const { container } = render(
       <PopupTestProvider path={paths.popup.signDidExtrinsic} data={input}>
+        <SignDidExtrinsic
+          identity={
+            identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+          }
+        />
+      </PopupTestProvider>,
+    );
+    await waitForGetPassword();
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render account linking extrinsic', async () => {
+    mockIsFullDid(true);
+
+    jest.mocked(getExtrinsic).mockResolvedValue({
+      method: { section: 'didLookup', method: 'associateAccount' },
+    } as unknown as GenericExtrinsic);
+
+    jest.mocked(getExtrinsicValues).mockReturnValue([
+      {
+        label: 'from',
+        value:
+          'extremely-long-domain-name-tries-to-overflow-all-available-space-and-just-keeps-going-and-going-and-going.com',
+      },
+      {
+        label: 'method data',
+        value:
+          'namespace.method(input = "some meaningful values you would definitely like to see")',
+      },
+    ]);
+
+    const { container } = render(
+      <PopupTestProvider
+        path={paths.popup.signDidExtrinsic}
+        data={linkingInput}
+      >
         <SignDidExtrinsic
           identity={
             identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']

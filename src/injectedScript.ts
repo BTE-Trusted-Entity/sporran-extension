@@ -3,6 +3,7 @@ import {
   IEncryptedMessage,
   IIdentity,
   DidResourceUri,
+  DidUri,
 } from '@kiltprotocol/types';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
@@ -132,12 +133,18 @@ async function signWithDid(plaintext: string): Promise<{
 async function signExtrinsicWithDid(
   extrinsic: HexString,
   signer: IIdentity['address'],
+  signingDid?: DidUri,
 ): Promise<{
   signed: HexString;
   didKeyUri: DidResourceUri;
 }> {
   const dAppName = document.title.substring(0, 50);
-  return injectedSignDidExtrinsicChannel.get({ extrinsic, signer, dAppName });
+  return injectedSignDidExtrinsicChannel.get({
+    extrinsic,
+    signer,
+    dAppName,
+    signingDid,
+  });
 }
 
 function main() {
