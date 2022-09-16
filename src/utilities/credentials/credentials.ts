@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo } from 'react';
 import { pick, pull } from 'lodash-es';
 import { DidUri, ICredential } from '@kiltprotocol/types';
-import { Attestation } from '@kiltprotocol/core';
+import { ConfigService } from '@kiltprotocol/config';
 import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
@@ -95,8 +95,14 @@ export function usePendingCredentialCheck(
       return;
     }
     (async () => {
-      const isAttested = await Attestation.query(credential.request.rootHash);
-      if (isAttested) {
+      const api = ConfigService.get('api');
+      const attestation = await api.query.attestation.attestations(
+        credential.request.rootHash,
+      );
+      if (attestation.isNone) return;
+      if (attestation.unwrap().revoked.isTrue) {
+        await saveCredential({ ...credential, status: 'revoked' });
+      } else {
         await saveCredential({ ...credential, status: 'attested' });
       }
     })();

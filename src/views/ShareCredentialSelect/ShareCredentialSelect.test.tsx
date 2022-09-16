@@ -1,4 +1,6 @@
-import { Attestation } from '@kiltprotocol/core';
+import { ConfigService } from '@kiltprotocol/config';
+
+import { TypeRegistry } from '@polkadot/types';
 
 import { render } from '../../testing/testing';
 
@@ -12,7 +14,18 @@ import { paths } from '../paths';
 
 import { ShareCredentialSelect } from './ShareCredentialSelect';
 
-jest.mocked(Attestation.query).mockResolvedValue(null);
+jest.mocked(ConfigService.get).mockImplementation((opt) => {
+  if (opt === 'api')
+    return {
+      query: {
+        attestation: {
+          attestations: jest
+            .fn()
+            .mockResolvedValue(new TypeRegistry().createType('Option')),
+        },
+      },
+    };
+});
 
 describe('ShareCredentialSelect', () => {
   it('should render', async () => {

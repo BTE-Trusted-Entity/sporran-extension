@@ -2,6 +2,7 @@ import { browser } from 'webextension-polyfill-ts';
 import { FormEvent, useCallback, useState } from 'react';
 import { Attestation, Credential } from '@kiltprotocol/core';
 import { ISubmitCredential } from '@kiltprotocol/types';
+import { ConfigService } from '@kiltprotocol/config';
 
 import * as styles from './ShareCredentialSign.module.css';
 
@@ -57,7 +58,11 @@ export function ShareCredentialSign({
         seed,
       );
 
-      const attestation = await Attestation.query(request.rootHash);
+      const api = ConfigService.get('api');
+      const attestation = Attestation.fromChain(
+        await api.query.attestation.attestations(request.rootHash),
+        request.rootHash,
+      );
 
       if (!attestation) {
         setError(t('view_ShareCredentialSign_error'));
