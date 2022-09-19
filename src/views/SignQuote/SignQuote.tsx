@@ -75,9 +75,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
       const { seed } = await passwordField.get(event);
 
-      const { encryptMsg, didDetails, sign } = await getIdentityCryptoFromSeed(
-        seed,
-      );
+      const { encryptMsg, didDetails } = await getIdentityCryptoFromSeed(seed);
 
       // The attester generated claim with the temporary identity, need to put real address in it
       const identityClaim = { ...claim, owner: didDetails.uri };
@@ -99,20 +97,8 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         status: 'pending',
       });
 
-      // some applications (including SKYC) may still expect a signed requestForAttestation.
-      // this interface is identical with the ICredentialPresentation, which we can create as follows:
-      const requestForAttestation = await Credential.createPresentation({
-        credential: requestedCredential,
-        signCallback: sign,
-        claimerDid: didDetails,
-      });
-
       const requestForAttestationBody: IRequestAttestation = {
-        content: {
-          credential: requestedCredential,
-          // @ts-expect-error requestForAttestation was renamed to credential, we include it for backwards compatibility.
-          requestForAttestation,
-        },
+        content: { credential: requestedCredential },
         type: 'request-attestation',
       };
 

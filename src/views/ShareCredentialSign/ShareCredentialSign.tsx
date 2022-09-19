@@ -77,15 +77,8 @@ export function ShareCredentialSign({
         challenge,
       });
 
-      // to support the old messaging interfaces we add a request & attestation prop
-      const presentationAndAttestedClaim = {
-        ...presentation,
-        request: presentation,
-        attestation,
-      };
-
       const credentialsBody: ISubmitCredential = {
-        content: [presentationAndAttestedClaim],
+        content: [presentation],
         type: 'submit-credential',
       };
 
