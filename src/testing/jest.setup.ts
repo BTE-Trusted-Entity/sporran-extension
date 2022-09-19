@@ -55,6 +55,11 @@ jest.mock('@kiltprotocol/utils', () => ({
     validateAddress: jest.fn(),
   },
 }));
+jest.mock('@kiltprotocol/config', () => ({
+  ConfigService: {
+    get: jest.fn(),
+  },
+}));
 
 jest.mock('../components/Avatar/Identicon', () => ({
   Identicon: () => 'Identicon',

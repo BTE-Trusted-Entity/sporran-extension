@@ -1,7 +1,5 @@
 import { ConfigService } from '@kiltprotocol/config';
 
-import { TypeRegistry } from '@polkadot/types';
-
 import { render } from '../../testing/testing';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
@@ -14,14 +12,20 @@ import { paths } from '../paths';
 
 import { ShareCredentialSelect } from './ShareCredentialSelect';
 
+// mock attestation querying
 jest.mocked(ConfigService.get).mockImplementation((opt) => {
   if (opt === 'api')
     return {
       query: {
         attestation: {
-          attestations: jest
-            .fn()
-            .mockResolvedValue(new TypeRegistry().createType('Option')),
+          attestations: jest.fn().mockResolvedValue({
+            // mock Option type
+            isSome: false,
+            isNone: true,
+            unwrap: () => {
+              throw new Error();
+            },
+          }),
         },
       },
     };

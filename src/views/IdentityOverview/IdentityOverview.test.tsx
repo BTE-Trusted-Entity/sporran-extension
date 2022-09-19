@@ -2,8 +2,6 @@ import { MemoryRouter, Route } from 'react-router-dom';
 
 import { ConfigService } from '@kiltprotocol/config';
 
-import { TypeRegistry } from '@polkadot/types';
-
 import {
   moreIdentitiesMock as identities,
   render,
@@ -24,19 +22,25 @@ import { waitForDownloadInfo } from '../../utilities/showDownloadInfoStorage/sho
 import { IdentityOverview } from './IdentityOverview';
 
 jest.mock('../../utilities/useAsyncValue/useAsyncValue');
+jest.mocked(useAsyncValue).mockReturnValue(false);
+// mock attestation querying
 jest.mocked(ConfigService.get).mockImplementation((opt) => {
   if (opt === 'api')
     return {
       query: {
         attestation: {
-          attestations: jest
-            .fn()
-            .mockResolvedValue(new TypeRegistry().createType('Option')),
+          attestations: jest.fn().mockResolvedValue({
+            // mock Option type
+            isSome: false,
+            isNone: true,
+            unwrap: () => {
+              throw new Error();
+            },
+          }),
         },
       },
     };
 });
-jest.mocked(useAsyncValue).mockReturnValue(false);
 
 const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
