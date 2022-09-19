@@ -11,11 +11,7 @@ export function isFullDid(did: DidUri): boolean {
 
 export async function getDidDocument(did: DidUri): Promise<DidDocument> {
   const details = await resolve(did);
-  if (
-    !details?.document ||
-    details.metadata.deactivated ||
-    details.metadata.canonicalId
-  ) {
+  if (!details?.document) {
     throw new Error(`Cannot resolve DID ${did}`);
   }
 
