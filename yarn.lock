@@ -12185,10 +12185,10 @@ react-accessible-dropdown-menu-hook@^3.2.0:
   resolved "https://registry.yarnpkg.com/react-accessible-dropdown-menu-hook/-/react-accessible-dropdown-menu-hook-3.2.0.tgz#fd3ec0ee97350ac0dd46c2d56ad814ca491f6d6e"
   integrity sha512-DilA+bEX1Jznu81Y7aVZyC2bWktuIHmMDW8OIGb0wmdfiP0mQEkklgxGaMJigwM6SssBghiKTRmoQIXkoS6YkQ==
 
-react-dialog-polyfill@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/react-dialog-polyfill/-/react-dialog-polyfill-1.1.4.tgz#194fee71bd1ff7ee3d124729c3ae486311113621"
-  integrity sha512-CYds8zz9GopBaEWamY7YPs9xZgnTQm/sG60hwWBn1m8ENQVC1Rfwo5oL9geFYQGuv9Ic3Qn2j6g8Oa87rHL8sA==
+react-dialog-polyfill@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/react-dialog-polyfill/-/react-dialog-polyfill-1.1.5.tgz#1fe9852ca931b1f358b71f48a717265cb4346787"
+  integrity sha512-R1KzirqEl8WEcapMeGgZODiESoo3p3L9tiowUOulDMpz4PQK763opfKL1YjUbxbiGLE1Yh9T5HBTobRA7YF0kQ==
   dependencies:
     dialog-polyfill "^0.5.6"
 
