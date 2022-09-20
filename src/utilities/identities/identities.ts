@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { mutate } from 'swr';
 import { Keyring } from '@polkadot/keyring';
-import { KeyringPair } from '@polkadot/keyring/types';
 import { HexString } from '@polkadot/util/types';
 import {
   naclBoxPairFromSecret,
@@ -22,6 +21,7 @@ import {
   EncryptCallback,
   DidDocument,
   KiltAddress,
+  KiltKeyringPair,
 } from '@kiltprotocol/types';
 import * as Message from '@kiltprotocol/messaging';
 import { Crypto } from '@kiltprotocol/utils';
@@ -118,12 +118,14 @@ export function makeKeyring(): Keyring {
   });
 }
 
-export function getKeypairByBackupPhrase(backupPhrase: string): KeyringPair {
-  return makeKeyring().addFromUri(backupPhrase);
+export function getKeypairByBackupPhrase(
+  backupPhrase: string,
+): KiltKeyringPair {
+  return makeKeyring().addFromUri(backupPhrase) as KiltKeyringPair;
 }
 
-export function getKeypairBySeed(seed: Uint8Array): KeyringPair {
-  return makeKeyring().addFromSeed(seed);
+export function getKeypairBySeed(seed: Uint8Array): KiltKeyringPair {
+  return makeKeyring().addFromSeed(seed) as KiltKeyringPair;
 }
 
 interface IdentityDidCrypto {
@@ -140,8 +142,8 @@ interface IdentityDidCrypto {
   ) => Promise<IEncryptedMessage>;
 }
 
-function deriveAuthenticationKey(seed: Uint8Array): KeyringPair {
-  return getKeypairBySeed(seed).derive('//did//0');
+function deriveAuthenticationKey(seed: Uint8Array): KiltKeyringPair {
+  return getKeypairBySeed(seed).derive('//did//0') as KiltKeyringPair;
 }
 
 export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
@@ -158,16 +160,6 @@ export function deriveEncryptionKeyFromSeed(seed: Uint8Array): {
   };
 }
 
-export async function getSignCallbackFromSeed(
-  seed: Uint8Array,
-): Promise<SignCallback> {
-  const authenticationKey = deriveAuthenticationKey(seed);
-  return async ({ data, alg }) => ({
-    data: authenticationKey.sign(data, { withType: false }),
-    alg,
-  });
-}
-
 export async function getIdentityCryptoFromSeed(
   seed: Uint8Array,
 ): Promise<IdentityDidCrypto> {
@@ -179,10 +171,20 @@ export async function getIdentityCryptoFromSeed(
   const { did } = identities[address];
 
   const didDetails = await getDidDocument(did);
+  const { authentication, keyAgreement } = didDetails;
 
-  const sign = await getSignCallbackFromSeed(seed);
+  if (!keyAgreement || !authentication) {
+    throw new Error(
+      'This DID does not have an authentication or encryption key?',
+    );
+  }
+  const sign: SignCallback = async ({ data }) => ({
+    data: authenticationKey.sign(data, { withType: false }),
+    keyType: authenticationKey.type,
+    keyUri: `${did}${authentication[0].id}`,
+  });
 
-  const encrypt: EncryptCallback = async ({ data, alg, peerPublicKey }) => {
+  const encrypt: EncryptCallback = async ({ data, peerPublicKey }) => {
     const { sealed, nonce } = naclSeal(
       data,
       encryptionKey.secretKey,
@@ -191,15 +193,15 @@ export async function getIdentityCryptoFromSeed(
 
     return {
       data: sealed,
-      alg,
       nonce,
+      keyUri: `${did}${keyAgreement[0].id}`,
     };
   };
 
   function signStr(plaintext: string) {
     const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
 
-    const didKeyUri: DidResourceUri = `${didDetails.uri}${didDetails.authentication[0].id}`;
+    const didKeyUri: DidResourceUri = `${did}${authentication[0].id}`;
 
     return { signature, didKeyUri };
   }
@@ -208,15 +210,9 @@ export async function getIdentityCryptoFromSeed(
     messageBody: MessageBody,
     dAppDidDocument: DidDocument,
   ): Promise<IEncryptedMessage> {
-    const message = Message.fromBody(
-      messageBody,
-      didDetails.uri,
-      dAppDidDocument.uri,
-    );
+    const message = Message.fromBody(messageBody, did, dAppDidDocument.uri);
     return Message.encrypt(
       message,
-      getDidEncryptionKey(didDetails).id,
-      didDetails,
       encrypt,
       `${dAppDidDocument.uri}${getDidEncryptionKey(dAppDidDocument).id}`,
     );

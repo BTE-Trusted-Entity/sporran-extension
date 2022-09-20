@@ -54,9 +54,7 @@ export function ShareCredentialSign({
 
       const { seed } = await passwordField.get(event);
 
-      const { encryptMsg, didDetails, sign } = await getIdentityCryptoFromSeed(
-        seed,
-      );
+      const { encryptMsg, sign } = await getIdentityCryptoFromSeed(seed);
 
       const api = ConfigService.get('api');
       const attestation = Attestation.fromChain(
@@ -73,7 +71,6 @@ export function ShareCredentialSign({
         credential: request,
         selectedAttributes: sharedContents,
         signCallback: sign,
-        claimerDid: didDetails,
         challenge,
       });
 

@@ -84,7 +84,6 @@ export async function getTabEncryption(
 
   const decryptBytes: DecryptCallback = async ({
     data,
-    alg,
     nonce,
     peerPublicKey,
   }) => {
@@ -100,14 +99,9 @@ export async function getTabEncryption(
 
     return {
       data: decrypted,
-      alg,
     };
   };
-  const encryptBytes: EncryptCallback = async ({
-    data,
-    alg,
-    peerPublicKey,
-  }) => {
+  const encryptBytes: EncryptCallback = async ({ data, peerPublicKey }) => {
     const { sealed, nonce } = naclSeal(
       data,
       encryptionKey.secretKey,
@@ -116,7 +110,7 @@ export async function getTabEncryption(
 
     return {
       data: sealed,
-      alg,
+      keyUri: sporranEncryptionDidKeyUri,
       nonce,
     };
   };
@@ -133,8 +127,6 @@ export async function getTabEncryption(
     );
     return Message.encrypt(
       message,
-      sporranEncryptionDidKey.id,
-      sporranDidDocument,
       encryptBytes,
       dAppEncryptionKeyUri as DidResourceUri,
     );

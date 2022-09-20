@@ -87,14 +87,15 @@ export async function verifyDidConfigResource(
         return false;
       }
 
-      const { verified } = await verifyDidSignature({
+      return verifyDidSignature({
         signature: {
           keyUri: `${issuerDidDocument.uri}${issuerDidDocument.assertionMethod[0].id}`,
           signature: credential.proof.signature as string,
         },
         message: Crypto.coToUInt8(credentialSubject.rootHash),
-      });
-      return verified;
+      })
+        .then(() => true)
+        .catch(() => false);
     },
   );
   if (!verified) {
