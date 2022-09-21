@@ -1,8 +1,6 @@
 import { resolve, Utils } from '@kiltprotocol/did';
 import { DidDocument, DidEncryptionKey, DidUri } from '@kiltprotocol/types';
 
-import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
-
 export function isFullDid(did: DidUri): boolean {
   if (!did) {
     // could be a legacy identity without DID

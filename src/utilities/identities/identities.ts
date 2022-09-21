@@ -130,7 +130,6 @@ export function getKeypairBySeed(seed: Uint8Array): KiltKeyringPair {
   return makeKeyring().addFromSeed(seed) as KiltKeyringPair;
 }
 
-// Why doesn't the SDK export this type? SignCallback is not sufficient for Did.Chain.GetStoreTx
 declare type GetStoreTxSignCallback = (
   signData: Omit<SignRequestData, 'did'>,
 ) => Promise<Omit<SignResponseData, 'keyUri'>>;
