@@ -28,14 +28,14 @@ import {
 import * as Message from '@kiltprotocol/messaging';
 import { Crypto } from '@kiltprotocol/utils';
 import { createLightDidDocument, resolve } from '@kiltprotocol/did';
-import { map, max } from 'lodash-es';
+import { map, max, memoize } from 'lodash-es';
 
 import {
   loadEncrypted,
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 
-import { getDidDocument, getDidEncryptionKey } from '../did/did';
+import { getDidDocument, getDidEncryptionKey, parseDidUri } from '../did/did';
 import { storage } from '../storage/storage';
 import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
 
@@ -136,7 +136,7 @@ declare type GetStoreTxSignCallback = (
 ) => Promise<Omit<SignResponseData, 'keyUri'>>;
 
 interface IdentityDidCrypto {
-  didDetails: DidDocument;
+  didDocument: DidDocument;
   sign: SignCallback;
   encrypt: EncryptCallback;
   signGetStoreTx: GetStoreTxSignCallback;
@@ -178,8 +178,8 @@ export async function getIdentityCryptoFromSeed(
   const identities = await getIdentities();
   const { did } = identities[address];
 
-  const didDetails = await getDidDocument(did);
-  const { authentication, keyAgreement } = didDetails;
+  const didDocument = await getDidDocument(did);
+  const { authentication, keyAgreement } = didDocument;
 
   if (!keyAgreement || !authentication) {
     throw new Error(
@@ -232,7 +232,7 @@ export async function getIdentityCryptoFromSeed(
   }
 
   return {
-    didDetails,
+    didDocument,
     sign,
     signGetStoreTx,
     encrypt,
@@ -324,12 +324,44 @@ export async function decryptIdentity(
   return new Uint8Array(seed);
 }
 
+/** Ensure that local information about the DID type matches stored on blockchain
+ * even if an error occurred while asynchronous update was running */
+async function syncDidStateWithBlockchain(address: string | null | undefined) {
+  if (!address) {
+    return;
+  }
+
+  const identities = await getIdentities();
+  const identity = identities[address];
+
+  const { fullDid, lightDid, type } = parseDidUri(identity.did);
+  const wasOnChain = type === 'full';
+
+  const resolved = await resolve(identity.did);
+  const isOnChain = wasOnChain
+    ? Boolean(resolved && resolved.metadata && !resolved.metadata.deactivated)
+    : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
+
+  if (wasOnChain && !isOnChain) {
+    await saveIdentity({ ...identity, did: lightDid });
+  }
+
+  if (!wasOnChain && isOnChain) {
+    await saveIdentity({ ...identity, did: fullDid });
+  }
+}
+
+/** Memoized function will run only once per identity while the popup is open, do not use from backend */
+const noAwaitUpdateCachedDidStateOnce = memoize(syncDidStateWithBlockchain);
+
 export function useCurrentIdentity(): string | null | undefined {
   const data = useSwrDataOrThrow(
     CURRENT_IDENTITY_KEY,
     getCurrentIdentity,
     'getCurrentIdentity',
   );
+
+  noAwaitUpdateCachedDidStateOnce(data);
 
   return data;
 }

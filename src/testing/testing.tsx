@@ -10,12 +10,15 @@ import { HTMLDialog } from 'react-dialog-polyfill';
 import { ConfigurationProvider } from '../configuration/ConfigurationContext';
 import { IdentitiesProviderMock } from '../utilities/identities/IdentitiesProvider.mock';
 import { CredentialsProviderMock } from '../utilities/credentials/CredentialsProvider.mock';
+import { mockIsFullDid } from '../utilities/did/did.mock';
 
 export {
   IdentitiesProviderMock,
   identitiesMock,
   moreIdentitiesMock,
 } from '../utilities/identities/IdentitiesProvider.mock';
+
+mockIsFullDid(false);
 
 // We do want to override the `render` from testing-library
 // eslint-disable-next-line import/export

@@ -17,7 +17,7 @@ exports[`CreateDidDApp should render with full DID 1`] = `
         class="container"
       >
         <div
-          class="avatar"
+          class="avatar fullDid"
         >
           Identicon
         </div>
@@ -175,7 +175,7 @@ exports[`CreateDidDApp should render with full DID 1`] = `
       <output
         class="errorTooltip"
       >
-        DID already exists for this identity
+        DID already on chain
       </output>
     </p>
   </form>
@@ -357,7 +357,7 @@ exports[`CreateDidDApp should render with light DID 1`] = `
         class="errorTooltip"
         hidden=""
       >
-        DID already exists for this identity
+        DID already on chain
       </output>
     </p>
   </form>

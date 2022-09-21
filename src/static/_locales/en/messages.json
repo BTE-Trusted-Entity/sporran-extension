@@ -541,6 +541,6 @@
     "message": "Request from:"
   },
   "view_CreateDidDApp_error": {
-    "message": "DID already exists for this identity"
+    "message": "DID already on chain"
   }
 }

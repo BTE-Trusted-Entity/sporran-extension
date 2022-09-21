@@ -40,12 +40,12 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
 
       const { keypair, seed } = await passwordField.get(event);
 
-      const { didDetails, signGetStoreTx } = await getIdentityCryptoFromSeed(
+      const { didDocument, signGetStoreTx } = await getIdentityCryptoFromSeed(
         seed,
       );
 
       const extrinsic = await Chain.getStoreTx(
-        didDetails,
+        didDocument,
         address,
         signGetStoreTx,
       );
