@@ -8,6 +8,8 @@ import { contentChallengeChannel } from './channels/ChallengeChannels/contentCha
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
 import { injectedAccessChannel } from './channels/AccessChannels/injectedAccessChannel';
+import { injectedCreateDidChannel } from './channels/CreateDidChannels/injectedCreateDidChannel';
+import { contentCreateDidChannel } from './channels/CreateDidChannels/contentCreateDidChannel';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -22,6 +24,7 @@ function initMessages() {
   injectedCredentialChannel.forward(contentCredentialChannel);
   injectedChallengeChannel.forward(contentChallengeChannel);
   injectedAccessChannel.forward(contentAccessChannel);
+  injectedCreateDidChannel.forward(contentCreateDidChannel);
 }
 
 async function main() {

@@ -1,1 +1,7 @@
-export type PopupAction = 'import' | 'access' | 'claim' | 'save' | 'share';
+export type PopupAction =
+  | 'import'
+  | 'access'
+  | 'claim'
+  | 'save'
+  | 'share'
+  | 'createDid';

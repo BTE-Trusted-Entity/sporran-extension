@@ -1,9 +1,12 @@
 import { IEncryptedMessage, DidResourceUri } from '@kiltprotocol/types';
 
+import { HexString } from '@polkadot/util/types';
+
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import { configuration } from './configuration/configuration';
 import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
 import { injectedAccessChannel } from './channels/AccessChannels/injectedAccessChannel';
+import { injectedCreateDidChannel } from './channels/CreateDidChannels/injectedCreateDidChannel';
 
 interface PubSubSession {
   listen: (
@@ -25,6 +28,7 @@ interface InjectedWindowProvider {
   name: string;
   version: string;
   specVersion: '1.0';
+  getSignedDidCreationExtrinsic: () => Promise<{ signed: HexString }>;
 }
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
@@ -86,6 +90,13 @@ async function startSession(
   };
 }
 
+async function getSignedDidCreationExtrinsic(): Promise<{
+  signed: HexString;
+}> {
+  const dAppName = document.title.substring(0, 50);
+  return injectedCreateDidChannel.get({ dAppName });
+}
+
 function main() {
   const { version } = configuration;
 
@@ -100,6 +111,7 @@ function main() {
   // Only injected scripts can create variables like this, content script cannot do this
   apiWindow.kilt ||= {};
   apiWindow.kilt.sporran ||= {
+    getSignedDidCreationExtrinsic,
     startSession,
     name: 'Sporran', // manifest_name
     version,

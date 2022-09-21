@@ -22,6 +22,8 @@ import {
   DidDocument,
   KiltAddress,
   KiltKeyringPair,
+  SignRequestData,
+  SignResponseData,
 } from '@kiltprotocol/types';
 import * as Message from '@kiltprotocol/messaging';
 import { Crypto } from '@kiltprotocol/utils';
@@ -128,10 +130,16 @@ export function getKeypairBySeed(seed: Uint8Array): KiltKeyringPair {
   return makeKeyring().addFromSeed(seed) as KiltKeyringPair;
 }
 
+// Why doesn't the SDK export this type? SignCallback is not sufficient for Did.Chain.GetStoreTx
+declare type GetStoreTxSignCallback = (
+  signData: Omit<SignRequestData, 'did'>,
+) => Promise<Omit<SignResponseData, 'keyUri'>>;
+
 interface IdentityDidCrypto {
   didDetails: DidDocument;
   sign: SignCallback;
   encrypt: EncryptCallback;
+  signGetStoreTx: GetStoreTxSignCallback;
   signStr: (plaintext: string) => {
     signature: HexString;
     didKeyUri: DidResourceUri;
@@ -184,6 +192,11 @@ export async function getIdentityCryptoFromSeed(
     keyUri: `${did}${authentication[0].id}`,
   });
 
+  const signGetStoreTx: GetStoreTxSignCallback = async ({ data }) => ({
+    data: authenticationKey.sign(data, { withType: false }),
+    keyType: authenticationKey.type,
+  });
+
   const encrypt: EncryptCallback = async ({ data, peerPublicKey }) => {
     const { sealed, nonce } = naclSeal(
       data,
@@ -221,6 +234,7 @@ export async function getIdentityCryptoFromSeed(
   return {
     didDetails,
     sign,
+    signGetStoreTx,
     encrypt,
     signStr,
     encryptMsg,

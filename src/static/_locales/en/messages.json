@@ -533,5 +533,14 @@
   },
   "view_ImportCredentials_more": {
     "message": "Import More Credentials"
+  },
+  "view_CreateDidDApp_heading": {
+    "message": "Create On-chain DID"
+  },
+  "view_CreateDidDApp_origin": {
+    "message": "Request from:"
+  },
+  "view_CreateDidDApp_error": {
+    "message": "DID already exists for this identity"
   }
 }
