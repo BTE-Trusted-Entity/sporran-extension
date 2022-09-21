@@ -20,10 +20,6 @@ export async function getDidDocument(did: DidUri): Promise<DidDocument> {
   return details.document;
 }
 
-export function useDidDocument(did: DidUri): DidDocument | undefined {
-  return useAsyncValue(getDidDocument, [did]);
-}
-
 export function parseDidUri(did: DidUri): ReturnType<
   typeof Utils.parseDidUri
 > & {
