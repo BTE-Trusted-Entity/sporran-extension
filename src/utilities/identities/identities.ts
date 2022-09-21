@@ -130,7 +130,7 @@ export function getKeypairBySeed(seed: Uint8Array): KiltKeyringPair {
   return makeKeyring().addFromSeed(seed) as KiltKeyringPair;
 }
 
-declare type GetStoreTxSignCallback = (
+type GetStoreTxSignCallback = (
   signData: Omit<SignRequestData, 'did'>,
 ) => Promise<Omit<SignResponseData, 'keyUri'>>;
 
