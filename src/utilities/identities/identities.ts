@@ -39,6 +39,12 @@ import { getDidDocument, getDidEncryptionKey, parseDidUri } from '../did/did';
 import { storage } from '../storage/storage';
 import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
 
+import {
+  deleteCredential,
+  getCredentials,
+  getList,
+} from '../credentials/credentials';
+
 import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
 import { IDENTITIES_KEY, getIdentities } from './getIdentities';
 
@@ -177,6 +183,10 @@ export async function getIdentityCryptoFromSeed(
   const identities = await getIdentities();
   const { did } = identities[address];
 
+  if (!did) {
+    throw new Error(`No DID for address ${address}`);
+  }
+
   const didDocument = await getDidDocument(did);
   const { authentication, keyAgreement } = didDocument;
 
@@ -211,6 +221,10 @@ export async function getIdentityCryptoFromSeed(
   };
 
   function signStr(plaintext: string) {
+    if (!did) {
+      throw new Error(`No DID for address ${address}`);
+    }
+
     const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
 
     const didKeyUri: DidResourceUri = `${did}${authentication[0].id}`;
@@ -222,6 +236,10 @@ export async function getIdentityCryptoFromSeed(
     messageBody: MessageBody,
     dAppDidDocument: DidDocument,
   ): Promise<IEncryptedMessage> {
+    if (!did) {
+      throw new Error(`No DID for address ${address}`);
+    }
+
     const message = Message.fromBody(messageBody, did, dAppDidDocument.uri);
     return Message.encrypt(
       message,
@@ -333,7 +351,11 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
   const identities = await getIdentities();
   const identity = identities[address];
 
-  const { fullDid, lightDid, type } = parseDidUri(identity.did);
+  if (!identity.did) {
+    return;
+  }
+
+  const { fullDid, type } = parseDidUri(identity.did);
   const wasOnChain = type === 'full';
 
   const resolved = await resolve(identity.did);
@@ -342,7 +364,15 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
     : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
 
   if (wasOnChain && !isOnChain) {
-    await saveIdentity({ ...identity, did: lightDid });
+    await saveIdentity({ ...identity, did: undefined });
+
+    // delete credentials since they are no longer usable
+    const credentials = await getCredentials(await getList());
+    credentials.forEach((credential) => {
+      if (credential.request.claim.owner === identity.did) {
+        deleteCredential(credential);
+      }
+    });
   }
 
   if (!wasOnChain && isOnChain) {

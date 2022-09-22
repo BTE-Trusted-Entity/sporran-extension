@@ -27,8 +27,7 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
 
   const { address, did } = identity;
 
-  const data = usePopupData<CreateDidOriginInput>();
-  const { origin } = data;
+  const { origin } = usePopupData<CreateDidOriginInput>();
 
   const passwordField = usePasswordField();
 
