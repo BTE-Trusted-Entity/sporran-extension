@@ -28,7 +28,7 @@ interface InjectedWindowProvider {
   name: string;
   version: string;
   specVersion: '1.0';
-  getSignedDidCreationExtrinsic: () => Promise<{ signed: HexString }>;
+  getSignedDidCreationExtrinsic: () => Promise<{ signedExtrinsic: HexString }>;
 }
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
@@ -91,7 +91,7 @@ async function startSession(
 }
 
 async function getSignedDidCreationExtrinsic(): Promise<{
-  signed: HexString;
+  signedExtrinsic: HexString;
 }> {
   const dAppName = document.title.substring(0, 50);
   return injectedCreateDidChannel.get({ dAppName });

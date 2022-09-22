@@ -8,5 +8,5 @@ export type CreateDidInput = DAppName;
 export type CreateDidOriginInput = DAppName & Origin;
 
 export interface CreateDidOutput {
-  signed: HexString;
+  signedExtrinsic: HexString;
 }

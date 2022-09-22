@@ -50,9 +50,9 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
         signGetStoreTx,
       );
 
-      const signed = (await extrinsic.signAsync(keypair)).toHex();
+      const signedExtrinsic = (await extrinsic.signAsync(keypair)).toHex();
 
-      await backgroundCreateDidChannel.return({ signed });
+      await backgroundCreateDidChannel.return({ signedExtrinsic });
       window.close();
     },
     [address, passwordField],
