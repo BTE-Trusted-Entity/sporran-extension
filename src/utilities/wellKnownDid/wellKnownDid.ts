@@ -1,5 +1,5 @@
 import ky from 'ky';
-import { DidUri, IRequestForAttestation } from '@kiltprotocol/types';
+import { DidUri } from '@kiltprotocol/types';
 import { DidDetails, Utils, verifyDidSignature } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 
@@ -26,7 +26,6 @@ interface DomainLinkageCredential {
   issuer: string;
   issuanceDate: string;
   expirationDate: string;
-  signedRequest: IRequestForAttestation;
   proof: Proof;
 }
 
