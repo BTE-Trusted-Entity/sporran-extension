@@ -75,7 +75,7 @@ export function useCredentials(): Credential[] | undefined {
   return useContext(CredentialsContext);
 }
 
-export function useIdentityCredentials(did: DidUri): Credential[] | undefined {
+export function useIdentityCredentials(did?: DidUri): Credential[] | undefined {
   const all = useCredentials();
 
   return useMemo(() => {

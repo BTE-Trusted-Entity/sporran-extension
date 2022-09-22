@@ -1,5 +1,8 @@
+import cx from 'classnames';
+
 import * as styles from './Avatar.module.css';
 
+import { isFullDid } from '../../utilities/did/did';
 import { Identity } from '../../utilities/identities/types';
 
 import { Identicon } from './Identicon';
@@ -14,7 +17,11 @@ export function Avatar({
   className = styles.avatar,
 }: Props): JSX.Element {
   return (
-    <div className={className}>
+    <div
+      className={cx(className, {
+        [styles.fullDid]: isFullDid(identity.did),
+      })}
+    >
       <Identicon
         className={styles.identicon}
         address={identity.address}

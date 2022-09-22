@@ -35,5 +35,6 @@ export const paths = {
       start: '/popup/share',
       sign: '/popup/share/sign',
     },
+    createDid: '/identity/:address/did/create',
   },
 };

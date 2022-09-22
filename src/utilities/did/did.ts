@@ -1,9 +1,9 @@
 import { resolve, Utils } from '@kiltprotocol/did';
 import { DidDocument, DidEncryptionKey, DidUri } from '@kiltprotocol/types';
 
-export function isFullDid(did: DidUri): boolean {
+export function isFullDid(did?: DidUri): boolean {
   if (!did) {
-    // could be a legacy identity without DID
+    // Will be undefined if DID has been removed from chain
     return false;
   }
   return Utils.parseDidUri(did).type === 'full';
@@ -18,8 +18,24 @@ export async function getDidDocument(did: DidUri): Promise<DidDocument> {
   return details.document;
 }
 
-export function getDidEncryptionKey(details: DidDocument): DidEncryptionKey {
-  const { keyAgreement } = details;
+export function parseDidUri(did: DidUri): ReturnType<
+  typeof Utils.parseDidUri
+> & {
+  fullDid: DidUri;
+} {
+  const parsed = Utils.parseDidUri(did);
+  const { type } = parsed;
+
+  const fullDid = type === 'full' ? did : Utils.getFullDidUri(did);
+
+  return {
+    ...parsed,
+    fullDid,
+  };
+}
+
+export function getDidEncryptionKey(document: DidDocument): DidEncryptionKey {
+  const { keyAgreement } = document;
   if (!keyAgreement?.length) {
     throw new Error('encryptionKey is not defined somehow');
   }

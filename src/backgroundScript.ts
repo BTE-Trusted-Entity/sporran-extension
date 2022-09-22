@@ -29,6 +29,8 @@ import { contentAccessChannel } from './channels/AccessChannels/contentAccessCha
 import { getAuthorizedOrigin } from './channels/AccessChannels/getAuthorizedOrigin';
 import { contentCredentialChannel } from './channels/CredentialChannels/contentCredentialChannel';
 import { contentChallengeChannel } from './channels/ChallengeChannels/contentChallengeChannel';
+import { contentCreateDidChannel } from './channels/CreateDidChannels/contentCreateDidChannel';
+import { getCreateDidResult } from './channels/CreateDidChannels/backgroundCreateDidChannel';
 
 function init() {
   initKiltSDK();
@@ -42,8 +44,9 @@ function init() {
 
   contentAccessChannel.produce(getAuthorizedOrigin);
   contentCredentialChannel.produce(showCredentialPopup);
-
   contentChallengeChannel.produce(produceEncryptedChallenge);
+  contentCreateDidChannel.produce(getCreateDidResult);
+
   browser.tabs.onRemoved.addListener(popupTabRemovedListener);
 
   onPopupConnect(connectToBlockchain);

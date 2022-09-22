@@ -22,20 +22,28 @@ import {
   DidDocument,
   KiltAddress,
   KiltKeyringPair,
+  SignRequestData,
+  SignResponseData,
 } from '@kiltprotocol/types';
 import * as Message from '@kiltprotocol/messaging';
 import { Crypto } from '@kiltprotocol/utils';
-import { createLightDidDocument, resolve } from '@kiltprotocol/did';
-import { map, max } from 'lodash-es';
+import { createLightDidDocument, resolve, Utils } from '@kiltprotocol/did';
+import { map, max, memoize } from 'lodash-es';
 
 import {
   loadEncrypted,
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 
-import { getDidDocument, getDidEncryptionKey } from '../did/did';
+import { getDidDocument, getDidEncryptionKey, parseDidUri } from '../did/did';
 import { storage } from '../storage/storage';
 import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
+
+import {
+  deleteCredential,
+  getCredentials,
+  getList,
+} from '../credentials/credentials';
 
 import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
 import { IDENTITIES_KEY, getIdentities } from './getIdentities';
@@ -128,10 +136,15 @@ export function getKeypairBySeed(seed: Uint8Array): KiltKeyringPair {
   return makeKeyring().addFromSeed(seed) as KiltKeyringPair;
 }
 
+type GetStoreTxSignCallback = (
+  signData: Omit<SignRequestData, 'did'>,
+) => Promise<Omit<SignResponseData, 'keyUri'>>;
+
 interface IdentityDidCrypto {
-  didDetails: DidDocument;
+  didDocument: DidDocument;
   sign: SignCallback;
   encrypt: EncryptCallback;
+  signGetStoreTx: GetStoreTxSignCallback;
   signStr: (plaintext: string) => {
     signature: HexString;
     didKeyUri: DidResourceUri;
@@ -170,8 +183,12 @@ export async function getIdentityCryptoFromSeed(
   const identities = await getIdentities();
   const { did } = identities[address];
 
-  const didDetails = await getDidDocument(did);
-  const { authentication, keyAgreement } = didDetails;
+  if (!did) {
+    throw new Error(`No DID for address ${address}`);
+  }
+
+  const didDocument = await getDidDocument(did);
+  const { authentication, keyAgreement } = didDocument;
 
   if (!keyAgreement || !authentication) {
     throw new Error(
@@ -182,6 +199,11 @@ export async function getIdentityCryptoFromSeed(
     data: authenticationKey.sign(data, { withType: false }),
     keyType: authenticationKey.type,
     keyUri: `${did}${authentication[0].id}`,
+  });
+
+  const signGetStoreTx: GetStoreTxSignCallback = async ({ data }) => ({
+    data: authenticationKey.sign(data, { withType: false }),
+    keyType: authenticationKey.type,
   });
 
   const encrypt: EncryptCallback = async ({ data, peerPublicKey }) => {
@@ -199,6 +221,10 @@ export async function getIdentityCryptoFromSeed(
   };
 
   function signStr(plaintext: string) {
+    if (!did) {
+      throw new Error(`No DID for address ${address}`);
+    }
+
     const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
 
     const didKeyUri: DidResourceUri = `${did}${authentication[0].id}`;
@@ -210,6 +236,10 @@ export async function getIdentityCryptoFromSeed(
     messageBody: MessageBody,
     dAppDidDocument: DidDocument,
   ): Promise<IEncryptedMessage> {
+    if (!did) {
+      throw new Error(`No DID for address ${address}`);
+    }
+
     const message = Message.fromBody(messageBody, did, dAppDidDocument.uri);
     return Message.encrypt(
       message,
@@ -219,8 +249,9 @@ export async function getIdentityCryptoFromSeed(
   }
 
   return {
-    didDetails,
+    didDocument,
     sign,
+    signGetStoreTx,
     encrypt,
     signStr,
     encryptMsg,
@@ -310,12 +341,58 @@ export async function decryptIdentity(
   return new Uint8Array(seed);
 }
 
+/** Ensure that local information about the DID type matches stored on blockchain
+ * even if an error occurred while asynchronous update was running */
+async function syncDidStateWithBlockchain(address: string | null | undefined) {
+  if (!address) {
+    return;
+  }
+
+  const identities = await getIdentities();
+  const identity = identities[address];
+
+  const { did } = identity;
+
+  if (!did) {
+    return;
+  }
+
+  const { fullDid, type } = parseDidUri(did);
+  const wasOnChain = type === 'full';
+
+  const resolved = await resolve(did);
+  const isOnChain = wasOnChain
+    ? Boolean(resolved && resolved.metadata && !resolved.metadata.deactivated)
+    : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
+
+  if (wasOnChain && !isOnChain) {
+    await saveIdentity({ ...identity, did: undefined });
+
+    // delete credentials since they are no longer usable
+    const credentials = await getCredentials(await getList());
+    credentials.forEach((credential) => {
+      if (Utils.isSameSubject(credential.request.claim.owner, did)) {
+        deleteCredential(credential);
+      }
+    });
+  }
+
+  if (!wasOnChain && isOnChain) {
+    await saveIdentity({ ...identity, did: fullDid });
+  }
+}
+
+/** Memoized function will run only once per identity while the popup is open, do not use from backend */
+const noAwaitUpdateCachedDidStateOnce = memoize(syncDidStateWithBlockchain);
+
 export function useCurrentIdentity(): string | null | undefined {
   const data = useSwrDataOrThrow(
     CURRENT_IDENTITY_KEY,
     getCurrentIdentity,
     'getCurrentIdentity',
   );
+
+  noAwaitUpdateCachedDidStateOnce(data);
 
   return data;
 }

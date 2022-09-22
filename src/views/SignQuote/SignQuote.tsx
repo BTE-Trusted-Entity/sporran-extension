@@ -75,10 +75,10 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
       const { seed } = await passwordField.get(event);
 
-      const { encryptMsg, didDetails } = await getIdentityCryptoFromSeed(seed);
+      const { encryptMsg, didDocument } = await getIdentityCryptoFromSeed(seed);
 
       // The attester generated claim with the temporary identity, need to put real address in it
-      const identityClaim = { ...claim, owner: didDetails.uri };
+      const identityClaim = { ...claim, owner: didDocument.uri };
 
       const requestedCredential = Credential.fromClaim(identityClaim, {
         legitimations,
