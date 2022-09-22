@@ -49,6 +49,7 @@ import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
 import { IDENTITIES_KEY, getIdentities } from './getIdentities';
 
 import { Identity } from './types';
+import { isSameSubject } from '@kiltprotocol/did/lib/cjs/Did.utils';
 export { Identity, IdentitiesMap } from './types';
 
 const CURRENT_IDENTITY_KEY = 'currentIdentity';
@@ -369,7 +370,7 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
     // delete credentials since they are no longer usable
     const credentials = await getCredentials(await getList());
     credentials.forEach((credential) => {
-      if (credential.request.claim.owner === identity.did) {
+      if (isSameSubject(credential.request.claim.owner, identity.did)) {
         deleteCredential(credential);
       }
     });
