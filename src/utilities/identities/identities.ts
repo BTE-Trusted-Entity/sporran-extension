@@ -27,7 +27,7 @@ import {
 } from '@kiltprotocol/types';
 import * as Message from '@kiltprotocol/messaging';
 import { Crypto } from '@kiltprotocol/utils';
-import { createLightDidDocument, resolve } from '@kiltprotocol/did';
+import { createLightDidDocument, resolve, Utils } from '@kiltprotocol/did';
 import { map, max, memoize } from 'lodash-es';
 
 import {
@@ -49,7 +49,6 @@ import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
 import { IDENTITIES_KEY, getIdentities } from './getIdentities';
 
 import { Identity } from './types';
-import { isSameSubject } from '@kiltprotocol/did/lib/cjs/Did.utils';
 export { Identity, IdentitiesMap } from './types';
 
 const CURRENT_IDENTITY_KEY = 'currentIdentity';
@@ -352,14 +351,16 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
   const identities = await getIdentities();
   const identity = identities[address];
 
-  if (!identity.did) {
+  const { did } = identity;
+
+  if (!did) {
     return;
   }
 
-  const { fullDid, type } = parseDidUri(identity.did);
+  const { fullDid, type } = parseDidUri(did);
   const wasOnChain = type === 'full';
 
-  const resolved = await resolve(identity.did);
+  const resolved = await resolve(did);
   const isOnChain = wasOnChain
     ? Boolean(resolved && resolved.metadata && !resolved.metadata.deactivated)
     : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
@@ -370,7 +371,7 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
     // delete credentials since they are no longer usable
     const credentials = await getCredentials(await getList());
     credentials.forEach((credential) => {
-      if (isSameSubject(credential.request.claim.owner, identity.did)) {
+      if (Utils.isSameSubject(credential.request.claim.owner, did)) {
         deleteCredential(credential);
       }
     });
