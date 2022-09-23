@@ -16,6 +16,7 @@ export default {
 const input: CreateDidOriginInput = {
   dAppName: 'dApp',
   origin: 'https://example.org/foo',
+  submitter: '4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB',
 };
 
 export function LightDid(): JSX.Element {

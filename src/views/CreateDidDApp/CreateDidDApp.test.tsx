@@ -16,6 +16,7 @@ import { CreateDidDApp } from './CreateDidDApp';
 const mockInput: CreateDidOriginInput = {
   dAppName: 'dApp',
   origin: 'https://example.org/foo',
+  submitter: '4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB',
 };
 
 describe('CreateDidDApp', () => {

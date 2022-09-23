@@ -25,9 +25,9 @@ interface Props {
 export function CreateDidDApp({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { address, did } = identity;
+  const { did } = identity;
 
-  const { origin } = usePopupData<CreateDidOriginInput>();
+  const { origin, submitter } = usePopupData<CreateDidOriginInput>();
 
   const passwordField = usePasswordField();
 
@@ -45,7 +45,7 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
 
       const extrinsic = await Chain.getStoreTx(
         didDocument,
-        address,
+        submitter,
         signGetStoreTx,
       );
 
@@ -54,7 +54,7 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
       await backgroundCreateDidChannel.return({ signedExtrinsic });
       window.close();
     },
-    [address, passwordField],
+    [passwordField],
   );
 
   const handleCancel = useCallback(async () => {
