@@ -540,7 +540,10 @@
   "view_CreateDidDApp_origin": {
     "message": "Request from:"
   },
-  "view_CreateDidDApp_error": {
+  "view_CreateDidDApp_error_full_did": {
     "message": "DID already on chain"
+  },
+  "view_CreateDidDApp_error_did_removed": {
+    "message": "DID removed from chain"
   }
 }

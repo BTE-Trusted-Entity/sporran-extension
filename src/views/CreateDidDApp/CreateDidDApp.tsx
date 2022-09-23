@@ -25,13 +25,16 @@ interface Props {
 export function CreateDidDApp({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { address, did } = identity;
+  const { did } = identity;
 
-  const { origin } = usePopupData<CreateDidOriginInput>();
+  const { origin, submitter } = usePopupData<CreateDidOriginInput>();
 
   const passwordField = usePasswordField();
 
-  const error = isFullDid(did);
+  const error = [
+    isFullDid(did) && t('view_CreateDidDApp_error_full_did'),
+    !did && t('view_CreateDidDApp_error_did_removed'),
+  ].filter(Boolean)[0];
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
@@ -45,7 +48,7 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
 
       const extrinsic = await Chain.getStoreTx(
         didDocument,
-        address,
+        submitter,
         signGetStoreTx,
       );
 
@@ -54,7 +57,7 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
       await backgroundCreateDidChannel.return({ signedExtrinsic });
       window.close();
     },
-    [address, passwordField],
+    [passwordField],
   );
 
   const handleCancel = useCallback(async () => {
@@ -79,11 +82,15 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
         <button onClick={handleCancel} type="button" className={styles.reject}>
           {t('common_action_cancel')}
         </button>
-        <button type="submit" className={styles.submit} disabled={error}>
+        <button
+          type="submit"
+          className={styles.submit}
+          disabled={Boolean(error)}
+        >
           {t('common_action_sign')}
         </button>
         <output className={styles.errorTooltip} hidden={!error}>
-          {t('view_CreateDidDApp_error')}
+          {error}
         </output>
       </p>
     </form>

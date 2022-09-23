@@ -1,4 +1,8 @@
-import { IEncryptedMessage, DidResourceUri } from '@kiltprotocol/types';
+import {
+  IEncryptedMessage,
+  DidResourceUri,
+  KiltAddress,
+} from '@kiltprotocol/types';
 
 import { HexString } from '@polkadot/util/types';
 
@@ -28,7 +32,9 @@ interface InjectedWindowProvider {
   name: string;
   version: string;
   specVersion: '1.0';
-  getSignedDidCreationExtrinsic: () => Promise<{ signedExtrinsic: HexString }>;
+  getSignedDidCreationExtrinsic: (
+    submitter: KiltAddress,
+  ) => Promise<{ signedExtrinsic: HexString }>;
 }
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
@@ -90,11 +96,11 @@ async function startSession(
   };
 }
 
-async function getSignedDidCreationExtrinsic(): Promise<{
+async function getSignedDidCreationExtrinsic(submitter: KiltAddress): Promise<{
   signedExtrinsic: HexString;
 }> {
   const dAppName = document.title.substring(0, 50);
-  return injectedCreateDidChannel.get({ dAppName });
+  return injectedCreateDidChannel.get({ dAppName, submitter });
 }
 
 function main() {
