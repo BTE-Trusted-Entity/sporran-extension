@@ -158,6 +158,7 @@ function initialize() {
     specVersion: '1.0',
   };
   window.dispatchEvent(new CustomEvent('kilt-extension#initialized'));
+  window.removeEventListener('kilt-dapp#initialized', initialize);
 }
 
 function main() {
