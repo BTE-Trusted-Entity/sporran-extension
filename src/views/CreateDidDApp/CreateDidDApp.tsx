@@ -57,7 +57,7 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
       await backgroundCreateDidChannel.return({ signedExtrinsic });
       window.close();
     },
-    [passwordField],
+    [passwordField, submitter],
   );
 
   const handleCancel = useCallback(async () => {
