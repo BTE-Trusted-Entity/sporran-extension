@@ -103,17 +103,13 @@ async function getSignedDidCreationExtrinsic(submitter: KiltAddress): Promise<{
   return injectedCreateDidChannel.get({ dAppName, submitter });
 }
 
-function main() {
-  const { version } = configuration;
+const { version } = configuration;
 
-  const apiWindow = window as unknown as {
-    kilt: { sporran?: Partial<InjectedWindowProvider> };
-  };
+const apiWindow = window as unknown as {
+  kilt: { sporran?: Partial<InjectedWindowProvider> };
+};
 
-  if (!apiWindow.kilt || apiWindow.kilt.sporran) {
-    return;
-  }
-
+function initialize() {
   // Only injected scripts can create variables like this, content script cannot do this
   apiWindow.kilt ||= {};
   apiWindow.kilt.sporran ||= {
@@ -123,6 +119,21 @@ function main() {
     version,
     specVersion: '1.0',
   };
+  window.dispatchEvent(new CustomEvent('kilt-extension#initialized'));
+  window.removeEventListener('kilt-dapp#initialized', initialize);
+}
+
+function main() {
+  if (!apiWindow.kilt) {
+    window.addEventListener('kilt-dapp#initialized', initialize);
+    return;
+  }
+
+  if (apiWindow.kilt.sporran) {
+    return;
+  }
+
+  initialize();
 }
 
 main();
