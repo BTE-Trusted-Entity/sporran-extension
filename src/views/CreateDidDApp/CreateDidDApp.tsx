@@ -54,8 +54,6 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
 
       const signedExtrinsic = (await extrinsic.signAsync(keypair)).toHex();
 
-      console.log('signed: ', signedExtrinsic);
-
       await backgroundCreateDidChannel.return({ signedExtrinsic });
       window.close();
     },
