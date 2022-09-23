@@ -16,7 +16,7 @@ export default {
 const input: CreateDidOriginInput = {
   dAppName: 'dApp',
   origin: 'https://example.org/foo',
-  submitter: '4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB',
+  submitter: '4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653',
 };
 
 export function LightDid(): JSX.Element {
@@ -31,6 +31,14 @@ export function FullDid(): JSX.Element {
   <PopupTestProvider path={paths.popup.createDid} data={input}>
     <CreateDidDApp
       identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}
+    />
+  </PopupTestProvider>;
+}
+
+export function NoDid(): JSX.Element {
+  <PopupTestProvider path={paths.popup.createDid} data={input}>
+    <CreateDidDApp
+      identity={identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']}
     />
   </PopupTestProvider>;
 }

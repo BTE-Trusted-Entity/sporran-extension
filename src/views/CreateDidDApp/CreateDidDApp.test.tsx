@@ -16,7 +16,7 @@ import { CreateDidDApp } from './CreateDidDApp';
 const mockInput: CreateDidOriginInput = {
   dAppName: 'dApp',
   origin: 'https://example.org/foo',
-  submitter: '4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB',
+  submitter: '4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653',
 };
 
 describe('CreateDidDApp', () => {
@@ -43,6 +43,23 @@ describe('CreateDidDApp', () => {
         <CreateDidDApp
           identity={
             identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+          }
+        />
+      </PopupTestProvider>,
+    );
+    await waitForGetPassword();
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render with removed DID', async () => {
+    mockIsFullDid(false);
+
+    const { container } = render(
+      <PopupTestProvider path={paths.popup.createDid} data={mockInput}>
+        <CreateDidDApp
+          identity={
+            identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']
           }
         />
       </PopupTestProvider>,

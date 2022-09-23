@@ -29,9 +29,8 @@ export const moreIdentitiesMock: IdentitiesMap = {
   ...identitiesMock,
   // square idle twenty same argue hire surround tongue satisfy tackle silly until
   '4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB': {
-    name: 'Identity 4',
+    name: 'Identity with removed on-chain DID',
     address: '4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB',
-    did: 'did:kilt:light:004tPoYT9j4i429JktnyX9EEu9StL58YfdPCi8cUkYnvtAKRbK',
     index: 4,
   },
   // unit faint retreat broken owner conduct summer exotic comic near essay during
