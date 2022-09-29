@@ -22,13 +22,13 @@ import {
   DidDocument,
   KiltAddress,
   KiltKeyringPair,
-  SignRequestData,
-  SignResponseData,
 } from '@kiltprotocol/types';
 import * as Message from '@kiltprotocol/messaging';
 import { Crypto } from '@kiltprotocol/utils';
 import { createLightDidDocument, resolve, Utils } from '@kiltprotocol/did';
 import { map, max, memoize } from 'lodash-es';
+
+import { getStoreTx } from '@kiltprotocol/did/lib/cjs/Did.chain';
 
 import {
   loadEncrypted,
@@ -136,15 +136,11 @@ export function getKeypairBySeed(seed: Uint8Array): KiltKeyringPair {
   return makeKeyring().addFromSeed(seed) as KiltKeyringPair;
 }
 
-type GetStoreTxSignCallback = (
-  signData: Omit<SignRequestData, 'did'>,
-) => Promise<Omit<SignResponseData, 'keyUri'>>;
-
 interface IdentityDidCrypto {
   didDocument: DidDocument;
   sign: SignCallback;
   encrypt: EncryptCallback;
-  signGetStoreTx: GetStoreTxSignCallback;
+  signGetStoreTx: Parameters<typeof getStoreTx>[2];
   signStr: (plaintext: string) => {
     signature: HexString;
     didKeyUri: DidResourceUri;
@@ -201,7 +197,9 @@ export async function getIdentityCryptoFromSeed(
     keyUri: `${did}${authentication[0].id}`,
   });
 
-  const signGetStoreTx: GetStoreTxSignCallback = async ({ data }) => ({
+  const signGetStoreTx: Parameters<typeof getStoreTx>[2] = async ({
+    data,
+  }) => ({
     data: authenticationKey.sign(data, { withType: false }),
     keyType: authenticationKey.type,
   });

@@ -40,19 +40,15 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
     async (event: FormEvent) => {
       event.preventDefault();
 
-      const { keypair, seed } = await passwordField.get(event);
+      const { seed } = await passwordField.get(event);
 
       const { didDocument, signGetStoreTx } = await getIdentityCryptoFromSeed(
         seed,
       );
 
-      const extrinsic = await Chain.getStoreTx(
-        didDocument,
-        submitter,
-        signGetStoreTx,
-      );
-
-      const signedExtrinsic = (await extrinsic.signAsync(keypair)).toHex();
+      const signedExtrinsic = (
+        await Chain.getStoreTx(didDocument, submitter, signGetStoreTx)
+      ).toHex();
 
       await backgroundCreateDidChannel.return({ signedExtrinsic });
       window.close();
