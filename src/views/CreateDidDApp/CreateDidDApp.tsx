@@ -1,6 +1,6 @@
 import { FormEvent, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Chain } from '@kiltprotocol/did';
+import { getStoreTx } from '@kiltprotocol/did';
 
 import * as styles from './CreateDidDApp.module.css';
 
@@ -47,7 +47,7 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
       );
 
       const signedExtrinsic = (
-        await Chain.getStoreTx(didDocument, submitter, signGetStoreTx)
+        await getStoreTx(didDocument, submitter, signGetStoreTx)
       ).toHex();
 
       await backgroundCreateDidChannel.return({ signedExtrinsic });

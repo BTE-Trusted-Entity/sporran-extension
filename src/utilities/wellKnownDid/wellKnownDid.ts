@@ -1,6 +1,6 @@
 import ky from 'ky';
 import { DidUri, DidDocument, ICredential } from '@kiltprotocol/types';
-import { Utils, verifyDidSignature } from '@kiltprotocol/did';
+import { validateUri, verifyDidSignature } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 
 import { getDidDocument } from '../did/did';
@@ -65,9 +65,13 @@ export async function verifyDidConfigResource(
         return false;
       }
 
-      const isDid = Utils.isKiltDidUri(credentialSubject.id);
+      try {
+        validateUri(credentialSubject.id, 'Did');
+      } catch {
+        return false;
+      }
       const matchesIssuer = issuer === credentialSubject.id;
-      if (!isDid || !matchesIssuer) {
+      if (!matchesIssuer) {
         return false;
       }
 

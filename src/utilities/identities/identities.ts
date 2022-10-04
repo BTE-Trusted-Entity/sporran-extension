@@ -25,7 +25,11 @@ import {
 } from '@kiltprotocol/types';
 import * as Message from '@kiltprotocol/messaging';
 import { Crypto } from '@kiltprotocol/utils';
-import { createLightDidDocument, resolve, Utils } from '@kiltprotocol/did';
+import {
+  createLightDidDocument,
+  isSameSubject,
+  resolve,
+} from '@kiltprotocol/did';
 import { map, max, memoize } from 'lodash-es';
 
 import { getStoreTx } from '@kiltprotocol/did/lib/cjs/Did.chain';
@@ -369,7 +373,7 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
     // delete credentials since they are no longer usable
     const credentials = await getCredentials(await getList());
     credentials.forEach((credential) => {
-      if (Utils.isSameSubject(credential.request.claim.owner, did)) {
+      if (isSameSubject(credential.request.claim.owner, did)) {
         deleteCredential(credential);
       }
     });

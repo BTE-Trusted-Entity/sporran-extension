@@ -1,4 +1,4 @@
-import { resolve, Utils } from '@kiltprotocol/did';
+import { resolve, parse, getFullDidUri } from '@kiltprotocol/did';
 import { DidDocument, DidEncryptionKey, DidUri } from '@kiltprotocol/types';
 
 export function isFullDid(did?: DidUri): boolean {
@@ -6,7 +6,7 @@ export function isFullDid(did?: DidUri): boolean {
     // Will be undefined if DID has been removed from chain
     return false;
   }
-  return Utils.parseDidUri(did).type === 'full';
+  return parse(did).type === 'full';
 }
 
 export async function getDidDocument(did: DidUri): Promise<DidDocument> {
@@ -18,15 +18,13 @@ export async function getDidDocument(did: DidUri): Promise<DidDocument> {
   return details.document;
 }
 
-export function parseDidUri(did: DidUri): ReturnType<
-  typeof Utils.parseDidUri
-> & {
+export function parseDidUri(did: DidUri): ReturnType<typeof parse> & {
   fullDid: DidUri;
 } {
-  const parsed = Utils.parseDidUri(did);
+  const parsed = parse(did);
   const { type } = parsed;
 
-  const fullDid = type === 'full' ? did : Utils.getFullDidUri(did);
+  const fullDid = type === 'full' ? did : getFullDidUri(did);
 
   return {
     ...parsed,

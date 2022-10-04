@@ -116,7 +116,7 @@ export async function getTabEncryption(
   };
 
   async function decrypt(encrypted: IEncryptedMessage): Promise<IMessage> {
-    return Message.decrypt(encrypted, decryptBytes, sporranDidDocument);
+    return Message.decrypt(encrypted, decryptBytes);
   }
 
   async function encrypt(messageBody: MessageBody): Promise<IEncryptedMessage> {
