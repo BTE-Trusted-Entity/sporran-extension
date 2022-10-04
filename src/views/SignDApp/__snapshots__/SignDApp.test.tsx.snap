@@ -83,7 +83,7 @@ exports[`SignDApp should render 1`] = `
       </dt>
       <dd
         class="detailValue"
-        title="namespace.method(input = \\"some meaningful values you would definitely like to see\\")"
+        title="namespace.method(input = "some meaningful values you would definitely like to see")"
       >
         namespace.method(input = "some meaningful values you would definitely like to see")
       </dd>
