@@ -53,6 +53,12 @@ export function W3NCreateForm({ identity }: Props): JSX.Element {
         return;
       }
 
+      const capital = web3name.match(/[A-Z]/);
+      if (capital) {
+        setError(t('view_W3NCreateForm_capital'));
+        return;
+      }
+
       const unexpected = web3name.match(/[^a-z0-9_-]/);
       if (unexpected) {
         setError(t('view_W3NCreateForm_unexpected', [unexpected[0]]));

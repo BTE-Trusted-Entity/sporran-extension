@@ -1254,6 +1254,9 @@
       }
     }
   },
+  "view_W3NCreateForm_capital": {
+    "message": "Capital letters are not supported as a part of your web3name"
+  },
   "view_W3NCreateForm_taken": {
     "message": "Too late, this web3name is already taken"
   },
