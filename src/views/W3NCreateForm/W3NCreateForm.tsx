@@ -55,7 +55,7 @@ export function W3NCreateForm({ identity }: Props): JSX.Element {
 
       const capital = web3name.match(/[A-Z]/);
       if (capital) {
-        setError(t('view_W3NCreateForm_capital', [capital[0]]));
+        setError(t('view_W3NCreateForm_capital'));
         return;
       }
 
