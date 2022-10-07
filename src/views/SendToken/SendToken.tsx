@@ -137,9 +137,9 @@ function getIsAmountSmallerThanRecipientExistential(
 
 function getAmountError(
   amount: string | null,
-  maximum: BN | null,
+  maximum: BN | undefined,
   recipientBalanceZero: boolean | undefined,
-): string | null {
+): string | null | undefined {
   if (amount === null) {
     return noError;
   }
@@ -208,11 +208,23 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     })();
   }, []);
 
-  const [fee, setFee] = useState<BN | null>(null);
+  const [fee, setFee] = useState<BN>();
 
   const balance = useAddressBalance(identity.address);
-  const maximum =
-    balance && fee ? BN.max(balance.transferable.sub(fee), new BN(0)) : null;
+  const [maximum, setMaximum] = useState<BN>();
+  useEffect(() => {
+    (async () => {
+      if (!balance) {
+        return;
+      }
+      const fee = await getFee({
+        amount: balance.transferable,
+        tip: new BN(0),
+        recipient: '',
+      });
+      setMaximum(BN.max(balance.transferable.sub(fee), new BN(0)));
+    })();
+  }, [balance]);
 
   const [recipient, setRecipient] = useState('');
   const recipientError = recipient && getAddressError(recipient, identity);
@@ -222,7 +234,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   );
   const recipientBalanceZero = recipientBalance?.total?.isZero?.();
 
-  const [amount, setAmount] = useState<string | null>(null);
+  const [amount, setAmount] = useState<string>();
   const amountError =
     amount && getAmountError(amount, maximum, recipientBalanceZero);
 
