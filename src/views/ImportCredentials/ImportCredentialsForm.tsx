@@ -38,17 +38,17 @@ export function ImportCredentialsForm({ handleFiles }: Props): JSX.Element {
   }, []);
 
   return (
-    <section className={styles.container}>
+    <section
+      className={styles.container}
+      onDragEnter={handleDrag}
+      onDragOver={handleDrag}
+      onDrop={handleDrop}
+    >
       <h1 className={styles.heading}>{t('view_ImportCredentials_title')}</h1>
       <p className={styles.subline}>{t('view_ImportCredentials_subline')}</p>
 
       <div className={styles.workspace}>
-        <form
-          className={styles.form}
-          onDragEnter={handleDrag}
-          onDragOver={handleDrag}
-          onDrop={handleDrop}
-        >
+        <form className={styles.form}>
           <p className={styles.drop}>{t('view_ImportCredentials_drop')}</p>
 
           <p>
