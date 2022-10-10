@@ -87,11 +87,11 @@ export async function decrypt(
 function arrayBufferToBase64(arrayBuffer: ArrayBuffer): string {
   const bytes = new Uint8Array(arrayBuffer);
   const asciiString = String.fromCodePoint(...bytes);
-  return window.btoa(asciiString);
+  return btoa(asciiString);
 }
 
 function base64ToArrayBuffer(base64: string): ArrayBuffer {
-  const asciiString = window.atob(base64);
+  const asciiString = atob(base64);
   return Uint8Array.from(asciiString, (c) => c.charCodeAt(0)).buffer;
 }
 

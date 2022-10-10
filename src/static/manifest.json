@@ -1,22 +1,21 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "__MSG_manifest_name__",
   "short_name": "__MSG_manifest_short_name__",
   "description": "__MSG_manifest_description__",
   "version": "2023.3.14",
   "default_locale": "en",
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "icon/light/16.png",
-      "32" : "icon/light/32.png",
+      "32": "icon/light/32.png",
       "48": "icon/light/48.png",
       "128": "icon/light/128.png"
     },
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["js/backgroundScript.js"],
-    "persistent": true
+    "service_worker": "js/backgroundScript.js"
   },
   "content_scripts": [{
     "matches": ["*://*/*"],
@@ -33,8 +32,13 @@
     "clipboardWrite",
     "storage"
   ],
-  "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self';",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'"
+  },
   "web_accessible_resources": [
-    "js/injectedScript.js"
+    {
+      "resources": ["js/injectedScript.js"],
+      "matches": ["*://*/*"]
+    }
   ]
 }
