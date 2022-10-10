@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { MouseEvent, useCallback, useState } from 'react';
 import { Modal } from 'react-dialog-polyfill';
 import { browser } from 'webextension-polyfill-ts';
 import { without } from 'lodash-es';
@@ -19,7 +19,7 @@ interface Props {
   pending: Import[];
   failedImports: FailedImport[];
   setFailedImports: (values: FailedImport[]) => void;
-  handleMoreClick: () => void;
+  handleMoreClick: (event: MouseEvent) => void;
 }
 
 export function ImportCredentialsResults({
@@ -53,7 +53,12 @@ export function ImportCredentialsResults({
   };
 
   return (
-    <section className={styles.container}>
+    <section
+      className={styles.container}
+      onDragEnter={handleMoreClick}
+      onDragOver={handleMoreClick}
+      onDrop={handleMoreClick}
+    >
       <h1 className={styles.heading}>{t('view_ImportCredentials_title')}</h1>
       <p className={styles.subline}>{t('view_ImportCredentials_subline')}</p>
 

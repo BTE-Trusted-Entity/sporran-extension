@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { MouseEvent, useCallback, useMemo, useState } from 'react';
 import { filter, reject, sortBy } from 'lodash-es';
 import { RequestForAttestation } from '@kiltprotocol/core';
 
@@ -110,7 +110,8 @@ export function ImportCredentials(): JSX.Element | null {
     [identitiesList],
   );
 
-  const handleMoreClick = useCallback(() => {
+  const handleMoreClick = useCallback((event: MouseEvent) => {
+    event.preventDefault();
     setProcessing(false);
     setPending([]);
     setSuccessfulImports([]);
