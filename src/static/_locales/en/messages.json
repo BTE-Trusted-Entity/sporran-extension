@@ -240,10 +240,13 @@
     "message": "Invalid"
   },
   "component_CredentialCard_delete_warning": {
-    "message": "Do you really want to delete this credential?"
+    "message": "Are you sure you want to delete this credential?"
   },
   "component_CredentialCard_delete_explanation": {
     "message": "If you have created a backup of this credential, you can restore it at any time."
+  },
+  "component_CredentialCard_revoked_delete_explanation": {
+    "message": "Deleting this credential will remove it from your Sporran wallet."
   },
   "component_CredentialCard_delete_confirm": {
     "message": "Yes, Delete This Credential"
