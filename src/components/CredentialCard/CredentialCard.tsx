@@ -137,11 +137,6 @@ function DeleteModal({
 }) {
   const t = browser.i18n.getMessage;
 
-  const explanation =
-    credential.status === 'revoked'
-      ? t('component_CredentialCard_revoked_delete_explanation')
-      : t('component_CredentialCard_delete_explanation');
-
   const visibility = useBooleanState();
 
   const handleConfirm = useCallback(async () => {
@@ -165,7 +160,11 @@ function DeleteModal({
             <h1 className={styles.warning}>
               {t('component_CredentialCard_delete_warning')}
             </h1>
-            <p className={styles.explanation}>{explanation}</p>
+            <p className={styles.explanation}>
+              {credential.status === 'revoked'
+                ? t('component_CredentialCard_revoked_delete_explanation')
+                : t('component_CredentialCard_delete_explanation')}
+            </p>
             <button
               type="button"
               className={styles.cancelDelete}
