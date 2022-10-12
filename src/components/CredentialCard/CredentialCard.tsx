@@ -154,7 +154,9 @@ function DeleteModal({
               {t('component_CredentialCard_delete_warning')}
             </h1>
             <p className={styles.explanation}>
-              {t('component_CredentialCard_delete_explanation')}
+              {credential.status === 'revoked'
+                ? t('component_CredentialCard_revoked_delete_explanation')
+                : t('component_CredentialCard_delete_explanation')}
             </p>
             <button
               type="button"
