@@ -196,7 +196,7 @@ export async function getIdentityCryptoFromSeed(
     );
   }
   const sign: SignCallback = async ({ data }) => ({
-    data: authenticationKey.sign(data, { withType: false }),
+    signature: authenticationKey.sign(data, { withType: false }),
     keyType: authenticationKey.type,
     keyUri: `${did}${authentication[0].id}`,
   });
@@ -204,7 +204,7 @@ export async function getIdentityCryptoFromSeed(
   const signGetStoreTx: Parameters<typeof getStoreTx>[2] = async ({
     data,
   }) => ({
-    data: authenticationKey.sign(data, { withType: false }),
+    signature: authenticationKey.sign(data, { withType: false }),
     keyType: authenticationKey.type,
   });
 

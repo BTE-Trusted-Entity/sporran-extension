@@ -1,3 +1,6 @@
+import { CType } from '@kiltprotocol/core';
+import { HexString } from '@polkadot/util/types';
+
 import { identitiesMock as identities, render } from '../../testing/testing';
 import { mockTerms } from '../../utilities/mockTerms/mockTerms';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
@@ -5,6 +8,10 @@ import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedP
 import { paths } from '../paths';
 
 import { SignQuote } from './SignQuote';
+
+jest
+  .mocked(CType)
+  .hashToId.mockImplementation((hash: HexString) => `kilt:ctype:${hash}`);
 
 describe('SignQuote', () => {
   it('should render', async () => {

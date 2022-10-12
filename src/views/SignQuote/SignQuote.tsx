@@ -1,7 +1,7 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { filter, find } from 'lodash-es';
-import { Credential } from '@kiltprotocol/core';
+import { Credential, CType } from '@kiltprotocol/core';
 import {
   IClaim,
   DidUri,
@@ -45,7 +45,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
   const { claim, cTypes, attesterName } = data;
 
-  const cType = find(cTypes, { hash: claim.cTypeHash });
+  const cType = find(cTypes, { $id: CType.hashToId(claim.cTypeHash) });
 
   const passwordField = usePasswordField();
 
@@ -67,7 +67,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       const { claim, delegationId, attesterName, attesterDid, legitimations } =
         data;
 
-      const cTypeTitle = cType.schema.title;
+      const cTypeTitle = cType.title;
 
       legitimations.forEach((legitimation) =>
         Credential.verifyDataStructure(legitimation),
@@ -133,7 +133,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
           </Fragment>
         ))}
         <dt className={styles.detailName}>{t('view_SignQuote_cType')}:</dt>
-        <dd className={styles.detailValue}>{cType?.schema?.title}</dd>
+        <dd className={styles.detailValue}>{cType?.title}</dd>
 
         <dt className={styles.detailName}>{t('view_SignQuote_attester')}:</dt>
         <dd className={styles.detailValue}>{attesterName}</dd>

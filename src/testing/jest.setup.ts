@@ -45,6 +45,7 @@ jest.mock('@polkadot/x-ws', () => ({}));
 
 jest.mock('@kiltprotocol/core', () => ({
   Attestation: { query: jest.fn() },
+  CType: { hashToId: jest.fn() },
 }));
 jest.mock('@kiltprotocol/did', () => ({
   Utils: { parseDidUri: jest.fn() },
