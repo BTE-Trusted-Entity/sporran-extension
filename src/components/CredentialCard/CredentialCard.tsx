@@ -1,18 +1,19 @@
 import {
+  ChangeEvent,
+  FocusEvent,
+  Fragment,
+  KeyboardEvent,
   RefObject,
   useCallback,
   useEffect,
   useRef,
   useState,
-  Fragment,
-  KeyboardEvent,
-  FocusEvent,
-  ChangeEvent,
 } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useParams } from 'react-router-dom';
 import { Modal } from 'react-dialog-polyfill';
 import { browser } from 'webextension-polyfill-ts';
+import cx from 'classnames';
 
 import * as styles from './CredentialCard.module.css';
 
@@ -20,6 +21,7 @@ import {
   Credential,
   deleteCredential,
   getCredentialDownload,
+  isUnusableCredential,
   saveCredential,
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
@@ -161,7 +163,7 @@ function DeleteModal({
               {t('component_CredentialCard_delete_warning')}
             </h1>
             <p className={styles.explanation}>
-              {credential.status === 'revoked'
+              {isUnusableCredential(credential)
                 ? t('component_CredentialCard_revoked_delete_explanation')
                 : t('component_CredentialCard_delete_explanation')}
             </p>
@@ -214,17 +216,19 @@ function DownloadModal({
 
   const showInfo = useShowDownloadInfo();
   const { isDownloaded } = credential;
+  const isUnusable = isUnusableCredential(credential);
   const { name, url } = getCredentialDownload(credential);
 
   return (
     <Fragment>
-      {!isDownloaded && showInfo ? (
+      {(!isDownloaded && showInfo) || isUnusable ? (
         <button
           className={
             isDownloaded ? styles.download : styles.downloadPromptExpanded
           }
           aria-label={t('component_CredentialCard_backup')}
           onClick={visibility.on}
+          disabled={isUnusable}
         />
       ) : (
         <a
@@ -300,13 +304,15 @@ function PresentationModal({
 
   const showInfo = useShowPresentationInfo();
 
-  const isAttested = credential.status === 'attested';
+  const { request, status } = credential;
+  const isAttested = status === 'attested';
+  const isUnusable = isUnusableCredential(credential);
   const { address } = useParams() as { address: string };
   if (!address || !isAttested) {
     return null; // only allow creating presentation when the identity is known and the credential is attested
   }
 
-  const hash = credential.request.rootHash;
+  const hash = request.rootHash;
   const url = generatePath(paths.identity.credentials.presentation, {
     address,
     hash,
@@ -314,11 +320,12 @@ function PresentationModal({
 
   return (
     <Fragment>
-      {showInfo ? (
+      {showInfo || isUnusable ? (
         <button
           className={styles.presentation}
           aria-label={t('component_CredentialCard_presentation')}
           onClick={visibility.on}
+          disabled={isUnusable}
         />
       ) : (
         <Link
@@ -411,16 +418,20 @@ export function CredentialCard({
   const contents = Object.entries(request.claim.contents);
   const label = contents[0][1];
 
+  const isUnusable = isUnusableCredential(credential);
+
   return (
     <li
-      className={styles.credential}
+      className={!isUnusable ? styles.credential : styles.unusableCredential}
       aria-expanded={expanded.current}
       ref={cardRef}
     >
       {!expanded.current && (
         <button
           type="button"
-          className={isDownloaded ? styles.expand : styles.downloadPrompt}
+          className={
+            isDownloaded || isUnusable ? styles.expand : styles.downloadPrompt
+          }
           onClick={expanded.on}
           aria-label={
             !isDownloaded
@@ -470,7 +481,14 @@ export function CredentialCard({
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_status')}
               </dt>
-              <dd className={styles.detailValue}>{statuses[status]}</dd>
+              <dd
+                className={cx(
+                  styles.detailValue,
+                  isUnusable && styles.unusableValue,
+                )}
+              >
+                {statuses[status]}
+              </dd>
             </div>
 
             {contents.map(([name, value]) => (

@@ -668,6 +668,9 @@
   "view_IdentityCredentials_import": {
     "message": "+ Import Credential"
   },
+  "view_IdentityCredentials_checkStatus": {
+    "message": "Check Status"
+  },
   "view_IdentityCredentials_no_credentials": {
     "message": "No credentials available"
   },

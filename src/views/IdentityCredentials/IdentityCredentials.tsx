@@ -9,13 +9,17 @@ import { Identity } from '../../utilities/identities/types';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
-import { useIdentityCredentials } from '../../utilities/credentials/credentials';
+import {
+  checkCredentialsStatus,
+  useIdentityCredentials,
+} from '../../utilities/credentials/credentials';
 
 import { isNew } from '../../utilities/identities/identities';
 import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 import { paths } from '../paths';
 import { showPopup } from '../../channels/base/PopupChannel/PopupMessages';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 interface Props {
   identity: Identity;
@@ -24,7 +28,7 @@ interface Props {
 export function IdentityCredentials({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const identityCredentials = useIdentityCredentials(identity.did);
+  const identityCredentials = useIdentityCredentials(identity.did, false);
 
   const credentials = useMemo(
     () => identityCredentials?.concat().reverse(),
@@ -35,6 +39,16 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
     await showPopup('import', {}, '', {});
     window.close();
   }, []);
+
+  const checkingStatus = useBooleanState();
+
+  const handleCheckStatusClick = useCallback(async () => {
+    if (credentials && !checkingStatus.current) {
+      checkingStatus.on();
+      await checkCredentialsStatus(credentials);
+      checkingStatus.off();
+    }
+  }, [checkingStatus, credentials]);
 
   if (isNew(identity)) {
     return <IdentityOverviewNew />;
@@ -55,13 +69,22 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
 
       <ul className={styles.credentials}>
         <li>
-          <Link
-            to={paths.popup.import}
-            onClick={handleImportClick}
-            className={styles.importCredential}
-          >
-            {t('view_IdentityCredentials_import')}
-          </Link>
+          <div className={styles.actions}>
+            <Link
+              to={paths.popup.import}
+              onClick={handleImportClick}
+              className={styles.importCredential}
+            >
+              {t('view_IdentityCredentials_import')}
+            </Link>
+            <button
+              type="button"
+              onClick={handleCheckStatusClick}
+              className={styles.checkStatus}
+            >
+              {t('view_IdentityCredentials_checkStatus')}
+            </button>
+          </div>
         </li>
 
         {credentials.length === 0 ? (
