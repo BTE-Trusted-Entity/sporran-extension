@@ -48,7 +48,7 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
 
       const signedExtrinsic = (
         await getStoreTx(didDocument, submitter, signGetStoreTx)
-      ).toHex();
+      ).method.toHex();
 
       await backgroundCreateDidChannel.return({ signedExtrinsic });
       window.close();
