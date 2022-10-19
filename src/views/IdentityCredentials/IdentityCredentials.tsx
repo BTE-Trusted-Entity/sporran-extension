@@ -83,6 +83,12 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
               className={styles.checkStatus}
             >
               {t('view_IdentityCredentials_checkStatus')}
+              <span
+                className={
+                  checkingStatus.current ? styles.progress : styles.stagnation
+                }
+                aria-hidden
+              />
             </button>
           </div>
         </li>

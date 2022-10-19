@@ -6,6 +6,8 @@ export const credentials: string;
 export const actions: string;
 export const importCredential: string;
 export const checkStatus: string;
+export const progress: string;
+export const stagnation: string;
 export const noCredentials: string;
 export const info: string;
 export const explainerLink: string;
