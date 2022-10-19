@@ -58,3 +58,11 @@ export function Expanded(): JSX.Element {
     </ul>
   );
 }
+
+export function Revoked(): JSX.Element {
+  return (
+    <ul className={styles.credentialsList}>
+      <CredentialCard expand credential={credentialsMock[2]} />
+    </ul>
+  );
+}

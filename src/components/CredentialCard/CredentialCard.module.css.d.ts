@@ -1,6 +1,7 @@
 export const __esModule: true;
 export const credentialsList: string;
 export const credential: string;
+export const unusableCredential: string;
 export const selectable: string;
 export const expand: string;
 export const downloadPrompt: string;
@@ -21,6 +22,7 @@ export const details: string;
 export const detail: string;
 export const detailName: string;
 export const detailValue: string;
+export const unusableValue: string;
 export const nameValue: string;
 export const editName: string;
 export const input: string;

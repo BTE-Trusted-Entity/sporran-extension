@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo } from 'react';
-import { cloneDeep, pick, pull, without } from 'lodash-es';
-import { IRequestForAttestation, DidUri } from '@kiltprotocol/types';
+import { cloneDeep, pick, pull, reject, without } from 'lodash-es';
+import { DidUri, IRequestForAttestation } from '@kiltprotocol/types';
 import { Attestation, RequestForAttestation } from '@kiltprotocol/core';
 import { mutate } from 'swr';
 
@@ -75,7 +75,14 @@ export function useCredentials(): Credential[] | undefined {
   return useContext(CredentialsContext);
 }
 
-export function useIdentityCredentials(did: DidUri): Credential[] | undefined {
+export function isUnusableCredential({ status }: Credential) {
+  return ['revoked', 'invalid'].includes(status);
+}
+
+export function useIdentityCredentials(
+  did: DidUri,
+  onlyUsable = true,
+): Credential[] | undefined {
   const all = useCredentials();
 
   return useMemo(() => {
@@ -87,11 +94,16 @@ export function useIdentityCredentials(did: DidUri): Credential[] | undefined {
       // could be a legacy identity without DID
       return [];
     }
+    const usable = reject(all, isUnusableCredential);
+    const unusable = all.filter(isUnusableCredential);
+    const sorted = [...unusable, ...usable]; // will be displayed in the reverse order
+    const filtered = onlyUsable ? usable : sorted;
+
     const { fullDid } = parseDidUri(did);
-    return all.filter((credential) =>
+    return filtered.filter((credential) =>
       sameFullDid(credential.request.claim.owner, fullDid),
     );
-  }, [all, did]);
+  }, [all, did, onlyUsable]);
 }
 
 export function usePendingCredentialCheck(
@@ -150,5 +162,19 @@ export async function invalidateCredentials(
 ): Promise<void> {
   for (const credential of credentials) {
     await saveCredential({ ...credential, status: 'invalid' });
+  }
+}
+
+export async function checkCredentialsStatus(
+  credentials: Credential[],
+): Promise<void> {
+  for (const credential of credentials) {
+    if (credential.status !== 'attested') {
+      continue;
+    }
+    const attestation = await Attestation.query(credential.request.rootHash);
+    if (attestation?.revoked === true) {
+      await saveCredential({ ...credential, status: 'revoked' });
+    }
   }
 }
