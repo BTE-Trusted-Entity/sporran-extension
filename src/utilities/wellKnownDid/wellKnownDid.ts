@@ -1,4 +1,5 @@
 import ky from 'ky';
+import { hexToU8a } from '@polkadot/util';
 import { DidUri, DidDocument, ICredential } from '@kiltprotocol/types';
 import { validateUri, verifyDidSignature } from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
@@ -92,10 +93,8 @@ export async function verifyDidConfigResource(
       }
 
       return verifyDidSignature({
-        signature: {
-          keyUri: `${issuerDidDocument.uri}${issuerDidDocument.assertionMethod[0].id}`,
-          signature: credential.proof.signature as string,
-        },
+        keyUri: `${issuerDidDocument.uri}${issuerDidDocument.assertionMethod[0].id}`,
+        signature: hexToU8a(credential.proof.signature as string),
         message: Crypto.coToUInt8(credentialSubject.rootHash),
       })
         .then(() => true)
