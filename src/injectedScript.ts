@@ -31,7 +31,7 @@ interface InjectedWindowProvider {
   ) => Promise<PubSubSession>;
   name: string;
   version: string;
-  specVersion: '1.0';
+  specVersion: '1.0' | '2.0' | '3.0';
   getSignedDidCreationExtrinsic: (
     submitter: KiltAddress,
   ) => Promise<{ signedExtrinsic: HexString }>;
@@ -106,18 +106,27 @@ async function getSignedDidCreationExtrinsic(submitter: KiltAddress): Promise<{
 const { version } = configuration;
 
 const apiWindow = window as unknown as {
-  kilt: { sporran?: Partial<InjectedWindowProvider> };
+  kilt: {
+    meta?: { versions: { credentials: string } };
+    sporran?: Partial<InjectedWindowProvider>;
+  };
 };
 
 function initialize() {
   // Only injected scripts can create variables like this, content script cannot do this
   apiWindow.kilt ||= {};
+  // detect specVersion to use
+  const specVersion = apiWindow.kilt?.meta?.versions?.credentials?.startsWith(
+    '3.',
+  )
+    ? '3.0'
+    : '1.0';
   apiWindow.kilt.sporran ||= {
     getSignedDidCreationExtrinsic,
     startSession,
     name: 'Sporran', // manifest_name
     version,
-    specVersion: '1.0',
+    specVersion,
   };
   window.dispatchEvent(new CustomEvent('kilt-extension#initialized'));
   window.removeEventListener('kilt-dapp#initialized', initialize);
