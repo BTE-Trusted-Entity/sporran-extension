@@ -173,7 +173,7 @@ function initialize() {
   apiWindow.kilt.sporran ||= {
     getSignedDidCreationExtrinsic,
     startSession,
-    name: 'Sporran', // manifest_name
+    name: 'Sporran Lite', // manifest_name
     version,
     specVersion,
   };
