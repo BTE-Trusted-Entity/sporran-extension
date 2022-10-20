@@ -60,12 +60,12 @@ export function ShareCredentialSign({
       const { encryptMsg, sign } = await getIdentityCryptoFromSeed(seed);
 
       const api = ConfigService.get('api');
-      const attestation = Attestation.fromChain(
-        await api.query.attestation.attestations(request.rootHash),
+
+      const attestation = await api.query.attestation.attestations(
         request.rootHash,
       );
 
-      if (!attestation) {
+      if (attestation.isNone) {
         setError(t('view_ShareCredentialSign_error'));
         return;
       }
@@ -82,7 +82,7 @@ export function ShareCredentialSign({
       if (specVersion === '1.0') {
         content = {
           request: presentation,
-          attestation,
+          attestation: Attestation.fromChain(attestation, request.rootHash),
         } as unknown as ICredentialPresentation;
       } else {
         content = presentation;
