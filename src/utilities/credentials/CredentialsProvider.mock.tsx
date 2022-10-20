@@ -575,6 +575,7 @@ export const mockRequestCredential: ShareInput = {
     challenge: 'PASS',
   },
   verifierDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
+  specVersion: '3.0',
 };
 
 export const mockUnknownCType = {

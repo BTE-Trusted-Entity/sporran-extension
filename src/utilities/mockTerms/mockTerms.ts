@@ -52,4 +52,5 @@ export const mockTerms: Terms = {
   cTypes: [mockCType],
   attesterName: 'SocialKYC',
   attesterDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
+  specVersion: '3.0',
 };

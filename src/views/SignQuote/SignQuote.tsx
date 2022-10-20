@@ -7,6 +7,7 @@ import {
   DidUri,
   IRequestAttestation,
   ITerms,
+  IRequestAttestationContent,
 } from '@kiltprotocol/types';
 
 import * as styles from './SignQuote.module.css';
@@ -32,6 +33,7 @@ export type Terms = ITerms & {
   claim: IClaim;
   attesterName: string;
   attesterDid: DidUri;
+  specVersion: '1.0' | '3.0';
 };
 
 interface Props {
@@ -43,7 +45,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
   const data = usePopupData<Terms>();
 
-  const { claim, cTypes, attesterName } = data;
+  const { claim, cTypes, attesterName, specVersion } = data;
 
   const cType = find(cTypes, { $id: CType.hashToId(claim.cTypeHash) });
 
@@ -75,7 +77,9 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
       const { seed } = await passwordField.get(event);
 
-      const { encryptMsg, didDocument } = await getIdentityCryptoFromSeed(seed);
+      const { encryptMsg, didDocument, sign } = await getIdentityCryptoFromSeed(
+        seed,
+      );
 
       // The attester generated claim with the temporary identity, need to put real address in it
       const identityClaim = { ...claim, owner: didDocument.uri };
@@ -97,21 +101,37 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         status: 'pending',
       });
 
-      const requestForAttestationBody: IRequestAttestation = {
-        content: { credential: requestedCredential },
+      let content: IRequestAttestationContent;
+
+      // DApps using legacy spec versions will expect a different interface for the message
+      if (specVersion === '1.0') {
+        // adds the expected claimerSignature property
+        const requestForAttestation = await Credential.createPresentation({
+          credential: requestedCredential,
+          signCallback: sign,
+        });
+        content = {
+          requestForAttestation,
+        } as unknown as IRequestAttestationContent;
+      } else {
+        content = { credential: requestedCredential };
+      }
+
+      const requestAttestationBody: IRequestAttestation = {
+        content,
         type: 'request-attestation',
       };
 
       const attesterDidDocument = await getDidDocument(attesterDid);
       const message = await encryptMsg(
-        requestForAttestationBody,
+        requestAttestationBody,
         attesterDidDocument,
       );
 
       await claimChannel.return(message);
       window.close();
     },
-    [credentials, cType, data, passwordField],
+    [credentials, cType, data, passwordField, specVersion],
   );
 
   return (

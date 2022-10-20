@@ -21,7 +21,7 @@ export async function showCredentialPopup(
   input: CredentialInput,
   sender: Runtime.MessageSender,
 ): Promise<IEncryptedMessage | void> {
-  const { message: encrypted, dAppName } = input;
+  const { message: encrypted, dAppName, specVersion } = input;
 
   await initKiltSDK();
 
@@ -32,11 +32,17 @@ export async function showCredentialPopup(
 
   if (message.body.type === 'submit-terms') {
     try {
+      const { content } = message.body;
+      if (specVersion === '1.0') {
+        // @ts-expect-error compatibility with old cType interface
+        content.cTypes = content.cTypes?.map((cType) => cType.schema);
+      }
       return await claimChannel.get(
         {
-          ...message.body.content,
+          ...content,
           attesterName: dAppName,
           attesterDid: dAppEncryptionDidKey.controller,
+          specVersion,
         },
         sender,
       );
@@ -59,6 +65,7 @@ export async function showCredentialPopup(
       {
         credentialRequest: message.body.content,
         verifierDid: dAppEncryptionDidKey.controller,
+        specVersion,
       },
       sender,
     );

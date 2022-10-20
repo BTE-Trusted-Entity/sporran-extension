@@ -1,7 +1,10 @@
 import { browser } from 'webextension-polyfill-ts';
 import { FormEvent, useCallback, useState } from 'react';
 import { Attestation, Credential } from '@kiltprotocol/core';
-import { ISubmitCredential } from '@kiltprotocol/types';
+import {
+  ICredentialPresentation,
+  ISubmitCredential,
+} from '@kiltprotocol/types';
 import { ConfigService } from '@kiltprotocol/config';
 
 import * as styles from './ShareCredentialSign.module.css';
@@ -34,7 +37,7 @@ export function ShareCredentialSign({
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { credentialRequest, verifierDid } = popupData;
+  const { credentialRequest, verifierDid, specVersion } = popupData;
 
   const { challenge } = credentialRequest;
 
@@ -74,8 +77,19 @@ export function ShareCredentialSign({
         challenge,
       });
 
+      let content: ICredentialPresentation;
+
+      if (specVersion === '1.0') {
+        content = {
+          request: presentation,
+          attestation,
+        } as unknown as ICredentialPresentation;
+      } else {
+        content = presentation;
+      }
+
       const credentialsBody: ISubmitCredential = {
-        content: [presentation],
+        content: [content],
         type: 'submit-credential',
       };
 
@@ -86,7 +100,15 @@ export function ShareCredentialSign({
       await shareChannel.return(message);
       window.close();
     },
-    [request, passwordField, challenge, verifierDid, t, sharedContents],
+    [
+      request,
+      passwordField,
+      challenge,
+      verifierDid,
+      t,
+      sharedContents,
+      specVersion,
+    ],
   );
 
   if (!selected) {
