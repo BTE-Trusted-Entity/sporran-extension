@@ -123,7 +123,7 @@ exports[`DidUpgradeEuro should render 1`] = `
         After signing you will go to the checkout page to pay with 
       </span>
       <span
-        class="bold"
+        class="paypal"
       >
         PayPal* 
       </span>

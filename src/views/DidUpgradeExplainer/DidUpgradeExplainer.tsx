@@ -62,7 +62,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
   }
 
   return (
-    <section className={styles.container}>
+    <form className={styles.container}>
       <h1 className={styles.heading}>
         {t('view_DidUpgradeExplainer_heading')}
       </h1>
@@ -191,6 +191,6 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
 
       <LinkBack />
       <Stats />
-    </section>
+    </form>
   );
 }

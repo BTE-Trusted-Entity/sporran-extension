@@ -83,7 +83,7 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
 
       <p className={styles.info}>
         <span>{t('view_DidUpgradeEuro_info')}</span>
-        <span className={styles.bold}>{t('view_DidUpgradeEuro_paypal')}</span>
+        <span className={styles.paypal}>{t('view_DidUpgradeEuro_paypal')}</span>
         <span>{t('view_DidUpgradeEuro_costs', [costs])}</span>
       </p>
 

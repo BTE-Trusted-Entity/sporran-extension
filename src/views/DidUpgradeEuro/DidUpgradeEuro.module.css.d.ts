@@ -7,7 +7,7 @@ export const detail: string;
 export const detailName: string;
 export const detailValue: string;
 export const info: string;
-export const bold: string;
+export const paypal: string;
 export const buttonsLine: string;
 export const cancel: string;
 export const submit: string;

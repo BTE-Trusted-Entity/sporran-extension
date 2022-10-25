@@ -2,7 +2,7 @@
 
 exports[`DidUpgradeExplainer should render DID already removed from chain 1`] = `
 <div>
-  <section
+  <form
     class="container"
   >
     <h1
@@ -87,13 +87,13 @@ exports[`DidUpgradeExplainer should render DID already removed from chain 1`] = 
         </span>
       </span>
     </p>
-  </section>
+  </form>
 </div>
 `;
 
 exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
 <div>
-  <section
+  <form
     class="container"
   >
     <h1
@@ -234,13 +234,13 @@ exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
         </span>
       </span>
     </p>
-  </section>
+  </form>
 </div>
 `;
 
 exports[`DidUpgradeExplainer should render insufficient balance to pay costs in KILT 1`] = `
 <div>
-  <section
+  <form
     class="container"
   >
     <h1
@@ -325,6 +325,6 @@ exports[`DidUpgradeExplainer should render insufficient balance to pay costs in 
         </span>
       </span>
     </p>
-  </section>
+  </form>
 </div>
 `;
