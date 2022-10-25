@@ -38,7 +38,8 @@ export const paths = {
     did: {
       upgrade: {
         start: '/identity/:address/did/upgrade',
-        sign: '/identity/:address/did/upgrade/sign',
+        kilt: '/identity/:address/did/upgrade/kilt',
+        euro: '/identity/:address/did/upgrade/euro',
       },
       manage: {
         start: '/identity/:address/did',

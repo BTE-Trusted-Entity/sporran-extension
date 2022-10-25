@@ -4,6 +4,7 @@ export const heading: string;
 export const subline: string;
 export const credentials: string;
 export const actions: string;
+export const action: string;
 export const importCredential: string;
 export const checkStatus: string;
 export const progress: string;

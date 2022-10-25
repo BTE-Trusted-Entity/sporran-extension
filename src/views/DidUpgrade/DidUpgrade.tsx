@@ -1,9 +1,6 @@
-import { FormEvent, useCallback, useMemo, useRef, useState } from 'react';
+import { FormEvent, useCallback, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
-
-import { DidUri } from '@kiltprotocol/types';
 
 import * as styles from './DidUpgrade.module.css';
 
@@ -13,10 +10,13 @@ import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
-import { getFee, sign, submit } from '../../utilities/didUpgrade/didUpgrade';
+import {
+  sign,
+  submit,
+  useKiltCosts,
+} from '../../utilities/didUpgrade/didUpgrade';
 import { saveIdentity } from '../../utilities/identities/identities';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
-import { useAddressBalance } from '../../components/Balance/Balance';
 import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
 import {
   asKiltCoins,
@@ -27,41 +27,16 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { Stats } from '../../components/Stats/Stats';
 import { paths } from '../paths';
-import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-import { getDepositDid } from '../../utilities/getDeposit/getDeposit';
 
 interface Props {
   identity: Identity;
-}
-
-function useCosts(
-  address: string,
-  did: DidUri,
-): {
-  fee?: BN;
-  deposit?: BN;
-  total?: BN;
-  error: boolean;
-} {
-  const fee = useAsyncValue(getFee, []);
-  const deposit = useAsyncValue(getDepositDid, [did]);
-
-  const total = useMemo(
-    () => (fee && deposit ? fee.add(deposit.amount) : undefined),
-    [deposit, fee],
-  );
-
-  const balance = useAddressBalance(address);
-  const error = Boolean(total && balance && balance.transferable.lt(total));
-
-  return { fee, deposit: deposit?.amount, total, error };
 }
 
 export function DidUpgrade({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
   const { address, did } = identity;
-  const { fee, deposit, total, error } = useCosts(address, did);
+  const { fee, deposit, total, insufficientKilt } = useKiltCosts(address, did);
   const [txHash, setTxHash] = useState<string>();
 
   const [submitting, setSubmitting] = useState(false);
@@ -81,7 +56,7 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         setSubmitting(true);
         setStatus('pending');
 
-        const hash = await sign(identity, seed);
+        const hash = await sign(seed);
         setTxHash(hash);
 
         const did = await submit(hash);
@@ -143,13 +118,13 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
         <button
           type="submit"
           className={styles.submit}
-          disabled={submitting || error}
+          disabled={submitting || insufficientKilt}
         >
           {t('common_action_sign')}
         </button>
         <output
           className={styles.errorTooltip}
-          hidden={!error || Boolean(status)}
+          hidden={!insufficientKilt || Boolean(status)}
         >
           {t('view_DidUpgrade_insufficientFunds', [
             asKiltCoins(total, 'costs'),

@@ -6,5 +6,5 @@ export const success: string;
 export const error: string;
 export const heading: string;
 export const confirm: string;
-export const subscan: string;
 export const status: string;
+export const subscan: string;
