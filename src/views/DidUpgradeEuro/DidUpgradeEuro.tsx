@@ -48,7 +48,7 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
       url.searchParams.set('address: ', address);
       url.searchParams.set('tx', extrinsic.method.toHex());
 
-      window.open(url);
+      await browser.tabs.create({ url: url.toString() });
     },
     [address, passwordField],
   );
