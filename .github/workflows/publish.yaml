@@ -15,7 +15,7 @@ jobs:
       - name: Configure Node and package manager
         uses: actions/setup-node@v3
         with:
-          node-version: '16.17.1'
+          node-version-file: 'package.json'
           cache: 'yarn'
 
       - name: Install dependencies
