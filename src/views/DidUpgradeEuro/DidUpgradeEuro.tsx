@@ -45,7 +45,7 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
       const { extrinsic } = await getTransaction(seed, submitter);
 
       const url = new URL(base);
-      url.searchParams.set('address: ', address);
+      url.searchParams.set('address', address);
       url.searchParams.set('tx', extrinsic.method.toHex());
 
       await browser.tabs.create({ url: url.toString() });
