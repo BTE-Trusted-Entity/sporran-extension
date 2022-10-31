@@ -1,4 +1,4 @@
-import { useEffect, useRef, RefObject } from 'react';
+import { useRef, RefObject } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 import { sortBy } from 'lodash-es';
@@ -7,9 +7,11 @@ import * as styles from './ShareCredentialSelect.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { useIdentities } from '../../utilities/identities/identities';
-import { useIdentityCredentials } from '../../utilities/credentials/credentials';
+import {
+  Credential,
+  useCredentials,
+} from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { sameFullDid } from '../../utilities/did/did';
 import { ShareInput } from '../../channels/shareChannel/types';
 
@@ -24,49 +26,26 @@ function MatchingIdentityCredentials({
   identity,
   onSelect,
   selected,
-  match,
   viewRef,
+  allMatching,
+  isLastIdentity,
 }: {
   identity: Identity;
   onSelect: (value: Selected) => void;
   selected?: Selected;
-  match: () => void;
   viewRef: RefObject<HTMLElement>;
-}): JSX.Element | null {
-  const data = usePopupData<ShareInput>();
-
-  const { credentialRequest } = data;
-
-  const { cTypes } = credentialRequest;
-  const cTypeHashes = cTypes.map(({ cTypeHash }) => cTypeHash);
-
-  const credentials = useIdentityCredentials(identity.did);
-
-  const matchingCredentials = credentials?.filter(
-    (credential) =>
-      cTypeHashes.includes(credential.request.claim.cTypeHash) &&
-      sameFullDid(credential.request.claim.owner, identity.did),
+  allMatching: Credential[];
+  isLastIdentity: boolean;
+}): JSX.Element {
+  const matchingIdentityCredentials = allMatching.filter((credential) =>
+    sameFullDid(credential.request.claim.owner, identity.did),
   );
-
-  useEffect(() => {
-    if (matchingCredentials && matchingCredentials.length > 0) {
-      match();
-    }
-  }, [matchingCredentials, match]);
-
-  if (!matchingCredentials) {
-    return null; // storage data pending
-  }
-
-  if (matchingCredentials.length === 0) {
-    return null;
-  }
 
   return (
     <section className={styles.identityCredentials}>
       <IdentityLine identity={identity} className={styles.identityLine} />
       <ul className={styles.list}>
-        {matchingCredentials.map((credential) => (
+        {matchingIdentityCredentials.map((credential, index) => (
           <ShareCredentialCard
             key={credential.request.rootHash}
             credential={credential}
@@ -77,6 +56,11 @@ function MatchingIdentityCredentials({
                 selected.credential.request.rootHash ===
                   credential.request.rootHash,
             )}
+            isLast={
+              isLastIdentity &&
+              allMatching.length < 7 &&
+              index === matchingIdentityCredentials.length - 1
+            }
             viewRef={viewRef}
           />
         ))}
@@ -100,15 +84,37 @@ export function ShareCredentialSelect({
 
   const identities = useIdentities().data;
 
-  const hasSome = useBooleanState();
+  const credentials = useCredentials();
+
+  const data = usePopupData<ShareInput>();
+  const { credentialRequest } = data;
+  const { cTypes } = credentialRequest;
+  const cTypeHashes = cTypes.map(({ cTypeHash }) => cTypeHash);
+
+  const matchingCredentials = credentials?.filter((credential) =>
+    cTypeHashes.includes(credential.request.claim.cTypeHash),
+  );
 
   const ref = useRef<HTMLElement>(null);
 
-  if (!identities) {
+  if (!identities || !matchingCredentials) {
     return null; // storage data pending
   }
 
-  const identitiesList = sortBy(Object.values(identities), 'index');
+  const noMatchingCredentials = matchingCredentials.length === 0;
+
+  const matchingCredentialDids = matchingCredentials.map(
+    (credential) => credential.request.claim.owner,
+  );
+
+  const identitiesWithMatchingCredentials = Object.values(identities).filter(
+    (identity) => matchingCredentialDids.includes(identity.did),
+  );
+
+  const identitiesList = sortBy(
+    Object.values(identitiesWithMatchingCredentials),
+    'index',
+  );
 
   return (
     <section className={styles.container}>
@@ -119,7 +125,7 @@ export function ShareCredentialSelect({
         {t('view_ShareCredentialSelect_subline')}
       </p>
 
-      {!hasSome.current && (
+      {noMatchingCredentials && (
         <section className={styles.noCredentials}>
           <p className={styles.info}>
             {t('view_ShareCredentialSelect_no_credentials')}
@@ -139,15 +145,16 @@ export function ShareCredentialSelect({
       <section
         className={styles.allCredentials}
         ref={ref}
-        hidden={!hasSome.current}
+        hidden={noMatchingCredentials}
       >
-        {identitiesList.map((identity) => (
+        {identitiesList.map((identity, index) => (
           <MatchingIdentityCredentials
             key={identity.address}
             identity={identity}
             onSelect={onSelect}
             selected={selected}
-            match={hasSome.on}
+            allMatching={matchingCredentials}
+            isLastIdentity={index === identitiesList.length - 1}
             viewRef={ref}
           />
         ))}

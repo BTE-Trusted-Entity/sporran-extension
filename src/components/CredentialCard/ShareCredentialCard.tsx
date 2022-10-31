@@ -33,6 +33,7 @@ interface Props {
   onSelect: (value: Selected) => void;
   viewRef: RefObject<HTMLElement>;
   isSelected?: boolean;
+  isLast: boolean;
 }
 
 export function ShareCredentialCard({
@@ -41,6 +42,7 @@ export function ShareCredentialCard({
   onSelect,
   viewRef,
   isSelected = false,
+  isLast,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -49,8 +51,14 @@ export function ShareCredentialCard({
   const expanded = useBooleanState();
 
   useEffect(() => {
+    if (isLast) {
+      onSelect({ credential, identity, sharedContents: [] });
+    }
+  }, [isLast, onSelect, credential, identity]);
+
+  useEffect(() => {
     expanded.set(isSelected);
-  }, [expanded, isSelected]);
+  }, [expanded, isSelected, isLast]);
 
   const statuses = {
     pending: t('component_CredentialCard_pending'),

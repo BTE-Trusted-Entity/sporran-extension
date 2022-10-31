@@ -91,6 +91,7 @@ describe('CredentialCard', () => {
           identity={identitiesMock[0]}
           onSelect={jest.fn()}
           viewRef={{ current: null }}
+          isLast={false}
         />
       </PopupTestProvider>,
     );
@@ -109,6 +110,27 @@ describe('CredentialCard', () => {
           isSelected
           onSelect={jest.fn()}
           viewRef={{ current: null }}
+          isLast={false}
+        />
+      </PopupTestProvider>,
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should expand last share credential card', () => {
+    const { container } = render(
+      <PopupTestProvider
+        path={paths.popup.share.start}
+        data={mockRequestCredential}
+      >
+        <ShareCredentialCard
+          credential={credentialsMock[0]}
+          identity={identitiesMock[0]}
+          isSelected
+          onSelect={jest.fn()}
+          viewRef={{ current: null }}
+          isLast={true}
         />
       </PopupTestProvider>,
     );
