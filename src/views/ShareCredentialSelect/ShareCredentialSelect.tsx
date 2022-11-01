@@ -1,16 +1,19 @@
-import { useEffect, useRef, RefObject } from 'react';
+import { useRef, RefObject } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
-import { sortBy } from 'lodash-es';
+import { reject, sortBy } from 'lodash-es';
 
 import * as styles from './ShareCredentialSelect.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { useIdentities } from '../../utilities/identities/identities';
-import { useIdentityCredentials } from '../../utilities/credentials/credentials';
+import {
+  Credential,
+  isUnusableCredential,
+  useCredentials,
+} from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
-import { sameFullDid } from '../../utilities/did/did';
+import { parseDidUri, sameFullDid } from '../../utilities/did/did';
 import { ShareInput } from '../../channels/shareChannel/types';
 
 import { paths } from '../paths';
@@ -24,49 +27,26 @@ function MatchingIdentityCredentials({
   identity,
   onSelect,
   selected,
-  match,
   viewRef,
+  allCredentials,
+  isLastIdentity,
 }: {
   identity: Identity;
   onSelect: (value: Selected) => void;
   selected?: Selected;
-  match: () => void;
   viewRef: RefObject<HTMLElement>;
-}): JSX.Element | null {
-  const data = usePopupData<ShareInput>();
-
-  const { credentialRequest } = data;
-
-  const { cTypes } = credentialRequest;
-  const cTypeHashes = cTypes.map(({ cTypeHash }) => cTypeHash);
-
-  const credentials = useIdentityCredentials(identity.did);
-
-  const matchingCredentials = credentials?.filter(
-    (credential) =>
-      cTypeHashes.includes(credential.request.claim.cTypeHash) &&
-      sameFullDid(credential.request.claim.owner, identity.did),
+  allCredentials: Credential[];
+  isLastIdentity: boolean;
+}): JSX.Element {
+  const credentials = allCredentials.filter((credential) =>
+    sameFullDid(credential.request.claim.owner, identity.did),
   );
-
-  useEffect(() => {
-    if (matchingCredentials && matchingCredentials.length > 0) {
-      match();
-    }
-  }, [matchingCredentials, match]);
-
-  if (!matchingCredentials) {
-    return null; // storage data pending
-  }
-
-  if (matchingCredentials.length === 0) {
-    return null;
-  }
 
   return (
     <section className={styles.identityCredentials}>
       <IdentityLine identity={identity} className={styles.identityLine} />
       <ul className={styles.list}>
-        {matchingCredentials.map((credential) => (
+        {credentials.map((credential, index) => (
           <ShareCredentialCard
             key={credential.request.rootHash}
             credential={credential}
@@ -77,6 +57,11 @@ function MatchingIdentityCredentials({
                 selected.credential.request.rootHash ===
                   credential.request.rootHash,
             )}
+            expand={
+              isLastIdentity &&
+              allCredentials.length < 7 &&
+              index === credentials.length - 1
+            }
             viewRef={viewRef}
           />
         ))}
@@ -100,15 +85,36 @@ export function ShareCredentialSelect({
 
   const identities = useIdentities().data;
 
-  const hasSome = useBooleanState();
+  const credentials = useCredentials();
+
+  const data = usePopupData<ShareInput>();
+  const { credentialRequest } = data;
+  const { cTypes } = credentialRequest;
+  const cTypeHashes = cTypes.map(({ cTypeHash }) => cTypeHash);
+
+  const matchingCredentials = credentials?.filter((credential) =>
+    cTypeHashes.includes(credential.request.claim.cTypeHash),
+  );
+
+  const usableCredentials = reject(matchingCredentials, isUnusableCredential);
 
   const ref = useRef<HTMLElement>(null);
 
-  if (!identities) {
+  if (!identities || !credentials) {
     return null; // storage data pending
   }
 
-  const identitiesList = sortBy(Object.values(identities), 'index');
+  const noUsableCredentials = usableCredentials.length === 0;
+
+  const matchingCredentialDids = usableCredentials.map(
+    (credential) => parseDidUri(credential.request.claim.owner).fullDid,
+  );
+  const identitiesWithMatchingCredentials = Object.values(identities).filter(
+    (identity) =>
+      matchingCredentialDids.includes(parseDidUri(identity.did).fullDid),
+  );
+
+  const sortedIdentities = sortBy(identitiesWithMatchingCredentials, 'index');
 
   return (
     <section className={styles.container}>
@@ -119,7 +125,7 @@ export function ShareCredentialSelect({
         {t('view_ShareCredentialSelect_subline')}
       </p>
 
-      {!hasSome.current && (
+      {noUsableCredentials && (
         <section className={styles.noCredentials}>
           <p className={styles.info}>
             {t('view_ShareCredentialSelect_no_credentials')}
@@ -136,22 +142,21 @@ export function ShareCredentialSelect({
         </section>
       )}
 
-      <section
-        className={styles.allCredentials}
-        ref={ref}
-        hidden={!hasSome.current}
-      >
-        {identitiesList.map((identity) => (
-          <MatchingIdentityCredentials
-            key={identity.address}
-            identity={identity}
-            onSelect={onSelect}
-            selected={selected}
-            match={hasSome.on}
-            viewRef={ref}
-          />
-        ))}
-      </section>
+      {!noUsableCredentials && (
+        <section className={styles.allCredentials} ref={ref}>
+          {sortedIdentities.map((identity, index) => (
+            <MatchingIdentityCredentials
+              key={identity.address}
+              identity={identity}
+              onSelect={onSelect}
+              selected={selected}
+              allCredentials={usableCredentials}
+              isLastIdentity={index === sortedIdentities.length - 1}
+              viewRef={ref}
+            />
+          ))}
+        </section>
+      )}
 
       <p className={styles.buttonsLine}>
         <button type="button" className={styles.cancel} onClick={onCancel}>

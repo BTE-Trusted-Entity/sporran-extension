@@ -31,6 +31,7 @@ export function Selected(): JSX.Element {
           isSelected
           onSelect={action('onSelect')}
           viewRef={{ current: null }}
+          expand={false}
         />
       </ul>
     </PopupTestProvider>
@@ -49,6 +50,7 @@ export function NotSelected(): JSX.Element {
           identity={identitiesMock[0]}
           onSelect={action('onSelect')}
           viewRef={{ current: null }}
+          expand={false}
         />
       </ul>
     </PopupTestProvider>
@@ -68,6 +70,7 @@ export function NotAttested(): JSX.Element {
           isSelected
           onSelect={action('onSelect')}
           viewRef={{ current: null }}
+          expand={false}
         />
       </ul>
     </PopupTestProvider>
