@@ -33,7 +33,7 @@ interface Props {
   onSelect: (value: Selected) => void;
   viewRef: RefObject<HTMLElement>;
   isSelected?: boolean;
-  isLast: boolean;
+  isLastOfFew: boolean;
 }
 
 export function ShareCredentialCard({
@@ -42,7 +42,7 @@ export function ShareCredentialCard({
   onSelect,
   viewRef,
   isSelected = false,
-  isLast,
+  isLastOfFew,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -51,14 +51,8 @@ export function ShareCredentialCard({
   const expanded = useBooleanState();
 
   useEffect(() => {
-    if (isLast) {
-      onSelect({ credential, identity, sharedContents: [] });
-    }
-  }, [isLast, onSelect, credential, identity]);
-
-  useEffect(() => {
     expanded.set(isSelected);
-  }, [expanded, isSelected, isLast]);
+  }, [expanded, isSelected, isLastOfFew]);
 
   const statuses = {
     pending: t('component_CredentialCard_pending'),
@@ -83,6 +77,12 @@ export function ShareCredentialCard({
   useEffect(() => {
     setChecked(requiredProperties);
   }, [requiredProperties]);
+
+  useEffect(() => {
+    if (isLastOfFew) {
+      onSelect({ credential, identity, sharedContents: checked });
+    }
+  }, [isLastOfFew, onSelect, credential, identity, checked]);
 
   const isAttested = credential.status === 'attested';
 

@@ -37,7 +37,7 @@ function MatchingIdentityCredentials({
   allMatching: Credential[];
   isLastIdentity: boolean;
 }): JSX.Element {
-  const matchingIdentityCredentials = allMatching.filter((credential) =>
+  const credentials = allMatching.filter((credential) =>
     sameFullDid(credential.request.claim.owner, identity.did),
   );
 
@@ -45,7 +45,7 @@ function MatchingIdentityCredentials({
     <section className={styles.identityCredentials}>
       <IdentityLine identity={identity} className={styles.identityLine} />
       <ul className={styles.list}>
-        {matchingIdentityCredentials.map((credential, index) => (
+        {credentials.map((credential, index) => (
           <ShareCredentialCard
             key={credential.request.rootHash}
             credential={credential}
@@ -56,10 +56,10 @@ function MatchingIdentityCredentials({
                 selected.credential.request.rootHash ===
                   credential.request.rootHash,
             )}
-            isLast={
+            isLastOfFew={
               isLastIdentity &&
               allMatching.length < 7 &&
-              index === matchingIdentityCredentials.length - 1
+              index === credentials.length - 1
             }
             viewRef={viewRef}
           />
@@ -106,12 +106,11 @@ export function ShareCredentialSelect({
   const matchingCredentialDids = matchingCredentials.map(
     (credential) => credential.request.claim.owner,
   );
-
   const identitiesWithMatchingCredentials = Object.values(identities).filter(
     (identity) => matchingCredentialDids.includes(identity.did),
   );
 
-  const identitiesList = sortBy(
+  const sortedIdentities = sortBy(
     Object.values(identitiesWithMatchingCredentials),
     'index',
   );
@@ -147,14 +146,14 @@ export function ShareCredentialSelect({
         ref={ref}
         hidden={noMatchingCredentials}
       >
-        {identitiesList.map((identity, index) => (
+        {sortedIdentities.map((identity, index) => (
           <MatchingIdentityCredentials
             key={identity.address}
             identity={identity}
             onSelect={onSelect}
             selected={selected}
             allMatching={matchingCredentials}
-            isLastIdentity={index === identitiesList.length - 1}
+            isLastIdentity={index === sortedIdentities.length - 1}
             viewRef={ref}
           />
         ))}
