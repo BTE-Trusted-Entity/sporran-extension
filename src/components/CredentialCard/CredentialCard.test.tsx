@@ -91,7 +91,7 @@ describe('CredentialCard', () => {
           identity={identitiesMock[0]}
           onSelect={jest.fn()}
           viewRef={{ current: null }}
-          isLastOfFew={false}
+          expand={false}
         />
       </PopupTestProvider>,
     );
@@ -110,7 +110,7 @@ describe('CredentialCard', () => {
           isSelected
           onSelect={jest.fn()}
           viewRef={{ current: null }}
-          isLastOfFew={false}
+          expand={false}
         />
       </PopupTestProvider>,
     );
@@ -130,7 +130,7 @@ describe('CredentialCard', () => {
           isSelected
           onSelect={jest.fn()}
           viewRef={{ current: null }}
-          isLastOfFew={true}
+          expand={true}
         />
       </PopupTestProvider>,
     );

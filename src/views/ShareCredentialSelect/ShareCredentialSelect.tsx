@@ -12,7 +12,7 @@ import {
   useCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { sameFullDid } from '../../utilities/did/did';
+import { parseDidUri, sameFullDid } from '../../utilities/did/did';
 import { ShareInput } from '../../channels/shareChannel/types';
 
 import { paths } from '../paths';
@@ -27,17 +27,17 @@ function MatchingIdentityCredentials({
   onSelect,
   selected,
   viewRef,
-  allMatching,
+  allCredentials,
   isLastIdentity,
 }: {
   identity: Identity;
   onSelect: (value: Selected) => void;
   selected?: Selected;
   viewRef: RefObject<HTMLElement>;
-  allMatching: Credential[];
+  allCredentials: Credential[];
   isLastIdentity: boolean;
 }): JSX.Element {
-  const credentials = allMatching.filter((credential) =>
+  const credentials = allCredentials.filter((credential) =>
     sameFullDid(credential.request.claim.owner, identity.did),
   );
 
@@ -56,9 +56,9 @@ function MatchingIdentityCredentials({
                 selected.credential.request.rootHash ===
                   credential.request.rootHash,
             )}
-            isLastOfFew={
+            expand={
               isLastIdentity &&
-              allMatching.length < 7 &&
+              allCredentials.length < 7 &&
               index === credentials.length - 1
             }
             viewRef={viewRef}
@@ -104,16 +104,14 @@ export function ShareCredentialSelect({
   const noMatchingCredentials = matchingCredentials.length === 0;
 
   const matchingCredentialDids = matchingCredentials.map(
-    (credential) => credential.request.claim.owner,
+    (credential) => parseDidUri(credential.request.claim.owner).fullDid,
   );
   const identitiesWithMatchingCredentials = Object.values(identities).filter(
-    (identity) => matchingCredentialDids.includes(identity.did),
+    (identity) =>
+      matchingCredentialDids.includes(parseDidUri(identity.did).fullDid),
   );
 
-  const sortedIdentities = sortBy(
-    Object.values(identitiesWithMatchingCredentials),
-    'index',
-  );
+  const sortedIdentities = sortBy(identitiesWithMatchingCredentials, 'index');
 
   return (
     <section className={styles.container}>
@@ -141,23 +139,21 @@ export function ShareCredentialSelect({
         </section>
       )}
 
-      <section
-        className={styles.allCredentials}
-        ref={ref}
-        hidden={noMatchingCredentials}
-      >
-        {sortedIdentities.map((identity, index) => (
-          <MatchingIdentityCredentials
-            key={identity.address}
-            identity={identity}
-            onSelect={onSelect}
-            selected={selected}
-            allMatching={matchingCredentials}
-            isLastIdentity={index === sortedIdentities.length - 1}
-            viewRef={ref}
-          />
-        ))}
-      </section>
+      {!noMatchingCredentials && (
+        <section className={styles.allCredentials} ref={ref}>
+          {sortedIdentities.map((identity, index) => (
+            <MatchingIdentityCredentials
+              key={identity.address}
+              identity={identity}
+              onSelect={onSelect}
+              selected={selected}
+              allCredentials={matchingCredentials}
+              isLastIdentity={index === sortedIdentities.length - 1}
+              viewRef={ref}
+            />
+          ))}
+        </section>
+      )}
 
       <p className={styles.buttonsLine}>
         <button type="button" className={styles.cancel} onClick={onCancel}>
