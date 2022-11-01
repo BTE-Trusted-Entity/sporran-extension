@@ -1,7 +1,7 @@
 import { useRef, RefObject } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
-import { sortBy } from 'lodash-es';
+import { reject, sortBy } from 'lodash-es';
 
 import * as styles from './ShareCredentialSelect.module.css';
 
@@ -9,6 +9,7 @@ import { Identity } from '../../utilities/identities/types';
 import { useIdentities } from '../../utilities/identities/identities';
 import {
   Credential,
+  isUnusableCredential,
   useCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
@@ -95,15 +96,17 @@ export function ShareCredentialSelect({
     cTypeHashes.includes(credential.request.claim.cTypeHash),
   );
 
+  const usableCredentials = reject(matchingCredentials, isUnusableCredential);
+
   const ref = useRef<HTMLElement>(null);
 
-  if (!identities || !matchingCredentials) {
+  if (!identities || !credentials) {
     return null; // storage data pending
   }
 
-  const noMatchingCredentials = matchingCredentials.length === 0;
+  const noUsableCredentials = usableCredentials.length === 0;
 
-  const matchingCredentialDids = matchingCredentials.map(
+  const matchingCredentialDids = usableCredentials.map(
     (credential) => parseDidUri(credential.request.claim.owner).fullDid,
   );
   const identitiesWithMatchingCredentials = Object.values(identities).filter(
@@ -122,7 +125,7 @@ export function ShareCredentialSelect({
         {t('view_ShareCredentialSelect_subline')}
       </p>
 
-      {noMatchingCredentials && (
+      {noUsableCredentials && (
         <section className={styles.noCredentials}>
           <p className={styles.info}>
             {t('view_ShareCredentialSelect_no_credentials')}
@@ -139,7 +142,7 @@ export function ShareCredentialSelect({
         </section>
       )}
 
-      {!noMatchingCredentials && (
+      {!noUsableCredentials && (
         <section className={styles.allCredentials} ref={ref}>
           {sortedIdentities.map((identity, index) => (
             <MatchingIdentityCredentials
@@ -147,7 +150,7 @@ export function ShareCredentialSelect({
               identity={identity}
               onSelect={onSelect}
               selected={selected}
-              allCredentials={matchingCredentials}
+              allCredentials={usableCredentials}
               isLastIdentity={index === sortedIdentities.length - 1}
               viewRef={ref}
             />
