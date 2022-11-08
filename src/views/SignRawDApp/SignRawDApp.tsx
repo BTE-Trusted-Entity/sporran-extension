@@ -1,10 +1,14 @@
 import { FormEvent, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { u8aToHex } from '@polkadot/util';
+import { Crypto } from '@kiltprotocol/utils';
 
 import * as styles from './SignRawDApp.module.css';
 
-import { useIdentities } from '../../utilities/identities/identities';
+import {
+  ss58Format,
+  useIdentities,
+} from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import { Avatar } from '../../components/Avatar/Avatar';
@@ -24,7 +28,11 @@ export function SignRawDApp(): JSX.Element | null {
   const passwordField = usePasswordField();
 
   const identities = useIdentities().data;
-  const identity = identities && identities[values.address as string];
+  const kiltAddress = Crypto.encodeAddress(
+    values.address as string,
+    ss58Format,
+  );
+  const identity = identities && identities[kiltAddress];
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {

@@ -113,7 +113,7 @@ export async function removeIdentity(identity: Identity): Promise<void> {
 }
 
 // KILT has registered the ss58 prefix 38
-const ss58Format = 38;
+export const ss58Format = 38;
 
 export function makeKeyring(): Keyring {
   return new Keyring({
