@@ -8,13 +8,17 @@ import { Chain, FullDidCreationBuilder } from '@kiltprotocol/did';
 
 import { u32 } from '@polkadot/types';
 
+import { useMemo } from 'react';
+
 import {
   getKeystoreFromSeed,
-  Identity,
   getLightDidFromSeed,
   getKeypairBySeed,
 } from '../identities/identities';
 import { getDidEncryptionKey, parseDidUri } from '../did/did';
+import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
+import { useAddressBalance } from '../../components/Balance/Balance';
+import { getDepositDid } from '../getDeposit/getDeposit';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
@@ -25,7 +29,10 @@ export async function getDeposit(): Promise<BN> {
   return Chain.queryDepositAmount();
 }
 
-async function getSignedTransaction(seed: Uint8Array): Promise<DidTransaction> {
+export async function getTransaction(
+  seed: Uint8Array,
+  submitter?: string,
+): Promise<DidTransaction> {
   const keystore = await getKeystoreFromSeed(seed);
   const keypair = getKeypairBySeed(seed);
 
@@ -41,34 +48,63 @@ async function getSignedTransaction(seed: Uint8Array): Promise<DidTransaction> {
     lightDidDetails.authenticationKey,
   )
     .addEncryptionKey(encryptionKey)
-    .build(keystore, keypair.address);
+    .build(keystore, submitter || keypair.address);
 
-  const tx = await blockchain.signTx(keypair, extrinsic);
-  return { extrinsic: tx, did };
+  return { extrinsic, did };
 }
 
 export async function getFee(): Promise<BN> {
   const fakeSeed = new Uint8Array(32);
   const keypair = getKeypairBySeed(fakeSeed);
-  const { extrinsic } = await getSignedTransaction(fakeSeed);
-  const extrinsicFee = (await extrinsic.paymentInfo(keypair)).partialFee;
 
-  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
-  const didCreationFee = api.consts.did.fee as u32;
+  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
+
+  const { extrinsic } = await getTransaction(fakeSeed);
+  const signed = await blockchain.signTx(keypair, extrinsic);
+  const extrinsicFee = (await signed.paymentInfo(keypair)).partialFee;
+
+  const didCreationFee = blockchain.api.consts.did.fee as u32;
 
   return extrinsicFee.add(didCreationFee);
 }
 
+export function useKiltCosts(
+  address: string,
+  did: DidUri,
+): {
+  fee?: BN;
+  deposit?: BN;
+  total?: BN;
+  insufficientKilt: boolean;
+} {
+  const fee = useAsyncValue(getFee, []);
+  const deposit = useAsyncValue(getDepositDid, [did]);
+
+  const total = useMemo(
+    () => (fee && deposit ? fee.add(deposit.amount) : undefined),
+    [deposit, fee],
+  );
+
+  const balance = useAddressBalance(address);
+  const insufficientKilt = Boolean(
+    total && balance && balance.transferable.lt(total),
+  );
+
+  return { fee, deposit: deposit?.amount, total, insufficientKilt };
+}
+
 const currentTx: Record<string, DidTransaction> = {};
 
-export async function sign(
-  identity: Identity,
-  seed: Uint8Array,
-): Promise<string> {
-  const { extrinsic, did } = await getSignedTransaction(seed);
+export async function sign(seed: Uint8Array): Promise<string> {
+  const { extrinsic, did } = await getTransaction(seed);
+  const keypair = getKeypairBySeed(seed);
 
-  const hash = extrinsic.hash.toHex();
-  currentTx[hash] = { extrinsic, did };
+  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
+
+  const signed = await blockchain.signTx(keypair, extrinsic);
+
+  const hash = signed.hash.toHex();
+  currentTx[hash] = { extrinsic: signed, did };
   return hash;
 }
 

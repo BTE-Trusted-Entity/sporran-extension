@@ -24,3 +24,11 @@ export function DeletedFromChain(): JSX.Element {
     />
   );
 }
+
+export function InsufficientKilt(): JSX.Element {
+  return (
+    <DidUpgradeExplainer
+      identity={identities['4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653']}
+    />
+  );
+}

@@ -895,6 +895,35 @@
   "view_DidUpgrade_error": {
     "message": "Upgrade to on-chain failed"
   },
+  "view_DidUpgradeEuro_heading": {
+    "message": "Prepare Transaction"
+  },
+  "view_DidUpgradeEuro_subline": {
+    "message": "Upgrade to on-chain DID"
+  },
+  "view_DidUpgradeEuro_address": {
+    "message": "Account Address:"
+  },
+  "view_DidUpgradeEuro_method": {
+    "message": "Method:"
+  },
+  "view_DidUpgradeEuro_info": {
+    "message": "After signing you will go to the checkout page to pay with "
+  },
+  "view_DidUpgradeEuro_paypal": {
+    "message": "PayPal* "
+  },
+  "view_DidUpgradeEuro_cost": {
+    "message": "(total cost: $cost$).",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_DidUpgradeEuro_footnote": {
+    "message": "*PayPal account required"
+  },
   "view_DidDowngrade_heading": {
     "message": "Remove on-chain DID"
   },
@@ -951,8 +980,34 @@
   "view_DidUpgradeExplainer_onchain_deleted_subline": {
     "message": "On-chain DID was deleted"
   },
+  "view_DidUpgradeExplainer_kilt": {
+    "message": "Pay with KILT"
+  },
+  "view_DidUpgradeExplainer_kilt_info": {
+    "message": "Pay with KILT information"
+  },
+  "view_DidUpgradeExplainer_kilt_explainer": {
+    "message": "For creating an on-chain DID, KILT Coins are needed to pay for the transaction and for the deposit. The deposit will be refunded if you remove your on-chain DID."
+  },
+  "view_DidUpgradeExplainer_euro": {
+    "message": "Pay with Euro"
+  },
+  "view_DidUpgradeExplainer_euro_info": {
+    "message": "Pay with Euro information"
+  },
+  "view_DidUpgradeExplainer_euro_explainer": {
+    "message": "You pay a fixed fiat rate and BTE in return takes over handling the necessary KILT payments for you. There are no refunds when removing your on-chain DID."
+  },
+  "view_DidUpgradeExplainer_insufficientKilt": {
+    "message": "You need at least $cost$ KILTs (deposit + fee)",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
+  },
   "view_DidUpgradeExplainer_CTA": {
-    "message": "Upgrade"
+    "message": "Continue"
   },
   "view_DidDowngradeWarningCredentials_heading": {
     "message": "Remove on-chain DID"

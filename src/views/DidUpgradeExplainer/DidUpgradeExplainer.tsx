@@ -1,6 +1,13 @@
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
-import { Fragment } from 'react';
+import {
+  ChangeEvent,
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import * as styles from './DidUpgradeExplainer.module.css';
 
@@ -14,6 +21,12 @@ import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
+import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
+import { useKiltCosts } from '../../utilities/didUpgrade/didUpgrade';
+import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
+import { useConfiguration } from '../../configuration/useConfiguration';
+
+type PaymentMethod = 'kilt' | 'euro';
 
 interface Props {
   identity: Identity;
@@ -26,12 +39,35 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
 
   const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
 
+  const { total: kiltCosts, insufficientKilt } = useKiltCosts(address, did);
+
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('kilt');
+
+  const { features } = useConfiguration();
+
+  useEffect(() => {
+    if (!insufficientKilt || !features.checkout) {
+      return;
+    }
+    setPaymentMethod('euro');
+  }, [insufficientKilt, features]);
+
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    setPaymentMethod(event.target.value as PaymentMethod);
+  }, []);
+
+  const portalRef = useRef<HTMLDivElement>(null);
+
   if (wasOnChainDidDeleted === undefined) {
     return null; // blockchain data pending
   }
 
+  if (!kiltCosts) {
+    return null; // blockchain data pending
+  }
+
   return (
-    <section className={styles.container}>
+    <form className={styles.container}>
       <h1 className={styles.heading}>
         {t('view_DidUpgradeExplainer_heading')}
       </h1>
@@ -74,12 +110,81 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
             {t('view_DidUpgradeExplainer_deposit')}
           </p>
 
+          {features.checkout && (
+            <section
+              className={
+                insufficientKilt
+                  ? styles.paymentMethodsError
+                  : styles.paymentMethods
+              }
+            >
+              <p className={styles.paymentMethod}>
+                <label
+                  className={
+                    insufficientKilt ? styles.insufficientKilt : styles.kilt
+                  }
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="kilt"
+                    checked={paymentMethod === 'kilt'}
+                    onChange={handleChange}
+                    className={styles.select}
+                    disabled={insufficientKilt}
+                  />
+
+                  {t('view_DidUpgradeExplainer_kilt')}
+                </label>
+
+                <ExplainerModal
+                  label={t('view_DidUpgradeExplainer_kilt_info')}
+                  portalRef={portalRef}
+                >
+                  {t('view_DidUpgradeExplainer_kilt_explainer')}
+                </ExplainerModal>
+
+                <output
+                  className={styles.errorTooltip}
+                  hidden={!insufficientKilt}
+                >
+                  {t('view_DidUpgradeExplainer_insufficientKilt', [
+                    asKiltCoins(kiltCosts, 'costs'),
+                  ])}
+                </output>
+              </p>
+
+              <p className={styles.paymentMethod}>
+                <label className={styles.euro}>
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="euro"
+                    checked={paymentMethod === 'euro'}
+                    onChange={handleChange}
+                    className={styles.select}
+                  />
+                  {t('view_DidUpgradeExplainer_euro')}
+                </label>
+
+                <ExplainerModal
+                  label={t('view_DidUpgradeExplainer_euro_info')}
+                  portalRef={portalRef}
+                >
+                  {t('view_DidUpgradeExplainer_euro_explainer')}
+                </ExplainerModal>
+              </p>
+            </section>
+          )}
+
           <p className={styles.buttonsLine}>
             <Link to={paths.home} className={styles.cancel}>
               {t('common_action_cancel')}
             </Link>
             <Link
-              to={generatePath(paths.identity.did.upgrade.sign, { address })}
+              to={generatePath(paths.identity.did.upgrade[paymentMethod], {
+                address,
+              })}
               className={styles.upgrade}
               aria-disabled={wasOnChainDidDeleted}
             >
@@ -89,8 +194,10 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
         </Fragment>
       )}
 
+      <div ref={portalRef} />
+
       <LinkBack />
       <Stats />
-    </section>
+    </form>
   );
 }

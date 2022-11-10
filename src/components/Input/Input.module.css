@@ -46,3 +46,21 @@
   background-position: calc(100% - 0.75rem) center, 0;
   padding-right: 2.25rem;
 }
+
+.inputRadio {
+  --diameter: 0.75rem;
+
+  appearance: none;
+  margin: 0;
+  height: var(--diameter);
+  width: var(--diameter);
+  border: 1px solid var(--color-white);
+  background: linear-gradient(#547099 0%, #304765 43.95%, #0a1b2f 100%);
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.inputRadio:checked {
+  background: content-box var(--color-green);
+  padding: 3px;
+}

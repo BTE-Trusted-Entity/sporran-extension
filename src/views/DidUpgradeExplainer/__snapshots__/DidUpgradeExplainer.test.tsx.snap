@@ -2,7 +2,7 @@
 
 exports[`DidUpgradeExplainer should render DID already removed from chain 1`] = `
 <div>
-  <section
+  <form
     class="container"
   >
     <h1
@@ -60,6 +60,7 @@ exports[`DidUpgradeExplainer should render DID already removed from chain 1`] = 
     >
       Back
     </a>
+    <div />
     <button
       aria-label="Back"
       class="linkBack"
@@ -86,13 +87,13 @@ exports[`DidUpgradeExplainer should render DID already removed from chain 1`] = 
         </span>
       </span>
     </p>
-  </section>
+  </form>
 </div>
 `;
 
 exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
 <div>
-  <section
+  <form
     class="container"
   >
     <h1
@@ -150,11 +151,12 @@ exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
       <a
         aria-disabled="false"
         class="upgrade"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade/sign"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade/kilt"
       >
-        Upgrade
+        Continue
       </a>
     </p>
+    <div />
     <button
       aria-label="Back"
       class="linkBack"
@@ -181,6 +183,300 @@ exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
         </span>
       </span>
     </p>
-  </section>
+  </form>
+</div>
+`;
+
+exports[`DidUpgradeExplainer should render pay with euro option in internal build 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Decentralized Identifier
+    </h1>
+    <p
+      class="subline"
+    >
+      Upgrade to an on-chain DID
+    </p>
+    <section
+      class="container"
+    >
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="centeredNameLine"
+      >
+        <span
+          class="name"
+        >
+          Light DID Identity
+        </span>
+      </div>
+    </section>
+    <div
+      class="functionality"
+    >
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      Upgrading enables you to sign with your on-chain DID and use new functionality.
+    </div>
+    <p
+      class="deposit"
+    >
+      A deposit is needed to create your on-chain DID. The deposit will be refunded if you remove your on-chain DID.
+    </p>
+    <section
+      class="paymentMethods"
+    >
+      <p
+        class="paymentMethod"
+      >
+        <label
+          class="kilt"
+        >
+          <input
+            checked=""
+            class="select"
+            name="payment"
+            type="radio"
+            value="kilt"
+          />
+          Pay with KILT
+        </label>
+        <button
+          aria-label="Pay with KILT information"
+          class="show"
+          type="button"
+        />
+        <output
+          class="errorTooltip"
+          hidden=""
+        >
+          You need at least 2.0000 KILTs (deposit + fee)
+        </output>
+      </p>
+      <p
+        class="paymentMethod"
+      >
+        <label
+          class="euro"
+        >
+          <input
+            class="select"
+            name="payment"
+            type="radio"
+            value="euro"
+          />
+          Pay with Euro
+        </label>
+        <button
+          aria-label="Pay with Euro information"
+          class="show"
+          type="button"
+        />
+      </p>
+    </section>
+    <p
+      class="buttonsLine"
+    >
+      <a
+        class="cancel"
+        href="/"
+      >
+        Cancel
+      </a>
+      <a
+        aria-disabled="false"
+        class="upgrade"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade/kilt"
+      >
+        Continue
+      </a>
+    </p>
+    <div />
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+    <p
+      class="stats"
+    >
+      You have 3 Identities with a
+      <span
+        class="balance"
+      >
+         Total Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="KILT Coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </form>
+</div>
+`;
+
+exports[`should render insufficient balance to pay costs in KILT 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Decentralized Identifier
+    </h1>
+    <p
+      class="subline"
+    >
+      Upgrade to an on-chain DID
+    </p>
+    <section
+      class="container"
+    >
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="centeredNameLine"
+      >
+        <span
+          class="name"
+        >
+          Light DID Identity
+        </span>
+      </div>
+    </section>
+    <div
+      class="functionality"
+    >
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      Upgrading enables you to sign with your on-chain DID and use new functionality.
+    </div>
+    <p
+      class="deposit"
+    >
+      A deposit is needed to create your on-chain DID. The deposit will be refunded if you remove your on-chain DID.
+    </p>
+    <section
+      class="paymentMethodsError"
+    >
+      <p
+        class="paymentMethod"
+      >
+        <label
+          class="insufficientKilt"
+        >
+          <input
+            checked=""
+            class="select"
+            disabled=""
+            name="payment"
+            type="radio"
+            value="kilt"
+          />
+          Pay with KILT
+        </label>
+        <button
+          aria-label="Pay with KILT information"
+          class="show"
+          type="button"
+        />
+        <output
+          class="errorTooltip"
+        >
+          You need at least 2.0000 KILTs (deposit + fee)
+        </output>
+      </p>
+      <p
+        class="paymentMethod"
+      >
+        <label
+          class="euro"
+        >
+          <input
+            class="select"
+            name="payment"
+            type="radio"
+            value="euro"
+          />
+          Pay with Euro
+        </label>
+        <button
+          aria-label="Pay with Euro information"
+          class="show"
+          type="button"
+        />
+      </p>
+    </section>
+    <p
+      class="buttonsLine"
+    >
+      <a
+        class="cancel"
+        href="/"
+      >
+        Cancel
+      </a>
+      <a
+        aria-disabled="false"
+        class="upgrade"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade/euro"
+      >
+        Continue
+      </a>
+    </p>
+    <div />
+    <button
+      aria-label="Back"
+      class="linkBack"
+      title="Back"
+      type="button"
+    />
+    <p
+      class="stats"
+    >
+      You have 3 Identities with a
+      <span
+        class="balance"
+      >
+         Total Balance: 
+        <span
+          class="amount"
+        >
+          3.7020
+           
+          <span
+            aria-label="KILT Coin"
+            class="coin"
+          />
+        </span>
+      </span>
+    </p>
+  </form>
 </div>
 `;

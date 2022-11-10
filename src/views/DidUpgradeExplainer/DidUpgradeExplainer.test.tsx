@@ -1,3 +1,5 @@
+import { BalanceUtils } from '@kiltprotocol/core';
+
 import {
   moreIdentitiesMock as identities,
   render,
@@ -8,6 +10,10 @@ import '../../components/useCopyButton/useCopyButton.mock';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 import { parseDidUri } from '../../utilities/did/did';
 
+import { useKiltCosts } from '../../utilities/didUpgrade/didUpgrade';
+
+import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
+
 import { DidUpgradeExplainer } from './DidUpgradeExplainer';
 
 jest.mock('../../utilities/did/useIsOnChainDidDeleted');
@@ -16,9 +22,17 @@ jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4tPoYT9j4i429JktnyX9EEu9StL58YfdPCi8cUkYnvtAKRbK',
 } as unknown as ReturnType<typeof parseDidUri>);
 
+jest.mock('../../utilities/didUpgrade/didUpgrade', () => ({
+  useKiltCosts: jest.fn(),
+}));
+
 describe('DidUpgradeExplainer', () => {
   it('should render DID not on chain yet', async () => {
     jest.mocked(useIsOnChainDidDeleted).mockReturnValue(false);
+    jest.mocked(useKiltCosts).mockReturnValue({
+      total: BalanceUtils.toFemtoKilt(2),
+      insufficientKilt: false,
+    });
 
     const { container } = render(
       <DidUpgradeExplainer
@@ -32,6 +46,10 @@ describe('DidUpgradeExplainer', () => {
 
   it('should render DID already removed from chain', async () => {
     jest.mocked(useIsOnChainDidDeleted).mockReturnValue(true);
+    jest.mocked(useKiltCosts).mockReturnValue({
+      total: BalanceUtils.toFemtoKilt(2),
+      insufficientKilt: false,
+    });
 
     const { container } = render(
       <DidUpgradeExplainer
@@ -42,4 +60,42 @@ describe('DidUpgradeExplainer', () => {
     );
     expect(container).toMatchSnapshot();
   });
+
+  it('should render pay with euro option in internal build', async () => {
+    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(false);
+    jest.mocked(useKiltCosts).mockReturnValue({
+      total: BalanceUtils.toFemtoKilt(2),
+      insufficientKilt: false,
+    });
+
+    const { container } = render(
+      <InternalConfigurationContext>
+        <DidUpgradeExplainer
+          identity={
+            identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
+          }
+        />
+      </InternalConfigurationContext>,
+    );
+    expect(container).toMatchSnapshot();
+  });
+});
+
+it('should render insufficient balance to pay costs in KILT', async () => {
+  jest.mocked(useIsOnChainDidDeleted).mockReturnValue(false);
+  jest.mocked(useKiltCosts).mockReturnValue({
+    total: BalanceUtils.toFemtoKilt(2),
+    insufficientKilt: true,
+  });
+
+  const { container } = render(
+    <InternalConfigurationContext>
+      <DidUpgradeExplainer
+        identity={
+          identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
+        }
+      />
+    </InternalConfigurationContext>,
+  );
+  expect(container).toMatchSnapshot();
 });
