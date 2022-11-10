@@ -26,6 +26,8 @@ import { useKiltCosts } from '../../utilities/didUpgrade/didUpgrade';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { useConfiguration } from '../../configuration/useConfiguration';
 
+type PaymentMethod = 'kilt' | 'euro';
+
 interface Props {
   identity: Identity;
 }
@@ -39,7 +41,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
 
   const { total: kiltCosts, insufficientKilt } = useKiltCosts(address, did);
 
-  const [paymentMethod, setPaymentMethod] = useState<'kilt' | 'euro'>('kilt');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('kilt');
 
   const { features } = useConfiguration();
 
@@ -51,7 +53,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
   }, [insufficientKilt, features]);
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    setPaymentMethod(event.target.value as 'kilt' | 'euro');
+    setPaymentMethod(event.target.value as PaymentMethod);
   }, []);
 
   const portalRef = useRef<HTMLDivElement>(null);
@@ -108,7 +110,6 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
             {t('view_DidUpgradeExplainer_deposit')}
           </p>
 
-          {/* TODO: remove feature check when KILT checkout is released */}
           {features.checkout && (
             <section
               className={

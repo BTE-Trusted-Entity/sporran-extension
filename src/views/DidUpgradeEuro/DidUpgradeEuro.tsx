@@ -17,29 +17,28 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { getTransaction } from '../../utilities/didUpgrade/didUpgrade';
-import { endpoints, getEndpoint } from '../../utilities/endpoints/endpoints';
+import {
+  getEndpoint,
+  KnownEndpoints,
+} from '../../utilities/endpoints/endpoints';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-
-interface Props {
-  identity: Identity;
-}
 
 // TODO: Fetch submitter address from TXD
 const submitter = '4t37z5PrEH9zz93cQ2of8F9kYMPrmWcRMBckJtNGF8keSW5W';
+
+const kiltCheckoutURLs: Record<KnownEndpoints, string> = {
+  'wss://kilt-rpc.dwellir.com': 'https://checkout.kilt.io',
+  'wss://spiritnet.kilt.io': 'https://checkout.kilt.io',
+  'wss://peregrine.kilt.io/parachain-public-ws': 'https://dev-checkout.kilt.io',
+  'wss://peregrine-stg.kilt.io/para': 'https://dev-checkout.kilt.io',
+  'wss://sporran-testnet.kilt.io': 'https://dev-checkout.kilt.io',
+};
 
 // TODO: return TXD URL when it works to fetch submitter address
 async function getExternalURLs(): Promise<{ checkoutBaseURL: string }> {
   const endpoint = await getEndpoint();
 
-  if (endpoint === endpoints[0] || endpoint === endpoints[1]) {
-    return {
-      checkoutBaseURL: 'https://checkout.kilt.io',
-    };
-  } else {
-    return {
-      checkoutBaseURL: 'https://dev-checkout.kilt.io/',
-    };
-  }
+  return { checkoutBaseURL: kiltCheckoutURLs[endpoint] };
 }
 
 async function getCost() {
@@ -51,6 +50,10 @@ async function getCost() {
     currency: 'EUR',
     currencyDisplay: 'code',
   });
+}
+
+interface Props {
+  identity: Identity;
 }
 
 export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
