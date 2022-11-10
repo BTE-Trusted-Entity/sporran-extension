@@ -12,6 +12,8 @@ import { parseDidUri } from '../../utilities/did/did';
 
 import { useKiltCosts } from '../../utilities/didUpgrade/didUpgrade';
 
+import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
+
 import { DidUpgradeExplainer } from './DidUpgradeExplainer';
 
 jest.mock('../../utilities/did/useIsOnChainDidDeleted');
@@ -59,20 +61,41 @@ describe('DidUpgradeExplainer', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('should render insufficient balance to pay costs in KILT', async () => {
-    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(true);
+  it('should render pay with euro option in internal build', async () => {
+    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(false);
     jest.mocked(useKiltCosts).mockReturnValue({
       total: BalanceUtils.toFemtoKilt(2),
-      insufficientKilt: true,
+      insufficientKilt: false,
     });
 
     const { container } = render(
-      <DidUpgradeExplainer
-        identity={
-          identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']
-        }
-      />,
+      <InternalConfigurationContext>
+        <DidUpgradeExplainer
+          identity={
+            identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
+          }
+        />
+      </InternalConfigurationContext>,
     );
     expect(container).toMatchSnapshot();
   });
+});
+
+it('should render insufficient balance to pay costs in KILT', async () => {
+  jest.mocked(useIsOnChainDidDeleted).mockReturnValue(false);
+  jest.mocked(useKiltCosts).mockReturnValue({
+    total: BalanceUtils.toFemtoKilt(2),
+    insufficientKilt: true,
+  });
+
+  const { container } = render(
+    <InternalConfigurationContext>
+      <DidUpgradeExplainer
+        identity={
+          identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
+        }
+      />
+    </InternalConfigurationContext>,
+  );
+  expect(container).toMatchSnapshot();
 });
