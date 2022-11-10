@@ -913,8 +913,8 @@
   "view_DidUpgradeEuro_paypal": {
     "message": "PayPal* "
   },
-  "view_DidUpgradeEuro_costs": {
-    "message": "(total cost: EUR $cost$).",
+  "view_DidUpgradeEuro_cost": {
+    "message": "(total cost: $cost$).",
     "placeholders": {
       "cost": {
         "content": "$1"

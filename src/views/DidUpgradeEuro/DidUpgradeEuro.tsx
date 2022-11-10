@@ -2,7 +2,9 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { Link } from 'react-router-dom';
 
-import { FormEvent, useCallback } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
+
+import ky from 'ky';
 
 import * as styles from './DidUpgradeEuro.module.css';
 
@@ -15,19 +17,41 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { getTransaction } from '../../utilities/didUpgrade/didUpgrade';
+import { endpoints, getEndpoint } from '../../utilities/endpoints/endpoints';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 interface Props {
   identity: Identity;
 }
 
-// TODO: Use KILT Checkout URL when available
-const base = 'https://www.kilt.io/';
-
-// TODO: Fetch costs from KILT checkout API
-const costs = '4,00';
-
 // TODO: Fetch submitter address from TXD
 const submitter = '4t37z5PrEH9zz93cQ2of8F9kYMPrmWcRMBckJtNGF8keSW5W';
+
+// TODO: return TXD URL when it works to fetch submitter address
+async function getExternalURLs(): Promise<{ checkoutBaseURL: string }> {
+  const endpoint = await getEndpoint();
+
+  if (endpoint === endpoints[0] || endpoint === endpoints[1]) {
+    return {
+      checkoutBaseURL: 'https://checkout.kilt.io',
+    };
+  } else {
+    return {
+      checkoutBaseURL: 'https://dev-checkout.kilt.io/',
+    };
+  }
+}
+
+async function getCost() {
+  const { checkoutBaseURL } = await getExternalURLs();
+
+  const cost = await ky.get(`${checkoutBaseURL}/cost`).text();
+  return parseFloat(cost).toLocaleString(undefined, {
+    style: 'currency',
+    currency: 'EUR',
+    currencyDisplay: 'code',
+  });
+}
 
 export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
@@ -35,6 +59,8 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
   const { address } = identity;
 
   const passwordField = usePasswordField();
+
+  const cost = useAsyncValue(getCost, []);
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
@@ -44,7 +70,9 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
 
       const { extrinsic } = await getTransaction(seed, submitter);
 
-      const url = new URL(base);
+      const { checkoutBaseURL } = await getExternalURLs();
+
+      const url = new URL(checkoutBaseURL);
       url.searchParams.set('address', address);
       url.searchParams.set('tx', extrinsic.method.toHex());
 
@@ -53,6 +81,10 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
     },
     [address, passwordField],
   );
+
+  if (!cost) {
+    return null;
+  }
 
   return (
     <form
@@ -85,7 +117,7 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
       <p className={styles.info}>
         <span>{t('view_DidUpgradeEuro_info')}</span>
         <span className={styles.paypal}>{t('view_DidUpgradeEuro_paypal')}</span>
-        <span>{t('view_DidUpgradeEuro_costs', [costs])}</span>
+        <span>{t('view_DidUpgradeEuro_cost', [cost])}</span>
       </p>
 
       <p className={styles.buttonsLine}>

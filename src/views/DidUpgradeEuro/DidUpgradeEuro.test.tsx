@@ -2,7 +2,12 @@ import { identitiesMock as identities, render } from '../../testing/testing';
 
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+
 import { DidUpgradeEuro } from './DidUpgradeEuro';
+
+jest.mock('../../utilities/useAsyncValue/useAsyncValue');
+jest.mocked(useAsyncValue).mockReturnValue('EUR 4,00');
 
 describe('DidUpgradeEuro', () => {
   it('should render', async () => {
