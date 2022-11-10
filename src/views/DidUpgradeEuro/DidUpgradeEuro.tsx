@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { Link } from 'react-router-dom';
 
-import { FormEvent, useCallback, useEffect, useState } from 'react';
+import { FormEvent, useCallback } from 'react';
 
 import ky from 'ky';
 
