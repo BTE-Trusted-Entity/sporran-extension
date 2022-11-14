@@ -3,7 +3,7 @@ import ky from 'ky';
 import { getExternalURLs } from '../getExternalURLs/getExternalURLs';
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
-async function getSubmitter() {
+async function getTXDSubmitter() {
   const { txd } = await getExternalURLs();
 
   const { paymentAddress } = await ky
@@ -14,5 +14,5 @@ async function getSubmitter() {
 }
 
 export function useTXDSubmitter() {
-  return useAsyncValue(getSubmitter, []);
+  return useAsyncValue(getTXDSubmitter, []);
 }
