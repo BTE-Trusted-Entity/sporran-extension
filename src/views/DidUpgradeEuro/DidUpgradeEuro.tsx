@@ -21,11 +21,25 @@ import { getTransaction } from '../../utilities/didUpgrade/didUpgrade';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { getExternalURLs } from '../../utilities/getExternalURLs/getExternalURLs';
 import { useTXDSubmitter } from '../../utilities/useTXDSubmitter/useTXDSubmitter';
+import {
+  getEndpoint,
+  KnownEndpoints,
+} from '../../utilities/endpoints/endpoints';
+
+const checkoutURLs: Record<KnownEndpoints, string> = {
+  'wss://kilt-rpc.dwellir.com': 'https://checkout.kilt.io',
+  'wss://spiritnet.kilt.io': 'https://checkout.kilt.io',
+  'wss://peregrine.kilt.io/parachain-public-ws': 'https://dev-checkout.kilt.io',
+  'wss://peregrine-stg.kilt.io/para': 'https://dev-checkout.kilt.io',
+  'wss://sporran-testnet.kilt.io': 'https://dev-checkout.kilt.io',
+};
 
 async function getCost() {
-  const { kiltCheckout } = await getExternalURLs();
+  const endpoint = await getEndpoint();
 
-  const cost = await ky.get(`${kiltCheckout}/cost`).text();
+  const checkout = checkoutURLs[endpoint];
+
+  const cost = await ky.get(`${checkout}/cost`).text();
   return parseFloat(cost).toLocaleString(undefined, {
     style: 'currency',
     currency: 'EUR',
