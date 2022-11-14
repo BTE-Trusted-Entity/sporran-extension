@@ -17,16 +17,15 @@ import {
 } from '../../components/PasswordField/PasswordField';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { getTransaction } from '../../utilities/didUpgrade/didUpgrade';
+
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+import { useTXDSubmitter } from '../../utilities/useTXDSubmitter/useTXDSubmitter';
 import {
   getEndpoint,
   KnownEndpoints,
 } from '../../utilities/endpoints/endpoints';
-import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
-// TODO: Fetch submitter address from TXD
-const submitter = '4t37z5PrEH9zz93cQ2of8F9kYMPrmWcRMBckJtNGF8keSW5W';
-
-const kiltCheckoutURLs: Record<KnownEndpoints, string> = {
+const checkoutURLs: Record<KnownEndpoints, string> = {
   'wss://kilt-rpc.dwellir.com': 'https://checkout.kilt.io',
   'wss://spiritnet.kilt.io': 'https://checkout.kilt.io',
   'wss://peregrine.kilt.io/parachain-public-ws': 'https://dev-checkout.kilt.io',
@@ -34,17 +33,15 @@ const kiltCheckoutURLs: Record<KnownEndpoints, string> = {
   'wss://sporran-testnet.kilt.io': 'https://dev-checkout.kilt.io',
 };
 
-// TODO: return TXD URL when it works to fetch submitter address
-async function getExternalURLs(): Promise<{ checkoutBaseURL: string }> {
+async function getCheckoutURL() {
   const endpoint = await getEndpoint();
-
-  return { checkoutBaseURL: kiltCheckoutURLs[endpoint] };
+  return checkoutURLs[endpoint];
 }
 
 async function getCost() {
-  const { checkoutBaseURL } = await getExternalURLs();
+  const checkout = await getCheckoutURL();
 
-  const cost = await ky.get(`${checkoutBaseURL}/cost`).text();
+  const cost = await ky.get(`${checkout}/cost`).text();
   return parseFloat(cost).toLocaleString(undefined, {
     style: 'currency',
     currency: 'EUR',
@@ -64,25 +61,30 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
   const passwordField = usePasswordField();
 
   const cost = useAsyncValue(getCost, []);
+  const submitter = useTXDSubmitter();
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
 
+      if (!submitter) {
+        throw new Error('Submitter address missing');
+      }
+
       const { seed } = await passwordField.get(event);
 
       const { extrinsic } = await getTransaction(seed, submitter);
 
-      const { checkoutBaseURL } = await getExternalURLs();
+      const checkout = await getCheckoutURL();
 
-      const url = new URL(checkoutBaseURL);
+      const url = new URL(checkout);
       url.searchParams.set('address', address);
       url.searchParams.set('tx', extrinsic.method.toHex());
 
       await browser.tabs.create({ url: url.toString() });
       window.close();
     },
-    [address, passwordField],
+    [address, passwordField, submitter],
   );
 
   if (!cost) {
