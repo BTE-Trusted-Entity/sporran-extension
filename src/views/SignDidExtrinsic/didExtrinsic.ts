@@ -69,7 +69,7 @@ export function getAddServiceEndpoint(
 
 export async function getRemoveServiceEndpoint(
   extrinsic: GenericExtrinsic,
-  did: DidUri,
+  did: DidUri | undefined,
   error: ReturnType<typeof useBooleanState>,
 ): Promise<DidServiceEndpoint> {
   error.off();
@@ -80,7 +80,7 @@ export async function getRemoveServiceEndpoint(
 
   const id = human.method.args['service_id'] as string;
 
-  if (!isFullDid(did)) {
+  if (!did || !isFullDid(did)) {
     return { id, types: [], urls: [] };
   }
 

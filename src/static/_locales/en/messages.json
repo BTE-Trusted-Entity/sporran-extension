@@ -1051,6 +1051,9 @@
   "view_DidManage_downgrade": {
     "message": "Remove on-chain DID"
   },
+  "view_DidManage_unusable": {
+    "message": "This identity’s DID cannot be used anymore because its on-chain DID has been removed."
+  },
   "view_DidEndpointsForm_heading": {
     "message": "Service Endpoints"
   },
@@ -1411,6 +1414,9 @@
   },
   "view_SignDidExtrinsic_error_light_did": {
     "message": "You need to upgrade to an on-chain DID first"
+  },
+  "view_SignDidExtrinsic_error_unusable_did": {
+    "message": "This identity’s DID has been removed and is unusable"
   },
   "view_SignDidExtrinsic_error_forbidden": {
     "message": "This DID call is forbidden"

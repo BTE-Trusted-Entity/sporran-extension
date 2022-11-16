@@ -9,6 +9,7 @@ import * as styles from './W3NRemove.module.css';
 import { Identity } from '../../utilities/identities/types';
 
 import {
+  getIdentityDid,
   getKeypairBySeed,
   getKeystoreFromSeed,
 } from '../../utilities/identities/identities';
@@ -58,7 +59,9 @@ interface Props {
 export function W3NRemove({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { address, did } = identity;
+  const { address } = identity;
+  const did = getIdentityDid(identity);
+
   const destination = generatePath(paths.identity.did.manage.start, {
     address,
   });

@@ -12,6 +12,7 @@ import {
 import * as styles from './DidUpgradeExplainer.module.css';
 
 import { Identity } from '../../utilities/identities/types';
+import { getIdentityDid } from '../../utilities/identities/identities';
 import { parseDidUri } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 
@@ -35,7 +36,8 @@ interface Props {
 export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { address, did } = identity;
+  const { address } = identity;
+  const did = getIdentityDid(identity);
 
   const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
 

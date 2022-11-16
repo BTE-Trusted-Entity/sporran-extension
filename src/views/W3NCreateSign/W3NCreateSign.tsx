@@ -18,6 +18,7 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import {
+  getIdentityDid,
   getKeypairBySeed,
   getKeystoreFromSeed,
 } from '../../utilities/identities/identities';
@@ -63,7 +64,9 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
 
   const { web3name } = useParams() as { web3name: string };
 
-  const { address, did } = identity;
+  const { address } = identity;
+  const did = getIdentityDid(identity);
+
   const destination = generatePath(paths.identity.did.manage.start, {
     address,
   });
@@ -110,7 +113,7 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
 
       <IdentitySlide identity={identity} />
 
-      <CopyValue value={identity.did} label="DID" className={styles.didLine} />
+      <CopyValue value={did} label="DID" className={styles.didLine} />
 
       <p className={styles.costs}>
         {t('view_W3NCreateSign_total')}

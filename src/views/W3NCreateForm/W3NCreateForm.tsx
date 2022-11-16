@@ -9,6 +9,7 @@ import { u32 } from '@polkadot/types';
 import * as styles from './W3NCreateForm.module.css';
 
 import { Identity } from '../../utilities/identities/types';
+import { getIdentityDid } from '../../utilities/identities/identities';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
@@ -22,6 +23,7 @@ interface Props {
 export function W3NCreateForm({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { address } = identity;
+  const did = getIdentityDid(identity);
 
   const history = useHistory();
   const { goBack } = history;
@@ -89,7 +91,7 @@ export function W3NCreateForm({ identity }: Props): JSX.Element {
 
       <IdentitySlide identity={identity} />
 
-      <CopyValue value={identity.did} label="DID" className={styles.didLine} />
+      <CopyValue value={did} label="DID" className={styles.didLine} />
 
       <p className={styles.info}>{t('view_W3NCreateForm_info')}</p>
 

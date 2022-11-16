@@ -4,6 +4,7 @@ import { browser } from 'webextension-polyfill-ts';
 import * as styles from './W3NCreateInfo.module.css';
 
 import { Identity } from '../../utilities/identities/types';
+import { getIdentityDid } from '../../utilities/identities/identities';
 import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
@@ -20,7 +21,9 @@ export function W3NCreateInfo({ identity }: Props): JSX.Element {
   const { goBack } = useHistory();
 
   const { address } = identity;
-  const canContinue = isFullDid(identity.did);
+  const did = getIdentityDid(identity);
+
+  const canContinue = isFullDid(did);
 
   return (
     <section className={styles.container}>
@@ -30,11 +33,7 @@ export function W3NCreateInfo({ identity }: Props): JSX.Element {
       <IdentitySlide identity={identity} />
 
       {canContinue && (
-        <CopyValue
-          value={identity.did}
-          label="DID"
-          className={styles.didLine}
-        />
+        <CopyValue value={did} label="DID" className={styles.didLine} />
       )}
 
       <p className={styles.info}>{t('view_W3NCreateInfo_info')}</p>

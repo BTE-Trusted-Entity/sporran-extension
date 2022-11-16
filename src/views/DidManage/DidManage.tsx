@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -31,41 +32,47 @@ export function DidManage({ identity }: Props): JSX.Element {
 
       <IdentitySlide identity={identity} />
 
-      <CopyValue value={identity.did} label="DID" className={styles.didLine} />
+      {did && (
+        <Fragment>
+          <CopyValue value={did} label="DID" className={styles.didLine} />
 
-      {web3name && (
-        <input
-          value={web3name}
-          aria-label="web3name"
-          readOnly
-          className={styles.web3NameLine}
-        />
+          {web3name && (
+            <input
+              value={web3name}
+              aria-label="web3name"
+              readOnly
+              className={styles.web3NameLine}
+            />
+          )}
+
+          <a
+            className={styles.linking}
+            href="https://linking.trusted-entity.io/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t('view_DidManage_linking')}
+          </a>
+
+          <Link
+            className={styles.endpoints}
+            to={generatePath(paths.identity.did.manage.endpoints.start, {
+              address,
+            })}
+          >
+            {t('view_DidManage_endpoints')}
+          </Link>
+
+          <Link
+            className={styles.downgrade}
+            to={generatePath(warningPath, { address })}
+          >
+            {t('view_DidManage_downgrade')}
+          </Link>
+        </Fragment>
       )}
 
-      <a
-        className={styles.linking}
-        href="https://linking.trusted-entity.io/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        {t('view_DidManage_linking')}
-      </a>
-
-      <Link
-        className={styles.endpoints}
-        to={generatePath(paths.identity.did.manage.endpoints.start, {
-          address,
-        })}
-      >
-        {t('view_DidManage_endpoints')}
-      </Link>
-
-      <Link
-        className={styles.downgrade}
-        to={generatePath(warningPath, { address })}
-      >
-        {t('view_DidManage_downgrade')}
-      </Link>
+      {!did && <p className={styles.didLine}>{t('view_DidManage_unusable')}</p>}
 
       {/* One of the child sub-views uses the link form, so this view also has to use it. */}
       <LinkBack to={paths.identity.overview} />

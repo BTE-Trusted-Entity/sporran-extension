@@ -74,8 +74,8 @@ async function getSignedTransaction(
   return { extrinsic: tx, did: uri };
 }
 
-export async function getFee(did: DidUri): Promise<BN> {
-  if (!isFullDid(did)) {
+export async function getFee(did: DidUri | undefined): Promise<BN> {
+  if (!did || !isFullDid(did)) {
     return new BN(0);
   }
   const fakeSeed = new Uint8Array(32);
@@ -91,6 +91,9 @@ export async function sign(
   identity: Identity,
   seed: Uint8Array,
 ): Promise<string> {
+  if (!identity.did) {
+    throw new Error('DID is deleted and unusable');
+  }
   const { extrinsic, did } = await getSignedTransaction(seed, identity.did);
 
   const hash = extrinsic.hash.toHex();

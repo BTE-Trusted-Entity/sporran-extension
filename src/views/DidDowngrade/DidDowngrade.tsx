@@ -42,7 +42,7 @@ import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 function useCosts(
   address: string,
-  did: DidUri,
+  did: DidUri | undefined, // after the downgrade it’s set to undefined
 ): {
   fee?: BN;
   deposit?: BN;

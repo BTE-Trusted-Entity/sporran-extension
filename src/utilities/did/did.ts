@@ -9,7 +9,7 @@ import { Crypto } from '@kiltprotocol/utils';
 
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
-export function isFullDid(did: DidUri): boolean {
+export function isFullDid(did: DidUri | undefined): boolean {
   if (!did) {
     // could be a legacy identity without DID
     return false;
@@ -47,18 +47,11 @@ export function getDidEncryptionKey(details: DidDetails): DidEncryptionKey {
 export function parseDidUri(did: DidUri): ReturnType<
   typeof Utils.parseDidUri
 > & {
-  lightDid: DidUri;
   fullDid: DidUri;
 } {
   const parsed = Utils.parseDidUri(did);
   const { identifier, type } = parsed;
   const unprefixedIdentifier = identifier.replace(/^00/, '');
-  const prefixedIdentifier = '00' + identifier;
-
-  const lightDid =
-    type === 'light'
-      ? did
-      : Utils.getKiltDidFromIdentifier(prefixedIdentifier, 'light');
 
   const fullDid =
     type === 'full'
@@ -67,7 +60,6 @@ export function parseDidUri(did: DidUri): ReturnType<
 
   return {
     ...parsed,
-    lightDid,
     fullDid,
   };
 }
@@ -79,7 +71,13 @@ export function sameFullDid(a: DidUri, b: DidUri): boolean {
   return parseDidUri(a).fullDid === parseDidUri(b).fullDid;
 }
 
-export async function needLegacyDidCrypto(did: DidUri): Promise<boolean> {
+export async function needLegacyDidCrypto(
+  did: DidUri | undefined,
+): Promise<boolean> {
+  if (!did) {
+    return false;
+  }
+
   if (!isFullDid(did)) {
     return false;
   }

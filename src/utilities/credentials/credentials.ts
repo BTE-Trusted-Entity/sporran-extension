@@ -80,7 +80,7 @@ export function isUnusableCredential({ status }: Credential) {
 }
 
 export function useIdentityCredentials(
-  did: DidUri,
+  did: DidUri | undefined,
   onlyUsable = true,
 ): Credential[] | undefined {
   const all = useCredentials();

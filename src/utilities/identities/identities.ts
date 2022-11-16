@@ -45,6 +45,7 @@ import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
 import { IDENTITIES_KEY, getIdentities } from './getIdentities';
 
 import { Identity } from './types';
+
 export { Identity, IdentitiesMap } from './types';
 
 const CURRENT_IDENTITY_KEY = 'currentIdentity';
@@ -207,6 +208,11 @@ async function fixLightDidIssues(seed: Uint8Array) {
   }
 
   try {
+    if (!identity.did) {
+      // DID was deactivated, no action needed.
+      return;
+    }
+
     // If this light DID was created and stored using SDK@0.24.0 then its keys are serialized using base64,
     // resulting in an invalid URI, so resolving would throw an exception.
     const details = await getDidDetails(identity.did);
@@ -240,7 +246,7 @@ export async function getIdentityCryptoFromSeed(
 
   const { address } = getKeypairBySeed(seed);
   const identities = await getIdentities();
-  const { did } = identities[address];
+  const did = getIdentityDid(identities[address]);
 
   const didDetails = await getDidDetails(did);
   const keystore = await getKeystoreFromSeed(seed);
@@ -392,7 +398,7 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
     return;
   }
 
-  const { lightDid, fullDid, type } = parseDidUri(identity.did);
+  const { fullDid, type } = parseDidUri(identity.did);
   const wasOnChain = type === 'full';
 
   const resolved = await DidResolver.resolveDoc(identity.did);
@@ -401,7 +407,7 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
     : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
 
   if (wasOnChain && !isOnChain) {
-    await saveIdentity({ ...identity, did: lightDid });
+    await saveIdentity({ ...identity, did: undefined });
   }
   if (!wasOnChain && isOnChain) {
     await saveIdentity({ ...identity, did: fullDid });
@@ -421,4 +427,11 @@ export function useCurrentIdentity(): string | null | undefined {
   noAwaitUpdateCachedDidStateOnce(data);
 
   return data;
+}
+
+export function getIdentityDid({ did }: Identity): DidUri {
+  if (!did) {
+    throw new Error('DID is deleted and unusable');
+  }
+  return did;
 }
