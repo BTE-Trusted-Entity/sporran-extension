@@ -75,6 +75,7 @@ export async function needLegacyDidCrypto(
   did: DidUri | undefined,
 ): Promise<boolean> {
   if (!did) {
+    // DID was deactivated, no action needed.
     return false;
   }
 
