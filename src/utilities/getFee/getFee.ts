@@ -1,7 +1,7 @@
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { ConfigService } from '@kiltprotocol/config';
 import BN from 'bn.js';
 
-import { makeKeyring } from '../identities/identities';
+import { makeFakeIdentityCrypto } from '../makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
 interface FeeInput {
   recipient: string;
@@ -13,8 +13,7 @@ const fallbackAddressForFee =
   '4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1';
 
 export async function getFee(input: FeeInput): Promise<BN> {
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  const { api } = blockchain;
+  const api = ConfigService.get('api');
 
   const tx = api.tx.balances.transfer(
     input.recipient || fallbackAddressForFee,
@@ -22,7 +21,7 @@ export async function getFee(input: FeeInput): Promise<BN> {
   );
 
   // Including any signature increases the transaction size and the fee
-  const fakeIdentity = makeKeyring().createFromUri('//Alice');
-  const signedTx = await blockchain.signTx(fakeIdentity, tx, input.tip);
-  return (await signedTx.paymentInfo(fakeIdentity)).partialFee;
+  const { keypair } = makeFakeIdentityCrypto();
+  const signedTx = await tx.signAsync(keypair, input);
+  return (await signedTx.paymentInfo(keypair)).partialFee;
 }

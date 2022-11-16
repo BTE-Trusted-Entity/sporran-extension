@@ -1,11 +1,12 @@
 import { browser } from 'webextension-polyfill-ts';
 import { FormEvent, useCallback, useState } from 'react';
+import { Attestation, Credential } from '@kiltprotocol/core';
+import { ConfigService } from '@kiltprotocol/config';
 import {
-  Attestation,
-  Credential,
-  RequestForAttestation,
-} from '@kiltprotocol/core';
-import { ISubmitCredential, MessageBodyType } from '@kiltprotocol/types';
+  IAttestation,
+  ICredentialPresentation,
+  ISubmitCredential,
+} from '@kiltprotocol/types';
 
 import * as styles from './ShareCredentialSign.module.css';
 
@@ -22,7 +23,23 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 import { Selected } from '../ShareCredential/ShareCredential';
 
-import { getDidDetails, needLegacyDidCrypto } from '../../utilities/did/did';
+import { getDidDocument, needLegacyDidCrypto } from '../../utilities/did/did';
+
+async function getCompatibleContent(
+  presentation: ICredentialPresentation,
+  attestation: IAttestation,
+  specVersion: ShareInput['specVersion'],
+): Promise<ISubmitCredential['content']> {
+  if (specVersion !== '1.0') {
+    return [presentation];
+  }
+
+  const legacy = {
+    request: presentation,
+    attestation,
+  } as unknown as ICredentialPresentation;
+  return [legacy];
+}
 
 interface Props {
   selected: Selected;
@@ -37,7 +54,7 @@ export function ShareCredentialSign({
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { credentialRequest, verifierDid } = popupData;
+  const { credentialRequest, verifierDid, specVersion } = popupData;
 
   const { challenge } = credentialRequest;
 
@@ -54,46 +71,36 @@ export function ShareCredentialSign({
       const { seed } = await passwordField.get(event);
 
       const isLegacy = await needLegacyDidCrypto(identity.did);
-      const { encrypt, keystore, didDetails } = await getIdentityCryptoFromSeed(
-        seed,
-        isLegacy,
-      );
+      const { encrypt, sign } = await getIdentityCryptoFromSeed(seed, isLegacy);
 
-      const request = RequestForAttestation.fromRequest(credential.request);
-      await request.signWithDidKey(
-        keystore,
-        didDetails,
-        didDetails.authenticationKey.id,
-        { challenge },
-      );
-
-      const attestation = await Attestation.query(request.rootHash);
-
-      if (!attestation) {
+      const { rootHash } = credential.request;
+      const api = ConfigService.get('api');
+      const result = await api.query.attestation.attestations(rootHash);
+      if (result.isNone) {
         setError(t('view_ShareCredentialSign_error'));
         return;
       }
+      const attestation = Attestation.fromChain(result, rootHash);
 
-      const credentialInstance = Credential.fromCredential({
-        request,
-        attestation,
-      });
-
-      const presentation = await credentialInstance.createPresentation({
+      const presentation = await Credential.createPresentation({
+        credential: credential.request,
         selectedAttributes: sharedContents,
-        signer: keystore,
-        claimerDid: didDetails,
+        signCallback: sign,
         challenge,
       });
 
       const credentialsBody: ISubmitCredential = {
-        content: [presentation],
-        type: MessageBodyType.SUBMIT_CREDENTIAL,
+        content: await getCompatibleContent(
+          presentation,
+          attestation,
+          specVersion,
+        ),
+        type: 'submit-credential',
       };
 
-      const verifierDidDetails = await getDidDetails(verifierDid);
+      const verifierDidDocument = await getDidDocument(verifierDid);
 
-      const message = await encrypt(credentialsBody, verifierDidDetails);
+      const message = await encrypt(credentialsBody, verifierDidDocument);
 
       await shareChannel.return(message);
       window.close();
@@ -106,6 +113,7 @@ export function ShareCredentialSign({
       verifierDid,
       t,
       sharedContents,
+      specVersion,
     ],
   );
 

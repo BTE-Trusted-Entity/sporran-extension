@@ -1,4 +1,5 @@
 import { GenericExtrinsic } from '@polkadot/types';
+import * as Did from '@kiltprotocol/did';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
 import '../../components/useCopyButton/useCopyButton.mock';
@@ -22,6 +23,11 @@ const input: SignDidExtrinsicOriginInput = {
   extrinsic: '0x1c0426000c666f6f',
   signer: '4tMMYZHsFfqzfCsgCPLJSBmomBv2d6cBEYzHKMGVKz2VjACR',
 };
+
+jest.mock('@kiltprotocol/did', () => ({ resourceIdToChain: jest.fn() }));
+jest
+  .mocked(Did.resourceIdToChain)
+  .mockImplementation((input) => input.substring(1));
 
 jest.mock('./didExtrinsic');
 
@@ -65,9 +71,9 @@ describe('SignDidExtrinsic', () => {
       method: { section: 'did', method: 'addServiceEndpoint' },
     } as unknown as GenericExtrinsic);
     jest.mocked(getAddServiceEndpoint).mockReturnValue({
-      id: '123456',
-      types: ['Some type'],
-      urls: ['https://sporran.org'],
+      id: '#123456',
+      type: ['Some type'],
+      serviceEndpoint: ['https://sporran.org'],
     });
     const { container } = render(
       <PopupTestProvider path={paths.popup.signDidExtrinsic} data={input}>
@@ -89,9 +95,9 @@ describe('SignDidExtrinsic', () => {
       method: { section: 'did', method: 'removeServiceEndpoint' },
     } as unknown as GenericExtrinsic);
     jest.mocked(getRemoveServiceEndpoint).mockResolvedValue({
-      id: '123456',
-      types: ['Some type'],
-      urls: ['https://sporran.org'],
+      id: '#123456',
+      type: ['Some type'],
+      serviceEndpoint: ['https://sporran.org'],
     });
 
     const { container } = render(

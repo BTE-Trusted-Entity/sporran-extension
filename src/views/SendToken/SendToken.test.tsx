@@ -1,10 +1,8 @@
+import { act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { BalanceUtils } from '@kiltprotocol/core';
+import { BalanceUtils, connect } from '@kiltprotocol/core';
 import { DataUtils } from '@kiltprotocol/utils';
-import {
-  Blockchain,
-  BlockchainApiConnection,
-} from '@kiltprotocol/chain-helpers';
+import { ConfigService } from '@kiltprotocol/config';
 
 import { NEW } from '../../utilities/identities/identities';
 import {
@@ -19,21 +17,21 @@ import '../../components/usePasteButton/usePasteButton.mock';
 import { SendToken } from './SendToken';
 
 jest.mock('../../utilities/getFee/getFee', () => ({ getFee: jest.fn() }));
-jest.mocked(getFee).mockResolvedValue(BalanceUtils.toFemtoKilt(0.001));
+const feePromise = Promise.resolve(BalanceUtils.toFemtoKilt(0.001));
+jest.mocked(getFee).mockReturnValue(feePromise);
 
-jest.mocked(BlockchainApiConnection.getConnectionOrConnect).mockResolvedValue({
-  api: {
-    consts: {
-      balances: { existentialDeposit: BalanceUtils.toFemtoKilt(0.1) },
-    },
+const api = {
+  consts: {
+    balances: { existentialDeposit: BalanceUtils.toFemtoKilt(0.1) },
   },
-} as Blockchain);
+} as Awaited<ReturnType<typeof connect>>;
+ConfigService.set({ api });
 
 const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 describe('SendToken', () => {
   beforeEach(() => {
-    jest.mocked(DataUtils.validateAddress).mockReset();
+    jest.mocked(DataUtils.verifyKiltAddress).mockReset();
     Object.defineProperty(window.navigator, 'onLine', {
       value: true,
       writable: true,
@@ -52,6 +50,9 @@ describe('SendToken', () => {
     const { container } = render(
       <SendToken identity={NEW} onSuccess={jest.fn()} />,
     );
+    await act(async () => {
+      await feePromise;
+    });
     expect(container).toMatchSnapshot();
   });
 
@@ -194,7 +195,7 @@ describe('SendToken', () => {
   });
 
   it('should report an invalid recipient', async () => {
-    jest.mocked(DataUtils.validateAddress).mockImplementation(() => {
+    jest.mocked(DataUtils.verifyKiltAddress).mockImplementation(() => {
       throw new Error();
     });
 

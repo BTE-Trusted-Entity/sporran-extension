@@ -1,6 +1,7 @@
 import { MouseEvent, useCallback, useMemo, useState } from 'react';
 import { filter, reject, sortBy } from 'lodash-es';
-import { RequestForAttestation } from '@kiltprotocol/core';
+import { Credential as SDKCredential } from '@kiltprotocol/core';
+import { isSameSubject } from '@kiltprotocol/did';
 
 import {
   Credential,
@@ -8,7 +9,6 @@ import {
 } from '../../utilities/credentials/credentials';
 import { exceptionToError } from '../../utilities/exceptionToError/exceptionToError';
 import { useIdentities } from '../../utilities/identities/identities';
-import { sameFullDid } from '../../utilities/did/did';
 
 import { ImportCredentialsForm } from './ImportCredentialsForm';
 import { ImportCredentialsResults } from './ImportCredentialsResults';
@@ -67,16 +67,17 @@ export function ImportCredentials(): JSX.Element | null {
               attester,
             } = credential;
 
-            if (
-              !cTypeTitle ||
-              !attester ||
-              !RequestForAttestation.verifyData(request)
-            ) {
+            if (!cTypeTitle || !attester) {
+              throw new Error('invalid');
+            }
+            try {
+              SDKCredential.verifyDataIntegrity(request);
+            } catch {
               throw new Error('invalid');
             }
 
             const knownIdentity = identitiesList.find(
-              ({ did }) => did && sameFullDid(did, request.claim.owner),
+              ({ did }) => did && isSameSubject(did, request.claim.owner),
             );
             if (!knownIdentity) {
               throw new Error('orphaned');

@@ -1,9 +1,5 @@
 import { Runtime } from 'webextension-polyfill-ts';
-import {
-  IEncryptedMessage,
-  IRejectTerms,
-  MessageBodyType,
-} from '@kiltprotocol/types';
+import { IEncryptedMessage, IRejectTerms } from '@kiltprotocol/types';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 import { channelsEnum } from '../base/channelsEnum';
@@ -11,6 +7,8 @@ import { claimChannel } from '../claimChannel/claimChannel';
 import { saveChannel } from '../saveChannel/saveChannel';
 import { shareChannel } from '../shareChannel/shareChannel';
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
+
+import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 
 import { CredentialInput, CredentialOutput } from './types';
 
@@ -23,20 +21,28 @@ export async function showCredentialPopup(
   input: CredentialInput,
   sender: Runtime.MessageSender,
 ): Promise<IEncryptedMessage | void> {
-  const { message: encrypted, dAppName } = input;
+  const { message: encrypted, dAppName, specVersion } = input;
+
+  await initKiltSDK();
 
   const { encrypt, decrypt, dAppEncryptionDidKey } = await getTabEncryption(
     sender,
   );
   const message = await decrypt(encrypted);
 
-  if (message.body.type === MessageBodyType.SUBMIT_TERMS) {
+  if (message.body.type === 'submit-terms') {
     try {
+      const { content } = message.body;
+      if (specVersion === '1.0') {
+        // @ts-expect-error compatibility with old cType interface
+        content.cTypes = content.cTypes?.map((cType) => cType.schema);
+      }
       return await claimChannel.get(
         {
-          ...message.body.content,
+          ...content,
           attesterName: dAppName,
           attesterDid: dAppEncryptionDidKey.controller,
+          specVersion,
         },
         sender,
       );
@@ -45,20 +51,21 @@ export async function showCredentialPopup(
 
       const rejectionBody: IRejectTerms = {
         content: { claim, legitimations, delegationId },
-        type: MessageBodyType.REJECT_TERMS,
+        type: 'reject-terms',
       };
 
       return encrypt(rejectionBody);
     }
   }
-  if (message.body.type === MessageBodyType.SUBMIT_ATTESTATION) {
+  if (message.body.type === 'submit-attestation') {
     await saveChannel.get(message.body.content.attestation, sender);
   }
-  if (message.body.type === MessageBodyType.REQUEST_CREDENTIAL) {
+  if (message.body.type === 'request-credential') {
     return await shareChannel.get(
       {
         credentialRequest: message.body.content,
         verifierDid: dAppEncryptionDidKey.controller,
+        specVersion,
       },
       sender,
     );

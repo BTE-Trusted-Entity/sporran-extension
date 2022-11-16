@@ -1,3 +1,5 @@
+import type { KiltAddress } from '@kiltprotocol/types';
+
 import ky from 'ky';
 
 import { getEndpoint, KnownEndpoints } from '../endpoints/endpoints';
@@ -21,7 +23,7 @@ async function getTXDSubmitter() {
     .get(`${TXD}/meta`)
     .json<{ paymentAddress: string }>();
 
-  return paymentAddress;
+  return paymentAddress as KiltAddress;
 }
 
 export function useTXDSubmitter() {

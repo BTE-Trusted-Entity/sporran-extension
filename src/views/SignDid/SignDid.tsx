@@ -1,7 +1,9 @@
 import { FormEvent, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import { RequestForAttestation } from '@kiltprotocol/core';
+import { DidResourceUri, ICredential } from '@kiltprotocol/types';
+import { Credential } from '@kiltprotocol/core';
+import { Crypto } from '@kiltprotocol/utils';
 
 import { without, cloneDeep } from 'lodash-es';
 
@@ -48,19 +50,23 @@ export function SignDid({
       event.preventDefault();
 
       const { seed } = await passwordField.get(event);
-      const { sign } = await getIdentityCryptoFromSeed(seed);
 
-      const signature = sign(plaintext);
+      const { didDocument, authenticationKey } =
+        await getIdentityCryptoFromSeed(seed);
+
+      const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
+      const didKeyUri =
+        `${didDocument.uri}${didDocument.authentication[0].id}` as DidResourceUri;
 
       if (!credentials) {
-        await backgroundSignDidChannel.return(signature);
+        await backgroundSignDidChannel.return({ signature, didKeyUri });
         window.close();
         return;
       }
 
       const presentations: {
         name: string;
-        credential: RequestForAttestation;
+        credential: ICredential;
       }[] = [];
 
       for (const { credential, sharedContents } of credentials) {
@@ -68,20 +74,19 @@ export function SignDid({
         const allProperties = Object.keys(request.claim.contents);
         const needRemoving = without(allProperties, ...sharedContents);
 
-        const requestInstance = RequestForAttestation.fromRequest(
-          cloneDeep(request),
-        );
-        requestInstance.removeClaimProperties(needRemoving);
+        const credentialCopy = cloneDeep(request);
+        Credential.removeClaimProperties(credentialCopy, needRemoving);
 
         presentations.push({
           name: credential.name,
-          credential: requestInstance,
+          credential: credentialCopy,
         });
       }
 
       await backgroundSignDidChannel.return({
         credentials: presentations,
-        ...signature,
+        signature,
+        didKeyUri,
       });
 
       window.close();

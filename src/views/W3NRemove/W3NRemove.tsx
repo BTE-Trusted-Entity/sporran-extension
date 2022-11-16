@@ -2,16 +2,17 @@ import { FormEvent, Fragment, useCallback } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import { FullDidDetails, Web3Names } from '@kiltprotocol/did';
+import { ConfigService } from '@kiltprotocol/config';
+import * as Did from '@kiltprotocol/did';
+import { DidDocument } from '@kiltprotocol/types';
 
 import * as styles from './W3NRemove.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 
 import {
+  getIdentityCryptoFromSeed,
   getIdentityDid,
-  getKeypairBySeed,
-  getKeystoreFromSeed,
 } from '../../utilities/identities/identities';
 import { paths } from '../paths';
 
@@ -28,25 +29,26 @@ import {
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-import { useFullDidDetails } from '../../utilities/did/did';
+import { useFullDidDocument } from '../../utilities/did/did';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
+import { makeFakeIdentityCrypto } from '../../utilities/makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
-async function getFee(fullDid?: FullDidDetails) {
+async function getFee(fullDid?: DidDocument) {
   if (!fullDid) {
     return undefined;
   }
 
-  const fakeSeed = new Uint8Array(32);
-  const keypair = getKeypairBySeed(fakeSeed);
+  const { address, keypair, sign } = makeFakeIdentityCrypto();
 
-  const extrinsic = await Web3Names.getReleaseByOwnerTx();
+  const api = ConfigService.get('api');
 
-  const authorized = await fullDid.authorizeExtrinsic(
-    extrinsic,
-    await getKeystoreFromSeed(fakeSeed),
-    keypair.address,
+  const authorized = await Did.authorizeTx(
+    fullDid.uri,
+    api.tx.web3Names.releaseByOwner(),
+    sign,
+    address,
   );
 
   return (await authorized.paymentInfo(keypair)).partialFee;
@@ -70,8 +72,8 @@ export function W3NRemove({ identity }: Props): JSX.Element | null {
 
   const isDepositOwner = deposit?.owner === address;
 
-  const fullDidDetails = useFullDidDetails(did);
-  const fee = useAsyncValue(getFee, [fullDidDetails]);
+  const fullDidDocument = useFullDidDocument(did);
+  const fee = useAsyncValue(getFee, [fullDidDocument]);
 
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
 
@@ -79,24 +81,27 @@ export function W3NRemove({ identity }: Props): JSX.Element | null {
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
-      if (!fullDidDetails) {
+      if (!fullDidDocument) {
         return;
       }
 
       const { keypair, seed } = await passwordField.get(event);
+      const { sign } = await getIdentityCryptoFromSeed(seed);
 
-      const extrinsic = await Web3Names.getReleaseByOwnerTx();
-      const authorized = await fullDidDetails.authorizeExtrinsic(
-        extrinsic,
-        await getKeystoreFromSeed(seed),
+      const api = ConfigService.get('api');
+
+      const authorized = await Did.authorizeTx(
+        fullDidDocument.uri,
+        api.tx.web3Names.releaseByOwner(),
+        sign,
         keypair.address,
       );
       await submit(keypair, authorized);
     },
-    [passwordField, fullDidDetails, submit],
+    [passwordField, fullDidDocument, submit],
   );
 
-  if (!fee || !fullDidDetails) {
+  if (!fee || !fullDidDocument) {
     return null; // blockchain data pending
   }
 

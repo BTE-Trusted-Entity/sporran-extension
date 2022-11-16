@@ -1,7 +1,7 @@
 import { generatePath, Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { ConfigService } from '@kiltprotocol/config';
 
 import * as styles from './BalanceUpdateLink.module.css';
 
@@ -10,7 +10,7 @@ import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { paths } from '../../views/paths';
 
 async function hasVestedFunds(address: string): Promise<boolean> {
-  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+  const api = ConfigService.get('api');
   const { isSome } = await api.query.vesting.vesting(address);
   return isSome;
 }

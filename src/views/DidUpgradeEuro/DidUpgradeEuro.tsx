@@ -24,6 +24,10 @@ import {
   getEndpoint,
   KnownEndpoints,
 } from '../../utilities/endpoints/endpoints';
+import {
+  getIdentityCryptoFromSeed,
+  getLightDidFromSeed,
+} from '../../utilities/identities/identities';
 
 const checkoutURLs: Record<KnownEndpoints, string> = {
   'wss://kilt-rpc.dwellir.com': 'https://checkout.kilt.io',
@@ -72,8 +76,15 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
       }
 
       const { seed } = await passwordField.get(event);
+      const { keypair, sign } = await getIdentityCryptoFromSeed(seed);
 
-      const { extrinsic } = await getTransaction(seed, submitter);
+      const document = getLightDidFromSeed(seed);
+      const { extrinsic } = await getTransaction(
+        document,
+        keypair,
+        sign,
+        submitter,
+      );
 
       const checkout = await getCheckoutURL();
 

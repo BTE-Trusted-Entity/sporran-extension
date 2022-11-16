@@ -12,14 +12,12 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
-import { KeyringPair } from '@polkadot/keyring/types';
+import { KiltKeyringPair } from '@kiltprotocol/types';
+import { Crypto } from '@kiltprotocol/utils';
 
 import * as styles from './PasswordField.module.css';
 
-import {
-  decryptIdentity,
-  getKeypairBySeed,
-} from '../../utilities/identities/identities';
+import { decryptIdentity } from '../../utilities/identities/identities';
 import { usePasswordType } from '../usePasswordType/usePasswordType';
 import { useInterval } from '../../utilities/useInterval/useInterval';
 import {
@@ -30,6 +28,7 @@ import {
 import { RouteExcept } from '../RouteExcept/RouteExcept';
 import { generatePath, paths } from '../../views/paths';
 import { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
+
 export { PasswordError } from '../../utilities/storageEncryption/storageEncryption';
 
 // Okay, ESLint, I must have a parameter but cannot use it
@@ -46,7 +45,7 @@ type SetPasswordGetterType = Dispatch<
 
 interface Value {
   password: string;
-  keypair: KeyringPair;
+  keypair: KiltKeyringPair;
   seed: Uint8Array;
 }
 
@@ -129,7 +128,7 @@ export function PasswordField({
         await forgetPasswordChannel.get(address);
       }
 
-      const keypair = getKeypairBySeed(seed);
+      const keypair = Crypto.makeKeypairFromSeed(seed, 'sr25519');
       return { password, keypair, seed };
     },
     [address, rememberRef, savedPassword, t],

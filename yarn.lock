@@ -1469,7 +1469,7 @@
     "@polkadot/api" "^9.4.1"
     "@polkadot/types" "^9.4.1"
 
-"@kiltprotocol/config@0.29.0":
+"@kiltprotocol/config@0.29.0", "@kiltprotocol/config@^0.29.0":
   version "0.29.0"
   resolved "https://registry.yarnpkg.com/@kiltprotocol/config/-/config-0.29.0.tgz#834d95912f139c78805c52e84e51746e122b4cec"
   integrity sha512-PvkZffj7qqvmrbOrfBvOewyaLWry0PYSmMJy+1pSHaDaNR/D/x9qIsVIA+AMbIyUn155enjMfycMOoHvA3tXHQ==

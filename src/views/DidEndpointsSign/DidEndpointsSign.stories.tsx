@@ -14,14 +14,14 @@ const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
 const endpoint: DidServiceEndpoint = {
-  urls: ['https://sporran.org/'],
-  types: ['Some Type'],
-  id: '123456',
+  serviceEndpoint: ['https://sporran.org/'],
+  type: ['Some Type'],
+  id: '#123456',
 };
 
 const longUrlEndpoint: DidServiceEndpoint = {
   ...endpoint,
-  urls: [
+  serviceEndpoint: [
     'https://www.this-is-a-super-long-url/which-just-keeps-going-and-going/to-test-the-overflow-behaviour-of-the-url-value',
   ],
 };

@@ -1,14 +1,11 @@
 import { FormEvent, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { u8aToHex } from '@polkadot/util';
-import { Crypto } from '@kiltprotocol/utils';
+import { Crypto, ss58Format } from '@kiltprotocol/utils';
 
 import * as styles from './SignRawDApp.module.css';
 
-import {
-  ss58Format,
-  useIdentities,
-} from '../../utilities/identities/identities';
+import { useIdentities } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { useCopyButton } from '../../components/useCopyButton/useCopyButton';
 import { Avatar } from '../../components/Avatar/Avatar';

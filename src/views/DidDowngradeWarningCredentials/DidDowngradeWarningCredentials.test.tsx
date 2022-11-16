@@ -1,4 +1,4 @@
-import { Attestation } from '@kiltprotocol/core';
+import * as Did from '@kiltprotocol/did';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
 
@@ -6,7 +6,7 @@ import { waitForDownloadInfo } from '../../utilities/showDownloadInfoStorage/sho
 import { waitForPresentationInfo } from '../../utilities/showPresentationInfoStorage/showPresentationInfoStorage.mock';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
-import { parseDidUri, sameFullDid } from '../../utilities/did/did';
+import { parseDidUri } from '../../utilities/did/did';
 
 import { DidDowngradeWarningCredentials } from './DidDowngradeWarningCredentials';
 
@@ -14,8 +14,9 @@ jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as unknown as ReturnType<typeof parseDidUri>);
-jest.mocked(sameFullDid).mockReturnValue(true);
-jest.mocked(Attestation.query).mockResolvedValue(null);
+
+jest.mock('@kiltprotocol/did', () => ({ isSameSubject: jest.fn() }));
+jest.mocked(Did.isSameSubject).mockReturnValue(true);
 
 describe('DidDowngradeWarningCredentials', () => {
   it('should render', async () => {

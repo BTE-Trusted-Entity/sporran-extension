@@ -1,7 +1,9 @@
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { ConfigService } from '@kiltprotocol/config';
+
+import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 
 export async function getGenesisHash(): Promise<string> {
-  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
-
+  await initKiltSDK();
+  const api = ConfigService.get('api');
   return api.genesisHash.toString();
 }

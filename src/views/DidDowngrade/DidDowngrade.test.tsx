@@ -1,4 +1,5 @@
 import { BalanceUtils } from '@kiltprotocol/core';
+import * as Did from '@kiltprotocol/did';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
 
@@ -15,13 +16,15 @@ import {
 
 import { DidDowngrade } from './DidDowngrade';
 
+jest.mock('@kiltprotocol/did', () => ({ isSameSubject: jest.fn() }));
+jest.mocked(Did.isSameSubject).mockReturnValue(true);
+
 jest.mock('../../utilities/didDowngrade/didDowngrade');
 jest.mocked(getFee).mockResolvedValue(BalanceUtils.toFemtoKilt(0.01));
 
 jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
-  identifier: '4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as unknown as ReturnType<typeof parseDidUri>);
 
 jest.mock('../../utilities/getDeposit/getDeposit');
@@ -32,11 +35,11 @@ describe('DidDowngrade', () => {
   it('promo used for both web3name and DID', async () => {
     mockIsFullDid(true);
     jest.mocked(useDepositDid).mockReturnValue({
-      owner: 'promo account',
+      owner: '4promo account',
       amount: depositAmount,
     });
     jest.mocked(useDepositWeb3Name).mockReturnValue({
-      owner: 'promo account',
+      owner: '4promo account',
       amount: depositAmount,
     });
 
@@ -54,7 +57,7 @@ describe('DidDowngrade', () => {
   it('promo used for web3name but not DID', async () => {
     mockIsFullDid(true);
     jest.mocked(useDepositDid).mockReturnValue({
-      owner: 'promo account',
+      owner: '4promo account',
       amount: depositAmount,
     });
     jest.mocked(useDepositWeb3Name).mockReturnValue({
@@ -79,7 +82,7 @@ describe('DidDowngrade', () => {
       amount: depositAmount,
     });
     jest.mocked(useDepositWeb3Name).mockReturnValue({
-      owner: 'promo account',
+      owner: '4promo account',
       amount: depositAmount,
     });
 

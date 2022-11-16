@@ -12,7 +12,7 @@ export default {
   component: SignDidExtrinsic,
 } as Meta;
 
-const dApp = {
+const dApp: Omit<SignDidExtrinsicOriginInput, 'extrinsic'> = {
   dAppName: 'dApp',
   origin: 'https://example.org/foo',
   signer: '4safqRNsTyQnjBh2yq9Yeo2MC8BnDpDomgsd8PWimTcP5FSh',

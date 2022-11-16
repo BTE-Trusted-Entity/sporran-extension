@@ -1,5 +1,7 @@
-import { disconnect, connect } from '@kiltprotocol/core';
+import { disconnect } from '@kiltprotocol/core';
 import { browser, Runtime } from 'webextension-polyfill-ts';
+
+import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 
 const name = 'popup';
 
@@ -24,5 +26,5 @@ export async function connectToBlockchain(port: Runtime.Port): Promise<void> {
     timeoutId = setTimeout(disconnect, timeoutMs);
   });
   clearTimeout(timeoutId);
-  await connect();
+  await initKiltSDK();
 }

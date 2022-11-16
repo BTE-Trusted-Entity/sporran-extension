@@ -1,11 +1,14 @@
+import { HexString } from '@polkadot/util/types';
 import { useContext, useEffect, useMemo } from 'react';
 import { cloneDeep, pick, pull, reject, without } from 'lodash-es';
-import { DidUri, IRequestForAttestation } from '@kiltprotocol/types';
-import { Attestation, RequestForAttestation } from '@kiltprotocol/core';
+import { DidUri, ICredential } from '@kiltprotocol/types';
+import { ConfigService } from '@kiltprotocol/config';
+import { Attestation, Credential } from '@kiltprotocol/core';
+import { isSameSubject } from '@kiltprotocol/did';
 import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
-import { parseDidUri, sameFullDid } from '../did/did';
+import { parseDidUri } from '../did/did';
 import { jsonToBase64 } from '../base64/base64';
 
 import { CredentialsContext } from './CredentialsContext';
@@ -13,7 +16,8 @@ import { CredentialsContext } from './CredentialsContext';
 type AttestationStatus = 'pending' | 'attested' | 'revoked' | 'invalid';
 
 export interface Credential {
-  request: IRequestForAttestation;
+  // TODO: rename?
+  request: ICredential;
   name: string;
   cTypeTitle: string;
   attester: string;
@@ -55,7 +59,21 @@ export async function saveCredential(credential: Credential): Promise<void> {
   await saveList(list);
 }
 
+// SDK <0.29 had claimerSignature in ICredential
+interface LegacyICredential extends ICredential {
+  claimerSignature?: unknown;
+}
+
 export async function getCredentials(keys: string[]): Promise<Credential[]> {
+  const legacy: Record<string, Credential> = await storage.get(keys);
+  for (const [key, credential] of Object.entries(legacy)) {
+    const request = credential.request as LegacyICredential;
+    if ('claimerSignature' in request) {
+      delete request.claimerSignature;
+      await storage.set({ [key]: credential });
+    }
+  }
+
   const result = await storage.get(keys);
   const credentials = pick(result, keys);
   return Object.values(credentials);
@@ -101,9 +119,17 @@ export function useIdentityCredentials(
 
     const { fullDid } = parseDidUri(did);
     return filtered.filter((credential) =>
-      sameFullDid(credential.request.claim.owner, fullDid),
+      isSameSubject(credential.request.claim.owner, fullDid),
     );
   }, [all, did, onlyUsable]);
+}
+
+export async function isAttestationRevoked(
+  rootHash: HexString,
+): Promise<boolean> {
+  const api = ConfigService.get('api');
+  const chain = await api.query.attestation.attestations(rootHash);
+  return Attestation.fromChain(chain, rootHash).revoked === true;
 }
 
 export function usePendingCredentialCheck(
@@ -114,9 +140,14 @@ export function usePendingCredentialCheck(
       return;
     }
     (async () => {
-      const isAttested = await Attestation.query(credential.request.rootHash);
-      if (isAttested) {
-        await saveCredential({ ...credential, status: 'attested' });
+      try {
+        if (await isAttestationRevoked(credential.request.rootHash)) {
+          await saveCredential({ ...credential, status: 'revoked' });
+        } else {
+          await saveCredential({ ...credential, status: 'attested' });
+        }
+      } catch {
+        // not on chain yet, ignore
       }
     })();
   }, [credential]);
@@ -148,10 +179,10 @@ export function getUnsignedPresentationDownload(
   const allProperties = Object.keys(request.claim.contents);
   const needRemoving = without(allProperties, ...properties);
 
-  const requestInstance = RequestForAttestation.fromRequest(cloneDeep(request));
-  requestInstance.removeClaimProperties(needRemoving);
+  const credentialCopy = cloneDeep(request);
+  Credential.removeClaimProperties(credentialCopy, needRemoving);
 
-  const blob = jsonToBase64(requestInstance);
+  const blob = jsonToBase64(credentialCopy);
   const url = `data:text/json;base64,${blob}`;
 
   return { name, url };
@@ -172,9 +203,12 @@ export async function checkCredentialsStatus(
     if (credential.status !== 'attested') {
       continue;
     }
-    const attestation = await Attestation.query(credential.request.rootHash);
-    if (attestation?.revoked === true) {
-      await saveCredential({ ...credential, status: 'revoked' });
+    try {
+      if (await isAttestationRevoked(credential.request.rootHash)) {
+        await saveCredential({ ...credential, status: 'revoked' });
+      }
+    } catch {
+      // not on chain yet, ignore
     }
   }
 }

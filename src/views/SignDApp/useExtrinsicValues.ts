@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import BN from 'bn.js';
 import { ExtrinsicPayload } from '@polkadot/types/interfaces';
 import { SignerPayloadJSON } from '@polkadot/types/types/extrinsic';
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { ConfigService } from '@kiltprotocol/config';
 
 import { SignOriginInput } from '../../dApps/SignChannels/types';
 import {
@@ -15,7 +15,7 @@ import {
 export async function getExtrinsic(
   input: SignerPayloadJSON,
 ): Promise<ExtrinsicPayload> {
-  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+  const api = ConfigService.get('api');
   api.registry.setSignedExtensions(input.signedExtensions);
 
   const params = { version: input.version };
@@ -36,7 +36,7 @@ export function useExtrinsicValues(input: SignOriginInput): Value[] {
       const t = browser.i18n.getMessage;
 
       const { genesisHash, origin } = input;
-      const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+      const api = ConfigService.get('api');
       const sameBlockchain = genesisHash === api.genesisHash.toString();
       const errorLine = { label: 'WRONG genesisHash', value: genesisHash };
       const error = sameBlockchain ? [] : [errorLine];

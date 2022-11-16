@@ -1,11 +1,11 @@
-import { IIdentity } from '@kiltprotocol/types';
+import { KiltAddress } from '@kiltprotocol/types';
 
 export interface Import {
   fileName: string;
 }
 
 export interface SuccessfulImport extends Import {
-  identityAddress: IIdentity['address'];
+  identityAddress: KiltAddress;
 }
 
 export interface FailedImport extends Import {

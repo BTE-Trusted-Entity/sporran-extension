@@ -1,8 +1,8 @@
 import userEvent from '@testing-library/user-event';
 import { mnemonicValidate } from '@polkadot/util-crypto';
-import { KeyringPair } from '@polkadot/keyring/types';
+import { KiltKeyringPair } from '@kiltprotocol/types';
+import { Crypto } from '@kiltprotocol/utils';
 
-import { getKeypairByBackupPhrase } from '../../utilities/identities/identities';
 import { render, screen } from '../../testing/testing';
 
 import { ImportBackupPhrase } from './ImportBackupPhrase';
@@ -10,8 +10,8 @@ import { ImportBackupPhrase } from './ImportBackupPhrase';
 jest.mock('@polkadot/util-crypto', () => ({
   mnemonicValidate: jest.fn(),
 }));
-jest.mock('../../utilities/identities/identities', () => ({
-  getKeypairByBackupPhrase: jest.fn(),
+jest.mock('@kiltprotocol/utils', () => ({
+  Crypto: { makeKeypairFromUri: jest.fn() },
 }));
 
 jest.mocked(mnemonicValidate).mockReturnValue(false);
@@ -45,7 +45,7 @@ async function typeElevenWords() {
 
 describe('ImportBackupPhrase', () => {
   beforeEach(() => {
-    jest.mocked(getKeypairByBackupPhrase).mockReset();
+    jest.mocked(Crypto.makeKeypairFromUri).mockReset();
   });
 
   it('should render for import', async () => {
@@ -112,9 +112,9 @@ describe('ImportBackupPhrase', () => {
 
   it('should report mismatching backup phrase', async () => {
     jest.mocked(mnemonicValidate).mockReturnValue(true);
-    jest.mocked(getKeypairByBackupPhrase).mockReturnValue({
+    jest.mocked(Crypto.makeKeypairFromUri).mockReturnValue({
       address: 'FAIL',
-    } as KeyringPair);
+    } as unknown as KiltKeyringPair);
 
     render(<ImportBackupPhrase {...props} type="reset" address="foo" />);
 
@@ -131,9 +131,9 @@ describe('ImportBackupPhrase', () => {
 
   it('should allow backup phrase import', async () => {
     jest.mocked(mnemonicValidate).mockReturnValue(true);
-    jest.mocked(getKeypairByBackupPhrase).mockReturnValue({
+    jest.mocked(Crypto.makeKeypairFromUri).mockReturnValue({
       address: 'PASS',
-    } as KeyringPair);
+    } as unknown as KiltKeyringPair);
 
     render(<ImportBackupPhrase {...props} address="PASS" />);
 
@@ -153,9 +153,9 @@ describe('ImportBackupPhrase', () => {
 
   it('should allow backup phrase reset', async () => {
     jest.mocked(mnemonicValidate).mockReturnValue(true);
-    jest.mocked(getKeypairByBackupPhrase).mockReturnValue({
+    jest.mocked(Crypto.makeKeypairFromUri).mockReturnValue({
       address: '4p273cfeZ2JRz46AcJoQvTRHCH8Vaj92jts2VxepZtQwbTBB',
-    } as KeyringPair);
+    } as unknown as KiltKeyringPair);
 
     render(
       <ImportBackupPhrase

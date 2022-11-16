@@ -1,9 +1,9 @@
 import ky from 'ky';
-import { DidUri } from '@kiltprotocol/types';
-import { DidDetails, Utils, verifyDidSignature } from '@kiltprotocol/did';
+import { DidResourceUri, DidUri } from '@kiltprotocol/types';
+import * as Did from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 
-import { getDidDetails } from '../did/did';
+import { getDidDocument } from '../did/did';
 
 interface CredentialSubject {
   id: DidUri;
@@ -57,45 +57,41 @@ export async function verifyDidConfigResource(
   const verified = await asyncSome(
     didConfigResource.linked_dids,
     async (credential) => {
-      const { issuer, credentialSubject } = credential;
-
-      const matchesSessionDid = did === credentialSubject.id;
-      if (!matchesSessionDid) {
-        return false;
-      }
-
-      const isDid = Utils.validateKiltDidUri(credentialSubject.id);
-      const matchesIssuer = issuer === credentialSubject.id;
-      if (!isDid || !matchesIssuer) {
-        return false;
-      }
-
-      const matchesOrigin = origin === credentialSubject.origin;
-      if (!matchesOrigin) {
-        return false;
-      }
-
-      let issuerDidDetails: DidDetails;
       try {
-        issuerDidDetails = await getDidDetails(issuer);
-      } catch {
+        const { issuer, credentialSubject } = credential;
+
+        const matchesSessionDid = did === credentialSubject.id;
+        if (!matchesSessionDid) {
+          return false;
+        }
+
+        Did.validateUri(credentialSubject.id, 'Did');
+        const matchesIssuer = issuer === credentialSubject.id;
+        if (!matchesIssuer) {
+          return false;
+        }
+
+        const matchesOrigin = origin === credentialSubject.origin;
+        if (!matchesOrigin) {
+          return false;
+        }
+
+        const issuerDidDocument = await getDidDocument(issuer);
+        if (!issuerDidDocument.assertionMethod?.[0]) {
+          return false;
+        }
+
+        await Did.verifyDidSignature({
+          keyUri:
+            `${issuerDidDocument.uri}${issuerDidDocument.assertionMethod?.[0].id}` as DidResourceUri,
+          signature: Crypto.coToUInt8(credential.proof.signature as string),
+          message: Crypto.coToUInt8(credentialSubject.rootHash),
+        });
+        return true;
+      } catch (error) {
+        console.error(error);
         return false;
       }
-
-      if (!issuerDidDetails.attestationKey) {
-        return false;
-      }
-
-      const { verified } = await verifyDidSignature({
-        signature: {
-          keyUri: issuerDidDetails.assembleKeyUri(
-            issuerDidDetails.attestationKey.id,
-          ),
-          signature: credential.proof.signature as string,
-        },
-        message: Crypto.coToUInt8(credentialSubject.rootHash),
-      });
-      return verified;
     },
   );
   if (!verified) {

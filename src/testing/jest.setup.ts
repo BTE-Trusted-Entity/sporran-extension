@@ -69,8 +69,7 @@ jest.mock('@kiltprotocol/core', () => ({
   },
 }));
 jest.mock('@kiltprotocol/chain-helpers', () => ({
-  BlockchainApiConnection: { getConnectionOrConnect: jest.fn() },
-  BlockchainUtils: { submitSignedTx: jest.fn() },
+  Blockchain: { submitSignedTx: jest.fn() },
 }));
 jest.mock('@kiltprotocol/did', () => ({
   Web3Names: {},
@@ -79,7 +78,7 @@ jest.mock('@kiltprotocol/did', () => ({
 }));
 jest.mock('@kiltprotocol/utils', () => ({
   DataUtils: {
-    validateAddress: jest.fn(),
+    verifyKiltAddress: jest.fn(),
   },
 }));
 

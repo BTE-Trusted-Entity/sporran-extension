@@ -491,12 +491,6 @@ export const credentialsMock: Credential[] = [
       delegationId: null,
       rootHash:
         '0xe4cc9f4eebf1112b3f26ad6bde36ef95ea79d544c481270f62a50d699fac819b',
-      claimerSignature: {
-        signature:
-          '0xdeee023d5597124fc80501a8ce23ef738882a297b87b1c35dd298b6f65f12d0734d52d8a80384a37d87399cfc8747ad5673238162bd48bb15d13e084d9885880',
-        keyUri:
-          'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ#0x9f0de4a3a943f2ae8ce8775763376922b7e33e77bfe331786cd8bbd73d6e7f89',
-      },
     },
     name: 'GitHub 1',
     cTypeTitle: 'GitHub',
@@ -581,6 +575,7 @@ export const mockRequestCredential: ShareInput = {
     challenge: 'PASS',
   },
   verifierDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
+  specVersion: '3.0',
 };
 
 export const mockUnknownCType = {

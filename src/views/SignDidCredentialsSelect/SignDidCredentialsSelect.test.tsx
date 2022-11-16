@@ -1,8 +1,8 @@
-import { Attestation } from '@kiltprotocol/core';
+import * as Did from '@kiltprotocol/did';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
 
-import { parseDidUri, sameFullDid } from '../../utilities/did/did';
+import { parseDidUri } from '../../utilities/did/did';
 
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 
@@ -14,8 +14,9 @@ jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
 } as unknown as ReturnType<typeof parseDidUri>);
 mockIsFullDid(true);
-jest.mocked(sameFullDid).mockReturnValue(true);
-jest.mocked(Attestation.query).mockResolvedValue(null);
+
+jest.mock('@kiltprotocol/did', () => ({ isSameSubject: jest.fn() }));
+jest.mocked(Did.isSameSubject).mockReturnValue(true);
 
 describe('SignDidCredentialsSelect', () => {
   it('should render', async () => {

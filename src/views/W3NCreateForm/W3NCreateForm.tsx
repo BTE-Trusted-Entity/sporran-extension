@@ -2,9 +2,7 @@ import { FormEvent, useCallback, useState } from 'react';
 import { useHistory, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import { Web3Names } from '@kiltprotocol/did';
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
-import { u32 } from '@polkadot/types';
+import { ConfigService } from '@kiltprotocol/config';
 
 import * as styles from './W3NCreateForm.module.css';
 
@@ -39,9 +37,9 @@ export function W3NCreateForm({ identity }: Props): JSX.Element {
       const value = formData.get('web3name') as string;
       const web3name = value.trim();
 
-      const { api } = await BlockchainApiConnection.getConnectionOrConnect();
-      const minLength = (api.consts.web3Names.minNameLength as u32).toNumber();
-      const maxLength = (api.consts.web3Names.maxNameLength as u32).toNumber();
+      const api = ConfigService.get('api');
+      const minLength = api.consts.web3Names.minNameLength.toNumber();
+      const maxLength = api.consts.web3Names.maxNameLength.toNumber();
 
       const tooShort = web3name.length < minLength;
       if (tooShort) {
@@ -68,8 +66,8 @@ export function W3NCreateForm({ identity }: Props): JSX.Element {
       }
 
       // TODO: if the future blockchain versions do not fix the stale link issue, consider a workaround here
-      const taken = Boolean(await Web3Names.queryDidForWeb3Name(web3name));
-      if (taken) {
+      const result = await api.call.did.queryByWeb3Name(web3name);
+      if (result.isSome) {
         setError(t('view_W3NCreateForm_taken'));
         return;
       }

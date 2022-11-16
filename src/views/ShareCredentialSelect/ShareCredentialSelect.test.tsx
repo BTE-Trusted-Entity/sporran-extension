@@ -1,4 +1,4 @@
-import { Attestation } from '@kiltprotocol/core';
+import * as Did from '@kiltprotocol/did';
 
 import { render } from '../../testing/testing';
 
@@ -7,7 +7,7 @@ import {
   mockRequestCredential,
   mockUnknownCType,
 } from '../../utilities/credentials/CredentialsProvider.mock';
-import { parseDidUri, sameFullDid } from '../../utilities/did/did';
+import { parseDidUri } from '../../utilities/did/did';
 
 import { paths } from '../paths';
 
@@ -18,8 +18,9 @@ jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as unknown as ReturnType<typeof parseDidUri>);
-jest.mocked(sameFullDid).mockReturnValue(true);
-jest.mocked(Attestation.query).mockResolvedValue(null);
+
+jest.mock('@kiltprotocol/did', () => ({ isSameSubject: jest.fn() }));
+jest.mocked(Did.isSameSubject).mockReturnValue(true);
 
 describe('ShareCredentialSelect', () => {
   it('should render', async () => {

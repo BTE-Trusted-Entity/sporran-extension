@@ -1,11 +1,16 @@
+import { DidUri } from '@kiltprotocol/types';
+import * as Did from '@kiltprotocol/did';
+
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 import { identitiesMock as identities, render } from '../../testing/testing';
-import { parseDidUri, sameFullDid } from '../../utilities/did/did';
+import { parseDidUri } from '../../utilities/did/did';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { paths } from '../paths';
 
 import { SignDidStart } from './SignDidStart';
+
+jest.mock('@kiltprotocol/did', () => ({ isSameSubject: jest.fn() }));
 
 jest.mock('../../utilities/did/did');
 
@@ -23,7 +28,7 @@ const input: SignDidOriginInput = {
 describe('SignDidStart', () => {
   it('should render full DID with credentials', () => {
     mockIsFullDid(true);
-    jest.mocked(sameFullDid).mockReturnValue(true);
+    jest.mocked(Did.isSameSubject).mockReturnValue(true);
 
     const { container } = render(
       <PopupTestProvider path={paths.popup.signDid.start} data={input}>
@@ -40,7 +45,7 @@ describe('SignDidStart', () => {
 
   it('should render full DID with no credentials', () => {
     mockIsFullDid(true);
-    jest.mocked(sameFullDid).mockReturnValue(false);
+    jest.mocked(Did.isSameSubject).mockReturnValue(false);
 
     const { container } = render(
       <PopupTestProvider path={paths.popup.signDid.start} data={input}>

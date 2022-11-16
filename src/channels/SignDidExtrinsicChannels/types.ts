@@ -1,12 +1,12 @@
 import { HexString } from '@polkadot/util/types';
-import { DidResourceUri, IIdentity } from '@kiltprotocol/types';
+import { DidResourceUri, KiltAddress } from '@kiltprotocol/types';
 
 import { DAppName } from '../../dApps/AccessChannels/DAppName';
 import { Origin } from '../../dApps/AccessChannels/Origin';
 
 export type SignDidExtrinsicInput = DAppName & {
   extrinsic: HexString;
-  signer: IIdentity['address'];
+  signer: KiltAddress;
 };
 
 export type SignDidExtrinsicOriginInput = SignDidExtrinsicInput & Origin;

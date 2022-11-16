@@ -1,27 +1,20 @@
-import { Web3Names, Chain } from '@kiltprotocol/did';
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
-import { Deposit, DidUri, IIdentity } from '@kiltprotocol/types';
-import { Option, Struct, u64 } from '@polkadot/types';
-import { AccountId } from '@polkadot/types/interfaces';
+import * as Did from '@kiltprotocol/did';
+import { ConfigService } from '@kiltprotocol/config';
+import { DidUri, KiltAddress } from '@kiltprotocol/types';
 
 import BN from 'bn.js';
 
 import { isFullDid, parseDidUri } from '../did/did';
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
-interface Web3NameData extends Struct {
-  owner: AccountId;
-  claimedAt: u64;
-  deposit: Deposit;
-}
-
 interface DepositData {
   amount: BN;
-  owner?: IIdentity['address'];
+  owner?: KiltAddress;
 }
 
 async function getDefaultDeposit() {
-  return { amount: await Web3Names.queryDepositAmount() };
+  const api = ConfigService.get('api');
+  return { amount: api.consts.web3Names.deposit };
 }
 
 async function getDepositWeb3Name(
@@ -31,24 +24,22 @@ async function getDepositWeb3Name(
     return getDefaultDeposit();
   }
 
-  const web3name = await Web3Names.queryWeb3NameForDid(did);
+  const api = ConfigService.get('api');
 
-  if (!web3name) {
+  const { web3Name } = Did.linkedInfoFromChain(
+    await api.call.did.query(Did.toChain(did)),
+  );
+
+  if (!web3Name) {
     return getDefaultDeposit();
   }
 
-  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
-
-  const data = await api.query.web3Names.owner<Option<Web3NameData>>(web3name);
+  const data = await api.query.web3Names.owner(web3Name);
 
   if (data.isNone) {
     return;
   }
-  const { deposit } = data.unwrap();
-
-  const { owner, amount } = deposit;
-
-  return { owner: owner.toString(), amount };
+  return Did.depositFromChain(data.unwrap().deposit);
 }
 
 export function useDepositWeb3Name(
@@ -60,19 +51,15 @@ export function useDepositWeb3Name(
 export async function getDepositDid(
   did: DidUri | undefined,
 ): Promise<DepositData | undefined> {
-  if (!did) {
-    return { amount: await Chain.queryDepositAmount() };
+  const api = ConfigService.get('api');
+
+  if (!did || Did.parse(did).type === 'light') {
+    return { amount: api.consts.did.deposit };
   }
 
-  const { identifier, type } = parseDidUri(did);
-
-  if (type === 'light') {
-    return { amount: await Chain.queryDepositAmount() };
-  }
-
-  const details = await Chain.queryDetails(identifier);
-
-  return details?.deposit;
+  return Did.depositFromChain(
+    (await api.query.did.did(Did.toChain(did))).unwrap().deposit,
+  );
 }
 
 export function useDepositDid(

@@ -1,31 +1,30 @@
 import { useCallback, useState } from 'react';
-import { KeyringPair } from '@polkadot/keyring/types';
-import { ISubmittableResult, SubmittableExtrinsic } from '@kiltprotocol/types';
 import {
-  BlockchainApiConnection,
-  BlockchainUtils,
-} from '@kiltprotocol/chain-helpers';
-import { Balance } from '@kiltprotocol/core';
+  ISubmittableResult,
+  KiltKeyringPair,
+  SubmittableExtrinsic,
+} from '@kiltprotocol/types';
+import { ConfigService } from '@kiltprotocol/config';
+import { Blockchain } from '@kiltprotocol/chain-helpers';
 import BN from 'bn.js';
 
-import { makeKeyring } from '../identities/identities';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { transformBalances } from '../transformBalances/transformBalances';
+import { makeFakeIdentityCrypto } from '../makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
 async function getUnpaidCosts(
   { address }: { address: string },
   draft: SubmittableExtrinsic,
   tip = new BN(0),
 ): Promise<BN | undefined> {
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
+  const { keypair } = makeFakeIdentityCrypto();
+  const extrinsic = await draft.signAsync(keypair, { tip });
 
-  const fakeIdentity = makeKeyring().createFromUri('//Alice');
-  const extrinsic = await blockchain.signTx(fakeIdentity, draft, tip);
+  const fee = (await extrinsic.paymentInfo(keypair)).partialFee;
 
-  const fee = (await extrinsic.paymentInfo(fakeIdentity)).partialFee;
-
+  const api = ConfigService.get('api');
   const { usableForFees } = transformBalances(
-    await Balance.getBalances(address),
+    (await api.query.system.account(address)).data,
   );
   const sufficient = usableForFees.gte(fee);
   if (sufficient) {
@@ -36,20 +35,19 @@ async function getUnpaidCosts(
 }
 
 async function submit(
-  keypair: KeyringPair,
+  keypair: KiltKeyringPair,
   draft: SubmittableExtrinsic,
   tip = new BN(0),
 ): Promise<{
   txHash: string;
   finalizedPromise: Promise<ISubmittableResult>;
 }> {
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  const extrinsic = await blockchain.signTx(keypair, draft, tip);
+  const extrinsic = await draft.signAsync(keypair, { tip });
 
   const txHash = extrinsic.hash.toHex();
 
-  const finalizedPromise = BlockchainUtils.submitSignedTx(extrinsic, {
-    resolveOn: BlockchainUtils.IS_FINALIZED,
+  const finalizedPromise = Blockchain.submitSignedTx(extrinsic, {
+    resolveOn: Blockchain.IS_FINALIZED,
   });
 
   return {
@@ -62,7 +60,7 @@ type Status = 'pending' | 'success' | 'error' | null;
 
 interface SubmitStates {
   submit: (
-    keypair: KeyringPair,
+    keypair: KiltKeyringPair,
     draft: SubmittableExtrinsic,
     tip?: BN,
   ) => Promise<void>;
@@ -89,7 +87,7 @@ export function useSubmitStates(): SubmitStates {
 
   const submitWithStates = useCallback(
     async (
-      keypair: KeyringPair,
+      keypair: KiltKeyringPair,
       draft: SubmittableExtrinsic,
       tip = new BN(0),
     ) => {

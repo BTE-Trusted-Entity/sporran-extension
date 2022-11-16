@@ -1,5 +1,5 @@
 import BN from 'bn.js';
-import { Balance } from '@kiltprotocol/core';
+import { ConfigService } from '@kiltprotocol/config';
 
 import { ErrorFirstCallback } from '../../channels/base/types';
 
@@ -52,10 +52,10 @@ export function onAddressBalanceChange(
     }
   }
 
-  const unsubscribePromise = Balance.listenToBalanceChanges(
-    address,
-    onBalanceChange,
-  );
+  const api = ConfigService.get('api');
+  const unsubscribePromise = api.query.system.account(address, ({ data }) => {
+    onBalanceChange(address, data);
+  });
   return async () => {
     const unsubscribe = await unsubscribePromise;
     unsubscribe();

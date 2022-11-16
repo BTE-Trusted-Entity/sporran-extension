@@ -1,29 +1,32 @@
 import BN from 'bn.js';
-import { DidUri, SubmittableExtrinsic } from '@kiltprotocol/types';
 import {
-  BlockchainApiConnection,
-  BlockchainUtils,
-} from '@kiltprotocol/chain-helpers';
-import { FullDidUpdateBuilder } from '@kiltprotocol/did';
+  DidUri,
+  KiltEncryptionKeypair,
+  KiltKeyringPair,
+  SignExtrinsicCallback,
+  SubmittableExtrinsic,
+} from '@kiltprotocol/types';
+import { ConfigService } from '@kiltprotocol/config';
+import { Blockchain } from '@kiltprotocol/chain-helpers';
+import * as Did from '@kiltprotocol/did';
 import { Crypto } from '@kiltprotocol/utils';
 
 import {
   deriveEncryptionKeyFromSeed,
-  getKeypairBySeed,
-  getKeystoreFromSeed,
+  getIdentityCryptoFromSeed,
 } from '../identities/identities';
-import { getFullDidDetails } from '../did/did';
+import { getDidEncryptionKey, getFullDidDocument } from '../did/did';
+import { makeFakeIdentityCrypto } from '../makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
 async function getSignedTransaction(
-  seed: Uint8Array,
+  keypair: KiltKeyringPair,
+  sign: SignExtrinsicCallback,
   fullDid: DidUri,
+  newKey: KiltEncryptionKeypair,
 ): Promise<SubmittableExtrinsic> {
-  const fullDidDetails = await getFullDidDetails(fullDid);
+  const fullDidDocument = await getFullDidDocument(fullDid);
 
-  const existingKey = fullDidDetails.encryptionKey;
-  if (!existingKey) {
-    throw new Error('Key agreement key not found');
-  }
+  const existingKey = getDidEncryptionKey(fullDidDocument);
 
   const keyToUpdate =
     '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
@@ -32,28 +35,26 @@ async function getSignedTransaction(
     throw new Error('DID repair not needed');
   }
 
-  const encryptionKey = deriveEncryptionKeyFromSeed(seed);
+  const api = ConfigService.get('api');
 
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
+  const authorized = await Did.authorizeBatch({
+    batchFunction: api.tx.utility.batchAll,
+    did: fullDid,
+    extrinsics: [
+      api.tx.did.removeKeyAgreementKey(Did.resourceIdToChain(existingKey.id)),
+      api.tx.did.addKeyAgreementKey(Did.publicKeyToChain(newKey)),
+    ],
+    submitter: keypair.address,
+    sign,
+  });
 
-  const keystore = await getKeystoreFromSeed(seed);
-  const keypair = getKeypairBySeed(seed);
-
-  const authorized = await new FullDidUpdateBuilder(
-    blockchain.api,
-    fullDidDetails,
-  )
-    .removeEncryptionKey(existingKey.id)
-    .addEncryptionKey(encryptionKey)
-    .build(keystore, keypair.address);
-
-  return await blockchain.signTx(keypair, authorized);
+  return authorized.signAsync(keypair);
 }
 
 export async function getFee(did: DidUri): Promise<BN> {
-  const fakeSeed = new Uint8Array(32);
-  const keypair = getKeypairBySeed(fakeSeed);
-  const extrinsic = await getSignedTransaction(fakeSeed, did);
+  const { keypair, sign, fakeSeed } = makeFakeIdentityCrypto();
+  const newKey = deriveEncryptionKeyFromSeed(fakeSeed);
+  const extrinsic = await getSignedTransaction(keypair, sign, did, newKey);
 
   return (await extrinsic.paymentInfo(keypair)).partialFee;
 }
@@ -61,7 +62,9 @@ export async function getFee(did: DidUri): Promise<BN> {
 const currentTx: Record<string, SubmittableExtrinsic> = {};
 
 export async function sign(did: DidUri, seed: Uint8Array): Promise<string> {
-  const extrinsic = await getSignedTransaction(seed, did);
+  const { sign, keypair } = await getIdentityCryptoFromSeed(seed);
+  const newKey = deriveEncryptionKeyFromSeed(seed);
+  const extrinsic = await getSignedTransaction(keypair, sign, did, newKey);
 
   const hash = extrinsic.hash.toHex();
   currentTx[hash] = extrinsic;
@@ -70,8 +73,8 @@ export async function sign(did: DidUri, seed: Uint8Array): Promise<string> {
 
 export async function submit(hash: string): Promise<void> {
   const extrinsic = currentTx[hash];
-  await BlockchainUtils.submitSignedTx(extrinsic, {
-    resolveOn: BlockchainUtils.IS_FINALIZED,
+  await Blockchain.submitSignedTx(extrinsic, {
+    resolveOn: Blockchain.IS_FINALIZED,
   });
   delete currentTx[hash];
 }
