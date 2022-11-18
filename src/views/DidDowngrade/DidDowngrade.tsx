@@ -104,9 +104,8 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
         const hash = await sign(identity, seed);
         setTxHash(hash);
 
-        const did = await submit(hash);
-
-        await saveIdentity({ ...identity, did });
+        await submit(hash);
+        await saveIdentity({ ...identity, did: undefined });
 
         if (credentials) {
           await invalidateCredentials(credentials);
