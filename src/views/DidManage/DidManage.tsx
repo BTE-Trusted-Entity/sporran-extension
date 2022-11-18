@@ -72,8 +72,6 @@ export function DidManage({ identity }: Props): JSX.Element {
         </Fragment>
       )}
 
-      {!did && <p className={styles.didLine}>{t('view_DidManage_unusable')}</p>}
-
       {/* One of the child sub-views uses the link form, so this view also has to use it. */}
       <LinkBack to={paths.identity.overview} />
       <Stats />

@@ -1051,9 +1051,6 @@
   "view_DidManage_downgrade": {
     "message": "Remove on-chain DID"
   },
-  "view_DidManage_unusable": {
-    "message": "This identity’s DID cannot be used anymore because it has been removed."
-  },
   "view_DidEndpointsForm_heading": {
     "message": "Service Endpoints"
   },

@@ -12,7 +12,6 @@ import {
 import * as styles from './DidUpgradeExplainer.module.css';
 
 import { Identity } from '../../utilities/identities/types';
-import { getIdentityDid } from '../../utilities/identities/identities';
 import { parseDidUri } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 
@@ -36,8 +35,7 @@ interface Props {
 export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { address } = identity;
-  const did = getIdentityDid(identity);
+  const { address, did } = identity;
 
   const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
 
@@ -74,7 +72,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
         {t('view_DidUpgradeExplainer_heading')}
       </h1>
 
-      {wasOnChainDidDeleted && (
+      {(wasOnChainDidDeleted || !did) && (
         <Fragment>
           <p className={styles.subline}>
             {t('view_DidUpgradeExplainer_onchain_deleted_subline')}
@@ -82,11 +80,13 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
 
           <IdentitySlide identity={identity} />
 
-          <CopyValue
-            value={parseDidUri(did).fullDid}
-            label="DID"
-            className={styles.didLine}
-          />
+          {did && (
+            <CopyValue
+              value={parseDidUri(did).fullDid}
+              label="DID"
+              className={styles.didLine}
+            />
+          )}
           <p className={styles.deleted}>
             {t('view_DidUpgradeExplainer_onchain_deleted')}
           </p>
@@ -96,7 +96,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
         </Fragment>
       )}
 
-      {!wasOnChainDidDeleted && (
+      {!wasOnChainDidDeleted && did && (
         <Fragment>
           <p className={styles.subline}>
             {t('view_DidUpgradeExplainer_subline')}

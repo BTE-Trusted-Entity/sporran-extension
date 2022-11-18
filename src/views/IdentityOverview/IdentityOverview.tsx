@@ -123,14 +123,10 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
       {upgradeDid && (
         <Link
-          to={
-            did
-              ? generatePath(paths.identity.did.upgrade.start, { address })
-              : paths.home
-          }
+          to={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.upgrade}
         >
-          {wasOnChainDidDeleted
+          {wasOnChainDidDeleted || !did
             ? t('view_IdentityOverview_did_removed')
             : t('view_IdentityOverview_upgrade')}
         </Link>
