@@ -41,7 +41,7 @@ async function getCheckoutURL() {
 async function getCost() {
   const checkout = await getCheckoutURL();
 
-  const cost = await ky.get(`${checkout}/cost`).text();
+  const cost = await ky.get(`${checkout}/api/cost`).text();
   return parseFloat(cost).toLocaleString(undefined, {
     style: 'currency',
     currency: 'EUR',
