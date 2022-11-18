@@ -134,8 +134,6 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
         </button>
       </p>
 
-      <p className={styles.footnote}>{t('view_DidUpgradeEuro_footnote')}</p>
-
       <LinkBack />
     </form>
   );

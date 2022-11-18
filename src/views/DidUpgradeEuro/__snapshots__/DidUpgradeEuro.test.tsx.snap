@@ -125,7 +125,7 @@ exports[`DidUpgradeEuro should render 1`] = `
       <span
         class="paypal"
       >
-        PayPal* 
+        PayPal 
       </span>
       <span>
         (total cost: EUR 4,00).
@@ -146,11 +146,6 @@ exports[`DidUpgradeEuro should render 1`] = `
       >
         Sign
       </button>
-    </p>
-    <p
-      class="footnote"
-    >
-      *PayPal account required
     </p>
     <button
       aria-label="Back"
