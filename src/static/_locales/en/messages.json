@@ -911,7 +911,7 @@
     "message": "After signing you will go to the checkout page to pay with "
   },
   "view_DidUpgradeEuro_paypal": {
-    "message": "PayPal* "
+    "message": "PayPal "
   },
   "view_DidUpgradeEuro_cost": {
     "message": "(total cost: $cost$).",

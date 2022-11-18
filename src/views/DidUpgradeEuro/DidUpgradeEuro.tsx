@@ -41,7 +41,7 @@ async function getCheckoutURL() {
 async function getCost() {
   const checkout = await getCheckoutURL();
 
-  const cost = await ky.get(`${checkout}/cost`).text();
+  const cost = await ky.get(`${checkout}/api/cost`).text();
   return parseFloat(cost).toLocaleString(undefined, {
     style: 'currency',
     currency: 'EUR',
@@ -133,8 +133,6 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
           {t('common_action_sign')}
         </button>
       </p>
-
-      <p className={styles.footnote}>{t('view_DidUpgradeEuro_footnote')}</p>
 
       <LinkBack />
     </form>
