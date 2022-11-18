@@ -6,6 +6,7 @@ import { find } from 'lodash-es';
 import * as styles from './CreatePresentation.module.css';
 
 import { Identity } from '../../utilities/identities/types';
+import { getIdentityDid } from '../../utilities/identities/identities';
 import {
   getUnsignedPresentationDownload,
   useIdentityCredentials,
@@ -25,7 +26,8 @@ export function CreatePresentation({ identity }: Props): JSX.Element | null {
   const params = useParams() as { hash: string };
   const rootHash = params.hash;
 
-  const credentials = useIdentityCredentials(identity.did);
+  const did = getIdentityDid(identity);
+  const credentials = useIdentityCredentials(did);
   const credential = find(credentials, { request: { rootHash } });
   const [checked, setChecked] = useState<string[]>([]);
 

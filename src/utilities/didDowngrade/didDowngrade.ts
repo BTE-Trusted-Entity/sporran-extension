@@ -7,16 +7,14 @@ import {
 import { Chain, Web3Names } from '@kiltprotocol/did';
 
 import {
+  getKeypairBySeed,
   getKeystoreFromSeed,
   Identity,
-  getLightDidFromSeed,
-  getKeypairBySeed,
 } from '../identities/identities';
 import { getFullDidDetails, isFullDid } from '../did/did';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
-  did: DidUri;
 }
 
 async function getSignedTransaction(
@@ -70,12 +68,11 @@ async function getSignedTransaction(
 
   const tx = await blockchain.signTx(keypair, extrinsic);
 
-  const { uri } = getLightDidFromSeed(seed);
-  return { extrinsic: tx, did: uri };
+  return { extrinsic: tx };
 }
 
-export async function getFee(did: DidUri): Promise<BN> {
-  if (!isFullDid(did)) {
+export async function getFee(did: DidUri | undefined): Promise<BN> {
+  if (!did || !isFullDid(did)) {
     return new BN(0);
   }
   const fakeSeed = new Uint8Array(32);
@@ -91,19 +88,20 @@ export async function sign(
   identity: Identity,
   seed: Uint8Array,
 ): Promise<string> {
-  const { extrinsic, did } = await getSignedTransaction(seed, identity.did);
+  if (!identity.did) {
+    throw new Error('DID is deleted and unusable');
+  }
+  const { extrinsic } = await getSignedTransaction(seed, identity.did);
 
   const hash = extrinsic.hash.toHex();
-  currentTx[hash] = { extrinsic, did };
+  currentTx[hash] = { extrinsic };
   return hash;
 }
 
-export async function submit(hash: string): Promise<DidUri> {
-  const { extrinsic, did } = currentTx[hash];
+export async function submit(hash: string): Promise<void> {
+  const { extrinsic } = currentTx[hash];
   await BlockchainUtils.submitSignedTx(extrinsic, {
     resolveOn: BlockchainUtils.IS_FINALIZED,
   });
   delete currentTx[hash];
-
-  return did;
 }

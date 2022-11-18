@@ -15,7 +15,10 @@ import {
   submit,
   useKiltCosts,
 } from '../../utilities/didUpgrade/didUpgrade';
-import { saveIdentity } from '../../utilities/identities/identities';
+import {
+  getIdentityDid,
+  saveIdentity,
+} from '../../utilities/identities/identities';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
 import {
@@ -35,7 +38,9 @@ interface Props {
 export function DidUpgrade({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { address, did } = identity;
+  const { address } = identity;
+  const did = getIdentityDid(identity);
+
   const { fee, deposit, total, insufficientKilt } = useKiltCosts(address, did);
   const [txHash, setTxHash] = useState<string>();
 

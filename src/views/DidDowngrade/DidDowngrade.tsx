@@ -42,7 +42,7 @@ import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 function useCosts(
   address: string,
-  did: DidUri,
+  did: DidUri | undefined, // after the downgrade it’s set to undefined
 ): {
   fee?: BN;
   deposit?: BN;
@@ -104,9 +104,8 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
         const hash = await sign(identity, seed);
         setTxHash(hash);
 
-        const did = await submit(hash);
-
-        await saveIdentity({ ...identity, did });
+        await submit(hash);
+        await saveIdentity({ ...identity, did: undefined });
 
         if (credentials) {
           await invalidateCredentials(credentials);

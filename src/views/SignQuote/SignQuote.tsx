@@ -78,7 +78,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
     window.close();
   }, []);
 
-  const credentials = useIdentityCredentials(identity.did);
+  const credentials = useIdentityCredentials(did);
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {

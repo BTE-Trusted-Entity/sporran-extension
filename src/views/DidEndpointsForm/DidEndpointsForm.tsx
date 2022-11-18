@@ -27,6 +27,7 @@ import { getFullDidDetails } from '../../utilities/did/did';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { generatePath, paths } from '../paths';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+import { getIdentityDid } from '../../utilities/identities/identities';
 
 function useScrollEndpoint(ref: RefObject<HTMLLIElement>, id: string) {
   const params: { id: string } = useParams();
@@ -315,7 +316,8 @@ export function DidEndpointsForm({
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { did, address } = identity;
+  const { address } = identity;
+  const did = getIdentityDid(identity);
 
   const endpoints = useAsyncValue(
     async (did) => (await getFullDidDetails(did)).getEndpoints(),
@@ -346,7 +348,7 @@ export function DidEndpointsForm({
 
       <IdentitySlide identity={identity} />
 
-      <CopyValue value={identity.did} label="DID" className={styles.didLine} />
+      <CopyValue value={did} label="DID" className={styles.didLine} />
 
       <ul className={styles.list}>
         {!endpoints && <div className={styles.loading} />}

@@ -17,6 +17,7 @@ import {
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import {
+  getIdentityDid,
   getKeypairBySeed,
   getKeystoreFromSeed,
 } from '../../utilities/identities/identities';
@@ -81,7 +82,8 @@ export function DidEndpointsSign({
   endpoint,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
-  const { address, did } = identity;
+  const { address } = identity;
+  const did = getIdentityDid(identity);
 
   const fee = useAsyncValue(getFee, [did, endpoint, type]);
 
@@ -132,7 +134,7 @@ export function DidEndpointsSign({
 
       <IdentitySlide identity={identity} />
 
-      <CopyValue value={identity.did} label="DID" className={styles.didLine} />
+      <CopyValue value={did} label="DID" className={styles.didLine} />
 
       {fee && (
         <p className={styles.fee}>

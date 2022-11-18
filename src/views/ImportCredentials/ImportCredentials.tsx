@@ -75,8 +75,8 @@ export function ImportCredentials(): JSX.Element | null {
               throw new Error('invalid');
             }
 
-            const knownIdentity = identitiesList.find(({ did }) =>
-              sameFullDid(did, request.claim.owner),
+            const knownIdentity = identitiesList.find(
+              ({ did }) => did && sameFullDid(did, request.claim.owner),
             );
             if (!knownIdentity) {
               throw new Error('orphaned');

@@ -72,7 +72,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
         {t('view_DidUpgradeExplainer_heading')}
       </h1>
 
-      {wasOnChainDidDeleted && (
+      {(wasOnChainDidDeleted || !did) && (
         <Fragment>
           <p className={styles.subline}>
             {t('view_DidUpgradeExplainer_onchain_deleted_subline')}
@@ -80,11 +80,13 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
 
           <IdentitySlide identity={identity} />
 
-          <CopyValue
-            value={parseDidUri(did).fullDid}
-            label="DID"
-            className={styles.didLine}
-          />
+          {did && (
+            <CopyValue
+              value={parseDidUri(did).fullDid}
+              label="DID"
+              className={styles.didLine}
+            />
+          )}
           <p className={styles.deleted}>
             {t('view_DidUpgradeExplainer_onchain_deleted')}
           </p>
@@ -94,7 +96,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
         </Fragment>
       )}
 
-      {!wasOnChainDidDeleted && (
+      {!wasOnChainDidDeleted && did && (
         <Fragment>
           <p className={styles.subline}>
             {t('view_DidUpgradeExplainer_subline')}

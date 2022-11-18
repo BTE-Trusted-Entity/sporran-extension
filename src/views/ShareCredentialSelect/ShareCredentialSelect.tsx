@@ -38,8 +38,9 @@ function MatchingIdentityCredentials({
   allCredentials: Credential[];
   isLastIdentity: boolean;
 }): JSX.Element {
-  const credentials = allCredentials.filter((credential) =>
-    sameFullDid(credential.request.claim.owner, identity.did),
+  const credentials = allCredentials.filter(
+    (credential) =>
+      identity.did && sameFullDid(credential.request.claim.owner, identity.did),
   );
 
   return (
@@ -110,8 +111,8 @@ export function ShareCredentialSelect({
     (credential) => parseDidUri(credential.request.claim.owner).fullDid,
   );
   const identitiesWithMatchingCredentials = Object.values(identities).filter(
-    (identity) =>
-      matchingCredentialDids.includes(parseDidUri(identity.did).fullDid),
+    ({ did }) =>
+      did && matchingCredentialDids.includes(parseDidUri(did).fullDid),
   );
 
   const sortedIdentities = sortBy(identitiesWithMatchingCredentials, 'index');

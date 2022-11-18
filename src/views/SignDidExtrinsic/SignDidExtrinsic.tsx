@@ -85,7 +85,7 @@ function AddServiceEndpointExtrinsic({
 
       <IdentitiesCarousel identity={identity} />
 
-      {isFullDid(did) && (
+      {did && isFullDid(did) && (
         <CopyValue value={did} label="DID" className={styles.didLine} />
       )}
 
@@ -124,7 +124,7 @@ function RemoveServiceEndpointExtrinsic({
 
       <IdentitiesCarousel identity={identity} />
 
-      {isFullDid(did) && (
+      {did && isFullDid(did) && (
         <CopyValue value={did} label="DID" className={styles.didLine} />
       )}
 
@@ -204,6 +204,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
     extrinsic?.method.section === 'did' && !isServiceEndpointExtrinsic;
 
   const error = [
+    !did && t('view_SignDidExtrinsic_error_unusable_did'),
     !isFullDid(did) && t('view_SignDidExtrinsic_error_light_did'),
     isForbidden && t('view_SignDidExtrinsic_error_forbidden'),
     removeEndpointError.current &&
@@ -215,6 +216,10 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
+
+      if (!did) {
+        throw new Error('DID is deleted and unusable');
+      }
 
       if (!extrinsic) {
         throw new Error('Missing extrinsic');

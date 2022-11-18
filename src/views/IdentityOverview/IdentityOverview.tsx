@@ -52,8 +52,8 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
   const hasLegacyDid = useAsyncValue(needLegacyDidCrypto, [did]);
 
   const upgradeDid = !isFullDid(did);
-  const manageDid = isFullDid(did) && !hasLegacyDid;
-  const repairDid = hasLegacyDid;
+  const manageDid = did && isFullDid(did) && !hasLegacyDid;
+  const repairDid = did && hasLegacyDid;
 
   const web3name = useWeb3Name(did);
   const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
@@ -126,7 +126,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           to={generatePath(paths.identity.did.upgrade.start, { address })}
           className={styles.upgrade}
         >
-          {wasOnChainDidDeleted
+          {wasOnChainDidDeleted || !did
             ? t('view_IdentityOverview_did_removed')
             : t('view_IdentityOverview_upgrade')}
         </Link>
@@ -150,7 +150,7 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
         </Link>
       )}
 
-      {!web3name && (
+      {!web3name && did && (
         <Link
           to={generatePath(paths.identity.web3name.create.info, {
             address,

@@ -70,7 +70,7 @@ export async function getFee(): Promise<BN> {
 
 export function useKiltCosts(
   address: string,
-  did: DidUri,
+  did: DidUri | undefined,
 ): {
   fee?: BN;
   deposit?: BN;

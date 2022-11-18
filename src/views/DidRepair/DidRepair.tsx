@@ -9,6 +9,7 @@ import * as styles from './DidRepair.module.css';
 
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { Identity } from '../../utilities/identities/types';
+import { getIdentityDid } from '../../utilities/identities/identities';
 import {
   PasswordError,
   PasswordField,
@@ -46,7 +47,9 @@ function useCosts(
 export function DidRepair({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { address, did } = identity;
+  const { address } = identity;
+  const did = getIdentityDid(identity);
+
   const { fee, error } = useCosts(address, did);
   const [txHash, setTxHash] = useState<string>();
 

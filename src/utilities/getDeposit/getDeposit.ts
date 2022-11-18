@@ -25,9 +25,9 @@ async function getDefaultDeposit() {
 }
 
 async function getDepositWeb3Name(
-  did: DidUri,
+  did: DidUri | undefined,
 ): Promise<DepositData | undefined> {
-  if (!isFullDid(did)) {
+  if (!did || !isFullDid(did)) {
     return getDefaultDeposit();
   }
 
@@ -51,13 +51,19 @@ async function getDepositWeb3Name(
   return { owner: owner.toString(), amount };
 }
 
-export function useDepositWeb3Name(did: DidUri): DepositData | undefined {
+export function useDepositWeb3Name(
+  did: DidUri | undefined,
+): DepositData | undefined {
   return useAsyncValue(getDepositWeb3Name, [did]);
 }
 
 export async function getDepositDid(
-  did: DidUri,
+  did: DidUri | undefined,
 ): Promise<DepositData | undefined> {
+  if (!did) {
+    return { amount: await Chain.queryDepositAmount() };
+  }
+
   const { identifier, type } = parseDidUri(did);
 
   if (type === 'light') {
@@ -69,6 +75,8 @@ export async function getDepositDid(
   return details?.deposit;
 }
 
-export function useDepositDid(did: DidUri): DepositData | undefined {
+export function useDepositDid(
+  did: DidUri | undefined,
+): DepositData | undefined {
   return useAsyncValue(getDepositDid, [did]);
 }

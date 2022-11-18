@@ -462,7 +462,7 @@ export function CredentialCard({
               <Fragment>
                 <DownloadModal credential={credential} portalRef={portalRef} />
 
-                {isFullDid(request.claim.owner) && (
+                {isFullDid(request.claim.owner) && !isUnusable && (
                   <PresentationModal
                     credential={credential}
                     portalRef={portalRef}
