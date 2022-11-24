@@ -4,7 +4,7 @@ import { DidUri, KiltAddress } from '@kiltprotocol/types';
 
 import BN from 'bn.js';
 
-import { isFullDid, parseDidUri } from '../did/did';
+import { isFullDid } from '../did/did';
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
 interface DepositData {

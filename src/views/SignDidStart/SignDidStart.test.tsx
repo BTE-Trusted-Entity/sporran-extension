@@ -1,4 +1,3 @@
-import { DidUri } from '@kiltprotocol/types';
 import * as Did from '@kiltprotocol/did';
 
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
