@@ -37,7 +37,7 @@ export function SignDidCredentialsSelect({
 
   const onSelect = useCallback(
     (presentation: SharedCredential) => {
-      const key = presentation.credential.request.rootHash;
+      const key = presentation.credential.credential.rootHash;
       setSelected({ ...selected, [key]: presentation });
     },
     [selected],
@@ -72,7 +72,7 @@ export function SignDidCredentialsSelect({
         <ul className={styles.list}>
           {credentials?.map((credential) => (
             <SignDidCredentialCard
-              key={credential.request.rootHash}
+              key={credential.credential.rootHash}
               credential={credential}
               onSelect={onSelect}
               onUnSelect={onUnSelect}

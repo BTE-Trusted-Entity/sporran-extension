@@ -39,7 +39,7 @@ export function PresentationPrompt(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        `/identity/${identity.address}/credentials/${credentialsMock[12].request.rootHash}/presentation`,
+        `/identity/${identity.address}/credentials/${credentialsMock[12].credential.rootHash}/presentation`,
       ]}
     >
       <Route path={paths.identity.credentials.presentation}>

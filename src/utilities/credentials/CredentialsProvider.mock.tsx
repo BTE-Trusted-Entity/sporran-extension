@@ -2,12 +2,12 @@ import { IAttestation } from '@kiltprotocol/types';
 
 import { ShareInput } from '../../channels/shareChannel/types';
 
-import { Credential } from './credentials';
+import { SporranCredential } from './credentials';
 import { CredentialsContext } from './CredentialsContext';
 
-export const credentialsMock: Credential[] = [
+export const credentialsMock: SporranCredential[] = [
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
@@ -45,7 +45,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
@@ -83,7 +83,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
@@ -121,7 +121,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
@@ -159,7 +159,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
@@ -197,7 +197,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x47d04c42bdf7fdd3fc5a194bcaa367b2f4766a6b16ae3df628927656d818f420',
@@ -235,7 +235,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x47d04c42bdf7fdd3fc5a194bcaa367b2f4766a6b16ae3df628927656d818f420',
@@ -273,7 +273,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x55c1dd2f28ae7fc2376dda1c01bf94658fccd80d3fc6685b3a17427797e845a2',
@@ -311,7 +311,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x55c1dd2f28ae7fc2376dda1c01bf94658fccd80d3fc6685b3a17427797e845a2',
@@ -349,7 +349,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x55c1dd2f28ae7fc2376dda1c01bf94658fccd80d3fc6685b3a17427797e845a3',
@@ -393,7 +393,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
@@ -430,7 +430,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
@@ -467,7 +467,7 @@ export const credentialsMock: Credential[] = [
     isDownloaded: true,
   },
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0xad52bd7a8bd8a52e03181a99d2743e00d0a5e96fdc0182626655fcf0c0a776d0',
@@ -500,9 +500,9 @@ export const credentialsMock: Credential[] = [
   },
 ];
 
-export const notDownloaded: Credential[] = [
+export const notDownloaded: SporranCredential[] = [
   {
-    request: {
+    credential: {
       claim: {
         cTypeHash:
           '0x3291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac',
@@ -568,7 +568,7 @@ export const mockRequestCredential: ShareInput = {
   credentialRequest: {
     cTypes: [
       {
-        cTypeHash: credentialsMock[0].request.claim.cTypeHash,
+        cTypeHash: credentialsMock[0].credential.claim.cTypeHash,
         requiredProperties: ['Email'],
       },
     ],
@@ -593,7 +593,7 @@ export function CredentialsProviderMock({
   credentials = [...credentialsMock, ...notDownloaded],
   children,
 }: {
-  credentials?: Credential[];
+  credentials?: SporranCredential[];
   children: JSX.Element;
 }): JSX.Element {
   return (

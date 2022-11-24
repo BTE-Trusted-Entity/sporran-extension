@@ -69,16 +69,19 @@ export function SignDid({
         credential: ICredential;
       }[] = [];
 
-      for (const { credential, sharedContents } of credentials) {
-        const { request } = credential;
-        const allProperties = Object.keys(request.claim.contents);
+      for (const {
+        credential: sporranCredential,
+        sharedContents,
+      } of credentials) {
+        const { credential } = sporranCredential;
+        const allProperties = Object.keys(credential.claim.contents);
         const needRemoving = without(allProperties, ...sharedContents);
 
-        const credentialCopy = cloneDeep(request);
+        const credentialCopy = cloneDeep(credential);
         Credential.removeClaimProperties(credentialCopy, needRemoving);
 
         presentations.push({
-          name: credential.name,
+          name: sporranCredential.name,
           credential: credentialCopy,
         });
       }

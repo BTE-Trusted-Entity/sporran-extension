@@ -3,21 +3,21 @@ import { ChangeEvent, useCallback, useEffect } from 'react';
 
 import * as styles from './CredentialCard.module.css';
 
-import { Credential } from '../../utilities/credentials/credentials';
+import { SporranCredential } from '../../utilities/credentials/credentials';
 
 interface Props {
-  credential: Credential;
+  credential: SporranCredential;
   onSelect: (value: string[]) => void;
 }
 
 export function PresentCredentialCard({
-  credential,
+  credential: sporranCredential,
   onSelect,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  const { cTypeTitle, attester, request, name, status } = credential;
-  const contents = Object.entries(request.claim.contents);
+  const { cTypeTitle, attester, credential, name, status } = sporranCredential;
+  const contents = Object.entries(credential.claim.contents);
   const isAttested = status === 'attested';
 
   const handlePropChecked = useCallback(
@@ -29,8 +29,8 @@ export function PresentCredentialCard({
   );
 
   useEffect(() => {
-    onSelect(Object.keys(request.claim.contents));
-  }, [onSelect, request.claim.contents]);
+    onSelect(Object.keys(credential.claim.contents));
+  }, [onSelect, credential.claim.contents]);
 
   const statuses = {
     pending: t('component_CredentialCard_pending'),
@@ -100,7 +100,7 @@ export function PresentCredentialCard({
             <dt className={styles.detailName}>
               {t('component_CredentialCard_hash')}
             </dt>
-            <dd className={styles.detailValue}>{request.rootHash}</dd>
+            <dd className={styles.detailValue}>{credential.rootHash}</dd>
           </div>
         </dl>
       </section>

@@ -111,7 +111,7 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
         ) : (
           credentials.map((credential, index) => (
             <CredentialCard
-              key={credential.request.rootHash}
+              key={credential.credential.rootHash}
               credential={credential}
               expand={index + 1 === credentialCount && credentialCount < 7}
             />

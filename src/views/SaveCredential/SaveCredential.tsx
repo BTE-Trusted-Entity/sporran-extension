@@ -23,7 +23,7 @@ export function SaveCredential(): JSX.Element | null {
   const credentials = useCredentials();
 
   const credential = credentials?.find(
-    (credential) => credential.request.rootHash === claimHash,
+    ({ credential: { rootHash } }) => rootHash === claimHash,
   );
 
   const handleDownloadClick = useCallback(async () => {

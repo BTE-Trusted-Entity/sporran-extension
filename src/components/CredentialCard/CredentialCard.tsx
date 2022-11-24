@@ -18,7 +18,7 @@ import cx from 'classnames';
 import * as styles from './CredentialCard.module.css';
 
 import {
-  Credential,
+  SporranCredential,
   deleteCredential,
   getCredentialDownload,
   isUnusableCredential,
@@ -74,7 +74,7 @@ export function useScrollIntoView(
 function CredentialName({
   credential,
 }: {
-  credential: Credential;
+  credential: SporranCredential;
 }): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -134,7 +134,7 @@ function DeleteModal({
   credential,
   portalRef,
 }: {
-  credential: Credential;
+  credential: SporranCredential;
   portalRef: RefObject<HTMLElement>;
 }) {
   const t = browser.i18n.getMessage;
@@ -192,7 +192,7 @@ function DownloadModal({
   credential,
   portalRef,
 }: {
-  credential: Credential;
+  credential: SporranCredential;
   portalRef: RefObject<HTMLElement>;
 }) {
   const t = browser.i18n.getMessage;
@@ -282,10 +282,10 @@ function DownloadModal({
 }
 
 function PresentationModal({
-  credential,
+  credential: sporranCredential,
   portalRef,
 }: {
-  credential: Credential;
+  credential: SporranCredential;
   portalRef: RefObject<HTMLElement>;
 }) {
   const t = browser.i18n.getMessage;
@@ -304,15 +304,15 @@ function PresentationModal({
 
   const showInfo = useShowPresentationInfo();
 
-  const { request, status } = credential;
+  const { credential, status } = sporranCredential;
   const isAttested = status === 'attested';
-  const isUnusable = isUnusableCredential(credential);
+  const isUnusable = isUnusableCredential(sporranCredential);
   const { address } = useParams() as { address: string };
   if (!address || !isAttested) {
     return null; // only allow creating presentation when the identity is known and the credential is attested
   }
 
-  const hash = request.rootHash;
+  const hash = credential.rootHash;
   const url = generatePath(paths.identity.credentials.presentation, {
     address,
     hash,
@@ -384,14 +384,14 @@ function PresentationModal({
 }
 
 interface Props {
-  credential: Credential;
+  credential: SporranCredential;
   expand?: boolean;
   collapsible?: boolean;
   buttons?: boolean;
 }
 
 export function CredentialCard({
-  credential,
+  credential: sporranCredential,
   expand = false,
   collapsible = true,
   buttons = true,
@@ -405,7 +405,7 @@ export function CredentialCard({
     invalid: t('component_CredentialCard_invalid'),
   };
 
-  usePendingCredentialCheck(credential);
+  usePendingCredentialCheck(sporranCredential);
 
   const expanded = useBooleanState(expand);
 
@@ -414,11 +414,11 @@ export function CredentialCard({
 
   const portalRef = useRef<HTMLDivElement>(null);
 
-  const { status, isDownloaded, request, name } = credential;
-  const contents = Object.entries(request.claim.contents);
+  const { status, isDownloaded, credential, name } = sporranCredential;
+  const contents = Object.entries(credential.claim.contents);
   const label = contents[0][1];
 
-  const isUnusable = isUnusableCredential(credential);
+  const isUnusable = isUnusableCredential(sporranCredential);
 
   return (
     <li
@@ -460,22 +460,28 @@ export function CredentialCard({
             )}
             {buttons && (
               <Fragment>
-                <DownloadModal credential={credential} portalRef={portalRef} />
+                <DownloadModal
+                  credential={sporranCredential}
+                  portalRef={portalRef}
+                />
 
-                {isFullDid(request.claim.owner) && !isUnusable && (
+                {isFullDid(credential.claim.owner) && !isUnusable && (
                   <PresentationModal
-                    credential={credential}
+                    credential={sporranCredential}
                     portalRef={portalRef}
                   />
                 )}
 
-                <DeleteModal credential={credential} portalRef={portalRef} />
+                <DeleteModal
+                  credential={sporranCredential}
+                  portalRef={portalRef}
+                />
               </Fragment>
             )}
           </section>
 
           <dl className={styles.details}>
-            <CredentialName credential={credential} />
+            <CredentialName credential={sporranCredential} />
 
             <div className={styles.detail}>
               <dt className={styles.detailName}>
@@ -508,19 +514,23 @@ export function CredentialCard({
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_ctype')}
               </dt>
-              <dd className={styles.detailValue}>{credential.cTypeTitle}</dd>
+              <dd className={styles.detailValue}>
+                {sporranCredential.cTypeTitle}
+              </dd>
             </div>
             <div className={styles.detail}>
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_attester')}
               </dt>
-              <dd className={styles.detailValue}>{credential.attester}</dd>
+              <dd className={styles.detailValue}>
+                {sporranCredential.attester}
+              </dd>
             </div>
             <div className={styles.hash}>
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_hash')}
               </dt>
-              <dd className={styles.detailValue}>{request.rootHash}</dd>
+              <dd className={styles.detailValue}>{credential.rootHash}</dd>
             </div>
           </dl>
         </section>

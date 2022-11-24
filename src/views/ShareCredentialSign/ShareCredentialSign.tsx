@@ -73,7 +73,7 @@ export function ShareCredentialSign({
       const isLegacy = await needLegacyDidCrypto(identity.did);
       const { encrypt, sign } = await getIdentityCryptoFromSeed(seed, isLegacy);
 
-      const { rootHash } = credential.request;
+      const { rootHash } = credential.credential;
       const api = ConfigService.get('api');
       const result = await api.query.attestation.attestations(rootHash);
       if (result.isNone) {
@@ -83,7 +83,7 @@ export function ShareCredentialSign({
       const attestation = Attestation.fromChain(result, rootHash);
 
       const presentation = await Credential.createPresentation({
-        credential: credential.request,
+        credential: credential.credential,
         selectedAttributes: sharedContents,
         signCallback: sign,
         challenge,
@@ -143,7 +143,7 @@ export function ShareCredentialSign({
             <div key={sharedProp} className={styles.detail}>
               <dt className={styles.detailName}>{sharedProp}</dt>
               <dd className={styles.detailValue}>
-                {String(credential.request.claim.contents[sharedProp])}
+                {String(credential.credential.claim.contents[sharedProp])}
               </dd>
             </div>
           ))}

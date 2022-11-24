@@ -4,7 +4,7 @@ import { Credential as SDKCredential } from '@kiltprotocol/core';
 import { isSameSubject } from '@kiltprotocol/did';
 
 import {
-  Credential,
+  SporranCredential,
   saveCredential,
 } from '../../utilities/credentials/credentials';
 import { exceptionToError } from '../../utilities/exceptionToError/exceptionToError';
@@ -57,34 +57,34 @@ export function ImportCredentials(): JSX.Element | null {
           const fileName = file.name;
           try {
             const text = await file.text();
-            const credential = JSON.parse(text) as Credential;
+            const sporranCredential = JSON.parse(text) as SporranCredential;
 
             const {
-              request,
+              credential,
               name = fileName,
               status = 'pending',
               cTypeTitle,
               attester,
-            } = credential;
+            } = sporranCredential;
 
             if (!cTypeTitle || !attester) {
               throw new Error('invalid');
             }
             try {
-              await SDKCredential.verifyCredential(request);
+              await SDKCredential.verifyCredential(credential);
             } catch {
               throw new Error('invalid');
             }
 
             const knownIdentity = identitiesList.find(
-              ({ did }) => did && isSameSubject(did, request.claim.owner),
+              ({ did }) => did && isSameSubject(did, credential.claim.owner),
             );
             if (!knownIdentity) {
               throw new Error('orphaned');
             }
 
             await saveCredential({
-              request,
+              credential,
               name,
               status,
               cTypeTitle,

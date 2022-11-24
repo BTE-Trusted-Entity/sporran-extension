@@ -51,7 +51,7 @@ export function DidDowngradeWarningCredentials({
       <ul className={styles.credentials}>
         {credentials.map((credential, index) => (
           <CredentialCard
-            key={credential.request.rootHash}
+            key={credential.credential.rootHash}
             credential={credential}
             buttons={false}
             expand={index + 1 === credentials.length && credentials.length < 5}

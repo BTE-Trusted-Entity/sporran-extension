@@ -6,7 +6,7 @@ import cx from 'classnames';
 import * as styles from './CredentialCard.module.css';
 
 import {
-  Credential,
+  SporranCredential,
   SharedCredential,
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
@@ -15,7 +15,7 @@ import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState
 import { useScrollIntoView } from './CredentialCard';
 
 interface Props {
-  credential: Credential;
+  credential: SporranCredential;
   onSelect: (value: SharedCredential) => void;
   onUnSelect: (rootHash: string) => void;
   viewRef: RefObject<HTMLElement>;
@@ -71,7 +71,7 @@ export function SignDidCredentialCard({
         isSelected.off();
         isExpanded.off();
         setContentsChecked([]);
-        onUnSelect(credential.request.rootHash);
+        onUnSelect(credential.credential.rootHash);
       }
     },
     [
@@ -92,7 +92,7 @@ export function SignDidCredentialCard({
     invalid: t('component_CredentialCard_invalid'),
   };
 
-  const contents = Object.entries(credential.request.claim.contents);
+  const contents = Object.entries(credential.credential.claim.contents);
 
   const cardRef = useRef<HTMLLIElement>(null);
 
@@ -107,7 +107,7 @@ export function SignDidCredentialCard({
       <input
         name="credential"
         type="checkbox"
-        id={credential.request.rootHash}
+        id={credential.credential.rootHash}
         onChange={handleSelect}
         checked={isSelected.current}
         disabled={!isAttested}
@@ -206,7 +206,7 @@ export function SignDidCredentialCard({
                 {t('component_CredentialCard_hash')}
               </dt>
               <dd className={styles.detailValue}>
-                {credential.request.rootHash}
+                {credential.credential.rootHash}
               </dd>
             </div>
           </dl>
