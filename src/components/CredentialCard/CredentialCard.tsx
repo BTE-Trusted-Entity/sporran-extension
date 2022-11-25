@@ -72,9 +72,9 @@ export function useScrollIntoView(
 }
 
 function CredentialName({
-  credential,
+  sporranCredential,
 }: {
-  credential: SporranCredential;
+  sporranCredential: SporranCredential;
 }): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -93,11 +93,11 @@ function CredentialName({
     async (event: FocusEvent<HTMLInputElement>) => {
       const name = event.target.value;
       if (name) {
-        await saveCredential({ ...credential, name });
+        await saveCredential({ ...sporranCredential, name });
       }
       isEditing.off();
     },
-    [credential, isEditing],
+    [sporranCredential, isEditing],
   );
 
   return isEditing.current ? (
@@ -105,7 +105,7 @@ function CredentialName({
       <label className={styles.detailName}>
         {t('component_CredentialCard_name')}
         <input
-          defaultValue={credential.name}
+          defaultValue={sporranCredential.name}
           autoFocus
           className={styles.input}
           onKeyPress={handleKeyPress}
@@ -119,7 +119,7 @@ function CredentialName({
         {t('component_CredentialCard_name')}
       </dt>
       <dd className={styles.nameValue}>
-        {credential.name}
+        {sporranCredential.name}
         <button
           className={styles.editName}
           aria-label={t('component_CredentialCard_edit_name')}
@@ -131,10 +131,10 @@ function CredentialName({
 }
 
 function DeleteModal({
-  credential,
+  sporranCredential,
   portalRef,
 }: {
-  credential: SporranCredential;
+  sporranCredential: SporranCredential;
   portalRef: RefObject<HTMLElement>;
 }) {
   const t = browser.i18n.getMessage;
@@ -142,9 +142,9 @@ function DeleteModal({
   const visibility = useBooleanState();
 
   const handleConfirm = useCallback(async () => {
-    await deleteCredential(credential);
+    await deleteCredential(sporranCredential);
     visibility.off();
-  }, [credential, visibility]);
+  }, [sporranCredential, visibility]);
 
   return (
     <Fragment>
@@ -163,7 +163,7 @@ function DeleteModal({
               {t('component_CredentialCard_delete_warning')}
             </h1>
             <p className={styles.explanation}>
-              {isUnusableCredential(credential)
+              {isUnusableCredential(sporranCredential)
                 ? t('component_CredentialCard_revoked_delete_explanation')
                 : t('component_CredentialCard_delete_explanation')}
             </p>
@@ -189,18 +189,18 @@ function DeleteModal({
 }
 
 function DownloadModal({
-  credential,
+  sporranCredential,
   portalRef,
 }: {
-  credential: SporranCredential;
+  sporranCredential: SporranCredential;
   portalRef: RefObject<HTMLElement>;
 }) {
   const t = browser.i18n.getMessage;
   const visibility = useBooleanState();
 
   const markCredentialDownloaded = useCallback(async () => {
-    await saveCredential({ ...credential, isDownloaded: true });
-  }, [credential]);
+    await saveCredential({ ...sporranCredential, isDownloaded: true });
+  }, [sporranCredential]);
 
   const [checked, setChecked] = useState(false);
 
@@ -215,9 +215,9 @@ function DownloadModal({
   }, [markCredentialDownloaded, checked, visibility]);
 
   const showInfo = useShowDownloadInfo();
-  const { isDownloaded } = credential;
-  const isUnusable = isUnusableCredential(credential);
-  const { name, url } = getCredentialDownload(credential);
+  const { isDownloaded } = sporranCredential;
+  const isUnusable = isUnusableCredential(sporranCredential);
+  const { name, url } = getCredentialDownload(sporranCredential);
 
   return (
     <Fragment>
@@ -282,10 +282,10 @@ function DownloadModal({
 }
 
 function PresentationModal({
-  credential: sporranCredential,
+  sporranCredential,
   portalRef,
 }: {
-  credential: SporranCredential;
+  sporranCredential: SporranCredential;
   portalRef: RefObject<HTMLElement>;
 }) {
   const t = browser.i18n.getMessage;
@@ -384,14 +384,14 @@ function PresentationModal({
 }
 
 interface Props {
-  credential: SporranCredential;
+  sporranCredential: SporranCredential;
   expand?: boolean;
   collapsible?: boolean;
   buttons?: boolean;
 }
 
 export function CredentialCard({
-  credential: sporranCredential,
+  sporranCredential,
   expand = false,
   collapsible = true,
   buttons = true,
@@ -461,19 +461,19 @@ export function CredentialCard({
             {buttons && (
               <Fragment>
                 <DownloadModal
-                  credential={sporranCredential}
+                  sporranCredential={sporranCredential}
                   portalRef={portalRef}
                 />
 
                 {isFullDid(credential.claim.owner) && !isUnusable && (
                   <PresentationModal
-                    credential={sporranCredential}
+                    sporranCredential={sporranCredential}
                     portalRef={portalRef}
                   />
                 )}
 
                 <DeleteModal
-                  credential={sporranCredential}
+                  sporranCredential={sporranCredential}
                   portalRef={portalRef}
                 />
               </Fragment>
@@ -481,7 +481,7 @@ export function CredentialCard({
           </section>
 
           <dl className={styles.details}>
-            <CredentialName credential={sporranCredential} />
+            <CredentialName sporranCredential={sporranCredential} />
 
             <div className={styles.detail}>
               <dt className={styles.detailName}>

@@ -26,7 +26,7 @@ export function Selected(): JSX.Element {
     >
       <ul className={styles.credentialsList}>
         <ShareCredentialCard
-          credential={credentialsMock[0]}
+          sporranCredential={credentialsMock[0]}
           identity={identitiesMock[0]}
           isSelected
           onSelect={action('onSelect')}
@@ -46,7 +46,7 @@ export function NotSelected(): JSX.Element {
     >
       <ul className={styles.credentialsList}>
         <ShareCredentialCard
-          credential={credentialsMock[0]}
+          sporranCredential={credentialsMock[0]}
           identity={identitiesMock[0]}
           onSelect={action('onSelect')}
           viewRef={{ current: null }}
@@ -65,7 +65,7 @@ export function NotAttested(): JSX.Element {
     >
       <ul className={styles.credentialsList}>
         <ShareCredentialCard
-          credential={credentialsMock[1]}
+          sporranCredential={credentialsMock[1]}
           identity={identitiesMock[0]}
           isSelected
           onSelect={action('onSelect')}

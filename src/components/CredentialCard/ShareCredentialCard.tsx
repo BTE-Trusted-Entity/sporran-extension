@@ -6,7 +6,6 @@ import React, {
   useRef,
   RefObject,
   ChangeEvent,
-  useMemo,
 } from 'react';
 import { includes, without, find } from 'lodash-es';
 import cx from 'classnames';
@@ -29,7 +28,7 @@ import { useScrollIntoView } from './CredentialCard';
 const noRequiredProperties: string[] = [];
 
 interface Props {
-  credential: SporranCredential;
+  sporranCredential: SporranCredential;
   identity: Identity;
   onSelect: (value: Selected) => void;
   viewRef: RefObject<HTMLElement>;
@@ -38,7 +37,7 @@ interface Props {
 }
 
 export function ShareCredentialCard({
-  credential: sporranCredential,
+  sporranCredential,
   identity,
   onSelect,
   viewRef,
@@ -74,14 +73,6 @@ export function ShareCredentialCard({
 
   const requiredProperties = cType?.requiredProperties || noRequiredProperties;
 
-  const onSelectArgs = useMemo(
-    () => ({
-      credential: sporranCredential,
-      identity,
-    }),
-    [identity, sporranCredential],
-  );
-
   const [checked, setChecked] = useState<string[]>([]);
 
   useEffect(() => {
@@ -90,29 +81,37 @@ export function ShareCredentialCard({
 
   useEffect(() => {
     if (expand) {
-      onSelect({ ...onSelectArgs, sharedContents: checked });
+      onSelect({ sporranCredential, identity, sharedContents: checked });
     }
-  }, [expand, onSelect, checked, onSelectArgs]);
+  }, [expand, onSelect, checked, sporranCredential, identity]);
 
   const isAttested = status === 'attested';
 
   const handleSelect = useCallback(() => {
-    const selected = { ...onSelectArgs, sharedContents: checked };
+    const selected = { sporranCredential, identity, sharedContents: checked };
     onSelect(selected);
-  }, [onSelectArgs, checked, onSelect]);
+  }, [sporranCredential, identity, checked, onSelect]);
 
   const handlePropChecked = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const name = event.target.name;
       if (event.target.checked && !includes(checked, name)) {
         setChecked([...checked, name]);
-        onSelect({ ...onSelectArgs, sharedContents: [...checked, name] });
+        onSelect({
+          sporranCredential,
+          identity,
+          sharedContents: [...checked, name],
+        });
       } else if (!includes(requiredProperties, name)) {
         setChecked(without(checked, name));
-        onSelect({ ...onSelectArgs, sharedContents: without(checked, name) });
+        onSelect({
+          sporranCredential,
+          identity,
+          sharedContents: without(checked, name),
+        });
       }
     },
-    [checked, requiredProperties, onSelect, onSelectArgs],
+    [checked, requiredProperties, sporranCredential, identity, onSelect],
   );
 
   const cardRef = useRef<HTMLLIElement>(null);

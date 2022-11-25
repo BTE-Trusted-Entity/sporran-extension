@@ -69,10 +69,7 @@ export function SignDid({
         credential: ICredential;
       }[] = [];
 
-      for (const {
-        credential: sporranCredential,
-        sharedContents,
-      } of credentials) {
+      for (const { sporranCredential, sharedContents } of credentials) {
         const { credential } = sporranCredential;
         const allProperties = Object.keys(credential.claim.contents);
         const needRemoving = without(allProperties, ...sharedContents);
@@ -113,7 +110,9 @@ export function SignDid({
 
           <dt className={styles.detailName}>{t('view_SignDid_credentials')}</dt>
           <dd className={styles.detailValue}>
-            {credentials.map(({ credential }) => credential.name).join(', ')}
+            {credentials
+              .map(({ sporranCredential }) => sporranCredential.name)
+              .join(', ')}
           </dd>
         </dl>
       )}

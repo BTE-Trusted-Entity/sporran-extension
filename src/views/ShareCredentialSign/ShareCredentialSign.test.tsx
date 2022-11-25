@@ -14,7 +14,7 @@ import { Selected } from '../ShareCredential/ShareCredential';
 import { ShareCredentialSign } from './ShareCredentialSign';
 
 const mockSelected: Selected = {
-  credential: credentialsMock[0],
+  sporranCredential: credentialsMock[0],
   identity: identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'],
   sharedContents: ['Email'],
 };

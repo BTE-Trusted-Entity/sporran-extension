@@ -58,7 +58,7 @@ export function ShareCredentialSign({
 
   const { challenge } = credentialRequest;
 
-  const { credential, identity, sharedContents } = selected;
+  const { sporranCredential, identity, sharedContents } = selected;
 
   const [error, setError] = useState<string>();
 
@@ -73,7 +73,7 @@ export function ShareCredentialSign({
       const isLegacy = await needLegacyDidCrypto(identity.did);
       const { encrypt, sign } = await getIdentityCryptoFromSeed(seed, isLegacy);
 
-      const { rootHash } = credential.credential;
+      const { rootHash } = sporranCredential.credential;
       const api = ConfigService.get('api');
       const result = await api.query.attestation.attestations(rootHash);
       if (result.isNone) {
@@ -83,7 +83,7 @@ export function ShareCredentialSign({
       const attestation = Attestation.fromChain(result, rootHash);
 
       const presentation = await Credential.createPresentation({
-        credential: credential.credential,
+        credential: sporranCredential.credential,
         selectedAttributes: sharedContents,
         signCallback: sign,
         challenge,
@@ -106,7 +106,7 @@ export function ShareCredentialSign({
       window.close();
     },
     [
-      credential,
+      sporranCredential,
       identity,
       passwordField,
       challenge,
@@ -136,14 +136,16 @@ export function ShareCredentialSign({
             <dt className={styles.detailName}>
               {t('view_ShareCredentialSign_name')}
             </dt>
-            <dd className={styles.detailValue}>{credential.name}</dd>
+            <dd className={styles.detailValue}>{sporranCredential.name}</dd>
           </div>
 
           {sharedContents.map((sharedProp) => (
             <div key={sharedProp} className={styles.detail}>
               <dt className={styles.detailName}>{sharedProp}</dt>
               <dd className={styles.detailValue}>
-                {String(credential.credential.claim.contents[sharedProp])}
+                {String(
+                  sporranCredential.credential.claim.contents[sharedProp],
+                )}
               </dd>
             </div>
           ))}

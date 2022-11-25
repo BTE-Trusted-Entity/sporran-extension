@@ -21,15 +21,15 @@ export function DidDowngradeWarningCredentials({
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const credentials = useIdentityCredentials(identity.did);
+  const sporranCredentials = useIdentityCredentials(identity.did);
 
   const { address } = identity;
 
-  if (!credentials) {
+  if (!sporranCredentials) {
     return null; // storage data pending
   }
 
-  if (credentials.length === 0) {
+  if (sporranCredentials.length === 0) {
     return <Redirect to={paths.identity.did.manage.downgrade.sign} />;
   }
 
@@ -49,12 +49,15 @@ export function DidDowngradeWarningCredentials({
       </p>
 
       <ul className={styles.credentials}>
-        {credentials.map((credential, index) => (
+        {sporranCredentials.map((sporranCredential, index) => (
           <CredentialCard
-            key={credential.credential.rootHash}
-            credential={credential}
+            key={sporranCredential.credential.rootHash}
+            sporranCredential={sporranCredential}
             buttons={false}
-            expand={index + 1 === credentials.length && credentials.length < 5}
+            expand={
+              index + 1 === sporranCredentials.length &&
+              sporranCredentials.length < 5
+            }
           />
         ))}
       </ul>

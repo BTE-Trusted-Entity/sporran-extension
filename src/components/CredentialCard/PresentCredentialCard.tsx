@@ -6,12 +6,12 @@ import * as styles from './CredentialCard.module.css';
 import { SporranCredential } from '../../utilities/credentials/credentials';
 
 interface Props {
-  credential: SporranCredential;
+  sporranCredential: SporranCredential;
   onSelect: (value: string[]) => void;
 }
 
 export function PresentCredentialCard({
-  credential: sporranCredential,
+  sporranCredential,
   onSelect,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;

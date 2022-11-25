@@ -44,10 +44,11 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
 
   const { address, did } = identity;
 
-  const credentials = useIdentityCredentials(did);
+  const sporranCredentials = useIdentityCredentials(did);
 
-  const showDownloadPrompt =
-    credentials && credentials.some(({ isDownloaded }) => !isDownloaded);
+  const showDownloadPrompt = sporranCredentials?.some(
+    ({ isDownloaded }) => !isDownloaded,
+  );
 
   const hasLegacyDid = useAsyncValue(needLegacyDidCrypto, [did]);
 

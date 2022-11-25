@@ -20,18 +20,18 @@ export function SaveCredential(): JSX.Element | null {
 
   const { claimHash } = usePopupData<IAttestation>();
 
-  const credentials = useCredentials();
+  const sporranCredentials = useCredentials();
 
-  const credential = credentials?.find(
+  const sporranCredential = sporranCredentials?.find(
     ({ credential: { rootHash } }) => rootHash === claimHash,
   );
 
   const handleDownloadClick = useCallback(async () => {
-    if (!credential) {
+    if (!sporranCredential) {
       return;
     }
-    await saveCredential({ ...credential, isDownloaded: true });
-  }, [credential]);
+    await saveCredential({ ...sporranCredential, isDownloaded: true });
+  }, [sporranCredential]);
 
   const handleClose = useCallback(() => {
     window.close();
@@ -43,16 +43,16 @@ export function SaveCredential(): JSX.Element | null {
     })();
   }, []);
 
-  if (!credentials) {
+  if (!sporranCredentials) {
     return null; // storage data pending
   }
 
-  if (!credential) {
+  if (!sporranCredential) {
     // TODO: decide on interface for an unknown credential
     return null;
   }
 
-  const download = getCredentialDownload(credential);
+  const download = getCredentialDownload(sporranCredential);
 
   return (
     <main className={styles.container}>
@@ -60,7 +60,7 @@ export function SaveCredential(): JSX.Element | null {
 
       <section className={styles.cardContainer}>
         <CredentialCard
-          credential={credential}
+          sporranCredential={sporranCredential}
           expand
           collapsible={false}
           buttons={false}
@@ -68,7 +68,9 @@ export function SaveCredential(): JSX.Element | null {
       </section>
 
       <h2
-        className={credential.isDownloaded ? styles.downloaded : styles.warning}
+        className={
+          sporranCredential.isDownloaded ? styles.downloaded : styles.warning
+        }
       >
         {t('view_SaveCredential_warning')}
       </h2>
@@ -82,7 +84,7 @@ export function SaveCredential(): JSX.Element | null {
         {t('view_SaveCredential_CTA')}
       </a>
 
-      {credential.isDownloaded && (
+      {sporranCredential.isDownloaded && (
         <p className={styles.done}>
           {t('view_SaveCredential_done')}
           <button type="button" className={styles.close} onClick={handleClose}>

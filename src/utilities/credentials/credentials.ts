@@ -25,7 +25,7 @@ export interface SporranCredential {
 }
 
 export interface SharedCredential {
-  credential: SporranCredential;
+  sporranCredential: SporranCredential;
   sharedContents: string[];
 }
 

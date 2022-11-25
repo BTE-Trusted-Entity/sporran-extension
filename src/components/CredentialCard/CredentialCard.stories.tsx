@@ -20,7 +20,7 @@ export default {
 export function Template(): JSX.Element {
   return (
     <ul className={styles.credentialsList}>
-      <CredentialCard credential={credentialsMock[0]} />
+      <CredentialCard sporranCredential={credentialsMock[0]} />
     </ul>
   );
 }
@@ -28,7 +28,7 @@ export function Template(): JSX.Element {
 export function DownloadPrompt(): JSX.Element {
   return (
     <ul className={styles.credentialsList}>
-      <CredentialCard credential={notDownloaded[0]} />
+      <CredentialCard sporranCredential={notDownloaded[0]} />
     </ul>
   );
 }
@@ -44,7 +44,7 @@ export function PresentationPrompt(): JSX.Element {
     >
       <Route path={paths.identity.credentials.presentation}>
         <ul className={styles.credentialsList}>
-          <CredentialCard expand credential={credentialsMock[12]} />
+          <CredentialCard expand sporranCredential={credentialsMock[12]} />
         </ul>
       </Route>
     </MemoryRouter>
@@ -54,7 +54,7 @@ export function PresentationPrompt(): JSX.Element {
 export function Expanded(): JSX.Element {
   return (
     <ul className={styles.credentialsList}>
-      <CredentialCard expand credential={notDownloaded[0]} />
+      <CredentialCard expand sporranCredential={notDownloaded[0]} />
     </ul>
   );
 }
@@ -62,7 +62,7 @@ export function Expanded(): JSX.Element {
 export function Revoked(): JSX.Element {
   return (
     <ul className={styles.credentialsList}>
-      <CredentialCard expand credential={credentialsMock[2]} />
+      <CredentialCard expand sporranCredential={credentialsMock[2]} />
     </ul>
   );
 }

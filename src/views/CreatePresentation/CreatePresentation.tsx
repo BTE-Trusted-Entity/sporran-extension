@@ -27,19 +27,24 @@ export function CreatePresentation({ identity }: Props): JSX.Element | null {
   const rootHash = params.hash;
 
   const did = getIdentityDid(identity);
-  const credentials = useIdentityCredentials(did);
-  const credential = find(credentials, { request: { rootHash } });
+  const sporranCredentials = useIdentityCredentials(did);
+  const sporranCredential = find(sporranCredentials, {
+    credential: { rootHash },
+  });
   const [checked, setChecked] = useState<string[]>([]);
 
-  if (!credentials) {
+  if (!sporranCredentials) {
     return null; // storage data pending
   }
 
-  if (!credential) {
+  if (!sporranCredential) {
     throw new Error(`Credential not found: ${rootHash}`);
   }
 
-  const { name, url } = getUnsignedPresentationDownload(credential, checked);
+  const { name, url } = getUnsignedPresentationDownload(
+    sporranCredential,
+    checked,
+  );
 
   return (
     <section className={styles.container}>
@@ -47,7 +52,10 @@ export function CreatePresentation({ identity }: Props): JSX.Element | null {
       <p className={styles.subline}>{t('view_CreatePresentation_subline')}</p>
 
       <div className={styles.credentialContainer}>
-        <PresentCredentialCard credential={credential} onSelect={setChecked} />
+        <PresentCredentialCard
+          sporranCredential={sporranCredential}
+          onSelect={setChecked}
+        />
       </div>
 
       <p className={styles.buttonsLine}>

@@ -35,7 +35,7 @@ export function NoCredentials(): JSX.Element {
 
 const mockSingleCredential: SharedCredential[] = [
   {
-    credential: credentialsMock[0],
+    sporranCredential: credentialsMock[0],
     sharedContents: ['Email'],
   },
 ];
@@ -53,15 +53,15 @@ export function SingleCredential(): JSX.Element {
 
 const mockMultipleCredentials: SharedCredential[] = [
   {
-    credential: credentialsMock[0],
+    sporranCredential: credentialsMock[0],
     sharedContents: ['Email'],
   },
   {
-    credential: credentialsMock[5],
+    sporranCredential: credentialsMock[5],
     sharedContents: [],
   },
   {
-    credential: credentialsMock[8],
+    sporranCredential: credentialsMock[8],
     sharedContents: [],
   },
 ];

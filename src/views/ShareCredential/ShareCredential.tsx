@@ -13,7 +13,7 @@ import { usePopupData } from '../../utilities/popups/usePopupData';
 import { ShareInput } from '../../channels/shareChannel/types';
 
 export interface Selected {
-  credential: SporranCredential;
+  sporranCredential: SporranCredential;
   identity: Identity;
   sharedContents: string[];
 }

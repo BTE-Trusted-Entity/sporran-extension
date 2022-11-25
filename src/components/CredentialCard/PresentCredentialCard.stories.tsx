@@ -16,7 +16,7 @@ export function Template(): JSX.Element {
   return (
     <div className={styles.credentialsList}>
       <PresentCredentialCard
-        credential={credentialsMock[0]}
+        sporranCredential={credentialsMock[0]}
         onSelect={action('onSelect')}
       />
     </div>
