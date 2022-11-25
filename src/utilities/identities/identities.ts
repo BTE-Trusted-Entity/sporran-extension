@@ -169,10 +169,10 @@ async function fixLightDidIssues(seed: Uint8Array) {
 
     // If this light DID was created and stored using SDK@0.24.0 then its keys are serialized using base64,
     // resulting in an invalid URI, so resolving would throw an exception.
-    const details = await getDidDocument(identity.did);
+    const document = await getDidDocument(identity.did);
 
     // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
-    const encryptionKey = getDidEncryptionKey(details);
+    const encryptionKey = getDidEncryptionKey(document);
 
     // This public key also means the DID needs to be regenerated
     const troubleKey =

@@ -1,7 +1,7 @@
 import { ConfigService } from '@kiltprotocol/config';
 import BN from 'bn.js';
 
-import { makeFakeIdentityCrypto } from '../makeFakeIdentityCrypto/makeFakeIdentityCrypto';
+import { makeFakeIdentityCrypto } from '../../utilities/makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
 interface FeeInput {
   recipient: string;

@@ -1,5 +1,3 @@
-import * as Did from '@kiltprotocol/did';
-
 import { identitiesMock, render } from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';
@@ -17,9 +15,6 @@ jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as unknown as ReturnType<typeof parseDidUri>);
-
-jest.mock('@kiltprotocol/did', () => ({ isSameSubject: jest.fn() }));
-jest.mocked(Did.isSameSubject).mockReturnValue(true);
 
 const identity =
   identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];

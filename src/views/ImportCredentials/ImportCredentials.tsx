@@ -71,7 +71,7 @@ export function ImportCredentials(): JSX.Element | null {
               throw new Error('invalid');
             }
             try {
-              SDKCredential.verifyDataIntegrity(request);
+              await SDKCredential.verifyCredential(request);
             } catch {
               throw new Error('invalid');
             }

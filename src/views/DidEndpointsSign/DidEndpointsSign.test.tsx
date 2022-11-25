@@ -1,5 +1,4 @@
 import { DidServiceEndpoint } from '@kiltprotocol/types';
-import * as Did from '@kiltprotocol/did';
 import { BalanceUtils } from '@kiltprotocol/core';
 
 import { identitiesMock, render } from '../../testing/testing';
@@ -9,11 +8,6 @@ import '../../components/useCopyButton/useCopyButton.mock';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 import { DidEndpointsSign } from './DidEndpointsSign';
-
-jest.mock('@kiltprotocol/did', () => ({ resourceIdToChain: jest.fn() }));
-jest
-  .mocked(Did.resourceIdToChain)
-  .mockImplementation((input) => input.substring(1));
 
 const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];

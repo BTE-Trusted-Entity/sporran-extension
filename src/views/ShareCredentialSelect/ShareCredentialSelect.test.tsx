@@ -1,5 +1,3 @@
-import * as Did from '@kiltprotocol/did';
-
 import { render } from '../../testing/testing';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
@@ -18,9 +16,6 @@ jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as unknown as ReturnType<typeof parseDidUri>);
-
-jest.mock('@kiltprotocol/did', () => ({ isSameSubject: jest.fn() }));
-jest.mocked(Did.isSameSubject).mockReturnValue(true);
 
 describe('ShareCredentialSelect', () => {
   it('should render', async () => {

@@ -2,7 +2,6 @@ import { MemoryRouter, Route } from 'react-router-dom';
 import { DidDocument, DidServiceEndpoint } from '@kiltprotocol/types';
 import { ConfigService } from '@kiltprotocol/config';
 import { connect } from '@kiltprotocol/core';
-import * as Did from '@kiltprotocol/did';
 
 import { identitiesMock, render, act } from '../../testing/testing';
 import { getFullDidDocument } from '../../utilities/did/did';
@@ -39,14 +38,9 @@ const api = {
 } as Awaited<ReturnType<typeof connect>>;
 ConfigService.set({ api });
 
-jest.mock('@kiltprotocol/did', () => ({ resourceIdToChain: jest.fn() }));
-jest
-  .mocked(Did.resourceIdToChain)
-  .mockImplementation((input) => input.substring(1));
-
-const detailsPromise = Promise.resolve({ service } as DidDocument);
+const documentPromise = Promise.resolve({ service } as DidDocument);
 jest.mock('../../utilities/did/did');
-jest.mocked(getFullDidDocument).mockReturnValue(detailsPromise);
+jest.mocked(getFullDidDocument).mockReturnValue(documentPromise);
 
 describe('DidEndpointsForm', () => {
   it('should match the snapshot', async () => {
@@ -69,7 +63,7 @@ describe('DidEndpointsForm', () => {
     );
 
     await act(async () => {
-      await detailsPromise;
+      await documentPromise;
     });
     expect(container).toMatchSnapshot();
   });

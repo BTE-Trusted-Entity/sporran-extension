@@ -11,12 +11,12 @@ import {
   runWithJSDOMErrorsDisabled,
   screen,
 } from '../../testing/testing';
-import { getFee } from '../../utilities/getFee/getFee';
 import '../../components/usePasteButton/usePasteButton.mock';
 
+import { getFee } from './getFee';
 import { SendToken } from './SendToken';
 
-jest.mock('../../utilities/getFee/getFee', () => ({ getFee: jest.fn() }));
+jest.mock('./getFee', () => ({ getFee: jest.fn() }));
 const feePromise = Promise.resolve(BalanceUtils.toFemtoKilt(0.001));
 jest.mocked(getFee).mockReturnValue(feePromise);
 
@@ -31,7 +31,7 @@ const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 describe('SendToken', () => {
   beforeEach(() => {
-    jest.mocked(DataUtils.verifyKiltAddress).mockReset();
+    jest.mocked(DataUtils.isKiltAddress).mockReset();
     Object.defineProperty(window.navigator, 'onLine', {
       value: true,
       writable: true,
@@ -195,9 +195,7 @@ describe('SendToken', () => {
   });
 
   it('should report an invalid recipient', async () => {
-    jest.mocked(DataUtils.verifyKiltAddress).mockImplementation(() => {
-      throw new Error();
-    });
+    jest.mocked(DataUtils.isKiltAddress).mockReturnValue(false);
 
     render(<SendToken identity={identity} onSuccess={jest.fn()} />);
 

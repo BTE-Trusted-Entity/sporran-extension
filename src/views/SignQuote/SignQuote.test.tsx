@@ -1,6 +1,4 @@
-import BN from 'bn.js';
-import { BalanceUtils, CType } from '@kiltprotocol/core';
-import * as Did from '@kiltprotocol/did';
+import { CType } from '@kiltprotocol/core';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
 import { mockTerms } from '../../utilities/mockTerms/mockTerms';
@@ -13,17 +11,7 @@ import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDelet
 
 import { SignQuote } from './SignQuote';
 
-jest.mock('@kiltprotocol/core', () => ({
-  BalanceUtils: { toFemtoKilt: jest.fn() },
-  CType: { hashToId: jest.fn() },
-}));
-jest
-  .mocked(BalanceUtils.toFemtoKilt)
-  .mockReturnValue(new BN('233000000000000000'));
 jest.mocked(CType.hashToId).mockImplementation((id) => `kilt:ctype:${id}`);
-
-jest.mock('@kiltprotocol/did', () => ({ isSameSubject: jest.fn() }));
-jest.mocked(Did.isSameSubject).mockReturnValue(true);
 
 jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({

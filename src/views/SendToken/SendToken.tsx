@@ -18,7 +18,6 @@ import { ConfigService } from '@kiltprotocol/config';
 
 import * as styles from './SendToken.module.css';
 
-import { getFee } from '../../utilities/getFee/getFee';
 import { Identity } from '../../utilities/identities/types';
 import { isNew, useIdentities } from '../../utilities/identities/identities';
 import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
@@ -30,6 +29,8 @@ import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
 import { useOnline } from '../../utilities/useOnline/useOnline';
 import { useConfiguration } from '../../configuration/useConfiguration';
+
+import { getFee } from './getFee';
 
 const noError = null;
 const nonNumberCharacters = /[^0-9,.\u066C\u2019\u202F]/g;
@@ -147,15 +148,6 @@ function getAmountError(
   ].filter(Boolean)[0];
 }
 
-function isValidAddress(address: string): boolean {
-  try {
-    DataUtils.verifyKiltAddress(address);
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
-
 function getAddressError(address: string, identity: Identity): string | null {
   const t = browser.i18n.getMessage;
 
@@ -163,7 +155,7 @@ function getAddressError(address: string, identity: Identity): string | null {
     return t('view_SendToken_recipient_same');
   }
 
-  if (!isValidAddress(address)) {
+  if (!DataUtils.isKiltAddress(address)) {
     return t('view_SendToken_recipient_invalid');
   }
 
@@ -213,7 +205,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const recipientError = recipient && getAddressError(recipient, identity);
 
   const recipientBalance = useAddressBalance(
-    isValidAddress(recipient) ? recipient : '',
+    DataUtils.isKiltAddress(recipient) ? recipient : '',
   );
   const recipientBalanceZero = recipientBalance?.total?.isZero?.();
 
@@ -282,7 +274,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       if (isNew(identity)) {
         return;
       }
-      if (recipient && !isValidAddress(recipient)) {
+      if (recipient && !DataUtils.isKiltAddress(recipient)) {
         return;
       }
       const realFee = await getFee({

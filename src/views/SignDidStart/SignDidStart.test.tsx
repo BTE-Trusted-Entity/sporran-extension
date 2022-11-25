@@ -9,8 +9,6 @@ import { paths } from '../paths';
 
 import { SignDidStart } from './SignDidStart';
 
-jest.mock('@kiltprotocol/did', () => ({ isSameSubject: jest.fn() }));
-
 jest.mock('../../utilities/did/did');
 
 jest.mocked(parseDidUri).mockReturnValue({
@@ -27,7 +25,6 @@ const input: SignDidOriginInput = {
 describe('SignDidStart', () => {
   it('should render full DID with credentials', () => {
     mockIsFullDid(true);
-    jest.mocked(Did.isSameSubject).mockReturnValue(true);
 
     const { container } = render(
       <PopupTestProvider path={paths.popup.signDid.start} data={input}>

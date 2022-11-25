@@ -1,5 +1,4 @@
 import { GenericExtrinsic } from '@polkadot/types';
-import * as Did from '@kiltprotocol/did';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
 import '../../components/useCopyButton/useCopyButton.mock';
@@ -23,11 +22,6 @@ const input: SignDidExtrinsicOriginInput = {
   extrinsic: '0x1c0426000c666f6f',
   signer: '4tMMYZHsFfqzfCsgCPLJSBmomBv2d6cBEYzHKMGVKz2VjACR',
 };
-
-jest.mock('@kiltprotocol/did', () => ({ resourceIdToChain: jest.fn() }));
-jest
-  .mocked(Did.resourceIdToChain)
-  .mockImplementation((input) => input.substring(1));
 
 jest.mock('./didExtrinsic');
 

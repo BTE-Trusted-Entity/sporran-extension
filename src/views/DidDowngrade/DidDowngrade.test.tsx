@@ -1,5 +1,4 @@
 import { BalanceUtils } from '@kiltprotocol/core';
-import * as Did from '@kiltprotocol/did';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
 
@@ -15,9 +14,6 @@ import {
 } from '../../utilities/getDeposit/getDeposit';
 
 import { DidDowngrade } from './DidDowngrade';
-
-jest.mock('@kiltprotocol/did', () => ({ isSameSubject: jest.fn() }));
-jest.mocked(Did.isSameSubject).mockReturnValue(true);
 
 jest.mock('../../utilities/didDowngrade/didDowngrade');
 jest.mocked(getFee).mockResolvedValue(BalanceUtils.toFemtoKilt(0.01));

@@ -1,11 +1,5 @@
 import { ConfigService } from '@kiltprotocol/config';
-import {
-  getFullDidUri,
-  linkedInfoFromChain,
-  parse,
-  parseDocumentFromLightDid,
-  toChain,
-} from '@kiltprotocol/did';
+import * as Did from '@kiltprotocol/did';
 import { DidDocument, DidEncryptionKey, DidUri } from '@kiltprotocol/types';
 import { Crypto } from '@kiltprotocol/utils';
 
@@ -16,12 +10,13 @@ export function isFullDid(did: DidUri | undefined): boolean {
     // could be a legacy identity without DID
     return false;
   }
-  return parse(did).type === 'full';
+  return Did.parse(did).type === 'full';
 }
 
 export async function getFullDidDocument(did: DidUri): Promise<DidDocument> {
   const api = ConfigService.get('api');
-  return linkedInfoFromChain(await api.call.did.query(toChain(did))).document;
+  return Did.linkedInfoFromChain(await api.call.did.query(Did.toChain(did)))
+    .document;
 }
 
 export function useFullDidDocument(did: DidUri): DidDocument | undefined {
@@ -31,7 +26,7 @@ export function useFullDidDocument(did: DidUri): DidDocument | undefined {
 export async function getDidDocument(did: DidUri): Promise<DidDocument> {
   return isFullDid(did)
     ? await getFullDidDocument(did)
-    : parseDocumentFromLightDid(did);
+    : Did.parseDocumentFromLightDid(did);
 }
 
 export function getDidEncryptionKey({
@@ -43,11 +38,11 @@ export function getDidEncryptionKey({
   return keyAgreement[0];
 }
 
-export function parseDidUri(did: DidUri): ReturnType<typeof parse> & {
+export function parseDidUri(did: DidUri): ReturnType<typeof Did.parse> & {
   fullDid: DidUri;
 } {
-  const parsed = parse(did);
-  const fullDid = parsed.type === 'full' ? did : getFullDidUri(did);
+  const parsed = Did.parse(did);
+  const fullDid = parsed.type === 'full' ? did : Did.getFullDidUri(did);
 
   return {
     ...parsed,
