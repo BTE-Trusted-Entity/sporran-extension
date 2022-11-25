@@ -6,6 +6,7 @@ import { isSameSubject } from '@kiltprotocol/did';
 import {
   SporranCredential,
   saveCredential,
+  updateLegacyCredential,
 } from '../../utilities/credentials/credentials';
 import { exceptionToError } from '../../utilities/exceptionToError/exceptionToError';
 import { useIdentities } from '../../utilities/identities/identities';
@@ -65,7 +66,7 @@ export function ImportCredentials(): JSX.Element | null {
               status = 'pending',
               cTypeTitle,
               attester,
-            } = sporranCredential;
+            } = updateLegacyCredential(sporranCredential);
 
             if (!cTypeTitle || !attester) {
               throw new Error('invalid');

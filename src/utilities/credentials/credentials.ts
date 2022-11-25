@@ -1,6 +1,14 @@
 import { HexString } from '@polkadot/util/types';
 import { useContext, useEffect, useMemo } from 'react';
-import { cloneDeep, omit, pick, pull, reject, without } from 'lodash-es';
+import {
+  cloneDeep,
+  isEqual,
+  omit,
+  pick,
+  pull,
+  reject,
+  without,
+} from 'lodash-es';
 import { DidUri, ICredential } from '@kiltprotocol/types';
 import { ConfigService } from '@kiltprotocol/config';
 import { Attestation, Credential } from '@kiltprotocol/core';
@@ -76,25 +84,28 @@ interface LegacyICredential extends ICredential {
   claimerSignature?: unknown;
 }
 
-async function updateLegacy(keys: string[]) {
+export function updateLegacyCredential(sporranCredential: SporranCredential) {
+  const modernCredential = !isLegacySporranCredential(sporranCredential)
+    ? sporranCredential
+    : {
+        ...omit(sporranCredential, 'request'),
+        credential: sporranCredential.request,
+      };
+
+  const credential = modernCredential.credential as LegacyICredential;
+  if ('claimerSignature' in credential) {
+    delete credential.claimerSignature;
+  }
+
+  return modernCredential;
+}
+
+async function updateLegacyStorage(keys: string[]) {
   const result: Record<string, SporranCredential> = await storage.get(keys);
 
   for (const [key, sporranCredential] of Object.entries(result)) {
-    let updateStorage = isLegacySporranCredential(sporranCredential);
-
-    const modernCredential = !isLegacySporranCredential(sporranCredential)
-      ? sporranCredential
-      : {
-          ...omit(sporranCredential, 'request'),
-          credential: sporranCredential.request,
-        };
-
-    const credential = modernCredential.credential as LegacyICredential;
-    if ('claimerSignature' in credential) {
-      delete credential.claimerSignature;
-      updateStorage = true;
-    }
-
+    const modernCredential = updateLegacyCredential(sporranCredential);
+    const updateStorage = !isEqual(sporranCredential, modernCredential);
     if (updateStorage) {
       await storage.set({ [key]: modernCredential });
     }
@@ -104,7 +115,7 @@ async function updateLegacy(keys: string[]) {
 export async function getCredentials(
   keys: string[],
 ): Promise<SporranCredential[]> {
-  await updateLegacy(keys);
+  await updateLegacyStorage(keys);
 
   const result = await storage.get(keys);
   const credentials = pick(result, keys);
