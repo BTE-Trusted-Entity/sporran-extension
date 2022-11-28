@@ -31,7 +31,7 @@ const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 describe('SendToken', () => {
   beforeEach(() => {
-    jest.mocked(DataUtils.isKiltAddress).mockReset();
+    jest.mocked(DataUtils.isKiltAddress).mockReturnValue(true);
     Object.defineProperty(window.navigator, 'onLine', {
       value: true,
       writable: true,
