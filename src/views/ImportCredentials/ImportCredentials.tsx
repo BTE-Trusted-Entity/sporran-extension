@@ -1,6 +1,6 @@
 import { MouseEvent, useCallback, useMemo, useState } from 'react';
 import { filter, reject, sortBy } from 'lodash-es';
-import { Credential as SDKCredential } from '@kiltprotocol/core';
+import { Credential } from '@kiltprotocol/core';
 import { isSameSubject } from '@kiltprotocol/did';
 
 import {
@@ -72,7 +72,7 @@ export function ImportCredentials(): JSX.Element | null {
               throw new Error('invalid');
             }
             try {
-              await SDKCredential.verifyCredential(credential);
+              await Credential.verifyCredential(credential);
             } catch {
               throw new Error('invalid');
             }
