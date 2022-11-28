@@ -20,53 +20,36 @@ interface DidTransaction {
 async function getSignedTransaction(
   keypair: KiltKeyringPair,
   sign: SignExtrinsicCallback,
-  fullDid: DidUri,
+  did: DidUri,
 ): Promise<DidTransaction> {
   const api = ConfigService.get('api');
-  const { address } = keypair;
+  const submitter = keypair.address;
 
-  const chainDid = Did.toChain(fullDid);
+  const chainDid = Did.toChain(did);
   const { web3Name, document } = Did.linkedInfoFromChain(
     await api.call.did.query(chainDid),
   );
-
-  const didRemoveExtrinsic = api.tx.did.delete(document.service?.length ?? 0);
+  const servicesCount = document.service?.length ?? 0;
 
   let authorized: SubmittableExtrinsic;
 
   if (web3Name) {
-    const w3nRemoveExtrinsic = api.tx.web3Names.releaseByOwner();
-
-    const txCounter = (await api.query.did.did(chainDid))
-      .unwrap()
-      .lastTxCounter.toBn();
-
-    const w3nRemoveAuthorized = await Did.authorizeTx(
-      document.uri,
-      w3nRemoveExtrinsic,
+    authorized = await Did.authorizeBatch({
+      batchFunction: api.tx.utility.batchAll,
+      did,
+      extrinsics: [
+        api.tx.web3Names.releaseByOwner(),
+        api.tx.did.delete(servicesCount),
+      ],
       sign,
-      address,
-      { txCounter },
-    );
-    txCounter.iaddn(1);
-    const didRemoveAuthorized = await Did.authorizeTx(
-      document.uri,
-      didRemoveExtrinsic,
-      sign,
-      address,
-      { txCounter },
-    );
-
-    authorized = api.tx.utility.batchAll([
-      w3nRemoveAuthorized,
-      didRemoveAuthorized,
-    ]);
+      submitter,
+    });
   } else {
     authorized = await Did.authorizeTx(
       document.uri,
-      didRemoveExtrinsic,
+      api.tx.did.delete(servicesCount),
       sign,
-      address,
+      submitter,
     );
   }
 
