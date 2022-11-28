@@ -1,8 +1,14 @@
 import { FormEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
-import { DidServiceEndpoint, DidUri } from '@kiltprotocol/types';
-import { Chain } from '@kiltprotocol/did';
+import {
+  DidServiceEndpoint,
+  DidUri,
+  KiltKeyringPair,
+  SignExtrinsicCallback,
+} from '@kiltprotocol/types';
+import { ConfigService } from '@kiltprotocol/config';
+import * as Did from '@kiltprotocol/did';
 
 import * as styles from './DidEndpointsSign.module.css';
 
@@ -17,53 +23,48 @@ import {
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import {
+  getIdentityCryptoFromSeed,
   getIdentityDid,
-  getKeypairBySeed,
-  getKeystoreFromSeed,
 } from '../../utilities/identities/identities';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { getFullDidDetails } from '../../utilities/did/did';
+import { getFullDidDocument } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
+import { makeFakeIdentityCrypto } from '../../utilities/makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
 type ActionType = 'add' | 'remove';
 
 async function getDidAuthorizedExtrinsic(
-  seed: Uint8Array,
+  keypair: KiltKeyringPair,
+  sign: SignExtrinsicCallback,
   did: DidUri,
-  endpoint: DidServiceEndpoint,
+  service: DidServiceEndpoint,
   type: ActionType,
 ) {
-  const keystore = await getKeystoreFromSeed(seed);
-  const keypair = getKeypairBySeed(seed);
-  const fullDidDetails = await getFullDidDetails(did);
+  const document = await getFullDidDocument(did);
 
-  // getRemoveEndpointExtrinsic expects just the fragment part
+  const api = ConfigService.get('api');
   const draft =
     type === 'add'
-      ? await Chain.getAddEndpointExtrinsic(endpoint)
-      : await Chain.getRemoveEndpointExtrinsic(endpoint.id);
+      ? api.tx.did.addServiceEndpoint(Did.serviceToChain(service))
+      : api.tx.did.removeServiceEndpoint(Did.resourceIdToChain(service.id));
 
-  return await fullDidDetails.authorizeExtrinsic(
-    draft,
-    keystore,
-    keypair.address,
-  );
+  return Did.authorizeTx(document.uri, draft, sign, keypair.address);
 }
 
 async function getFee(
   did: DidUri,
-  endpoint: DidServiceEndpoint,
+  service: DidServiceEndpoint,
   type: ActionType,
 ) {
-  const fakeSeed = new Uint8Array(32);
-  const keypair = getKeypairBySeed(fakeSeed);
+  const { keypair, sign } = makeFakeIdentityCrypto();
 
   const authorized = await getDidAuthorizedExtrinsic(
-    fakeSeed,
+    keypair,
+    sign,
     did,
-    endpoint,
+    service,
     type,
   );
 
@@ -95,9 +96,11 @@ export function DidEndpointsSign({
       event.preventDefault();
 
       const { keypair, seed } = await passwordField.get(event);
+      const { sign } = await getIdentityCryptoFromSeed(seed);
 
       const authorized = await getDidAuthorizedExtrinsic(
-        seed,
+        keypair,
+        sign,
         did,
         endpoint,
         type,
@@ -105,7 +108,7 @@ export function DidEndpointsSign({
 
       await submit(keypair, authorized);
     },
-    [endpoint, did, passwordField, submit, type],
+    [passwordField, type, endpoint, did, submit],
   );
 
   const modalMessagesAdd = {
@@ -148,17 +151,19 @@ export function DidEndpointsSign({
           <dt className={styles.detailName}>
             {t('view_DidEndpointsSign_url')}
           </dt>
-          <dd className={styles.detailValue}>{endpoint.urls[0]}</dd>
+          <dd className={styles.detailValue}>{endpoint.serviceEndpoint[0]}</dd>
         </div>
         <div className={styles.detail}>
           <dt className={styles.detailName}>
             {t('view_DidEndpointsSign_type')}
           </dt>
-          <dd className={styles.detailValue}>{endpoint.types[0]}</dd>
+          <dd className={styles.detailValue}>{endpoint.type[0]}</dd>
         </div>
         <div className={styles.detail}>
           <dt className={styles.detailName}>{t('view_DidEndpointsSign_id')}</dt>
-          <dd className={styles.detailValue}>{endpoint.id}</dd>
+          <dd className={styles.detailValue}>
+            {Did.resourceIdToChain(endpoint.id)}
+          </dd>
         </div>
       </dl>
 

@@ -1,5 +1,5 @@
 import { BalanceUtils } from '@kiltprotocol/core';
-import { FullDidDetails } from '@kiltprotocol/did';
+import { DidDocument } from '@kiltprotocol/types';
 
 import { MemoryRouter, Route } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedP
 import '../../components/useCopyButton/useCopyButton.mock';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
-import { useFullDidDetails } from '../../utilities/did/did';
+import { useFullDidDocument } from '../../utilities/did/did';
 
 import { generatePath, paths } from '../paths';
 
@@ -23,7 +23,7 @@ jest
   .mockReturnValue({ amount: BalanceUtils.toFemtoKilt(2) });
 
 jest.mock('../../utilities/did/did');
-jest.mocked(useFullDidDetails).mockReturnValue({} as FullDidDetails);
+jest.mocked(useFullDidDocument).mockReturnValue({} as DidDocument);
 
 const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];

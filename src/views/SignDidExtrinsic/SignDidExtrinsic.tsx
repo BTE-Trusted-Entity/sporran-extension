@@ -1,6 +1,7 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { BaseDidKey, DidServiceEndpoint } from '@kiltprotocol/types';
+import { DidResourceUri, DidServiceEndpoint } from '@kiltprotocol/types';
+import * as Did from '@kiltprotocol/did';
 import { GenericExtrinsic } from '@polkadot/types';
 
 import * as styles from './SignDidExtrinsic.module.css';
@@ -8,7 +9,7 @@ import * as styles from './SignDidExtrinsic.module.css';
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
-import { getFullDidDetails, isFullDid } from '../../utilities/did/did';
+import { getFullDidDocument, isFullDid } from '../../utilities/did/did';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import {
   PasswordField,
@@ -23,10 +24,10 @@ import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 import {
-  getExtrinsicValues,
   getAddServiceEndpoint,
-  getRemoveServiceEndpoint,
   getExtrinsic,
+  getExtrinsicValues,
+  getRemoveServiceEndpoint,
 } from './didExtrinsic';
 
 function Endpoint({ endpoint }: { endpoint: DidServiceEndpoint }): JSX.Element {
@@ -34,21 +35,23 @@ function Endpoint({ endpoint }: { endpoint: DidServiceEndpoint }): JSX.Element {
 
   return (
     <dl className={styles.endpointDetails}>
-      {endpoint.urls && endpoint.urls.length > 0 && (
+      {endpoint.serviceEndpoint && endpoint.serviceEndpoint.length > 0 && (
         <div className={styles.fullWidthDetail}>
           <dt className={styles.endpointName}>
             {t('view_SignDidExtrinsic_endpoint_url')}
           </dt>
-          <dd className={styles.endpointValue}>{endpoint.urls[0]}</dd>
+          <dd className={styles.endpointValue}>
+            {endpoint.serviceEndpoint[0]}
+          </dd>
         </div>
       )}
 
-      {endpoint.types && endpoint.types.length > 0 && (
+      {endpoint.type && endpoint.type.length > 0 && (
         <div className={styles.endpointDetail}>
           <dt className={styles.endpointName}>
             {t('view_SignDidExtrinsic_endpoint_type')}
           </dt>
-          <dd className={styles.endpointValue}>{endpoint.types[0]}</dd>
+          <dd className={styles.endpointValue}>{endpoint.type[0]}</dd>
         </div>
       )}
 
@@ -56,11 +59,14 @@ function Endpoint({ endpoint }: { endpoint: DidServiceEndpoint }): JSX.Element {
         <dt className={styles.endpointName}>
           {t('view_SignDidExtrinsic_endpoint_id')}
         </dt>
-        <dd className={styles.endpointValue}>{endpoint.id}</dd>
+        <dd className={styles.endpointValue}>
+          {Did.resourceIdToChain(endpoint.id)}
+        </dd>
       </div>
     </dl>
   );
 }
+
 function AddServiceEndpointExtrinsic({
   identity,
   extrinsic,
@@ -229,28 +235,24 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
         throw new Error('This DID call is forbidden');
       }
 
-      const fullDidDetails = await getFullDidDetails(did);
+      const fullDidDocument = await getFullDidDocument(did);
 
       const { seed } = await passwordField.get(event);
-      const { keystore } = await getIdentityCryptoFromSeed(seed);
+      const { sign } = await getIdentityCryptoFromSeed(seed);
 
-      let didKey: BaseDidKey | undefined;
-      const authorized = await fullDidDetails.authorizeExtrinsic(
-        extrinsic,
-        keystore,
-        signer,
-        {
-          async keySelection([key]) {
-            didKey = key;
-            return key;
-          },
-        },
-      );
-
+      const keyRelationship = Did.getKeyRelationshipForTx(extrinsic);
+      const didKey = keyRelationship && fullDidDocument[keyRelationship]?.[0];
       if (!didKey) {
         throw new Error('No extrinsic signing key stored');
       }
-      const didKeyUri = fullDidDetails.assembleKeyUri(didKey.id);
+      const didKeyUri = `${fullDidDocument.uri}${didKey.id}` as DidResourceUri;
+
+      const authorized = await Did.authorizeTx(
+        fullDidDocument.uri,
+        extrinsic,
+        sign,
+        signer,
+      );
       const signed = authorized.toHex();
 
       await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });

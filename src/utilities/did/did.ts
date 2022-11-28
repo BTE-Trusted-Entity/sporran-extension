@@ -1,10 +1,6 @@
-import {
-  DidDetails,
-  Utils,
-  FullDidDetails,
-  LightDidDetails,
-} from '@kiltprotocol/did';
-import { DidEncryptionKey, DidUri } from '@kiltprotocol/types';
+import { ConfigService } from '@kiltprotocol/config';
+import * as Did from '@kiltprotocol/did';
+import { DidDocument, DidEncryptionKey, DidUri } from '@kiltprotocol/types';
 import { Crypto } from '@kiltprotocol/utils';
 
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
@@ -14,61 +10,44 @@ export function isFullDid(did: DidUri | undefined): boolean {
     // could be a legacy identity without DID
     return false;
   }
-  return Utils.parseDidUri(did).type === 'full';
+  return Did.parse(did).type === 'full';
 }
 
-export async function getFullDidDetails(did: DidUri): Promise<FullDidDetails> {
-  const details = await FullDidDetails.fromChainInfo(did);
-  if (!details) {
-    throw new Error(`Cannot resolve DID ${did}`);
-  }
-
-  return details;
+export async function getFullDidDocument(did: DidUri): Promise<DidDocument> {
+  const api = ConfigService.get('api');
+  return Did.linkedInfoFromChain(await api.call.did.query(Did.toChain(did)))
+    .document;
 }
 
-export function useFullDidDetails(did: DidUri): FullDidDetails | undefined {
-  return useAsyncValue(getFullDidDetails, [did]);
+export function useFullDidDocument(did: DidUri): DidDocument | undefined {
+  return useAsyncValue(getFullDidDocument, [did]);
 }
 
-export async function getDidDetails(did: DidUri): Promise<DidDetails> {
+export async function getDidDocument(did: DidUri): Promise<DidDocument> {
   return isFullDid(did)
-    ? await getFullDidDetails(did)
-    : LightDidDetails.fromUri(did);
+    ? await getFullDidDocument(did)
+    : Did.parseDocumentFromLightDid(did);
 }
 
-export function getDidEncryptionKey(details: DidDetails): DidEncryptionKey {
-  const { encryptionKey } = details;
-  if (!encryptionKey) {
+export function getDidEncryptionKey({
+  keyAgreement,
+}: DidDocument): DidEncryptionKey {
+  if (!keyAgreement || !keyAgreement[0]) {
     throw new Error('encryptionKey is not defined somehow');
   }
-  return encryptionKey;
+  return keyAgreement[0];
 }
 
-export function parseDidUri(did: DidUri): ReturnType<
-  typeof Utils.parseDidUri
-> & {
+export function parseDidUri(did: DidUri): ReturnType<typeof Did.parse> & {
   fullDid: DidUri;
 } {
-  const parsed = Utils.parseDidUri(did);
-  const { identifier, type } = parsed;
-  const unprefixedIdentifier = identifier.replace(/^00/, '');
-
-  const fullDid =
-    type === 'full'
-      ? did
-      : Utils.getKiltDidFromIdentifier(unprefixedIdentifier, 'full');
+  const parsed = Did.parse(did);
+  const fullDid = parsed.type === 'full' ? did : Did.getFullDidUri(did);
 
   return {
     ...parsed,
     fullDid,
   };
-}
-
-export function sameFullDid(a: DidUri, b: DidUri): boolean {
-  if (!a || !b) {
-    return false;
-  }
-  return parseDidUri(a).fullDid === parseDidUri(b).fullDid;
 }
 
 export async function needLegacyDidCrypto(
@@ -78,19 +57,18 @@ export async function needLegacyDidCrypto(
     // DID was deactivated, no action needed.
     return false;
   }
-
   if (!isFullDid(did)) {
     return false;
   }
 
   try {
-    const encryptionKey = getDidEncryptionKey(await getDidDetails(did));
+    const encryptionKey = getDidEncryptionKey(await getDidDocument(did));
     return (
       Crypto.u8aToHex(encryptionKey.publicKey) ===
       '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e'
     );
   } catch {
-    // getDidDetails might throw if the DID is not on-chain anymore (removed, another endpoint),
+    // getDidDocument might throw if the DID is not on-chain anymore (removed, another endpoint),
     // no legacy crypto needed in that case
     return false;
   }

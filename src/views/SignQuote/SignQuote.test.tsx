@@ -1,3 +1,5 @@
+import { CType } from '@kiltprotocol/core';
+
 import { identitiesMock as identities, render } from '../../testing/testing';
 import { mockTerms } from '../../utilities/mockTerms/mockTerms';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
@@ -8,6 +10,8 @@ import { paths } from '../paths';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 
 import { SignQuote } from './SignQuote';
+
+jest.mocked(CType.hashToId).mockImplementation((id) => `kilt:ctype:${id}`);
 
 jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({

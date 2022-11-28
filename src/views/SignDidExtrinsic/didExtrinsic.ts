@@ -1,10 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { ConfigService } from '@kiltprotocol/config';
+import * as Did from '@kiltprotocol/did';
+import { DidServiceEndpoint, DidUri, UriFragment } from '@kiltprotocol/types';
 
 import { GenericExtrinsic } from '@polkadot/types';
-
-import { Chain } from '@kiltprotocol/did';
-import { DidUri, DidServiceEndpoint } from '@kiltprotocol/types';
 
 import { SignDidExtrinsicOriginInput } from '../../channels/SignDidExtrinsicChannels/types';
 import {
@@ -12,13 +11,13 @@ import {
   getExtrinsicDocsEntry,
   Value,
 } from '../../utilities/extrinsicDetails/extrinsicDetails';
-import { parseDidUri, isFullDid } from '../../utilities/did/did';
+import { isFullDid } from '../../utilities/did/did';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 
 export async function getExtrinsic(
   input: SignDidExtrinsicOriginInput,
 ): Promise<GenericExtrinsic> {
-  const { api } = await BlockchainApiConnection.getConnectionOrConnect();
+  const api = ConfigService.get('api');
   return api.createType('Extrinsic', input.extrinsic);
 }
 
@@ -56,15 +55,15 @@ export function getAddServiceEndpoint(
 
   const {
     id,
-    serviceTypes: types,
-    urls,
+    serviceTypes: type,
+    urls: serviceEndpoint,
   } = human.method.args['service_endpoint'] as {
     id: string;
     serviceTypes: string[];
     urls: string[];
   };
 
-  return { id, types, urls };
+  return { id: `#${id}`, type, serviceEndpoint };
 }
 
 export async function getRemoveServiceEndpoint(
@@ -73,26 +72,29 @@ export async function getRemoveServiceEndpoint(
   error: ReturnType<typeof useBooleanState>,
 ): Promise<DidServiceEndpoint> {
   error.off();
-
   const human = extrinsic.toHuman() as {
     method: Parameters<typeof getExtrinsicCallEntry>[0];
   };
 
-  const id = human.method.args['service_id'] as string;
+  const id = `#${human.method.args['service_id']}` as UriFragment;
+  const fallback = { id, type: [], serviceEndpoint: [] };
 
   if (!did || !isFullDid(did)) {
-    return { id, types: [], urls: [] };
+    return fallback;
   }
 
-  const { identifier } = parseDidUri(did);
-
-  const result = await Chain.queryServiceEndpoint(identifier, id);
-
-  if (!result) {
+  try {
+    const api = ConfigService.get('api');
+    const { document } = await Did.linkedInfoFromChain(
+      await api.call.did.query(Did.toChain(did)),
+    );
+    const service = Did.getService(document, id);
+    if (!service) {
+      throw new Error('DID service not found');
+    }
+    return service;
+  } catch {
     error.on();
-    return { id, types: [], urls: [] };
-  } else {
-    const { types, urls } = result;
-    return { id, types, urls };
+    return fallback;
   }
 }

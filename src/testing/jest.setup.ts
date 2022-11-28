@@ -47,12 +47,7 @@ jest.mock('@polkadot/x-randomvalues', () => ({}));
 jest.mock('@polkadot/x-ws', () => ({}));
 
 jest.mock('@kiltprotocol/core', () => ({
-  Attestation: { query: jest.fn() },
-  Balance: {
-    listenToBalanceChanges: jest.fn(),
-    getTransferTx: jest.fn(),
-    getBalances: jest.fn(),
-  },
+  CType: { hashToId: jest.fn() },
   BalanceUtils: {
     toFemtoKilt(coins: number) {
       const string = coins.toString().includes('e')
@@ -69,17 +64,17 @@ jest.mock('@kiltprotocol/core', () => ({
   },
 }));
 jest.mock('@kiltprotocol/chain-helpers', () => ({
-  BlockchainApiConnection: { getConnectionOrConnect: jest.fn() },
-  BlockchainUtils: { submitSignedTx: jest.fn() },
+  Blockchain: { submitSignedTx: jest.fn() },
 }));
 jest.mock('@kiltprotocol/did', () => ({
-  Web3Names: {},
-  Utils: { parseDidUri: jest.fn() },
-  Chain: { queryDetails: jest.fn() },
+  isSameSubject: jest.fn().mockReturnValue(true),
+  resourceIdToChain: jest
+    .fn()
+    .mockImplementation((input) => input.substring(1)),
 }));
 jest.mock('@kiltprotocol/utils', () => ({
   DataUtils: {
-    validateAddress: jest.fn(),
+    isKiltAddress: jest.fn(),
   },
 }));
 

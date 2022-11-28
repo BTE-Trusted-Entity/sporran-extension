@@ -1,8 +1,8 @@
 import { HexString } from '@polkadot/util/types';
 import {
   IEncryptedMessage,
-  IIdentity,
   DidResourceUri,
+  KiltAddress,
 } from '@kiltprotocol/types';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
@@ -11,67 +11,47 @@ import { configuration } from './configuration/configuration';
 import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
 import { injectedSignDidChannel } from './channels/SignDidChannels/injectedSignDidChannel';
 import { injectedSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/injectedSignDidExtrinsicChannel';
+import { injectedCreateDidChannel } from './channels/CreateDidChannels/injectedCreateDidChannel';
 import { injectedAccessChannel } from './dApps/AccessChannels/injectedAccessChannel';
-
-interface PubSubSession {
-  listen: (
-    callback: (message: IEncryptedMessage) => Promise<void>,
-  ) => Promise<void>;
-  close: () => Promise<void>;
-  send: (message: IEncryptedMessage) => Promise<void>;
-  encryptionKeyId: DidResourceUri;
-  encryptedChallenge: string;
-  nonce: string;
-}
-
-interface InjectedWindowProvider {
-  startSession: (
-    dAppName: string,
-    dAppEncryptionKeyId: DidResourceUri,
-    challenge: string,
-  ) => Promise<PubSubSession>;
-  name: string;
-  version: string;
-  specVersion: '1.0';
-  signWithDid: (
-    plaintext: string,
-  ) => Promise<{ signature: string; didKeyUri: DidResourceUri }>;
-  signExtrinsicWithDid: (
-    extrinsic: HexString,
-    signer: IIdentity['address'],
-  ) => Promise<{ signed: HexString; didKeyUri: DidResourceUri }>;
-}
+import {
+  IEncryptedMessageV1,
+  InjectedWindowProvider,
+  PubSubSessionV1,
+  PubSubSessionV2,
+} from './interfaces';
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
 
 const unprocessedMessagesFromSporran: IEncryptedMessage[] = [];
+
+function toMessageV1(message: IEncryptedMessage): IEncryptedMessageV1 {
+  const { receiverKeyUri, senderKeyUri, ...rest } = message;
+  return {
+    ...rest,
+    receiverKeyId: receiverKeyUri,
+    senderKeyId: senderKeyUri,
+  };
+}
+
+function fromMessageV1(message: IEncryptedMessageV1): IEncryptedMessage {
+  const { receiverKeyId, senderKeyId, ...rest } = message;
+  return {
+    ...rest,
+    receiverKeyUri: receiverKeyId,
+    senderKeyUri: senderKeyId,
+  };
+}
 
 async function storeMessageFromSporran(
   message: IEncryptedMessage,
 ): Promise<void> {
   unprocessedMessagesFromSporran.push(message);
 }
-
-type CompatibleMessage = IEncryptedMessage & {
-  receiverKeyId?: IEncryptedMessage['receiverKeyUri'];
-  senderKeyId?: IEncryptedMessage['senderKeyUri'];
-};
-
-function makeBackwardsCompatible(message: CompatibleMessage) {
-  message.receiverKeyId = message.receiverKeyUri;
-  message.senderKeyId = message.senderKeyUri;
-}
-
-function makeFutureProof(message: CompatibleMessage) {
-  message.senderKeyUri = message.senderKeyUri || message.senderKeyId;
-  message.receiverKeyUri = message.receiverKeyUri || message.receiverKeyId;
-}
-
 async function startSession(
   unsafeDAppName: string,
   dAppEncryptionKeyId: DidResourceUri,
   challenge: string,
-): Promise<PubSubSession> {
+): Promise<PubSubSessionV1 | PubSubSessionV2> {
   const dAppName = unsafeDAppName.substring(0, 50);
   await injectedAccessChannel.get({ dAppName });
 
@@ -80,19 +60,65 @@ async function startSession(
 
   onMessageFromSporran = storeMessageFromSporran;
 
+  const specVersion = apiWindow.kilt.sporran?.specVersion;
+
+  // TODO: reduce code duplication
+  if (specVersion === '3.0') {
+    return {
+      /** Sporran temporary identity */
+      encryptionKeyUri: encryptionKeyId,
+
+      /** dApp will use given callback to process messages from Sporran */
+      async listen(
+        dAppProcessesMessage: (message: IEncryptedMessage) => Promise<void>,
+      ): Promise<void> {
+        onMessageFromSporran = dAppProcessesMessage;
+
+        let message;
+        while ((message = unprocessedMessagesFromSporran.pop())) {
+          await onMessageFromSporran(message);
+        }
+      },
+
+      /** dApp stops accepting messages */
+      async close(): Promise<void> {
+        onMessageFromSporran = storeMessageFromSporran;
+      },
+
+      /** dApp sends a message */
+      async send(message: IEncryptedMessage): Promise<void> {
+        const messageFromSporran = await injectedCredentialChannel.get({
+          message,
+          dAppName,
+          specVersion,
+        });
+        if (messageFromSporran) {
+          await onMessageFromSporran(messageFromSporran);
+        }
+      },
+
+      encryptedChallenge,
+      nonce,
+    };
+  }
+
+  if (specVersion !== '1.0') {
+    throw new Error(`Unknown spec version ${specVersion}`);
+  }
+
   return {
     /** Sporran temporary identity */
     encryptionKeyId,
 
     /** dApp will use given callback to process messages from Sporran */
     async listen(
-      dAppProcessesMessage: (message: IEncryptedMessage) => Promise<void>,
+      dAppProcessesMessage: (message: IEncryptedMessageV1) => Promise<void>,
     ): Promise<void> {
-      onMessageFromSporran = dAppProcessesMessage;
+      onMessageFromSporran = (message) =>
+        dAppProcessesMessage(toMessageV1(message));
 
       let message;
       while ((message = unprocessedMessagesFromSporran.pop())) {
-        makeBackwardsCompatible(message);
         await onMessageFromSporran(message);
       }
     },
@@ -103,15 +129,13 @@ async function startSession(
     },
 
     /** dApp sends a message */
-    async send(message: IEncryptedMessage): Promise<void> {
-      makeFutureProof(message);
-
+    async send(message: IEncryptedMessageV1): Promise<void> {
       const messageFromSporran = await injectedCredentialChannel.get({
-        message,
+        message: fromMessageV1(message),
         dAppName,
+        specVersion,
       });
       if (messageFromSporran) {
-        makeBackwardsCompatible(messageFromSporran);
         await onMessageFromSporran(messageFromSporran);
       }
     },
@@ -131,7 +155,7 @@ async function signWithDid(plaintext: string): Promise<{
 
 async function signExtrinsicWithDid(
   extrinsic: HexString,
-  signer: IIdentity['address'],
+  signer: KiltAddress,
 ): Promise<{
   signed: HexString;
   didKeyUri: DidResourceUri;
@@ -140,22 +164,42 @@ async function signExtrinsicWithDid(
   return injectedSignDidExtrinsicChannel.get({ extrinsic, signer, dAppName });
 }
 
+async function getSignedDidCreationExtrinsic(submitter: KiltAddress): Promise<{
+  signedExtrinsic: HexString;
+}> {
+  const dAppName = document.title.substring(0, 50);
+  return injectedCreateDidChannel.get({ dAppName, submitter });
+}
+
 const { version } = configuration;
 
 const apiWindow = window as unknown as {
-  kilt: { sporran?: Partial<InjectedWindowProvider> };
+  kilt: {
+    meta?: { versions: { credentials: string } };
+    sporran?: Partial<
+      InjectedWindowProvider<PubSubSessionV1 | PubSubSessionV2>
+    >;
+  };
 };
 
 function initialize() {
   // Only injected scripts can create variables like this, content script cannot do this
   apiWindow.kilt ||= {};
+  // detect specVersion to use
+  const specVersion = apiWindow.kilt?.meta?.versions?.credentials?.startsWith(
+    '3.',
+  )
+    ? '3.0'
+    : '1.0';
+
   apiWindow.kilt.sporran ||= {
     signWithDid,
     signExtrinsicWithDid,
+    getSignedDidCreationExtrinsic,
     startSession,
     name: 'Sporran', // manifest_name
     version,
-    specVersion: '1.0',
+    specVersion,
   };
   window.dispatchEvent(new CustomEvent('kilt-extension#initialized'));
   window.removeEventListener('kilt-dapp#initialized', initialize);

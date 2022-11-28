@@ -91,5 +91,6 @@ export const paths = {
       credentials: '/identity/:address/did/sign/credentials',
     },
     signDidExtrinsic: '/identity/:address/did/signExtrinsic',
+    createDid: '/identity/:address/did/create',
   },
 };

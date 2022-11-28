@@ -1,5 +1,4 @@
 import { DidServiceEndpoint } from '@kiltprotocol/types';
-import { Utils } from '@kiltprotocol/did';
 import { BalanceUtils } from '@kiltprotocol/core';
 
 import { identitiesMock, render } from '../../testing/testing';
@@ -14,14 +13,10 @@ const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
 const endpoint: DidServiceEndpoint = {
-  urls: ['https://sporran.org/'],
-  types: ['Some Type'],
-  id: '123456',
+  serviceEndpoint: ['https://sporran.org/'],
+  type: ['Some Type'],
+  id: '#123456',
 };
-
-jest.mocked(Utils.parseDidUri).mockReturnValue({
-  identifier: '4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
-} as ReturnType<typeof Utils.parseDidUri>);
 
 jest.mock('../../utilities/useAsyncValue/useAsyncValue');
 jest.mocked(useAsyncValue).mockReturnValue(BalanceUtils.toFemtoKilt(0.01));

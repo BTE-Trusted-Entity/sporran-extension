@@ -1,7 +1,8 @@
-import { useRef, RefObject } from 'react';
+import { RefObject, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 import { reject, sortBy } from 'lodash-es';
+import { isSameSubject } from '@kiltprotocol/did';
 
 import * as styles from './ShareCredentialSelect.module.css';
 
@@ -13,7 +14,7 @@ import {
   useCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { parseDidUri, sameFullDid } from '../../utilities/did/did';
+import { parseDidUri } from '../../utilities/did/did';
 import { ShareInput } from '../../channels/shareChannel/types';
 
 import { paths } from '../paths';
@@ -40,7 +41,8 @@ function MatchingIdentityCredentials({
 }): JSX.Element {
   const credentials = allCredentials.filter(
     (credential) =>
-      identity.did && sameFullDid(credential.request.claim.owner, identity.did),
+      identity.did &&
+      isSameSubject(credential.request.claim.owner, identity.did),
   );
 
   return (

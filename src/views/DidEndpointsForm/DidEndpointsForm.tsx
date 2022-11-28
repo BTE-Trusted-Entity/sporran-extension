@@ -3,18 +3,16 @@ import {
   RefObject,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
 import { Link, Prompt, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { stringToU8a } from '@polkadot/util';
-import { u32 } from '@polkadot/types';
-import { Codec } from '@polkadot/types/types';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { ConfigService } from '@kiltprotocol/config';
 import { last } from 'lodash-es';
+import * as Did from '@kiltprotocol/did';
 
 import * as styles from './DidEndpointsForm.module.css';
 
@@ -23,7 +21,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
-import { getFullDidDetails } from '../../utilities/did/did';
+import { getFullDidDocument } from '../../utilities/did/did';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { generatePath, paths } from '../paths';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
@@ -57,10 +55,10 @@ function DidEndpointCard({
   }, [endpoint, onRemove]);
 
   const {
-    types: [type],
-    urls: [url],
-    id,
+    type: [type],
+    serviceEndpoint: [url],
   } = endpoint;
+  const id = Did.resourceIdToChain(endpoint.id);
 
   const expanded = !startUrl || id === decodeURIComponent(params.id);
   const { address } = params;
@@ -113,10 +111,6 @@ function DidEndpointCard({
   );
 }
 
-function apiConstToNumber(value?: Codec): number | undefined {
-  return value === undefined ? undefined : (value as u32).toNumber();
-}
-
 function DidNewEndpoint({
   onAdd,
   tooMany,
@@ -136,23 +130,10 @@ function DidNewEndpoint({
 
   const dirty = useBooleanState();
 
-  const namespace = useAsyncValue(
-    async () =>
-      (await BlockchainApiConnection.getConnectionOrConnect()).api.consts.did,
-    [],
-  );
-  const maxIdLength = useMemo(
-    () => apiConstToNumber(namespace?.maxServiceIdLength),
-    [namespace],
-  );
-  const maxTypeLength = useMemo(
-    () => apiConstToNumber(namespace?.maxServiceTypeLength),
-    [namespace],
-  );
-  const maxUrlLength = useMemo(
-    () => apiConstToNumber(namespace?.maxServiceUrlLength),
-    [namespace],
-  );
+  const namespace = ConfigService.get('api').consts.did;
+  const maxIdLength = namespace.maxServiceIdLength.toNumber();
+  const maxTypeLength = namespace.maxServiceTypeLength.toNumber();
+  const maxUrlLength = namespace.maxServiceUrlLength.toNumber();
 
   const [endpointIdError, setEndpointIdError] = useState('');
   const [endpointUrlError, setEndpointUrlError] = useState('');
@@ -210,9 +191,9 @@ function DidNewEndpoint({
       await new Promise((resolve) => setTimeout(resolve, 10));
 
       onAdd({
-        id,
-        urls: [url],
-        types: [type],
+        id: `#${id}`,
+        serviceEndpoint: [url],
+        type: [type],
       });
     },
     [tooMany, maxIdLength, maxTypeLength, maxUrlLength, dirty, onAdd, t],
@@ -320,14 +301,12 @@ export function DidEndpointsForm({
   const did = getIdentityDid(identity);
 
   const endpoints = useAsyncValue(
-    async (did) => (await getFullDidDetails(did)).getEndpoints(),
+    async (did) => (await getFullDidDocument(did)).service || [],
     [did],
   );
 
-  const maxEndpoints = useAsyncValue(async () => {
-    const { api } = await BlockchainApiConnection.getConnectionOrConnect();
-    return apiConstToNumber(api.consts.did.maxNumberOfServicesPerDid);
-  }, []);
+  const api = ConfigService.get('api');
+  const maxEndpoints = api.consts.did.maxNumberOfServicesPerDid.toNumber();
 
   const lastEndpoint = last(endpoints);
   const hasTooManyEndpoints = Boolean(

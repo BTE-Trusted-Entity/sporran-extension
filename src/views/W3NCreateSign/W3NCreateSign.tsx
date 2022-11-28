@@ -2,8 +2,9 @@ import { FormEvent, useCallback, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import { FullDidDetails, Web3Names } from '@kiltprotocol/did';
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { ConfigService } from '@kiltprotocol/config';
+import { DidDocument } from '@kiltprotocol/types';
+import * as Did from '@kiltprotocol/did';
 
 import * as styles from './W3NCreateSign.module.css';
 
@@ -18,11 +19,10 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import {
+  getIdentityCryptoFromSeed,
   getIdentityDid,
-  getKeypairBySeed,
-  getKeystoreFromSeed,
 } from '../../utilities/identities/identities';
-import { useFullDidDetails } from '../../utilities/did/did';
+import { useFullDidDocument } from '../../utilities/did/did';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import {
   asKiltCoins,
@@ -33,25 +33,24 @@ import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
+import { makeFakeIdentityCrypto } from '../../utilities/makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
-async function getFee(fullDid?: FullDidDetails) {
+async function getFee(fullDid?: DidDocument) {
   if (!fullDid) {
     return undefined;
   }
 
-  const fakeSeed = new Uint8Array(32);
-  const keypair = getKeypairBySeed(fakeSeed);
+  const { address, keypair, sign } = makeFakeIdentityCrypto();
 
-  const extrinsic = await Web3Names.getClaimTx(
-    '01234567890123456789012345678901',
-  );
-  const authorized = await fullDid.authorizeExtrinsic(
+  const api = ConfigService.get('api');
+  const extrinsic = api.tx.web3Names.claim('01234567890123456789012345678901');
+  const authorized = await Did.authorizeTx(
+    fullDid.uri,
     extrinsic,
-    await getKeystoreFromSeed(fakeSeed),
-    keypair.address,
+    sign,
+    address,
   );
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  const signed = await blockchain.signTx(keypair, authorized);
+  const signed = await authorized.signAsync(keypair);
   return (await signed.paymentInfo(keypair)).partialFee;
 }
 
@@ -71,8 +70,8 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
     address,
   });
 
-  const fullDidDetails = useFullDidDetails(did);
-  const fee = useAsyncValue(getFee, [fullDidDetails]);
+  const fullDidDocument = useFullDidDocument(did);
+  const fee = useAsyncValue(getFee, [fullDidDocument]);
   const deposit = useDepositWeb3Name(did)?.amount;
 
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
@@ -81,26 +80,28 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
-      if (!fullDidDetails) {
+      if (!fullDidDocument) {
         return;
       }
 
       const { keypair, seed } = await passwordField.get(event);
+      const { sign } = await getIdentityCryptoFromSeed(seed);
 
-      const extrinsic = await Web3Names.getClaimTx(web3name);
-      const authorized = await fullDidDetails.authorizeExtrinsic(
-        extrinsic,
-        await getKeystoreFromSeed(seed),
+      const api = ConfigService.get('api');
+      const authorized = await Did.authorizeTx(
+        fullDidDocument.uri,
+        api.tx.web3Names.claim(web3name),
+        sign,
         keypair.address,
       );
       await submit(keypair, authorized);
     },
-    [fullDidDetails, passwordField, submit, web3name],
+    [fullDidDocument, passwordField, submit, web3name],
   );
 
   const portalRef = useRef<HTMLDivElement>(null);
 
-  if (!deposit || !fee || !fullDidDetails) {
+  if (!deposit || !fee || !fullDidDocument) {
     return null; // blockchain data pending
   }
 

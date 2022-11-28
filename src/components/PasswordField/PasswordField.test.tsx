@@ -1,5 +1,7 @@
 import { FormEvent } from 'react';
 import userEvent from '@testing-library/user-event';
+import { KiltKeyringPair } from '@kiltprotocol/types';
+import { Crypto } from '@kiltprotocol/utils';
 
 import {
   identitiesMock as identities,
@@ -20,6 +22,11 @@ import { exceptionToError } from '../../utilities/exceptionToError/exceptionToEr
 import { useInterval } from '../../utilities/useInterval/useInterval';
 
 import { PasswordField } from './PasswordField';
+
+jest.mock('@kiltprotocol/utils', () => ({
+  Crypto: { makeKeypairFromSeed: jest.fn() },
+}));
+jest.mocked(Crypto.makeKeypairFromSeed).mockReturnValue({} as KiltKeyringPair);
 
 jest.mock('../../channels/SavedPasswordsChannels/SavedPasswordsChannels');
 jest.mock('../../utilities/identities/identities');

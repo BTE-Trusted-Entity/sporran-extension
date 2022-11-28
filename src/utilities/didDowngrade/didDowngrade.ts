@@ -1,83 +1,86 @@
 import BN from 'bn.js';
-import { DidUri, SubmittableExtrinsic } from '@kiltprotocol/types';
 import {
-  BlockchainApiConnection,
-  BlockchainUtils,
-} from '@kiltprotocol/chain-helpers';
-import { Chain, Web3Names } from '@kiltprotocol/did';
+  DidUri,
+  KiltKeyringPair,
+  SignExtrinsicCallback,
+  SubmittableExtrinsic,
+} from '@kiltprotocol/types';
+import { Blockchain } from '@kiltprotocol/chain-helpers';
+import * as Did from '@kiltprotocol/did';
+import { ConfigService } from '@kiltprotocol/config';
 
-import {
-  getKeypairBySeed,
-  getKeystoreFromSeed,
-  Identity,
-} from '../identities/identities';
-import { getFullDidDetails, isFullDid } from '../did/did';
+import { getIdentityCryptoFromSeed, Identity } from '../identities/identities';
+import { isFullDid } from '../did/did';
+import { makeFakeIdentityCrypto } from '../makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
 }
 
 async function getSignedTransaction(
-  seed: Uint8Array,
+  keypair: KiltKeyringPair,
+  sign: SignExtrinsicCallback,
   fullDid: DidUri,
 ): Promise<DidTransaction> {
-  const fullDidDetails = await getFullDidDetails(fullDid);
+  const api = ConfigService.get('api');
+  const { address } = keypair;
 
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  const keystore = await getKeystoreFromSeed(seed);
-  const keypair = getKeypairBySeed(seed);
-
-  const didRemoveExtrinsic = await Chain.getDeleteDidExtrinsic(
-    await Chain.queryEndpointsCounts(fullDidDetails.identifier),
+  const chainDid = Did.toChain(fullDid);
+  const { web3Name, document } = Did.linkedInfoFromChain(
+    await api.call.did.query(chainDid),
   );
 
-  const web3name = await Web3Names.queryWeb3NameForDid(fullDidDetails.uri);
+  const didRemoveExtrinsic = api.tx.did.delete(document.service?.length ?? 0);
 
-  let extrinsic: SubmittableExtrinsic;
+  let authorized: SubmittableExtrinsic;
 
-  if (web3name) {
-    const w3nRemoveExtrinsic = await Web3Names.getReleaseByOwnerTx();
+  if (web3Name) {
+    const w3nRemoveExtrinsic = api.tx.web3Names.releaseByOwner();
 
-    const txCounter = await fullDidDetails.getNextNonce();
+    const txCounter = (await api.query.did.did(chainDid))
+      .unwrap()
+      .lastTxCounter.toBn();
 
-    const w3nRemoveAuthorized = await fullDidDetails.authorizeExtrinsic(
+    const w3nRemoveAuthorized = await Did.authorizeTx(
+      document.uri,
       w3nRemoveExtrinsic,
-      keystore,
-      keypair.address,
+      sign,
+      address,
       { txCounter },
     );
     txCounter.iaddn(1);
-    const didRemoveAuthorized = await fullDidDetails.authorizeExtrinsic(
+    const didRemoveAuthorized = await Did.authorizeTx(
+      document.uri,
       didRemoveExtrinsic,
-      keystore,
-      keypair.address,
+      sign,
+      address,
       { txCounter },
     );
 
-    extrinsic = blockchain.api.tx.utility.batchAll([
+    authorized = api.tx.utility.batchAll([
       w3nRemoveAuthorized,
       didRemoveAuthorized,
     ]);
   } else {
-    extrinsic = await fullDidDetails.authorizeExtrinsic(
+    authorized = await Did.authorizeTx(
+      document.uri,
       didRemoveExtrinsic,
-      keystore,
-      keypair.address,
+      sign,
+      address,
     );
   }
 
-  const tx = await blockchain.signTx(keypair, extrinsic);
+  const extrinsic = await authorized.signAsync(keypair);
 
-  return { extrinsic: tx };
+  return { extrinsic };
 }
 
 export async function getFee(did: DidUri | undefined): Promise<BN> {
   if (!did || !isFullDid(did)) {
     return new BN(0);
   }
-  const fakeSeed = new Uint8Array(32);
-  const keypair = getKeypairBySeed(fakeSeed);
-  const { extrinsic } = await getSignedTransaction(fakeSeed, did);
+  const { keypair, sign } = makeFakeIdentityCrypto();
+  const { extrinsic } = await getSignedTransaction(keypair, sign, did);
 
   return (await extrinsic.paymentInfo(keypair)).partialFee;
 }
@@ -91,7 +94,8 @@ export async function sign(
   if (!identity.did) {
     throw new Error('DID is deleted and unusable');
   }
-  const { extrinsic } = await getSignedTransaction(seed, identity.did);
+  const { keypair, sign } = await getIdentityCryptoFromSeed(seed);
+  const { extrinsic } = await getSignedTransaction(keypair, sign, identity.did);
 
   const hash = extrinsic.hash.toHex();
   currentTx[hash] = { extrinsic };
@@ -100,8 +104,8 @@ export async function sign(
 
 export async function submit(hash: string): Promise<void> {
   const { extrinsic } = currentTx[hash];
-  await BlockchainUtils.submitSignedTx(extrinsic, {
-    resolveOn: BlockchainUtils.IS_FINALIZED,
+  await Blockchain.submitSignedTx(extrinsic, {
+    resolveOn: Blockchain.IS_FINALIZED,
   });
   delete currentTx[hash];
 }

@@ -1,9 +1,7 @@
-import { Attestation } from '@kiltprotocol/core';
-
 import { identitiesMock, render } from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';
-import { parseDidUri, sameFullDid } from '../../utilities/did/did';
+import { parseDidUri } from '../../utilities/did/did';
 import { waitForDownloadInfo } from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage.mock';
 import { waitForPresentationInfo } from '../../utilities/showPresentationInfoStorage/showPresentationInfoStorage.mock';
 import {
@@ -17,8 +15,6 @@ jest.mock('../../utilities/did/did');
 jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as unknown as ReturnType<typeof parseDidUri>);
-jest.mocked(sameFullDid).mockReturnValue(true);
-jest.mocked(Attestation.query).mockResolvedValue(null);
 
 const identity =
   identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];

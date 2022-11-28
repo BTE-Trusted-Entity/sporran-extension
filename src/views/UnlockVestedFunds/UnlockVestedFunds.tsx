@@ -2,7 +2,7 @@ import { FormEvent, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { ConfigService } from '@kiltprotocol/config';
 
 import BN from 'bn.js';
 
@@ -22,20 +22,13 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-import { getKeypairBySeed } from '../../utilities/identities/identities';
-
-async function getUnsignedExtrinsic() {
-  const blockchain = await BlockchainApiConnection.getConnectionOrConnect();
-  const { api } = blockchain;
-
-  return api.tx.vesting.vest();
-}
+import { makeFakeIdentityCrypto } from '../../utilities/makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
 async function getFee(): Promise<BN> {
-  const fakeSeed = new Uint8Array(32);
-  const keypair = getKeypairBySeed(fakeSeed);
+  const { keypair } = makeFakeIdentityCrypto();
 
-  const unsigned = await getUnsignedExtrinsic();
+  const api = ConfigService.get('api');
+  const unsigned = api.tx.vesting.vest();
   return (await unsigned.paymentInfo(keypair)).partialFee;
 }
 
@@ -58,7 +51,8 @@ export function UnlockVestedFunds({ identity }: Props): JSX.Element {
 
       const { keypair } = await passwordField.get(event);
 
-      const unsigned = await getUnsignedExtrinsic();
+      const api = ConfigService.get('api');
+      const unsigned = api.tx.vesting.vest();
 
       await submit(keypair, unsigned);
     },

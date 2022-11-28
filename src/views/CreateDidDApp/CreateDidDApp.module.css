@@ -1,0 +1,45 @@
+.container {
+  composes: container from '../../components/View/View.module.css';
+}
+
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  margin-bottom: calc(31rem / 16);
+}
+
+.buttonsLine {
+  composes: buttonsLine from '../../components/Button/Button.module.css';
+}
+
+.details {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.label {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  width: 100%;
+  margin: 0;
+  text-align: left;
+}
+
+.origin {
+  composes: inputText from '../../components/Typography/Typography.module.css';
+  width: 100%;
+  margin: 0.5rem 0;
+  text-align: left;
+}
+
+.reject {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
+}
+
+.submit {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+}
+
+.errorTooltip {
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
+  top: 2.5rem;
+  left: 75%;
+}

@@ -1,18 +1,16 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { filter, find } from 'lodash-es';
+import { BalanceUtils, Credential, CType } from '@kiltprotocol/core';
 import {
-  BalanceUtils,
-  Credential,
-  RequestForAttestation,
-} from '@kiltprotocol/core';
-import {
-  IClaim,
   DidUri,
+  IClaim,
+  ICredential,
+  ICType,
   IRequestAttestation,
+  IRequestAttestationContent,
   ITerms,
-  MessageBodyType,
-  DidSignature,
+  SignCallback,
 } from '@kiltprotocol/types';
 
 import * as styles from './SignQuote.module.css';
@@ -26,7 +24,7 @@ import {
   useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { getDidDetails, needLegacyDidCrypto } from '../../utilities/did/did';
+import { getDidDocument, needLegacyDidCrypto } from '../../utilities/did/did';
 import {
   PasswordField,
   usePasswordField,
@@ -40,16 +38,26 @@ export type Terms = ITerms & {
   claim: IClaim;
   attesterName: string;
   attesterDid: DidUri;
+  specVersion: '1.0' | '3.0';
 };
 
-type CompatibleSignature = DidSignature & { keyId?: DidSignature['keyUri'] };
+async function getCompatibleContent(
+  credential: ICredential,
+  signCallback: SignCallback,
+  specVersion: Terms['specVersion'],
+): Promise<IRequestAttestationContent> {
+  if (specVersion !== '1.0') {
+    return { credential };
+  }
 
-function makeBackwardsCompatible(signature: CompatibleSignature) {
-  signature.keyId = signature.keyUri;
-}
-
-function makeFutureProof(signature: CompatibleSignature) {
-  signature.keyUri = signature.keyUri || signature.keyId;
+  // DApps using legacy spec versions will expect a different interface for the message including the claimerSignature property
+  const requestForAttestation = await Credential.createPresentation({
+    credential,
+    signCallback,
+  });
+  return {
+    requestForAttestation,
+  } as unknown as IRequestAttestationContent;
 }
 
 interface Props {
@@ -64,9 +72,10 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
   const { did } = identity;
   const error = useIsOnChainDidDeleted(did);
 
-  const { claim, cTypes, quote, attesterName } = data;
+  const { claim, cTypes, quote, attesterName, specVersion } = data;
 
-  const cType = find(cTypes, { hash: claim.cTypeHash });
+  const $id = CType.hashToId(claim.cTypeHash);
+  const cType = find(cTypes, { $id }) as ICType | undefined;
 
   const gross = quote?.cost?.gross;
   const costs = BalanceUtils.toFemtoKilt(gross || 0);
@@ -91,69 +100,52 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       const { claim, delegationId, attesterName, attesterDid, legitimations } =
         data;
 
-      const cTypeTitle = cType.schema.title;
+      const cTypeTitle = cType.title;
 
-      const attestedClaims = legitimations.map((legitimation) =>
-        Credential.fromCredential(legitimation),
+      legitimations.forEach((legitimation) =>
+        Credential.verifyDataStructure(legitimation),
       );
 
       const { seed } = await passwordField.get(event);
 
       const isLegacy = await needLegacyDidCrypto(identity.did);
-      const { encrypt, keystore, didDetails } = await getIdentityCryptoFromSeed(
+      const { sign, encrypt, didDocument } = await getIdentityCryptoFromSeed(
         seed,
         isLegacy,
       );
 
       // The attester generated claim with the temporary identity, need to put real address in it
-      const identityClaim = { ...claim, owner: didDetails.uri };
+      const identityClaim = { ...claim, owner: didDocument.uri };
 
-      const requestForAttestation = RequestForAttestation.fromClaim(
-        identityClaim,
-        {
-          legitimations: attestedClaims,
-          ...(delegationId && { delegationId }),
-        },
-      );
-
-      await requestForAttestation.signWithDidKey(
-        keystore,
-        didDetails,
-        didDetails.authenticationKey.id,
-      );
-
-      if (requestForAttestation.claimerSignature) {
-        makeBackwardsCompatible(requestForAttestation.claimerSignature);
-        makeFutureProof(requestForAttestation.claimerSignature);
-      }
+      const credential = Credential.fromClaim(identityClaim, {
+        legitimations,
+        ...(delegationId && { delegationId }),
+      });
 
       const matchingCredentials = filter(credentials, { cTypeTitle });
       const index = matchingCredentials.length + 1;
       const name = `${cTypeTitle} ${index}`;
 
       await saveCredential({
-        request: requestForAttestation,
+        request: credential,
         name,
         cTypeTitle,
         attester: attesterName,
         status: 'pending',
       });
 
-      const requestForAttestationBody: IRequestAttestation = {
-        content: { requestForAttestation },
-        type: MessageBodyType.REQUEST_ATTESTATION,
+      const messageBody: IRequestAttestation = {
+        content: await getCompatibleContent(credential, sign, specVersion),
+        type: 'request-attestation',
       };
 
-      const attesterDidDetails = await getDidDetails(attesterDid);
-      const message = await encrypt(
-        requestForAttestationBody,
-        attesterDidDetails,
-      );
+      const attesterDidDocument = await getDidDocument(attesterDid);
+      const message = await encrypt(messageBody, attesterDidDocument);
 
       await claimChannel.return(message);
       window.close();
     },
-    [credentials, cType, data, passwordField, identity.did],
+    [credentials, cType, data, passwordField, identity.did, specVersion],
   );
 
   return (
@@ -180,7 +172,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
           </Fragment>
         ))}
         <dt className={styles.detailName}>{t('view_SignQuote_cType')}:</dt>
-        <dd className={styles.detailValue}>{cType?.schema?.title}</dd>
+        <dd className={styles.detailValue}>{cType?.title}</dd>
 
         <dt className={styles.detailName}>{t('view_SignQuote_attester')}:</dt>
         <dd className={styles.detailValue}>{attesterName}</dd>
@@ -199,7 +191,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         >
           {t('view_SignQuote_CTA')}
         </button>
-        <output className={styles.errorTooltip} hidden={!error}>
+        <output className={styles.errorTooltip} hidden={did && !error}>
           {t('view_SignQuote_on_chain_did_deleted')}
         </output>
       </p>

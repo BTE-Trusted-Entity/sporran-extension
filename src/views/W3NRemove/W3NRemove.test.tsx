@@ -1,12 +1,12 @@
 import { BalanceUtils } from '@kiltprotocol/core';
-import { FullDidDetails } from '@kiltprotocol/did';
+import { DidDocument } from '@kiltprotocol/types';
 
 import { identitiesMock, render } from '../../testing/testing';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import '../../components/useCopyButton/useCopyButton.mock';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
-import { useFullDidDetails } from '../../utilities/did/did';
+import { useFullDidDocument } from '../../utilities/did/did';
 
 import { W3NRemove } from './W3NRemove';
 
@@ -14,7 +14,7 @@ const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
 jest.mock('../../utilities/did/did');
-jest.mocked(useFullDidDetails).mockReturnValue({} as FullDidDetails);
+jest.mocked(useFullDidDocument).mockReturnValue({} as DidDocument);
 
 jest.mock('../../utilities/useAsyncValue/useAsyncValue');
 jest.mocked(useAsyncValue).mockReturnValue(BalanceUtils.toFemtoKilt(0.01));
@@ -35,7 +35,7 @@ describe('W3NRemove', () => {
 
   it('should show only fee amount if promo was used', async () => {
     jest.mocked(useDepositWeb3Name).mockReturnValue({
-      owner: 'some other deposit owner',
+      owner: '4some other deposit owner',
       amount: BalanceUtils.toFemtoKilt(2),
     });
 

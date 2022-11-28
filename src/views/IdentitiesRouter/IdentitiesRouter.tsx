@@ -36,6 +36,7 @@ import { paths } from '../paths';
 import { DidRepair } from '../DidRepair/DidRepair';
 import { W3NCreateFlow } from '../W3NCreateFlow/W3NCreateFlow';
 import { W3NManageRouter } from '../W3NManageRouter/W3NManageRouter';
+import { CreateDidDApp } from '../CreateDidDApp/CreateDidDApp';
 
 interface Props {
   identities: IdentitiesMap;
@@ -124,6 +125,10 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.popup.signDidExtrinsic}>
           <SignDidExtrinsic identity={identity} />
+        </Route>
+
+        <Route path={paths.popup.createDid}>
+          <CreateDidDApp identity={identity} />
         </Route>
 
         <Route path={paths.identity.did.upgrade.start}>

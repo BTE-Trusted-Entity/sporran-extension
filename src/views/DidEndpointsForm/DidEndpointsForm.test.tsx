@@ -1,14 +1,10 @@
 import { MemoryRouter, Route } from 'react-router-dom';
-import { DidServiceEndpoint } from '@kiltprotocol/types';
-import { Utils, FullDidDetails } from '@kiltprotocol/did';
-import {
-  Blockchain,
-  BlockchainApiConnection,
-} from '@kiltprotocol/chain-helpers';
-import { Codec } from '@polkadot/types/types';
+import { DidDocument, DidServiceEndpoint } from '@kiltprotocol/types';
+import { ConfigService } from '@kiltprotocol/config';
+import { connect } from '@kiltprotocol/core';
 
 import { identitiesMock, render, act } from '../../testing/testing';
-import { getFullDidDetails } from '../../utilities/did/did';
+import { getFullDidDocument } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 import '../../components/useCopyButton/useCopyButton.mock';
 
@@ -17,41 +13,34 @@ import { DidEndpointsForm } from './DidEndpointsForm';
 const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
-const endpoints: DidServiceEndpoint[] = [
+const service: DidServiceEndpoint[] = [
   {
-    urls: ['https://sporran.org/'],
-    types: ['Some Type'],
-    id: '123456',
+    serviceEndpoint: ['https://sporran.org/'],
+    type: ['Some Type'],
+    id: '#123456',
   },
   {
-    urls: ['https://kilt.io/'],
-    types: ['Another Type'],
-    id: '654321',
+    serviceEndpoint: ['https://kilt.io/'],
+    type: ['Another Type'],
+    id: '#654321',
   },
 ];
 
-jest.mocked(BlockchainApiConnection.getConnectionOrConnect).mockResolvedValue({
-  api: {
-    consts: {
-      did: {
-        maxServiceIdLength: { toNumber: () => 50 } as unknown as Codec,
-        maxServiceTypeLength: { toNumber: () => 50 } as unknown as Codec,
-        maxServiceUrlLength: { toNumber: () => 200 } as unknown as Codec,
-        maxNumberOfServicesPerDid: { toNumber: () => 25 } as unknown as Codec,
-      },
+const api = {
+  consts: {
+    did: {
+      maxServiceIdLength: { toNumber: () => 50 },
+      maxServiceTypeLength: { toNumber: () => 50 },
+      maxServiceUrlLength: { toNumber: () => 200 },
+      maxNumberOfServicesPerDid: { toNumber: () => 25 },
     },
   },
-} as unknown as Blockchain);
+} as Awaited<ReturnType<typeof connect>>;
+ConfigService.set({ api });
 
-jest.mocked(Utils.parseDidUri).mockReturnValue({
-  identifier: '4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
-} as ReturnType<typeof Utils.parseDidUri>);
-
-const detailsPromise = Promise.resolve({
-  getEndpoints: () => endpoints,
-} as FullDidDetails);
+const documentPromise = Promise.resolve({ service } as DidDocument);
 jest.mock('../../utilities/did/did');
-jest.mocked(getFullDidDetails).mockReturnValue(detailsPromise);
+jest.mocked(getFullDidDocument).mockReturnValue(documentPromise);
 
 describe('DidEndpointsForm', () => {
   it('should match the snapshot', async () => {
@@ -74,7 +63,7 @@ describe('DidEndpointsForm', () => {
     );
 
     await act(async () => {
-      await detailsPromise;
+      await documentPromise;
     });
     expect(container).toMatchSnapshot();
   });

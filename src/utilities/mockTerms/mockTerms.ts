@@ -1,24 +1,24 @@
-import { identitiesMock } from '../identities/IdentitiesProvider.mock';
+import { DidUri, ICType } from '@kiltprotocol/types';
 
-const mockCType = {
-  hash: '0x240c744923bd98797504328f9bef57ca6c777f5cbf3e1aada74f348c9879d78a',
-  owner: null,
-  schema: {
-    $schema: 'http://kilt-protocol.org/draft-01/ctype#',
-    title: 'BL-Mail-Simple',
-    properties: {
-      'Full name': {
-        type: 'string',
-      },
-      Email: {
-        type: 'string',
-      },
+import { identitiesMock } from '../identities/IdentitiesProvider.mock';
+import { Terms } from '../../views/SignQuote/SignQuote';
+
+const mockCType: ICType = {
+  $id: 'kilt:ctype:0x240c744923bd98797504328f9bef57ca6c777f5cbf3e1aada74f348c9879d78a',
+  $schema: 'http://kilt-protocol.org/draft-01/ctype#',
+  title: 'BL-Mail-Simple',
+  properties: {
+    'Full name': {
+      type: 'string',
     },
-    type: 'object',
+    Email: {
+      type: 'string',
+    },
   },
+  type: 'object',
 };
 
-export const mockTerms = {
+export const mockTerms: Terms = {
   claim: {
     cTypeHash:
       '0x240c744923bd98797504328f9bef57ca6c777f5cbf3e1aada74f348c9879d78a',
@@ -26,13 +26,13 @@ export const mockTerms = {
       'Full Name': 'Ingo Rübe',
       Email: 'ingo@kilt.io',
     },
-    owner:
-      identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'].did,
+    owner: identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
+      .did as DidUri,
   },
   legitimations: [],
   quote: {
     attesterSignature: {
-      keyId:
+      keyUri:
         'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ#0x59a56e1a4017b60a00c5450bfd6af21dc753e84ef72f2fd45dfc27dd5c3bdafb',
       signature:
         '0x30d01aefd64c7eea48bc743782fe54ba58f96b5a91e33d8d9ee5fae282964967bdea5e9ac3f31756fd251a40ea4d2e9a93ac9b1314cc037cdcb04a53a007e68f',
@@ -52,4 +52,5 @@ export const mockTerms = {
   cTypes: [mockCType],
   attesterName: 'SocialKYC',
   attesterDid: 'did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ',
+  specVersion: '3.0',
 };

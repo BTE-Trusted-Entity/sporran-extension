@@ -1,11 +1,15 @@
-import { Balance } from '@kiltprotocol/core';
+import { ConfigService } from '@kiltprotocol/config';
+import { connect } from '@kiltprotocol/core';
 
-import {
-  Balances,
-  computeBalance,
-  onAddressBalanceChange,
-} from './balanceChanges';
+import { computeBalance, onAddressBalanceChange } from './balanceChanges';
 import { originalBalancesMock } from './balanceChanges.mock';
+
+const api = {
+  query: {
+    system: { account: jest.fn() },
+  },
+} as unknown as Awaited<ReturnType<typeof connect>>;
+ConfigService.set({ api });
 
 jest.unmock('./balanceChanges');
 
@@ -39,21 +43,23 @@ describe('balanceChanges', () => {
     it('should start listening when called', async () => {
       onAddressBalanceChange('address', jest.fn());
 
-      expect(Balance.listenToBalanceChanges).toHaveBeenCalledWith(
+      expect(api.query.system.account).toHaveBeenCalledWith(
         'address',
         expect.anything(),
       );
     });
 
     it('should run publisher on balance change', async () => {
-      jest.mocked(Balance.listenToBalanceChanges).mockClear();
+      jest.mocked(api.query.system.account).mockClear();
 
       const publisher = jest.fn();
       onAddressBalanceChange('address', publisher);
 
       jest
-        .mocked(Balance.listenToBalanceChanges)
-        .mock.calls[0][1]('address', originalBalancesMock, {} as Balances);
+        .mocked(api.query.system.account)
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .mock.calls[0][1]({ data: originalBalancesMock });
 
       const { balances } = publisher.mock.calls[0][1];
       expect(expectedBalanceStrings).toEqual({

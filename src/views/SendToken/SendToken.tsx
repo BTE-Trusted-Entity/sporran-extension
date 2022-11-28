@@ -14,11 +14,10 @@ import { browser } from 'webextension-polyfill-ts';
 import { find } from 'lodash-es';
 import { BalanceUtils } from '@kiltprotocol/core';
 import { DataUtils } from '@kiltprotocol/utils';
-import { BlockchainApiConnection } from '@kiltprotocol/chain-helpers';
+import { ConfigService } from '@kiltprotocol/config';
 
 import * as styles from './SendToken.module.css';
 
-import { getFee } from '../../utilities/getFee/getFee';
 import { Identity } from '../../utilities/identities/types';
 import { isNew, useIdentities } from '../../utilities/identities/identities';
 import { IdentityOverviewNew } from '../IdentityOverview/IdentityOverviewNew';
@@ -31,23 +30,12 @@ import { usePasteButton } from '../../components/usePasteButton/usePasteButton';
 import { useOnline } from '../../utilities/useOnline/useOnline';
 import { useConfiguration } from '../../configuration/useConfiguration';
 
+import { getFee } from './getFee';
+
 const noError = null;
 const nonNumberCharacters = /[^0-9,.\u066C\u2019\u202F]/g;
-const KILT_POWER = 15;
 const minimum = BalanceUtils.toFemtoKilt(0.01);
 let existential: BN | undefined;
-
-function numberToBN(parsedValue: number): BN {
-  const value = parsedValue.toFixed(KILT_POWER);
-
-  // ludicrously rich man’s multiplication that supports values beyond 1e22
-  const [whole, fraction = ''] = value.split('.');
-  const paddedFraction = fraction
-    .substring(0, KILT_POWER)
-    .padEnd(KILT_POWER, '0');
-
-  return new BN(whole + paddedFraction);
-}
 
 function getLocaleSeparators(locale: string = browser.i18n.getUILanguage()): {
   group?: string;
@@ -105,7 +93,7 @@ function getIsAmountInvalidError(amount: string): string | null {
 }
 
 function getIsAmountTooSmallError(amount: number, minimum: BN): string | null {
-  if (numberToBN(amount).gte(minimum)) {
+  if (BalanceUtils.toFemtoKilt(amount).gte(minimum)) {
     return noError;
   }
   const t = browser.i18n.getMessage;
@@ -113,7 +101,7 @@ function getIsAmountTooSmallError(amount: number, minimum: BN): string | null {
 }
 
 function getIsAmountTooLargeError(amount: number, maximum: BN): string | null {
-  if (numberToBN(amount).lte(maximum)) {
+  if (BalanceUtils.toFemtoKilt(amount).lte(maximum)) {
     return noError;
   }
   const t = browser.i18n.getMessage;
@@ -127,7 +115,7 @@ function getIsAmountSmallerThanRecipientExistential(
   if (
     !recipientBalanceZero ||
     !existential ||
-    numberToBN(amount).gte(existential)
+    BalanceUtils.toFemtoKilt(amount).gte(existential)
   ) {
     return noError;
   }
@@ -160,15 +148,6 @@ function getAmountError(
   ].filter(Boolean)[0];
 }
 
-function isValidAddress(address: string): boolean {
-  try {
-    DataUtils.validateAddress(address, 'recipient');
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
-
 function getAddressError(address: string, identity: Identity): string | null {
   const t = browser.i18n.getMessage;
 
@@ -176,7 +155,7 @@ function getAddressError(address: string, identity: Identity): string | null {
     return t('view_SendToken_recipient_same');
   }
 
-  if (!isValidAddress(address)) {
+  if (!DataUtils.isKiltAddress(address)) {
     return t('view_SendToken_recipient_invalid');
   }
 
@@ -201,12 +180,8 @@ interface Props {
 export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  useEffect(() => {
-    (async () => {
-      const { api } = await BlockchainApiConnection.getConnectionOrConnect();
-      existential = api.consts.balances.existentialDeposit;
-    })();
-  }, []);
+  const api = ConfigService.get('api');
+  existential = api.consts.balances.existentialDeposit;
 
   const [fee, setFee] = useState<BN>();
 
@@ -230,7 +205,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const recipientError = recipient && getAddressError(recipient, identity);
 
   const recipientBalance = useAddressBalance(
-    isValidAddress(recipient) ? recipient : '',
+    DataUtils.isKiltAddress(recipient) ? recipient : '',
   );
   const recipientBalanceZero = recipientBalance?.total?.isZero?.();
 
@@ -244,7 +219,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const amountBN = useMemo(
     () =>
       typeof numericAmount === 'number' && !Number.isNaN(numericAmount)
-        ? numberToBN(numericAmount)
+        ? BalanceUtils.toFemtoKilt(numericAmount)
         : new BN(0),
     [numericAmount],
   );
@@ -255,14 +230,14 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       return new BN(0);
     }
     const preciseTip = (tipPercents / 100) * numericAmount;
-    const preciseTipBN = numberToBN(preciseTip);
+    const preciseTipBN = BalanceUtils.toFemtoKilt(preciseTip);
 
     // Technically tip is costs, but if we round it up here the user might not be able to set tip below 0.0002,
     // while if we round it down the user will always able to increase it.
     const roundedTipString = asKiltCoins(preciseTipBN, 'funds');
     const roundedTip = parseFloatLocale(roundedTipString);
 
-    return numberToBN(roundedTip);
+    return BalanceUtils.toFemtoKilt(roundedTip);
   }, [numericAmount, tipPercents]);
 
   const { totalCosts, existentialWarning, finalTip } = useMemo(() => {
@@ -299,7 +274,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       if (isNew(identity)) {
         return;
       }
-      if (recipient && !isValidAddress(recipient)) {
+      if (recipient && !DataUtils.isKiltAddress(recipient)) {
         return;
       }
       const realFee = await getFee({
@@ -333,7 +308,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       if (Number.isNaN(parsedValue)) {
         return;
       }
-      const femtoKilts = numberToBN(parsedValue);
+      const femtoKilts = BalanceUtils.toFemtoKilt(parsedValue);
       const formatted = formatKiltInput(femtoKilts);
       event.target.value = formatted;
       setAmount(formatted);
@@ -392,7 +367,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
 
       onSuccess({
         recipient,
-        amount: numberToBN(numericAmount),
+        amount: BalanceUtils.toFemtoKilt(numericAmount),
         fee,
         tip: finalTip,
         existentialWarning: Boolean(existentialWarning),
@@ -480,9 +455,9 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
           disabled={
             !!numericAmount &&
             !!maximum &&
-            numberToBN(((100 + tipPercents + 1) / 100) * numericAmount).gt(
-              maximum,
-            )
+            BalanceUtils.toFemtoKilt(
+              ((100 + tipPercents + 1) / 100) * numericAmount,
+            ).gt(maximum)
           }
         />
       </p>

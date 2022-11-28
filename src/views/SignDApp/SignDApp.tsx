@@ -1,13 +1,10 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Crypto } from '@kiltprotocol/utils';
+import { Crypto, ss58Format } from '@kiltprotocol/utils';
 
 import * as styles from './SignDApp.module.css';
 
-import {
-  ss58Format,
-  useIdentities,
-} from '../../utilities/identities/identities';
+import { useIdentities } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
