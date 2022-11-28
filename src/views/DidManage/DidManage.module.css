@@ -28,7 +28,7 @@
 }
 
 .linking {
-  composes: buttonNew from '../../components/Button/Button.module.css';
+  composes: buttonWide from '../../components/Button/Button.module.css';
   margin: 0.75rem 0 0;
 
   --wide-button-icon: url('../../components/images/linking_page.svg');

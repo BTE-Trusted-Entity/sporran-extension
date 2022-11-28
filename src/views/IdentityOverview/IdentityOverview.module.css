@@ -56,7 +56,7 @@
 }
 
 .manage {
-  composes: buttonNew from '../../components/Button/Button.module.css';
+  composes: buttonWide from '../../components/Button/Button.module.css';
 
   --wide-button-icon: url('../../components/images/manage-did.svg');
 }
