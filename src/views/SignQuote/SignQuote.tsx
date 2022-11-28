@@ -87,13 +87,13 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
     window.close();
   }, []);
 
-  const credentials = useIdentityCredentials(did);
+  const sporranCredentials = useIdentityCredentials(did);
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
 
-      if (!credentials || !cType) {
+      if (!sporranCredentials || !cType) {
         return;
       }
 
@@ -122,12 +122,12 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         ...(delegationId && { delegationId }),
       });
 
-      const matchingCredentials = filter(credentials, { cTypeTitle });
+      const matchingCredentials = filter(sporranCredentials, { cTypeTitle });
       const index = matchingCredentials.length + 1;
       const name = `${cTypeTitle} ${index}`;
 
       await saveCredential({
-        request: credential,
+        credential,
         name,
         cTypeTitle,
         attester: attesterName,
@@ -145,7 +145,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       await claimChannel.return(message);
       window.close();
     },
-    [credentials, cType, data, passwordField, identity.did, specVersion],
+    [sporranCredentials, cType, data, passwordField, identity.did, specVersion],
   );
 
   return (

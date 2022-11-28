@@ -6,7 +6,7 @@ import cx from 'classnames';
 import * as styles from './CredentialCard.module.css';
 
 import {
-  Credential,
+  SporranCredential,
   SharedCredential,
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
@@ -15,23 +15,23 @@ import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState
 import { useScrollIntoView } from './CredentialCard';
 
 interface Props {
-  credential: Credential;
+  sporranCredential: SporranCredential;
   onSelect: (value: SharedCredential) => void;
   onUnSelect: (rootHash: string) => void;
   viewRef: RefObject<HTMLElement>;
 }
 
 export function SignDidCredentialCard({
-  credential,
+  sporranCredential,
   onSelect,
   onUnSelect,
   viewRef,
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  usePendingCredentialCheck(credential);
+  usePendingCredentialCheck(sporranCredential);
 
-  const isAttested = credential.status === 'attested';
+  const isAttested = sporranCredential.status === 'attested';
 
   const isExpanded = useBooleanState();
   const isSelected = useBooleanState();
@@ -52,9 +52,9 @@ export function SignDidCredentialCard({
         : without(contentsChecked, name);
 
       setContentsChecked(newContents);
-      onSelect({ credential, sharedContents: newContents });
+      onSelect({ sporranCredential, sharedContents: newContents });
     },
-    [contentsChecked, credential, onSelect, isSelected],
+    [contentsChecked, sporranCredential, onSelect, isSelected],
   );
 
   const handleSelect = useCallback(
@@ -66,16 +66,16 @@ export function SignDidCredentialCard({
       if (event.target.checked) {
         isSelected.on();
         isExpanded.on();
-        onSelect({ credential, sharedContents: contentsChecked });
+        onSelect({ sporranCredential, sharedContents: contentsChecked });
       } else {
         isSelected.off();
         isExpanded.off();
         setContentsChecked([]);
-        onUnSelect(credential.request.rootHash);
+        onUnSelect(sporranCredential.credential.rootHash);
       }
     },
     [
-      credential,
+      sporranCredential,
       contentsChecked,
       onSelect,
       onUnSelect,
@@ -92,7 +92,7 @@ export function SignDidCredentialCard({
     invalid: t('component_CredentialCard_invalid'),
   };
 
-  const contents = Object.entries(credential.request.claim.contents);
+  const contents = Object.entries(sporranCredential.credential.claim.contents);
 
   const cardRef = useRef<HTMLLIElement>(null);
 
@@ -107,7 +107,7 @@ export function SignDidCredentialCard({
       <input
         name="credential"
         type="checkbox"
-        id={credential.request.rootHash}
+        id={sporranCredential.credential.rootHash}
         onChange={handleSelect}
         checked={isSelected.current}
         disabled={!isAttested}
@@ -125,9 +125,11 @@ export function SignDidCredentialCard({
             })}
           >
             <h4 className={styles.collapsedName} id="collapsedLabel">
-              {credential.name}
+              {sporranCredential.name}
             </h4>
-            <p className={styles.collapsedValue}>{credential.attester}</p>
+            <p className={styles.collapsedValue}>
+              {sporranCredential.attester}
+            </p>
           </section>
         </button>
       )}
@@ -150,7 +152,7 @@ export function SignDidCredentialCard({
                   {t('component_CredentialCard_name')}
                 </dt>
                 <dd className={styles.detailValue} id="expandedLabel">
-                  {credential.name}
+                  {sporranCredential.name}
                 </dd>
               </div>
               <div className={styles.detail}>
@@ -158,7 +160,7 @@ export function SignDidCredentialCard({
                   {t('component_CredentialCard_status')}
                 </dt>
                 <dd className={styles.detailValue}>
-                  {statuses[credential.status]}
+                  {statuses[sporranCredential.status]}
                 </dd>
               </div>
 
@@ -193,20 +195,24 @@ export function SignDidCredentialCard({
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_ctype')}
               </dt>
-              <dd className={styles.detailValue}>{credential.cTypeTitle}</dd>
+              <dd className={styles.detailValue}>
+                {sporranCredential.cTypeTitle}
+              </dd>
             </div>
             <div className={styles.detail}>
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_attester')}
               </dt>
-              <dd className={styles.detailValue}>{credential.attester}</dd>
+              <dd className={styles.detailValue}>
+                {sporranCredential.attester}
+              </dd>
             </div>
             <div className={styles.hash}>
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_hash')}
               </dt>
               <dd className={styles.detailValue}>
-                {credential.request.rootHash}
+                {sporranCredential.credential.rootHash}
               </dd>
             </div>
           </dl>

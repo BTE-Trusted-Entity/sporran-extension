@@ -20,11 +20,11 @@ mockIsFullDid(true);
 
 const mockSharedCredentials: SharedCredential[] = [
   {
-    credential: credentialsMock[0],
+    sporranCredential: credentialsMock[0],
     sharedContents: ['Email'],
   },
   {
-    credential: credentialsMock[3],
+    sporranCredential: credentialsMock[3],
     sharedContents: [],
   },
 ];

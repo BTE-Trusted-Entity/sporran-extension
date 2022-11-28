@@ -1,6 +1,14 @@
 import { HexString } from '@polkadot/util/types';
 import { useContext, useEffect, useMemo } from 'react';
-import { cloneDeep, pick, pull, reject, without } from 'lodash-es';
+import {
+  cloneDeep,
+  isEqual,
+  omit,
+  pick,
+  pull,
+  reject,
+  without,
+} from 'lodash-es';
 import { DidUri, ICredential } from '@kiltprotocol/types';
 import { ConfigService } from '@kiltprotocol/config';
 import { Attestation, Credential } from '@kiltprotocol/core';
@@ -15,9 +23,8 @@ import { CredentialsContext } from './CredentialsContext';
 
 type AttestationStatus = 'pending' | 'attested' | 'revoked' | 'invalid';
 
-export interface Credential {
-  // TODO: rename?
-  request: ICredential;
+export interface SporranCredential {
+  credential: ICredential;
   name: string;
   cTypeTitle: string;
   attester: string;
@@ -26,7 +33,7 @@ export interface Credential {
 }
 
 export interface SharedCredential {
-  credential: Credential;
+  sporranCredential: SporranCredential;
   sharedContents: string[];
 }
 
@@ -45,8 +52,10 @@ async function saveList(list: string[]): Promise<void> {
   await mutate(['getCredentials', LIST_KEY]);
 }
 
-export async function saveCredential(credential: Credential): Promise<void> {
-  const key = toKey(credential.request.rootHash);
+export async function saveCredential(
+  credential: SporranCredential,
+): Promise<void> {
+  const key = toKey(credential.credential.rootHash);
   await storage.set({ [key]: credential });
   await mutate(key);
 
@@ -59,28 +68,70 @@ export async function saveCredential(credential: Credential): Promise<void> {
   await saveList(list);
 }
 
+interface LegacySporranCredential
+  extends Omit<SporranCredential, 'credential'> {
+  request: ICredential & { claimerSignature?: unknown };
+}
+
+function isLegacySporranCredential(
+  input: unknown,
+): input is LegacySporranCredential {
+  return typeof input === 'object' && input !== null && 'request' in input;
+}
+
 // SDK <0.29 had claimerSignature in ICredential
 interface LegacyICredential extends ICredential {
   claimerSignature?: unknown;
 }
 
-export async function getCredentials(keys: string[]): Promise<Credential[]> {
-  const legacy: Record<string, Credential> = await storage.get(keys);
-  for (const [key, credential] of Object.entries(legacy)) {
-    const request = credential.request as LegacyICredential;
-    if ('claimerSignature' in request) {
-      delete request.claimerSignature;
-      await storage.set({ [key]: credential });
+function isLegacyICredential(input: unknown): input is LegacyICredential {
+  return (
+    typeof input === 'object' && input !== null && 'claimerSignature' in input
+  );
+}
+
+export function updateLegacyCredential(sporranCredential: SporranCredential) {
+  const modernCredential = !isLegacySporranCredential(sporranCredential)
+    ? sporranCredential
+    : {
+        ...omit(sporranCredential, 'request'),
+        credential: sporranCredential.request,
+      };
+
+  const { credential } = modernCredential;
+  if (isLegacyICredential(credential)) {
+    delete credential.claimerSignature;
+  }
+
+  return modernCredential;
+}
+
+async function updateLegacyStorage(keys: string[]) {
+  const result: Record<string, SporranCredential> = await storage.get(keys);
+
+  for (const [key, sporranCredential] of Object.entries(result)) {
+    const modernCredential = updateLegacyCredential(sporranCredential);
+    const updateStorage = !isEqual(sporranCredential, modernCredential);
+    if (updateStorage) {
+      await storage.set({ [key]: modernCredential });
     }
   }
+}
+
+export async function getCredentials(
+  keys: string[],
+): Promise<SporranCredential[]> {
+  await updateLegacyStorage(keys);
 
   const result = await storage.get(keys);
   const credentials = pick(result, keys);
   return Object.values(credentials);
 }
 
-export async function deleteCredential(credential: Credential): Promise<void> {
-  const key = toKey(credential.request.rootHash);
+export async function deleteCredential(
+  credential: SporranCredential,
+): Promise<void> {
+  const key = toKey(credential.credential.rootHash);
   await storage.remove(key);
 
   const list = await getList();
@@ -89,18 +140,18 @@ export async function deleteCredential(credential: Credential): Promise<void> {
   await saveList(list);
 }
 
-export function useCredentials(): Credential[] | undefined {
+export function useCredentials(): SporranCredential[] | undefined {
   return useContext(CredentialsContext);
 }
 
-export function isUnusableCredential({ status }: Credential) {
+export function isUnusableCredential({ status }: SporranCredential) {
   return ['revoked', 'invalid'].includes(status);
 }
 
 export function useIdentityCredentials(
   did: DidUri | undefined,
   onlyUsable = true,
-): Credential[] | undefined {
+): SporranCredential[] | undefined {
   const all = useCredentials();
 
   return useMemo(() => {
@@ -119,7 +170,7 @@ export function useIdentityCredentials(
 
     const { fullDid } = parseDidUri(did);
     return filtered.filter((credential) =>
-      isSameSubject(credential.request.claim.owner, fullDid),
+      isSameSubject(credential.credential.claim.owner, fullDid),
     );
   }, [all, did, onlyUsable]);
 }
@@ -133,7 +184,7 @@ export async function isAttestationRevoked(
 }
 
 export function usePendingCredentialCheck(
-  credential: Credential | undefined,
+  credential: SporranCredential | undefined,
 ): void {
   useEffect(() => {
     if (!credential || credential.status !== 'pending') {
@@ -141,7 +192,7 @@ export function usePendingCredentialCheck(
     }
     (async () => {
       try {
-        if (await isAttestationRevoked(credential.request.rootHash)) {
+        if (await isAttestationRevoked(credential.credential.rootHash)) {
           await saveCredential({ ...credential, status: 'revoked' });
         } else {
           await saveCredential({ ...credential, status: 'attested' });
@@ -159,7 +210,7 @@ interface CredentialDownload {
 }
 
 export function getCredentialDownload(
-  credential: Credential,
+  credential: SporranCredential,
 ): CredentialDownload {
   const name = `${credential.name}-${credential.cTypeTitle}.json`;
 
@@ -170,16 +221,16 @@ export function getCredentialDownload(
 }
 
 export function getUnsignedPresentationDownload(
-  credential: Credential,
+  sporranCredential: SporranCredential,
   properties: string[],
 ): CredentialDownload {
-  const name = `${credential.name}-${credential.cTypeTitle}-presentation.json`;
+  const name = `${sporranCredential.name}-${sporranCredential.cTypeTitle}-presentation.json`;
 
-  const { request } = credential;
-  const allProperties = Object.keys(request.claim.contents);
+  const { credential } = sporranCredential;
+  const allProperties = Object.keys(credential.claim.contents);
   const needRemoving = without(allProperties, ...properties);
 
-  const credentialCopy = cloneDeep(request);
+  const credentialCopy = cloneDeep(credential);
   Credential.removeClaimProperties(credentialCopy, needRemoving);
 
   const blob = jsonToBase64(credentialCopy);
@@ -189,7 +240,7 @@ export function getUnsignedPresentationDownload(
 }
 
 export async function invalidateCredentials(
-  credentials: Credential[],
+  credentials: SporranCredential[],
 ): Promise<void> {
   for (const credential of credentials) {
     await saveCredential({ ...credential, status: 'invalid' });
@@ -197,14 +248,14 @@ export async function invalidateCredentials(
 }
 
 export async function checkCredentialsStatus(
-  credentials: Credential[],
+  credentials: SporranCredential[],
 ): Promise<void> {
   for (const credential of credentials) {
     if (credential.status !== 'attested') {
       continue;
     }
     try {
-      if (await isAttestationRevoked(credential.request.rootHash)) {
+      if (await isAttestationRevoked(credential.credential.rootHash)) {
         await saveCredential({ ...credential, status: 'revoked' });
       }
     } catch {

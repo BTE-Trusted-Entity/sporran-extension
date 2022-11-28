@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
-import { Credential } from '../../utilities/credentials/credentials';
+import { SporranCredential } from '../../utilities/credentials/credentials';
 
 import { shareChannel } from '../../channels/shareChannel/shareChannel';
 import { paths } from '../paths';
@@ -13,7 +13,7 @@ import { usePopupData } from '../../utilities/popups/usePopupData';
 import { ShareInput } from '../../channels/shareChannel/types';
 
 export interface Selected {
-  credential: Credential;
+  sporranCredential: SporranCredential;
   identity: Identity;
   sharedContents: string[];
 }

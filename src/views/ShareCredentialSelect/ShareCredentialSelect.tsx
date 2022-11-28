@@ -9,7 +9,7 @@ import * as styles from './ShareCredentialSelect.module.css';
 import { Identity } from '../../utilities/identities/types';
 import { useIdentities } from '../../utilities/identities/identities';
 import {
-  Credential,
+  SporranCredential,
   isUnusableCredential,
   useCredentials,
 } from '../../utilities/credentials/credentials';
@@ -36,29 +36,28 @@ function MatchingIdentityCredentials({
   onSelect: (value: Selected) => void;
   selected?: Selected;
   viewRef: RefObject<HTMLElement>;
-  allCredentials: Credential[];
+  allCredentials: SporranCredential[];
   isLastIdentity: boolean;
 }): JSX.Element {
   const credentials = allCredentials.filter(
-    (credential) =>
-      identity.did &&
-      isSameSubject(credential.request.claim.owner, identity.did),
+    ({ credential }) =>
+      identity.did && isSameSubject(credential.claim.owner, identity.did),
   );
 
   return (
     <section className={styles.identityCredentials}>
       <IdentityLine identity={identity} className={styles.identityLine} />
       <ul className={styles.list}>
-        {credentials.map((credential, index) => (
+        {credentials.map((sporranCredential, index) => (
           <ShareCredentialCard
-            key={credential.request.rootHash}
-            credential={credential}
+            key={sporranCredential.credential.rootHash}
+            sporranCredential={sporranCredential}
             identity={identity}
             onSelect={onSelect}
             isSelected={Boolean(
               selected &&
-                selected.credential.request.rootHash ===
-                  credential.request.rootHash,
+                selected.sporranCredential.credential.rootHash ===
+                  sporranCredential.credential.rootHash,
             )}
             expand={
               isLastIdentity &&
@@ -95,8 +94,8 @@ export function ShareCredentialSelect({
   const { cTypes } = credentialRequest;
   const cTypeHashes = cTypes.map(({ cTypeHash }) => cTypeHash);
 
-  const matchingCredentials = credentials?.filter((credential) =>
-    cTypeHashes.includes(credential.request.claim.cTypeHash),
+  const matchingCredentials = credentials?.filter(({ credential }) =>
+    cTypeHashes.includes(credential.claim.cTypeHash),
   );
 
   const usableCredentials = reject(matchingCredentials, isUnusableCredential);
@@ -110,7 +109,7 @@ export function ShareCredentialSelect({
   const noUsableCredentials = usableCredentials.length === 0;
 
   const matchingCredentialDids = usableCredentials.map(
-    (credential) => parseDidUri(credential.request.claim.owner).fullDid,
+    ({ credential }) => parseDidUri(credential.claim.owner).fullDid,
   );
   const identitiesWithMatchingCredentials = Object.values(identities).filter(
     ({ did }) =>
@@ -168,7 +167,9 @@ export function ShareCredentialSelect({
         <Link
           to={paths.popup.share.sign}
           className={styles.next}
-          aria-disabled={!selected || selected.credential.status !== 'attested'}
+          aria-disabled={
+            !selected || selected.sporranCredential.status !== 'attested'
+          }
         >
           {t('view_ShareCredentialSelect_next')}
         </Link>

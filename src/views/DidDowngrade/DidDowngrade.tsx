@@ -88,7 +88,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
     null,
   );
 
-  const credentials = useIdentityCredentials(did);
+  const sporranCredentials = useIdentityCredentials(did);
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
@@ -107,8 +107,8 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
         await submit(hash);
         await saveIdentity({ ...identity, did: undefined });
 
-        if (credentials) {
-          await invalidateCredentials(credentials);
+        if (sporranCredentials) {
+          await invalidateCredentials(sporranCredentials);
         }
 
         setStatus('success');
@@ -121,7 +121,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
         setStatus('error');
       }
     },
-    [identity, passwordField, credentials],
+    [identity, passwordField, sporranCredentials],
   );
 
   const closeModal = useCallback(() => {
@@ -132,7 +132,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
     return null; // blockchain data pending
   }
 
-  if (!credentials) {
+  if (!sporranCredentials) {
     return null; // storage data pending
   }
 

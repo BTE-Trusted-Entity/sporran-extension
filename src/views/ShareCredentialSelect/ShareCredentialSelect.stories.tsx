@@ -20,7 +20,7 @@ export default {
 } as Meta;
 
 const mockSelected: Selected = {
-  credential: credentialsMock[4],
+  sporranCredential: credentialsMock[4],
   identity: identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'],
   sharedContents: ['Email'],
 };

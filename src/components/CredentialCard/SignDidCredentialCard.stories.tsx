@@ -25,7 +25,7 @@ export function Selected(): JSX.Element {
     >
       <ul className={styles.credentialsList}>
         <SignDidCredentialCard
-          credential={credentialsMock[0]}
+          sporranCredential={credentialsMock[0]}
           onSelect={action('onSelect')}
           onUnSelect={action('onUnSelect')}
           viewRef={{ current: null }}
@@ -43,7 +43,7 @@ export function NotAttested(): JSX.Element {
     >
       <ul className={styles.credentialsList}>
         <SignDidCredentialCard
-          credential={credentialsMock[1]}
+          sporranCredential={credentialsMock[1]}
           onSelect={action('onSelect')}
           onUnSelect={action('onUnSelect')}
           viewRef={{ current: null }}

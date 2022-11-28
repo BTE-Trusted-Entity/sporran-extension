@@ -30,7 +30,7 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
 
   const identityCredentials = useIdentityCredentials(identity.did, false);
 
-  const credentials = useMemo(
+  const sporranCredentials = useMemo(
     () => identityCredentials?.concat().reverse(),
     [identityCredentials],
   );
@@ -43,22 +43,22 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
   const checkingStatus = useBooleanState();
 
   const handleCheckStatusClick = useCallback(async () => {
-    if (credentials && !checkingStatus.current) {
+    if (sporranCredentials && !checkingStatus.current) {
       checkingStatus.on();
-      await checkCredentialsStatus(credentials);
+      await checkCredentialsStatus(sporranCredentials);
       checkingStatus.off();
     }
-  }, [checkingStatus, credentials]);
+  }, [checkingStatus, sporranCredentials]);
 
   if (isNew(identity)) {
     return <IdentityOverviewNew />;
   }
 
-  if (!credentials) {
+  if (!sporranCredentials) {
     return null; // storage data pending
   }
 
-  const credentialCount = credentials.length;
+  const credentialCount = sporranCredentials.length;
 
   return (
     <section className={styles.container}>
@@ -93,7 +93,7 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
           </div>
         </li>
 
-        {credentials.length === 0 ? (
+        {sporranCredentials.length === 0 ? (
           <li className={styles.noCredentials}>
             <p className={styles.info}>
               {t('view_IdentityCredentials_no_credentials')}
@@ -109,10 +109,10 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
             </a>
           </li>
         ) : (
-          credentials.map((credential, index) => (
+          sporranCredentials.map((sporranCredential, index) => (
             <CredentialCard
-              key={credential.request.rootHash}
-              credential={credential}
+              key={sporranCredential.credential.rootHash}
+              sporranCredential={sporranCredential}
               expand={index + 1 === credentialCount && credentialCount < 7}
             />
           ))

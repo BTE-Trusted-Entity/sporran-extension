@@ -29,7 +29,7 @@ export function SignDidCredentialsSelect({
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const credentials = useIdentityCredentials(identity.did);
+  const sporranCredentials = useIdentityCredentials(identity.did);
 
   const ref = useRef<HTMLElement>(null);
 
@@ -37,7 +37,7 @@ export function SignDidCredentialsSelect({
 
   const onSelect = useCallback(
     (presentation: SharedCredential) => {
-      const key = presentation.credential.request.rootHash;
+      const key = presentation.sporranCredential.credential.rootHash;
       setSelected({ ...selected, [key]: presentation });
     },
     [selected],
@@ -70,10 +70,10 @@ export function SignDidCredentialsSelect({
         <IdentityLine identity={identity} className={styles.identityLine} />
 
         <ul className={styles.list}>
-          {credentials?.map((credential) => (
+          {sporranCredentials?.map((sporranCredential) => (
             <SignDidCredentialCard
-              key={credential.request.rootHash}
-              credential={credential}
+              key={sporranCredential.credential.rootHash}
+              sporranCredential={sporranCredential}
               onSelect={onSelect}
               onUnSelect={onUnSelect}
               viewRef={ref}

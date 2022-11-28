@@ -24,7 +24,7 @@ describe('CreatePresentation', () => {
     const { container } = render(
       <MemoryRouter
         initialEntries={[
-          `/identity/${identity.address}/credentials/${credentialsMock[0].request.rootHash}/presentation`,
+          `/identity/${identity.address}/credentials/${credentialsMock[0].credential.rootHash}/presentation`,
         ]}
       >
         <Route path={paths.identity.credentials.presentation}>

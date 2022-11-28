@@ -24,9 +24,9 @@ export function SignDidStart({ identity, resetCredentials }: Props) {
 
   const { address, did } = identity;
 
-  const credentials = useIdentityCredentials(did);
+  const sporranCredentials = useIdentityCredentials(did);
 
-  const noAttestedCredentials = !credentials?.some(
+  const noAttestedCredentials = !sporranCredentials?.some(
     ({ status }) => status === 'attested' || status === 'pending',
   );
 

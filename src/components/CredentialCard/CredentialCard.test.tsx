@@ -19,7 +19,7 @@ import { SignDidCredentialCard } from './SignDidCredentialCard';
 describe('CredentialCard', () => {
   it('should render collapsed card', async () => {
     const { container } = render(
-      <CredentialCard credential={credentialsMock[0]} />,
+      <CredentialCard sporranCredential={credentialsMock[0]} />,
     );
     await waitForDownloadInfo();
     await waitForPresentationInfo();
@@ -28,7 +28,7 @@ describe('CredentialCard', () => {
 
   it('should render expanded card on click', async () => {
     const { container } = render(
-      <CredentialCard credential={credentialsMock[0]} />,
+      <CredentialCard sporranCredential={credentialsMock[0]} />,
     );
     await waitForDownloadInfo();
     await waitForPresentationInfo();
@@ -43,7 +43,7 @@ describe('CredentialCard', () => {
   it('should render uncollapsible card', async () => {
     const { container } = render(
       <CredentialCard
-        credential={credentialsMock[0]}
+        sporranCredential={credentialsMock[0]}
         expand
         collapsible={false}
       />,
@@ -55,7 +55,11 @@ describe('CredentialCard', () => {
 
   it('should render expanded card without backup and delete buttons', async () => {
     const { container } = render(
-      <CredentialCard credential={credentialsMock[0]} expand buttons={false} />,
+      <CredentialCard
+        sporranCredential={credentialsMock[0]}
+        expand
+        buttons={false}
+      />,
     );
     await waitForDownloadInfo();
     await waitForPresentationInfo();
@@ -64,7 +68,7 @@ describe('CredentialCard', () => {
 
   it('should render collapsed card with backup notification', async () => {
     const { container } = render(
-      <CredentialCard credential={notDownloaded[0]} />,
+      <CredentialCard sporranCredential={notDownloaded[0]} />,
     );
     await waitForDownloadInfo();
     await waitForPresentationInfo();
@@ -73,7 +77,7 @@ describe('CredentialCard', () => {
 
   it('should render expanded card with backup notification', async () => {
     const { container } = render(
-      <CredentialCard expand credential={notDownloaded[0]} />,
+      <CredentialCard expand sporranCredential={notDownloaded[0]} />,
     );
     await waitForDownloadInfo();
     await waitForPresentationInfo();
@@ -87,7 +91,7 @@ describe('CredentialCard', () => {
         data={mockRequestCredential}
       >
         <ShareCredentialCard
-          credential={credentialsMock[0]}
+          sporranCredential={credentialsMock[0]}
           identity={identitiesMock[0]}
           onSelect={jest.fn()}
           viewRef={{ current: null }}
@@ -105,7 +109,7 @@ describe('CredentialCard', () => {
         data={mockRequestCredential}
       >
         <ShareCredentialCard
-          credential={credentialsMock[0]}
+          sporranCredential={credentialsMock[0]}
           identity={identitiesMock[0]}
           isSelected
           onSelect={jest.fn()}
@@ -125,7 +129,7 @@ describe('CredentialCard', () => {
         data={mockRequestCredential}
       >
         <ShareCredentialCard
-          credential={credentialsMock[0]}
+          sporranCredential={credentialsMock[0]}
           identity={identitiesMock[0]}
           isSelected
           onSelect={jest.fn()}
@@ -145,7 +149,7 @@ describe('CredentialCard', () => {
         data={mockRequestCredential}
       >
         <SignDidCredentialCard
-          credential={credentialsMock[0]}
+          sporranCredential={credentialsMock[0]}
           onSelect={jest.fn()}
           onUnSelect={jest.fn()}
           viewRef={{ current: null }}
@@ -163,7 +167,7 @@ describe('CredentialCard', () => {
         data={mockRequestCredential}
       >
         <SignDidCredentialCard
-          credential={credentialsMock[0]}
+          sporranCredential={credentialsMock[0]}
           onSelect={jest.fn()}
           onUnSelect={jest.fn()}
           viewRef={{ current: null }}

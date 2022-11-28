@@ -13,7 +13,7 @@ import cx from 'classnames';
 import * as styles from './CredentialCard.module.css';
 
 import {
-  Credential,
+  SporranCredential,
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
@@ -28,7 +28,7 @@ import { useScrollIntoView } from './CredentialCard';
 const noRequiredProperties: string[] = [];
 
 interface Props {
-  credential: Credential;
+  sporranCredential: SporranCredential;
   identity: Identity;
   onSelect: (value: Selected) => void;
   viewRef: RefObject<HTMLElement>;
@@ -37,7 +37,7 @@ interface Props {
 }
 
 export function ShareCredentialCard({
-  credential,
+  sporranCredential,
   identity,
   onSelect,
   viewRef,
@@ -46,7 +46,7 @@ export function ShareCredentialCard({
 }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
 
-  usePendingCredentialCheck(credential);
+  usePendingCredentialCheck(sporranCredential);
 
   const expanded = useBooleanState();
 
@@ -61,13 +61,14 @@ export function ShareCredentialCard({
     invalid: t('component_CredentialCard_invalid'),
   };
 
-  const contents = Object.entries(credential.request.claim.contents);
+  const { credential, name, attester, cTypeTitle, status } = sporranCredential;
+  const contents = Object.entries(credential.claim.contents);
 
   const data = usePopupData<ShareInput>();
 
   const { cTypes } = data.credentialRequest;
 
-  const { cTypeHash } = credential.request.claim;
+  const { cTypeHash } = credential.claim;
   const cType = find(cTypes, { cTypeHash });
 
   const requiredProperties = cType?.requiredProperties || noRequiredProperties;
@@ -80,33 +81,37 @@ export function ShareCredentialCard({
 
   useEffect(() => {
     if (expand) {
-      onSelect({ credential, identity, sharedContents: checked });
+      onSelect({ sporranCredential, identity, sharedContents: checked });
     }
-  }, [expand, onSelect, credential, identity, checked]);
+  }, [expand, onSelect, checked, sporranCredential, identity]);
 
-  const isAttested = credential.status === 'attested';
+  const isAttested = status === 'attested';
 
   const handleSelect = useCallback(() => {
-    const selected = { credential, identity, sharedContents: checked };
+    const selected = { sporranCredential, identity, sharedContents: checked };
     onSelect(selected);
-  }, [credential, onSelect, checked, identity]);
+  }, [sporranCredential, identity, checked, onSelect]);
 
   const handlePropChecked = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const name = event.target.name;
       if (event.target.checked && !includes(checked, name)) {
         setChecked([...checked, name]);
-        onSelect({ credential, identity, sharedContents: [...checked, name] });
+        onSelect({
+          sporranCredential,
+          identity,
+          sharedContents: [...checked, name],
+        });
       } else if (!includes(requiredProperties, name)) {
         setChecked(without(checked, name));
         onSelect({
-          credential,
+          sporranCredential,
           identity,
           sharedContents: without(checked, name),
         });
       }
     },
-    [checked, requiredProperties, credential, identity, onSelect],
+    [checked, requiredProperties, sporranCredential, identity, onSelect],
   );
 
   const cardRef = useRef<HTMLLIElement>(null);
@@ -122,7 +127,7 @@ export function ShareCredentialCard({
       <input
         name="credential"
         type="radio"
-        id={credential.request.rootHash}
+        id={credential.rootHash}
         onChange={handleSelect}
         onClick={expanded.on}
         checked={isSelected}
@@ -132,14 +137,14 @@ export function ShareCredentialCard({
       />
 
       {!expanded.current && (
-        <label className={styles.expand} htmlFor={credential.request.rootHash}>
+        <label className={styles.expand} htmlFor={credential.rootHash}>
           <section
             className={cx(styles.collapsedShareCredential, {
               [styles.notAttested]: !isAttested,
             })}
           >
-            <h4 className={styles.collapsedName}>{credential.name}</h4>
-            <p className={styles.collapsedValue}>{credential.attester}</p>
+            <h4 className={styles.collapsedName}>{name}</h4>
+            <p className={styles.collapsedValue}>{attester}</p>
           </section>
         </label>
       )}
@@ -161,15 +166,13 @@ export function ShareCredentialCard({
                 <dt className={styles.detailName}>
                   {t('component_CredentialCard_name')}
                 </dt>
-                <dd className={styles.detailValue}>{credential.name}</dd>
+                <dd className={styles.detailValue}>{name}</dd>
               </div>
               <div className={styles.detail}>
                 <dt className={styles.detailName}>
                   {t('component_CredentialCard_status')}
                 </dt>
-                <dd className={styles.detailValue}>
-                  {statuses[credential.status]}
-                </dd>
+                <dd className={styles.detailValue}>{statuses[status]}</dd>
               </div>
 
               {contents.map(([name, value]) => (
@@ -216,21 +219,19 @@ export function ShareCredentialCard({
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_ctype')}
               </dt>
-              <dd className={styles.detailValue}>{credential.cTypeTitle}</dd>
+              <dd className={styles.detailValue}>{cTypeTitle}</dd>
             </div>
             <div className={styles.detail}>
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_attester')}
               </dt>
-              <dd className={styles.detailValue}>{credential.attester}</dd>
+              <dd className={styles.detailValue}>{attester}</dd>
             </div>
             <div className={styles.hash}>
               <dt className={styles.detailName}>
                 {t('component_CredentialCard_hash')}
               </dt>
-              <dd className={styles.detailValue}>
-                {credential.request.rootHash}
-              </dd>
+              <dd className={styles.detailValue}>{credential.rootHash}</dd>
             </div>
           </dl>
         </section>
