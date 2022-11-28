@@ -79,6 +79,12 @@ function isLegacySporranCredential(
   return typeof input === 'object' && input !== null && 'request' in input;
 }
 
+function isLegacyICredential(input: unknown): input is LegacyICredential {
+  return (
+    typeof input === 'object' && input !== null && 'claimerSignature' in input
+  );
+}
+
 // SDK <0.29 had claimerSignature in ICredential
 interface LegacyICredential extends ICredential {
   claimerSignature?: unknown;
@@ -92,8 +98,8 @@ export function updateLegacyCredential(sporranCredential: SporranCredential) {
         credential: sporranCredential.request,
       };
 
-  const credential = modernCredential.credential as LegacyICredential;
-  if ('claimerSignature' in credential) {
+  const { credential } = modernCredential;
+  if (isLegacyICredential(credential)) {
     delete credential.claimerSignature;
   }
 
