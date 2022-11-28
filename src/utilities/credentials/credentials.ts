@@ -79,15 +79,15 @@ function isLegacySporranCredential(
   return typeof input === 'object' && input !== null && 'request' in input;
 }
 
+// SDK <0.29 had claimerSignature in ICredential
+interface LegacyICredential extends ICredential {
+  claimerSignature?: unknown;
+}
+
 function isLegacyICredential(input: unknown): input is LegacyICredential {
   return (
     typeof input === 'object' && input !== null && 'claimerSignature' in input
   );
-}
-
-// SDK <0.29 had claimerSignature in ICredential
-interface LegacyICredential extends ICredential {
-  claimerSignature?: unknown;
 }
 
 export function updateLegacyCredential(sporranCredential: SporranCredential) {
