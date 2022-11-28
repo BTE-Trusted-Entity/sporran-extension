@@ -46,9 +46,7 @@ async function submit(
 
   const txHash = extrinsic.hash.toHex();
 
-  const finalizedPromise = Blockchain.submitSignedTx(extrinsic, {
-    resolveOn: Blockchain.IS_FINALIZED,
-  });
+  const finalizedPromise = Blockchain.submitSignedTx(extrinsic);
 
   return {
     txHash,

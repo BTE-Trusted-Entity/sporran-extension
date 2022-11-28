@@ -101,9 +101,7 @@ export async function sign(seed: Uint8Array): Promise<string> {
 
 export async function submit(hash: string): Promise<DidUri> {
   const { extrinsic, did } = currentTx[hash];
-  await Blockchain.submitSignedTx(extrinsic, {
-    resolveOn: Blockchain.IS_FINALIZED,
-  });
+  await Blockchain.submitSignedTx(extrinsic);
   delete currentTx[hash];
 
   return did;

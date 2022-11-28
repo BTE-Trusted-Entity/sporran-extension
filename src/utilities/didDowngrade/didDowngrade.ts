@@ -87,8 +87,6 @@ export async function sign(
 
 export async function submit(hash: string): Promise<void> {
   const { extrinsic } = currentTx[hash];
-  await Blockchain.submitSignedTx(extrinsic, {
-    resolveOn: Blockchain.IS_FINALIZED,
-  });
+  await Blockchain.submitSignedTx(extrinsic);
   delete currentTx[hash];
 }
