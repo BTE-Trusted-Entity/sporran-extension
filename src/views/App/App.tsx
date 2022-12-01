@@ -27,7 +27,7 @@ function confirmNavigation(message: string, callback: (ok: boolean) => void) {
   callback(allowed);
 }
 
-export function App(): JSX.Element | null {
+export function App(): JSX.Element {
   const initialEntries = useInitialEntries();
 
   const popupPaths = [
