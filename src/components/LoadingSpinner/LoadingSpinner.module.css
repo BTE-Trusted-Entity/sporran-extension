@@ -8,9 +8,20 @@
   }
 }
 
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .spinner {
   height: 3rem;
   width: 3rem;
+  animation: 0s linear 1s backwards opacity;
 }
 
 .spinner::before {
