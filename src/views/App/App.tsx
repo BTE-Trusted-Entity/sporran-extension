@@ -20,6 +20,7 @@ import { AppSettings } from '../AppSettings/AppSettings';
 
 import { paths } from '../paths';
 import { LegacyDids } from '../../components/LegacyDids/LegacyDids';
+import { ApiProvider } from '../../utilities/initKiltSDK/ApiProvider';
 
 function confirmNavigation(message: string, callback: (ok: boolean) => void) {
   const allowed = window.confirm(message);
@@ -37,57 +38,59 @@ export function App(): JSX.Element {
   ];
 
   return (
-    <div className={styles.container}>
-      <GenericError>
-        <MemoryRouter
-          initialEntries={initialEntries}
-          getUserConfirmation={confirmNavigation}
-        >
-          <RouteExcept path={popupPaths}>
-            <Fragment>
-              <nav className={styles.menus}>
-                <AddIdentity />
-                <Settings />
-              </nav>
-              <LegacyDids />
-            </Fragment>
-          </RouteExcept>
+    <GenericError>
+      <MemoryRouter
+        initialEntries={initialEntries}
+        getUserConfirmation={confirmNavigation}
+      >
+        <RouteExcept path={popupPaths}>
+          <Fragment>
+            <nav className={styles.menus}>
+              <AddIdentity />
+              <Settings />
+            </nav>
+            <LegacyDids />
+          </Fragment>
+        </RouteExcept>
 
-          <Switch>
-            <Route path={paths.home} exact>
-              <Welcome />
-            </Route>
+        <Switch>
+          <Route path={paths.home} exact>
+            <Welcome />
+          </Route>
 
-            <Route path={paths.settings}>
-              <AppSettings />
-            </Route>
+          <Route path={paths.settings}>
+            <AppSettings />
+          </Route>
 
-            <Route path={paths.access}>
-              <ExternalAccess />
-            </Route>
+          <Route path={paths.access}>
+            <ExternalAccess />
+          </Route>
 
-            <Route path={paths.identity.base}>
-              <IdentitiesRouter />
-            </Route>
+          <Route path={paths.identity.base}>
+            <IdentitiesRouter />
+          </Route>
 
-            <Route path={paths.popup.base}>
-              <PopupsRouter />
-            </Route>
-          </Switch>
-        </MemoryRouter>
-      </GenericError>
-    </div>
+          <Route path={paths.popup.base}>
+            <PopupsRouter />
+          </Route>
+        </Switch>
+      </MemoryRouter>
+    </GenericError>
   );
 }
 
 export function AppWithProviders(): JSX.Element {
   return (
-    <ConfigurationProvider>
-      <IdentitiesProvider>
-        <CredentialsProvider>
-          <App />
-        </CredentialsProvider>
-      </IdentitiesProvider>
-    </ConfigurationProvider>
+    <div className={styles.container}>
+      <ApiProvider>
+        <ConfigurationProvider>
+          <IdentitiesProvider>
+            <CredentialsProvider>
+              <App />
+            </CredentialsProvider>
+          </IdentitiesProvider>
+        </ConfigurationProvider>
+      </ApiProvider>
+    </div>
   );
 }

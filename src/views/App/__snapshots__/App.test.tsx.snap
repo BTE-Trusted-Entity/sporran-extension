@@ -2,78 +2,74 @@
 
 exports[`App should render 1`] = `
 <div>
+  <nav
+    class="menus"
+  >
+    <div
+      class="wrapper"
+    >
+      <button
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="Settings"
+        class="toggle"
+        role="button"
+        tabindex="0"
+        title="Settings"
+        type="button"
+      />
+    </div>
+  </nav>
   <div
     class="container"
   >
-    <nav
-      class="menus"
+    <h1
+      class="heading"
     >
-      <div
-        class="wrapper"
-      >
-        <button
-          aria-expanded="false"
-          aria-haspopup="true"
-          aria-label="Settings"
-          class="toggle"
-          role="button"
-          tabindex="0"
-          title="Settings"
-          type="button"
-        />
-      </div>
-    </nav>
-    <div
-      class="container"
+      Welcome to your Sporran
+    </h1>
+    <h3
+      class="info"
     >
-      <h1
-        class="heading"
-      >
-        Welcome to your Sporran
-      </h1>
-      <h3
-        class="info"
-      >
-        You currently don’t have any Identities.
+      You currently don’t have any Identities.
 Add your first Identity to get started.
-      </h3>
-      <p
-        class="termsLine"
+    </h3>
+    <p
+      class="termsLine"
+    >
+      <label
+        class="agreeLabel"
       >
-        <label
-          class="agreeLabel"
-        >
-          <input
-            class="agree"
-            type="checkbox"
-          />
-          <span />
-           I have read and agree to the 
-        </label>
-        <a
-          class="terms"
-          href="https://www.sporran.org/terms"
-          rel="noreferrer"
-          target="_blank"
-        >
-          Terms & Conditions
-        </a>
-      </p>
+        <input
+          class="agree"
+          type="checkbox"
+        />
+        <span />
+         I have read and agree to the 
+      </label>
       <a
-        aria-disabled="true"
-        class="create"
-        href="/identity/create"
+        class="terms"
+        href="https://www.sporran.org/terms"
+        rel="noreferrer"
+        target="_blank"
       >
-        Create Identity
+        Terms & Conditions
       </a>
-      <a
-        aria-disabled="true"
-        class="importPhrase"
-        href="/identity/import"
-      >
-        Import an Identity from pre-existing phrase
-      </a>
-    </div>
+    </p>
+    <a
+      aria-disabled="true"
+      class="create"
+      href="/identity/create"
+    >
+      Create Identity
+    </a>
+    <a
+      aria-disabled="true"
+      class="importPhrase"
+      href="/identity/import"
+    >
+      Import an Identity from pre-existing phrase
+    </a>
   </div>
 </div>
 `;
