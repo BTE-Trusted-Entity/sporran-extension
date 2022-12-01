@@ -1,13 +1,3 @@
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(-359deg);
-  }
-}
-
 @keyframes opacity {
   from {
     opacity: 0;
@@ -15,6 +5,16 @@
 
   to {
     opacity: 1;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-359deg);
   }
 }
 
