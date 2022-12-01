@@ -61,7 +61,6 @@ export function Balance({
   return (
     <>
       <p className={styles.balanceLine}>
-        {connecting && <span className={styles.connecting}></span>}
         {t('component_Balance_label')}
         {!connecting && (
           <KiltAmount

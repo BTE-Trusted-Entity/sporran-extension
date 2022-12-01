@@ -6,15 +6,11 @@ import { connectToBackground } from './channels/ExtensionPopupMessages/Extension
 import { chromeMacBug } from './components/chromeMacBug/chromeMacBug';
 import { resizePopup } from './channels/base/PopupChannel/PopupMessages';
 
-import { initKiltSDK } from './utilities/initKiltSDK/initKiltSDK';
-
 (async () => {
   await resizePopup();
 
   await browser.tabs.query({ active: true, currentWindow: true });
   connectToBackground();
-
-  await initKiltSDK();
 
   await chromeMacBug();
   document.documentElement.lang = browser.i18n.getUILanguage();
