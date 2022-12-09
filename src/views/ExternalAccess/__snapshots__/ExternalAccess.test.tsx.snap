@@ -95,26 +95,6 @@ exports[`ExternalAccess should render 1`] = `
       title="Back"
       type="button"
     />
-    <p
-      class="stats"
-    >
-      You have 3 Identities with a
-      <span
-        class="balance"
-      >
-         Total Balance: 
-        <span
-          class="amount"
-        >
-          3.7020
-           
-          <span
-            aria-label="KILT Coin"
-            class="coin"
-          />
-        </span>
-      </span>
-    </p>
   </section>
 </div>
 `;

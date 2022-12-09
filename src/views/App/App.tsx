@@ -54,10 +54,6 @@ export function App(): JSX.Element {
         </RouteExcept>
 
         <Switch>
-          <Route path={paths.home} exact>
-            <Welcome />
-          </Route>
-
           <Route path={paths.settings}>
             <AppSettings />
           </Route>
@@ -66,13 +62,19 @@ export function App(): JSX.Element {
             <ExternalAccess />
           </Route>
 
-          <Route path={paths.identity.base}>
-            <IdentitiesRouter />
-          </Route>
+          <ApiProvider>
+            <Route path={paths.home} exact>
+              <Welcome />
+            </Route>
 
-          <Route path={paths.popup.base}>
-            <PopupsRouter />
-          </Route>
+            <Route path={paths.identity.base}>
+              <IdentitiesRouter />
+            </Route>
+
+            <Route path={paths.popup.base}>
+              <PopupsRouter />
+            </Route>
+          </ApiProvider>
         </Switch>
       </MemoryRouter>
     </GenericError>
@@ -82,15 +84,13 @@ export function App(): JSX.Element {
 export function AppWithProviders(): JSX.Element {
   return (
     <div className={styles.container}>
-      <ApiProvider>
-        <ConfigurationProvider>
-          <IdentitiesProvider>
-            <CredentialsProvider>
-              <App />
-            </CredentialsProvider>
-          </IdentitiesProvider>
-        </ConfigurationProvider>
-      </ApiProvider>
+      <ConfigurationProvider>
+        <IdentitiesProvider>
+          <CredentialsProvider>
+            <App />
+          </CredentialsProvider>
+        </IdentitiesProvider>
+      </ConfigurationProvider>
     </div>
   );
 }
