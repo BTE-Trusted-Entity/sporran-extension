@@ -290,28 +290,28 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
           `${fullDidDocument.uri}${didKey.id}` as DidResourceUri;
 
         await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });
+
+        window.close();
+        return;
       }
 
-      if (keyRelationship !== 'assertionMethod') {
-        const didKey = fullDidDocument[keyRelationship]?.[0];
-        if (!didKey) {
-          throw new Error('No extrinsic signing key stored');
-        }
-        const didKeyUri =
-          `${fullDidDocument.uri}${didKey.id}` as DidResourceUri;
-
-        const { sign } = await getIdentityCryptoFromSeed(seed);
-
-        const authorized = await Did.authorizeTx(
-          fullDidDocument.uri,
-          extrinsic,
-          sign,
-          submitter,
-        );
-        const signed = authorized.toHex();
-
-        await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });
+      const didKey = fullDidDocument[keyRelationship]?.[0];
+      if (!didKey) {
+        throw new Error('No extrinsic signing key stored');
       }
+      const didKeyUri = `${fullDidDocument.uri}${didKey.id}` as DidResourceUri;
+
+      const { sign } = await getIdentityCryptoFromSeed(seed);
+
+      const authorized = await Did.authorizeTx(
+        fullDidDocument.uri,
+        extrinsic,
+        sign,
+        submitter,
+      );
+      const signed = authorized.toHex();
+
+      await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });
 
       window.close();
     },
