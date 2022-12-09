@@ -5,7 +5,6 @@ import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './ExternalAccess.module.css';
 
-import { Stats } from '../../components/Stats/Stats';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import {
   authorizedKey,
@@ -73,7 +72,6 @@ export function ExternalAccess(): JSX.Element | null {
       </Link>
 
       <LinkBack />
-      <Stats />
     </section>
   );
 }
