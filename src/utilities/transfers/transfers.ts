@@ -27,8 +27,6 @@ export async function signTransfer(input: Input): Promise<string> {
 }
 
 export async function submitTransfer(hash: string): Promise<void> {
-  await Blockchain.submitSignedTx(currentTx[hash], {
-    resolveOn: Blockchain.IS_FINALIZED,
-  });
+  await Blockchain.submitSignedTx(currentTx[hash]);
   delete currentTx[hash];
 }
