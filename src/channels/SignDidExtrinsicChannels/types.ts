@@ -6,7 +6,7 @@ import { Origin } from '../../dApps/AccessChannels/Origin';
 
 export type SignDidExtrinsicInput = DAppName & {
   extrinsic: HexString;
-  signer: KiltAddress;
+  submitter: KiltAddress;
 };
 
 export type SignDidExtrinsicOriginInput = SignDidExtrinsicInput & Origin;

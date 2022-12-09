@@ -1,14 +1,24 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { DidResourceUri, DidServiceEndpoint } from '@kiltprotocol/types';
+import {
+  DidResourceUri,
+  DidServiceEndpoint,
+  SignRequestData,
+} from '@kiltprotocol/types';
 import * as Did from '@kiltprotocol/did';
 import { GenericExtrinsic } from '@polkadot/types';
+
+import { ConfigService } from '@kiltprotocol/config';
 
 import * as styles from './SignDidExtrinsic.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
+import {
+  deriveAttestationKeyFromSeed,
+  deriveAuthenticationKey,
+  getIdentityCryptoFromSeed,
+} from '../../utilities/identities/identities';
 import { getFullDidDocument, isFullDid } from '../../utilities/did/did';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import {
@@ -194,7 +204,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
 
   const data = usePopupData<SignDidExtrinsicOriginInput>();
 
-  const { signer, origin } = data;
+  const { submitter, origin } = data;
 
   const extrinsic = useAsyncValue(getExtrinsic, [data]);
 
@@ -238,28 +248,74 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
       const fullDidDocument = await getFullDidDocument(did);
 
       const { seed } = await passwordField.get(event);
-      const { sign } = await getIdentityCryptoFromSeed(seed);
 
       const keyRelationship = Did.getKeyRelationshipForTx(extrinsic);
-      const didKey = keyRelationship && fullDidDocument[keyRelationship]?.[0];
-      if (!didKey) {
-        throw new Error('No extrinsic signing key stored');
+
+      if (!keyRelationship) {
+        throw new Error('No key relationship found');
       }
-      const didKeyUri = `${fullDidDocument.uri}${didKey.id}` as DidResourceUri;
 
-      const authorized = await Did.authorizeTx(
-        fullDidDocument.uri,
-        extrinsic,
-        sign,
-        signer,
-      );
-      const signed = authorized.toHex();
+      if (keyRelationship === 'assertionMethod') {
+        const api = ConfigService.get('api');
+        const attestationKey = deriveAttestationKeyFromSeed(seed);
 
-      await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });
+        async function sign({ data, keyRelationship }: SignRequestData) {
+          const signingKey =
+            keyRelationship === 'assertionMethod'
+              ? attestationKey
+              : deriveAuthenticationKey(seed);
+          const signature = signingKey.sign(data, { withType: false });
+          const keyType = signingKey.type;
+
+          return { signature, keyType };
+        }
+
+        const authorized = await Did.authorizeBatch({
+          batchFunction: api.tx.utility.batchAll,
+          did: fullDidDocument.uri,
+          extrinsics: [
+            api.tx.did.setAttestationKey(Did.publicKeyToChain(attestationKey)),
+            extrinsic,
+            api.tx.did.removeAttestationKey(),
+          ],
+          sign,
+          submitter,
+        });
+
+        const signed = authorized.toHex();
+
+        // Assertion key will not exist in the DID document, so we return authentication key instead
+        const didKey = fullDidDocument.authentication[0];
+        const didKeyUri =
+          `${fullDidDocument.uri}${didKey.id}` as DidResourceUri;
+
+        await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });
+      }
+
+      if (keyRelationship !== 'assertionMethod') {
+        const didKey = fullDidDocument[keyRelationship]?.[0];
+        if (!didKey) {
+          throw new Error('No extrinsic signing key stored');
+        }
+        const didKeyUri =
+          `${fullDidDocument.uri}${didKey.id}` as DidResourceUri;
+
+        const { sign } = await getIdentityCryptoFromSeed(seed);
+
+        const authorized = await Did.authorizeTx(
+          fullDidDocument.uri,
+          extrinsic,
+          sign,
+          submitter,
+        );
+        const signed = authorized.toHex();
+
+        await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });
+      }
 
       window.close();
     },
-    [extrinsic, signer, passwordField, did, isForbidden],
+    [extrinsic, submitter, passwordField, did, isForbidden],
   );
 
   const handleCancelClick = useCallback(async () => {

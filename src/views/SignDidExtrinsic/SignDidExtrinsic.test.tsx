@@ -20,7 +20,7 @@ const input: SignDidExtrinsicOriginInput = {
   dAppName: 'dApp',
   origin: 'https://example.org/foo',
   extrinsic: '0x1c0426000c666f6f',
-  signer: '4tMMYZHsFfqzfCsgCPLJSBmomBv2d6cBEYzHKMGVKz2VjACR',
+  submitter: '4tMMYZHsFfqzfCsgCPLJSBmomBv2d6cBEYzHKMGVKz2VjACR',
 };
 
 jest.mock('./didExtrinsic');

@@ -117,7 +117,7 @@ interface IdentityDidCrypto {
   ) => Promise<IEncryptedMessage>;
 }
 
-function deriveAuthenticationKey(seed: Uint8Array) {
+export function deriveAuthenticationKey(seed: Uint8Array) {
   const baseKey = Crypto.makeKeypairFromSeed(seed, 'sr25519');
   return baseKey.derive('//did//0') as typeof baseKey;
 }
@@ -129,6 +129,11 @@ export function deriveEncryptionKeyFromSeed(
   const { path } = keyExtractPath('//did//keyAgreement//0');
   const { secretKey } = keyFromPath(keypair, path, 'sr25519');
   return Crypto.makeEncryptionKeypairFromSeed(blake2AsU8a(secretKey));
+}
+
+export function deriveAttestationKeyFromSeed(seed: Uint8Array) {
+  const baseKey = Crypto.makeKeypairFromSeed(seed, 'sr25519');
+  return baseKey.derive('//did//assertion//0') as typeof baseKey;
 }
 
 function deriveEncryptionKeyLegacy(seed: Uint8Array) {
