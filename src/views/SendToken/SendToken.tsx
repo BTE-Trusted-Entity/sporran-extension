@@ -226,7 +226,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
 
   const [tipPercents, setTipPercents] = useState(0);
   const tipBN = useMemo(() => {
-    const preciseTipBN = amountBN.muln(tipPercents / 100);
+    const preciseTipBN = amountBN.muln(tipPercents).divn(100);
 
     // Technically tip is costs, but if we round it up here the user might not be able to set tip below 0.0002,
     // while if we round it down the user will always able to increase it.
@@ -249,7 +249,9 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
 
     const remainingTransferable = maximum.sub(amountBN);
     // Including some tip slightly increases the transaction size and the fee, allow some room for it
-    const remainingAdjustedForTip = remainingTransferable.sub(fee.muln(0.05));
+    const remainingAdjustedForTip = remainingTransferable.sub(
+      fee.muln(5).divn(100),
+    );
 
     const finalTip = existentialWarning
       ? BN.max(remainingAdjustedForTip, tipBN)
@@ -451,7 +453,10 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
           disabled={
             amountBN.gtn(0) &&
             !!maximum &&
-            amountBN.muln((100 + tipPercents + 1) / 100).gt(maximum)
+            amountBN
+              .muln(100 + tipPercents + 1)
+              .divn(100)
+              .gt(maximum)
           }
         />
       </p>
