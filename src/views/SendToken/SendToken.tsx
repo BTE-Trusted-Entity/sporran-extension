@@ -226,11 +226,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
 
   const [tipPercents, setTipPercents] = useState(0);
   const tipBN = useMemo(() => {
-    if (!numericAmount) {
-      return new BN(0);
-    }
-    const preciseTip = (tipPercents / 100) * numericAmount;
-    const preciseTipBN = BalanceUtils.toFemtoKilt(preciseTip);
+    const preciseTipBN = amountBN.muln(tipPercents / 100);
 
     // Technically tip is costs, but if we round it up here the user might not be able to set tip below 0.0002,
     // while if we round it down the user will always able to increase it.
@@ -238,7 +234,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
     const roundedTip = parseFloatLocale(roundedTipString);
 
     return BalanceUtils.toFemtoKilt(roundedTip);
-  }, [numericAmount, tipPercents]);
+  }, [amountBN, tipPercents]);
 
   const { totalCosts, existentialWarning, finalTip } = useMemo(() => {
     const totalCosts = tipBN.add(fee || new BN(0));
@@ -453,11 +449,9 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
           title={t('view_SendToken_tip_increase')}
           aria-label={t('view_SendToken_tip_increase')}
           disabled={
-            !!numericAmount &&
+            amountBN.gtn(0) &&
             !!maximum &&
-            BalanceUtils.toFemtoKilt(
-              ((100 + tipPercents + 1) / 100) * numericAmount,
-            ).gt(maximum)
+            amountBN.muln((100 + tipPercents + 1) / 100).gt(maximum)
           }
         />
       </p>
