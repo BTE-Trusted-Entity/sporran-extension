@@ -21,6 +21,7 @@ import { AppSettings } from '../AppSettings/AppSettings';
 import { paths } from '../paths';
 import { LegacyDids } from '../../components/LegacyDids/LegacyDids';
 import { ApiProvider } from '../../utilities/initKiltSDK/ApiProvider';
+import { useIdentities } from '../../utilities/identities/identities';
 
 function confirmNavigation(message: string, callback: (ok: boolean) => void) {
   const allowed = window.confirm(message);
@@ -36,6 +37,9 @@ export function App(): JSX.Element {
     paths.popup.claim,
     paths.popup.signDidExtrinsic,
   ];
+
+  // Without this workaround the IdentitiesRouter will never load identities, seems like a library bug
+  useIdentities().data;
 
   return (
     <GenericError>
