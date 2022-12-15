@@ -3,8 +3,8 @@ import { DidDocument, DidServiceEndpoint } from '@kiltprotocol/types';
 import { ConfigService } from '@kiltprotocol/config';
 import { connect } from '@kiltprotocol/core';
 
-import { identitiesMock, render, act } from '../../testing/testing';
-import { getFullDidDocument } from '../../utilities/did/did';
+import { identitiesMock, render, screen } from '../../testing/testing';
+import { useFullDidDocument } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 import '../../components/useCopyButton/useCopyButton.mock';
 
@@ -38,21 +38,19 @@ const api = {
 } as Awaited<ReturnType<typeof connect>>;
 ConfigService.set({ api });
 
-const documentPromise = Promise.resolve({ service } as DidDocument);
-jest.mock('../../utilities/did/did');
-jest.mocked(getFullDidDocument).mockReturnValue(documentPromise);
+jest.mocked(useFullDidDocument).mockReturnValue({ service } as DidDocument);
 
 describe('DidEndpointsForm', () => {
   it('should match the snapshot', async () => {
     const { container } = render(
       <MemoryRouter
         initialEntries={[
-          generatePath(paths.identity.did.manage.endpoints.start, {
+          generatePath(paths.identity.did.manage.endpoints.add, {
             address: 'FOO',
           }),
         ]}
       >
-        <Route path={paths.identity.did.manage.endpoints.start}>
+        <Route path={paths.identity.did.manage.endpoints.edit}>
           <DidEndpointsForm
             identity={identity}
             onAdd={jest.fn()}
@@ -62,9 +60,8 @@ describe('DidEndpointsForm', () => {
       </MemoryRouter>,
     );
 
-    await act(async () => {
-      await documentPromise;
-    });
+    await screen.getByLabelText('URL');
+
     expect(container).toMatchSnapshot();
   });
 });

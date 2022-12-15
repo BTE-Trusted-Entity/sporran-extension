@@ -31,7 +31,7 @@ function useScrollEndpoint(ref: RefObject<HTMLLIElement>, id: string) {
 
   useEffect(() => {
     if (decodeURIComponent(params.id) === id && ref.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      ref.current.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
     }
   }, [id, params.id, ref]);
 }
