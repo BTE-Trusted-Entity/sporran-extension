@@ -42,6 +42,7 @@ jest.mocked(useFullDidDocument).mockReturnValue({ service } as DidDocument);
 
 describe('DidEndpointsForm', () => {
   it('should match the snapshot', async () => {
+    const mock = jest.spyOn(Math, 'random').mockReturnValue(0.123456);
     const { container } = render(
       <MemoryRouter
         initialEntries={[
@@ -63,5 +64,6 @@ describe('DidEndpointsForm', () => {
     await screen.getByLabelText('URL');
 
     expect(container).toMatchSnapshot();
+    mock.mockClear();
   });
 });

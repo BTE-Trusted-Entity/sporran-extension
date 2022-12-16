@@ -103,7 +103,7 @@ exports[`DidEndpointsForm should match the snapshot 1`] = `
                 class="input"
                 name="id"
                 required=""
-                value="458512"
+                value="123456"
               />
             </label>
           </div>
