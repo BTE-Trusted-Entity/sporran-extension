@@ -318,14 +318,20 @@ export async function importIdentity(
   const lightDidDocument = getLightDidFromSeed(seed);
   const resolved = await Did.resolve(lightDidDocument.uri);
 
-  const did =
-    resolved && resolved.metadata && resolved.metadata.canonicalId
-      ? resolved.metadata.canonicalId
-      : lightDidDocument.uri;
+  const did = resolved?.metadata?.canonicalId || lightDidDocument.uri;
+  const deactivatedDid = resolved?.metadata?.deactivated
+    ? resolved.metadata.canonicalId
+    : undefined;
 
   const { name, index } = await getIdentityName();
 
-  const identity = { name, address, did, index };
+  const identity = {
+    name,
+    address,
+    index,
+    ...(!deactivatedDid && { did }),
+    ...(deactivatedDid && { deactivatedDid }),
+  };
   await saveIdentity(identity);
 
   return identity;
@@ -363,7 +369,11 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
     : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
 
   if (wasOnChain && !isOnChain) {
-    await saveIdentity({ ...identity, did: undefined });
+    await saveIdentity({
+      ...identity,
+      did: undefined,
+      deletedDid: fullDid,
+    });
   }
   if (!wasOnChain && isOnChain) {
     await saveIdentity({ ...identity, did: fullDid });

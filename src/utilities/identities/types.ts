@@ -5,6 +5,7 @@ export interface Identity {
   did?: DidUri;
   name: string;
   index: number;
+  deletedDid?: DidUri;
 }
 
 export type IdentitiesMap = Record<string, Identity>;
