@@ -319,7 +319,7 @@ export async function importIdentity(
   const resolved = await Did.resolve(lightDidDocument.uri);
 
   const did = resolved?.metadata?.canonicalId || lightDidDocument.uri;
-  const deactivatedDid = resolved?.metadata?.deactivated
+  const deletedDid = resolved?.metadata?.deactivated
     ? resolved.metadata.canonicalId
     : undefined;
 
@@ -329,8 +329,8 @@ export async function importIdentity(
     name,
     address,
     index,
-    ...(!deactivatedDid && { did }),
-    ...(deactivatedDid && { deactivatedDid }),
+    ...(!deletedDid && { did }),
+    ...(deletedDid && { deletedDid }),
   };
   await saveIdentity(identity);
 
