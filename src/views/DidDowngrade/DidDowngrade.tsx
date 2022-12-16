@@ -108,7 +108,7 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
         await saveIdentity({
           ...identity,
           did: undefined,
-          deletedDid: did,
+          deletedDid: identity.did,
         });
 
         if (sporranCredentials) {
