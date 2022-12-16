@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Link, Prompt, useParams } from 'react-router-dom';
+import { Link, Prompt, Redirect, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { stringToU8a } from '@polkadot/util';
 import { DidServiceEndpoint } from '@kiltprotocol/types';
@@ -21,10 +21,9 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { Identity } from '../../utilities/identities/types';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
-import { getFullDidDocument } from '../../utilities/did/did';
+import { useFullDidDocument } from '../../utilities/did/did';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { generatePath, paths } from '../paths';
-import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { getIdentityDid } from '../../utilities/identities/identities';
 
 function useScrollEndpoint(ref: RefObject<HTMLLIElement>, id: string) {
@@ -32,7 +31,7 @@ function useScrollEndpoint(ref: RefObject<HTMLLIElement>, id: string) {
 
   useEffect(() => {
     if (decodeURIComponent(params.id) === id && ref.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      ref.current.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
     }
   }, [id, params.id, ref]);
 }
@@ -300,10 +299,8 @@ export function DidEndpointsForm({
   const { address } = identity;
   const did = getIdentityDid(identity);
 
-  const endpoints = useAsyncValue(
-    async (did) => (await getFullDidDocument(did)).service || [],
-    [did],
-  );
+  const document = useFullDidDocument(did);
+  const endpoints = document?.service || [];
 
   const api = ConfigService.get('api');
   const maxEndpoints = api.consts.did.maxNumberOfServicesPerDid.toNumber();
@@ -313,8 +310,18 @@ export function DidEndpointsForm({
     endpoints && maxEndpoints && endpoints.length >= maxEndpoints,
   );
   const hasFewEndpoints = endpoints && endpoints.length < 7;
-  const hasNoEndpoints = !endpoints || endpoints.length === 0;
+  const hasNoEndpoints = endpoints && endpoints.length === 0;
   const collapsible = !hasNoEndpoints;
+
+  if (hasNoEndpoints) {
+    return (
+      <Redirect
+        to={generatePath(paths.identity.did.manage.endpoints.add, {
+          address,
+        })}
+      />
+    );
+  }
 
   const startUrl = generatePath(paths.identity.did.manage.endpoints.start, {
     address,
