@@ -18,8 +18,8 @@ export class WindowChannel<Input, Output> {
   output: string;
 
   constructor(type: string) {
-    this.input = `sporranExtension.injectedScript.${type}Input`;
-    this.output = `sporranExtension.injectedScript.${type}Output`;
+    this.input = `anotherExtension.injectedScript.${type}Input`;
+    this.output = `anotherExtension.injectedScript.${type}Output`;
   }
 
   emitInput(input: Input): string {

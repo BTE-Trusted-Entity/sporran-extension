@@ -3,10 +3,10 @@
     "message": "en"
   },
   "manifest_name": {
-    "message": "Sporran"
+    "message": "Another"
   },
   "manifest_short_name": {
-    "message": "Sporran"
+    "message": "Another"
   },
   "manifest_description": {
     "message": "Sporran. The wallet for your KILTs and credentials."

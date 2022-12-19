@@ -47,6 +47,7 @@ async function storeMessageFromSporran(
 ): Promise<void> {
   unprocessedMessagesFromSporran.push(message);
 }
+
 async function startSession(
   unsafeDAppName: string,
   dAppEncryptionKeyId: DidResourceUri,
@@ -60,7 +61,7 @@ async function startSession(
 
   onMessageFromSporran = storeMessageFromSporran;
 
-  const specVersion = apiWindow.kilt.sporran?.specVersion;
+  const specVersion = apiWindow.kilt.another?.specVersion;
 
   // TODO: reduce code duplication
   if (specVersion === '3.0') {
@@ -180,7 +181,7 @@ const { version } = configuration;
 const apiWindow = window as unknown as {
   kilt: {
     meta?: { versions: { credentials: string } };
-    sporran?: Partial<
+    another?: Partial<
       InjectedWindowProvider<PubSubSessionV1 | PubSubSessionV2>
     >;
   };
@@ -196,12 +197,12 @@ function initialize() {
     ? '3.0'
     : '1.0';
 
-  apiWindow.kilt.sporran ||= {
+  apiWindow.kilt.another ||= {
     signWithDid,
     signExtrinsicWithDid,
     getSignedDidCreationExtrinsic,
     startSession,
-    name: 'Sporran', // manifest_name
+    name: 'Another', // manifest_name
     version,
     specVersion,
   };
@@ -217,7 +218,7 @@ function main() {
     return;
   }
 
-  if (apiWindow.kilt.sporran) {
+  if (apiWindow.kilt.another) {
     return;
   }
 

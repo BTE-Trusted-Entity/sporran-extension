@@ -6,7 +6,7 @@ import { SignerInjectedAPI } from '../SignerInjectedAPI/SignerInjectedAPI';
 
 export function injectIntoDApp(version: string): void {
   const sporranMeta = {
-    name: 'Sporran', // manifest_name
+    name: 'Another', // manifest_name
     version,
   };
 
