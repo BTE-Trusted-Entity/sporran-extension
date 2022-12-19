@@ -31,7 +31,7 @@ export const moreIdentitiesMock: IdentitiesMap = {
   '4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB': {
     name: 'Identity with deleted on-chain DID',
     address: '4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB',
-    did: 'did:kilt:light:004tPoYT9j4i429JktnyX9EEu9StL58YfdPCi8cUkYnvtAKRbK',
+    deletedDid: 'did:kilt:4tPoYT9j4i429JktnyX9EEu9StL58YfdPCi8cUkYnvtAKRbK',
     index: 4,
   },
   // unit faint retreat broken owner conduct summer exotic comic near essay during

@@ -12,7 +12,6 @@ import {
 import * as styles from './DidUpgradeExplainer.module.css';
 
 import { Identity } from '../../utilities/identities/types';
-import { parseDidUri } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
@@ -35,7 +34,7 @@ interface Props {
 export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { address, did } = identity;
+  const { address, did, deletedDid } = identity;
 
   const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
 
@@ -80,9 +79,9 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
 
           <IdentitySlide identity={identity} />
 
-          {did && (
+          {deletedDid && (
             <CopyValue
-              value={parseDidUri(did).fullDid}
+              value={deletedDid}
               label="DID"
               className={styles.didLine}
             />

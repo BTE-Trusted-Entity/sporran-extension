@@ -105,7 +105,11 @@ export function DidDowngrade({ identity }: Props): JSX.Element | null {
         setTxHash(hash);
 
         await submit(hash);
-        await saveIdentity({ ...identity, did: undefined });
+        await saveIdentity({
+          ...identity,
+          did: undefined,
+          deletedDid: identity.did,
+        });
 
         if (sporranCredentials) {
           await invalidateCredentials(sporranCredentials);

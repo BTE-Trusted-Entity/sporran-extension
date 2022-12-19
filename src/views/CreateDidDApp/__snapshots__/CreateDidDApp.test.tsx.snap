@@ -529,14 +529,16 @@ exports[`CreateDidDApp should render with removed DID 1`] = `
       </button>
       <button
         class="submit"
+        disabled=""
         type="submit"
       >
         Sign
       </button>
       <output
         class="errorTooltip"
-        hidden=""
-      />
+      >
+        DID removed from chain
+      </output>
     </p>
   </form>
 </div>
