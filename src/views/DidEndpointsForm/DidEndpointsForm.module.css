@@ -18,7 +18,7 @@
 
 .loading {
   composes: spinner from '../../components/LoadingSpinner/LoadingSpinner.module.css';
-  margin: auto;
+  margin: 5rem auto;
 }
 
 .list {
@@ -44,14 +44,24 @@
   composes: card;
 }
 
-.expand {
-  composes: expand from '../../components/Card/Card.module.css';
+.cardHeading {
   composes: buttonText from '../../components/Typography/Typography.module.css';
   font-size: 0.75rem;
   padding: 0.75rem 0;
+  margin: 0;
+}
+
+.expand {
+  composes: expand from '../../components/Card/Card.module.css';
+  composes: cardHeading;
   height: auto;
   background-position: right center;
   text-decoration: none;
+}
+
+.addCollapse {
+  composes: expand;
+  background-image: url('../../components/images/chevron-up.svg');
 }
 
 .collapsedCard {

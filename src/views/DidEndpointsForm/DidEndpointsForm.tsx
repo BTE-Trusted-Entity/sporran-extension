@@ -198,21 +198,30 @@ function DidNewEndpoint({
     [tooMany, maxIdLength, maxTypeLength, maxUrlLength, dirty, onAdd, t],
   );
 
+  const isCollapsible = Boolean(startUrl);
+
   return (
-    <li
-      className={styles.add}
-      aria-expanded={Boolean(startUrl) && isAdding}
-      ref={ref}
-    >
-      <Link
-        className={styles.expand}
-        to={generatePath(paths.identity.did.manage.endpoints.add, {
-          address: params.address,
-        })}
-        replace
-      >
-        {t('view_DidEndpointsForm_add')}
-      </Link>
+    <li className={styles.add} aria-expanded={isAdding} ref={ref}>
+      {!isCollapsible && (
+        <h2 className={styles.cardHeading}>{t('view_DidEndpointsForm_add')}</h2>
+      )}
+
+      {isCollapsible && startUrl && (
+        <Link
+          className={isAdding ? styles.addCollapse : styles.expand}
+          to={
+            isAdding
+              ? startUrl
+              : generatePath(paths.identity.did.manage.endpoints.edit, {
+                  address: params.address,
+                  id: 'add',
+                })
+          }
+          replace
+        >
+          {t('view_DidEndpointsForm_add')}
+        </Link>
+      )}
 
       {isAdding && (
         <form onSubmit={handleSubmit} onInput={dirty.on}>
@@ -300,24 +309,30 @@ export function DidEndpointsForm({
   const did = getIdentityDid(identity);
 
   const document = useFullDidDocument(did);
-  const endpoints = document?.service || [];
+
+  const params: { id: string } = useParams();
+
+  if (!document) {
+    return <div className={styles.loading} />;
+  }
+
+  const endpoints = document.service || [];
 
   const api = ConfigService.get('api');
   const maxEndpoints = api.consts.did.maxNumberOfServicesPerDid.toNumber();
 
   const lastEndpoint = last(endpoints);
-  const hasTooManyEndpoints = Boolean(
-    endpoints && maxEndpoints && endpoints.length >= maxEndpoints,
-  );
-  const hasFewEndpoints = endpoints && endpoints.length < 7;
-  const hasNoEndpoints = endpoints && endpoints.length === 0;
+  const hasTooManyEndpoints = Boolean(endpoints.length >= maxEndpoints);
+  const hasFewEndpoints = endpoints.length < 7;
+  const hasNoEndpoints = endpoints.length === 0;
   const collapsible = !hasNoEndpoints;
 
-  if (hasNoEndpoints) {
+  if (hasNoEndpoints && params.id !== 'add') {
     return (
       <Redirect
-        to={generatePath(paths.identity.did.manage.endpoints.add, {
+        to={generatePath(paths.identity.did.manage.endpoints.edit, {
           address,
+          id: 'add',
         })}
       />
     );
@@ -337,17 +352,13 @@ export function DidEndpointsForm({
       <CopyValue value={did} label="DID" className={styles.didLine} />
 
       <ul className={styles.list}>
-        {!endpoints && <div className={styles.loading} />}
+        <DidNewEndpoint
+          onAdd={onAdd}
+          tooMany={hasTooManyEndpoints}
+          startUrl={collapsible ? startUrl : undefined}
+        />
 
-        {endpoints && (
-          <DidNewEndpoint
-            onAdd={onAdd}
-            tooMany={hasTooManyEndpoints}
-            startUrl={collapsible ? startUrl : undefined}
-          />
-        )}
-
-        {endpoints?.map((endpoint) => (
+        {endpoints.map((endpoint) => (
           <DidEndpointCard
             key={endpoint.id}
             endpoint={endpoint}

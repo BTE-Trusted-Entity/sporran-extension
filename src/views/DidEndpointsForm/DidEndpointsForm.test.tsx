@@ -38,15 +38,41 @@ const api = {
 } as Awaited<ReturnType<typeof connect>>;
 ConfigService.set({ api });
 
-jest.mocked(useFullDidDocument).mockReturnValue({ service } as DidDocument);
-
 describe('DidEndpointsForm', () => {
   it('should match the snapshot', async () => {
+    jest.mocked(useFullDidDocument).mockReturnValue({ service } as DidDocument);
+
     const mock = jest.spyOn(Math, 'random').mockReturnValue(0.123456);
     const { container } = render(
       <MemoryRouter
         initialEntries={[
-          generatePath(paths.identity.did.manage.endpoints.add, {
+          generatePath(paths.identity.did.manage.endpoints.start, {
+            address: 'FOO',
+          }),
+        ]}
+      >
+        <Route path={paths.identity.did.manage.endpoints.edit}>
+          <DidEndpointsForm
+            identity={identity}
+            onAdd={jest.fn()}
+            onRemove={jest.fn()}
+          />
+        </Route>
+      </MemoryRouter>,
+    );
+
+    expect(container).toMatchSnapshot();
+    mock.mockClear();
+  });
+
+  it('should match the snapshot when no service endpoints', async () => {
+    jest.mocked(useFullDidDocument).mockReturnValue({} as DidDocument);
+
+    const mock = jest.spyOn(Math, 'random').mockReturnValue(0.123456);
+    const { container } = render(
+      <MemoryRouter
+        initialEntries={[
+          generatePath(paths.identity.did.manage.endpoints.start, {
             address: 'FOO',
           }),
         ]}
