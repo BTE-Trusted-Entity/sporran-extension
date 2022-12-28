@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { FormEvent, useCallback } from 'react';
 
-import ky from 'ky';
-
 import * as styles from './DidUpgradeEuro.module.css';
 
 import { Identity } from '../../utilities/identities/types';
@@ -21,37 +19,13 @@ import { getTransaction } from '../../utilities/didUpgrade/didUpgrade';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { useTXDSubmitter } from '../../utilities/useTXDSubmitter/useTXDSubmitter';
 import {
-  getEndpoint,
-  KnownEndpoints,
-} from '../../utilities/endpoints/endpoints';
-import {
   getIdentityCryptoFromSeed,
   getLightDidFromSeed,
 } from '../../utilities/identities/identities';
-
-const checkoutURLs: Record<KnownEndpoints, string> = {
-  'wss://kilt-rpc.dwellir.com': 'https://checkout.kilt.io',
-  'wss://spiritnet.kilt.io': 'https://checkout.kilt.io',
-  'wss://peregrine.kilt.io/parachain-public-ws': 'https://dev-checkout.kilt.io',
-  'wss://peregrine-stg.kilt.io/para': 'https://dev-checkout.kilt.io',
-  'wss://sporran-testnet.kilt.io': 'https://dev-checkout.kilt.io',
-};
-
-async function getCheckoutURL() {
-  const endpoint = await getEndpoint();
-  return checkoutURLs[endpoint];
-}
-
-async function getCost() {
-  const checkout = await getCheckoutURL();
-
-  const cost = await ky.get(`${checkout}/api/cost`).text();
-  return parseFloat(cost).toLocaleString(undefined, {
-    style: 'currency',
-    currency: 'EUR',
-    currencyDisplay: 'code',
-  });
-}
+import {
+  getCheckoutURL,
+  getCheckoutCosts,
+} from '../../utilities/checkout/checkout';
 
 interface Props {
   identity: Identity;
@@ -64,7 +38,7 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
 
   const passwordField = usePasswordField();
 
-  const cost = useAsyncValue(getCost, []);
+  const cost = useAsyncValue(getCheckoutCosts, [])?.did;
   const submitter = useTXDSubmitter();
 
   const handleSubmit = useCallback(
@@ -99,7 +73,7 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
   );
 
   if (!cost) {
-    return null;
+    return null; // network data pending
   }
 
   return (

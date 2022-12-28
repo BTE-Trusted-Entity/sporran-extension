@@ -7,7 +7,7 @@ import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { DidUpgradeEuro } from './DidUpgradeEuro';
 
 jest.mock('../../utilities/useAsyncValue/useAsyncValue');
-jest.mocked(useAsyncValue).mockReturnValue('EUR 4,00');
+jest.mocked(useAsyncValue).mockReturnValue({ did: 'EUR 4,00' });
 
 describe('DidUpgradeEuro', () => {
   it('should render', async () => {

@@ -1359,6 +1359,29 @@
       }
     }
   },
+  "view_W3NCreateSignEuro_heading": {
+    "message": "Prepare Transaction"
+  },
+  "view_W3NCreateSignEuro_subline": {
+    "message": "Connect a web3name to your on-chain DID"
+  },
+  "view_W3NCreateSignEuro_label": {
+    "message": "web3name: "
+  },
+  "view_W3NCreateSignEuro_info": {
+    "message": "After signing you will go to the checkout page to pay with "
+  },
+  "view_W3NCreateSignEuro_paypal": {
+    "message": "PayPal"
+  },
+  "view_W3NCreateSignEuro_cost": {
+    "message": " (total cost: $cost$).",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
+  },
   "view_W3NRemove_heading": {
     "message": "Remove web3name"
   },
