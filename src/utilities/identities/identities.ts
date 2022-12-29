@@ -316,12 +316,14 @@ export async function importIdentity(
   const seed = mnemonicToMiniSecret(backupPhrase);
 
   const lightDidDocument = getLightDidFromSeed(seed);
-  const resolved = await Did.resolve(lightDidDocument.uri);
+  const lightDid = lightDidDocument.uri;
 
-  const did = resolved?.metadata?.canonicalId || lightDidDocument.uri;
-  const deletedDid = resolved?.metadata?.deactivated
-    ? resolved.metadata.canonicalId
-    : undefined;
+  const resolved = await Did.resolve(lightDid);
+  const fullDid = resolved?.metadata?.canonicalId;
+
+  const deactivated = resolved?.metadata?.deactivated;
+  const did = deactivated ? undefined : fullDid || lightDid;
+  const deletedDid = deactivated ? Did.getFullDidUri(lightDid) : undefined;
 
   const { name, index } = await getIdentityName();
 
@@ -329,8 +331,8 @@ export async function importIdentity(
     name,
     address,
     index,
-    ...(!deletedDid && { did }),
-    ...(deletedDid && { deletedDid }),
+    ...(!deactivated && { did }),
+    ...(deactivated && { deletedDid }),
   };
   await saveIdentity(identity);
 
