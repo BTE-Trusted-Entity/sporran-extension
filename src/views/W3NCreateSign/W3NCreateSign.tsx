@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { ConfigService } from '@kiltprotocol/config';
-import { DidDocument } from '@kiltprotocol/types';
+import { DidUri } from '@kiltprotocol/types';
 import * as Did from '@kiltprotocol/did';
 
 import * as styles from './W3NCreateSign.module.css';
@@ -22,7 +22,6 @@ import {
   getIdentityCryptoFromSeed,
   getIdentityDid,
 } from '../../utilities/identities/identities';
-import { useFullDidDocument } from '../../utilities/did/did';
 import { TxStatusModal } from '../../components/TxStatusModal/TxStatusModal';
 import {
   asKiltCoins,
@@ -35,18 +34,13 @@ import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
 import { makeFakeIdentityCrypto } from '../../utilities/makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
-async function getFee(fullDid?: DidDocument) {
-  if (!fullDid) {
-    return undefined;
-  }
-
+async function getFee(did: DidUri) {
   const { address, keypair, sign } = makeFakeIdentityCrypto();
 
   const api = ConfigService.get('api');
-  const extrinsic = api.tx.web3Names.claim('01234567890123456789012345678901');
   const authorized = await Did.authorizeTx(
-    fullDid.uri,
-    extrinsic,
+    did,
+    api.tx.web3Names.claim('01234567890123456789012345678901'),
     sign,
     address,
   );
@@ -70,8 +64,7 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
     address,
   });
 
-  const fullDidDocument = useFullDidDocument(did);
-  const fee = useAsyncValue(getFee, [fullDidDocument]);
+  const fee = useAsyncValue(getFee, [did]);
   const deposit = useDepositWeb3Name(did)?.amount;
 
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
@@ -80,28 +73,25 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
-      if (!fullDidDocument) {
-        return;
-      }
 
       const { keypair, seed } = await passwordField.get(event);
       const { sign } = await getIdentityCryptoFromSeed(seed);
 
       const api = ConfigService.get('api');
       const authorized = await Did.authorizeTx(
-        fullDidDocument.uri,
+        did,
         api.tx.web3Names.claim(web3name),
         sign,
         keypair.address,
       );
       await submit(keypair, authorized);
     },
-    [fullDidDocument, passwordField, submit, web3name],
+    [did, passwordField, submit, web3name],
   );
 
   const portalRef = useRef<HTMLDivElement>(null);
 
-  if (!deposit || !fee || !fullDidDocument) {
+  if (!deposit || !fee) {
     return null; // blockchain data pending
   }
 
