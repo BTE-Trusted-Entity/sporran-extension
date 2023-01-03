@@ -1,14 +1,6 @@
 import { HexString } from '@polkadot/util/types';
 import { useContext, useEffect, useMemo } from 'react';
-import {
-  cloneDeep,
-  isEqual,
-  omit,
-  pick,
-  pull,
-  reject,
-  without,
-} from 'lodash-es';
+import { isEqual, omit, pick, pull, reject, without } from 'lodash-es';
 import { DidUri, ICredential } from '@kiltprotocol/types';
 import { ConfigService } from '@kiltprotocol/config';
 import { Attestation, Credential } from '@kiltprotocol/core';
@@ -230,8 +222,10 @@ export function getUnsignedPresentationDownload(
   const allProperties = Object.keys(credential.claim.contents);
   const needRemoving = without(allProperties, ...properties);
 
-  const credentialCopy = cloneDeep(credential);
-  Credential.removeClaimProperties(credentialCopy, needRemoving);
+  const credentialCopy = Credential.removeClaimProperties(
+    credential,
+    needRemoving,
+  );
 
   const blob = jsonToBase64(credentialCopy);
   const url = `data:text/json;base64,${blob}`;

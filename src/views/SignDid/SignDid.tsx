@@ -5,7 +5,7 @@ import { DidResourceUri, ICredential } from '@kiltprotocol/types';
 import { Credential } from '@kiltprotocol/core';
 import { Crypto } from '@kiltprotocol/utils';
 
-import { without, cloneDeep } from 'lodash-es';
+import { without } from 'lodash-es';
 
 import * as styles from './SignDid.module.css';
 
@@ -74,8 +74,10 @@ export function SignDid({
         const allProperties = Object.keys(credential.claim.contents);
         const needRemoving = without(allProperties, ...sharedContents);
 
-        const credentialCopy = cloneDeep(credential);
-        Credential.removeClaimProperties(credentialCopy, needRemoving);
+        const credentialCopy = Credential.removeClaimProperties(
+          credential,
+          needRemoving,
+        );
 
         presentations.push({
           name: sporranCredential.name,
