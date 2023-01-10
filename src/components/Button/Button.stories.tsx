@@ -10,7 +10,7 @@ export default {
 export function ButtonPrimary(): JSX.Element {
   return (
     <button className={styles.buttonPrimary} type="button">
-      Review transaction
+      Button Primary
     </button>
   );
 }
@@ -18,7 +18,7 @@ export function ButtonPrimary(): JSX.Element {
 export function ButtonPrimaryDisabled(): JSX.Element {
   return (
     <button className={styles.buttonPrimary} type="button" disabled>
-      Review transaction
+      Primary Disabled
     </button>
   );
 }
@@ -39,34 +39,10 @@ export function ButtonSecondaryDisabled(): JSX.Element {
   );
 }
 
-export function ButtonTertiary(): JSX.Element {
-  return (
-    <button className={styles.buttonTertiary} type="button">
-      Update Balance
-    </button>
-  );
-}
-
-export function ButtonTertiaryDisabled(): JSX.Element {
-  return (
-    <button className={styles.buttonTertiary} type="button" disabled>
-      Update Balance
-    </button>
-  );
-}
-
 export function ButtonWide(): JSX.Element {
   return (
     <button className={storiesStyles.wide} type="button">
-      Update Balance
-    </button>
-  );
-}
-
-export function ButtonTriangleNew(): JSX.Element {
-  return (
-    <button className={storiesStyles.triangleNew} type="button">
-      Manage On-Chain DID
+      Button Wide
     </button>
   );
 }

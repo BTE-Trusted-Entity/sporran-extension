@@ -1,5 +1,5 @@
-import { BrowserChannel } from '../../channels/base/BrowserChannel/BrowserChannel';
-import { popupsEnum } from '../../channels/base/channelsEnum';
+import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
+import { popupsEnum } from '../base/channelsEnum';
 
 import { AccessInput, AccessOutput } from './types';
 

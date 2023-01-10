@@ -3,6 +3,7 @@ import { naclSeal } from '@polkadot/util-crypto';
 import { Crypto } from '@kiltprotocol/utils';
 
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
+
 import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 
 import { ChallengeInput, ChallengeOutput } from './types';

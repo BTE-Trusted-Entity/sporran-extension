@@ -23,22 +23,14 @@ import {
   connectToBlockchain,
   onPopupConnect,
 } from './channels/ExtensionPopupMessages/ExtensionPopupMessages';
-import { getSignResult } from './dApps/SignChannels/backgroundSignChannel';
-import { getSignRawResult } from './dApps/SignRawChannels/backgroundSignRawChannel';
 import { produceEncryptedChallenge } from './channels/ChallengeChannels/backgroundChallengeChannel';
-import { getGenesisHash } from './dApps/genesisHashChannel/initBackgroundGenesisHashChannel';
 import { showCredentialPopup } from './channels/CredentialChannels/backgroundCredentialChannel';
-import { getSignDidResult } from './channels/SignDidChannels/backgroundSignDidChannel';
-import { contentAccessChannel } from './dApps/AccessChannels/contentAccessChannel';
-import { getAuthorizedOrigin } from './dApps/AccessChannels/getAuthorizedOrigin';
-import { genesisHashChannel } from './dApps/genesisHashChannel/genesisHashChannel';
+import { contentAccessChannel } from './channels/AccessChannels/contentAccessChannel';
+import { getAuthorizedOrigin } from './channels/AccessChannels/getAuthorizedOrigin';
 import { contentCredentialChannel } from './channels/CredentialChannels/contentCredentialChannel';
-import { contentSignChannel } from './dApps/SignChannels/contentSignChannel';
-import { contentSignRawChannel } from './dApps/SignRawChannels/contentSignRawChannel';
-import { contentSignDidChannel } from './channels/SignDidChannels/contentSignDidChannel';
 import { contentChallengeChannel } from './channels/ChallengeChannels/contentChallengeChannel';
-import { contentSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/contentSignDidExtrinsicChannel';
-import { getSignDidExtrinsicResult } from './channels/SignDidExtrinsicChannels/backgroundSignDidExtrinsicChannel';
+import { contentCreateDidChannel } from './channels/CreateDidChannels/contentCreateDidChannel';
+import { getCreateDidResult } from './channels/CreateDidChannels/backgroundCreateDidChannel';
 
 function init() {
   initKiltSDK();
@@ -52,16 +44,13 @@ function init() {
 
   contentAccessChannel.produce(getAuthorizedOrigin);
   contentCredentialChannel.produce(showCredentialPopup);
-  contentSignChannel.produce(getSignResult);
-  contentSignRawChannel.produce(getSignRawResult);
-  contentSignDidChannel.produce(getSignDidResult);
-  contentSignDidExtrinsicChannel.produce(getSignDidExtrinsicResult);
   contentChallengeChannel.produce(produceEncryptedChallenge);
+  contentCreateDidChannel.produce(getCreateDidResult);
+
   browser.tabs.onRemoved.addListener(popupTabRemovedListener);
 
   onPopupConnect(connectToBlockchain);
   toggleIconChannel.produce(produceToggleIcon);
-  genesisHashChannel.produce(getGenesisHash);
 }
 
 init();

@@ -23,7 +23,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 import { Selected } from '../ShareCredential/ShareCredential';
 
-import { getDidDocument, needLegacyDidCrypto } from '../../utilities/did/did';
+import { getDidDocument } from '../../utilities/did/did';
 
 async function getCompatibleContent(
   presentation: ICredentialPresentation,
@@ -70,8 +70,7 @@ export function ShareCredentialSign({
 
       const { seed } = await passwordField.get(event);
 
-      const isLegacy = await needLegacyDidCrypto(identity.did);
-      const { encrypt, sign } = await getIdentityCryptoFromSeed(seed, isLegacy);
+      const { encrypt, sign } = await getIdentityCryptoFromSeed(seed);
 
       const { rootHash } = sporranCredential.credential;
       const api = ConfigService.get('api');
@@ -107,7 +106,6 @@ export function ShareCredentialSign({
     },
     [
       sporranCredential,
-      identity,
       passwordField,
       challenge,
       verifierDid,

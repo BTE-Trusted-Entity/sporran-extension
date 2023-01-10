@@ -1,6 +1,4 @@
-import userEvent from '@testing-library/user-event';
-
-import { identitiesMock, render, screen } from '../../testing/testing';
+import { identitiesMock, render } from '../../testing/testing';
 import {
   useCurrentIdentity,
   useIdentities,
@@ -24,21 +22,5 @@ describe('Welcome', () => {
     jest.mocked(useIdentities).mockReturnValue({ data: identitiesMock });
     const { container } = render(<Welcome again />);
     expect(container).toMatchSnapshot();
-  });
-
-  it('should enable links after accepting T&C', async () => {
-    jest.mocked(useIdentities).mockReturnValue({ data: identitiesMock });
-    render(<Welcome again />);
-
-    const createLink = await screen.findByText(/Create/);
-    const importLink = await screen.findByText(/Import/);
-
-    expect(createLink).toHaveAttribute('aria-disabled', 'true');
-    expect(importLink).toHaveAttribute('aria-disabled', 'true');
-
-    await userEvent.click(await screen.findByLabelText(/agree to the/));
-
-    expect(createLink).not.toHaveAttribute('aria-disabled', 'true');
-    expect(importLink).not.toHaveAttribute('aria-disabled', 'true');
   });
 });

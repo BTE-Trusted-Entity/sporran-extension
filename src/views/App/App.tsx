@@ -1,5 +1,4 @@
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
-import { Fragment } from 'react';
 
 import './App.css';
 import * as styles from './App.module.css';
@@ -19,7 +18,6 @@ import { PopupsRouter } from '../PopupsRouter/PopupsRouter';
 import { AppSettings } from '../AppSettings/AppSettings';
 
 import { paths } from '../paths';
-import { LegacyDids } from '../../components/LegacyDids/LegacyDids';
 import { ApiProvider } from '../../utilities/initKiltSDK/ApiProvider';
 import { useIdentities } from '../../utilities/identities/identities';
 
@@ -33,9 +31,8 @@ export function App(): JSX.Element {
 
   const popupPaths = [
     paths.popup.base,
-    paths.popup.signDid.start,
     paths.popup.claim,
-    paths.popup.signDidExtrinsic,
+    paths.popup.createDid,
   ];
 
   // Without this workaround the IdentitiesRouter will never load identities, seems like a library bug
@@ -48,13 +45,10 @@ export function App(): JSX.Element {
         getUserConfirmation={confirmNavigation}
       >
         <RouteExcept path={popupPaths}>
-          <Fragment>
-            <nav className={styles.menus}>
-              <AddIdentity />
-              <Settings />
-            </nav>
-            <LegacyDids />
-          </Fragment>
+          <nav className={styles.menus}>
+            <AddIdentity />
+            <Settings />
+          </nav>
         </RouteExcept>
 
         <Switch>

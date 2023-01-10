@@ -4,7 +4,4 @@ export type PopupAction =
   | 'claim'
   | 'save'
   | 'share'
-  | 'sign'
-  | 'signRaw'
-  | 'signDid'
-  | 'signDidExtrinsic';
+  | 'createDid';

@@ -1,7 +1,7 @@
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { render } from '../../testing/testing';
 
-import { AccessOriginInput } from '../../dApps/AccessChannels/types';
+import { AccessOriginInput } from '../../channels/AccessChannels/types';
 import { paths } from '../paths';
 
 import { AuthorizeDApp } from './AuthorizeDApp';

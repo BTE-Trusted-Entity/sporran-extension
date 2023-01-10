@@ -69,20 +69,9 @@ export interface InjectedWindowProvider<T> {
     dAppEncryptionKeyId: DidResourceUri,
     challenge: string,
   ) => Promise<T>;
-
   name: string;
   version: string;
   specVersion: '1.0' | '3.0';
-
-  signWithDid: (
-    plaintext: string,
-  ) => Promise<{ signature: string; didKeyUri: DidResourceUri }>;
-
-  signExtrinsicWithDid: (
-    extrinsic: HexString,
-    signer: KiltAddress,
-  ) => Promise<{ signed: HexString; didKeyUri: DidResourceUri }>;
-
   getSignedDidCreationExtrinsic: (
     submitter: KiltAddress,
   ) => Promise<{ signedExtrinsic: HexString }>;

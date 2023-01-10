@@ -2,22 +2,12 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { getIdentities } from './utilities/identities/getIdentities';
 import { toggleIcon } from './channels/toggleIconChannel/toggleIconChannel';
-import { injectedIdentitiesSubscriber } from './dApps/identitiesDataProvider/identitiesDataProvider';
-import { contentAccessChannel } from './dApps/AccessChannels/contentAccessChannel';
-import { contentSignChannel } from './dApps/SignChannels/contentSignChannel';
-import { contentSignRawChannel } from './dApps/SignRawChannels/contentSignRawChannel';
-import { contentSignDidChannel } from './channels/SignDidChannels/contentSignDidChannel';
+import { contentAccessChannel } from './channels/AccessChannels/contentAccessChannel';
 import { contentCredentialChannel } from './channels/CredentialChannels/contentCredentialChannel';
 import { contentChallengeChannel } from './channels/ChallengeChannels/contentChallengeChannel';
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
-import { injectedAccessChannel } from './dApps/AccessChannels/injectedAccessChannel';
-import { injectedSignChannel } from './dApps/SignChannels/injectedSignChannel';
-import { injectedSignRawChannel } from './dApps/SignRawChannels/injectedSignRawChannel';
-import { injectedSignDidChannel } from './channels/SignDidChannels/injectedSignDidChannel';
-import { injectedIdentitiesChannel } from './dApps/injectedIdentitiesChannel/injectedIdentitiesChannel';
-import { injectedSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/injectedSignDidExtrinsicChannel';
-import { contentSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/contentSignDidExtrinsicChannel';
+import { injectedAccessChannel } from './channels/AccessChannels/injectedAccessChannel';
 import { contentCreateDidChannel } from './channels/CreateDidChannels/contentCreateDidChannel';
 import { injectedCreateDidChannel } from './channels/CreateDidChannels/injectedCreateDidChannel';
 
@@ -34,11 +24,6 @@ function initMessages() {
   injectedCredentialChannel.forward(contentCredentialChannel);
   injectedChallengeChannel.forward(contentChallengeChannel);
   injectedAccessChannel.forward(contentAccessChannel);
-  injectedIdentitiesChannel.publish(injectedIdentitiesSubscriber);
-  injectedSignChannel.forward(contentSignChannel);
-  injectedSignRawChannel.forward(contentSignRawChannel);
-  injectedSignDidChannel.forward(contentSignDidChannel);
-  injectedSignDidExtrinsicChannel.forward(contentSignDidExtrinsicChannel);
   injectedCreateDidChannel.forward(contentCreateDidChannel);
 }
 

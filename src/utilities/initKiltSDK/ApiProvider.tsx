@@ -1,7 +1,5 @@
 import { Fragment, ReactNode } from 'react';
 
-import * as styles from './ApiProvider.module.css';
-
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
 import { initKiltSDK } from './initKiltSDK';
@@ -10,14 +8,14 @@ export function ApiProvider({
   children,
 }: {
   children: ReactNode;
-}): JSX.Element {
+}): JSX.Element | null {
   const render = useAsyncValue(async () => {
     await initKiltSDK();
     return true;
   }, []);
 
   if (!render) {
-    return <div className={styles.spinner} />;
+    return null;
   }
 
   return <Fragment>{children}</Fragment>;

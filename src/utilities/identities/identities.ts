@@ -131,72 +131,11 @@ export function deriveEncryptionKeyFromSeed(
   return Crypto.makeEncryptionKeypairFromSeed(blake2AsU8a(secretKey));
 }
 
-function deriveEncryptionKeyLegacy(seed: Uint8Array) {
-  const keypair = Crypto.makeKeypairFromSeed(seed, 'sr25519');
-  const encryptionKeyringPair = keypair.derive('//did//keyAgreement//0');
-
-  const secret = encryptionKeyringPair
-    .encryptMessage(
-      new Uint8Array(24).fill(0),
-      new Uint8Array(24).fill(0),
-      new Uint8Array(24).fill(0),
-    )
-    .slice(24); // first 24 bytes are the nonce
-
-  return Crypto.makeEncryptionKeypairFromSeed(secret);
-}
-
-async function fixLightDidIssues(seed: Uint8Array) {
-  const identities = await getIdentities();
-  const { address } = Crypto.makeKeypairFromSeed(seed, 'sr25519');
-  const identity = identities[address];
-
-  if (!identity) {
-    // could be the Alice identity
-    return;
-  }
-
-  const parsed = identity.did && Did.parse(identity.did);
-  if (parsed && parsed.type !== 'light') {
-    return;
-  }
-
-  try {
-    if (!identity.did) {
-      // DID was deactivated, no action needed.
-      return;
-    }
-
-    // If this light DID was created and stored using SDK@0.24.0 then its keys are serialized using base64,
-    // resulting in an invalid URI, so resolving would throw an exception.
-    const document = await getDidDocument(identity.did);
-
-    // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
-    const encryptionKey = getDidEncryptionKey(document);
-
-    // This public key also means the DID needs to be regenerated
-    const troubleKey =
-      '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
-    if (Crypto.u8aToHex(encryptionKey.publicKey) === troubleKey) {
-      throw new Error();
-    }
-  } catch {
-    // We re-create the invalid DID from scratch and update its URI in the identity.
-    const { uri } = getLightDidFromSeed(seed);
-    await saveIdentity({ ...identity, did: uri });
-  }
-}
-
 export async function getIdentityCryptoFromSeed(
   seed: Uint8Array,
-  legacy?: boolean,
 ): Promise<IdentityDidCrypto> {
-  await fixLightDidIssues(seed);
-
   const authenticationKey = deriveAuthenticationKey(seed);
-  const encryptionKey = legacy
-    ? deriveEncryptionKeyLegacy(seed)
-    : deriveEncryptionKeyFromSeed(seed);
+  const encryptionKey = deriveEncryptionKeyFromSeed(seed);
 
   const keypair = Crypto.makeKeypairFromSeed(seed, 'sr25519');
   const identities = await getIdentities();

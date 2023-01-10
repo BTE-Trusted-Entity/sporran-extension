@@ -1,7 +1,7 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { filter, find } from 'lodash-es';
-import { BalanceUtils, Credential, CType } from '@kiltprotocol/core';
+import { Credential, CType } from '@kiltprotocol/core';
 import {
   DidUri,
   IClaim,
@@ -24,15 +24,13 @@ import {
   useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { getDidDocument, needLegacyDidCrypto } from '../../utilities/did/did';
+import { getDidDocument } from '../../utilities/did/did';
 import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { claimChannel } from '../../channels/claimChannel/claimChannel';
-import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
-import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 
 export type Terms = ITerms & {
   claim: IClaim;
@@ -70,15 +68,11 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
   const data = usePopupData<Terms>();
 
   const { did } = identity;
-  const error = useIsOnChainDidDeleted(did);
 
-  const { claim, cTypes, quote, attesterName, specVersion } = data;
+  const { claim, cTypes, attesterName, specVersion } = data;
 
   const $id = CType.hashToId(claim.cTypeHash);
   const cType = find(cTypes, { $id }) as ICType | undefined;
-
-  const gross = quote?.cost?.gross;
-  const costs = BalanceUtils.toFemtoKilt(gross || 0);
 
   const passwordField = usePasswordField();
 
@@ -108,10 +102,8 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
 
       const { seed } = await passwordField.get(event);
 
-      const isLegacy = await needLegacyDidCrypto(identity.did);
       const { sign, encrypt, didDocument } = await getIdentityCryptoFromSeed(
         seed,
-        isLegacy,
       );
 
       // The attester generated claim with the temporary identity, need to put real address in it
@@ -145,7 +137,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       await claimChannel.return(message);
       window.close();
     },
-    [sporranCredentials, cType, data, passwordField, identity.did, specVersion],
+    [sporranCredentials, cType, data, passwordField, specVersion],
   );
 
   return (
@@ -158,11 +150,6 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       <p className={styles.subline}>{t('view_SignQuote_subline')}</p>
 
       <IdentitiesCarousel identity={identity} />
-
-      <p className={styles.costs}>
-        <span>{t('view_SignQuote_costs')}</span>
-        <KiltAmount amount={costs} type="costs" smallDecimals />
-      </p>
 
       <dl className={styles.details}>
         {Object.entries(claim.contents).map(([name, value]) => (
@@ -187,13 +174,10 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         <button
           type="submit"
           className={styles.submit}
-          disabled={passwordField.isEmpty || error}
+          disabled={passwordField.isEmpty}
         >
           {t('view_SignQuote_CTA')}
         </button>
-        <output className={styles.errorTooltip} hidden={did && !error}>
-          {t('view_SignQuote_on_chain_did_deleted')}
-        </output>
       </p>
     </form>
   );

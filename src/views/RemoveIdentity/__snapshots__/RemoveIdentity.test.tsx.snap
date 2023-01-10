@@ -25,21 +25,6 @@ exports[`RemoveIdentity should render 1`] = `
     >
       Light DID Identity
     </p>
-    <p
-      class="balanceLine"
-    >
-      Total Balance: 
-      <span
-        class="amount"
-      >
-        1.2340
-         
-        <span
-          aria-label="KILT Coin"
-          class="coin"
-        />
-      </span>
-    </p>
     <small
       class="addressLabel"
     >
@@ -77,26 +62,6 @@ exports[`RemoveIdentity should render 1`] = `
       title="Back"
       type="button"
     />
-    <p
-      class="stats"
-    >
-      You have 3 Identities with a
-      <span
-        class="balance"
-      >
-         Total Balance: 
-        <span
-          class="amount"
-        >
-          3.7020
-           
-          <span
-            aria-label="KILT Coin"
-            class="coin"
-          />
-        </span>
-      </span>
-    </p>
   </main>
 </div>
 `;

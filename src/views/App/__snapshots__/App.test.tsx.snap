@@ -26,7 +26,7 @@ exports[`App should render 1`] = `
     <h1
       class="heading"
     >
-      Welcome to your Sporran
+      Welcome
     </h1>
     <h3
       class="info"
@@ -34,37 +34,13 @@ exports[`App should render 1`] = `
       You currently don’t have any Identities.
 Add your first Identity to get started.
     </h3>
-    <p
-      class="termsLine"
-    >
-      <label
-        class="agreeLabel"
-      >
-        <input
-          class="agree"
-          type="checkbox"
-        />
-        <span />
-         I have read and agree to the 
-      </label>
-      <a
-        class="terms"
-        href="https://www.sporran.org/terms"
-        rel="noreferrer"
-        target="_blank"
-      >
-        Terms & Conditions
-      </a>
-    </p>
     <a
-      aria-disabled="true"
       class="create"
       href="/identity/create"
     >
       Create Identity
     </a>
     <a
-      aria-disabled="true"
       class="importPhrase"
       href="/identity/import"
     >

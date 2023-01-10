@@ -24,15 +24,3 @@ export function Template(): JSX.Element {
     </PopupTestProvider>
   );
 }
-
-export function OnChainDidDeleted(): JSX.Element {
-  return (
-    <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
-      <SignQuote
-        identity={
-          identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']
-        }
-      />
-    </PopupTestProvider>
-  );
-}

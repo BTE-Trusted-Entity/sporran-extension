@@ -13,31 +13,10 @@
 .info {
   composes: subline from '../../components/Typography/Typography.module.css';
   margin-top: 0.375rem;
-  margin-bottom: 0;
   white-space: pre-line;
   line-height: 1.25rem;
   text-align: center;
-}
-
-.termsLine {
-  composes: subline from '../../components/Typography/Typography.module.css';
-  margin-top: 1.25rem;
-}
-
-.agreeLabel {
-  cursor: pointer;
-}
-
-.agree {
-  composes: checkbox from '../../components/Checkbox/Checkbox.module.css';
-}
-
-.terms {
-  composes: subline from '../../components/Typography/Typography.module.css';
-}
-
-.terms:not(:hover) {
-  text-decoration: none;
+  margin-bottom: 1.25rem;
 }
 
 .create {

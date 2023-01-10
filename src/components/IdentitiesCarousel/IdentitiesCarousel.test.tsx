@@ -70,8 +70,8 @@ describe('IdentitiesCarousel', () => {
 
   it('should support other paths', async () => {
     const { container } = render(
-      <MemoryRouter initialEntries={[paths.identity.send.start]}>
-        <Route path={paths.identity.send.start}>
+      <MemoryRouter initialEntries={[paths.popup.claim]}>
+        <Route path={paths.popup.claim}>
           <IdentitiesCarousel
             identity={
               fewIdentities['4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653']

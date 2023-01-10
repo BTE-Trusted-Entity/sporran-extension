@@ -1,9 +1,9 @@
 import { HexString } from '@polkadot/util/types';
 import { useContext, useEffect, useMemo } from 'react';
-import { isEqual, omit, pick, pull, reject, without } from 'lodash-es';
+import { isEqual, omit, pick, pull, reject } from 'lodash-es';
 import { DidUri, ICredential } from '@kiltprotocol/types';
 import { ConfigService } from '@kiltprotocol/config';
-import { Attestation, Credential } from '@kiltprotocol/core';
+import { Attestation } from '@kiltprotocol/core';
 import { isSameSubject } from '@kiltprotocol/did';
 import { mutate } from 'swr';
 
@@ -210,50 +210,4 @@ export function getCredentialDownload(
   const url = `data:text/json;base64,${blob}`;
 
   return { name, url };
-}
-
-export function getUnsignedPresentationDownload(
-  sporranCredential: SporranCredential,
-  properties: string[],
-): CredentialDownload {
-  const name = `${sporranCredential.name}-${sporranCredential.cTypeTitle}-presentation.json`;
-
-  const { credential } = sporranCredential;
-  const allProperties = Object.keys(credential.claim.contents);
-  const needRemoving = without(allProperties, ...properties);
-
-  const credentialCopy = Credential.removeClaimProperties(
-    credential,
-    needRemoving,
-  );
-
-  const blob = jsonToBase64(credentialCopy);
-  const url = `data:text/json;base64,${blob}`;
-
-  return { name, url };
-}
-
-export async function invalidateCredentials(
-  credentials: SporranCredential[],
-): Promise<void> {
-  for (const credential of credentials) {
-    await saveCredential({ ...credential, status: 'invalid' });
-  }
-}
-
-export async function checkCredentialsStatus(
-  credentials: SporranCredential[],
-): Promise<void> {
-  for (const credential of credentials) {
-    if (credential.status !== 'attested') {
-      continue;
-    }
-    try {
-      if (await isAttestationRevoked(credential.credential.rootHash)) {
-        await saveCredential({ ...credential, status: 'revoked' });
-      }
-    } catch {
-      // not on chain yet, ignore
-    }
-  }
 }
