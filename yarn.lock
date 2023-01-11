@@ -9826,10 +9826,10 @@ known-css-properties@^0.26.0:
   resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.26.0.tgz#008295115abddc045a9f4ed7e2a84dc8b3a77649"
   integrity sha512-5FZRzrZzNTBruuurWpvZnvP9pum+fe0HcK8z/ooo+U+Hmp4vtbyp1/QDsqmufirXy4egGzbaH/y2uCZf+6W5Kg==
 
-ky@^0.33.0:
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/ky/-/ky-0.33.0.tgz#430c35a53b6ef04196913cb844232dbc0362cdfa"
-  integrity sha512-peKzuOlN/q3Q3jOgi4t0cp6DOgif5rVnmiSIsjsmkiOcdnSjkrKSUqQmRWYCTqjUtR9b3xQQr8aj7KwSW1r49A==
+ky@^0.33.1:
+  version "0.33.1"
+  resolved "https://registry.yarnpkg.com/ky/-/ky-0.33.1.tgz#8e4febabf4609baac41d0d3ec7c00999ffe73e39"
+  integrity sha512-zZ9OlhgM4UEunvgJBH1bBl7+a7vas1HnCLSezu2CJawc4Ka+yJculRAVKbakUece4gW7kC5Dz+UGvbXIlpDt1w==
 
 latest-version@^7.0.0:
   version "7.0.0"
