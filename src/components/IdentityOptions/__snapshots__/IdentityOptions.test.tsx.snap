@@ -61,6 +61,17 @@ exports[`AddIdentity menu should be visible when menu button clicked 1`] = `
             Reset Password
           </a>
         </li>
+        <li
+          class="listItem"
+        >
+          <a
+            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/upgradeDid"
+            role="menuitem"
+            tabindex="-1"
+          >
+            Upgrade DID
+          </a>
+        </li>
       </ul>
     </div>
   </div>

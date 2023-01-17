@@ -25,6 +25,7 @@ import { RemoveIdentity } from '../RemoveIdentity/RemoveIdentity';
 import { SignQuote } from '../SignQuote/SignQuote';
 import { CreateDidDApp } from '../CreateDidDApp/CreateDidDApp';
 import { paths } from '../paths';
+import { DidUpgrade } from '../DidUpgrade/DidUpgrade';
 
 interface Props {
   identities: IdentitiesMap;
@@ -89,6 +90,10 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.popup.createDid}>
           <CreateDidDApp identity={identity} />
+        </Route>
+
+        <Route path={paths.identity.upgradeDid}>
+          <DidUpgrade identity={identity} />
         </Route>
 
         <Route path={paths.identity.overview}>
