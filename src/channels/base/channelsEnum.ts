@@ -18,5 +18,7 @@ export const popupsEnum = {
   claim: 'claim' as PopupAction,
   save: 'save' as PopupAction,
   share: 'share' as PopupAction,
+  signDid: 'signDid' as PopupAction,
+  signDidExtrinsic: 'signDidExtrinsic' as PopupAction,
   createDid: 'createDid' as PopupAction,
 };

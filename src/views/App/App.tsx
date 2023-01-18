@@ -31,7 +31,9 @@ export function App(): JSX.Element {
 
   const popupPaths = [
     paths.popup.base,
+    paths.popup.signDid.start,
     paths.popup.claim,
+    paths.popup.signDidExtrinsic,
     paths.popup.createDid,
   ];
 
