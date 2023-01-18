@@ -26,6 +26,7 @@ import {
   getCheckoutURL,
   getCheckoutCosts,
 } from '../../utilities/checkout/checkout';
+import { parseDidUri } from '../../utilities/did/did';
 
 interface Props {
   identity: Identity;
@@ -34,7 +35,7 @@ interface Props {
 export function DidUpgrade({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { address } = identity;
+  const { address, did } = identity;
 
   const passwordField = usePasswordField();
 
@@ -47,6 +48,9 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
 
       if (!submitter) {
         throw new Error('Submitter address missing');
+      }
+      if (!did) {
+        throw new Error('DID missing');
       }
 
       const { seed } = await passwordField.get(event);
@@ -65,11 +69,13 @@ export function DidUpgrade({ identity }: Props): JSX.Element | null {
       const url = new URL(checkout);
       url.searchParams.set('address', address);
       url.searchParams.set('tx', extrinsic.method.toHex());
+      const { fullDid } = parseDidUri(did);
+      url.searchParams.set('did', fullDid);
 
       await browser.tabs.create({ url: url.toString() });
       window.close();
     },
-    [address, passwordField, submitter],
+    [address, passwordField, submitter, did],
   );
 
   if (!cost) {

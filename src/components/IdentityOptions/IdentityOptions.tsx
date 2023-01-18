@@ -20,7 +20,7 @@ export function IdentityOptions({ identity, onEdit }: Props): JSX.Element {
 
   const { address, did } = identity;
 
-  const isLightDid = Boolean(did) && !isFullDid(did);
+  const isLightDid = !isFullDid(did);
   const itemCount = isLightDid ? 4 : 3;
   const { buttonProps, itemProps, isOpen, setIsOpen } =
     useDropdownMenu(itemCount);

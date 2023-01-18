@@ -21,9 +21,9 @@ async function getTXDSubmitter() {
 
   const { paymentAddress } = await ky
     .get(`${TXD}/meta`)
-    .json<{ paymentAddress: string }>();
+    .json<{ paymentAddress: KiltAddress }>();
 
-  return paymentAddress as KiltAddress;
+  return paymentAddress;
 }
 
 export function useTXDSubmitter() {
