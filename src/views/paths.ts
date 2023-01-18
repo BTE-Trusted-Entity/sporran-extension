@@ -24,6 +24,7 @@ export const paths = {
       password: '/identity/:address/reset/password',
     },
     remove: '/identity/:address/remove',
+    upgradeDid: '/identity/:address/upgradeDid',
   },
   popup: {
     base: '/popup',

@@ -68,6 +68,9 @@
   "component_IdentityOptions_reset_password": {
     "message": "Reset Password"
   },
+  "component_IdentityOptions_upgrade_did": {
+    "message": "Upgrade DID"
+  },
   "component_Settings_label": {
     "message": "Settings"
   },
@@ -548,5 +551,31 @@
   },
   "view_CreateDidDApp_error_did_removed": {
     "message": "DID removed from chain"
+  },
+  "view_DidUpgrade_heading": {
+    "message": "Prepare Transaction"
+  },
+  "view_DidUpgrade_subline": {
+    "message": "Upgrade to on-chain DID"
+  },
+  "view_DidUpgrade_address": {
+    "message": "Account Address:"
+  },
+  "view_DidUpgrade_method": {
+    "message": "Method:"
+  },
+  "view_DidUpgrade_info": {
+    "message": "After signing you will go to the checkout page to pay with "
+  },
+  "view_DidUpgrade_paypal": {
+    "message": "PayPal "
+  },
+  "view_DidUpgrade_cost": {
+    "message": "(total cost: $cost$).",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
   }
 }
