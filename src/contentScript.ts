@@ -4,10 +4,14 @@ import { getIdentities } from './utilities/identities/getIdentities';
 import { toggleIcon } from './channels/toggleIconChannel/toggleIconChannel';
 import { contentAccessChannel } from './channels/AccessChannels/contentAccessChannel';
 import { contentCredentialChannel } from './channels/CredentialChannels/contentCredentialChannel';
+import { contentSignDidChannel } from './channels/SignDidChannels/contentSignDidChannel';
 import { contentChallengeChannel } from './channels/ChallengeChannels/contentChallengeChannel';
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
 import { injectedAccessChannel } from './channels/AccessChannels/injectedAccessChannel';
+import { injectedSignDidChannel } from './channels/SignDidChannels/injectedSignDidChannel';
+import { injectedSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/injectedSignDidExtrinsicChannel';
+import { contentSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/contentSignDidExtrinsicChannel';
 import { contentCreateDidChannel } from './channels/CreateDidChannels/contentCreateDidChannel';
 import { injectedCreateDidChannel } from './channels/CreateDidChannels/injectedCreateDidChannel';
 
@@ -24,6 +28,8 @@ function initMessages() {
   injectedCredentialChannel.forward(contentCredentialChannel);
   injectedChallengeChannel.forward(contentChallengeChannel);
   injectedAccessChannel.forward(contentAccessChannel);
+  injectedSignDidChannel.forward(contentSignDidChannel);
+  injectedSignDidExtrinsicChannel.forward(contentSignDidExtrinsicChannel);
   injectedCreateDidChannel.forward(contentCreateDidChannel);
 }
 

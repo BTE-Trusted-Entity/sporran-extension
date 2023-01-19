@@ -8,6 +8,8 @@ import {
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import { configuration } from './configuration/configuration';
 import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
+import { injectedSignDidChannel } from './channels/SignDidChannels/injectedSignDidChannel';
+import { injectedSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/injectedSignDidExtrinsicChannel';
 import { injectedCreateDidChannel } from './channels/CreateDidChannels/injectedCreateDidChannel';
 import { injectedAccessChannel } from './channels/AccessChannels/injectedAccessChannel';
 import {
@@ -142,6 +144,25 @@ async function startSession(
   };
 }
 
+async function signWithDid(plaintext: string): Promise<{
+  signature: HexString;
+  didKeyUri: DidResourceUri;
+}> {
+  const dAppName = document.title.substring(0, 50);
+  return injectedSignDidChannel.get({ plaintext, dAppName });
+}
+
+async function signExtrinsicWithDid(
+  extrinsic: HexString,
+  signer: KiltAddress,
+): Promise<{
+  signed: HexString;
+  didKeyUri: DidResourceUri;
+}> {
+  const dAppName = document.title.substring(0, 50);
+  return injectedSignDidExtrinsicChannel.get({ extrinsic, signer, dAppName });
+}
+
 async function getSignedDidCreationExtrinsic(submitter: KiltAddress): Promise<{
   signedExtrinsic: HexString;
 }> {
@@ -171,6 +192,8 @@ function initialize() {
     : '1.0';
 
   apiWindow.kilt.sporran ||= {
+    signWithDid,
+    signExtrinsicWithDid,
     getSignedDidCreationExtrinsic,
     startSession,
     name: 'Sporran Lite', // manifest_name

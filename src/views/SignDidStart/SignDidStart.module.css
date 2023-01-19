@@ -1,0 +1,35 @@
+.container {
+  composes: container from '../../components/View/View.module.css';
+}
+
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
+}
+
+.subline {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  margin: 0 0 0.8125rem;
+}
+
+.infoWrapper {
+  margin: 1.5rem 0;
+}
+
+.info {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  line-height: 1.25rem;
+  margin: 0;
+}
+
+.next {
+  composes: buttonWide from '../../components/Button/Button.module.css';
+  background:
+    rgb(var(--color-black-rgb) / 30%)
+    url('../../components/images/chevron-right.svg') no-repeat right 0.75rem center/0.375rem 0.75rem;
+}
+
+.next[aria-disabled='true'] {
+  pointer-events: auto;
+  cursor: not-allowed;
+  border: none;
+}

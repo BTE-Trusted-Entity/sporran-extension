@@ -36,6 +36,12 @@ export const paths = {
       start: '/popup/share',
       sign: '/popup/share/sign',
     },
+    signDid: {
+      start: '/identity/:address/did/sign',
+      sign: '/identity/:address/did/sign/password',
+      credentials: '/identity/:address/did/sign/credentials',
+    },
+    signDidExtrinsic: '/identity/:address/did/signExtrinsic',
     createDid: '/identity/:address/did/create',
   },
 };

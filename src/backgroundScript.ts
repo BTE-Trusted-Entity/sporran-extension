@@ -25,10 +25,14 @@ import {
 } from './channels/ExtensionPopupMessages/ExtensionPopupMessages';
 import { produceEncryptedChallenge } from './channels/ChallengeChannels/backgroundChallengeChannel';
 import { showCredentialPopup } from './channels/CredentialChannels/backgroundCredentialChannel';
+import { getSignDidResult } from './channels/SignDidChannels/backgroundSignDidChannel';
 import { contentAccessChannel } from './channels/AccessChannels/contentAccessChannel';
 import { getAuthorizedOrigin } from './channels/AccessChannels/getAuthorizedOrigin';
 import { contentCredentialChannel } from './channels/CredentialChannels/contentCredentialChannel';
+import { contentSignDidChannel } from './channels/SignDidChannels/contentSignDidChannel';
 import { contentChallengeChannel } from './channels/ChallengeChannels/contentChallengeChannel';
+import { contentSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/contentSignDidExtrinsicChannel';
+import { getSignDidExtrinsicResult } from './channels/SignDidExtrinsicChannels/backgroundSignDidExtrinsicChannel';
 import { contentCreateDidChannel } from './channels/CreateDidChannels/contentCreateDidChannel';
 import { getCreateDidResult } from './channels/CreateDidChannels/backgroundCreateDidChannel';
 
@@ -44,6 +48,8 @@ function init() {
 
   contentAccessChannel.produce(getAuthorizedOrigin);
   contentCredentialChannel.produce(showCredentialPopup);
+  contentSignDidChannel.produce(getSignDidResult);
+  contentSignDidExtrinsicChannel.produce(getSignDidExtrinsicResult);
   contentChallengeChannel.produce(produceEncryptedChallenge);
   contentCreateDidChannel.produce(getCreateDidResult);
 

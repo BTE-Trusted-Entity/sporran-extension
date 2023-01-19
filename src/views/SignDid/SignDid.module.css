@@ -1,0 +1,98 @@
+.container {
+  composes: container from '../../components/View/View.module.css';
+}
+
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  margin-bottom: calc(31rem / 16);
+}
+
+.details {
+  composes: fullWidthContainer from '../../components/View/View.module.css';
+  box-sizing: border-box;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  max-height: calc(140rem / 16);
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.detailName {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  font-size: calc(11rem / 16);
+  width: 7rem;
+  margin: 0.25rem 0;
+}
+
+.detailValue {
+  composes: inputText from '../../components/Typography/Typography.module.css';
+  font-size: calc(11rem / 16);
+  width: calc(100% - 8rem);
+  max-width: calc(100% - 8rem);
+  margin: 0.25rem;
+  text-align: left;
+  color: var(--color-grey-light);
+}
+
+.data {
+  composes: detailValue;
+  word-break: break-word;
+}
+
+.noCredentials {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.label {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  width: 100%;
+  margin: 0;
+  text-align: left;
+}
+
+.origin {
+  composes: inputText from '../../components/Typography/Typography.module.css';
+  width: 100%;
+  margin: 0.5rem 0;
+  text-align: left;
+}
+
+.plaintextLine {
+  position: relative;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.plaintext {
+  composes: input from '../../components/Input/Input.module.css';
+  width: calc(100% - 3.5rem);
+  height: 3rem;
+  padding-right: 2.5rem;
+}
+
+.address {
+  composes: input from '../../components/Input/Input.module.css';
+  font-size: 0.75rem;
+  width: calc(100% - 3.5rem);
+  padding-right: 2.5rem;
+}
+
+.buttonsLine {
+  composes: buttonsLine from '../../components/Button/Button.module.css';
+}
+
+.cancel {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
+}
+
+.submit {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+}
+
+.errorTooltip {
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
+  top: 2.5rem;
+  left: 75%;
+}

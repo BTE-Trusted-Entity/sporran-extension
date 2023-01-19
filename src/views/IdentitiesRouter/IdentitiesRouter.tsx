@@ -23,6 +23,8 @@ import { IdentityOverview } from '../IdentityOverview/IdentityOverview';
 import { ResetIdentity } from '../ResetIdentity/ResetIdentity';
 import { RemoveIdentity } from '../RemoveIdentity/RemoveIdentity';
 import { SignQuote } from '../SignQuote/SignQuote';
+import { SignDidFlow } from '../SignDidFlow/SignDidFlow';
+import { SignDidExtrinsic } from '../SignDidExtrinsic/SignDidExtrinsic';
 import { CreateDidDApp } from '../CreateDidDApp/CreateDidDApp';
 import { paths } from '../paths';
 import { DidUpgrade } from '../DidUpgrade/DidUpgrade';
@@ -86,6 +88,14 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.popup.claim}>
           <SignQuote identity={identity} />
+        </Route>
+
+        <Route path={paths.popup.signDid.start}>
+          <SignDidFlow identity={identity} />
+        </Route>
+
+        <Route path={paths.popup.signDidExtrinsic}>
+          <SignDidExtrinsic identity={identity} />
         </Route>
 
         <Route path={paths.popup.createDid}>

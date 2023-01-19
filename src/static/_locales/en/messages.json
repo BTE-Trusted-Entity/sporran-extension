@@ -577,5 +577,101 @@
         "content": "$1"
       }
     }
+  },
+  "view_SignDid_title": {
+    "message": "Sign with on-chain DID"
+  },
+  "view_SignDid_origin": {
+    "message": "Request from:"
+  },
+  "view_SignDid_plaintext": {
+    "message": "Data to be signed:"
+  },
+  "view_SignDid_credentials": {
+    "message": "Credentials:"
+  },
+  "view_SignDid_error": {
+    "message": "Unexpected error"
+  },
+  "view_SignDidStart_title": {
+    "message": "Sign with on-chain DID"
+  },
+  "view_SignDidStart_subline": {
+    "message": "Select your Identity and sign with your password"
+  },
+  "view_SignDidStart_info_did": {
+    "message": "To proceed you need an on-chain DID."
+  },
+  "view_SignDidStart_info_credentials": {
+    "message": "Choose whether to attach your credentials to the signature, or sign without credentials."
+  },
+  "view_SignDidStart_with_credentials": {
+    "message": "Sign with credentials"
+  },
+  "view_SignDidStart_without_credentials": {
+    "message": "Sign without credentials"
+  },
+  "view_SignDidStart_error_did": {
+    "message": "You need to upgrade to an on-chain DID first"
+  },
+  "view_SignDidStart_error_credentials": {
+    "message": "This identity has no attested credentials"
+  },
+  "view_SignDidCredentialsSelect_heading": {
+    "message": "Select Credentials"
+  },
+  "view_SignDidCredentialsSelect_subline": {
+    "message": "Select credentials to attach to your signature"
+  },
+  "view_SignDidCredentialsSelect_next": {
+    "message": "Next"
+  },
+  "view_SignDidExtrinsic_from": {
+    "message": "from"
+  },
+  "view_SignDidExtrinsic_title": {
+    "message": "Sign with on-chain DID"
+  },
+  "view_SignDidExtrinsic_subline": {
+    "message": "Select your Identity and sign with your password"
+  },
+  "view_SignDidExtrinsic_reject": {
+    "message": "Reject"
+  },
+  "view_SignDidExtrinsic_error_light_did": {
+    "message": "You need to upgrade to an on-chain DID first"
+  },
+  "view_SignDidExtrinsic_error_unusable_did": {
+    "message": "This identity’s DID has been removed and is unusable"
+  },
+  "view_SignDidExtrinsic_error_forbidden": {
+    "message": "This DID call is forbidden"
+  },
+  "view_SignDidExtrinsic_endpoint_title_add": {
+    "message": "Add Service Endpoint"
+  },
+  "view_SignDidExtrinsic_endpoint_title_remove": {
+    "message": "Remove Service Endpoint"
+  },
+  "view_SignDidExtrinsic_endpoint_subline": {
+    "message": "Sign with your password"
+  },
+  "view_SignDidExtrinsic_endpoint_url": {
+    "message": "URL"
+  },
+  "view_SignDidExtrinsic_endpoint_type": {
+    "message": "Type"
+  },
+  "view_SignDidExtrinsic_endpoint_id": {
+    "message": "Service ID"
+  },
+  "view_SignDidExtrinsic_endpoint_remove_error": {
+    "message": "No service endpoint found for DID"
+  },
+  "component_extrinsicDetails_method": {
+    "message": "method data"
+  },
+  "component_extrinsicDetails_info": {
+    "message": "info"
   }
 }

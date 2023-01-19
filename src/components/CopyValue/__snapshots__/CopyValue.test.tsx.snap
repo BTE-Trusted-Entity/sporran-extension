@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CopyValue should match the snapshot with label 1`] = `
+<div>
+  <p
+    class="line"
+  >
+    <input
+      aria-label="BAR"
+      class="input"
+      readonly=""
+      value="FOO"
+    />
+    <button
+      aria-label="copy to clipboard"
+      class="copy"
+      title="copy to clipboard"
+      type="button"
+    />
+  </p>
+</div>
+`;
+
+exports[`CopyValue should match the snapshot with labelled-by 1`] = `
+<div>
+  <p
+    class="line"
+  >
+    <input
+      aria-labelledby="ZAB"
+      class="input"
+      readonly=""
+      value="FOO"
+    />
+    <button
+      aria-label="copy to clipboard"
+      class="copy"
+      title="copy to clipboard"
+      type="button"
+    />
+  </p>
+</div>
+`;
