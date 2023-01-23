@@ -139,6 +139,57 @@ exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
     >
       A deposit is needed to create your on-chain DID. The deposit will be refunded if you remove your on-chain DID.
     </p>
+    <section
+      class="paymentMethods"
+    >
+      <p
+        class="paymentMethod"
+      >
+        <label
+          class="kilt"
+        >
+          <input
+            checked=""
+            class="select"
+            name="payment"
+            type="radio"
+            value="kilt"
+          />
+          Pay with KILT
+        </label>
+        <button
+          aria-label="Pay with KILT information"
+          class="show"
+          type="button"
+        />
+        <output
+          class="errorTooltip"
+          hidden=""
+        >
+          You need at least 2.0000 KILTs (deposit + fee)
+        </output>
+      </p>
+      <p
+        class="paymentMethod"
+      >
+        <label
+          class="euro"
+        >
+          <input
+            class="select"
+            name="payment"
+            type="radio"
+            value="euro"
+          />
+          Pay with Euro
+        </label>
+        <button
+          aria-label="Pay with Euro information"
+          class="show"
+          type="button"
+        />
+      </p>
+    </section>
     <p
       class="buttonsLine"
     >
