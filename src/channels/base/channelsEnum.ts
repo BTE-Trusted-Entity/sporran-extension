@@ -21,4 +21,5 @@ export const popupsEnum = {
   signDid: 'signDid' as PopupAction,
   signDidExtrinsic: 'signDidExtrinsic' as PopupAction,
   createDid: 'createDid' as PopupAction,
+  ASUserData: 'ASUserData' as PopupAction,
 };

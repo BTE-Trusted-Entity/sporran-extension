@@ -28,6 +28,7 @@ import { SignDidExtrinsic } from '../SignDidExtrinsic/SignDidExtrinsic';
 import { CreateDidDApp } from '../CreateDidDApp/CreateDidDApp';
 import { paths } from '../paths';
 import { DidUpgrade } from '../DidUpgrade/DidUpgrade';
+import { ASUserData } from '../ASUserData/ASUserData';
 
 interface Props {
   identities: IdentitiesMap;
@@ -100,6 +101,10 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.popup.createDid}>
           <CreateDidDApp identity={identity} />
+        </Route>
+
+        <Route path={paths.popup.ASUserData}>
+          <ASUserData identity={identity} />
         </Route>
 
         <Route path={paths.identity.upgradeDid}>

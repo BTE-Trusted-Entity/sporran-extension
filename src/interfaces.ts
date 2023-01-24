@@ -85,4 +85,8 @@ export interface InjectedWindowProvider<T> {
   getSignedDidCreationExtrinsic: (
     submitter: KiltAddress,
   ) => Promise<{ signedExtrinsic: HexString }>;
+
+  getASUserData: (
+    submitter: KiltAddress,
+  ) => Promise<{ createDidExtrinsic: HexString; name: string; email: string }>;
 }

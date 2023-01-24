@@ -1,0 +1,587 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ASUserData should render with full DID 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Register
+    </h1>
+    <div
+      class="container"
+    >
+      <section
+        class="container"
+      >
+        <div
+          class="avatar fullDid"
+        >
+          Identicon
+        </div>
+        <div
+          class="centeredNameLine"
+        >
+          <span
+            class="name"
+          >
+            Identity with on-chain DID and lots of coins
+          </span>
+        </div>
+      </section>
+      <a
+        aria-label="Light DID Identity"
+        class="left"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+        title="Light DID Identity"
+      />
+      <a
+        aria-label="Identity which has a very very very very long name and might not even fit on the screen"
+        class="right"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+        title="Identity which has a very very very very long name and might not even fit on the screen"
+      />
+      <ul
+        class="bubbles"
+      >
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Light DID Identity"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+            title="Light DID Identity"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Identity with on-chain DID and lots of coins"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+            title="Identity with on-chain DID and lots of coins"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Add Identity"
+            class="add addActive"
+            href="/"
+            title="Add Identity"
+          />
+        </li>
+      </ul>
+    </div>
+    <section
+      class="details"
+    >
+      <p
+        class="label"
+      >
+        Request from:
+      </p>
+      <p
+        class="origin"
+      >
+        https://example.org/foo
+      </p>
+    </section>
+    <input
+      class="input"
+      name="name"
+      placeholder="Name"
+      required=""
+      type="text"
+    />
+    <input
+      class="input"
+      name="email"
+      placeholder="Email"
+      required=""
+      type="email"
+    />
+    <p
+      class="resetLine"
+    >
+      <label
+        class="passwordLabel"
+        for="password"
+      >
+        Sign with password:
+      </label>
+      <a
+        class="reset"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/reset"
+      >
+        Reset password
+      </a>
+    </p>
+    <p
+      class="passwordLine"
+    >
+      <input
+        class="password"
+        id="password"
+        name="password"
+        type="password"
+        value=""
+      />
+      <button
+        aria-label="Show"
+        class="show"
+        title="Show"
+        type="button"
+      />
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+    <label
+      class="rememberLabel"
+    >
+      <span>
+        Remember password for the next 15 minutes
+      </span>
+      <input
+        class="remember"
+        name="remember"
+        type="checkbox"
+      />
+      <span />
+    </label>
+    <p
+      class="buttonsLine"
+    >
+      <button
+        class="reject"
+        type="button"
+      >
+        Cancel
+      </button>
+      <button
+        class="submit"
+        disabled=""
+        type="submit"
+      >
+        Sign
+      </button>
+      <output
+        class="errorTooltip"
+      >
+        DID already on chain
+      </output>
+    </p>
+  </form>
+</div>
+`;
+
+exports[`ASUserData should render with light DID 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Register
+    </h1>
+    <div
+      class="container"
+    >
+      <section
+        class="container"
+      >
+        <div
+          class="avatar"
+        >
+          Identicon
+        </div>
+        <div
+          class="centeredNameLine"
+        >
+          <span
+            class="name"
+          >
+            Light DID Identity
+          </span>
+        </div>
+      </section>
+      <a
+        aria-label="Add Identity"
+        class="left"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+        title="Add Identity"
+      />
+      <a
+        aria-label="Identity with on-chain DID and lots of coins"
+        class="right"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+        title="Identity with on-chain DID and lots of coins"
+      />
+      <ul
+        class="bubbles"
+      >
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Light DID Identity"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+            title="Light DID Identity"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Identity with on-chain DID and lots of coins"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+            title="Identity with on-chain DID and lots of coins"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Add Identity"
+            class="add addActive"
+            href="/"
+            title="Add Identity"
+          />
+        </li>
+      </ul>
+    </div>
+    <section
+      class="details"
+    >
+      <p
+        class="label"
+      >
+        Request from:
+      </p>
+      <p
+        class="origin"
+      >
+        https://example.org/foo
+      </p>
+    </section>
+    <input
+      class="input"
+      name="name"
+      placeholder="Name"
+      required=""
+      type="text"
+    />
+    <input
+      class="input"
+      name="email"
+      placeholder="Email"
+      required=""
+      type="email"
+    />
+    <p
+      class="resetLine"
+    >
+      <label
+        class="passwordLabel"
+        for="password"
+      >
+        Sign with password:
+      </label>
+      <a
+        class="reset"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/reset"
+      >
+        Reset password
+      </a>
+    </p>
+    <p
+      class="passwordLine"
+    >
+      <input
+        class="password"
+        id="password"
+        name="password"
+        type="password"
+        value=""
+      />
+      <button
+        aria-label="Show"
+        class="show"
+        title="Show"
+        type="button"
+      />
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+    <label
+      class="rememberLabel"
+    >
+      <span>
+        Remember password for the next 15 minutes
+      </span>
+      <input
+        class="remember"
+        name="remember"
+        type="checkbox"
+      />
+      <span />
+    </label>
+    <p
+      class="buttonsLine"
+    >
+      <button
+        class="reject"
+        type="button"
+      >
+        Cancel
+      </button>
+      <button
+        class="submit"
+        type="submit"
+      >
+        Sign
+      </button>
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+  </form>
+</div>
+`;
+
+exports[`ASUserData should render with removed DID 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Register
+    </h1>
+    <div
+      class="container"
+    >
+      <section
+        class="container"
+      >
+        <div
+          class="avatar"
+        >
+          Identicon
+        </div>
+        <div
+          class="centeredNameLine"
+        >
+          <span
+            class="name"
+          >
+            Identity with deleted on-chain DID
+          </span>
+        </div>
+      </section>
+      <a
+        aria-label="Add Identity"
+        class="left"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+        title="Add Identity"
+      />
+      <a
+        aria-label="Light DID Identity"
+        class="right"
+        href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+        title="Light DID Identity"
+      />
+      <ul
+        class="bubbles"
+      >
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Light DID Identity"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+            title="Light DID Identity"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Identity with on-chain DID and lots of coins"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+            title="Identity with on-chain DID and lots of coins"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
+            class="bubble bubbleActive"
+            href="/?data=eyJkQXBwTmFtZSI6ImRBcHAiLCJvcmlnaW4iOiJodHRwczovL2V4YW1wbGUub3JnL2ZvbyIsInN1Ym1pdHRlciI6IjRwVVZvVEo2OUpNdWFwTmR1Y0hKUFU2OG5Ha1FYQjdSOXhBV1k5ZG12VWg0MjY1MyJ9"
+            title="Identity which has a very very very very long name and might not even fit on the screen"
+          />
+        </li>
+        <li
+          class="item"
+        >
+          <a
+            aria-current="page"
+            aria-label="Add Identity"
+            class="add addActive"
+            href="/"
+            title="Add Identity"
+          />
+        </li>
+      </ul>
+    </div>
+    <section
+      class="details"
+    >
+      <p
+        class="label"
+      >
+        Request from:
+      </p>
+      <p
+        class="origin"
+      >
+        https://example.org/foo
+      </p>
+    </section>
+    <input
+      class="input"
+      name="name"
+      placeholder="Name"
+      required=""
+      type="text"
+    />
+    <input
+      class="input"
+      name="email"
+      placeholder="Email"
+      required=""
+      type="email"
+    />
+    <p
+      class="resetLine"
+    >
+      <label
+        class="passwordLabel"
+        for="password"
+      >
+        Sign with password:
+      </label>
+      <a
+        class="reset"
+        href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/reset"
+      >
+        Reset password
+      </a>
+    </p>
+    <p
+      class="passwordLine"
+    >
+      <input
+        class="password"
+        id="password"
+        name="password"
+        type="password"
+        value=""
+      />
+      <button
+        aria-label="Show"
+        class="show"
+        title="Show"
+        type="button"
+      />
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+    <label
+      class="rememberLabel"
+    >
+      <span>
+        Remember password for the next 15 minutes
+      </span>
+      <input
+        class="remember"
+        name="remember"
+        type="checkbox"
+      />
+      <span />
+    </label>
+    <p
+      class="buttonsLine"
+    >
+      <button
+        class="reject"
+        type="button"
+      >
+        Cancel
+      </button>
+      <button
+        class="submit"
+        disabled=""
+        type="submit"
+      >
+        Sign
+      </button>
+      <output
+        class="errorTooltip"
+      >
+        DID removed from chain
+      </output>
+    </p>
+  </form>
+</div>
+`;

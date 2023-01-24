@@ -552,6 +552,24 @@
   "view_CreateDidDApp_error_did_removed": {
     "message": "DID removed from chain"
   },
+  "view_ASUserData_heading": {
+    "message": "Register"
+  },
+  "view_ASUserData_origin": {
+    "message": "Request from:"
+  },
+  "view_ASUserData_error_full_did": {
+    "message": "DID already on chain"
+  },
+  "view_ASUserData_name": {
+    "message": "Name"
+  },
+  "view_ASUserData_email": {
+    "message": "Email"
+  },
+  "view_ASUserData_error_did_removed": {
+    "message": "DID removed from chain"
+  },
   "view_DidUpgrade_heading": {
     "message": "Prepare Transaction"
   },

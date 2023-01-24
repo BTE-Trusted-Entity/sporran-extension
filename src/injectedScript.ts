@@ -18,6 +18,7 @@ import {
   PubSubSessionV1,
   PubSubSessionV2,
 } from './interfaces';
+import { injectedASUserDataChannel } from './channels/ASUserDataChannels/injectedASUserDataChannel';
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
 
@@ -170,6 +171,13 @@ async function getSignedDidCreationExtrinsic(submitter: KiltAddress): Promise<{
   return injectedCreateDidChannel.get({ dAppName, submitter });
 }
 
+async function getASUserData(
+  submitter: KiltAddress,
+): Promise<{ createDidExtrinsic: HexString; name: string; email: string }> {
+  const dAppName = document.title.substring(0, 50);
+  return injectedASUserDataChannel.get({ dAppName, submitter });
+}
+
 const { version } = configuration;
 
 const apiWindow = window as unknown as {
@@ -195,6 +203,7 @@ function initialize() {
     signWithDid,
     signExtrinsicWithDid,
     getSignedDidCreationExtrinsic,
+    getASUserData,
     startSession,
     name: 'Sporran Lite', // manifest_name
     version,

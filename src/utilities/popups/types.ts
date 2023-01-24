@@ -6,4 +6,5 @@ export type PopupAction =
   | 'share'
   | 'signDid'
   | 'signDidExtrinsic'
-  | 'createDid';
+  | 'createDid'
+  | 'ASUserData';
