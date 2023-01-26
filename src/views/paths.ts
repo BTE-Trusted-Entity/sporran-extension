@@ -64,7 +64,9 @@ export const paths = {
         base: '/identity/:address/web3name/create',
         info: '/identity/:address/web3name/create/info',
         form: '/identity/:address/web3name/create/form',
-        sign: '/identity/:address/web3name/create/sign/:web3name',
+        choose: '/identity/:address/web3name/create/choose/:web3name',
+        kilt: '/identity/:address/web3name/create/kilt/:web3name',
+        euro: '/identity/:address/web3name/create/euro/:web3name',
       },
       manage: {
         start: '/identity/:address/web3name',

@@ -1479,5 +1479,43 @@
   },
   "view_CreateDidDApp_error_did_removed": {
     "message": "DID removed from chain"
+  },
+  "view_W3NCreateChoose_heading": {
+    "message": "web3name"
+  },
+  "view_W3NCreateChoose_subline": {
+    "message": "Connect a web3name to your on-chain DID"
+  },
+  "view_W3NCreateChoose_info": {
+    "message": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis"
+  },
+  "view_W3NCreateChoose_kilt": {
+    "message": "Pay with KILT"
+  },
+  "view_W3NCreateChoose_kilt_info": {
+    "message": "Pay with KILT information"
+  },
+  "view_W3NCreateChoose_kilt_explainer": {
+    "message": "For creating a web3name, KILT Coins are needed to pay for the transaction and for the deposit. The deposit will be refunded if you remove your web3name."
+  },
+  "view_W3NCreateChoose_euro": {
+    "message": "Pay with Euro"
+  },
+  "view_W3NCreateChoose_euro_info": {
+    "message": "Pay with Euro information"
+  },
+  "view_W3NCreateChoose_euro_explainer": {
+    "message": "You pay a fixed fiat rate and BTE in return takes over handling the necessary KILT payments for you."
+  },
+  "view_W3NCreateChoose_insufficientKilt": {
+    "message": "You need at least $cost$ KILTs (deposit + fee)",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
+  },
+  "view_W3NCreateChoose_CTA": {
+    "message": "Next"
   }
 }

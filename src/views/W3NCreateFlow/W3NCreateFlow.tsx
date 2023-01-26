@@ -16,7 +16,13 @@ export function W3NCreateFlow({ identity }: Props): JSX.Element {
       <Route path={paths.identity.web3name.create.form}>
         <W3NCreateForm identity={identity} />
       </Route>
-      <Route path={paths.identity.web3name.create.sign}>
+      <Route path={paths.identity.web3name.create.choose}>
+        <W3NCreateSign identity={identity} />
+      </Route>
+      <Route path={paths.identity.web3name.create.kilt}>
+        <W3NCreateSign identity={identity} />
+      </Route>
+      <Route path={paths.identity.web3name.create.euro}>
         <W3NCreateSign identity={identity} />
       </Route>
       <Route path={paths.identity.web3name.create.info}>

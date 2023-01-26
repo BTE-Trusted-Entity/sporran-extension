@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { ConfigService } from '@kiltprotocol/config';
-import { DidUri } from '@kiltprotocol/types';
 import * as Did from '@kiltprotocol/did';
 
 import * as styles from './W3NCreateSign.module.css';
@@ -30,23 +29,7 @@ import {
 import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
 import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
-import { makeFakeIdentityCrypto } from '../../utilities/makeFakeIdentityCrypto/makeFakeIdentityCrypto';
-
-async function getFee(did: DidUri) {
-  const { address, keypair, sign } = makeFakeIdentityCrypto();
-
-  const api = ConfigService.get('api');
-  const authorized = await Did.authorizeTx(
-    did,
-    api.tx.web3Names.claim('01234567890123456789012345678901'),
-    sign,
-    address,
-  );
-  const signed = await authorized.signAsync(keypair);
-  return (await signed.paymentInfo(keypair)).partialFee;
-}
+import { useKiltCosts } from '../../utilities/w3nCreate/w3nCreate';
 
 interface Props {
   identity: Identity;
@@ -64,8 +47,7 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
     address,
   });
 
-  const fee = useAsyncValue(getFee, [did]);
-  const deposit = useDepositWeb3Name(did)?.amount;
+  const { deposit, fee, total } = useKiltCosts(address, did);
 
   const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
 
@@ -91,11 +73,9 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
 
   const portalRef = useRef<HTMLDivElement>(null);
 
-  if (!deposit || !fee) {
+  if (!deposit || !fee || !total) {
     return null; // blockchain data pending
   }
-
-  const total = deposit.add(fee);
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>

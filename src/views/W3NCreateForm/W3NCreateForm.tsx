@@ -13,6 +13,7 @@ import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { paths } from '../paths';
+import { useConfiguration } from '../../configuration/useConfiguration';
 
 interface Props {
   identity: Identity;
@@ -22,6 +23,8 @@ export function W3NCreateForm({ identity }: Props): JSX.Element {
   const t = browser.i18n.getMessage;
   const { address } = identity;
   const did = getIdentityDid(identity);
+
+  const { features } = useConfiguration();
 
   const history = useHistory();
   const { goBack } = history;
@@ -72,14 +75,12 @@ export function W3NCreateForm({ identity }: Props): JSX.Element {
         return;
       }
 
-      history.push(
-        generatePath(paths.identity.web3name.create.sign, {
-          address,
-          web3name,
-        }),
-      );
+      const nextPath = features.checkout
+        ? paths.identity.web3name.create.choose
+        : paths.identity.web3name.create.kilt;
+      history.push(generatePath(nextPath, { address, web3name }));
     },
-    [t, address, history],
+    [features, history, address, t],
   );
 
   return (
