@@ -108,8 +108,15 @@ exports[`ASUserData should render with full DID 1`] = `
     </section>
     <input
       class="input"
-      name="name"
-      placeholder="Name"
+      name="firstName"
+      placeholder="First Name"
+      required=""
+      type="text"
+    />
+    <input
+      class="input"
+      name="surname"
+      placeholder="Last Name"
       required=""
       type="text"
     />
@@ -304,8 +311,15 @@ exports[`ASUserData should render with light DID 1`] = `
     </section>
     <input
       class="input"
-      name="name"
-      placeholder="Name"
+      name="firstName"
+      placeholder="First Name"
+      required=""
+      type="text"
+    />
+    <input
+      class="input"
+      name="surname"
+      placeholder="Last Name"
       required=""
       type="text"
     />
@@ -498,8 +512,15 @@ exports[`ASUserData should render with removed DID 1`] = `
     </section>
     <input
       class="input"
-      name="name"
-      placeholder="Name"
+      name="firstName"
+      placeholder="First Name"
+      required=""
+      type="text"
+    />
+    <input
+      class="input"
+      name="surname"
+      placeholder="Last Name"
       required=""
       type="text"
     />
