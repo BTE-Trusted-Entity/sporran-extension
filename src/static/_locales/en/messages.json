@@ -561,8 +561,11 @@
   "view_ASUserData_error_full_did": {
     "message": "DID already on chain"
   },
-  "view_ASUserData_name": {
-    "message": "Name"
+  "view_ASUserData_firstName": {
+    "message": "First Name"
+  },
+  "view_ASUserData_surname": {
+    "message": "Last Name"
   },
   "view_ASUserData_email": {
     "message": "Email"
