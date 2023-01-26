@@ -23,7 +23,6 @@ import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDelet
 import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { useKiltCosts } from '../../utilities/didUpgrade/didUpgrade';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
-import { useConfiguration } from '../../configuration/useConfiguration';
 
 type PaymentMethod = 'kilt' | 'euro';
 
@@ -42,14 +41,11 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('kilt');
 
-  const { features } = useConfiguration();
-
   useEffect(() => {
-    if (!insufficientKilt || !features.checkout) {
-      return;
+    if (insufficientKilt) {
+      setPaymentMethod('euro');
     }
-    setPaymentMethod('euro');
-  }, [insufficientKilt, features]);
+  }, [insufficientKilt]);
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(event.target.value as PaymentMethod);
@@ -111,72 +107,70 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
             {t('view_DidUpgradeExplainer_deposit')}
           </p>
 
-          {features.checkout && (
-            <section
-              className={
-                insufficientKilt
-                  ? styles.paymentMethodsError
-                  : styles.paymentMethods
-              }
-            >
-              <p className={styles.paymentMethod}>
-                <label
-                  className={
-                    insufficientKilt ? styles.insufficientKilt : styles.kilt
-                  }
-                >
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="kilt"
-                    checked={paymentMethod === 'kilt'}
-                    onChange={handleChange}
-                    className={styles.select}
-                    disabled={insufficientKilt}
-                  />
+          <section
+            className={
+              insufficientKilt
+                ? styles.paymentMethodsError
+                : styles.paymentMethods
+            }
+          >
+            <p className={styles.paymentMethod}>
+              <label
+                className={
+                  insufficientKilt ? styles.insufficientKilt : styles.kilt
+                }
+              >
+                <input
+                  type="radio"
+                  name="payment"
+                  value="kilt"
+                  checked={paymentMethod === 'kilt'}
+                  onChange={handleChange}
+                  className={styles.select}
+                  disabled={insufficientKilt}
+                />
 
-                  {t('view_DidUpgradeExplainer_kilt')}
-                </label>
+                {t('view_DidUpgradeExplainer_kilt')}
+              </label>
 
-                <ExplainerModal
-                  label={t('view_DidUpgradeExplainer_kilt_info')}
-                  portalRef={portalRef}
-                >
-                  {t('view_DidUpgradeExplainer_kilt_explainer')}
-                </ExplainerModal>
+              <ExplainerModal
+                label={t('view_DidUpgradeExplainer_kilt_info')}
+                portalRef={portalRef}
+              >
+                {t('view_DidUpgradeExplainer_kilt_explainer')}
+              </ExplainerModal>
 
-                <output
-                  className={styles.errorTooltip}
-                  hidden={!insufficientKilt}
-                >
-                  {t('view_DidUpgradeExplainer_insufficientKilt', [
-                    asKiltCoins(kiltCosts, 'costs'),
-                  ])}
-                </output>
-              </p>
+              <output
+                className={styles.errorTooltip}
+                hidden={!insufficientKilt}
+              >
+                {t('view_DidUpgradeExplainer_insufficientKilt', [
+                  asKiltCoins(kiltCosts, 'costs'),
+                ])}
+              </output>
+            </p>
 
-              <p className={styles.paymentMethod}>
-                <label className={styles.euro}>
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="euro"
-                    checked={paymentMethod === 'euro'}
-                    onChange={handleChange}
-                    className={styles.select}
-                  />
-                  {t('view_DidUpgradeExplainer_euro')}
-                </label>
+            <p className={styles.paymentMethod}>
+              <label className={styles.euro}>
+                <input
+                  type="radio"
+                  name="payment"
+                  value="euro"
+                  checked={paymentMethod === 'euro'}
+                  onChange={handleChange}
+                  className={styles.select}
+                />
+                {t('view_DidUpgradeExplainer_euro')}
+              </label>
 
-                <ExplainerModal
-                  label={t('view_DidUpgradeExplainer_euro_info')}
-                  portalRef={portalRef}
-                >
-                  {t('view_DidUpgradeExplainer_euro_explainer')}
-                </ExplainerModal>
-              </p>
-            </section>
-          )}
+              <ExplainerModal
+                label={t('view_DidUpgradeExplainer_euro_info')}
+                portalRef={portalRef}
+              >
+                {t('view_DidUpgradeExplainer_euro_explainer')}
+              </ExplainerModal>
+            </p>
+          </section>
 
           <p className={styles.buttonsLine}>
             <Link to={paths.home} className={styles.cancel}>
