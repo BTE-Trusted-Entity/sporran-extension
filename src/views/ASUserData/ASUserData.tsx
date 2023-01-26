@@ -43,7 +43,8 @@ export function ASUserData({ identity }: Props): JSX.Element {
       event.preventDefault();
 
       const formData = new FormData(event.currentTarget);
-      const name = (formData.get('name') as string).trim();
+      const surname = (formData.get('surname') as string).trim();
+      const firstName = (formData.get('firstName') as string).trim();
       const email = (formData.get('email') as string).trim();
 
       const { seed } = await passwordField.get(event);
@@ -60,7 +61,9 @@ export function ASUserData({ identity }: Props): JSX.Element {
 
       await backgroundASUserDataChannel.return({
         createDidExtrinsic,
-        name,
+        firstName,
+        did,
+        surname,
         email,
       });
       window.close();
@@ -87,11 +90,17 @@ export function ASUserData({ identity }: Props): JSX.Element {
       <input
         className={styles.input}
         type="text"
-        name="name"
-        placeholder={t('view_ASUserData_name')}
+        name="firstName"
+        placeholder={t('view_ASUserData_firstName')}
         required
       />
-
+      <input
+        className={styles.input}
+        type="text"
+        name="surname"
+        placeholder={t('view_ASUserData_surname')}
+        required
+      />
       <input
         className={styles.input}
         type="email"

@@ -1,5 +1,6 @@
 import {
   DidResourceUri,
+  DidUri,
   IEncryptedMessage,
   KiltAddress,
 } from '@kiltprotocol/types';
@@ -88,5 +89,5 @@ export interface InjectedWindowProvider<T> {
 
   getASUserData: (
     submitter: KiltAddress,
-  ) => Promise<{ createDidExtrinsic: HexString; name: string; email: string }>;
+  ) => Promise<{ createDidExtrinsic: HexString; did: DidUri; firstName: string; surname: string; email: string }>;
 }
