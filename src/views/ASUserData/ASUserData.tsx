@@ -2,6 +2,10 @@ import { FormEvent, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import * as Did from '@kiltprotocol/did';
 
+import { Claim, Credential } from '@kiltprotocol/core';
+
+import { ICType } from '@kiltprotocol/types';
+
 import * as styles from './ASUserData.module.css';
 
 import { ASUserDataOriginInput } from '../../channels/ASUserDataChannels/types';
@@ -17,8 +21,25 @@ import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/Identiti
 
 import { backgroundASUserDataChannel } from '../../channels/ASUserDataChannels/backgroundASUserDataChannel';
 import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
+import { saveCredential } from '../../utilities/credentials/credentials';
 
-// const ASUserCType: ICType = {};
+const axelSpringerCType: ICType = {
+  $id: 'kilt:ctype:0x62b0c9651c6eed6f38230d5e98e8fbd5d37d276e473c183af8c88933f09b3081',
+  $schema: 'http://kilt-protocol.org/draft-01/ctype#',
+  properties: {
+    Email: {
+      type: 'string',
+    },
+    'First Name': {
+      type: 'string',
+    },
+    'Last Name': {
+      type: 'string',
+    },
+  },
+  title: 'Axel Springer Login',
+  type: 'object',
+};
 
 interface Props {
   identity: Identity;
@@ -59,12 +80,30 @@ export function ASUserData({ identity }: Props): JSX.Element {
       );
       const createDidExtrinsic = storeTx.method.toHex();
 
+      const claimContents = {
+        'First Name': firstName,
+        'Last Name': surname,
+        Email: email,
+      };
+      const claim = Claim.fromCTypeAndClaimContents(
+        axelSpringerCType,
+        claimContents,
+        did,
+      );
+
+      const credential = Credential.fromClaim(claim);
+
+      await saveCredential({
+        credential,
+        name: axelSpringerCType.title,
+        cTypeTitle: axelSpringerCType.title,
+        attester: 'Axel Springer',
+        status: 'pending',
+      });
+
       await backgroundASUserDataChannel.return({
         createDidExtrinsic,
-        firstName,
-        did,
-        surname,
-        email,
+        credential,
       });
       window.close();
     },
