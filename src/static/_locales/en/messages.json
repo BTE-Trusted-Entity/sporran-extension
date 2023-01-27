@@ -1496,7 +1496,7 @@
     "message": "Pay with KILT information"
   },
   "view_W3NCreateChoose_kilt_explainer": {
-    "message": "For creating a web3name, KILT Coins are needed to pay for the transaction and for the deposit. The deposit will be refunded if you remove your web3name."
+    "message": "For creating a web3name, KILT Coins are needed to pay for the transaction and for the deposit."
   },
   "view_W3NCreateChoose_euro": {
     "message": "Pay with Euro"
