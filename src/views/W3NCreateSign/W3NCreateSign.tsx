@@ -117,7 +117,7 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
           className={styles.errorTooltip}
           hidden={!insufficientKilt || Boolean(modalProps)}
         >
-          {t('view_W3NCreateSign_insufficientFunds', [insufficientKilt])}
+          {t('view_W3NCreateSign_insufficientFunds', [total])}
         </output>
       </p>
 
