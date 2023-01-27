@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { ConfigService } from '@kiltprotocol/config';
@@ -12,7 +12,6 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-import { generatePath, paths } from '../paths';
 import {
   PasswordField,
   usePasswordField,
@@ -38,14 +37,13 @@ interface Props {
 export function W3NCreateSign({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
+  const history = useHistory();
+  const { goBack } = history;
+
   const { web3name } = useParams() as { web3name: string };
 
   const { address } = identity;
   const did = getIdentityDid(identity);
-
-  const destination = generatePath(paths.identity.did.manage.start, {
-    address,
-  });
 
   const { deposit, fee, total } = useKiltCosts(address, did);
 
@@ -107,9 +105,9 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
-        <Link to={destination} className={styles.back}>
-          {t('common_action_cancel')}
-        </Link>
+        <button type="button" onClick={goBack} className={styles.back}>
+          {t('common_action_back')}
+        </button>
 
         <button type="submit" className={styles.next} disabled={submitting}>
           {t('common_action_sign')}
@@ -127,7 +125,6 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
         <TxStatusModal
           {...modalProps}
           identity={identity}
-          destination={destination}
           messages={{
             pending: t('view_W3NCreateSign_pending'),
             success: t('view_W3NCreateSign_success'),

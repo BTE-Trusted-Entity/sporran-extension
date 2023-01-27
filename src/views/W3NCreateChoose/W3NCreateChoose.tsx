@@ -1,12 +1,5 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import { useHistory, generatePath, useParams } from 'react-router-dom';
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { useHistory, generatePath, useParams, Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './W3NCreateChoose.module.css';
@@ -51,20 +44,6 @@ export function W3NCreateChoose({ identity }: Props): JSX.Element | null {
     setPaymentMethod(event.target.value as PaymentMethod);
   }, []);
 
-  const handleSubmit = useCallback(
-    async (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-
-      history.push(
-        generatePath(paths.identity.web3name.create.choose, {
-          address,
-          web3name,
-        }),
-      );
-    },
-    [history, address, web3name],
-  );
-
   const portalRef = useRef<HTMLDivElement>(null);
 
   if (!kiltCosts) {
@@ -72,7 +51,7 @@ export function W3NCreateChoose({ identity }: Props): JSX.Element | null {
   }
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <section className={styles.container}>
       <h1 className={styles.heading}>{t('view_W3NCreateChoose_heading')}</h1>
       <p className={styles.subline}>{t('view_W3NCreateChoose_subline')}</p>
 
@@ -147,15 +126,21 @@ export function W3NCreateChoose({ identity }: Props): JSX.Element | null {
           {t('common_action_back')}
         </button>
 
-        <button type="submit" className={styles.next}>
-          {t('view_W3NCreateChoose_CTA')}
-        </button>
+        <Link
+          to={generatePath(paths.identity.web3name.create[paymentMethod], {
+            address,
+            web3name,
+          })}
+          className={styles.upgrade}
+        >
+          {t('common_action_next')}
+        </Link>
       </p>
 
       <div ref={portalRef} />
 
       <LinkBack />
       <Stats />
-    </form>
+    </section>
   );
 }

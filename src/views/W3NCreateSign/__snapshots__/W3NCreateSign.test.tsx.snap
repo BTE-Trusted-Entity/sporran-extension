@@ -155,12 +155,12 @@ exports[`W3NCreateSign should match the snapshot 1`] = `
     <p
       class="buttonsLine"
     >
-      <a
+      <button
         class="back"
-        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did"
+        type="button"
       >
-        Cancel
-      </a>
+        Back
+      </button>
       <button
         class="next"
         type="submit"
