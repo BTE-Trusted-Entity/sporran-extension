@@ -1,9 +1,8 @@
 import { FormEvent, useCallback, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { ConfigService } from '@kiltprotocol/config';
-import { DidUri } from '@kiltprotocol/types';
 import * as Did from '@kiltprotocol/did';
 
 import * as styles from './W3NCreateSign.module.css';
@@ -13,7 +12,6 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-import { generatePath, paths } from '../paths';
 import {
   PasswordField,
   usePasswordField,
@@ -30,23 +28,7 @@ import {
 import { KiltCurrency } from '../../components/KiltCurrency/KiltCurrency';
 import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates';
-import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-import { useDepositWeb3Name } from '../../utilities/getDeposit/getDeposit';
-import { makeFakeIdentityCrypto } from '../../utilities/makeFakeIdentityCrypto/makeFakeIdentityCrypto';
-
-async function getFee(did: DidUri) {
-  const { address, keypair, sign } = makeFakeIdentityCrypto();
-
-  const api = ConfigService.get('api');
-  const authorized = await Did.authorizeTx(
-    did,
-    api.tx.web3Names.claim('01234567890123456789012345678901'),
-    sign,
-    address,
-  );
-  const signed = await authorized.signAsync(keypair);
-  return (await signed.paymentInfo(keypair)).partialFee;
-}
+import { useKiltCosts } from '../../utilities/w3nCreate/w3nCreate';
 
 interface Props {
   identity: Identity;
@@ -55,19 +37,17 @@ interface Props {
 export function W3NCreateSign({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
+  const history = useHistory();
+  const { goBack } = history;
+
   const { web3name } = useParams() as { web3name: string };
 
   const { address } = identity;
   const did = getIdentityDid(identity);
 
-  const destination = generatePath(paths.identity.did.manage.start, {
-    address,
-  });
+  const { deposit, fee, total, insufficientKilt } = useKiltCosts(address, did);
 
-  const fee = useAsyncValue(getFee, [did]);
-  const deposit = useDepositWeb3Name(did)?.amount;
-
-  const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
+  const { submit, modalProps, submitting } = useSubmitStates();
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
@@ -91,11 +71,9 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
 
   const portalRef = useRef<HTMLDivElement>(null);
 
-  if (!deposit || !fee) {
+  if (!deposit || !fee || !total) {
     return null; // blockchain data pending
   }
-
-  const total = deposit.add(fee);
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
@@ -127,9 +105,9 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
       <p className={styles.buttonsLine}>
-        <Link to={destination} className={styles.back}>
-          {t('common_action_cancel')}
-        </Link>
+        <button type="button" onClick={goBack} className={styles.back}>
+          {t('common_action_back')}
+        </button>
 
         <button type="submit" className={styles.next} disabled={submitting}>
           {t('common_action_sign')}
@@ -137,9 +115,9 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
 
         <output
           className={styles.errorTooltip}
-          hidden={!unpaidCosts || Boolean(modalProps)}
+          hidden={!insufficientKilt || Boolean(modalProps)}
         >
-          {t('view_W3NCreateSign_insufficientFunds', [unpaidCosts])}
+          {t('view_W3NCreateSign_insufficientFunds', [total])}
         </output>
       </p>
 
@@ -147,7 +125,6 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
         <TxStatusModal
           {...modalProps}
           identity={identity}
-          destination={destination}
           messages={{
             pending: t('view_W3NCreateSign_pending'),
             success: t('view_W3NCreateSign_success'),

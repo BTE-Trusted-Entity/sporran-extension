@@ -18,13 +18,13 @@ export function Template(): JSX.Element {
   return (
     <MemoryRouter
       initialEntries={[
-        generatePath(paths.identity.web3name.create.sign, {
+        generatePath(paths.identity.web3name.create.euro, {
           address: 'FOO',
           web3name: 'fancy-name',
         }),
       ]}
     >
-      <Route path={paths.identity.web3name.create.sign}>
+      <Route path={paths.identity.web3name.create.euro}>
         <W3NCreateSignEuro identity={identity} />
       </Route>
     </MemoryRouter>

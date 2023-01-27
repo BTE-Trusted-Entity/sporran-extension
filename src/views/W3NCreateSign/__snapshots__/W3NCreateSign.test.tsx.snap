@@ -155,12 +155,12 @@ exports[`W3NCreateSign should match the snapshot 1`] = `
     <p
       class="buttonsLine"
     >
-      <a
+      <button
         class="back"
-        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did"
+        type="button"
       >
-        Cancel
-      </a>
+        Back
+      </button>
       <button
         class="next"
         type="submit"
@@ -169,9 +169,8 @@ exports[`W3NCreateSign should match the snapshot 1`] = `
       </button>
       <output
         class="errorTooltip"
-        hidden=""
       >
-        You need at least undefined KILTs to create the web3name
+        You need at least 2010000000000000 KILTs to create the web3name
       </output>
     </p>
     <div />

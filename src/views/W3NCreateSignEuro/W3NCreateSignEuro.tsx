@@ -1,5 +1,5 @@
 import { FormEvent, useCallback } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
 import { ConfigService } from '@kiltprotocol/config';
@@ -12,7 +12,6 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
-import { generatePath, paths } from '../paths';
 import {
   PasswordField,
   usePasswordField,
@@ -35,14 +34,12 @@ interface Props {
 export function W3NCreateSignEuro({ identity }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
+  const history = useHistory();
+  const { goBack } = history;
+
   const { web3name } = useParams() as { web3name: string };
 
-  const { address } = identity;
   const did = getIdentityDid(identity);
-
-  const destination = generatePath(paths.identity.did.manage.start, {
-    address,
-  });
 
   const cost = useAsyncValue(getCheckoutCosts, [])?.w3n;
   const submitter = useTXDSubmitter();
@@ -51,7 +48,10 @@ export function W3NCreateSignEuro({ identity }: Props): JSX.Element | null {
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
-      if (!submitter) {
+
+      const { address, did } = identity;
+
+      if (!submitter || !did) {
         return;
       }
 
@@ -70,12 +70,13 @@ export function W3NCreateSignEuro({ identity }: Props): JSX.Element | null {
 
       const url = new URL(checkout);
       url.searchParams.set('address', address);
+      url.searchParams.set('did', did);
       url.searchParams.set('tx', authorized.method.toHex());
 
       await browser.tabs.create({ url: url.toString() });
       window.close();
     },
-    [address, did, passwordField, submitter, web3name],
+    [identity, passwordField, submitter, web3name],
   );
 
   if (!cost) {
@@ -109,9 +110,9 @@ export function W3NCreateSignEuro({ identity }: Props): JSX.Element | null {
       </p>
 
       <p className={styles.buttonsLine}>
-        <Link to={destination} className={styles.back}>
-          {t('common_action_cancel')}
-        </Link>
+        <button type="button" onClick={goBack} className={styles.back}>
+          {t('common_action_back')}
+        </button>
 
         <button type="submit" className={styles.next}>
           {t('common_action_sign')}
