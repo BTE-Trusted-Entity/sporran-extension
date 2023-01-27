@@ -45,9 +45,9 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
   const { address } = identity;
   const did = getIdentityDid(identity);
 
-  const { deposit, fee, total } = useKiltCosts(address, did);
+  const { deposit, fee, total, insufficientKilt } = useKiltCosts(address, did);
 
-  const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
+  const { submit, modalProps, submitting } = useSubmitStates();
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
@@ -115,9 +115,9 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
 
         <output
           className={styles.errorTooltip}
-          hidden={!unpaidCosts || Boolean(modalProps)}
+          hidden={!insufficientKilt || Boolean(modalProps)}
         >
-          {t('view_W3NCreateSign_insufficientFunds', [unpaidCosts])}
+          {t('view_W3NCreateSign_insufficientFunds', [insufficientKilt])}
         </output>
       </p>
 
