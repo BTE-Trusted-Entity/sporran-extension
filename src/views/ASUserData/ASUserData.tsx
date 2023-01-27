@@ -95,8 +95,8 @@ export function ASUserData({ identity }: Props): JSX.Element {
 
       await saveCredential({
         credential,
-        name: 'AS User',
-        cTypeTitle: 'AS User',
+        name: axelSpringerCType.title,
+        cTypeTitle: axelSpringerCType.title,
         attester: 'Axel Springer',
         status: 'pending',
       });
