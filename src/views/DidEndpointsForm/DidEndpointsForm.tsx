@@ -9,7 +9,10 @@ import {
 import { Link, Prompt, Redirect, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { stringToU8a } from '@polkadot/util';
-import { DidServiceEndpoint } from '@kiltprotocol/types';
+import {
+  DidServiceEndpoint,
+  KiltPublishedCredentialCollectionV1Type,
+} from '@kiltprotocol/types';
 import { ConfigService } from '@kiltprotocol/config';
 import { last } from 'lodash-es';
 import * as Did from '@kiltprotocol/did';
@@ -245,7 +248,15 @@ function DidNewEndpoint({
           <div className={styles.labelLine}>
             <label className={styles.label}>
               {t('view_DidEndpointsForm_type')}
-              <input className={styles.input} name="type" required />
+              <datalist id="types">
+                <option value={KiltPublishedCredentialCollectionV1Type} />
+              </datalist>
+              <input
+                className={styles.input}
+                name="type"
+                list="types"
+                required
+              />
             </label>
             {endpointTypeError && (
               <output className={styles.errorTooltipField}>
