@@ -54,7 +54,7 @@
     "@polkadot/extension-inject": "^0.44.6",
     "@polkadot/keyring": "^10.1.11",
     "@polkadot/types": "^9.5.2",
-    "@polkadot/ui-shared": "^2.9.13",
+    "@polkadot/ui-shared": "^2.11.1",
     "@polkadot/util": "^10.1.11",
     "@polkadot/util-crypto": "^10.1.11",
     "@polkadot/x-textdecoder": "^10.1.11",
