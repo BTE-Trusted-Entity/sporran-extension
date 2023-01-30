@@ -1,7 +1,11 @@
 import { HexString } from '@polkadot/util/types';
 import { useContext, useEffect, useMemo } from 'react';
 import { isEqual, omit, pick, pull, reject, without } from 'lodash-es';
-import { DidUri, ICredential } from '@kiltprotocol/types';
+import {
+  DidUri,
+  ICredential,
+  KiltPublishedCredentialCollectionV1,
+} from '@kiltprotocol/types';
 import { ConfigService } from '@kiltprotocol/config';
 import { Attestation, Credential } from '@kiltprotocol/core';
 import { isSameSubject } from '@kiltprotocol/did';
@@ -227,7 +231,11 @@ export function getUnsignedPresentationDownload(
     needRemoving,
   );
 
-  const blob = jsonToBase64(credentialCopy);
+  const collection: KiltPublishedCredentialCollectionV1 = [
+    { credential: credentialCopy },
+  ];
+
+  const blob = jsonToBase64(collection);
   const url = `data:text/json;base64,${blob}`;
 
   return { name, url };

@@ -247,8 +247,16 @@ exports[`DidEndpointsForm should match the snapshot when no service endpoints 1`
               class="label"
             >
               Type
+              <datalist
+                id="types"
+              >
+                <option
+                  value="KiltPublishedCredentialCollectionV1"
+                />
+              </datalist>
               <input
                 class="input"
+                list="types"
                 name="type"
                 required=""
               />
