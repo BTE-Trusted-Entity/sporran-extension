@@ -13,7 +13,7 @@ export const endpoints = [
   'wss://sporran-testnet.kilt.io',
 ] as const;
 
-export type KnownEndpoints = typeof endpoints[number];
+export type KnownEndpoints = (typeof endpoints)[number];
 
 export const publicEndpoints = {
   Dwellir: 'wss://kilt-rpc.dwellir.com',
