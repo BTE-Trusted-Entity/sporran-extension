@@ -163,6 +163,7 @@ exports[`W3NCreateSign should match the snapshot 1`] = `
       </button>
       <button
         class="next"
+        disabled=""
         type="submit"
       >
         Sign
@@ -170,7 +171,7 @@ exports[`W3NCreateSign should match the snapshot 1`] = `
       <output
         class="errorTooltip"
       >
-        You need at least 2010000000000000 KILTs to create the web3name
+        You need at least 2.0100 KILTs to create the web3name
       </output>
     </p>
     <div />
