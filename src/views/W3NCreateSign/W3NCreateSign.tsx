@@ -109,7 +109,11 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
           {t('common_action_back')}
         </button>
 
-        <button type="submit" className={styles.next} disabled={submitting}>
+        <button
+          type="submit"
+          className={styles.next}
+          disabled={insufficientKilt || submitting}
+        >
           {t('common_action_sign')}
         </button>
 
@@ -117,7 +121,9 @@ export function W3NCreateSign({ identity }: Props): JSX.Element | null {
           className={styles.errorTooltip}
           hidden={!insufficientKilt || Boolean(modalProps)}
         >
-          {t('view_W3NCreateSign_insufficientFunds', [total])}
+          {t('view_W3NCreateSign_insufficientFunds', [
+            asKiltCoins(total, 'costs'),
+          ])}
         </output>
       </p>
 
