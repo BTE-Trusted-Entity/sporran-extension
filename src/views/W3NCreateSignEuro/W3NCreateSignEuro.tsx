@@ -49,7 +49,7 @@ export function W3NCreateSignEuro({ identity }: Props): JSX.Element | null {
     async (event: FormEvent) => {
       event.preventDefault();
 
-      const { address, did } = identity;
+      const { did } = identity;
 
       if (!submitter || !did) {
         return;
