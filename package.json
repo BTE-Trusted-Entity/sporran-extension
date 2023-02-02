@@ -51,7 +51,7 @@
     "@kiltprotocol/messaging": "0.30.0",
     "@kiltprotocol/types": "0.30.0",
     "@kiltprotocol/utils": "0.30.0",
-    "@polkadot/extension-inject": "^0.44.6",
+    "@polkadot/extension-inject": "^0.44.8",
     "@polkadot/keyring": "^10.1.11",
     "@polkadot/types": "^9.5.2",
     "@polkadot/ui-shared": "^2.11.1",
