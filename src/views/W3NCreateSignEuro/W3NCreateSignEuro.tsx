@@ -69,7 +69,7 @@ export function W3NCreateSignEuro({ identity }: Props): JSX.Element | null {
       const checkout = await getCheckoutURL();
 
       const url = new URL(checkout);
-      url.searchParams.set('address', address);
+      url.searchParams.set('web3name', web3name);
       url.searchParams.set('did', did);
       url.searchParams.set('tx', authorized.method.toHex());
 
