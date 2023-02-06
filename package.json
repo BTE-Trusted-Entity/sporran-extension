@@ -53,7 +53,7 @@
     "@kiltprotocol/utils": "0.30.0",
     "@polkadot/extension-inject": "^0.44.8",
     "@polkadot/keyring": "^10.3.1",
-    "@polkadot/types": "^9.13.5",
+    "@polkadot/types": "^9.13.6",
     "@polkadot/ui-shared": "^2.11.1",
     "@polkadot/util": "^10.3.1",
     "@polkadot/util-crypto": "^10.3.1",
