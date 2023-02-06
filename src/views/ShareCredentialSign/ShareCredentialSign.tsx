@@ -10,7 +10,10 @@ import {
 
 import * as styles from './ShareCredentialSign.module.css';
 
-import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
+import {
+  getIdentityCryptoFromSeed,
+  syncDidStateWithBlockchain,
+} from '../../utilities/identities/identities';
 
 import { ShareInput } from '../../channels/shareChannel/types';
 import { shareChannel } from '../../channels/shareChannel/shareChannel';
@@ -67,6 +70,10 @@ export function ShareCredentialSign({
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
+
+      // The DID state will not be synced with blockchain if user
+      // did not open the extension after getting the on-chain DID
+      await syncDidStateWithBlockchain(identity.address);
 
       const { seed } = await passwordField.get(event);
 
