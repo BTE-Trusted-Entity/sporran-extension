@@ -71,11 +71,11 @@ export function ShareCredentialSign({
     async (event: FormEvent) => {
       event.preventDefault();
 
+      const { seed } = await passwordField.get(event);
+
       // The DID state will not be synced with blockchain if user
       // did not open the extension since getting the on-chain DID
       await syncDidStateWithBlockchain(identity.address);
-
-      const { seed } = await passwordField.get(event);
 
       const { encrypt, sign } = await getIdentityCryptoFromSeed(seed);
 
