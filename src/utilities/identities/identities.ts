@@ -288,7 +288,9 @@ export async function decryptIdentity(
 
 /** Ensure that local information about the DID type matches stored on blockchain
  * even if an error occurred while asynchronous update was running */
-async function syncDidStateWithBlockchain(address: string | null | undefined) {
+export async function syncDidStateWithBlockchain(
+  address: string | null | undefined,
+) {
   if (!address) {
     return;
   }

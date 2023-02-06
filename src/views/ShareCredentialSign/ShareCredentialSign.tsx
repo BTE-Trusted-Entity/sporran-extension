@@ -10,7 +10,10 @@ import {
 
 import * as styles from './ShareCredentialSign.module.css';
 
-import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
+import {
+  getIdentityCryptoFromSeed,
+  syncDidStateWithBlockchain,
+} from '../../utilities/identities/identities';
 
 import { ShareInput } from '../../channels/shareChannel/types';
 import { shareChannel } from '../../channels/shareChannel/shareChannel';
@@ -70,6 +73,10 @@ export function ShareCredentialSign({
 
       const { seed } = await passwordField.get(event);
 
+      // The DID state will not be synced with blockchain if user
+      // did not open the extension since getting the on-chain DID
+      await syncDidStateWithBlockchain(identity.address);
+
       const { encrypt, sign } = await getIdentityCryptoFromSeed(seed);
 
       const { rootHash } = sporranCredential.credential;
@@ -112,6 +119,7 @@ export function ShareCredentialSign({
       t,
       sharedContents,
       specVersion,
+      identity,
     ],
   );
 
