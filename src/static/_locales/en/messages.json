@@ -707,6 +707,9 @@
   "view_ShareCredentialSign_error": {
     "message": "The selected credential has not been attested."
   },
+  "view_ShareCredentialSign_error_revoked": {
+    "message": "The credential has been revoked."
+  },
   "view_AppSettings_heading": {
     "message": "Set Custom Endpoint"
   },

@@ -24,6 +24,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import { Selected } from '../ShareCredential/ShareCredential';
 
 import { getDidDocument, needLegacyDidCrypto } from '../../utilities/did/did';
+import { saveCredential } from '../../utilities/credentials/credentials';
 
 async function getCompatibleContent(
   presentation: ICredentialPresentation,
@@ -81,6 +82,12 @@ export function ShareCredentialSign({
         return;
       }
       const attestation = Attestation.fromChain(result, rootHash);
+
+      if (attestation.revoked) {
+        setError(t('view_ShareCredentialSign_error_revoked'));
+        await saveCredential({ ...sporranCredential, status: 'revoked' });
+        return;
+      }
 
       const presentation = await Credential.createPresentation({
         credential: sporranCredential.credential,
