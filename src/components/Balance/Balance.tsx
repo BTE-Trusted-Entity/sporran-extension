@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './Balance.module.css';
 
 import { KiltAmount } from '../KiltAmount/KiltAmount';
-import { BalanceUpdateLink } from '../BalanceUpdateLink/BalanceUpdateLink';
 
 import {
   BalanceChange,
@@ -92,7 +91,7 @@ export function Balance({
           ))}
       </p>
       {breakdownVisibility.current && !connecting && (
-        <>
+        <Fragment>
           <ul className={styles.breakdown}>
             <li className={styles.balance}>
               {t('component_Balance_transferable')}
@@ -107,8 +106,7 @@ export function Balance({
               <KiltAmount amount={balance.bonded} type="funds" />
             </li>
           </ul>
-          <BalanceUpdateLink address={address} />
-        </>
+        </Fragment>
       )}
     </>
   );

@@ -26,7 +26,6 @@ import { RemoveIdentity } from '../RemoveIdentity/RemoveIdentity';
 import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
 import { CreatePresentation } from '../CreatePresentation/CreatePresentation';
 import { IdentityCredentials } from '../IdentityCredentials/IdentityCredentials';
-import { UnlockVestedFunds } from '../UnlockVestedFunds/UnlockVestedFunds';
 import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
 import { SignQuote } from '../SignQuote/SignQuote';
 import { SignDidFlow } from '../SignDidFlow/SignDidFlow';
@@ -109,10 +108,6 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.identity.reset.start}>
           <ResetIdentity identity={identity} />
-        </Route>
-
-        <Route path={paths.identity.vest}>
-          <UnlockVestedFunds identity={identity} />
         </Route>
 
         <Route path={paths.popup.claim}>

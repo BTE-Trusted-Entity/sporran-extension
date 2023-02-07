@@ -97,14 +97,5 @@ exports[`Balance should show balance breakdown with update balance button 1`] = 
       </span>
     </li>
   </ul>
-  <a
-    aria-disabled="true"
-    aria-label="Identity has no unlocked funds for update"
-    class="update"
-    href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/vest"
-    title="Identity has no unlocked funds for update"
-  >
-    Update Balance
-  </a>
 </div>
 `;
