@@ -34,7 +34,6 @@ export const paths = {
       presentation: '/identity/:address/credentials/:hash/presentation',
     },
     remove: '/identity/:address/remove',
-    vest: '/identity/:address/vest',
     did: {
       upgrade: {
         start: '/identity/:address/did/upgrade',
