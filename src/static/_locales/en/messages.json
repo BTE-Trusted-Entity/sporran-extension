@@ -309,6 +309,20 @@
   "component_extrinsicDetails_info": {
     "message": "info"
   },
+  "component_UnknownIdentity_heading": {
+    "message": "Unknown Identity"
+  },
+  "component_UnknownIdentity_text": {
+    "message": "The identity $address$ is not recognized by Sporran.",
+    "placeholders": {
+      "address": {
+        "content": "$1"
+      }
+    }
+  },
+  "component_UnknownIdentity_info": {
+    "message": "This operation is only supported for identities existing in Sporran."
+  },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
   },
