@@ -48,3 +48,17 @@ export function Template(): JSX.Element {
     </PopupTestProvider>
   );
 }
+
+export function Unknown(): JSX.Element {
+  return (
+    <PopupTestProvider
+      path={paths.popup.sign}
+      data={{
+        ...mockExtrinsic,
+        address: '4qp7KB8jbwqS6XXL8zH8qZn3GCdnZDt6Nmq5M47ztGKhXJVh',
+      }}
+    >
+      <SignDApp />
+    </PopupTestProvider>
+  );
+}

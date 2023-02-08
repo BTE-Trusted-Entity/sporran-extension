@@ -6,6 +6,7 @@ import * as styles from './SignDApp.module.css';
 
 import { useIdentities } from '../../utilities/identities/identities';
 import { usePopupData } from '../../utilities/popups/usePopupData';
+import { UnknownIdentity } from '../../components/UnknownIdentity/UnknownIdentity';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { CopyValue } from '../../components/CopyValue/CopyValue';
 import {
@@ -56,7 +57,7 @@ export function SignDApp(): JSX.Element | null {
   }, []);
 
   if (!identity) {
-    return null; // TODO: what to show when the user has no identities?
+    return <UnknownIdentity address={kiltAddress} />;
   }
 
   return (
