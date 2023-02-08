@@ -970,7 +970,7 @@
     "message": "Pay with Euro information"
   },
   "view_DidUpgradeExplainer_euro_explainer": {
-    "message": "You pay a fixed fiat rate and BOTLabs in return takes over handling the necessary KILT payments for you. There are no refunds when removing your on-chain DID."
+    "message": "You pay a fixed fiat rate and BTE in return takes over handling the necessary KILT payments for you. There are no refunds when removing your on-chain DID."
   },
   "view_DidUpgradeExplainer_insufficientKilt": {
     "message": "You need at least $cost$ KILTs (deposit + fee)",
@@ -1479,7 +1479,7 @@
     "message": "Pay with Euro information"
   },
   "view_W3NCreateChoose_euro_explainer": {
-    "message": "You pay a fixed fiat rate and BOTLabs in return takes over handling the necessary KILT payments for you."
+    "message": "You pay a fixed fiat rate and BTE in return takes over handling the necessary KILT payments for you."
   },
   "view_W3NCreateChoose_insufficientKilt": {
     "message": "You need at least $cost$ KILTs (deposit + fee)",
