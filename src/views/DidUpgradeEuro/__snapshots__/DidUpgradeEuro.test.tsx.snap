@@ -51,20 +51,6 @@ exports[`DidUpgradeEuro should render 1`] = `
           4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1
         </dd>
       </div>
-      <div
-        class="detail"
-      >
-        <dt
-          class="detailName"
-        >
-          Method:
-        </dt>
-        <dd
-          class="detailValue"
-        >
-          did.create
-        </dd>
-      </div>
     </dl>
     <p
       class="resetLine"

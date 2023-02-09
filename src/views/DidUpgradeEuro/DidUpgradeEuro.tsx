@@ -94,12 +94,6 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
           </dt>
           <dd className={styles.detailValue}>{address}</dd>
         </div>
-        <div className={styles.detail}>
-          <dt className={styles.detailName}>
-            {t('view_DidUpgradeEuro_method')}
-          </dt>
-          <dd className={styles.detailValue}>did.create</dd>
-        </div>
       </dl>
 
       <PasswordField identity={identity} autoFocus password={passwordField} />
