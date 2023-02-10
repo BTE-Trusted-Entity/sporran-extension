@@ -126,7 +126,7 @@
     "stream-browserify": "^3.0.0",
     "style-loader": "^3.3.1",
     "stylelint": "^15.0.0",
-    "stylelint-config-css-modules": "^4.1.0",
+    "stylelint-config-css-modules": "^4.2.0",
     "stylelint-config-standard": "^30.0.1",
     "ts-jest": "^29.0.5",
     "ts-loader": "^9.4.2",
