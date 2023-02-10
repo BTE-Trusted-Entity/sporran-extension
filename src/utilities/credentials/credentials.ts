@@ -172,6 +172,7 @@ export function useIdentityCredentials(
 
 async function syncCredentialStatusWithChain(credential: SporranCredential) {
   const initialStatus = credential.status;
+  const claimHash = credential.credential.rootHash;
 
   // revoked and invalid statuses are permanent
   if (['revoked', 'invalid'].includes(initialStatus)) {
@@ -180,14 +181,9 @@ async function syncCredentialStatusWithChain(credential: SporranCredential) {
 
   try {
     const api = ConfigService.get('api');
-    const chain = await api.query.attestation.attestations(
-      credential.credential.rootHash,
-    );
+    const chain = await api.query.attestation.attestations(claimHash);
 
-    const attestation = Attestation.fromChain(
-      chain,
-      credential.credential.rootHash,
-    );
+    const attestation = Attestation.fromChain(chain, claimHash);
 
     const hasBecomeRevoked = attestation.revoked;
     const hasBecomeAttested = initialStatus === 'pending' && !hasBecomeRevoked;
