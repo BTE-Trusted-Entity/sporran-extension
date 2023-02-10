@@ -261,6 +261,7 @@ export async function checkCredentialsStatus(
         await saveCredential({ ...credential, status: 'revoked' });
         return;
       }
+      // isAttestationRevoked did not throw, so it is on chain, but was pending before
       if (credential.status === 'pending') {
         await saveCredential({ ...credential, status: 'attested' });
       }
