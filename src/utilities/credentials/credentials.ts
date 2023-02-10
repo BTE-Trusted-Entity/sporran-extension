@@ -253,12 +253,16 @@ export async function checkCredentialsStatus(
   credentials: SporranCredential[],
 ): Promise<void> {
   for (const credential of credentials) {
-    if (credential.status !== 'attested') {
+    if (!['pending', 'attested'].includes(credential.status)) {
       continue;
     }
     try {
       if (await isAttestationRevoked(credential.credential.rootHash)) {
         await saveCredential({ ...credential, status: 'revoked' });
+        return;
+      }
+      if (credential.status === 'pending') {
+        await saveCredential({ ...credential, status: 'attested' });
       }
     } catch {
       // not on chain yet, ignore
