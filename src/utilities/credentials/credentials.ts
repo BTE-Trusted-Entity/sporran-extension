@@ -3,6 +3,7 @@ import { useContext, useEffect, useMemo } from 'react';
 import { isEqual, omit, pick, pull, reject, without } from 'lodash-es';
 import {
   DidUri,
+  IAttestation,
   ICredential,
   KiltPublishedCredentialCollectionV1,
 } from '@kiltprotocol/types';
@@ -171,12 +172,37 @@ export function useIdentityCredentials(
   }, [all, did, onlyUsable]);
 }
 
-export async function isAttestationRevoked(
-  rootHash: HexString,
-): Promise<boolean> {
-  const api = ConfigService.get('api');
-  const chain = await api.query.attestation.attestations(rootHash);
-  return Attestation.fromChain(chain, rootHash).revoked === true;
+async function syncCredentialStatusWithChain(credential: SporranCredential) {
+  const initialStatus = credential.status;
+
+  // revoked and invalid statuses are permanent
+  if (['revoked', 'invalid'].includes(initialStatus)) {
+    return;
+  }
+
+  try {
+    const api = ConfigService.get('api');
+    const chain = await api.query.attestation.attestations(
+      credential.credential.rootHash,
+    );
+
+    const attestation = Attestation.fromChain(
+      chain,
+      credential.credential.rootHash,
+    );
+
+    const hasBecomeRevoked = attestation.revoked;
+    const hasBecomeAttested = initialStatus === 'pending' && !hasBecomeRevoked;
+
+    if (hasBecomeRevoked) {
+      await saveCredential({ ...credential, status: 'revoked' });
+    }
+    if (hasBecomeAttested) {
+      await saveCredential({ ...credential, status: 'attested' });
+    }
+  } catch {
+    // not on chain yet, ignore
+  }
 }
 
 export function usePendingCredentialCheck(
@@ -187,15 +213,7 @@ export function usePendingCredentialCheck(
       return;
     }
     (async () => {
-      try {
-        if (await isAttestationRevoked(credential.credential.rootHash)) {
-          await saveCredential({ ...credential, status: 'revoked' });
-        } else {
-          await saveCredential({ ...credential, status: 'attested' });
-        }
-      } catch {
-        // not on chain yet, ignore
-      }
+      await syncCredentialStatusWithChain(credential);
     })();
   }, [credential]);
 }
@@ -253,20 +271,6 @@ export async function checkCredentialsStatus(
   credentials: SporranCredential[],
 ): Promise<void> {
   for (const credential of credentials) {
-    if (!['pending', 'attested'].includes(credential.status)) {
-      continue;
-    }
-    try {
-      if (await isAttestationRevoked(credential.credential.rootHash)) {
-        await saveCredential({ ...credential, status: 'revoked' });
-        return;
-      }
-      // isAttestationRevoked did not throw, so it is on chain, but was pending before
-      if (credential.status === 'pending') {
-        await saveCredential({ ...credential, status: 'attested' });
-      }
-    } catch {
-      // not on chain yet, ignore
-    }
+    await syncCredentialStatusWithChain(credential);
   }
 }
