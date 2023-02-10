@@ -1,9 +1,7 @@
-import { HexString } from '@polkadot/util/types';
 import { useContext, useEffect, useMemo } from 'react';
 import { isEqual, omit, pick, pull, reject, without } from 'lodash-es';
 import {
   DidUri,
-  IAttestation,
   ICredential,
   KiltPublishedCredentialCollectionV1,
 } from '@kiltprotocol/types';
