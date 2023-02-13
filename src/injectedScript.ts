@@ -155,13 +155,17 @@ async function signWithDid(plaintext: string): Promise<{
 
 async function signExtrinsicWithDid(
   extrinsic: HexString,
-  signer: KiltAddress,
+  submitter: KiltAddress,
 ): Promise<{
   signed: HexString;
   didKeyUri: DidResourceUri;
 }> {
   const dAppName = document.title.substring(0, 50);
-  return injectedSignDidExtrinsicChannel.get({ extrinsic, signer, dAppName });
+  return injectedSignDidExtrinsicChannel.get({
+    extrinsic,
+    submitter,
+    dAppName,
+  });
 }
 
 async function getSignedDidCreationExtrinsic(submitter: KiltAddress): Promise<{
