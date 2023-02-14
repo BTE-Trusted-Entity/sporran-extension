@@ -8,12 +8,12 @@ exports[`W3NCreateChoose should match the snapshot 1`] = `
     <h1
       class="heading"
     >
-      web3name
+      Create web3name
     </h1>
     <p
       class="subline"
     >
-      Connect a web3name to your on-chain DID
+      Select your payment method
     </p>
     <section
       class="container"
@@ -58,7 +58,8 @@ exports[`W3NCreateChoose should match the snapshot 1`] = `
     <p
       class="info"
     >
-      Your web3name is yours forever and no one else can claim it. Choose a payment option below.
+      Claim a web3name to represent your DID.
+Fees for creating your web3name may be paid in KILT Coins or via PayPal.
     </p>
     <section
       class="paymentMethods"
@@ -76,13 +77,8 @@ exports[`W3NCreateChoose should match the snapshot 1`] = `
             type="radio"
             value="kilt"
           />
-          Pay with KILT
+          Pay with KILT 1.0000 (deposit + fee)
         </label>
-        <button
-          aria-label="Pay with KILT information"
-          class="show"
-          type="button"
-        />
         <output
           class="errorTooltip"
           hidden=""
@@ -102,13 +98,8 @@ exports[`W3NCreateChoose should match the snapshot 1`] = `
             type="radio"
             value="euro"
           />
-          Pay with Euro
+          Use Checkout Service and pay with PayPal EUR 5.00 (service fee) or EUR equivalent, depending on your preferred PayPal currency
         </label>
-        <button
-          aria-label="Pay with Euro information"
-          class="show"
-          type="button"
-        />
       </p>
     </section>
     <p
@@ -124,10 +115,9 @@ exports[`W3NCreateChoose should match the snapshot 1`] = `
         class="upgrade"
         href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/web3name/create/kilt/mr_pink"
       >
-        Next Step
+        Continue
       </a>
     </p>
-    <div />
     <button
       aria-label="Back"
       class="linkBack"

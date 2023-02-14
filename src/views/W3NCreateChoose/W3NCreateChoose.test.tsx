@@ -5,12 +5,15 @@ import { render } from '../../testing/testing';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { useKiltCosts } from '../../utilities/w3nCreate/w3nCreate';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { generatePath, paths } from '../paths';
 import '../../components/useCopyButton/useCopyButton.mock';
 
 import { W3NCreateChoose } from './W3NCreateChoose';
 
 jest.mock('../../utilities/w3nCreate/w3nCreate');
+jest.mock('../../utilities/useAsyncValue/useAsyncValue');
+jest.mocked(useAsyncValue).mockReturnValue({ w3n: 'EUR 5.00' });
 
 describe('W3NCreateChoose', () => {
   it('should match the snapshot', async () => {
