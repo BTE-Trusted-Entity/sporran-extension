@@ -31,12 +31,6 @@ interface Costs {
 export async function getCheckoutCosts(): Promise<Costs> {
   const checkout = await getCheckoutURL();
 
-  // TODO: remove
-  return {
-    did: 'EUR 4.00',
-    w3n: 'EUR 5.00',
-  };
-
   const { did, w3n } = await ky.get(`${checkout}/api/costs`).json<Costs>();
 
   return {
