@@ -63,7 +63,7 @@ export function DidDowngradeWarningWeb3Name({
           )}
           className={styles.cta}
         >
-          {t('view_DidDowngradeWarningWeb3Name_CTA')}
+          {t('common_action_continue')}
         </Link>
       </p>
 

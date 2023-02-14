@@ -115,7 +115,7 @@ export function W3NCreateForm({ identity }: Props): JSX.Element {
         </button>
 
         <button type="submit" className={styles.next}>
-          {t('common_action_next')}
+          {t('common_action_continue')}
         </button>
       </p>
 

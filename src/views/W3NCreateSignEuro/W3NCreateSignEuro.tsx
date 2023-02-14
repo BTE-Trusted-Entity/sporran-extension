@@ -102,13 +102,7 @@ export function W3NCreateSignEuro({ identity }: Props): JSX.Element | null {
 
       <PasswordField identity={identity} autoFocus password={passwordField} />
 
-      <p className={styles.info}>
-        <span>{t('view_W3NCreateSignEuro_info')}</span>
-        <span className={styles.paypal}>
-          {t('view_W3NCreateSignEuro_paypal')}
-        </span>
-        <span>{t('view_W3NCreateSignEuro_cost', [cost])}</span>
-      </p>
+      <p className={styles.info}>{t('view_W3NCreateSignEuro_cost', [cost])}</p>
 
       <p className={styles.buttonsLine}>
         <button type="button" onClick={goBack} className={styles.back}>

@@ -347,7 +347,7 @@ function PresentationModal({
               className={styles.confirmDownload}
               onClick={handleConfirm}
             >
-              {t('component_CredentialCard_presentation_confirm')}
+              {t('common_action_continue')}
             </Link>
             <p className={styles.buttonsLine}>
               <a

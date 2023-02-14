@@ -5,7 +5,6 @@ export const subline: string;
 export const didLine: string;
 export const details: string;
 export const info: string;
-export const paypal: string;
 export const label: string;
 export const buttonsLine: string;
 export const next: string;

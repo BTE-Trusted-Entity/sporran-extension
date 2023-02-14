@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useHistory, generatePath, useParams, Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
@@ -12,8 +12,9 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { Stats } from '../../components/Stats/Stats';
 import { paths } from '../paths';
 import { useKiltCosts } from '../../utilities/w3nCreate/w3nCreate';
-import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+import { getCheckoutCosts } from '../../utilities/checkout/checkout';
 
 type PaymentMethod = 'kilt' | 'euro';
 
@@ -31,6 +32,7 @@ export function W3NCreateChoose({ identity }: Props): JSX.Element | null {
   const history = useHistory();
   const { goBack } = history;
 
+  const euroCost = useAsyncValue(getCheckoutCosts, [])?.w3n;
   const { total: kiltCosts, insufficientKilt } = useKiltCosts(address, did);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('kilt');
 
@@ -44,10 +46,11 @@ export function W3NCreateChoose({ identity }: Props): JSX.Element | null {
     setPaymentMethod(event.target.value as PaymentMethod);
   }, []);
 
-  const portalRef = useRef<HTMLDivElement>(null);
-
   if (!kiltCosts) {
     return null; // blockchain data pending
+  }
+  if (!euroCost) {
+    return null; // network data pending
   }
 
   return (
@@ -82,15 +85,8 @@ export function W3NCreateChoose({ identity }: Props): JSX.Element | null {
               disabled={insufficientKilt}
             />
 
-            {t('view_W3NCreateChoose_kilt')}
+            {t('view_W3NCreateChoose_kilt', [asKiltCoins(kiltCosts, 'costs')])}
           </label>
-
-          <ExplainerModal
-            label={t('view_W3NCreateChoose_kilt_info')}
-            portalRef={portalRef}
-          >
-            {t('view_W3NCreateChoose_kilt_explainer')}
-          </ExplainerModal>
 
           <output className={styles.errorTooltip} hidden={!insufficientKilt}>
             {t('view_W3NCreateChoose_insufficientKilt', [
@@ -109,15 +105,8 @@ export function W3NCreateChoose({ identity }: Props): JSX.Element | null {
               onChange={handleChange}
               className={styles.select}
             />
-            {t('view_W3NCreateChoose_euro')}
+            {t('view_W3NCreateChoose_euro', [euroCost])}
           </label>
-
-          <ExplainerModal
-            label={t('view_W3NCreateChoose_euro_info')}
-            portalRef={portalRef}
-          >
-            {t('view_W3NCreateChoose_euro_explainer')}
-          </ExplainerModal>
         </p>
       </section>
 
@@ -133,11 +122,9 @@ export function W3NCreateChoose({ identity }: Props): JSX.Element | null {
           })}
           className={styles.upgrade}
         >
-          {t('common_action_next')}
+          {t('common_action_continue')}
         </Link>
       </p>
-
-      <div ref={portalRef} />
 
       <LinkBack />
       <Stats />

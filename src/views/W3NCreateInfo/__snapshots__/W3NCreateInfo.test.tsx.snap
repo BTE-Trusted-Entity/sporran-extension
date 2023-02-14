@@ -8,12 +8,12 @@ exports[`W3NCreateInfo should match the snapshot for off-chain did 1`] = `
     <h1
       class="heading"
     >
-      web3name
+      Create web3name
     </h1>
     <p
       class="subline"
     >
-      Connect a web3name to your on-chain DID
+      Claim a custom name to represent your DID
     </p>
     <section
       class="container"
@@ -36,7 +36,7 @@ exports[`W3NCreateInfo should match the snapshot for off-chain did 1`] = `
     <p
       class="info"
     >
-      Web3names are user-friendly names built on top of the KILT blockchain. With your on-chain DID, you can claim this alias which makes it easier for others to reference your identity, without the need to triple-check the DID’s long sequence of characters.
+      web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked with your SocialKYC credentials and with addresses across multiple blockchains.
     </p>
     <p
       class="warning"
@@ -97,12 +97,12 @@ exports[`W3NCreateInfo should match the snapshot for on-chain did 1`] = `
     <h1
       class="heading"
     >
-      web3name
+      Create web3name
     </h1>
     <p
       class="subline"
     >
-      Connect a web3name to your on-chain DID
+      Claim a custom name to represent your DID
     </p>
     <section
       class="container"
@@ -141,7 +141,7 @@ exports[`W3NCreateInfo should match the snapshot for on-chain did 1`] = `
     <p
       class="info"
     >
-      Web3names are user-friendly names built on top of the KILT blockchain. With your on-chain DID, you can claim this alias which makes it easier for others to reference your identity, without the need to triple-check the DID’s long sequence of characters.
+      web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked with your SocialKYC credentials and with addresses across multiple blockchains.
     </p>
     <p
       class="buttonsLine"
@@ -156,7 +156,7 @@ exports[`W3NCreateInfo should match the snapshot for on-chain did 1`] = `
         class="next"
         href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/web3name/create/form"
       >
-        Next Step
+        Continue
       </a>
     </p>
     <button
