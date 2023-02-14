@@ -8,12 +8,12 @@ exports[`W3NCreateForm should match the snapshot 1`] = `
     <h1
       class="heading"
     >
-      web3name
+      Create web3name
     </h1>
     <p
       class="subline"
     >
-      Connect a web3name to your on-chain DID
+      Claim a custom name to represent your DID
     </p>
     <section
       class="container"
@@ -52,7 +52,7 @@ exports[`W3NCreateForm should match the snapshot 1`] = `
     <p
       class="info"
     >
-      Please choose a unique web3name.
+      Choose your unique web3name.
 Use only these characters for your web3name:
 lowercase a to z, 0 to 9, “-” and “_”
     </p>
@@ -84,7 +84,7 @@ lowercase a to z, 0 to 9, “-” and “_”
         class="next"
         type="submit"
       >
-        Next Step
+        Continue
       </button>
     </p>
     <button

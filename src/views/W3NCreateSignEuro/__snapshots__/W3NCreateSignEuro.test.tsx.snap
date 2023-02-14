@@ -13,7 +13,7 @@ exports[`W3NCreateSignEuro should match the snapshot 1`] = `
     <p
       class="subline"
     >
-      Connect a web3name to your on-chain DID
+      Pay for your web3name
     </p>
     <section
       class="container"
@@ -112,17 +112,7 @@ exports[`W3NCreateSignEuro should match the snapshot 1`] = `
     <p
       class="info"
     >
-      <span>
-        After signing you will go to the checkout page to pay with 
-      </span>
-      <span
-        class="paypal"
-      >
-        PayPal
-      </span>
-      <span>
-         (total cost: EUR 5.00).
-      </span>
+      After signing you will be directed to the Checkout Service and pay with PayPal (total cost: EUR 5.00)
     </p>
     <p
       class="buttonsLine"
