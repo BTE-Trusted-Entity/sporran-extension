@@ -54,7 +54,7 @@ export function W3NCreateInfo({ identity }: Props): JSX.Element {
             })}
             className={styles.next}
           >
-            {t('common_action_next')}
+            {t('common_action_continue')}
           </Link>
         )}
         {!canContinue && (

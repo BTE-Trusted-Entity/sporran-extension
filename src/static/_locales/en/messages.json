@@ -26,6 +26,9 @@
   "common_action_next": {
     "message": "Next Step"
   },
+  "common_action_continue": {
+    "message": "Continue"
+  },
   "common_action_confirm": {
     "message": "OK"
   },
@@ -259,9 +262,6 @@
   },
   "component_CredentialCard_presentation_info": {
     "message": "Create a version of your credential to save and share"
-  },
-  "component_CredentialCard_presentation_confirm": {
-    "message": "Continue"
   },
   "component_CredentialCard_more": {
     "message": "Learn more"
@@ -994,9 +994,6 @@
       }
     }
   },
-  "view_DidUpgradeExplainer_CTA": {
-    "message": "Continue"
-  },
   "view_DidDowngradeWarningCredentials_heading": {
     "message": "Remove on-chain DID"
   },
@@ -1005,9 +1002,6 @@
   },
   "view_DidDowngradeWarningCredentials_warning": {
     "message": "Attention! This will render the following credentials unusable:"
-  },
-  "view_DidDowngradeWarningCredentials_CTA": {
-    "message": "Continue"
   },
   "view_DidDowngradeWarningWeb3Name_heading": {
     "message": "Remove on-chain DID"
@@ -1023,9 +1017,6 @@
   },
   "view_DidDowngradeWarningWeb3Name_explanation": {
     "message": "Please note: if you remove your web3name, it can be claimed by someone else."
-  },
-  "view_DidDowngradeWarningWeb3Name_CTA": {
-    "message": "Continue"
   },
   "view_DidManage_heading": {
     "message": "Manage DID"
@@ -1253,13 +1244,13 @@
     "message": "Download"
   },
   "view_W3NCreateInfo_heading": {
-    "message": "web3name"
+    "message": "Create web3name"
   },
   "view_W3NCreateInfo_subline": {
-    "message": "Connect a web3name to your on-chain DID"
+    "message": "Claim a custom name to represent your DID"
   },
   "view_W3NCreateInfo_info": {
-    "message": "Web3names are user-friendly names built on top of the KILT blockchain. With your on-chain DID, you can claim this alias which makes it easier for others to reference your identity, without the need to triple-check the DID’s long sequence of characters."
+    "message": "web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked with your SocialKYC credentials and with addresses across multiple blockchains."
   },
   "view_W3NCreateInfo_warning": {
     "message": "You need an on-chain DID to use this feature."
@@ -1268,13 +1259,13 @@
     "message": "Upgrade to on-chain DID"
   },
   "view_W3NCreateForm_heading": {
-    "message": "web3name"
+    "message": "Create web3name"
   },
   "view_W3NCreateForm_subline": {
-    "message": "Connect a web3name to your on-chain DID"
+    "message": "Claim a custom name to represent your DID"
   },
   "view_W3NCreateForm_info": {
-    "message": "Please choose a unique web3name.\nUse only these characters for your web3name:\nlowercase a to z, 0 to 9, “-” and “_”"
+    "message": "Choose your unique web3name.\nUse only these characters for your web3name:\nlowercase a to z, 0 to 9, “-” and “_”"
   },
   "view_W3NCreateForm_placeholder": {
     "message": "choose a unique web3name"
@@ -1351,19 +1342,13 @@
     "message": "Prepare Transaction"
   },
   "view_W3NCreateSignEuro_subline": {
-    "message": "Connect a web3name to your on-chain DID"
+    "message": "Pay for your web3name"
   },
   "view_W3NCreateSignEuro_label": {
     "message": "web3name: "
   },
-  "view_W3NCreateSignEuro_info": {
-    "message": "After signing you will go to the checkout page to pay with "
-  },
-  "view_W3NCreateSignEuro_paypal": {
-    "message": "PayPal"
-  },
   "view_W3NCreateSignEuro_cost": {
-    "message": " (total cost: $cost$).",
+    "message": "After signing you will be directed to the Checkout Service and pay with PayPal (total cost: $cost$)",
     "placeholders": {
       "cost": {
         "content": "$1"
@@ -1469,31 +1454,29 @@
     "message": "DID removed from chain"
   },
   "view_W3NCreateChoose_heading": {
-    "message": "web3name"
+    "message": "Create web3name"
   },
   "view_W3NCreateChoose_subline": {
-    "message": "Connect a web3name to your on-chain DID"
+    "message": "Select your payment method"
   },
   "view_W3NCreateChoose_info": {
-    "message": "Your web3name is yours forever and no one else can claim it. Choose a payment option below."
+    "message": "Claim a web3name to represent your DID.\nFees for creating your web3name may be paid in KILT Coins or via PayPal."
   },
   "view_W3NCreateChoose_kilt": {
-    "message": "Pay with KILT"
-  },
-  "view_W3NCreateChoose_kilt_info": {
-    "message": "Pay with KILT information"
-  },
-  "view_W3NCreateChoose_kilt_explainer": {
-    "message": "For creating a web3name, KILT Coins are needed to pay for the transaction and for the deposit."
+    "message": "Pay with KILT $cost$ (deposit + fee)",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
   },
   "view_W3NCreateChoose_euro": {
-    "message": "Pay with Euro"
-  },
-  "view_W3NCreateChoose_euro_info": {
-    "message": "Pay with Euro information"
-  },
-  "view_W3NCreateChoose_euro_explainer": {
-    "message": "You pay a fixed fiat rate and BTE in return takes over handling the necessary KILT payments for you."
+    "message": "Use Checkout Service and pay with PayPal $cost$ (service fee) or EUR equivalent, depending on your preferred PayPal currency",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
   },
   "view_W3NCreateChoose_insufficientKilt": {
     "message": "You need at least $cost$ KILTs (deposit + fee)",

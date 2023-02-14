@@ -75,7 +75,7 @@ export function DidDowngradeWarningCredentials({
           })}
           className={styles.cta}
         >
-          {t('view_DidDowngradeWarningCredentials_CTA')}
+          {t('common_action_continue')}
         </Link>
       </p>
 

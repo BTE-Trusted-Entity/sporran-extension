@@ -183,7 +183,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
               className={styles.upgrade}
               aria-disabled={wasOnChainDidDeleted}
             >
-              {t('view_DidUpgradeExplainer_CTA')}
+              {t('common_action_continue')}
             </Link>
           </p>
         </Fragment>

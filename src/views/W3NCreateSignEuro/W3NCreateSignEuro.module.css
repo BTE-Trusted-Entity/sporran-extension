@@ -23,12 +23,7 @@
 
 .info {
   composes: subline from '../../components/Typography/Typography.module.css';
-  width: 80%;
   margin: 0;
-}
-
-.paypal {
-  font-family: 'Montserrat Bold', sans-serif;
 }
 
 .label {
