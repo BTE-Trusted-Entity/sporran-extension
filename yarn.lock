@@ -1891,10 +1891,10 @@
     "@polkadot/util-crypto" "^10.4.1"
     rxjs "^7.8.0"
 
-"@polkadot/ui-shared@^2.11.1":
-  version "2.11.1"
-  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-2.11.1.tgz#b4dfe2310003ce4621fcbb5e94daa8c76b45a028"
-  integrity sha512-+qCLPT3SEnHOG3WvO0iYSJ6zArPQGCz9nHx8X8rw9GhffdiEC20ae63jB6dQTjR5GppPQx0aLE/cOppWn/HpRg==
+"@polkadot/ui-shared@^2.11.2":
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-2.11.2.tgz#da503905614d2da94ad7b8636d1fe95e766bd298"
+  integrity sha512-uegjHkORHO9ZeKD3RhCJH9H+46yft3/lwDY1Ffd0OJWaxOREhB7OcAaTIfk/KgrkuNwdS4DvU15tH+CD7kr0Fg==
   dependencies:
     "@babel/runtime" "^7.20.13"
     color "^3.2.1"
