@@ -172,11 +172,11 @@ export function ShareCredentialSign({
         >
           {t('view_ShareCredentialSign_CTA')}
         </button>
-      </p>
 
-      <output className={styles.errorTooltip} hidden={!error}>
-        {error}
-      </output>
+        <output className={styles.errorTooltip} hidden={!error}>
+          {error}
+        </output>
+      </p>
     </form>
   );
 }
