@@ -34,6 +34,8 @@ import { getDidDocument, getDidEncryptionKey, parseDidUri } from '../did/did';
 import { storage } from '../storage/storage';
 import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
 
+import { isInternal } from '../../configuration/variant';
+
 import { IdentitiesContext, IdentitiesContextType } from './IdentitiesContext';
 import { getIdentities, IDENTITIES_KEY } from './getIdentities';
 
@@ -367,10 +369,12 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
     return;
   }
 
-  const { fullDid, type } = parseDidUri(identity.did);
-  const wasOnChain = type === 'full';
+  const { fullDid, type, address: kiltAddress } = parseDidUri(identity.did);
 
   const resolved = await Did.resolve(identity.did);
+
+  const wasOnChain = type === 'full' && Boolean(resolved);
+
   const isOnChain = wasOnChain
     ? Boolean(resolved && resolved.metadata && !resolved.metadata.deactivated)
     : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
@@ -384,6 +388,10 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
   }
   if (!wasOnChain && isOnChain) {
     await saveIdentity({ ...identity, did: fullDid });
+  }
+  // possible in internal version when switching blockchain endpoints
+  if (isInternal && !wasOnChain && !isOnChain) {
+    await saveIdentity({ ...identity, did: `did:kilt:light:00${kiltAddress}` });
   }
 }
 
