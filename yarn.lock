@@ -12129,10 +12129,10 @@ rc@1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-accessible-dropdown-menu-hook@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/react-accessible-dropdown-menu-hook/-/react-accessible-dropdown-menu-hook-3.2.0.tgz#fd3ec0ee97350ac0dd46c2d56ad814ca491f6d6e"
-  integrity sha512-DilA+bEX1Jznu81Y7aVZyC2bWktuIHmMDW8OIGb0wmdfiP0mQEkklgxGaMJigwM6SssBghiKTRmoQIXkoS6YkQ==
+react-accessible-dropdown-menu-hook@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-accessible-dropdown-menu-hook/-/react-accessible-dropdown-menu-hook-4.0.0.tgz#a07b719f75a7a3661f4800fec16852f2a6350ea6"
+  integrity sha512-dquRX+26jBD2Pida0fmePfIYFPlHcAPh7uBSZ3TUJZcb3rRQ0yZXHEz2hFFX1/7vpofx8tIba85qc58tAuuOyg==
 
 react-dialog-polyfill@^1.1.6:
   version "1.1.6"
