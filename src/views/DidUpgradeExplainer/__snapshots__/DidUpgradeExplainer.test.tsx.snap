@@ -181,7 +181,7 @@ exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
             type="radio"
             value="euro"
           />
-          Pay with Euro
+          Use Checkout Service and pay with Paypal EUR 1,20 (service fee, including VAT) or EUR equivalent, depending on your preferred PayPal currency
         </label>
         <button
           aria-label="Pay with Euro information"
@@ -328,7 +328,7 @@ exports[`DidUpgradeExplainer should render pay with euro option in internal buil
             type="radio"
             value="euro"
           />
-          Pay with Euro
+          Use Checkout Service and pay with Paypal EUR 1,20 (service fee, including VAT) or EUR equivalent, depending on your preferred PayPal currency
         </label>
         <button
           aria-label="Pay with Euro information"
@@ -475,7 +475,7 @@ exports[`should render insufficient balance to pay costs in KILT 1`] = `
             type="radio"
             value="euro"
           />
-          Pay with Euro
+          Use Checkout Service and pay with Paypal EUR 1,20 (service fee, including VAT) or EUR equivalent, depending on your preferred PayPal currency
         </label>
         <button
           aria-label="Pay with Euro information"

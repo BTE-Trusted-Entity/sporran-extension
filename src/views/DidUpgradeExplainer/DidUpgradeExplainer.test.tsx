@@ -15,6 +15,7 @@ import { useKiltCosts } from '../../utilities/didUpgrade/didUpgrade';
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
 
 import { DidUpgradeExplainer } from './DidUpgradeExplainer';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 jest.mock('../../utilities/did/useIsOnChainDidDeleted');
 jest.mock('../../utilities/did/did');
@@ -25,6 +26,9 @@ jest.mocked(parseDidUri).mockReturnValue({
 jest.mock('../../utilities/didUpgrade/didUpgrade', () => ({
   useKiltCosts: jest.fn(),
 }));
+
+jest.mock('../../utilities/useAsyncValue/useAsyncValue');
+jest.mocked(useAsyncValue).mockReturnValue({ did: 'EUR 1,20' });
 
 describe('DidUpgradeExplainer', () => {
   it('should render DID not on chain yet', async () => {

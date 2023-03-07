@@ -23,6 +23,8 @@ import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDelet
 import { ExplainerModal } from '../../components/ExplainerModal/ExplainerModal';
 import { useKiltCosts } from '../../utilities/didUpgrade/didUpgrade';
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+import { getCheckoutCosts } from '../../utilities/checkout/checkout';
 
 type PaymentMethod = 'kilt' | 'euro';
 
@@ -38,6 +40,8 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
   const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
 
   const { total: kiltCosts, insufficientKilt } = useKiltCosts(address, did);
+
+  const euroCost = useAsyncValue(getCheckoutCosts, [])?.did;
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('kilt');
 
@@ -160,7 +164,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
                   onChange={handleChange}
                   className={styles.select}
                 />
-                {t('view_DidUpgradeExplainer_euro')}
+                {t('view_DidUpgradeExplainer_euro', [euroCost])}
               </label>
 
               <ExplainerModal

@@ -978,7 +978,12 @@
     "message": "For creating an on-chain DID, KILT Coins are needed to pay for the transaction and for the deposit. The deposit will be refunded if you remove your on-chain DID."
   },
   "view_DidUpgradeExplainer_euro": {
-    "message": "Pay with Euro"
+    "message": "Use Checkout Service and pay with Paypal $cost$ (service fee, including VAT) or EUR equivalent, depending on your preferred PayPal currency",
+    "placeholders": {
+      "cost": {
+        "content": "$1"
+      }
+    }
   },
   "view_DidUpgradeExplainer_euro_info": {
     "message": "Pay with Euro information"
@@ -1250,7 +1255,7 @@
     "message": "Claim a custom name to represent your DID"
   },
   "view_W3NCreateInfo_info": {
-    "message": "web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked with your SocialKYC credentials and with addresses across multiple blockchains."
+    "message": "web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked via your DID with your SocialKYC credentials and with addresses across multiple blockchains."
   },
   "view_W3NCreateInfo_warning": {
     "message": "You need an on-chain DID to use this feature."
@@ -1471,7 +1476,7 @@
     }
   },
   "view_W3NCreateChoose_euro": {
-    "message": "Use Checkout Service and pay with PayPal $cost$ (service fee) or EUR equivalent, depending on your preferred PayPal currency",
+    "message": "Use Checkout Service and pay with PayPal $cost$ (service fee, including VAT) or EUR equivalent, depending on your preferred PayPal currency",
     "placeholders": {
       "cost": {
         "content": "$1"
