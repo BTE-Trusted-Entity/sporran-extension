@@ -36,7 +36,7 @@ exports[`W3NCreateInfo should match the snapshot for off-chain did 1`] = `
     <p
       class="info"
     >
-      web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked with your SocialKYC credentials and with addresses across multiple blockchains.
+      web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked via your DID with your SocialKYC credentials and with addresses across multiple blockchains.
     </p>
     <p
       class="warning"
@@ -141,7 +141,7 @@ exports[`W3NCreateInfo should match the snapshot for on-chain did 1`] = `
     <p
       class="info"
     >
-      web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked with your SocialKYC credentials and with addresses across multiple blockchains.
+      web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked via your DID with your SocialKYC credentials and with addresses across multiple blockchains.
     </p>
     <p
       class="buttonsLine"

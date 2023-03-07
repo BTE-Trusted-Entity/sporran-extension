@@ -98,7 +98,7 @@ Fees for creating your web3name may be paid in KILT Coins or via PayPal.
             type="radio"
             value="euro"
           />
-          Use Checkout Service and pay with PayPal EUR 5.00 (service fee) or EUR equivalent, depending on your preferred PayPal currency
+          Use Checkout Service and pay with PayPal EUR 5.00 (service fee, including VAT) or EUR equivalent, depending on your preferred PayPal currency
         </label>
       </p>
     </section>
