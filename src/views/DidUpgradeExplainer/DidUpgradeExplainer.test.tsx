@@ -14,8 +14,9 @@ import { useKiltCosts } from '../../utilities/didUpgrade/didUpgrade';
 
 import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
 
-import { DidUpgradeExplainer } from './DidUpgradeExplainer';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
+
+import { DidUpgradeExplainer } from './DidUpgradeExplainer';
 
 jest.mock('../../utilities/did/useIsOnChainDidDeleted');
 jest.mock('../../utilities/did/did');

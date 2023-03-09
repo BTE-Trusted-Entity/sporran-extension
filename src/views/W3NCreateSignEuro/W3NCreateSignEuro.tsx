@@ -49,7 +49,7 @@ export function W3NCreateSignEuro({ identity }: Props): JSX.Element | null {
     async (event: FormEvent) => {
       event.preventDefault();
 
-      const { address, did } = identity;
+      const { did } = identity;
 
       if (!submitter || !did) {
         return;
@@ -70,7 +70,6 @@ export function W3NCreateSignEuro({ identity }: Props): JSX.Element | null {
 
       const url = new URL(checkout);
       url.searchParams.set('web3name', web3name);
-      url.searchParams.set('address', address);
       url.searchParams.set('did', did);
       url.searchParams.set('tx', authorized.method.toHex());
 
