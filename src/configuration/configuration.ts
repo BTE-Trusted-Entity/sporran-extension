@@ -15,7 +15,7 @@ export interface ConfigurationType {
 const publicFeatures: Features = {
   endpoint: false,
   recipientsList: false,
-  checkout: false,
+  checkout: true,
   finalized: true,
 };
 
