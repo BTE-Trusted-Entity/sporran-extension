@@ -62,6 +62,7 @@ export class PopupChannel<
   }
 
   async throw(error: string): Promise<void> {
-    await this.channel.throw(error, this.getCallId());
+    const { stack = '' } = new Error();
+    await this.channel.throw(error, stack, this.getCallId());
   }
 }

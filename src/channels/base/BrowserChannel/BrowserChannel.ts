@@ -7,9 +7,14 @@ import {
 } from '../ChannelTransforms/ChannelTransforms';
 import { exceptionToError } from '../../../utilities/exceptionToError/exceptionToError';
 import { ErrorFirstCallback } from '../types';
+import {
+  exceptionToJson,
+  jsonToError,
+} from '../../../utilities/exceptionToJson/exceptionToJson';
 
 interface ErrorMessage {
   error: string;
+  stack: string;
 }
 
 type MaybeSuccessMessage<JsonOutput> =
@@ -22,6 +27,7 @@ type MaybeSuccessMessage<JsonOutput> =
       type: string;
       callId: string;
       error: string;
+      stack: string;
     };
 
 export class BrowserChannel<
@@ -58,7 +64,7 @@ export class BrowserChannel<
       | void;
 
     if (result && typeof result === 'object' && 'error' in result) {
-      throw new Error(result.error);
+      throw jsonToError(result);
     }
 
     return result;
@@ -73,7 +79,7 @@ export class BrowserChannel<
         return;
       }
       if ('error' in message) {
-        handleOutput(new Error(message.error));
+        handleOutput(jsonToError(message));
         return;
       }
       try {
@@ -134,8 +140,7 @@ export class BrowserChannel<
           const output = await producer(input, sender);
           return this.transform.outputToJson(output);
         } catch (exception) {
-          const error = exceptionToError(exception).message;
-          return { error };
+          return exceptionToJson(exception);
         }
       })();
     };
@@ -154,12 +159,12 @@ export class BrowserChannel<
         output: jsonOutput,
       });
     } catch (exception) {
-      const error = exceptionToError(exception).message;
-      await this.throw(error, callId);
+      const { error, stack } = exceptionToJson(exception);
+      await this.throw(error, stack, callId);
     }
   }
 
-  async throw(error: string, callId: string): Promise<void> {
+  async throw(error: string, stack: string, callId: string): Promise<void> {
     await this.emit({
       type: this.output,
       callId,
@@ -192,13 +197,15 @@ export class BrowserChannel<
         input,
         async (error: Error | null, output?: Output) => {
           if (error) {
-            await this.throw(error.toString(), callId);
+            const json = exceptionToJson(error);
+            await this.throw(json.error, json.stack, callId);
             return;
           }
           try {
             await this.return(output as Output, callId);
           } catch (anotherError) {
-            await this.throw(exceptionToError(anotherError).message, callId);
+            const json = exceptionToJson(anotherError);
+            await this.throw(json.error, json.stack, callId);
           }
         },
         sender,
