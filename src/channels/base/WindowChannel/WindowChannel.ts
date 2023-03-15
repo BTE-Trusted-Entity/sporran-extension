@@ -1,5 +1,8 @@
 import { makeControlledPromise } from '../../../utilities/makeControlledPromise/makeControlledPromise';
-import { exceptionToError } from '../../../utilities/exceptionToError/exceptionToError';
+import {
+  exceptionToJson,
+  jsonToError,
+} from '../../../utilities/exceptionToJson/exceptionToJson';
 import { ErrorFirstCallback } from '../types';
 
 function addListener(listener: (message: MessageEvent) => void) {
@@ -40,7 +43,7 @@ export class WindowChannel<Input, Output> {
     function responseListener({ source, data }: MessageEvent) {
       if (source === window && data.type === output && data.callId === callId) {
         if (data.error) {
-          listener(new Error(data.error));
+          listener(jsonToError(data));
         } else {
           listener(null, data.output);
         }
@@ -67,11 +70,12 @@ export class WindowChannel<Input, Output> {
     window.postMessage(message, window.location.href);
   }
 
-  throw(error: string, callId: string): void {
+  throw(error: string, stack: string, callId: string): void {
     const message = {
       type: this.output,
       callId,
       error,
+      stack,
     };
     window.postMessage(message, window.location.href);
   }
@@ -85,8 +89,8 @@ export class WindowChannel<Input, Output> {
         const output = await producer(data.input);
         this.return(output, data.callId);
       } catch (exception) {
-        const error = exceptionToError(exception).message;
-        this.throw(error, data.callId);
+        const { error, stack } = exceptionToJson(exception);
+        this.throw(error, stack, data.callId);
       }
     };
 
@@ -104,7 +108,8 @@ export class WindowChannel<Input, Output> {
       }
       subscriber(data.input, (error, output?) => {
         if (error) {
-          this.throw(error.message, data.callId);
+          const json = exceptionToJson(error);
+          this.throw(json.error, json.stack, data.callId);
         } else {
           this.return(output as Output, data.callId);
         }
