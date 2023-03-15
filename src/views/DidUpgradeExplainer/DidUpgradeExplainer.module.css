@@ -55,7 +55,6 @@
   flex-direction: column;
   gap: 0.75rem;
   align-items: flex-start;
-  padding-left: calc(68rem / 16);
   margin-top: 1.5rem;
 }
 
