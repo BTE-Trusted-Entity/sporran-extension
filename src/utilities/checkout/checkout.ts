@@ -27,20 +27,18 @@ function localizeCost(cost: string) {
 
 interface Costs {
   did: string;
-  w3n: string;
   paymentAddress: KiltAddress;
 }
 
 export async function getCheckoutCosts(): Promise<Costs> {
   const checkout = await getCheckoutURL();
 
-  const { did, w3n, paymentAddress } = await ky
+  const { did, paymentAddress } = await ky
     .get(`${checkout}/api/costs`)
     .json<Costs>();
 
   return {
     did: localizeCost(did),
-    w3n: localizeCost(w3n),
     paymentAddress,
   };
 }

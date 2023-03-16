@@ -23,7 +23,6 @@ import { ShareInput } from '../../channels/shareChannel/types';
 import { paths } from '../paths';
 
 import { ShareCredentialCard } from '../../components/CredentialCard/ShareCredentialCard';
-import { Stats } from '../../components/Stats/Stats';
 import { IdentityLine } from '../../components/IdentityLine/IdentityLine';
 import { Selected } from '../ShareCredential/ShareCredential';
 
@@ -230,8 +229,6 @@ export function ShareCredentialSelect({ onCancel, onSelect, selected }: Props) {
           {t('view_ShareCredentialSelect_next')}
         </button>
       </p>
-
-      <Stats />
 
       {showConfirm.current && (
         <ConfirmModal onConfirm={handleNext} onReject={showConfirm.off} />

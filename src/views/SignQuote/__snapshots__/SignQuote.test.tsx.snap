@@ -34,28 +34,6 @@ exports[`SignQuote should render 1`] = `
         </span>
       </div>
     </section>
-    <p
-      class="costs"
-    >
-      <span>
-        Credential Costs: 
-      </span>
-      <span
-        class="amount"
-      >
-        233
-        <span
-          class="fractional"
-        >
-          .0000
-        </span>
-         
-        <span
-          aria-label="KILT Coin"
-          class="coin"
-        />
-      </span>
-    </p>
     <dl
       class="details"
     >
@@ -169,12 +147,6 @@ exports[`SignQuote should render 1`] = `
       >
         Request Attestation
       </button>
-      <output
-        class="errorTooltip"
-        hidden=""
-      >
-        DID deleted, please select a different Identity
-      </output>
     </p>
   </form>
 </div>
@@ -278,28 +250,6 @@ exports[`SignQuote should show error message if on-chain DID deleted 1`] = `
         </li>
       </ul>
     </div>
-    <p
-      class="costs"
-    >
-      <span>
-        Credential Costs: 
-      </span>
-      <span
-        class="amount"
-      >
-        233
-        <span
-          class="fractional"
-        >
-          .0000
-        </span>
-         
-        <span
-          aria-label="KILT Coin"
-          class="coin"
-        />
-      </span>
-    </p>
     <dl
       class="details"
     >
@@ -409,16 +359,10 @@ exports[`SignQuote should show error message if on-chain DID deleted 1`] = `
       </button>
       <button
         class="submit"
-        disabled=""
         type="submit"
       >
         Request Attestation
       </button>
-      <output
-        class="errorTooltip"
-      >
-        DID deleted, please select a different Identity
-      </output>
     </p>
   </form>
 </div>

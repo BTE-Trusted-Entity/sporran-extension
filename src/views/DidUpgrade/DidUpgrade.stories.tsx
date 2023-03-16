@@ -1,8 +1,6 @@
 import { Meta } from '@storybook/react';
-import { MemoryRouter, Route } from 'react-router-dom';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
-import { paths } from '../paths';
 
 import { DidUpgrade } from './DidUpgrade';
 
@@ -13,18 +11,8 @@ export default {
 
 export function Template() {
   return (
-    <MemoryRouter
-      initialEntries={[
-        '/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade/kilt',
-      ]}
-    >
-      <Route path={paths.identity.did.upgrade.kilt}>
-        <DidUpgrade
-          identity={
-            identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
-          }
-        />
-      </Route>
-    </MemoryRouter>
+    <DidUpgrade
+      identity={identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']}
+    />
   );
 }

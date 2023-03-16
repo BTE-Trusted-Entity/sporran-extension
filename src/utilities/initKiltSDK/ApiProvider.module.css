@@ -1,4 +1,0 @@
-.spinner {
-  composes: spinner from '../../components/LoadingSpinner/LoadingSpinner.module.css';
-  margin: 5rem auto;
-}

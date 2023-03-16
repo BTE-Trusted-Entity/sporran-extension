@@ -1,5 +1,4 @@
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
-import { Fragment } from 'react';
 
 import './App.css';
 import * as styles from './App.module.css';
@@ -21,7 +20,6 @@ import { AppSettings } from '../AppSettings/AppSettings';
 import { paths } from '../paths';
 import { ApiProvider } from '../../utilities/initKiltSDK/ApiProvider';
 import { useIdentities } from '../../utilities/identities/identities';
-import { isInternal } from '../../configuration/variant';
 
 function confirmNavigation(message: string, callback: (ok: boolean) => void) {
   const allowed = window.confirm(message);
@@ -36,6 +34,7 @@ export function App() {
     paths.popup.signDid.start,
     paths.popup.claim,
     paths.popup.signDidExtrinsic,
+    paths.popup.createDid,
   ];
 
   // Without this workaround the IdentitiesRouter will never load identities, seems like a library bug
@@ -48,12 +47,10 @@ export function App() {
         getUserConfirmation={confirmNavigation}
       >
         <RouteExcept path={popupPaths}>
-          <Fragment>
-            <nav className={styles.menus}>
-              <AddIdentity />
-              <Settings />
-            </nav>
-          </Fragment>
+          <nav className={styles.menus}>
+            <AddIdentity />
+            <Settings />
+          </nav>
         </RouteExcept>
 
         <Switch>
@@ -86,7 +83,7 @@ export function App() {
 
 export function AppWithProviders() {
   return (
-    <div className={isInternal ? styles.containerInternal : styles.container}>
+    <div className={styles.container}>
       <ConfigurationProvider>
         <IdentitiesProvider>
           <CredentialsProvider>

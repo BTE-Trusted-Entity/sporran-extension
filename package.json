@@ -57,7 +57,6 @@
     "classnames": "^2.3.2",
     "ky": "^0.33.3",
     "lodash-es": "^4.17.21",
-    "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-accessible-dropdown-menu-hook": "^4.0.0",
     "react-dialog-polyfill": "^1.1.7",

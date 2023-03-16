@@ -1,22 +1,12 @@
-import { BalanceUtils } from '@kiltprotocol/sdk-js';
-
 import { identitiesMock as identities, render } from '../../testing/testing';
 
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
-import { useKiltCosts } from '../../utilities/didUpgrade/didUpgrade';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 import { DidUpgrade } from './DidUpgrade';
 
-jest.mock('../../utilities/didUpgrade/didUpgrade', () => ({
-  useKiltCosts: jest.fn(),
-}));
-
-jest.mocked(useKiltCosts).mockReturnValue({
-  fee: BalanceUtils.toFemtoKilt(0.01),
-  deposit: BalanceUtils.toFemtoKilt(1),
-  total: BalanceUtils.toFemtoKilt(1.01),
-  insufficientKilt: false,
-});
+jest.mock('../../utilities/useAsyncValue/useAsyncValue');
+jest.mocked(useAsyncValue).mockReturnValue({ did: 'EUR 4,00' });
 
 describe('DidUpgrade', () => {
   it('should render', async () => {

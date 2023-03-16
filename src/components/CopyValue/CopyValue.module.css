@@ -6,13 +6,6 @@
   margin: 0;
 }
 
-.kiltLine {
-  composes: line;
-
-  --copy-value-icon: url('../images/kilt-coin-circle.svg');
-  --copy-value-icon-size: 1rem;
-}
-
 .didLine {
   composes: line;
 

@@ -1,7 +1,7 @@
 import { DidUri } from '@kiltprotocol/sdk-js';
 
-import { DAppName } from '../../dApps/AccessChannels/DAppName';
-import { Origin } from '../../dApps/AccessChannels/Origin';
+import { DAppName } from '../AccessChannels/DAppName';
+import { Origin } from '../AccessChannels/Origin';
 
 export type ShareIdentitiesInput = DAppName;
 

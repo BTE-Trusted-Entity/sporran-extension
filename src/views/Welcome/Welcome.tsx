@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  Fragment,
-  MouseEvent,
-  useCallback,
-  useState,
-} from 'react';
+import { Fragment } from 'react';
 import browser from 'webextension-polyfill';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -24,23 +18,6 @@ interface Props {
 
 export function Welcome({ again = false }: Props) {
   const t = browser.i18n.getMessage;
-
-  const [enabled, setEnabled] = useState(false);
-  const handleTermsClick = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setEnabled(event.target.checked);
-    },
-    [],
-  );
-
-  const handleLinkClick = useCallback(
-    (event: MouseEvent) => {
-      if (!enabled) {
-        event.preventDefault();
-      }
-    },
-    [enabled],
-  );
 
   const identities = useIdentities();
   const current = useCurrentIdentity();
@@ -80,42 +57,11 @@ export function Welcome({ again = false }: Props) {
         )}
       </h3>
 
-      <p className={styles.termsLine}>
-        <label className={styles.agreeLabel}>
-          <input
-            className={styles.agree}
-            type="checkbox"
-            onChange={handleTermsClick}
-            checked={enabled}
-          />
-          <span />
-          {t('view_Welcome_agree')}
-        </label>
-        <a
-          className={styles.terms}
-          href="https://www.sporran.org/terms"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {t('view_Welcome_terms')}
-        </a>
-      </p>
-
-      <Link
-        to={paths.identity.create.start}
-        className={styles.create}
-        onClick={handleLinkClick}
-        aria-disabled={!enabled}
-      >
+      <Link to={paths.identity.create.start} className={styles.create}>
         {t('view_Welcome_create')}
       </Link>
 
-      <Link
-        to={paths.identity.import.start}
-        className={styles.importPhrase}
-        onClick={handleLinkClick}
-        aria-disabled={!enabled}
-      >
+      <Link to={paths.identity.import.start} className={styles.importPhrase}>
         {t('view_Welcome_import')}
       </Link>
 

@@ -19,29 +19,6 @@
   opacity: 1;
 }
 
-.inputKiltAmount {
-  composes: input;
-  text-align: right;
-  background-image: url('../images/kilt-coin.svg'), var(--input-gradient);
-  background-size:
-    calc(13rem / 16) 1rem,
-    auto;
-  background-repeat: no-repeat;
-  background-position:
-    calc(100% - 0.75rem) center,
-    0;
-  padding-right: 2rem;
-}
-
-.inputKiltAmount[type='number'] {
-  appearance: initial;
-}
-
-.inputKiltAmount[type='number']::-webkit-inner-spin-button,
-.inputKiltAmount[type='number']::-webkit-outer-spin-button {
-  appearance: none;
-}
-
 .inputName {
   composes: input;
   background-image: url('../images/pencil.svg'), var(--input-gradient);
@@ -51,22 +28,4 @@
     calc(100% - 0.75rem) center,
     0;
   padding-right: 2.25rem;
-}
-
-.inputRadio {
-  --diameter: 0.75rem;
-
-  appearance: none;
-  margin: 0 0 -0.125rem;
-  height: var(--diameter);
-  width: var(--diameter);
-  border: 1px solid var(--color-white);
-  background: linear-gradient(#547099 0%, #304765 43.95%, #0a1b2f 100%);
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.inputRadio:checked {
-  background: content-box var(--color-green);
-  padding: 3px;
 }

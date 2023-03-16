@@ -7,14 +7,13 @@ import {
 } from '@kiltprotocol/sdk-js';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
-import { injectIntoDApp } from './dApps/injectIntoDApp/injectIntoDApp';
 import { configuration } from './configuration/configuration';
 import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedChallengeChannel';
 import { injectedSignDidChannel } from './channels/SignDidChannels/injectedSignDidChannel';
 import { injectedSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/injectedSignDidExtrinsicChannel';
 import { injectedCreateDidChannel } from './channels/CreateDidChannels/injectedCreateDidChannel';
 import { injectedShareIdentitiesChannel } from './channels/ShareIdentitiesChannels/injectedShareIdentitiesChannel';
-import { injectedAccessChannel } from './dApps/AccessChannels/injectedAccessChannel';
+import { injectedAccessChannel } from './channels/AccessChannels/injectedAccessChannel';
 import {
   IEncryptedMessageV1,
   InjectedWindowProvider,
@@ -220,7 +219,7 @@ function initialize() {
     signExtrinsicWithDid,
     getSignedDidCreationExtrinsic,
     startSession,
-    name: 'Sporran', // manifest_name
+    name: 'Sporran Lite', // manifest_name
     version,
     specVersion,
   };
@@ -229,8 +228,6 @@ function initialize() {
 }
 
 function main() {
-  injectIntoDApp(version);
-
   if (!apiWindow.kilt) {
     window.addEventListener('kilt-dapp#initialized', initialize);
     return;

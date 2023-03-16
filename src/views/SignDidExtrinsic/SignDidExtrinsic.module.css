@@ -60,26 +60,31 @@
 }
 
 .didLine {
-  composes: didLine from '../DidEndpointsSign/DidEndpointsSign.module.css';
-}
-
-.endpointDetails {
-  composes: details from '../DidEndpointsSign/DidEndpointsSign.module.css';
+  composes: didLine from '../../components/CopyValue/CopyValue.module.css';
   margin-top: 1rem;
 }
 
+.endpointDetails {
+  composes: details from '../../components/Card/Card.module.css';
+}
+
 .endpointDetail {
-  composes: detail from '../DidEndpointsSign/DidEndpointsSign.module.css';
+  composes: detail from '../../components/Card/Card.module.css';
 }
 
 .fullWidthDetail {
-  composes: fullWidthDetail from '../DidEndpointsSign/DidEndpointsSign.module.css';
+  composes: fullWidthDetail from '../../components/Card/Card.module.css';
 }
 
 .endpointName {
-  composes: detailName from '../DidEndpointsSign/DidEndpointsSign.module.css';
+  composes: detailName from '../../components/Card/Card.module.css';
 }
 
 .endpointValue {
-  composes: detailValue from '../DidEndpointsSign/DidEndpointsSign.module.css';
+  composes: detailValue from '../../components/Card/Card.module.css';
+  font-size: 0.875rem;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
 }

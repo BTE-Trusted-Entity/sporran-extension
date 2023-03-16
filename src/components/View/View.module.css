@@ -5,7 +5,6 @@
   min-height: var(--popup-height);
   height: var(--popup-height);
   max-height: var(--popup-height);
-  background: fixed url('../images/background.png') no-repeat center/contain;
   padding: 4rem 1.5rem 0;
   box-sizing: border-box;
   margin: auto;

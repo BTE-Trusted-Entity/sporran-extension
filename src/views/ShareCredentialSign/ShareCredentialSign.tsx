@@ -77,6 +77,7 @@ export function ShareCredentialSign({ selected, onCancel, popupData }: Props) {
       event.preventDefault();
 
       const { seed } = await passwordField.get(event);
+
       const { encrypt, sign } = await getIdentityCryptoFromSeed(seed);
 
       const presentation = await Credential.createPresentation({

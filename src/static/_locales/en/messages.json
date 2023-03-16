@@ -3,13 +3,13 @@
     "message": "en"
   },
   "manifest_name": {
-    "message": "Sporran"
+    "message": "Sporran Lite"
   },
   "manifest_short_name": {
-    "message": "Sporran"
+    "message": "Sporran Lite"
   },
   "manifest_description": {
-    "message": "Sporran. The wallet for your KILTs and credentials."
+    "message": "Sporran Lite. The wallet for your credentials."
   },
   "common_action_back": {
     "message": "Back"
@@ -26,32 +26,11 @@
   "common_action_next": {
     "message": "Next Step"
   },
-  "common_action_continue": {
-    "message": "Continue"
-  },
   "common_action_confirm": {
     "message": "OK"
   },
   "common_action_sign": {
     "message": "Sign"
-  },
-  "component_Balance_label": {
-    "message": "Total Balance: "
-  },
-  "component_Balance_showBreakdown": {
-    "message": "Show balance breakdown"
-  },
-  "component_Balance_hideBreakdown": {
-    "message": "Hide balance breakdown"
-  },
-  "component_Balance_transferable": {
-    "message": "Transferable Balance: "
-  },
-  "component_Balance_locked": {
-    "message": "Locked Balance: "
-  },
-  "component_Balance_bonded": {
-    "message": "Bonded Balance: "
   },
   "component_IdentitySlide_name": {
     "message": "Identity name:"
@@ -64,25 +43,6 @@
   },
   "component_IdentitySlideNew_title": {
     "message": "Add Identity"
-  },
-  "component_Stats_identity_one": {
-    "message": "You have $number$ Identity with a",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "component_Stats_identity_other": {
-    "message": "You have $number$ Identities with a",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "component_Stats_balance": {
-    "message": " Total Balance: "
   },
   "component_AddIdentity_label": {
     "message": "Add"
@@ -108,8 +68,8 @@
   "component_IdentityOptions_reset_password": {
     "message": "Reset Password"
   },
-  "component_KiltCurrency_label": {
-    "message": "KILT Coin"
+  "component_IdentityOptions_upgrade_did": {
+    "message": "Upgrade DID"
   },
   "component_Settings_label": {
     "message": "Settings"
@@ -122,12 +82,6 @@
   },
   "component_Settings_forget_saved_passwords": {
     "message": "Require Password for Future Transactions"
-  },
-  "component_Settings_terms_and_conditions": {
-    "message": "Terms & Conditions"
-  },
-  "component_Settings_tech_support": {
-    "message": "Tech Support"
   },
   "component_Settings_access": {
     "message": "Toggle Website Access"
@@ -158,27 +112,6 @@
   "component_IdentitySuccessOverlay_message_reset": {
     "message": "You have successfully set a new password"
   },
-  "component_useCopyButton_copy": {
-    "message": "Copy to clipboard"
-  },
-  "component_usePasteButton_paste": {
-    "message": "Paste from clipboard"
-  },
-  "component_TxStatusModal_pending": {
-    "message": "Your transaction is being processed"
-  },
-  "component_TxStatusModal_success": {
-    "message": "Your transaction was successful"
-  },
-  "component_TxStatusModal_error": {
-    "message": "Your transaction has failed"
-  },
-  "component_TxStatusModal_subscan": {
-    "message": "Check Status on Subscan"
-  },
-  "component_TxStatusModal_status": {
-    "message": "Check Status on status.kilt.io"
-  },
   "component_PasswordField_reset": {
     "message": "Reset password"
   },
@@ -199,9 +132,6 @@
   },
   "component_CredentialCard_backup": {
     "message": "Back up credential"
-  },
-  "component_CredentialCard_presentation": {
-    "message": "Create presentation of credential"
   },
   "component_CredentialCard_remove": {
     "message": "Remove credential"
@@ -266,15 +196,6 @@
   "component_CredentialCard_download_prompt": {
     "message": "(Not backed up)"
   },
-  "component_CredentialCard_presentation_info": {
-    "message": "Create a version of your credential to save and share"
-  },
-  "component_CredentialCard_more": {
-    "message": "Learn more"
-  },
-  "component_CredentialCard_presentation_toggle": {
-    "message": "Don’t show this message again"
-  },
   "component_ShareCredentialCard_required": {
     "message": "* required"
   },
@@ -294,29 +215,6 @@
       }
     }
   },
-  "component_ExplainerModal_show": {
-    "message": "Information"
-  },
-  "component_extrinsicDetails_method": {
-    "message": "method data"
-  },
-  "component_extrinsicDetails_info": {
-    "message": "info"
-  },
-  "component_UnknownIdentity_heading": {
-    "message": "Unknown Identity"
-  },
-  "component_UnknownIdentity_text": {
-    "message": "The identity $address$ is not recognized by Sporran.",
-    "placeholders": {
-      "address": {
-        "content": "$1"
-      }
-    }
-  },
-  "component_UnknownIdentity_info": {
-    "message": "This operation is only supported for identities existing in Sporran."
-  },
   "component_UnknownCredential_heading": {
     "message": "Unknown Credential"
   },
@@ -332,7 +230,7 @@
     "message": "This operation is only supported for credentials existing in Sporran."
   },
   "view_Welcome_heading": {
-    "message": "Welcome to your Sporran"
+    "message": "Welcome"
   },
   "view_Welcome_again": {
     "message": "Add Identity"
@@ -342,12 +240,6 @@
   },
   "view_Welcome_addAnother": {
     "message": ". Add another one."
-  },
-  "view_Welcome_agree": {
-    "message": " I have read and agree to the "
-  },
-  "view_Welcome_terms": {
-    "message": "Terms & Conditions"
   },
   "view_Welcome_create": {
     "message": "Create Identity"
@@ -468,26 +360,8 @@
   "view_CreatePassword_CTA": {
     "message": "Next Step"
   },
-  "view_ReceiveToken_heading": {
-    "message": "Receive"
-  },
-  "view_ReceiveToken_explanation": {
-    "message": "Copy and send your address"
-  },
-  "view_ReceiveToken_identity_address": {
-    "message": "Address"
-  },
-  "view_ReceiveToken_enlarge": {
-    "message": "Enlarge"
-  },
   "view_IdentityOverview_title": {
     "message": "Your Identities"
-  },
-  "view_IdentityOverview_send": {
-    "message": "Send"
-  },
-  "view_IdentityOverview_receive": {
-    "message": "Receive"
   },
   "view_IdentityOverview_credentials": {
     "message": "Show Credentials"
@@ -495,31 +369,17 @@
   "view_IdentityOverview_add": {
     "message": "Add Identity"
   },
-  "view_IdentityOverview_subscan": {
-    "message": "View Transactions"
-  },
-  "view_IdentityOverview_upgrade": {
-    "message": "Get your DID"
-  },
-  "view_IdentityOverview_on_chain": {
-    "message": "Manage DID"
-  },
   "view_IdentityOverview_download_prompt": {
     "message": "Some credentials have not been backed up"
   },
-  "view_IdentityOverview_web3name_create": {
-    "message": "Create web3name"
+  "view_IdentityOverview_import": {
+    "message": "+ Import Credential"
   },
-  "view_IdentityOverview_web3name_manage": {
-    "message": "Manage web3name: $web3name$",
-    "placeholders": {
-      "web3name": {
-        "content": "$1"
-      }
-    }
+  "view_IdentityOverview_no_credentials": {
+    "message": "No credentials available"
   },
-  "view_IdentityOverview_did_removed": {
-    "message": "DID removed"
+  "view_IdentityOverview_explainer": {
+    "message": "How To Get Credentials"
   },
   "view_RemoveIdentity_heading": {
     "message": "Attention!"
@@ -536,106 +396,6 @@
   "view_RemoveIdentity_remove": {
     "message": "Remove this Identity"
   },
-  "view_SendToken_heading": {
-    "message": "Send KILT Coins"
-  },
-  "view_SendToken_subline": {
-    "message": "Securely send your coins"
-  },
-  "view_SendToken_maximum": {
-    "message": "Maximum transferable amount: "
-  },
-  "view_SendToken_amount": {
-    "message": "Amount to send"
-  },
-  "view_SendToken_amount_invalid": {
-    "message": "The value entered is not a number"
-  },
-  "view_SendToken_amount_small": {
-    "message": "The minimum transferable amount is $minimum$",
-    "placeholders": {
-      "minimum": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_SendToken_amount_large": {
-    "message": "The amount entered exceeds your maximum transferable amount"
-  },
-  "view_SendToken_error_existential_recepient": {
-    "message": "Cannot send less than the existential deposit"
-  },
-  "view_SendToken_fee_large": {
-    "message": "The amount+costs exceed your maximum transferable amount"
-  },
-  "view_SendToken_total_fee": {
-    "message": "Costs: "
-  },
-  "view_SendToken_all_in": {
-    "message": "Send All"
-  },
-  "view_SendToken_tip_increase": {
-    "message": "Increase the tip by 1%"
-  },
-  "view_SendToken_tip_decrease": {
-    "message": "Decrease the tip by 1%"
-  },
-  "view_SendToken_tip": {
-    "message": "Tip of $percent$% included in costs",
-    "placeholders": {
-      "percent": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_SendToken_recipient": {
-    "message": "Paste the recipient’s address here"
-  },
-  "view_SendToken_recipient_invalid": {
-    "message": "The address is invalid. Please check it again."
-  },
-  "view_SendToken_recipient_same": {
-    "message": "The recipient address is the same as Identity address"
-  },
-  "view_SendToken_CTA": {
-    "message": "Review & Sign Transaction"
-  },
-  "view_SendToken_offline": {
-    "message": "Cannot connect to the network. Please check your internet connection."
-  },
-  "view_ReviewTransaction_heading": {
-    "message": "Send KILT Coins"
-  },
-  "view_ReviewTransaction_subline": {
-    "message": "Transaction Details"
-  },
-  "view_ReviewTransaction_recipient": {
-    "message": "Send to:"
-  },
-  "view_ReviewTransaction_total": {
-    "message": "Total: "
-  },
-  "view_ReviewTransaction_showDetails": {
-    "message": "Show details"
-  },
-  "view_ReviewTransaction_hideDetails": {
-    "message": "Hide details"
-  },
-  "view_ReviewTransaction_fee": {
-    "message": "Fee:"
-  },
-  "view_ReviewTransaction_tip": {
-    "message": "Tip:"
-  },
-  "view_ReviewTransaction_totalFee": {
-    "message": "Costs:"
-  },
-  "view_ReviewTransaction_amount": {
-    "message": "Amount:"
-  },
-  "view_ReviewTransaction_CTA": {
-    "message": "Send"
-  },
   "view_SignQuote_heading": {
     "message": "Terms of Attestation"
   },
@@ -645,17 +405,11 @@
   "view_SignQuote_subline_predetermined": {
     "message": "The credential will be issued to this Identity"
   },
-  "view_SignQuote_costs": {
-    "message": "Credential Costs: "
-  },
   "view_SignQuote_cType": {
     "message": "Credential type"
   },
   "view_SignQuote_attester": {
     "message": "Attester"
-  },
-  "view_SignQuote_on_chain_did_deleted": {
-    "message": "DID deleted, please select a different Identity"
   },
   "view_SignQuote_CTA": {
     "message": "Request Attestation"
@@ -674,24 +428,6 @@
   },
   "view_SaveCredential_close": {
     "message": "close this popup now"
-  },
-  "view_IdentityCredentials_title": {
-    "message": "Your Credentials"
-  },
-  "view_IdentityCredentials_subline": {
-    "message": "View and manage your credentials"
-  },
-  "view_IdentityCredentials_import": {
-    "message": "+ Import Credential"
-  },
-  "view_IdentityCredentials_checkStatus": {
-    "message": "Check Status"
-  },
-  "view_IdentityCredentials_no_credentials": {
-    "message": "No credentials available"
-  },
-  "view_IdentityCredentials_explainer": {
-    "message": "How To Get Credentials"
   },
   "view_ShareCredentialSelect_heading": {
     "message": "Select a Credential"
@@ -767,59 +503,6 @@
   "view_AuthorizeDApp_reject": {
     "message": "Reject"
   },
-  "view_SignDApp_from": {
-    "message": "from"
-  },
-  "view_SignDApp_version": {
-    "message": "version"
-  },
-  "view_SignDApp_nonce": {
-    "message": "nonce"
-  },
-  "view_SignDApp_method": {
-    "message": "method data"
-  },
-  "view_SignDApp_lifetime": {
-    "message": "lifetime"
-  },
-  "view_SignDApp_immortal": {
-    "message": "immortal"
-  },
-  "view_SignDApp_mortal": {
-    "message": "mortal, valid from $start$ to $end$",
-    "placeholders": {
-      "start": {
-        "content": "$1"
-      },
-      "end": {
-        "content": "$2"
-      }
-    }
-  },
-  "view_SignDApp_title": {
-    "message": "Transaction"
-  },
-  "view_SignDApp_reject": {
-    "message": "Reject"
-  },
-  "view_SignDApp_CTA": {
-    "message": "Sign the Transaction"
-  },
-  "view_SignRawDApp_from": {
-    "message": "from"
-  },
-  "view_SignRawDApp_message": {
-    "message": "message"
-  },
-  "view_SignRawDApp_title": {
-    "message": "Sign the Message"
-  },
-  "view_SignRawDApp_reject": {
-    "message": "Reject"
-  },
-  "view_SignRawDApp_CTA": {
-    "message": "Sign the Message"
-  },
   "view_ExternalAccess_heading": {
     "message": "Website Access"
   },
@@ -838,303 +521,91 @@
   "view_ExternalAccess_back": {
     "message": "Back to My Identities"
   },
-  "view_ExistentialWarning_headline": {
-    "message": "Attention"
-  },
-  "view_ExistentialWarning_subline": {
-    "message": "Your Identity’s remaining balance will be set to zero"
-  },
-  "view_ExistentialWarning_warning": {
-    "message": "This transaction would leave your balance below the existential deposit. Therefore the balance of your Identity will be set to zero. The rest of your transferable balance will be added as a tip. Confirm to proceed with this transaction anyway."
-  },
-  "view_ExistentialWarning_confirm": {
-    "message": "Confirm"
-  },
   "view_GenericError_message": {
-    "message": "An error occurred; please try again. For help please contact  <a href='mailto:tech-support@sporran.org'>tech-support@sporran.org</a> and send over the following text in full."
+    "message": "An error occurred; please try again."
   },
   "view_GenericError_details": {
     "message": "Error details"
   },
+  "view_ImportCredentials_title": {
+    "message": "Import Credentials"
+  },
+  "view_ImportCredentials_subline": {
+    "message": "To import your credentials you need your backup files"
+  },
+  "view_ImportCredentials_drop": {
+    "message": "Drag’n’drop the backup files here"
+  },
+  "view_ImportCredentials_cta": {
+    "message": "or Browse Files"
+  },
+  "view_ImportCredentials_pendingImport": {
+    "message": "Processing…"
+  },
+  "view_ImportCredentials_successfulImport": {
+    "message": "Done"
+  },
+  "view_ImportCredentials_wrongFormatLabel": {
+    "message": "Wrong file format"
+  },
+  "view_ImportCredentials_wrongFormatInfo": {
+    "message": "Please make sure to upload only JSON files that were previously backed up from your Sporran."
+  },
+  "view_ImportCredentials_unknownIdentityLabel": {
+    "message": "Identity missing"
+  },
+  "view_ImportCredentials_unknownIdentityInfo": {
+    "message": "You uploaded a credential for an identity that is currently not in your Sporran. Please add this identity first and import the credential again."
+  },
+  "view_ImportCredentials_unexpectedErrorLabel": {
+    "message": "Unexpected error"
+  },
+  "view_ImportCredentials_unexpectedErrorInfo": {
+    "message": "An unexpected error happened. Please try again."
+  },
+  "view_ImportCredentials_hideError": {
+    "message": "Hide this message"
+  },
+  "view_ImportCredentials_more": {
+    "message": "Import More Credentials"
+  },
+  "view_CreateDidDApp_heading": {
+    "message": "Create On-chain DID"
+  },
+  "view_CreateDidDApp_origin": {
+    "message": "Request from:"
+  },
+  "view_CreateDidDApp_error_full_did": {
+    "message": "DID already on chain"
+  },
+  "view_CreateDidDApp_error_did_removed": {
+    "message": "DID removed from chain"
+  },
   "view_DidUpgrade_heading": {
-    "message": "Get your DID"
-  },
-  "view_DidUpgrade_subline": {
-    "message": "Sign"
-  },
-  "view_DidUpgrade_total": {
-    "message": "Total cost: "
-  },
-  "view_DidUpgrade_deposit": {
-    "message": " Deposit "
-  },
-  "view_DidUpgrade_deposit_explainer": {
-    "message": "A deposit is needed to create your DID. The deposit will be refunded if you remove your DID."
-  },
-  "view_DidUpgrade_fee": {
-    "message": " + fee "
-  },
-  "view_DidUpgrade_info": {
-    "message": "Information"
-  },
-  "view_DidUpgrade_insufficientFunds": {
-    "message": "You need at least $cost$ KILTs",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_DidUpgrade_pending": {
-    "message": "DID creation is being processed"
-  },
-  "view_DidUpgrade_success": {
-    "message": "DID creation was successful"
-  },
-  "view_DidUpgrade_error": {
-    "message": "DID creation failed"
-  },
-  "view_DidUpgradeEuro_heading": {
     "message": "Prepare Transaction"
   },
-  "view_DidUpgradeEuro_subline": {
-    "message": "Get your DID"
+  "view_DidUpgrade_subline": {
+    "message": "Upgrade to on-chain DID"
   },
-  "view_DidUpgradeEuro_address": {
+  "view_DidUpgrade_address": {
     "message": "Account Address:"
   },
-  "view_DidUpgradeEuro_method": {
+  "view_DidUpgrade_method": {
     "message": "Method:"
   },
-  "view_DidUpgradeEuro_info": {
+  "view_DidUpgrade_info": {
     "message": "After signing you will go to the checkout page to pay with "
   },
-  "view_DidUpgradeEuro_paypal": {
+  "view_DidUpgrade_paypal": {
     "message": "PayPal "
   },
-  "view_DidUpgradeEuro_cost": {
+  "view_DidUpgrade_cost": {
     "message": "(total cost: $cost$).",
     "placeholders": {
       "cost": {
         "content": "$1"
       }
     }
-  },
-  "view_DidUpgradeEuro_footnote": {
-    "message": "*PayPal account required"
-  },
-  "view_DidDowngrade_heading": {
-    "message": "Remove DID"
-  },
-  "view_DidDowngrade_subline": {
-    "message": "Remove DID from the KILT blockchain"
-  },
-  "view_DidDowngrade_total": {
-    "message": "Refund Amount: "
-  },
-  "view_DidDowngrade_deposit": {
-    "message": " Deposit "
-  },
-  "view_DidDowngrade_fee": {
-    "message": " - fee "
-  },
-  "view_DidDowngrade_insufficientFunds": {
-    "message": "You need at least $cost$ KILTs to pay the fee",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_DidDowngrade_pending": {
-    "message": "DID removal is being processed"
-  },
-  "view_DidDowngrade_success": {
-    "message": "DID removal was successful"
-  },
-  "view_DidDowngrade_error": {
-    "message": "DID removal failed"
-  },
-  "view_DidDowngrade_fee_as_total": {
-    "message": "Fee: "
-  },
-  "view_DidDowngrade_explanation": {
-    "message": "Take care: this identity won’t be able to get a DID again."
-  },
-  "view_DidUpgradeExplainer_heading": {
-    "message": "Decentralized Identifier"
-  },
-  "view_DidUpgradeExplainer_subline": {
-    "message": "Get your DID"
-  },
-  "view_DidUpgradeExplainer_functionality": {
-    "message": "Enables you to sign with your DID and use new functionality"
-  },
-  "view_DidUpgradeExplainer_deposit": {
-    "message": "A deposit is needed to create your DID. The deposit will be refunded if you remove your DID."
-  },
-  "view_DidUpgradeExplainer_onchain_deleted": {
-    "message": "You deleted your DID and can no longer use this feature. To start using a DID, please create a new identity."
-  },
-  "view_DidUpgradeExplainer_onchain_deleted_subline": {
-    "message": "DID was deleted"
-  },
-  "view_DidUpgradeExplainer_kilt": {
-    "message": "Pay with KILT"
-  },
-  "view_DidUpgradeExplainer_kilt_info": {
-    "message": "Pay with KILT information"
-  },
-  "view_DidUpgradeExplainer_kilt_explainer": {
-    "message": "For creating a DID, KILT Coins are needed to pay for the transaction and for the deposit. The deposit will be refunded if you remove your DID."
-  },
-  "view_DidUpgradeExplainer_euro": {
-    "message": "Use Checkout Service and pay with Paypal $cost$ (service fee, including VAT) or EUR equivalent, depending on your preferred PayPal currency",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_DidUpgradeExplainer_euro_info": {
-    "message": "Pay with Euro information"
-  },
-  "view_DidUpgradeExplainer_euro_explainer": {
-    "message": "You pay a fixed fiat rate and BTE in return takes over handling the necessary KILT payments for you. There are no refunds when removing your DID."
-  },
-  "view_DidUpgradeExplainer_insufficientKilt": {
-    "message": "You need at least $cost$ KILTs (deposit + fee)",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_DidDowngradeWarningCredentials_heading": {
-    "message": "Remove DID"
-  },
-  "view_DidDowngradeWarningCredentials_subline": {
-    "message": "Remove DID from the KILT blockchain"
-  },
-  "view_DidDowngradeWarningCredentials_warning": {
-    "message": "Attention! This will render the following credentials unusable:"
-  },
-  "view_DidDowngradeWarningWeb3Name_heading": {
-    "message": "Remove DID"
-  },
-  "view_DidDowngradeWarningWeb3Name_subline": {
-    "message": "Remove DID from the KILT blockchain"
-  },
-  "view_DidDowngradeWarningWeb3Name_warning": {
-    "message": "Attention! Removing your DID will also remove your web3name:"
-  },
-  "view_DidDowngradeWarningWeb3Name_web3name": {
-    "message": "web3name: "
-  },
-  "view_DidDowngradeWarningWeb3Name_explanation": {
-    "message": "Please note: if you remove your web3name, it can be claimed by someone else."
-  },
-  "view_DidManage_heading": {
-    "message": "Manage DID"
-  },
-  "view_DidManage_linking": {
-    "message": "Linking accounts"
-  },
-  "view_DidManage_endpoints": {
-    "message": "Service endpoints"
-  },
-  "view_DidManage_downgrade": {
-    "message": "Remove DID"
-  },
-  "view_DidEndpointsForm_heading": {
-    "message": "Service Endpoints"
-  },
-  "view_DidEndpointsForm_subline": {
-    "message": "Add and remove service endpoints"
-  },
-  "view_DidEndpointsForm_add": {
-    "message": "+ Add service endpoint"
-  },
-  "view_DidEndpointsForm_url": {
-    "message": "URL"
-  },
-  "view_DidEndpointsForm_type": {
-    "message": "Type"
-  },
-  "view_DidEndpointsForm_id": {
-    "message": "Service ID"
-  },
-  "view_DidEndpointsForm_unsaved": {
-    "message": "Clicking OK will cause unsaved form data to be lost"
-  },
-  "view_DidEndpointsForm_tooMany": {
-    "message": "You cannot add any more service endpoints"
-  },
-  "view_DidEndpointsForm_formatID": {
-    "message": "“$character$” is not a supported character",
-    "placeholders": {
-      "character": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_DidEndpointsForm_tooLong": {
-    "message": "This string is $current$ bytes; the maximum allowed is $maximum$.",
-    "placeholders": {
-      "current": {
-        "content": "$1"
-      },
-      "maximum": {
-        "content": "$2"
-      }
-    }
-  },
-  "view_DidEndpointsSign_heading_add": {
-    "message": "Add Service Endpoint"
-  },
-  "view_DidEndpointsSign_heading_remove": {
-    "message": "Remove Service Endpoint"
-  },
-  "view_DidEndpointsSign_subline": {
-    "message": "Sign with your password"
-  },
-  "view_DidEndpointsSign_insufficientFunds": {
-    "message": "You need at least $cost$ KILTs to pay the fee",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_DidEndpointsSign_add_pending": {
-    "message": "The new service endpoint is being created"
-  },
-  "view_DidEndpointsSign_add_success": {
-    "message": "The new service endpoint has been added"
-  },
-  "view_DidEndpointsSign_add_error": {
-    "message": "Adding the new service endpoint failed"
-  },
-  "view_DidEndpointsSign_remove_pending": {
-    "message": "The service endpoint is being removed"
-  },
-  "view_DidEndpointsSign_remove_success": {
-    "message": "The service endpoint was removed"
-  },
-  "view_DidEndpointsSign_remove_error": {
-    "message": "Removing the service endpoint failed"
-  },
-  "view_DidEndpointsSign_fee": {
-    "message": "Fee: "
-  },
-  "view_DidEndpointsSign_url": {
-    "message": "URL"
-  },
-  "view_DidEndpointsSign_type": {
-    "message": "Type"
-  },
-  "view_DidEndpointsSign_id": {
-    "message": "Service ID"
   },
   "view_SignDid_title": {
     "message": "Sign with DID"
@@ -1184,207 +655,6 @@
   "view_SignDidCredentialsSelect_next": {
     "message": "Next"
   },
-  "view_ImportCredentials_title": {
-    "message": "Import Credentials"
-  },
-  "view_ImportCredentials_subline": {
-    "message": "To import your credentials you need your backup files"
-  },
-  "view_ImportCredentials_drop": {
-    "message": "Drag’n’drop the backup files here"
-  },
-  "view_ImportCredentials_cta": {
-    "message": "or Browse Files"
-  },
-  "view_ImportCredentials_pendingImport": {
-    "message": "Processing…"
-  },
-  "view_ImportCredentials_successfulImport": {
-    "message": "Done"
-  },
-  "view_ImportCredentials_wrongFormatLabel": {
-    "message": "Wrong file format"
-  },
-  "view_ImportCredentials_wrongFormatInfo": {
-    "message": "Please make sure to upload only JSON files that were previously backed up from your Sporran."
-  },
-  "view_ImportCredentials_unknownIdentityLabel": {
-    "message": "Identity missing"
-  },
-  "view_ImportCredentials_unknownIdentityInfo": {
-    "message": "You uploaded a credential for an identity that is currently not in your Sporran. Please add this identity first and import the credential again."
-  },
-  "view_ImportCredentials_unexpectedErrorLabel": {
-    "message": "Unexpected error"
-  },
-  "view_ImportCredentials_unexpectedErrorInfo": {
-    "message": "An unexpected error happened. Please try again."
-  },
-  "view_ImportCredentials_hideError": {
-    "message": "Hide this message"
-  },
-  "view_ImportCredentials_more": {
-    "message": "Import More Credentials"
-  },
-  "view_CreatePresentation_title": {
-    "message": "Customize Credential"
-  },
-  "view_CreatePresentation_subline": {
-    "message": "Select the information to disclose"
-  },
-  "view_CreatePresentation_download": {
-    "message": "Download"
-  },
-  "view_W3NCreateInfo_heading": {
-    "message": "Create web3name"
-  },
-  "view_W3NCreateInfo_subline": {
-    "message": "Claim a custom name to represent your DID"
-  },
-  "view_W3NCreateInfo_info": {
-    "message": "web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked via your DID with your SocialKYC credentials and with addresses across multiple blockchains."
-  },
-  "view_W3NCreateInfo_warning": {
-    "message": "You need a DID to use this feature."
-  },
-  "view_W3NCreateInfo_upgradeCTA": {
-    "message": "Get your DID"
-  },
-  "view_W3NCreateForm_heading": {
-    "message": "Create web3name"
-  },
-  "view_W3NCreateForm_subline": {
-    "message": "Claim a custom name to represent your DID"
-  },
-  "view_W3NCreateForm_info": {
-    "message": "Choose your unique web3name.\nUse only these characters for your web3name:\nlowercase a to z, 0 to 9, “-” and “_”"
-  },
-  "view_W3NCreateForm_placeholder": {
-    "message": "choose a unique web3name"
-  },
-  "view_W3NCreateForm_short": {
-    "message": "You need to use at least $minimum$ characters",
-    "placeholders": {
-      "minimum": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_W3NCreateForm_long": {
-    "message": "You may use at most $maximum$ characters",
-    "placeholders": {
-      "maximum": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_W3NCreateForm_unexpected": {
-    "message": "“$character$” is not a supported character",
-    "placeholders": {
-      "character": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_W3NCreateForm_capital": {
-    "message": "Capital letters are not supported as a part of your web3name"
-  },
-  "view_W3NCreateForm_taken": {
-    "message": "Too late, this web3name is already taken"
-  },
-  "view_W3NCreateSign_heading": {
-    "message": "web3name"
-  },
-  "view_W3NCreateSign_subline": {
-    "message": "Connect a web3name to your DID"
-  },
-  "view_W3NCreateSign_pending": {
-    "message": "Create web3name is being processed"
-  },
-  "view_W3NCreateSign_success": {
-    "message": "Create web3name was successful"
-  },
-  "view_W3NCreateSign_error": {
-    "message": "Create web3name failed"
-  },
-  "view_W3NCreateSign_total": {
-    "message": "Total cost: "
-  },
-  "view_W3NCreateSign_deposit": {
-    "message": " Deposit "
-  },
-  "view_W3NCreateSign_fee": {
-    "message": " + fee "
-  },
-  "view_W3NCreateSign_explainer": {
-    "message": "A deposit is needed to claim your web3name. The deposit will be refunded if you remove your web3name."
-  },
-  "view_W3NCreateSign_label": {
-    "message": "web3name: "
-  },
-  "view_W3NCreateSign_insufficientFunds": {
-    "message": "You need at least $cost$ KILTs to create the web3name",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_W3NCreateSignEuro_heading": {
-    "message": "Prepare Transaction"
-  },
-  "view_W3NCreateSignEuro_subline": {
-    "message": "Pay for your web3name"
-  },
-  "view_W3NCreateSignEuro_label": {
-    "message": "web3name: "
-  },
-  "view_W3NCreateSignEuro_cost": {
-    "message": "After signing you will be directed to the Checkout Service and pay with PayPal (total cost: $cost$)",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_W3NRemove_heading": {
-    "message": "Remove web3name"
-  },
-  "view_W3NRemove_subline": {
-    "message": "Remove web3name from the KILT blockchain"
-  },
-  "view_W3NRemove_total": {
-    "message": "Refund Amount: "
-  },
-  "view_W3NRemove_deposit": {
-    "message": " Deposit "
-  },
-  "view_W3NRemove_fee": {
-    "message": " - fee "
-  },
-  "view_W3NRemove_fee_as_total": {
-    "message": "Fee: "
-  },
-  "view_W3NRemove_insufficientFunds": {
-    "message": "You need at least $cost$ KILTs to pay the fee",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_W3NRemove_pending": {
-    "message": "Remove web3name is being processed"
-  },
-  "view_W3NRemove_success": {
-    "message": "Remove web3name was successful"
-  },
-  "view_W3NRemove_error": {
-    "message": "Remove web3name failed"
-  },
-  "view_W3NRemove_explanation": {
-    "message": "Please note: if you remove your web3name, it can be claimed by someone else."
-  },
   "view_SignDidExtrinsic_from": {
     "message": "from"
   },
@@ -1427,24 +697,6 @@
   "view_SignDidExtrinsic_endpoint_remove_error": {
     "message": "No service endpoint found for DID"
   },
-  "view_W3NManage_heading": {
-    "message": "Manage web3name"
-  },
-  "view_W3NManage_remove": {
-    "message": "Remove web3name"
-  },
-  "view_CreateDidDApp_heading": {
-    "message": "Create DID"
-  },
-  "view_CreateDidDApp_origin": {
-    "message": "Request from:"
-  },
-  "view_CreateDidDApp_error_full_did": {
-    "message": "DID already exists"
-  },
-  "view_CreateDidDApp_error_did_removed": {
-    "message": "DID already removed"
-  },
   "view_GetDidList_heading": {
     "message": "Share your Identities"
   },
@@ -1463,38 +715,11 @@
   "view_GetDidList_share": {
     "message": "Share"
   },
-  "view_W3NCreateChoose_heading": {
-    "message": "Create web3name"
+  "component_extrinsicDetails_method": {
+    "message": "method data"
   },
-  "view_W3NCreateChoose_subline": {
-    "message": "Select your payment method"
-  },
-  "view_W3NCreateChoose_info": {
-    "message": "Claim a web3name to represent your DID.\nFees for creating your web3name may be paid in KILT Coins or via PayPal."
-  },
-  "view_W3NCreateChoose_kilt": {
-    "message": "Pay with KILT $cost$ (deposit + fee)",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_W3NCreateChoose_euro": {
-    "message": "Use Checkout Service and pay with PayPal $cost$ (service fee, including VAT) or EUR equivalent, depending on your preferred PayPal currency",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_W3NCreateChoose_insufficientKilt": {
-    "message": "You need at least $cost$ KILTs (deposit + fee)",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
+  "component_extrinsicDetails_info": {
+    "message": "info"
   },
   "view_AttestationRejected_heading": {
     "message": "Attestation rejected"

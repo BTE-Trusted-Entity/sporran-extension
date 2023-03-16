@@ -3,8 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import { AuthorizeDApp } from '../AuthorizeDApp/AuthorizeDApp';
 import { SaveCredential } from '../SaveCredential/SaveCredential';
 import { ShareCredential } from '../ShareCredential/ShareCredential';
-import { SignDApp } from '../SignDApp/SignDApp';
-import { SignRawDApp } from '../SignRawDApp/SignRawDApp';
 import { ImportCredentials } from '../ImportCredentials/ImportCredentials';
 import { AttestationRejected } from '../AttestationRejected/AttestationRejected';
 import { ShareIdentities } from '../ShareIdentities/ShareIdentities';
@@ -24,12 +22,6 @@ export function PopupsRouter() {
       </Route>
       <Route path={paths.popup.share.start}>
         <ShareCredential />
-      </Route>
-      <Route path={paths.popup.sign}>
-        <SignDApp />
-      </Route>
-      <Route path={paths.popup.signRaw}>
-        <SignRawDApp />
       </Route>
       <Route path={paths.popup.shareIdentities}>
         <ShareIdentities />

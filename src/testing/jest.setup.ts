@@ -19,7 +19,6 @@ jest.mock('@polkadot/api-augment', () => ({}));
 jest.mock('@polkadot/api-base', () => ({}));
 jest.mock('@polkadot/api-derive', () => ({}));
 jest.mock('@polkadot/api', () => ({}));
-jest.mock('@polkadot/extension-inject', () => ({}));
 jest.mock('@polkadot/keyring', () => ({}));
 jest.mock('@polkadot/networks', () => ({}));
 jest.mock('@polkadot/rpc-augment', () => ({}));
@@ -73,6 +72,8 @@ jest.mock('@kiltprotocol/sdk-js', () => ({
   },
   Blockchain: { submitSignedTx: jest.fn() },
   Did: {
+    parse: jest.fn(),
+    getFullDidUri: jest.fn(),
     isSameSubject: jest.fn().mockReturnValue(true),
     resourceIdToChain: jest
       .fn()

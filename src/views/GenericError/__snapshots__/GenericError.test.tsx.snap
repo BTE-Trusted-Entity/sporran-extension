@@ -17,13 +17,7 @@ exports[`GenericError should render generic error when an error happens 1`] = `
       <p
         class="text"
       >
-        An error occurred; please try again. For help please contact  
-        <a
-          href="mailto:tech-support@sporran.org"
-        >
-          tech-support@sporran.org
-        </a>
-         and send over the following text in full.
+        An error occurred; please try again.
       </p>
       <textarea
         aria-label="Error details"

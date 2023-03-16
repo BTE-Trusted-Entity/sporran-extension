@@ -111,28 +111,6 @@ export function Settings() {
             )}
 
             <li className={menuStyles.listItem}>
-              <a
-                href="https://www.sporran.org/terms"
-                target="_blank"
-                rel="noreferrer"
-                {...itemProps.shift()}
-              >
-                {t('component_Settings_terms_and_conditions')}
-              </a>
-            </li>
-
-            <li className={menuStyles.listItem}>
-              <a
-                href="https://support.kilt.io/"
-                target="_blank"
-                rel="noreferrer"
-                {...itemProps.shift()}
-              >
-                {t('component_Settings_tech_support')}
-              </a>
-            </li>
-
-            <li className={menuStyles.listItem}>
               <Link to={paths.access} {...itemProps.shift()}>
                 {t('component_Settings_access')}
               </Link>

@@ -1,7 +1,7 @@
 import { Runtime } from 'webextension-polyfill';
 
 import { PopupChannel } from '../base/PopupChannel/PopupChannel';
-import { getAuthorizedOrigin } from '../../dApps/AccessChannels/getAuthorizedOrigin';
+import { getAuthorizedOrigin } from '../AccessChannels/getAuthorizedOrigin';
 import { setCurrentIdentityByDid } from '../../utilities/identities/identities';
 import { popupsEnum } from '../base/channelsEnum';
 

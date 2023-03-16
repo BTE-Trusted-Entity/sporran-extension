@@ -16,25 +16,18 @@ import {
   useIdentities,
 } from '../../utilities/identities/identities';
 
-import { ReceiveToken } from '../ReceiveToken/ReceiveToken';
 import { Welcome } from '../Welcome/Welcome';
 import { CreateIdentity } from '../CreateIdentity/CreateIdentity';
 import { ImportIdentity } from '../ImportIdentity/ImportIdentity';
 import { IdentityOverview } from '../IdentityOverview/IdentityOverview';
 import { ResetIdentity } from '../ResetIdentity/ResetIdentity';
 import { RemoveIdentity } from '../RemoveIdentity/RemoveIdentity';
-import { SendTokenFlow } from '../SendTokenFlow/SendTokenFlow';
-import { CreatePresentation } from '../CreatePresentation/CreatePresentation';
-import { IdentityCredentials } from '../IdentityCredentials/IdentityCredentials';
-import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
 import { SignQuote } from '../SignQuote/SignQuote';
 import { SignDidFlow } from '../SignDidFlow/SignDidFlow';
 import { SignDidExtrinsic } from '../SignDidExtrinsic/SignDidExtrinsic';
-import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
-import { paths } from '../paths';
-import { W3NCreateFlow } from '../W3NCreateFlow/W3NCreateFlow';
-import { W3NManageRouter } from '../W3NManageRouter/W3NManageRouter';
 import { CreateDidDApp } from '../CreateDidDApp/CreateDidDApp';
+import { paths } from '../paths';
+import { DidUpgrade } from '../DidUpgrade/DidUpgrade';
 
 interface Props {
   identities: IdentitiesMap;
@@ -83,22 +76,6 @@ export function SpecificIdentityRouter({ identities }: Props) {
   return (
     <>
       <Switch>
-        <Route path={paths.identity.receive}>
-          <ReceiveToken identity={identity} />
-        </Route>
-
-        <Route path={paths.identity.send.start}>
-          <SendTokenFlow identity={identity} />
-        </Route>
-
-        <Route path={paths.identity.credentials.presentation}>
-          <CreatePresentation identity={identity} />
-        </Route>
-
-        <Route path={paths.identity.credentials.base}>
-          <IdentityCredentials identity={identity} />
-        </Route>
-
         <Route path={paths.identity.remove}>
           <RemoveIdentity identity={identity} />
         </Route>
@@ -123,20 +100,8 @@ export function SpecificIdentityRouter({ identities }: Props) {
           <CreateDidDApp identity={identity} />
         </Route>
 
-        <Route path={paths.identity.did.upgrade.start}>
-          <DidUpgradeFlow identity={identity} />
-        </Route>
-
-        <Route path={paths.identity.did.manage.start}>
-          <DidManageRouter identity={identity} />
-        </Route>
-
-        <Route path={paths.identity.web3name.create.base}>
-          <W3NCreateFlow identity={identity} />
-        </Route>
-
-        <Route path={paths.identity.web3name.manage.start}>
-          <W3NManageRouter identity={identity} />
+        <Route path={paths.identity.upgradeDid}>
+          <DidUpgrade identity={identity} />
         </Route>
 
         <Route path={paths.identity.overview}>

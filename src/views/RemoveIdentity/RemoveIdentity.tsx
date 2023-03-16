@@ -6,13 +6,11 @@ import { map, without } from 'lodash-es';
 import * as styles from './RemoveIdentity.module.css';
 
 import { Identity } from '../../utilities/identities/types';
-import { Balance } from '../../components/Balance/Balance';
 import {
   removeIdentity,
   useIdentities,
 } from '../../utilities/identities/identities';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
-import { Stats } from '../../components/Stats/Stats';
 import { generatePath, paths } from '../paths';
 import { Avatar } from '../../components/Avatar/Avatar';
 
@@ -50,8 +48,6 @@ export function RemoveIdentity({ identity }: Props) {
       <Avatar identity={identity} />
       <p className={styles.name}>{identity.name}</p>
 
-      <Balance address={identity.address} />
-
       <small className={styles.addressLabel}>
         {t('view_RemoveIdentity_address')}
       </small>
@@ -70,8 +66,6 @@ export function RemoveIdentity({ identity }: Props) {
       </p>
 
       <LinkBack />
-
-      <Stats />
     </main>
   );
 }

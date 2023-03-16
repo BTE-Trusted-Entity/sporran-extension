@@ -1,7 +1,5 @@
 import { Fragment, PropsWithChildren } from 'react';
 
-import * as styles from './ApiProvider.module.css';
-
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
 import { initKiltSDK } from './initKiltSDK';
@@ -13,7 +11,7 @@ export function ApiProvider({ children }: PropsWithChildren) {
   }, []);
 
   if (!render) {
-    return <div className={styles.spinner} />;
+    return null;
   }
 
   return <Fragment>{children}</Fragment>;

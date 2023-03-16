@@ -64,32 +64,6 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
           class="listItem"
         >
           <a
-            href="https://www.sporran.org/terms"
-            rel="noreferrer"
-            role="menuitem"
-            tabindex="-1"
-            target="_blank"
-          >
-            Terms & Conditions
-          </a>
-        </li>
-        <li
-          class="listItem"
-        >
-          <a
-            href="https://support.kilt.io/"
-            rel="noreferrer"
-            role="menuitem"
-            tabindex="-1"
-            target="_blank"
-          >
-            Tech Support
-          </a>
-        </li>
-        <li
-          class="listItem"
-        >
-          <a
             href="/access"
             role="menuitem"
             tabindex="-1"
@@ -170,32 +144,6 @@ exports[`Settings should render the endpoint item in the internal build 1`] = `
       <ul
         class="list"
       >
-        <li
-          class="listItem"
-        >
-          <a
-            href="https://www.sporran.org/terms"
-            rel="noreferrer"
-            role="menuitem"
-            tabindex="-1"
-            target="_blank"
-          >
-            Terms & Conditions
-          </a>
-        </li>
-        <li
-          class="listItem"
-        >
-          <a
-            href="https://support.kilt.io/"
-            rel="noreferrer"
-            role="menuitem"
-            tabindex="-1"
-            target="_blank"
-          >
-            Tech Support
-          </a>
-        </li>
         <li
           class="listItem"
         >

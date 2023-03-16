@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IdentityOverview should render a normal identity 1`] = `
+exports[`IdentityOverview should expand last credential when there are less than 7 1`] = `
 <div>
   <main
     class="container"
@@ -12,7 +12,7 @@ exports[`IdentityOverview should render a normal identity 1`] = `
         Your Identities
       </h1>
       <p
-        class="info"
+        class="subline"
       >
         You have 3 Identities
       </p>
@@ -110,89 +110,203 @@ exports[`IdentityOverview should render a normal identity 1`] = `
         </li>
       </ul>
     </div>
-    <p
-      class="balanceLine"
-    >
-      Total Balance: 
-      <span
-        class="amount"
-      >
-        1
-        <span
-          class="fractional"
-        >
-          .2340
-        </span>
-         
-        <span
-          aria-label="KILT Coin"
-          class="coin"
-        />
-      </span>
-      <button
-        aria-label="Show balance breakdown"
-        class="showBreakdown"
-        title="Show balance breakdown"
-        type="button"
-      />
-    </p>
-    <p>
-      <a
-        class="button"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send"
-      >
-        Send
-      </a>
-      <a
-        class="button"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/receive"
-      >
-        Receive
-      </a>
-    </p>
-    <a
+    <ul
       class="credentials"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/credentials"
     >
-      Show Credentials
-    </a>
-    <a
-      class="upgrade"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade"
-    >
-      Get your DID
-    </a>
-    <a
-      class="web3Name"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/web3name/create/info"
-    >
-      Create web3name
-    </a>
-    <p
-      class="stats"
-    >
-      You have 3 Identities with a
-      <span
-        class="balance"
-      >
-         Total Balance: 
-        <span
-          class="amount"
+      <li>
+        <a
+          class="importCredential"
+          href="/popup/import"
         >
-          3.7020
-           
-          <span
-            aria-label="KILT Coin"
-            class="coin"
-          />
-        </span>
-      </span>
-    </p>
+          + Import Credential
+        </a>
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Alter Ego Email
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              badboy69@hotmail.com
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Email Credential
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              mockEmail@mock.mock
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="true"
+        class="unusableCredential"
+      >
+        <section
+          class="expanded"
+        >
+          <section
+            class="buttons"
+          >
+            <button
+              aria-label="Collapse credential details"
+              class="collapse"
+              type="button"
+            />
+            <button
+              aria-label="Back up credential"
+              class="download"
+              disabled=""
+            />
+            <button
+              aria-label="Remove credential"
+              class="remove"
+              type="button"
+            />
+          </section>
+          <dl
+            class="details"
+          >
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                Credential name
+              </dt>
+              <dd
+                class="nameValue"
+              >
+                Sporran email
+                <button
+                  aria-label="Edit credential name"
+                  class="editName"
+                />
+              </dd>
+            </div>
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                Status
+              </dt>
+              <dd
+                class="detailValue unusableValue"
+              >
+                Revoked
+              </dd>
+            </div>
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                Email
+              </dt>
+              <dd
+                class="detailValue"
+              >
+                sporran@sporran.org
+              </dd>
+            </div>
+          </dl>
+          <h4
+            class="technical"
+          >
+            Technical details
+          </h4>
+          <dl
+            class="details"
+          >
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                CType
+              </dt>
+              <dd
+                class="detailValue"
+              >
+                Email
+              </dd>
+            </div>
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                Attester
+              </dt>
+              <dd
+                class="detailValue"
+              >
+                Social KYC
+              </dd>
+            </div>
+            <div
+              class="hash"
+            >
+              <dt
+                class="detailName"
+              >
+                Credential hash
+              </dt>
+              <dd
+                class="detailValue"
+              >
+                0xbe7fcc7aa0186b05fd116c100e2d673fb951163693788640ce6032ad2f700dag
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <div />
+      </li>
+    </ul>
   </main>
 </div>
 `;
 
-exports[`IdentityOverview should render full DID identity 1`] = `
+exports[`IdentityOverview should render a normal identity 1`] = `
 <div>
   <main
     class="container"
@@ -204,7 +318,7 @@ exports[`IdentityOverview should render full DID identity 1`] = `
         Your Identities
       </h1>
       <p
-        class="info"
+        class="subline"
       >
         You have 3 Identities
       </p>
@@ -216,7 +330,7 @@ exports[`IdentityOverview should render full DID identity 1`] = `
         class="container"
       >
         <div
-          class="avatar fullDid"
+          class="avatar"
         >
           Identicon
         </div>
@@ -226,7 +340,7 @@ exports[`IdentityOverview should render full DID identity 1`] = `
           <span
             class="name"
           >
-            Identity with on-chain DID and lots of coins
+            Light DID Identity
           </span>
           <div
             class="wrapper"
@@ -245,16 +359,16 @@ exports[`IdentityOverview should render full DID identity 1`] = `
         </div>
       </section>
       <a
-        aria-label="Light DID Identity"
+        aria-label="Add Identity"
         class="left"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
-        title="Light DID Identity"
+        href="/identity/NEW"
+        title="Add Identity"
       />
       <a
-        aria-label="Identity which has a very very very very long name and might not even fit on the screen"
+        aria-label="Identity with on-chain DID and lots of coins"
         class="right"
-        href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
-        title="Identity which has a very very very very long name and might not even fit on the screen"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
+        title="Identity with on-chain DID and lots of coins"
       />
       <ul
         class="bubbles"
@@ -263,8 +377,9 @@ exports[`IdentityOverview should render full DID identity 1`] = `
           class="item"
         >
           <a
+            aria-current="page"
             aria-label="Light DID Identity"
-            class="bubble"
+            class="bubble bubbleActive"
             href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
             title="Light DID Identity"
           />
@@ -273,9 +388,8 @@ exports[`IdentityOverview should render full DID identity 1`] = `
           class="item"
         >
           <a
-            aria-current="page"
             aria-label="Identity with on-chain DID and lots of coins"
-            class="bubble bubbleActive"
+            class="bubble"
             href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
             title="Identity with on-chain DID and lots of coins"
           />
@@ -302,92 +416,394 @@ exports[`IdentityOverview should render full DID identity 1`] = `
         </li>
       </ul>
     </div>
-    <p
-      class="balanceLine"
-    >
-      Total Balance: 
-      <span
-        class="amount"
-      >
-        1
-        <span
-          class="fractional"
-        >
-          .2340
-        </span>
-         
-        <span
-          aria-label="KILT Coin"
-          class="coin"
-        />
-      </span>
-      <button
-        aria-label="Show balance breakdown"
-        class="showBreakdown"
-        title="Show balance breakdown"
-        type="button"
-      />
-    </p>
-    <p>
-      <a
-        class="button"
-        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/send"
-      >
-        Send
-      </a>
-      <a
-        class="button"
-        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/receive"
-      >
-        Receive
-      </a>
-    </p>
-    <a
-      class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo?tab=transfer"
-      rel="noreferrer"
-      target="_blank"
-    >
-      View Transactions
-    </a>
-    <a
+    <ul
       class="credentials"
-      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/credentials"
     >
-      Show Credentials
-    </a>
-    <a
-      class="manage"
-      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did"
-    >
-      Manage DID
-    </a>
-    <a
-      class="web3Name"
-      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/web3name/create/info"
-    >
-      Create web3name
-    </a>
-    <p
-      class="stats"
-    >
-      You have 3 Identities with a
-      <span
-        class="balance"
-      >
-         Total Balance: 
-        <span
-          class="amount"
+      <li>
+        <a
+          class="importCredential"
+          href="/popup/import"
         >
-          3.7020
-           
-          <span
-            aria-label="KILT Coin"
-            class="coin"
-          />
-        </span>
-      </span>
-    </p>
+          + Import Credential
+        </a>
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          aria-label="Not downloaded Email Credential mockEmail@mock.mock (Not backed up)"
+          class="downloadPrompt"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Not downloaded Email Credential
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              mockEmail@mock.mock
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              GitHub 1
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              28846466
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Email Credential
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              mockEmail@mock.mock
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Lots of props
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              Proppy
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              All your stakes are belong to us
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              This is a really long name for the first property of claim contents to check how the overflow looks
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Dotsama Credential
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              God collator
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Tweet Twit Twat
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              tweety_bird
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Mein Credential
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              maxmustermann@gmx-123-z34-dfdsafsdf-42r421-2sdfag.de
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              A really long name for my credential which probably will not fit on the screen
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              loremipsum@gmail.com
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Alter Ego Email
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              badboy69@hotmail.com
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="credential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Email Credential
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              mockEmail@mock.mock
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="unusableCredential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              GitHub 2
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              arty-name
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="unusableCredential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Sporran email
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              sporran@sporran.org
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="unusableCredential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Believe me
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              realDonaldTrump
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+      <li
+        aria-expanded="false"
+        class="unusableCredential"
+      >
+        <button
+          class="expand"
+          type="button"
+        >
+          <section
+            class="collapsedCredential"
+          >
+            <h4
+              class="collapsedName"
+            >
+              Sporran email
+            </h4>
+            <p
+              class="collapsedValue"
+            >
+              sporran@sporran.org
+            </p>
+          </section>
+        </button>
+        <div />
+      </li>
+    </ul>
   </main>
 </div>
 `;
@@ -404,7 +820,7 @@ exports[`IdentityOverview should render the new identity 1`] = `
         Your Identities
       </h1>
       <p
-        class="info"
+        class="subline"
       >
         You have 3 Identities
       </p>
@@ -484,31 +900,11 @@ exports[`IdentityOverview should render the new identity 1`] = `
     >
       Add Identity
     </a>
-    <p
-      class="stats"
-    >
-      You have 3 Identities with a
-      <span
-        class="balance"
-      >
-         Total Balance: 
-        <span
-          class="amount"
-        >
-          3.7020
-           
-          <span
-            aria-label="KILT Coin"
-            class="coin"
-          />
-        </span>
-      </span>
-    </p>
   </main>
 </div>
 `;
 
-exports[`IdentityOverview should render with link to send screen 1`] = `
+exports[`IdentityOverview should render when no credentials 1`] = `
 <div>
   <main
     class="container"
@@ -520,7 +916,7 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
         Your Identities
       </h1>
       <p
-        class="info"
+        class="subline"
       >
         You have 3 Identities
       </p>
@@ -618,702 +1014,35 @@ exports[`IdentityOverview should render with link to send screen 1`] = `
         </li>
       </ul>
     </div>
-    <p
-      class="balanceLine"
-    >
-      Total Balance: 
-      <span
-        class="amount"
-      >
-        1
-        <span
-          class="fractional"
-        >
-          .2340
-        </span>
-         
-        <span
-          aria-label="KILT Coin"
-          class="coin"
-        />
-      </span>
-      <button
-        aria-label="Show balance breakdown"
-        class="showBreakdown"
-        title="Show balance breakdown"
-        type="button"
-      />
-    </p>
-    <p>
-      <a
-        class="button"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send"
-      >
-        Send
-      </a>
-      <a
-        class="button"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/receive"
-      >
-        Receive
-      </a>
-    </p>
-    <a
-      class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1?tab=transfer"
-      rel="noreferrer"
-      target="_blank"
-    >
-      View Transactions
-    </a>
-    <a
+    <ul
       class="credentials"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/credentials"
     >
-      Show Credentials
-    </a>
-    <a
-      class="upgrade"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade"
-    >
-      Get your DID
-    </a>
-    <a
-      class="web3Name"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/web3name/create/info"
-    >
-      Create web3name
-    </a>
-    <p
-      class="stats"
-    >
-      You have 3 Identities with a
-      <span
-        class="balance"
-      >
-         Total Balance: 
-        <span
-          class="amount"
+      <li>
+        <a
+          class="importCredential"
+          href="/popup/import"
         >
-          3.7020
-           
-          <span
-            aria-label="KILT Coin"
-            class="coin"
-          />
-        </span>
-      </span>
-    </p>
-  </main>
-</div>
-`;
-
-exports[`IdentityOverview should show notification for not backed up credentials 1`] = `
-<div>
-  <main
-    class="container"
-  >
-    <header>
-      <h1
-        class="heading"
+          + Import Credential
+        </a>
+      </li>
+      <li
+        class="noCredentials"
       >
-        Your Identities
-      </h1>
-      <p
-        class="info"
-      >
-        You have 3 Identities
-      </p>
-    </header>
-    <div
-      class="container"
-    >
-      <section
-        class="container"
-      >
-        <div
-          class="avatar fullDid"
+        <p
+          class="info"
         >
-          Identicon
-        </div>
-        <div
-          class="nameLine"
+          No credentials available
+        </p>
+        <a
+          class="explainerLink"
+          href="https://socialkyc.io/"
+          rel="noreferrer"
+          target="_blank"
         >
-          <span
-            class="name"
-          >
-            Light DID Identity
-          </span>
-          <div
-            class="wrapper"
-          >
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="Identity options"
-              class="toggle"
-              role="button"
-              tabindex="0"
-              title="Identity options"
-              type="button"
-            />
-          </div>
-        </div>
-      </section>
-      <a
-        aria-label="Add Identity"
-        class="left"
-        href="/identity/NEW"
-        title="Add Identity"
-      />
-      <a
-        aria-label="Identity with on-chain DID and lots of coins"
-        class="right"
-        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
-        title="Identity with on-chain DID and lots of coins"
-      />
-      <ul
-        class="bubbles"
-      >
-        <li
-          class="item"
-        >
-          <a
-            aria-current="page"
-            aria-label="Light DID Identity"
-            class="bubble bubbleActive"
-            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
-            title="Light DID Identity"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-label="Identity with on-chain DID and lots of coins"
-            class="bubble"
-            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
-            title="Identity with on-chain DID and lots of coins"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
-            class="bubble"
-            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
-            title="Identity which has a very very very very long name and might not even fit on the screen"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-label="Add Identity"
-            class="add"
-            href="/identity/NEW"
-            title="Add Identity"
-          />
-        </li>
-      </ul>
-    </div>
-    <p
-      class="balanceLine"
-    >
-      Total Balance: 
-      <span
-        class="amount"
-      >
-        1
-        <span
-          class="fractional"
-        >
-          .2340
-        </span>
-         
-        <span
-          aria-label="KILT Coin"
-          class="coin"
-        />
-      </span>
-      <button
-        aria-label="Show balance breakdown"
-        class="showBreakdown"
-        title="Show balance breakdown"
-        type="button"
-      />
-    </p>
-    <p>
-      <a
-        class="button"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send"
-      >
-        Send
-      </a>
-      <a
-        class="button"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/receive"
-      >
-        Receive
-      </a>
-    </p>
-    <a
-      class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1?tab=transfer"
-      rel="noreferrer"
-      target="_blank"
-    >
-      View Transactions
-    </a>
-    <a
-      aria-label="Show Credentials. Some credentials have not been backed up"
-      class="downloadPrompt"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/credentials"
-    >
-      Show Credentials
-    </a>
-    <a
-      class="manage"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did"
-    >
-      Manage DID
-    </a>
-    <a
-      class="web3Name"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/web3name/create/info"
-    >
-      Create web3name
-    </a>
-    <p
-      class="stats"
-    >
-      You have 3 Identities with a
-      <span
-        class="balance"
-      >
-         Total Balance: 
-        <span
-          class="amount"
-        >
-          3.7020
-           
-          <span
-            aria-label="KILT Coin"
-            class="coin"
-          />
-        </span>
-      </span>
-    </p>
-  </main>
-</div>
-`;
-
-exports[`IdentityOverview should show on-chain DID removed 1`] = `
-<div>
-  <main
-    class="container"
-  >
-    <header>
-      <h1
-        class="heading"
-      >
-        Your Identities
-      </h1>
-      <p
-        class="info"
-      >
-        You have 3 Identities
-      </p>
-    </header>
-    <div
-      class="container"
-    >
-      <section
-        class="container"
-      >
-        <div
-          class="avatar"
-        >
-          Identicon
-        </div>
-        <div
-          class="nameLine"
-        >
-          <span
-            class="name"
-          >
-            Identity with deleted on-chain DID
-          </span>
-          <div
-            class="wrapper"
-          >
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="Identity options"
-              class="toggle"
-              role="button"
-              tabindex="0"
-              title="Identity options"
-              type="button"
-            />
-          </div>
-        </div>
-      </section>
-      <a
-        aria-label="Add Identity"
-        class="left"
-        href="/identity/NEW"
-        title="Add Identity"
-      />
-      <a
-        aria-label="Light DID Identity"
-        class="right"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
-        title="Light DID Identity"
-      />
-      <ul
-        class="bubbles"
-      >
-        <li
-          class="item"
-        >
-          <a
-            aria-label="Light DID Identity"
-            class="bubble"
-            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
-            title="Light DID Identity"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-label="Identity with on-chain DID and lots of coins"
-            class="bubble"
-            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
-            title="Identity with on-chain DID and lots of coins"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
-            class="bubble"
-            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
-            title="Identity which has a very very very very long name and might not even fit on the screen"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-label="Add Identity"
-            class="add"
-            href="/identity/NEW"
-            title="Add Identity"
-          />
-        </li>
-      </ul>
-    </div>
-    <p
-      class="balanceLine"
-    >
-      Total Balance: 
-      <span
-        class="amount"
-      >
-        1
-        <span
-          class="fractional"
-        >
-          .2340
-        </span>
-         
-        <span
-          aria-label="KILT Coin"
-          class="coin"
-        />
-      </span>
-      <button
-        aria-label="Show balance breakdown"
-        class="showBreakdown"
-        title="Show balance breakdown"
-        type="button"
-      />
-    </p>
-    <p>
-      <a
-        class="button"
-        href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/send"
-      >
-        Send
-      </a>
-      <a
-        class="button"
-        href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/receive"
-      >
-        Receive
-      </a>
-    </p>
-    <a
-      class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB?tab=transfer"
-      rel="noreferrer"
-      target="_blank"
-    >
-      View Transactions
-    </a>
-    <a
-      aria-label="Show Credentials. Some credentials have not been backed up"
-      class="downloadPrompt"
-      href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/credentials"
-    >
-      Show Credentials
-    </a>
-    <a
-      class="upgrade"
-      href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/did/upgrade"
-    >
-      DID removed
-    </a>
-    <a
-      class="web3Name"
-      href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/web3name"
-    >
-      <span
-        class="web3NameManage"
-      >
-        Manage web3name: fancy-name
-      </span>
-    </a>
-    <p
-      class="stats"
-    >
-      You have 3 Identities with a
-      <span
-        class="balance"
-      >
-         Total Balance: 
-        <span
-          class="amount"
-        >
-          3.7020
-           
-          <span
-            aria-label="KILT Coin"
-            class="coin"
-          />
-        </span>
-      </span>
-    </p>
-  </main>
-</div>
-`;
-
-exports[`IdentityOverview should show web3name 1`] = `
-<div>
-  <main
-    class="container"
-  >
-    <header>
-      <h1
-        class="heading"
-      >
-        Your Identities
-      </h1>
-      <p
-        class="info"
-      >
-        You have 3 Identities
-      </p>
-    </header>
-    <div
-      class="container"
-    >
-      <section
-        class="container"
-      >
-        <div
-          class="avatar fullDid"
-        >
-          Identicon
-        </div>
-        <div
-          class="nameLine"
-        >
-          <span
-            class="name"
-          >
-            Light DID Identity
-          </span>
-          <div
-            class="wrapper"
-          >
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="Identity options"
-              class="toggle"
-              role="button"
-              tabindex="0"
-              title="Identity options"
-              type="button"
-            />
-          </div>
-        </div>
-      </section>
-      <a
-        aria-label="Add Identity"
-        class="left"
-        href="/identity/NEW"
-        title="Add Identity"
-      />
-      <a
-        aria-label="Identity with on-chain DID and lots of coins"
-        class="right"
-        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
-        title="Identity with on-chain DID and lots of coins"
-      />
-      <ul
-        class="bubbles"
-      >
-        <li
-          class="item"
-        >
-          <a
-            aria-label="Light DID Identity"
-            class="bubble"
-            href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
-            title="Light DID Identity"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-current="page"
-            aria-label="Identity with on-chain DID and lots of coins"
-            class="bubble bubbleActive"
-            href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
-            title="Identity with on-chain DID and lots of coins"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
-            class="bubble"
-            href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
-            title="Identity which has a very very very very long name and might not even fit on the screen"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-label="Add Identity"
-            class="add"
-            href="/identity/NEW"
-            title="Add Identity"
-          />
-        </li>
-      </ul>
-    </div>
-    <p
-      class="balanceLine"
-    >
-      Total Balance: 
-      <span
-        class="amount"
-      >
-        1
-        <span
-          class="fractional"
-        >
-          .2340
-        </span>
-         
-        <span
-          aria-label="KILT Coin"
-          class="coin"
-        />
-      </span>
-      <button
-        aria-label="Show balance breakdown"
-        class="showBreakdown"
-        title="Show balance breakdown"
-        type="button"
-      />
-    </p>
-    <p>
-      <a
-        class="button"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send"
-      >
-        Send
-      </a>
-      <a
-        class="button"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/receive"
-      >
-        Receive
-      </a>
-    </p>
-    <a
-      class="subscan"
-      href="https://kilt-testnet.subscan.io/account/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1?tab=transfer"
-      rel="noreferrer"
-      target="_blank"
-    >
-      View Transactions
-    </a>
-    <a
-      aria-label="Show Credentials. Some credentials have not been backed up"
-      class="downloadPrompt"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/credentials"
-    >
-      Show Credentials
-    </a>
-    <a
-      class="manage"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did"
-    >
-      Manage DID
-    </a>
-    <a
-      class="web3Name"
-      href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/web3name"
-    >
-      <span
-        class="web3NameManage"
-      >
-        Manage web3name: fancy-name
-      </span>
-    </a>
-    <p
-      class="stats"
-    >
-      You have 3 Identities with a
-      <span
-        class="balance"
-      >
-         Total Balance: 
-        <span
-          class="amount"
-        >
-          3.7020
-           
-          <span
-            aria-label="KILT Coin"
-            class="coin"
-          />
-        </span>
-      </span>
-    </p>
+          How To Get Credentials
+        </a>
+      </li>
+    </ul>
   </main>
 </div>
 `;

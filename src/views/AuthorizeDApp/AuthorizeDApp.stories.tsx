@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 
-import { AccessOriginInput } from '../../dApps/AccessChannels/types';
+import { AccessOriginInput } from '../../channels/AccessChannels/types';
 import { paths } from '../paths';
 
 import { AuthorizeDApp } from './AuthorizeDApp';

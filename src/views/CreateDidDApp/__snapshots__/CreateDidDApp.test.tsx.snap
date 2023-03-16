@@ -8,7 +8,7 @@ exports[`CreateDidDApp should render with a specific light DID 1`] = `
     <h1
       class="heading"
     >
-      Create DID
+      Create On-chain DID
     </h1>
     <section
       class="container"
@@ -124,7 +124,7 @@ exports[`CreateDidDApp should render with full DID 1`] = `
     <h1
       class="heading"
     >
-      Create DID
+      Create On-chain DID
     </h1>
     <div
       class="container"
@@ -291,7 +291,7 @@ exports[`CreateDidDApp should render with full DID 1`] = `
       <output
         class="errorTooltip"
       >
-        DID already exists
+        DID already on chain
       </output>
     </p>
   </form>
@@ -306,7 +306,7 @@ exports[`CreateDidDApp should render with light DID 1`] = `
     <h1
       class="heading"
     >
-      Create DID
+      Create On-chain DID
     </h1>
     <div
       class="container"
@@ -486,7 +486,7 @@ exports[`CreateDidDApp should render with removed DID 1`] = `
     <h1
       class="heading"
     >
-      Create DID
+      Create On-chain DID
     </h1>
     <div
       class="container"
@@ -653,7 +653,7 @@ exports[`CreateDidDApp should render with removed DID 1`] = `
       <output
         class="errorTooltip"
       >
-        DID already removed
+        DID removed from chain
       </output>
     </p>
   </form>

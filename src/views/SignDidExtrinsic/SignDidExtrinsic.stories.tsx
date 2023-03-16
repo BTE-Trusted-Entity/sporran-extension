@@ -42,11 +42,6 @@ const input: Record<string, SignDidExtrinsicOriginInput> = {
     extrinsic:
       '0x9004400600def12e42f3e487e9b14095aa8d5cc16a33491f1b50dadcf8811d1480f3fa8627',
   },
-  publicCredential: {
-    ...dApp,
-    extrinsic:
-      '0x29020445003291bb126e33b4862d421bfaa1d2f272e6cdfc4f96658988fbcffea8914bd9ac1d016469643a61737365743a6569703135353a312e6572633732313a3078303835633039316237316239643737623866353266303733643733386365383035646563333639623a323770a165456d61696c746c756b656772756e617540676d61696c2e636f6d00',
-  },
 };
 
 export function AddEndpoint() {
@@ -133,21 +128,6 @@ export function LightDid() {
       <SignDidExtrinsic
         identity={
           identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
-        }
-      />
-    </PopupTestProvider>
-  );
-}
-
-export function PublicCredential() {
-  return (
-    <PopupTestProvider
-      path={paths.popup.signDidExtrinsic}
-      data={input.publicCredential}
-    >
-      <SignDidExtrinsic
-        identity={
-          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
         }
       />
     </PopupTestProvider>

@@ -29,7 +29,7 @@ export class GenericError extends Component<PropsWithChildren, State> {
 
     return (
       <main>
-        <Modal open className={styles.overlay}>
+        <Modal open className={overlayStyles.overlay}>
           <p
             className={styles.text}
             dangerouslySetInnerHTML={{ __html: t('view_GenericError_message') }}

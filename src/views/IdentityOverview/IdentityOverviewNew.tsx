@@ -8,7 +8,6 @@ import { paths } from '../paths';
 
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
-import { Stats } from '../../components/Stats/Stats';
 
 export function IdentityOverviewNew() {
   const t = browser.i18n.getMessage;
@@ -17,7 +16,7 @@ export function IdentityOverviewNew() {
     <main className={styles.container}>
       <header>
         <h1 className={styles.heading}>{t('view_IdentityOverview_title')}</h1>
-        <p className={styles.info}>
+        <p className={styles.subline}>
           <YouHaveIdentities />
         </p>
       </header>
@@ -27,8 +26,6 @@ export function IdentityOverviewNew() {
       <Link to={paths.identity.add} className={styles.add}>
         {t('view_IdentityOverview_add')}
       </Link>
-
-      <Stats />
     </main>
   );
 }

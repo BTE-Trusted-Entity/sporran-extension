@@ -14,12 +14,6 @@ body {
   composes: view from '../../components/View/View.module.css';
 }
 
-.containerInternal {
-  composes: container;
-  border: 0.125rem solid black;
-  border-image: repeating-linear-gradient(-45deg, black 0 1rem, yellow 1rem 2rem) 4 stretch;
-}
-
 .menus {
   position: absolute;
   top: 1.5rem;

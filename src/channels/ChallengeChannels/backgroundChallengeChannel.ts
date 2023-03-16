@@ -2,6 +2,7 @@ import { Runtime } from 'webextension-polyfill';
 import { Utils } from '@kiltprotocol/sdk-js';
 
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
+
 import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 
 import { ChallengeInput, ChallengeOutput } from './types';

@@ -1,36 +1,31 @@
 import { MemoryRouter, Route } from 'react-router-dom';
 
+import { Did } from '@kiltprotocol/sdk-js';
+
 import {
   moreIdentitiesMock as identities,
   render,
-  screen,
 } from '../../testing/testing';
 
 import { NEW } from '../../utilities/identities/identities';
 import { paths } from '../paths';
 
-import { InternalConfigurationContext } from '../../configuration/InternalConfigurationContext';
-import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
-import { mockIsFullDid } from '../../utilities/did/did.mock';
-import { notDownloaded } from '../../utilities/credentials/CredentialsProvider.mock';
-import { useIdentityCredentials } from '../../utilities/credentials/credentials';
-import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
+
+import {
+  credentialsMock,
+  CredentialsProviderMock,
+} from '../../utilities/credentials/CredentialsProvider.mock';
+
+import { waitForDownloadInfo } from '../../utilities/showDownloadInfoStorage/showDownloadInfoStorage.mock';
 
 import { IdentityOverview } from './IdentityOverview';
 
-jest.mock('../../utilities/useSubscanHost/useSubscanHost');
-jest.mock('../../utilities/credentials/credentials');
-jest.mock('../../utilities/useWeb3Name/useWeb3Name');
 jest.mock('../../utilities/useAsyncValue/useAsyncValue');
 jest.mocked(useAsyncValue).mockReturnValue(false);
-jest.mock('../../utilities/did/useIsOnChainDidDeleted');
+jest.mocked(Did.parse).mockReturnValue({} as ReturnType<typeof Did.parse>);
 
 const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
-
-const fullDidIdentity =
-  identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
 describe('IdentityOverview', () => {
   it('should render a normal identity', async () => {
@@ -41,6 +36,7 @@ describe('IdentityOverview', () => {
         </Route>
       </MemoryRouter>,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
@@ -52,106 +48,35 @@ describe('IdentityOverview', () => {
         </Route>
       </MemoryRouter>,
     );
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
-  it('should render with link to send screen', async () => {
-    jest
-      .mocked(useSubscanHost)
-      .mockReturnValue('https://kilt-testnet.subscan.io');
-
+  it('should render when no credentials', async () => {
     const { container } = render(
-      <InternalConfigurationContext>
+      <CredentialsProviderMock credentials={[]}>
         <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
           <Route path={paths.identity.overview}>
             <IdentityOverview identity={identity} />
           </Route>
         </MemoryRouter>
-      </InternalConfigurationContext>,
+      </CredentialsProviderMock>,
     );
-
-    await screen.findByRole('link', { name: 'Send' });
-
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 
-  it('should render with link to credentials screen', async () => {
-    render(
-      <InternalConfigurationContext>
+  it('should expand last credential when there are less than 7', async () => {
+    const { container } = render(
+      <CredentialsProviderMock credentials={credentialsMock.slice(0, 3)}>
         <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
           <Route path={paths.identity.overview}>
             <IdentityOverview identity={identity} />
           </Route>
         </MemoryRouter>
-      </InternalConfigurationContext>,
+      </CredentialsProviderMock>,
     );
-
-    expect(
-      await screen.findByRole('link', { name: 'Show Credentials' }),
-    ).toBeInTheDocument();
-  });
-
-  it('should render full DID identity', async () => {
-    mockIsFullDid(true);
-
-    const { container } = render(
-      <MemoryRouter initialEntries={[`/identity/${fullDidIdentity.address}/`]}>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={fullDidIdentity} />
-        </Route>
-      </MemoryRouter>,
-    );
-    expect(container).toMatchSnapshot();
-  });
-
-  it('should show notification for not backed up credentials', async () => {
-    jest.mocked(useIdentityCredentials).mockReturnValue(notDownloaded);
-
-    const { container } = render(
-      <MemoryRouter initialEntries={[`/identity/${identity.address}/`]}>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={identity} />
-        </Route>
-      </MemoryRouter>,
-    );
-    expect(container).toMatchSnapshot();
-  });
-
-  it('should show web3name', async () => {
-    jest.mocked(useWeb3Name).mockReturnValueOnce('fancy-name');
-
-    const { container } = render(
-      <MemoryRouter initialEntries={[`/identity/${fullDidIdentity.address}/`]}>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={identity} />
-        </Route>
-      </MemoryRouter>,
-    );
-
-    expect(container).toMatchSnapshot();
-  });
-
-  it('should show on-chain DID removed', async () => {
-    mockIsFullDid(false);
-    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(true);
-    jest.mocked(useWeb3Name).mockReturnValueOnce('fancy-name');
-
-    const { container } = render(
-      <MemoryRouter
-        initialEntries={[
-          '/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB',
-        ]}
-      >
-        <Route path={paths.identity.overview}>
-          <IdentityOverview
-            identity={
-              identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']
-            }
-          />
-        </Route>
-      </MemoryRouter>,
-    );
-
+    await waitForDownloadInfo();
     expect(container).toMatchSnapshot();
   });
 });

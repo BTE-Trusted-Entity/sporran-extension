@@ -4,8 +4,8 @@ import { useCallback } from 'react';
 import * as styles from './AuthorizeDApp.module.css';
 
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { backgroundAccessChannel } from '../../dApps/AccessChannels/backgroundAccessChannels';
-import { AccessOriginInput } from '../../dApps/AccessChannels/types';
+import { backgroundAccessChannel } from '../../channels/AccessChannels/backgroundAccessChannels';
+import { AccessOriginInput } from '../../channels/AccessChannels/types';
 
 export function AuthorizeDApp() {
   const t = browser.i18n.getMessage;

@@ -6,8 +6,6 @@ import {
   DidUri,
 } from '@kiltprotocol/sdk-js';
 
-import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
-
 export function isFullDid(did: DidUri | undefined): boolean {
   if (!did) {
     // maybe the DID was deleted from the blockchain
@@ -20,10 +18,6 @@ export async function getFullDidDocument(did: DidUri): Promise<DidDocument> {
   const api = ConfigService.get('api');
   return Did.linkedInfoFromChain(await api.call.did.query(Did.toChain(did)))
     .document;
-}
-
-export function useFullDidDocument(did: DidUri): DidDocument | undefined {
-  return useAsyncValue(getFullDidDocument, [did]);
 }
 
 export async function getDidDocument(did: DidUri): Promise<DidDocument> {

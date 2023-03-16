@@ -2,7 +2,6 @@ import { FormEvent, Fragment, useCallback } from 'react';
 import browser from 'webextension-polyfill';
 import { filter, find } from 'lodash-es';
 import {
-  BalanceUtils,
   Credential,
   CType,
   DidUri,
@@ -32,9 +31,7 @@ import {
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
 import { claimChannel } from '../../channels/claimChannel/claimChannel';
-import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
-import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 export type Terms = ITerms & {
@@ -73,15 +70,11 @@ export function SignQuote({ identity }: Props) {
   const data = usePopupData<Terms>();
 
   const { did } = identity;
-  const error = useIsOnChainDidDeleted(did);
 
-  const { claim, cTypes, quote, attesterName, specVersion } = data;
+  const { claim, cTypes, attesterName, specVersion } = data;
 
   const $id = CType.hashToId(claim.cTypeHash);
   const cType = find(cTypes, { $id }) as ICType | undefined;
-
-  const gross = quote?.cost?.gross;
-  const costs = BalanceUtils.toFemtoKilt(gross || 0);
 
   const passwordField = usePasswordField();
 
@@ -168,11 +161,6 @@ export function SignQuote({ identity }: Props) {
         <IdentitiesCarousel identity={identity} />
       )}
 
-      <p className={styles.costs}>
-        <span>{t('view_SignQuote_costs')}</span>
-        <KiltAmount amount={costs} type="costs" smallDecimals />
-      </p>
-
       <dl className={styles.details}>
         {Object.entries(claim.contents).map(([name, value]) => (
           <Fragment key={name}>
@@ -193,12 +181,9 @@ export function SignQuote({ identity }: Props) {
         <button type="button" className={styles.cancel} onClick={handleCancel}>
           {t('common_action_cancel')}
         </button>
-        <button type="submit" className={styles.submit} disabled={error}>
+        <button type="submit" className={styles.submit}>
           {t('view_SignQuote_CTA')}
         </button>
-        <output className={styles.errorTooltip} hidden={did && !error}>
-          {t('view_SignQuote_on_chain_did_deleted')}
-        </output>
       </p>
     </form>
   );

@@ -399,13 +399,13 @@ exports[`IdentitiesCarousel should support other paths 1`] = `
     <a
       aria-label="Identity with on-chain DID and lots of coins"
       class="left"
-      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/send"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/claim"
       title="Identity with on-chain DID and lots of coins"
     />
     <a
       aria-label="Add Identity"
       class="right"
-      href="/identity/NEW/send"
+      href="/identity/NEW/claim"
       title="Add Identity"
     />
     <ul
@@ -417,7 +417,7 @@ exports[`IdentitiesCarousel should support other paths 1`] = `
         <a
           aria-label="Light DID Identity"
           class="bubble"
-          href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/send"
+          href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/claim"
           title="Light DID Identity"
         />
       </li>
@@ -427,7 +427,7 @@ exports[`IdentitiesCarousel should support other paths 1`] = `
         <a
           aria-label="Identity with on-chain DID and lots of coins"
           class="bubble"
-          href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/send"
+          href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/claim"
           title="Identity with on-chain DID and lots of coins"
         />
       </li>
@@ -437,7 +437,7 @@ exports[`IdentitiesCarousel should support other paths 1`] = `
         <a
           aria-label="Identity which has a very very very very long name and might not even fit on the screen"
           class="bubble"
-          href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653/send"
+          href="/identity/4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653/claim"
           title="Identity which has a very very very very long name and might not even fit on the screen"
         />
       </li>
@@ -447,7 +447,7 @@ exports[`IdentitiesCarousel should support other paths 1`] = `
         <a
           aria-label="Add Identity"
           class="add"
-          href="/identity/NEW/send"
+          href="/identity/NEW/claim"
           title="Add Identity"
         />
       </li>

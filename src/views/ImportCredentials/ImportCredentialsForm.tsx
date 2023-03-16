@@ -3,8 +3,6 @@ import browser from 'webextension-polyfill';
 
 import * as styles from './ImportCredentials.module.css';
 
-import { Stats } from '../../components/Stats/Stats';
-
 interface Props {
   handleFiles: (files: FileList) => void;
 }
@@ -74,8 +72,6 @@ export function ImportCredentialsForm({ handleFiles }: Props) {
           </button>
         </form>
       </div>
-
-      <Stats />
     </section>
   );
 }

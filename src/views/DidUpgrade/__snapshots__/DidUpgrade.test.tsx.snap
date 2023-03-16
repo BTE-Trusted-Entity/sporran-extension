@@ -9,12 +9,12 @@ exports[`DidUpgrade should render 1`] = `
     <h1
       class="heading"
     >
-      Get your DID
+      Prepare Transaction
     </h1>
     <p
       class="subline"
     >
-      Sign
+      Upgrade to on-chain DID
     </p>
     <section
       class="container"
@@ -34,49 +34,38 @@ exports[`DidUpgrade should render 1`] = `
         </span>
       </div>
     </section>
-    <p
-      class="costs"
-    >
-      Total cost: 
-      <span
-        class="amount"
-      >
-        1
-        <span
-          class="fractional"
-        >
-          .0100
-        </span>
-         
-        <span
-          aria-label="KILT Coin"
-          class="coin"
-        />
-      </span>
-    </p>
-    <p
+    <dl
       class="details"
     >
-      <button
-        aria-label="Information"
-        class="show"
-        type="button"
-      />
-       Deposit 
-      1.0000
-       
-      <span
-        aria-label="KILT Coin"
-        class="coin"
-      />
-       + fee 
-      0.0100
-       
-      <span
-        aria-label="KILT Coin"
-        class="coin"
-      />
-    </p>
+      <div
+        class="detail"
+      >
+        <dt
+          class="detailName"
+        >
+          Account Address:
+        </dt>
+        <dd
+          class="detailValue"
+        >
+          4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1
+        </dd>
+      </div>
+      <div
+        class="detail"
+      >
+        <dt
+          class="detailName"
+        >
+          Method:
+        </dt>
+        <dd
+          class="detailValue"
+        >
+          did.create
+        </dd>
+      </div>
+    </dl>
     <p
       class="resetLine"
     >
@@ -128,6 +117,21 @@ exports[`DidUpgrade should render 1`] = `
       <span />
     </label>
     <p
+      class="info"
+    >
+      <span>
+        After signing you will go to the checkout page to pay with 
+      </span>
+      <span
+        class="paypal"
+      >
+        PayPal 
+      </span>
+      <span>
+        (total cost: EUR 4,00).
+      </span>
+    </p>
+    <p
       class="buttonsLine"
     >
       <a
@@ -142,40 +146,13 @@ exports[`DidUpgrade should render 1`] = `
       >
         Sign
       </button>
-      <output
-        class="errorTooltip"
-        hidden=""
-      >
-        You need at least 1.0100 KILTs
-      </output>
     </p>
-    <div />
     <button
       aria-label="Back"
       class="linkBack"
       title="Back"
       type="button"
     />
-    <p
-      class="stats"
-    >
-      You have 3 Identities with a
-      <span
-        class="balance"
-      >
-         Total Balance: 
-        <span
-          class="amount"
-        >
-          3.7020
-           
-          <span
-            aria-label="KILT Coin"
-            class="coin"
-          />
-        </span>
-      </span>
-    </p>
   </form>
 </div>
 `;

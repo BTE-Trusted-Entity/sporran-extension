@@ -10,7 +10,6 @@ import { HTMLDialog } from 'react-dialog-polyfill';
 import { ConfigurationProvider } from '../configuration/ConfigurationContext';
 import { IdentitiesProviderMock } from '../utilities/identities/IdentitiesProvider.mock';
 import { CredentialsProviderMock } from '../utilities/credentials/CredentialsProvider.mock';
-import { mockBalanceChanges } from '../utilities/balanceChanges/mockBalanceChanges';
 import { mockIsFullDid } from '../utilities/did/did.mock';
 
 export {
@@ -19,7 +18,6 @@ export {
   moreIdentitiesMock,
 } from '../utilities/identities/IdentitiesProvider.mock';
 
-mockBalanceChanges();
 mockIsFullDid(false);
 
 // We do want to override the `render` from testing-library

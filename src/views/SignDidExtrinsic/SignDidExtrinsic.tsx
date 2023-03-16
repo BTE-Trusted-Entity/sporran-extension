@@ -1,23 +1,13 @@
 import { FormEvent, Fragment, PropsWithChildren, useCallback } from 'react';
 import browser from 'webextension-polyfill';
-import {
-  ConfigService,
-  Did,
-  DidResourceUri,
-  DidServiceEndpoint,
-  SignRequestData,
-} from '@kiltprotocol/sdk-js';
+import { Did, DidResourceUri, DidServiceEndpoint } from '@kiltprotocol/sdk-js';
 import { GenericExtrinsic } from '@polkadot/types';
 
 import * as styles from './SignDidExtrinsic.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import {
-  deriveAttestationKeyFromSeed,
-  deriveAuthenticationKey,
-  getIdentityCryptoFromSeed,
-} from '../../utilities/identities/identities';
+import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
 import { getFullDidDocument, isFullDid } from '../../utilities/did/did';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
@@ -249,60 +239,14 @@ export function SignDidExtrinsic({ identity }: Props) {
       const fullDidDocument = await getFullDidDocument(did);
 
       const { seed } = await passwordField.get(event);
+      const { sign } = await getIdentityCryptoFromSeed(seed);
 
       const keyRelationship = Did.getKeyRelationshipForTx(extrinsic);
-
-      if (!keyRelationship) {
-        throw new Error('No key relationship found');
-      }
-
-      if (keyRelationship === 'assertionMethod') {
-        const api = ConfigService.get('api');
-        const attestationKey = deriveAttestationKeyFromSeed(seed);
-
-        async function sign({ data, keyRelationship }: SignRequestData) {
-          const signingKey =
-            keyRelationship === 'assertionMethod'
-              ? attestationKey
-              : deriveAuthenticationKey(seed);
-          const signature = signingKey.sign(data, { withType: false });
-          const keyType = signingKey.type;
-
-          return { signature, keyType };
-        }
-
-        const authorized = await Did.authorizeBatch({
-          batchFunction: api.tx.utility.batchAll,
-          did: fullDidDocument.uri,
-          extrinsics: [
-            api.tx.did.setAttestationKey(Did.publicKeyToChain(attestationKey)),
-            extrinsic,
-            api.tx.did.removeAttestationKey(),
-          ],
-          sign,
-          submitter,
-        });
-
-        const signed = authorized.toHex();
-
-        // Assertion key will not exist in the DID document, so we return authentication key instead
-        const didKey = fullDidDocument.authentication[0];
-        const didKeyUri =
-          `${fullDidDocument.uri}${didKey.id}` as DidResourceUri;
-
-        await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });
-
-        window.close();
-        return;
-      }
-
-      const didKey = fullDidDocument[keyRelationship]?.[0];
+      const didKey = keyRelationship && fullDidDocument[keyRelationship]?.[0];
       if (!didKey) {
         throw new Error('No extrinsic signing key stored');
       }
       const didKeyUri = `${fullDidDocument.uri}${didKey.id}` as DidResourceUri;
-
-      const { sign } = await getIdentityCryptoFromSeed(seed);
 
       const authorized = await Did.authorizeTx(
         fullDidDocument.uri,

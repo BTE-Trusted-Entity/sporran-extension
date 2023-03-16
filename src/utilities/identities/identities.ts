@@ -143,50 +143,9 @@ export function deriveEncryptionKeyFromSeed(
   return Utils.Crypto.makeEncryptionKeypairFromSeed(blake2AsU8a(secretKey));
 }
 
-export function deriveAttestationKeyFromSeed(seed: Uint8Array) {
-  const baseKey = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
-  return baseKey.derive('//did//assertion//0') as typeof baseKey;
-}
-
-async function fixLightDidIssues(seed: Uint8Array) {
-  const identities = await getIdentities();
-  const { address } = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
-  const identity = identities[address];
-
-  if (!identity) {
-    // could be the Alice identity
-    return;
-  }
-
-  const parsed = identity.did && Did.parse(identity.did);
-  if (parsed && parsed.type !== 'light') {
-    return;
-  }
-
-  try {
-    if (!identity.did) {
-      // DID was deactivated, no action needed.
-      return;
-    }
-
-    // If this light DID was created and stored using SDK@0.24.0 then its keys are serialized using base64,
-    // resulting in an invalid URI, so resolving would throw an exception.
-    const document = await getDidDocument(identity.did);
-
-    // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
-    getDidEncryptionKey(document);
-  } catch {
-    // We re-create the invalid DID from scratch and update its URI in the identity.
-    const { uri } = getLightDidFromSeed(seed);
-    await saveIdentity({ ...identity, did: uri });
-  }
-}
-
 export async function getIdentityCryptoFromSeed(
   seed: Uint8Array,
 ): Promise<IdentityDidCrypto> {
-  await fixLightDidIssues(seed);
-
   const authenticationKey = deriveAuthenticationKey(seed);
   const encryptionKey = deriveEncryptionKeyFromSeed(seed);
 

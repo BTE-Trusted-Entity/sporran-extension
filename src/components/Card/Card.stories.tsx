@@ -26,11 +26,13 @@ export function Expanded() {
     <ul>
       <li className={styles.card} aria-expanded="true">
         <section className={styles.expanded}>
-          <button
-            type="button"
-            aria-label="Collapse"
-            className={styles.collapse}
-          />
+          <section className={styles.buttons}>
+            <button
+              type="button"
+              aria-label="Collapse"
+              className={styles.collapse}
+            />
+          </section>
         </section>
       </li>
     </ul>

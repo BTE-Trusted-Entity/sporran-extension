@@ -8,6 +8,7 @@ import * as styles from './IdentityOptions.module.css';
 
 import { Identity } from '../../utilities/identities/types';
 import { generatePath, paths } from '../../views/paths';
+import { isFullDid } from '../../utilities/did/did';
 
 interface Props {
   identity: Identity;
@@ -17,9 +18,12 @@ interface Props {
 export function IdentityOptions({ identity, onEdit }: Props) {
   const t = browser.i18n.getMessage;
 
-  const { address } = identity;
+  const { address, did } = identity;
 
-  const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(3);
+  const isLightDid = !isFullDid(did);
+  const itemCount = isLightDid ? 4 : 3;
+  const { buttonProps, itemProps, isOpen, setIsOpen } =
+    useDropdownMenu(itemCount);
 
   const handleClick = useCallback(() => {
     onEdit();
@@ -69,6 +73,17 @@ export function IdentityOptions({ identity, onEdit }: Props) {
                 {t('component_IdentityOptions_reset_password')}
               </Link>
             </li>
+
+            {isLightDid && (
+              <li className={menuStyles.listItem}>
+                <Link
+                  to={generatePath(paths.identity.upgradeDid, { address })}
+                  {...itemProps[3]}
+                >
+                  {t('component_IdentityOptions_upgrade_did')}
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       )}

@@ -10,8 +10,6 @@ import { parseDidUri } from '../../utilities/did/did';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { paths } from '../paths';
 
-import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
-
 import { SignQuote } from './SignQuote';
 
 jest.mocked(CType.hashToId).mockImplementation((id) => `kilt:ctype:${id}`);
@@ -21,12 +19,8 @@ jest.mocked(parseDidUri).mockReturnValue({
   fullDid: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR51',
 } as unknown as ReturnType<typeof parseDidUri>);
 
-jest.mock('../../utilities/did/useIsOnChainDidDeleted');
-
 describe('SignQuote', () => {
   it('should render', async () => {
-    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(false);
-
     const { container } = render(
       <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
         <SignQuote
@@ -41,8 +35,6 @@ describe('SignQuote', () => {
   });
 
   it('should show error message if on-chain DID deleted', async () => {
-    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(true);
-
     const { container } = render(
       <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
         <SignQuote

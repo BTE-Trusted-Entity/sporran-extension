@@ -1,8 +1,8 @@
 import { DidUri, KiltAddress } from '@kiltprotocol/sdk-js';
 import { HexString } from '@polkadot/util/types';
 
-import { DAppName } from '../../dApps/AccessChannels/DAppName';
-import { Origin } from '../../dApps/AccessChannels/Origin';
+import { DAppName } from '../AccessChannels/DAppName';
+import { Origin } from '../AccessChannels/Origin';
 
 export type CreateDidInput = DAppName & {
   submitter: KiltAddress;
