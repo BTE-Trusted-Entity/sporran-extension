@@ -31,7 +31,8 @@
   width: 100%;
   height: 3.25rem;
   padding: calc(11rem / 16) 0 0;
-  background: url('../../components/images/chevron-down.svg') no-repeat right 1rem top 0.75rem/0.75rem;
+  background: url('../../components/images/chevron-down.svg') no-repeat right
+    1rem top 0.75rem/0.75rem;
   border: none;
   cursor: pointer;
 }
@@ -59,8 +60,7 @@
 
 .card:last-child {
   border-bottom: none;
-  box-shadow:
-    0 -1px 2px rgb(var(--color-black-rgb) / 30%),
+  box-shadow: 0 -1px 2px rgb(var(--color-black-rgb) / 30%),
     inset 0 -3px 6px rgb(var(--color-black-rgb) / 30%);
 }
 

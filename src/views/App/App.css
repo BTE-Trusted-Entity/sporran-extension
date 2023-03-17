@@ -23,7 +23,12 @@
   --color-black-rgb: 0 0 0;
   --color-white: white;
   --color-white-rgb: 255 255 255;
-  --input-gradient: linear-gradient(90deg, #335a87 0%, #2f537e 33%, #264262 100%);
+  --input-gradient: linear-gradient(
+    90deg,
+    #335a87 0%,
+    #2f537e 33%,
+    #264262 100%
+  );
   --popup-width: 480px;
   --popup-height: 600px;
 

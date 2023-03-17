@@ -18,5 +18,6 @@
   width: var(--size);
   top: calc((100% - var(--size)) / 2);
   left: calc((100% - var(--size)) / 2);
-  background: var(--color-white) url('../images/kilt-logo.svg') no-repeat center/contain;
+  background: var(--color-white) url('../images/kilt-logo.svg') no-repeat
+    center/contain;
 }

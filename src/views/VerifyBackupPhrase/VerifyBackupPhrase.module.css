@@ -38,7 +38,10 @@
   border-radius: calc(3rem / 16);
   box-shadow: 1px 1px 1px 0 rgb(var(--color-black-rgb) / 40%);
   margin: calc(3rem / 16);
-  background: linear-gradient(rgb(168 168 168 / 70%) 0%, rgb(108 107 107 / 70%) 100%);
+  background: linear-gradient(
+    rgb(168 168 168 / 70%) 0%,
+    rgb(108 107 107 / 70%) 100%
+  );
   color: var(--color-dark);
   cursor: pointer;
 }
@@ -49,7 +52,10 @@
 
 .correct {
   composes: smallText from '../../components/Typography/Typography.module.css';
-  background: linear-gradient(rgb(90 185 170 / 60%) 0%, rgb(56 112 103 / 60%) 100%);
+  background: linear-gradient(
+    rgb(90 185 170 / 60%) 0%,
+    rgb(56 112 103 / 60%) 100%
+  );
   color: var(--color-grey-light);
 }
 
@@ -63,7 +69,10 @@
 }
 
 .incorrect {
-  background: linear-gradient(rgb(var(--color-orange-rgb) / 60%) 0%, rgb(186 72 34 / 60%) 100%);
+  background: linear-gradient(
+    rgb(var(--color-orange-rgb) / 60%) 0%,
+    rgb(186 72 34 / 60%) 100%
+  );
   color: var(--color-grey-light);
 }
 
@@ -76,7 +85,10 @@
   border: 1px solid rgb(var(--color-black-rgb) / 50%);
   box-shadow: 1px 1px 1px 0 rgb(var(--color-black-rgb) / 40%);
   border-radius: 50%;
-  background: linear-gradient(rgb(var(--color-orange-rgb) / 60%) 0%, rgb(186 72 34 / 60%) 100%);
+  background: linear-gradient(
+    rgb(var(--color-orange-rgb) / 60%) 0%,
+    rgb(186 72 34 / 60%) 100%
+  );
   position: absolute;
   right: -0.25rem;
   top: -0.25rem;

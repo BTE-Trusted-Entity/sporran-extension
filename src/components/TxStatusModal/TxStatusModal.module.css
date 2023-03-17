@@ -14,10 +14,7 @@
 .wrapper::after {
   content: '';
   position: absolute;
-  top: -0.5rem;
-  bottom: -0.5rem;
-  right: -0.5rem;
-  left: -0.5rem;
+  inset: -0.5rem;
 }
 
 .success {

@@ -10,7 +10,8 @@
   composes: importantHeadline from '../../components/Typography/Typography.module.css';
   font-size: 0.875rem;
   padding-top: 4.5rem;
-  background: url('../../components/images/exclamation.svg') no-repeat top center;
+  background: url('../../components/images/exclamation.svg') no-repeat top
+    center;
   margin-top: 0;
 }
 

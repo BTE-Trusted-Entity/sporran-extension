@@ -9,7 +9,8 @@
 
 .text {
   composes: text from '../../components/Overlay/Overlay.module.css';
-  background: url('../../components/images/transaction-error.svg') no-repeat top center/4rem;
+  background: url('../../components/images/transaction-error.svg') no-repeat top
+    center/4rem;
   padding-top: 5rem;
   margin-top: 0;
   margin-bottom: 1rem;

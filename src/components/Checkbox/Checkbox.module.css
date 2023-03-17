@@ -27,5 +27,6 @@
   left: 0;
   bottom: 0;
   content: ' ';
-  background: url('../images/checkmark-bold.svg') no-repeat center/var(--tick-size);
+  background: url('../images/checkmark-bold.svg') no-repeat
+    center/var(--tick-size);
 }
