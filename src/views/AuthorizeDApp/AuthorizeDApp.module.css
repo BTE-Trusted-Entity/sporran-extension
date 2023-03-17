@@ -23,7 +23,8 @@
   composes: subline from '../../components/Typography/Typography.module.css';
   margin-top: 1rem;
   padding-top: 7.5rem;
-  background: url('../../components/images/attention-hand.svg') no-repeat top center;
+  background: url('../../components/images/attention-hand.svg') no-repeat top
+    center;
 }
 
 .authorize {

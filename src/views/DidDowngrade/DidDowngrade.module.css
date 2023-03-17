@@ -26,7 +26,8 @@
 }
 
 .info {
-  background: url('../../components/images/info-solid.svg') no-repeat center/100%;
+  background: url('../../components/images/info-solid.svg') no-repeat
+    center/100%;
   display: inline-block;
   width: 1em;
   height: 1em;
