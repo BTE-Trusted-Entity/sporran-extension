@@ -8,6 +8,7 @@ import {
   sr25519PairFromSeed,
 } from '@polkadot/util-crypto';
 import {
+  Did,
   DidDocument,
   DidResourceUri,
   DidUri,
@@ -16,13 +17,12 @@ import {
   KiltAddress,
   KiltEncryptionKeypair,
   KiltKeyringPair,
+  Message,
   MessageBody,
   SignCallback,
   SignRequestData,
-} from '@kiltprotocol/types';
-import * as Message from '@kiltprotocol/messaging';
-import * as Did from '@kiltprotocol/did';
-import { Crypto } from '@kiltprotocol/utils';
+  Utils,
+} from '@kiltprotocol/sdk-js';
 import { map, max, memoize } from 'lodash-es';
 
 import {
@@ -118,7 +118,7 @@ interface IdentityDidCrypto {
 }
 
 export function deriveAuthenticationKey(seed: Uint8Array) {
-  const baseKey = Crypto.makeKeypairFromSeed(seed, 'sr25519');
+  const baseKey = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
   return baseKey.derive('//did//0') as typeof baseKey;
 }
 
@@ -128,16 +128,16 @@ export function deriveEncryptionKeyFromSeed(
   const keypair = sr25519PairFromSeed(seed);
   const { path } = keyExtractPath('//did//keyAgreement//0');
   const { secretKey } = keyFromPath(keypair, path, 'sr25519');
-  return Crypto.makeEncryptionKeypairFromSeed(blake2AsU8a(secretKey));
+  return Utils.Crypto.makeEncryptionKeypairFromSeed(blake2AsU8a(secretKey));
 }
 
 export function deriveAttestationKeyFromSeed(seed: Uint8Array) {
-  const baseKey = Crypto.makeKeypairFromSeed(seed, 'sr25519');
+  const baseKey = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
   return baseKey.derive('//did//assertion//0') as typeof baseKey;
 }
 
 function deriveEncryptionKeyLegacy(seed: Uint8Array) {
-  const keypair = Crypto.makeKeypairFromSeed(seed, 'sr25519');
+  const keypair = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
   const encryptionKeyringPair = keypair.derive('//did//keyAgreement//0');
 
   const secret = encryptionKeyringPair
@@ -148,12 +148,12 @@ function deriveEncryptionKeyLegacy(seed: Uint8Array) {
     )
     .slice(24); // first 24 bytes are the nonce
 
-  return Crypto.makeEncryptionKeypairFromSeed(secret);
+  return Utils.Crypto.makeEncryptionKeypairFromSeed(secret);
 }
 
 async function fixLightDidIssues(seed: Uint8Array) {
   const identities = await getIdentities();
-  const { address } = Crypto.makeKeypairFromSeed(seed, 'sr25519');
+  const { address } = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
   const identity = identities[address];
 
   if (!identity) {
@@ -182,7 +182,7 @@ async function fixLightDidIssues(seed: Uint8Array) {
     // This public key also means the DID needs to be regenerated
     const troubleKey =
       '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
-    if (Crypto.u8aToHex(encryptionKey.publicKey) === troubleKey) {
+    if (Utils.Crypto.u8aToHex(encryptionKey.publicKey) === troubleKey) {
       throw new Error();
     }
   } catch {
@@ -203,14 +203,14 @@ export async function getIdentityCryptoFromSeed(
     ? deriveEncryptionKeyLegacy(seed)
     : deriveEncryptionKeyFromSeed(seed);
 
-  const keypair = Crypto.makeKeypairFromSeed(seed, 'sr25519');
+  const keypair = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
   const identities = await getIdentities();
   const did = getIdentityDid(identities[keypair.address]);
 
   const didDocument = await getDidDocument(did);
 
   async function encryptCallback({ data, peerPublicKey }: EncryptRequestData) {
-    const { box, nonce } = Crypto.encryptAsymmetric(
+    const { box, nonce } = Utils.Crypto.encryptAsymmetric(
       data,
       peerPublicKey,
       encryptionKey.secretKey,
@@ -273,7 +273,7 @@ export async function encryptIdentity(
   password: string,
 ): Promise<KiltAddress> {
   const seed = mnemonicToMiniSecret(backupPhrase);
-  const { address } = Crypto.makeKeypairFromUri(backupPhrase, 'sr25519');
+  const { address } = Utils.Crypto.makeKeypairFromUri(backupPhrase, 'sr25519');
   await saveEncrypted(address, password, seed);
   return address;
 }

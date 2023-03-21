@@ -2,13 +2,13 @@ import { FormEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import {
+  ConfigService,
+  Did,
   DidServiceEndpoint,
   DidUri,
   KiltKeyringPair,
   SignExtrinsicCallback,
-} from '@kiltprotocol/types';
-import { ConfigService } from '@kiltprotocol/config';
-import * as Did from '@kiltprotocol/did';
+} from '@kiltprotocol/sdk-js';
 
 import * as styles from './DidEndpointsSign.module.css';
 

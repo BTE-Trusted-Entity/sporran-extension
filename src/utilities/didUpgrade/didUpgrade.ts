@@ -1,15 +1,15 @@
 import BN from 'bn.js';
 import {
+  Blockchain,
+  ConfigService,
+  Did,
   DidDocument,
   DidUri,
   KiltAddress,
   KiltKeyringPair,
   SignExtrinsicCallback,
   SubmittableExtrinsic,
-} from '@kiltprotocol/types';
-import { ConfigService } from '@kiltprotocol/config';
-import { Blockchain } from '@kiltprotocol/chain-helpers';
-import * as Did from '@kiltprotocol/did';
+} from '@kiltprotocol/sdk-js';
 
 import { useMemo } from 'react';
 

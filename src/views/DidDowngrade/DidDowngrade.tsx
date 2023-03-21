@@ -2,7 +2,7 @@ import { FormEvent, Fragment, useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
-import { DidUri } from '@kiltprotocol/types';
+import { DidUri } from '@kiltprotocol/sdk-js';
 
 import * as styles from './DidDowngrade.module.css';
 

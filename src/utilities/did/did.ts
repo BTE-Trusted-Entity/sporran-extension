@@ -1,7 +1,11 @@
-import { ConfigService } from '@kiltprotocol/config';
-import * as Did from '@kiltprotocol/did';
-import { DidDocument, DidEncryptionKey, DidUri } from '@kiltprotocol/types';
-import { Crypto } from '@kiltprotocol/utils';
+import {
+  ConfigService,
+  Did,
+  DidDocument,
+  DidEncryptionKey,
+  DidUri,
+  Utils,
+} from '@kiltprotocol/sdk-js';
 
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
@@ -64,7 +68,7 @@ export async function needLegacyDidCrypto(
   try {
     const encryptionKey = getDidEncryptionKey(await getDidDocument(did));
     return (
-      Crypto.u8aToHex(encryptionKey.publicKey) ===
+      Utils.Crypto.u8aToHex(encryptionKey.publicKey) ===
       '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e'
     );
   } catch {

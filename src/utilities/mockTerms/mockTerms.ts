@@ -1,4 +1,4 @@
-import { DidUri, ICType } from '@kiltprotocol/types';
+import { DidUri, ICType } from '@kiltprotocol/sdk-js';
 
 import { identitiesMock } from '../identities/IdentitiesProvider.mock';
 import { Terms } from '../../views/SignQuote/SignQuote';

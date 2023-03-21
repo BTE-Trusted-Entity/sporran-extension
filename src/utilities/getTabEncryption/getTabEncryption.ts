@@ -6,16 +6,16 @@ import {
   naclSeal,
 } from '@polkadot/util-crypto';
 import {
+  Did,
   DidResourceUri,
   IEncryptedMessage,
   IMessage,
   KiltKeyringPair,
+  Message,
   MessageBody,
   ResolvedDidKey,
-} from '@kiltprotocol/types';
-import * as Message from '@kiltprotocol/messaging';
-import { createLightDidDocument, resolveKey } from '@kiltprotocol/did';
-import { Crypto } from '@kiltprotocol/utils';
+  Utils,
+} from '@kiltprotocol/sdk-js';
 
 import { verifyDidConfigResource } from '../wellKnownDid/wellKnownDid';
 import { getDidEncryptionKey } from '../did/did';
@@ -48,17 +48,20 @@ export async function getTabEncryption(
     throw new Error('Cannot generate encryption outside challenge flow');
   }
 
-  const encryptionKey = Crypto.makeEncryptionKeypairFromSeed(
+  const encryptionKey = Utils.Crypto.makeEncryptionKeypairFromSeed(
     ed25519PairFromRandom().secretKey,
   );
   const { secretKey } = encryptionKey;
 
-  const baseKey = Crypto.makeKeypairFromSeed(secretKey.slice(0, 32), 'sr25519');
+  const baseKey = Utils.Crypto.makeKeypairFromSeed(
+    secretKey.slice(0, 32),
+    'sr25519',
+  );
   const authenticationKey = baseKey.derive(
     '//authentication',
   ) as typeof baseKey;
 
-  const sporranDidDocument = createLightDidDocument({
+  const sporranDidDocument = Did.createLightDidDocument({
     authentication: [authenticationKey],
     keyAgreement: [encryptionKey],
   });
@@ -66,7 +69,7 @@ export async function getTabEncryption(
   const sporranEncryptionDidKeyUri =
     `${sporranDidDocument.uri}${sporranEncryptionDidKey.id}` as DidResourceUri;
 
-  const dAppEncryptionDidKey = await resolveKey(dAppEncryptionKeyUri);
+  const dAppEncryptionDidKey = await Did.resolveKey(dAppEncryptionKeyUri);
   const dAppDid = dAppEncryptionDidKey.controller;
   await verifyDidConfigResource(dAppDid, sender.url);
 

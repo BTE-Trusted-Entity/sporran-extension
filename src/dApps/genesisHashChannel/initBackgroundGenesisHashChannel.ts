@@ -1,4 +1,4 @@
-import { ConfigService } from '@kiltprotocol/config';
+import { ConfigService } from '@kiltprotocol/sdk-js';
 
 import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 

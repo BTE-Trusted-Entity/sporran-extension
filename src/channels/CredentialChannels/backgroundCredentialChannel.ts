@@ -1,5 +1,5 @@
 import { Runtime } from 'webextension-polyfill-ts';
-import { IEncryptedMessage, IRejectTerms } from '@kiltprotocol/types';
+import { IEncryptedMessage, IRejectTerms } from '@kiltprotocol/sdk-js';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 import { channelsEnum } from '../base/channelsEnum';

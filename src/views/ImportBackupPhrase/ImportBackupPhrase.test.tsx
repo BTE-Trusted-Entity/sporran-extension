@@ -1,7 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { mnemonicValidate } from '@polkadot/util-crypto';
-import { KiltKeyringPair } from '@kiltprotocol/types';
-import { Crypto } from '@kiltprotocol/utils';
+import { KiltKeyringPair, Utils } from '@kiltprotocol/sdk-js';
 
 import { render, screen } from '../../testing/testing';
 
@@ -9,9 +8,6 @@ import { ImportBackupPhrase } from './ImportBackupPhrase';
 
 jest.mock('@polkadot/util-crypto', () => ({
   mnemonicValidate: jest.fn(),
-}));
-jest.mock('@kiltprotocol/utils', () => ({
-  Crypto: { makeKeypairFromUri: jest.fn() },
 }));
 
 jest.mocked(mnemonicValidate).mockReturnValue(false);
@@ -45,7 +41,7 @@ async function typeElevenWords() {
 
 describe('ImportBackupPhrase', () => {
   beforeEach(() => {
-    jest.mocked(Crypto.makeKeypairFromUri).mockReset();
+    jest.mocked(Utils.Crypto.makeKeypairFromUri).mockReset();
   });
 
   it('should render for import', async () => {
@@ -112,7 +108,7 @@ describe('ImportBackupPhrase', () => {
 
   it('should report mismatching backup phrase', async () => {
     jest.mocked(mnemonicValidate).mockReturnValue(true);
-    jest.mocked(Crypto.makeKeypairFromUri).mockReturnValue({
+    jest.mocked(Utils.Crypto.makeKeypairFromUri).mockReturnValue({
       address: 'FAIL',
     } as unknown as KiltKeyringPair);
 
@@ -131,7 +127,7 @@ describe('ImportBackupPhrase', () => {
 
   it('should allow backup phrase import', async () => {
     jest.mocked(mnemonicValidate).mockReturnValue(true);
-    jest.mocked(Crypto.makeKeypairFromUri).mockReturnValue({
+    jest.mocked(Utils.Crypto.makeKeypairFromUri).mockReturnValue({
       address: 'PASS',
     } as unknown as KiltKeyringPair);
 
@@ -153,7 +149,7 @@ describe('ImportBackupPhrase', () => {
 
   it('should allow backup phrase reset', async () => {
     jest.mocked(mnemonicValidate).mockReturnValue(true);
-    jest.mocked(Crypto.makeKeypairFromUri).mockReturnValue({
+    jest.mocked(Utils.Crypto.makeKeypairFromUri).mockReturnValue({
       address: '4p273cfeZ2JRz46AcJoQvTRHCH8Vaj92jts2VxepZtQwbTBB',
     } as unknown as KiltKeyringPair);
 

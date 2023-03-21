@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import { MemoryRouter, Route } from 'react-router-dom';
-import { BalanceUtils } from '@kiltprotocol/core';
+import { BalanceUtils } from '@kiltprotocol/sdk-js';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { paths } from '../paths';

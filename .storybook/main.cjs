@@ -12,6 +12,9 @@ module.exports = {
     '@storybook/addon-controls/register',
     '@storybook/addon-toolbars/register',
   ],
+  typescript: {
+    reactDocgen: 'none', // current version doesn’t work with the recent TS
+  },
   webpackFinal: async (config) => {
     const cssRule = config.module.rules.find(({ test }) => test.toString() === '/\\.css$/');
 

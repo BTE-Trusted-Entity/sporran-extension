@@ -7,10 +7,6 @@ import { paths } from '../paths';
 import { useExtrinsicValues } from './useExtrinsicValues';
 import { SignDApp } from './SignDApp';
 
-jest.mock('@kiltprotocol/utils', () => ({
-  Crypto: { encodeAddress: (address: string) => address },
-}));
-
 jest.mock('./useExtrinsicValues');
 jest.mocked(useExtrinsicValues).mockReturnValue([
   {

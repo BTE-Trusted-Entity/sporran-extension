@@ -10,12 +10,12 @@ import { Link, Prompt, Redirect, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { stringToU8a } from '@polkadot/util';
 import {
+  ConfigService,
+  Did,
   DidServiceEndpoint,
   KiltPublishedCredentialCollectionV1Type,
-} from '@kiltprotocol/types';
-import { ConfigService } from '@kiltprotocol/config';
+} from '@kiltprotocol/sdk-js';
 import { last } from 'lodash-es';
-import * as Did from '@kiltprotocol/did';
 
 import * as styles from './DidEndpointsForm.module.css';
 

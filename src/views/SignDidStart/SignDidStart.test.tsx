@@ -1,4 +1,4 @@
-import * as Did from '@kiltprotocol/did';
+import { Did } from '@kiltprotocol/sdk-js';
 
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 import { identitiesMock as identities, render } from '../../testing/testing';

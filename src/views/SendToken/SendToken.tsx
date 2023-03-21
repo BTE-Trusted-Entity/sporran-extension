@@ -12,9 +12,7 @@ import {
 import BN from 'bn.js';
 import { browser } from 'webextension-polyfill-ts';
 import { find } from 'lodash-es';
-import { BalanceUtils } from '@kiltprotocol/core';
-import { DataUtils } from '@kiltprotocol/utils';
-import { ConfigService } from '@kiltprotocol/config';
+import { BalanceUtils, ConfigService, Utils } from '@kiltprotocol/sdk-js';
 
 import * as styles from './SendToken.module.css';
 
@@ -155,7 +153,7 @@ function getAddressError(address: string, identity: Identity): string | null {
     return t('view_SendToken_recipient_same');
   }
 
-  if (!DataUtils.isKiltAddress(address)) {
+  if (!Utils.DataUtils.isKiltAddress(address)) {
     return t('view_SendToken_recipient_invalid');
   }
 
@@ -205,7 +203,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
   const recipientError = recipient && getAddressError(recipient, identity);
 
   const recipientBalance = useAddressBalance(
-    DataUtils.isKiltAddress(recipient) ? recipient : '',
+    Utils.DataUtils.isKiltAddress(recipient) ? recipient : '',
   );
   const recipientBalanceZero = recipientBalance?.total?.isZero?.();
 
@@ -272,7 +270,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       if (isNew(identity)) {
         return;
       }
-      if (recipient && !DataUtils.isKiltAddress(recipient)) {
+      if (recipient && !Utils.DataUtils.isKiltAddress(recipient)) {
         return;
       }
       const realFee = await getFee({

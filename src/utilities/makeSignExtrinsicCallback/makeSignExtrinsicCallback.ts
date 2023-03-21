@@ -2,7 +2,7 @@ import {
   KiltKeyringPair,
   SignExtrinsicCallback,
   SignRequestData,
-} from '@kiltprotocol/types';
+} from '@kiltprotocol/sdk-js';
 
 export function makeSignExtrinsicCallback(
   keypair: KiltKeyringPair,

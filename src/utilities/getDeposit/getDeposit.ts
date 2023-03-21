@@ -1,6 +1,4 @@
-import * as Did from '@kiltprotocol/did';
-import { ConfigService } from '@kiltprotocol/config';
-import { DidUri, KiltAddress } from '@kiltprotocol/types';
+import { ConfigService, Did, DidUri, KiltAddress } from '@kiltprotocol/sdk-js';
 
 import BN from 'bn.js';
 

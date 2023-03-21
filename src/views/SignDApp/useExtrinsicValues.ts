@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import BN from 'bn.js';
 import { ExtrinsicPayload } from '@polkadot/types/interfaces';
 import { SignerPayloadJSON } from '@polkadot/types/types/extrinsic';
-import { ConfigService } from '@kiltprotocol/config';
+import { ConfigService } from '@kiltprotocol/sdk-js';
 
 import { SignOriginInput } from '../../dApps/SignChannels/types';
 import {

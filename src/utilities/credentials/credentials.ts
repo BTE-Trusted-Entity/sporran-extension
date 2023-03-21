@@ -1,13 +1,14 @@
 import { useContext, useEffect, useMemo } from 'react';
 import { isEqual, omit, pick, pull, reject, without } from 'lodash-es';
 import {
+  Attestation,
+  ConfigService,
+  Credential,
+  Did,
   DidUri,
   ICredential,
   KiltPublishedCredentialCollectionV1,
-} from '@kiltprotocol/types';
-import { ConfigService } from '@kiltprotocol/config';
-import { Attestation, Credential } from '@kiltprotocol/core';
-import { isSameSubject } from '@kiltprotocol/did';
+} from '@kiltprotocol/sdk-js';
 import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
@@ -165,7 +166,7 @@ export function useIdentityCredentials(
 
     const { fullDid } = parseDidUri(did);
     return filtered.filter((credential) =>
-      isSameSubject(credential.credential.claim.owner, fullDid),
+      Did.isSameSubject(credential.credential.claim.owner, fullDid),
     );
   }, [all, did, onlyUsable]);
 }

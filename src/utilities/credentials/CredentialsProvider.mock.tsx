@@ -1,4 +1,4 @@
-import { IAttestation } from '@kiltprotocol/types';
+import { IAttestation } from '@kiltprotocol/sdk-js';
 
 import { ShareInput } from '../../channels/shareChannel/types';
 

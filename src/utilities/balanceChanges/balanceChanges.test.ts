@@ -1,5 +1,4 @@
-import { ConfigService } from '@kiltprotocol/config';
-import { connect } from '@kiltprotocol/core';
+import { ConfigService, connect } from '@kiltprotocol/sdk-js';
 
 import { computeBalance, onAddressBalanceChange } from './balanceChanges';
 import { originalBalancesMock } from './balanceChanges.mock';

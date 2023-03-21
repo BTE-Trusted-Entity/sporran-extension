@@ -1,5 +1,4 @@
-import { BalanceUtils } from '@kiltprotocol/core';
-import { DidDocument } from '@kiltprotocol/types';
+import { BalanceUtils, DidDocument } from '@kiltprotocol/sdk-js';
 
 import { MemoryRouter, Route } from 'react-router-dom';
 

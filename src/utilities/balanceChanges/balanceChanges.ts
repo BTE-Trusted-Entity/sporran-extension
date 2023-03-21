@@ -1,5 +1,5 @@
 import BN from 'bn.js';
-import { ConfigService } from '@kiltprotocol/config';
+import { ConfigService } from '@kiltprotocol/sdk-js';
 
 import { ErrorFirstCallback } from '../../channels/base/types';
 

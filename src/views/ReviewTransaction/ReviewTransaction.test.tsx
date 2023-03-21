@@ -1,4 +1,4 @@
-import { BalanceUtils } from '@kiltprotocol/core';
+import { BalanceUtils } from '@kiltprotocol/sdk-js';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';

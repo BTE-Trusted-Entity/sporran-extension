@@ -1,6 +1,6 @@
 import { FormEvent, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import * as Did from '@kiltprotocol/did';
+import { Did } from '@kiltprotocol/sdk-js';
 
 import * as styles from './CreateDidDApp.module.css';
 

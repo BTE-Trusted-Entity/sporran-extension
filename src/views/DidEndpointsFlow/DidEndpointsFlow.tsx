@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import { DidServiceEndpoint } from '@kiltprotocol/types';
+import { DidServiceEndpoint } from '@kiltprotocol/sdk-js';
 
 import { Identity } from '../../utilities/identities/types';
 import { DidEndpointsForm } from '../DidEndpointsForm/DidEndpointsForm';

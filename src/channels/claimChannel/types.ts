@@ -1,4 +1,4 @@
-import { ITerms, DidUri, IEncryptedMessage } from '@kiltprotocol/types';
+import { ITerms, DidUri, IEncryptedMessage } from '@kiltprotocol/sdk-js';
 
 export interface ClaimInput extends ITerms {
   attesterName: string;

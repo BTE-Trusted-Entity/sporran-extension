@@ -1,4 +1,4 @@
-import { KiltAddress } from '@kiltprotocol/types';
+import { KiltAddress } from '@kiltprotocol/sdk-js';
 import { HexString } from '@polkadot/util/types';
 
 import { DAppName } from '../../dApps/AccessChannels/DAppName';

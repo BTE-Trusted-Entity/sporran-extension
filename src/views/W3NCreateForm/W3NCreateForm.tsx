@@ -2,7 +2,7 @@ import { FormEvent, useCallback, useState } from 'react';
 import { useHistory, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import { ConfigService } from '@kiltprotocol/config';
+import { ConfigService } from '@kiltprotocol/sdk-js';
 
 import * as styles from './W3NCreateForm.module.css';
 

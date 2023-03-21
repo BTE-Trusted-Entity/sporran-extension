@@ -1,5 +1,5 @@
 import { HexString } from '@polkadot/util/types';
-import { DidResourceUri, ICredential } from '@kiltprotocol/types';
+import { DidResourceUri, ICredential } from '@kiltprotocol/sdk-js';
 
 import { DAppName } from '../../dApps/AccessChannels/DAppName';
 import { Origin } from '../../dApps/AccessChannels/Origin';

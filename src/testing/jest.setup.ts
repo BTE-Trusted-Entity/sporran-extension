@@ -46,7 +46,16 @@ jest.mock('@polkadot/x-fetch', () => ({}));
 jest.mock('@polkadot/x-randomvalues', () => ({}));
 jest.mock('@polkadot/x-ws', () => ({}));
 
-jest.mock('@kiltprotocol/core', () => ({
+jest.mock('@kiltprotocol/sdk-js', () => ({
+  ConfigService: {
+    api: undefined,
+    get() {
+      return this.api;
+    },
+    set({ api }: { api: undefined }) {
+      this.api = api;
+    },
+  },
   CType: { hashToId: jest.fn() },
   BalanceUtils: {
     toFemtoKilt(coins: number) {
@@ -62,20 +71,25 @@ jest.mock('@kiltprotocol/core', () => ({
       return new BN(digits.slice(0, index + 15).join(''));
     },
   },
-}));
-jest.mock('@kiltprotocol/chain-helpers', () => ({
   Blockchain: { submitSignedTx: jest.fn() },
-}));
-jest.mock('@kiltprotocol/did', () => ({
-  isSameSubject: jest.fn().mockReturnValue(true),
-  resourceIdToChain: jest
-    .fn()
-    .mockImplementation((input) => input.substring(1)),
-}));
-jest.mock('@kiltprotocol/utils', () => ({
-  DataUtils: {
-    isKiltAddress: jest.fn(),
+  Did: {
+    isSameSubject: jest.fn().mockReturnValue(true),
+    resourceIdToChain: jest
+      .fn()
+      .mockImplementation((input) => input.substring(1)),
   },
+  Utils: {
+    DataUtils: {
+      isKiltAddress: jest.fn(),
+    },
+    Crypto: {
+      makeKeypairFromSeed: jest.fn(),
+      makeKeypairFromUri: jest.fn(),
+      encodeAddress: (address: string) => address,
+    },
+  },
+  KiltPublishedCredentialCollectionV1Type:
+    'KiltPublishedCredentialCollectionV1',
 }));
 
 jest.mock('../components/Avatar/Identicon', () => ({

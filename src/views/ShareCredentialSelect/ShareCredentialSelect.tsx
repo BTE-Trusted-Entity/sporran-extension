@@ -2,7 +2,7 @@ import { RefObject, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link } from 'react-router-dom';
 import { reject, sortBy } from 'lodash-es';
-import { isSameSubject } from '@kiltprotocol/did';
+import { Did } from '@kiltprotocol/sdk-js';
 
 import * as styles from './ShareCredentialSelect.module.css';
 
@@ -41,7 +41,7 @@ function MatchingIdentityCredentials({
 }): JSX.Element {
   const credentials = allCredentials.filter(
     ({ credential }) =>
-      identity.did && isSameSubject(credential.claim.owner, identity.did),
+      identity.did && Did.isSameSubject(credential.claim.owner, identity.did),
   );
 
   return (
