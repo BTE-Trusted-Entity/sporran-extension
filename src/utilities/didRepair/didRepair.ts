@@ -1,15 +1,15 @@
 import BN from 'bn.js';
 import {
+  Blockchain,
+  ConfigService,
+  Did,
   DidUri,
   KiltEncryptionKeypair,
   KiltKeyringPair,
   SignExtrinsicCallback,
   SubmittableExtrinsic,
-} from '@kiltprotocol/types';
-import { ConfigService } from '@kiltprotocol/config';
-import { Blockchain } from '@kiltprotocol/chain-helpers';
-import * as Did from '@kiltprotocol/did';
-import { Crypto } from '@kiltprotocol/utils';
+  Utils,
+} from '@kiltprotocol/sdk-js';
 
 import {
   deriveEncryptionKeyFromSeed,
@@ -30,7 +30,8 @@ async function getSignedTransaction(
 
   const keyToUpdate =
     '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
-  const noUpdateNeeded = Crypto.u8aToHex(existingKey.publicKey) !== keyToUpdate;
+  const noUpdateNeeded =
+    Utils.Crypto.u8aToHex(existingKey.publicKey) !== keyToUpdate;
   if (noUpdateNeeded) {
     throw new Error('DID repair not needed');
   }

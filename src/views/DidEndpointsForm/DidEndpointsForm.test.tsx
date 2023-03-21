@@ -1,7 +1,10 @@
 import { MemoryRouter, Route } from 'react-router-dom';
-import { DidDocument, DidServiceEndpoint } from '@kiltprotocol/types';
-import { ConfigService } from '@kiltprotocol/config';
-import { connect } from '@kiltprotocol/core';
+import {
+  ConfigService,
+  connect,
+  DidDocument,
+  DidServiceEndpoint,
+} from '@kiltprotocol/sdk-js';
 
 import { identitiesMock, render, screen } from '../../testing/testing';
 import { useFullDidDocument } from '../../utilities/did/did';
@@ -35,7 +38,7 @@ const api = {
       maxNumberOfServicesPerDid: { toNumber: () => 25 },
     },
   },
-} as Awaited<ReturnType<typeof connect>>;
+} as unknown as Awaited<ReturnType<typeof connect>>;
 ConfigService.set({ api });
 
 describe('DidEndpointsForm', () => {

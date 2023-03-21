@@ -8,7 +8,7 @@ export default {
 
 export function Collapsed(): JSX.Element {
   return (
-    <ul className={styles.list}>
+    <ul>
       <li className={styles.card} aria-expanded="false">
         <button type="button" className={styles.expand}>
           <section className={styles.collapsedCard}>
@@ -23,7 +23,7 @@ export function Collapsed(): JSX.Element {
 
 export function Expanded(): JSX.Element {
   return (
-    <ul className={styles.list}>
+    <ul>
       <li className={styles.card} aria-expanded="true">
         <section className={styles.expanded}>
           <button

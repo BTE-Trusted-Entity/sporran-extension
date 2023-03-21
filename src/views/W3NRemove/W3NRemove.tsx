@@ -2,9 +2,7 @@ import { FormEvent, Fragment, useCallback } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import { ConfigService } from '@kiltprotocol/config';
-import * as Did from '@kiltprotocol/did';
-import { DidDocument } from '@kiltprotocol/types';
+import { ConfigService, Did, DidDocument } from '@kiltprotocol/sdk-js';
 
 import * as styles from './W3NRemove.module.css';
 

@@ -1,8 +1,10 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { filter, find } from 'lodash-es';
-import { BalanceUtils, Credential, CType } from '@kiltprotocol/core';
 import {
+  BalanceUtils,
+  Credential,
+  CType,
   DidUri,
   IClaim,
   ICredential,
@@ -11,7 +13,7 @@ import {
   IRequestAttestationContent,
   ITerms,
   SignCallback,
-} from '@kiltprotocol/types';
+} from '@kiltprotocol/sdk-js';
 
 import * as styles from './SignQuote.module.css';
 

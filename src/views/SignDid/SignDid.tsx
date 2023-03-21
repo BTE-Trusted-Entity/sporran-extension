@@ -1,9 +1,12 @@
 import { FormEvent, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
-import { DidResourceUri, ICredential } from '@kiltprotocol/types';
-import { Credential } from '@kiltprotocol/core';
-import { Crypto } from '@kiltprotocol/utils';
+import {
+  Credential,
+  DidResourceUri,
+  ICredential,
+  Utils,
+} from '@kiltprotocol/sdk-js';
 
 import { without } from 'lodash-es';
 
@@ -54,7 +57,9 @@ export function SignDid({
       const { didDocument, authenticationKey } =
         await getIdentityCryptoFromSeed(seed);
 
-      const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
+      const signature = Utils.Crypto.u8aToHex(
+        authenticationKey.sign(plaintext),
+      );
       const didKeyUri =
         `${didDocument.uri}${didDocument.authentication[0].id}` as DidResourceUri;
 

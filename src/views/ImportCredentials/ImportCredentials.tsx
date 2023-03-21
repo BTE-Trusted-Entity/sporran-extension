@@ -1,7 +1,6 @@
 import { MouseEvent, useCallback, useMemo, useState } from 'react';
 import { filter, reject, sortBy } from 'lodash-es';
-import { Credential } from '@kiltprotocol/core';
-import { isSameSubject } from '@kiltprotocol/did';
+import { Credential, Did } from '@kiltprotocol/sdk-js';
 
 import {
   SporranCredential,
@@ -78,7 +77,8 @@ export function ImportCredentials(): JSX.Element | null {
             }
 
             const knownIdentity = identitiesList.find(
-              ({ did }) => did && isSameSubject(did, credential.claim.owner),
+              ({ did }) =>
+                did && Did.isSameSubject(did, credential.claim.owner),
             );
             if (!knownIdentity) {
               throw new Error('orphaned');

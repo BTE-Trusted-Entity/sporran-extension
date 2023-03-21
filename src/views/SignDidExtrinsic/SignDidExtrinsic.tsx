@@ -1,14 +1,13 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import {
+  ConfigService,
+  Did,
   DidResourceUri,
   DidServiceEndpoint,
   SignRequestData,
-} from '@kiltprotocol/types';
-import * as Did from '@kiltprotocol/did';
+} from '@kiltprotocol/sdk-js';
 import { GenericExtrinsic } from '@polkadot/types';
-
-import { ConfigService } from '@kiltprotocol/config';
 
 import * as styles from './SignDidExtrinsic.module.css';
 

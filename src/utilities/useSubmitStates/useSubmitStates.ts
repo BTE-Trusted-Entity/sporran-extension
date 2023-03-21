@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import {
+  Blockchain,
+  ConfigService,
   ISubmittableResult,
   KiltKeyringPair,
   SubmittableExtrinsic,
-} from '@kiltprotocol/types';
-import { ConfigService } from '@kiltprotocol/config';
-import { Blockchain } from '@kiltprotocol/chain-helpers';
+} from '@kiltprotocol/sdk-js';
 import BN from 'bn.js';
 
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';

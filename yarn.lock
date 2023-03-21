@@ -1511,7 +1511,7 @@
     "@polkadot/api" "^9.10.2"
     "@polkadot/types" "^9.10.2"
 
-"@kiltprotocol/config@0.31.1", "@kiltprotocol/config@^0.31.1":
+"@kiltprotocol/config@0.31.1":
   version "0.31.1"
   resolved "https://registry.yarnpkg.com/@kiltprotocol/config/-/config-0.31.1.tgz#a85c85a3aee5504ac0bcae7f3790a847c39aa00d"
   integrity sha512-qXUtPZmvwqwQE6Xic8h0k0mOoYzThjUBXdoHyjSKQs5pa3YDmDD/EapzxskO5wxbczfDOh2snuAgkA+hdvWCIw==
@@ -1568,6 +1568,19 @@
     "@kiltprotocol/types" "0.31.1"
     "@kiltprotocol/utils" "0.31.1"
     "@polkadot/util" "^10.2.1"
+
+"@kiltprotocol/sdk-js@^0.31.1":
+  version "0.31.1"
+  resolved "https://registry.yarnpkg.com/@kiltprotocol/sdk-js/-/sdk-js-0.31.1.tgz#0ae3a2652a56e059db7b8be8b859be13fe30bedf"
+  integrity sha512-uYkdXYRCTMlxyJ/zaLY5MrEUnVfr+rbSuy94yFwpQnbnwgr5gTMypbi8+FIqy4pCbh+32O/HUAUy0Nwhf886Ug==
+  dependencies:
+    "@kiltprotocol/chain-helpers" "0.31.1"
+    "@kiltprotocol/config" "0.31.1"
+    "@kiltprotocol/core" "0.31.1"
+    "@kiltprotocol/did" "0.31.1"
+    "@kiltprotocol/messaging" "0.31.1"
+    "@kiltprotocol/types" "0.31.1"
+    "@kiltprotocol/utils" "0.31.1"
 
 "@kiltprotocol/type-definitions@0.31.1":
   version "0.31.1"

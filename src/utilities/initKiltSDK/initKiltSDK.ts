@@ -1,6 +1,4 @@
-import { ConfigService } from '@kiltprotocol/config';
-import { connect } from '@kiltprotocol/core';
-import { Blockchain } from '@kiltprotocol/chain-helpers';
+import { Blockchain, ConfigService, connect } from '@kiltprotocol/sdk-js';
 
 import { getEndpoint } from '../endpoints/endpoints';
 import { configuration } from '../../configuration/configuration';

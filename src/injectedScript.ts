@@ -3,7 +3,7 @@ import {
   IEncryptedMessage,
   DidResourceUri,
   KiltAddress,
-} from '@kiltprotocol/types';
+} from '@kiltprotocol/sdk-js';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import { injectIntoDApp } from './dApps/injectIntoDApp/injectIntoDApp';

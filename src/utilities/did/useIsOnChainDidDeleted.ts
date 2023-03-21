@@ -1,5 +1,4 @@
-import { DidUri } from '@kiltprotocol/types';
-import { resolve } from '@kiltprotocol/did';
+import { Did, DidUri } from '@kiltprotocol/sdk-js';
 
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
@@ -11,7 +10,7 @@ async function getIsOnChainDidDeleted(
   }
 
   try {
-    const resolved = await resolve(did);
+    const resolved = await Did.resolve(did);
     return Boolean(
       resolved && resolved.metadata && resolved.metadata.deactivated,
     );

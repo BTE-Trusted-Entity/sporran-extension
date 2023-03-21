@@ -2,8 +2,7 @@ import { FormEvent, useCallback } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 
-import { ConfigService } from '@kiltprotocol/config';
-import * as Did from '@kiltprotocol/did';
+import { ConfigService, Did } from '@kiltprotocol/sdk-js';
 
 import * as styles from './W3NCreateSignEuro.module.css';
 

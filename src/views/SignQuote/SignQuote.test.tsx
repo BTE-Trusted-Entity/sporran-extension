@@ -1,4 +1,4 @@
-import { CType } from '@kiltprotocol/core';
+import { CType } from '@kiltprotocol/sdk-js';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
 import { mockTerms } from '../../utilities/mockTerms/mockTerms';

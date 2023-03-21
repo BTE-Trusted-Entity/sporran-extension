@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { BalanceUtils } from '@kiltprotocol/core';
+import { BalanceUtils } from '@kiltprotocol/sdk-js';
 
 import { KiltAmount } from './KiltAmount';
 

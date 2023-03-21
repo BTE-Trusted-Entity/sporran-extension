@@ -1,12 +1,13 @@
 import { browser } from 'webextension-polyfill-ts';
 import { FormEvent, useCallback, useState } from 'react';
-import { Attestation, Credential } from '@kiltprotocol/core';
-import { ConfigService } from '@kiltprotocol/config';
 import {
+  Attestation,
+  ConfigService,
+  Credential,
   IAttestation,
   ICredentialPresentation,
   ISubmitCredential,
-} from '@kiltprotocol/types';
+} from '@kiltprotocol/sdk-js';
 
 import * as styles from './ShareCredentialSign.module.css';
 

@@ -1,6 +1,6 @@
 import { Runtime } from 'webextension-polyfill-ts';
 import { naclSeal } from '@polkadot/util-crypto';
-import { Crypto } from '@kiltprotocol/utils';
+import { Utils } from '@kiltprotocol/sdk-js';
 
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
 import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
@@ -20,14 +20,14 @@ export async function produceEncryptedChallenge(
   const { dAppEncryptionDidKey, sporranEncryptionDidKeyUri } = encryption;
 
   const { sealed, nonce } = naclSeal(
-    Crypto.coToUInt8(challenge),
+    Utils.Crypto.coToUInt8(challenge),
     encryption.encryptionKey.secretKey,
     dAppEncryptionDidKey.publicKey,
   );
 
   return {
     encryptionKeyId: sporranEncryptionDidKeyUri,
-    encryptedChallenge: Crypto.u8aToHex(sealed),
-    nonce: Crypto.u8aToHex(nonce),
+    encryptedChallenge: Utils.Crypto.u8aToHex(sealed),
+    nonce: Utils.Crypto.u8aToHex(nonce),
   };
 }

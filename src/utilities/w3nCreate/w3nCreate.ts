@@ -1,9 +1,7 @@
-import type { DidUri } from '@kiltprotocol/types';
+import { ConfigService, Did, DidUri } from '@kiltprotocol/sdk-js';
 
 import { useMemo } from 'react';
 import BN from 'bn.js';
-import { ConfigService } from '@kiltprotocol/config';
-import * as Did from '@kiltprotocol/did';
 
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 import { useDepositWeb3Name } from '../getDeposit/getDeposit';

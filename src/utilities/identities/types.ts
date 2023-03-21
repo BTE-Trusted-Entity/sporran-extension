@@ -1,4 +1,4 @@
-import { DidUri, KiltAddress } from '@kiltprotocol/types';
+import { DidUri, KiltAddress } from '@kiltprotocol/sdk-js';
 
 export interface Identity {
   address: KiltAddress;

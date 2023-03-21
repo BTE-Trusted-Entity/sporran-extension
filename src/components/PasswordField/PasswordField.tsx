@@ -12,8 +12,7 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
-import { KiltKeyringPair } from '@kiltprotocol/types';
-import { Crypto } from '@kiltprotocol/utils';
+import { KiltKeyringPair, Utils } from '@kiltprotocol/sdk-js';
 
 import * as styles from './PasswordField.module.css';
 
@@ -128,7 +127,7 @@ export function PasswordField({
         await forgetPasswordChannel.get(address);
       }
 
-      const keypair = Crypto.makeKeypairFromSeed(seed, 'sr25519');
+      const keypair = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
       return { password, keypair, seed };
     },
     [address, rememberRef, savedPassword, t],

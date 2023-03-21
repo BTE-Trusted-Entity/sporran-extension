@@ -2,7 +2,7 @@ import {
   DidResourceUri,
   IEncryptedMessage,
   KiltAddress,
-} from '@kiltprotocol/types';
+} from '@kiltprotocol/sdk-js';
 import { HexString } from '@polkadot/util/types';
 
 export interface IEncryptedMessageV1 {

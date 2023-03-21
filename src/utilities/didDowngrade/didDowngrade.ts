@@ -1,13 +1,13 @@
 import BN from 'bn.js';
 import {
+  Blockchain,
+  ConfigService,
+  Did,
   DidUri,
   KiltKeyringPair,
   SignExtrinsicCallback,
   SubmittableExtrinsic,
-} from '@kiltprotocol/types';
-import { Blockchain } from '@kiltprotocol/chain-helpers';
-import * as Did from '@kiltprotocol/did';
-import { ConfigService } from '@kiltprotocol/config';
+} from '@kiltprotocol/sdk-js';
 
 import { getIdentityCryptoFromSeed, Identity } from '../identities/identities';
 import { isFullDid } from '../did/did';

@@ -1,7 +1,5 @@
 import ky from 'ky';
-import { DidResourceUri, DidUri } from '@kiltprotocol/types';
-import * as Did from '@kiltprotocol/did';
-import { Crypto } from '@kiltprotocol/utils';
+import { Did, DidResourceUri, DidUri, Utils } from '@kiltprotocol/sdk-js';
 
 import { getDidDocument } from '../did/did';
 
@@ -84,8 +82,10 @@ export async function verifyDidConfigResource(
         await Did.verifyDidSignature({
           keyUri:
             `${issuerDidDocument.uri}${issuerDidDocument.assertionMethod?.[0].id}` as DidResourceUri,
-          signature: Crypto.coToUInt8(credential.proof.signature as string),
-          message: Crypto.coToUInt8(credentialSubject.rootHash),
+          signature: Utils.Crypto.coToUInt8(
+            credential.proof.signature as string,
+          ),
+          message: Utils.Crypto.coToUInt8(credentialSubject.rootHash),
         });
         return true;
       } catch (error) {

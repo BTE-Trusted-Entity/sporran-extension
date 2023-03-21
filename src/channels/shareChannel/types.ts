@@ -2,7 +2,7 @@ import {
   DidUri,
   IEncryptedMessage,
   IRequestCredentialContent,
-} from '@kiltprotocol/types';
+} from '@kiltprotocol/sdk-js';
 
 export type ShareInput = {
   credentialRequest: IRequestCredentialContent;

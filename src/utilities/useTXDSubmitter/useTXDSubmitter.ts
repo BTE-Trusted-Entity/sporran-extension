@@ -1,4 +1,4 @@
-import type { KiltAddress } from '@kiltprotocol/types';
+import type { KiltAddress } from '@kiltprotocol/sdk-js';
 
 import ky from 'ky';
 

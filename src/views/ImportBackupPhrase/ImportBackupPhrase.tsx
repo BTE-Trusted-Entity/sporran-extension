@@ -9,7 +9,7 @@ import {
 } from 'react';
 import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/bip39-en';
 import { mnemonicValidate } from '@polkadot/util-crypto';
-import { Crypto } from '@kiltprotocol/utils';
+import { Utils } from '@kiltprotocol/sdk-js';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './ImportBackupPhrase.module.css';
@@ -35,7 +35,7 @@ function isInvalid(
     return t('view_ImportBackupPhrase_error_invalid_backup_phrase');
   }
 
-  const { address } = Crypto.makeKeypairFromUri(mnemonic, 'sr25519');
+  const { address } = Utils.Crypto.makeKeypairFromUri(mnemonic, 'sr25519');
 
   const noNeedToCompare = !expectedAddress;
   const matchesExpectations = expectedAddress === address;

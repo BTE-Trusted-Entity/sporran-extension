@@ -1,6 +1,4 @@
-import { ConfigService } from '@kiltprotocol/config';
-import * as Did from '@kiltprotocol/did';
-import { DidUri } from '@kiltprotocol/types';
+import { ConfigService, Did, DidUri } from '@kiltprotocol/sdk-js';
 
 import { isFullDid } from '../did/did';
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';

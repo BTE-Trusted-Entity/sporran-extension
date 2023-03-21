@@ -1,7 +1,11 @@
 import { browser } from 'webextension-polyfill-ts';
-import { ConfigService } from '@kiltprotocol/config';
-import * as Did from '@kiltprotocol/did';
-import { DidServiceEndpoint, DidUri, UriFragment } from '@kiltprotocol/types';
+import {
+  ConfigService,
+  Did,
+  DidServiceEndpoint,
+  DidUri,
+  UriFragment,
+} from '@kiltprotocol/sdk-js';
 
 import { GenericExtrinsic } from '@polkadot/types';
 
