@@ -191,6 +191,9 @@
   "component_PasswordField_remember": {
     "message": "Remember password for the next 15 minutes"
   },
+  "component_PasswordField_required": {
+    "message": "The password is required"
+  },
   "component_CredentialCard_collapse": {
     "message": "Collapse credential details"
   },
