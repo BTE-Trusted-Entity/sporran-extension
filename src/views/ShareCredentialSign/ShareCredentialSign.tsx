@@ -166,11 +166,7 @@ export function ShareCredentialSign({
         <button type="button" className={styles.cancel} onClick={onCancel}>
           {t('common_action_cancel')}
         </button>
-        <button
-          type="submit"
-          className={styles.submit}
-          disabled={passwordField.isEmpty}
-        >
+        <button type="submit" className={styles.submit}>
           {t('view_ShareCredentialSign_CTA')}
         </button>
 

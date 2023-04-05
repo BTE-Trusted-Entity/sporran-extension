@@ -33,7 +33,6 @@ const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 const passwordField = {
   set: jest.fn(),
-  setIsEmpty: jest.fn(),
 };
 
 jest.mock('../../utilities/useInterval/useInterval');
@@ -44,7 +43,6 @@ jest.mocked(useInterval).mockImplementation(() => {
 describe('PasswordField', () => {
   beforeEach(() => {
     passwordField.set.mockReset();
-    passwordField.setIsEmpty.mockReset();
     jest.mocked(decryptIdentity).mockReset();
     jest.mocked(getPasswordChannel.get).mockReset();
     jest.mocked(savePasswordChannel.get).mockReset();
@@ -90,9 +88,6 @@ describe('PasswordField', () => {
     expect(await screen.findByLabelText(/Sign with password/)).toHaveValue(
       '************',
     );
-
-    expect(passwordField.setIsEmpty).toHaveBeenCalledTimes(2);
-    expect(passwordField.setIsEmpty).toHaveBeenCalledWith(false);
   });
   it('should clear the password from state if it has been cleared from background memory', async () => {
     const promise = Promise.resolve('password');
@@ -153,7 +148,7 @@ describe('PasswordField', () => {
       await userEvent.click(await screen.findByText('Submit'));
 
       await waitFor(() => error !== '');
-      expect(error).toEqual('Invalid password');
+      expect(error).toEqual('No password');
     });
 
     it('should return the valid password', async () => {

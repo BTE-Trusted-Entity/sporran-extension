@@ -1,5 +1,4 @@
 import {
-  ChangeEvent,
   Dispatch,
   FormEvent,
   Fragment,
@@ -51,22 +50,17 @@ interface Value {
 export function usePasswordField(): {
   get: (event: FormEvent) => Promise<Value>;
   set: (getter: (event: FormEvent) => Promise<Value>) => void;
-  isEmpty: boolean;
-  setIsEmpty: (isEmpty: boolean) => void;
 } {
   const [passwordGetter, setPasswordGetter] = useState(
     () => defaultGetPassword,
   );
-  const [isEmpty, setIsEmpty] = useState(true);
 
   return useMemo(
     () => ({
       get: passwordGetter,
       set: setPasswordGetter,
-      isEmpty,
-      setIsEmpty,
     }),
-    [passwordGetter, isEmpty],
+    [passwordGetter],
   );
 }
 
@@ -77,7 +71,6 @@ interface Props {
   autoFocus?: boolean;
   password: {
     set: (getter: (event: FormEvent) => Promise<Value>) => void;
-    setIsEmpty: (isEmpty: boolean) => void;
   };
 }
 
@@ -88,7 +81,6 @@ export function PasswordField({
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
 
-  const { setIsEmpty } = password;
   const setPasswordGetter = password.set as SetPasswordGetterType;
 
   const rememberRef = useRef<HTMLInputElement>(null);
@@ -110,6 +102,11 @@ export function PasswordField({
       const providedPassword = target.elements.password.value;
       const useSaved = savedPassword && providedPassword === asterisks;
       const password = useSaved ? savedPassword : providedPassword;
+
+      if (!password) {
+        setError(t('component_PasswordField_required'));
+        throw new Error('No password');
+      }
 
       let seed: Uint8Array;
       try {
@@ -133,14 +130,10 @@ export function PasswordField({
     [address, rememberRef, savedPassword, t],
   );
 
-  const handlePasswordInput = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setError(null);
-      setIsEmpty(event.target.value === '');
-      setPasswordGetter(() => passwordGetter);
-    },
-    [passwordGetter, setPasswordGetter, setIsEmpty],
-  );
+  const handlePasswordInput = useCallback(() => {
+    setError(null);
+    setPasswordGetter(() => passwordGetter);
+  }, [passwordGetter, setPasswordGetter]);
 
   const getSavedPassword = useCallback(async () => {
     if (!address || !rememberRef.current) {
@@ -150,10 +143,9 @@ export function PasswordField({
     setSavedPassword(passwordString);
 
     rememberRef.current.checked = Boolean(passwordString);
-    setIsEmpty(!rememberRef.current.checked);
 
     setPasswordGetter(() => passwordGetter);
-  }, [address, passwordGetter, setPasswordGetter, setIsEmpty]);
+  }, [address, passwordGetter, setPasswordGetter]);
 
   useInterval(getSavedPassword, 1 * 60 * 1000);
 
