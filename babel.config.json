@@ -5,6 +5,12 @@
         ["@babel/preset-env", { "targets": { "node": "current" } }],
         "@babel/preset-typescript"
       ]
+    },
+    "development": {
+      "presets": [
+        ["@babel/preset-env", { "targets": { "chrome": 100, "firefox": 100 } }],
+        "@babel/preset-typescript"
+      ]
     }
   }
 }

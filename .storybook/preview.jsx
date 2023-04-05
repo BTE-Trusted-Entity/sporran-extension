@@ -1,5 +1,4 @@
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
-import { withConsole, setConsoleOptions } from '@storybook/addon-console';
 import { MemoryRouter } from 'react-router-dom';
 
 import { defaultEndpoint } from '../src/utilities/endpoints/endpoints';
@@ -14,22 +13,12 @@ import { ApiProvider } from '../src/utilities/initKiltSDK/ApiProvider';
 import { ViewDecorator } from '../src/components/View/ViewDecorator';
 import '../src/views/App/App.css';
 
-// You'll start to receive all console messages, warnings, errors in your action logger panel - Everything except HMR logs.
-setConsoleOptions({
-  panelExclude: [],
-});
-
 export const globalTypes = {
   ...localeGlobalTypes,
   ...configurationTypesForStorybook,
 };
 
 export const decorators = [
-  // You'll receive console outputs as a console,
-  // warn and error actions in the panel. You might want to know from
-  // what stories they come. In this case, add withConsole decorator:
-  (storyFn, context) => withConsole()(storyFn)(context),
-
   withLocale,
   withConfigurationProvider,
   ViewDecorator,

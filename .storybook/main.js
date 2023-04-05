@@ -1,29 +1,24 @@
-const webpack = require('webpack');
-const path = require('path');
+import webpack from 'webpack';
 
-module.exports = {
-  core: {
-    builder: 'webpack5',
+export default {
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
   },
   stories: ['../src/**/*.stories.tsx'],
   addons: [
-    '@storybook/addon-actions/register',
-    '@storybook/addon-viewport/register',
-    '@storybook/addon-controls/register',
-    '@storybook/addon-toolbars/register',
+    '@storybook/addon-actions',
+    '@storybook/addon-viewport',
+    '@storybook/addon-controls',
+    '@storybook/addon-toolbars',
   ],
   typescript: {
     reactDocgen: 'none', // current version doesn’t work with the recent TS
   },
-  webpackFinal: async (config) => {
-    const cssRule = config.module.rules.find(({ test }) => test.toString() === '/\\.css$/');
-
-    // needs to be done while Storybook uses style-loader@2
-    const styleLoaderOptions = {
-      loader: cssRule.use[0],
-      options: { modules: { namedExport: true } }
-    };
-    cssRule.use[0] = styleLoaderOptions;
+  webpackFinal: async config => {
+    const cssRule = config.module.rules.find(({
+      test,
+    }) => test.toString() === '/\\.css$/');
 
     const cssLoaderOptions = cssRule.use[1].options;
     cssLoaderOptions.modules = { namedExport: true };
@@ -44,8 +39,7 @@ module.exports = {
       new webpack.ProvidePlugin({
         Buffer: ['buffer', 'Buffer'],
         process: ['process'],
-      }),
-    ];
+      })];
 
     return config;
   },
