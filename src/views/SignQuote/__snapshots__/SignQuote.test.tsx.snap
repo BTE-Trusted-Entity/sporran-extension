@@ -229,7 +229,6 @@ exports[`SignQuote should render 1`] = `
       </button>
       <button
         class="submit"
-        disabled=""
         type="submit"
       >
         Request Attestation

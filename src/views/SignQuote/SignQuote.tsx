@@ -186,11 +186,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         <button type="button" className={styles.cancel} onClick={handleCancel}>
           {t('common_action_cancel')}
         </button>
-        <button
-          type="submit"
-          className={styles.submit}
-          disabled={passwordField.isEmpty || error}
-        >
+        <button type="submit" className={styles.submit} disabled={error}>
           {t('view_SignQuote_CTA')}
         </button>
         <output className={styles.errorTooltip} hidden={did && !error}>
