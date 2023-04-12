@@ -852,7 +852,7 @@
     "message": "Get your DID"
   },
   "view_DidUpgrade_subline": {
-    "message": "Sign upgrade"
+    "message": "Sign"
   },
   "view_DidUpgrade_total": {
     "message": "Total cost: "
@@ -867,10 +867,10 @@
     "message": " + fee "
   },
   "view_DidUpgrade_info": {
-    "message": "Upgrade information"
+    "message": "Information"
   },
   "view_DidUpgrade_insufficientFunds": {
-    "message": "You need at least $cost$ KILTs to upgrade",
+    "message": "You need at least $cost$ KILTs",
     "placeholders": {
       "cost": {
         "content": "$1"
