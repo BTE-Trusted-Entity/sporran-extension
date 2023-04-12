@@ -13,12 +13,12 @@ exports[`LegacyDids should render 1`] = `
     <p
       class="explanation"
     >
-      We are updating on-chain DIDs for initial users, to reset the DID encryption feature for messaging in the future.
+      We are updating DIDs for initial users, to reset the DID encryption feature for messaging in the future.
     </p>
     <p
       class="cta"
     >
-      Please update your on-chain DIDs by initiating a transaction for each one that you set up. We have already refunded the transaction fee to you.
+      Please update your DIDs by initiating a transaction for each one that you set up. We have already refunded the transaction fee to you.
     </p>
     <h3
       class="listHeading"

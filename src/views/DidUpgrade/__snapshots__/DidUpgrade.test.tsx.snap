@@ -9,7 +9,7 @@ exports[`DidUpgrade should render 1`] = `
     <h1
       class="heading"
     >
-      Upgrade to on-chain DID
+      Get your DID
     </h1>
     <p
       class="subline"

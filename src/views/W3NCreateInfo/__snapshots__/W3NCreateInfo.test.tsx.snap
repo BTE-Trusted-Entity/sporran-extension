@@ -41,7 +41,7 @@ exports[`W3NCreateInfo should match the snapshot for off-chain did 1`] = `
     <p
       class="warning"
     >
-      You need an on-chain DID to use this feature.
+      You need a DID to use this feature.
     </p>
     <p
       class="buttonsLine"
@@ -56,7 +56,7 @@ exports[`W3NCreateInfo should match the snapshot for off-chain did 1`] = `
         class="next"
         href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade"
       >
-        Upgrade to on-chain DID
+        Get your DID
       </a>
     </p>
     <button

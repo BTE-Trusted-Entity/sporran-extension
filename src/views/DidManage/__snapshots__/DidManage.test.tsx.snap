@@ -68,7 +68,7 @@ exports[`DidManage should match the snapshot with web3name 1`] = `
       class="downgrade"
       href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/downgrade/warning/web3name"
     >
-      Remove on-chain DID
+      Remove DID
     </a>
     <a
       aria-label="Back"
@@ -162,7 +162,7 @@ exports[`DidManage should match the snapshot without web3name 1`] = `
       class="downgrade"
       href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/downgrade/warning/credentials"
     >
-      Remove on-chain DID
+      Remove DID
     </a>
     <a
       aria-label="Back"
