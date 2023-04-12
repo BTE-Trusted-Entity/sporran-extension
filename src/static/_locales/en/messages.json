@@ -960,7 +960,7 @@
     "message": "Get your DID"
   },
   "view_DidUpgradeExplainer_functionality": {
-    "message": "A DID enables you to sign new transactions and use new functionality"
+    "message": "Enables you to sign with your DID and use new functionality"
   },
   "view_DidUpgradeExplainer_deposit": {
     "message": "A deposit is needed to create your DID. The deposit will be refunded if you remove your DID."
