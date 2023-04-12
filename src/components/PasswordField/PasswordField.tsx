@@ -105,7 +105,7 @@ export function PasswordField({
 
       if (!password) {
         setError(t('component_PasswordField_required'));
-        throw new Error('No password');
+        throw new PasswordError('No password');
       }
 
       let seed: Uint8Array;
