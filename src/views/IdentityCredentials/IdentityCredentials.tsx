@@ -41,14 +41,22 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
   }, []);
 
   const checkingStatus = useBooleanState();
+  const animating = useBooleanState();
+
+  const handleAnimationIteration = useCallback(() => {
+    if (!checkingStatus.current) {
+      animating.off();
+    }
+  }, [animating, checkingStatus]);
 
   const handleCheckStatusClick = useCallback(async () => {
     if (sporranCredentials && !checkingStatus.current) {
       checkingStatus.on();
+      animating.on();
       await checkCredentialsStatus(sporranCredentials);
       checkingStatus.off();
     }
-  }, [checkingStatus, sporranCredentials]);
+  }, [animating, checkingStatus, sporranCredentials]);
 
   if (isNew(identity)) {
     return <IdentityOverviewNew />;
@@ -85,8 +93,9 @@ export function IdentityCredentials({ identity }: Props): JSX.Element | null {
               {t('view_IdentityCredentials_checkStatus')}
               <span
                 className={
-                  checkingStatus.current ? styles.progress : styles.stagnation
+                  animating.current ? styles.progress : styles.stagnation
                 }
+                onAnimationIteration={handleAnimationIteration}
                 aria-hidden
               />
             </button>
