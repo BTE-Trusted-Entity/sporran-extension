@@ -132,7 +132,7 @@ exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
       >
         Identicon
       </div>
-      A DID enables you to sign new transactions and use new functionality
+      Enables you to sign with your DID and use new functionality
     </div>
     <p
       class="deposit"
@@ -279,7 +279,7 @@ exports[`DidUpgradeExplainer should render pay with euro option in internal buil
       >
         Identicon
       </div>
-      A DID enables you to sign new transactions and use new functionality
+      Enables you to sign with your DID and use new functionality
     </div>
     <p
       class="deposit"
@@ -426,7 +426,7 @@ exports[`should render insufficient balance to pay costs in KILT 1`] = `
       >
         Identicon
       </div>
-      A DID enables you to sign new transactions and use new functionality
+      Enables you to sign with your DID and use new functionality
     </div>
     <p
       class="deposit"
