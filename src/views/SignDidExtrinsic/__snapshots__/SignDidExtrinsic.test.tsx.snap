@@ -241,7 +241,7 @@ exports[`SignDidExtrinsic should render extrinsic 1`] = `
     <h1
       class="heading"
     >
-      Sign with on-chain DID
+      Sign with DID
     </h1>
     <p
       class="subline"
@@ -440,7 +440,7 @@ exports[`SignDidExtrinsic should render forbidden DID extrinsic 1`] = `
     <h1
       class="heading"
     >
-      Sign with on-chain DID
+      Sign with DID
     </h1>
     <p
       class="subline"

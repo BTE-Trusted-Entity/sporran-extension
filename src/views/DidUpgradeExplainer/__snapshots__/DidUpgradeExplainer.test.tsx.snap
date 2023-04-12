@@ -13,7 +13,7 @@ exports[`DidUpgradeExplainer should render DID already removed from chain 1`] = 
     <p
       class="subline"
     >
-      On-chain DID was deleted
+      DID was deleted
     </p>
     <section
       class="container"
@@ -52,7 +52,7 @@ exports[`DidUpgradeExplainer should render DID already removed from chain 1`] = 
     <p
       class="deleted"
     >
-      You deleted your on-chain DID and can no longer use this feature. To start using an on-chain DID, please create a new identity.
+      You deleted your DID and can no longer use this feature. To start using a DID, please create a new identity.
     </p>
     <a
       class="back"
@@ -104,7 +104,7 @@ exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
     <p
       class="subline"
     >
-      Upgrade to an on-chain DID
+      Get your DID
     </p>
     <section
       class="container"
@@ -132,12 +132,12 @@ exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
       >
         Identicon
       </div>
-      Upgrading enables you to sign with your on-chain DID and use new functionality.
+      Enables you to sign with your DID and use new functionality
     </div>
     <p
       class="deposit"
     >
-      A deposit is needed to create your on-chain DID. The deposit will be refunded if you remove your on-chain DID.
+      A deposit is needed to create your DID. The deposit will be refunded if you remove your DID.
     </p>
     <section
       class="paymentMethods"
@@ -251,7 +251,7 @@ exports[`DidUpgradeExplainer should render pay with euro option in internal buil
     <p
       class="subline"
     >
-      Upgrade to an on-chain DID
+      Get your DID
     </p>
     <section
       class="container"
@@ -279,12 +279,12 @@ exports[`DidUpgradeExplainer should render pay with euro option in internal buil
       >
         Identicon
       </div>
-      Upgrading enables you to sign with your on-chain DID and use new functionality.
+      Enables you to sign with your DID and use new functionality
     </div>
     <p
       class="deposit"
     >
-      A deposit is needed to create your on-chain DID. The deposit will be refunded if you remove your on-chain DID.
+      A deposit is needed to create your DID. The deposit will be refunded if you remove your DID.
     </p>
     <section
       class="paymentMethods"
@@ -398,7 +398,7 @@ exports[`should render insufficient balance to pay costs in KILT 1`] = `
     <p
       class="subline"
     >
-      Upgrade to an on-chain DID
+      Get your DID
     </p>
     <section
       class="container"
@@ -426,12 +426,12 @@ exports[`should render insufficient balance to pay costs in KILT 1`] = `
       >
         Identicon
       </div>
-      Upgrading enables you to sign with your on-chain DID and use new functionality.
+      Enables you to sign with your DID and use new functionality
     </div>
     <p
       class="deposit"
     >
-      A deposit is needed to create your on-chain DID. The deposit will be refunded if you remove your on-chain DID.
+      A deposit is needed to create your DID. The deposit will be refunded if you remove your DID.
     </p>
     <section
       class="paymentMethodsError"

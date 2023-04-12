@@ -8,7 +8,7 @@ exports[`DidDowngradeWarningWeb3Name should render 1`] = `
     <h1
       class="heading"
     >
-      Remove on-chain DID
+      Remove DID
     </h1>
     <p
       class="subline"
@@ -23,7 +23,7 @@ exports[`DidDowngradeWarningWeb3Name should render 1`] = `
     <p
       class="warning"
     >
-      Attention! Removing your on-chain DID will also remove your web3name:
+      Attention! Removing your DID will also remove your web3name:
     </p>
     <p
       class="details"

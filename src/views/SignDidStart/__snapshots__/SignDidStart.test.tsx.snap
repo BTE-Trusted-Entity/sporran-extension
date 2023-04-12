@@ -8,7 +8,7 @@ exports[`SignDidStart should render full DID with credentials 1`] = `
     <h1
       class="heading"
     >
-      Sign with on-chain DID
+      Sign with DID
     </h1>
     <p
       class="subline"
@@ -103,7 +103,7 @@ exports[`SignDidStart should render full DID with credentials 1`] = `
       <p
         class="info"
       >
-        To proceed you need an on-chain DID.
+        To proceed you need a DID.
       </p>
       <p
         class="info"
@@ -137,7 +137,7 @@ exports[`SignDidStart should render full DID with no credentials 1`] = `
     <h1
       class="heading"
     >
-      Sign with on-chain DID
+      Sign with DID
     </h1>
     <p
       class="subline"
@@ -232,7 +232,7 @@ exports[`SignDidStart should render full DID with no credentials 1`] = `
       <p
         class="info"
       >
-        To proceed you need an on-chain DID.
+        To proceed you need a DID.
       </p>
       <p
         class="info"
@@ -268,7 +268,7 @@ exports[`SignDidStart should render light DID 1`] = `
     <h1
       class="heading"
     >
-      Sign with on-chain DID
+      Sign with DID
     </h1>
     <p
       class="subline"
@@ -363,7 +363,7 @@ exports[`SignDidStart should render light DID 1`] = `
       <p
         class="info"
       >
-        To proceed you need an on-chain DID.
+        To proceed you need a DID.
       </p>
       <p
         class="info"
@@ -373,19 +373,19 @@ exports[`SignDidStart should render light DID 1`] = `
     </div>
     <a
       aria-disabled="true"
-      aria-label="You need to upgrade to an on-chain DID first"
+      aria-label="You need a DID first"
       class="next"
       href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/sign/credentials"
-      title="You need to upgrade to an on-chain DID first"
+      title="You need a DID first"
     >
       Sign with credentials
     </a>
     <a
       aria-disabled="true"
-      aria-label="You need to upgrade to an on-chain DID first"
+      aria-label="You need a DID first"
       class="next"
       href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/sign/password"
-      title="You need to upgrade to an on-chain DID first"
+      title="You need a DID first"
     >
       Sign without credentials
     </a>

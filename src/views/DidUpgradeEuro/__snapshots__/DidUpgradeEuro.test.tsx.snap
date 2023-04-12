@@ -14,7 +14,7 @@ exports[`DidUpgradeEuro should render 1`] = `
     <p
       class="subline"
     >
-      Upgrade to on-chain DID
+      Get your DID
     </p>
     <section
       class="container"

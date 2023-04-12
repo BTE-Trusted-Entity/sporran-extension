@@ -48,7 +48,7 @@ exports[`DidRepair should render 1`] = `
     <p
       class="info"
     >
-      This transaction updates your on-chain DID.
+      This transaction updates your DID.
 The fee has already been refunded.
     </p>
     <p

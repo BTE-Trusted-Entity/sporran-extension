@@ -9,7 +9,7 @@ exports[`DidDowngrade promo not used at all 1`] = `
     <h1
       class="heading"
     >
-      Remove on-chain DID
+      Remove DID
     </h1>
     <p
       class="subline"
@@ -75,7 +75,7 @@ exports[`DidDowngrade promo not used at all 1`] = `
     <p
       class="explanation"
     >
-      Take care: this identity won’t be able to upgrade to an on-chain DID again.
+      Take care: this identity won’t be able to get a DID again.
     </p>
     <p
       class="resetLine"
@@ -188,7 +188,7 @@ exports[`DidDowngrade promo used for DID but not web3name 1`] = `
     <h1
       class="heading"
     >
-      Remove on-chain DID
+      Remove DID
     </h1>
     <p
       class="subline"
@@ -254,7 +254,7 @@ exports[`DidDowngrade promo used for DID but not web3name 1`] = `
     <p
       class="explanation"
     >
-      Take care: this identity won’t be able to upgrade to an on-chain DID again.
+      Take care: this identity won’t be able to get a DID again.
     </p>
     <p
       class="resetLine"
@@ -367,7 +367,7 @@ exports[`DidDowngrade promo used for both web3name and DID 1`] = `
     <h1
       class="heading"
     >
-      Remove on-chain DID
+      Remove DID
     </h1>
     <p
       class="subline"
@@ -415,7 +415,7 @@ exports[`DidDowngrade promo used for both web3name and DID 1`] = `
     <p
       class="explanation"
     >
-      Take care: this identity won’t be able to upgrade to an on-chain DID again.
+      Take care: this identity won’t be able to get a DID again.
     </p>
     <p
       class="resetLine"
@@ -528,7 +528,7 @@ exports[`DidDowngrade promo used for web3name but not DID 1`] = `
     <h1
       class="heading"
     >
-      Remove on-chain DID
+      Remove DID
     </h1>
     <p
       class="subline"
@@ -594,7 +594,7 @@ exports[`DidDowngrade promo used for web3name but not DID 1`] = `
     <p
       class="explanation"
     >
-      Take care: this identity won’t be able to upgrade to an on-chain DID again.
+      Take care: this identity won’t be able to get a DID again.
     </p>
     <p
       class="resetLine"

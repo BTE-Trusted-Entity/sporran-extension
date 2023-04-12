@@ -8,7 +8,7 @@ exports[`SignDid should render with credentials 1`] = `
     <h1
       class="heading"
     >
-      Sign with on-chain DID
+      Sign with DID
     </h1>
     <section
       class="container"
@@ -146,7 +146,7 @@ exports[`SignDid should render without credentials 1`] = `
     <h1
       class="heading"
     >
-      Sign with on-chain DID
+      Sign with DID
     </h1>
     <section
       class="container"

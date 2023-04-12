@@ -13,7 +13,7 @@ exports[`W3NCreateSign should match the snapshot 1`] = `
     <p
       class="subline"
     >
-      Connect a web3name to your on-chain DID
+      Connect a web3name to your DID
     </p>
     <section
       class="container"

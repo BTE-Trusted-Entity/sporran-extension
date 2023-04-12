@@ -295,10 +295,10 @@
     "message": "Important Update"
   },
   "component_LegacyDids_explanation": {
-    "message": "We are updating on-chain DIDs for initial users, to reset the DID encryption feature for messaging in the future."
+    "message": "We are updating DIDs for initial users, to reset the DID encryption feature for messaging in the future."
   },
   "component_LegacyDids_cta": {
-    "message": "Please update your on-chain DIDs by initiating a transaction for each one that you set up. We have already refunded the transaction fee to you."
+    "message": "Please update your DIDs by initiating a transaction for each one that you set up. We have already refunded the transaction fee to you."
   },
   "component_LegacyDids_dids": {
     "message": "DIDs that need updating:"
@@ -494,16 +494,16 @@
     "message": "View Transactions"
   },
   "view_IdentityOverview_upgrade": {
-    "message": "Upgrade to on-chain DID"
+    "message": "Get your DID"
   },
   "view_IdentityOverview_on_chain": {
-    "message": "Manage on-chain DID"
+    "message": "Manage DID"
   },
   "view_IdentityOverview_download_prompt": {
     "message": "Some credentials have not been backed up"
   },
   "view_IdentityOverview_did_repair": {
-    "message": "Please update your on-chain DID"
+    "message": "Please update your DID"
   },
   "view_IdentityOverview_web3name_create": {
     "message": "Create web3name"
@@ -849,10 +849,10 @@
     "message": "Error details"
   },
   "view_DidUpgrade_heading": {
-    "message": "Upgrade to on-chain DID"
+    "message": "Get your DID"
   },
   "view_DidUpgrade_subline": {
-    "message": "Sign upgrade"
+    "message": "Sign"
   },
   "view_DidUpgrade_total": {
     "message": "Total cost: "
@@ -861,16 +861,16 @@
     "message": " Deposit "
   },
   "view_DidUpgrade_deposit_explainer": {
-    "message": "A deposit is needed to create your on-chain DID. The deposit will be refunded if you remove your on-chain DID."
+    "message": "A deposit is needed to create your DID. The deposit will be refunded if you remove your DID."
   },
   "view_DidUpgrade_fee": {
     "message": " + fee "
   },
   "view_DidUpgrade_info": {
-    "message": "Upgrade information"
+    "message": "Information"
   },
   "view_DidUpgrade_insufficientFunds": {
-    "message": "You need at least $cost$ KILTs to upgrade",
+    "message": "You need at least $cost$ KILTs",
     "placeholders": {
       "cost": {
         "content": "$1"
@@ -878,19 +878,19 @@
     }
   },
   "view_DidUpgrade_pending": {
-    "message": "Upgrade to on-chain is being processed"
+    "message": "DID creation is being processed"
   },
   "view_DidUpgrade_success": {
-    "message": "Upgrade to on-chain was successful"
+    "message": "DID creation was successful"
   },
   "view_DidUpgrade_error": {
-    "message": "Upgrade to on-chain failed"
+    "message": "DID creation failed"
   },
   "view_DidUpgradeEuro_heading": {
     "message": "Prepare Transaction"
   },
   "view_DidUpgradeEuro_subline": {
-    "message": "Upgrade to on-chain DID"
+    "message": "Get your DID"
   },
   "view_DidUpgradeEuro_address": {
     "message": "Account Address:"
@@ -916,7 +916,7 @@
     "message": "*PayPal account required"
   },
   "view_DidDowngrade_heading": {
-    "message": "Remove on-chain DID"
+    "message": "Remove DID"
   },
   "view_DidDowngrade_subline": {
     "message": "Remove DID from the KILT blockchain"
@@ -939,37 +939,37 @@
     }
   },
   "view_DidDowngrade_pending": {
-    "message": "Remove on-chain DID is being processed"
+    "message": "DID removal is being processed"
   },
   "view_DidDowngrade_success": {
-    "message": "Remove on-chain DID was successful"
+    "message": "DID removal was successful"
   },
   "view_DidDowngrade_error": {
-    "message": "Remove on-chain DID failed"
+    "message": "DID removal failed"
   },
   "view_DidDowngrade_fee_as_total": {
     "message": "Fee: "
   },
   "view_DidDowngrade_explanation": {
-    "message": "Take care: this identity won’t be able to upgrade to an on-chain DID again."
+    "message": "Take care: this identity won’t be able to get a DID again."
   },
   "view_DidUpgradeExplainer_heading": {
     "message": "Decentralized Identifier"
   },
   "view_DidUpgradeExplainer_subline": {
-    "message": "Upgrade to an on-chain DID"
+    "message": "Get your DID"
   },
   "view_DidUpgradeExplainer_functionality": {
-    "message": "Upgrading enables you to sign with your on-chain DID and use new functionality."
+    "message": "Enables you to sign with your DID and use new functionality"
   },
   "view_DidUpgradeExplainer_deposit": {
-    "message": "A deposit is needed to create your on-chain DID. The deposit will be refunded if you remove your on-chain DID."
+    "message": "A deposit is needed to create your DID. The deposit will be refunded if you remove your DID."
   },
   "view_DidUpgradeExplainer_onchain_deleted": {
-    "message": "You deleted your on-chain DID and can no longer use this feature. To start using an on-chain DID, please create a new identity."
+    "message": "You deleted your DID and can no longer use this feature. To start using a DID, please create a new identity."
   },
   "view_DidUpgradeExplainer_onchain_deleted_subline": {
-    "message": "On-chain DID was deleted"
+    "message": "DID was deleted"
   },
   "view_DidUpgradeExplainer_kilt": {
     "message": "Pay with KILT"
@@ -978,7 +978,7 @@
     "message": "Pay with KILT information"
   },
   "view_DidUpgradeExplainer_kilt_explainer": {
-    "message": "For creating an on-chain DID, KILT Coins are needed to pay for the transaction and for the deposit. The deposit will be refunded if you remove your on-chain DID."
+    "message": "For creating a DID, KILT Coins are needed to pay for the transaction and for the deposit. The deposit will be refunded if you remove your DID."
   },
   "view_DidUpgradeExplainer_euro": {
     "message": "Use Checkout Service and pay with Paypal $cost$ (service fee, including VAT) or EUR equivalent, depending on your preferred PayPal currency",
@@ -992,7 +992,7 @@
     "message": "Pay with Euro information"
   },
   "view_DidUpgradeExplainer_euro_explainer": {
-    "message": "You pay a fixed fiat rate and BTE in return takes over handling the necessary KILT payments for you. There are no refunds when removing your on-chain DID."
+    "message": "You pay a fixed fiat rate and BTE in return takes over handling the necessary KILT payments for you. There are no refunds when removing your DID."
   },
   "view_DidUpgradeExplainer_insufficientKilt": {
     "message": "You need at least $cost$ KILTs (deposit + fee)",
@@ -1003,7 +1003,7 @@
     }
   },
   "view_DidDowngradeWarningCredentials_heading": {
-    "message": "Remove on-chain DID"
+    "message": "Remove DID"
   },
   "view_DidDowngradeWarningCredentials_subline": {
     "message": "Remove DID from the KILT blockchain"
@@ -1012,13 +1012,13 @@
     "message": "Attention! This will render the following credentials unusable:"
   },
   "view_DidDowngradeWarningWeb3Name_heading": {
-    "message": "Remove on-chain DID"
+    "message": "Remove DID"
   },
   "view_DidDowngradeWarningWeb3Name_subline": {
     "message": "Remove DID from the KILT blockchain"
   },
   "view_DidDowngradeWarningWeb3Name_warning": {
-    "message": "Attention! Removing your on-chain DID will also remove your web3name:"
+    "message": "Attention! Removing your DID will also remove your web3name:"
   },
   "view_DidDowngradeWarningWeb3Name_web3name": {
     "message": "web3name: "
@@ -1036,7 +1036,7 @@
     "message": "Service endpoints"
   },
   "view_DidManage_downgrade": {
-    "message": "Remove on-chain DID"
+    "message": "Remove DID"
   },
   "view_DidEndpointsForm_heading": {
     "message": "Service Endpoints"
@@ -1124,7 +1124,7 @@
     "message": "Service ID"
   },
   "view_SignDid_title": {
-    "message": "Sign with on-chain DID"
+    "message": "Sign with DID"
   },
   "view_SignDid_origin": {
     "message": "Request from:"
@@ -1139,13 +1139,13 @@
     "message": "Unexpected error"
   },
   "view_SignDidStart_title": {
-    "message": "Sign with on-chain DID"
+    "message": "Sign with DID"
   },
   "view_SignDidStart_subline": {
     "message": "Select your Identity and sign with your password"
   },
   "view_SignDidStart_info_did": {
-    "message": "To proceed you need an on-chain DID."
+    "message": "To proceed you need a DID."
   },
   "view_SignDidStart_info_credentials": {
     "message": "Choose whether to attach your credentials to the signature, or sign without credentials."
@@ -1157,7 +1157,7 @@
     "message": "Sign without credentials"
   },
   "view_SignDidStart_error_did": {
-    "message": "You need to upgrade to an on-chain DID first"
+    "message": "You need a DID first"
   },
   "view_SignDidStart_error_credentials": {
     "message": "This identity has no attested credentials"
@@ -1223,7 +1223,7 @@
     "message": "Fee "
   },
   "view_DidRepair_info": {
-    "message": "This transaction updates your on-chain DID.\nThe fee has already been refunded."
+    "message": "This transaction updates your DID.\nThe fee has already been refunded."
   },
   "view_DidRepair_insufficientFunds": {
     "message": "You need at least $cost$ KILTs to update your DID",
@@ -1234,13 +1234,13 @@
     }
   },
   "view_DidRepair_pending": {
-    "message": "Processing on-chain DID update"
+    "message": "Processing DID update"
   },
   "view_DidRepair_success": {
-    "message": "On-chain DID update successful"
+    "message": "DID update successful"
   },
   "view_DidRepair_error": {
-    "message": "On-chain DID update failed"
+    "message": "DID update failed"
   },
   "view_CreatePresentation_title": {
     "message": "Customize Credential"
@@ -1261,10 +1261,10 @@
     "message": "web3name is a custom name you create to represent your DID and personalize your digital identity. web3names can be linked via your DID with your SocialKYC credentials and with addresses across multiple blockchains."
   },
   "view_W3NCreateInfo_warning": {
-    "message": "You need an on-chain DID to use this feature."
+    "message": "You need a DID to use this feature."
   },
   "view_W3NCreateInfo_upgradeCTA": {
-    "message": "Upgrade to on-chain DID"
+    "message": "Get your DID"
   },
   "view_W3NCreateForm_heading": {
     "message": "Create web3name"
@@ -1312,7 +1312,7 @@
     "message": "web3name"
   },
   "view_W3NCreateSign_subline": {
-    "message": "Connect a web3name to your on-chain DID"
+    "message": "Connect a web3name to your DID"
   },
   "view_W3NCreateSign_pending": {
     "message": "Create web3name is being processed"
@@ -1405,7 +1405,7 @@
     "message": "from"
   },
   "view_SignDidExtrinsic_title": {
-    "message": "Sign with on-chain DID"
+    "message": "Sign with DID"
   },
   "view_SignDidExtrinsic_subline": {
     "message": "Select your Identity and sign with your password"
@@ -1414,7 +1414,7 @@
     "message": "Reject"
   },
   "view_SignDidExtrinsic_error_light_did": {
-    "message": "You need to upgrade to an on-chain DID first"
+    "message": "You need to create a DID first"
   },
   "view_SignDidExtrinsic_error_unusable_did": {
     "message": "This identity’s DID has been removed and is unusable"

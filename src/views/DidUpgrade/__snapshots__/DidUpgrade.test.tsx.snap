@@ -9,12 +9,12 @@ exports[`DidUpgrade should render 1`] = `
     <h1
       class="heading"
     >
-      Upgrade to on-chain DID
+      Get your DID
     </h1>
     <p
       class="subline"
     >
-      Sign upgrade
+      Sign
     </p>
     <section
       class="container"
@@ -58,7 +58,7 @@ exports[`DidUpgrade should render 1`] = `
       class="details"
     >
       <button
-        aria-label="Upgrade information"
+        aria-label="Information"
         class="show"
         type="button"
       />
@@ -146,7 +146,7 @@ exports[`DidUpgrade should render 1`] = `
         class="errorTooltip"
         hidden=""
       >
-        You need at least 1.0100 KILTs to upgrade
+        You need at least 1.0100 KILTs
       </output>
     </p>
     <div />
