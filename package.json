@@ -121,7 +121,7 @@
     "style-loader": "^3.3.2",
     "stylelint": "^15.4.0",
     "stylelint-config-css-modules": "^4.2.0",
-    "stylelint-config-standard": "^32.0.0",
+    "stylelint-config-standard": "^33.0.0",
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.2",
     "typed-css-modules": "^0.7.2",
