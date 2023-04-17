@@ -9,7 +9,7 @@ exports[`DidRepair should render 1`] = `
     <h1
       class="heading"
     >
-      On-Chain DID Update
+      DID Update
     </h1>
     <p
       class="subline"

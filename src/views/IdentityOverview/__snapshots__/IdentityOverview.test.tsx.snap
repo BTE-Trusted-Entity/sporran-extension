@@ -1277,7 +1277,7 @@ exports[`IdentityOverview should show on-chain DID removed 1`] = `
       class="upgrade"
       href="/identity/4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB/did/upgrade"
     >
-      On-chain DID removed
+      DID removed
     </a>
     <a
       class="web3Name"
