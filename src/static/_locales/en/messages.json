@@ -517,7 +517,7 @@
     }
   },
   "view_IdentityOverview_did_removed": {
-    "message": "On-chain DID removed"
+    "message": "DID removed"
   },
   "view_RemoveIdentity_heading": {
     "message": "Attention!"
@@ -650,7 +650,7 @@
     "message": "Attester"
   },
   "view_SignQuote_on_chain_did_deleted": {
-    "message": "On-chain DID deleted, please select a different Identity"
+    "message": "DID deleted, please select a different Identity"
   },
   "view_SignQuote_CTA": {
     "message": "Request Attestation"
@@ -1214,7 +1214,7 @@
     "message": "Import More Credentials"
   },
   "view_DidRepair_heading": {
-    "message": "On-Chain DID Update"
+    "message": "DID Update"
   },
   "view_DidRepair_subline": {
     "message": "Please update your DID"
@@ -1450,16 +1450,16 @@
     "message": "Remove web3name"
   },
   "view_CreateDidDApp_heading": {
-    "message": "Create On-chain DID"
+    "message": "Create DID"
   },
   "view_CreateDidDApp_origin": {
     "message": "Request from:"
   },
   "view_CreateDidDApp_error_full_did": {
-    "message": "DID already on chain"
+    "message": "DID already exists"
   },
   "view_CreateDidDApp_error_did_removed": {
-    "message": "DID removed from chain"
+    "message": "DID already removed"
   },
   "view_W3NCreateChoose_heading": {
     "message": "Create web3name"

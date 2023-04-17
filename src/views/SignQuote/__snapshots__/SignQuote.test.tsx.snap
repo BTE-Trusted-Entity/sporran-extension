@@ -237,7 +237,7 @@ exports[`SignQuote should render 1`] = `
         class="errorTooltip"
         hidden=""
       >
-        On-chain DID deleted, please select a different Identity
+        DID deleted, please select a different Identity
       </output>
     </p>
   </form>
@@ -481,7 +481,7 @@ exports[`SignQuote should show error message if on-chain DID deleted 1`] = `
       <output
         class="errorTooltip"
       >
-        On-chain DID deleted, please select a different Identity
+        DID deleted, please select a different Identity
       </output>
     </p>
   </form>
