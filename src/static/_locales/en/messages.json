@@ -640,6 +640,9 @@
   "view_SignQuote_subline": {
     "message": "Choose an Identity for your credential"
   },
+  "view_SignQuote_subline_predetermined": {
+    "message": "The credential will be issued to this Identity"
+  },
   "view_SignQuote_costs": {
     "message": "Credential Costs: "
   },

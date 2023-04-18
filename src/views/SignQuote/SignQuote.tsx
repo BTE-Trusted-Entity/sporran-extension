@@ -35,6 +35,7 @@ import { claimChannel } from '../../channels/claimChannel/claimChannel';
 import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
+import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 export type Terms = ITerms & {
   claim: IClaim;
@@ -116,7 +117,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
         isLegacy,
       );
 
-      // The attester generated claim with the temporary identity, need to put real address in it
+      // if a legacy attester generated a claim with a temporary DID, we need to replace it with the real one
       const identityClaim = { ...claim, owner: didDocument.uri };
 
       const credential = Credential.fromClaim(identityClaim, {
@@ -150,6 +151,8 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
     [sporranCredentials, cType, data, passwordField, identity.did, specVersion],
   );
 
+  const identityIsPredetermined = did === claim.owner;
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -157,9 +160,17 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       autoComplete="off"
     >
       <h1 className={styles.heading}>{t('view_SignQuote_heading')}</h1>
-      <p className={styles.subline}>{t('view_SignQuote_subline')}</p>
+      <p className={styles.subline}>
+        {identityIsPredetermined
+          ? t('view_SignQuote_subline_predetermined')
+          : t('view_SignQuote_subline')}
+      </p>
 
-      <IdentitiesCarousel identity={identity} />
+      {identityIsPredetermined ? (
+        <IdentitySlide identity={identity} />
+      ) : (
+        <IdentitiesCarousel identity={identity} />
+      )}
 
       <p className={styles.costs}>
         <span>{t('view_SignQuote_costs')}</span>

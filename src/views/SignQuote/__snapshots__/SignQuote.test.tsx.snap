@@ -14,90 +14,26 @@ exports[`SignQuote should render 1`] = `
     <p
       class="subline"
     >
-      Choose an Identity for your credential
+      The credential will be issued to this Identity
     </p>
-    <div
+    <section
       class="container"
     >
-      <section
-        class="container"
+      <div
+        class="avatar"
       >
-        <div
-          class="avatar"
-        >
-          Identicon
-        </div>
-        <div
-          class="centeredNameLine"
-        >
-          <span
-            class="name"
-          >
-            Light DID Identity
-          </span>
-        </div>
-      </section>
-      <a
-        aria-label="Add Identity"
-        class="left"
-        href="/?data=eyJjbGFpbSI6eyJjVHlwZUhhc2giOiIweDI0MGM3NDQ5MjNiZDk4Nzk3NTA0MzI4ZjliZWY1N2NhNmM3NzdmNWNiZjNlMWFhZGE3NGYzNDhjOTg3OWQ3OGEiLCJjb250ZW50cyI6eyJGdWxsIE5hbWUiOiJJbmdvIFL8YmUiLCJFbWFpbCI6ImluZ29Aa2lsdC5pbyJ9LCJvd25lciI6ImRpZDpraWx0OmxpZ2h0OjAwNG9VaUszRXZUY3pjNnVrWUxFVjU3QnV4emtXOXprc0tSY2haWFlHU29jTG1XRTVOIn0sImxlZ2l0aW1hdGlvbnMiOltdLCJxdW90ZSI6eyJhdHRlc3RlclNpZ25hdHVyZSI6eyJrZXlVcmkiOiJkaWQ6a2lsdDo0b2VKNzZoZGo4NHhud0NOcWlqVUhVQ1RtZndYZ1NaNHZteExFaVRFWWdRZEJDY1ojMHg1OWE1NmUxYTQwMTdiNjBhMDBjNTQ1MGJmZDZhZjIxZGM3NTNlODRlZjcyZjJmZDQ1ZGZjMjdkZDVjM2JkYWZiIiwic2lnbmF0dXJlIjoiMHgzMGQwMWFlZmQ2NGM3ZWVhNDhiYzc0Mzc4MmZlNTRiYTU4Zjk2YjVhOTFlMzNkOGQ5ZWU1ZmFlMjgyOTY0OTY3YmRlYTVlOWFjM2YzMTc1NmZkMjUxYTQwZWE0ZDJlOWE5M2FjOWIxMzE0Y2MwMzdjZGNiMDRhNTNhMDA3ZTY4ZiJ9LCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsImNUeXBlSGFzaCI6IjB4YmZhZDYwOTc3YmMxOGNmOWRmZDc2ZGE4ODYyNGNlMjE5MzYxZjMzN2I0MzMyZDVjNDJjMDQ3NDk5ZjRiOTNjNyIsImNvc3QiOnsiZ3Jvc3MiOjIzMywibmV0IjoyMy4zLCJ0YXgiOnsidmF0IjozLjN9fSwiY3VycmVuY3kiOiJLSUxUIiwidGltZWZyYW1lIjoiU2F0IEp1bCAxMCAyMDIxIDAwOjAwOjAwIEdNVCswMDAwIChDb29yZGluYXRlZCBVbml2ZXJzYWwgVGltZSkiLCJ0ZXJtc0FuZENvbmRpdGlvbnMiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS90ZXJtcyJ9LCJjVHlwZXMiOlt7IiRpZCI6ImtpbHQ6Y3R5cGU6MHgyNDBjNzQ0OTIzYmQ5ODc5NzUwNDMyOGY5YmVmNTdjYTZjNzc3ZjVjYmYzZTFhYWRhNzRmMzQ4Yzk4NzlkNzhhIiwiJHNjaGVtYSI6Imh0dHA6Ly9raWx0LXByb3RvY29sLm9yZy9kcmFmdC0wMS9jdHlwZSMiLCJ0aXRsZSI6IkJMLU1haWwtU2ltcGxlIiwicHJvcGVydGllcyI6eyJGdWxsIG5hbWUiOnsidHlwZSI6InN0cmluZyJ9LCJFbWFpbCI6eyJ0eXBlIjoic3RyaW5nIn19LCJ0eXBlIjoib2JqZWN0In1dLCJhdHRlc3Rlck5hbWUiOiJTb2NpYWxLWUMiLCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsInNwZWNWZXJzaW9uIjoiMy4wIn0="
-        title="Add Identity"
-      />
-      <a
-        aria-label="Identity with on-chain DID and lots of coins"
-        class="right"
-        href="/?data=eyJjbGFpbSI6eyJjVHlwZUhhc2giOiIweDI0MGM3NDQ5MjNiZDk4Nzk3NTA0MzI4ZjliZWY1N2NhNmM3NzdmNWNiZjNlMWFhZGE3NGYzNDhjOTg3OWQ3OGEiLCJjb250ZW50cyI6eyJGdWxsIE5hbWUiOiJJbmdvIFL8YmUiLCJFbWFpbCI6ImluZ29Aa2lsdC5pbyJ9LCJvd25lciI6ImRpZDpraWx0OmxpZ2h0OjAwNG9VaUszRXZUY3pjNnVrWUxFVjU3QnV4emtXOXprc0tSY2haWFlHU29jTG1XRTVOIn0sImxlZ2l0aW1hdGlvbnMiOltdLCJxdW90ZSI6eyJhdHRlc3RlclNpZ25hdHVyZSI6eyJrZXlVcmkiOiJkaWQ6a2lsdDo0b2VKNzZoZGo4NHhud0NOcWlqVUhVQ1RtZndYZ1NaNHZteExFaVRFWWdRZEJDY1ojMHg1OWE1NmUxYTQwMTdiNjBhMDBjNTQ1MGJmZDZhZjIxZGM3NTNlODRlZjcyZjJmZDQ1ZGZjMjdkZDVjM2JkYWZiIiwic2lnbmF0dXJlIjoiMHgzMGQwMWFlZmQ2NGM3ZWVhNDhiYzc0Mzc4MmZlNTRiYTU4Zjk2YjVhOTFlMzNkOGQ5ZWU1ZmFlMjgyOTY0OTY3YmRlYTVlOWFjM2YzMTc1NmZkMjUxYTQwZWE0ZDJlOWE5M2FjOWIxMzE0Y2MwMzdjZGNiMDRhNTNhMDA3ZTY4ZiJ9LCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsImNUeXBlSGFzaCI6IjB4YmZhZDYwOTc3YmMxOGNmOWRmZDc2ZGE4ODYyNGNlMjE5MzYxZjMzN2I0MzMyZDVjNDJjMDQ3NDk5ZjRiOTNjNyIsImNvc3QiOnsiZ3Jvc3MiOjIzMywibmV0IjoyMy4zLCJ0YXgiOnsidmF0IjozLjN9fSwiY3VycmVuY3kiOiJLSUxUIiwidGltZWZyYW1lIjoiU2F0IEp1bCAxMCAyMDIxIDAwOjAwOjAwIEdNVCswMDAwIChDb29yZGluYXRlZCBVbml2ZXJzYWwgVGltZSkiLCJ0ZXJtc0FuZENvbmRpdGlvbnMiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS90ZXJtcyJ9LCJjVHlwZXMiOlt7IiRpZCI6ImtpbHQ6Y3R5cGU6MHgyNDBjNzQ0OTIzYmQ5ODc5NzUwNDMyOGY5YmVmNTdjYTZjNzc3ZjVjYmYzZTFhYWRhNzRmMzQ4Yzk4NzlkNzhhIiwiJHNjaGVtYSI6Imh0dHA6Ly9raWx0LXByb3RvY29sLm9yZy9kcmFmdC0wMS9jdHlwZSMiLCJ0aXRsZSI6IkJMLU1haWwtU2ltcGxlIiwicHJvcGVydGllcyI6eyJGdWxsIG5hbWUiOnsidHlwZSI6InN0cmluZyJ9LCJFbWFpbCI6eyJ0eXBlIjoic3RyaW5nIn19LCJ0eXBlIjoib2JqZWN0In1dLCJhdHRlc3Rlck5hbWUiOiJTb2NpYWxLWUMiLCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsInNwZWNWZXJzaW9uIjoiMy4wIn0="
-        title="Identity with on-chain DID and lots of coins"
-      />
-      <ul
-        class="bubbles"
+        Identicon
+      </div>
+      <div
+        class="centeredNameLine"
       >
-        <li
-          class="item"
+        <span
+          class="name"
         >
-          <a
-            aria-current="page"
-            aria-label="Light DID Identity"
-            class="bubble bubbleActive"
-            href="/?data=eyJjbGFpbSI6eyJjVHlwZUhhc2giOiIweDI0MGM3NDQ5MjNiZDk4Nzk3NTA0MzI4ZjliZWY1N2NhNmM3NzdmNWNiZjNlMWFhZGE3NGYzNDhjOTg3OWQ3OGEiLCJjb250ZW50cyI6eyJGdWxsIE5hbWUiOiJJbmdvIFL8YmUiLCJFbWFpbCI6ImluZ29Aa2lsdC5pbyJ9LCJvd25lciI6ImRpZDpraWx0OmxpZ2h0OjAwNG9VaUszRXZUY3pjNnVrWUxFVjU3QnV4emtXOXprc0tSY2haWFlHU29jTG1XRTVOIn0sImxlZ2l0aW1hdGlvbnMiOltdLCJxdW90ZSI6eyJhdHRlc3RlclNpZ25hdHVyZSI6eyJrZXlVcmkiOiJkaWQ6a2lsdDo0b2VKNzZoZGo4NHhud0NOcWlqVUhVQ1RtZndYZ1NaNHZteExFaVRFWWdRZEJDY1ojMHg1OWE1NmUxYTQwMTdiNjBhMDBjNTQ1MGJmZDZhZjIxZGM3NTNlODRlZjcyZjJmZDQ1ZGZjMjdkZDVjM2JkYWZiIiwic2lnbmF0dXJlIjoiMHgzMGQwMWFlZmQ2NGM3ZWVhNDhiYzc0Mzc4MmZlNTRiYTU4Zjk2YjVhOTFlMzNkOGQ5ZWU1ZmFlMjgyOTY0OTY3YmRlYTVlOWFjM2YzMTc1NmZkMjUxYTQwZWE0ZDJlOWE5M2FjOWIxMzE0Y2MwMzdjZGNiMDRhNTNhMDA3ZTY4ZiJ9LCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsImNUeXBlSGFzaCI6IjB4YmZhZDYwOTc3YmMxOGNmOWRmZDc2ZGE4ODYyNGNlMjE5MzYxZjMzN2I0MzMyZDVjNDJjMDQ3NDk5ZjRiOTNjNyIsImNvc3QiOnsiZ3Jvc3MiOjIzMywibmV0IjoyMy4zLCJ0YXgiOnsidmF0IjozLjN9fSwiY3VycmVuY3kiOiJLSUxUIiwidGltZWZyYW1lIjoiU2F0IEp1bCAxMCAyMDIxIDAwOjAwOjAwIEdNVCswMDAwIChDb29yZGluYXRlZCBVbml2ZXJzYWwgVGltZSkiLCJ0ZXJtc0FuZENvbmRpdGlvbnMiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS90ZXJtcyJ9LCJjVHlwZXMiOlt7IiRpZCI6ImtpbHQ6Y3R5cGU6MHgyNDBjNzQ0OTIzYmQ5ODc5NzUwNDMyOGY5YmVmNTdjYTZjNzc3ZjVjYmYzZTFhYWRhNzRmMzQ4Yzk4NzlkNzhhIiwiJHNjaGVtYSI6Imh0dHA6Ly9raWx0LXByb3RvY29sLm9yZy9kcmFmdC0wMS9jdHlwZSMiLCJ0aXRsZSI6IkJMLU1haWwtU2ltcGxlIiwicHJvcGVydGllcyI6eyJGdWxsIG5hbWUiOnsidHlwZSI6InN0cmluZyJ9LCJFbWFpbCI6eyJ0eXBlIjoic3RyaW5nIn19LCJ0eXBlIjoib2JqZWN0In1dLCJhdHRlc3Rlck5hbWUiOiJTb2NpYWxLWUMiLCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsInNwZWNWZXJzaW9uIjoiMy4wIn0="
-            title="Light DID Identity"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-current="page"
-            aria-label="Identity with on-chain DID and lots of coins"
-            class="bubble bubbleActive"
-            href="/?data=eyJjbGFpbSI6eyJjVHlwZUhhc2giOiIweDI0MGM3NDQ5MjNiZDk4Nzk3NTA0MzI4ZjliZWY1N2NhNmM3NzdmNWNiZjNlMWFhZGE3NGYzNDhjOTg3OWQ3OGEiLCJjb250ZW50cyI6eyJGdWxsIE5hbWUiOiJJbmdvIFL8YmUiLCJFbWFpbCI6ImluZ29Aa2lsdC5pbyJ9LCJvd25lciI6ImRpZDpraWx0OmxpZ2h0OjAwNG9VaUszRXZUY3pjNnVrWUxFVjU3QnV4emtXOXprc0tSY2haWFlHU29jTG1XRTVOIn0sImxlZ2l0aW1hdGlvbnMiOltdLCJxdW90ZSI6eyJhdHRlc3RlclNpZ25hdHVyZSI6eyJrZXlVcmkiOiJkaWQ6a2lsdDo0b2VKNzZoZGo4NHhud0NOcWlqVUhVQ1RtZndYZ1NaNHZteExFaVRFWWdRZEJDY1ojMHg1OWE1NmUxYTQwMTdiNjBhMDBjNTQ1MGJmZDZhZjIxZGM3NTNlODRlZjcyZjJmZDQ1ZGZjMjdkZDVjM2JkYWZiIiwic2lnbmF0dXJlIjoiMHgzMGQwMWFlZmQ2NGM3ZWVhNDhiYzc0Mzc4MmZlNTRiYTU4Zjk2YjVhOTFlMzNkOGQ5ZWU1ZmFlMjgyOTY0OTY3YmRlYTVlOWFjM2YzMTc1NmZkMjUxYTQwZWE0ZDJlOWE5M2FjOWIxMzE0Y2MwMzdjZGNiMDRhNTNhMDA3ZTY4ZiJ9LCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsImNUeXBlSGFzaCI6IjB4YmZhZDYwOTc3YmMxOGNmOWRmZDc2ZGE4ODYyNGNlMjE5MzYxZjMzN2I0MzMyZDVjNDJjMDQ3NDk5ZjRiOTNjNyIsImNvc3QiOnsiZ3Jvc3MiOjIzMywibmV0IjoyMy4zLCJ0YXgiOnsidmF0IjozLjN9fSwiY3VycmVuY3kiOiJLSUxUIiwidGltZWZyYW1lIjoiU2F0IEp1bCAxMCAyMDIxIDAwOjAwOjAwIEdNVCswMDAwIChDb29yZGluYXRlZCBVbml2ZXJzYWwgVGltZSkiLCJ0ZXJtc0FuZENvbmRpdGlvbnMiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS90ZXJtcyJ9LCJjVHlwZXMiOlt7IiRpZCI6ImtpbHQ6Y3R5cGU6MHgyNDBjNzQ0OTIzYmQ5ODc5NzUwNDMyOGY5YmVmNTdjYTZjNzc3ZjVjYmYzZTFhYWRhNzRmMzQ4Yzk4NzlkNzhhIiwiJHNjaGVtYSI6Imh0dHA6Ly9raWx0LXByb3RvY29sLm9yZy9kcmFmdC0wMS9jdHlwZSMiLCJ0aXRsZSI6IkJMLU1haWwtU2ltcGxlIiwicHJvcGVydGllcyI6eyJGdWxsIG5hbWUiOnsidHlwZSI6InN0cmluZyJ9LCJFbWFpbCI6eyJ0eXBlIjoic3RyaW5nIn19LCJ0eXBlIjoib2JqZWN0In1dLCJhdHRlc3Rlck5hbWUiOiJTb2NpYWxLWUMiLCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsInNwZWNWZXJzaW9uIjoiMy4wIn0="
-            title="Identity with on-chain DID and lots of coins"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-current="page"
-            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
-            class="bubble bubbleActive"
-            href="/?data=eyJjbGFpbSI6eyJjVHlwZUhhc2giOiIweDI0MGM3NDQ5MjNiZDk4Nzk3NTA0MzI4ZjliZWY1N2NhNmM3NzdmNWNiZjNlMWFhZGE3NGYzNDhjOTg3OWQ3OGEiLCJjb250ZW50cyI6eyJGdWxsIE5hbWUiOiJJbmdvIFL8YmUiLCJFbWFpbCI6ImluZ29Aa2lsdC5pbyJ9LCJvd25lciI6ImRpZDpraWx0OmxpZ2h0OjAwNG9VaUszRXZUY3pjNnVrWUxFVjU3QnV4emtXOXprc0tSY2haWFlHU29jTG1XRTVOIn0sImxlZ2l0aW1hdGlvbnMiOltdLCJxdW90ZSI6eyJhdHRlc3RlclNpZ25hdHVyZSI6eyJrZXlVcmkiOiJkaWQ6a2lsdDo0b2VKNzZoZGo4NHhud0NOcWlqVUhVQ1RtZndYZ1NaNHZteExFaVRFWWdRZEJDY1ojMHg1OWE1NmUxYTQwMTdiNjBhMDBjNTQ1MGJmZDZhZjIxZGM3NTNlODRlZjcyZjJmZDQ1ZGZjMjdkZDVjM2JkYWZiIiwic2lnbmF0dXJlIjoiMHgzMGQwMWFlZmQ2NGM3ZWVhNDhiYzc0Mzc4MmZlNTRiYTU4Zjk2YjVhOTFlMzNkOGQ5ZWU1ZmFlMjgyOTY0OTY3YmRlYTVlOWFjM2YzMTc1NmZkMjUxYTQwZWE0ZDJlOWE5M2FjOWIxMzE0Y2MwMzdjZGNiMDRhNTNhMDA3ZTY4ZiJ9LCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsImNUeXBlSGFzaCI6IjB4YmZhZDYwOTc3YmMxOGNmOWRmZDc2ZGE4ODYyNGNlMjE5MzYxZjMzN2I0MzMyZDVjNDJjMDQ3NDk5ZjRiOTNjNyIsImNvc3QiOnsiZ3Jvc3MiOjIzMywibmV0IjoyMy4zLCJ0YXgiOnsidmF0IjozLjN9fSwiY3VycmVuY3kiOiJLSUxUIiwidGltZWZyYW1lIjoiU2F0IEp1bCAxMCAyMDIxIDAwOjAwOjAwIEdNVCswMDAwIChDb29yZGluYXRlZCBVbml2ZXJzYWwgVGltZSkiLCJ0ZXJtc0FuZENvbmRpdGlvbnMiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS90ZXJtcyJ9LCJjVHlwZXMiOlt7IiRpZCI6ImtpbHQ6Y3R5cGU6MHgyNDBjNzQ0OTIzYmQ5ODc5NzUwNDMyOGY5YmVmNTdjYTZjNzc3ZjVjYmYzZTFhYWRhNzRmMzQ4Yzk4NzlkNzhhIiwiJHNjaGVtYSI6Imh0dHA6Ly9raWx0LXByb3RvY29sLm9yZy9kcmFmdC0wMS9jdHlwZSMiLCJ0aXRsZSI6IkJMLU1haWwtU2ltcGxlIiwicHJvcGVydGllcyI6eyJGdWxsIG5hbWUiOnsidHlwZSI6InN0cmluZyJ9LCJFbWFpbCI6eyJ0eXBlIjoic3RyaW5nIn19LCJ0eXBlIjoib2JqZWN0In1dLCJhdHRlc3Rlck5hbWUiOiJTb2NpYWxLWUMiLCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsInNwZWNWZXJzaW9uIjoiMy4wIn0="
-            title="Identity which has a very very very very long name and might not even fit on the screen"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-current="page"
-            aria-label="Add Identity"
-            class="add addActive"
-            href="/"
-            title="Add Identity"
-          />
-        </li>
-      </ul>
-    </div>
+          Light DID Identity
+        </span>
+      </div>
+    </section>
     <p
       class="costs"
     >
@@ -258,90 +194,26 @@ exports[`SignQuote should show error message if on-chain DID deleted 1`] = `
     <p
       class="subline"
     >
-      Choose an Identity for your credential
+      The credential will be issued to this Identity
     </p>
-    <div
+    <section
       class="container"
     >
-      <section
-        class="container"
+      <div
+        class="avatar"
       >
-        <div
-          class="avatar"
-        >
-          Identicon
-        </div>
-        <div
-          class="centeredNameLine"
-        >
-          <span
-            class="name"
-          >
-            Light DID Identity
-          </span>
-        </div>
-      </section>
-      <a
-        aria-label="Add Identity"
-        class="left"
-        href="/?data=eyJjbGFpbSI6eyJjVHlwZUhhc2giOiIweDI0MGM3NDQ5MjNiZDk4Nzk3NTA0MzI4ZjliZWY1N2NhNmM3NzdmNWNiZjNlMWFhZGE3NGYzNDhjOTg3OWQ3OGEiLCJjb250ZW50cyI6eyJGdWxsIE5hbWUiOiJJbmdvIFL8YmUiLCJFbWFpbCI6ImluZ29Aa2lsdC5pbyJ9LCJvd25lciI6ImRpZDpraWx0OmxpZ2h0OjAwNG9VaUszRXZUY3pjNnVrWUxFVjU3QnV4emtXOXprc0tSY2haWFlHU29jTG1XRTVOIn0sImxlZ2l0aW1hdGlvbnMiOltdLCJxdW90ZSI6eyJhdHRlc3RlclNpZ25hdHVyZSI6eyJrZXlVcmkiOiJkaWQ6a2lsdDo0b2VKNzZoZGo4NHhud0NOcWlqVUhVQ1RtZndYZ1NaNHZteExFaVRFWWdRZEJDY1ojMHg1OWE1NmUxYTQwMTdiNjBhMDBjNTQ1MGJmZDZhZjIxZGM3NTNlODRlZjcyZjJmZDQ1ZGZjMjdkZDVjM2JkYWZiIiwic2lnbmF0dXJlIjoiMHgzMGQwMWFlZmQ2NGM3ZWVhNDhiYzc0Mzc4MmZlNTRiYTU4Zjk2YjVhOTFlMzNkOGQ5ZWU1ZmFlMjgyOTY0OTY3YmRlYTVlOWFjM2YzMTc1NmZkMjUxYTQwZWE0ZDJlOWE5M2FjOWIxMzE0Y2MwMzdjZGNiMDRhNTNhMDA3ZTY4ZiJ9LCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsImNUeXBlSGFzaCI6IjB4YmZhZDYwOTc3YmMxOGNmOWRmZDc2ZGE4ODYyNGNlMjE5MzYxZjMzN2I0MzMyZDVjNDJjMDQ3NDk5ZjRiOTNjNyIsImNvc3QiOnsiZ3Jvc3MiOjIzMywibmV0IjoyMy4zLCJ0YXgiOnsidmF0IjozLjN9fSwiY3VycmVuY3kiOiJLSUxUIiwidGltZWZyYW1lIjoiU2F0IEp1bCAxMCAyMDIxIDAwOjAwOjAwIEdNVCswMDAwIChDb29yZGluYXRlZCBVbml2ZXJzYWwgVGltZSkiLCJ0ZXJtc0FuZENvbmRpdGlvbnMiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS90ZXJtcyJ9LCJjVHlwZXMiOlt7IiRpZCI6ImtpbHQ6Y3R5cGU6MHgyNDBjNzQ0OTIzYmQ5ODc5NzUwNDMyOGY5YmVmNTdjYTZjNzc3ZjVjYmYzZTFhYWRhNzRmMzQ4Yzk4NzlkNzhhIiwiJHNjaGVtYSI6Imh0dHA6Ly9raWx0LXByb3RvY29sLm9yZy9kcmFmdC0wMS9jdHlwZSMiLCJ0aXRsZSI6IkJMLU1haWwtU2ltcGxlIiwicHJvcGVydGllcyI6eyJGdWxsIG5hbWUiOnsidHlwZSI6InN0cmluZyJ9LCJFbWFpbCI6eyJ0eXBlIjoic3RyaW5nIn19LCJ0eXBlIjoib2JqZWN0In1dLCJhdHRlc3Rlck5hbWUiOiJTb2NpYWxLWUMiLCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsInNwZWNWZXJzaW9uIjoiMy4wIn0="
-        title="Add Identity"
-      />
-      <a
-        aria-label="Identity with on-chain DID and lots of coins"
-        class="right"
-        href="/?data=eyJjbGFpbSI6eyJjVHlwZUhhc2giOiIweDI0MGM3NDQ5MjNiZDk4Nzk3NTA0MzI4ZjliZWY1N2NhNmM3NzdmNWNiZjNlMWFhZGE3NGYzNDhjOTg3OWQ3OGEiLCJjb250ZW50cyI6eyJGdWxsIE5hbWUiOiJJbmdvIFL8YmUiLCJFbWFpbCI6ImluZ29Aa2lsdC5pbyJ9LCJvd25lciI6ImRpZDpraWx0OmxpZ2h0OjAwNG9VaUszRXZUY3pjNnVrWUxFVjU3QnV4emtXOXprc0tSY2haWFlHU29jTG1XRTVOIn0sImxlZ2l0aW1hdGlvbnMiOltdLCJxdW90ZSI6eyJhdHRlc3RlclNpZ25hdHVyZSI6eyJrZXlVcmkiOiJkaWQ6a2lsdDo0b2VKNzZoZGo4NHhud0NOcWlqVUhVQ1RtZndYZ1NaNHZteExFaVRFWWdRZEJDY1ojMHg1OWE1NmUxYTQwMTdiNjBhMDBjNTQ1MGJmZDZhZjIxZGM3NTNlODRlZjcyZjJmZDQ1ZGZjMjdkZDVjM2JkYWZiIiwic2lnbmF0dXJlIjoiMHgzMGQwMWFlZmQ2NGM3ZWVhNDhiYzc0Mzc4MmZlNTRiYTU4Zjk2YjVhOTFlMzNkOGQ5ZWU1ZmFlMjgyOTY0OTY3YmRlYTVlOWFjM2YzMTc1NmZkMjUxYTQwZWE0ZDJlOWE5M2FjOWIxMzE0Y2MwMzdjZGNiMDRhNTNhMDA3ZTY4ZiJ9LCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsImNUeXBlSGFzaCI6IjB4YmZhZDYwOTc3YmMxOGNmOWRmZDc2ZGE4ODYyNGNlMjE5MzYxZjMzN2I0MzMyZDVjNDJjMDQ3NDk5ZjRiOTNjNyIsImNvc3QiOnsiZ3Jvc3MiOjIzMywibmV0IjoyMy4zLCJ0YXgiOnsidmF0IjozLjN9fSwiY3VycmVuY3kiOiJLSUxUIiwidGltZWZyYW1lIjoiU2F0IEp1bCAxMCAyMDIxIDAwOjAwOjAwIEdNVCswMDAwIChDb29yZGluYXRlZCBVbml2ZXJzYWwgVGltZSkiLCJ0ZXJtc0FuZENvbmRpdGlvbnMiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS90ZXJtcyJ9LCJjVHlwZXMiOlt7IiRpZCI6ImtpbHQ6Y3R5cGU6MHgyNDBjNzQ0OTIzYmQ5ODc5NzUwNDMyOGY5YmVmNTdjYTZjNzc3ZjVjYmYzZTFhYWRhNzRmMzQ4Yzk4NzlkNzhhIiwiJHNjaGVtYSI6Imh0dHA6Ly9raWx0LXByb3RvY29sLm9yZy9kcmFmdC0wMS9jdHlwZSMiLCJ0aXRsZSI6IkJMLU1haWwtU2ltcGxlIiwicHJvcGVydGllcyI6eyJGdWxsIG5hbWUiOnsidHlwZSI6InN0cmluZyJ9LCJFbWFpbCI6eyJ0eXBlIjoic3RyaW5nIn19LCJ0eXBlIjoib2JqZWN0In1dLCJhdHRlc3Rlck5hbWUiOiJTb2NpYWxLWUMiLCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsInNwZWNWZXJzaW9uIjoiMy4wIn0="
-        title="Identity with on-chain DID and lots of coins"
-      />
-      <ul
-        class="bubbles"
+        Identicon
+      </div>
+      <div
+        class="centeredNameLine"
       >
-        <li
-          class="item"
+        <span
+          class="name"
         >
-          <a
-            aria-current="page"
-            aria-label="Light DID Identity"
-            class="bubble bubbleActive"
-            href="/?data=eyJjbGFpbSI6eyJjVHlwZUhhc2giOiIweDI0MGM3NDQ5MjNiZDk4Nzk3NTA0MzI4ZjliZWY1N2NhNmM3NzdmNWNiZjNlMWFhZGE3NGYzNDhjOTg3OWQ3OGEiLCJjb250ZW50cyI6eyJGdWxsIE5hbWUiOiJJbmdvIFL8YmUiLCJFbWFpbCI6ImluZ29Aa2lsdC5pbyJ9LCJvd25lciI6ImRpZDpraWx0OmxpZ2h0OjAwNG9VaUszRXZUY3pjNnVrWUxFVjU3QnV4emtXOXprc0tSY2haWFlHU29jTG1XRTVOIn0sImxlZ2l0aW1hdGlvbnMiOltdLCJxdW90ZSI6eyJhdHRlc3RlclNpZ25hdHVyZSI6eyJrZXlVcmkiOiJkaWQ6a2lsdDo0b2VKNzZoZGo4NHhud0NOcWlqVUhVQ1RtZndYZ1NaNHZteExFaVRFWWdRZEJDY1ojMHg1OWE1NmUxYTQwMTdiNjBhMDBjNTQ1MGJmZDZhZjIxZGM3NTNlODRlZjcyZjJmZDQ1ZGZjMjdkZDVjM2JkYWZiIiwic2lnbmF0dXJlIjoiMHgzMGQwMWFlZmQ2NGM3ZWVhNDhiYzc0Mzc4MmZlNTRiYTU4Zjk2YjVhOTFlMzNkOGQ5ZWU1ZmFlMjgyOTY0OTY3YmRlYTVlOWFjM2YzMTc1NmZkMjUxYTQwZWE0ZDJlOWE5M2FjOWIxMzE0Y2MwMzdjZGNiMDRhNTNhMDA3ZTY4ZiJ9LCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsImNUeXBlSGFzaCI6IjB4YmZhZDYwOTc3YmMxOGNmOWRmZDc2ZGE4ODYyNGNlMjE5MzYxZjMzN2I0MzMyZDVjNDJjMDQ3NDk5ZjRiOTNjNyIsImNvc3QiOnsiZ3Jvc3MiOjIzMywibmV0IjoyMy4zLCJ0YXgiOnsidmF0IjozLjN9fSwiY3VycmVuY3kiOiJLSUxUIiwidGltZWZyYW1lIjoiU2F0IEp1bCAxMCAyMDIxIDAwOjAwOjAwIEdNVCswMDAwIChDb29yZGluYXRlZCBVbml2ZXJzYWwgVGltZSkiLCJ0ZXJtc0FuZENvbmRpdGlvbnMiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS90ZXJtcyJ9LCJjVHlwZXMiOlt7IiRpZCI6ImtpbHQ6Y3R5cGU6MHgyNDBjNzQ0OTIzYmQ5ODc5NzUwNDMyOGY5YmVmNTdjYTZjNzc3ZjVjYmYzZTFhYWRhNzRmMzQ4Yzk4NzlkNzhhIiwiJHNjaGVtYSI6Imh0dHA6Ly9raWx0LXByb3RvY29sLm9yZy9kcmFmdC0wMS9jdHlwZSMiLCJ0aXRsZSI6IkJMLU1haWwtU2ltcGxlIiwicHJvcGVydGllcyI6eyJGdWxsIG5hbWUiOnsidHlwZSI6InN0cmluZyJ9LCJFbWFpbCI6eyJ0eXBlIjoic3RyaW5nIn19LCJ0eXBlIjoib2JqZWN0In1dLCJhdHRlc3Rlck5hbWUiOiJTb2NpYWxLWUMiLCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsInNwZWNWZXJzaW9uIjoiMy4wIn0="
-            title="Light DID Identity"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-current="page"
-            aria-label="Identity with on-chain DID and lots of coins"
-            class="bubble bubbleActive"
-            href="/?data=eyJjbGFpbSI6eyJjVHlwZUhhc2giOiIweDI0MGM3NDQ5MjNiZDk4Nzk3NTA0MzI4ZjliZWY1N2NhNmM3NzdmNWNiZjNlMWFhZGE3NGYzNDhjOTg3OWQ3OGEiLCJjb250ZW50cyI6eyJGdWxsIE5hbWUiOiJJbmdvIFL8YmUiLCJFbWFpbCI6ImluZ29Aa2lsdC5pbyJ9LCJvd25lciI6ImRpZDpraWx0OmxpZ2h0OjAwNG9VaUszRXZUY3pjNnVrWUxFVjU3QnV4emtXOXprc0tSY2haWFlHU29jTG1XRTVOIn0sImxlZ2l0aW1hdGlvbnMiOltdLCJxdW90ZSI6eyJhdHRlc3RlclNpZ25hdHVyZSI6eyJrZXlVcmkiOiJkaWQ6a2lsdDo0b2VKNzZoZGo4NHhud0NOcWlqVUhVQ1RtZndYZ1NaNHZteExFaVRFWWdRZEJDY1ojMHg1OWE1NmUxYTQwMTdiNjBhMDBjNTQ1MGJmZDZhZjIxZGM3NTNlODRlZjcyZjJmZDQ1ZGZjMjdkZDVjM2JkYWZiIiwic2lnbmF0dXJlIjoiMHgzMGQwMWFlZmQ2NGM3ZWVhNDhiYzc0Mzc4MmZlNTRiYTU4Zjk2YjVhOTFlMzNkOGQ5ZWU1ZmFlMjgyOTY0OTY3YmRlYTVlOWFjM2YzMTc1NmZkMjUxYTQwZWE0ZDJlOWE5M2FjOWIxMzE0Y2MwMzdjZGNiMDRhNTNhMDA3ZTY4ZiJ9LCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsImNUeXBlSGFzaCI6IjB4YmZhZDYwOTc3YmMxOGNmOWRmZDc2ZGE4ODYyNGNlMjE5MzYxZjMzN2I0MzMyZDVjNDJjMDQ3NDk5ZjRiOTNjNyIsImNvc3QiOnsiZ3Jvc3MiOjIzMywibmV0IjoyMy4zLCJ0YXgiOnsidmF0IjozLjN9fSwiY3VycmVuY3kiOiJLSUxUIiwidGltZWZyYW1lIjoiU2F0IEp1bCAxMCAyMDIxIDAwOjAwOjAwIEdNVCswMDAwIChDb29yZGluYXRlZCBVbml2ZXJzYWwgVGltZSkiLCJ0ZXJtc0FuZENvbmRpdGlvbnMiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS90ZXJtcyJ9LCJjVHlwZXMiOlt7IiRpZCI6ImtpbHQ6Y3R5cGU6MHgyNDBjNzQ0OTIzYmQ5ODc5NzUwNDMyOGY5YmVmNTdjYTZjNzc3ZjVjYmYzZTFhYWRhNzRmMzQ4Yzk4NzlkNzhhIiwiJHNjaGVtYSI6Imh0dHA6Ly9raWx0LXByb3RvY29sLm9yZy9kcmFmdC0wMS9jdHlwZSMiLCJ0aXRsZSI6IkJMLU1haWwtU2ltcGxlIiwicHJvcGVydGllcyI6eyJGdWxsIG5hbWUiOnsidHlwZSI6InN0cmluZyJ9LCJFbWFpbCI6eyJ0eXBlIjoic3RyaW5nIn19LCJ0eXBlIjoib2JqZWN0In1dLCJhdHRlc3Rlck5hbWUiOiJTb2NpYWxLWUMiLCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsInNwZWNWZXJzaW9uIjoiMy4wIn0="
-            title="Identity with on-chain DID and lots of coins"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-current="page"
-            aria-label="Identity which has a very very very very long name and might not even fit on the screen"
-            class="bubble bubbleActive"
-            href="/?data=eyJjbGFpbSI6eyJjVHlwZUhhc2giOiIweDI0MGM3NDQ5MjNiZDk4Nzk3NTA0MzI4ZjliZWY1N2NhNmM3NzdmNWNiZjNlMWFhZGE3NGYzNDhjOTg3OWQ3OGEiLCJjb250ZW50cyI6eyJGdWxsIE5hbWUiOiJJbmdvIFL8YmUiLCJFbWFpbCI6ImluZ29Aa2lsdC5pbyJ9LCJvd25lciI6ImRpZDpraWx0OmxpZ2h0OjAwNG9VaUszRXZUY3pjNnVrWUxFVjU3QnV4emtXOXprc0tSY2haWFlHU29jTG1XRTVOIn0sImxlZ2l0aW1hdGlvbnMiOltdLCJxdW90ZSI6eyJhdHRlc3RlclNpZ25hdHVyZSI6eyJrZXlVcmkiOiJkaWQ6a2lsdDo0b2VKNzZoZGo4NHhud0NOcWlqVUhVQ1RtZndYZ1NaNHZteExFaVRFWWdRZEJDY1ojMHg1OWE1NmUxYTQwMTdiNjBhMDBjNTQ1MGJmZDZhZjIxZGM3NTNlODRlZjcyZjJmZDQ1ZGZjMjdkZDVjM2JkYWZiIiwic2lnbmF0dXJlIjoiMHgzMGQwMWFlZmQ2NGM3ZWVhNDhiYzc0Mzc4MmZlNTRiYTU4Zjk2YjVhOTFlMzNkOGQ5ZWU1ZmFlMjgyOTY0OTY3YmRlYTVlOWFjM2YzMTc1NmZkMjUxYTQwZWE0ZDJlOWE5M2FjOWIxMzE0Y2MwMzdjZGNiMDRhNTNhMDA3ZTY4ZiJ9LCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsImNUeXBlSGFzaCI6IjB4YmZhZDYwOTc3YmMxOGNmOWRmZDc2ZGE4ODYyNGNlMjE5MzYxZjMzN2I0MzMyZDVjNDJjMDQ3NDk5ZjRiOTNjNyIsImNvc3QiOnsiZ3Jvc3MiOjIzMywibmV0IjoyMy4zLCJ0YXgiOnsidmF0IjozLjN9fSwiY3VycmVuY3kiOiJLSUxUIiwidGltZWZyYW1lIjoiU2F0IEp1bCAxMCAyMDIxIDAwOjAwOjAwIEdNVCswMDAwIChDb29yZGluYXRlZCBVbml2ZXJzYWwgVGltZSkiLCJ0ZXJtc0FuZENvbmRpdGlvbnMiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS90ZXJtcyJ9LCJjVHlwZXMiOlt7IiRpZCI6ImtpbHQ6Y3R5cGU6MHgyNDBjNzQ0OTIzYmQ5ODc5NzUwNDMyOGY5YmVmNTdjYTZjNzc3ZjVjYmYzZTFhYWRhNzRmMzQ4Yzk4NzlkNzhhIiwiJHNjaGVtYSI6Imh0dHA6Ly9raWx0LXByb3RvY29sLm9yZy9kcmFmdC0wMS9jdHlwZSMiLCJ0aXRsZSI6IkJMLU1haWwtU2ltcGxlIiwicHJvcGVydGllcyI6eyJGdWxsIG5hbWUiOnsidHlwZSI6InN0cmluZyJ9LCJFbWFpbCI6eyJ0eXBlIjoic3RyaW5nIn19LCJ0eXBlIjoib2JqZWN0In1dLCJhdHRlc3Rlck5hbWUiOiJTb2NpYWxLWUMiLCJhdHRlc3RlckRpZCI6ImRpZDpraWx0OjRvZUo3Nmhkajg0eG53Q05xaWpVSFVDVG1md1hnU1o0dm14TEVpVEVZZ1FkQkNjWiIsInNwZWNWZXJzaW9uIjoiMy4wIn0="
-            title="Identity which has a very very very very long name and might not even fit on the screen"
-          />
-        </li>
-        <li
-          class="item"
-        >
-          <a
-            aria-current="page"
-            aria-label="Add Identity"
-            class="add addActive"
-            href="/"
-            title="Add Identity"
-          />
-        </li>
-      </ul>
-    </div>
+          Light DID Identity
+        </span>
+      </div>
+    </section>
     <p
       class="costs"
     >

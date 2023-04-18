@@ -58,7 +58,7 @@ export function useIdentities(): IdentitiesContextType {
   return useContext(IdentitiesContext);
 }
 
-async function getCurrentIdentity(): Promise<string | null> {
+export async function getCurrentIdentity(): Promise<string | null> {
   const identities = await getIdentities();
   const stored = await storage.get(CURRENT_IDENTITY_KEY);
   const current = stored[CURRENT_IDENTITY_KEY];
