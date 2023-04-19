@@ -1063,7 +1063,12 @@
     "message": "You cannot add any more service endpoints"
   },
   "view_DidEndpointsForm_formatID": {
-    "message": "Please use letters from A to Z and numbers from 0 through 9"
+    "message": "“$character$” is not a supported character",
+    "placeholders": {
+      "character": {
+        "content": "$1"
+      }
+    }
   },
   "view_DidEndpointsForm_tooLong": {
     "message": "This string is $current$ bytes; the maximum allowed is $maximum$.",
