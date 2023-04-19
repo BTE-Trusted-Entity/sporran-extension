@@ -158,6 +158,7 @@ function DidNewEndpoint({
       const url = (formData.get('url') as string).trim();
       const type = (formData.get('type') as string).trim();
 
+      // allow all characters valid in the URI fragment except for %
       const unsupportedCharacter = id.match(/[^a-z0-9\-._~!$&'()*+=,;:@?/]/i);
       if (unsupportedCharacter) {
         setEndpointIdError(
