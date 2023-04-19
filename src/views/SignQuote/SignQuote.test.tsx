@@ -1,6 +1,9 @@
 import { CType } from '@kiltprotocol/sdk-js';
 
-import { identitiesMock as identities, render } from '../../testing/testing';
+import {
+  moreIdentitiesMock as identities,
+  render,
+} from '../../testing/testing';
 import { mockTerms } from '../../utilities/mockTerms/mockTerms';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { parseDidUri } from '../../utilities/did/did';
@@ -44,7 +47,7 @@ describe('SignQuote', () => {
       <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
         <SignQuote
           identity={
-            identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
+            identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']
           }
         />
       </PopupTestProvider>,
