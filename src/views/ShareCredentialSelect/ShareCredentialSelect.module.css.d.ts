@@ -12,3 +12,8 @@ export const list: string;
 export const buttonsLine: string;
 export const cancel: string;
 export const next: string;
+export const confirm: string;
+export const confirmWarning: string;
+export const confirmInfo: string;
+export const confirmNext: string;
+export const confirmCancel: string;

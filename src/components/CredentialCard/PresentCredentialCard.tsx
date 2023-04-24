@@ -42,7 +42,7 @@ export function PresentCredentialCard({
   return (
     <form className={styles.credential}>
       <section className={styles.expanded}>
-        <section className={!isAttested ? styles.notAttested : undefined}>
+        <section className={!isAttested ? styles.notUsable : undefined}>
           <dl className={styles.details}>
             <div className={styles.detail}>
               <dt className={styles.detailName}>

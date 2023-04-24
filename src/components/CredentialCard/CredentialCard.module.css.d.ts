@@ -33,7 +33,7 @@ export const selectOne: string;
 export const selectMultiple: string;
 export const share: string;
 export const shareLabel: string;
-export const notAttested: string;
+export const notUsable: string;
 export const required: string;
 export const requiredInfo: string;
 export const overlay: string;
