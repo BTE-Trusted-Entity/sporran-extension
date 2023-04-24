@@ -25,6 +25,11 @@ const mockSelected: Selected = {
   sharedContents: ['Email'],
 };
 
+const mockRevokedSelected: Selected = {
+  ...mockSelected,
+  sporranCredential: credentialsMock[2],
+};
+
 export function Template(): JSX.Element {
   return (
     <PopupTestProvider
@@ -33,6 +38,21 @@ export function Template(): JSX.Element {
     >
       <ShareCredentialSelect
         selected={mockSelected}
+        onCancel={action('onCancel')}
+        onSelect={action('onSelect')}
+      />
+    </PopupTestProvider>
+  );
+}
+
+export function RevokedSelected(): JSX.Element {
+  return (
+    <PopupTestProvider
+      path={paths.popup.share.start}
+      data={mockRequestCredential}
+    >
+      <ShareCredentialSelect
+        selected={mockRevokedSelected}
         onCancel={action('onCancel')}
         onSelect={action('onSelect')}
       />

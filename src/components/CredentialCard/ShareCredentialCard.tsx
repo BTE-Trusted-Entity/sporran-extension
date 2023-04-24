@@ -85,7 +85,7 @@ export function ShareCredentialCard({
     }
   }, [expand, onSelect, checked, sporranCredential, identity]);
 
-  const isAttested = status === 'attested';
+  const isShareable = ['attested', 'revoked'].includes(status);
 
   const handleSelect = useCallback(() => {
     const selected = { sporranCredential, identity, sharedContents: checked };
@@ -132,7 +132,7 @@ export function ShareCredentialCard({
         onClick={expanded.on}
         checked={isSelected}
         className={cx(styles.selectOne, {
-          [styles.notAttested]: !isAttested,
+          [styles.notUsable]: !isShareable,
         })}
       />
 
@@ -140,7 +140,7 @@ export function ShareCredentialCard({
         <label className={styles.expand} htmlFor={credential.rootHash}>
           <section
             className={cx(styles.collapsedShareCredential, {
-              [styles.notAttested]: !isAttested,
+              [styles.notUsable]: !isShareable,
             })}
           >
             <h4 className={styles.collapsedName}>{name}</h4>
@@ -160,7 +160,7 @@ export function ShareCredentialCard({
             />
           </section>
 
-          <section className={!isAttested ? styles.notAttested : undefined}>
+          <section className={!isShareable ? styles.notUsable : undefined}>
             <dl className={styles.details}>
               <div className={styles.detail}>
                 <dt className={styles.detailName}>
@@ -192,7 +192,7 @@ export function ShareCredentialCard({
                         className={styles.share}
                         checked={includes(checked, name)}
                         onChange={handlePropChecked}
-                        disabled={!isAttested}
+                        disabled={!isShareable}
                         readOnly={includes(requiredProperties, name)}
                       />
                       <span />

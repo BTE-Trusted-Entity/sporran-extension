@@ -1,8 +1,11 @@
-import { RefObject, useRef } from 'react';
+import { FormEvent, RefObject, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
-import { Link } from 'react-router-dom';
 import { reject, sortBy } from 'lodash-es';
 import { Did } from '@kiltprotocol/sdk-js';
+
+import { useHistory } from 'react-router';
+
+import { Modal } from 'react-dialog-polyfill';
 
 import * as styles from './ShareCredentialSelect.module.css';
 
@@ -14,6 +17,7 @@ import {
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { parseDidUri } from '../../utilities/did/did';
+import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
 import { ShareInput } from '../../channels/shareChannel/types';
 
 import { paths } from '../paths';
@@ -22,6 +26,35 @@ import { ShareCredentialCard } from '../../components/CredentialCard/ShareCreden
 import { Stats } from '../../components/Stats/Stats';
 import { IdentityLine } from '../../components/IdentityLine/IdentityLine';
 import { Selected } from '../ShareCredential/ShareCredential';
+
+function ConfirmModal({
+  onConfirm,
+  onReject,
+}: {
+  onConfirm: () => void;
+  onReject: () => void;
+}) {
+  const t = browser.i18n.getMessage;
+
+  return (
+    <Modal open className={styles.confirm}>
+      <h1 className={styles.confirmWarning}>
+        {t('view_ShareCredentialSelect_confirm_warning')}
+      </h1>
+
+      <p className={styles.confirmInfo}>
+        {t('view_ShareCredentialSelect_confirm_info')}
+      </p>
+
+      <button className={styles.confirmCancel} type="button" onClick={onReject}>
+        {t('common_action_back')}
+      </button>
+      <button className={styles.confirmNext} type="button" onClick={onConfirm}>
+        {t('common_action_continue')}
+      </button>
+    </Modal>
+  );
+}
 
 function MatchingIdentityCredentials({
   identity,
@@ -83,6 +116,7 @@ export function ShareCredentialSelect({
   selected,
 }: Props): JSX.Element | null {
   const t = browser.i18n.getMessage;
+  const history = useHistory();
 
   const identities = useIdentities().data;
 
@@ -103,6 +137,32 @@ export function ShareCredentialSelect({
 
   const ref = useRef<HTMLElement>(null);
 
+  const showConfirm = useBooleanState();
+
+  const handleNext = useCallback(() => {
+    history.push(paths.popup.share.sign);
+  }, [history]);
+
+  const handleSubmit = useCallback(
+    (event: FormEvent) => {
+      event.preventDefault();
+      if (!selected) {
+        return;
+      }
+
+      const {
+        sporranCredential: { status },
+      } = selected;
+
+      if (status !== 'revoked') {
+        handleNext();
+        return;
+      }
+      showConfirm.on();
+    },
+    [selected, handleNext, showConfirm],
+  );
+
   if (!identities || !credentials) {
     return null; // storage data pending
   }
@@ -120,7 +180,7 @@ export function ShareCredentialSelect({
   const sortedIdentities = sortBy(identitiesWithMatchingCredentials, 'index');
 
   return (
-    <section className={styles.container}>
+    <form className={styles.container} onSubmit={handleSubmit}>
       <h1 className={styles.heading}>
         {t('view_ShareCredentialSelect_heading')}
       </h1>
@@ -165,18 +225,22 @@ export function ShareCredentialSelect({
         <button type="button" className={styles.cancel} onClick={onCancel}>
           {t('common_action_cancel')}
         </button>
-        <Link
-          to={paths.popup.share.sign}
+        <button
+          type="submit"
           className={styles.next}
-          aria-disabled={
-            !selected || selected.sporranCredential.status !== 'attested'
+          disabled={
+            !selected || selected.sporranCredential.status === 'pending'
           }
         >
           {t('view_ShareCredentialSelect_next')}
-        </Link>
+        </button>
       </p>
 
       <Stats />
-    </section>
+
+      {showConfirm.current && (
+        <ConfirmModal onConfirm={handleNext} onReject={showConfirm.off} />
+      )}
+    </form>
   );
 }

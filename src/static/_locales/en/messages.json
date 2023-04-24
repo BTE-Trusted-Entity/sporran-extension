@@ -706,6 +706,12 @@
   "view_ShareCredentialSelect_explainer": {
     "message": "Get Credentials"
   },
+  "view_ShareCredentialSelect_confirm_warning": {
+    "message": "Warning"
+  },
+  "view_ShareCredentialSelect_confirm_info": {
+    "message": "You are in the process of presenting a revoked credential. Do you still want to continue?"
+  },
   "view_ShareCredentialSign_heading": {
     "message": "Share Credential"
   },
@@ -720,9 +726,6 @@
   },
   "view_ShareCredentialSign_error": {
     "message": "The selected credential has not been attested."
-  },
-  "view_ShareCredentialSign_error_revoked": {
-    "message": "The credential has been revoked."
   },
   "view_AppSettings_heading": {
     "message": "Set Custom Endpoint"

@@ -121,7 +121,7 @@ export function SignDidCredentialCard({
         <button className={styles.expand} onClick={isExpanded.on}>
           <section
             className={cx(styles.collapsedShareCredential, {
-              [styles.notAttested]: !isAttested,
+              [styles.notUsable]: !isAttested,
             })}
           >
             <h4 className={styles.collapsedName} id="collapsedLabel">
@@ -145,7 +145,7 @@ export function SignDidCredentialCard({
             />
           </section>
 
-          <section className={!isAttested ? styles.notAttested : undefined}>
+          <section className={!isAttested ? styles.notUsable : undefined}>
             <dl className={styles.details}>
               <div className={styles.detail}>
                 <dt className={styles.detailName}>
