@@ -184,6 +184,12 @@ async function syncCredentialStatusWithChain(credential: SporranCredential) {
     const api = ConfigService.get('api');
     const chain = await api.query.attestation.attestations(claimHash);
 
+    const hasBeenRemoved = chain.isNone && initialStatus === 'attested';
+
+    if (hasBeenRemoved) {
+      await saveCredential({ ...credential, status: 'revoked' });
+    }
+
     const attestation = Attestation.fromChain(chain, claimHash);
 
     const hasBecomeRevoked = attestation.revoked;

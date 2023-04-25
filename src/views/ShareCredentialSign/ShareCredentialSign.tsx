@@ -4,7 +4,6 @@ import {
   Attestation,
   ConfigService,
   Credential,
-  IAttestation,
   ICredentialPresentation,
   ISubmitCredential,
 } from '@kiltprotocol/sdk-js';
@@ -26,14 +25,26 @@ import { Selected } from '../ShareCredential/ShareCredential';
 
 import { getDidDocument, needLegacyDidCrypto } from '../../utilities/did/did';
 
+class AttestationRemovedError extends Error {}
+
 async function getCompatibleContent(
   presentation: ICredentialPresentation,
-  attestation: IAttestation,
   specVersion: ShareInput['specVersion'],
 ): Promise<ISubmitCredential['content']> {
   if (specVersion !== '1.0') {
     return [presentation];
   }
+
+  const { rootHash } = presentation;
+
+  const api = ConfigService.get('api');
+  const result = await api.query.attestation.attestations(rootHash);
+
+  if (result.isNone) {
+    throw new AttestationRemovedError();
+  }
+
+  const attestation = Attestation.fromChain(result, rootHash);
 
   const legacy = {
     request: presentation,
@@ -74,15 +85,6 @@ export function ShareCredentialSign({
       const isLegacy = await needLegacyDidCrypto(identity.did);
       const { encrypt, sign } = await getIdentityCryptoFromSeed(seed, isLegacy);
 
-      const { rootHash } = sporranCredential.credential;
-      const api = ConfigService.get('api');
-      const result = await api.query.attestation.attestations(rootHash);
-      if (result.isNone) {
-        setError(t('view_ShareCredentialSign_error'));
-        return;
-      }
-      const attestation = Attestation.fromChain(result, rootHash);
-
       const presentation = await Credential.createPresentation({
         credential: sporranCredential.credential,
         selectedAttributes: sharedContents,
@@ -90,21 +92,23 @@ export function ShareCredentialSign({
         challenge,
       });
 
-      const credentialsBody: ISubmitCredential = {
-        content: await getCompatibleContent(
-          presentation,
-          attestation,
-          specVersion,
-        ),
-        type: 'submit-credential',
-      };
+      try {
+        const credentialsBody: ISubmitCredential = {
+          content: await getCompatibleContent(presentation, specVersion),
+          type: 'submit-credential',
+        };
 
-      const verifierDidDocument = await getDidDocument(verifierDid);
+        const verifierDidDocument = await getDidDocument(verifierDid);
 
-      const message = await encrypt(credentialsBody, verifierDidDocument);
+        const message = await encrypt(credentialsBody, verifierDidDocument);
 
-      await shareChannel.return(message);
-      window.close();
+        await shareChannel.return(message);
+        window.close();
+      } catch (exception) {
+        if (exception instanceof AttestationRemovedError) {
+          setError(t('view_ShareCredentialSign_error'));
+        }
+      }
     },
     [
       sporranCredential,
