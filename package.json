@@ -67,9 +67,9 @@
     "webextension-polyfill-ts": "^0.26.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.21.4",
-    "@babel/preset-typescript": "^7.21.4",
+    "@babel/core": "^7.21.5",
+    "@babel/preset-env": "^7.21.5",
+    "@babel/preset-typescript": "^7.21.5",
     "@storybook/addon-actions": "^7.0.7",
     "@storybook/addon-controls": "^7.0.7",
     "@storybook/addon-links": "^7.0.7",
