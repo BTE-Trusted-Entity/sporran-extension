@@ -3,6 +3,7 @@ export type PopupAction =
   | 'access'
   | 'claim'
   | 'save'
+  | 'reject'
   | 'share'
   | 'sign'
   | 'signRaw'

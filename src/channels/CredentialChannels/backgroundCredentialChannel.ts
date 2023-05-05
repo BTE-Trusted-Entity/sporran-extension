@@ -5,6 +5,7 @@ import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 import { channelsEnum } from '../base/channelsEnum';
 import { claimChannel } from '../claimChannel/claimChannel';
 import { saveChannel } from '../saveChannel/saveChannel';
+import { rejectChannel } from '../rejectChannel/rejectChannel';
 import { shareChannel } from '../shareChannel/shareChannel';
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
 import { getIdentities } from '../../utilities/identities/getIdentities';
@@ -70,6 +71,9 @@ export async function showCredentialPopup(
   }
   if (message.body.type === 'submit-attestation') {
     await saveChannel.get(message.body.content.attestation, sender);
+  }
+  if (message.body.type === 'reject-attestation') {
+    await rejectChannel.get(message.body.content, sender);
   }
   if (message.body.type === 'request-credential') {
     return await shareChannel.get(
