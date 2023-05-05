@@ -12,7 +12,9 @@ export function UnknownIdentity({
   const t = browser.i18n.getMessage;
   return (
     <section className={styles.container}>
-      <h1 className={styles.heading}>Error</h1>
+      <h1 className={styles.heading}>
+        {t('component_UnknownIdentity_heading')}
+      </h1>
       <p className={styles.text}>
         {t('component_UnknownIdentity_text', [address])}
       </p>

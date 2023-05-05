@@ -8,7 +8,7 @@ exports[`UnknownIdentity should match the snapshot 1`] = `
     <h1
       class="heading"
     >
-      Error
+      Unknown Identity
     </h1>
     <p
       class="text"
