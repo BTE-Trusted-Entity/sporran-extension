@@ -236,6 +236,9 @@
   "component_CredentialCard_revoked": {
     "message": "Revoked"
   },
+  "component_CredentialCard_rejected": {
+    "message": "Rejected"
+  },
   "component_CredentialCard_invalid": {
     "message": "Invalid"
   },

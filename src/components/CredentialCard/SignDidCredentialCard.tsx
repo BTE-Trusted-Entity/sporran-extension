@@ -89,6 +89,7 @@ export function SignDidCredentialCard({
     pending: t('component_CredentialCard_pending'),
     attested: t('component_CredentialCard_attested'),
     revoked: t('component_CredentialCard_revoked'),
+    rejected: t('component_CredentialCard_rejected'),
     invalid: t('component_CredentialCard_invalid'),
   };
 
