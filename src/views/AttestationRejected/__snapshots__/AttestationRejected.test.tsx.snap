@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AttestationRejected should match the snapshot 1`] = `
+<div>
+  <main
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Attestation rejected
+    </h1>
+    <p
+      class="info"
+    >
+      The attestation you requested was rejected.
+The credential will likely not be useful in the future.
+Do you want to remove it from your Sporran?
+    </p>
+    <section
+      class="cardContainer"
+    >
+      <li
+        aria-expanded="true"
+        class="unusableCredential"
+      >
+        <section
+          class="expanded"
+        >
+          <section
+            class="buttons"
+          />
+          <dl
+            class="details"
+          >
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                Credential name
+              </dt>
+              <dd
+                class="nameValue"
+              >
+                GitHub 2
+                <button
+                  aria-label="Edit credential name"
+                  class="editName"
+                />
+              </dd>
+            </div>
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                Status
+              </dt>
+              <dd
+                class="detailValue unusableValue"
+              >
+                Rejected
+              </dd>
+            </div>
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                Username
+              </dt>
+              <dd
+                class="detailValue"
+              >
+                arty-name
+              </dd>
+            </div>
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                User ID
+              </dt>
+              <dd
+                class="detailValue"
+              >
+                133055
+              </dd>
+            </div>
+          </dl>
+          <h4
+            class="technical"
+          >
+            Technical details
+          </h4>
+          <dl
+            class="details"
+          >
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                CType
+              </dt>
+              <dd
+                class="detailValue"
+              >
+                GitHub
+              </dd>
+            </div>
+            <div
+              class="detail"
+            >
+              <dt
+                class="detailName"
+              >
+                Attester
+              </dt>
+              <dd
+                class="detailValue"
+              >
+                SocialKYC
+              </dd>
+            </div>
+            <div
+              class="hash"
+            >
+              <dt
+                class="detailName"
+              >
+                Credential hash
+              </dt>
+              <dd
+                class="detailValue"
+              >
+                0x202b70def75caa7d2130524b12d759e711ebf75960e838cbbc27d657560e6675
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <div />
+      </li>
+    </section>
+    <p
+      class="buttonsLine"
+    >
+      <button
+        class="keep"
+        type="button"
+      >
+        Keep
+      </button>
+      <button
+        class="remove"
+        type="button"
+      >
+        Remove
+      </button>
+    </p>
+  </main>
+</div>
+`;

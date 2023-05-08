@@ -6,6 +6,7 @@ import { ShareCredential } from '../ShareCredential/ShareCredential';
 import { SignDApp } from '../SignDApp/SignDApp';
 import { SignRawDApp } from '../SignRawDApp/SignRawDApp';
 import { ImportCredentials } from '../ImportCredentials/ImportCredentials';
+import { AttestationRejected } from '../AttestationRejected/AttestationRejected';
 import { paths } from '../paths';
 
 export function PopupsRouter(): JSX.Element {
@@ -16,6 +17,9 @@ export function PopupsRouter(): JSX.Element {
       </Route>
       <Route path={paths.popup.save}>
         <SaveCredential />
+      </Route>
+      <Route path={paths.popup.reject}>
+        <AttestationRejected />
       </Route>
       <Route path={paths.popup.share.start}>
         <ShareCredential />

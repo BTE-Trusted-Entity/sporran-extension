@@ -79,6 +79,7 @@ export const paths = {
     access: '/popup/access',
     claim: '/identity/:address/claim',
     save: '/popup/save',
+    reject: '/popup/reject',
     share: {
       start: '/popup/share',
       sign: '/popup/share/sign',

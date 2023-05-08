@@ -1521,5 +1521,17 @@
         "content": "$1"
       }
     }
+  },
+  "view_AttestationRejected_heading": {
+    "message": "Attestation rejected"
+  },
+  "view_AttestationRejected_info": {
+    "message": "The attestation you requested was rejected.\nThe credential will likely not be useful in the future.\nDo you want to remove it from your Sporran?"
+  },
+  "view_AttestationRejected_remove": {
+    "message": "Remove"
+  },
+  "view_AttestationRejected_keep": {
+    "message": "Keep"
   }
 }
