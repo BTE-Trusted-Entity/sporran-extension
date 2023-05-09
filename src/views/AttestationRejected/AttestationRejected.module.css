@@ -1,0 +1,31 @@
+.container {
+  composes: container from '../../components/View/View.module.css';
+}
+
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
+}
+
+.cardContainer {
+  composes: fullWidthContainer from '../../components/View/View.module.css';
+  list-style: none;
+  max-height: calc(330rem / 16);
+}
+
+.info {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  margin: 1rem 0;
+  white-space: pre-line;
+}
+
+.buttonsLine {
+  composes: buttonsLine from '../../components/Button/Button.module.css';
+}
+
+.remove {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+}
+
+.keep {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
+}

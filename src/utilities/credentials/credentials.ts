@@ -17,7 +17,12 @@ import { jsonToBase64 } from '../base64/base64';
 
 import { CredentialsContext } from './CredentialsContext';
 
-type AttestationStatus = 'pending' | 'attested' | 'revoked' | 'invalid';
+type AttestationStatus =
+  | 'pending'
+  | 'attested'
+  | 'revoked'
+  | 'rejected'
+  | 'invalid';
 
 export interface SporranCredential {
   credential: ICredential;
@@ -141,7 +146,7 @@ export function useCredentials(): SporranCredential[] | undefined {
 }
 
 export function isUnusableCredential({ status }: SporranCredential) {
-  return ['revoked', 'invalid'].includes(status);
+  return ['revoked', 'rejected', 'invalid'].includes(status);
 }
 
 export function useIdentityCredentials(

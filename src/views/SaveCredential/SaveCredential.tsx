@@ -10,10 +10,9 @@ import {
   useCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-
 import { saveChannel } from '../../channels/saveChannel/saveChannel';
-
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
+import { UnknownCredential } from '../../components/UnknownCredential/UnknownCredential';
 
 export function SaveCredential(): JSX.Element | null {
   const t = browser.i18n.getMessage;
@@ -48,8 +47,7 @@ export function SaveCredential(): JSX.Element | null {
   }
 
   if (!sporranCredential) {
-    // TODO: decide on interface for an unknown credential
-    return null;
+    return <UnknownCredential rootHash={claimHash} />;
   }
 
   const download = getCredentialDownload(sporranCredential);

@@ -135,6 +135,8 @@ export function ShareCredentialSelect({
     status: 'invalid',
   });
 
+  const status = selected?.sporranCredential.status;
+
   const ref = useRef<HTMLElement>(null);
 
   const showConfirm = useBooleanState();
@@ -146,13 +148,6 @@ export function ShareCredentialSelect({
   const handleSubmit = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
-      if (!selected) {
-        return;
-      }
-
-      const {
-        sporranCredential: { status },
-      } = selected;
 
       if (status !== 'revoked') {
         handleNext();
@@ -160,7 +155,7 @@ export function ShareCredentialSelect({
       }
       showConfirm.on();
     },
-    [selected, handleNext, showConfirm],
+    [status, handleNext, showConfirm],
   );
 
   if (!identities || !credentials) {
@@ -228,9 +223,7 @@ export function ShareCredentialSelect({
         <button
           type="submit"
           className={styles.next}
-          disabled={
-            !selected || selected.sporranCredential.status === 'pending'
-          }
+          disabled={!selected || status === 'pending' || status === 'rejected'}
         >
           {t('view_ShareCredentialSelect_next')}
         </button>

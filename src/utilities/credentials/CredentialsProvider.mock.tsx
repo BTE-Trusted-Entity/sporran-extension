@@ -498,6 +498,41 @@ export const credentialsMock: SporranCredential[] = [
     status: 'attested',
     isDownloaded: true,
   },
+  {
+    credential: {
+      claim: {
+        cTypeHash:
+          '0xad52bd7a8bd8a52e03181a99d2743e00d0a5e96fdc0182626655fcf0c0a776d0',
+        contents: {
+          Username: 'arty-name',
+          'User ID': '133055',
+        },
+        owner: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E',
+      },
+      legitimations: [],
+      claimHashes: [
+        '0x73ab53e3e87960ae33b827d8bde3fee2717cfd5af2841d7dfc163a0eeed85474',
+        '0xbd0d90cff6b3784e9e53afb0499076902c677c992c472b9f4aac87fe0f700709',
+        '0xfacb2590ec33b9c5c1cd37bc5da8023629052d1fd593f4b9fb5c3271e7bee146',
+      ],
+      claimNonceMap: {
+        '0x39df1673e48bcdf17a1eff936fbe2460555de5bdc029b515afd25bb81012ebcd':
+          '56ea4c72-caa8-425a-9def-fa5ea5571fcc',
+        '0xc9cccabfbfc0c529263c97d9775ed8297df7832d53948229c7282667c2d15f7c':
+          'd6faf781-9a0c-4f10-a58d-591f35f3f6ad',
+        '0x800e8346b87610819d18304201c9aaee24ef2f69769e86713928937e37ffff99':
+          '4a4d173c-c348-4c24-b974-9c6e84817a92',
+      },
+      rootHash:
+        '0x202b70def75caa7d2130524b12d759e711ebf75960e838cbbc27d657560e6675',
+      delegationId: null,
+    },
+    name: 'GitHub 2',
+    cTypeTitle: 'GitHub',
+    attester: 'SocialKYC',
+    status: 'rejected',
+    isDownloaded: true,
+  },
 ];
 
 export const notDownloaded: SporranCredential[] = [

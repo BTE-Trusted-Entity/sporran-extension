@@ -236,6 +236,9 @@
   "component_CredentialCard_revoked": {
     "message": "Revoked"
   },
+  "component_CredentialCard_rejected": {
+    "message": "Rejected"
+  },
   "component_CredentialCard_invalid": {
     "message": "Invalid"
   },
@@ -325,6 +328,20 @@
   },
   "component_UnknownIdentity_info": {
     "message": "This operation is only supported for identities existing in Sporran."
+  },
+  "component_UnknownCredential_heading": {
+    "message": "Unknown Credential"
+  },
+  "component_UnknownCredential_text": {
+    "message": "The credential $rootHash$ is not recognized by Sporran.",
+    "placeholders": {
+      "rootHash": {
+        "content": "$1"
+      }
+    }
+  },
+  "component_UnknownCredential_info": {
+    "message": "This operation is only supported for credentials existing in Sporran."
   },
   "view_Welcome_heading": {
     "message": "Welcome to your Sporran"
@@ -1504,5 +1521,17 @@
         "content": "$1"
       }
     }
+  },
+  "view_AttestationRejected_heading": {
+    "message": "Attestation rejected"
+  },
+  "view_AttestationRejected_info": {
+    "message": "The attestation you requested was rejected.\nThe credential will likely not be useful in the future.\nDo you want to remove it from your Sporran?"
+  },
+  "view_AttestationRejected_remove": {
+    "message": "Remove"
+  },
+  "view_AttestationRejected_keep": {
+    "message": "Keep"
   }
 }
