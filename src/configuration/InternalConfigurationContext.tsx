@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 import { ConfigurationContext } from './ConfigurationContext';
 import { configuration, internalFeatures } from './configuration';
 

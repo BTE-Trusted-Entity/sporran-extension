@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { JSX, useCallback, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import BN from 'bn.js';
 

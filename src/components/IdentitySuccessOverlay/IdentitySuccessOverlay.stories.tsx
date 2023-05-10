@@ -1,4 +1,5 @@
 import { action } from '@storybook/addon-actions';
+import { JSX } from 'react';
 import { Meta } from '@storybook/react';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';

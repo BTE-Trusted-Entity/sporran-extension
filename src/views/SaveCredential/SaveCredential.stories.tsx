@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 
 import { mockAttestations } from '../../utilities/credentials/CredentialsProvider.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';

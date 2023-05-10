@@ -1,4 +1,4 @@
-import { ChangeEvent, DragEvent, useCallback } from 'react';
+import { ChangeEvent, DragEvent, JSX, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './ImportCredentials.module.css';

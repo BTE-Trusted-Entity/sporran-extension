@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-
+import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';

@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 import { DidServiceEndpoint } from '@kiltprotocol/sdk-js';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';

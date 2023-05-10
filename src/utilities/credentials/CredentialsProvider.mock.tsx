@@ -1,4 +1,5 @@
 import { IAttestation } from '@kiltprotocol/sdk-js';
+import { JSX } from 'react';
 
 import { ShareInput } from '../../channels/shareChannel/types';
 

@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { Link, NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { sortBy } from 'lodash-es';

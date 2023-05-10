@@ -1,4 +1,5 @@
 import { QRCodeSVG } from 'qrcode.react';
+import { JSX } from 'react';
 
 import * as styles from './QRCode.module.css';
 

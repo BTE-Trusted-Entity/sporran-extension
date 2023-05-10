@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { Meta } from '@storybook/react';
 

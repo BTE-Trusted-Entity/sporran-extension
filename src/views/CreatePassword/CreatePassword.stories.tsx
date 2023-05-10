@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { CreatePassword } from './CreatePassword';

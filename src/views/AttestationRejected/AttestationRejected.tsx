@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { JSX, useCallback, useEffect } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { find } from 'lodash-es';
 

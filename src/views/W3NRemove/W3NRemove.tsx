@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, useCallback } from 'react';
+import { FormEvent, Fragment, JSX, useCallback } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 

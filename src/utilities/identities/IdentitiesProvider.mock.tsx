@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 import { IdentitiesMap, Identity } from './types';
 import { IdentitiesContext } from './IdentitiesContext';
 

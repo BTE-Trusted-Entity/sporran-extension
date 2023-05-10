@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 

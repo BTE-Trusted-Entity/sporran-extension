@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
-
 import { action } from '@storybook/addon-actions';
+import { JSX } from 'react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { moreIdentitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';

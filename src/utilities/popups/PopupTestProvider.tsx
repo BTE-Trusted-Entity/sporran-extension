@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { jsonToBase64 } from '../base64/base64';

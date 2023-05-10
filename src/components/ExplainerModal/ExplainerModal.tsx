@@ -1,4 +1,4 @@
-import { Fragment, RefObject } from 'react';
+import { Fragment, JSX, RefObject } from 'react';
 import { createPortal } from 'react-dom';
 import { Modal } from 'react-dialog-polyfill';
 import { browser } from 'webextension-polyfill-ts';

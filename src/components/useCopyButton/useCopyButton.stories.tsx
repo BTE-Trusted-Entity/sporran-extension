@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { useRef } from 'react';
+import { JSX, useRef } from 'react';
 
 import { useCopyButton } from './useCopyButton';
 

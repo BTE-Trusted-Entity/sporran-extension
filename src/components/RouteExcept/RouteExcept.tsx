@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 interface Props {

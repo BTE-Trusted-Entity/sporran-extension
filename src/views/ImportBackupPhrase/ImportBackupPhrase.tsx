@@ -4,6 +4,7 @@ import {
   ClipboardEvent,
   ClipboardEventHandler,
   FormEvent,
+  JSX,
   useCallback,
   useState,
 } from 'react';

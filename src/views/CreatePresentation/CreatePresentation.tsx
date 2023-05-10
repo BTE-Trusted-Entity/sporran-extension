@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { JSX, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 import { find } from 'lodash-es';

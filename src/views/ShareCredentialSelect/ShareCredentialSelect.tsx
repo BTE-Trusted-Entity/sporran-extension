@@ -1,4 +1,4 @@
-import { FormEvent, RefObject, useCallback, useRef } from 'react';
+import { FormEvent, JSX, RefObject, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { reject, sortBy } from 'lodash-es';
 import { Did } from '@kiltprotocol/sdk-js';

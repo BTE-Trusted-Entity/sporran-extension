@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import * as menuStyles from '../Menu/Menu.module.css';

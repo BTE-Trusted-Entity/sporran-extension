@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { JSX, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, useHistory } from 'react-router-dom';
 import { map, without } from 'lodash-es';

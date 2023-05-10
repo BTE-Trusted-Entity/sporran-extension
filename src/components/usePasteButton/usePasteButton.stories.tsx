@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { JSX, useRef } from 'react';
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 

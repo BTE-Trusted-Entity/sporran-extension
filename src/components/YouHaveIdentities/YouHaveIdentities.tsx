@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, JSX } from 'react';
 
 import { useIdentities } from '../../utilities/identities/identities';
 import { plural } from '../../utilities/plural/plural';

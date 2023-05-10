@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 import { Link, MemoryRouter, Route } from 'react-router-dom';
 
 import * as styles from './LinkBack.module.css';

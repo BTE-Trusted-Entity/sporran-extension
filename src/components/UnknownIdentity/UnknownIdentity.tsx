@@ -1,5 +1,6 @@
 import type { KiltAddress } from '@kiltprotocol/sdk-js';
 
+import { JSX } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './UnknownIdentity.module.css';

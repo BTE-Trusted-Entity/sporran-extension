@@ -1,5 +1,12 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useCallback, useState, useRef, RefObject, ChangeEvent } from 'react';
+import {
+  JSX,
+  useCallback,
+  useState,
+  useRef,
+  RefObject,
+  ChangeEvent,
+} from 'react';
 import { includes, without } from 'lodash-es';
 import cx from 'classnames';
 
