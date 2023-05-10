@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from 'react';
+import { Fragment, JSX, ReactNode } from 'react';
 
 import * as styles from './ApiProvider.module.css';
 

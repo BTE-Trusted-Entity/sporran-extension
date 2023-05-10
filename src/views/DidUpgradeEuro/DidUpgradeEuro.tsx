@@ -1,8 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
-
 import { Link } from 'react-router-dom';
-
-import { FormEvent, useCallback } from 'react';
+import { FormEvent, JSX, useCallback } from 'react';
 
 import * as styles from './DidUpgradeEuro.module.css';
 

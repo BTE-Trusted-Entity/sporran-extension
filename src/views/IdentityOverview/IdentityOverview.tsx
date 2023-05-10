@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { JSX, useCallback, useState } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Link, Redirect, useParams } from 'react-router-dom';
 

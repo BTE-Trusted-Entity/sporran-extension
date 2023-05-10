@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { FormEvent, useCallback, useState } from 'react';
+import { FormEvent, JSX, useCallback, useState } from 'react';
 import {
   Attestation,
   ConfigService,

@@ -1,5 +1,6 @@
 import { action } from '@storybook/addon-actions';
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 import { Modal } from 'react-dialog-polyfill';
 
 import * as overlayStyles from './Overlay.module.css';

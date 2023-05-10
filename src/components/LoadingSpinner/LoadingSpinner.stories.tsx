@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 
 import * as styles from './LoadingSpinner.module.css';
 

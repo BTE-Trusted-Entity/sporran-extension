@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { useCallback } from 'react';
+import { JSX, useCallback } from 'react';
 
 import * as styles from './AuthorizeDApp.module.css';
 

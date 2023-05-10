@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import * as styles from './CredentialCard.module.css';

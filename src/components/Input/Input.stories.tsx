@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { Fragment } from 'react';
+import { Fragment, JSX } from 'react';
 
 import * as styles from './Input.module.css';
 

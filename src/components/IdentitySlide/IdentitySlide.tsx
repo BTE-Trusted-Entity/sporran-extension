@@ -1,4 +1,4 @@
-import { FormEvent, useCallback } from 'react';
+import { FormEvent, JSX, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './IdentitySlide.module.css';

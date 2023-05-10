@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 
 import * as storiesStyles from './Button.stories.module.css';
 import * as styles from './Button.module.css';

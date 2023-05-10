@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+import { JSX } from 'react';
 import { Modal } from 'react-dialog-polyfill';
 
 import * as styles from './ReceiveToken.module.css';

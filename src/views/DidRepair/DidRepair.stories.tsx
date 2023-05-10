@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 
 import { legacyIdentity } from '../../utilities/identities/IdentitiesProvider.mock';
 

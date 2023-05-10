@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
-
 import { action } from '@storybook/addon-actions';
+import { JSX } from 'react';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';

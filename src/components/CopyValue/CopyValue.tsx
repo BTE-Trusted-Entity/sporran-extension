@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { JSX, useRef } from 'react';
 
 import * as styles from './CopyValue.module.css';
 

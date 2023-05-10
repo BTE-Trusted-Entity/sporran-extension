@@ -1,5 +1,5 @@
+import { JSX } from 'react';
 import { Switch } from 'react-router';
-
 import { Route } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';

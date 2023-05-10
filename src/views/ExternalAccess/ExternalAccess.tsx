@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, JSX, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import { browser } from 'webextension-polyfill-ts';

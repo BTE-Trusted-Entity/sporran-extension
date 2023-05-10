@@ -1,5 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
-import React, {
+import {
+  JSX,
   useCallback,
   useState,
   useEffect,

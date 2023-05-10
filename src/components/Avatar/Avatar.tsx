@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import cx from 'classnames';
 
 import * as styles from './Avatar.module.css';

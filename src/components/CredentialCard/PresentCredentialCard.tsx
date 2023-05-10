@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { ChangeEvent, useCallback, useEffect } from 'react';
+import { ChangeEvent, JSX, useCallback, useEffect } from 'react';
 
 import * as styles from './CredentialCard.module.css';
 

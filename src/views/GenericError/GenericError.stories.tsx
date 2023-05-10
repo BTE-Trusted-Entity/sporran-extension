@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { useState, MouseEvent } from 'react';
+import { JSX, MouseEvent, useState } from 'react';
 
 import { GenericError } from './GenericError';
 

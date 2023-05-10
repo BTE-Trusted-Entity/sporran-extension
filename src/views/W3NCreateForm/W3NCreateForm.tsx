@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useState } from 'react';
+import { FormEvent, JSX, useCallback, useState } from 'react';
 import { useHistory, generatePath } from 'react-router-dom';
 import { browser } from 'webextension-polyfill-ts';
 

@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+import { JSX } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import * as styles from './ExistentialWarning.module.css';

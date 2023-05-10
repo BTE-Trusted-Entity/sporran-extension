@@ -1,5 +1,5 @@
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
-import { Fragment } from 'react';
+import { JSX, Fragment } from 'react';
 
 import './App.css';
 import * as styles from './App.module.css';

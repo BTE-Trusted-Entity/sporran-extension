@@ -1,8 +1,7 @@
 import { Modal } from 'react-dialog-polyfill';
 import { browser } from 'webextension-polyfill-ts';
 import { generatePath, Link } from 'react-router-dom';
-
-import { useEffect } from 'react';
+import { JSX, useEffect } from 'react';
 
 import * as styles from './LegacyDids.module.css';
 

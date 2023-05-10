@@ -1,4 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
+import { JSX } from 'react';
 import { Link } from 'react-router-dom';
 
 import * as styles from './Warning.module.css';

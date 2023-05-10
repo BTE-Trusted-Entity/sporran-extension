@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 import * as styles from './IdentityLine.module.css';
 
 import { Identity } from '../../utilities/identities/types';

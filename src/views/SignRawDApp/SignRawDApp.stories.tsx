@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+import { JSX } from 'react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { SignRawOriginInput } from '../../dApps/SignRawChannels/types';

@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, JSX } from 'react';
 import useSWR from 'swr';
 
 import { IdentitiesMap } from './types';

@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 
 import * as styles from './Stats.module.css';

@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useRef } from 'react';
+import { FormEvent, JSX, useCallback, useRef } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { u8aToHex } from '@polkadot/util';
 import { Utils } from '@kiltprotocol/sdk-js';

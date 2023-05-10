@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, useCallback } from 'react';
+import { FormEvent, Fragment, JSX, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { Utils } from '@kiltprotocol/sdk-js';
 

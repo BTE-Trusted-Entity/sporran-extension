@@ -1,4 +1,4 @@
-import React from 'react';
+import { JSX } from 'react';
 import { polkadotIcon } from '@polkadot/ui-shared';
 
 interface Props {
