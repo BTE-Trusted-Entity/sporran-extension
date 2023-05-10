@@ -6,6 +6,7 @@ export const didLine: string;
 export const details: string;
 export const info: string;
 export const label: string;
+export const errorTooltip: string;
 export const buttonsLine: string;
 export const next: string;
 export const back: string;

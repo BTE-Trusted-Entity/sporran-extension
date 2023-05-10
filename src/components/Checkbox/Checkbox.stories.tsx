@@ -15,3 +15,13 @@ export function Template(): JSX.Element {
     </label>
   );
 }
+
+export function Disabled(): JSX.Element {
+  return (
+    <label>
+      I am disabled{' '}
+      <input className={styles.checkbox} type="checkbox" disabled />
+      <span />
+    </label>
+  );
+}

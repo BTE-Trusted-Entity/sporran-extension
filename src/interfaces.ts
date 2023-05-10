@@ -75,6 +75,12 @@ export interface InjectedWindowProvider<T> {
   version: string;
   specVersion: '1.0' | '3.0';
 
+  getDidList: () => Promise<
+    Array<
+      { did: DidUri; name?: string } | { pendingDid: DidUri; name?: string }
+    >
+  >;
+
   signWithDid: (
     plaintext: string,
     didUri?: DidUri,
