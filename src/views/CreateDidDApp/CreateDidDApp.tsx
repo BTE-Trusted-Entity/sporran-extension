@@ -14,6 +14,7 @@ import { isFullDid, parseDidUri } from '../../utilities/did/did';
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
+import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 import { backgroundCreateDidChannel } from '../../channels/CreateDidChannels/backgroundCreateDidChannel';
 import { getIdentityCryptoFromSeed } from '../../utilities/identities/identities';
@@ -27,7 +28,8 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
 
   const { did } = identity;
 
-  const { origin, submitter } = usePopupData<CreateDidOriginInput>();
+  const { origin, submitter, pendingDidUri } =
+    usePopupData<CreateDidOriginInput>();
 
   const passwordField = usePasswordField();
 
@@ -63,11 +65,17 @@ export function CreateDidDApp({ identity }: Props): JSX.Element {
     window.close();
   }, []);
 
+  const identityIsPredetermined = did && did === pendingDidUri;
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <h1 className={styles.heading}>{t('view_CreateDidDApp_heading')}</h1>
 
-      <IdentitiesCarousel identity={identity} />
+      {identityIsPredetermined ? (
+        <IdentitySlide identity={identity} />
+      ) : (
+        <IdentitiesCarousel identity={identity} />
+      )}
 
       <section className={styles.details}>
         <p className={styles.label}>{t('view_CreateDidDApp_origin')}</p>

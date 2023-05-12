@@ -168,11 +168,14 @@ async function signExtrinsicWithDid(
   });
 }
 
-async function getSignedDidCreationExtrinsic(submitter: KiltAddress): Promise<{
+async function getSignedDidCreationExtrinsic(
+  submitter: KiltAddress,
+  pendingDidUri?: DidUri,
+): Promise<{
   signedExtrinsic: HexString;
 }> {
   const dAppName = document.title.substring(0, 50);
-  return injectedCreateDidChannel.get({ dAppName, submitter });
+  return injectedCreateDidChannel.get({ dAppName, pendingDidUri, submitter });
 }
 
 const { version } = configuration;

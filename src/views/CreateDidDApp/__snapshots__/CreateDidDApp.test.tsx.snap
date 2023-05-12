@@ -1,5 +1,121 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CreateDidDApp should render with a specific light DID 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Create DID
+    </h1>
+    <section
+      class="container"
+    >
+      <div
+        class="avatar"
+      >
+        Identicon
+      </div>
+      <div
+        class="centeredNameLine"
+      >
+        <span
+          class="name"
+        >
+          Light DID Identity
+        </span>
+      </div>
+    </section>
+    <section
+      class="details"
+    >
+      <p
+        class="label"
+      >
+        Request from:
+      </p>
+      <p
+        class="origin"
+      >
+        https://example.org/foo
+      </p>
+    </section>
+    <p
+      class="resetLine"
+    >
+      <label
+        class="passwordLabel"
+        for="password"
+      >
+        Sign with password:
+      </label>
+      <a
+        class="reset"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/reset"
+      >
+        Reset password
+      </a>
+    </p>
+    <p
+      class="passwordLine"
+    >
+      <input
+        class="password"
+        id="password"
+        name="password"
+        type="password"
+        value=""
+      />
+      <button
+        aria-label="Show"
+        class="show"
+        title="Show"
+        type="button"
+      />
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+    <label
+      class="rememberLabel"
+    >
+      <span>
+        Remember password for the next 15 minutes
+      </span>
+      <input
+        class="remember"
+        name="remember"
+        type="checkbox"
+      />
+      <span />
+    </label>
+    <p
+      class="buttonsLine"
+    >
+      <button
+        class="reject"
+        type="button"
+      >
+        Cancel
+      </button>
+      <button
+        class="submit"
+        type="submit"
+      >
+        Sign
+      </button>
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+  </form>
+</div>
+`;
+
 exports[`CreateDidDApp should render with full DID 1`] = `
 <div>
   <form

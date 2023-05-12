@@ -20,9 +20,27 @@ const input: CreateDidOriginInput = {
   submitter: '4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653',
 };
 
+const specificInput: CreateDidOriginInput = {
+  ...input,
+  pendingDidUri:
+    identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'].did,
+};
+
 export function LightDid(): JSX.Element {
   return (
     <PopupTestProvider path={paths.popup.createDid} data={input}>
+      <CreateDidDApp
+        identity={
+          identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
+        }
+      />
+    </PopupTestProvider>
+  );
+}
+
+export function SpecificLightDid(): JSX.Element {
+  return (
+    <PopupTestProvider path={paths.popup.createDid} data={specificInput}>
       <CreateDidDApp
         identity={
           identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']

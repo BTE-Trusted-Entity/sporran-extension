@@ -85,5 +85,6 @@ export interface InjectedWindowProvider<T> {
 
   getSignedDidCreationExtrinsic: (
     submitter: KiltAddress,
+    pendingDidUri?: DidUri,
   ) => Promise<{ signedExtrinsic: HexString }>;
 }
