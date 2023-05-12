@@ -48,6 +48,7 @@ async function storeMessageFromSporran(
 ): Promise<void> {
   unprocessedMessagesFromSporran.push(message);
 }
+
 async function startSession(
   unsafeDAppName: string,
   dAppEncryptionKeyId: DidResourceUri,
@@ -160,6 +161,7 @@ async function signWithDid(
 async function signExtrinsicWithDid(
   extrinsic: HexString,
   submitter: KiltAddress,
+  didUri?: DidUri,
 ): Promise<{
   signed: HexString;
   didKeyUri: DidResourceUri;
@@ -168,6 +170,7 @@ async function signExtrinsicWithDid(
   return injectedSignDidExtrinsicChannel.get({
     extrinsic,
     submitter,
+    didUri,
     dAppName,
   });
 }

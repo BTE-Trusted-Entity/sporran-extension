@@ -865,3 +865,172 @@ exports[`SignDidExtrinsic should render remove endpoint extrinsic 1`] = `
   </form>
 </div>
 `;
+
+exports[`SignDidExtrinsic should render remove endpoint extrinsic for specific DID 1`] = `
+<div>
+  <form
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Remove Service Endpoint
+    </h1>
+    <p
+      class="subline"
+    >
+      Sign with your password
+    </p>
+    <section
+      class="container"
+    >
+      <div
+        class="avatar fullDid"
+      >
+        Identicon
+      </div>
+      <div
+        class="centeredNameLine"
+      >
+        <span
+          class="name"
+        >
+          Identity with on-chain DID and lots of coins
+        </span>
+      </div>
+    </section>
+    <p
+      class="didLine"
+    >
+      <input
+        aria-label="DID"
+        class="long"
+        readonly=""
+        value="did:kilt:4oeJ76hdj84xnwCNqijUHUCTmfwXgSZ4vmxLEiTEYgQdBCcZ"
+      />
+      <button
+        aria-label="copy to clipboard"
+        class="copy"
+        title="copy to clipboard"
+        type="button"
+      />
+    </p>
+    <dl
+      class="endpointDetails"
+    >
+      <div
+        class="fullWidthDetail"
+      >
+        <dt
+          class="endpointName"
+        >
+          URL
+        </dt>
+        <dd
+          class="endpointValue"
+        >
+          https://sporran.org
+        </dd>
+      </div>
+      <div
+        class="endpointDetail"
+      >
+        <dt
+          class="endpointName"
+        >
+          Type
+        </dt>
+        <dd
+          class="endpointValue"
+        >
+          Some type
+        </dd>
+      </div>
+      <div
+        class="endpointDetail"
+      >
+        <dt
+          class="endpointName"
+        >
+          Service ID
+        </dt>
+        <dd
+          class="endpointValue"
+        >
+          123456
+        </dd>
+      </div>
+    </dl>
+    <p
+      class="resetLine"
+    >
+      <label
+        class="passwordLabel"
+        for="password"
+      >
+        Sign with password:
+      </label>
+      <a
+        class="reset"
+        href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/reset"
+      >
+        Reset password
+      </a>
+    </p>
+    <p
+      class="passwordLine"
+    >
+      <input
+        class="password"
+        id="password"
+        name="password"
+        type="password"
+        value=""
+      />
+      <button
+        aria-label="Show"
+        class="show"
+        title="Show"
+        type="button"
+      />
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+    <label
+      class="rememberLabel"
+    >
+      <span>
+        Remember password for the next 15 minutes
+      </span>
+      <input
+        class="remember"
+        name="remember"
+        type="checkbox"
+      />
+      <span />
+    </label>
+    <p
+      class="buttonsLine"
+    >
+      <button
+        class="reject"
+        type="button"
+      >
+        Reject
+      </button>
+      <button
+        class="submit"
+        type="submit"
+      >
+        Sign
+      </button>
+      <output
+        class="errorTooltip"
+        hidden=""
+      />
+    </p>
+  </form>
+</div>
+`;

@@ -83,6 +83,7 @@ export interface InjectedWindowProvider<T> {
   signExtrinsicWithDid: (
     extrinsic: HexString,
     signer: KiltAddress,
+    didUri?: DidUri,
   ) => Promise<{ signed: HexString; didKeyUri: DidResourceUri }>;
 
   getSignedDidCreationExtrinsic: (

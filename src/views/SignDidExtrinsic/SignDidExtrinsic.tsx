@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, JSX, useCallback } from 'react';
+import { FormEvent, Fragment, JSX, ReactNode, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import {
   ConfigService,
@@ -20,6 +20,7 @@ import {
 } from '../../utilities/identities/identities';
 import { getFullDidDocument, isFullDid } from '../../utilities/did/did';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
+import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import {
   PasswordField,
   usePasswordField,
@@ -79,9 +80,11 @@ function Endpoint({ endpoint }: { endpoint: DidServiceEndpoint }): JSX.Element {
 function AddServiceEndpointExtrinsic({
   identity,
   extrinsic,
+  children,
 }: {
   identity: Identity;
   extrinsic: GenericExtrinsic;
+  children: ReactNode;
 }): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -98,7 +101,7 @@ function AddServiceEndpointExtrinsic({
         {t('view_SignDidExtrinsic_endpoint_subline')}
       </p>
 
-      <IdentitiesCarousel identity={identity} />
+      {children}
 
       {did && isFullDid(did) && (
         <CopyValue value={did} label="DID" className={styles.didLine} />
@@ -113,10 +116,12 @@ function RemoveServiceEndpointExtrinsic({
   identity,
   extrinsic,
   error,
+  children,
 }: {
   identity: Identity;
   extrinsic: GenericExtrinsic;
   error: ReturnType<typeof useBooleanState>;
+  children: ReactNode;
 }): JSX.Element {
   const t = browser.i18n.getMessage;
 
@@ -137,7 +142,7 @@ function RemoveServiceEndpointExtrinsic({
         {t('view_SignDidExtrinsic_endpoint_subline')}
       </p>
 
-      <IdentitiesCarousel identity={identity} />
+      {children}
 
       {did && isFullDid(did) && (
         <CopyValue value={did} label="DID" className={styles.didLine} />
@@ -149,11 +154,11 @@ function RemoveServiceEndpointExtrinsic({
 }
 
 function DidExtrinsic({
-  identity,
+  children,
   extrinsic,
   origin,
 }: {
-  identity: Identity;
+  children: ReactNode;
   extrinsic: GenericExtrinsic;
   origin: string;
 }) {
@@ -166,7 +171,7 @@ function DidExtrinsic({
       <h1 className={styles.heading}>{t('view_SignDidExtrinsic_title')}</h1>
       <p className={styles.subline}>{t('view_SignDidExtrinsic_subline')}</p>
 
-      <IdentitiesCarousel identity={identity} />
+      {children}
 
       <dl className={styles.details}>
         {values.map(({ label, value, details }) => (
@@ -203,7 +208,7 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
 
   const data = usePopupData<SignDidExtrinsicOriginInput>();
 
-  const { submitter, origin } = data;
+  const { submitter, origin, didUri } = data;
 
   const extrinsic = useAsyncValue(getExtrinsic, [data]);
 
@@ -326,13 +331,15 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
     return null; // blockchain data pending
   }
 
+  const identityIsPredetermined = did && did === didUri;
+  const Carousel = identityIsPredetermined ? IdentitySlide : IdentitiesCarousel;
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       {extrinsicMethod === 'addServiceEndpoint' && (
-        <AddServiceEndpointExtrinsic
-          identity={identity}
-          extrinsic={extrinsic}
-        />
+        <AddServiceEndpointExtrinsic identity={identity} extrinsic={extrinsic}>
+          <Carousel identity={identity} />
+        </AddServiceEndpointExtrinsic>
       )}
 
       {extrinsicMethod === 'removeServiceEndpoint' && (
@@ -340,15 +347,15 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
           identity={identity}
           extrinsic={extrinsic}
           error={removeEndpointError}
-        />
+        >
+          <Carousel identity={identity} />
+        </RemoveServiceEndpointExtrinsic>
       )}
 
       {!isServiceEndpointExtrinsic && (
-        <DidExtrinsic
-          identity={identity}
-          extrinsic={extrinsic}
-          origin={origin}
-        />
+        <DidExtrinsic extrinsic={extrinsic} origin={origin}>
+          <Carousel identity={identity} />
+        </DidExtrinsic>
       )}
 
       <PasswordField identity={identity} autoFocus password={passwordField} />

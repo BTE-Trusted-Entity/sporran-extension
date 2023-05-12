@@ -23,6 +23,11 @@ const input: SignDidExtrinsicOriginInput = {
   submitter: '4tMMYZHsFfqzfCsgCPLJSBmomBv2d6cBEYzHKMGVKz2VjACR',
 };
 
+const specificInput: SignDidExtrinsicOriginInput = {
+  ...input,
+  didUri: identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'].did,
+};
+
 jest.mock('./didExtrinsic');
 
 describe('SignDidExtrinsic', () => {
@@ -96,6 +101,34 @@ describe('SignDidExtrinsic', () => {
 
     const { container } = render(
       <PopupTestProvider path={paths.popup.signDidExtrinsic} data={input}>
+        <SignDidExtrinsic
+          identity={
+            identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+          }
+        />
+      </PopupTestProvider>,
+    );
+    await waitForGetPassword();
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render remove endpoint extrinsic for specific DID', async () => {
+    mockIsFullDid(true);
+
+    jest.mocked(getExtrinsic).mockResolvedValue({
+      method: { section: 'did', method: 'removeServiceEndpoint' },
+    } as unknown as GenericExtrinsic);
+    jest.mocked(getRemoveServiceEndpoint).mockResolvedValue({
+      id: '#123456',
+      type: ['Some type'],
+      serviceEndpoint: ['https://sporran.org'],
+    });
+
+    const { container } = render(
+      <PopupTestProvider
+        path={paths.popup.signDidExtrinsic}
+        data={specificInput}
+      >
         <SignDidExtrinsic
           identity={
             identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
