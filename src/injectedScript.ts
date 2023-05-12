@@ -2,6 +2,7 @@ import { HexString } from '@polkadot/util/types';
 import {
   IEncryptedMessage,
   DidResourceUri,
+  DidUri,
   KiltAddress,
 } from '@kiltprotocol/sdk-js';
 
@@ -145,12 +146,15 @@ async function startSession(
   };
 }
 
-async function signWithDid(plaintext: string): Promise<{
+async function signWithDid(
+  plaintext: string,
+  didUri?: DidUri,
+): Promise<{
   signature: HexString;
   didKeyUri: DidResourceUri;
 }> {
   const dAppName = document.title.substring(0, 50);
-  return injectedSignDidChannel.get({ plaintext, dAppName });
+  return injectedSignDidChannel.get({ plaintext, didUri, dAppName });
 }
 
 async function signExtrinsicWithDid(

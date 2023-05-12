@@ -1,5 +1,6 @@
 import {
   DidResourceUri,
+  DidUri,
   IEncryptedMessage,
   KiltAddress,
 } from '@kiltprotocol/sdk-js';
@@ -76,6 +77,7 @@ export interface InjectedWindowProvider<T> {
 
   signWithDid: (
     plaintext: string,
+    didUri?: DidUri,
   ) => Promise<{ signature: string; didKeyUri: DidResourceUri }>;
 
   signExtrinsicWithDid: (

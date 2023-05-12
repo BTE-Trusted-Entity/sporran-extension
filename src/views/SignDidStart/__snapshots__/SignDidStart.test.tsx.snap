@@ -129,6 +129,71 @@ exports[`SignDidStart should render full DID with credentials 1`] = `
 </div>
 `;
 
+exports[`SignDidStart should render full DID with credentials for specific DID 1`] = `
+<div>
+  <section
+    class="container"
+  >
+    <h1
+      class="heading"
+    >
+      Sign with DID
+    </h1>
+    <p
+      class="subline"
+    >
+      Select your Identity and sign with your password
+    </p>
+    <section
+      class="container"
+    >
+      <div
+        class="avatar fullDid"
+      >
+        Identicon
+      </div>
+      <div
+        class="centeredNameLine"
+      >
+        <span
+          class="name"
+        >
+          Identity with on-chain DID and lots of coins
+        </span>
+      </div>
+    </section>
+    <div
+      class="infoWrapper"
+    >
+      <p
+        class="info"
+      >
+        To proceed you need a DID.
+      </p>
+      <p
+        class="info"
+      >
+        Choose whether to attach your credentials to the signature, or sign without credentials.
+      </p>
+    </div>
+    <a
+      aria-disabled="false"
+      class="next"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/sign/credentials"
+    >
+      Sign with credentials
+    </a>
+    <a
+      aria-disabled="false"
+      class="next"
+      href="/identity/4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo/did/sign/password"
+    >
+      Sign without credentials
+    </a>
+  </section>
+</div>
+`;
+
 exports[`SignDidStart should render full DID with no credentials 1`] = `
 <div>
   <section
