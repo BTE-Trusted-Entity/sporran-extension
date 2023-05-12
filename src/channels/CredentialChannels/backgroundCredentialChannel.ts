@@ -8,8 +8,7 @@ import { saveChannel } from '../saveChannel/saveChannel';
 import { rejectChannel } from '../rejectChannel/rejectChannel';
 import { shareChannel } from '../shareChannel/shareChannel';
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
-import { getIdentities } from '../../utilities/identities/getIdentities';
-import { setCurrentIdentity } from '../../utilities/identities/identities';
+import { setCurrentIdentityByDid } from '../../utilities/identities/identities';
 import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 
 import { CredentialInput, CredentialOutput } from './types';
@@ -41,13 +40,7 @@ export async function showCredentialPopup(
       }
 
       // the DID to use for signing could be predetermined by the dApp, if we have a matching identity we’ll use it
-      const { owner } = content.claim;
-      const identities = await getIdentities();
-      for (const { address, did } of Object.values(identities)) {
-        if (did === owner) {
-          await setCurrentIdentity(address);
-        }
-      }
+      await setCurrentIdentityByDid(content.claim.owner);
 
       return await claimChannel.get(
         {
