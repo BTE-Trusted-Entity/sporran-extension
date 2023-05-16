@@ -332,13 +332,15 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
   }
 
   const identityIsPredetermined = did && did === didUri;
-  const Carousel = identityIsPredetermined ? IdentitySlide : IdentitiesCarousel;
+  const IdentityChoice = identityIsPredetermined
+    ? IdentitySlide
+    : IdentitiesCarousel;
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       {extrinsicMethod === 'addServiceEndpoint' && (
         <AddServiceEndpointExtrinsic identity={identity} extrinsic={extrinsic}>
-          <Carousel identity={identity} />
+          <IdentityChoice identity={identity} />
         </AddServiceEndpointExtrinsic>
       )}
 
@@ -348,13 +350,13 @@ export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
           extrinsic={extrinsic}
           error={removeEndpointError}
         >
-          <Carousel identity={identity} />
+          <IdentityChoice identity={identity} />
         </RemoveServiceEndpointExtrinsic>
       )}
 
       {!isServiceEndpointExtrinsic && (
         <DidExtrinsic extrinsic={extrinsic} origin={origin}>
-          <Carousel identity={identity} />
+          <IdentityChoice identity={identity} />
         </DidExtrinsic>
       )}
 
