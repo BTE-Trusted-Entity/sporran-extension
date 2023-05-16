@@ -23,7 +23,7 @@ import {
   SignRequestData,
   Utils,
 } from '@kiltprotocol/sdk-js';
-import { map, max, memoize } from 'lodash-es';
+import { find, map, max, memoize } from 'lodash-es';
 
 import {
   loadEncrypted,
@@ -84,6 +84,18 @@ export async function setCurrentIdentity(address: string): Promise<void> {
   }
   await storage.set({ [CURRENT_IDENTITY_KEY]: address });
   await mutate(['getCurrentIdentity', CURRENT_IDENTITY_KEY]);
+}
+
+export async function setCurrentIdentityByDid(did?: DidUri): Promise<void> {
+  if (!did) {
+    return;
+  }
+  const identities = await getIdentities();
+  const match = find(identities, { did });
+  if (!match) {
+    return;
+  }
+  await setCurrentIdentity(match.address);
 }
 
 export async function saveIdentity(identity: Identity): Promise<void> {

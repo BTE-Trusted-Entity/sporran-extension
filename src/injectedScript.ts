@@ -2,6 +2,7 @@ import { HexString } from '@polkadot/util/types';
 import {
   IEncryptedMessage,
   DidResourceUri,
+  DidUri,
   KiltAddress,
 } from '@kiltprotocol/sdk-js';
 
@@ -47,6 +48,7 @@ async function storeMessageFromSporran(
 ): Promise<void> {
   unprocessedMessagesFromSporran.push(message);
 }
+
 async function startSession(
   unsafeDAppName: string,
   dAppEncryptionKeyId: DidResourceUri,
@@ -145,17 +147,21 @@ async function startSession(
   };
 }
 
-async function signWithDid(plaintext: string): Promise<{
+async function signWithDid(
+  plaintext: string,
+  didUri?: DidUri,
+): Promise<{
   signature: HexString;
   didKeyUri: DidResourceUri;
 }> {
   const dAppName = document.title.substring(0, 50);
-  return injectedSignDidChannel.get({ plaintext, dAppName });
+  return injectedSignDidChannel.get({ plaintext, didUri, dAppName });
 }
 
 async function signExtrinsicWithDid(
   extrinsic: HexString,
   submitter: KiltAddress,
+  didUri?: DidUri,
 ): Promise<{
   signed: HexString;
   didKeyUri: DidResourceUri;
@@ -164,15 +170,19 @@ async function signExtrinsicWithDid(
   return injectedSignDidExtrinsicChannel.get({
     extrinsic,
     submitter,
+    didUri,
     dAppName,
   });
 }
 
-async function getSignedDidCreationExtrinsic(submitter: KiltAddress): Promise<{
+async function getSignedDidCreationExtrinsic(
+  submitter: KiltAddress,
+  pendingDidUri?: DidUri,
+): Promise<{
   signedExtrinsic: HexString;
 }> {
   const dAppName = document.title.substring(0, 50);
-  return injectedCreateDidChannel.get({ dAppName, submitter });
+  return injectedCreateDidChannel.get({ dAppName, pendingDidUri, submitter });
 }
 
 const { version } = configuration;

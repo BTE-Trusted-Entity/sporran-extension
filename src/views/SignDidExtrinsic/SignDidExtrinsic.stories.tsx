@@ -29,6 +29,11 @@ const input: Record<string, SignDidExtrinsicOriginInput> = {
     ...dApp,
     extrinsic: '0x2804400918343935373831',
   },
+  removeEndpointSpecific: {
+    ...dApp,
+    extrinsic: '0x2804400918343935373831',
+    didUri: identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'].did,
+  },
   web3name: {
     ...dApp,
     extrinsic: '0x3404440024746573742d6e616d65',
@@ -65,6 +70,21 @@ export function RemoveEndpoint(): JSX.Element {
     <PopupTestProvider
       path={paths.popup.signDidExtrinsic}
       data={input.removeEndpoint}
+    >
+      <SignDidExtrinsic
+        identity={
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+        }
+      />
+    </PopupTestProvider>
+  );
+}
+
+export function RemoveEndpointSpecific(): JSX.Element {
+  return (
+    <PopupTestProvider
+      path={paths.popup.signDidExtrinsic}
+      data={input.removeEndpointSpecific}
     >
       <SignDidExtrinsic
         identity={

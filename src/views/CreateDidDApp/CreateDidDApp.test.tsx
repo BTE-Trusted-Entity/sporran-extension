@@ -19,10 +19,31 @@ const mockInput: CreateDidOriginInput = {
   submitter: '4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653',
 };
 
+const mockSpecificInput: CreateDidOriginInput = {
+  ...mockInput,
+  pendingDidUri:
+    identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'].did,
+};
+
 describe('CreateDidDApp', () => {
   it('should render with light DID', async () => {
     const { container } = render(
       <PopupTestProvider path={paths.popup.createDid} data={mockInput}>
+        <CreateDidDApp
+          identity={
+            identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
+          }
+        />
+      </PopupTestProvider>,
+    );
+    await waitForGetPassword();
+
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render with a specific light DID', async () => {
+    const { container } = render(
+      <PopupTestProvider path={paths.popup.createDid} data={mockSpecificInput}>
         <CreateDidDApp
           identity={
             identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']

@@ -21,10 +21,30 @@ const input: SignDidOriginInput = {
     'All your base are belong to us All your base are belong to us All your base are belong to us',
 };
 
+const specificInput: SignDidOriginInput = {
+  ...input,
+  didUri: identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'].did,
+};
+
 export function FullDidWithCredentials(): JSX.Element {
   return (
     <PopupTestProvider path={paths.popup.signDid.start} data={input}>
       <SignDidStart
+        popupData={input}
+        identity={
+          identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+        }
+        resetCredentials={action('resetCredentials')}
+      />
+    </PopupTestProvider>
+  );
+}
+
+export function FullDidSpecific(): JSX.Element {
+  return (
+    <PopupTestProvider path={paths.popup.signDid.start} data={specificInput}>
+      <SignDidStart
+        popupData={specificInput}
         identity={
           identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
         }
@@ -38,6 +58,7 @@ export function FullDidNoCredentials(): JSX.Element {
   return (
     <PopupTestProvider path={paths.popup.signDid.start} data={input}>
       <SignDidStart
+        popupData={input}
         identity={
           identities['4q11Jce9wqM4A9GPB2z8n4K8LF9w2sQgZKFddhuKXwQ2Qo4q']
         }
@@ -51,6 +72,7 @@ export function LightDid(): JSX.Element {
   return (
     <PopupTestProvider path={paths.popup.signDid.start} data={input}>
       <SignDidStart
+        popupData={input}
         identity={
           identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
         }

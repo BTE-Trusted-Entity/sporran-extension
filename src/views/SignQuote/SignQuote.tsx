@@ -151,7 +151,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
     [sporranCredentials, cType, data, passwordField, identity.did, specVersion],
   );
 
-  const identityIsPredetermined = did === claim.owner;
+  const identityIsPredetermined = did && did === claim.owner;
 
   return (
     <form

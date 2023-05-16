@@ -22,6 +22,11 @@ const input: SignDidOriginInput = {
     'AllyourbasearebelongtousAllyourbasearebelongtousAllyourbasearebelongtous',
 };
 
+const specificInput: SignDidOriginInput = {
+  ...input,
+  didUri: identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'].did,
+};
+
 describe('SignDidStart', () => {
   it('should render full DID with credentials', () => {
     mockIsFullDid(true);
@@ -29,6 +34,24 @@ describe('SignDidStart', () => {
     const { container } = render(
       <PopupTestProvider path={paths.popup.signDid.start} data={input}>
         <SignDidStart
+          popupData={input}
+          identity={
+            identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
+          }
+          resetCredentials={jest.fn()}
+        />
+      </PopupTestProvider>,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should render full DID with credentials for specific DID', () => {
+    mockIsFullDid(true);
+
+    const { container } = render(
+      <PopupTestProvider path={paths.popup.signDid.start} data={specificInput}>
+        <SignDidStart
+          popupData={specificInput}
           identity={
             identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
           }
@@ -46,6 +69,7 @@ describe('SignDidStart', () => {
     const { container } = render(
       <PopupTestProvider path={paths.popup.signDid.start} data={input}>
         <SignDidStart
+          popupData={input}
           identity={
             identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']
           }
@@ -62,6 +86,7 @@ describe('SignDidStart', () => {
     const { container } = render(
       <PopupTestProvider path={paths.popup.signDid.start} data={input}>
         <SignDidStart
+          popupData={input}
           identity={
             identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
           }

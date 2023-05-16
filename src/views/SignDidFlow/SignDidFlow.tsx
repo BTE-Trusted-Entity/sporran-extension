@@ -64,7 +64,11 @@ export function SignDidFlow({ identity }: Props) {
       </Route>
 
       <Route path={paths.popup.signDid.start}>
-        <SignDidStart identity={identity} resetCredentials={resetCredentials} />
+        <SignDidStart
+          popupData={popupData}
+          identity={identity}
+          resetCredentials={resetCredentials}
+        />
       </Route>
     </Switch>
   );
