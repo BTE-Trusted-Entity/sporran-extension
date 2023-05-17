@@ -1489,6 +1489,24 @@
   "view_CreateDidDApp_error_did_removed": {
     "message": "DID already removed"
   },
+  "view_GetDidList_heading": {
+    "message": "Share your Identities"
+  },
+  "view_GetDidList_origin": {
+    "message": "Request from:"
+  },
+  "view_GetDidList_names": {
+    "message": "Include names when sharing"
+  },
+  "view_GetDidList_choose": {
+    "message": "Choose at least one Identity with a DID to share"
+  },
+  "view_GetDidList_noDID": {
+    "message": "[no DID] "
+  },
+  "view_GetDidList_share": {
+    "message": "Share"
+  },
   "view_W3NCreateChoose_heading": {
     "message": "Create web3name"
   },

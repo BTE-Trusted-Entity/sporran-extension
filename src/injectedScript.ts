@@ -13,6 +13,7 @@ import { injectedChallengeChannel } from './channels/ChallengeChannels/injectedC
 import { injectedSignDidChannel } from './channels/SignDidChannels/injectedSignDidChannel';
 import { injectedSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChannels/injectedSignDidExtrinsicChannel';
 import { injectedCreateDidChannel } from './channels/CreateDidChannels/injectedCreateDidChannel';
+import { injectedShareIdentitiesChannel } from './channels/ShareIdentitiesChannels/injectedShareIdentitiesChannel';
 import { injectedAccessChannel } from './dApps/AccessChannels/injectedAccessChannel';
 import {
   IEncryptedMessageV1,
@@ -147,6 +148,13 @@ async function startSession(
   };
 }
 
+function getDidList(): ReturnType<
+  InjectedWindowProvider<unknown>['getDidList']
+> {
+  const dAppName = document.title.substring(0, 50);
+  return injectedShareIdentitiesChannel.get({ dAppName });
+}
+
 async function signWithDid(
   plaintext: string,
   didUri?: DidUri,
@@ -207,6 +215,7 @@ function initialize() {
     : '1.0';
 
   apiWindow.kilt.sporran ||= {
+    getDidList,
     signWithDid,
     signExtrinsicWithDid,
     getSignedDidCreationExtrinsic,

@@ -41,6 +41,8 @@ import { contentSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChann
 import { getSignDidExtrinsicResult } from './channels/SignDidExtrinsicChannels/backgroundSignDidExtrinsicChannel';
 import { getCreateDidResult } from './channels/CreateDidChannels/backgroundCreateDidChannel';
 import { contentCreateDidChannel } from './channels/CreateDidChannels/contentCreateDidChannel';
+import { contentShareIdentitiesChannel } from './channels/ShareIdentitiesChannels/contentShareIdentitiesChannel';
+import { getGetDidList } from './channels/ShareIdentitiesChannels/backgroundShareIdentitiesChannel';
 
 function init() {
   initKiltSDK();
@@ -60,6 +62,7 @@ function init() {
   contentSignDidExtrinsicChannel.produce(getSignDidExtrinsicResult);
   contentCreateDidChannel.produce(getCreateDidResult);
   contentChallengeChannel.produce(produceEncryptedChallenge);
+  contentShareIdentitiesChannel.produce(getGetDidList);
   browser.tabs.onRemoved.addListener(popupTabRemovedListener);
 
   onPopupConnect(connectToBlockchain);

@@ -1,0 +1,96 @@
+.container {
+  composes: container from '../../components/View/View.module.css';
+  height: calc(100% - 1.5rem);
+  text-align: left;
+}
+
+.heading {
+  composes: screenHeadline from '../../components/Typography/Typography.module.css';
+  margin-bottom: 2rem;
+}
+
+.details {
+  width: 100%;
+}
+
+.label {
+  composes: smallText from '../../components/Typography/Typography.module.css';
+  margin: 0;
+}
+
+.origin {
+  composes: inputText from '../../components/Typography/Typography.module.css';
+  margin-block: 0.5rem;
+}
+
+.choose {
+  composes: subline from '../../components/Typography/Typography.module.css';
+}
+
+.identities {
+  composes: fullWidthContainer from '../../components/View/View.module.css';
+  min-height: 3rem;
+  flex-grow: 1;
+  padding-block: 0.5rem;
+  margin-block: 0.75rem;
+}
+
+.identityLine {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  height: 2.5rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.avatar {
+  composes: avatar from '../../components/Avatar/Avatar.module.css';
+  height: 1.75rem;
+  width: 1.75rem;
+  background: none;
+  margin-inline: 0.5rem;
+}
+
+.name {
+  width: 24rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.disabled {
+  composes: name;
+  color: var(--color-grey-medium)
+}
+
+.names {
+  composes: subline from '../../components/Typography/Typography.module.css';
+  display: flex;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.namesInput {
+  composes: checkbox from '../../components/Checkbox/Checkbox.module.css';
+}
+
+.buttonsLine {
+  composes: buttonsLine from '../../components/Button/Button.module.css';
+  margin-top: 0.5rem;
+}
+
+.reject {
+  composes: buttonSecondary from '../../components/Button/Button.module.css';
+}
+
+.submit {
+  composes: buttonPrimary from '../../components/Button/Button.module.css';
+}
+
+.errorTooltip {
+  composes: tooltip from '../../components/ErrorTooltip/ErrorTooltip.module.css';
+  top: 2.5rem;
+  left: 75%;
+}

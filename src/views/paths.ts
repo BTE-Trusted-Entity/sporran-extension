@@ -93,5 +93,6 @@ export const paths = {
     },
     signDidExtrinsic: '/identity/:address/did/signExtrinsic',
     createDid: '/identity/:address/did/create',
+    shareIdentities: '/popup/getDidList',
   },
 };

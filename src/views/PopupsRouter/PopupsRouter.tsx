@@ -8,6 +8,7 @@ import { SignDApp } from '../SignDApp/SignDApp';
 import { SignRawDApp } from '../SignRawDApp/SignRawDApp';
 import { ImportCredentials } from '../ImportCredentials/ImportCredentials';
 import { AttestationRejected } from '../AttestationRejected/AttestationRejected';
+import { ShareIdentities } from '../ShareIdentities/ShareIdentities';
 import { paths } from '../paths';
 
 export function PopupsRouter(): JSX.Element {
@@ -30,6 +31,9 @@ export function PopupsRouter(): JSX.Element {
       </Route>
       <Route path={paths.popup.signRaw}>
         <SignRawDApp />
+      </Route>
+      <Route path={paths.popup.shareIdentities}>
+        <ShareIdentities />
       </Route>
       <Route path={paths.popup.import}>
         <ImportCredentials />
