@@ -7,6 +7,4 @@ export type ShareIdentitiesInput = DAppName;
 
 export type ShareIdentitiesOriginInput = ShareIdentitiesInput & Origin;
 
-export type ShareIdentitiesOutput = Array<
-  { did: DidUri; name?: string } | { pendingDid: DidUri; name?: string }
->;
+export type ShareIdentitiesOutput = Array<{ did: DidUri; name?: string }>;
