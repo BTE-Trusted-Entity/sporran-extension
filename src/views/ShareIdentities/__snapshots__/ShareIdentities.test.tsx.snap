@@ -27,7 +27,7 @@ exports[`ShareIdentities should render 1`] = `
     <h2
       class="choose"
     >
-      Choose at least one Identity to share
+      Choose at least one Identity with a DID to share
     </h2>
     <ul
       class="identities"
@@ -38,6 +38,7 @@ exports[`ShareIdentities should render 1`] = `
         >
           <input
             class="namesInput"
+            disabled=""
             name="4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"
             type="checkbox"
           />
@@ -48,8 +49,9 @@ exports[`ShareIdentities should render 1`] = `
             Identicon
           </div>
           <span
-            class="name"
+            class="disabled"
           >
+            [no DID] 
             Light DID Identity
           </span>
         </label>
@@ -60,6 +62,7 @@ exports[`ShareIdentities should render 1`] = `
         >
           <input
             class="namesInput"
+            disabled=""
             name="4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
             type="checkbox"
           />
@@ -70,8 +73,9 @@ exports[`ShareIdentities should render 1`] = `
             Identicon
           </div>
           <span
-            class="name"
+            class="disabled"
           >
+            [no DID] 
             Identity with on-chain DID and lots of coins
           </span>
         </label>
@@ -82,6 +86,7 @@ exports[`ShareIdentities should render 1`] = `
         >
           <input
             class="namesInput"
+            disabled=""
             name="4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
             type="checkbox"
           />
@@ -92,8 +97,9 @@ exports[`ShareIdentities should render 1`] = `
             Identicon
           </div>
           <span
-            class="name"
+            class="disabled"
           >
+            [no DID] 
             Identity which has a very very very very long name and might not even fit on the screen
           </span>
         </label>
@@ -131,7 +137,7 @@ exports[`ShareIdentities should render 1`] = `
         class="errorTooltip"
         hidden=""
       >
-        Choose at least one Identity to share
+        Choose at least one Identity with a DID to share
       </output>
     </p>
   </form>

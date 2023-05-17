@@ -1499,10 +1499,10 @@
     "message": "Include names when sharing"
   },
   "view_GetDidList_choose": {
-    "message": "Choose at least one Identity to share"
+    "message": "Choose at least one Identity with a DID to share"
   },
-  "view_GetDidList_deleted": {
-    "message": "[deleted] "
+  "view_GetDidList_noDID": {
+    "message": "[no DID] "
   },
   "view_GetDidList_share": {
     "message": "Share"

@@ -41,11 +41,12 @@ export function ShareIdentities(): JSX.Element | null {
         return;
       }
 
-      const result = selected.map(({ name, did }) => {
-        const namePart = includeName ? { name } : undefined;
-        const didPart = isFullDid(did) ? { did } : { pendingDid: did };
-        return { ...namePart, ...didPart };
-      }) as ShareIdentitiesOutput;
+      const result = selected
+        .filter(({ did }) => isFullDid(did))
+        .map(({ name, did }) => ({
+          did,
+          ...(includeName && { name }),
+        })) as ShareIdentitiesOutput;
       await backgroundShareIdentitiesChannel.return(result);
       window.close();
     },
@@ -75,7 +76,7 @@ export function ShareIdentities(): JSX.Element | null {
       <ul className={styles.identities}>
         {Object.values(identities).map((identity) => {
           const { name, did, address } = identity;
-          const inactive = !did;
+          const inactive = !isFullDid(did);
           return (
             <li key={address}>
               <label className={styles.identityLine}>
@@ -89,7 +90,7 @@ export function ShareIdentities(): JSX.Element | null {
                 <span />
                 <Avatar identity={identity} className={styles.avatar} />
                 <span className={inactive ? styles.disabled : styles.name}>
-                  {inactive && t('view_GetDidList_deleted')}
+                  {inactive && t('view_GetDidList_noDID')}
                   {name}
                 </span>
               </label>
