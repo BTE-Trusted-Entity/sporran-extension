@@ -118,7 +118,7 @@
     "react-router": "^5.3.4",
     "storybook": "^7.0.12",
     "stream-browserify": "^3.0.0",
-    "style-loader": "^3.3.2",
+    "style-loader": "^3.3.3",
     "stylelint": "^15.6.2",
     "stylelint-config-css-modules": "^4.2.0",
     "stylelint-config-standard": "^33.0.0",
