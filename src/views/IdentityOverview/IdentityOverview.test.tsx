@@ -14,7 +14,6 @@ import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { mockIsFullDid } from '../../utilities/did/did.mock';
 import { notDownloaded } from '../../utilities/credentials/CredentialsProvider.mock';
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
-import { legacyIdentity } from '../../utilities/identities/IdentitiesProvider.mock';
 import { useWeb3Name } from '../../utilities/useWeb3Name/useWeb3Name';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
@@ -115,21 +114,6 @@ describe('IdentityOverview', () => {
         </Route>
       </MemoryRouter>,
     );
-    expect(container).toMatchSnapshot();
-  });
-
-  it('should prompt to update legacy DID', async () => {
-    jest.mocked(useIsOnChainDidDeleted).mockReturnValue(false);
-    jest.mocked(useAsyncValue).mockReturnValueOnce(true);
-
-    const { container } = render(
-      <MemoryRouter initialEntries={[`/identity/${legacyIdentity.address}/`]}>
-        <Route path={paths.identity.overview}>
-          <IdentityOverview identity={legacyIdentity} />
-        </Route>
-      </MemoryRouter>,
-    );
-
     expect(container).toMatchSnapshot();
   });
 

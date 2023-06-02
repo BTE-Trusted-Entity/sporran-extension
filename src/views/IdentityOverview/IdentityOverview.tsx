@@ -4,14 +4,13 @@ import { Link, Redirect, useParams } from 'react-router-dom';
 
 import * as styles from './IdentityOverview.module.css';
 
-import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Balance } from '../../components/Balance/Balance';
 import { Stats } from '../../components/Stats/Stats';
 import { IdentitySuccessOverlay } from '../../components/IdentitySuccessOverlay/IdentitySuccessOverlay';
 
 import { Identity, isNew } from '../../utilities/identities/identities';
-import { isFullDid, needLegacyDidCrypto } from '../../utilities/did/did';
+import { isFullDid } from '../../utilities/did/did';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { generatePath, paths } from '../paths';
@@ -50,11 +49,8 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
     ({ isDownloaded }) => !isDownloaded,
   );
 
-  const hasLegacyDid = useAsyncValue(needLegacyDidCrypto, [did]);
-
   const upgradeDid = !isFullDid(did);
-  const manageDid = did && isFullDid(did) && !hasLegacyDid;
-  const repairDid = did && hasLegacyDid;
+  const manageDid = did && isFullDid(did);
 
   const web3name = useWeb3Name(did);
   const wasOnChainDidDeleted = useIsOnChainDidDeleted(did);
@@ -139,15 +135,6 @@ export function IdentityOverview({ identity }: Props): JSX.Element | null {
           className={styles.manage}
         >
           {t('view_IdentityOverview_on_chain')}
-        </Link>
-      )}
-
-      {repairDid && (
-        <Link
-          to={generatePath(paths.identity.did.repair, { address })}
-          className={styles.repair}
-        >
-          {t('view_IdentityOverview_did_repair')}
         </Link>
       )}
 

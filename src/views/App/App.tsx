@@ -19,7 +19,6 @@ import { PopupsRouter } from '../PopupsRouter/PopupsRouter';
 import { AppSettings } from '../AppSettings/AppSettings';
 
 import { paths } from '../paths';
-import { LegacyDids } from '../../components/LegacyDids/LegacyDids';
 import { ApiProvider } from '../../utilities/initKiltSDK/ApiProvider';
 import { useIdentities } from '../../utilities/identities/identities';
 
@@ -53,7 +52,6 @@ export function App(): JSX.Element {
               <AddIdentity />
               <Settings />
             </nav>
-            <LegacyDids />
           </Fragment>
         </RouteExcept>
 

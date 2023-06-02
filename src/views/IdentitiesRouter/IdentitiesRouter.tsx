@@ -32,7 +32,6 @@ import { SignDidFlow } from '../SignDidFlow/SignDidFlow';
 import { SignDidExtrinsic } from '../SignDidExtrinsic/SignDidExtrinsic';
 import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
 import { paths } from '../paths';
-import { DidRepair } from '../DidRepair/DidRepair';
 import { W3NCreateFlow } from '../W3NCreateFlow/W3NCreateFlow';
 import { W3NManageRouter } from '../W3NManageRouter/W3NManageRouter';
 import { CreateDidDApp } from '../CreateDidDApp/CreateDidDApp';
@@ -128,10 +127,6 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.identity.did.upgrade.start}>
           <DidUpgradeFlow identity={identity} />
-        </Route>
-
-        <Route path={paths.identity.did.repair}>
-          <DidRepair identity={identity} />
         </Route>
 
         <Route path={paths.identity.did.manage.start}>

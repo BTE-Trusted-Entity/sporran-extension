@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 
-import { IdentitiesMap, Identity } from './types';
+import { IdentitiesMap } from './types';
 import { IdentitiesContext } from './IdentitiesContext';
 
 export const identitiesMock: IdentitiesMap = {
@@ -64,14 +64,6 @@ export const moreIdentitiesMock: IdentitiesMap = {
     did: 'did:kilt:4tFY7xFap6VWDsAcfSB3yXpio9FzReAfLPm8omd9BzzaWTqh',
     index: 8,
   },
-};
-
-export const legacyIdentity: Identity = {
-  // session stage peanut cross say entire behave require rather whale corn beauty
-  name: 'Legacy Identity',
-  address: '4qp7KB8jbwqS6XXL8zH8qZn3GCdnZDt6Nmq5M47ztGKhXJVh',
-  did: 'did:kilt:4pTdRYFnieqTHgAyS9PijMjnH8hXonJ6iEvi32trwAPkoFtF',
-  index: 9,
 };
 
 export function IdentitiesProviderMock({

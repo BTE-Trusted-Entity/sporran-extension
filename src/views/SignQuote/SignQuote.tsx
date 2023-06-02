@@ -26,7 +26,7 @@ import {
   useIdentityCredentials,
 } from '../../utilities/credentials/credentials';
 import { usePopupData } from '../../utilities/popups/usePopupData';
-import { getDidDocument, needLegacyDidCrypto } from '../../utilities/did/did';
+import { getDidDocument } from '../../utilities/did/did';
 import {
   PasswordField,
   usePasswordField,
@@ -110,11 +110,8 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       );
 
       const { seed } = await passwordField.get(event);
-
-      const isLegacy = await needLegacyDidCrypto(identity.did);
       const { sign, encrypt, didDocument } = await getIdentityCryptoFromSeed(
         seed,
-        isLegacy,
       );
 
       // if a legacy attester generated a claim with a temporary DID, we need to replace it with the real one

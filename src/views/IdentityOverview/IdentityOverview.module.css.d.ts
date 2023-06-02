@@ -9,7 +9,6 @@ export const credentials: string;
 export const downloadPrompt: string;
 export const upgrade: string;
 export const manage: string;
-export const repair: string;
 export const web3Name: string;
 export const web3NameManage: string;
 export const avatarSmall: string;
