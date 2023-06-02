@@ -1,10 +1,7 @@
 import { Runtime } from 'webextension-polyfill-ts';
 import { Keypair } from '@polkadot/util-crypto/types';
-import {
-  ed25519PairFromRandom,
-  naclOpen,
-  naclSeal,
-} from '@polkadot/util-crypto';
+import { randomAsU8a } from '@polkadot/util-crypto';
+import { box } from 'tweetnacl';
 import {
   Did,
   DidResourceUri,
@@ -48,9 +45,7 @@ export async function getTabEncryption(
     throw new Error('Cannot generate encryption outside challenge flow');
   }
 
-  const encryptionKey = Utils.Crypto.makeEncryptionKeypairFromSeed(
-    ed25519PairFromRandom().secretKey,
-  );
+  const encryptionKey = Utils.Crypto.makeEncryptionKeypairFromSeed();
   const { secretKey } = encryptionKey;
 
   const baseKey = Utils.Crypto.makeKeypairFromSeed(
@@ -77,7 +72,7 @@ export async function getTabEncryption(
     return Message.decrypt(
       encrypted,
       async ({ data, peerPublicKey, nonce }) => {
-        const decrypted = naclOpen(data, nonce, peerPublicKey, secretKey);
+        const decrypted = box.open(data, nonce, peerPublicKey, secretKey);
         if (!decrypted) {
           throw new Error('Failed to decrypt with given key');
         }
@@ -96,7 +91,8 @@ export async function getTabEncryption(
     return Message.encrypt(
       message,
       async ({ data, peerPublicKey }) => {
-        const { sealed, nonce } = naclSeal(data, secretKey, peerPublicKey);
+        const nonce = randomAsU8a(24);
+        const sealed = box(data, nonce, peerPublicKey, secretKey);
         return {
           data: sealed,
           nonce,

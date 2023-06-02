@@ -8,7 +8,7 @@ import {
   useCallback,
   useState,
 } from 'react';
-import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/bip39-en';
+import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/wordlists/en';
 import { mnemonicValidate } from '@polkadot/util-crypto';
 import { Utils } from '@kiltprotocol/sdk-js';
 import { browser } from 'webextension-polyfill-ts';

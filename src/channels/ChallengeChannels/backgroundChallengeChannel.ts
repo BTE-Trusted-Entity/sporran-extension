@@ -1,5 +1,6 @@
 import { Runtime } from 'webextension-polyfill-ts';
-import { naclSeal } from '@polkadot/util-crypto';
+import { randomAsU8a } from '@polkadot/util-crypto';
+import { box } from 'tweetnacl';
 import { Utils } from '@kiltprotocol/sdk-js';
 
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
@@ -19,10 +20,12 @@ export async function produceEncryptedChallenge(
 
   const { dAppEncryptionDidKey, sporranEncryptionDidKeyUri } = encryption;
 
-  const { sealed, nonce } = naclSeal(
+  const nonce = randomAsU8a(24);
+  const sealed = box(
     Utils.Crypto.coToUInt8(challenge),
-    encryption.encryptionKey.secretKey,
+    nonce,
     dAppEncryptionDidKey.publicKey,
+    encryption.encryptionKey.secretKey,
   );
 
   return {
