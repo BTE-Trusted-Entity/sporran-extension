@@ -145,7 +145,7 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       await claimChannel.return(message);
       window.close();
     },
-    [sporranCredentials, cType, data, passwordField, identity.did, specVersion],
+    [sporranCredentials, cType, data, passwordField, specVersion],
   );
 
   const identityIsPredetermined = did && did === claim.owner;

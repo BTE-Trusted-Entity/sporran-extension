@@ -110,7 +110,6 @@ export function ShareCredentialSign({
     },
     [
       sporranCredential,
-      identity,
       passwordField,
       challenge,
       verifierDid,
