@@ -23,7 +23,7 @@ import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 
 import { Selected } from '../ShareCredential/ShareCredential';
 
-import { getDidDocument, needLegacyDidCrypto } from '../../utilities/did/did';
+import { getDidDocument } from '../../utilities/did/did';
 
 class AttestationRemovedError extends Error {}
 
@@ -81,9 +81,7 @@ export function ShareCredentialSign({
       event.preventDefault();
 
       const { seed } = await passwordField.get(event);
-
-      const isLegacy = await needLegacyDidCrypto(identity.did);
-      const { encrypt, sign } = await getIdentityCryptoFromSeed(seed, isLegacy);
+      const { encrypt, sign } = await getIdentityCryptoFromSeed(seed);
 
       const presentation = await Credential.createPresentation({
         credential: sporranCredential.credential,
@@ -112,7 +110,6 @@ export function ShareCredentialSign({
     },
     [
       sporranCredential,
-      identity,
       passwordField,
       challenge,
       verifierDid,

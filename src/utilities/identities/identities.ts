@@ -148,21 +148,6 @@ export function deriveAttestationKeyFromSeed(seed: Uint8Array) {
   return baseKey.derive('//did//assertion//0') as typeof baseKey;
 }
 
-function deriveEncryptionKeyLegacy(seed: Uint8Array) {
-  const keypair = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
-  const encryptionKeyringPair = keypair.derive('//did//keyAgreement//0');
-
-  const secret = encryptionKeyringPair
-    .encryptMessage(
-      new Uint8Array(24).fill(0),
-      new Uint8Array(24).fill(0),
-      new Uint8Array(24).fill(0),
-    )
-    .slice(24); // first 24 bytes are the nonce
-
-  return Utils.Crypto.makeEncryptionKeypairFromSeed(secret);
-}
-
 async function fixLightDidIssues(seed: Uint8Array) {
   const identities = await getIdentities();
   const { address } = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
@@ -189,14 +174,7 @@ async function fixLightDidIssues(seed: Uint8Array) {
     const document = await getDidDocument(identity.did);
 
     // Another issue we see is the light DIDs without key agreement keys, need to regenerate them as well
-    const encryptionKey = getDidEncryptionKey(document);
-
-    // This public key also means the DID needs to be regenerated
-    const troubleKey =
-      '0xf2c90875e0630bd1700412341e5e9339a57d2fefdbba08de1cac8db5b4145f6e';
-    if (Utils.Crypto.u8aToHex(encryptionKey.publicKey) === troubleKey) {
-      throw new Error();
-    }
+    getDidEncryptionKey(document);
   } catch {
     // We re-create the invalid DID from scratch and update its URI in the identity.
     const { uri } = getLightDidFromSeed(seed);
@@ -206,14 +184,11 @@ async function fixLightDidIssues(seed: Uint8Array) {
 
 export async function getIdentityCryptoFromSeed(
   seed: Uint8Array,
-  legacy?: boolean,
 ): Promise<IdentityDidCrypto> {
   await fixLightDidIssues(seed);
 
   const authenticationKey = deriveAuthenticationKey(seed);
-  const encryptionKey = legacy
-    ? deriveEncryptionKeyLegacy(seed)
-    : deriveEncryptionKeyFromSeed(seed);
+  const encryptionKey = deriveEncryptionKeyFromSeed(seed);
 
   const keypair = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
   const identities = await getIdentities();
@@ -375,7 +350,7 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
   const identity = identities[address];
 
   if (!identity.did) {
-    // could be a legacy identity without DID
+    // maybe the DID was deleted from the blockchain
     return;
   }
 

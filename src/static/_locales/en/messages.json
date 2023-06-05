@@ -294,18 +294,6 @@
       }
     }
   },
-  "component_LegacyDids_heading": {
-    "message": "Important Update"
-  },
-  "component_LegacyDids_explanation": {
-    "message": "We are updating DIDs for initial users, to reset the DID encryption feature for messaging in the future."
-  },
-  "component_LegacyDids_cta": {
-    "message": "Please update your DIDs by initiating a transaction for each one that you set up. We have already refunded the transaction fee to you."
-  },
-  "component_LegacyDids_dids": {
-    "message": "DIDs that need updating:"
-  },
   "component_ExplainerModal_show": {
     "message": "Information"
   },
@@ -518,9 +506,6 @@
   },
   "view_IdentityOverview_download_prompt": {
     "message": "Some credentials have not been backed up"
-  },
-  "view_IdentityOverview_did_repair": {
-    "message": "Please update your DID"
   },
   "view_IdentityOverview_web3name_create": {
     "message": "Create web3name"
@@ -1240,35 +1225,6 @@
   },
   "view_ImportCredentials_more": {
     "message": "Import More Credentials"
-  },
-  "view_DidRepair_heading": {
-    "message": "DID Update"
-  },
-  "view_DidRepair_subline": {
-    "message": "Please update your DID"
-  },
-  "view_DidRepair_fee": {
-    "message": "Fee "
-  },
-  "view_DidRepair_info": {
-    "message": "This transaction updates your DID.\nThe fee has already been refunded."
-  },
-  "view_DidRepair_insufficientFunds": {
-    "message": "You need at least $cost$ KILTs to update your DID",
-    "placeholders": {
-      "cost": {
-        "content": "$1"
-      }
-    }
-  },
-  "view_DidRepair_pending": {
-    "message": "Processing DID update"
-  },
-  "view_DidRepair_success": {
-    "message": "DID update successful"
-  },
-  "view_DidRepair_error": {
-    "message": "DID update failed"
   },
   "view_CreatePresentation_title": {
     "message": "Customize Credential"

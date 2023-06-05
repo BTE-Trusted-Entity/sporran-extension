@@ -161,7 +161,7 @@ export function useIdentityCredentials(
       return undefined;
     }
     if (!did) {
-      // could be a legacy identity without DID
+      // maybe the DID was deleted from the blockchain
       return [];
     }
     const usable = reject(all, isUnusableCredential);

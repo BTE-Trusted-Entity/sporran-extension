@@ -56,7 +56,6 @@ export const paths = {
           sign: '/identity/:address/did/endpoints/sign',
         },
       },
-      repair: '/identity/:address/did/repair',
     },
     web3name: {
       create: {
