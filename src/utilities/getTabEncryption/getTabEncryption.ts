@@ -1,7 +1,5 @@
 import { Runtime } from 'webextension-polyfill-ts';
 import { Keypair } from '@polkadot/util-crypto/types';
-import { randomAsU8a } from '@polkadot/util-crypto';
-import { box } from 'tweetnacl';
 import {
   Did,
   DidResourceUri,
@@ -71,13 +69,17 @@ export async function getTabEncryption(
   async function decrypt(encrypted: IEncryptedMessage): Promise<IMessage> {
     return Message.decrypt(
       encrypted,
-      async ({ data, peerPublicKey, nonce }) => {
-        const decrypted = box.open(data, nonce, peerPublicKey, secretKey);
-        if (!decrypted) {
+      async ({ data: box, peerPublicKey, nonce }) => {
+        const data = Utils.Crypto.decryptAsymmetric(
+          { box, nonce },
+          peerPublicKey,
+          secretKey,
+        );
+        if (!data) {
           throw new Error('Failed to decrypt with given key');
         }
 
-        return { data: decrypted };
+        return { data };
       },
     );
   }
@@ -91,10 +93,13 @@ export async function getTabEncryption(
     return Message.encrypt(
       message,
       async ({ data, peerPublicKey }) => {
-        const nonce = randomAsU8a(24);
-        const sealed = box(data, nonce, peerPublicKey, secretKey);
+        const { nonce, box } = Utils.Crypto.encryptAsymmetric(
+          data,
+          peerPublicKey,
+          secretKey,
+        );
         return {
-          data: sealed,
+          data: box,
           nonce,
           keyUri: sporranEncryptionDidKeyUri,
         };

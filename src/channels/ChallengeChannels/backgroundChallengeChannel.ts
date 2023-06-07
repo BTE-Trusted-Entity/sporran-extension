@@ -1,6 +1,4 @@
 import { Runtime } from 'webextension-polyfill-ts';
-import { randomAsU8a } from '@polkadot/util-crypto';
-import { box } from 'tweetnacl';
 import { Utils } from '@kiltprotocol/sdk-js';
 
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
@@ -20,17 +18,15 @@ export async function produceEncryptedChallenge(
 
   const { dAppEncryptionDidKey, sporranEncryptionDidKeyUri } = encryption;
 
-  const nonce = randomAsU8a(24);
-  const sealed = box(
-    Utils.Crypto.coToUInt8(challenge),
-    nonce,
+  const { nonce, box } = Utils.Crypto.encryptAsymmetric(
+    challenge,
     dAppEncryptionDidKey.publicKey,
     encryption.encryptionKey.secretKey,
   );
 
   return {
     encryptionKeyId: sporranEncryptionDidKeyUri,
-    encryptedChallenge: Utils.Crypto.u8aToHex(sealed),
+    encryptedChallenge: Utils.Crypto.u8aToHex(box),
     nonce: Utils.Crypto.u8aToHex(nonce),
   };
 }
