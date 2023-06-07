@@ -18,7 +18,7 @@ export async function produceEncryptedChallenge(
 
   const { dAppEncryptionDidKey, sporranEncryptionDidKeyUri } = encryption;
 
-  const { nonce, box } = Utils.Crypto.encryptAsymmetric(
+  const { nonce, box } = Utils.Crypto.encryptAsymmetricAsStr(
     challenge,
     dAppEncryptionDidKey.publicKey,
     encryption.encryptionKey.secretKey,
@@ -26,7 +26,7 @@ export async function produceEncryptedChallenge(
 
   return {
     encryptionKeyId: sporranEncryptionDidKeyUri,
-    encryptedChallenge: Utils.Crypto.u8aToHex(box),
-    nonce: Utils.Crypto.u8aToHex(nonce),
+    encryptedChallenge: box,
+    nonce,
   };
 }
