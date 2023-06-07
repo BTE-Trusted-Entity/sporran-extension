@@ -71,7 +71,7 @@ export function ImportCredentials(): JSX.Element | null {
               throw new Error('invalid');
             }
             try {
-              await Credential.verifyCredential(credential);
+              await Credential.verifyWellFormed(credential);
             } catch {
               throw new Error('invalid');
             }
