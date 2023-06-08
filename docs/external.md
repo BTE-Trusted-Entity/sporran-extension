@@ -1,6 +1,6 @@
 # DApp development with Sporran
 
-Sporran is designed to communicate with DApps built on the KILT blockchain. If you're developing your own DApp, or trying out KILT's example DApps [CertifiedProof](https://github.com/KILTprotocol/CertifiedProof) and [ProofCheck](https://github.com/KILTprotocol/ProofCheck), it's helpful to have a test wallet with play coins that you can use in conjunction with your development environment.
+Sporran is designed to communicate with DApps built on the KILT blockchain. If you’re developing your own DApp, or trying out KILT’s example DApps [CertifiedProof](https://github.com/KILTprotocol/CertifiedProof) and [ProofCheck](https://github.com/KILTprotocol/ProofCheck), it’s helpful to have a test wallet with play coins that you can use in conjunction with your development environment.
 
 ## Quick start _with play coins_
 
