@@ -1,12 +1,10 @@
 import path from 'node:path';
-import { createRequire } from 'node:module';
 
 import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import ExtensionReloader from 'webpack-extension-reloader';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const require = createRequire(import.meta.url);
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 export default {
@@ -57,16 +55,8 @@ export default {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.module.css', '.json'],
-    fallback: {
-      crypto: require.resolve('crypto-browserify'),
-      stream: require.resolve('stream-browserify'),
-    },
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      Buffer: ['buffer', 'Buffer'],
-      process: ['process'],
-    }),
     new webpack.DefinePlugin({
       VARIANT: JSON.stringify(process.env.VARIANT),
     }),
