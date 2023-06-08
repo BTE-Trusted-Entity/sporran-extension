@@ -1,5 +1,3 @@
-import webpack from 'webpack';
-
 export default {
   framework: {
     name: '@storybook/react-webpack5',
@@ -27,19 +25,6 @@ export default {
       ...config.resolve.alias,
       'webextension-polyfill-ts': require.resolve('../src/__mocks__/webextension-polyfill-ts.ts'),
     };
-
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      'crypto': require.resolve('crypto-browserify'),
-      'stream': require.resolve('stream-browserify'),
-    };
-
-    config.plugins = [
-      ...config.plugins,
-      new webpack.ProvidePlugin({
-        Buffer: ['buffer', 'Buffer'],
-        process: ['process'],
-      })];
 
     return config;
   },
