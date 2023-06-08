@@ -20,20 +20,3 @@ Sporran is designed to communicate with DApps built on the KILT blockchain. If y
    Click the _Receive_ link and copy the Identity address on the next screen.
 1. Visit the [Faucet](https://faucet.peregrine.kilt.io/), paste the Identity address there, accept the Terms,
    and click _Request Tokens_ to get some play KILT coins
-
-## Built with
-
-- [React](https://reactjs.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Storybook](https://storybook.js.org/)
-- [Jest](https://jestjs.io)
-- [Eslint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-- [Webpack](https://webpack.js.org/)
-- [Babel](https://babeljs.io/)
-- [webextension-polyfill-ts](https://github.com/Lusito/webextension-polyfill-ts)
-
-## Misc. References
-
-- [Chrome Extension Developer Guide](https://developer.chrome.com/extensions/devguide)
-- [Firefox Extension Developer Guide](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)

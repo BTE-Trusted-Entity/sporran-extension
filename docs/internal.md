@@ -64,3 +64,20 @@ yarn package
 ```
 
 This will generate a file `dist/web-ext-artifacts/sporran-???.zip` ready to be uploaded to stores.
+
+## Built with
+
+- [React](https://reactjs.org)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Storybook](https://storybook.js.org/)
+- [Jest](https://jestjs.io)
+- [Eslint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [Webpack](https://webpack.js.org/)
+- [Babel](https://babeljs.io/)
+- [webextension-polyfill-ts](https://github.com/Lusito/webextension-polyfill-ts)
+
+## Misc. References
+
+- [Chrome Extension Developer Guide](https://developer.chrome.com/extensions/devguide)
+- [Firefox Extension Developer Guide](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
