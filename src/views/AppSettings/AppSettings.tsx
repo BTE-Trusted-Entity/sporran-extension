@@ -7,7 +7,7 @@ import * as styles from './AppSettings.module.css';
 import {
   defaultEndpoint,
   endpoints,
-  getEndpoint,
+  getStoredEndpoint,
   publicEndpoints,
   setEndpoint,
 } from '../../utilities/endpoints/endpoints';
@@ -23,7 +23,7 @@ export function AppSettings(): JSX.Element {
   const [endpointValue, setEndpointValue] = useState('');
   useEffect(() => {
     (async () => {
-      const current = await getEndpoint();
+      const current = await getStoredEndpoint();
       setEndpointValue(current);
     })();
   }, []);

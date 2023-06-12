@@ -33,18 +33,31 @@ export const defaultEndpoint =
     ? endpoints[0]
     : endpoints[2];
 
+/**
+ * Always returns a value from a known list, to be used in the mappings of an endpoint to something else
+ */
 export async function getEndpoint(): Promise<KnownEndpoints> {
+  const stored = (await storage.get(endpointKey))[endpointKey];
+
+  const isKnown = endpoints.includes(stored);
+  return isKnown ? stored : defaultEndpoint;
+}
+
+/**
+ * The internal version allows the developers to specify any custom endpoint
+ */
+export async function getStoredEndpoint(): Promise<string> {
   const stored = (await storage.get(endpointKey))[endpointKey];
   if (!stored) {
     return defaultEndpoint;
   }
 
   const isKnown = endpoints.includes(stored);
-  if (isKnown) {
+  const allowUnknown = isInternal;
+  if (isKnown || allowUnknown) {
     return stored;
   }
 
-  await storage.remove(endpointKey);
   return defaultEndpoint;
 }
 

@@ -1,10 +1,10 @@
 import { Blockchain, ConfigService, connect } from '@kiltprotocol/sdk-js';
 
-import { getEndpoint } from '../endpoints/endpoints';
+import { getStoredEndpoint } from '../endpoints/endpoints';
 import { configuration } from '../../configuration/configuration';
 
 export async function initKiltSDK(): Promise<void> {
-  const address = await getEndpoint();
+  const address = await getStoredEndpoint();
   if (!ConfigService.isSet('api') || !ConfigService.get('api').isConnected) {
     await connect(address);
   }
