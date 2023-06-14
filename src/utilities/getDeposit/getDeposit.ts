@@ -52,7 +52,8 @@ export async function getDepositDid(
   const api = ConfigService.get('api');
 
   if (!did || Did.parse(did).type === 'light') {
-    return { amount: api.consts.did.deposit };
+    // @ts-ignore
+    return { amount: api.consts.did.baseDeposit };
   }
 
   return Did.depositFromChain(

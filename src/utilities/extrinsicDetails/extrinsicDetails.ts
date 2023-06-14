@@ -44,8 +44,8 @@ export function getExtrinsicDocsEntry({
   return [
     {
       label: t('component_extrinsicDetails_info'),
-      value: value.toString(),
-      details: rest.join('\n').replace(/\n+#.*$/s, ''),
+      value: value?.toString(),
+      details: rest?.join('\n').replace(/\n+#.*$/s, ''),
     },
   ];
 }
