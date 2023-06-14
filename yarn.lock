@@ -2280,10 +2280,10 @@
     rxjs "^7.8.1"
     tslib "^2.5.3"
 
-"@polkadot/ui-shared@^3.4.2":
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-3.4.2.tgz#95e510189b4c66add016af762041422ca3d71f80"
-  integrity sha512-kDSewuKgAKrNmPE+ksrnWHETnal9ivAtxGZpsWK+3AFcZpGlD+NmAvW0ZbHBdP8VFFiF0AwePnA4fdbBDFkSEw==
+"@polkadot/ui-shared@^3.5.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-3.5.1.tgz#c7be9c98d62940647bfc1c69b7675395f6c73ee8"
+  integrity sha512-YXOVfm4YDbkTOyVPu6duhHN1L6/kntzk4Zx2IM8mPXRAdV7nexKPh9nasG/DJth0oqomCuhAhH+B61UueCmXUQ==
   dependencies:
     colord "^2.9.3"
     tslib "^2.5.3"
