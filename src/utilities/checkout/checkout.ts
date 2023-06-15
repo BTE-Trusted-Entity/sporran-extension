@@ -13,7 +13,7 @@ const checkoutURLs: Record<KnownEndpoints, string> = {
 
 export async function getCheckoutURL() {
   const endpoint = await getEndpoint();
-  return checkoutURLs['wss://kilt-rpc.dwellir.com'];
+  return checkoutURLs[endpoint];
 }
 
 function localizeCost(cost: string) {
