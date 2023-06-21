@@ -22,6 +22,8 @@ import { contentCreateDidChannel } from './channels/CreateDidChannels/contentCre
 import { injectedCreateDidChannel } from './channels/CreateDidChannels/injectedCreateDidChannel';
 import { injectedShareIdentitiesChannel } from './channels/ShareIdentitiesChannels/injectedShareIdentitiesChannel';
 import { contentShareIdentitiesChannel } from './channels/ShareIdentitiesChannels/contentShareIdentitiesChannel';
+import { injectedSignCrossChainChannel } from './channels/SignCrossChainChannels/injectedSignCrossChainChannel';
+import { contentSignCrossChainChannel } from './channels/SignCrossChainChannels/contentSignCrossChainChannel';
 
 function injectScript() {
   // content scripts cannot expose APIs to website code, only injected scripts can
@@ -43,6 +45,7 @@ function initMessages() {
   injectedSignDidExtrinsicChannel.forward(contentSignDidExtrinsicChannel);
   injectedCreateDidChannel.forward(contentCreateDidChannel);
   injectedShareIdentitiesChannel.forward(contentShareIdentitiesChannel);
+  injectedSignCrossChainChannel.forward(contentSignCrossChainChannel);
 }
 
 async function main() {

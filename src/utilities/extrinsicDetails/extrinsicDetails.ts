@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
-import browser from 'webextension-polyfill';
+import type { ReactNode } from 'react';
+
+import { browser } from 'webextension-polyfill-ts';
 
 export interface Value {
   value: ReactNode;

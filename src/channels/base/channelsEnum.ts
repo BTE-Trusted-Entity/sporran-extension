@@ -21,6 +21,7 @@ export const popupsEnum = {
   share: 'share' as PopupAction,
   sign: 'sign' as PopupAction,
   signDid: 'signDid' as PopupAction,
+  signCrossChain: 'signCrossChain' as PopupAction,
   signRaw: 'signRaw' as PopupAction,
   signDidExtrinsic: 'signDidExtrinsic' as PopupAction,
   createDid: 'createDid' as PopupAction,

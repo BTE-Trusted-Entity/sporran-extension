@@ -1,10 +1,12 @@
-import {
+import type {
   DidResourceUri,
   DidUri,
   IEncryptedMessage,
   KiltAddress,
 } from '@kiltprotocol/sdk-js';
-import { HexString } from '@polkadot/util/types';
+import type { HexString } from '@polkadot/util/types';
+
+import type { Value } from './utilities/extrinsicDetails/extrinsicDetails';
 
 export interface IEncryptedMessageV1 {
   /** ID of the key agreement key of the receiver DID used to encrypt the message */
@@ -81,6 +83,13 @@ export interface InjectedWindowProvider<T> {
     plaintext: string,
     didUri?: DidUri,
   ) => Promise<{ signature: string; didKeyUri: DidResourceUri }>;
+
+  signCrossChain: (
+    plaintext: string,
+    blockNumber: number,
+    values: Value[],
+    didUri?: DidUri,
+  ) => Promise<{ signed: string }>;
 
   signExtrinsicWithDid: (
     extrinsic: HexString,
