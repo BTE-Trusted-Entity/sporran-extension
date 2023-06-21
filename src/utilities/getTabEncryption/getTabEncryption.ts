@@ -40,7 +40,9 @@ export async function getTabEncryption(
     return tabEncryptions[tabId];
   }
   if (!dAppEncryptionKeyUri) {
-    throw new Error('Cannot generate encryption outside challenge flow');
+    throw new Error(
+      'Cannot generate encryption outside challenge flow. Have you called startSession() before?',
+    );
   }
 
   const encryptionKey = Utils.Crypto.makeEncryptionKeypairFromSeed();

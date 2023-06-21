@@ -9,6 +9,8 @@ import { debounceAsync } from '../../utilities/debounceAsync/debounceAsync';
 import { backgroundAccessChannel } from './backgroundAccessChannels';
 import { AccessInput, AccessOutput } from './types';
 
+const help = 'Enable in Sporran > ⚙ Settings > Toggle Website Access';
+
 export async function unsafeGetAuthorizedOrigin(
   input: AccessInput,
   sender: Runtime.MessageSender,
@@ -25,7 +27,7 @@ export async function unsafeGetAuthorizedOrigin(
   }
 
   if (authorizedDApps[origin] === false) {
-    throw new Error('Not authorized');
+    throw new Error(`Not authorized. ${help}`);
   }
 
   const authorized = await backgroundAccessChannel.get(
@@ -39,7 +41,7 @@ export async function unsafeGetAuthorizedOrigin(
   });
 
   if (!authorized) {
-    throw new Error('Not authorized');
+    throw new Error(`Not authorized. ${help}`);
   }
 
   return origin;
