@@ -42,16 +42,23 @@ export async function verifyDidConfigResource(
   tabUrl: string,
 ): Promise<void> {
   const { origin } = new URL(tabUrl);
-  const didConfigResource = (await ky
-    .get(`${origin}/.well-known/did-configuration.json`)
-    .json()) as {
+  const url = `${origin}/.well-known/did-configuration.json`;
+
+  let didConfigResource: {
     '@context': string;
     linked_dids: DomainLinkageCredential[];
   };
+  try {
+    didConfigResource = await ky.get(url).json();
+  } catch (cause) {
+    console.error(cause);
+    throw new Error(`Could not fetch ${url}: ${cause}`);
+  }
 
   // Verification steps outlined in Well Known DID Configuration
   // https://identity.foundation/.well-known/resources/did-configuration/#did-configuration-resource-verification
 
+  let verificationError = new Error('No "linked_dids"');
   const verified = await asyncSome(
     didConfigResource.linked_dids,
     async (credential) => {
@@ -90,13 +97,14 @@ export async function verifyDidConfigResource(
         return true;
       } catch (error) {
         console.error(error);
+        verificationError = error as Error;
         return false;
       }
     },
   );
   if (!verified) {
     throw new Error(
-      `Verification of DID configuration resource of ${origin} failed for ${did}`,
+      `Verification of ${url} failed for ${did}: ${verificationError}`,
     );
   }
 }

@@ -43,7 +43,9 @@ export class WindowChannel<Input, Output> {
     function responseListener({ source, data }: MessageEvent) {
       if (source === window && data.type === output && data.callId === callId) {
         if (data.error) {
-          listener(jsonToError(data));
+          const error = jsonToError(data);
+          error.name = 'SporranError';
+          listener(error);
         } else {
           listener(null, data.output);
         }
