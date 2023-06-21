@@ -30,6 +30,7 @@ import { DidUpgradeFlow } from '../DidUpgradeFlow/DidUpgradeFlow';
 import { SignQuote } from '../SignQuote/SignQuote';
 import { SignDidFlow } from '../SignDidFlow/SignDidFlow';
 import { SignDidExtrinsic } from '../SignDidExtrinsic/SignDidExtrinsic';
+import { SignCrossChain } from '../SignCrossChain/SignCrossChain';
 import { DidManageRouter } from '../DidManageRouter/DidManageRouter';
 import { paths } from '../paths';
 import { W3NCreateFlow } from '../W3NCreateFlow/W3NCreateFlow';
@@ -119,6 +120,10 @@ export function SpecificIdentityRouter({
 
         <Route path={paths.popup.signDidExtrinsic}>
           <SignDidExtrinsic identity={identity} />
+        </Route>
+
+        <Route path={paths.popup.signCrossChain}>
+          <SignCrossChain identity={identity} />
         </Route>
 
         <Route path={paths.popup.createDid}>

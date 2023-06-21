@@ -1427,6 +1427,24 @@
   "view_SignDidExtrinsic_endpoint_remove_error": {
     "message": "No service endpoint found for DID"
   },
+  "view_SignCrossChain_title": {
+    "message": "Cross-chain DIP signing"
+  },
+  "view_SignCrossChain_subline": {
+    "message": "Select your Identity and sign with your password"
+  },
+  "view_SignCrossChain_reject": {
+    "message": "Reject"
+  },
+  "view_SignCrossChain_error_light_did": {
+    "message": "You need to create a DID first"
+  },
+  "view_SignCrossChain_error_unusable_did": {
+    "message": "This identity’s DID has been removed and is unusable"
+  },
+  "view_SignCrossChain_error_web3name": {
+    "message": "Come back when you’ve got a web3name"
+  },
   "view_W3NManage_heading": {
     "message": "Manage web3name"
   },

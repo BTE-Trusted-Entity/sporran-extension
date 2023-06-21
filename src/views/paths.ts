@@ -90,6 +90,7 @@ export const paths = {
       sign: '/identity/:address/did/sign/password',
       credentials: '/identity/:address/did/sign/credentials',
     },
+    signCrossChain: '/identity/:address/did/signCrossChain',
     signDidExtrinsic: '/identity/:address/did/signExtrinsic',
     createDid: '/identity/:address/did/create',
     shareIdentities: '/popup/getDidList',

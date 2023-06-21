@@ -21,6 +21,8 @@ import {
   PubSubSessionV1,
   PubSubSessionV2,
 } from './interfaces';
+import { injectedSignCrossChainChannel } from './channels/SignCrossChainChannels/injectedSignCrossChainChannel';
+import { Value } from './utilities/extrinsicDetails/extrinsicDetails';
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
 
@@ -183,6 +185,24 @@ async function signExtrinsicWithDid(
   });
 }
 
+async function signCrossChain(
+  plaintext: string,
+  blockNumber: number,
+  values: Value[],
+  didUri?: DidUri,
+): Promise<{
+  signed: string;
+}> {
+  const dAppName = document.title.substring(0, 50);
+  return injectedSignCrossChainChannel.get({
+    plaintext,
+    blockNumber,
+    values,
+    didUri,
+    dAppName,
+  });
+}
+
 async function getSignedDidCreationExtrinsic(
   submitter: KiltAddress,
   pendingDidUri?: DidUri,
@@ -218,6 +238,7 @@ function initialize() {
     getDidList,
     signWithDid,
     signExtrinsicWithDid,
+    signCrossChain,
     getSignedDidCreationExtrinsic,
     startSession,
     name: 'Sporran', // manifest_name
