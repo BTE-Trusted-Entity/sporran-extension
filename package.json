@@ -63,7 +63,7 @@
     "react-dialog-polyfill": "^1.1.6",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
-    "swr": "^2.1.5",
+    "swr": "^2.2.0",
     "webextension-polyfill-ts": "^0.26.0"
   },
   "devDependencies": {
