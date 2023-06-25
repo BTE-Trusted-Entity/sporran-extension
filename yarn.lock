@@ -10640,10 +10640,10 @@ react-colorful@^5.1.2:
   resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.6.1.tgz#7dc2aed2d7c72fac89694e834d179e32f3da563b"
   integrity sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==
 
-react-dialog-polyfill@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/react-dialog-polyfill/-/react-dialog-polyfill-1.1.6.tgz#e8280eff3d9de38da204814da6c5f48b24884d8b"
-  integrity sha512-AZ6aziLl4ahOzBtV8AB9uZwWA4fG5lyMqpoqn+PGpPEAvgOwr4/43GTGGHtl29yfHBllaqodpgJpJ+YjYvlyQQ==
+react-dialog-polyfill@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/react-dialog-polyfill/-/react-dialog-polyfill-1.1.7.tgz#95463f268e93de922244dc66c5bd0fd6475d7d2a"
+  integrity sha512-VX7kFTmAYlWW8+wRxnjdEoKYDGGeFeXM45twj0OIiOq7uFPw45RBSxxf3hTc78C89RGMC2ZS6DFt7xUOAxtIQA==
   dependencies:
     dialog-polyfill "^0.5.6"
 
