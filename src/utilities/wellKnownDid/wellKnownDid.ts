@@ -67,23 +67,31 @@ export async function verifyDidConfigResource(
 
         const matchesSessionDid = did === credentialSubject.id;
         if (!matchesSessionDid) {
-          return false;
+          throw new Error(
+            `The credential at ${url} is issued for ${credentialSubject.id} but message came from ${did}`,
+          );
         }
 
         Did.validateUri(credentialSubject.id, 'Did');
         const matchesIssuer = issuer === credentialSubject.id;
         if (!matchesIssuer) {
-          return false;
+          throw new Error(
+            `The credential at ${url} is issued by ${issuer} and not by ${credentialSubject.id}`,
+          );
         }
 
         const matchesOrigin = origin === credentialSubject.origin;
         if (!matchesOrigin) {
-          return false;
+          throw new Error(
+            `The credential at ${url} is issued for origin ${credentialSubject.origin} but message came from ${origin}`,
+          );
         }
 
         const issuerDidDocument = await getDidDocument(issuer);
         if (!issuerDidDocument.assertionMethod?.[0]) {
-          return false;
+          throw new Error(
+            `The credential at ${url} is issued for ${credentialSubject.id} but this DID has no assertionMethod key`,
+          );
         }
 
         await Did.verifyDidSignature({
@@ -94,6 +102,7 @@ export async function verifyDidConfigResource(
           ),
           message: Utils.Crypto.coToUInt8(credentialSubject.rootHash),
         });
+
         return true;
       } catch (error) {
         console.error(error);
