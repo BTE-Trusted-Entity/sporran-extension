@@ -62,7 +62,7 @@
 
 .disabled {
   composes: name;
-  color: var(--color-grey-medium)
+  color: var(--color-grey-medium);
 }
 
 .names {

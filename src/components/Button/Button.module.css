@@ -12,7 +12,8 @@
     rgb(var(--color-black-rgb) / 0%) 0%,
     rgb(var(--color-black-rgb) / 40%) 100%
   );
-  box-shadow: inset -1px 1px 1px 0 rgb(var(--color-white-rgb) / 10%),
+  box-shadow:
+    inset -1px 1px 1px 0 rgb(var(--color-white-rgb) / 10%),
     0.375rem 0.375rem 0.75rem 0 rgb(var(--color-black-rgb) / 20%);
   cursor: pointer;
 }
@@ -67,7 +68,8 @@
 
   --wide-button-icon: url('../../components/images/chevron-right.svg');
 
-  background: var(--wide-button-icon) no-repeat 0.75rem center/1.5rem,
+  background:
+    var(--wide-button-icon) no-repeat 0.75rem center/1.5rem,
     rgb(var(--color-black-rgb) / 30%)
       url('../../components/images/chevron-right.svg') no-repeat right 0.75rem
       center/0.375rem 0.75rem;
@@ -108,7 +110,8 @@
   background-image: url('../images/checkmark.svg'),
     linear-gradient(#335a87 0%, var(--color-dark) 100%);
   margin: 0 0.375rem;
-  box-shadow: inset -1px 1px 1px 0 rgb(var(--color-white-rgb) / 10%),
+  box-shadow:
+    inset -1px 1px 1px 0 rgb(var(--color-white-rgb) / 10%),
     0 0 0 2px rgb(var(--color-white-rgb) / 5%),
     0.375rem 0.375rem 0.75rem 0 rgb(var(--color-black-rgb) / 20%);
 }
@@ -118,7 +121,8 @@
   border: 2px solid var(--color-dark);
   background-image: url('../images/x-close.svg'),
     linear-gradient(#335a87 0%, #2f537e 33%, #264262 100%);
-  box-shadow: inset -1px 1px 1px 0 rgb(var(--color-white-rgb) / 10%),
+  box-shadow:
+    inset -1px 1px 1px 0 rgb(var(--color-white-rgb) / 10%),
     0.375rem 0.375rem 0.75rem 0 rgb(var(--color-black-rgb) / 20%);
 }
 

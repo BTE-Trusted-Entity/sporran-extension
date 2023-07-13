@@ -34,7 +34,9 @@
   position: absolute;
   left: 1px;
   background-color: var(--color-grey-light);
-  transition: left 0.2s, background-color 0.2s;
+  transition:
+    left 0.2s,
+    background-color 0.2s;
 }
 
 .toggle:checked + *::after {
