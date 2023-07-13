@@ -26,7 +26,8 @@
   width: calc(100% - 4.5rem);
   padding-right: 2.5rem;
   padding-left: 2rem;
-  background: var(--copy-value-icon) no-repeat left 0.625rem
+  background:
+    var(--copy-value-icon) no-repeat left 0.625rem
       center/var(--copy-value-icon-size),
     var(--input-gradient);
 }

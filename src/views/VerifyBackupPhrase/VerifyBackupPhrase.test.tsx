@@ -67,9 +67,7 @@ describe('VerifyBackupPhrase', () => {
   it('should handle duplicate words', async () => {
     render(<VerifyBackupPhrase backupPhrase={backupPhraseWithDupeWord} />);
     await userEvent.click(
-      (
-        await screen.findAllByRole('button', { name: 'two' })
-      )[0],
+      (await screen.findAllByRole('button', { name: 'two' }))[0],
     );
 
     const buttons = await screen.findAllByRole('button', { name: 'two' });

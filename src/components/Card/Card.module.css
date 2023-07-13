@@ -60,7 +60,8 @@
 
 .card:last-child {
   border-bottom: none;
-  box-shadow: 0 -1px 2px rgb(var(--color-black-rgb) / 30%),
+  box-shadow:
+    0 -1px 2px rgb(var(--color-black-rgb) / 30%),
     inset 0 -3px 6px rgb(var(--color-black-rgb) / 30%);
 }
 

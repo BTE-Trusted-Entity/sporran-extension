@@ -23,9 +23,13 @@
   composes: input;
   text-align: right;
   background-image: url('../images/kilt-coin.svg'), var(--input-gradient);
-  background-size: calc(13rem / 16) 1rem, auto;
+  background-size:
+    calc(13rem / 16) 1rem,
+    auto;
   background-repeat: no-repeat;
-  background-position: calc(100% - 0.75rem) center, 0;
+  background-position:
+    calc(100% - 0.75rem) center,
+    0;
   padding-right: 2rem;
 }
 
@@ -43,7 +47,9 @@
   background-image: url('../images/pencil.svg'), var(--input-gradient);
   background-size: auto;
   background-repeat: no-repeat;
-  background-position: calc(100% - 0.75rem) center, 0;
+  background-position:
+    calc(100% - 0.75rem) center,
+    0;
   padding-right: 2.25rem;
 }
 
