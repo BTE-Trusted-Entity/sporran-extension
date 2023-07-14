@@ -15,7 +15,7 @@ Sporran is designed to communicate with DApps built on the KILT blockchain. If y
 1. Click the _Load unpacked_ button and select the `sporran-extension/dist` directory
    (or in Firefox click _Load Temporary Add-on..._ and select `sporran-extension/dist/manifest.json`)
 1. Now you have the internal version of Sporran installed. **DO NOT USE IT** for real KILT identities/addresses/coins!
-   Choose `wss://peregrine.kilt.io/parachain-public-ws` in _⚙ Settings > Custom Endpoint_.
+   Choose `wss://peregrine.kilt.io` in _⚙ Settings > Custom Endpoint_.
    Click the Sporran icon in the browser toolbar and follow the flow to create an Identity.
    Click the _Receive_ link and copy the Identity address on the next screen.
 1. Visit the [Faucet](https://faucet.peregrine.kilt.io/), paste the Identity address there, accept the Terms,

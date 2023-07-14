@@ -8,7 +8,7 @@ const endpointKey = 'endpoints';
 export const endpoints = [
   'wss://kilt-rpc.dwellir.com',
   'wss://spiritnet.kilt.io',
-  'wss://peregrine.kilt.io/parachain-public-ws',
+  'wss://peregrine.kilt.io',
   'wss://peregrine-stg.kilt.io/para',
   'wss://sporran-testnet.kilt.io',
 ] as const;
