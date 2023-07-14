@@ -9,8 +9,7 @@ import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 const TXDURLs: Record<KnownEndpoints, string> = {
   'wss://kilt-rpc.dwellir.com': 'https://txd.trusted-entity.io',
   'wss://spiritnet.kilt.io': 'https://txd.trusted-entity.io',
-  'wss://peregrine.kilt.io/parachain-public-ws':
-    'https://txd-dev.trusted-entity.io',
+  'wss://peregrine.kilt.io': 'https://txd-dev.trusted-entity.io',
   'wss://peregrine-stg.kilt.io/para': 'https://txd-dev.trusted-entity.io',
   'wss://sporran-testnet.kilt.io': 'https://txd-dev.trusted-entity.io',
 };
