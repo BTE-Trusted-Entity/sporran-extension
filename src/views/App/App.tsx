@@ -21,6 +21,7 @@ import { AppSettings } from '../AppSettings/AppSettings';
 import { paths } from '../paths';
 import { ApiProvider } from '../../utilities/initKiltSDK/ApiProvider';
 import { useIdentities } from '../../utilities/identities/identities';
+import { isInternal } from '../../configuration/variant';
 
 function confirmNavigation(message: string, callback: (ok: boolean) => void) {
   const allowed = window.confirm(message);
@@ -85,7 +86,7 @@ export function App(): JSX.Element {
 
 export function AppWithProviders(): JSX.Element {
   return (
-    <div className={styles.container}>
+    <div className={isInternal ? styles.containerInternal : styles.container}>
       <ConfigurationProvider>
         <IdentitiesProvider>
           <CredentialsProvider>
