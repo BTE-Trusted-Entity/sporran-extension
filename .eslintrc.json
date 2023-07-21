@@ -20,6 +20,7 @@
   "rules": {
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    "import/no-named-as-default-member": "off",
     "import/no-extraneous-dependencies": 2,
     "import/order": ["error", {
       "newlines-between": "always-and-inside-groups",

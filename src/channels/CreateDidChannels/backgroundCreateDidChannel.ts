@@ -1,4 +1,4 @@
-import { Runtime } from 'webextension-polyfill-ts';
+import { Runtime } from 'webextension-polyfill';
 
 import { popupsEnum } from '../base/channelsEnum';
 import { PopupChannel } from '../base/PopupChannel/PopupChannel';

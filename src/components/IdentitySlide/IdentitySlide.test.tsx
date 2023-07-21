@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import {
   identitiesMock as identities,

@@ -1,5 +1,5 @@
 import { FormEvent, Fragment, JSX, useCallback } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { filter, find } from 'lodash-es';
 import {
   BalanceUtils,

@@ -1,5 +1,5 @@
 import { JSX, useCallback, useEffect } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { find } from 'lodash-es';
 
 import * as styles from './AttestationRejected.module.css';

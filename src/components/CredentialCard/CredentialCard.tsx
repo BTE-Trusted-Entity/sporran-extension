@@ -13,7 +13,7 @@ import {
 import { createPortal } from 'react-dom';
 import { Link, useParams } from 'react-router-dom';
 import { Modal } from 'react-dialog-polyfill';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import cx from 'classnames';
 
 import * as styles from './CredentialCard.module.css';

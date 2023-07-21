@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { FormEvent, JSX, useCallback, useState } from 'react';
 import {
   Attestation,

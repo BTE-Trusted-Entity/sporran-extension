@@ -1,6 +1,6 @@
 import { JSX, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { find } from 'lodash-es';
 
 import * as styles from './CreatePresentation.module.css';

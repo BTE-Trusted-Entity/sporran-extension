@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 import { Link, NavLink, useLocation, useRouteMatch } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { sortBy } from 'lodash-es';
 
 import * as styles from './IdentitiesCarousel.module.css';

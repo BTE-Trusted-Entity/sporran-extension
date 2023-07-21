@@ -4658,6 +4658,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/webextension-polyfill@npm:^0.10.1":
+  version: 0.10.1
+  resolution: "@types/webextension-polyfill@npm:0.10.1"
+  checksum: 7315dcb1943aedf2e18fd0c536406a3b3b9a8dc11ad380e66cf810e700cd7cc0a2ac08c2b017b6c17aba8a71782efc55158e1cb93497f3b680ac90a8d7b6635d
+  languageName: node
+  linkType: hard
+
 "@types/webpack-sources@npm:*":
   version: 2.1.1
   resolution: "@types/webpack-sources@npm:2.1.1"
@@ -15697,6 +15704,7 @@ __metadata:
     "@types/react": ^18.2.15
     "@types/react-dom": ^18.2.7
     "@types/react-router-dom": ^5.3.3
+    "@types/webextension-polyfill": ^0.10.1
     "@typescript-eslint/eslint-plugin": ^6.1.0
     "@typescript-eslint/parser": ^6.1.0
     babel-core: ^6.26.3
@@ -15744,7 +15752,7 @@ __metadata:
     typescript: ^5.1.6
     typescript-plugin-css-modules: ^5.0.1
     web-ext: ^7.6.2
-    webextension-polyfill-ts: ^0.26.0
+    webextension-polyfill: ^0.10.0
     webpack: ^5.88.2
     webpack-cli: ^5.1.4
     webpack-extension-reloader: ^1.1.4
@@ -17428,12 +17436,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webextension-polyfill-ts@npm:^0.26.0":
-  version: 0.26.0
-  resolution: "webextension-polyfill-ts@npm:0.26.0"
-  dependencies:
-    webextension-polyfill: ^0.8.0
-  checksum: cf9e21da6b1237e760d3774f707d9694c6e51e9629c15ebdac5b43e0c7b02fffe18570aeab1f5b3126e24fbb4bf6f523c56d5c9a92d944d900e7182c1fd81066
+"webextension-polyfill@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "webextension-polyfill@npm:0.10.0"
+  checksum: 4a59036bda571360c2c0b2fb03fe1dc244f233946bcf9a6766f677956c40fd14d270aaa69cdba95e4ac521014afbe4008bfa5959d0ac39f91c990eb206587f91
   languageName: node
   linkType: hard
 
@@ -17441,13 +17447,6 @@ __metadata:
   version: 0.5.0
   resolution: "webextension-polyfill@npm:0.5.0"
   checksum: 629b8cb19281d869df956963cf798ef1f02fb52e4ca757782d1800ad0ac77f9a7fdc81714c9518b32228a0937aedea98c23a6c776d6f2985b75da02e8a087067
-  languageName: node
-  linkType: hard
-
-"webextension-polyfill@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "webextension-polyfill@npm:0.8.0"
-  checksum: 56286e6216e15834fdcdc3dcf611000d96b49c9d925de3d657eb5f1e294074180dd3efe78a0966223eb311ac3a0ac5fdf71d324b836bf05724455ffd6c7c98c3
   languageName: node
   linkType: hard
 

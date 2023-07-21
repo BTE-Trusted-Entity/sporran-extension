@@ -1,6 +1,6 @@
 import type { AnyJson } from '@polkadot/types/types';
 
-import { browser, Runtime, Windows } from 'webextension-polyfill-ts';
+import browser, { Runtime, Windows } from 'webextension-polyfill';
 
 import { PopupAction } from '../../../utilities/popups/types';
 import { jsonToBase64 } from '../../../utilities/base64/base64';

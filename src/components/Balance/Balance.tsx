@@ -1,6 +1,6 @@
 import { Fragment, JSX, useEffect, useState } from 'react';
 import BN from 'bn.js';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import * as styles from './Balance.module.css';
 

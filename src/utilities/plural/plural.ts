@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 type Category = 'zero' | 'one' | 'two' | 'few' | 'many' | 'other';
 
@@ -18,5 +18,5 @@ export function plural(value: number, keys: Keys): string {
     );
   }
 
-  return browser.i18n.getMessage(key, [value]);
+  return browser.i18n.getMessage(key, [String(value)]);
 }

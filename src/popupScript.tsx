@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { AppWithProviders } from './views/App/App';
 import { connectToBackground } from './channels/ExtensionPopupMessages/ExtensionPopupMessages';

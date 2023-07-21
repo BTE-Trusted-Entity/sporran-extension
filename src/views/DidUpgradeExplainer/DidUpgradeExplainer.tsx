@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { Link } from 'react-router-dom';
 import {
   ChangeEvent,
@@ -165,7 +165,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
                   onChange={handleChange}
                   className={styles.select}
                 />
-                {t('view_DidUpgradeExplainer_euro', [euroCost])}
+                {euroCost && t('view_DidUpgradeExplainer_euro', [euroCost])}
               </label>
 
               <ExplainerModal

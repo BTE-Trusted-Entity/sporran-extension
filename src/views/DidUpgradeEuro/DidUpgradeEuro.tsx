@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { Link } from 'react-router-dom';
 import { FormEvent, JSX, useCallback } from 'react';
 

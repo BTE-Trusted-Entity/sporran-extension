@@ -1,6 +1,6 @@
 import { JSX, useCallback } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 
 import * as menuStyles from '../Menu/Menu.module.css';

@@ -75,7 +75,7 @@ This will generate a file `dist/web-ext-artifacts/sporran-???.zip` ready to be u
 - [Prettier](https://prettier.io/)
 - [Webpack](https://webpack.js.org/)
 - [Babel](https://babeljs.io/)
-- [webextension-polyfill-ts](https://github.com/Lusito/webextension-polyfill-ts)
+- [webextension-polyfill](https://github.com/mozilla/webextension-polyfill)
 
 ## Misc. References
 

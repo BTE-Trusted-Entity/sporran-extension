@@ -1,5 +1,5 @@
-// src/__mocks__/webextension-polyfill-ts
-// Update this file to include any mocks for the `webextension-polyfill-ts` package
+// src/__mocks__/webextension-polyfill
+// Update this file to include any mocks for the `webextension-polyfill` package
 // This is used to mock these values for Storybook so you can develop your components
 // outside the Web Extension environment provided by a compatible browser
 
@@ -7,7 +7,7 @@ import { setupGetMessageShim } from 'chrome-extension-i18n-shim';
 
 import messagesEN from '../static/_locales/en/messages.json';
 
-export const browser = {
+export default {
   tabs: {
     executeScript(
       currentTabId: number /* eslint-disable-line @typescript-eslint/no-unused-vars */,

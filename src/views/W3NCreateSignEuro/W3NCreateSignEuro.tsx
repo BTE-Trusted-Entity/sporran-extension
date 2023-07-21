@@ -1,6 +1,6 @@
 import { FormEvent, JSX, useCallback } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { ConfigService, Did } from '@kiltprotocol/sdk-js';
 

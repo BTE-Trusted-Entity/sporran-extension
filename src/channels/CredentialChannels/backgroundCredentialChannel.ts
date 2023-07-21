@@ -1,4 +1,4 @@
-import { Runtime } from 'webextension-polyfill-ts';
+import { Runtime } from 'webextension-polyfill';
 import { IEncryptedMessage, IRejectTerms } from '@kiltprotocol/sdk-js';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';

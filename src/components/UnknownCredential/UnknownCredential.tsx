@@ -1,7 +1,7 @@
 import type { HexString } from '@polkadot/util/types';
 
 import { JSX } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import * as styles from './UnknownCredential.module.css';
 

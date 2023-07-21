@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { storage } from '../storage/storage';
 import { isInternal } from '../../configuration/variant';

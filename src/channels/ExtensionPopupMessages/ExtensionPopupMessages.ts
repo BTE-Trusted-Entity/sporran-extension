@@ -1,5 +1,5 @@
 import { disconnect } from '@kiltprotocol/sdk-js';
-import { browser, Runtime } from 'webextension-polyfill-ts';
+import browser, { Runtime } from 'webextension-polyfill';
 
 import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
 

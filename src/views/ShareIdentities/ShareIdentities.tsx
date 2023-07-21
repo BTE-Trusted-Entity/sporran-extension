@@ -1,5 +1,5 @@
 import { FormEvent, JSX, useCallback, useState } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { pick } from 'lodash-es';
 
 import * as styles from './ShareIdentities.module.css';

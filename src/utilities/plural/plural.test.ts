@@ -1,8 +1,8 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { plural } from './plural';
 
-jest.mock('webextension-polyfill-ts');
+jest.mock('webextension-polyfill');
 jest
   .spyOn(browser.i18n, 'getMessage')
   .mockImplementation((key) => (key === 'messages_locale' ? 'en' : key));

@@ -6,7 +6,7 @@ import {
   useCallback,
   useState,
 } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { Link, Redirect } from 'react-router-dom';
 
 import * as styles from './Welcome.module.css';

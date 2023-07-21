@@ -1,5 +1,5 @@
 import { MouseEventHandler, RefObject, useCallback, useState } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import * as styles from './useCopyButton.module.css';
 
