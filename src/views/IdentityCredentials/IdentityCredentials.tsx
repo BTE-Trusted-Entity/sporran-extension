@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { JSX, useMemo, useCallback } from 'react';
 
 import { Link } from 'react-router-dom';

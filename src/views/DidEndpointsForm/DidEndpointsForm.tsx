@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 import { Link, Prompt, Redirect, useParams } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { stringToU8a } from '@polkadot/util';
 import {
   ConfigService,
@@ -171,7 +171,10 @@ function DidNewEndpoint({
       const idBytes = stringToU8a(id).length;
       if (maxIdLength && idBytes > maxIdLength) {
         setEndpointIdError(
-          t('view_DidEndpointsForm_tooLong', [idBytes, maxIdLength]),
+          t('view_DidEndpointsForm_tooLong', [
+            String(idBytes),
+            String(maxIdLength),
+          ]),
         );
         return;
       }
@@ -179,7 +182,10 @@ function DidNewEndpoint({
       const urlBytes = stringToU8a(url).length;
       if (maxUrlLength && urlBytes > maxUrlLength) {
         setEndpointUrlError(
-          t('view_DidEndpointsForm_tooLong', [urlBytes, maxUrlLength]),
+          t('view_DidEndpointsForm_tooLong', [
+            String(urlBytes),
+            String(maxUrlLength),
+          ]),
         );
         return;
       }
@@ -187,7 +193,10 @@ function DidNewEndpoint({
       const typeBytes = stringToU8a(type).length;
       if (maxTypeLength && typeBytes > maxTypeLength) {
         setEndpointTypeError(
-          t('view_DidEndpointsForm_tooLong', [typeBytes, maxTypeLength]),
+          t('view_DidEndpointsForm_tooLong', [
+            String(typeBytes),
+            String(maxTypeLength),
+          ]),
         );
         return;
       }

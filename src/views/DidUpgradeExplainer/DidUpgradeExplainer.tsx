@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { Link } from 'react-router-dom';
 import {
   ChangeEvent,
@@ -64,6 +64,10 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
 
   if (!kiltCosts) {
     return null; // blockchain data pending
+  }
+
+  if (!euroCost) {
+    return null; // network data pending
   }
 
   return (

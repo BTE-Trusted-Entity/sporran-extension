@@ -1,6 +1,6 @@
 import { FormEvent, JSX, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import {
   ConfigService,
   Did,
@@ -180,7 +180,8 @@ export function DidEndpointsSign({
           className={styles.errorTooltip}
           hidden={!unpaidCosts || Boolean(modalProps)}
         >
-          {t('view_DidEndpointsSign_insufficientFunds', [unpaidCosts])}
+          {unpaidCosts &&
+            t('view_DidEndpointsSign_insufficientFunds', [unpaidCosts])}
         </output>
       </p>
 

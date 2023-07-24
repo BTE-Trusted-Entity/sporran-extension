@@ -1,5 +1,5 @@
 import { JSX, useCallback, useEffect } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { IAttestation } from '@kiltprotocol/sdk-js';
 
 import * as styles from './SaveCredential.module.css';

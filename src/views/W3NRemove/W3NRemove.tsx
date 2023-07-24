@@ -1,6 +1,6 @@
 import { FormEvent, Fragment, JSX, useCallback } from 'react';
 import { generatePath, Link } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { ConfigService, Did, DidDocument } from '@kiltprotocol/sdk-js';
 

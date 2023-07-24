@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { initKiltSDK } from './utilities/initKiltSDK/initKiltSDK';
 import {

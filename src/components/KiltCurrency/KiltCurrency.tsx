@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { JSX } from 'react';
 
 import * as styles from './KiltCurrency.module.css';

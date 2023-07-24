@@ -1,5 +1,5 @@
 import { FormEvent, Fragment, JSX, ReactNode, useCallback } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import {
   ConfigService,
   Did,

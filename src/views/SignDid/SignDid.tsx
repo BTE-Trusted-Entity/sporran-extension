@@ -1,5 +1,5 @@
 import { FormEvent, JSX, useCallback, useRef } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import {
   Credential,

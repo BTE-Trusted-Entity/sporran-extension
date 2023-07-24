@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 import { channelsEnum } from '../base/channelsEnum';

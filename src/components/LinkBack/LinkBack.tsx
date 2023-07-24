@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import * as styles from './LinkBack.module.css';
 

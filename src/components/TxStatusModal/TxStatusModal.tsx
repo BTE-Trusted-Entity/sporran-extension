@@ -1,5 +1,5 @@
 import { JSX, ReactNode } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { Modal } from 'react-dialog-polyfill';
 import { Link } from 'react-router-dom';
 

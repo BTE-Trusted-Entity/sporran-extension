@@ -1,7 +1,7 @@
 import { JSX, useState, useCallback, MouseEvent, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import cx from 'classnames';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import * as styles from './VerifyBackupPhrase.module.css';
 

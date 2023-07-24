@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, JSX, useCallback, useState } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { Link } from 'react-router-dom';
 
 import * as styles from './CreatePassword.module.css';
@@ -80,7 +80,8 @@ export function CreatePassword({ onSuccess }: Props): JSX.Element {
       !hasBothCases(password) && t('view_CreatePassword_error_cases'),
       !hasNumber(password) && t('view_CreatePassword_error_numbers'),
       !hasOther(password) && t('view_CreatePassword_error_other'),
-      !isLong(password) && t('view_CreatePassword_error_length', [MIN_LENGTH]),
+      !isLong(password) &&
+        t('view_CreatePassword_error_length', [String(MIN_LENGTH)]),
       !isNotExample(password) && t('view_CreatePassword_error_example'),
     ].filter(Boolean)[0];
 

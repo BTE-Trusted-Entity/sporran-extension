@@ -1,6 +1,6 @@
 import { Component, JSX } from 'react';
 import { Modal } from 'react-dialog-polyfill';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import * as overlayStyles from '../../components/Overlay/Overlay.module.css';
 import * as styles from './GenericError.module.css';

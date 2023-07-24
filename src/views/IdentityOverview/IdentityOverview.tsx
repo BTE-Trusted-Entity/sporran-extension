@@ -1,5 +1,5 @@
 import { JSX, useCallback, useState } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { Link, Redirect, useParams } from 'react-router-dom';
 
 import * as styles from './IdentityOverview.module.css';

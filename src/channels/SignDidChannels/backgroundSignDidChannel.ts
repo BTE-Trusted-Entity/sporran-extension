@@ -1,4 +1,4 @@
-import { Runtime } from 'webextension-polyfill-ts';
+import { Runtime } from 'webextension-polyfill';
 
 import { PopupChannel } from '../base/PopupChannel/PopupChannel';
 import { getAuthorizedOrigin } from '../../dApps/AccessChannels/getAuthorizedOrigin';

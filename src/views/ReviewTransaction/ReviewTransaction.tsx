@@ -1,6 +1,6 @@
 import { FormEvent, JSX, useCallback, useState } from 'react';
 import BN from 'bn.js';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { Link } from 'react-router-dom';
 
 import * as styles from './ReviewTransaction.module.css';

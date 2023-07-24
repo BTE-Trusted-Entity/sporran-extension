@@ -23,7 +23,7 @@ export default {
 
     config.resolve.alias = {
       ...config.resolve.alias,
-      'webextension-polyfill-ts': require.resolve('../src/__mocks__/webextension-polyfill-ts.ts'),
+      'webextension-polyfill': require.resolve('../src/__mocks__/webextension-polyfill.ts'),
     };
 
     return config;

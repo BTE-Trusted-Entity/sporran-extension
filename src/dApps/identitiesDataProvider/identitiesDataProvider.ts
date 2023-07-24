@@ -1,5 +1,5 @@
 import { InjectedAccount } from '@polkadot/extension-inject/types';
-import { browser, Storage } from 'webextension-polyfill-ts';
+import browser, { Storage } from 'webextension-polyfill';
 
 import { genesisHashChannel } from '../genesisHashChannel/genesisHashChannel';
 import { storageAreaName } from '../../utilities/storage/storage';

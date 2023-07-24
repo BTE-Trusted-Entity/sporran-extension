@@ -1,6 +1,6 @@
 import { JSX, MouseEvent, useCallback, useState } from 'react';
 import { Modal } from 'react-dialog-polyfill';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { without } from 'lodash-es';
 
 import * as styles from './ImportCredentials.module.css';

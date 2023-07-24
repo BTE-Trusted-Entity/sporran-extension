@@ -1,4 +1,4 @@
-import { Runtime } from 'webextension-polyfill-ts';
+import { Runtime } from 'webextension-polyfill';
 import { Keypair } from '@polkadot/util-crypto/types';
 import {
   Did,

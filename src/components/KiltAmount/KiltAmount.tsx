@@ -1,5 +1,5 @@
 import BN from 'bn.js';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { JSX } from 'react';
 
 import * as styles from './KiltAmount.module.css';

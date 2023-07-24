@@ -1,6 +1,6 @@
 import { ChangeEvent, JSX, useCallback, useEffect, useState } from 'react';
 import { useHistory, generatePath, useParams, Link } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import * as styles from './W3NCreateChoose.module.css';
 

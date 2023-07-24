@@ -11,7 +11,7 @@ import {
 import DEFAULT_WORDLIST from '@polkadot/util-crypto/mnemonic/wordlists/en';
 import { mnemonicValidate } from '@polkadot/util-crypto';
 import { Utils } from '@kiltprotocol/sdk-js';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import * as styles from './ImportBackupPhrase.module.css';
 

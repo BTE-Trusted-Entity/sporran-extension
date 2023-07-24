@@ -1,6 +1,6 @@
 import { FormEvent, JSX, useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import * as styles from './AppSettings.module.css';
 

@@ -11,7 +11,7 @@ import {
   useState,
 } from 'react';
 import BN from 'bn.js';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { find } from 'lodash-es';
 import { BalanceUtils, ConfigService, Utils } from '@kiltprotocol/sdk-js';
 
@@ -461,7 +461,7 @@ export function SendToken({ identity, onSuccess }: Props): JSX.Element {
       </p>
 
       <small className={styles.tip}>
-        {t('view_SendToken_tip', [tipPercents])}
+        {t('view_SendToken_tip', [String(tipPercents)])}
       </small>
 
       <p className={styles.recipientLine}>

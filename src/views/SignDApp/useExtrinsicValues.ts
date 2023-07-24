@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { useEffect, useState } from 'react';
 import BN from 'bn.js';
 import { ExtrinsicPayload } from '@polkadot/types/interfaces';

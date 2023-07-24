@@ -11,7 +11,7 @@ import {
   useState,
 } from 'react';
 import { Link } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { KiltKeyringPair, Utils } from '@kiltprotocol/sdk-js';
 
 import * as styles from './PasswordField.module.css';

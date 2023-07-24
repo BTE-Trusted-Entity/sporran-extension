@@ -1,6 +1,6 @@
 import { FormEvent, JSX, useCallback, useState } from 'react';
 import { useHistory, generatePath } from 'react-router-dom';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { ConfigService } from '@kiltprotocol/sdk-js';
 
@@ -43,13 +43,13 @@ export function W3NCreateForm({ identity }: Props): JSX.Element {
 
       const tooShort = web3name.length < minLength;
       if (tooShort) {
-        setError(t('view_W3NCreateForm_short', [minLength]));
+        setError(t('view_W3NCreateForm_short', [String(minLength)]));
         return;
       }
 
       const tooLong = web3name.length > maxLength;
       if (tooLong) {
-        setError(t('view_W3NCreateForm_long', [maxLength]));
+        setError(t('view_W3NCreateForm_long', [String(maxLength)]));
         return;
       }
 

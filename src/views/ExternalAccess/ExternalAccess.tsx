@@ -1,7 +1,7 @@
 import { ChangeEvent, JSX, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import * as styles from './ExternalAccess.module.css';
 
