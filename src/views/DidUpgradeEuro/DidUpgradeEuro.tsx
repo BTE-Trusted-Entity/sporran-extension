@@ -15,7 +15,6 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { getTransaction } from '../../utilities/didUpgrade/didUpgrade';
 
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-import { useTXDSubmitter } from '../../utilities/useTXDSubmitter/useTXDSubmitter';
 import {
   getIdentityCryptoFromSeed,
   getLightDidFromSeed,
@@ -36,8 +35,9 @@ export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
 
   const passwordField = usePasswordField();
 
-  const cost = useAsyncValue(getCheckoutCosts, [])?.did;
-  const submitter = useTXDSubmitter();
+  const costs = useAsyncValue(getCheckoutCosts, []);
+  const cost = costs?.did;
+  const submitter = costs?.paymentAddress;
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {

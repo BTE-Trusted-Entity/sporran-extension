@@ -24,7 +24,6 @@ import {
   getCheckoutURL,
 } from '../../utilities/checkout/checkout';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-import { useTXDSubmitter } from '../../utilities/useTXDSubmitter/useTXDSubmitter';
 
 interface Props {
   identity: Identity;
@@ -40,8 +39,9 @@ export function W3NCreateSignEuro({ identity }: Props): JSX.Element | null {
 
   const did = getIdentityDid(identity);
 
-  const cost = useAsyncValue(getCheckoutCosts, [])?.w3n;
-  const submitter = useTXDSubmitter();
+  const costs = useAsyncValue(getCheckoutCosts, []);
+  const cost = costs?.w3n;
+  const submitter = costs?.paymentAddress;
 
   const passwordField = usePasswordField();
   const handleSubmit = useCallback(
