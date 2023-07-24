@@ -66,6 +66,10 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
     return null; // blockchain data pending
   }
 
+  if (!euroCost) {
+    return null; // network data pending
+  }
+
   return (
     <form className={styles.container}>
       <h1 className={styles.heading}>
@@ -165,7 +169,7 @@ export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
                   onChange={handleChange}
                   className={styles.select}
                 />
-                {euroCost && t('view_DidUpgradeExplainer_euro', [euroCost])}
+                {t('view_DidUpgradeExplainer_euro', [euroCost])}
               </label>
 
               <ExplainerModal
