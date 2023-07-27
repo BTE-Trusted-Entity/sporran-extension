@@ -52,6 +52,12 @@ export async function getDepositDid(
   const api = ConfigService.get('api');
 
   if (!did || Did.parse(did).type === 'light') {
+    if ('baseDeposit' in api.consts.did && 'keyDeposit' in api.consts.did) {
+      const baseDeposit = api.consts.did.baseDeposit as BN;
+      const keyDeposit = api.consts.did.keyDeposit as BN;
+      const amount = baseDeposit.add(keyDeposit).add(keyDeposit);
+      return { amount };
+    }
     return { amount: api.consts.did.deposit };
   }
 

@@ -68,7 +68,15 @@ async function getFee(
     type,
   );
 
-  return (await authorized.paymentInfo(keypair)).partialFee;
+  const { partialFee } = await authorized.paymentInfo(keypair);
+
+  const api = ConfigService.get('api');
+  if (type !== 'add' || !('serviceEndpointDeposit' in api.consts.did)) {
+    return partialFee;
+  }
+
+  const deposit = api.consts.did.serviceEndpointDeposit as typeof partialFee;
+  return partialFee.add(deposit);
 }
 
 interface Props {
