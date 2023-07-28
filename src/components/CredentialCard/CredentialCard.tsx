@@ -418,7 +418,7 @@ export function CredentialCard({
 
   const { status, isDownloaded, credential, name } = sporranCredential;
   const contents = Object.entries(credential.claim.contents);
-  const label = contents[0][1];
+  const label = contents[0]?.[1] || '';
 
   const isUnusable = isUnusableCredential(sporranCredential);
 
