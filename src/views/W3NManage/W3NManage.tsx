@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { Link } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
@@ -17,7 +16,7 @@ interface Props {
   identity: Identity;
 }
 
-export function W3NManage({ identity }: Props): JSX.Element {
+export function W3NManage({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { address } = identity;

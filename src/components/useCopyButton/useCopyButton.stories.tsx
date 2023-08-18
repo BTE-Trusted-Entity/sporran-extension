@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { JSX, useRef } from 'react';
+import { useRef } from 'react';
 
 import { useCopyButton } from './useCopyButton';
 
@@ -7,7 +7,7 @@ export default {
   title: 'Components/useCopyButton',
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   const ref = useRef(null);
   const copy = useCopyButton(ref);
 

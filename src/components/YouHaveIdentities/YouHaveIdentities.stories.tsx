@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import {
   identitiesMock,
@@ -13,7 +12,7 @@ export default {
   component: YouHaveIdentities,
 } as Meta;
 
-export function YouHaveOneIdentity(): JSX.Element {
+export function YouHaveOneIdentity() {
   return (
     <IdentitiesProviderMock
       identities={{
@@ -26,6 +25,6 @@ export function YouHaveOneIdentity(): JSX.Element {
   );
 }
 
-export function YouHaveMoreIdentities(): JSX.Element {
+export function YouHaveMoreIdentities() {
   return <YouHaveIdentities />;
 }

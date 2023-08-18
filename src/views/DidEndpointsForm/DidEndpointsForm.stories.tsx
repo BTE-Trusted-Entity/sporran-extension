@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -16,7 +15,7 @@ export default {
 const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <MemoryRouter
       initialEntries={[

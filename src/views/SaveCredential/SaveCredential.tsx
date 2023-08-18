@@ -1,4 +1,4 @@
-import { JSX, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import browser from 'webextension-polyfill';
 import { IAttestation } from '@kiltprotocol/sdk-js';
 
@@ -14,7 +14,7 @@ import { saveChannel } from '../../channels/saveChannel/saveChannel';
 import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 import { UnknownCredential } from '../../components/UnknownCredential/UnknownCredential';
 
-export function SaveCredential(): JSX.Element | null {
+export function SaveCredential() {
   const t = browser.i18n.getMessage;
 
   const { claimHash } = usePopupData<IAttestation>();

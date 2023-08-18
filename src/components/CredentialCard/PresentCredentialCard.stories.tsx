@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import * as styles from './CredentialCard.module.css';
@@ -13,7 +12,7 @@ export default {
   component: PresentCredentialCard,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <div className={styles.credentialsList}>
       <PresentCredentialCard

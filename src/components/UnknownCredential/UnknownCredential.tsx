@@ -1,15 +1,10 @@
 import type { HexString } from '@polkadot/util/types';
 
-import { JSX } from 'react';
 import browser from 'webextension-polyfill';
 
 import * as styles from './UnknownCredential.module.css';
 
-export function UnknownCredential({
-  rootHash,
-}: {
-  rootHash: HexString;
-}): JSX.Element {
+export function UnknownCredential({ rootHash }: { rootHash: HexString }) {
   const t = browser.i18n.getMessage;
   return (
     <section className={styles.container}>

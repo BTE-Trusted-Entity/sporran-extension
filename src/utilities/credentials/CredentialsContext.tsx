@@ -1,23 +1,19 @@
-import { createContext, JSX, useState, useEffect } from 'react';
+import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 
 import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
 
 import {
-  SporranCredential,
+  getCredentials,
   getList,
   LIST_KEY,
-  getCredentials,
+  SporranCredential,
 } from './credentials';
 
 export const CredentialsContext = createContext<
   SporranCredential[] | undefined
 >(undefined);
 
-export function CredentialsProvider({
-  children,
-}: {
-  children: JSX.Element;
-}): JSX.Element {
+export function CredentialsProvider({ children }: PropsWithChildren) {
   const [credentials, setCredentials] = useState<SporranCredential[]>();
 
   const list = useSwrDataOrThrow(

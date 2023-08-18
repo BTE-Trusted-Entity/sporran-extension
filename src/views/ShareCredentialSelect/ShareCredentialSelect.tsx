@@ -1,4 +1,4 @@
-import { FormEvent, JSX, RefObject, useCallback, useRef } from 'react';
+import { FormEvent, RefObject, useCallback, useRef } from 'react';
 import browser from 'webextension-polyfill';
 import { reject, sortBy } from 'lodash-es';
 import { Did } from '@kiltprotocol/sdk-js';
@@ -70,7 +70,7 @@ function MatchingIdentityCredentials({
   viewRef: RefObject<HTMLElement>;
   allCredentials: SporranCredential[];
   isLastIdentity: boolean;
-}): JSX.Element {
+}) {
   const credentials = allCredentials.filter(
     ({ credential }) =>
       identity.did && Did.isSameSubject(credential.claim.owner, identity.did),
@@ -110,11 +110,7 @@ interface Props {
   selected?: Selected;
 }
 
-export function ShareCredentialSelect({
-  onCancel,
-  onSelect,
-  selected,
-}: Props): JSX.Element | null {
+export function ShareCredentialSelect({ onCancel, onSelect, selected }: Props) {
   const t = browser.i18n.getMessage;
   const history = useHistory();
 

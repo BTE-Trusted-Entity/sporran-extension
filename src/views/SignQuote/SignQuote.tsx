@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, JSX, useCallback } from 'react';
+import { FormEvent, Fragment, useCallback } from 'react';
 import browser from 'webextension-polyfill';
 import { filter, find } from 'lodash-es';
 import {
@@ -67,7 +67,7 @@ interface Props {
   identity: Identity;
 }
 
-export function SignQuote({ identity }: Props): JSX.Element | null {
+export function SignQuote({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const data = usePopupData<Terms>();
@@ -110,9 +110,8 @@ export function SignQuote({ identity }: Props): JSX.Element | null {
       );
 
       const { seed } = await passwordField.get(event);
-      const { sign, encrypt, didDocument } = await getIdentityCryptoFromSeed(
-        seed,
-      );
+      const { sign, encrypt, didDocument } =
+        await getIdentityCryptoFromSeed(seed);
 
       // if a legacy attester generated a claim with a temporary DID, we need to replace it with the real one
       const identityClaim = { ...claim, owner: didDocument.uri };

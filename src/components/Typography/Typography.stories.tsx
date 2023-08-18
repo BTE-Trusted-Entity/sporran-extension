@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import * as styles from './Typography.module.css';
 
@@ -7,7 +6,7 @@ export default {
   title: 'Components/Typography',
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <>
       <h1 className={styles.screenHeadline} style={{ marginTop: 0 }}>

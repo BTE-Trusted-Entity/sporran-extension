@@ -1,4 +1,4 @@
-import { JSX, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
@@ -18,7 +18,7 @@ export interface Selected {
   sharedContents: string[];
 }
 
-export function ShareCredential(): JSX.Element | null {
+export function ShareCredential() {
   const handleCancel = useCallback(async () => {
     await shareChannel.throw('Rejected');
     window.close();

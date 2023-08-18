@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, JSX, useCallback } from 'react';
+import { FormEvent, Fragment, useCallback } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
@@ -56,7 +56,7 @@ interface Props {
   identity: Identity;
 }
 
-export function W3NRemove({ identity }: Props): JSX.Element | null {
+export function W3NRemove({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { address } = identity;

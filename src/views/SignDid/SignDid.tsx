@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useCallback, useRef } from 'react';
+import { FormEvent, useCallback, useRef } from 'react';
 import browser from 'webextension-polyfill';
 
 import {
@@ -33,12 +33,7 @@ interface Props {
   credentials?: SharedCredential[];
 }
 
-export function SignDid({
-  identity,
-  popupData,
-  onCancel,
-  credentials,
-}: Props): JSX.Element | null {
+export function SignDid({ identity, popupData, onCancel, credentials }: Props) {
   const t = browser.i18n.getMessage;
 
   const { origin, plaintext } = popupData;

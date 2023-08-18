@@ -1,4 +1,4 @@
-import { JSX, useRef } from 'react';
+import { useRef } from 'react';
 
 import * as styles from './CopyValue.module.css';
 
@@ -16,7 +16,7 @@ export function CopyValue({
   label,
   labelledBy,
   className = styles.line,
-}: Props): JSX.Element {
+}: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const copy = useCopyButton(inputRef);
 

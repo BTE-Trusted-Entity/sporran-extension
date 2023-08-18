@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useCallback, useRef, useState } from 'react';
+import { FormEvent, useCallback, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
@@ -35,7 +35,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidUpgrade({ identity }: Props): JSX.Element | null {
+export function DidUpgrade({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { address } = identity;

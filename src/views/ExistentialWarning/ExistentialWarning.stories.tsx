@@ -1,8 +1,7 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
-import { paths, generatePath } from '../paths';
+import { generatePath, paths } from '../paths';
 
 import { ExistentialWarning } from './ExistentialWarning';
 
@@ -13,7 +12,7 @@ export default {
 
 const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <ExistentialWarning
       nextPath={generatePath(paths.identity.send.review, {

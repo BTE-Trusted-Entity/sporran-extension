@@ -1,5 +1,3 @@
-import { JSX } from 'react';
-
 import * as styles from './IdentityLine.module.css';
 
 import { Identity } from '../../utilities/identities/types';
@@ -15,7 +13,7 @@ interface Props {
 export function IdentityLine({
   identity,
   className = styles.component,
-}: Props): JSX.Element {
+}: Props) {
   const balance = useAddressBalance(identity.address);
 
   return (

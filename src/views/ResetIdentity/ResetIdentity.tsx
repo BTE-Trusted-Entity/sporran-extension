@@ -1,19 +1,15 @@
-import { JSX, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
 import {
-  Identity,
   encryptIdentity,
+  Identity,
 } from '../../utilities/identities/identities';
 import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { ImportBackupPhrase } from '../ImportBackupPhrase/ImportBackupPhrase';
-import { paths, generatePath } from '../paths';
+import { generatePath, paths } from '../paths';
 
-export function ResetIdentity({
-  identity,
-}: {
-  identity: Identity;
-}): JSX.Element {
+export function ResetIdentity({ identity }: { identity: Identity }) {
   const { address } = identity;
   const [backupPhrase, setBackupPhrase] = useState('');
   const history = useHistory();

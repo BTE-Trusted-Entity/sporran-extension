@@ -1,4 +1,4 @@
-import { Fragment, JSX, RefObject } from 'react';
+import { Fragment, PropsWithChildren, RefObject } from 'react';
 import { createPortal } from 'react-dom';
 import { Modal } from 'react-dialog-polyfill';
 import browser from 'webextension-polyfill';
@@ -11,11 +11,10 @@ export function ExplainerModal({
   children,
   portalRef,
   label = browser.i18n.getMessage('component_ExplainerModal_show'),
-}: {
-  children: JSX.Element | string;
+}: PropsWithChildren<{
   portalRef: RefObject<HTMLElement>;
   label?: string;
-}): JSX.Element {
+}>) {
   const t = browser.i18n.getMessage;
   const visibility = useBooleanState();
 

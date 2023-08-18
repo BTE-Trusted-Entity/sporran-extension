@@ -1,4 +1,4 @@
-import { ChangeEvent, JSX, useCallback } from 'react';
+import { ChangeEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import browser from 'webextension-polyfill';
@@ -13,7 +13,7 @@ import {
 } from '../../utilities/authorizedStorage/authorizedStorage';
 import { paths } from '../paths';
 
-export function ExternalAccess(): JSX.Element | null {
+export function ExternalAccess() {
   const t = browser.i18n.getMessage;
 
   const hosts = useSWR(authorizedKey, getAuthorized).data;

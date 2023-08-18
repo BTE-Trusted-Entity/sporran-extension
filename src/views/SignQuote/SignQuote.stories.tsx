@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { mockTerms } from '../../utilities/mockTerms/mockTerms';
 
@@ -14,7 +13,7 @@ export default {
   component: SignQuote,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
       <SignQuote
@@ -26,7 +25,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function OnChainDidDeleted(): JSX.Element {
+export function OnChainDidDeleted() {
   return (
     <PopupTestProvider path={paths.popup.claim} data={mockTerms}>
       <SignQuote

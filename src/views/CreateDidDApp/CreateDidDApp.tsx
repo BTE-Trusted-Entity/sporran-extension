@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useCallback } from 'react';
+import { FormEvent, useCallback } from 'react';
 import browser from 'webextension-polyfill';
 import { Did } from '@kiltprotocol/sdk-js';
 
@@ -23,7 +23,7 @@ interface Props {
   identity: Identity;
 }
 
-export function CreateDidDApp({ identity }: Props): JSX.Element {
+export function CreateDidDApp({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { did } = identity;

@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
@@ -13,7 +12,7 @@ export default {
   component: ReceiveToken,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <MemoryRouter
       initialEntries={[
@@ -31,7 +30,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function New(): JSX.Element {
+export function New() {
   return (
     <MemoryRouter initialEntries={['/identity/NEW/receive']}>
       <Route path={paths.identity.receive}>

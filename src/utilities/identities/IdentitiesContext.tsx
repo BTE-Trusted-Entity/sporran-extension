@@ -1,4 +1,4 @@
-import { createContext, JSX } from 'react';
+import { createContext, PropsWithChildren } from 'react';
 import useSWR from 'swr';
 
 import { IdentitiesMap } from './types';
@@ -11,11 +11,7 @@ export interface IdentitiesContextType {
 
 export const IdentitiesContext = createContext<IdentitiesContextType>({});
 
-export function IdentitiesProvider({
-  children,
-}: {
-  children: JSX.Element;
-}): JSX.Element {
+export function IdentitiesProvider({ children }: PropsWithChildren) {
   const value = useSWR(IDENTITIES_KEY, getIdentities);
   return (
     <IdentitiesContext.Provider value={value}>

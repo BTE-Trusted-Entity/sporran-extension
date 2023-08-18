@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { BalanceUtils } from '@kiltprotocol/sdk-js';
 
@@ -13,7 +12,7 @@ export default {
   component: ReviewTransaction,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <MemoryRouter
       initialEntries={[

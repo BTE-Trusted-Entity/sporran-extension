@@ -1,6 +1,5 @@
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { JSX } from 'react';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import {
@@ -31,7 +30,7 @@ const mockRevokedSelected: Selected = {
   sporranCredential: credentialsMock[2],
 };
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <PopupTestProvider
       path={paths.popup.share.start}
@@ -46,7 +45,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function RevokedSelected(): JSX.Element {
+export function RevokedSelected() {
   return (
     <PopupTestProvider
       path={paths.popup.share.start}
@@ -61,7 +60,7 @@ export function RevokedSelected(): JSX.Element {
   );
 }
 
-export function NoMatchingCredentials(): JSX.Element {
+export function NoMatchingCredentials() {
   return (
     <PopupTestProvider path={paths.popup.share.start} data={mockUnknownCType}>
       <ShareCredentialSelect

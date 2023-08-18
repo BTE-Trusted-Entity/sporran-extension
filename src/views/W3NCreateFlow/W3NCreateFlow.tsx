@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { paths } from '../paths';
@@ -13,7 +12,7 @@ interface Props {
   identity: Identity;
 }
 
-export function W3NCreateFlow({ identity }: Props): JSX.Element {
+export function W3NCreateFlow({ identity }: Props) {
   return (
     <Switch>
       <Route path={paths.identity.web3name.create.form}>

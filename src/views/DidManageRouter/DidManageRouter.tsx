@@ -1,5 +1,4 @@
-import { JSX } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
 import { DidEndpointsFlow } from '../DidEndpointsFlow/DidEndpointsFlow';
@@ -11,7 +10,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidManageRouter({ identity }: Props): JSX.Element {
+export function DidManageRouter({ identity }: Props) {
   return (
     <Switch>
       <Route path={paths.identity.did.manage.downgrade.base}>

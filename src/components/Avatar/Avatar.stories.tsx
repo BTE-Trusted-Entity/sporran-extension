@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 
@@ -11,7 +10,7 @@ export default {
   decorators: [(story) => <div style={{ textAlign: 'center' }}>{story()}</div>],
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <Avatar
       identity={
@@ -21,7 +20,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function withFullDid(): JSX.Element {
+export function withFullDid() {
   return (
     <Avatar
       identity={

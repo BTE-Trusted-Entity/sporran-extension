@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { mockAttestations } from '../../utilities/credentials/CredentialsProvider.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
@@ -14,7 +13,7 @@ export default {
 
 const { downloaded, notDownloaded } = mockAttestations;
 
-export function Downloaded(): JSX.Element {
+export function Downloaded() {
   return (
     <PopupTestProvider path={paths.popup.save} data={downloaded}>
       <SaveCredential />
@@ -22,7 +21,7 @@ export function Downloaded(): JSX.Element {
   );
 }
 
-export function NotDownloaded(): JSX.Element {
+export function NotDownloaded() {
   return (
     <PopupTestProvider path={paths.popup.save} data={notDownloaded}>
       <SaveCredential />

@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { VerifyBackupPhrase } from './VerifyBackupPhrase';
 
@@ -8,7 +7,7 @@ export default {
   component: VerifyBackupPhrase,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <VerifyBackupPhrase backupPhrase="one two two three four five six seven eight nine ten eleven" />
   );

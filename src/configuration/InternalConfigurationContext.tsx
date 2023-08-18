@@ -1,4 +1,4 @@
-import { JSX } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { ConfigurationContext } from './ConfigurationContext';
 import { configuration, internalFeatures } from './configuration';
@@ -8,11 +8,7 @@ const internalConfiguration = {
   features: internalFeatures,
 };
 
-export function InternalConfigurationContext({
-  children,
-}: {
-  children: JSX.Element;
-}): JSX.Element {
+export function InternalConfigurationContext({ children }: PropsWithChildren) {
   return (
     <ConfigurationContext.Provider value={internalConfiguration}>
       {children}

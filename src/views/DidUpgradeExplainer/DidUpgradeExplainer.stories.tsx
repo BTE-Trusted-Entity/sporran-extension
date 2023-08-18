@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { moreIdentitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 
@@ -10,7 +9,7 @@ export default {
   component: DidUpgradeExplainer,
 } as Meta;
 
-export function NotOnChain(): JSX.Element {
+export function NotOnChain() {
   return (
     <DidUpgradeExplainer
       identity={identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']}
@@ -18,7 +17,7 @@ export function NotOnChain(): JSX.Element {
   );
 }
 
-export function DeletedFromChain(): JSX.Element {
+export function DeletedFromChain() {
   return (
     <DidUpgradeExplainer
       identity={identities['4rZ7pGtvmLhAYesf7DAzLQixdTEwWPN3emKb44bKVXqSoTZB']}
@@ -26,7 +25,7 @@ export function DeletedFromChain(): JSX.Element {
   );
 }
 
-export function InsufficientKilt(): JSX.Element {
+export function InsufficientKilt() {
   return (
     <DidUpgradeExplainer
       identity={identities['4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653']}

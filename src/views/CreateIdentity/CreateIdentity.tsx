@@ -1,4 +1,4 @@
-import { JSX, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
 
 import { mnemonicGenerate } from '@polkadot/util-crypto';
@@ -10,7 +10,7 @@ import { createIdentity } from '../../utilities/identities/identities';
 import { VerifyBackupPhrase } from '../VerifyBackupPhrase/VerifyBackupPhrase';
 import { paths } from '../paths';
 
-export function CreateIdentity(): JSX.Element {
+export function CreateIdentity() {
   const backupPhrase = useMemo(() => mnemonicGenerate(), []);
   const history = useHistory();
 

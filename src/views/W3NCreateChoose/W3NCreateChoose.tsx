@@ -1,5 +1,5 @@
-import { ChangeEvent, JSX, useCallback, useEffect, useState } from 'react';
-import { useHistory, generatePath, useParams, Link } from 'react-router-dom';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { generatePath, Link, useHistory, useParams } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
 import * as styles from './W3NCreateChoose.module.css';
@@ -22,7 +22,7 @@ interface Props {
   identity: Identity;
 }
 
-export function W3NCreateChoose({ identity }: Props): JSX.Element | null {
+export function W3NCreateChoose({ identity }: Props) {
   const t = browser.i18n.getMessage;
   const { address } = identity;
   const did = getIdentityDid(identity);

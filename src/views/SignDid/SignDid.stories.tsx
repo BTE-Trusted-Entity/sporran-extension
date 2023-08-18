@@ -1,6 +1,5 @@
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { JSX } from 'react';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
@@ -23,7 +22,7 @@ const mockPopupData: SignDidOriginInput = {
     'AllyourbasearebelongtousAllyourbasearebelongtousAllyourbasearebelongtous',
 };
 
-export function NoCredentials(): JSX.Element {
+export function NoCredentials() {
   return (
     <SignDid
       identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}
@@ -40,7 +39,7 @@ const mockSingleCredential: SharedCredential[] = [
   },
 ];
 
-export function SingleCredential(): JSX.Element {
+export function SingleCredential() {
   return (
     <SignDid
       identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}
@@ -66,7 +65,7 @@ const mockMultipleCredentials: SharedCredential[] = [
   },
 ];
 
-export function MultipleCredentials(): JSX.Element {
+export function MultipleCredentials() {
   return (
     <SignDid
       identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}

@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { CreateDidOriginInput } from '../../channels/CreateDidChannels/types';
@@ -26,7 +25,7 @@ const specificInput: CreateDidOriginInput = {
     identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'].did,
 };
 
-export function LightDid(): JSX.Element {
+export function LightDid() {
   return (
     <PopupTestProvider path={paths.popup.createDid} data={input}>
       <CreateDidDApp
@@ -38,7 +37,7 @@ export function LightDid(): JSX.Element {
   );
 }
 
-export function SpecificLightDid(): JSX.Element {
+export function SpecificLightDid() {
   return (
     <PopupTestProvider path={paths.popup.createDid} data={specificInput}>
       <CreateDidDApp
@@ -50,7 +49,7 @@ export function SpecificLightDid(): JSX.Element {
   );
 }
 
-export function FullDid(): JSX.Element {
+export function FullDid() {
   return (
     <PopupTestProvider path={paths.popup.createDid} data={input}>
       <CreateDidDApp
@@ -62,7 +61,7 @@ export function FullDid(): JSX.Element {
   );
 }
 
-export function NoDid(): JSX.Element {
+export function NoDid() {
   return (
     <PopupTestProvider path={paths.popup.createDid} data={input}>
       <CreateDidDApp

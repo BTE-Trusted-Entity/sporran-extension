@@ -1,4 +1,4 @@
-import { Fragment, JSX } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
@@ -16,7 +16,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidManage({ identity }: Props): JSX.Element {
+export function DidManage({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { address, did } = identity;

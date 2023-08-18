@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
@@ -50,7 +49,7 @@ const input: Record<string, SignDidExtrinsicOriginInput> = {
   },
 };
 
-export function AddEndpoint(): JSX.Element {
+export function AddEndpoint() {
   return (
     <PopupTestProvider
       path={paths.popup.signDidExtrinsic}
@@ -65,7 +64,7 @@ export function AddEndpoint(): JSX.Element {
   );
 }
 
-export function RemoveEndpoint(): JSX.Element {
+export function RemoveEndpoint() {
   return (
     <PopupTestProvider
       path={paths.popup.signDidExtrinsic}
@@ -80,7 +79,7 @@ export function RemoveEndpoint(): JSX.Element {
   );
 }
 
-export function RemoveEndpointSpecific(): JSX.Element {
+export function RemoveEndpointSpecific() {
   return (
     <PopupTestProvider
       path={paths.popup.signDidExtrinsic}
@@ -95,7 +94,7 @@ export function RemoveEndpointSpecific(): JSX.Element {
   );
 }
 
-export function web3Name(): JSX.Element {
+export function web3Name() {
   return (
     <PopupTestProvider
       path={paths.popup.signDidExtrinsic}
@@ -110,7 +109,7 @@ export function web3Name(): JSX.Element {
   );
 }
 
-export function Forbidden(): JSX.Element {
+export function Forbidden() {
   return (
     <PopupTestProvider
       path={paths.popup.signDidExtrinsic}
@@ -125,7 +124,7 @@ export function Forbidden(): JSX.Element {
   );
 }
 
-export function LightDid(): JSX.Element {
+export function LightDid() {
   return (
     <PopupTestProvider
       path={paths.popup.signDidExtrinsic}
@@ -140,7 +139,7 @@ export function LightDid(): JSX.Element {
   );
 }
 
-export function PublicCredential(): JSX.Element {
+export function PublicCredential() {
   return (
     <PopupTestProvider
       path={paths.popup.signDidExtrinsic}

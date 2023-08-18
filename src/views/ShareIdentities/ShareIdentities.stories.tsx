@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { ShareIdentitiesOriginInput } from '../../channels/ShareIdentitiesChannels/types';
@@ -17,7 +16,7 @@ const input: ShareIdentitiesOriginInput = {
   origin: 'https://example.org/foo',
 };
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <PopupTestProvider path={paths.popup.shareIdentities} data={input}>
       <ShareIdentities />

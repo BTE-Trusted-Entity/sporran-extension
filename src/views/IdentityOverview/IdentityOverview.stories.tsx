@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { moreIdentitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
@@ -28,7 +27,7 @@ const fullDidIdentity =
 const web3NameIdentity =
   identities['4q11Jce9wqM4A9GPB2z8n4K8LF9w2sQgZKFddhuKXwQ2Qo4q'];
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <MemoryRouter initialEntries={[uri]}>
       <Route path={paths.identity.overview}>
@@ -38,7 +37,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function New(): JSX.Element {
+export function New() {
   return (
     <MemoryRouter initialEntries={['/identity/NEW/send']}>
       <Route path={paths.identity.overview}>
@@ -48,7 +47,7 @@ export function New(): JSX.Element {
   );
 }
 
-export function CreateSuccess(): JSX.Element {
+export function CreateSuccess() {
   return (
     <MemoryRouter
       initialEntries={[
@@ -63,7 +62,7 @@ export function CreateSuccess(): JSX.Element {
   );
 }
 
-export function ImportSuccess(): JSX.Element {
+export function ImportSuccess() {
   return (
     <MemoryRouter
       initialEntries={[
@@ -78,7 +77,7 @@ export function ImportSuccess(): JSX.Element {
   );
 }
 
-export function ResetSuccess(): JSX.Element {
+export function ResetSuccess() {
   return (
     <MemoryRouter
       initialEntries={[
@@ -93,7 +92,7 @@ export function ResetSuccess(): JSX.Element {
   );
 }
 
-export function withFullDid(): JSX.Element {
+export function withFullDid() {
   return (
     <MemoryRouter initialEntries={[fullDidUri]}>
       <Route path={paths.identity.overview}>
@@ -103,7 +102,7 @@ export function withFullDid(): JSX.Element {
   );
 }
 
-export function withWeb3Name(): JSX.Element {
+export function withWeb3Name() {
   return (
     <MemoryRouter initialEntries={[fullDidUri]}>
       <Route path={paths.identity.overview}>
@@ -113,7 +112,7 @@ export function withWeb3Name(): JSX.Element {
   );
 }
 
-export function BackupWarning(): JSX.Element {
+export function BackupWarning() {
   return (
     <MemoryRouter initialEntries={[fullDidUri]}>
       <Route path={paths.identity.overview}>
@@ -125,7 +124,7 @@ export function BackupWarning(): JSX.Element {
   );
 }
 
-export function onChainDidRemoved(): JSX.Element {
+export function onChainDidRemoved() {
   return (
     <MemoryRouter
       initialEntries={[

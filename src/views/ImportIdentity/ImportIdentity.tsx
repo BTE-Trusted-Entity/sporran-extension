@@ -1,4 +1,4 @@
-import { JSX, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
 
 import { importIdentity } from '../../utilities/identities/identities';
@@ -6,7 +6,7 @@ import { CreatePassword } from '../CreatePassword/CreatePassword';
 import { ImportBackupPhrase } from '../ImportBackupPhrase/ImportBackupPhrase';
 import { paths } from '../paths';
 
-export function ImportIdentity(): JSX.Element {
+export function ImportIdentity() {
   const [backupPhrase, setBackupPhrase] = useState('');
   const history = useHistory();
 

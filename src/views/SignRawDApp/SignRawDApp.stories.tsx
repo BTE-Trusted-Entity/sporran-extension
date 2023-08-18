@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { SignRawOriginInput } from '../../dApps/SignRawChannels/types';
@@ -22,7 +21,7 @@ const mockExtrinsic: SignRawOriginInput = {
   dAppName: 'FOO',
 };
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <PopupTestProvider path={paths.popup.sign} data={mockExtrinsic}>
       <SignRawDApp />
@@ -30,7 +29,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function Unknown(): JSX.Element {
+export function Unknown() {
   return (
     <PopupTestProvider
       path={paths.popup.sign}

@@ -1,4 +1,4 @@
-import { JSX } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { IdentitiesMap } from './types';
 import { IdentitiesContext } from './IdentitiesContext';
@@ -69,10 +69,9 @@ export const moreIdentitiesMock: IdentitiesMap = {
 export function IdentitiesProviderMock({
   identities = identitiesMock,
   children,
-}: {
+}: PropsWithChildren<{
   identities?: IdentitiesMap;
-  children: JSX.Element;
-}): JSX.Element {
+}>) {
   return (
     <IdentitiesContext.Provider value={{ data: identities }}>
       {children}

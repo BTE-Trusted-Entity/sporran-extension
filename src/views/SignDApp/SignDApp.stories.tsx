@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { SignOriginInput } from '../../dApps/SignChannels/types';
@@ -42,7 +41,7 @@ const mockExtrinsic: SignOriginInput = {
   version: 4,
 };
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <PopupTestProvider path={paths.popup.sign} data={mockExtrinsic}>
       <SignDApp />
@@ -50,7 +49,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function Unknown(): JSX.Element {
+export function Unknown() {
   return (
     <PopupTestProvider
       path={paths.popup.sign}

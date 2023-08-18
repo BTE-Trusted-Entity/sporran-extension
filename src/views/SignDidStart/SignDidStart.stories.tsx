@@ -1,6 +1,5 @@
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { JSX } from 'react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { moreIdentitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
@@ -26,7 +25,7 @@ const specificInput: SignDidOriginInput = {
   didUri: identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'].did,
 };
 
-export function FullDidWithCredentials(): JSX.Element {
+export function FullDidWithCredentials() {
   return (
     <PopupTestProvider path={paths.popup.signDid.start} data={input}>
       <SignDidStart
@@ -40,7 +39,7 @@ export function FullDidWithCredentials(): JSX.Element {
   );
 }
 
-export function FullDidSpecific(): JSX.Element {
+export function FullDidSpecific() {
   return (
     <PopupTestProvider path={paths.popup.signDid.start} data={specificInput}>
       <SignDidStart
@@ -54,7 +53,7 @@ export function FullDidSpecific(): JSX.Element {
   );
 }
 
-export function FullDidNoCredentials(): JSX.Element {
+export function FullDidNoCredentials() {
   return (
     <PopupTestProvider path={paths.popup.signDid.start} data={input}>
       <SignDidStart
@@ -68,7 +67,7 @@ export function FullDidNoCredentials(): JSX.Element {
   );
 }
 
-export function LightDid(): JSX.Element {
+export function LightDid() {
   return (
     <PopupTestProvider path={paths.popup.signDid.start} data={input}>
       <SignDidStart

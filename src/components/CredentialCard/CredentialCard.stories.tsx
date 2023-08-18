@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import * as styles from './CredentialCard.module.css';
@@ -18,7 +17,7 @@ export default {
   component: CredentialCard,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <ul className={styles.credentialsList}>
       <CredentialCard sporranCredential={credentialsMock[0]} />
@@ -26,7 +25,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function DownloadPrompt(): JSX.Element {
+export function DownloadPrompt() {
   return (
     <ul className={styles.credentialsList}>
       <CredentialCard sporranCredential={notDownloaded[0]} />
@@ -34,7 +33,7 @@ export function DownloadPrompt(): JSX.Element {
   );
 }
 
-export function PresentationPrompt(): JSX.Element {
+export function PresentationPrompt() {
   const identity =
     identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
   return (
@@ -52,7 +51,7 @@ export function PresentationPrompt(): JSX.Element {
   );
 }
 
-export function Expanded(): JSX.Element {
+export function Expanded() {
   return (
     <ul className={styles.credentialsList}>
       <CredentialCard expand sporranCredential={notDownloaded[0]} />
@@ -60,7 +59,7 @@ export function Expanded(): JSX.Element {
   );
 }
 
-export function Revoked(): JSX.Element {
+export function Revoked() {
   return (
     <ul className={styles.credentialsList}>
       <CredentialCard expand sporranCredential={credentialsMock[2]} />

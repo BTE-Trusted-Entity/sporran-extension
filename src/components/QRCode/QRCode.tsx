@@ -1,5 +1,4 @@
 import { QRCodeSVG } from 'qrcode.react';
-import { JSX } from 'react';
 
 import * as styles from './QRCode.module.css';
 
@@ -8,10 +7,7 @@ interface Props {
   className?: string;
 }
 
-export function QRCode({
-  address,
-  className = styles.component,
-}: Props): JSX.Element {
+export function QRCode({ address, className = styles.component }: Props) {
   return (
     <span className={className}>
       <QRCodeSVG

@@ -1,5 +1,5 @@
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
-import { JSX, Fragment } from 'react';
+import { Fragment } from 'react';
 
 import './App.css';
 import * as styles from './App.module.css';
@@ -28,7 +28,7 @@ function confirmNavigation(message: string, callback: (ok: boolean) => void) {
   callback(allowed);
 }
 
-export function App(): JSX.Element {
+export function App() {
   const initialEntries = useInitialEntries();
 
   const popupPaths = [
@@ -84,7 +84,7 @@ export function App(): JSX.Element {
   );
 }
 
-export function AppWithProviders(): JSX.Element {
+export function AppWithProviders() {
   return (
     <div className={isInternal ? styles.containerInternal : styles.container}>
       <ConfigurationProvider>

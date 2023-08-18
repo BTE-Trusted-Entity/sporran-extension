@@ -1,5 +1,4 @@
 import { action } from '@storybook/addon-actions';
-import { JSX } from 'react';
 import { Meta } from '@storybook/react';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
@@ -14,7 +13,7 @@ export default {
 const identity =
   identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <IdentitySuccessOverlay
       identity={identity}
@@ -24,7 +23,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function Imported(): JSX.Element {
+export function Imported() {
   return (
     <IdentitySuccessOverlay
       identity={identity}
@@ -34,7 +33,7 @@ export function Imported(): JSX.Element {
   );
 }
 
-export function Reset(): JSX.Element {
+export function Reset() {
   return (
     <IdentitySuccessOverlay
       identity={identity}

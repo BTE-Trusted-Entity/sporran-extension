@@ -1,4 +1,4 @@
-import { JSX, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import BN from 'bn.js';
 
@@ -12,7 +12,7 @@ interface Props {
   identity: Identity;
 }
 
-export function SendTokenFlow({ identity }: Props): JSX.Element {
+export function SendTokenFlow({ identity }: Props) {
   const history = useHistory();
 
   const [recipient, setRecipient] = useState<string | null>(null);

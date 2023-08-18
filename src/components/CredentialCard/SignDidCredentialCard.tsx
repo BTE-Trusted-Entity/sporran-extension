@@ -1,20 +1,13 @@
 import browser from 'webextension-polyfill';
-import {
-  JSX,
-  useCallback,
-  useState,
-  useRef,
-  RefObject,
-  ChangeEvent,
-} from 'react';
+import { ChangeEvent, RefObject, useCallback, useRef, useState } from 'react';
 import { includes, without } from 'lodash-es';
 import cx from 'classnames';
 
 import * as styles from './CredentialCard.module.css';
 
 import {
-  SporranCredential,
   SharedCredential,
+  SporranCredential,
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
 import { useBooleanState } from '../../utilities/useBooleanState/useBooleanState';
@@ -33,7 +26,7 @@ export function SignDidCredentialCard({
   onSelect,
   onUnSelect,
   viewRef,
-}: Props): JSX.Element {
+}: Props) {
   const t = browser.i18n.getMessage;
 
   usePendingCredentialCheck(sporranCredential);

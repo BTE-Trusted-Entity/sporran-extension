@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import browser from 'webextension-polyfill';
 import { pick } from 'lodash-es';
 
@@ -14,7 +14,7 @@ import { useIdentities } from '../../utilities/identities/identities';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { isFullDid } from '../../utilities/did/did';
 
-export function ShareIdentities(): JSX.Element | null {
+export function ShareIdentities() {
   const t = browser.i18n.getMessage;
 
   const identities = useIdentities().data;

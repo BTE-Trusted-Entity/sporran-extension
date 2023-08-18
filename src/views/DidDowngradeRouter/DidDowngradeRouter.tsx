@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { Switch } from 'react-router';
 import { Route } from 'react-router-dom';
 
@@ -12,7 +11,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidDowngradeRouter({ identity }: Props): JSX.Element {
+export function DidDowngradeRouter({ identity }: Props) {
   return (
     <Switch>
       <Route path={paths.identity.did.manage.downgrade.sign}>

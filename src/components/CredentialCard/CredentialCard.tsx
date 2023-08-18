@@ -2,7 +2,6 @@ import {
   ChangeEvent,
   FocusEvent,
   Fragment,
-  JSX,
   KeyboardEvent,
   RefObject,
   useCallback,
@@ -19,11 +18,11 @@ import cx from 'classnames';
 import * as styles from './CredentialCard.module.css';
 
 import {
-  SporranCredential,
   deleteCredential,
   getCredentialDownload,
   isUnusableCredential,
   saveCredential,
+  SporranCredential,
   usePendingCredentialCheck,
 } from '../../utilities/credentials/credentials';
 import {
@@ -76,7 +75,7 @@ function CredentialName({
   sporranCredential,
 }: {
   sporranCredential: SporranCredential;
-}): JSX.Element {
+}) {
   const t = browser.i18n.getMessage;
 
   const isEditing = useBooleanState();
@@ -396,7 +395,7 @@ export function CredentialCard({
   expand = false,
   collapsible = true,
   buttons = true,
-}: Props): JSX.Element {
+}: Props) {
   const t = browser.i18n.getMessage;
 
   const statuses = {

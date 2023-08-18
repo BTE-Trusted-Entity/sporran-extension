@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { JSX, MouseEvent, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 
 import { GenericError } from './GenericError';
 
@@ -8,7 +8,7 @@ export default {
   component: GenericError,
 } as Meta;
 
-function Failure(): JSX.Element {
+function Failure() {
   const [error, setError] = useState<MouseEvent | null>(null);
 
   if (error) {
@@ -22,7 +22,7 @@ function Failure(): JSX.Element {
   );
 }
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <GenericError>
       <Failure />

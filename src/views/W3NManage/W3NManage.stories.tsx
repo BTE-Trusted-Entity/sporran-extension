@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { Meta } from '@storybook/react';
 
@@ -12,7 +11,7 @@ export default {
   component: W3NManage,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <MemoryRouter
       initialEntries={[

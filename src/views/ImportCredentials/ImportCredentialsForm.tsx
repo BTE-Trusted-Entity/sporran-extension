@@ -1,4 +1,4 @@
-import { ChangeEvent, DragEvent, JSX, useCallback } from 'react';
+import { ChangeEvent, DragEvent, useCallback } from 'react';
 import browser from 'webextension-polyfill';
 
 import * as styles from './ImportCredentials.module.css';
@@ -9,7 +9,7 @@ interface Props {
   handleFiles: (files: FileList) => void;
 }
 
-export function ImportCredentialsForm({ handleFiles }: Props): JSX.Element {
+export function ImportCredentialsForm({ handleFiles }: Props) {
   const t = browser.i18n.getMessage;
 
   const handleChange = useCallback(

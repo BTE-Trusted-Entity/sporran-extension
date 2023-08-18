@@ -1,12 +1,11 @@
 import browser from 'webextension-polyfill';
-import { JSX } from 'react';
 import { Link } from 'react-router-dom';
 
 import * as styles from './IdentitySlide.module.css';
 
 import { paths } from '../../views/paths';
 
-export function IdentitySlideNew(): JSX.Element {
+export function IdentitySlideNew() {
   const t = browser.i18n.getMessage;
 
   return (

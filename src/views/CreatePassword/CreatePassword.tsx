@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, JSX, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import browser from 'webextension-polyfill';
 import { Link } from 'react-router-dom';
 
@@ -63,7 +63,7 @@ interface Props {
   onSuccess: (password: string) => void;
 }
 
-export function CreatePassword({ onSuccess }: Props): JSX.Element {
+export function CreatePassword({ onSuccess }: Props) {
   const t = browser.i18n.getMessage;
 
   const [password, setPassword] = useState('');

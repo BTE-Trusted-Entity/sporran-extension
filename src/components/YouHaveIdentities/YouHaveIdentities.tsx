@@ -1,9 +1,9 @@
-import { Fragment, JSX } from 'react';
+import { Fragment } from 'react';
 
 import { useIdentities } from '../../utilities/identities/identities';
 import { plural } from '../../utilities/plural/plural';
 
-export function YouHaveIdentities(): JSX.Element | null {
+export function YouHaveIdentities() {
   const identities = useIdentities().data;
   if (!identities) {
     // empty string to force rendering of the containing component and prevent layout shift

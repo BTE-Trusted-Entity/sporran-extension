@@ -1,4 +1,4 @@
-import { JSX, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import browser from 'webextension-polyfill';
 import { find } from 'lodash-es';
 
@@ -15,7 +15,7 @@ import { CredentialCard } from '../../components/CredentialCard/CredentialCard';
 import { UnknownCredential } from '../../components/UnknownCredential/UnknownCredential';
 import { RejectInput } from '../../channels/rejectChannel/types';
 
-export function AttestationRejected(): JSX.Element | null {
+export function AttestationRejected() {
   const t = browser.i18n.getMessage;
 
   const rootHash = usePopupData<RejectInput>();

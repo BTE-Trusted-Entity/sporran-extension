@@ -1,5 +1,5 @@
-import { FormEvent, JSX, useCallback, useState } from 'react';
-import { useHistory, generatePath } from 'react-router-dom';
+import { FormEvent, useCallback, useState } from 'react';
+import { generatePath, useHistory } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
 import { ConfigService } from '@kiltprotocol/sdk-js';
@@ -18,7 +18,7 @@ interface Props {
   identity: Identity;
 }
 
-export function W3NCreateForm({ identity }: Props): JSX.Element {
+export function W3NCreateForm({ identity }: Props) {
   const t = browser.i18n.getMessage;
   const { address } = identity;
   const did = getIdentityDid(identity);

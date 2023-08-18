@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { UnknownIdentity } from './UnknownIdentity';
 
@@ -8,7 +7,7 @@ export default {
   component: UnknownIdentity,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <UnknownIdentity address="4qp7KB8jbwqS6XXL8zH8qZn3GCdnZDt6Nmq5M47ztGKhXJVh" />
   );

@@ -1,4 +1,4 @@
-import { JSX, useState } from 'react';
+import { useState } from 'react';
 import { Meta } from '@storybook/react';
 
 import * as styles from './ErrorTooltip.module.css';
@@ -7,7 +7,7 @@ export default {
   title: 'Components/ErrorTooltip',
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   const [error, setError] = useState('');
 
   return (

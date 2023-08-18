@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 
@@ -13,6 +12,6 @@ export default {
 const identity =
   identitiesMock['4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653'];
 
-export function Template(): JSX.Element {
+export function Template() {
   return <IdentityLine identity={identity} />;
 }

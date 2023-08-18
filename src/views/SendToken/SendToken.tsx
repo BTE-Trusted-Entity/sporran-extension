@@ -2,7 +2,6 @@ import {
   ChangeEvent,
   FocusEvent,
   FormEvent,
-  JSX,
   MouseEvent,
   useCallback,
   useEffect,
@@ -176,7 +175,7 @@ interface Props {
   }) => void;
 }
 
-export function SendToken({ identity, onSuccess }: Props): JSX.Element {
+export function SendToken({ identity, onSuccess }: Props) {
   const t = browser.i18n.getMessage;
 
   const api = ConfigService.get('api');

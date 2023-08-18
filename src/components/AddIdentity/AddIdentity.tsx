@@ -1,4 +1,4 @@
-import { JSX, useCallback } from 'react';
+import { useCallback } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
@@ -10,7 +10,7 @@ import { paths } from '../../views/paths';
 import { NEW } from '../../utilities/identities/identities';
 import { showPopup } from '../../channels/base/PopupChannel/PopupMessages';
 
-export function AddIdentity(): JSX.Element | null {
+export function AddIdentity() {
   const t = browser.i18n.getMessage;
 
   const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(2);

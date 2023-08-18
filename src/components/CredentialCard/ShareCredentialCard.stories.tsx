@@ -1,12 +1,11 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import * as styles from './CredentialCard.module.css';
 
 import {
-  mockRequestCredential,
   credentialsMock,
+  mockRequestCredential,
 } from '../../utilities/credentials/CredentialsProvider.mock';
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
@@ -19,7 +18,7 @@ export default {
   component: ShareCredentialCard,
 } as Meta;
 
-export function Selected(): JSX.Element {
+export function Selected() {
   return (
     <PopupTestProvider
       path={paths.popup.share.start}
@@ -39,7 +38,7 @@ export function Selected(): JSX.Element {
   );
 }
 
-export function NotSelected(): JSX.Element {
+export function NotSelected() {
   return (
     <PopupTestProvider
       path={paths.popup.share.start}
@@ -58,7 +57,7 @@ export function NotSelected(): JSX.Element {
   );
 }
 
-export function NotAttested(): JSX.Element {
+export function NotAttested() {
   return (
     <PopupTestProvider
       path={paths.popup.share.start}

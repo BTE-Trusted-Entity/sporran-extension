@@ -1,5 +1,3 @@
-import { JSX } from 'react';
-
 import {
   mockDialogShowModal,
   render,
@@ -21,7 +19,7 @@ describe('GenericError', () => {
   });
 
   it('should render generic error when an error happens', async () => {
-    function Failure(): JSX.Element {
+    function Failure(): null {
       const error = new Error('Testing GenericError');
       error.stack = 'test.js@123:12';
       throw error;

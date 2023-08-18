@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 
@@ -12,6 +11,6 @@ export default {
 
 const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
-export function Template(): JSX.Element {
+export function Template() {
   return <RemoveIdentity identity={identity} />;
 }

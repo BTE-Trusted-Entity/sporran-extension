@@ -4,7 +4,6 @@ import {
   ClipboardEvent,
   ClipboardEventHandler,
   FormEvent,
-  JSX,
   useCallback,
   useState,
 } from 'react';
@@ -66,12 +65,7 @@ interface WordInputProps {
   handlePaste?: ClipboardEventHandler<HTMLInputElement>;
 }
 
-function WordInput({
-  word,
-  index,
-  handleInput,
-  handlePaste,
-}: WordInputProps): JSX.Element {
+function WordInput({ word, index, handleInput, handlePaste }: WordInputProps) {
   const t = browser.i18n.getMessage;
 
   const hasError = Boolean(word && !isAllowed(word));
@@ -110,7 +104,7 @@ export function ImportBackupPhrase({
   type = 'import',
   address,
   onImport,
-}: Props): JSX.Element {
+}: Props) {
   const t = browser.i18n.getMessage;
 
   const [backupPhrase, setBackupPhrase] = useState<BackupPhrase>(

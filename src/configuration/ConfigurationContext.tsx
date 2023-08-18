@@ -1,14 +1,10 @@
-import { createContext, JSX } from 'react';
+import { createContext, PropsWithChildren } from 'react';
 
 import { configuration } from './configuration';
 
 export const ConfigurationContext = createContext(configuration);
 
-export function ConfigurationProvider({
-  children,
-}: {
-  children: JSX.Element;
-}): JSX.Element {
+export function ConfigurationProvider({ children }: PropsWithChildren) {
   return (
     <ConfigurationContext.Provider value={configuration}>
       {children}

@@ -1,4 +1,4 @@
-import { JSX, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import browser from 'webextension-polyfill';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import { Link, useRouteMatch } from 'react-router-dom';
@@ -24,7 +24,7 @@ function useItemsCount(onExistingIdentity: boolean, hasPasswords: boolean) {
   return itemCounts.generic + itemCounts.identity + itemCounts.forgetPasswords;
 }
 
-export function Settings(): JSX.Element {
+export function Settings() {
   const t = browser.i18n.getMessage;
 
   const [hasPasswords, setHasPasswords] = useState(false);

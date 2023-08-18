@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 
@@ -18,7 +17,7 @@ const mockAccessData: AccessOriginInput = {
   origin: 'https://polkadot.js.org/apps/',
 };
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <PopupTestProvider path={paths.popup.access} data={mockAccessData}>
       <AuthorizeDApp />

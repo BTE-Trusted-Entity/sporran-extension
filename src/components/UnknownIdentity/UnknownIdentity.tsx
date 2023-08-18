@@ -1,15 +1,10 @@
 import type { KiltAddress } from '@kiltprotocol/sdk-js';
 
-import { JSX } from 'react';
 import browser from 'webextension-polyfill';
 
 import * as styles from './UnknownIdentity.module.css';
 
-export function UnknownIdentity({
-  address,
-}: {
-  address: KiltAddress;
-}): JSX.Element {
+export function UnknownIdentity({ address }: { address: KiltAddress }) {
   const t = browser.i18n.getMessage;
   return (
     <section className={styles.container}>

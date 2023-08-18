@@ -1,5 +1,4 @@
 import browser from 'webextension-polyfill';
-import { JSX } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import * as styles from './ExistentialWarning.module.css';
@@ -10,7 +9,7 @@ interface Props {
   nextPath: string;
 }
 
-export function ExistentialWarning({ nextPath }: Props): JSX.Element {
+export function ExistentialWarning({ nextPath }: Props) {
   const t = browser.i18n.getMessage;
   const { goBack } = useHistory();
 

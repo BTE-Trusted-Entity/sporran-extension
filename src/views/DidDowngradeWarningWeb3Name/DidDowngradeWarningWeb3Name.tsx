@@ -1,5 +1,4 @@
 import browser from 'webextension-polyfill';
-import { JSX } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import * as styles from './DidDowngradeWarningWeb3Name.module.css';
@@ -16,9 +15,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidDowngradeWarningWeb3Name({
-  identity,
-}: Props): JSX.Element | null {
+export function DidDowngradeWarningWeb3Name({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { goBack } = useHistory();
