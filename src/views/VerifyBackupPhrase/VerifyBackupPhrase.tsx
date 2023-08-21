@@ -1,4 +1,4 @@
-import { JSX, useState, useCallback, MouseEvent, FormEvent } from 'react';
+import { FormEvent, MouseEvent, useCallback, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import cx from 'classnames';
 import browser from 'webextension-polyfill';
@@ -12,7 +12,7 @@ interface Props {
   backupPhrase: string;
 }
 
-export function VerifyBackupPhrase({ backupPhrase }: Props): JSX.Element {
+export function VerifyBackupPhrase({ backupPhrase }: Props) {
   const t = browser.i18n.getMessage;
   const history = useHistory();
 

@@ -26,9 +26,8 @@ export async function showCredentialPopup(
 
   await initKiltSDK();
 
-  const { encrypt, decrypt, dAppEncryptionDidKey } = await getTabEncryption(
-    sender,
-  );
+  const { encrypt, decrypt, dAppEncryptionDidKey } =
+    await getTabEncryption(sender);
   const message = await decrypt(encrypted);
 
   if (message.body.type === 'submit-terms') {

@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { Link, MemoryRouter, Route } from 'react-router-dom';
 
 import * as styles from './LinkBack.module.css';
@@ -12,15 +11,15 @@ export default {
   title: 'Components/LinkBack',
 } as Meta;
 
-export function CSS(): JSX.Element {
+export function CSS() {
   return <Link to="" title="Back" className={styles.linkBack} />;
 }
 
-export function AsButton(): JSX.Element {
+export function AsButton() {
   return <LinkBack />;
 }
 
-export function AsLink(): JSX.Element {
+export function AsLink() {
   return (
     <MemoryRouter
       initialEntries={[

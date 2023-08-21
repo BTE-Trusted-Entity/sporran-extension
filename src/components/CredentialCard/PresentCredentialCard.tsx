@@ -1,5 +1,5 @@
 import browser from 'webextension-polyfill';
-import { ChangeEvent, JSX, useCallback, useEffect } from 'react';
+import { ChangeEvent, useCallback, useEffect } from 'react';
 
 import * as styles from './CredentialCard.module.css';
 
@@ -10,10 +10,7 @@ interface Props {
   onSelect: (value: string[]) => void;
 }
 
-export function PresentCredentialCard({
-  sporranCredential,
-  onSelect,
-}: Props): JSX.Element {
+export function PresentCredentialCard({ sporranCredential, onSelect }: Props) {
   const t = browser.i18n.getMessage;
 
   const { cTypeTitle, attester, credential, name, status } = sporranCredential;

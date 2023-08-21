@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import BN from 'bn.js';
 import browser from 'webextension-polyfill';
 import { Link } from 'react-router-dom';
@@ -38,7 +38,7 @@ export function ReviewTransaction({
   amount,
   fee,
   tip,
-}: Props): JSX.Element {
+}: Props) {
   const t = browser.i18n.getMessage;
 
   const showDetails = useBooleanState();

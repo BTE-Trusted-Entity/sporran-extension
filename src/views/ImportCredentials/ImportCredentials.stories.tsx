@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
@@ -13,15 +12,15 @@ export default {
   component: ImportCredentials,
 } as Meta;
 
-export function Flow(): JSX.Element {
+export function Flow() {
   return <ImportCredentials />;
 }
 
-export function Form(): JSX.Element {
+export function Form() {
   return <ImportCredentialsForm handleFiles={action('handleFiles')} />;
 }
 
-export function Results(): JSX.Element {
+export function Results() {
   return (
     <ImportCredentialsResults
       pending={[{ fileName: 'Email-1.json' }]}

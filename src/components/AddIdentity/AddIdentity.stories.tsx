@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import * as menuStyles from '../Menu/Menu.module.css';
@@ -18,7 +17,7 @@ export default {
   ],
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <MemoryRouter
       initialEntries={[
@@ -30,7 +29,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function WhenCreating(): JSX.Element {
+export function WhenCreating() {
   return (
     <MemoryRouter initialEntries={['/identity/NEW']}>
       <AddIdentity />
@@ -38,7 +37,7 @@ export function WhenCreating(): JSX.Element {
   );
 }
 
-export function NoIdentities(): JSX.Element {
+export function NoIdentities() {
   return (
     <MemoryRouter initialEntries={['/']}>
       <AddIdentity />

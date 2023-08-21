@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
@@ -11,7 +10,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidUpgradeFlow({ identity }: Props): JSX.Element {
+export function DidUpgradeFlow({ identity }: Props) {
   return (
     <Switch>
       <Route path={paths.identity.did.upgrade.kilt}>

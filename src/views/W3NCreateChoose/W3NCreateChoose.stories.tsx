@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { moreIdentitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
@@ -12,7 +11,7 @@ export default {
   component: W3NCreateChoose,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <MemoryRouter
       initialEntries={[

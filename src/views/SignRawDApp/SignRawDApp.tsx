@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useCallback, useRef } from 'react';
+import { FormEvent, useCallback, useRef } from 'react';
 import browser from 'webextension-polyfill';
 import { u8aToHex } from '@polkadot/util';
 import { Utils } from '@kiltprotocol/sdk-js';
@@ -18,7 +18,7 @@ import {
 import { backgroundSignRawChannel } from '../../dApps/SignRawChannels/backgroundSignRawChannel';
 import { SignRawOriginInput } from '../../dApps/SignRawChannels/types';
 
-export function SignRawDApp(): JSX.Element | null {
+export function SignRawDApp() {
   const t = browser.i18n.getMessage;
 
   const values = usePopupData<SignRawOriginInput>();

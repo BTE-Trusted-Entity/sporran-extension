@@ -1,4 +1,4 @@
-import { JSX, useCallback } from 'react';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
@@ -14,7 +14,7 @@ interface Props {
   onEdit: () => void;
 }
 
-export function IdentityOptions({ identity, onEdit }: Props): JSX.Element {
+export function IdentityOptions({ identity, onEdit }: Props) {
   const t = browser.i18n.getMessage;
 
   const { address } = identity;

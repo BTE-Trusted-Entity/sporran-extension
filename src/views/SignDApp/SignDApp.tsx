@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, JSX, useCallback } from 'react';
+import { FormEvent, Fragment, useCallback } from 'react';
 import browser from 'webextension-polyfill';
 import { Utils } from '@kiltprotocol/sdk-js';
 
@@ -18,7 +18,7 @@ import { SignOriginInput } from '../../dApps/SignChannels/types';
 
 import { getExtrinsic, useExtrinsicValues } from './useExtrinsicValues';
 
-export function SignDApp(): JSX.Element | null {
+export function SignDApp() {
   const t = browser.i18n.getMessage;
 
   const input = usePopupData<SignOriginInput>();

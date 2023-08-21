@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
@@ -17,9 +16,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidDowngradeWarningCredentials({
-  identity,
-}: Props): JSX.Element | null {
+export function DidDowngradeWarningCredentials({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const sporranCredentials = useIdentityCredentials(identity.did);

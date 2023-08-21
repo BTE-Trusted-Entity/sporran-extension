@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import cx from 'classnames';
 
 import * as styles from './Avatar.module.css';
@@ -13,10 +12,7 @@ interface Props {
   className?: string;
 }
 
-export function Avatar({
-  identity,
-  className = styles.avatar,
-}: Props): JSX.Element {
+export function Avatar({ identity, className = styles.avatar }: Props) {
   return (
     <div
       className={cx(className, {

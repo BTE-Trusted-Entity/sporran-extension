@@ -1,7 +1,6 @@
 import {
   ChangeEvent,
   Fragment,
-  JSX,
   MouseEvent,
   useCallback,
   useState,
@@ -12,8 +11,8 @@ import { Link, Redirect } from 'react-router-dom';
 import * as styles from './Welcome.module.css';
 
 import {
-  useIdentities,
   useCurrentIdentity,
+  useIdentities,
 } from '../../utilities/identities/identities';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
@@ -23,7 +22,7 @@ interface Props {
   again?: boolean;
 }
 
-export function Welcome({ again = false }: Props): JSX.Element | null {
+export function Welcome({ again = false }: Props) {
   const t = browser.i18n.getMessage;
 
   const [enabled, setEnabled] = useState(false);

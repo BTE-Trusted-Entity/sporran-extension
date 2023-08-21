@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { Stats } from './Stats';
 
@@ -8,6 +7,6 @@ export default {
   component: Stats,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return <Stats />;
 }

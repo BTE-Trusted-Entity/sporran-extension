@@ -1,4 +1,4 @@
-import { JSX, MouseEvent, useCallback, useState } from 'react';
+import { MouseEvent, useCallback, useState } from 'react';
 import { Modal } from 'react-dialog-polyfill';
 import browser from 'webextension-polyfill';
 import { without } from 'lodash-es';
@@ -28,7 +28,7 @@ export function ImportCredentialsResults({
   failedImports,
   setFailedImports,
   handleMoreClick,
-}: Props): JSX.Element {
+}: Props) {
   const t = browser.i18n.getMessage;
 
   const [modalText, setModalText] = useState<string>();

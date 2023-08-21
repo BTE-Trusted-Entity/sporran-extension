@@ -1,4 +1,4 @@
-import { JSX, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import browser from 'webextension-polyfill';
 import { Link, Redirect, useParams } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ interface Props {
   identity: Identity;
 }
 
-export function IdentityOverview({ identity }: Props): JSX.Element | null {
+export function IdentityOverview({ identity }: Props) {
   const t = browser.i18n.getMessage;
   const params = useParams() as { type?: 'created' | 'imported' | 'pwreset' };
 

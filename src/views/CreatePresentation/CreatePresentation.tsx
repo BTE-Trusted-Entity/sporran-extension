@@ -1,4 +1,4 @@
-import { JSX, useState } from 'react';
+import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 import { find } from 'lodash-es';
@@ -19,7 +19,7 @@ interface Props {
   identity: Identity;
 }
 
-export function CreatePresentation({ identity }: Props): JSX.Element | null {
+export function CreatePresentation({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { goBack } = useHistory();

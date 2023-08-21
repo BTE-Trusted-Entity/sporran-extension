@@ -1,5 +1,4 @@
 import browser from 'webextension-polyfill';
-import { JSX } from 'react';
 import { Modal } from 'react-dialog-polyfill';
 
 import * as styles from './IdentitySuccessOverlay.module.css';
@@ -17,7 +16,7 @@ export function IdentitySuccessOverlay({
   identity,
   successType,
   onSuccessOverlayButtonClick,
-}: Props): JSX.Element {
+}: Props) {
   const t = browser.i18n.getMessage;
 
   const messages = {

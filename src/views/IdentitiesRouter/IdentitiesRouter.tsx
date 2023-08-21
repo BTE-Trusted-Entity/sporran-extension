@@ -1,4 +1,4 @@
-import { JSX, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   Redirect,
   Route,
@@ -60,9 +60,7 @@ function useRedirectToCurrent() {
   return noAddressProvided;
 }
 
-export function SpecificIdentityRouter({
-  identities,
-}: Props): JSX.Element | null {
+export function SpecificIdentityRouter({ identities }: Props) {
   const { address } = useParams() as { address: string };
 
   useEffect(() => {
@@ -149,7 +147,7 @@ export function SpecificIdentityRouter({
   );
 }
 
-export function IdentitiesRouter(): JSX.Element {
+export function IdentitiesRouter() {
   const identities = useIdentities();
 
   return (

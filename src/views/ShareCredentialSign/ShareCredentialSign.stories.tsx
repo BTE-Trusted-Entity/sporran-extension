@@ -1,6 +1,5 @@
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { JSX } from 'react';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import { credentialsMock } from '../../utilities/credentials/CredentialsProvider.mock';
@@ -36,7 +35,7 @@ const mockSelected: Selected = {
   sharedContents: ['Email'],
 };
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <ShareCredentialSign
       selected={mockSelected}

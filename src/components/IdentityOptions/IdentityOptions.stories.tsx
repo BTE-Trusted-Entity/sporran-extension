@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import * as menuStyles from '../Menu/Menu.module.css';
@@ -20,7 +19,7 @@ export default {
   ],
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <IdentityOptions
       onEdit={action('onEdit')}

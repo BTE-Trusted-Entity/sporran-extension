@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { Balance } from './Balance';
 
@@ -8,11 +7,11 @@ export default {
   component: Balance,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return <Balance address="4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1" />;
 }
 
-export function WithBreakdown(): JSX.Element {
+export function WithBreakdown() {
   return (
     <Balance
       address="4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1"

@@ -1,5 +1,4 @@
 import browser from 'webextension-polyfill';
-import { JSX } from 'react';
 import { Link } from 'react-router-dom';
 
 import * as styles from './SaveBackupPhrase.module.css';
@@ -11,7 +10,7 @@ interface Props {
   backupPhrase: string;
 }
 
-export function SaveBackupPhrase({ backupPhrase }: Props): JSX.Element {
+export function SaveBackupPhrase({ backupPhrase }: Props) {
   const words = backupPhrase.split(/\s+/);
   const t = browser.i18n.getMessage;
 

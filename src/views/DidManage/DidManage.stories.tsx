@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { Meta } from '@storybook/react';
 
@@ -12,7 +11,7 @@ export default {
   component: DidManage,
 } as Meta;
 
-export function WithoutWeb3Name(): JSX.Element {
+export function WithoutWeb3Name() {
   return (
     <MemoryRouter
       initialEntries={[
@@ -30,7 +29,7 @@ export function WithoutWeb3Name(): JSX.Element {
   );
 }
 
-export function WithWeb3Name(): JSX.Element {
+export function WithWeb3Name() {
   return (
     <MemoryRouter
       initialEntries={[

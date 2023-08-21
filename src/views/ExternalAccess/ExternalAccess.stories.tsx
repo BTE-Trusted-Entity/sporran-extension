@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { ExternalAccess } from './ExternalAccess';
 
@@ -8,6 +7,6 @@ export default {
   component: ExternalAccess,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return <ExternalAccess />;
 }

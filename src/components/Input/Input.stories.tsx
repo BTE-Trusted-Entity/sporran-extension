@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { Fragment, JSX } from 'react';
+import { Fragment } from 'react';
 
 import * as styles from './Input.module.css';
 
@@ -7,7 +7,7 @@ export default {
   title: 'Components/Input',
 } as Meta;
 
-export function Input(): JSX.Element {
+export function Input() {
   return (
     <input
       className={styles.input}
@@ -17,7 +17,7 @@ export function Input(): JSX.Element {
   );
 }
 
-export function InputKiltAmount(): JSX.Element {
+export function InputKiltAmount() {
   return (
     <input
       className={styles.inputKiltAmount}
@@ -28,7 +28,7 @@ export function InputKiltAmount(): JSX.Element {
   );
 }
 
-export function InputRadio(): JSX.Element {
+export function InputRadio() {
   return (
     <Fragment>
       <input className={styles.inputRadio} type="radio" name="radio" checked />

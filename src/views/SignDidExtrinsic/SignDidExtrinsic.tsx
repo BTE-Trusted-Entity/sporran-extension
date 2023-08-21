@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, JSX, ReactNode, useCallback } from 'react';
+import { FormEvent, Fragment, PropsWithChildren, useCallback } from 'react';
 import browser from 'webextension-polyfill';
 import {
   ConfigService,
@@ -40,7 +40,7 @@ import {
   getRemoveServiceEndpoint,
 } from './didExtrinsic';
 
-function Endpoint({ endpoint }: { endpoint: DidServiceEndpoint }): JSX.Element {
+function Endpoint({ endpoint }: { endpoint: DidServiceEndpoint }) {
   const t = browser.i18n.getMessage;
 
   return (
@@ -81,11 +81,10 @@ function AddServiceEndpointExtrinsic({
   identity,
   extrinsic,
   children,
-}: {
+}: PropsWithChildren<{
   identity: Identity;
   extrinsic: GenericExtrinsic;
-  children: ReactNode;
-}): JSX.Element {
+}>) {
   const t = browser.i18n.getMessage;
 
   const { did } = identity;
@@ -117,12 +116,11 @@ function RemoveServiceEndpointExtrinsic({
   extrinsic,
   error,
   children,
-}: {
+}: PropsWithChildren<{
   identity: Identity;
   extrinsic: GenericExtrinsic;
   error: ReturnType<typeof useBooleanState>;
-  children: ReactNode;
-}): JSX.Element {
+}>) {
   const t = browser.i18n.getMessage;
 
   const { did } = identity;
@@ -157,11 +155,10 @@ function DidExtrinsic({
   children,
   extrinsic,
   origin,
-}: {
-  children: ReactNode;
+}: PropsWithChildren<{
   extrinsic: GenericExtrinsic;
   origin: string;
-}) {
+}>) {
   const t = browser.i18n.getMessage;
 
   const values = getExtrinsicValues(extrinsic, origin);
@@ -201,7 +198,7 @@ interface Props {
   identity: Identity;
 }
 
-export function SignDidExtrinsic({ identity }: Props): JSX.Element | null {
+export function SignDidExtrinsic({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { did } = identity;

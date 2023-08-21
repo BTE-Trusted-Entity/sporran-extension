@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useCallback, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
@@ -15,7 +15,7 @@ import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { useConfiguration } from '../../configuration/useConfiguration';
 import { paths } from '../paths';
 
-export function AppSettings(): JSX.Element {
+export function AppSettings() {
   const t = browser.i18n.getMessage;
 
   const { features } = useConfiguration();

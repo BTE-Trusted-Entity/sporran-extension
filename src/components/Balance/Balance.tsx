@@ -1,4 +1,4 @@
-import { Fragment, JSX, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import BN from 'bn.js';
 import browser from 'webextension-polyfill';
 
@@ -50,7 +50,7 @@ export function Balance({
   address,
   breakdown = false,
   smallDecimals = false,
-}: BalanceProps): JSX.Element {
+}: BalanceProps) {
   const t = browser.i18n.getMessage;
   const balance = useAddressBalance(address);
   const connecting = balance === null;

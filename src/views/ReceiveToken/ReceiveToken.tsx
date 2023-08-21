@@ -1,5 +1,4 @@
 import browser from 'webextension-polyfill';
-import { JSX } from 'react';
 import { Modal } from 'react-dialog-polyfill';
 
 import * as styles from './ReceiveToken.module.css';
@@ -17,7 +16,7 @@ interface Props {
   identity: Identity;
 }
 
-export function ReceiveToken({ identity }: Props): JSX.Element {
+export function ReceiveToken({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const largeQR = useBooleanState();

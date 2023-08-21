@@ -1,14 +1,13 @@
 import browser from 'webextension-polyfill';
 import {
-  JSX,
+  ChangeEvent,
+  RefObject,
   useCallback,
-  useState,
   useEffect,
   useRef,
-  RefObject,
-  ChangeEvent,
+  useState,
 } from 'react';
-import { includes, without, find } from 'lodash-es';
+import { find, includes, without } from 'lodash-es';
 import cx from 'classnames';
 
 import * as styles from './CredentialCard.module.css';
@@ -44,7 +43,7 @@ export function ShareCredentialCard({
   viewRef,
   isSelected = false,
   expand,
-}: Props): JSX.Element {
+}: Props) {
   const t = browser.i18n.getMessage;
 
   usePendingCredentialCheck(sporranCredential);

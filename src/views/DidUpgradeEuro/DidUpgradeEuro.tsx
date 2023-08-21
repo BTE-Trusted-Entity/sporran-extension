@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill';
 import { Link } from 'react-router-dom';
-import { FormEvent, JSX, useCallback } from 'react';
+import { FormEvent, useCallback } from 'react';
 
 import * as styles from './DidUpgradeEuro.module.css';
 
@@ -20,15 +20,15 @@ import {
   getLightDidFromSeed,
 } from '../../utilities/identities/identities';
 import {
-  getCheckoutURL,
   getCheckoutCosts,
+  getCheckoutURL,
 } from '../../utilities/checkout/checkout';
 
 interface Props {
   identity: Identity;
 }
 
-export function DidUpgradeEuro({ identity }: Props): JSX.Element | null {
+export function DidUpgradeEuro({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { address } = identity;

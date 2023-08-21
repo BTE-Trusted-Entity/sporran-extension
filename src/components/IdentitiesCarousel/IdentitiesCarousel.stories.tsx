@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import {
   identitiesMock,
@@ -15,7 +14,7 @@ export default {
   decorators: [(story) => <div style={{ textAlign: 'center' }}>{story()}</div>],
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <IdentitiesCarousel
       identity={
@@ -25,7 +24,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function NoBubbles(): JSX.Element {
+export function NoBubbles() {
   return (
     <IdentitiesProviderMock identities={moreIdentitiesMock}>
       <IdentitiesCarousel

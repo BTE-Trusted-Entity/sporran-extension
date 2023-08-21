@@ -1,4 +1,4 @@
-import { JSX, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import browser from 'webextension-polyfill';
 import { Modal } from 'react-dialog-polyfill';
 import { Link } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import * as styles from './TxStatusModal.module.css';
 
 import { Identity } from '../../utilities/identities/types';
-import { paths, generatePath } from '../../views/paths';
+import { generatePath, paths } from '../../views/paths';
 import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 import { Avatar } from '../Avatar/Avatar';
 
@@ -39,7 +39,7 @@ export function TxStatusModal({
   onDismissError,
   messages = defaultMessages,
   destination,
-}: Props): JSX.Element | null {
+}: Props) {
   const t = browser.i18n.getMessage;
 
   const subscanHost = useSubscanHost();

@@ -1,10 +1,10 @@
-import { JSX, MouseEvent, useCallback, useMemo, useState } from 'react';
+import { MouseEvent, useCallback, useMemo, useState } from 'react';
 import { filter, reject, sortBy } from 'lodash-es';
 import { Credential, Did } from '@kiltprotocol/sdk-js';
 
 import {
-  SporranCredential,
   saveCredential,
+  SporranCredential,
   updateLegacyCredential,
 } from '../../utilities/credentials/credentials';
 import { exceptionToError } from '../../utilities/exceptionToError/exceptionToError';
@@ -14,7 +14,7 @@ import { ImportCredentialsForm } from './ImportCredentialsForm';
 import { ImportCredentialsResults } from './ImportCredentialsResults';
 import { FailedImport, Import, SuccessfulImport } from './types';
 
-export function ImportCredentials(): JSX.Element | null {
+export function ImportCredentials() {
   const [processing, setProcessing] = useState(false);
   const [pending, setPending] = useState<Import[]>([]);
   const [failedImports, setFailedImports] = useState<FailedImport[]>([]);

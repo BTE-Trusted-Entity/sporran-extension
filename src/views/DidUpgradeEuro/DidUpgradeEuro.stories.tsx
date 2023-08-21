@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 
@@ -10,7 +9,7 @@ export default {
   component: DidUpgradeEuro,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <DidUpgradeEuro
       identity={identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']}

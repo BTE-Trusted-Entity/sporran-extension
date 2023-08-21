@@ -1,4 +1,4 @@
-import { JSX, useRef } from 'react';
+import { useRef } from 'react';
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -8,7 +8,7 @@ export default {
   title: 'Components/usePasteButton',
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   const ref = useRef(null);
   const copy = usePasteButton(ref, action('onPaste'));
 

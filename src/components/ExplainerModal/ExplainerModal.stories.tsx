@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { JSX, useRef } from 'react';
+import { useRef } from 'react';
 
 import * as styles from '../Typography/Typography.module.css';
 
@@ -10,7 +10,7 @@ export default {
   component: ExplainerModal,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   const portalRef = useRef<HTMLDivElement>(null);
   return (
     <section>

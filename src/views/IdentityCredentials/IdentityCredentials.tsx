@@ -1,5 +1,5 @@
 import browser from 'webextension-polyfill';
-import { JSX, useMemo, useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ interface Props {
   identity: Identity;
 }
 
-export function IdentityCredentials({ identity }: Props): JSX.Element | null {
+export function IdentityCredentials({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const identityCredentials = useIdentityCredentials(identity.did, false);

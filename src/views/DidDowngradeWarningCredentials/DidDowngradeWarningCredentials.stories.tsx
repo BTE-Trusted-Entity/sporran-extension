@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { identitiesMock as identities } from '../../utilities/identities/IdentitiesProvider.mock';
 
@@ -10,7 +9,7 @@ export default {
   component: DidDowngradeWarningCredentials,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <DidDowngradeWarningCredentials
       identity={identities['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo']}

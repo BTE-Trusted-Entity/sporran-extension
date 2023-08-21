@@ -1,5 +1,4 @@
 import browser from 'webextension-polyfill';
-import { JSX } from 'react';
 import { Link } from 'react-router-dom';
 
 import * as styles from './Warning.module.css';
@@ -7,7 +6,7 @@ import * as styles from './Warning.module.css';
 import { LinkBack } from '../../components/LinkBack/LinkBack';
 import { paths } from '../paths';
 
-export function Warning(): JSX.Element {
+export function Warning() {
   const t = browser.i18n.getMessage;
 
   return (

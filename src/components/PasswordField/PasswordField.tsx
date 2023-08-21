@@ -2,7 +2,6 @@ import {
   Dispatch,
   FormEvent,
   Fragment,
-  JSX,
   SetStateAction,
   useCallback,
   useEffect,
@@ -79,7 +78,7 @@ export function PasswordField({
   identity: { address },
   autoFocus,
   password,
-}: Props): JSX.Element | null {
+}: Props) {
   const t = browser.i18n.getMessage;
 
   const setPasswordGetter = password.set as SetPasswordGetterType;

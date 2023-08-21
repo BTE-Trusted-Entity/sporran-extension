@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import {
   ChangeEvent,
   Fragment,
-  JSX,
   useCallback,
   useEffect,
   useRef,
@@ -33,7 +32,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidUpgradeExplainer({ identity }: Props): JSX.Element | null {
+export function DidUpgradeExplainer({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { address, did, deletedDid } = identity;

@@ -1,5 +1,5 @@
 import browser from 'webextension-polyfill';
-import { FormEvent, JSX, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import {
   Attestation,
   ConfigService,
@@ -59,11 +59,7 @@ interface Props {
   popupData: ShareInput;
 }
 
-export function ShareCredentialSign({
-  selected,
-  onCancel,
-  popupData,
-}: Props): JSX.Element | null {
+export function ShareCredentialSign({ selected, onCancel, popupData }: Props) {
   const t = browser.i18n.getMessage;
 
   const { credentialRequest, verifierDid, specVersion } = popupData;

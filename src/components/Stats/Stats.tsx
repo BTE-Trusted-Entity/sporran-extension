@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import browser from 'webextension-polyfill';
 
 import * as styles from './Stats.module.css';
@@ -16,7 +15,7 @@ interface Props {
   identities: IdentitiesMap;
 }
 
-function UnconditionalStats({ identities }: Props): JSX.Element | null {
+function UnconditionalStats({ identities }: Props) {
   const t = browser.i18n.getMessage;
 
   const stats = useStats(identities);
@@ -38,7 +37,7 @@ function UnconditionalStats({ identities }: Props): JSX.Element | null {
   );
 }
 
-export function Stats(): JSX.Element | null {
+export function Stats() {
   const identities = useIdentities().data;
   if (!identities) {
     return null; // storage data pending

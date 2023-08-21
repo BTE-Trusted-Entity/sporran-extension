@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
@@ -10,7 +9,7 @@ interface Props {
   to?: string;
 }
 
-export function LinkBack({ to }: Props): JSX.Element {
+export function LinkBack({ to }: Props) {
   const t = browser.i18n.getMessage;
 
   const { goBack } = useHistory();

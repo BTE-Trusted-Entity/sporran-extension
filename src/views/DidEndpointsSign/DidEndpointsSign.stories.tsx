@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { DidServiceEndpoint } from '@kiltprotocol/sdk-js';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
@@ -27,19 +26,19 @@ const longUrlEndpoint: DidServiceEndpoint = {
   ],
 };
 
-export function Add(): JSX.Element {
+export function Add() {
   return (
     <DidEndpointsSign type="add" identity={identity} endpoint={endpoint} />
   );
 }
 
-export function Remove(): JSX.Element {
+export function Remove() {
   return (
     <DidEndpointsSign type="remove" identity={identity} endpoint={endpoint} />
   );
 }
 
-export function LongUrl(): JSX.Element {
+export function LongUrl() {
   return (
     <DidEndpointsSign
       type="add"

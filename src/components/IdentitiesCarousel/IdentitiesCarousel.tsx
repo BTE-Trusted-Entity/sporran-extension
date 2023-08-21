@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { Link, NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 import { sortBy } from 'lodash-es';
@@ -28,7 +27,7 @@ function IdentityLink({
   identities,
   direction,
   showAdd,
-}: IdentityLinkProps): JSX.Element {
+}: IdentityLinkProps) {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
   const { search } = useLocation();
@@ -73,7 +72,7 @@ interface IdentitiesBubblesProps {
 export function IdentitiesBubbles({
   identities,
   showAdd,
-}: IdentitiesBubblesProps): JSX.Element | null {
+}: IdentitiesBubblesProps) {
   const t = browser.i18n.getMessage;
   const { path } = useRouteMatch();
   const { search } = useLocation();
@@ -117,10 +116,7 @@ interface Props {
   options?: boolean;
 }
 
-export function IdentitiesCarousel({
-  identity,
-  options = false,
-}: Props): JSX.Element | null {
+export function IdentitiesCarousel({ identity, options = false }: Props) {
   const identities = useIdentities().data;
   if (!identities) {
     return null; // storage data pending

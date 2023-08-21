@@ -1,11 +1,4 @@
-import {
-  FormEvent,
-  Fragment,
-  JSX,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
+import { FormEvent, Fragment, useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import browser from 'webextension-polyfill';
@@ -83,7 +76,7 @@ interface Props {
   identity: Identity;
 }
 
-export function DidDowngrade({ identity }: Props): JSX.Element | null {
+export function DidDowngrade({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const { address, did } = identity;

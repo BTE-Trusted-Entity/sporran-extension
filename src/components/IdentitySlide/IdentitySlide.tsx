@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useCallback } from 'react';
+import { FormEvent, useCallback } from 'react';
 import browser from 'webextension-polyfill';
 
 import * as styles from './IdentitySlide.module.css';
@@ -14,10 +14,7 @@ interface Props {
   options?: boolean;
 }
 
-export function IdentitySlide({
-  identity,
-  options = false,
-}: Props): JSX.Element {
+export function IdentitySlide({ identity, options = false }: Props) {
   const t = browser.i18n.getMessage;
 
   const editing = useBooleanState();

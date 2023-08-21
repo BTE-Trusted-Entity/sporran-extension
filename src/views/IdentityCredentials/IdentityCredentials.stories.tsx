@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 import { NEW } from '../../utilities/identities/identities';
@@ -19,15 +18,15 @@ export default {
   component: IdentityCredentials,
 } as Meta;
 
-export function ManyCredentials(): JSX.Element {
+export function ManyCredentials() {
   return <IdentityCredentials identity={identity} />;
 }
 
-export function New(): JSX.Element {
+export function New() {
   return <IdentityCredentials identity={NEW} />;
 }
 
-export function NoCredentials(): JSX.Element {
+export function NoCredentials() {
   return (
     <CredentialsProviderMock credentials={[]}>
       <IdentityCredentials identity={identity} />
@@ -35,7 +34,7 @@ export function NoCredentials(): JSX.Element {
   );
 }
 
-export function FewCredentials(): JSX.Element {
+export function FewCredentials() {
   return (
     <CredentialsProviderMock credentials={credentialsMock.slice(0, 4)}>
       <IdentityCredentials identity={identity} />

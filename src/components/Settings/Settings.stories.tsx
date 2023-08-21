@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import * as menuStyles from '../Menu/Menu.module.css';
@@ -20,7 +19,7 @@ export default {
   ],
 } as Meta;
 
-export function NoIdentities(): JSX.Element {
+export function NoIdentities() {
   return (
     <IdentitiesProviderMock identities={{}}>
       <Settings />
@@ -28,7 +27,7 @@ export function NoIdentities(): JSX.Element {
   );
 }
 
-export function WithIdentities(): JSX.Element {
+export function WithIdentities() {
   return (
     <MemoryRouter
       initialEntries={[

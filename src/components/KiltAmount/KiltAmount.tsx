@@ -1,6 +1,5 @@
 import BN from 'bn.js';
 import browser from 'webextension-polyfill';
-import { JSX } from 'react';
 
 import * as styles from './KiltAmount.module.css';
 
@@ -41,11 +40,7 @@ interface Props {
   smallDecimals?: boolean;
 }
 
-export function KiltAmount({
-  amount,
-  type,
-  smallDecimals = false,
-}: Props): JSX.Element {
+export function KiltAmount({ amount, type, smallDecimals = false }: Props) {
   const value = asKiltCoins(amount, type);
 
   const offset = -1 - PRECISION;

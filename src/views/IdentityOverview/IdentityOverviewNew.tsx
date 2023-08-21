@@ -1,5 +1,4 @@
 import browser from 'webextension-polyfill';
-import { JSX } from 'react';
 import { Link } from 'react-router-dom';
 
 import * as styles from './IdentityOverview.module.css';
@@ -11,7 +10,7 @@ import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIde
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { Stats } from '../../components/Stats/Stats';
 
-export function IdentityOverviewNew(): JSX.Element | null {
+export function IdentityOverviewNew() {
   const t = browser.i18n.getMessage;
 
   return (

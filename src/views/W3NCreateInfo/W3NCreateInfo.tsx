@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
@@ -17,7 +16,7 @@ interface Props {
   identity: Identity;
 }
 
-export function W3NCreateInfo({ identity }: Props): JSX.Element {
+export function W3NCreateInfo({ identity }: Props) {
   const t = browser.i18n.getMessage;
   const { goBack } = useHistory();
 

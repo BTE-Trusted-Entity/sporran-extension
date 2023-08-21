@@ -1,5 +1,5 @@
 import { IAttestation } from '@kiltprotocol/sdk-js';
-import { JSX } from 'react';
+import { PropsWithChildren } from 'react';
 
 import { ShareInput } from '../../channels/shareChannel/types';
 
@@ -628,10 +628,9 @@ export const mockUnknownCType = {
 export function CredentialsProviderMock({
   credentials = [...credentialsMock, ...notDownloaded],
   children,
-}: {
+}: PropsWithChildren<{
   credentials?: SporranCredential[];
-  children: JSX.Element;
-}): JSX.Element {
+}>) {
   return (
     <CredentialsContext.Provider value={credentials}>
       {children}

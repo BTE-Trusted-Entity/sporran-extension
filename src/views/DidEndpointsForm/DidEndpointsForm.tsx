@@ -1,6 +1,5 @@
 import {
   FormEvent,
-  JSX,
   RefObject,
   useCallback,
   useEffect,
@@ -48,7 +47,7 @@ function DidEndpointCard({
   endpoint: DidServiceEndpoint;
   startUrl?: string;
   onRemove: (endpoint: DidServiceEndpoint) => void;
-}): JSX.Element {
+}) {
   const t = browser.i18n.getMessage;
 
   const params: { id: string; address: string } = useParams();
@@ -122,7 +121,7 @@ function DidNewEndpoint({
   onAdd: (endpoint: DidServiceEndpoint) => void;
   tooMany: boolean;
   startUrl?: string;
-}): JSX.Element {
+}) {
   const t = browser.i18n.getMessage;
 
   const params: { address: string; id: string } = useParams();
@@ -322,11 +321,7 @@ interface Props {
   onRemove: (endpoint: DidServiceEndpoint) => void;
 }
 
-export function DidEndpointsForm({
-  identity,
-  onAdd,
-  onRemove,
-}: Props): JSX.Element {
+export function DidEndpointsForm({ identity, onAdd, onRemove }: Props) {
   const t = browser.i18n.getMessage;
 
   const { address } = identity;

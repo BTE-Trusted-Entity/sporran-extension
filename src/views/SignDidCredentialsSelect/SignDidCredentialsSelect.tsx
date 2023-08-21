@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill';
 
-import { JSX, useRef, useState, useCallback } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { omit } from 'lodash-es';
 
@@ -26,7 +26,7 @@ export function SignDidCredentialsSelect({
   identity,
   onCancel,
   onSubmit,
-}: Props): JSX.Element | null {
+}: Props) {
   const t = browser.i18n.getMessage;
 
   const sporranCredentials = useIdentityCredentials(identity.did);

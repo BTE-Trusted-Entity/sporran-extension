@@ -1,9 +1,8 @@
 import browser from 'webextension-polyfill';
-import { JSX } from 'react';
 
 import * as styles from './KiltCurrency.module.css';
 
-export function KiltCurrency(): JSX.Element {
+export function KiltCurrency() {
   const t = browser.i18n.getMessage;
   return (
     <span

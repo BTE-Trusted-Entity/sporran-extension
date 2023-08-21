@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
 
@@ -13,6 +12,6 @@ export default {
 const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
-export function Template(): JSX.Element {
+export function Template() {
   return <W3NCreateForm identity={identity} />;
 }

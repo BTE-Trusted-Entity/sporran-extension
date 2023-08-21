@@ -1,4 +1,4 @@
-import { JSX, useCallback } from 'react';
+import { useCallback } from 'react';
 import browser from 'webextension-polyfill';
 import { Link, useHistory } from 'react-router-dom';
 import { map, without } from 'lodash-es';
@@ -20,7 +20,7 @@ interface Props {
   identity: Identity;
 }
 
-export function RemoveIdentity({ identity }: Props): JSX.Element {
+export function RemoveIdentity({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const history = useHistory();

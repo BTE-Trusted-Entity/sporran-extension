@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import * as styles from './Checkbox.module.css';
 
@@ -7,7 +6,7 @@ export default {
   title: 'Components/Checkbox',
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <label>
       Click me <input className={styles.checkbox} type="checkbox" />
@@ -16,7 +15,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function Disabled(): JSX.Element {
+export function Disabled() {
   return (
     <label>
       I am disabled{' '}

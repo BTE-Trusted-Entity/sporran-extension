@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useCallback, useRef } from 'react';
+import { FormEvent, useCallback, useRef } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
@@ -33,7 +33,7 @@ interface Props {
   identity: Identity;
 }
 
-export function W3NCreateSign({ identity }: Props): JSX.Element | null {
+export function W3NCreateSign({ identity }: Props) {
   const t = browser.i18n.getMessage;
 
   const history = useHistory();

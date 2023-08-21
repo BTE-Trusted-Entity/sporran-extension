@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -14,7 +13,7 @@ export default {
   component: SendToken,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <MemoryRouter
       initialEntries={[
@@ -33,7 +32,7 @@ export function Template(): JSX.Element {
   );
 }
 
-export function New(): JSX.Element {
+export function New() {
   return (
     <MemoryRouter initialEntries={['/identity/NEW/send']}>
       <Route path={paths.identity.send.start}>

@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import * as styles from './Card.module.css';
 
@@ -7,7 +6,7 @@ export default {
   title: 'Components/Card',
 } as Meta;
 
-export function Collapsed(): JSX.Element {
+export function Collapsed() {
   return (
     <ul>
       <li className={styles.card} aria-expanded="false">
@@ -22,7 +21,7 @@ export function Collapsed(): JSX.Element {
   );
 }
 
-export function Expanded(): JSX.Element {
+export function Expanded() {
   return (
     <ul>
       <li className={styles.card} aria-expanded="true">

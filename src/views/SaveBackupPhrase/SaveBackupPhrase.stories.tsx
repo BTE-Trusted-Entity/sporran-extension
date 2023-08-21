@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { SaveBackupPhrase } from './SaveBackupPhrase';
 
@@ -8,7 +7,7 @@ export default {
   component: SaveBackupPhrase,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <SaveBackupPhrase backupPhrase="one two three four five six seven eight nine ten eleven twelve" />
   );

@@ -1,4 +1,3 @@
-import { JSX } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { AuthorizeDApp } from '../AuthorizeDApp/AuthorizeDApp';
@@ -11,7 +10,7 @@ import { AttestationRejected } from '../AttestationRejected/AttestationRejected'
 import { ShareIdentities } from '../ShareIdentities/ShareIdentities';
 import { paths } from '../paths';
 
-export function PopupsRouter(): JSX.Element {
+export function PopupsRouter() {
   return (
     <Switch>
       <Route path={paths.popup.access}>

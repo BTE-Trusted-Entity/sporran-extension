@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { Warning } from './Warning';
 
@@ -8,6 +7,6 @@ export default {
   component: Warning,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return <Warning />;
 }

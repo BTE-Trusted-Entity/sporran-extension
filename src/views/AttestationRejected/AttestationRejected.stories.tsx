@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { credentialsMock } from '../../utilities/credentials/CredentialsProvider.mock';
@@ -12,7 +11,7 @@ export default {
   component: AttestationRejected,
 } as Meta;
 
-export function Template(): JSX.Element {
+export function Template() {
   return (
     <PopupTestProvider
       path={paths.popup.reject}

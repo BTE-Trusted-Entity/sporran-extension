@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useCallback } from 'react';
+import { FormEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 import {
@@ -85,11 +85,7 @@ interface Props {
   endpoint: DidServiceEndpoint;
 }
 
-export function DidEndpointsSign({
-  identity,
-  type,
-  endpoint,
-}: Props): JSX.Element {
+export function DidEndpointsSign({ identity, type, endpoint }: Props) {
   const t = browser.i18n.getMessage;
   const { address } = identity;
   const did = getIdentityDid(identity);

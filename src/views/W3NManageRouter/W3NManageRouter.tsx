@@ -1,5 +1,4 @@
-import { JSX } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { Identity } from '../../utilities/identities/types';
 import { W3NManage } from '../W3NManage/W3NManage';
@@ -10,7 +9,7 @@ interface Props {
   identity: Identity;
 }
 
-export function W3NManageRouter({ identity }: Props): JSX.Element {
+export function W3NManageRouter({ identity }: Props) {
   return (
     <Switch>
       <Route path={paths.identity.web3name.manage.remove}>

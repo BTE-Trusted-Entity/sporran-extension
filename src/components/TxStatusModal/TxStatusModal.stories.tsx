@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { JSX } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { identitiesMock } from '../../utilities/identities/IdentitiesProvider.mock';
@@ -14,7 +13,7 @@ export default {
 const identity =
   identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
-export function TxPending(): JSX.Element {
+export function TxPending() {
   return (
     <TxStatusModal
       identity={identity}
@@ -24,7 +23,7 @@ export function TxPending(): JSX.Element {
   );
 }
 
-export function TxSuccess(): JSX.Element {
+export function TxSuccess() {
   return (
     <TxStatusModal
       identity={identity}
@@ -35,7 +34,7 @@ export function TxSuccess(): JSX.Element {
   );
 }
 
-export function TxError(): JSX.Element {
+export function TxError() {
   return (
     <TxStatusModal
       identity={identity}

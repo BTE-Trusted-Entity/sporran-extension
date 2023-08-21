@@ -1,4 +1,4 @@
-import { Component, JSX } from 'react';
+import { Component, PropsWithChildren } from 'react';
 import { Modal } from 'react-dialog-polyfill';
 import browser from 'webextension-polyfill';
 
@@ -7,15 +7,11 @@ import * as styles from './GenericError.module.css';
 
 import { configuration } from '../../configuration/configuration';
 
-interface Props {
-  children: JSX.Element;
-}
-
 interface State {
   errorText?: string;
 }
 
-export class GenericError extends Component<Props, State> {
+export class GenericError extends Component<PropsWithChildren, State> {
   state: State = {};
 
   static getDerivedStateFromError(error: Error): State {
@@ -24,7 +20,7 @@ export class GenericError extends Component<Props, State> {
     };
   }
 
-  render(): JSX.Element {
+  render() {
     if (!this.state.errorText) {
       return this.props.children;
     }
