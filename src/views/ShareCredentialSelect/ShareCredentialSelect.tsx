@@ -1,7 +1,7 @@
 import { FormEvent, RefObject, useCallback, useRef } from 'react';
 import browser from 'webextension-polyfill';
 import { reject, sortBy } from 'lodash-es';
-import { Did } from '@kiltprotocol/sdk-js';
+import { Did, DidUri } from '@kiltprotocol/sdk-js';
 
 import { useHistory } from 'react-router';
 
@@ -121,10 +121,16 @@ export function ShareCredentialSelect({ onCancel, onSelect, selected }: Props) {
   const data = usePopupData<ShareInput>();
   const { credentialRequest } = data;
   const { cTypes } = credentialRequest;
+  const owner =
+    'owner' in credentialRequest
+      ? (credentialRequest.owner as DidUri)
+      : undefined;
   const cTypeHashes = cTypes.map(({ cTypeHash }) => cTypeHash);
 
-  const matchingCredentials = credentials?.filter(({ credential }) =>
-    cTypeHashes.includes(credential.claim.cTypeHash),
+  const matchingCredentials = credentials?.filter(
+    ({ credential: { claim } }) =>
+      cTypeHashes.includes(claim.cTypeHash) &&
+      (owner ? Did.isSameSubject(claim.owner, owner) : true),
   );
 
   const displayedCredentials = reject(matchingCredentials, {
