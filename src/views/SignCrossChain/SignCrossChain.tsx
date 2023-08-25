@@ -2,6 +2,8 @@ import { FormEvent, Fragment, JSX, useCallback } from 'react';
 import { browser } from 'webextension-polyfill-ts';
 import { ConfigService, Did, Utils } from '@kiltprotocol/sdk-js';
 
+import { ApiPromise, WsProvider } from '@polkadot/api'
+
 import * as styles from './SignCrossChain.module.css';
 
 import { Identity } from '../../utilities/identities/types';
@@ -63,17 +65,96 @@ export function SignCrossChain({ identity }: Props): JSX.Element | null {
         accounts,
         shouldIncludeWeb3Name: true,
       });
-      const proofChain = await api.call.dipProvider.generateProof(request);
-      // @ts-ignore
-      const proof = proofChain.asOk.proof.toJSON();
+      const dipProof = await api.call.dipProvider.generateProof(request).asOk;
+
+      // Taken from kilt-did-utils
+      const providerChainId = await api.query.parachainInfo.parachainId()
+      console.log(`Provider chain has para ID = ${providerChainId.toHuman()}.`)
+      const providerFinalizedBlockHash = await api.rpc.chain.getFinalizedHead()
+      const providerFinalizedBlockNumber = await api.rpc.chain
+        .getHeader(providerFinalizedBlockHash)
+        .then((h: any) => h.number)
+      console.log(
+        `DIP action targeting the last finalized identity provider block with hash:
+          ${providerFinalizedBlockHash}
+          and number
+          ${providerFinalizedBlockNumber}.`
+      )
+      const relayParentBlockHeight = await api
+        .at(providerFinalizedBlockHash)
+        .then((api: any) => api.query.parachainSystem.lastRelayChainBlockNumber())
+      const relayApi = await ApiPromise.create({ provider: new WsProvider('ws://127.0.0.1:50001') })
+      const relayParentBlockHash = await relayApi.rpc.chain.getBlockHash(
+        relayParentBlockHeight
+      )
+      console.log(
+        `Relay chain block the identity provider block was anchored to:
+    ${relayParentBlockHeight.toHuman()}
+    with hash
+    ${relayParentBlockHash.toHuman()}.`
+      )
+
+      const { proof: relayProof } = await relayApi.rpc.state.getReadProof(
+        [relayApi.query.paras.heads.key(providerChainId)],
+        relayParentBlockHash
+      )
+
+      const header = await relayApi.rpc.chain.getHeader(relayParentBlockHash)
+      console.log(
+        `Header for the relay at block ${relayParentBlockHeight} (${relayParentBlockHash}): ${JSON.stringify(
+          header,
+          null,
+          2
+        )}`
+      )
+
+      // Proof of commitment must be generated with the state root at the block before the last one finalized.
+      const previousBlockHash = await api.rpc.chain.getBlockHash(
+        providerFinalizedBlockNumber.toNumber() - 1
+      )
+      console.log(
+        `Using previous provider block hash for the state proof generation: ${previousBlockHash.toHex()}.`
+      )
+      const { proof: paraStateProof } = await api.rpc.state.getReadProof(
+        [
+          api.query.dipProvider.identityCommitments.key(
+            Did.toChain(did)
+          ),
+        ],
+        previousBlockHash
+      )
+      console.log(
+        `DIP proof generated for the DID key ${document.authentication[0].id.substring(
+          1
+        )}.`
+      )
 
       const signature = Utils.Crypto.u8aToHex(
         authenticationKey.sign(plaintext),
       );
+      // @ts-ignore
+      const proof = {
+        paraStateRoot: {
+          relayBlockHeight: relayParentBlockHeight,
+          proof: relayProof,
+        },
+        header: {
+          ...header.toJSON(),
+        },
+        dipIdentityCommitment: paraStateProof,
+        did: {
+          leaves: {
+            blinded: dipProof.proof.blinded,
+            revealed: dipProof.proof.revealed,
+          }
+        },
+      };
+      console.log('Proof: ', JSON.stringify(proof, null, 2));
       const signed = JSON.stringify([
         proof,
         [{ sr25519: signature }, blockNumber],
       ]);
+      console.log('Signed: ', JSON.stringify(proof, null, 2));
 
       await backgroundSignCrossChainChannel.return({ signed });
 

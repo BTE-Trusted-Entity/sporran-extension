@@ -64,7 +64,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
     "swr": "^2.2.2",
-    "webextension-polyfill": "^0.10.0"
+    "webextension-polyfill": "^0.10.0",
+    "webextension-polyfill-ts": "^0.26.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.17",
