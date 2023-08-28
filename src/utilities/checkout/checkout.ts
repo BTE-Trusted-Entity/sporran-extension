@@ -7,9 +7,9 @@ import { getEndpoint, KnownEndpoints } from '../endpoints/endpoints';
 const checkoutURLs: Record<KnownEndpoints, string> = {
   'wss://kilt-rpc.dwellir.com': 'https://checkout.kilt.io',
   'wss://spiritnet.kilt.io': 'https://checkout.kilt.io',
-  'wss://peregrine.kilt.io': 'https://dev-checkout.kilt.io',
-  'wss://peregrine-stg.kilt.io/para': 'https://dev-checkout.kilt.io',
-  'wss://sporran-testnet.kilt.io': 'https://dev-checkout.kilt.io',
+  'wss://peregrine.kilt.io': 'https://dev.checkout.kilt.io',
+  'wss://peregrine-stg.kilt.io/para': 'https://dev.checkout.kilt.io',
+  'wss://sporran-testnet.kilt.io': 'https://dev.checkout.kilt.io',
 };
 
 export async function getCheckoutURL() {
