@@ -10,7 +10,6 @@ export const endpoints = [
   'wss://spiritnet.kilt.io',
   'wss://peregrine.kilt.io',
   'wss://peregrine-stg.kilt.io/para',
-  'wss://sporran-testnet.kilt.io',
 ] as const;
 
 export type KnownEndpoints = (typeof endpoints)[number];

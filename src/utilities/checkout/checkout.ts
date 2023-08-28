@@ -9,7 +9,6 @@ const checkoutURLs: Record<KnownEndpoints, string> = {
   'wss://spiritnet.kilt.io': 'https://checkout.kilt.io',
   'wss://peregrine.kilt.io': 'https://dev.checkout.kilt.io',
   'wss://peregrine-stg.kilt.io/para': 'https://smoke.checkout.kilt.io',
-  'wss://sporran-testnet.kilt.io': 'https://dev.checkout.kilt.io',
 };
 
 export async function getCheckoutURL() {
