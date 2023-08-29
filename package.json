@@ -35,7 +35,7 @@
     "test-size": "bundlewatch --config bundlewatch.config.json",
     "lint": "yarn run lint-css --formatter github && yarn run lint-js",
     "lint-js": "eslint --fix --max-warnings 0 --config ./.eslintrc.json \"src/**/*.ts*\"",
-    "lint-css": "stylelint --fix --max-warnings 0 \"src/**/*.css\"",
+    "lint-css": "stylelint --max-warnings 0 \"src/**/*.css\"",
     "css": "tcm --namedExports --pattern 'src/**/*.module.css' && eslint --fix --config ./.eslintrc.json \"src/**/*.css.d.ts\"",
     "prettify": "prettier --write \"src/**/*.ts*\" \"src/**/*.css*\"",
     "storybook": "storybook dev --port 6006",
