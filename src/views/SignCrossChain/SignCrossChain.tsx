@@ -139,8 +139,8 @@ export function SignCrossChain({ identity }: Props): JSX.Element | null {
           relayBlockHeight: relayParentBlockHeight,
           proof: relayProof,
         },
-        header: {
-          ...header,
+        relayHeader: {
+          ...header.toJSON(),
         },
         dipIdentityCommitment: paraStateProof,
         did: {
@@ -152,7 +152,7 @@ export function SignCrossChain({ identity }: Props): JSX.Element | null {
             signature: {
               sr25519: signature,
             },
-            blockNumber: blockNumber,
+            blockNumber,
           },
         },
       };
