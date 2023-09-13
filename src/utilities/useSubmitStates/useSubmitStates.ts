@@ -94,12 +94,12 @@ export function useSubmitStates(): SubmitStates {
         setStatus('pending');
 
         setUnpaidCostsBN(undefined);
-        const unpaid = await getUnpaidCosts(keypair, draft, tip);
-        if (unpaid) {
-          setUnpaidCostsBN(unpaid);
-          setStatus(null);
-          return;
-        }
+        // const unpaid = await getUnpaidCosts(keypair, draft, tip);
+        // if (unpaid) {
+        //   setUnpaidCostsBN(unpaid);
+        //   setStatus(null);
+        //   return;
+        // }
 
         const { txHash, finalizedPromise } = await submit(keypair, draft, tip);
         setTxHash(txHash);
@@ -122,10 +122,10 @@ export function useSubmitStates(): SubmitStates {
   const modalProps = !status
     ? undefined
     : {
-        status,
-        txHash,
-        onDismissError,
-      };
+      status,
+      txHash,
+      onDismissError,
+    };
 
   return {
     submit: submitWithStates,
