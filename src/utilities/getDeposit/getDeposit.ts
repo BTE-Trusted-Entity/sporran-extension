@@ -4,6 +4,7 @@ import BN from 'bn.js';
 
 import { isFullDid } from '../did/did';
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
+import { ActionType } from '../../views/DidEndpointsSign/DidEndpointsSign';
 
 interface DepositData {
   amount: BN;
@@ -72,4 +73,13 @@ export function useDepositDid(
   did: DidUri | undefined,
 ): DepositData | undefined {
   return useAsyncValue(getDepositDid, [did]);
+}
+
+export function getDepositServiceEndpoint(type: ActionType): DepositData {
+  const api = ConfigService.get('api');
+  if (type !== 'add' || !('serviceEndpointDeposit' in api.consts.did)) {
+    return { amount: new BN(0) };
+  }
+
+  return { amount: api.consts.did.serviceEndpointDeposit as BN };
 }

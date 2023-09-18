@@ -6,6 +6,8 @@ import '../../components/useCopyButton/useCopyButton.mock';
 
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
+import { getDepositServiceEndpoint } from '../../utilities/getDeposit/getDeposit';
+
 import { DidEndpointsSign } from './DidEndpointsSign';
 
 const identity =
@@ -19,6 +21,11 @@ const endpoint: DidServiceEndpoint = {
 
 jest.mock('../../utilities/useAsyncValue/useAsyncValue');
 jest.mocked(useAsyncValue).mockReturnValue(BalanceUtils.toFemtoKilt(0.01));
+
+jest.mock('../../utilities/getDeposit/getDeposit');
+jest
+  .mocked(getDepositServiceEndpoint)
+  .mockReturnValue({ amount: BalanceUtils.toFemtoKilt(0.2) });
 
 describe('DidEndpointsSign', () => {
   it('should match the snapshot when adding', async () => {
