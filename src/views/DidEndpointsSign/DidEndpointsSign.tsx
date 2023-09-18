@@ -209,7 +209,11 @@ export function DidEndpointsSign({ identity, type, endpoint }: Props) {
         <Link to={paths.home} className={styles.cancel}>
           {t('common_action_cancel')}
         </Link>
-        <button type="submit" className={styles.submit} disabled={submitting}>
+        <button
+          type="submit"
+          className={styles.submit}
+          disabled={insufficientKilt || submitting}
+        >
           {t('common_action_sign')}
         </button>
         <output
