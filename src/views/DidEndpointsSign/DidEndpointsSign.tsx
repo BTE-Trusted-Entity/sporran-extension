@@ -103,7 +103,7 @@ export function useCosts(
     total && balance && balance.transferable.lt(total),
   );
 
-  return { fee, deposit: deposit?.amount, total, insufficientKilt };
+  return { total, insufficientKilt };
 }
 
 interface Props {
@@ -119,12 +119,7 @@ export function DidEndpointsSign({ identity, type, endpoint }: Props) {
 
   const passwordField = usePasswordField();
 
-  const { deposit, fee, total, insufficientKilt } = useCosts(
-    address,
-    did,
-    type,
-    endpoint,
-  );
+  const { total, insufficientKilt } = useCosts(address, did, type, endpoint);
 
   const { submit, modalProps, submitting } = useSubmitStates();
 
@@ -159,7 +154,7 @@ export function DidEndpointsSign({ identity, type, endpoint }: Props) {
     error: t('view_DidEndpointsSign_remove_error'),
   };
 
-  if (!deposit || !fee || !total) {
+  if (!total) {
     return null; // blockchain data pending
   }
 
@@ -180,7 +175,7 @@ export function DidEndpointsSign({ identity, type, endpoint }: Props) {
 
       <CopyValue value={did} label="DID" className={styles.didLine} />
 
-      {fee && (
+      {total && (
         <p className={styles.fee}>
           {t('view_DidEndpointsSign_fee')}
           <KiltAmount amount={total} type="costs" smallDecimals />
