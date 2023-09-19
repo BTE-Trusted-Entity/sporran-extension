@@ -1,7 +1,8 @@
-import { FormEvent, useCallback } from 'react';
+import { FormEvent, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 import {
+  BN,
   ConfigService,
   Did,
   DidServiceEndpoint,
@@ -30,10 +31,15 @@ import { useSubmitStates } from '../../utilities/useSubmitStates/useSubmitStates
 import { getFullDidDocument } from '../../utilities/did/did';
 import { generatePath, paths } from '../paths';
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
-import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
+import {
+  KiltAmount,
+  asKiltCoins,
+} from '../../components/KiltAmount/KiltAmount';
 import { makeFakeIdentityCrypto } from '../../utilities/makeFakeIdentityCrypto/makeFakeIdentityCrypto';
+import { getDepositServiceEndpoint } from '../../utilities/getDeposit/getDeposit';
+import { useAddressBalance } from '../../components/Balance/Balance';
 
-type ActionType = 'add' | 'remove';
+export type ActionType = 'add' | 'remove';
 
 async function getDidAuthorizedExtrinsic(
   keypair: KiltKeyringPair,
@@ -70,13 +76,34 @@ async function getFee(
 
   const { partialFee } = await authorized.paymentInfo(keypair);
 
-  const api = ConfigService.get('api');
-  if (type !== 'add' || !('serviceEndpointDeposit' in api.consts.did)) {
-    return partialFee;
-  }
+  return partialFee;
+}
 
-  const deposit = api.consts.did.serviceEndpointDeposit as typeof partialFee;
-  return partialFee.add(deposit);
+export function useCosts(
+  address: string,
+  did: DidUri,
+  type: ActionType,
+  service: DidServiceEndpoint,
+): {
+  fee?: BN;
+  deposit?: BN;
+  total?: BN;
+  insufficientKilt: boolean;
+} {
+  const fee = useAsyncValue(getFee, [did, service, type]);
+  const deposit = getDepositServiceEndpoint(type);
+
+  const total = useMemo(
+    () => (fee && deposit ? fee.add(deposit.amount) : undefined),
+    [deposit, fee],
+  );
+
+  const balance = useAddressBalance(address);
+  const insufficientKilt = Boolean(
+    total && balance && balance.transferable.lt(total),
+  );
+
+  return { total, insufficientKilt };
 }
 
 interface Props {
@@ -90,10 +117,11 @@ export function DidEndpointsSign({ identity, type, endpoint }: Props) {
   const { address } = identity;
   const did = getIdentityDid(identity);
 
-  const fee = useAsyncValue(getFee, [did, endpoint, type]);
-
   const passwordField = usePasswordField();
-  const { submit, modalProps, submitting, unpaidCosts } = useSubmitStates();
+
+  const { total, insufficientKilt } = useCosts(address, did, type, endpoint);
+
+  const { submit, modalProps, submitting } = useSubmitStates();
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
@@ -126,6 +154,10 @@ export function DidEndpointsSign({ identity, type, endpoint }: Props) {
     error: t('view_DidEndpointsSign_remove_error'),
   };
 
+  if (!total) {
+    return null; // blockchain data pending
+  }
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -143,10 +175,10 @@ export function DidEndpointsSign({ identity, type, endpoint }: Props) {
 
       <CopyValue value={did} label="DID" className={styles.didLine} />
 
-      {fee && (
+      {total && (
         <p className={styles.fee}>
           {t('view_DidEndpointsSign_fee')}
-          <KiltAmount amount={fee} type="costs" smallDecimals />
+          <KiltAmount amount={total} type="costs" smallDecimals />
         </p>
       )}
 
@@ -177,15 +209,21 @@ export function DidEndpointsSign({ identity, type, endpoint }: Props) {
         <Link to={paths.home} className={styles.cancel}>
           {t('common_action_cancel')}
         </Link>
-        <button type="submit" className={styles.submit} disabled={submitting}>
+        <button
+          type="submit"
+          className={styles.submit}
+          disabled={insufficientKilt || submitting}
+        >
           {t('common_action_sign')}
         </button>
         <output
           className={styles.errorTooltip}
-          hidden={!unpaidCosts || Boolean(modalProps)}
+          hidden={!insufficientKilt || Boolean(modalProps)}
         >
-          {unpaidCosts &&
-            t('view_DidEndpointsSign_insufficientFunds', [unpaidCosts])}
+          {insufficientKilt &&
+            t('view_DidEndpointsSign_insufficientFunds', [
+              asKiltCoins(total, 'costs'),
+            ])}
         </output>
       </p>
 

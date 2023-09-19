@@ -61,7 +61,7 @@ exports[`DidEndpointsSign should match the snapshot when adding 1`] = `
         <span
           class="fractional"
         >
-          .0100
+          .2100
         </span>
          
         <span
@@ -277,7 +277,7 @@ exports[`DidEndpointsSign should match the snapshot when removing 1`] = `
         <span
           class="fractional"
         >
-          .0100
+          .2100
         </span>
          
         <span
