@@ -8,8 +8,17 @@
   ],
   "packageRules": [
     {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    },
+    {
       "matchPackagePatterns": ["kiltprotocol"],
-      "groupName": "kiltprotocol"
+      "groupName": "kiltprotocol",
+      "automerge": false
     },
     {
       "matchPackagePatterns": ["polkadot"],
@@ -17,15 +26,8 @@
         "@polkadot/extension-inject",
         "@polkadot/ui-shared"
       ],
-      "groupName": "polkadot"
-    },
-    {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
-      "automerge": true
+      "groupName": "polkadot",
+      "automerge": false
     }
   ]
 }
