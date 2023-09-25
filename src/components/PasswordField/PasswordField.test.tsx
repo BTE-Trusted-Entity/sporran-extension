@@ -1,5 +1,5 @@
 import { FormEvent } from 'react';
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 import { KiltKeyringPair, Utils } from '@kiltprotocol/sdk-js';
 
 import {

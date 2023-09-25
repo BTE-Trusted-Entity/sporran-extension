@@ -1,4 +1,4 @@
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '../../testing/testing';
