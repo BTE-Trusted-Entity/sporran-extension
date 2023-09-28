@@ -123,7 +123,7 @@
     "typed-css-modules": "^0.7.2",
     "typescript": "^5.2.2",
     "typescript-plugin-css-modules": "^5.0.1",
-    "web-ext": "^7.7.0",
+    "web-ext": "^7.8.0",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-extension-reloader": "^1.1.4",
