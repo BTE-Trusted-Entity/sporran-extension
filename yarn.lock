@@ -4875,12 +4875,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ed2curve@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "@types/ed2curve@npm:0.2.2"
+"@types/ed2curve@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@types/ed2curve@npm:0.2.3"
   dependencies:
     tweetnacl: ^1.0.0
-  checksum: f1ab16d46c5eed50d51539effef76c87806bb53ab45ecff78c19a632e63825fd08d604984b08778f8201c79be0bd43120565dad38cc5d45ba65a6c7de5bf4ace
+  checksum: 87bb0f39e8be3cf63741430f362a122fce3bc8701d267a0f89feb09e2d6ab74f366fc92d3b87fa45753bfb78838ed738d6bc805eb8ccbd9eab5d8102412bac76
   languageName: node
   linkType: hard
 
@@ -16467,7 +16467,7 @@ __metadata:
     "@testing-library/jest-dom": ^6.1.4
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.5.1
-    "@types/ed2curve": ^0.2.2
+    "@types/ed2curve": ^0.2.3
     "@types/jest": ^29.5.5
     "@types/lodash-es": ^4.17.9
     "@types/react": ^18.2.28
