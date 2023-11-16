@@ -34,6 +34,9 @@ Just start it again to continue.
           value="wss://kilt-rpc.dwellir.com"
         />
         <option
+          value="wss://spiritnet.api.onfinality.io/public-ws"
+        />
+        <option
           value="wss://spiritnet.kilt.io"
         />
         <option
@@ -49,12 +52,16 @@ Just start it again to continue.
         name="endpoint"
       >
         <option
+          label="BOTLabs"
+          value="wss://spiritnet.kilt.io"
+        />
+        <option
           label="Dwellir"
           value="wss://kilt-rpc.dwellir.com"
         />
         <option
-          label="BOTLabs Trusted Entity"
-          value="wss://spiritnet.kilt.io"
+          label="OnFinality"
+          value="wss://spiritnet.api.onfinality.io/public-ws"
         />
       </select>
       <button
