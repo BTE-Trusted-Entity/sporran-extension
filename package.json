@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@kiltprotocol/sdk-js": "^0.34.0",
-    "@polkadot/extension-inject": "^0.46.5",
+    "@polkadot/extension-inject": "^0.46.6",
     "@polkadot/keyring": "^12.5.1",
     "@polkadot/types": "^10.9.1",
     "@polkadot/ui-shared": "^3.6.3",
