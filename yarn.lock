@@ -2818,16 +2818,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/ui-shared@npm:^3.6.3":
-  version: 3.6.3
-  resolution: "@polkadot/ui-shared@npm:3.6.3"
+"@polkadot/ui-shared@npm:^3.6.4":
+  version: 3.6.4
+  resolution: "@polkadot/ui-shared@npm:3.6.4"
   dependencies:
     colord: ^2.9.3
     tslib: ^2.6.2
   peerDependencies:
     "@polkadot/util": "*"
     "@polkadot/util-crypto": "*"
-  checksum: 9bf09c368f876d2c7233961b8d46b1b53e8673888c5763b2eb38bcb1c7fb8bcd5b6fbf130729aee761529c89bb716743e8c7cb54b1abbc461e51687cbb224946
+  checksum: a29b5f684a14cd231dd8e9aeecc9f958442bd8870c642681db5a8bc6847f8c99962b835a46f40efa33e6a9eb5195fb2605f55e3bada72e2ca3986b63de76fc88
   languageName: node
   linkType: hard
 
@@ -16502,7 +16502,7 @@ __metadata:
     "@polkadot/extension-inject": ^0.46.6
     "@polkadot/keyring": ^12.5.1
     "@polkadot/types": ^10.9.1
-    "@polkadot/ui-shared": ^3.6.3
+    "@polkadot/ui-shared": ^3.6.4
     "@polkadot/util": ^12.5.1
     "@polkadot/util-crypto": ^12.5.1
     "@polkadot/x-textdecoder": ^12.5.1
