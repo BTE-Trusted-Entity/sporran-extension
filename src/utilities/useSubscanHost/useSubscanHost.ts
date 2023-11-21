@@ -5,6 +5,7 @@ const subscanHosts: Record<KnownEndpoints, string | undefined> = {
   'wss://peregrine.kilt.io': 'https://kilt-testnet.subscan.io',
   'wss://spiritnet.kilt.io': 'https://spiritnet.subscan.io',
   'wss://kilt-rpc.dwellir.com': 'https://spiritnet.subscan.io',
+  'wss://spiritnet.api.onfinality.io/public-ws': 'https://spiritnet.subscan.io',
   'wss://peregrine-stg.kilt.io/para': undefined,
 };
 

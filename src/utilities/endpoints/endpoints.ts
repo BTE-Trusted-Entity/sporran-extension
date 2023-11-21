@@ -7,6 +7,7 @@ const endpointKey = 'endpoints';
 
 export const endpoints = [
   'wss://kilt-rpc.dwellir.com',
+  'wss://spiritnet.api.onfinality.io/public-ws',
   'wss://spiritnet.kilt.io',
   'wss://peregrine.kilt.io',
   'wss://peregrine-stg.kilt.io/para',
@@ -15,8 +16,9 @@ export const endpoints = [
 export type KnownEndpoints = (typeof endpoints)[number];
 
 export const publicEndpoints = {
+  BOTLabs: 'wss://spiritnet.kilt.io',
   Dwellir: 'wss://kilt-rpc.dwellir.com',
-  'BOTLabs Trusted Entity': 'wss://spiritnet.kilt.io',
+  OnFinality: 'wss://spiritnet.api.onfinality.io/public-ws',
 };
 
 /* Do we already build a production version first and ask QA to test it
@@ -27,10 +29,10 @@ approach when we need to validate both endpoints, but in this case it is
 explicitly about both endpoints, so the production will be tested anyway,
 so there's no real downside. */
 
-export const defaultEndpoint =
+export const defaultEndpoint: KnownEndpoints =
   process.env.NODE_ENV === 'production' && !isInternal
-    ? endpoints[0]
-    : endpoints[2];
+    ? 'wss://kilt-rpc.dwellir.com'
+    : 'wss://peregrine.kilt.io';
 
 /**
  * Always returns a value from a known list, to be used in the mappings of an endpoint to something else
