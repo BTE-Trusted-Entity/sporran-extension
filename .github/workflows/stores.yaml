@@ -36,7 +36,7 @@ jobs:
         run: zip -r dist/web-ext-artifacts/sporran-sources.zip $(ls --almost-all) -x 'dist/*' '.git/*' 'node_modules/*'
 
       - name: Publish on GitHub
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sporran-extension-${{ github.sha }}
           path: dist/web-ext-artifacts/*
