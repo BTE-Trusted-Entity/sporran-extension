@@ -1,6 +1,6 @@
-import { FormEvent, Fragment, useCallback } from 'react';
+import { FormEvent, Fragment, useCallback, useEffect, useState } from 'react';
 import browser from 'webextension-polyfill';
-import { filter, find } from 'lodash-es';
+import { filter } from 'lodash-es';
 import {
   BalanceUtils,
   Credential,
@@ -68,6 +68,8 @@ interface Props {
 }
 
 export function SignQuote({ identity }: Props) {
+  const [cType, setCType] = useState<ICType>();
+
   const t = browser.i18n.getMessage;
 
   const data = usePopupData<Terms>();
@@ -75,10 +77,9 @@ export function SignQuote({ identity }: Props) {
   const { did } = identity;
   const error = useIsOnChainDidDeleted(did);
 
-  const { claim, cTypes, quote, attesterName, specVersion } = data;
+  const { claim, quote, attesterName, specVersion } = data;
 
   const $id = CType.hashToId(claim.cTypeHash);
-  const cType = find(cTypes, { $id }) as ICType | undefined;
 
   const gross = quote?.cost?.gross;
   const costs = BalanceUtils.toFemtoKilt(gross || 0);
@@ -89,6 +90,14 @@ export function SignQuote({ identity }: Props) {
     await claimChannel.throw('Rejected');
     window.close();
   }, []);
+
+  useEffect(() => {
+    const queryFromChain = async () => {
+      const { cType } = await CType.fetchFromChain($id);
+      setCType(cType);
+    };
+    queryFromChain();
+  }, [$id]);
 
   const sporranCredentials = useIdentityCredentials(did);
 
