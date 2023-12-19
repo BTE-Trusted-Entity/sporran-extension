@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, useCallback, useEffect, useState } from 'react';
+import { FormEvent, Fragment, useCallback } from 'react';
 import browser from 'webextension-polyfill';
 import { filter } from 'lodash-es';
 import {
@@ -8,7 +8,6 @@ import {
   DidUri,
   IClaim,
   ICredential,
-  ICType,
   IRequestAttestation,
   IRequestAttestationContent,
   ITerms,
@@ -36,6 +35,7 @@ import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 export type Terms = ITerms & {
   claim: IClaim;
@@ -68,8 +68,6 @@ interface Props {
 }
 
 export function SignQuote({ identity }: Props) {
-  const [cType, setCType] = useState<ICType>();
-
   const t = browser.i18n.getMessage;
 
   const data = usePopupData<Terms>();
@@ -80,6 +78,8 @@ export function SignQuote({ identity }: Props) {
   const { claim, quote, attesterName, specVersion } = data;
 
   const $id = CType.hashToId(claim.cTypeHash);
+  const cTypeDetails = useAsyncValue(CType.fetchFromChain, [$id]);
+  const cType = cTypeDetails?.cType;
 
   const gross = quote?.cost?.gross;
   const costs = BalanceUtils.toFemtoKilt(gross || 0);
@@ -90,14 +90,6 @@ export function SignQuote({ identity }: Props) {
     await claimChannel.throw('Rejected');
     window.close();
   }, []);
-
-  useEffect(() => {
-    const queryFromChain = async () => {
-      const { cType } = await CType.fetchFromChain($id);
-      setCType(cType);
-    };
-    queryFromChain();
-  }, [$id]);
 
   const sporranCredentials = useIdentityCredentials(did);
 
