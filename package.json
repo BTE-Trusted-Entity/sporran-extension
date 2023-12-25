@@ -115,7 +115,7 @@
     "react-router": "^5.3.4",
     "storybook": "^7.6.6",
     "style-loader": "^3.3.3",
-    "stylelint": "^16.0.2",
+    "stylelint": "^16.1.0",
     "stylelint-config-css-modules": "^4.4.0",
     "stylelint-config-standard": "^35.0.0",
     "ts-jest": "^29.1.1",
