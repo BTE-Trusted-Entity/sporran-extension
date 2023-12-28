@@ -7323,10 +7323,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "classnames@npm:2.4.0"
-  checksum: 059c2c7e58ef69d6e9fc0f9861d22e94af9a7e73256c42fc539698472cb37e4dcef861acb9820bd2852a13767e62705d80a0aa399201cc1917556a2d9dfcdc5a
+"classnames@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "classnames@npm:2.5.0"
+  checksum: f10a5b07db7fda8eb77f701f795b7006f3de86a723ec62cc10f4d82b4195fc65a578bbf91c47675b8c6fcb2921b903bfea5c670bdb43513e454daa6c2e9738b3
   languageName: node
   linkType: hard
 
@@ -16323,7 +16323,7 @@ __metadata:
     bundlewatch: "npm:^0.3.3"
     chrome-extension-i18n-shim: "npm:^1.0.0"
     chrome-launch: "npm:^1.1.4"
-    classnames: "npm:^2.4.0"
+    classnames: "npm:^2.5.0"
     copy-webpack-plugin: "npm:^11.0.0"
     css-loader: "npm:^6.8.1"
     dialog-polyfill: "npm:^0.5.6"
