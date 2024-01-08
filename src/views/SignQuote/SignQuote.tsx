@@ -1,6 +1,6 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import browser from 'webextension-polyfill';
-import { filter, find } from 'lodash-es';
+import { filter } from 'lodash-es';
 import {
   BalanceUtils,
   Credential,
@@ -8,7 +8,6 @@ import {
   DidUri,
   IClaim,
   ICredential,
-  ICType,
   IRequestAttestation,
   IRequestAttestationContent,
   ITerms,
@@ -36,6 +35,7 @@ import { KiltAmount } from '../../components/KiltAmount/KiltAmount';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 export type Terms = ITerms & {
   claim: IClaim;
@@ -75,10 +75,11 @@ export function SignQuote({ identity }: Props) {
   const { did } = identity;
   const error = useIsOnChainDidDeleted(did);
 
-  const { claim, cTypes, quote, attesterName, specVersion } = data;
+  const { claim, quote, attesterName, specVersion } = data;
 
   const $id = CType.hashToId(claim.cTypeHash);
-  const cType = find(cTypes, { $id }) as ICType | undefined;
+  const cTypeDetails = useAsyncValue(CType.fetchFromChain, [$id]);
+  const cType = cTypeDetails?.cType;
 
   const gross = quote?.cost?.gross;
   const costs = BalanceUtils.toFemtoKilt(gross || 0);
