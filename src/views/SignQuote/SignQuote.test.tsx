@@ -4,13 +4,15 @@ import {
   moreIdentitiesMock as identities,
   render,
 } from '../../testing/testing';
-import { mockTerms } from '../../utilities/mockTerms/mockTerms';
+import { mockCType, mockTerms } from '../../utilities/mockTerms/mockTerms';
 import { PopupTestProvider } from '../../utilities/popups/PopupTestProvider';
 import { parseDidUri } from '../../utilities/did/did';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
 import { paths } from '../paths';
 
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
+
+import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 import { SignQuote } from './SignQuote';
 
@@ -22,6 +24,9 @@ jest.mocked(parseDidUri).mockReturnValue({
 } as unknown as ReturnType<typeof parseDidUri>);
 
 jest.mock('../../utilities/did/useIsOnChainDidDeleted');
+
+jest.mock('../../utilities/useAsyncValue/useAsyncValue');
+jest.mocked(useAsyncValue).mockReturnValue({ cType: mockCType });
 
 describe('SignQuote', () => {
   it('should render', async () => {

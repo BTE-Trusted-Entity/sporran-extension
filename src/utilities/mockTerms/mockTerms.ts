@@ -3,7 +3,7 @@ import { DidUri, ICType } from '@kiltprotocol/sdk-js';
 import { identitiesMock } from '../identities/IdentitiesProvider.mock';
 import { Terms } from '../../views/SignQuote/SignQuote';
 
-const mockCType: ICType = {
+export const mockCType: ICType = {
   $id: 'kilt:ctype:0x240c744923bd98797504328f9bef57ca6c777f5cbf3e1aada74f348c9879d78a',
   $schema: 'http://kilt-protocol.org/draft-01/ctype#',
   title: 'BL-Mail-Simple',
