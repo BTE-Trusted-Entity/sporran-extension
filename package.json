@@ -97,7 +97,7 @@
     "chrome-extension-i18n-shim": "^1.0.0",
     "chrome-launch": "^1.1.4",
     "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.8.1",
+    "css-loader": "^6.9.0",
     "dialog-polyfill": "^0.5.6",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
