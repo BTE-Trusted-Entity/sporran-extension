@@ -1823,13 +1823,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:8.55.0":
-  version: 8.55.0
-  resolution: "@eslint/js@npm:8.55.0"
-  checksum: 88ab9fc57a651becd2b32ec40a3958db27fae133b1ae77bebd733aa5bbd00a92f325bb02f20ad680d31c731fa49b22f060a4777dd52eb3e27da013d940bd978d
-  languageName: node
-  linkType: hard
-
 "@eslint/js@npm:8.56.0":
   version: 8.56.0
   resolution: "@eslint/js@npm:8.56.0"
@@ -2400,10 +2393,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdn/browser-compat-data@npm:5.4.3":
-  version: 5.4.3
-  resolution: "@mdn/browser-compat-data@npm:5.4.3"
-  checksum: edd3375ae8c73a90081a637a15ac7d608ae4cb19f7a0bace68f4465e09e7f518ae7fee749d46e03eaf2ce22b94dcf54f77dfbb03445170e116ec24bcc77537ba
+"@mdn/browser-compat-data@npm:5.5.4":
+  version: 5.5.4
+  resolution: "@mdn/browser-compat-data@npm:5.5.4"
+  checksum: bdef5c85cc6e90bbf6e873033bfcf92dba2df699fb9fdd7390f5d1dc0e6d14fba9b8b3585370248a82913585eb1792c1afd20900efb6604c9e59122ba98060d7
   languageName: node
   linkType: hard
 
@@ -5816,34 +5809,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"addons-linter@npm:6.19.0":
-  version: 6.19.0
-  resolution: "addons-linter@npm:6.19.0"
+"addons-linter@npm:6.20.0":
+  version: 6.20.0
+  resolution: "addons-linter@npm:6.20.0"
   dependencies:
     "@fluent/syntax": "npm:0.19.0"
-    "@mdn/browser-compat-data": "npm:5.4.3"
+    "@mdn/browser-compat-data": "npm:5.5.4"
     addons-moz-compare: "npm:1.3.0"
-    addons-scanner-utils: "npm:9.8.0"
+    addons-scanner-utils: "npm:9.9.0"
     ajv: "npm:8.12.0"
     chalk: "npm:4.1.2"
     cheerio: "npm:1.0.0-rc.12"
     columnify: "npm:1.6.0"
     common-tags: "npm:1.8.2"
     deepmerge: "npm:4.3.1"
-    eslint: "npm:8.55.0"
+    eslint: "npm:8.56.0"
     eslint-plugin-no-unsanitized: "npm:4.0.2"
     eslint-visitor-keys: "npm:3.4.3"
     espree: "npm:9.6.1"
     esprima: "npm:4.0.1"
     fast-json-patch: "npm:3.1.1"
     glob: "npm:10.3.10"
-    image-size: "npm:1.0.2"
+    image-size: "npm:1.1.1"
     is-mergeable-object: "npm:1.1.1"
     jed: "npm:1.1.1"
     json-merge-patch: "npm:1.0.2"
     os-locale: "npm:5.0.0"
-    pino: "npm:8.16.2"
-    postcss: "npm:8.4.32"
+    pino: "npm:8.17.2"
+    postcss: "npm:8.4.33"
     relaxed-json: "npm:1.0.3"
     semver: "npm:7.5.4"
     sha.js: "npm:2.4.11"
@@ -5854,7 +5847,7 @@ __metadata:
     yauzl: "npm:2.10.0"
   bin:
     addons-linter: bin/addons-linter
-  checksum: dddb6a77314e0b26a7c22b5ca53e897a1bae847ccfc31b7ba234a172c0a6bd73adab445c6a4df08c68635778d010c821fa550a57e0d70a47b80a0a96a7a930e4
+  checksum: 03282162e687b8e311f94475bf302d7f7fec0c9ab168bc21a6b7bfa5d98e6ef2e68c53e08869b569120231843a94480cc558821465d7741891aaf4cab51fb76c
   languageName: node
   linkType: hard
 
@@ -5865,9 +5858,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"addons-scanner-utils@npm:9.8.0":
-  version: 9.8.0
-  resolution: "addons-scanner-utils@npm:9.8.0"
+"addons-scanner-utils@npm:9.9.0":
+  version: 9.9.0
+  resolution: "addons-scanner-utils@npm:9.9.0"
   dependencies:
     "@types/yauzl": "npm:2.10.3"
     common-tags: "npm:1.8.2"
@@ -5889,7 +5882,7 @@ __metadata:
       optional: true
     safe-compare:
       optional: true
-  checksum: 463b0f30e3bd0ad41fa1dae48c9a55f1b4566378c7606a41699cbec7d819afa8a755910c2d7ed866c69e27b438be4b6e6b6234b4e69977239c47dd529344aeb3
+  checksum: 479efd5827926fd6a0c73f86b6b06db9e0b860d74bf6786f5a33fe0ab80222ddbccfd1f2ff7578df34ef8938e7b90e5914fc6e0dcc2e1f42e6a6b08e03cfbc1e
   languageName: node
   linkType: hard
 
@@ -9220,55 +9213,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.55.0":
-  version: 8.55.0
-  resolution: "eslint@npm:8.55.0"
-  dependencies:
-    "@eslint-community/eslint-utils": "npm:^4.2.0"
-    "@eslint-community/regexpp": "npm:^4.6.1"
-    "@eslint/eslintrc": "npm:^2.1.4"
-    "@eslint/js": "npm:8.55.0"
-    "@humanwhocodes/config-array": "npm:^0.11.13"
-    "@humanwhocodes/module-importer": "npm:^1.0.1"
-    "@nodelib/fs.walk": "npm:^1.2.8"
-    "@ungap/structured-clone": "npm:^1.2.0"
-    ajv: "npm:^6.12.4"
-    chalk: "npm:^4.0.0"
-    cross-spawn: "npm:^7.0.2"
-    debug: "npm:^4.3.2"
-    doctrine: "npm:^3.0.0"
-    escape-string-regexp: "npm:^4.0.0"
-    eslint-scope: "npm:^7.2.2"
-    eslint-visitor-keys: "npm:^3.4.3"
-    espree: "npm:^9.6.1"
-    esquery: "npm:^1.4.2"
-    esutils: "npm:^2.0.2"
-    fast-deep-equal: "npm:^3.1.3"
-    file-entry-cache: "npm:^6.0.1"
-    find-up: "npm:^5.0.0"
-    glob-parent: "npm:^6.0.2"
-    globals: "npm:^13.19.0"
-    graphemer: "npm:^1.4.0"
-    ignore: "npm:^5.2.0"
-    imurmurhash: "npm:^0.1.4"
-    is-glob: "npm:^4.0.0"
-    is-path-inside: "npm:^3.0.3"
-    js-yaml: "npm:^4.1.0"
-    json-stable-stringify-without-jsonify: "npm:^1.0.1"
-    levn: "npm:^0.4.1"
-    lodash.merge: "npm:^4.6.2"
-    minimatch: "npm:^3.1.2"
-    natural-compare: "npm:^1.4.0"
-    optionator: "npm:^0.9.3"
-    strip-ansi: "npm:^6.0.1"
-    text-table: "npm:^0.2.0"
-  bin:
-    eslint: bin/eslint.js
-  checksum: d28c0b60f19bb7d355cb8393e77b018c8f548dba3f820b799c89bb2e0c436ee26084e700c5e57e1e97e7972ec93065277849141b82e7b0c0d02c2dc1e553a2a1
-  languageName: node
-  linkType: hard
-
-"eslint@npm:^8.56.0":
+"eslint@npm:8.56.0, eslint@npm:^8.56.0":
   version: 8.56.0
   resolution: "eslint@npm:8.56.0"
   dependencies:
@@ -10126,9 +10071,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fx-runner@npm:1.3.0":
-  version: 1.3.0
-  resolution: "fx-runner@npm:1.3.0"
+"fx-runner@npm:1.4.0":
+  version: 1.4.0
+  resolution: "fx-runner@npm:1.4.0"
   dependencies:
     commander: "npm:2.9.0"
     shell-quote: "npm:1.7.3"
@@ -10138,7 +10083,7 @@ __metadata:
     winreg: "npm:0.0.12"
   bin:
     fx-runner: bin/fx-runner
-  checksum: 1de2fe2dc96a5901b47fbe4a7fefa38719826258b6b92d3bc62896a566f515c71bc76a5f854a7e3a9c224220b19d47987f90a2793ce8617f9b53a30e4fa566d1
+  checksum: 32ab32c5b9f92deced7103ed03de0dee1dca2c51f2e1d545ad34bafe600fb7f634f717b4a2c2fdab20058341846682f4d867a7081f6a75e66d658425a551d37c
   languageName: node
   linkType: hard
 
@@ -10937,14 +10882,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"image-size@npm:1.0.2":
-  version: 1.0.2
-  resolution: "image-size@npm:1.0.2"
+"image-size@npm:1.1.1":
+  version: 1.1.1
+  resolution: "image-size@npm:1.1.1"
   dependencies:
     queue: "npm:6.0.2"
   bin:
     image-size: bin/image-size.js
-  checksum: df518606c75d0ee12a6d7e822a64ef50d9eabbb303dcee8c9df06bad94e49b4d4680b9003968203f239ff39a9cc51d4ff1781cd331cc0a4b3b858d9fc9836c68
+  checksum: 2660470096d12be82195f7e80fe03274689fbd14184afb78eaf66ade7cd06352518325814f88af4bde4b26647889fe49e573129f6e7ba8f5ff5b85cc7f559000
   languageName: node
   linkType: hard
 
@@ -14320,16 +14265,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino@npm:8.16.2":
-  version: 8.16.2
-  resolution: "pino@npm:8.16.2"
+"pino@npm:8.17.2":
+  version: 8.17.2
+  resolution: "pino@npm:8.17.2"
   dependencies:
     atomic-sleep: "npm:^1.0.0"
     fast-redact: "npm:^3.1.1"
     on-exit-leak-free: "npm:^2.1.0"
     pino-abstract-transport: "npm:v1.1.0"
     pino-std-serializers: "npm:^6.0.0"
-    process-warning: "npm:^2.0.0"
+    process-warning: "npm:^3.0.0"
     quick-format-unescaped: "npm:^4.0.3"
     real-require: "npm:^0.2.0"
     safe-stable-stringify: "npm:^2.3.1"
@@ -14337,7 +14282,7 @@ __metadata:
     thread-stream: "npm:^2.0.0"
   bin:
     pino: bin.js
-  checksum: ea1b2f426985a442b65566a75e3f20eed47c1f51f3aea9a10fc16a452feb339cde4d5439d724c822408fce6a8bfcf6d24f61421547f4cc718f44a6eb47921293
+  checksum: 9e55af6cd9d1833a4dbe64924fc73163295acd3c988a9c7db88926669f2574ab7ec607e8487b6dd71dbdad2d7c1c1aac439f37e59233f37220b1a9d88fa2ce01
   languageName: node
   linkType: hard
 
@@ -14509,18 +14454,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.4.32":
-  version: 8.4.32
-  resolution: "postcss@npm:8.4.32"
-  dependencies:
-    nanoid: "npm:^3.3.7"
-    picocolors: "npm:^1.0.0"
-    source-map-js: "npm:^1.0.2"
-  checksum: 39308a9195fa34d4dbdd7b58a896cff0c7809f84f7a4ac1b95b68ca86c9138a395addff33075668ed3983d41b90aac05754c445237a9365eb1c3a5602ebd03ad
-  languageName: node
-  linkType: hard
-
-"postcss@npm:^8.0.0, postcss@npm:^8.2.14, postcss@npm:^8.4.21, postcss@npm:^8.4.31, postcss@npm:^8.4.32":
+"postcss@npm:8.4.33, postcss@npm:^8.0.0, postcss@npm:^8.2.14, postcss@npm:^8.4.21, postcss@npm:^8.4.31, postcss@npm:^8.4.32":
   version: 8.4.33
   resolution: "postcss@npm:8.4.33"
   dependencies:
@@ -14618,10 +14552,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"process-warning@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "process-warning@npm:2.0.0"
-  checksum: b3afebd724b6a78f2c229ad0d32367b6980ac81055d9b43818b99e09486158028cea7d5442d337721f702329af4a96af7696f6d1b76eee52f388734fdb04311f
+"process-warning@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "process-warning@npm:3.0.0"
+  checksum: 60f3c8ddee586f0706c1e6cb5aa9c86df05774b9330d792d7c8851cf0031afd759d665404d07037e0b4901b55c44a423f07bdc465c63de07d8d23196bb403622
   languageName: node
   linkType: hard
 
@@ -16376,7 +16310,7 @@ __metadata:
     typed-css-modules: "npm:^0.8.1"
     typescript: "npm:^5.3.3"
     typescript-plugin-css-modules: "npm:^5.0.2"
-    web-ext: "npm:^7.9.0"
+    web-ext: "npm:^7.10.0"
     webextension-polyfill: "npm:^0.10.0"
     webpack: "npm:^5.89.0"
     webpack-cli: "npm:^5.1.4"
@@ -18071,13 +18005,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-ext@npm:^7.9.0":
-  version: 7.9.0
-  resolution: "web-ext@npm:7.9.0"
+"web-ext@npm:^7.10.0":
+  version: 7.10.0
+  resolution: "web-ext@npm:7.10.0"
   dependencies:
     "@babel/runtime": "npm:7.21.0"
     "@devicefarmer/adbkit": "npm:3.2.3"
-    addons-linter: "npm:6.19.0"
+    addons-linter: "npm:6.20.0"
     bunyan: "npm:1.8.15"
     camelcase: "npm:7.0.1"
     chrome-launcher: "npm:0.15.1"
@@ -18086,7 +18020,7 @@ __metadata:
     es6-error: "npm:4.1.1"
     firefox-profile: "npm:4.3.2"
     fs-extra: "npm:11.1.0"
-    fx-runner: "npm:1.3.0"
+    fx-runner: "npm:1.4.0"
     import-fresh: "npm:3.3.0"
     jose: "npm:4.13.1"
     mkdirp: "npm:1.0.4"
@@ -18109,7 +18043,7 @@ __metadata:
     zip-dir: "npm:2.0.0"
   bin:
     web-ext: bin/web-ext.js
-  checksum: 914fb36040f7873c2533a35581fc192fdb18c1011e8d457f2992b89decec692556e9a646c05208fd2f9af341b9c31e3b3178824182effcba8598668779dc6b3d
+  checksum: 6d0dd3a8c56afdc348d1d7a8de7dd9d95f3d4bfeb60c3fbd50632349645644bb9649805354b8643b8d490a6edc97aaa06427f5f64022d435f51be042159ae97f
   languageName: node
   linkType: hard
 
