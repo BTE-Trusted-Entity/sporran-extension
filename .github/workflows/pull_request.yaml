@@ -43,7 +43,7 @@ jobs:
         run: cd dist/web-ext-artifacts/ && mv * $(ls | sed 's/-/-PR-/')
 
       - name: Publish on GitHub
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sporran-extension-${{ github.sha }}
           path: dist/web-ext-artifacts/*
