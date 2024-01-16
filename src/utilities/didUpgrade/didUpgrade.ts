@@ -1,19 +1,27 @@
-import BN from 'bn.js';
-import {
-  Blockchain,
-  ConfigService,
+import type {
   Did,
   DidDocument,
-  DidUri,
   KiltAddress,
   KiltKeyringPair,
-  SignExtrinsicCallback,
+  SignerInterface,
   SubmittableExtrinsic,
-} from '@kiltprotocol/sdk-js';
+} from '@kiltprotocol/types';
+
+import BN from 'bn.js';
 
 import { useMemo } from 'react';
 
+import { ConfigService, DidResolver } from '@kiltprotocol/sdk-js';
+import { Blockchain } from '@kiltprotocol/chain-helpers';
 import {
+  NewDidEncryptionKey,
+  NewDidVerificationKey,
+  getStoreTx,
+} from '@kiltprotocol/did';
+
+import {
+  deriveAuthenticationKey,
+  deriveEncryptionKeyFromSeed,
   getIdentityCryptoFromSeed,
   getLightDidFromSeed,
 } from '../identities/identities';
@@ -25,33 +33,51 @@ import { makeFakeIdentityCrypto } from '../makeFakeIdentityCrypto/makeFakeIdenti
 
 interface DidTransaction {
   extrinsic: SubmittableExtrinsic;
-  did: DidUri;
+  did: Did;
 }
 
 export async function getTransaction(
   lightDidDocument: DidDocument,
+  keysToAdd: {
+    authentication: NewDidVerificationKey;
+    keyAgreement: NewDidEncryptionKey;
+  },
   keypair: KiltKeyringPair,
-  sign: SignExtrinsicCallback,
+  signers: SignerInterface[],
   submitter?: KiltAddress,
 ): Promise<DidTransaction> {
-  const { fullDid: did } = parseDidUri(lightDidDocument.uri);
+  const { fullDid: did } = parseDidUri(lightDidDocument.id);
 
-  const extrinsic = await Did.getStoreTx(
-    lightDidDocument,
+  await DidResolver.dereference(lightDidDocument.id, {});
+
+  const { authentication, keyAgreement } = keysToAdd;
+
+  const extrinsic = await getStoreTx(
+    { authentication: [authentication], keyAgreement: [keyAgreement] },
     submitter || keypair.address,
-    async (input) => sign({ ...input, did }),
+    signers,
   );
 
   return { extrinsic, did };
 }
 
 export async function getFee(): Promise<BN> {
-  const { keypair, sign, fakeSeed } = makeFakeIdentityCrypto();
+  const { keypair, signers, fakeSeed } = await makeFakeIdentityCrypto();
   const document = getLightDidFromSeed(fakeSeed);
+
+  const keysToAdd = {
+    authentication: deriveAuthenticationKey(fakeSeed),
+    keyAgreement: deriveEncryptionKeyFromSeed(fakeSeed),
+  };
 
   const api = ConfigService.get('api');
 
-  const { extrinsic } = await getTransaction(document, keypair, sign);
+  const { extrinsic } = await getTransaction(
+    document,
+    keysToAdd,
+    keypair,
+    signers,
+  );
   const signed = await extrinsic.signAsync(keypair);
   const extrinsicFee = (await signed.paymentInfo(keypair)).partialFee;
 
@@ -62,7 +88,7 @@ export async function getFee(): Promise<BN> {
 
 export function useKiltCosts(
   address: string,
-  did: DidUri | undefined,
+  did: Did | undefined,
 ): {
   fee?: BN;
   deposit?: BN;
@@ -88,9 +114,20 @@ export function useKiltCosts(
 const currentTx: Record<string, DidTransaction> = {};
 
 export async function sign(seed: Uint8Array): Promise<string> {
-  const document = getLightDidFromSeed(seed);
-  const { keypair, sign } = await getIdentityCryptoFromSeed(seed);
-  const { extrinsic, did } = await getTransaction(document, keypair, sign);
+  const { didDocument, keypair, signers } =
+    await getIdentityCryptoFromSeed(seed);
+
+  const keysToAdd = {
+    authentication: deriveAuthenticationKey(seed),
+    keyAgreement: deriveEncryptionKeyFromSeed(seed),
+  };
+
+  const { extrinsic, did } = await getTransaction(
+    didDocument,
+    keysToAdd,
+    keypair,
+    signers,
+  );
 
   const signed = await extrinsic.signAsync(keypair);
 
@@ -99,7 +136,7 @@ export async function sign(seed: Uint8Array): Promise<string> {
   return hash;
 }
 
-export async function submit(hash: string): Promise<DidUri> {
+export async function submit(hash: string): Promise<Did> {
   const { extrinsic, did } = currentTx[hash];
   await Blockchain.submitSignedTx(extrinsic);
   delete currentTx[hash];

@@ -1,7 +1,7 @@
 import { FormEvent, useCallback, useRef } from 'react';
 import browser from 'webextension-polyfill';
 import { u8aToHex } from '@polkadot/util';
-import { Utils } from '@kiltprotocol/sdk-js';
+import { Crypto, ss58Format } from '@kiltprotocol/utils';
 
 import * as styles from './SignRawDApp.module.css';
 
@@ -26,9 +26,9 @@ export function SignRawDApp() {
   const passwordField = usePasswordField();
 
   const identities = useIdentities().data;
-  const kiltAddress = Utils.Crypto.encodeAddress(
+  const kiltAddress = Crypto.encodeAddress(
     values.address as string,
-    Utils.ss58Format,
+    ss58Format,
   );
   const identity = identities && identities[kiltAddress];
 

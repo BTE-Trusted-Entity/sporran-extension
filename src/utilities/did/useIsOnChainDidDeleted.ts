@@ -1,18 +1,19 @@
-import { Did, DidUri } from '@kiltprotocol/sdk-js';
+import { Did } from '@kiltprotocol/types';
+
+import { DidResolver } from '@kiltprotocol/sdk-js';
 
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
-async function getIsOnChainDidDeleted(
-  did: DidUri | undefined,
-): Promise<boolean> {
+async function getIsOnChainDidDeleted(did: Did | undefined): Promise<boolean> {
   if (!did) {
     return false;
   }
 
   try {
-    const resolved = await Did.resolve(did);
+    const { didResolutionMetadata, didDocumentMetadata } =
+      await DidResolver.resolve(did, {});
     return Boolean(
-      resolved && resolved.metadata && resolved.metadata.deactivated,
+      !didResolutionMetadata.error && didDocumentMetadata.deactivated,
     );
   } catch (error) {
     console.error(error, 'Could not get DID deletion status');
@@ -21,7 +22,7 @@ async function getIsOnChainDidDeleted(
 }
 
 export function useIsOnChainDidDeleted(
-  did: DidUri | undefined,
+  did: Did | undefined,
 ): boolean | undefined {
   return useAsyncValue(getIsOnChainDidDeleted, [did]);
 }

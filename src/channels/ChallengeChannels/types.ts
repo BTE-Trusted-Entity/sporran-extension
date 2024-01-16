@@ -1,12 +1,12 @@
-import { DidResourceUri } from '@kiltprotocol/sdk-js';
+import type { DidUrl } from '@kiltprotocol/types';
 
 export interface ChallengeInput {
-  dAppEncryptionKeyId: DidResourceUri;
+  dAppEncryptionKeyId: DidUrl;
   challenge: string;
 }
 
 export interface ChallengeOutput {
-  encryptionKeyId: DidResourceUri;
+  encryptionKeyId: DidUrl;
   encryptedChallenge: string;
   nonce: string;
 }

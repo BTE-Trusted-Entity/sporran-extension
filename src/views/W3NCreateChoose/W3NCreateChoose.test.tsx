@@ -1,5 +1,5 @@
 import { MemoryRouter, Route } from 'react-router-dom';
-import { BalanceUtils } from '@kiltprotocol/sdk-js';
+import { BalanceUtils } from '@kiltprotocol/chain-helpers';
 
 import { render } from '../../testing/testing';
 

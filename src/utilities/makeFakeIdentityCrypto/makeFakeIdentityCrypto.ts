@@ -1,10 +1,10 @@
-import { Utils } from '@kiltprotocol/sdk-js';
+import { Crypto, Signers } from '@kiltprotocol/utils';
 
-import { makeSignExtrinsicCallback } from '../makeSignExtrinsicCallback/makeSignExtrinsicCallback';
-
-export function makeFakeIdentityCrypto(fakeSeed = new Uint8Array(32)) {
-  const keypair = Utils.Crypto.makeKeypairFromSeed(fakeSeed, 'sr25519');
-  const sign = makeSignExtrinsicCallback(keypair);
+export async function makeFakeIdentityCrypto(fakeSeed = new Uint8Array(32)) {
+  const keypair = Crypto.makeKeypairFromSeed(fakeSeed, 'sr25519');
+  const signers = await Signers.getSignersForKeypair({
+    keypair,
+  });
   const { address } = keypair;
-  return { keypair, address, sign, fakeSeed };
+  return { keypair, address, signers, fakeSeed };
 }

@@ -1,6 +1,9 @@
+import type { KiltKeyringPair } from '@kiltprotocol/types';
+
 import { userEvent } from '@testing-library/user-event';
 import { mnemonicValidate } from '@polkadot/util-crypto';
-import { KiltKeyringPair, Utils } from '@kiltprotocol/sdk-js';
+
+import { Crypto } from '@kiltprotocol/utils';
 
 import { render, screen } from '../../testing/testing';
 
@@ -41,7 +44,7 @@ async function typeElevenWords() {
 
 describe('ImportBackupPhrase', () => {
   beforeEach(() => {
-    jest.mocked(Utils.Crypto.makeKeypairFromUri).mockReset();
+    jest.mocked(Crypto.makeKeypairFromUri).mockReset();
   });
 
   it('should render for import', async () => {
@@ -108,7 +111,7 @@ describe('ImportBackupPhrase', () => {
 
   it('should report mismatching backup phrase', async () => {
     jest.mocked(mnemonicValidate).mockReturnValue(true);
-    jest.mocked(Utils.Crypto.makeKeypairFromUri).mockReturnValue({
+    jest.mocked(Crypto.makeKeypairFromUri).mockReturnValue({
       address: 'FAIL',
     } as unknown as KiltKeyringPair);
 
@@ -127,7 +130,7 @@ describe('ImportBackupPhrase', () => {
 
   it('should allow backup phrase import', async () => {
     jest.mocked(mnemonicValidate).mockReturnValue(true);
-    jest.mocked(Utils.Crypto.makeKeypairFromUri).mockReturnValue({
+    jest.mocked(Crypto.makeKeypairFromUri).mockReturnValue({
       address: 'PASS',
     } as unknown as KiltKeyringPair);
 
@@ -149,7 +152,7 @@ describe('ImportBackupPhrase', () => {
 
   it('should allow backup phrase reset', async () => {
     jest.mocked(mnemonicValidate).mockReturnValue(true);
-    jest.mocked(Utils.Crypto.makeKeypairFromUri).mockReturnValue({
+    jest.mocked(Crypto.makeKeypairFromUri).mockReturnValue({
       address: '4p273cfeZ2JRz46AcJoQvTRHCH8Vaj92jts2VxepZtQwbTBB',
     } as unknown as KiltKeyringPair);
 

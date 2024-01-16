@@ -39,8 +39,8 @@ function IdentityLink({
   const modifiedIndex = !isNew(identity)
     ? identities.indexOf(identity) + delta
     : isPrevious
-    ? length - 1
-    : 0;
+      ? length - 1
+      : 0;
 
   const isInRange = 0 <= modifiedIndex && modifiedIndex < length;
   const isNewIdentity = showAdd && !isInRange;

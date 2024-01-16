@@ -1,8 +1,11 @@
+import type { DidDocument } from '@kiltprotocol/types';
+
 import { FormEvent, Fragment, useCallback } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
-import { ConfigService, Did, DidDocument } from '@kiltprotocol/sdk-js';
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { authorizeTx } from '@kiltprotocol/did';
 
 import * as styles from './W3NRemove.module.css';
 
@@ -38,14 +41,14 @@ async function getFee(fullDid?: DidDocument) {
     return undefined;
   }
 
-  const { address, keypair, sign } = makeFakeIdentityCrypto();
+  const { address, keypair, signers } = await makeFakeIdentityCrypto();
 
   const api = ConfigService.get('api');
 
-  const authorized = await Did.authorizeTx(
-    fullDid.uri,
+  const authorized = await authorizeTx(
+    fullDid.id,
     api.tx.web3Names.releaseByOwner(),
-    sign,
+    signers,
     address,
   );
 
@@ -84,14 +87,14 @@ export function W3NRemove({ identity }: Props) {
       }
 
       const { keypair, seed } = await passwordField.get(event);
-      const { sign } = await getIdentityCryptoFromSeed(seed);
+      const { signers } = await getIdentityCryptoFromSeed(seed);
 
       const api = ConfigService.get('api');
 
-      const authorized = await Did.authorizeTx(
-        fullDidDocument.uri,
+      const authorized = await authorizeTx(
+        fullDidDocument.id,
         api.tx.web3Names.releaseByOwner(),
-        sign,
+        signers,
         keypair.address,
       );
       await submit(keypair, authorized);

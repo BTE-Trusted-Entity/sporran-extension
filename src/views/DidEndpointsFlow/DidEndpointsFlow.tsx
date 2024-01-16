@@ -1,6 +1,7 @@
+import type { Service } from '@kiltprotocol/types';
+
 import { useCallback, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import { DidServiceEndpoint } from '@kiltprotocol/sdk-js';
 
 import { Identity } from '../../utilities/identities/types';
 import { DidEndpointsForm } from '../DidEndpointsForm/DidEndpointsForm';
@@ -15,7 +16,7 @@ export function DidEndpointsFlow({ identity }: Props) {
   const history = useHistory();
 
   const [type, setType] = useState<'add' | 'remove'>('add');
-  const [values, setValues] = useState<DidServiceEndpoint | undefined>();
+  const [values, setValues] = useState<Service | undefined>();
 
   const { address } = identity;
   const signPath = generatePath(paths.identity.did.manage.endpoints.sign, {
@@ -23,7 +24,7 @@ export function DidEndpointsFlow({ identity }: Props) {
   });
 
   const onAdd = useCallback(
-    async (endpoint: DidServiceEndpoint) => {
+    async (endpoint: Service) => {
       setType('add');
       setValues(endpoint);
       history.push(signPath);
@@ -32,7 +33,7 @@ export function DidEndpointsFlow({ identity }: Props) {
   );
 
   const onRemove = useCallback(
-    async (endpoint: DidServiceEndpoint) => {
+    async (endpoint: Service) => {
       setType('remove');
       setValues(endpoint);
       history.push(signPath);

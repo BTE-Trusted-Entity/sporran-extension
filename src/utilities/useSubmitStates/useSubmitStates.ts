@@ -1,12 +1,14 @@
-import { useCallback, useState } from 'react';
-import {
-  Blockchain,
-  ConfigService,
+import type {
   ISubmittableResult,
   KiltKeyringPair,
   SubmittableExtrinsic,
-} from '@kiltprotocol/sdk-js';
+} from '@kiltprotocol/types';
+
+import { useCallback, useState } from 'react';
 import BN from 'bn.js';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { Blockchain } from '@kiltprotocol/chain-helpers';
 
 import { asKiltCoins } from '../../components/KiltAmount/KiltAmount';
 import { transformBalances } from '../transformBalances/transformBalances';
@@ -17,7 +19,7 @@ async function getUnpaidCosts(
   draft: SubmittableExtrinsic,
   tip = new BN(0),
 ): Promise<BN | undefined> {
-  const { keypair } = makeFakeIdentityCrypto();
+  const { keypair } = await makeFakeIdentityCrypto();
   const extrinsic = await draft.signAsync(keypair, { tip });
 
   const fee = (await extrinsic.paymentInfo(keypair)).partialFee;

@@ -1,6 +1,7 @@
 import { FormEvent, Fragment, useCallback } from 'react';
 import browser from 'webextension-polyfill';
-import { Utils } from '@kiltprotocol/sdk-js';
+
+import { Crypto, ss58Format } from '@kiltprotocol/utils';
 
 import * as styles from './SignDApp.module.css';
 
@@ -27,10 +28,7 @@ export function SignDApp() {
   const passwordField = usePasswordField();
 
   const identities = useIdentities().data;
-  const kiltAddress = Utils.Crypto.encodeAddress(
-    input.address as string,
-    Utils.ss58Format,
-  );
+  const kiltAddress = Crypto.encodeAddress(input.address as string, ss58Format);
   const identity = identities && identities[kiltAddress];
 
   const handleSubmit = useCallback(

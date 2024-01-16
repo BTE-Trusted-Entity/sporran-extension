@@ -16,6 +16,8 @@ import { getTransaction } from '../../utilities/didUpgrade/didUpgrade';
 
 import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 import {
+  deriveAuthenticationKey,
+  deriveEncryptionKeyFromSeed,
   getIdentityCryptoFromSeed,
   getLightDidFromSeed,
 } from '../../utilities/identities/identities';
@@ -48,13 +50,20 @@ export function DidUpgradeEuro({ identity }: Props) {
       }
 
       const { seed } = await passwordField.get(event);
-      const { keypair, sign } = await getIdentityCryptoFromSeed(seed);
+      const { keypair, signers } = await getIdentityCryptoFromSeed(seed);
 
       const document = getLightDidFromSeed(seed);
+
+      const keysToAdd = {
+        authentication: deriveAuthenticationKey(seed),
+        keyAgreement: deriveEncryptionKeyFromSeed(seed),
+      };
+
       const { extrinsic } = await getTransaction(
         document,
+        keysToAdd,
         keypair,
-        sign,
+        signers,
         submitter,
       );
 

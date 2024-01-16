@@ -1,15 +1,17 @@
+import type {
+  BN,
+  Did,
+  Service,
+  KiltKeyringPair,
+  SignerInterface,
+} from '@kiltprotocol/types';
+
 import { FormEvent, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import browser from 'webextension-polyfill';
-import {
-  BN,
-  ConfigService,
-  Did,
-  DidServiceEndpoint,
-  DidUri,
-  KiltKeyringPair,
-  SignExtrinsicCallback,
-} from '@kiltprotocol/sdk-js';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { authorizeTx, serviceToChain } from '@kiltprotocol/did';
 
 import * as styles from './DidEndpointsSign.module.css';
 
@@ -43,32 +45,29 @@ export type ActionType = 'add' | 'remove';
 
 async function getDidAuthorizedExtrinsic(
   keypair: KiltKeyringPair,
-  sign: SignExtrinsicCallback,
-  did: DidUri,
-  service: DidServiceEndpoint,
+  signers: SignerInterface[],
+  did: Did,
+  service: Service,
   type: ActionType,
 ) {
   const document = await getFullDidDocument(did);
 
   const api = ConfigService.get('api');
+  const chainService = serviceToChain(service);
   const draft =
     type === 'add'
-      ? api.tx.did.addServiceEndpoint(Did.serviceToChain(service))
-      : api.tx.did.removeServiceEndpoint(Did.resourceIdToChain(service.id));
+      ? api.tx.did.addServiceEndpoint(chainService)
+      : api.tx.did.removeServiceEndpoint(chainService.id);
 
-  return Did.authorizeTx(document.uri, draft, sign, keypair.address);
+  return authorizeTx(document.id, draft, signers, keypair.address);
 }
 
-async function getFee(
-  did: DidUri,
-  service: DidServiceEndpoint,
-  type: ActionType,
-) {
-  const { keypair, sign } = makeFakeIdentityCrypto();
+async function getFee(did: Did, service: Service, type: ActionType) {
+  const { keypair, signers } = await makeFakeIdentityCrypto();
 
   const authorized = await getDidAuthorizedExtrinsic(
     keypair,
-    sign,
+    signers,
     did,
     service,
     type,
@@ -81,9 +80,9 @@ async function getFee(
 
 export function useCosts(
   address: string,
-  did: DidUri,
+  did: Did,
   type: ActionType,
-  service: DidServiceEndpoint,
+  service: Service,
 ): {
   fee?: BN;
   deposit?: BN;
@@ -109,7 +108,7 @@ export function useCosts(
 interface Props {
   identity: Identity;
   type: ActionType;
-  endpoint: DidServiceEndpoint;
+  endpoint: Service;
 }
 
 export function DidEndpointsSign({ identity, type, endpoint }: Props) {
@@ -128,11 +127,11 @@ export function DidEndpointsSign({ identity, type, endpoint }: Props) {
       event.preventDefault();
 
       const { keypair, seed } = await passwordField.get(event);
-      const { sign } = await getIdentityCryptoFromSeed(seed);
+      const { signers } = await getIdentityCryptoFromSeed(seed);
 
       const authorized = await getDidAuthorizedExtrinsic(
         keypair,
-        sign,
+        signers,
         did,
         endpoint,
         type,
@@ -197,9 +196,7 @@ export function DidEndpointsSign({ identity, type, endpoint }: Props) {
         </div>
         <div className={styles.detail}>
           <dt className={styles.detailName}>{t('view_DidEndpointsSign_id')}</dt>
-          <dd className={styles.detailValue}>
-            {Did.resourceIdToChain(endpoint.id)}
-          </dd>
+          <dd className={styles.detailValue}>{serviceToChain(endpoint).id}</dd>
         </div>
       </dl>
 

@@ -1,5 +1,7 @@
 import { Runtime } from 'webextension-polyfill';
-import { Utils } from '@kiltprotocol/sdk-js';
+
+import { Crypto } from '@kiltprotocol/utils';
+import { multibaseKeyToDidKey } from '@kiltprotocol/did';
 
 import { getTabEncryption } from '../../utilities/getTabEncryption/getTabEncryption';
 import { initKiltSDK } from '../../utilities/initKiltSDK/initKiltSDK';
@@ -18,9 +20,18 @@ export async function produceEncryptedChallenge(
 
   const { dAppEncryptionDidKey, sporranEncryptionDidKeyUri } = encryption;
 
-  const { nonce, box } = Utils.Crypto.encryptAsymmetricAsStr(
-    Utils.Crypto.coToUInt8(challenge),
-    dAppEncryptionDidKey.publicKey,
+  const { keyType, publicKey } = multibaseKeyToDidKey(
+    dAppEncryptionDidKey.publicKeyMultibase,
+  );
+  if (keyType !== 'x25519') {
+    throw new Error(
+      `key type ${keyType} is not suitable for x25519 key agreement`,
+    );
+  }
+
+  const { nonce, box } = Crypto.encryptAsymmetricAsStr(
+    Crypto.coToUInt8(challenge),
+    publicKey,
     encryption.encryptionKey.secretKey,
   );
 

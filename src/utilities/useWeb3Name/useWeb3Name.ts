@@ -1,11 +1,12 @@
-import { ConfigService, Did, DidUri } from '@kiltprotocol/sdk-js';
+import type { Did } from '@kiltprotocol/types';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { linkedInfoFromChain, toChain } from '@kiltprotocol/did';
 
 import { isFullDid } from '../did/did';
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
-export function useWeb3Name(
-  did: DidUri | undefined,
-): string | null | undefined {
+export function useWeb3Name(did: Did | undefined): string | null | undefined {
   return useAsyncValue(
     async (did) => {
       if (!(did && isFullDid(did))) {
@@ -13,12 +14,12 @@ export function useWeb3Name(
       }
 
       const api = ConfigService.get('api');
-      const result = await api.call.did.query(Did.toChain(did));
+      const result = await api.call.did.query(toChain(did));
       if (result.isNone) {
         return null;
       }
 
-      return Did.linkedInfoFromChain(result).web3Name;
+      return linkedInfoFromChain(result).document.alsoKnownAs?.[0];
     },
     [did],
   );

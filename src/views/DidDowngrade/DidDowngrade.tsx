@@ -1,8 +1,9 @@
+import type { Did } from '@kiltprotocol/types';
+
 import { FormEvent, Fragment, useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BN from 'bn.js';
 import browser from 'webextension-polyfill';
-import { DidUri } from '@kiltprotocol/sdk-js';
 
 import * as styles from './DidDowngrade.module.css';
 
@@ -42,7 +43,7 @@ import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 
 function useCosts(
   address: string,
-  did: DidUri | undefined, // after the downgrade it’s set to undefined
+  did: Did | undefined, // after the downgrade it’s set to undefined
 ): {
   fee?: BN;
   deposit?: BN;

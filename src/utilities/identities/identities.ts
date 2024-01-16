@@ -1,3 +1,18 @@
+import type {
+  Did,
+  DidDocument,
+  DidUrl,
+  KiltAddress,
+  KiltEncryptionKeypair,
+  KiltKeyringPair,
+  SignerInterface,
+} from '@kiltprotocol/types';
+import type {
+  EncryptRequestData,
+  IEncryptedMessage,
+  MessageBody,
+} from '@kiltprotocol/kilt-extension-api/types';
+
 import { useContext } from 'react';
 import { mutate } from 'swr';
 import {
@@ -7,23 +22,12 @@ import {
   mnemonicToMiniSecret,
   sr25519PairFromSeed,
 } from '@polkadot/util-crypto';
-import {
-  Did,
-  DidDocument,
-  DidResourceUri,
-  DidUri,
-  EncryptRequestData,
-  IEncryptedMessage,
-  KiltAddress,
-  KiltEncryptionKeypair,
-  KiltKeyringPair,
-  Message,
-  MessageBody,
-  SignCallback,
-  SignRequestData,
-  Utils,
-} from '@kiltprotocol/sdk-js';
 import { find, map, max, memoize } from 'lodash-es';
+
+import { DidResolver } from '@kiltprotocol/sdk-js';
+import { Crypto, Signers } from '@kiltprotocol/utils';
+import { createLightDidDocument, getFullDid, parse } from '@kiltprotocol/did';
+import * as Message from '@kiltprotocol/kilt-extension-api/messaging';
 
 import {
   loadEncrypted,
@@ -45,7 +49,7 @@ const CURRENT_IDENTITY_KEY = 'currentIdentity';
 
 export const NEW: Identity = {
   address: 'NEW' as KiltAddress,
-  did: '' as DidUri,
+  did: '' as Did,
   name: '',
   index: -1,
 };
@@ -86,7 +90,7 @@ export async function setCurrentIdentity(address: string): Promise<void> {
   await mutate(['getCurrentIdentity', CURRENT_IDENTITY_KEY]);
 }
 
-export async function setCurrentIdentityByDid(did?: DidUri): Promise<void> {
+export async function setCurrentIdentityByDid(did?: Did): Promise<void> {
   if (!did) {
     return;
   }
@@ -122,7 +126,8 @@ interface IdentityDidCrypto {
   didDocument: DidDocument;
   keypair: KiltKeyringPair;
   authenticationKey: KiltKeyringPair;
-  sign: SignCallback;
+  encryptionKey: KiltEncryptionKeypair;
+  signers: SignerInterface[];
   encrypt: (
     messageBody: MessageBody,
     dAppDidDocument: DidDocument,
@@ -130,7 +135,7 @@ interface IdentityDidCrypto {
 }
 
 export function deriveAuthenticationKey(seed: Uint8Array) {
-  const baseKey = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
+  const baseKey = Crypto.makeKeypairFromSeed(seed, 'sr25519');
   return baseKey.derive('//did//0') as typeof baseKey;
 }
 
@@ -140,17 +145,17 @@ export function deriveEncryptionKeyFromSeed(
   const keypair = sr25519PairFromSeed(seed);
   const { path } = keyExtractPath('//did//keyAgreement//0');
   const { secretKey } = keyFromPath(keypair, path, 'sr25519');
-  return Utils.Crypto.makeEncryptionKeypairFromSeed(blake2AsU8a(secretKey));
+  return Crypto.makeEncryptionKeypairFromSeed(blake2AsU8a(secretKey));
 }
 
 export function deriveAttestationKeyFromSeed(seed: Uint8Array) {
-  const baseKey = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
+  const baseKey = Crypto.makeKeypairFromSeed(seed, 'sr25519');
   return baseKey.derive('//did//assertion//0') as typeof baseKey;
 }
 
 async function fixLightDidIssues(seed: Uint8Array) {
   const identities = await getIdentities();
-  const { address } = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
+  const { address } = Crypto.makeKeypairFromSeed(seed, 'sr25519');
   const identity = identities[address];
 
   if (!identity) {
@@ -158,7 +163,7 @@ async function fixLightDidIssues(seed: Uint8Array) {
     return;
   }
 
-  const parsed = identity.did && Did.parse(identity.did);
+  const parsed = identity.did && parse(identity.did);
   if (parsed && parsed.type !== 'light') {
     return;
   }
@@ -177,8 +182,8 @@ async function fixLightDidIssues(seed: Uint8Array) {
     getDidEncryptionKey(document);
   } catch {
     // We re-create the invalid DID from scratch and update its URI in the identity.
-    const { uri } = getLightDidFromSeed(seed);
-    await saveIdentity({ ...identity, did: uri });
+    const { id } = getLightDidFromSeed(seed);
+    await saveIdentity({ ...identity, did: id });
   }
 }
 
@@ -186,46 +191,35 @@ export async function getIdentityCryptoFromSeed(
   seed: Uint8Array,
 ): Promise<IdentityDidCrypto> {
   await fixLightDidIssues(seed);
+  const keypair = Crypto.makeKeypairFromSeed(seed, 'sr25519');
 
   const authenticationKey = deriveAuthenticationKey(seed);
   const encryptionKey = deriveEncryptionKeyFromSeed(seed);
 
-  const keypair = Utils.Crypto.makeKeypairFromSeed(seed, 'sr25519');
   const identities = await getIdentities();
   const did = getIdentityDid(identities[keypair.address]);
 
   const didDocument = await getDidDocument(did);
 
+  const keyUri =
+    `${didDocument.id}${getDidEncryptionKey(didDocument)}` as DidUrl;
+
+  const signers = await Signers.getSignersForKeypair({
+    keypair: authenticationKey,
+    id: `${didDocument.id}${didDocument.authentication?.[0]}`,
+  });
+
   async function encryptCallback({ data, peerPublicKey }: EncryptRequestData) {
-    const { box, nonce } = Utils.Crypto.encryptAsymmetric(
+    const { box, nonce } = Crypto.encryptAsymmetric(
       data,
       peerPublicKey,
       encryptionKey.secretKey,
     );
-    const keyUri = `${didDocument.uri}${getDidEncryptionKey(didDocument).id}`;
+
     return {
       nonce,
       data: box,
-      keyUri: keyUri as DidResourceUri,
-    };
-  }
-
-  async function sign({ data, keyRelationship }: SignRequestData) {
-    if (keyRelationship !== 'authentication') {
-      throw new Error(
-        'Only key relationship "authentication" is supported for signing',
-      );
-    }
-
-    const signature = authenticationKey.sign(data, { withType: false });
-    const keyUri =
-      `${didDocument.uri}${didDocument.authentication[0].id}` as DidResourceUri;
-    const keyType = authenticationKey.type;
-
-    return {
-      signature,
       keyUri,
-      keyType,
     };
   }
 
@@ -235,14 +229,14 @@ export async function getIdentityCryptoFromSeed(
   ): Promise<IEncryptedMessage> {
     const message = Message.fromBody(
       messageBody,
-      didDocument.uri,
-      dAppDidDocument.uri,
+      didDocument.id,
+      dAppDidDocument.id,
     );
 
     return Message.encrypt(
       message,
       encryptCallback,
-      `${dAppDidDocument.uri}${getDidEncryptionKey(dAppDidDocument).id}`,
+      `${dAppDidDocument.id}${getDidEncryptionKey(dAppDidDocument)}`,
     );
   }
 
@@ -250,7 +244,8 @@ export async function getIdentityCryptoFromSeed(
     didDocument,
     keypair,
     authenticationKey,
-    sign,
+    encryptionKey,
+    signers,
     encrypt,
   };
 }
@@ -260,13 +255,13 @@ export async function encryptIdentity(
   password: string,
 ): Promise<KiltAddress> {
   const seed = mnemonicToMiniSecret(backupPhrase);
-  const { address } = Utils.Crypto.makeKeypairFromUri(backupPhrase, 'sr25519');
+  const { address } = Crypto.makeKeypairFromUri(backupPhrase, 'sr25519');
   await saveEncrypted(address, password, seed);
   return address;
 }
 
 export function getLightDidFromSeed(seed: Uint8Array): DidDocument {
-  return Did.createLightDidDocument({
+  return createLightDidDocument({
     authentication: [deriveAuthenticationKey(seed)],
     keyAgreement: [deriveEncryptionKeyFromSeed(seed)],
   });
@@ -289,11 +284,11 @@ export async function createIdentity(
 
   const seed = mnemonicToMiniSecret(backupPhrase);
 
-  const { uri } = getLightDidFromSeed(seed);
+  const { id } = getLightDidFromSeed(seed);
 
   const { name, index } = await getIdentityName();
 
-  const identity = { name, address, did: uri, index };
+  const identity = { name, address, did: id, index };
   await saveIdentity(identity);
 
   return identity;
@@ -308,14 +303,16 @@ export async function importIdentity(
   const seed = mnemonicToMiniSecret(backupPhrase);
 
   const lightDidDocument = getLightDidFromSeed(seed);
-  const lightDid = lightDidDocument.uri;
+  const lightDid = lightDidDocument.id;
 
-  const resolved = await Did.resolve(lightDid);
-  const fullDid = resolved?.metadata?.canonicalId;
+  const {
+    didDocumentMetadata: { canonicalId, deactivated },
+  } = await DidResolver.resolve(lightDid, {});
 
-  const deactivated = resolved?.metadata?.deactivated;
+  const fullDid = canonicalId;
+
   const did = deactivated ? undefined : fullDid || lightDid;
-  const deletedDid = deactivated ? Did.getFullDidUri(lightDid) : undefined;
+  const deletedDid = deactivated ? getFullDid(lightDid) : undefined;
 
   const { name, index } = await getIdentityName();
 
@@ -357,10 +354,14 @@ async function syncDidStateWithBlockchain(address: string | null | undefined) {
   const { fullDid, type } = parseDidUri(identity.did);
   const wasOnChain = type === 'full';
 
-  const resolved = await Did.resolve(identity.did);
+  const {
+    didDocument,
+    didDocumentMetadata: { canonicalId, deactivated },
+  } = await DidResolver.resolve(identity.did, {});
+
   const isOnChain = wasOnChain
-    ? Boolean(resolved && resolved.metadata && !resolved.metadata.deactivated)
-    : Boolean(resolved && resolved.metadata && resolved.metadata.canonicalId);
+    ? Boolean(didDocument && !deactivated)
+    : Boolean(didDocument && canonicalId);
 
   if (wasOnChain && !isOnChain) {
     await saveIdentity({
@@ -389,7 +390,7 @@ export function useCurrentIdentity(): string | null | undefined {
   return data;
 }
 
-export function getIdentityDid({ did }: Identity): DidUri {
+export function getIdentityDid({ did }: Identity): Did {
   if (!did) {
     throw new Error('DID is deleted and unusable');
   }

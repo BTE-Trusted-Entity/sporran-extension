@@ -1,4 +1,4 @@
-import type { KiltAddress } from '@kiltprotocol/sdk-js';
+import type { KiltAddress } from '@kiltprotocol/types';
 
 import browser from 'webextension-polyfill';
 

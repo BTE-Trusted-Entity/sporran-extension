@@ -1,4 +1,6 @@
-import { BalanceUtils, DidServiceEndpoint } from '@kiltprotocol/sdk-js';
+import type { Service } from '@kiltprotocol/types';
+
+import { BalanceUtils } from '@kiltprotocol/chain-helpers';
 
 import { identitiesMock, render } from '../../testing/testing';
 import { waitForGetPassword } from '../../channels/SavedPasswordsChannels/SavedPasswordsChannels.mock';
@@ -13,7 +15,7 @@ import { DidEndpointsSign } from './DidEndpointsSign';
 const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
-const endpoint: DidServiceEndpoint = {
+const endpoint: Service = {
   serviceEndpoint: ['https://sporran.org/'],
   type: ['Some Type'],
   id: '#123456',

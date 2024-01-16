@@ -1,4 +1,4 @@
-import { Did } from '@kiltprotocol/sdk-js';
+import { isSameSubject } from '@kiltprotocol/did';
 
 import { SignDidOriginInput } from '../../channels/SignDidChannels/types';
 import { identitiesMock as identities, render } from '../../testing/testing';
@@ -64,7 +64,7 @@ describe('SignDidStart', () => {
 
   it('should render full DID with no credentials', () => {
     mockIsFullDid(true);
-    jest.mocked(Did.isSameSubject).mockReturnValue(false);
+    jest.mocked(isSameSubject).mockReturnValue(false);
 
     const { container } = render(
       <PopupTestProvider path={paths.popup.signDid.start} data={input}>

@@ -1,11 +1,9 @@
 import { act } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import {
-  BalanceUtils,
-  ConfigService,
-  connect,
-  Utils,
-} from '@kiltprotocol/sdk-js';
+
+import { ConfigService, connect } from '@kiltprotocol/sdk-js';
+import { BalanceUtils } from '@kiltprotocol/chain-helpers';
+import { DataUtils } from '@kiltprotocol/utils';
 
 import { NEW } from '../../utilities/identities/identities';
 import {
@@ -34,7 +32,7 @@ const identity = identities['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1'];
 
 describe('SendToken', () => {
   beforeEach(() => {
-    jest.mocked(Utils.DataUtils.isKiltAddress).mockReturnValue(true);
+    jest.mocked(DataUtils.isKiltAddress).mockReturnValue(true);
     Object.defineProperty(window.navigator, 'onLine', {
       value: true,
       writable: true,
@@ -198,7 +196,7 @@ describe('SendToken', () => {
   });
 
   it('should report an invalid recipient', async () => {
-    jest.mocked(Utils.DataUtils.isKiltAddress).mockReturnValue(false);
+    jest.mocked(DataUtils.isKiltAddress).mockReturnValue(false);
 
     render(<SendToken identity={identity} onSuccess={jest.fn()} />);
 

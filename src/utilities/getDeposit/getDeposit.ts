@@ -1,4 +1,12 @@
-import { ConfigService, Did, DidUri, KiltAddress } from '@kiltprotocol/sdk-js';
+import type { Did, KiltAddress } from '@kiltprotocol/types';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import {
+  depositFromChain,
+  linkedInfoFromChain,
+  parse,
+  toChain,
+} from '@kiltprotocol/did';
 
 import BN from 'bn.js';
 
@@ -17,7 +25,7 @@ async function getDefaultDeposit() {
 }
 
 async function getDepositWeb3Name(
-  did: DidUri | undefined,
+  did: Did | undefined,
 ): Promise<DepositData | undefined> {
   if (!did || !isFullDid(did)) {
     return getDefaultDeposit();
@@ -25,53 +33,51 @@ async function getDepositWeb3Name(
 
   const api = ConfigService.get('api');
 
-  const { web3Name } = Did.linkedInfoFromChain(
-    await api.call.did.query(Did.toChain(did)),
-  );
+  const {
+    document: { alsoKnownAs },
+  } = linkedInfoFromChain(await api.call.did.query(toChain(did)));
 
-  if (!web3Name) {
+  if (!alsoKnownAs) {
     return getDefaultDeposit();
   }
 
-  const data = await api.query.web3Names.owner(web3Name);
+  const data = await api.query.web3Names.owner(alsoKnownAs[0]);
 
   if (data.isNone) {
     return;
   }
-  return Did.depositFromChain(data.unwrap().deposit);
+  return depositFromChain(data.unwrap().deposit);
 }
 
 export function useDepositWeb3Name(
-  did: DidUri | undefined,
+  did: Did | undefined,
 ): DepositData | undefined {
   return useAsyncValue(getDepositWeb3Name, [did]);
 }
 
 export async function getDepositDid(
-  did: DidUri | undefined,
+  did: Did | undefined,
 ): Promise<DepositData | undefined> {
   const api = ConfigService.get('api');
 
-  if (!did || Did.parse(did).type === 'light') {
+  if (!did || parse(did).type === 'light') {
     if ('deposit' in api.consts.did) {
       // TODO: remove this `if` once the Spiritnet is updated
-      return { amount: api.consts.did.deposit as BN };
+      return { amount: api.consts.did.deposit as unknown as BN };
     }
 
-    const baseDeposit = api.consts.did.baseDeposit as BN;
-    const keyDeposit = api.consts.did.keyDeposit as BN;
+    const baseDeposit = api.consts.did.baseDeposit as unknown as BN;
+    const keyDeposit = api.consts.did.keyDeposit as unknown as BN;
     const amount = baseDeposit.add(keyDeposit).add(keyDeposit);
     return { amount };
   }
 
-  return Did.depositFromChain(
-    (await api.query.did.did(Did.toChain(did))).unwrap().deposit,
+  return depositFromChain(
+    (await api.query.did.did(toChain(did))).unwrap().deposit,
   );
 }
 
-export function useDepositDid(
-  did: DidUri | undefined,
-): DepositData | undefined {
+export function useDepositDid(did: Did | undefined): DepositData | undefined {
   return useAsyncValue(getDepositDid, [did]);
 }
 
@@ -81,5 +87,5 @@ export function getDepositServiceEndpoint(type: ActionType): DepositData {
     return { amount: new BN(0) };
   }
 
-  return { amount: api.consts.did.serviceEndpointDeposit as BN };
+  return { amount: api.consts.did.serviceEndpointDeposit as unknown as BN };
 }

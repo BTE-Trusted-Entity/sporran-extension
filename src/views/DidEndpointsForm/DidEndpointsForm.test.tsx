@@ -1,10 +1,8 @@
+import type { DidDocument, Service } from '@kiltprotocol/types';
+
+import { ConfigService, connect } from '@kiltprotocol/sdk-js';
+
 import { MemoryRouter, Route } from 'react-router-dom';
-import {
-  ConfigService,
-  connect,
-  DidDocument,
-  DidServiceEndpoint,
-} from '@kiltprotocol/sdk-js';
 
 import { identitiesMock, render, screen } from '../../testing/testing';
 import { useFullDidDocument } from '../../utilities/did/did';
@@ -16,7 +14,7 @@ import { DidEndpointsForm } from './DidEndpointsForm';
 const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
-const service: DidServiceEndpoint[] = [
+const service: Service[] = [
   {
     serviceEndpoint: ['https://sporran.org/'],
     type: ['Some Type'],
