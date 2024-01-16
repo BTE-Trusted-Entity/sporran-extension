@@ -1,4 +1,4 @@
-import {
+import type {
   Service,
   KiltPublishedCredentialCollectionV1Type,
 } from '@kiltprotocol/types';

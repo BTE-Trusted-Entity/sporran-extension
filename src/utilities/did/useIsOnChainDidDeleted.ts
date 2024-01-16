@@ -1,4 +1,4 @@
-import { Did } from '@kiltprotocol/types';
+import type { Did } from '@kiltprotocol/types';
 
 import { DidResolver } from '@kiltprotocol/sdk-js';
 
