@@ -8,7 +8,7 @@ import type {
   IRequestAttestation,
   IRequestAttestationContent,
   ITerms,
-} from '@kiltprotocol/kilt-extension-api/types';
+} from '@kiltprotocol/extension-api/types';
 
 import { FormEvent, Fragment, useCallback } from 'react';
 import browser from 'webextension-polyfill';

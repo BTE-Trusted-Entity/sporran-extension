@@ -5,7 +5,7 @@ import type {
   InjectedWindowProvider,
   PubSubSessionV1,
   PubSubSessionV2,
-} from '@kiltprotocol/kilt-extension-api/types';
+} from '@kiltprotocol/extension-api/types';
 
 import { HexString } from '@polkadot/util/types';
 

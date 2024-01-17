@@ -61,13 +61,8 @@ export async function getDepositDid(
   const api = ConfigService.get('api');
 
   if (!did || parse(did).type === 'light') {
-    if ('deposit' in api.consts.did) {
-      // TODO: remove this `if` once the Spiritnet is updated
-      return { amount: api.consts.did.deposit as unknown as BN };
-    }
-
-    const baseDeposit = api.consts.did.baseDeposit as unknown as BN;
-    const keyDeposit = api.consts.did.keyDeposit as unknown as BN;
+    const baseDeposit = api.consts.did.baseDeposit;
+    const keyDeposit = api.consts.did.keyDeposit;
     const amount = baseDeposit.add(keyDeposit).add(keyDeposit);
     return { amount };
   }
@@ -87,5 +82,5 @@ export function getDepositServiceEndpoint(type: ActionType): DepositData {
     return { amount: new BN(0) };
   }
 
-  return { amount: api.consts.did.serviceEndpointDeposit as unknown as BN };
+  return { amount: api.consts.did.serviceEndpointDeposit };
 }

@@ -2,7 +2,7 @@ import type { Did } from '@kiltprotocol/types';
 import type {
   IEncryptedMessage,
   ITerms,
-} from '@kiltprotocol/kilt-extension-api/types';
+} from '@kiltprotocol/extension-api/types';
 
 export interface ClaimInput extends ITerms {
   attesterName: string;

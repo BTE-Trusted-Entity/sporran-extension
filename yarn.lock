@@ -2368,19 +2368,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kiltprotocol/jcs-data-integrity-proofs-common@npm:0.1.0-rc.1, @kiltprotocol/jcs-data-integrity-proofs-common@npm:^0.1.0-rc.1":
-  version: 0.1.0-rc.1
-  resolution: "@kiltprotocol/jcs-data-integrity-proofs-common@npm:0.1.0-rc.1"
-  dependencies:
-    canonicalize: "npm:^2.0.0"
-    multibase: "npm:^4.0.6"
-  checksum: a7c60afcdc1580dc35a4678be0c1886724a5f02617422d5024312679a8309318fef03959960d398f945a488ad6206a05393547fcc968ba09be9708f2d13f7993
-  languageName: node
-  linkType: hard
-
-"@kiltprotocol/kilt-extension-api@KILTprotocol/kilt-extension-api#rf-sdk-1-alpha":
+"@kiltprotocol/extension-api@KILTprotocol/kilt-extension-api#rf-sdk-1-alpha":
   version: 0.1.0
-  resolution: "@kiltprotocol/kilt-extension-api@https://github.com/KILTprotocol/kilt-extension-api.git#commit=88e48709ccdbefc5eac3268fdfe822f2831d550a"
+  resolution: "@kiltprotocol/extension-api@https://github.com/KILTprotocol/kilt-extension-api.git#commit=88e48709ccdbefc5eac3268fdfe822f2831d550a"
   dependencies:
     "@kiltprotocol/credentials": "npm:^0.100.0-alpha.1"
     "@kiltprotocol/did": "npm:^0.100.0-alpha.1"
@@ -2392,7 +2382,17 @@ __metadata:
     yargs: "npm:^17.7.2"
   bin:
     createDidConfig: ./cli/createDidConfig.js
-  checksum: 1c3d05e8fe77bb001c788135bd1f15735de0237636ec8c5c705718d1849bafaa6bf3854b1302e8dafbd6de78553afd7bfd521d510e276e1e86dfb2c49ed1a36a
+  checksum: f9437c0e92af94c7dee9751848aae24abcd25963fa97da68edebc963a798f65c3787d6995f978e94fcbbd766b3411c2f6da6a24008110e950aef4b650726602f
+  languageName: node
+  linkType: hard
+
+"@kiltprotocol/jcs-data-integrity-proofs-common@npm:0.1.0-rc.1, @kiltprotocol/jcs-data-integrity-proofs-common@npm:^0.1.0-rc.1":
+  version: 0.1.0-rc.1
+  resolution: "@kiltprotocol/jcs-data-integrity-proofs-common@npm:0.1.0-rc.1"
+  dependencies:
+    canonicalize: "npm:^2.0.0"
+    multibase: "npm:^4.0.6"
+  checksum: a7c60afcdc1580dc35a4678be0c1886724a5f02617422d5024312679a8309318fef03959960d398f945a488ad6206a05393547fcc968ba09be9708f2d13f7993
   languageName: node
   linkType: hard
 
@@ -16377,7 +16377,7 @@ __metadata:
     "@kiltprotocol/chain-helpers": "npm:0.100.0-alpha.1"
     "@kiltprotocol/credentials": "npm:0.100.0-alpha.1"
     "@kiltprotocol/did": "npm:0.100.0-alpha.1"
-    "@kiltprotocol/kilt-extension-api": "KILTprotocol/kilt-extension-api#rf-sdk-1-alpha"
+    "@kiltprotocol/extension-api": "KILTprotocol/kilt-extension-api#rf-sdk-1-alpha"
     "@kiltprotocol/legacy-credentials": "npm:0.100.0-alpha.1"
     "@kiltprotocol/sdk-js": "npm:1.0.0-alpha.1"
     "@kiltprotocol/types": "npm:0.100.0-alpha.1"

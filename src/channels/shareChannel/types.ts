@@ -2,7 +2,7 @@ import type { Did } from '@kiltprotocol/types';
 import type {
   IEncryptedMessage,
   IRequestCredentialContent,
-} from '@kiltprotocol/kilt-extension-api/types';
+} from '@kiltprotocol/extension-api/types';
 
 export type ShareInput = {
   credentialRequest: IRequestCredentialContent;

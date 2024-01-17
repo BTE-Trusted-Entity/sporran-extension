@@ -4,12 +4,11 @@ import type {
   VerificationMethod,
 } from '@kiltprotocol/types';
 import type {
-  DecryptRequestData,
   EncryptRequestData,
   IEncryptedMessage,
   IMessage,
   MessageBody,
-} from '@kiltprotocol/kilt-extension-api/types';
+} from '@kiltprotocol/extension-api/types';
 
 import { Runtime } from 'webextension-polyfill';
 import { Keypair } from '@polkadot/util-crypto/types';
@@ -17,7 +16,7 @@ import { Keypair } from '@polkadot/util-crypto/types';
 import { DidResolver } from '@kiltprotocol/sdk-js';
 import { Crypto } from '@kiltprotocol/utils';
 import { createLightDidDocument } from '@kiltprotocol/did';
-import * as Message from '@kiltprotocol/kilt-extension-api/messaging';
+import * as Message from '@kiltprotocol/extension-api/messaging';
 
 import { verifyDidConfigResource } from '../wellKnownDid/wellKnownDid';
 import { getDidEncryptionKey } from '../did/did';
@@ -87,7 +86,7 @@ export async function getTabEncryption(
   async function decrypt(encrypted: IEncryptedMessage): Promise<IMessage> {
     return Message.decrypt(
       encrypted,
-      async ({ data: box, peerPublicKey, nonce }: DecryptRequestData) => {
+      async ({ data: box, peerPublicKey, nonce }) => {
         const data = Crypto.decryptAsymmetric(
           { box, nonce },
           peerPublicKey,
@@ -116,7 +115,6 @@ export async function getTabEncryption(
     };
   }
 
-  // TODO: use encryption from kilt-extension-api library
   async function encrypt(messageBody: MessageBody): Promise<IEncryptedMessage> {
     const message = Message.fromBody(
       messageBody,

@@ -11,7 +11,7 @@ import BN from 'bn.js';
 
 import { useMemo } from 'react';
 
-import { ConfigService, DidResolver } from '@kiltprotocol/sdk-js';
+import { ConfigService } from '@kiltprotocol/sdk-js';
 import { Blockchain } from '@kiltprotocol/chain-helpers';
 import {
   NewDidEncryptionKey,
@@ -47,8 +47,6 @@ export async function getTransaction(
   submitter?: KiltAddress,
 ): Promise<DidTransaction> {
   const { fullDid: did } = parseDidUri(lightDidDocument.id);
-
-  await DidResolver.dereference(lightDidDocument.id, {});
 
   const { authentication, keyAgreement } = keysToAdd;
 

@@ -1,14 +1,14 @@
 import type {
   IEncryptedMessage,
   IReject,
-} from '@kiltprotocol/kilt-extension-api/types';
+} from '@kiltprotocol/extension-api/types';
 
 import {
   isSubmitTerms,
   isSubmitAttestation,
   isRejectAttestation,
   isIRequestCredential,
-} from '@kiltprotocol/kilt-extension-api/utils';
+} from '@kiltprotocol/extension-api/utils';
 
 import { Runtime } from 'webextension-polyfill';
 

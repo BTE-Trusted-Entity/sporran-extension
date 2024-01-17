@@ -8,6 +8,7 @@ import { ConfigService } from '@kiltprotocol/sdk-js';
 import {
   authorizeBatch,
   authorizeTx,
+  didKeyToVerificationMethod,
   getVerificationRelationshipForTx,
   publicKeyToChain,
   serviceToChain,
@@ -23,11 +24,7 @@ import {
   deriveAttestationKeyFromSeed,
   getIdentityCryptoFromSeed,
 } from '../../utilities/identities/identities';
-import {
-  getFullDidDocument,
-  isFullDid,
-  verificationMethodFromKeypair,
-} from '../../utilities/did/did';
+import { getFullDidDocument, isFullDid } from '../../utilities/did/did';
 import { IdentitiesCarousel } from '../../components/IdentitiesCarousel/IdentitiesCarousel';
 import { IdentitySlide } from '../../components/IdentitySlide/IdentitySlide';
 import {
@@ -266,14 +263,24 @@ export function SignDidExtrinsic({ identity }: Props) {
       if (keyRelationship === 'assertionMethod') {
         const api = ConfigService.get('api');
         const keypair = deriveAttestationKeyFromSeed(seed);
-        const attestationKey = verificationMethodFromKeypair(keypair, did);
 
-        fullDidDocument.verificationMethod?.push(attestationKey);
-        fullDidDocument.assertionMethod = [attestationKey.id];
+        const { type, publicKey } = keypair;
+
+        const attestationKey = didKeyToVerificationMethod(did, '#assert', {
+          keyType: type,
+          publicKey,
+        });
+
+        const assertionDidDocument = { ...fullDidDocument };
+
+        // DID will always have at least 1 verification method, unless deactivated
+        assertionDidDocument.verificationMethod?.push(attestationKey);
+
+        assertionDidDocument.assertionMethod = [attestationKey.id];
 
         const assertionMethodSigners = await Signers.getSignersForKeypair({
           keypair,
-          id: `${fullDidDocument.id}${fullDidDocument.assertionMethod[0]}`,
+          id: `${assertionDidDocument.id}${assertionDidDocument.assertionMethod[0]}`,
         });
 
         const { signers: authSigners } = await getIdentityCryptoFromSeed(seed);
@@ -282,7 +289,7 @@ export function SignDidExtrinsic({ identity }: Props) {
 
         const authorized = await authorizeBatch({
           batchFunction: api.tx.utility.batchAll,
-          did: fullDidDocument,
+          did: assertionDidDocument,
           extrinsics: [
             api.tx.did.setAttestationKey(publicKeyToChain(keypair)),
             extrinsic,
@@ -295,8 +302,8 @@ export function SignDidExtrinsic({ identity }: Props) {
         const signed = authorized.toHex();
 
         // Assertion key will not exist in the DID document, so we return authentication key instead
-        const didKey = fullDidDocument.authentication?.[0];
-        const didKeyUri = `${fullDidDocument.id}${didKey}` as DidUrl;
+        const didKey = assertionDidDocument.authentication?.[0];
+        const didKeyUri = `${assertionDidDocument.id}${didKey}` as DidUrl;
 
         await backgroundSignDidExtrinsicChannel.return({ signed, didKeyUri });
 

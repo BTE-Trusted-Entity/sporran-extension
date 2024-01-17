@@ -11,7 +11,7 @@ import type {
   EncryptRequestData,
   IEncryptedMessage,
   MessageBody,
-} from '@kiltprotocol/kilt-extension-api/types';
+} from '@kiltprotocol/extension-api/types';
 
 import { useContext } from 'react';
 import { mutate } from 'swr';
@@ -27,7 +27,7 @@ import { find, map, max, memoize } from 'lodash-es';
 import { DidResolver } from '@kiltprotocol/sdk-js';
 import { Crypto, Signers } from '@kiltprotocol/utils';
 import { createLightDidDocument, getFullDid, parse } from '@kiltprotocol/did';
-import * as Message from '@kiltprotocol/kilt-extension-api/messaging';
+import * as Message from '@kiltprotocol/extension-api/messaging';
 
 import {
   loadEncrypted,

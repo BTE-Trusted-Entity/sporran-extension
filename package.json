@@ -47,7 +47,7 @@
     "@kiltprotocol/chain-helpers": "0.100.0-alpha.1",
     "@kiltprotocol/credentials": "0.100.0-alpha.1",
     "@kiltprotocol/did": "0.100.0-alpha.1",
-    "@kiltprotocol/kilt-extension-api": "KILTprotocol/kilt-extension-api#rf-sdk-1-alpha",
+    "@kiltprotocol/extension-api": "KILTprotocol/kilt-extension-api#rf-sdk-1-alpha",
     "@kiltprotocol/legacy-credentials": "0.100.0-alpha.1",
     "@kiltprotocol/sdk-js": "1.0.0-alpha.1",
     "@kiltprotocol/types": "0.100.0-alpha.1",

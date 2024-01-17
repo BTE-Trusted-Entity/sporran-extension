@@ -1,5 +1,5 @@
 import type { ICredentialPresentation } from '@kiltprotocol/types';
-import type { ISubmitCredential } from '@kiltprotocol/kilt-extension-api/types';
+import type { ISubmitCredential } from '@kiltprotocol/extension-api/types';
 
 import browser from 'webextension-polyfill';
 import { FormEvent, useCallback, useState } from 'react';

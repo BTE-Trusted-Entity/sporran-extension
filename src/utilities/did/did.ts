@@ -1,20 +1,11 @@
-import type {
-  Did,
-  DidDocument,
-  KiltKeyringPair,
-  UriFragment,
-  VerificationMethod,
-} from '@kiltprotocol/types';
+import type { Did, DidDocument, UriFragment } from '@kiltprotocol/types';
 
 import { DidResolver } from '@kiltprotocol/sdk-js';
 import {
-  didKeyToVerificationMethod,
   getFullDid,
   parse,
   parseDocumentFromLightDid,
 } from '@kiltprotocol/did';
-
-import { blake2AsHex } from '@polkadot/util-crypto';
 
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 
@@ -27,9 +18,12 @@ export function isFullDid(did: Did | undefined): boolean {
 }
 
 export async function getFullDidDocument(did: Did): Promise<DidDocument> {
-  const { didDocument } = await DidResolver.resolve(did, {});
+  const {
+    didDocument,
+    didResolutionMetadata: { error },
+  } = await DidResolver.resolve(did, {});
   if (!didDocument) {
-    throw new Error('Unable to resolve DID');
+    throw new Error(`DID resolution error: ${error}`);
   }
   return didDocument;
 }
@@ -63,18 +57,4 @@ export function parseDidUri(did: Did): ReturnType<typeof parse> & {
     ...parsed,
     fullDid,
   };
-}
-
-export function computeKeyId(key: Uint8Array): VerificationMethod['id'] {
-  return `#${blake2AsHex(key, 256)}`;
-}
-
-export function verificationMethodFromKeypair(
-  { publicKey, type }: KiltKeyringPair,
-  controller: Did,
-): VerificationMethod {
-  return didKeyToVerificationMethod(controller, computeKeyId(publicKey), {
-    keyType: type,
-    publicKey,
-  });
 }
