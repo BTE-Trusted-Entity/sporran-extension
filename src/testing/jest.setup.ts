@@ -56,7 +56,13 @@ jest.mock('@kiltprotocol/sdk-js', () => ({
       this.api = api;
     },
   },
+}));
+
+jest.mock('@kiltprotocol/credentials', () => ({
   CType: { hashToId: jest.fn() },
+}));
+
+jest.mock('@kiltprotocol/chain-helpers', () => ({
   BalanceUtils: {
     toFemtoKilt(coins: number) {
       const string = coins.toString().includes('e')
@@ -72,24 +78,36 @@ jest.mock('@kiltprotocol/sdk-js', () => ({
     },
   },
   Blockchain: { submitSignedTx: jest.fn() },
-  Did: {
-    isSameSubject: jest.fn().mockReturnValue(true),
-    resourceIdToChain: jest
-      .fn()
-      .mockImplementation((input) => input.substring(1)),
+}));
+
+jest.mock('@kiltprotocol/did', () => ({
+  isSameSubject: jest.fn().mockReturnValue(true),
+  serviceToChain: jest
+    .fn()
+    .mockImplementation(({ id, type, serviceEndpoint }) => ({
+      id: id.substring(1),
+      serviceTypes: type,
+      urls: serviceEndpoint,
+    })),
+}));
+
+jest.mock('@kiltprotocol/utils', () => ({
+  DataUtils: {
+    isKiltAddress: jest.fn(),
   },
-  Utils: {
-    DataUtils: {
-      isKiltAddress: jest.fn(),
-    },
-    Crypto: {
-      makeKeypairFromSeed: jest.fn(),
-      makeKeypairFromUri: jest.fn(),
-      encodeAddress: (address: string) => address,
+  Crypto: {
+    makeKeypairFromSeed: jest.fn(),
+    makeKeypairFromUri: jest.fn(),
+    encodeAddress: (address: string) => address,
+  },
+  Signers: {
+    select: {
+      bySignerId: jest.fn(),
+      byAlgorithm: jest.fn(),
+      byDid: jest.fn(),
+      verifiableOnChain: jest.fn(),
     },
   },
-  KiltPublishedCredentialCollectionV1Type:
-    'KiltPublishedCredentialCollectionV1',
 }));
 
 jest.mock('../components/Avatar/Identicon', () => ({

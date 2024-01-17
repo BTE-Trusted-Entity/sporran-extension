@@ -43,19 +43,20 @@ export async function showCredentialPopup(
 
   if (isSubmitTerms(message)) {
     try {
+      const { content } = message.body;
       if (specVersion === '1.0') {
-        message.body.content.cTypes = message.body.content.cTypes?.map(
+        message.body.content.cTypes = content.cTypes?.map(
           // @ts-expect-error compatibility with old cType interface
           (cType) => cType.schema,
         );
       }
 
       // the DID to use for signing could be predetermined by the dApp, if we have a matching identity we’ll use it
-      await setCurrentIdentityByDid(message.body.content.claim.owner);
+      await setCurrentIdentityByDid(content.claim.owner);
 
       return await claimChannel.get(
         {
-          ...message.body.content,
+          ...content,
           attesterName: dAppName,
           attesterDid: dAppEncryptionDidKey.controller,
           specVersion,
