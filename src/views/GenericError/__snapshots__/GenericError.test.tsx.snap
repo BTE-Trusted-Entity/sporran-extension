@@ -30,7 +30,7 @@ exports[`GenericError should render generic error when an error happens 1`] = `
         class="details"
         readonly=""
       >
-        Sporran@2023.8.10
+        Sporran@2024.1.17
 
 Testing GenericError
 
