@@ -7727,9 +7727,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-webpack-plugin@npm:^12.0.1":
-  version: 12.0.1
-  resolution: "copy-webpack-plugin@npm:12.0.1"
+"copy-webpack-plugin@npm:^12.0.2":
+  version: 12.0.2
+  resolution: "copy-webpack-plugin@npm:12.0.2"
   dependencies:
     fast-glob: "npm:^3.3.2"
     glob-parent: "npm:^6.0.1"
@@ -7739,7 +7739,7 @@ __metadata:
     serialize-javascript: "npm:^6.0.2"
   peerDependencies:
     webpack: ^5.1.0
-  checksum: 2fc73d165e15f50adec2353b4353a5e2b227f02c6bde87c853dd3aef34966fe2d826063a6d3f1f8082f26a9b813316a0f7a73b96e6b9b9dcc8e7b5dd9876ec7e
+  checksum: 1a2715a1280a37b81b7040b89ed962db4aa75475b164f84f266fa4e81f209269b13f8bff10b104dff7558854bafedcdd4f30c40fd23ecd8fa28af45516b459cd
   languageName: node
   linkType: hard
 
@@ -16289,7 +16289,7 @@ __metadata:
     chrome-extension-i18n-shim: "npm:^1.0.0"
     chrome-launch: "npm:^1.1.4"
     classnames: "npm:^2.5.1"
-    copy-webpack-plugin: "npm:^12.0.1"
+    copy-webpack-plugin: "npm:^12.0.2"
     css-loader: "npm:^6.9.0"
     dialog-polyfill: "npm:^0.5.6"
     eslint: "npm:^8.56.0"
