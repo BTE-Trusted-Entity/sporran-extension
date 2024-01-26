@@ -1,4 +1,4 @@
-import { BalanceUtils } from '@kiltprotocol/sdk-js';
+import { BalanceUtils } from '@kiltprotocol/chain-helpers';
 
 import { identitiesMock as identities, render } from '../../testing/testing';
 

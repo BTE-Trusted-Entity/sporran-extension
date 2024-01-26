@@ -1,4 +1,4 @@
-import { BalanceUtils } from '@kiltprotocol/sdk-js';
+import { BalanceUtils } from '@kiltprotocol/chain-helpers';
 
 import { Balances } from './balanceChanges';
 

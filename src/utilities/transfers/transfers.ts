@@ -1,11 +1,12 @@
-import BN from 'bn.js';
-
-import {
-  Blockchain,
-  ConfigService,
+import type {
   KiltKeyringPair,
   SubmittableExtrinsic,
-} from '@kiltprotocol/sdk-js';
+} from '@kiltprotocol/types';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { Blockchain } from '@kiltprotocol/chain-helpers';
+
+import BN from 'bn.js';
 
 const currentTx: Record<string, SubmittableExtrinsic> = {};
 

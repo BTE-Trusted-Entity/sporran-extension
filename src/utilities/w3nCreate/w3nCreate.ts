@@ -1,25 +1,29 @@
-import { ConfigService, Did, DidUri } from '@kiltprotocol/sdk-js';
+import type { Did } from '@kiltprotocol/types';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
 
 import { useMemo } from 'react';
 import BN from 'bn.js';
+
+import { authorizeTx } from '@kiltprotocol/did';
 
 import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 import { useDepositWeb3Name } from '../getDeposit/getDeposit';
 import { useAddressBalance } from '../../components/Balance/Balance';
 import { makeFakeIdentityCrypto } from '../makeFakeIdentityCrypto/makeFakeIdentityCrypto';
 
-async function getFee(did: DidUri | undefined) {
+async function getFee(did: Did | undefined) {
   if (!did) {
     return;
   }
 
-  const { address, keypair, sign } = makeFakeIdentityCrypto();
+  const { address, keypair, signers } = await makeFakeIdentityCrypto();
 
   const api = ConfigService.get('api');
-  const authorized = await Did.authorizeTx(
+  const authorized = await authorizeTx(
     did,
     api.tx.web3Names.claim('01234567890123456789012345678901'),
-    sign,
+    signers,
     address,
   );
   const signed = await authorized.signAsync(keypair);
@@ -28,7 +32,7 @@ async function getFee(did: DidUri | undefined) {
 
 export function useKiltCosts(
   address: string,
-  did: DidUri | undefined,
+  did: Did | undefined,
 ): {
   fee?: BN;
   deposit?: BN;

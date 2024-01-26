@@ -1,14 +1,17 @@
-import { useContext, useEffect, useMemo } from 'react';
-import { isEqual, omit, pick, pull, reject, without } from 'lodash-es';
-import {
-  Attestation,
-  ConfigService,
-  Credential,
+import type {
   Did,
-  DidUri,
   ICredential,
   KiltPublishedCredentialCollectionV1,
-} from '@kiltprotocol/sdk-js';
+} from '@kiltprotocol/types';
+
+import { useContext, useEffect, useMemo } from 'react';
+import { isEqual, omit, pick, pull, reject, without } from 'lodash-es';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { isSameSubject } from '@kiltprotocol/did';
+import { Attestation } from '@kiltprotocol/credentials';
+import { Credential } from '@kiltprotocol/legacy-credentials';
+
 import { mutate } from 'swr';
 
 import { storage } from '../storage/storage';
@@ -150,7 +153,7 @@ export function isUnusableCredential({ status }: SporranCredential) {
 }
 
 export function useIdentityCredentials(
-  did: DidUri | undefined,
+  did: Did | undefined,
   onlyUsable = true,
 ): SporranCredential[] | undefined {
   const all = useCredentials();
@@ -171,7 +174,7 @@ export function useIdentityCredentials(
 
     const { fullDid } = parseDidUri(did);
     return filtered.filter((credential) =>
-      Did.isSameSubject(credential.credential.claim.owner, fullDid),
+      isSameSubject(credential.credential.claim.owner, fullDid),
     );
   }, [all, did, onlyUsable]);
 }

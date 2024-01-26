@@ -1,14 +1,13 @@
+import type { DidUrl, ICredential } from '@kiltprotocol/types';
+
 import { FormEvent, useCallback, useRef } from 'react';
 import browser from 'webextension-polyfill';
 
-import {
-  Credential,
-  DidResourceUri,
-  ICredential,
-  Utils,
-} from '@kiltprotocol/sdk-js';
-
 import { without } from 'lodash-es';
+
+import { Crypto } from '@kiltprotocol/utils';
+
+import { Credential } from '@kiltprotocol/legacy-credentials';
 
 import * as styles from './SignDid.module.css';
 
@@ -52,11 +51,9 @@ export function SignDid({ identity, popupData, onCancel, credentials }: Props) {
       const { didDocument, authenticationKey } =
         await getIdentityCryptoFromSeed(seed);
 
-      const signature = Utils.Crypto.u8aToHex(
-        authenticationKey.sign(plaintext),
-      );
+      const signature = Crypto.u8aToHex(authenticationKey.sign(plaintext));
       const didKeyUri =
-        `${didDocument.uri}${didDocument.authentication[0].id}` as DidResourceUri;
+        `${didDocument.id}${didDocument.authentication?.[0]}` as DidUrl;
 
       if (!credentials) {
         await backgroundSignDidChannel.return({ signature, didKeyUri });

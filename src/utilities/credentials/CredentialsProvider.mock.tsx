@@ -1,4 +1,5 @@
-import { IAttestation } from '@kiltprotocol/sdk-js';
+import type { IAttestation } from '@kiltprotocol/types';
+
 import { PropsWithChildren } from 'react';
 
 import { ShareInput } from '../../channels/shareChannel/types';

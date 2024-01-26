@@ -1,4 +1,9 @@
 import {
+  KiltPublishedCredentialCollectionV1Type,
+  type Service,
+} from '@kiltprotocol/types';
+
+import {
   FormEvent,
   RefObject,
   useCallback,
@@ -9,13 +14,10 @@ import {
 import { Link, Prompt, Redirect, useParams } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 import { stringToU8a } from '@polkadot/util';
-import {
-  ConfigService,
-  Did,
-  DidServiceEndpoint,
-  KiltPublishedCredentialCollectionV1Type,
-} from '@kiltprotocol/sdk-js';
 import { last } from 'lodash-es';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { serviceToChain } from '@kiltprotocol/did';
 
 import * as styles from './DidEndpointsForm.module.css';
 
@@ -44,9 +46,9 @@ function DidEndpointCard({
   startUrl,
   onRemove,
 }: {
-  endpoint: DidServiceEndpoint;
+  endpoint: Service;
   startUrl?: string;
-  onRemove: (endpoint: DidServiceEndpoint) => void;
+  onRemove: (endpoint: Service) => void;
 }) {
   const t = browser.i18n.getMessage;
 
@@ -60,7 +62,7 @@ function DidEndpointCard({
     type: [type],
     serviceEndpoint: [url],
   } = endpoint;
-  const id = Did.resourceIdToChain(endpoint.id);
+  const { id } = serviceToChain(endpoint);
 
   const expanded = !startUrl || id === decodeURIComponent(params.id);
   const { address } = params;
@@ -118,7 +120,7 @@ function DidNewEndpoint({
   tooMany,
   startUrl,
 }: {
-  onAdd: (endpoint: DidServiceEndpoint) => void;
+  onAdd: (endpoint: Service) => void;
   tooMany: boolean;
   startUrl?: string;
 }) {
@@ -317,8 +319,8 @@ function DidNewEndpoint({
 
 interface Props {
   identity: Identity;
-  onAdd: (endpoint: DidServiceEndpoint) => void;
-  onRemove: (endpoint: DidServiceEndpoint) => void;
+  onAdd: (endpoint: Service) => void;
+  onRemove: (endpoint: Service) => void;
 }
 
 export function DidEndpointsForm({ identity, onAdd, onRemove }: Props) {

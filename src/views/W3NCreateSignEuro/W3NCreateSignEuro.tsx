@@ -2,7 +2,8 @@ import { FormEvent, useCallback } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import browser from 'webextension-polyfill';
 
-import { ConfigService, Did } from '@kiltprotocol/sdk-js';
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { authorizeTx } from '@kiltprotocol/did';
 
 import * as styles from './W3NCreateSignEuro.module.css';
 
@@ -55,13 +56,13 @@ export function W3NCreateSignEuro({ identity }: Props) {
       }
 
       const { seed } = await passwordField.get(event);
-      const { sign } = await getIdentityCryptoFromSeed(seed);
+      const { signers } = await getIdentityCryptoFromSeed(seed);
 
       const api = ConfigService.get('api');
-      const authorized = await Did.authorizeTx(
+      const authorized = await authorizeTx(
         did,
         api.tx.web3Names.claim(web3name),
-        sign,
+        signers,
         submitter,
       );
 

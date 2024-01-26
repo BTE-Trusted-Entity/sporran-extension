@@ -1,4 +1,4 @@
-import { DidUri, ICType } from '@kiltprotocol/sdk-js';
+import type { Did, ICType } from '@kiltprotocol/types';
 
 import { identitiesMock } from '../identities/IdentitiesProvider.mock';
 import { Terms } from '../../views/SignQuote/SignQuote';
@@ -27,7 +27,7 @@ export const mockTerms: Terms = {
       Email: 'ingo@kilt.io',
     },
     owner: identitiesMock['4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1']
-      .did as DidUri,
+      .did as Did,
   },
   legitimations: [],
   quote: {

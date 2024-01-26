@@ -48,13 +48,16 @@ export function DidUpgradeEuro({ identity }: Props) {
       }
 
       const { seed } = await passwordField.get(event);
-      const { keypair, sign } = await getIdentityCryptoFromSeed(seed);
+      const { keypair, signers, authenticationKey, encryptionKey } =
+        await getIdentityCryptoFromSeed(seed);
 
       const document = getLightDidFromSeed(seed);
+
       const { extrinsic } = await getTransaction(
         document,
+        { authenticationKey, encryptionKey },
         keypair,
-        sign,
+        signers,
         submitter,
       );
 

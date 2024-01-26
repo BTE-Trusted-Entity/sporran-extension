@@ -1,12 +1,12 @@
-import {
-  DidUri,
+import type { Did } from '@kiltprotocol/types';
+import type {
   IEncryptedMessage,
   IRequestCredentialContent,
-} from '@kiltprotocol/sdk-js';
+} from '@kiltprotocol/extension-api/types';
 
 export type ShareInput = {
   credentialRequest: IRequestCredentialContent;
-  verifierDid: DidUri;
+  verifierDid: Did;
   specVersion: '1.0' | '3.0';
 };
 

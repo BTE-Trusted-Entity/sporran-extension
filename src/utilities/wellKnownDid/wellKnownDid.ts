@@ -1,10 +1,14 @@
+import type { Did } from '@kiltprotocol/types';
+
 import ky from 'ky';
-import { Did, DidResourceUri, DidUri, Utils } from '@kiltprotocol/sdk-js';
+
+import { validateDid, verifyDidSignature } from '@kiltprotocol/did';
+import { Crypto } from '@kiltprotocol/utils';
 
 import { getDidDocument } from '../did/did';
 
 interface CredentialSubject {
-  id: DidUri;
+  id: Did;
   origin: string;
   rootHash: string;
 }
@@ -38,7 +42,7 @@ async function asyncSome(
 }
 
 export async function verifyDidConfigResource(
-  did: DidUri,
+  did: Did,
   tabUrl: string,
 ): Promise<void> {
   const { origin } = new URL(tabUrl);
@@ -72,7 +76,7 @@ export async function verifyDidConfigResource(
           );
         }
 
-        Did.validateUri(credentialSubject.id, 'Did');
+        validateDid(credentialSubject.id, 'Did');
         const matchesIssuer = issuer === credentialSubject.id;
         if (!matchesIssuer) {
           throw new Error(
@@ -87,20 +91,17 @@ export async function verifyDidConfigResource(
           );
         }
 
-        const issuerDidDocument = await getDidDocument(issuer);
+        const issuerDidDocument = await getDidDocument(issuer as Did);
         if (!issuerDidDocument.assertionMethod?.[0]) {
           throw new Error(
             `The credential at ${url} is issued for ${credentialSubject.id} but this DID has no assertionMethod key`,
           );
         }
 
-        await Did.verifyDidSignature({
-          keyUri:
-            `${issuerDidDocument.uri}${issuerDidDocument.assertionMethod?.[0].id}` as DidResourceUri,
-          signature: Utils.Crypto.coToUInt8(
-            credential.proof.signature as string,
-          ),
-          message: Utils.Crypto.coToUInt8(credentialSubject.rootHash),
+        await verifyDidSignature({
+          signerUrl: `${issuerDidDocument.id}${issuerDidDocument.assertionMethod?.[0]}`,
+          signature: Crypto.coToUInt8(credential.proof.signature as string),
+          message: Crypto.coToUInt8(credentialSubject.rootHash),
         });
 
         return true;

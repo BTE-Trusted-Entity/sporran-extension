@@ -1,4 +1,4 @@
-import { IAttestation } from '@kiltprotocol/sdk-js';
+import type { IAttestation } from '@kiltprotocol/types';
 
 export type SaveInput = IAttestation;
 

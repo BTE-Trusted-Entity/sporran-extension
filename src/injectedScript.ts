@@ -1,10 +1,13 @@
-import { HexString } from '@polkadot/util/types';
-import {
+import type { Did, DidUrl, KiltAddress } from '@kiltprotocol/types';
+import type {
   IEncryptedMessage,
-  DidResourceUri,
-  DidUri,
-  KiltAddress,
-} from '@kiltprotocol/sdk-js';
+  IEncryptedMessageV1,
+  InjectedWindowProvider,
+  PubSubSessionV1,
+  PubSubSessionV2,
+} from '@kiltprotocol/extension-api/types';
+
+import { HexString } from '@polkadot/util/types';
 
 import { injectedCredentialChannel } from './channels/CredentialChannels/injectedCredentialChannel';
 import { injectIntoDApp } from './dApps/injectIntoDApp/injectIntoDApp';
@@ -15,12 +18,10 @@ import { injectedSignDidExtrinsicChannel } from './channels/SignDidExtrinsicChan
 import { injectedCreateDidChannel } from './channels/CreateDidChannels/injectedCreateDidChannel';
 import { injectedShareIdentitiesChannel } from './channels/ShareIdentitiesChannels/injectedShareIdentitiesChannel';
 import { injectedAccessChannel } from './dApps/AccessChannels/injectedAccessChannel';
-import {
-  IEncryptedMessageV1,
-  InjectedWindowProvider,
-  PubSubSessionV1,
-  PubSubSessionV2,
-} from './interfaces';
+
+interface InjectedSporranApi<T> extends InjectedWindowProvider<T> {
+  getDidList: () => Promise<Array<{ did: Did; name?: string }>>;
+}
 
 let onMessageFromSporran: (message: IEncryptedMessage) => Promise<void>;
 
@@ -52,7 +53,7 @@ async function storeMessageFromSporran(
 
 async function startSession(
   unsafeDAppName: string,
-  dAppEncryptionKeyId: DidResourceUri,
+  dAppEncryptionKeyId: DidUrl,
   challenge: string,
 ): Promise<PubSubSessionV1 | PubSubSessionV2> {
   const dAppName = unsafeDAppName.substring(0, 50);
@@ -148,19 +149,17 @@ async function startSession(
   };
 }
 
-function getDidList(): ReturnType<
-  InjectedWindowProvider<unknown>['getDidList']
-> {
+function getDidList(): ReturnType<InjectedSporranApi<unknown>['getDidList']> {
   const dAppName = document.title.substring(0, 50);
   return injectedShareIdentitiesChannel.get({ dAppName });
 }
 
 async function signWithDid(
   plaintext: string,
-  didUri?: DidUri,
+  didUri?: Did,
 ): Promise<{
   signature: HexString;
-  didKeyUri: DidResourceUri;
+  didKeyUri: DidUrl;
 }> {
   const dAppName = document.title.substring(0, 50);
   return injectedSignDidChannel.get({ plaintext, didUri, dAppName });
@@ -169,10 +168,10 @@ async function signWithDid(
 async function signExtrinsicWithDid(
   extrinsic: HexString,
   submitter: KiltAddress,
-  didUri?: DidUri,
+  didUri?: Did,
 ): Promise<{
   signed: HexString;
-  didKeyUri: DidResourceUri;
+  didKeyUri: DidUrl;
 }> {
   const dAppName = document.title.substring(0, 50);
   return injectedSignDidExtrinsicChannel.get({
@@ -185,7 +184,7 @@ async function signExtrinsicWithDid(
 
 async function getSignedDidCreationExtrinsic(
   submitter: KiltAddress,
-  pendingDidUri?: DidUri,
+  pendingDidUri?: Did,
 ): Promise<{
   signedExtrinsic: HexString;
 }> {
@@ -198,9 +197,7 @@ const { version } = configuration;
 const apiWindow = window as unknown as {
   kilt: {
     meta?: { versions: { credentials: string } };
-    sporran?: Partial<
-      InjectedWindowProvider<PubSubSessionV1 | PubSubSessionV2>
-    >;
+    sporran?: Partial<InjectedSporranApi<PubSubSessionV1 | PubSubSessionV2>>;
   };
 };
 

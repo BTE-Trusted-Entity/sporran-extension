@@ -1,4 +1,4 @@
-import { KiltAddress } from '@kiltprotocol/sdk-js';
+import type { KiltAddress } from '@kiltprotocol/types';
 
 export interface Import {
   fileName: string;

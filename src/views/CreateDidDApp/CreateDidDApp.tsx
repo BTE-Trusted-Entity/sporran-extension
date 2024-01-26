@@ -1,6 +1,7 @@
 import { FormEvent, useCallback } from 'react';
 import browser from 'webextension-polyfill';
-import { Did } from '@kiltprotocol/sdk-js';
+
+import { getStoreTx } from '@kiltprotocol/did';
 
 import * as styles from './CreateDidDApp.module.css';
 
@@ -9,7 +10,7 @@ import {
   PasswordField,
   usePasswordField,
 } from '../../components/PasswordField/PasswordField';
-import { isFullDid, parseDidUri } from '../../utilities/did/did';
+import { isFullDid } from '../../utilities/did/did';
 
 import { Identity } from '../../utilities/identities/types';
 import { usePopupData } from '../../utilities/popups/usePopupData';
@@ -44,13 +45,19 @@ export function CreateDidDApp({ identity }: Props) {
 
       const { seed } = await passwordField.get(event);
 
-      const { didDocument, sign } = await getIdentityCryptoFromSeed(seed);
-      const { fullDid: did } = parseDidUri(didDocument.uri);
+      const { authenticationKey, encryptionKey, didDocument, signers } =
+        await getIdentityCryptoFromSeed(seed);
 
-      const storeTx = await Did.getStoreTx(
-        didDocument,
+      if (!didDocument.authentication) {
+        throw new Error(
+          'At least one authentication key required to create DID',
+        );
+      }
+
+      const storeTx = await getStoreTx(
+        { authentication: [authenticationKey], keyAgreement: [encryptionKey] },
         submitter,
-        async (input) => sign({ ...input, did }),
+        signers,
       );
       const signedExtrinsic = storeTx.method.toHex();
 

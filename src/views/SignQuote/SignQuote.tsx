@@ -1,18 +1,22 @@
-import { FormEvent, Fragment, useCallback } from 'react';
-import browser from 'webextension-polyfill';
-import { filter } from 'lodash-es';
-import {
-  BalanceUtils,
-  Credential,
-  CType,
-  DidUri,
+import type {
+  Did,
   IClaim,
   ICredential,
+  SignerInterface,
+} from '@kiltprotocol/types';
+import type {
   IRequestAttestation,
   IRequestAttestationContent,
   ITerms,
-  SignCallback,
-} from '@kiltprotocol/sdk-js';
+} from '@kiltprotocol/extension-api/types';
+
+import { FormEvent, Fragment, useCallback } from 'react';
+import browser from 'webextension-polyfill';
+import { filter } from 'lodash-es';
+
+import { Credential } from '@kiltprotocol/legacy-credentials';
+import { CType } from '@kiltprotocol/credentials';
+import { BalanceUtils } from '@kiltprotocol/chain-helpers';
 
 import * as styles from './SignQuote.module.css';
 
@@ -40,13 +44,13 @@ import { useAsyncValue } from '../../utilities/useAsyncValue/useAsyncValue';
 export type Terms = ITerms & {
   claim: IClaim;
   attesterName: string;
-  attesterDid: DidUri;
+  attesterDid: Did;
   specVersion: '1.0' | '3.0';
 };
 
 async function getCompatibleContent(
   credential: ICredential,
-  signCallback: SignCallback,
+  signers: SignerInterface[],
   specVersion: Terms['specVersion'],
 ): Promise<IRequestAttestationContent> {
   if (specVersion !== '1.0') {
@@ -56,7 +60,7 @@ async function getCompatibleContent(
   // DApps using legacy spec versions will expect a different interface for the message including the claimerSignature property
   const requestForAttestation = await Credential.createPresentation({
     credential,
-    signCallback,
+    signers,
   });
   return {
     requestForAttestation,
@@ -111,11 +115,11 @@ export function SignQuote({ identity }: Props) {
       );
 
       const { seed } = await passwordField.get(event);
-      const { sign, encrypt, didDocument } =
+      const { signers, encrypt, didDocument } =
         await getIdentityCryptoFromSeed(seed);
 
       // if a legacy attester generated a claim with a temporary DID, we need to replace it with the real one
-      const identityClaim = { ...claim, owner: didDocument.uri };
+      const identityClaim = { ...claim, owner: didDocument.id };
 
       const credential = Credential.fromClaim(identityClaim, {
         legitimations,
@@ -135,7 +139,7 @@ export function SignQuote({ identity }: Props) {
       });
 
       const messageBody: IRequestAttestation = {
-        content: await getCompatibleContent(credential, sign, specVersion),
+        content: await getCompatibleContent(credential, signers, specVersion),
         type: 'request-attestation',
       };
 

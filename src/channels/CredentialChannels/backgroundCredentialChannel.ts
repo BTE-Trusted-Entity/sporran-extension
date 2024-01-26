@@ -1,5 +1,16 @@
+import type {
+  IEncryptedMessage,
+  IReject,
+} from '@kiltprotocol/extension-api/types';
+
+import {
+  isSubmitTerms,
+  isSubmitAttestation,
+  isRejectAttestation,
+  isIRequestCredential,
+} from '@kiltprotocol/extension-api/utils';
+
 import { Runtime } from 'webextension-polyfill';
-import { IEncryptedMessage, IRejectTerms } from '@kiltprotocol/sdk-js';
 
 import { BrowserChannel } from '../base/BrowserChannel/BrowserChannel';
 import { channelsEnum } from '../base/channelsEnum';
@@ -30,12 +41,14 @@ export async function showCredentialPopup(
     await getTabEncryption(sender);
   const message = await decrypt(encrypted);
 
-  if (message.body.type === 'submit-terms') {
+  if (isSubmitTerms(message)) {
     try {
       const { content } = message.body;
       if (specVersion === '1.0') {
-        // @ts-expect-error compatibility with old cType interface
-        content.cTypes = content.cTypes?.map((cType) => cType.schema);
+        message.body.content.cTypes = content.cTypes?.map(
+          // @ts-expect-error compatibility with old cType interface
+          (cType) => cType.schema,
+        );
       }
 
       // the DID to use for signing could be predetermined by the dApp, if we have a matching identity we’ll use it
@@ -51,23 +64,23 @@ export async function showCredentialPopup(
         sender,
       );
     } catch (error) {
-      const { claim, legitimations, delegationId } = message.body.content;
-
-      const rejectionBody: IRejectTerms = {
-        content: { claim, legitimations, delegationId },
-        type: 'reject-terms',
+      const rejectionBody: IReject = {
+        content: { message: 'Terms rejected' },
+        type: 'reject',
       };
 
       return encrypt(rejectionBody);
     }
   }
-  if (message.body.type === 'submit-attestation') {
+
+  if (isSubmitAttestation(message)) {
     await saveChannel.get(message.body.content.attestation, sender);
   }
-  if (message.body.type === 'reject-attestation') {
+
+  if (isRejectAttestation(message)) {
     await rejectChannel.get(message.body.content, sender);
   }
-  if (message.body.type === 'request-credential') {
+  if (isIRequestCredential(message)) {
     return await shareChannel.get(
       {
         credentialRequest: message.body.content,

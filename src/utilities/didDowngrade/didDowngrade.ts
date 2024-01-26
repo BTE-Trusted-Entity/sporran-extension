@@ -1,13 +1,20 @@
-import BN from 'bn.js';
-import {
-  Blockchain,
-  ConfigService,
+import type {
   Did,
-  DidUri,
   KiltKeyringPair,
-  SignExtrinsicCallback,
+  SignerInterface,
   SubmittableExtrinsic,
-} from '@kiltprotocol/sdk-js';
+} from '@kiltprotocol/types';
+
+import BN from 'bn.js';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { Blockchain } from '@kiltprotocol/chain-helpers';
+import {
+  authorizeBatch,
+  authorizeTx,
+  linkedInfoFromChain,
+  toChain,
+} from '@kiltprotocol/did';
 
 import { getIdentityCryptoFromSeed, Identity } from '../identities/identities';
 import { isFullDid } from '../did/did';
@@ -19,36 +26,35 @@ interface DidTransaction {
 
 async function getSignedTransaction(
   keypair: KiltKeyringPair,
-  sign: SignExtrinsicCallback,
-  did: DidUri,
+  signers: SignerInterface[],
+  did: Did,
 ): Promise<DidTransaction> {
   const api = ConfigService.get('api');
   const submitter = keypair.address;
 
-  const chainDid = Did.toChain(did);
-  const { web3Name, document } = Did.linkedInfoFromChain(
-    await api.call.did.query(chainDid),
-  );
+  const chainDid = toChain(did);
+  const { document } = linkedInfoFromChain(await api.call.did.query(chainDid));
+  const web3Name = document.alsoKnownAs?.[0];
   const servicesCount = document.service?.length ?? 0;
 
   let authorized: SubmittableExtrinsic;
 
   if (web3Name) {
-    authorized = await Did.authorizeBatch({
+    authorized = await authorizeBatch({
       batchFunction: api.tx.utility.batchAll,
       did,
       extrinsics: [
         api.tx.web3Names.releaseByOwner(),
         api.tx.did.delete(servicesCount),
       ],
-      sign,
+      signers,
       submitter,
     });
   } else {
-    authorized = await Did.authorizeTx(
-      document.uri,
+    authorized = await authorizeTx(
+      document.id,
       api.tx.did.delete(servicesCount),
-      sign,
+      signers,
       submitter,
     );
   }
@@ -58,12 +64,12 @@ async function getSignedTransaction(
   return { extrinsic };
 }
 
-export async function getFee(did: DidUri | undefined): Promise<BN> {
+export async function getFee(did: Did | undefined): Promise<BN> {
   if (!did || !isFullDid(did)) {
     return new BN(0);
   }
-  const { keypair, sign } = makeFakeIdentityCrypto();
-  const { extrinsic } = await getSignedTransaction(keypair, sign, did);
+  const { keypair, signers } = await makeFakeIdentityCrypto();
+  const { extrinsic } = await getSignedTransaction(keypair, signers, did);
 
   return (await extrinsic.paymentInfo(keypair)).partialFee;
 }
@@ -77,8 +83,12 @@ export async function sign(
   if (!identity.did) {
     throw new Error('DID is deleted and unusable');
   }
-  const { keypair, sign } = await getIdentityCryptoFromSeed(seed);
-  const { extrinsic } = await getSignedTransaction(keypair, sign, identity.did);
+  const { keypair, signers } = await getIdentityCryptoFromSeed(seed);
+  const { extrinsic } = await getSignedTransaction(
+    keypair,
+    signers,
+    identity.did,
+  );
 
   const hash = extrinsic.hash.toHex();
   currentTx[hash] = { extrinsic };

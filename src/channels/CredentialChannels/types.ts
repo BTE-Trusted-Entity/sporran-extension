@@ -1,4 +1,4 @@
-import { IEncryptedMessage } from '@kiltprotocol/sdk-js';
+import type { IEncryptedMessage } from '@kiltprotocol/extension-api/types';
 
 import { DAppName } from '../../dApps/AccessChannels/DAppName';
 

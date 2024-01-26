@@ -1,4 +1,4 @@
-import { CType } from '@kiltprotocol/sdk-js';
+import { CType } from '@kiltprotocol/credentials';
 
 import {
   moreIdentitiesMock as identities,

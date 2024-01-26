@@ -1,13 +1,13 @@
+import type { Did, Service, UriFragment } from '@kiltprotocol/types';
+
 import browser from 'webextension-polyfill';
-import {
-  ConfigService,
-  Did,
-  DidServiceEndpoint,
-  DidUri,
-  UriFragment,
-} from '@kiltprotocol/sdk-js';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { linkedInfoFromChain, toChain } from '@kiltprotocol/did';
 
 import { GenericExtrinsic } from '@polkadot/types';
+
+import { find } from 'lodash-es';
 
 import { SignDidExtrinsicOriginInput } from '../../channels/SignDidExtrinsicChannels/types';
 import {
@@ -50,9 +50,7 @@ export function getExtrinsicValues(
   ];
 }
 
-export function getAddServiceEndpoint(
-  extrinsic: GenericExtrinsic,
-): DidServiceEndpoint {
+export function getAddServiceEndpoint(extrinsic: GenericExtrinsic): Service {
   const human = extrinsic.toHuman() as {
     method: Parameters<typeof getExtrinsicCallEntry>[0];
   };
@@ -72,9 +70,9 @@ export function getAddServiceEndpoint(
 
 export async function getRemoveServiceEndpoint(
   extrinsic: GenericExtrinsic,
-  did: DidUri | undefined,
+  did: Did | undefined,
   error: ReturnType<typeof useBooleanState>,
-): Promise<DidServiceEndpoint> {
+): Promise<Service> {
   error.off();
   const human = extrinsic.toHuman() as {
     method: Parameters<typeof getExtrinsicCallEntry>[0];
@@ -89,14 +87,15 @@ export async function getRemoveServiceEndpoint(
 
   try {
     const api = ConfigService.get('api');
-    const { document } = await Did.linkedInfoFromChain(
-      await api.call.did.query(Did.toChain(did)),
-    );
-    const service = Did.getService(document, id);
-    if (!service) {
+    const {
+      document: { service },
+    } = linkedInfoFromChain(await api.call.did.query(toChain(did)));
+
+    const foundService = find(service, { id });
+    if (!foundService) {
       throw new Error('DID service not found');
     }
-    return service;
+    return foundService;
   } catch {
     error.on();
     return fallback;

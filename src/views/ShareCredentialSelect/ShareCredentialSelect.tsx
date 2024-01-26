@@ -1,7 +1,10 @@
+import type { Did } from '@kiltprotocol/types';
+
 import { FormEvent, RefObject, useCallback, useRef } from 'react';
 import browser from 'webextension-polyfill';
 import { reject, sortBy } from 'lodash-es';
-import { Did, DidUri } from '@kiltprotocol/sdk-js';
+
+import { isSameSubject } from '@kiltprotocol/did';
 
 import { useHistory } from 'react-router';
 
@@ -73,7 +76,7 @@ function MatchingIdentityCredentials({
 }) {
   const credentials = allCredentials.filter(
     ({ credential }) =>
-      identity.did && Did.isSameSubject(credential.claim.owner, identity.did),
+      identity.did && isSameSubject(credential.claim.owner, identity.did),
   );
 
   return (
@@ -122,15 +125,13 @@ export function ShareCredentialSelect({ onCancel, onSelect, selected }: Props) {
   const { credentialRequest } = data;
   const { cTypes } = credentialRequest;
   const owner =
-    'owner' in credentialRequest
-      ? (credentialRequest.owner as DidUri)
-      : undefined;
+    'owner' in credentialRequest ? (credentialRequest.owner as Did) : undefined;
   const cTypeHashes = cTypes.map(({ cTypeHash }) => cTypeHash);
 
   const matchingCredentials = credentials?.filter(
     ({ credential: { claim } }) =>
       cTypeHashes.includes(claim.cTypeHash) &&
-      (owner ? Did.isSameSubject(claim.owner, owner) : true),
+      (owner ? isSameSubject(claim.owner, owner) : true),
   );
 
   const displayedCredentials = reject(matchingCredentials, {

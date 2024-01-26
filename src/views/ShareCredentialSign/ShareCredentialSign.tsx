@@ -1,12 +1,12 @@
+import type { ICredentialPresentation } from '@kiltprotocol/types';
+import type { ISubmitCredential } from '@kiltprotocol/extension-api/types';
+
 import browser from 'webextension-polyfill';
 import { FormEvent, useCallback, useState } from 'react';
-import {
-  Attestation,
-  ConfigService,
-  Credential,
-  ICredentialPresentation,
-  ISubmitCredential,
-} from '@kiltprotocol/sdk-js';
+
+import { ConfigService } from '@kiltprotocol/sdk-js';
+import { Attestation } from '@kiltprotocol/credentials';
+import { Credential } from '@kiltprotocol/legacy-credentials';
 
 import * as styles from './ShareCredentialSign.module.css';
 
@@ -77,12 +77,12 @@ export function ShareCredentialSign({ selected, onCancel, popupData }: Props) {
       event.preventDefault();
 
       const { seed } = await passwordField.get(event);
-      const { encrypt, sign } = await getIdentityCryptoFromSeed(seed);
+      const { encrypt, signers } = await getIdentityCryptoFromSeed(seed);
 
       const presentation = await Credential.createPresentation({
         credential: sporranCredential.credential,
         selectedAttributes: sharedContents,
-        signCallback: sign,
+        signers,
         challenge,
       });
 
