@@ -34,7 +34,12 @@ import {
   saveEncrypted,
 } from '../storageEncryption/storageEncryption';
 
-import { getDidDocument, getDidEncryptionKey, parseDidUri } from '../did/did';
+import {
+  getDidDocument,
+  getDidEncryptionKey,
+  isFullDid,
+  parseDidUri,
+} from '../did/did';
 import { storage } from '../storage/storage';
 import { useSwrDataOrThrow } from '../useSwrDataOrThrow/useSwrDataOrThrow';
 
@@ -201,13 +206,16 @@ export async function getIdentityCryptoFromSeed(
 
   const didDocument = await getDidDocument(did);
 
-  const keyUri =
-    `${didDocument.id}${getDidEncryptionKey(didDocument)}` as DidUrl;
-
+  // id must be an address for light DIDs - passing the light DID key URL does not work
   const signers = await Signers.getSignersForKeypair({
     keypair: authenticationKey,
-    id: `${didDocument.id}${didDocument.authentication?.[0]}`,
+    id: isFullDid(did)
+      ? `${didDocument.id}${didDocument.authentication?.[0]}`
+      : authenticationKey.address,
   });
+
+  const keyUri =
+    `${didDocument.id}${getDidEncryptionKey(didDocument)}` as DidUrl;
 
   async function encryptCallback({ data, peerPublicKey }: EncryptRequestData) {
     const { box, nonce } = Crypto.encryptAsymmetric(
