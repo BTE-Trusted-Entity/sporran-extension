@@ -301,18 +301,7 @@ exports[`SendToken should render 1`] = `
     >
       <datalist
         id="identities"
-      >
-        <option
-          value="4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo"
-        >
-          Identity with on-chain DID and lots of coins
-        </option>
-        <option
-          value="4pUVoTJ69JMuapNducHJPU68nGkQXB7R9xAWY9dmvUh42653"
-        >
-          Identity which has a very very very very long name and might not even fit on the screen
-        </option>
-      </datalist>
+      />
       <input
         aria-label="Paste the recipient’s address here"
         class="recipientWithButton"

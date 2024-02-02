@@ -46,17 +46,24 @@ Just start it again to continue.
           value="wss://peregrine-stg.kilt.io/para"
         />
       </datalist>
-      <input
+      <select
         aria-label="Custom endpoint"
         class="endpoint"
-        list="endpoints"
         name="endpoint"
-        pattern="wss?://.*"
-        placeholder="wss://example.org:433"
-        required=""
-        type="url"
-        value="wss://peregrine.kilt.io"
-      />
+      >
+        <option
+          label="BOTLabs"
+          value="wss://spiritnet.kilt.io"
+        />
+        <option
+          label="Dwellir"
+          value="wss://kilt-rpc.dwellir.com"
+        />
+        <option
+          label="OnFinality"
+          value="wss://spiritnet.api.onfinality.io/public-ws"
+        />
+      </select>
       <button
         aria-label="Save"
         class="save"
