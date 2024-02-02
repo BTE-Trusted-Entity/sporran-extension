@@ -22,8 +22,7 @@ async function getFee(did: DidUri | undefined) {
     sign,
     address,
   );
-  const signed = await authorized.signAsync(keypair);
-  return (await signed.paymentInfo(keypair)).partialFee;
+  return (await authorized.paymentInfo(keypair)).partialFee;
 }
 
 export function useKiltCosts(

@@ -52,8 +52,7 @@ export async function getFee(): Promise<BN> {
   const api = ConfigService.get('api');
 
   const { extrinsic } = await getTransaction(document, keypair, sign);
-  const signed = await extrinsic.signAsync(keypair);
-  const extrinsicFee = (await signed.paymentInfo(keypair)).partialFee;
+  const extrinsicFee = (await extrinsic.paymentInfo(keypair)).partialFee;
 
   const didCreationFee = api.consts.did.fee;
 

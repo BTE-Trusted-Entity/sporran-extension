@@ -20,8 +20,6 @@ export async function getFee(input: FeeInput): Promise<BN> {
     input.amount,
   );
 
-  // Including any signature increases the transaction size and the fee
   const { keypair } = makeFakeIdentityCrypto();
-  const signedTx = await tx.signAsync(keypair, input);
-  return (await signedTx.paymentInfo(keypair)).partialFee;
+  return (await tx.paymentInfo(keypair)).partialFee;
 }
