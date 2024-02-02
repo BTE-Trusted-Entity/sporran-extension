@@ -1,6 +1,6 @@
 import { BalanceUtils } from '@kiltprotocol/sdk-js';
 
-import { BalancesV1 } from './balanceChanges';
+import { BalancesV1 } from '../transformBalances/transformBalances';
 
 export const originalBalancesMock: BalancesV1 = {
   free: BalanceUtils.toFemtoKilt(1.226),
