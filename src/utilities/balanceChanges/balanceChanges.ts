@@ -20,9 +20,10 @@ export interface BalancesV2 {
   flag: BN;
 }
 
-function isBalancesV2(obj: any): obj is BalancesV2 {
+function isBalancesV2(obj: unknown): obj is BalancesV2 {
   return (
     typeof obj === 'object' &&
+    obj !== null &&
     'free' in obj && obj.free instanceof BN &&
     'reserved' in obj && obj.reserved instanceof BN &&
     'frozen' in obj && obj.frozen instanceof BN &&
