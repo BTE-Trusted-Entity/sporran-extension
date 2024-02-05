@@ -15,12 +15,10 @@ import { makeFakeIdentityCrypto } from '../makeFakeIdentityCrypto/makeFakeIdenti
 async function getUnpaidCosts(
   { address }: { address: string },
   draft: SubmittableExtrinsic,
-  tip = new BN(0),
 ): Promise<BN | undefined> {
   const { keypair } = makeFakeIdentityCrypto();
-  const extrinsic = await draft.signAsync(keypair, { tip });
 
-  const fee = (await extrinsic.paymentInfo(keypair)).partialFee;
+  const fee = (await draft.paymentInfo(keypair)).partialFee;
 
   const api = ConfigService.get('api');
   const { usableForFees } = transformBalances(
@@ -94,7 +92,7 @@ export function useSubmitStates(): SubmitStates {
         setStatus('pending');
 
         setUnpaidCostsBN(undefined);
-        const unpaid = await getUnpaidCosts(keypair, draft, tip);
+        const unpaid = await getUnpaidCosts(keypair, draft);
         if (unpaid) {
           setUnpaidCostsBN(unpaid);
           setStatus(null);
