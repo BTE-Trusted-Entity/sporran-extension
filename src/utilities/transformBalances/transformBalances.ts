@@ -3,7 +3,7 @@ import BN from 'bn.js';
 interface TransformedBalances {
   transferable: BN;
   usableForFees: BN;
-  locked: BN;
+  frozen: BN;
   bonded: BN;
   total: BN;
 }
@@ -46,7 +46,7 @@ function transformBalancesV1(balances: BalancesV1): TransformedBalances {
   return {
     transferable,
     usableForFees,
-    locked: miscFrozen,
+    frozen: miscFrozen,
     bonded: reserved,
     total,
   };
@@ -60,9 +60,9 @@ function transformBalancesV2(balances: BalancesV2): TransformedBalances {
   return {
     transferable,
     usableForFees,
-    locked: frozen,
-    bonded: reserved,
+    frozen,
     total,
+    bonded: reserved,
   };
 }
 

@@ -15,7 +15,7 @@ export interface BalanceChange {
   balances: {
     transferable: BN;
     usableForFees: BN;
-    locked: BN;
+    frozen: BN;
     bonded: BN;
     total: BN;
   };

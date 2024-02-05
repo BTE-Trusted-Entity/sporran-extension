@@ -16,7 +16,7 @@ interface BalanceBN {
   transferable: BN;
   usableForFees: BN;
   bonded: BN;
-  locked: BN;
+  frozen: BN;
   total: BN;
 }
 
@@ -99,7 +99,7 @@ export function Balance({
             </li>
             <li className={styles.balance}>
               {t('component_Balance_locked')}
-              <KiltAmount amount={balance.locked} type="funds" />
+              <KiltAmount amount={balance.frozen} type="funds" />
             </li>
             <li className={styles.balance}>
               {t('component_Balance_bonded')}
