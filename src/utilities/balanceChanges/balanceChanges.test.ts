@@ -14,8 +14,7 @@ jest.unmock('./balanceChanges');
 
 const expectedBalanceStrings = {
   transferable: '1216000000000000',
-  usableForFees: '1224000000000000',
-  locked: '10000000000000',
+  frozen: '10000000000000',
   bonded: '8000000000000',
   total: '1234000000000000',
 };
@@ -31,8 +30,7 @@ describe('balanceChanges', () => {
       expect(expectedBalanceStrings).toEqual({
         bonded: balances.bonded.toString(),
         transferable: balances.transferable.toString(),
-        usableForFees: balances.usableForFees.toString(),
-        locked: balances.locked.toString(),
+        frozen: balances.frozen.toString(),
         total: balances.total.toString(),
       });
     });
@@ -64,8 +62,7 @@ describe('balanceChanges', () => {
       expect(expectedBalanceStrings).toEqual({
         bonded: balances.bonded.toString(),
         transferable: balances.transferable.toString(),
-        usableForFees: balances.usableForFees.toString(),
-        locked: balances.locked.toString(),
+        frozen: balances.frozen.toString(),
         total: balances.total.toString(),
       });
     });

@@ -3,22 +3,19 @@ import { ConfigService } from '@kiltprotocol/sdk-js';
 
 import { ErrorFirstCallback } from '../../channels/base/types';
 
-import { transformBalances } from '../transformBalances/transformBalances';
+import {
+  BalancesV1,
+  BalancesV2,
+  transformBalances,
+} from '../transformBalances/transformBalances';
 import { exceptionToError } from '../exceptionToError/exceptionToError';
-
-export interface Balances {
-  free: BN;
-  miscFrozen: BN;
-  feeFrozen: BN;
-  reserved: BN;
-}
 
 export interface BalanceChange {
   address: string;
   balances: {
     transferable: BN;
     usableForFees: BN;
-    locked: BN;
+    frozen: BN;
     bonded: BN;
     total: BN;
   };
@@ -26,7 +23,7 @@ export interface BalanceChange {
 
 export function computeBalance(
   address: string,
-  balances: Balances,
+  balances: BalancesV2 | BalancesV1,
 ): BalanceChange {
   const transformedBalances = transformBalances(balances);
 
@@ -42,7 +39,7 @@ export function onAddressBalanceChange(
 ): () => void {
   function onBalanceChange(
     responseAddress: string,
-    rawBalances: Balances,
+    rawBalances: BalancesV2 | BalancesV1,
   ): void {
     try {
       const balance = computeBalance(responseAddress, rawBalances);
