@@ -14,7 +14,7 @@ export function mockBalanceChanges(): void {
           bonded: BalanceUtils.toFemtoKilt(0.008),
           transferable: BalanceUtils.toFemtoKilt(1.216),
           usableForFees: BalanceUtils.toFemtoKilt(1.224),
-          locked: BalanceUtils.toFemtoKilt(0.01),
+          frozen: BalanceUtils.toFemtoKilt(0.01),
           total: BalanceUtils.toFemtoKilt(1.234),
         },
       });
