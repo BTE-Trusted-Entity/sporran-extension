@@ -10,16 +10,16 @@ interface TransformedBalances {
 
 export interface BalancesV1 {
   free: BN;
+  reserved: BN;
   miscFrozen: BN;
   feeFrozen: BN;
-  reserved: BN;
 }
 
 export interface BalancesV2 {
   free: BN;
   reserved: BN;
   frozen: BN;
-  flag: BN;
+  flags: BN;
 }
 
 function isBalancesV2(obj: unknown): obj is BalancesV2 {
