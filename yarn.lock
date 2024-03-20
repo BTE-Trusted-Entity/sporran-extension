@@ -2829,7 +2829,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/types@npm:10.12.4, @polkadot/types@npm:^10.11.2, @polkadot/types@npm:^10.12.4, @polkadot/types@npm:^10.7.3":
+"@polkadot/types@npm:10.12.4, @polkadot/types@npm:^10.12.4, @polkadot/types@npm:^10.7.3":
   version: 10.12.4
   resolution: "@polkadot/types@npm:10.12.4"
   dependencies:
@@ -16472,7 +16472,7 @@ __metadata:
     "@kiltprotocol/sdk-js": "npm:^0.35.0"
     "@polkadot/extension-inject": "npm:^0.46.9"
     "@polkadot/keyring": "npm:^12.6.2"
-    "@polkadot/types": "npm:^10.11.2"
+    "@polkadot/types": "npm:^10.12.4"
     "@polkadot/ui-shared": "npm:^3.6.5"
     "@polkadot/util": "npm:^12.6.2"
     "@polkadot/util-crypto": "npm:^12.6.2"
