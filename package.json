@@ -48,7 +48,7 @@
     "@polkadot/extension-inject": "^0.46.9",
     "@polkadot/keyring": "^12.6.2",
     "@polkadot/types": "^10.11.2",
-    "@polkadot/ui-shared": "^3.6.5",
+    "@polkadot/ui-shared": "^3.6.6",
     "@polkadot/util": "^12.6.2",
     "@polkadot/util-crypto": "^12.6.2",
     "@polkadot/x-textdecoder": "^12.6.2",
