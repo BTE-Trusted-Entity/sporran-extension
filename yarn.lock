@@ -16847,7 +16847,7 @@ __metadata:
     typescript: "npm:^5.4.5"
     typescript-plugin-css-modules: "npm:^5.1.0"
     web-ext: "npm:^7.11.0"
-    webextension-polyfill: "npm:^0.11.0"
+    webextension-polyfill: "npm:^0.12.0"
     webpack: "npm:^5.91.0"
     webpack-cli: "npm:^5.1.4"
     webpack-extension-reloader: "npm:^1.1.4"
@@ -18614,13 +18614,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webextension-polyfill@npm:^0.11.0":
-  version: 0.11.0
-  resolution: "webextension-polyfill@npm:0.11.0"
-  dependencies:
-    webpack: "npm:^5.91.0"
-    webpack-cli: "npm:^5.1.4"
-  checksum: 10c0/f56fa11b90b42fc8c6d176237452d8431a53230be7011b201e8b869c008a94bcc3700c703384ba9a549949482255cc6e84d502b28a5f4fe170b3be5c73f2d4dc
+"webextension-polyfill@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "webextension-polyfill@npm:0.12.0"
+  checksum: 10c0/5ace2aaaf6a203515bdd2fb948622f186a5fbb50099b539ce9c0ad54896f9cc1fcc3c0e2a71d1f7071dd7236d7daebba1e0cbcf43bfdfe54361addf0333ee7d1
   languageName: node
   linkType: hard
 
