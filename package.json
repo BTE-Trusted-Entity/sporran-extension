@@ -23,7 +23,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">= 20.13.1"
+    "node": ">= 20.14.0"
   },
   "scripts": {
     "build": "env NODE_ENV=production webpack",
