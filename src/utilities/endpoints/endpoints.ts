@@ -47,22 +47,28 @@ export async function getEndpoint(): Promise<KnownEndpoints> {
 /**
  * The internal version allows the developers to specify any custom endpoint
  */
-export async function getStoredEndpoint(): Promise<string> {
-  const stored = (await storage.get(endpointKey))[endpointKey];
-  if (!stored) {
-    return defaultEndpoint;
+export async function getStoredEndpoint(): Promise<string[]> {
+  const storedStr: string | undefined = (await storage.get(endpointKey))[
+    endpointKey
+  ];
+  if (!storedStr) {
+    return [defaultEndpoint];
   }
 
-  const isKnown = endpoints.includes(stored);
-  const allowUnknown = isInternal;
-  if (isKnown || allowUnknown) {
-    return stored;
+  const stored: string[] = storedStr.split(',');
+
+  if (!isInternal) {
+    stored.forEach((ep, i) => {
+      if (!endpoints.includes(ep as any)) {
+        stored[i] = defaultEndpoint;
+      }
+    });
   }
 
-  return defaultEndpoint;
+  return stored;
 }
 
-export async function setEndpoint(endpoint: string): Promise<void> {
-  await storage.set({ [endpointKey]: endpoint });
+export async function setEndpoint(endpoints: string[]): Promise<void> {
+  await storage.set({ [endpointKey]: endpoints.join(',') });
   await browser.runtime.reload();
 }

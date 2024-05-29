@@ -20,7 +20,7 @@ export function AppSettings() {
 
   const { features } = useConfiguration();
 
-  const [endpointValue, setEndpointValue] = useState('');
+  const [endpointValue, setEndpointValue] = useState<string[]>([]);
   useEffect(() => {
     (async () => {
       const current = await getStoredEndpoint();
@@ -32,7 +32,14 @@ export function AppSettings() {
     async (
       event: FormEvent<HTMLInputElement> | FormEvent<HTMLSelectElement>,
     ) => {
-      setEndpointValue(event.currentTarget.value);
+      const target = event.currentTarget;
+      if ('selectedOptions' in target) {
+        setEndpointValue(
+          Array.from(target.selectedOptions).map(({ value }) => value),
+        );
+      } else {
+        setEndpointValue([target.value]);
+      }
     },
     [],
   );
@@ -46,7 +53,7 @@ export function AppSettings() {
   );
 
   const handleReset = useCallback(async () => {
-    setEndpointValue(defaultEndpoint);
+    setEndpointValue([defaultEndpoint]);
   }, []);
 
   return (
@@ -88,6 +95,7 @@ export function AppSettings() {
             value={endpointValue}
             aria-label={t('view_AppSettings_endpoint')}
             autoFocus
+            multiple={true}
           >
             {Object.entries(publicEndpoints).map(([label, value]) => (
               <option label={label} value={value} key={value} />
