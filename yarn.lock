@@ -15364,14 +15364,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dialog-polyfill@npm:^1.1.7":
-  version: 1.1.7
-  resolution: "react-dialog-polyfill@npm:1.1.7"
+"react-dialog-polyfill@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "react-dialog-polyfill@npm:1.2.0"
   dependencies:
     dialog-polyfill: "npm:^0.5.6"
   peerDependencies:
-    react: ^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/854eb5970e0c903d0fc59f392d22a26b521da23bf9ba6667c19f34d7d801fa379457ad4ed1980d49b3e29b10dad2c32a179a81e9159472137de5813c84714911
+    react: ^0.13.0 || ^0.14.0 || >=15
+  checksum: 10c0/ff7b4106f022853178aedc6ff1c1e8ddfcc487bdf42c64e2b9051b8b3d0d68b586ed06cb70c5a41c5ca567321a9107f31fca35156d511108a9d3b6af91e99153
   languageName: node
   linkType: hard
 
@@ -16741,7 +16741,7 @@ __metadata:
     qrcode.react: "npm:^3.1.0"
     react: "npm:^18.3.1"
     react-accessible-dropdown-menu-hook: "npm:^4.0.0"
-    react-dialog-polyfill: "npm:^1.1.7"
+    react-dialog-polyfill: "npm:^1.2.0"
     react-dom: "npm:^18.3.1"
     react-router: "npm:^5.3.4"
     react-router-dom: "npm:^5.3.4"
