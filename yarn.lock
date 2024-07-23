@@ -3141,16 +3141,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/ui-shared@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "@polkadot/ui-shared@npm:3.8.1"
+"@polkadot/ui-shared@npm:^3.8.2":
+  version: 3.8.2
+  resolution: "@polkadot/ui-shared@npm:3.8.2"
   dependencies:
     colord: "npm:^2.9.3"
     tslib: "npm:^2.6.2"
   peerDependencies:
     "@polkadot/util": "*"
     "@polkadot/util-crypto": "*"
-  checksum: 10c0/f2d50011f6ce010dba15f1c8c896a0e31784e87965a9a96847adb4039bb67eb2b6bc23b3b246609516ba6aec47e3558a986de8564c0e836173943e44daacd2d0
+  checksum: 10c0/5a9e8c88ddb002bcb24a046eeecb88d08f73de270262ada26141c3066ec343fdd178b2417eba4021c2d25299bdd93827314bd7f42a989d604704e5cec6d0b27c
   languageName: node
   linkType: hard
 
@@ -16774,7 +16774,7 @@ __metadata:
     "@polkadot/extension-inject": "npm:^0.49.3"
     "@polkadot/keyring": "npm:^12.6.2"
     "@polkadot/types": "npm:^10.11.2"
-    "@polkadot/ui-shared": "npm:^3.8.1"
+    "@polkadot/ui-shared": "npm:^3.8.2"
     "@polkadot/util": "npm:^12.6.2"
     "@polkadot/util-crypto": "npm:^12.6.2"
     "@polkadot/x-textdecoder": "npm:^12.6.2"
