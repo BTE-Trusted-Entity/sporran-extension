@@ -121,7 +121,7 @@
     "ts-jest": "^29.2.3",
     "ts-loader": "^9.5.1",
     "typed-css-modules": "^0.9.1",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "typescript-plugin-css-modules": "^5.1.0",
     "web-ext": "^8.2.0",
     "webpack": "^5.93.0",
