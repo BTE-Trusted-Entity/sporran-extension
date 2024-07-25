@@ -5,9 +5,9 @@ import ky from 'ky';
 import { getEndpoint, KnownEndpoints } from '../endpoints/endpoints';
 
 const checkoutURLs: Record<KnownEndpoints, string> = {
-  'wss://kilt-rpc.dwellir.com': 'https://checkout.kilt.io',
+  'wss://kilt.dotters.network': 'https://checkout.kilt.io',
   'wss://spiritnet.kilt.io': 'https://checkout.kilt.io',
-  'wss://spiritnet.api.onfinality.io/public-ws': 'https://checkout.kilt.io',
+  'wss://kilt.ibp.network': 'https://checkout.kilt.io',
   'wss://peregrine.kilt.io': 'https://dev.checkout.kilt.io',
   'wss://peregrine-stg.kilt.io/para': 'https://smoke.checkout.kilt.io',
 };
