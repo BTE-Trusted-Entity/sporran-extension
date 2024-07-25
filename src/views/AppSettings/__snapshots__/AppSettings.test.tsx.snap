@@ -31,10 +31,10 @@ Just start it again to continue.
         id="endpoints"
       >
         <option
-          value="wss://kilt.dotters.network"
+          value="wss://kilt.ibp.network"
         />
         <option
-          value="wss://kilt.ibp.network"
+          value="wss://kilt.dotters.network"
         />
         <option
           value="wss://spiritnet.kilt.io"
