@@ -6,8 +6,8 @@ import { isInternal } from '../../configuration/variant';
 const endpointKey = 'endpoints';
 
 export const endpoints = [
-  'wss://kilt-rpc.dwellir.com',
-  'wss://spiritnet.api.onfinality.io/public-ws',
+  'wss://kilt.ibp.network',
+  'wss://kilt.dotters.network',
   'wss://spiritnet.kilt.io',
   'wss://peregrine.kilt.io',
   'wss://peregrine-stg.kilt.io/para',
@@ -17,8 +17,8 @@ export type KnownEndpoints = (typeof endpoints)[number];
 
 export const publicEndpoints = {
   BOTLabs: 'wss://spiritnet.kilt.io',
-  Dwellir: 'wss://kilt-rpc.dwellir.com',
-  OnFinality: 'wss://spiritnet.api.onfinality.io/public-ws',
+  IBP1: 'wss://kilt.ibp.network',
+  IBP2: 'wss://kilt.dotters.network',
 };
 
 /* Do we already build a production version first and ask QA to test it
@@ -31,7 +31,7 @@ so there's no real downside. */
 
 export const defaultEndpoint: KnownEndpoints =
   process.env.NODE_ENV === 'production' && !isInternal
-    ? 'wss://kilt-rpc.dwellir.com'
+    ? 'wss://kilt.dotters.network'
     : 'wss://peregrine.kilt.io';
 
 /**

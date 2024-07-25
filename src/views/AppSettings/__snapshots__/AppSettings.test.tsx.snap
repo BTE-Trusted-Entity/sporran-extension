@@ -31,10 +31,10 @@ Just start it again to continue.
         id="endpoints"
       >
         <option
-          value="wss://kilt-rpc.dwellir.com"
+          value="wss://kilt.dotters.network"
         />
         <option
-          value="wss://spiritnet.api.onfinality.io/public-ws"
+          value="wss://kilt.ibp.network"
         />
         <option
           value="wss://spiritnet.kilt.io"
@@ -56,12 +56,12 @@ Just start it again to continue.
           value="wss://spiritnet.kilt.io"
         />
         <option
-          label="Dwellir"
-          value="wss://kilt-rpc.dwellir.com"
+          label="IBP1"
+          value="wss://kilt.ibp.network"
         />
         <option
-          label="OnFinality"
-          value="wss://spiritnet.api.onfinality.io/public-ws"
+          label="IBP2"
+          value="wss://kilt.dotters.network"
         />
       </select>
       <button
