@@ -2834,9 +2834,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/extension-inject@npm:^0.52.1":
-  version: 0.52.1
-  resolution: "@polkadot/extension-inject@npm:0.52.1"
+"@polkadot/extension-inject@npm:^0.52.2":
+  version: 0.52.2
+  resolution: "@polkadot/extension-inject@npm:0.52.2"
   dependencies:
     "@polkadot/api": "npm:^12.3.1"
     "@polkadot/rpc-provider": "npm:^12.3.1"
@@ -2848,7 +2848,7 @@ __metadata:
   peerDependencies:
     "@polkadot/api": "*"
     "@polkadot/util": "*"
-  checksum: 10c0/3a76584ba097b6bbcb813215bc21d30d1c00284aaf2273d6fef7ea197d2caf3a8207751173c0e60d60214e39284c3dbe220f67471d2b4ee6b202816f94dc4969
+  checksum: 10c0/7faccda5e0f681220176e520cb25feecb46760faeeae1bd83782b05bfd1977ccfbe2bd8a19e060bcf42d1ff1be8d9aa1687089cd5d236b9d20f489b1f4feda44
   languageName: node
   linkType: hard
 
@@ -16844,7 +16844,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.25.3"
     "@babel/preset-typescript": "npm:^7.24.7"
     "@kiltprotocol/sdk-js": "npm:^0.35.0"
-    "@polkadot/extension-inject": "npm:^0.52.1"
+    "@polkadot/extension-inject": "npm:^0.52.2"
     "@polkadot/keyring": "npm:^12.6.2"
     "@polkadot/types": "npm:^10.11.2"
     "@polkadot/ui-shared": "npm:^3.9.1"
