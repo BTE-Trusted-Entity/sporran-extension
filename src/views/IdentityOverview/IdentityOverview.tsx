@@ -14,7 +14,7 @@ import { isFullDid } from '../../utilities/did/did';
 import { useIsOnChainDidDeleted } from '../../utilities/did/useIsOnChainDidDeleted';
 import { YouHaveIdentities } from '../../components/YouHaveIdentities/YouHaveIdentities';
 import { generatePath, paths } from '../paths';
-// import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
+import { useSubscanHost } from '../../utilities/useSubscanHost/useSubscanHost';
 
 import { useIdentityCredentials } from '../../utilities/credentials/credentials';
 
@@ -39,7 +39,7 @@ export function IdentityOverview({ identity }: Props) {
     setHasSuccessOverlay(false);
   }, []);
 
-  // const subscanHost = useSubscanHost();
+  const subscanHost = useSubscanHost();
 
   const { address, did } = identity;
 
@@ -91,7 +91,7 @@ export function IdentityOverview({ identity }: Props) {
         </Link>
       </p>
 
-      {/* {subscanHost && (
+      {subscanHost && (
         <a
           className={styles.subscan}
           href={`${subscanHost}/account/${identity.address}?tab=transfer`}
@@ -100,7 +100,7 @@ export function IdentityOverview({ identity }: Props) {
         >
           {t('view_IdentityOverview_subscan')}
         </a>
-      )} */}
+      )}
 
       <Link
         to={generatePath(paths.identity.credentials.base, { address })}
