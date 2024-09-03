@@ -1,6 +1,6 @@
 import { ConfigService } from '@kiltprotocol/sdk-js';
 
-export async function whichChain() {
+export async function getChainName() {
   const api = ConfigService.get('api');
 
   const chainName = (await api.rpc.system.chain()).toHuman();
