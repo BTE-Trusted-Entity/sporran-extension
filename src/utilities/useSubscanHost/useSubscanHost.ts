@@ -2,7 +2,7 @@ import { useAsyncValue } from '../useAsyncValue/useAsyncValue';
 import { getEndpoint, KnownEndpoints } from '../endpoints/endpoints';
 
 const subscanHosts: Record<KnownEndpoints, string | undefined> = {
-  'wss://peregrine.kilt.io': 'https://kilt-testnet.subscan.io',
+  'wss://peregrine.kilt.io': undefined,
   'wss://spiritnet.kilt.io': 'https://spiritnet.subscan.io',
   'wss://kilt.dotters.network': 'https://spiritnet.subscan.io',
   'wss://kilt.ibp.network': 'https://spiritnet.subscan.io',
