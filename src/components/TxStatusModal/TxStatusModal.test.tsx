@@ -10,6 +10,10 @@ import { TxStatusModal } from './TxStatusModal';
 const identity =
   identitiesMock['4pNXuxPWhMxhRctgB4qd3MkRt2Sxp7Y7sxrApVCVXCEcdQMo'];
 
+jest.mock('../../utilities/endpoints/getChainName', () => ({
+  getChainName: () => 'KILT Peregrine',
+}));
+
 describe('TxStatusModal', () => {
   beforeEach(mockDialogShowModal);
 
