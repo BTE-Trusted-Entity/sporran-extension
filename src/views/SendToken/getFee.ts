@@ -15,7 +15,7 @@ const fallbackAddressForFee =
 export async function getFee(input: FeeInput): Promise<BN> {
   const api = ConfigService.get('api');
 
-  const tx = api.tx.balances.transfer(
+  const tx = api.tx.balances.transferAllowDeath(
     input.recipient || fallbackAddressForFee,
     input.amount,
   );

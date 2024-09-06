@@ -20,7 +20,7 @@ export async function signTransfer(input: Input): Promise<string> {
   const { recipient, amount, keypair, tip } = input;
 
   const api = ConfigService.get('api');
-  const tx = api.tx.balances.transfer(recipient, amount);
+  const tx = api.tx.balances.transferAllowDeath(recipient, amount);
 
   const signedTx = await tx.signAsync(keypair, { tip });
   const hash = signedTx.hash.toHex();
