@@ -55,6 +55,8 @@ yarn dev
 
 Update the version in `src/static/manifest.json` and `src/configuration/configuration.ts`.
 
+### For the external version
+
 Run the following commands:
 
 ```
@@ -64,6 +66,20 @@ yarn package
 ```
 
 This will generate a file `dist/web-ext-artifacts/sporran-???.zip` ready to be uploaded to stores.
+This version will only connect to _KILT Spirinet_ blockchain via predefined node endpoints.
+
+### For the internal version
+
+Run the following commands:
+
+```
+yarn install
+yarn build-internal
+yarn package
+```
+
+This will generate a file `dist/web-ext-artifacts/sporran-???.zip` ready to be uploaded on the github's release site for developers to use.
+This version will connect to any node endpoints the user inputs and by default to the _KILT Peregrine_ blockchain.
 
 ## Built with
 
