@@ -13,7 +13,8 @@ yarn dev
 
 ## Scripts
 
-- `yarn dev` - run `webpack` in `watch` mode
+- `yarn dev` - run `webpack` in `watch` mode using the "internal" variant
+- `yarn dev-public` - run `webpack` in `watch` mode using the "public" variant
 - `yarn storybook` - runs the Storybook server
 - `yarn build` - builds the production-ready unpacked extension
 - `yarn package` - packages the built code for upload
