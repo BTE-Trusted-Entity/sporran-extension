@@ -30,7 +30,7 @@ yarn dev
 1. Go to [actions page for "Packages the internal version"](https://github.com/KILTprotocol/sporran-extension/actions/workflows/publish.yaml).
 1. Click on the build you want to test.
 1. Download the extension file from the _Artifacts_ section at the bottom.
-1. Unpack the downloaded _.zip_ file and unpack the _sporran-???.zip_ from it as well.
+1. Unpack the downloaded _sporran-???.zip_ file.
 
 ### Getting the _public_ version of extension
 
