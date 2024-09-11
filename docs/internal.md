@@ -66,7 +66,7 @@ yarn package
 ```
 
 This will generate a file `dist/web-ext-artifacts/sporran-???.zip` ready to be uploaded to stores.
-This version will only connect to _KILT Spirinet_ blockchain via predefined node endpoints.
+This version will only connect to _KILT Spiritnet_ blockchain via predefined node endpoints.
 
 ### For the internal version
 
@@ -78,8 +78,34 @@ yarn build-internal
 yarn package
 ```
 
-This will generate a file `dist/web-ext-artifacts/sporran-???.zip` ready to be uploaded on the github's release site for developers to use.
+This will generate a file `dist/web-ext-artifacts/sporran-???.zip` ready for developers to use.
 This version will connect to any node endpoints the user inputs and by default to the _KILT Peregrine_ blockchain.
+
+## Uploading to the release site
+
+We recommend external developers to download the test version of the Sporran extension from [the release page on github](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
+The uploads to this page occur manually.
+Only Sporran versions using changes merged to `main` should be publish as releases.
+
+To get a Sporran Extension you could upload on the release, either [build and package it locally](#For-the-internal-version) or alternatively, you could:
+
+1. Merge the wished changes to `main`.
+2. Go out the [Sporran GitHub's Actions page for "Packages the internal version"](https://github.com/BTE-Trusted-Entity/sporran-extension/actions/workflows/publish.yaml).
+3. Click on the workflow of the wished commit.
+4. Download the artifact.
+
+Before updating it to the release site, please prepend a _"TEST-"_ to the zip file's name.
+If you got the extension from the github workflow, it would be nice to replace the commit hash with the sporran version on the zip's name.
+
+To uploaded:
+
+1. Got to [the release page](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
+2. Copy title and description of an older release.
+3. Click on [Draft a new release](https://github.com/BTE-Trusted-Entity/sporran-extension/releases/new)
+4. Paste title and description and attach the Sporran extension zip file.
+5. Choose as tag the version of Sporran being release.
+   You can directly create the tag while publishing the release.
+6. Publish the release.
 
 ## Built with
 
