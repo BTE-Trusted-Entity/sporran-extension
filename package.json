@@ -27,6 +27,7 @@
   },
   "scripts": {
     "build": "env NODE_ENV=production webpack",
+    "build-internal": "env VARIANT=internal NODE_ENV=production webpack",
     "package": "cd dist && web-ext build --overwrite-dest",
     "dev": "env VARIANT=internal NODE_ENV=development webpack --watch",
     "dev-public": "env VARIANT=public NODE_ENV=development webpack --watch",
