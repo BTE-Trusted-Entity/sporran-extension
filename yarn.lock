@@ -15362,12 +15362,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qrcode.react@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "qrcode.react@npm:3.2.0"
+"qrcode.react@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "qrcode.react@npm:4.0.1"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/86479ce19c7711baccf4a4d84ffddf008823e080f5209fc38c84b9d47435bc0568a81972e021eb147ee9dc3090638731f4169ec07a1e243185e5a548d75a18cc
+  checksum: 10c0/b4c1b8874f88dd1f42573c6c9d753d3ee3e8cd4ee799962e530ae51e7fad0b020a8bd3f016a6ab4f69e2151aadf019405b16e46c11f532c2b51fc4b8159fcc73
   languageName: node
   linkType: hard
 
@@ -16908,7 +16908,7 @@ __metadata:
     lodash-es: "npm:^4.17.21"
     mini-css-extract-plugin: "npm:^2.9.1"
     prettier: "npm:^3.3.3"
-    qrcode.react: "npm:^3.2.0"
+    qrcode.react: "npm:^4.0.1"
     react: "npm:^18.3.1"
     react-accessible-dropdown-menu-hook: "npm:^4.0.0"
     react-dialog-polyfill: "npm:^1.3.0"
