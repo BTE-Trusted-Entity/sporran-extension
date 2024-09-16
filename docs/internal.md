@@ -84,7 +84,7 @@ This version will connect to any node endpoints the user inputs and by default t
 
 ## Uploading to the release site
 
-We recommend external developers to download the test version of the Sporran extension from [the release page on github](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
+We recommend external developers to download the test version of the Sporran extension from [the releases page on github](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
 The uploads to this page occur manually.
 Only Sporran versions using changes merged to `main` should be publish as releases.
 
@@ -100,7 +100,7 @@ If you got the extension from the github workflow, it would be nice to replace t
 
 To uploaded:
 
-1. Got to [the release page](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
+1. Go to [the releases page](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
 2. Copy title and description of an older release.
 3. Click on [Draft a new release](https://github.com/BTE-Trusted-Entity/sporran-extension/releases/new)
 4. Paste title and description and attach the Sporran extension zip file.
