@@ -30,14 +30,14 @@ yarn dev
 
 1. Go to [actions page for "Packages the internal version"](https://github.com/KILTprotocol/sporran-extension/actions/workflows/publish.yaml).
 1. Click on the build you want to test.
-1. Download the extension file from the _Artifacts_ section at the bottom.
+1. Download the extension file from the _Artifact's_ section at the bottom.
 1. Unpack the downloaded _sporran-???.zip_ file.
 
 ### Getting the _public_ version of extension
 
 1. Go to [actions page for "Packages the public version"](https://github.com/KILTprotocol/sporran-extension/actions/workflows/stores.yaml).
 1. Click the buttons "Run workflow" -> "Run workflow" to prepare the public version and wait for the workflow to finish.
-1. Click the link for the just finished workflow and download the extension file from the _Artifacts_ section at the bottom.
+1. Click the link for the just finished workflow and download the extension file from the _Artifacts'_ section at the bottom.
 1. Unpack the downloaded _.zip_ file and unpack the _sporran-???.zip_ from it as well.
 
 ### Testing in [Chrome](https://developer.chrome.com/docs/extensions/mv2/getstarted/#manifest)
@@ -82,13 +82,13 @@ yarn package
 This will generate a file `dist/web-ext-artifacts/sporran-???.zip` ready for developers to use.
 This version will connect to any node endpoints the user inputs and by default to the _KILT Peregrine_ blockchain.
 
-## Uploading to the release site
+## Uploading to the release's site
 
-We recommend external developers to download the test version of the Sporran extension from [the releases page on github](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
+We recommend external developers to download the test version of the Sporran extension from [the releases' page on GitHub](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
 The uploads to this page occur manually.
-Only Sporran versions using changes merged to `main` should be publish as releases.
+Only Sporran versions using changes merged to `main` should be published as releases.
 
-To get a releasable Sporran Extension file you could either [build and package it locally](#For-the-internal-version) or ,alternatively, follow this steps:
+To get a releasable Sporran Extension file you could either [build and package it locally](#For-the-internal-version) or, alternatively, follow these steps:
 
 1. Merge the wished changes to `main`.
 2. Go to the [Sporran GitHub's Actions page for "Packages the internal version"](https://github.com/BTE-Trusted-Entity/sporran-extension/actions/workflows/publish.yaml).
@@ -96,15 +96,15 @@ To get a releasable Sporran Extension file you could either [build and package i
 4. Download the artifact.
 
 Before updating it to the release site, please prepend a _"TEST-"_ to the zip file's name.
-If you got the extension from the github workflow, it would be nice to replace the commit hash with the sporran version on the zip's name.
+If you got the extension from the GitHub workflow, it would be nice to replace the commit hash with the Sporran version on the zip's name.
 
-To uploaded:
+To upload:
 
-1. Go to [the releases page](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
+1. Go to [the releases' page](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
 2. Copy title and description of an older release.
 3. Click on [Draft a new release](https://github.com/BTE-Trusted-Entity/sporran-extension/releases/new)
 4. Paste title and description and attach the Sporran extension zip file.
-5. Choose as tag the version of Sporran being release.
+5. Choose as tag the version of Sporran being released.
    You can directly create the tag while publishing the release.
 6. Publish the release.
 
