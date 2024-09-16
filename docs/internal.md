@@ -30,14 +30,14 @@ yarn dev
 
 1. Go to [actions page for "Packages the internal version"](https://github.com/KILTprotocol/sporran-extension/actions/workflows/publish.yaml).
 1. Click on the build you want to test.
-1. Download the extension file from the _Artifact's_ section at the bottom.
+1. Download the extension file from the _Artifacts_ section at the bottom.
 1. Unpack the downloaded _sporran-???.zip_ file.
 
 ### Getting the _public_ version of extension
 
 1. Go to [actions page for "Packages the public version"](https://github.com/KILTprotocol/sporran-extension/actions/workflows/stores.yaml).
 1. Click the buttons "Run workflow" -> "Run workflow" to prepare the public version and wait for the workflow to finish.
-1. Click the link for the just finished workflow and download the extension file from the _Artifacts'_ section at the bottom.
+1. Click the link for the just finished workflow and download the extension file from the _Artifacts_ section at the bottom.
 1. Unpack the downloaded _.zip_ file and unpack the _sporran-???.zip_ from it as well.
 
 ### Testing in [Chrome](https://developer.chrome.com/docs/extensions/mv2/getstarted/#manifest)
@@ -82,9 +82,9 @@ yarn package
 This will generate a file `dist/web-ext-artifacts/sporran-???.zip` ready for developers to use.
 This version will connect to any node endpoints the user inputs and by default to the _KILT Peregrine_ blockchain.
 
-## Uploading to the release's page
+## Uploading to the releases page
 
-We recommend external developers to download the test version of the Sporran extension from [the releases' page on GitHub](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
+We recommend external developers to download the test version of the Sporran extension from [the releases page on GitHub](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
 The uploads to this page occur manually.
 Only Sporran versions using changes merged to `main` should be published as releases.
 
@@ -100,7 +100,7 @@ If you got the extension from the GitHub workflow, it would be nice to replace t
 
 To upload:
 
-1. Go to [the releases' page](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
+1. Go to [the releases page](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
 2. Copy title and description of an older release.
 3. Click on [Draft a new release](https://github.com/BTE-Trusted-Entity/sporran-extension/releases/new)
 4. Paste title and description and attach the Sporran extension zip file.
