@@ -82,7 +82,7 @@ yarn package
 This will generate a file `dist/web-ext-artifacts/sporran-???.zip` ready for developers to use.
 This version will connect to any node endpoints the user inputs and by default to the _KILT Peregrine_ blockchain.
 
-## Uploading to the release's site
+## Uploading to the release's page
 
 We recommend external developers to download the test version of the Sporran extension from [the releases' page on GitHub](https://github.com/BTE-Trusted-Entity/sporran-extension/releases).
 The uploads to this page occur manually.
@@ -95,7 +95,7 @@ To get a releasable Sporran Extension file you could either [build and package i
 3. Click on the workflow of the wished commit.
 4. Download the artifact.
 
-Before updating it to the release site, please prepend a _"TEST-"_ to the zip file's name.
+Before updating it to the release page, please prepend a _"TEST-"_ to the zip file's name.
 If you got the extension from the GitHub workflow, it would be nice to replace the commit hash with the Sporran version on the zip's name.
 
 To upload:
