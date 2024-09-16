@@ -91,7 +91,7 @@ Only Sporran versions using changes merged to `main` should be publish as releas
 To get a releasable Sporran Extension file you could either [build and package it locally](#For-the-internal-version) or ,alternatively, follow this steps:
 
 1. Merge the wished changes to `main`.
-2. Go out the [Sporran GitHub's Actions page for "Packages the internal version"](https://github.com/BTE-Trusted-Entity/sporran-extension/actions/workflows/publish.yaml).
+2. Go to the [Sporran GitHub's Actions page for "Packages the internal version"](https://github.com/BTE-Trusted-Entity/sporran-extension/actions/workflows/publish.yaml).
 3. Click on the workflow of the wished commit.
 4. Download the artifact.
 
