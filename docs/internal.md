@@ -88,7 +88,7 @@ We recommend external developers to download the test version of the Sporran ext
 The uploads to this page occur manually.
 Only Sporran versions using changes merged to `main` should be publish as releases.
 
-To get a Sporran Extension you could upload on the release, either [build and package it locally](#For-the-internal-version) or alternatively, you could:
+To get a releasable Sporran Extension file you could either [build and package it locally](#For-the-internal-version) or ,alternatively, follow this steps:
 
 1. Merge the wished changes to `main`.
 2. Go out the [Sporran GitHub's Actions page for "Packages the internal version"](https://github.com/BTE-Trusted-Entity/sporran-extension/actions/workflows/publish.yaml).
