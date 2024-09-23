@@ -25,7 +25,7 @@ export const internalFeatures: Features = {
 
 // Duplicates the value in src/static/manifest.json
 // We can’t use browser.runtime.getManifest().version, as it’s unavailable in injected scripts
-const version = '2024.9.11';
+const version = '2024.9.23';
 
 export const configuration: ConfigurationType = {
   version,

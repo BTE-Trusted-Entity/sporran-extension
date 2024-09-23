@@ -13,7 +13,7 @@ export async function toggleIcon(): Promise<void> {
 }
 
 export async function produceToggleIcon(): Promise<void> {
-  await browser.browserAction.setIcon({
+  await browser.action.setIcon({
     path: {
       16: 'icon/dark/16.png',
       32: 'icon/dark/32.png',
