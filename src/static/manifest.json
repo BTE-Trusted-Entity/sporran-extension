@@ -3,7 +3,7 @@
   "name": "__MSG_manifest_name__",
   "short_name": "__MSG_manifest_short_name__",
   "description": "__MSG_manifest_description__",
-  "version": "2024.9.23",
+  "version": "2024.10.4",
   "default_locale": "en",
   "action": {
     "default_icon": {
@@ -15,7 +15,8 @@
     "default_popup": "popup.html"
   },
   "background": {
-    "service_worker": "js/backgroundScript.js"
+    "service_worker": "js/backgroundScript.js",
+    "scripts": ["js/backgroundScript.js"]
   },
   "content_scripts": [
     {
@@ -53,5 +54,10 @@
         "*://*/*"
       ]
     }
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{e78c8451-ea3a-494b-ba6f-b14cfa9b571f}"
+    }
+  }
 }
