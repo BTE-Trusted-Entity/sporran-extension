@@ -55,9 +55,9 @@
     }
   ],
   "browser_specific_settings": {
-  "gecko": {
-    "id": "support@kilt.io"
-  }
+    "gecko": {
+      "id": "{e78c8451-ea3a-494b-ba6f-b14cfa9b571f}"
+    }
 }
 
 }
