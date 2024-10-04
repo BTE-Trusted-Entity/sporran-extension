@@ -3,7 +3,7 @@
   "name": "__MSG_manifest_name__",
   "short_name": "__MSG_manifest_short_name__",
   "description": "__MSG_manifest_description__",
-  "version": "2024.9.23",
+  "version": "2024.10.4",
   "default_locale": "en",
   "action": {
     "default_icon": {
