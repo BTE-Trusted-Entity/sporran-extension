@@ -53,5 +53,11 @@
         "*://*/*"
       ]
     }
-  ]
+  ],
+  "browser_specific_settings": {
+  "gecko": {
+    "id": "support@kilt.io"
+  }
+}
+
 }
