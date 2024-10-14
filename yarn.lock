@@ -3031,7 +3031,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/types@npm:10.13.1, @polkadot/types@npm:^10.11.2, @polkadot/types@npm:^10.7.3":
+"@polkadot/types@npm:10.13.1, @polkadot/types@npm:^10.7.3":
   version: 10.13.1
   resolution: "@polkadot/types@npm:10.13.1"
   dependencies:
@@ -3312,7 +3312,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/x-textdecoder@npm:12.6.2, @polkadot/x-textdecoder@npm:^12.6.2":
+"@polkadot/x-textdecoder@npm:12.6.2":
   version: 12.6.2
   resolution: "@polkadot/x-textdecoder@npm:12.6.2"
   dependencies:
@@ -3322,7 +3322,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/x-textdecoder@npm:13.1.1":
+"@polkadot/x-textdecoder@npm:13.1.1, @polkadot/x-textdecoder@npm:^13.1.1":
   version: 13.1.1
   resolution: "@polkadot/x-textdecoder@npm:13.1.1"
   dependencies:
@@ -3332,7 +3332,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/x-textencoder@npm:12.6.2, @polkadot/x-textencoder@npm:^12.6.2":
+"@polkadot/x-textencoder@npm:12.6.2":
   version: 12.6.2
   resolution: "@polkadot/x-textencoder@npm:12.6.2"
   dependencies:
@@ -3342,7 +3342,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot/x-textencoder@npm:13.1.1":
+"@polkadot/x-textencoder@npm:13.1.1, @polkadot/x-textencoder@npm:^13.1.1":
   version: 13.1.1
   resolution: "@polkadot/x-textencoder@npm:13.1.1"
   dependencies:
@@ -16446,13 +16446,13 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.25.7"
     "@kiltprotocol/sdk-js": "npm:^0.35.0"
     "@polkadot/extension-inject": "npm:^0.54.1"
-    "@polkadot/keyring": "npm:^12.6.2"
-    "@polkadot/types": "npm:^10.11.2"
+    "@polkadot/keyring": "npm:^13.1.1"
+    "@polkadot/types": "npm:^14.0.1"
     "@polkadot/ui-shared": "npm:^3.10.1"
-    "@polkadot/util": "npm:^12.6.2"
-    "@polkadot/util-crypto": "npm:^12.6.2"
-    "@polkadot/x-textdecoder": "npm:^12.6.2"
-    "@polkadot/x-textencoder": "npm:^12.6.2"
+    "@polkadot/util": "npm:^13.1.1"
+    "@polkadot/util-crypto": "npm:^13.1.1"
+    "@polkadot/x-textdecoder": "npm:^13.1.1"
+    "@polkadot/x-textencoder": "npm:^13.1.1"
     "@storybook/addon-actions": "npm:^7.6.20"
     "@storybook/addon-controls": "npm:^7.6.20"
     "@storybook/addon-styling": "npm:^1.3.7"
