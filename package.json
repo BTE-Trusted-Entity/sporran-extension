@@ -125,7 +125,7 @@
     "typescript": "^5.7.2",
     "typescript-plugin-css-modules": "^5.1.0",
     "web-ext": "^8.3.0",
-    "webpack": "^5.95.0",
+    "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4",
     "webpack-extension-reloader": "^1.1.4",
     "webpack-merge": "^6.0.1"
