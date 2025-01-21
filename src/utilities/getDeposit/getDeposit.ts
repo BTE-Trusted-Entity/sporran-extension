@@ -53,14 +53,9 @@ export async function getDepositDid(
   const api = ConfigService.get('api');
 
   if (!did || Did.parse(did).type === 'light') {
-    if ('deposit' in api.consts.did) {
-      // TODO: remove this `if` once the Spiritnet is updated
-      return { amount: api.consts.did.deposit as BN };
-    }
-
-    const baseDeposit = api.consts.did.baseDeposit as BN;
-    const keyDeposit = api.consts.did.keyDeposit as BN;
-    const amount = baseDeposit.add(keyDeposit).add(keyDeposit);
+    const baseDeposit = api.consts.did.baseDeposit;
+    const keyDeposit = api.consts.did.keyDeposit;
+    const amount: BN = baseDeposit.add(keyDeposit).add(keyDeposit);
     return { amount };
   }
 
