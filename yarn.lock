@@ -2180,7 +2180,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kiltprotocol/augment-api@npm:^1.0.0":
+"@kiltprotocol/augment-api@npm:1.11501.0-peregrine-rc.1":
   version: 1.11501.0-peregrine-rc.1
   resolution: "@kiltprotocol/augment-api@npm:1.11501.0-peregrine-rc.1"
   dependencies:
@@ -2311,12 +2311,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kiltprotocol/type-definitions@npm:^1.0.0":
-  version: 1.11500.0-rc.2
-  resolution: "@kiltprotocol/type-definitions@npm:1.11500.0-rc.2"
+"@kiltprotocol/type-definitions@npm:1.11501.0-rc.1":
+  version: 1.11501.0-rc.1
+  resolution: "@kiltprotocol/type-definitions@npm:1.11501.0-rc.1"
   peerDependencies:
     "@polkadot/types": ^12.2.0
-  checksum: 10c0/027e5bfe0a6302a97e3df8c99546481402160461352493fc915d78afb13d2272fe88bc5a4c22f2f8d0d97ba910034d84912a65d6db1b8cea3bfdee8582173262
+  checksum: 10c0/a52150b16f403eadfa62af7aad3f59006e7c72710b58d16460bc3555daaf4d8cc96d4f201e070d6e68aa03d13f5174f14680d77b8a9780828ff467f2a004475d
   languageName: node
   linkType: hard
 
