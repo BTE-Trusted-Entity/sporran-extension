@@ -52,11 +52,13 @@ describe('balanceChanges', () => {
       const publisher = jest.fn();
       onAddressBalanceChange('address', publisher);
 
-      jest
-        .mocked(api.query.system.account)
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        .mock.calls[0][1]({ data: originalBalancesMock });
+      (
+        jest.mocked(api.query.system.account).mock.calls[0] as ((
+          x: unknown,
+        ) => void)[]
+      )[1]({
+        data: originalBalancesMock,
+      });
 
       const { balances } = publisher.mock.calls[0][1];
       expect(expectedBalanceStrings).toEqual({
