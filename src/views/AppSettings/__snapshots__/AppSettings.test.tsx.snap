@@ -52,7 +52,7 @@ Just start it again to continue.
         name="endpoint"
       >
         <option
-          label="BOTLabs"
+          label="KILT Foundation"
           value="wss://spiritnet.kilt.io"
         />
         <option
