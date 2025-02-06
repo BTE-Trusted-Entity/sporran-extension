@@ -1000,7 +1000,7 @@
     "message": "Pay with Euro information"
   },
   "view_DidUpgradeExplainer_euro_explainer": {
-    "message": "You pay a fixed fiat rate and BTE in return takes over handling the necessary KILT payments for you. There are no refunds when removing your DID."
+    "message": "You pay a fixed fiat rate and the KILT Foundation in return takes over handling the necessary KILT payments for you. There are no refunds when removing your DID."
   },
   "view_DidUpgradeExplainer_insufficientKilt": {
     "message": "You need at least $cost$ KILTs (deposit + fee)",
