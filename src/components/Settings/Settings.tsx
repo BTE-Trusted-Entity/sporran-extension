@@ -122,17 +122,6 @@ export function Settings() {
             </li>
 
             <li className={menuStyles.listItem}>
-              <a
-                href="https://support.kilt.io/"
-                target="_blank"
-                rel="noreferrer"
-                {...itemProps.shift()}
-              >
-                {t('component_Settings_tech_support')}
-              </a>
-            </li>
-
-            <li className={menuStyles.listItem}>
               <Link to={paths.access} {...itemProps.shift()}>
                 {t('component_Settings_access')}
               </Link>

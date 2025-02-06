@@ -16,7 +16,7 @@ export const endpoints = [
 export type KnownEndpoints = (typeof endpoints)[number];
 
 export const publicEndpoints = {
-  BOTLabs: 'wss://spiritnet.kilt.io',
+  'KILT Foundation': 'wss://spiritnet.kilt.io',
   IBP1: 'wss://kilt.ibp.network',
   IBP2: 'wss://kilt.dotters.network',
 };

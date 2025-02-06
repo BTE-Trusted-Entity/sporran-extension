@@ -350,14 +350,6 @@ function PresentationModal({
               {t('common_action_continue')}
             </Link>
             <p className={styles.buttonsLine}>
-              <a
-                href="https://support.kilt.io/support/solutions/articles/80000987961"
-                target="_blank"
-                rel="noreferrer"
-                className={styles.learnMore}
-              >
-                {t('component_CredentialCard_more')}
-              </a>
               <button
                 type="button"
                 className={styles.cancelDownload}
