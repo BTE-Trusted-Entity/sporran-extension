@@ -96,14 +96,15 @@ export function W3NCreateChoose({ identity }: Props) {
         </p>
 
         <p className={styles.paymentMethod}>
-          <label className={styles.euro}>
+          <label className={styles.insufficientKilt}>
             <input
               type="radio"
               name="payment"
               value="euro"
-              checked={paymentMethod === 'euro'}
+              // checked={paymentMethod === 'euro'}
               onChange={handleChange}
               className={styles.select}
+              disabled={true}
             />
             {t('view_W3NCreateChoose_euro', [euroCost])}
           </label>
@@ -121,6 +122,7 @@ export function W3NCreateChoose({ identity }: Props) {
             web3name,
           })}
           className={styles.upgrade}
+          aria-disabled={insufficientKilt}
         >
           {t('common_action_continue')}
         </Link>
