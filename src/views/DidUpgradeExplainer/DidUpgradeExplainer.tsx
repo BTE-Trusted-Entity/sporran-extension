@@ -4,7 +4,7 @@ import {
   ChangeEvent,
   Fragment,
   useCallback,
-  useEffect,
+  // useEffect,
   useRef,
   useState,
 } from 'react';
@@ -45,11 +45,11 @@ export function DidUpgradeExplainer({ identity }: Props) {
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('kilt');
 
-  useEffect(() => {
-    if (insufficientKilt) {
-      setPaymentMethod('euro');
-    }
-  }, [insufficientKilt]);
+  // useEffect(() => {
+  //   if (insufficientKilt) {
+  //     setPaymentMethod('euro');
+  //   }
+  // }, [insufficientKilt]);
 
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(event.target.value as PaymentMethod);
@@ -159,14 +159,15 @@ export function DidUpgradeExplainer({ identity }: Props) {
             </p>
 
             <p className={styles.paymentMethod}>
-              <label className={styles.euro}>
+              <label className={styles.insufficientKilt}>
                 <input
                   type="radio"
                   name="payment"
                   value="euro"
-                  checked={paymentMethod === 'euro'}
+                  // checked={paymentMethod === 'euro'}
                   onChange={handleChange}
                   className={styles.select}
+                  disabled={insufficientKilt || true}
                 />
                 {t('view_DidUpgradeExplainer_euro', [euroCost])}
               </label>
@@ -189,7 +190,7 @@ export function DidUpgradeExplainer({ identity }: Props) {
                 address,
               })}
               className={styles.upgrade}
-              aria-disabled={wasOnChainDidDeleted}
+              aria-disabled={wasOnChainDidDeleted || insufficientKilt}
             >
               {t('common_action_continue')}
             </Link>

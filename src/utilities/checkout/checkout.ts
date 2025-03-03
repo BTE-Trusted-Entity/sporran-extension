@@ -1,6 +1,6 @@
 import type { KiltAddress } from '@kiltprotocol/sdk-js';
 
-import ky from 'ky';
+// import ky from 'ky';
 
 import { getEndpoint, KnownEndpoints } from '../endpoints/endpoints';
 
@@ -32,15 +32,15 @@ interface Costs {
 }
 
 export async function getCheckoutCosts(): Promise<Costs> {
-  const checkout = await getCheckoutURL();
+  // const checkout = await getCheckoutURL();
 
-  const { did, w3n, paymentAddress } = await ky
-    .get(`${checkout}/api/costs`)
-    .json<Costs>();
+  // const { did, w3n, paymentAddress } = await ky
+  //   .get(`${checkout}/api/costs`)
+  //   .json<Costs>();
 
   return {
-    did: localizeCost(did),
-    w3n: localizeCost(w3n),
-    paymentAddress,
+    did: localizeCost('0'),
+    w3n: localizeCost('0'),
+    paymentAddress: '4pF5Y2Eo6doQHPLQj5AkndZwtomVB8ab2sRftRS2D9JDdELr',
   };
 }
