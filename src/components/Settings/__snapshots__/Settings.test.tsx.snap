@@ -102,7 +102,7 @@ exports[`Settings menu should be visible when menu button clicked 1`] = `
             role="menuitem"
             tabindex="-1"
           >
-            Version 2025.2.6
+            Version 2025.3.3
           </a>
         </li>
       </ul>
@@ -199,7 +199,7 @@ exports[`Settings should render the endpoint item in the internal build 1`] = `
             role="menuitem"
             tabindex="-1"
           >
-            Version 2025.2.6
+            Version 2025.3.3
           </a>
         </li>
       </ul>
