@@ -1,6 +1,6 @@
 import type { KiltAddress } from '@kiltprotocol/sdk-js';
 
-import ky from 'ky';
+// import ky from 'ky';
 
 import { getEndpoint, KnownEndpoints } from '../endpoints/endpoints';
 
