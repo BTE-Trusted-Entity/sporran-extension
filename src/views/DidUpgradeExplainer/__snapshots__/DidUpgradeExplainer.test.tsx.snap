@@ -173,10 +173,11 @@ exports[`DidUpgradeExplainer should render DID not on chain yet 1`] = `
         class="paymentMethod"
       >
         <label
-          class="euro"
+          class="insufficientKilt"
         >
           <input
             class="select"
+            disabled=""
             name="payment"
             type="radio"
             value="euro"
@@ -320,10 +321,11 @@ exports[`DidUpgradeExplainer should render pay with euro option in internal buil
         class="paymentMethod"
       >
         <label
-          class="euro"
+          class="insufficientKilt"
         >
           <input
             class="select"
+            disabled=""
             name="payment"
             type="radio"
             value="euro"
@@ -467,10 +469,11 @@ exports[`should render insufficient balance to pay costs in KILT 1`] = `
         class="paymentMethod"
       >
         <label
-          class="euro"
+          class="insufficientKilt"
         >
           <input
             class="select"
+            disabled=""
             name="payment"
             type="radio"
             value="euro"
@@ -494,9 +497,9 @@ exports[`should render insufficient balance to pay costs in KILT 1`] = `
         Cancel
       </a>
       <a
-        aria-disabled="false"
+        aria-disabled="true"
         class="upgrade"
-        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade/euro"
+        href="/identity/4tDjyLy2gESkLzvaLnpbn7N61VgnwAhqnTHsPPFAwaZjGwP1/did/upgrade/kilt"
       >
         Continue
       </a>
