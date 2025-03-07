@@ -15,5 +15,5 @@ Sporran is designed to communicate with DApps built on the KILT blockchain. If y
    Choose `wss://peregrine.kilt.io` in _⚙ Settings > Custom Endpoint_.
    Click the Sporran icon in the browser toolbar and follow the flow to create an Identity.
    Click the _Receive_ link and copy the Identity address on the next screen.
-7. Visit the [Faucet](https://faucet.peregrine.kilt.io/), paste the Identity address there, accept the Terms,
+7. Visit the [Faucet](https://substratefaucet.xyz/kilt), paste the Identity address there, accept the Terms,
    and click _Request Tokens_ to get some play KILT coins
